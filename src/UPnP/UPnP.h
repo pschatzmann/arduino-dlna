@@ -11,6 +11,7 @@
 #include <WiFiClient.h>
 #include <WiFiUdp.h>
 #include <limits.h>
+#include "Basic/Vector.h"
 
 #ifdef UPNP_DEBUG
 #define debugPrint(...) Serial.print(__VA_ARGS__)
@@ -46,19 +47,11 @@ typedef void (*callback_function)(void);
 
 struct SsdpDevice {
   IPAddress host;
-  int port;  // this port is used when getting router capabilities and xml files
+  int port = 0;  // this port is used when getting router capabilities and xml files
   String path;  // this is the path that is used to retrieve router information
                 // from xml files
-};
 
-/**
- * @brief UPnP Device Node
- * @internal
- */
-
-struct SsdpDeviceNode {
-  SsdpDevice *ssdpDevice;
-  SsdpDeviceNode *next;
+  operator bool() {return !(host == IPAddress());}
 };
 
 /**
@@ -72,12 +65,10 @@ class UPnP {
   /// for blocking operation
   UPnP(unsigned long timeoutMs = 20000) {
     timeoutMs = timeoutMs;
-    headRuleNode = nullptr;
   }
 
   UPnP(Client &client, UDP &udp, unsigned long timeoutMs = 20000) {
     timeoutMs = timeoutMs;
-    headRuleNode = nullptr;
     p_udp = &udp;
     p_client = &client;
   }
@@ -116,9 +107,9 @@ class UPnP {
   /// checks access to the network
   bool checkConnectivity(unsigned long startTime = 0);
   /// will create an object with all SSDP devices on the network
-  SsdpDeviceNode *listDevices();
+  Vector<SsdpDevice> listDevices();
   // will print all SSDP devices
-  void debugDevices(SsdpDeviceNode *SsdpDeviceNode);
+  void debugDevices();
   // prints all the port mappings that werea added using `addConfig`
   void debugConfig();
   /// Retrievs and prints the port mappings from the network
@@ -168,7 +159,7 @@ class UPnP {
       serviceTypeName = "";
     }
 
-    bool isValid() {
+    operator bool() {
       debugPrint(F("isGatewayInfoValid ["));
       debugPrint(host.toString());
       debugPrint(F("] port ["));
@@ -209,16 +200,6 @@ class UPnP {
   };
 
   /**
-   * @brief UPnP Rule Node information
-   * @internal
-   */
-
-  struct UpnpRuleNode {
-    UpnpRule *upnpRule;
-    UpnpRuleNode *next;
-  };
-
-  /**
    * @brief PortMappingResult enum
    * @internal
    */
@@ -233,7 +214,8 @@ class UPnP {
     NOP  // the check is delayed
   };
 
-  UpnpRuleNode *headRuleNode = nullptr;
+  Vector<UpnpRule> ruleNodes{0};
+  Vector<SsdpDevice> devices{0};
   unsigned long lastUpdateTime = 0;
   long timeoutMs;  // 0 for blocking operation
   WiFiUDP udpClient;
@@ -274,7 +256,7 @@ class UPnP {
 
   bool connectUDP();
   void broadcastMSearch(bool isSsdpAll = false);
-  SsdpDevice *waitForUnicastResponseToMSearch(IPAddress gatewayIP);
+  SsdpDevice waitForUnicastResponseToMSearch(IPAddress gatewayIP);
   bool getGatewayInfo(GatewayInfo *deviceInfo, long startTime);
   bool connectToIGD(IPAddress host, int port);
   bool getIGDEventURLs(GatewayInfo *deviceInfo);
@@ -293,7 +275,7 @@ class UPnP {
   int getPort(String url);
   String getPath(String url);
   String getTagContent(const String &line, String tagName);
-  void ssdpDeviceToString(SsdpDevice *ssdpDevice);
+  void debugSsdpDevice(SsdpDevice *ssdpDevice);
 };
 
 }  // namespace tiny_dlna

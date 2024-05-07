@@ -5,7 +5,7 @@
 #include <SD.h>
 #include "HttpRequest.h"
 #include "Utils/MimeResolver.h"
-#include "HttpLogger.h"
+#include "Basic/Logger.h"
 #include "Utils/SDFileNameMgr.h"
 #include "Url.h"
 #include "Utils/UrlExtractor.h"
@@ -22,7 +22,7 @@ class WebCopy {
   public:
     /// default constructor
     WebCopy(Client &client, bool inDoLoop=true, int cpin=-1, int bufferSize=512) {
-      HttpLogger.log(Info,"WebCopy");
+      Logger.log(Info,"WebCopy");
       this->processing_in_do_loop = inDoLoop;
       this->http.setClient(client);
       this->buffer_size = bufferSize;
@@ -52,10 +52,10 @@ class WebCopy {
     virtual void start(const char* startUrlChar){
       char msg[100];
       sprintf(msg, "start %s",startUrlChar);
-      HttpLogger.log(Info,"WebCopy %s", msg);
+      Logger.log(Info,"WebCopy %s", msg);
       this->start_url.setUrl(startUrlChar);
       const char* root = start_url.urlRoot();
-      HttpLogger.log(Info,"WebCopy->root %s", root);
+      Logger.log(Info,"WebCopy->root %s", root);
 
 
       this->file_name_mgr.setRootUrl(root);
@@ -69,7 +69,7 @@ class WebCopy {
     }
 
     virtual void stop() {
-      HttpLogger.log(Info,"WebCopy %s", "stop");
+      Logger.log(Info,"WebCopy %s", "stop");
       active = false;
     }
 
@@ -80,8 +80,8 @@ class WebCopy {
     // incremental processing in Loop
     void doLoop(){
       if (processing_in_do_loop){
-        HttpLogger.log(Info, "startDump");
-        Str url = stack.popStr();
+        Logger.log(Info, "startDump");
+        StrView url = stack.popStr();
         if(active && !url.isEmpty()){
           reportHeap();
           // extract the content
@@ -113,8 +113,8 @@ class WebCopy {
 
     /// dumps the url to a file while for all stack
     virtual void startDump(){
-      HttpLogger.log(Info, "startDump");
-      Str url = stack.popStr();
+      Logger.log(Info, "startDump");
+      StrView url = stack.popStr();
       while(active && !url.isEmpty()){
         reportHeap();
         // extract the content
@@ -128,17 +128,17 @@ class WebCopy {
       int freeHeap = ESP.getFreeHeap();
       char msg[80];
       sprintf(msg, "free memory: %d",  freeHeap);
-      HttpLogger.log(Info, msg);
+      Logger.log(Info, msg);
   #endif
     }
 
     // copies the content of the url to a file and collects the contained urls
-    void processContent(Str urlStr) {
-        HttpLogger.log(Info, "processContent %s", urlStr.c_str());
+    void processContent(StrView urlStr) {
+        Logger.log(Info, "processContent %s", urlStr.c_str());
         if (!urlStr.isEmpty()){
           // Determine Mime
           url.setUrl(urlStr.c_str());
-          Str mimeStr = getMime(url);
+          StrView mimeStr = getMime(url);
           // optional filter by requested mime type
           // create file 
           bool exists = false;
@@ -146,7 +146,7 @@ class WebCopy {
           if (file.size()==0){
               // get the data
               reportHeap();
-              HttpLogger.log(Info, "processContent %s", url.url());
+              Logger.log(Info, "processContent %s", url.url());
               http.get(url);
               processFile(file, mimeStr);
           }
@@ -155,8 +155,8 @@ class WebCopy {
     }
 
     // read from URL to File
-    void processFile(File &file, Str &mimeStr){
-        HttpLogger.log(Info, "processFile %s", file.name());
+    void processFile(File &file, StrView &mimeStr){
+        Logger.log(Info, "processFile %s", file.name());
         if (mimeStr.contains("htm")){
           processHtml(file);
         } else {
@@ -165,21 +165,21 @@ class WebCopy {
     }
 
     // determines the mime type
-    Str getMime(Url &url) {
-        HttpLogger.log(Info, "getMime %s", url.url());
+    StrView getMime(Url &url) {
+        Logger.log(Info, "getMime %s", url.url());
         http.head(url);
         const char* mime = http.reply().get(CONTENT_TYPE);
         // text/html; charset=UTF-8 -> html
-        Str mimeStr(mime);
-        HttpLogger.log(Info, "getMime-> %s", mimeStr.c_str());
+        StrView mimeStr(mime);
+        Logger.log(Info, "getMime-> %s", mimeStr.c_str());
         return mimeStr;
     }
 
     // creates an empty file for the url - returns true if an empty file was created
-    bool createEmptyFile(Str urlStr){
+    bool createEmptyFile(StrView urlStr){
         Url url(urlStr.c_str());
-        Str mime = getMime(url);
-        Str fileName = this->file_name_mgr.getName(urlStr.c_str(), mime.c_str());
+        StrView mime = getMime(url);
+        StrView fileName = this->file_name_mgr.getName(urlStr.c_str(), mime.c_str());
         bool exists = SD.exists(fileName.c_str());
         if (!exists){
           File file = SD.open(fileName.c_str(), FILE_WRITE);
@@ -189,11 +189,11 @@ class WebCopy {
     }
 
     // creates the directoy and the file on the SD drive
-    File createFile(Str &urlStr, Str &mime){
-        HttpLogger.log(Info, "createFile %s", urlStr.c_str());
+    File createFile(StrView &urlStr, StrView &mime){
+        Logger.log(Info, "createFile %s", urlStr.c_str());
         // determine the file name which is valid for the SD card
-        Str file_name = file_name_mgr.getName(urlStr.c_str(), mime.c_str());
-        HttpLogger.log(Info, "createFile %s", file_name.c_str());
+        StrView file_name = file_name_mgr.getName(urlStr.c_str(), mime.c_str());
+        Logger.log(Info, "createFile %s", file_name.c_str());
         // create directory - limit name to show only the path
         int pos = file_name.lastIndexOf("/");
         if (pos>1){
@@ -204,7 +204,7 @@ class WebCopy {
         }
         // return an real file only if it does 
         File file = SD.open(file_name.c_str());
-        HttpLogger.log(Info, "createFile %s", file.name());
+        Logger.log(Info, "createFile %s", file.name());
 
         return file;
     }
@@ -212,7 +212,7 @@ class WebCopy {
     // process a html file by saving the content to the file and extracting the 
     // contained urls
     void processHtml(File &file) {
-        HttpLogger.log(Info, "processHtml %s", file.name());
+        Logger.log(Info, "processHtml %s", file.name());
         // process all lines
         uint8_t buffer[buffer_size];
         while(http.available()){
@@ -226,7 +226,7 @@ class WebCopy {
 
     // just save the content to a file
     void processOthers(File &file) {
-        HttpLogger.log(Info, "processOthers");
+        Logger.log(Info, "processOthers");
         uint8_t buffer[buffer_size];
         while(http.available()){
             // read a single line
@@ -238,9 +238,9 @@ class WebCopy {
 
     // extracts the stack and puts them on the stack 
     void extractReferences(uint8_t* buffer, int len) {
-        HttpLogger.log(Info, "extractReferences");
+        Logger.log(Info, "extractReferences");
         char url_buffer[200];
-        Str url(url_buffer,200);
+        StrView url(url_buffer,200);
         // read a single line
         url_extractor.setString((const char*)buffer);
         
@@ -249,7 +249,7 @@ class WebCopy {
         while(found){
           if (!url.isEmpty()){
             if (createEmptyFile(url)) {
-              HttpLogger.log(Info, "extractReferences %s",url.c_str());
+              Logger.log(Info, "extractReferences %s",url.c_str());
               stack.push(url.c_str());
             }
           }

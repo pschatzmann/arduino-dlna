@@ -23,14 +23,14 @@ namespace tiny_dlna {
 class HttpServer {
     public:
         HttpServer(WiFiServer &server_ptr, int bufferSize=1024){
-            HttpLogger.log(Info,"HttpServer");
+            Logger.log(Info,"HttpServer");
             this->server_ptr = &server_ptr;
             this->buffer_size = bufferSize;
             this->buffer = new char[bufferSize];
         }
 
         ~HttpServer(){
-            HttpLogger.log(Info,"~HttpServer");
+            Logger.log(Info,"~HttpServer");
             delete []buffer;
             handler_collection.clear();
             request_header.clear(false);
@@ -66,7 +66,7 @@ class HttpServer {
 
         /// Starts the server on the indicated port
         bool begin(int port){
-            HttpLogger.log(Info,"HttpServer %s","begin");
+            Logger.log(Info,"HttpServer %s","begin");
             is_active = true;
             server_ptr->begin(port);
             return true;
@@ -74,7 +74,7 @@ class HttpServer {
 
         /// stops the server_ptr
         void end(){
-            HttpLogger.log(Info,"HttpServer %s","stop");
+            Logger.log(Info,"HttpServer %s","stop");
             is_active = false;
         }
 
@@ -87,7 +87,7 @@ class HttpServer {
 
         /// register a generic handler
         void on(const char* url, TinyMethodID method, web_callback_fn fn,void* ctx[]=nullptr, int ctxCount=0){
-            HttpLogger.log(Info,"on-generic %s",url);
+            Logger.log(Info,"on-generic %s",url);
             HttpRequestHandlerLine *hl = new HttpRequestHandlerLine();
             hl->path = url;
             hl->fn = fn;
@@ -99,7 +99,7 @@ class HttpServer {
 
         /// register a handler with mime
         void on(const char* url, TinyMethodID method, const char* mime, web_callback_fn fn){
-            HttpLogger.log(Info,"on-mime %s",url);
+            Logger.log(Info,"on-mime %s",url);
             HttpRequestHandlerLine *hl = new HttpRequestHandlerLine();
             hl->path = url;
             hl->fn = fn;
@@ -111,21 +111,21 @@ class HttpServer {
 
         /// register a handler which provides the indicated string
         void on(const char* url, TinyMethodID method, const char* mime, const char* result) {
-            HttpLogger.log(Info,"on-strings");
+            Logger.log(Info,"on-strings");
 
             auto lambda = [](HttpServer *server_ptr,const char*requestPath, HttpRequestHandlerLine *hl) { 
-                HttpLogger.log(Info,"on-strings %s","lambda");
+                Logger.log(Info,"on-strings %s","lambda");
                 if (hl->contextCount<2){
-                    HttpLogger.log(Error,"The context is not available");
+                    Logger.log(Error,"The context is not available");
                     return;
                 }
-                const char* mime = static_cast<Str*>(hl->context[0])->c_str();
-                const char* msg = static_cast<Str*>(hl->context[1])->c_str();
+                const char* mime = static_cast<StrView*>(hl->context[0])->c_str();
+                const char* msg = static_cast<StrView*>(hl->context[1])->c_str();
                 server_ptr->reply(mime, msg, 200);
             };
             HttpRequestHandlerLine *hl = new HttpRequestHandlerLine(2);
-            hl->context[0] = new Str(mime);
-            hl->context[1] = new Str(result);
+            hl->context[0] = new StrView(mime);
+            hl->context[1] = new StrView(result);
             hl->path = url;
             hl->fn = lambda;
             hl->method = method;
@@ -134,13 +134,13 @@ class HttpServer {
   
         /// register a redirection
         void on(const char*url, TinyMethodID method, Url &redirect){
-            HttpLogger.log(Info,"on-redirect");
+            Logger.log(Info,"on-redirect");
             auto lambda = [](HttpServer *server_ptr, const char*requestPath, HttpRequestHandlerLine *hl) { 
                 if (hl->contextCount<1){
-                    HttpLogger.log(Error,"The context is not available");
+                    Logger.log(Error,"The context is not available");
                     return;
                 }
-                HttpLogger.log(Info,"on-redirect %s","lambda");
+                Logger.log(Info,"on-redirect %s","lambda");
                 HttpReplyHeader reply_header;
                 Url *url = static_cast<Url*>(hl->context[0]);
                 reply_header.setValues(301, "Moved");
@@ -162,13 +162,13 @@ class HttpServer {
 
         /// register a redirection
         void on(const char*url, TinyMethodID method, HttpTunnel &tunnel){
-            HttpLogger.log(Info,"on-HttpTunnel %s",url);
+            Logger.log(Info,"on-HttpTunnel %s",url);
 
             auto lambda = [](HttpServer *server_ptr,const char*requestPath, HttpRequestHandlerLine *hl) { 
-                HttpLogger.log(Info,"on-HttpTunnel %s","lambda");
+                Logger.log(Info,"on-HttpTunnel %s","lambda");
                 HttpTunnel *p_tunnel = static_cast<HttpTunnel*>(hl->context[0]);
                 if (p_tunnel==nullptr){
-                    HttpLogger.log(Error,"p_tunnel is null");
+                    Logger.log(Error,"p_tunnel is null");
                     server_ptr->replyNotFound();
                     return;
                 }
@@ -176,12 +176,12 @@ class HttpServer {
                 // execute T_GET request 
                 Stream *p_in = p_tunnel->get();
                 if (p_in==nullptr){
-                    HttpLogger.log(Error,"p_in is null");
+                    Logger.log(Error,"p_in is null");
                     server_ptr->replyNotFound();
                     return;
                 }
                 const char* content_len = p_tunnel->request().reply().get(CONTENT_LENGTH);
-                Str content_len_str{content_len};
+                StrView content_len_str{content_len};
                 // provide result
                 server_ptr->reply(mime, *p_in, content_len_str.toInt());
             };
@@ -197,20 +197,20 @@ class HttpServer {
 
         /// generic handler - you can overwrite this method to provide your specifc processing logic
         bool onRequest(const char* path) {
-            HttpLogger.log(Info,"onRequest %s", path);
+            Logger.log(Info,"onRequest %s", path);
 
             bool result = false;
             // check in registered handlers
-            Str pathStr = Str(path);
+            StrView pathStr = StrView(path);
             for (auto it = handler_collection.begin() ; it != handler_collection.end(); ++it) {
                 HttpRequestHandlerLine *handler_line_ptr = *it;
-                HttpLogger.log(Info,"onRequest - checking: %s %s %s", nullstr(handler_line_ptr->path), methods[handler_line_ptr->method], nullstr(handler_line_ptr->mime));
+                Logger.log(Info,"onRequest - checking: %s %s %s", nullstr(handler_line_ptr->path), methods[handler_line_ptr->method], nullstr(handler_line_ptr->mime));
 
                 if (pathStr.matches(handler_line_ptr->path) 
                 && request_header.method() == handler_line_ptr->method
                 && matchesMime(handler_line_ptr->mime, request_header.accept())) {
                     // call registed handler function
-                    HttpLogger.log(Info,"onRequest %s","->found");
+                    Logger.log(Info,"onRequest %s","->found");
                     handler_line_ptr->fn(this, path, handler_line_ptr);
                     result = true;
                     break;
@@ -234,7 +234,7 @@ class HttpServer {
 
         /// start of chunked reply: use HttpChunkWriter to provde the data 
         void replyChunked(const char* contentType, int status=200, const char* msg=SUCCESS) {
-            HttpLogger.log(Info,"reply %s","replyChunked");
+            Logger.log(Info,"reply %s","replyChunked");
             reply_header.setValues(status, msg);
             reply_header.put(TRANSFER_ENCODING,CHUNKED);
             reply_header.put(CONTENT_TYPE,contentType);
@@ -244,7 +244,7 @@ class HttpServer {
 
         /// write reply - copies data from input stream with header size
         void reply(const char* contentType, Stream &inputStream, int size, int status=200, const char* msg=SUCCESS){
-            HttpLogger.log(Info,"reply %s","stream");
+            Logger.log(Info,"reply %s","stream");
             reply_header.setValues(status, msg);
             reply_header.put(CONTENT_LENGTH,size);
             reply_header.put(CONTENT_TYPE,contentType);
@@ -261,7 +261,7 @@ class HttpServer {
 
         /// write reply - using callback that writes to stream
         void reply(const char* contentType, void(*callback)(Stream&out), int status=200, const char* msg=SUCCESS){
-            HttpLogger.log(Info,"reply %s","callback");
+            Logger.log(Info,"reply %s","callback");
             reply_header.setValues(status, msg);
             reply_header.put(CONTENT_TYPE,contentType);
             reply_header.put(CONNECTION,CON_KEEP_ALIVE);
@@ -273,7 +273,7 @@ class HttpServer {
 
         /// write reply - string with header size
         void reply(const char* contentType, const char* str, int status=200, const char* msg=SUCCESS){
-            HttpLogger.log(Info,"reply %s","str");
+            Logger.log(Info,"reply %s","str");
             int len = strlen(str);
             reply_header.setValues(status, msg);
             reply_header.put(CONTENT_LENGTH,len);
@@ -291,13 +291,13 @@ class HttpServer {
 
         /// write 404 reply 
         void replyNotFound() {
-            HttpLogger.log(Info,"reply %s","404");
+            Logger.log(Info,"reply %s","404");
             reply(404,"Page Not Found" );
         }
 
         /// Writes the status and message to the reply
         void reply(int status, const char* msg) {
-            HttpLogger.log(Info,"reply %d",status);
+            Logger.log(Info,"reply %d",status);
             reply_header.setValues(status, msg);
             reply_header.write(this->client());
             endClient();
@@ -315,7 +315,7 @@ class HttpServer {
 
         /// closes the connection to the current client_ptr
         void endClient() {
-            HttpLogger.log(Info,"HttpServer %s","endClient");
+            Logger.log(Info,"HttpServer %s","endClient");
             client_ptr->flush();
             client_ptr->stop();
         }
@@ -328,7 +328,7 @@ class HttpServer {
 
         // /// registers an extension
         // void addExtension(Extension &out){
-        //     HttpLogger.log(Info,"HttpServer %s","addExtension");
+        //     Logger.log(Info,"HttpServer %s","addExtension");
         //     out.open(this);
         //     extension_collection.push_back(&out);
         // }
@@ -349,7 +349,7 @@ class HttpServer {
             if (is_active) {
                 WiFiClient client = server_ptr->available();
                 if (client){
-                    HttpLogger.log(Info,"doLoop->hasClient");
+                    Logger.log(Info,"doLoop->hasClient");
                     client_ptr = &client;
 
                     // process the new client with standard functionality
@@ -411,7 +411,7 @@ class HttpServer {
 
         // process a full request and send the reply
         void processRequest(){
-            HttpLogger.log(Info,"processRequest");
+            Logger.log(Info,"processRequest");
             request_header.read(this->client());
             // provide reply with empty header
             reply_header.clear();
@@ -426,7 +426,7 @@ class HttpServer {
 
         // /// executes the doLoop of all extension_collection
         // void processExtensions(){
-        //     //if (extension_collection.size()>0) HttpLogger.log(Info,"processExtensions");
+        //     //if (extension_collection.size()>0) Logger.log(Info,"processExtensions");
         //     // we handle all open clients
         //     for (auto i = extension_collection.begin(); i != extension_collection.end(); ++i) {
         //         Extension *ext = (*i);
@@ -451,7 +451,7 @@ class HttpServer {
             if (handler_mime==nullptr || request_mime==nullptr){
                 return true;
             }
-            bool result = Str(request_mime).contains(handler_mime);
+            bool result = StrView(request_mime).contains(handler_mime);
             return result;
         }
 

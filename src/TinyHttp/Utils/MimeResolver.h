@@ -26,7 +26,7 @@ class MimeResolver {
         /// determines the mime type from the file extension
         virtual const char* getMime(const char* newName){
             if (mime_extensions!=nullptr){
-                Str name(newName);
+                StrView name(newName);
                 for (int j=0; mime_extensions[j].mime != nullptr;j++){
                     if (name.endsWith(mime_extensions[j].extension)){
                         return mime_extensions[j].mime;
@@ -37,10 +37,10 @@ class MimeResolver {
         }
 
         virtual const char* getExtension(const char* mime){
-            Str mimeStr(mime);
+            StrView mimeStr(mime);
             if (mime_extensions!=nullptr){
                 for (int j=0; mime_extensions[j].mime != nullptr;j++){
-                    if (Str(mime_extensions[j].mime) == mimeStr){
+                    if (StrView(mime_extensions[j].mime) == mimeStr){
                         return mime_extensions[j].extension;
                     }
                 }

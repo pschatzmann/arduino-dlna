@@ -105,6 +105,8 @@ class DLNADevice {
 
   virtual const char* getMulticastAddress() { return multicast_address; }
 
+  Device& getDevice() { return *p_device;}
+
  protected:
   UPnP upnp;
   Url base_url;

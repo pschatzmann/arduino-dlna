@@ -61,9 +61,9 @@ class Client  {
     
         // opens a conection
         int connect(const char* address, int port){
-            HttpLogger.log(Info, "Socket is connecting...");
+            Logger.log(Info, "Socket is connecting...");
             if ((sock = ::socket(AF_INET, SOCK_STREAM, 0)) < 0) { 
-                HttpLogger.log(Error, "Socket creation error");
+                Logger.log(Error, "Socket creation error");
                 return -1; 
             } 
         
@@ -73,16 +73,16 @@ class Client  {
             
             // Convert IPv4 and IPv6 addresses from text to binary form 
             if(::inet_pton(AF_INET, address, &serv_addr.sin_addr)<=0)  { 
-                HttpLogger.log(Error, "Invalid address: Address not supported");
+                Logger.log(Error, "Invalid address: Address not supported");
                 return -2; 
             } 
         
             if (::connect(sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0) { 
-                HttpLogger.log(Error, "Connection Failed");
+                Logger.log(Error, "Connection Failed");
                 return -3; 
             } 
 
-            HttpLogger.log(Info, "Socket is connected");
+            Logger.log(Info, "Socket is connected");
             is_connected = true;
             return 1;
         }

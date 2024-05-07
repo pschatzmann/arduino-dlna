@@ -1,7 +1,7 @@
 #pragma once
-#include "Basic/StrExt.h"
+#include "Basic/Str.h"
 #include "Basic/Vector.h"
-#include "HttpLogger.h"
+#include "Basic/Logger.h"
 #include "Stream.h"
 #include <ctype.h>
 #include <stdlib.h>
@@ -16,8 +16,8 @@ namespace tiny_dlna {
 class HttpParameters {
   struct HttpParameterEntry {
     HttpParameterEntry() = default;
-    StrExt key = nullptr;
-    StrExt value = nullptr;
+    Str key = nullptr;
+    Str value = nullptr;
     void clear() {
       key.clear();
       value.clear();
@@ -37,17 +37,17 @@ public:
     while (in.available() > 0) {
       memset(buffer, 0, max_len);
       in.readBytesUntil('&', buffer, max_len);
-      Str str(buffer);
-      HttpLogger.log(Info, "parameter: %s", buffer);
+      StrView str(buffer);
+      Logger.log(Info, "parameter: %s", buffer);
       urldecode2(buffer, buffer);
-      HttpLogger.log(Info, "parameter decoded: %s", buffer);
+      Logger.log(Info, "parameter decoded: %s", buffer);
       int pos = str.indexOf("=");
       if (pos > 0) {
         buffer[pos] = 0; // delimit key
         const char *key = buffer;
         const char *value = buffer + pos + 1;
-        HttpLogger.log(Debug, "key: %s", key);
-        HttpLogger.log(Debug, "value: %s", value);
+        Logger.log(Debug, "key: %s", key);
+        Logger.log(Debug, "value: %s", value);
         HttpParameterEntry *entry = getParameter(key);
         if (entry != nullptr) {
           entry->value = value;
@@ -68,10 +68,10 @@ public:
     while (in.available() > 0) {
       memset(buffer, 0, max_len);
       in.readBytesUntil('&', buffer, max_len);
-      Str str(buffer);
-      HttpLogger.log(Info, "parameter: %s", buffer);
+      StrView str(buffer);
+      Logger.log(Info, "parameter: %s", buffer);
       urldecode2(buffer, buffer);
-      HttpLogger.log(Info, "parameter decoded: %s", buffer);
+      Logger.log(Info, "parameter decoded: %s", buffer);
       int pos = str.indexOf("=");
       if (pos > 0) {
         buffer[pos] = 0; // delimit key

@@ -14,7 +14,7 @@ struct XMLPrinter {
   /// Defines the output
   void setOutput(Print& output) { p_out = &output; }
 
-  void printXML() { p_out->println("<?xml version=\"1.0\"?>"); }
+  void printXMLHeader() { p_out->println("<?xml version=\"1.0\"?>"); }
 
   void printNode(const char* node, const char* txt,
                  const char* attributes = nullptr) {

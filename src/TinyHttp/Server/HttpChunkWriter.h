@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Client.h"
-#include "HttpLogger.h"
+#include "Basic/Logger.h"
 
 namespace tiny_dlna {
 
@@ -12,7 +12,7 @@ namespace tiny_dlna {
 class HttpChunkWriter {
     public:
         int writeChunk(Client &client, const char* str, int len, const char* str1=nullptr, int len1=0){
-            HttpLogger.log(Debug,"HttpChunkWriter","writeChunk");
+            Logger.log(Debug,"HttpChunkWriter","writeChunk");
             client.println(len+len1, HEX);
             int result = client.write((uint8_t*)str, len);
             if (str1!=nullptr){

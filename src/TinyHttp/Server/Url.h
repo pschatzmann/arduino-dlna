@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Basic/StrExt.h"
-#include "HttpLogger.h"
+#include "Basic/Str.h"
+#include "Basic/Logger.h"
 
 namespace tiny_dlna {
 
@@ -19,11 +19,11 @@ class Url {
     public:
         // empty url
         Url() {
-            HttpLogger.log(Info,"Url");
+            Logger.log(Info,"Url");
         }
         
         ~Url() {
-            HttpLogger.log(Info,"~Url");
+            Logger.log(Info,"~Url");
             pathStr.clear();
             hostStr.clear();
             protocolStr.clear();
@@ -33,13 +33,13 @@ class Url {
 
         // setup url with string
         Url(const char *url){
-            HttpLogger.log(Info,"Url %s",url);
+            Logger.log(Info,"Url %s",url);
             setUrl(url);
         }
 
         // copy constructor
         Url(Url &url){
-            HttpLogger.log(Info,"Url %s",url.url());
+            Logger.log(Info,"Url %s",url.url());
             setUrl(url.url());
         }
 
@@ -51,21 +51,21 @@ class Url {
         int port() {return portInt;}
 
         void setUrl(const char* url){
-            HttpLogger.log(Info,"setUrl %s",url);
+            Logger.log(Info,"setUrl %s",url);
             this->urlStr = url;
             parse();
         }
 
     protected:
-        StrExt pathStr = StrExt(40);
-        StrExt hostStr = StrExt(20);
-        StrExt protocolStr = StrExt(6);
-        StrExt urlRootStr = StrExt(40);
-        StrExt urlStr = StrExt(40);
+        Str pathStr = Str(40);
+        Str hostStr = Str(20);
+        Str protocolStr = Str(6);
+        Str urlRootStr = Str(40);
+        Str urlStr = Str(40);
         int portInt;
 
         void parse() {
-            HttpLogger.log(Info,"Url::parse");
+            Logger.log(Info,"Url::parse");
             
             int protocolEnd = urlStr.indexOf("://");
             if (protocolEnd==-1){
@@ -101,8 +101,8 @@ class Url {
                 pathStr.trim();
                 urlRootStr.substring(urlStr, 0, pathStart);
             }
-            HttpLogger.log(Info,"url-> %s",url());
-            HttpLogger.log(Info,"path-> %s",path());
+            Logger.log(Info,"url-> %s",url());
+            Logger.log(Info,"path-> %s",path());
            
         }
 

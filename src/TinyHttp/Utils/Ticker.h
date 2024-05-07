@@ -2,7 +2,7 @@
 
 #include "Arduino.h"
 #include "Basic/List.h"
-#include "../Server/HttpLogger.h"
+#include "Basic/Logger.h"
 
 namespace tiny_dlna {
 
@@ -90,7 +90,7 @@ class Ticker {
 
         // protected methods
         static void cleanup(void*) {
-            HttpLogger.log(Info,"Ticker %s","cleanup");
+            Logger.log(Info,"Ticker %s","cleanup");
             long count=0;
             long now = millis();
             for (int pos=ticker_entries.size()-1; pos>=0; pos--) {
@@ -101,7 +101,7 @@ class Ticker {
                 }
             }
 
-            HttpLogger.log(Info,"Ticker cleaned up %d ticker_entries", count);
+            Logger.log(Info,"Ticker cleaned up %d ticker_entries", count);
         }
 
 };

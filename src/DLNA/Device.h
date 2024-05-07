@@ -18,7 +18,7 @@ class Device {
   /// renderes the device xml
   void print(Print& out) {
     xml.setOutput(out);
-    xml.printXML();
+    xml.printXMLHeader();
     auto printRootCb = std::bind(&Device::printRoot, this);
     xml.printNode("root", printRootCb, ns);
   }
@@ -53,7 +53,7 @@ class Device {
   Service getService(const char* id) {
     Service result;
     for (auto& service : services) {
-      if (Str(service.name).equals(id)) {
+      if (StrView(service.name).equals(id)) {
         return result;
       }
     }

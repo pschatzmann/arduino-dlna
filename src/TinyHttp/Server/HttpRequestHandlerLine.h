@@ -19,15 +19,15 @@ typedef void (*web_callback_fn)(HttpServer *server, const char* requestPath, Htt
 class HttpRequestHandlerLine {
     public:
         HttpRequestHandlerLine(int ctxSize=0){
-            HttpLogger.log(Info,"HttpRequestHandlerLine");
+            Logger.log(Info,"HttpRequestHandlerLine");
             contextCount = ctxSize;
             context = new void*[ctxSize];
         }
 
         ~HttpRequestHandlerLine(){
-            HttpLogger.log(Info,"~HttpRequestHandlerLine");
+            Logger.log(Info,"~HttpRequestHandlerLine");
             if (contextCount>0){
-                HttpLogger.log(Info,"HttpRequestHandlerLine %s","free");
+                Logger.log(Info,"HttpRequestHandlerLine %s","free");
                 delete[] context;
             }
         }
@@ -38,7 +38,7 @@ class HttpRequestHandlerLine {
         web_callback_fn fn;
         void** context;
         int contextCount;
-        Str *header = nullptr;
+        StrView *header = nullptr;
 };
 
 }

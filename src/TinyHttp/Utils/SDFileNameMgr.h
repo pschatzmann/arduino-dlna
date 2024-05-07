@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Basic/StrExt.h"
+#include "Basic/Str.h"
 #include "HttpCommon.h"
 #include "Utils/MimeResolver.h"
 #include <iostream>
@@ -35,7 +35,7 @@ class SDFileNameMgr {
 
         // e.g. https://www.pschatzmann.ch/test/longpathname/test [text/html] -> /test/longpath/name/path/test.html
         // builds a compliant file name with an extension triggered by the mime
-        virtual Str& getName(const char *originalName, const char* mime="text/html") {
+        virtual StrView& getName(const char *originalName, const char* mime="text/html") {
             name_buffer = originalName;
 
             if (name_buffer.startsWith(root_url.c_str())){
@@ -61,8 +61,8 @@ class SDFileNameMgr {
         }
 
     protected:
-        StrExt root_url = StrExt(80);
-        StrExt name_buffer = StrExt(40);
+        Str root_url = Str(80);
+        Str name_buffer = Str(40);
         MimeResolver mime_resolver;
 
         void split() {

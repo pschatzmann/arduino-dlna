@@ -1,6 +1,6 @@
 #pragma once
 
-#include "HttpLogger.h"
+#include "Basic/Logger.h"
 
 namespace tiny_dlna {
 
@@ -16,14 +16,14 @@ class HttpLineReader {
         // reads up the the next CR LF - but never more then the indicated len. returns the number of characters read including crlf
         virtual int readlnInternal(Stream &client, uint8_t* str, int len, bool incl_nl=true){
             int result = 0;
-            HttpLogger.log(Debug, "HttpLineReader","readlnInternal");
+            Logger.log(Debug, "HttpLineReader","readlnInternal");
             // wait for first character
             for (int w=0;w<20 && client.available()==0; w++){
                 delay(100);
             }
             // if we do not have any data we stop
             if (client.available()==0) {
-                HttpLogger.log(Warning, "HttpLineReader","readlnInternal->no Data");
+                Logger.log(Warning, "HttpLineReader","readlnInternal->no Data");
                 str[0]=0;
                 return 0;
             }
@@ -69,7 +69,7 @@ class HttpLineReader {
             str[result]=0;
             str[result-1]=0;
             if (is_buffer_owerflow){
-               HttpLogger.log(Error, "Line cut off:", (const char*) str);
+               Logger.log(Error, "Line cut off:", (const char*) str);
             }
             return result;
         }
