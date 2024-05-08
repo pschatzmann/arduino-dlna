@@ -14,7 +14,7 @@ namespace tiny_dlna {
  */
 enum DlnaLogLevel { DlnaDebug, DlnaInfo, DlnaWarning, DlnaError };
 
-static const char* HttpDlnaLogLevelStr[] = {"DlnaDebug", "DlnaInfo", "DlnaWarning", "DlnaError"};
+static const char* HttpDlnaLogLevelStr[] = {"Debug", "Info", "Warning", "Error"};
 
 /**
  * @brief Logger that writes messages dependent on the log level

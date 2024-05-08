@@ -31,15 +31,15 @@ void UPnP::GatewayDlnaInfo::clear() {
 }
 
 bool UPnP::GatewayDlnaInfo::isValid() {
-  DlnaLogger.log(DlnaInfo,
-             "isGatewayDlnaInfoValid [%s] port [%d] path [%s] actionPort [%d] "
-             "actionPath [%s] serviceTypeName [%s]",
-             toStr(host), port, path, actionPort, actionPath, serviceTypeName);
 
   if (host == NullIP || port == 0 || path.length() == 0 || actionPort == 0) {
     DlnaLogger.log(DlnaError, "Gateway info is not valid: %s", toStr(host));
     return false;
   }
+  DlnaLogger.log(DlnaInfo,
+             "GatewayDlnaInfo::isValid [%s] port [%d] path [%s] actionPort [%d] "
+             "actionPath [%s] serviceTypeName [%s]",
+             toStr(host), port, path, actionPort, actionPath, serviceTypeName);
 
   DlnaLogger.log(DlnaInfo, "Gateway info is valid");
   return true;
@@ -111,15 +111,15 @@ bool UPnP::save() {
                   // its rules
   }
 
-  DlnaLogger.log(DlnaInfo, "port [%d] actionPort [%d]", gatewayDlnaInfo.port,
-             gatewayDlnaInfo.actionPort);
-
-  // double verify gateway information is valid
+  // verify gateway information is valid
   if (!gatewayDlnaInfo) {
     DlnaLogger.log(DlnaError, "ERROR: Invalid router info, cannot continue");
     lastResult = PortMappingResult::NETWORK_ERROR;
     return false;
   }
+
+  DlnaLogger.log(DlnaInfo, "port [%d] actionPort [%d]", gatewayDlnaInfo.port,
+             gatewayDlnaInfo.actionPort);
 
   if (gatewayDlnaInfo.port != gatewayDlnaInfo.actionPort) {
     // in this case we need to connect to a different port
@@ -214,6 +214,8 @@ bool UPnP::getGatewayDlnaInfo(GatewayDlnaInfo *deviceDlnaInfo, long startTime) {
     }
     delay(1);
   }
+
+  if (!ssdpDevice) return false;
 
   deviceDlnaInfo->host = ssdpDevice.host;
   deviceDlnaInfo->port = ssdpDevice.port;
@@ -511,7 +513,7 @@ bool UPnP::connectUDP() {
 void UPnP::broadcastMSearch(bool isSsdpAll /*=false*/) {
   char integer_string[32];
 
-  DlnaLogger.log(DlnaInfo, "Sending M-SEARCH to [%d] Port [%d]", ipMulti,
+  DlnaLogger.log(DlnaInfo, "Sending M-SEARCH to [%s] Port [%d]", toStr(ipMulti),
              UPNP_SSDP_PORT);
 
 #if defined(ESP8266)
@@ -627,7 +629,7 @@ SsdpDevice UPnP::waitForUnicastResponseToMSearch(IPAddress gatewayIP) {
   IPAddress remoteIP = p_udp->remoteIP();
   // only continue if the packet was received from the gateway router
   // for SSDP discovery we continue anyway
-  if (gatewayIP != NullIP && remoteIP != gatewayIP) {
+  if (!(gatewayIP == NullIP) && !(remoteIP == gatewayIP)) {
     DlnaLogger.log(DlnaInfo,
                "Discarded packet not originating from IGD - gatewayIP [%s] "
                "remoteIP [%s]",

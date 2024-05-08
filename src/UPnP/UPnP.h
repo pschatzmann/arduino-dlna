@@ -69,13 +69,13 @@ struct SsdpDevice {
    * @internal
    */
   struct UpnpRule {
-    int index;
-    String devFriendlyName;
-    IPAddress internalAddr;
-    int internalPort;
-    int externalPort;
-    String protocol;
-    int leaseDurationSec;
+    int index = 0;
+    String devFriendlyName = "";
+    IPAddress internalAddr{0,0,0,0};
+    int internalPort = 0;
+    int externalPort = 0;
+    String protocol = "";
+    int leaseDurationSec = 0;
 
     String toString();
   };

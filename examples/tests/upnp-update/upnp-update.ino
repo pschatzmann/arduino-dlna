@@ -1,11 +1,12 @@
-#include "DLNA.h"
 #include <WiFi.h>
 #include <WiFiUdp.h>
+
+#include "DLNA.h"
 
 // server config
 const char* ssid = "<FILL THIS!>";
 const char* password = "<FILL THIS!>";
-#define LISTEN_PORT 8888              
+#define LISTEN_PORT 8888
 #define LEASE_DURATION 36000  // seconds
 #define FRIENDLY_NAME "FriendlyName"
 
@@ -31,16 +32,15 @@ void connectWiFi() {
   Serial.print("IP address: ");
   Serial.println(WiFi.localIP());
 #else
-  upnp.setLocalIP(IPAddress(192,168,1,35));
-  upnp.setGatewayIP(IPAddress(192,168,1,1));
+  upnp.setLocalIP(IPAddress(192, 168, 1, 35));
+  upnp.setGatewayIP(IPAddress(192, 168, 1, 1));
 #endif
 }
 
 void update() {
   bool portMappingAdded = false;
   upnp.begin();
-  upnp.addConfig(LISTEN_PORT, RULE_PROTOCOL_TCP,
-                                LEASE_DURATION, FRIENDLY_NAME);
+  upnp.addConfig(LISTEN_PORT, RULE_PROTOCOL_TCP, LEASE_DURATION, FRIENDLY_NAME);
   while (!portMappingAdded) {
     portMappingAdded = upnp.save();
     Serial.println("");
@@ -48,11 +48,10 @@ void update() {
     if (!portMappingAdded) {
       // for debugging, you can see this in your router too under forwarding or
       // UPnP
-      for (auto &rule : upnp.listConfig()){
+      Serial.println("The requested port mapping failed:");
+      for (auto& rule : upnp.listConfig()) {
         Serial.println(rule.toString().c_str());
       }
-      Serial.println(
-          "This was printed because adding the required port mapping failed");
       delay(30000);  // 30 seconds before trying again
     }
   }
@@ -60,7 +59,7 @@ void update() {
 
 void setup(void) {
   Serial.begin(115200);
-  DlnaLogger.begin(Serial, DlnaInfo);
+  DlnaLogger.begin(Serial, DlnaDebug);
   Serial.println(F("Starting..."));
 
   connectWiFi();
