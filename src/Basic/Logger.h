@@ -23,7 +23,9 @@ static const char* HttpDlnaLogLevelStr[] = {"DlnaDebug", "DlnaInfo", "DlnaWarnin
 
 class LoggerClass {
  public:
-  LoggerClass() = default;
+  LoggerClass() {
+    Serial.println("LoggerClass");
+  };
 
   // activate the logging
   virtual void begin(Print& out, DlnaLogLevel level = DlnaError) {
@@ -57,6 +59,6 @@ class LoggerClass {
   DlnaLogLevel log_level = DlnaWarning;
 };
 
-static LoggerClass DlnaLogger;
+extern LoggerClass DlnaLogger;
 
 }  // namespace tiny_dlna
