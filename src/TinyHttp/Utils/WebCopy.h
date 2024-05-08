@@ -22,7 +22,7 @@ class WebCopy {
   public:
     /// default constructor
     WebCopy(Client &client, bool inDoLoop=true, int cpin=-1, int bufferSize=512) {
-      Logger.log(Info,"WebCopy");
+      DlnaLogger.log(DlnaInfo,"WebCopy");
       this->processing_in_do_loop = inDoLoop;
       this->http.setClient(client);
       this->buffer_size = bufferSize;
@@ -52,10 +52,10 @@ class WebCopy {
     virtual void start(const char* startUrlChar){
       char msg[100];
       sprintf(msg, "start %s",startUrlChar);
-      Logger.log(Info,"WebCopy %s", msg);
+      DlnaLogger.log(DlnaInfo,"WebCopy %s", msg);
       this->start_url.setUrl(startUrlChar);
       const char* root = start_url.urlRoot();
-      Logger.log(Info,"WebCopy->root %s", root);
+      DlnaLogger.log(DlnaInfo,"WebCopy->root %s", root);
 
 
       this->file_name_mgr.setRootUrl(root);
@@ -69,7 +69,7 @@ class WebCopy {
     }
 
     virtual void stop() {
-      Logger.log(Info,"WebCopy %s", "stop");
+      DlnaLogger.log(DlnaInfo,"WebCopy %s", "stop");
       active = false;
     }
 
@@ -80,7 +80,7 @@ class WebCopy {
     // incremental processing in Loop
     void doLoop(){
       if (processing_in_do_loop){
-        Logger.log(Info, "startDump");
+        DlnaLogger.log(DlnaInfo, "startDump");
         StrView url = stack.popStr();
         if(active && !url.isEmpty()){
           reportHeap();
@@ -113,7 +113,7 @@ class WebCopy {
 
     /// dumps the url to a file while for all stack
     virtual void startDump(){
-      Logger.log(Info, "startDump");
+      DlnaLogger.log(DlnaInfo, "startDump");
       StrView url = stack.popStr();
       while(active && !url.isEmpty()){
         reportHeap();
@@ -128,13 +128,13 @@ class WebCopy {
       int freeHeap = ESP.getFreeHeap();
       char msg[80];
       sprintf(msg, "free memory: %d",  freeHeap);
-      Logger.log(Info, msg);
+      DlnaLogger.log(DlnaInfo, msg);
   #endif
     }
 
     // copies the content of the url to a file and collects the contained urls
     void processContent(StrView urlStr) {
-        Logger.log(Info, "processContent %s", urlStr.c_str());
+        DlnaLogger.log(DlnaInfo, "processContent %s", urlStr.c_str());
         if (!urlStr.isEmpty()){
           // Determine Mime
           url.setUrl(urlStr.c_str());
@@ -146,7 +146,7 @@ class WebCopy {
           if (file.size()==0){
               // get the data
               reportHeap();
-              Logger.log(Info, "processContent %s", url.url());
+              DlnaLogger.log(DlnaInfo, "processContent %s", url.url());
               http.get(url);
               processFile(file, mimeStr);
           }
@@ -156,7 +156,7 @@ class WebCopy {
 
     // read from URL to File
     void processFile(File &file, StrView &mimeStr){
-        Logger.log(Info, "processFile %s", file.name());
+        DlnaLogger.log(DlnaInfo, "processFile %s", file.name());
         if (mimeStr.contains("htm")){
           processHtml(file);
         } else {
@@ -166,12 +166,12 @@ class WebCopy {
 
     // determines the mime type
     StrView getMime(Url &url) {
-        Logger.log(Info, "getMime %s", url.url());
+        DlnaLogger.log(DlnaInfo, "getMime %s", url.url());
         http.head(url);
         const char* mime = http.reply().get(CONTENT_TYPE);
         // text/html; charset=UTF-8 -> html
         StrView mimeStr(mime);
-        Logger.log(Info, "getMime-> %s", mimeStr.c_str());
+        DlnaLogger.log(DlnaInfo, "getMime-> %s", mimeStr.c_str());
         return mimeStr;
     }
 
@@ -190,10 +190,10 @@ class WebCopy {
 
     // creates the directoy and the file on the SD drive
     File createFile(StrView &urlStr, StrView &mime){
-        Logger.log(Info, "createFile %s", urlStr.c_str());
+        DlnaLogger.log(DlnaInfo, "createFile %s", urlStr.c_str());
         // determine the file name which is valid for the SD card
         StrView file_name = file_name_mgr.getName(urlStr.c_str(), mime.c_str());
-        Logger.log(Info, "createFile %s", file_name.c_str());
+        DlnaLogger.log(DlnaInfo, "createFile %s", file_name.c_str());
         // create directory - limit name to show only the path
         int pos = file_name.lastIndexOf("/");
         if (pos>1){
@@ -204,7 +204,7 @@ class WebCopy {
         }
         // return an real file only if it does 
         File file = SD.open(file_name.c_str());
-        Logger.log(Info, "createFile %s", file.name());
+        DlnaLogger.log(DlnaInfo, "createFile %s", file.name());
 
         return file;
     }
@@ -212,7 +212,7 @@ class WebCopy {
     // process a html file by saving the content to the file and extracting the 
     // contained urls
     void processHtml(File &file) {
-        Logger.log(Info, "processHtml %s", file.name());
+        DlnaLogger.log(DlnaInfo, "processHtml %s", file.name());
         // process all lines
         uint8_t buffer[buffer_size];
         while(http.available()){
@@ -226,7 +226,7 @@ class WebCopy {
 
     // just save the content to a file
     void processOthers(File &file) {
-        Logger.log(Info, "processOthers");
+        DlnaLogger.log(DlnaInfo, "processOthers");
         uint8_t buffer[buffer_size];
         while(http.available()){
             // read a single line
@@ -238,7 +238,7 @@ class WebCopy {
 
     // extracts the stack and puts them on the stack 
     void extractReferences(uint8_t* buffer, int len) {
-        Logger.log(Info, "extractReferences");
+        DlnaLogger.log(DlnaInfo, "extractReferences");
         char url_buffer[200];
         StrView url(url_buffer,200);
         // read a single line
@@ -249,7 +249,7 @@ class WebCopy {
         while(found){
           if (!url.isEmpty()){
             if (createEmptyFile(url)) {
-              Logger.log(Info, "extractReferences %s",url.c_str());
+              DlnaLogger.log(DlnaInfo, "extractReferences %s",url.c_str());
               stack.push(url.c_str());
             }
           }

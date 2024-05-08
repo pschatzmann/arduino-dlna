@@ -19,15 +19,15 @@ typedef void (*web_callback_fn)(HttpServer *server, const char* requestPath, Htt
 class HttpRequestHandlerLine {
     public:
         HttpRequestHandlerLine(int ctxSize=0){
-            Logger.log(Info,"HttpRequestHandlerLine");
+            DlnaLogger.log(DlnaInfo,"HttpRequestHandlerLine");
             contextCount = ctxSize;
             context = new void*[ctxSize];
         }
 
         ~HttpRequestHandlerLine(){
-            Logger.log(Info,"~HttpRequestHandlerLine");
+            DlnaLogger.log(DlnaInfo,"~HttpRequestHandlerLine");
             if (contextCount>0){
-                Logger.log(Info,"HttpRequestHandlerLine %s","free");
+                DlnaLogger.log(DlnaInfo,"HttpRequestHandlerLine %s","free");
                 delete[] context;
             }
         }

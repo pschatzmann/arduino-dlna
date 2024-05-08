@@ -6,7 +6,7 @@
 const char* ssid = "<FILL THIS!>";
 const char* password = "<FILL THIS!>";
 
-UPnP tinyUPnP(12000);  // when using the library for listing SSDP devices, a
+UPnP upnp(12000);  // when using the library for listing SSDP devices, a
                        // timeout must be set
 
 void connectWiFi() {
@@ -33,17 +33,21 @@ void connectWiFi() {
   Serial.println(WiFi.gatewayIP().toString());
   Serial.print("Network Mask: ");
   Serial.println(WiFi.subnetMask().toString());
+#else
+  upnp.setLocalIP(IPAddress(192,168,1,35));
+  upnp.setGatewayIP(IPAddress(192,168,1,1));
 #endif
 }
 
 void setup(void) {
   Serial.begin(115200);
+  DlnaLogger.begin(Serial, DlnaInfo);
   Serial.println("Starting...");
 
   connectWiFi();
   
-  tinyUPnP.begin();
-  for (auto &dev : tinyUPnP.listDevices()){
+  upnp.begin();
+  for (auto &dev : upnp.listDevices()){
     Serial.println(dev.toString().c_str());
   }
 }

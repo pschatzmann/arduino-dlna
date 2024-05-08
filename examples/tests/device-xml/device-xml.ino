@@ -30,7 +30,8 @@ void setupDevice() {
 }
 
 void setup() {
-  //Serial.begin(119200);
+  Serial.begin(119200);
+  DlnaLogger.begin(Serial, DlnaInfo);
   
   setupDevice();
   // render device XML

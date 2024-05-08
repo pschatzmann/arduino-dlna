@@ -19,13 +19,13 @@ namespace tiny_dlna {
 class HttpRequest{
     public:
         HttpRequest() {
-            Logger.log(Info,"HttpRequest");
+            DlnaLogger.log(DlnaInfo,"HttpRequest");
             default_client.setInsecure();
             setClient(default_client);
         }
 
         HttpRequest(Client &client){
-            Logger.log(Info,"HttpRequest");
+            DlnaLogger.log(DlnaInfo,"HttpRequest");
             setClient(client);
         }
 
@@ -35,7 +35,7 @@ class HttpRequest{
 
         // the requests usually need a host. This needs to be set if we did not provide a URL
         void setHost(const char* host){
-            Logger.log(Info,"setHost", host);
+            DlnaLogger.log(DlnaInfo,"setHost", host);
             this->host_name = host;
         }
 
@@ -55,33 +55,33 @@ class HttpRequest{
         }
 
         virtual void stop(){
-            Logger.log(Info,"stop");
+            DlnaLogger.log(DlnaInfo,"stop");
             client_ptr->stop();
         }
 
         virtual int post(Url &url, const char* mime, const char *data, int len=-1){
-            Logger.log(Info,"post %s", url.url());
+            DlnaLogger.log(DlnaInfo,"post %s", url.url());
             return process(T_POST, url, mime, data, len);
         }
 
         virtual int put(Url &url, const char* mime, const char *data, int len=-1){
-            Logger.log(Info,"put %s", url.url());
+            DlnaLogger.log(DlnaInfo,"put %s", url.url());
             return process(T_PUT, url, mime, data, len);
         }
 
         virtual int del(Url &url,const char* mime=nullptr, const char *data=nullptr, int len=-1) {
-            Logger.log(Info,"del %s", url.url());
+            DlnaLogger.log(DlnaInfo,"del %s", url.url());
             return process(T_DELETE, url, mime, data, len);
         }
 
         virtual int get(Url &url,const char* acceptMime=nullptr, const char *data=nullptr, int len=-1) {
-            Logger.log(Info,"get %s", str(url.url()));
+            DlnaLogger.log(DlnaInfo,"get %s", str(url.url()));
             this->accept = acceptMime;
             return process(T_GET, url, nullptr, data, len);
         }
 
         virtual int head(Url &url,const char* acceptMime=nullptr, const char *data=nullptr, int len=-1) {
-            Logger.log(Info,"head %s", url.url());
+            DlnaLogger.log(DlnaInfo,"head %s", url.url());
             this->accept = acceptMime;
             return process(T_HEAD, url, nullptr, data, len);
         }
@@ -145,7 +145,7 @@ class HttpRequest{
 
         // opens a connection to the indicated host
         virtual int connect(const char *ip, uint16_t port) {
-            Logger.log(Info,"connect %s", ip);
+            DlnaLogger.log(DlnaInfo,"connect %s", ip);
             return this->client_ptr->connect(ip, port);
         }
 
@@ -154,7 +154,7 @@ class HttpRequest{
             if (!connected()){
                 char msg[1024];
                 sprintf(msg, "connecting to host %s port %d", url.host(), url.port());
-                Logger.log(Info,"process %s", msg);
+                DlnaLogger.log(DlnaInfo,"process %s", msg);
 
                 connect(url.host(), url.port());
                 if (host_name==nullptr){
@@ -185,7 +185,7 @@ class HttpRequest{
             request_header.write(*client_ptr);
 
             if (len>0){
-                Logger.log(Info,"process - writing data");
+                DlnaLogger.log(DlnaInfo,"process - writing data");
                 client_ptr->write((const uint8_t*)data,len);
             }
 

@@ -9,7 +9,7 @@ const char* password = "<FILL THIS!>";
 #define LEASE_DURATION 36000  // seconds
 #define FRIENDLY_NAME "FriendlyName"
 
-UPnP tinyUPnP(20000);
+UPnP upnp(20000);
 
 void connectWiFi() {
 #ifndef IS_DESKTOP
@@ -30,22 +30,25 @@ void connectWiFi() {
   Serial.println(ssid);
   Serial.print("IP address: ");
   Serial.println(WiFi.localIP());
+#else
+  upnp.setLocalIP(IPAddress(192,168,1,35));
+  upnp.setGatewayIP(IPAddress(192,168,1,1));
 #endif
 }
 
 void update() {
   bool portMappingAdded = false;
-  tinyUPnP.begin();
-  tinyUPnP.addConfig(WiFi.localIP(), LISTEN_PORT, RULE_PROTOCOL_TCP,
+  upnp.begin();
+  upnp.addConfig(LISTEN_PORT, RULE_PROTOCOL_TCP,
                                 LEASE_DURATION, FRIENDLY_NAME);
   while (!portMappingAdded) {
-    portMappingAdded = tinyUPnP.save();
+    portMappingAdded = upnp.save();
     Serial.println("");
 
     if (!portMappingAdded) {
       // for debugging, you can see this in your router too under forwarding or
       // UPnP
-      for (auto &rule : tinyUPnP.listConfig()){
+      for (auto &rule : upnp.listConfig()){
         Serial.println(rule.toString().c_str());
       }
       Serial.println(
@@ -57,6 +60,7 @@ void update() {
 
 void setup(void) {
   Serial.begin(115200);
+  DlnaLogger.begin(Serial, DlnaInfo);
   Serial.println(F("Starting..."));
 
   connectWiFi();
@@ -66,5 +70,5 @@ void setup(void) {
 
 void loop(void) {
   delay(5);
-  tinyUPnP.update(600000, &connectWiFi);  // 10 minutes
+  upnp.update(600000, &connectWiFi);  // 10 minutes
 }

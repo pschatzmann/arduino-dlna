@@ -158,19 +158,19 @@ class DLNADevice {
     return upnp.getTempBuffer();
   }
 
-  const char* soapReplyError(const char* error, int errorCode) {
+  const char* soapReplyDlnaError(const char* error, int errorCode) {
     const char* tmp =
         "<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\" "
         "s:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\">"
         "<s:Body>"
         "<s:Fault>"
         "<faultcode>s:Client</faultcode>"
-        "<faultstring>UPnPError</faultstring>"
+        "<faultstring>UPnPDlnaError</faultstring>"
         "<detail>"
-        "<UPnPError xmlns=\"urn:schemas-upnp-org:control-1-0\">"
+        "<UPnPDlnaError xmlns=\"urn:schemas-upnp-org:control-1-0\">"
         "<errorCode>%d</errorCode>"
         "<errorDescription>%s</errorDescription>"
-        "</UPnPError>"
+        "</UPnPDlnaError>"
         "</detail>"
         "</s:Fault>"
         "</s:Body>"

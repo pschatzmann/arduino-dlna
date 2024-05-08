@@ -12,9 +12,9 @@ namespace tiny_dlna {
  * @brief Supported log levels
  *
  */
-enum LogLevel { Debug, Info, Warning, Error };
+enum DlnaLogLevel { DlnaDebug, DlnaInfo, DlnaWarning, DlnaError };
 
-static const char* HttpLogLevelStr[] = {"Debug", "Info", "Warning", "Error"};
+static const char* HttpDlnaLogLevelStr[] = {"DlnaDebug", "DlnaInfo", "DlnaWarning", "DlnaError"};
 
 /**
  * @brief Logger that writes messages dependent on the log level
@@ -26,23 +26,23 @@ class LoggerClass {
   LoggerClass() = default;
 
   // activate the logging
-  virtual void begin(Print& out, LogLevel level = Error) {
+  virtual void begin(Print& out, DlnaLogLevel level = DlnaError) {
     this->log_stream_ptr = &out;
     this->log_level = level;
   }
 
-  void setLevel(LogLevel l) { log_level = l; }
+  void setLevel(DlnaLogLevel l) { log_level = l; }
 
   // checks if the logging is active
   virtual bool isLogging() { return log_stream_ptr != nullptr; }
 
   /// Print log message
-  void log(LogLevel current_level, const char* fmt...) {
+  void log(DlnaLogLevel current_level, const char* fmt...) {
     if (current_level >= log_level && log_stream_ptr != nullptr &&
         fmt != nullptr) {
       char log_buffer[200];
       strcpy(log_buffer, "DLNA - ");
-      strcat(log_buffer, HttpLogLevelStr[current_level]);
+      strcat(log_buffer, HttpDlnaLogLevelStr[current_level]);
       strcat(log_buffer, ":     ");
       va_list arg;
       va_start(arg, fmt);
@@ -54,9 +54,9 @@ class LoggerClass {
 
  protected:
   Print* log_stream_ptr = &Serial;
-  LogLevel log_level = Warning;
+  DlnaLogLevel log_level = DlnaWarning;
 };
 
-static LoggerClass Logger;
+static LoggerClass DlnaLogger;
 
 }  // namespace tiny_dlna

@@ -135,11 +135,11 @@ class Device {
   }
 
   void printIconList() {
-    auto printIconInfoCb = std::bind(&Device::printIconInfo, this);
-    xml.printNode("icon", printIconInfoCb);
+    auto printIconDlnaInfoCb = std::bind(&Device::printIconDlnaInfo, this);
+    xml.printNode("icon", printIconDlnaInfoCb);
   }
 
-  void printIconInfo() {
+  void printIconDlnaInfo() {
     xml.printNode("mimetype", "image/png");
     xml.printNode("width", icon_width);
     xml.printNode("height", icon_height);

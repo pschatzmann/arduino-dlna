@@ -159,11 +159,11 @@ class UPnP {
   };
 
   /**
-   * @brief UPnP Gateway Information
+   * @brief UPnP Gateway DlnaInformation
    * @internal
    */
-  struct GatewayInfo {
-    GatewayInfo() { clear(); }
+  struct GatewayDlnaInfo {
+    GatewayDlnaInfo() { clear(); }
     // router info
     IPAddress host;
     int port;     // this port is used when getting router capabilities and xml
@@ -198,7 +198,11 @@ class UPnP {
 
   Vector<UpnpRule> ruleNodes{0};
   Vector<SsdpDevice> devices{0};
+#ifdef IS_DESKTOP
+  bool is_wifi = false;
+#else
   bool is_wifi = true;
+#endif
   unsigned long lastUpdateTime = 0;
   long timeoutMs;  // 0 for blocking operation
   WiFiUDP udpClient;
@@ -207,7 +211,7 @@ class UPnP {
   UDP *p_udp = &udpClient;
   WiFiClient wifiClient;
   Client *p_client = &wifiClient;
-  GatewayInfo gatewayInfo;
+  GatewayDlnaInfo gatewayDlnaInfo;
   unsigned long consequtiveFails = 0;
   PortMappingResult lastResult = PortMappingResult::UNKNOWN;
   bool isActive = false;
@@ -244,14 +248,14 @@ class UPnP {
   bool connectUDP();
   void broadcastMSearch(bool isSsdpAll = false);
   SsdpDevice waitForUnicastResponseToMSearch(IPAddress gatewayIP);
-  bool getGatewayInfo(GatewayInfo *deviceInfo, long startTime);
+  bool getGatewayDlnaInfo(GatewayDlnaInfo *deviceDlnaInfo, long startTime);
   bool connectToIGD(IPAddress host, int port);
-  bool getIGDEventURLs(GatewayInfo *deviceInfo);
-  bool addPortMappingEntry(GatewayInfo *deviceInfo, UpnpRule *rule_ptr);
-  bool verifyPortMapping(GatewayInfo *deviceInfo, UpnpRule *rule_ptr);
-  bool deletePortMapping(GatewayInfo *deviceInfo, UpnpRule *rule_ptr);
+  bool getIGDEventURLs(GatewayDlnaInfo *deviceDlnaInfo);
+  bool addPortMappingEntry(GatewayDlnaInfo *deviceDlnaInfo, UpnpRule *rule_ptr);
+  bool verifyPortMapping(GatewayDlnaInfo *deviceDlnaInfo, UpnpRule *rule_ptr);
+  bool deletePortMapping(GatewayDlnaInfo *deviceDlnaInfo, UpnpRule *rule_ptr);
   bool applyActionOnSpecificPortMapping(SOAPAction *soapAction,
-                                        GatewayInfo *deviceInfo,
+                                        GatewayDlnaInfo *deviceDlnaInfo,
                                         UpnpRule *rule_ptr);
   void removeAllPortMappingsFromIGD();
   // char* ipAddressToCharArr(IPAddress ipAddress);  // ?? not sure this is

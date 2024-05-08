@@ -6,7 +6,7 @@
 
 namespace tiny_dlna {
 
-/// Information for each scheduled ticker request
+/// DlnaInformation for each scheduled ticker request
 struct TickerEntry {
     long repeatMs;
     long startMs= -1l; 
@@ -90,7 +90,7 @@ class Ticker {
 
         // protected methods
         static void cleanup(void*) {
-            Logger.log(Info,"Ticker %s","cleanup");
+            DlnaLogger.log(DlnaInfo,"Ticker %s","cleanup");
             long count=0;
             long now = millis();
             for (int pos=ticker_entries.size()-1; pos>=0; pos--) {
@@ -101,7 +101,7 @@ class Ticker {
                 }
             }
 
-            Logger.log(Info,"Ticker cleaned up %d ticker_entries", count);
+            DlnaLogger.log(DlnaInfo,"Ticker cleaned up %d ticker_entries", count);
         }
 
 };
