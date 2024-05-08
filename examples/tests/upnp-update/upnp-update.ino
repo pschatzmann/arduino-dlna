@@ -12,6 +12,7 @@ const char* password = "<FILL THIS!>";
 UPnP tinyUPnP(20000);
 
 void connectWiFi() {
+#ifndef IS_DESKTOP
   WiFi.disconnect();
   delay(1200);
   WiFi.mode(WIFI_STA);
@@ -21,14 +22,15 @@ void connectWiFi() {
   // wait for connection
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
-    Serial.print(F("."));
+    Serial.print(".");
   }
 
-  Serial.println(F(""));
-  Serial.print(F("Connected to "));
+  Serial.println("");
+  Serial.print("Connected to ");
   Serial.println(ssid);
-  Serial.print(F("IP address: "));
+  Serial.print("IP address: ");
   Serial.println(WiFi.localIP());
+#endif
 }
 
 void update() {
@@ -44,7 +46,7 @@ void update() {
       // for debugging, you can see this in your router too under forwarding or
       // UPnP
       for (auto &rule : tinyUPnP.listConfig()){
-        Serial.println(rule.toString());
+        Serial.println(rule.toString().c_str());
       }
       Serial.println(
           "This was printed because adding the required port mapping failed");

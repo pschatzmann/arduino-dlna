@@ -4,6 +4,7 @@ cmake_minimum_required(VERSION 3.20)
 project(upnp-list-all)
 set (CMAKE_CXX_STANDARD 11)
 set (DCMAKE_CXX_FLAGS "-Werror")
+set (CMAKE_INCLUDE_CURRENT_DIR ON)
 
 include(FetchContent)
 
@@ -21,4 +22,4 @@ target_compile_definitions(arduino_emulator PUBLIC -DDEFINE_MAIN)
 target_compile_definitions(upnp-list-all PUBLIC -DARDUINO -DIS_DESKTOP -DEXIT_ON_STOP -DPLATFORM_LINUX)
 
 # specify libraries
-target_link_libraries(device-xml arduino_emulator dlna_server)
+target_link_libraries(upnp-list-all arduino_emulator dlna_server)

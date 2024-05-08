@@ -1,7 +1,7 @@
 // This example will list all the SSDP devices in the local network
 
 #include "DLNA.h"
-#include <WiFi.h>
+#include "WiFi.h"
 
 const char* ssid = "<FILL THIS!>";
 const char* password = "<FILL THIS!>";
@@ -10,6 +10,7 @@ UPnP tinyUPnP(12000);  // when using the library for listing SSDP devices, a
                        // timeout must be set
 
 void connectWiFi() {
+#ifndef IS_DESKTOP  
   WiFi.disconnect();
   delay(1200);
   WiFi.mode(WIFI_STA);
@@ -32,6 +33,7 @@ void connectWiFi() {
   Serial.println(WiFi.gatewayIP().toString());
   Serial.print("Network Mask: ");
   Serial.println(WiFi.subnetMask().toString());
+#endif
 }
 
 void setup(void) {
@@ -42,7 +44,7 @@ void setup(void) {
   
   tinyUPnP.begin();
   for (auto &dev : tinyUPnP.listDevices()){
-    Serial.println(dev.toString());
+    Serial.println(dev.toString().c_str());
   }
 }
 
