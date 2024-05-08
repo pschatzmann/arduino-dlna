@@ -1,8 +1,10 @@
 
 /*
+ * Original Soruce from https://github.com/ofekp/TinyUPnP
  * TinyUPnP.h - Library for creating UPnP rules automatically in your router.
  * Created by Ofek Pearl, September 2017.
  * Released into the public domain.
+ *
  */
 
 #pragma once
@@ -11,32 +13,32 @@
 #include <WiFiClient.h>
 #include <WiFiUdp.h>
 #include <limits.h>
+
+#include "Basic/Logger.h"
+#include "Basic/StrView.h"
 #include "Basic/Vector.h"
 
-#ifdef UPNP_DEBUG
-#define debugPrint(...) Serial.print(__VA_ARGS__)
-#define debugPrintln(...) Serial.println(__VA_ARGS__)
-#else
-#define debugPrint(...)
-#define debugPrintln(...)
-#endif
-
-// #define UPNP_DEBUG // uncomment to enable debug and TinyUPnP::print<...>()
-// outputs
+// default ssdp port
 #define UPNP_SSDP_PORT 1900
+// Timout
 #define TCP_CONNECTION_TIMEOUT_MS 6000
 // after 6 tries of begin we will execute the more extensive addPortMapping
 #define MAX_NUM_OF_UPDATES_WITH_NO_EFFECT 6
 // reduce max UDP packet size to conserve memory (by default
 // UDP_TX_PACKET_MAX_SIZE=8192)
 #define UPNP_UDP_TX_PACKET_MAX_SIZE 1000
+// Max size for udp packet
 #define UPNP_UDP_TX_RESPONSE_MAX_SIZE 8192
+// Max size for temporary scratch buffer
 #define MAX_TMP_SIZE 1200
+
+#define RULE_PROTOCOL_TCP "TCP"
+#define RULE_PROTOCOL_UDP "UDP"
 
 namespace tiny_dlna {
 
 // indication to update rules when the IP of the device changes
-IPAddress ipNull(0, 0, 0, 0);
+static IPAddress NullIP(0, 0, 0, 0);
 
 typedef void (*callback_function)(void);
 
@@ -47,12 +49,37 @@ typedef void (*callback_function)(void);
 
 struct SsdpDevice {
   IPAddress host;
-  int port = 0;  // this port is used when getting router capabilities and xml files
+  int port =
+      0;  // this port is used when getting router capabilities and xml files
   String path;  // this is the path that is used to retrieve router information
                 // from xml files
+  operator bool() { return !(host == IPAddress()); }
 
-  operator bool() {return !(host == IPAddress());}
+  String toString() {
+    String result = "SSDP device [%1] port [%2] path [%3]";
+    result.replace("%1", toStr(host));
+    result.replace("%2", String(port));
+    result.replace("%3", path);
+    return result;
+  }
 };
+
+  /**
+   * @brief UPnP Rule
+   * @internal
+   */
+  struct UpnpRule {
+    int index;
+    String devFriendlyName;
+    IPAddress internalAddr;
+    int internalPort;
+    int externalPort;
+    String protocol;
+    int leaseDurationSec;
+
+    String toString();
+  };
+
 
 /**
  * @brief Basic UPnP Discovery Functionality
@@ -63,14 +90,13 @@ class UPnP {
  public:
   /// timeoutMs - timeout in milli seconds for the operations of this class, 0
   /// for blocking operation
-  UPnP(unsigned long timeoutMs = 20000) {
-    timeoutMs = timeoutMs;
-  }
+  UPnP(unsigned long timeoutMs = 20000) { timeoutMs = timeoutMs; }
 
-  UPnP(Client &client, UDP &udp, unsigned long timeoutMs = 20000) {
+  UPnP(Client &client, UDP &udp, bool isWifi, unsigned long timeoutMs = 20000) {
     timeoutMs = timeoutMs;
     p_udp = &udp;
     p_client = &client;
+    is_wifi = isWifi;
   }
 
   // when the ruleIP is set to the current device IP, the IP of the rule will
@@ -78,7 +104,7 @@ class UPnP {
   // directed to the device even if the IP chnages
   void addConfig(int rulePort, const char *ruleProtocol,
                  int ruleLeaseDurationSec, const char *ruleFriendlyName) {
-    addConfig(ipNull, rulePort, rulePort, ruleProtocol, ruleLeaseDurationSec,
+    addConfig(NullIP, rulePort, rulePort, ruleProtocol, ruleLeaseDurationSec,
               ruleFriendlyName);
   }
 
@@ -94,6 +120,8 @@ class UPnP {
 
   /// Discovers the devices on the network
   bool begin();
+  /// Commit changes
+  bool save();
   /// Rediscovers the devices on the network
   bool update(unsigned long intervalMs,
               callback_function fallback = nullptr /* optional */);
@@ -108,19 +136,17 @@ class UPnP {
   bool checkConnectivity(unsigned long startTime = 0);
   /// will create an object with all SSDP devices on the network
   Vector<SsdpDevice> listDevices();
-  // will print all SSDP devices
-  void debugDevices();
   // prints all the port mappings that werea added using `addConfig`
-  void debugConfig();
+  Vector<UpnpRule>  listConfig();
   /// Retrievs and prints the port mappings from the network
-  bool debugPortMappings();
+  bool updatePortMappings();
 
-  void beginPostAlive(int intervallSec);
-  void postAlive();
-
-  char *getTempBuffer() { return body_tmp; }
-
-  UDP *getUDP() { return p_udp; }
+  /// If the gatway can not be determined automatically you must set it
+  /// yourself
+  void setGatewayIP(IPAddress addr) { gatewayIP = addr; }
+  /// If the local ip can not be determined automatically you must set it
+  /// yourself
+  void setLocalIP(IPAddress addr) { localIP = addr; }
 
  protected:
   /**
@@ -150,53 +176,9 @@ class UPnP {
     String actionPath;  // this is the path used to perform SOAP API actions
     String serviceTypeName;  // i.e "WANPPPConnection:1" or "WANIPConnection:1"
 
-    void clear() {
-      host = IPAddress(0, 0, 0, 0);
-      port = 0;
-      path = "";
-      actionPort = 0;
-      actionPath = "";
-      serviceTypeName = "";
-    }
-
-    operator bool() {
-      debugPrint(F("isGatewayInfoValid ["));
-      debugPrint(host.toString());
-      debugPrint(F("] port ["));
-      debugPrint(String(port));
-      debugPrint(F("] path ["));
-      debugPrint(path);
-      debugPrint(F("] actionPort ["));
-      debugPrint(String(actionPort));
-      debugPrint(F("] actionPath ["));
-      debugPrint(actionPath);
-      debugPrint(F("] serviceTypeName ["));
-      debugPrint(serviceTypeName);
-      debugPrintln(F("]"));
-
-      if (host == IPAddress(0, 0, 0, 0) || port == 0 || path.length() == 0 ||
-          actionPort == 0) {
-        debugPrintln(F("Gateway info is not valid"));
-        return false;
-      }
-
-      debugPrintln(F("Gateway info is valid"));
-      return true;
-    }
-  };
-
-  /**
-   * @brief UPnP Rule
-   * @internal
-   */
-  struct UpnpRule {
-    int index;
-    String devFriendlyName;
-    IPAddress internalAddr;
-    int internalPort;
-    int externalPort;
-    String protocol;
-    int leaseDurationSec;
+    void clear();
+    bool isValid();
+    operator bool() { return isValid(); }
   };
 
   /**
@@ -216,9 +198,12 @@ class UPnP {
 
   Vector<UpnpRule> ruleNodes{0};
   Vector<SsdpDevice> devices{0};
+  bool is_wifi = true;
   unsigned long lastUpdateTime = 0;
   long timeoutMs;  // 0 for blocking operation
   WiFiUDP udpClient;
+  IPAddress gatewayIP;
+  IPAddress localIP;
   UDP *p_udp = &udpClient;
   WiFiClient wifiClient;
   Client *p_client = &wifiClient;
@@ -254,6 +239,8 @@ class UPnP {
   SOAPAction SOAPActionDeletePortMapping{"DeletePortMapping"};
   int postEveryMs = 3000;
 
+  char *getTempBuffer() { return body_tmp; }
+  UDP *getUDP() { return p_udp; }
   bool connectUDP();
   void broadcastMSearch(bool isSsdpAll = false);
   SsdpDevice waitForUnicastResponseToMSearch(IPAddress gatewayIP);
@@ -269,13 +256,12 @@ class UPnP {
   void removeAllPortMappingsFromIGD();
   // char* ipAddressToCharArr(IPAddress ipAddress);  // ?? not sure this is
   // needed
-  void upnpRuleToString(UpnpRule *rule_ptr);
-  String getSpacesString(int num);
+  const char *spaces(int num);
   IPAddress getHost(String url);
   int getPort(String url);
   String getPath(String url);
   String getTagContent(const String &line, String tagName);
-  void debugSsdpDevice(SsdpDevice *ssdpDevice);
+  void logSsdpDevice(SsdpDevice *ssdpDevice);
 };
 
 }  // namespace tiny_dlna

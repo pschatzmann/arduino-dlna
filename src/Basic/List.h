@@ -3,7 +3,7 @@
 #include "InitializerList.h"
 #endif
 #include <stddef.h>
-
+#include <assert.h>
 #include "Allocator.h"
 
 namespace tiny_dlna {

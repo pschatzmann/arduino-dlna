@@ -4,6 +4,7 @@
 
 namespace tiny_dlna {
 
+
 /**
  * @brief String implementation which keeps the data on the heap. We grow the
  * allocated memory only if the copy source is not fitting.

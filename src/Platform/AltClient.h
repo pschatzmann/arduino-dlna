@@ -12,7 +12,7 @@
 #include <arpa/inet.h> 
 
 #include "Basic/RingBuffer.h"
-#include "Url.h"
+#include "TinyHttp/Server/Url.h"
 
 namespace tiny_dlna {
 
@@ -188,8 +188,9 @@ class Client  {
  * @brief We provide the WiFiClient so that it complies outside of the Arduino Environment. 
  * 
  */
-class WiFiClient : public Client {
-};
+using WiFiClient = Client
+using WiFiClientSecure = Client;
+
 
 }
 

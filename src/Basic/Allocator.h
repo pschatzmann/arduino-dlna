@@ -1,5 +1,6 @@
 #pragma once
 #include <stdlib.h>
+
 #include "Basic/Logger.h"
 
 namespace tiny_dlna {
@@ -42,7 +43,7 @@ class Allocator {
     void* addr = allocate(sizeof(T) * len);
     T* addrT = (T*)addr;
     // call constructor
-    for (int j = 0; j < len; j++) new (addrT+j) T();
+    for (int j = 0; j < len; j++) new (addrT + j) T();
     return (T*)addr;
   }
 
@@ -60,12 +61,16 @@ class Allocator {
   virtual void* allocate(size_t size) {
     void* result = do_allocate(size);
     if (result == nullptr) {
-      Logger.log(Error,"Allocateation failed for %zu bytes", size);
+      Logger.log(Error, "Allocateation failed for %zu bytes", size);
       stop();
     } else {
-      Logger.log(Debug,"Allocated %zu", size);
+      Logger.log(Debug, "Allocated %zu", size);
     }
     return result;
+  }
+
+  void stop() {
+    while (true) delay(1000);
   }
 
   /// frees memory
@@ -95,7 +100,7 @@ class AllocatorExt : public Allocator {
 #endif
     if (result == nullptr) result = malloc(size);
     if (result == nullptr) {
-      Logger.log(Error,"allocateation failed for %zu bytes", size);
+      Logger.log(Error, "allocateation failed for %zu bytes", size);
       stop();
     }
     // initialize object
@@ -120,7 +125,7 @@ class AllocatorPSRAM : public Allocator {
     void* result = nullptr;
     result = ps_calloc(1, size);
     if (result == nullptr) {
-      Logger.log(Error,"allocateation failed for %zu bytes", size);
+      Logger.log(Error, "allocateation failed for %zu bytes", size);
       stop();
     }
     return result;

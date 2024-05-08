@@ -13,14 +13,46 @@
 
 namespace tiny_dlna {
 
+String UpnpRule::toString() {
+  char msg[160] = {0};
+  sprintf(msg, "%5d %30s %18s %7d %7d %7s %7d", this->index,
+          this->devFriendlyName.c_str(), toStr(this->internalAddr), this->internalPort,
+          this->externalPort, this->protocol.c_str(), this->leaseDurationSec);
+  return String(msg);
+}
+
+void UPnP::GatewayInfo::clear() {
+  host = IPAddress(0, 0, 0, 0);
+  port = 0;
+  path = "";
+  actionPort = 0;
+  actionPath = "";
+  serviceTypeName = "";
+}
+
+bool UPnP::GatewayInfo::isValid() {
+  Logger.log(Info,
+             "isGatewayInfoValid [%s] port [%d] path [%s] actionPort [%d] "
+             "actionPath [%s] serviceTypeName [%s]",
+             toStr(host), port, path, actionPort, actionPath, serviceTypeName);
+
+  if (host == NullIP || port == 0 || path.length() == 0 || actionPort == 0) {
+    Logger.log(Error, "Gateway info is not valid: %s", toStr(host));
+    return false;
+  }
+
+  Logger.log(Info, "Gateway info is valid");
+  return true;
+}
+
 void UPnP::addConfig(IPAddress ruleIP, int ruleInternalPort,
                      int ruleExternalPort, const char *ruleProtocol,
                      int ruleLeaseDurationSec, const char *ruleFriendlyName) {
   static int index = 0;
   UpnpRule rule;
   rule.index = index++;
-  rule.internalAddr = (ruleIP == WiFi.localIP())
-                          ? ipNull
+  rule.internalAddr = (ruleIP == localIP)
+                          ? NullIP
                           : ruleIP;  // for automatic IP change handling
   rule.internalPort = ruleInternalPort;
   rule.externalPort = ruleExternalPort;
@@ -32,8 +64,27 @@ void UPnP::addConfig(IPAddress ruleIP, int ruleInternalPort,
 }
 
 bool UPnP::begin() {
+#ifndef NO_GATEWAYIP
+  if (is_wifi) {
+    gatewayIP = WiFi.gatewayIP();
+    localIP = WiFi.localIP();
+  }
+  return true;
+#endif
+  if (localIP == NullIP) {
+    Logger.log(Error, "ERROR: localIP is not defined");
+    return false;
+  }
+  if (gatewayIP == NullIP) {
+    Logger.log(Error, "ERROR: gatewayIP is not defined");
+    return false;
+  }
+  return false;
+}
+
+bool UPnP::save() {
   if (ruleNodes.empty()) {
-    debugPrintln(F("ERROR: No UPnP port mapping was set."));
+    Logger.log(Error, "ERROR: No UPnP port mapping was set.");
     lastResult = PortMappingResult::EMPTY_PORT_MAPPING_CONFIG;
     return false;
   }
@@ -42,7 +93,7 @@ bool UPnP::begin() {
 
   // verify WiFi is connected
   if (!checkConnectivity(startTime)) {
-    debugPrintln(F("ERROR: not connected to WiFi, cannot continue"));
+    Logger.log(Error, "ERROR: not connected to WiFi, cannot continue");
     lastResult = PortMappingResult::NETWORK_ERROR;
     return false;
   }
@@ -51,7 +102,7 @@ bool UPnP::begin() {
   if (!gatewayInfo) {
     getGatewayInfo(&gatewayInfo, startTime);
     if (timeoutMs > 0 && (millis() - startTime > timeoutMs)) {
-      debugPrintln(F("ERROR: Invalid router info, cannot continue"));
+      Logger.log(Error, "ERROR: Invalid router info, cannot continue");
       p_client->stop();
       lastResult = PortMappingResult::NETWORK_ERROR;
       return false;
@@ -60,31 +111,26 @@ bool UPnP::begin() {
                   // its rules
   }
 
-  debugPrint(F("port ["));
-  debugPrint(String(gatewayInfo.port));
-  debugPrint(F("] actionPort ["));
-  debugPrint(String(gatewayInfo.actionPort));
-  debugPrintln(F("]"));
+  Logger.log(Info, "port [%d] actionPort [%d]", gatewayInfo.port,
+             gatewayInfo.actionPort);
 
   // double verify gateway information is valid
   if (!gatewayInfo) {
-    debugPrintln(F("ERROR: Invalid router info, cannot continue"));
+    Logger.log(Error, "ERROR: Invalid router info, cannot continue");
     lastResult = PortMappingResult::NETWORK_ERROR;
     return false;
   }
 
   if (gatewayInfo.port != gatewayInfo.actionPort) {
     // in this case we need to connect to a different port
-    debugPrintln(F("Connection port changed, disconnecting from IGD"));
+    Logger.log(Error, "Connection port changed, disconnecting from IGD");
     p_client->stop();
   }
 
   bool allPortMappingsAlreadyExist = true;  // for debug
   int addedPortMappings = 0;                // for debug
   for (auto &rule : ruleNodes) {
-    debugPrint(F("Verify port mapping for rule ["));
-    debugPrint(rule.devFriendlyName);
-    debugPrintln(F("]"));
+    Logger.log(Info, "Verify port mapping for rule [%s]", rule.devFriendlyName);
     bool currPortMappingAlreadyExists = true;  // for debug
     // TODO: since verifyPortMapping connects to the IGD then
     // addPortMappingEntry can skip it
@@ -93,7 +139,7 @@ bool UPnP::begin() {
       currPortMappingAlreadyExists = false;
       allPortMappingsAlreadyExist = false;
       if (timeoutMs > 0 && (millis() - startTime > timeoutMs)) {
-        debugPrintln(F("Timeout expired while trying to add a port mapping"));
+        Logger.log(Error, "Timeout expired while trying to add a port mapping");
         p_client->stop();
         lastResult = PortMappingResult::TIMEOUT;
         return false;
@@ -120,26 +166,24 @@ bool UPnP::begin() {
 
     if (!currPortMappingAlreadyExists) {
       addedPortMappings++;
-      debugPrint(F("Port mapping ["));
-      debugPrint(rule.devFriendlyName);
-      debugPrintln(F("] was added"));
+      Logger.log(Info, "Port mapping [%s] was added", rule.devFriendlyName);
     }
   }
 
   p_client->stop();
 
   if (allPortMappingsAlreadyExist) {
-    debugPrintln(F(
-        "All port mappings were already found in the IGD, not doing anything"));
+    Logger.log(
+        Info,
+        "All port mappings were already found in the IGD, not doing anything");
     lastResult = PortMappingResult::ALREADY_MAPPED;
     return true;
   } else {
     // addedPortMappings is at least 1 here
     if (addedPortMappings > 1) {
-      debugPrint(addedPortMappings);
-      debugPrintln(F(" UPnP port mappings were added"));
+      Logger.log(Info, "%d UPnP port mappings were added", addedPortMappings);
     } else {
-      debugPrintln(F("One UPnP port mapping was added"));
+      Logger.log(Info, "One UPnP port mapping was added");
     }
   }
   lastResult = PortMappingResult::SUCCESS;
@@ -149,28 +193,22 @@ bool UPnP::begin() {
 bool UPnP::getGatewayInfo(GatewayInfo *deviceInfo, long startTime) {
   while (!connectUDP()) {
     if (timeoutMs > 0 && (millis() - startTime > timeoutMs)) {
-      debugPrint(F("Timeout expired while connecting UDP"));
+      Logger.log(Error, "Timeout expired while connecting UDP");
       p_udp->stop();
       return false;
     }
     delay(500);
-    debugPrint(".");
   }
-  debugPrintln("");  // \n
 
   broadcastMSearch();
-  IPAddress gatewayIP = WiFi.gatewayIP();
-
-  debugPrint(F("Gateway IP ["));
-  debugPrint(gatewayIP.toString());
-  debugPrintln(F("]"));
+  Logger.log(Info, "Gateway IP [%s]", toStr(gatewayIP));
 
   SsdpDevice ssdpDevice;
   while ((ssdpDevice = waitForUnicastResponseToMSearch(gatewayIP)) == true) {
     if (timeoutMs > 0 && (millis() - startTime > timeoutMs)) {
-      debugPrintln(
-          F("Timeout expired while waiting for the gateway router to respond "
-            "to M-SEARCH message"));
+      Logger.log(Error,
+                 "Timeout expired while waiting for the gateway router to "
+                 "respond to M-SEARCH message");
       p_udp->stop();
       return false;
     }
@@ -190,7 +228,7 @@ bool UPnP::getGatewayInfo(GatewayInfo *deviceInfo, long startTime) {
   // connect to IGD (TCP connection)
   while (!connectToIGD(deviceInfo->host, deviceInfo->port)) {
     if (timeoutMs > 0 && (millis() - startTime > timeoutMs)) {
-      debugPrintln(F("Timeout expired while trying to connect to the IGD"));
+      Logger.log(Error, "Timeout expired while trying to connect to the IGD");
       p_client->stop();
       return false;
     }
@@ -200,7 +238,7 @@ bool UPnP::getGatewayInfo(GatewayInfo *deviceInfo, long startTime) {
   // get event urls from the gateway IGD
   while (!getIGDEventURLs(deviceInfo)) {
     if (timeoutMs > 0 && (millis() - startTime > timeoutMs)) {
-      debugPrintln(F("Timeout expired while adding a new port mapping"));
+      Logger.log(Error, "Timeout expired while adding a new port mapping");
       p_client->stop();
       return false;
     }
@@ -213,20 +251,19 @@ bool UPnP::getGatewayInfo(GatewayInfo *deviceInfo, long startTime) {
 bool UPnP::update(unsigned long intervalMs, callback_function fallback) {
   if (!isActive) return false;
   if (millis() - lastUpdateTime >= intervalMs) {
-    debugPrintln(F("Updating port mapping"));
+    Logger.log(Info, "Updating port mapping");
 
     // fallback
     if (consequtiveFails >= MAX_NUM_OF_UPDATES_WITH_NO_EFFECT) {
-      debugPrint(
-          F("ERROR: Too many times with no effect on updatePortMappings. "
-            "Current number of fallbacks times ["));
-      debugPrint(String(consequtiveFails));
-      debugPrintln(F("]"));
+      Logger.log(Error,
+                 "ERROR: Too many times with no effect on updatePortMappings. "
+                 "Current number of fallbacks times [%d]",
+                 consequtiveFails);
 
       consequtiveFails = 0;
       gatewayInfo.clear();
       if (fallback != nullptr) {
-        debugPrintln(F("Executing fallback method"));
+        Logger.log(Info, "Executing fallback method");
         fallback();
       }
 
@@ -243,10 +280,10 @@ bool UPnP::update(unsigned long intervalMs, callback_function fallback) {
       return result;
     } else {
       lastUpdateTime += intervalMs / 2;  // delay next try
-      debugPrint(F(
-          "ERROR: While updating UPnP port mapping. Failed with error code ["));
-      debugPrint(String(result));
-      debugPrintln(F("]"));
+      Logger.log(Error,
+                 "ERROR: While updating UPnP port mapping. Failed with error "
+                 "code [%d]",
+                 lastResult);
       p_client->stop();
       consequtiveFails++;
       return result;
@@ -259,32 +296,32 @@ bool UPnP::update(unsigned long intervalMs, callback_function fallback) {
 }
 
 bool UPnP::checkConnectivity(unsigned long startTime) {
-  debugPrint(F("Testing WiFi connection for ["));
-  // debugPrint(WiFi.localIP().toString());
-  // debugPrint("]");
-  // while (WiFi.status() != WL_CONNECTED) {
-  //   if (timeoutMs > 0 && startTime > 0 && (millis() - startTime > timeoutMs))
-  //   {
-  //     debugPrint(F(" ==> Timeout expired while verifying WiFi connection"));
-  //     p_client->stop();
-  //     return false;
-  //   }
-  //   delay(200);
-  //   debugPrint(".");
-  // }
-  // debugPrintln(F(" ==> GOOD"));  // \n
+  if (is_wifi) {
+    Logger.log(Info, "Testing WiFi connection for [%s]", toStr(localIP));
+    while (WiFi.status() != WL_CONNECTED) {
+      if (timeoutMs > 0 && startTime > 0 &&
+          (millis() - startTime > timeoutMs)) {
+        Logger.log(Error,
+                   " ==> Timeout expired while verifying WiFi connection");
+        p_client->stop();
+        return false;
+      }
+      delay(200);
+    }
+    Logger.log(Info, " ==> GOOD");  // \n
+  }
 
-  debugPrint(F("Testing internet connection"));
+  Logger.log(Info, "Testing internet connection");
   p_client->connect(connectivityTestIp, 80);
   while (!p_client->connected()) {
     if (startTime + TCP_CONNECTION_TIMEOUT_MS > millis()) {
-      debugPrintln(F(" ==> BAD"));
+      Logger.log(Error, " ==> BAD");
       p_client->stop();
       return false;
     }
   }
 
-  debugPrintln(F(" ==> GOOD"));
+  Logger.log(Info, " ==> GOOD");
   p_client->stop();
   return true;
 }
@@ -295,20 +332,20 @@ bool UPnP::verifyPortMapping(GatewayInfo *deviceInfo, UpnpRule *rule_ptr) {
     return false;
   }
 
-  debugPrintln(F("verifyPortMapping called"));
+  Logger.log(Info, "verifyPortMapping called");
 
   // TODO: extract the current lease duration and return it instead of a bool
   bool isSuccess = false;
   bool detectedChangedIP = false;
   while (p_client->available()) {
     String line = p_client->readStringUntil('\r');
-    debugPrint(line);
+    Logger.log(Debug, line.c_str());
     if (line.indexOf(F("errorCode")) >= 0) {
       isSuccess = false;
       // flush response and exit loop
       while (p_client->available()) {
         line = p_client->readStringUntil('\r');
-        debugPrint(line);
+        Logger.log(Debug, line.c_str());
       }
       continue;
     }
@@ -316,10 +353,10 @@ bool UPnP::verifyPortMapping(GatewayInfo *deviceInfo, UpnpRule *rule_ptr) {
     if (line.indexOf(F("NewInternalClient")) >= 0) {
       String content = getTagContent(line, F("NewInternalClient"));
       if (content.length() > 0) {
-        IPAddress ipAddressToVerify = (rule_ptr->internalAddr == ipNull)
-                                          ? WiFi.localIP()
+        IPAddress ipAddressToVerify = (rule_ptr->internalAddr == NullIP)
+                                          ? localIP
                                           : rule_ptr->internalAddr;
-        if (content == ipAddressToVerify.toString()) {
+        if (content == String(ipAddressToVerify)) {
           isSuccess = true;
         } else {
           detectedChangedIP = true;
@@ -328,17 +365,15 @@ bool UPnP::verifyPortMapping(GatewayInfo *deviceInfo, UpnpRule *rule_ptr) {
     }
   }
 
-  debugPrintln("");  // \n
-
   p_client->stop();
 
   if (isSuccess) {
-    debugPrintln(F("Port mapping found in IGD"));
+    Logger.log(Info, "Port mapping found in IGD");
   } else if (detectedChangedIP) {
-    debugPrintln(F("Detected a change in IP"));
+    Logger.log(Info, "Detected a change in IP");
     removeAllPortMappingsFromIGD();
   } else {
-    debugPrintln(F("Could not find port mapping in IGD"));
+    Logger.log(Error, "Could not find port mapping in IGD");
   }
 
   return isSuccess;
@@ -353,13 +388,13 @@ bool UPnP::deletePortMapping(GatewayInfo *deviceInfo, UpnpRule *rule_ptr) {
   bool isSuccess = false;
   while (p_client->available()) {
     String line = p_client->readStringUntil('\r');
-    debugPrint(line);
+    Logger.log(Debug, line.c_str());
     if (line.indexOf(F("errorCode")) >= 0) {
       isSuccess = false;
       // flush response and exit loop
       while (p_client->available()) {
         line = p_client->readStringUntil('\r');
-        debugPrint(line);
+        Logger.log(Debug, line.c_str());
       }
       continue;
     }
@@ -376,11 +411,8 @@ bool UPnP::applyActionOnSpecificPortMapping(SOAPAction *soapAction,
                                             UpnpRule *rule_ptr) {
   UpnpRule &rule = *rule_ptr;
   char integer_string[32];
-  debugPrint(F("Apply action ["));
-  debugPrint(soapAction->name);
-  debugPrint(F("] on port mapping ["));
-  debugPrint(rule.devFriendlyName);
-  debugPrintln(F("]"));
+  Logger.log(Info, "Apply action [%d] on port mapping [%s]", soapAction->name,
+             rule.devFriendlyName);
 
   // connect to IGD (TCP connection) again, if needed, in case we got
   // disconnected after the previous query
@@ -388,7 +420,7 @@ bool UPnP::applyActionOnSpecificPortMapping(SOAPAction *soapAction,
   if (!p_client->connected()) {
     while (!connectToIGD(deviceInfo->host, deviceInfo->actionPort)) {
       if (millis() > timeout) {
-        debugPrintln(F("Timeout expired while trying to connect to the IGD"));
+        Logger.log(Error, "Timeout expired while trying to connect to the IGD");
         p_client->stop();
         return false;
       }
@@ -414,7 +446,7 @@ bool UPnP::applyActionOnSpecificPortMapping(SOAPAction *soapAction,
   strcat_P(body_tmp, soapAction->name);
   strcat_P(body_tmp, PSTR(">\r\n</s:Body>\r\n</s:Envelope>\r\n"));
 
-  sprintf(integer_string, "%d", strlen(body_tmp));
+  sprintf(integer_string, "%d", (int)strlen(body_tmp));
 
   p_client->print(F("POST "));
 
@@ -422,7 +454,7 @@ bool UPnP::applyActionOnSpecificPortMapping(SOAPAction *soapAction,
   p_client->println(F(" HTTP/1.1"));
   p_client->println(F("Connection: close"));
   p_client->println(F("Content-Type: text/xml; charset=\"utf-8\""));
-  p_client->println("Host: " + deviceInfo->host.toString() + ":" +
+  p_client->println(String("Host: ") + toStr(deviceInfo->host) + ":" +
                     String(deviceInfo->actionPort));
   p_client->print(F("SOAPAction: \""));
   p_client->print(deviceInfo->serviceTypeName);
@@ -436,12 +468,13 @@ bool UPnP::applyActionOnSpecificPortMapping(SOAPAction *soapAction,
   p_client->println(body_tmp);
   p_client->println();
 
-  debugPrintln(body_tmp);
+  Logger.log(Debug, body_tmp);
 
   timeout = millis() + TCP_CONNECTION_TIMEOUT_MS;
   while (p_client->available() == 0) {
     if (millis() > timeout) {
-      debugPrintln(F("TCP connection timeout while retrieving port mappings"));
+      Logger.log(Error,
+                 "TCP connection timeout while retrieving port mappings");
       p_client->stop();
       // TODO: in this case we might not want to add the ports right away
       // might want to try again or only start adding the ports after we
@@ -459,7 +492,7 @@ void UPnP::removeAllPortMappingsFromIGD() { ruleNodes.clear(); }
 // packets after the M-SEARCH multicast message will be broadcasted
 bool UPnP::connectUDP() {
 #if defined(ESP8266)
-  if (p_udp->beginMulticast(WiFi.localIP(), ipMulti, 0)) {
+  if (p_udp->beginMulticast(localIP, ipMulti, 0)) {
     return true;
   }
 #else
@@ -468,7 +501,7 @@ bool UPnP::connectUDP() {
   }
 #endif
 
-  debugPrintln(F("UDP connection failed"));
+  Logger.log(Error, "UDP connection failed");
   return false;
 }
 
@@ -478,19 +511,14 @@ bool UPnP::connectUDP() {
 void UPnP::broadcastMSearch(bool isSsdpAll /*=false*/) {
   char integer_string[32];
 
-  debugPrint(F("Sending M-SEARCH to ["));
-  debugPrint(ipMulti.toString());
-  debugPrint(F("] Port ["));
-  debugPrint(String(UPNP_SSDP_PORT));
-  debugPrintln(F("]"));
+  Logger.log(Info, "Sending M-SEARCH to [%d] Port [%d]", ipMulti,
+             UPNP_SSDP_PORT);
 
 #if defined(ESP8266)
-  p_udp->beginPacketMulticast(ipMulti, UPNP_SSDP_PORT, WiFi.localIP());
+  p_udp->beginPacketMulticast(ipMulti, UPNP_SSDP_PORT, localIP);
 #else
   uint8_t beginMulticastPacketRes = p_udp->beginPacket(ipMulti, UPNP_SSDP_PORT);
-  debugPrint(F("beginMulticastPacketRes ["));
-  debugPrint(String(beginMulticastPacketRes));
-  debugPrintln(F("]"));
+  Logger.log(Info, "beginMulticastPacketRes [%d]", beginMulticastPacketRes);
 #endif
 
   const char *const *deviceList = deviceListUpnp;
@@ -513,11 +541,9 @@ void UPnP::broadcastMSearch(bool isSsdpAll /*=false*/) {
     strcat_P(body_tmp, PSTR("USER-AGENT: unix/5.1 UPnP/2.0 UPnP/1.0\r\n"));
     strcat_P(body_tmp, PSTR("\r\n"));
 
-    debugPrintln(body_tmp);
+    Logger.log(Info, body_tmp);
     size_t len = strlen(body_tmp);
-    debugPrint(F("M-SEARCH packet length is ["));
-    debugPrint(String(len));
-    debugPrintln(F("]"));
+    Logger.log(Info, "M-SEARCH packet length is [%d]", len);
 
 #if defined(ESP8266)
     p_udp->write(body_tmp);
@@ -526,59 +552,51 @@ void UPnP::broadcastMSearch(bool isSsdpAll /*=false*/) {
 #endif
 
     int endPacketRes = p_udp->endPacket();
-    debugPrint(F("endPacketRes ["));
-    debugPrint(String(endPacketRes));
-    debugPrintln(F("]"));
+    Logger.log(Info, "endPacketRes [%d]", endPacketRes);
   }
 
-  debugPrintln(F("M-SEARCH packets sent"));
+  Logger.log(Info, "M-SEARCH packets sent");
 }
 
 Vector<SsdpDevice> UPnP::listDevices() {
   devices.clear();
   if (timeoutMs <= 0) {
-    debugPrintln(
-        "Timeout must be set when initializing UPnP to use this method, "
-        "exiting.");
+    Logger.log(Info,
+               "Timeout must be set when initializing UPnP to use this method, "
+               "exiting.");
     return devices;
   }
 
   unsigned long startTime = millis();
   while (!connectUDP()) {
     if (timeoutMs > 0 && (millis() - startTime > timeoutMs)) {
-      debugPrint(F("Timeout expired while connecting UDP"));
+      Logger.log(Info, "Timeout expired while connecting UDP");
       p_udp->stop();
       return devices;
     }
     delay(500);
-    debugPrint(".");
   }
-  debugPrintln("");  // \n
 
   broadcastMSearch(true);
-  IPAddress gatewayIP = WiFi.gatewayIP();
-
-  debugPrint(F("Gateway IP ["));
-  debugPrint(gatewayIP.toString());
-  debugPrintln(F("]"));
+  Logger.log(Info, "Gateway IP [%s]", toStr(gatewayIP));
 
   SsdpDevice ssdpDevice;
   while (true) {
     ssdpDevice = waitForUnicastResponseToMSearch(
-        ipNull);  // nullptr will cause finding all SSDP device (not just the
+        NullIP);  // nullptr will cause finding all SSDP device (not just the
                   // IGD)
     if (timeoutMs > 0 && (millis() - startTime > timeoutMs)) {
-      debugPrintln(
-          F("Timeout expired while waiting for the gateway router to respond "
-            "to M-SEARCH message"));
+      Logger.log(
+          Info,
+          "Timeout expired while waiting for the gateway router to respond "
+          "to M-SEARCH message");
       p_udp->stop();
       break;
     }
 
     // ssdpDeviceToString(ssdpDevice_ptr);
     if (ssdpDevice) {
-      if (!devices.contains(ssdpDevice))
-        devices.push_back(ssdpDevice);
+      if (!devices.contains(ssdpDevice)) devices.push_back(ssdpDevice);
     }
 
     delay(5);
@@ -609,34 +627,23 @@ SsdpDevice UPnP::waitForUnicastResponseToMSearch(IPAddress gatewayIP) {
   IPAddress remoteIP = p_udp->remoteIP();
   // only continue if the packet was received from the gateway router
   // for SSDP discovery we continue anyway
-  if (gatewayIP != ipNull && remoteIP != gatewayIP) {
-    debugPrint(F("Discarded packet not originating from IGD - gatewayIP ["));
-    debugPrint(gatewayIP.toString());
-    debugPrint(F("] remoteIP ["));
-    debugPrint(remoteIP.toString());
-    debugPrintln(F("]"));
+  if (gatewayIP != NullIP && remoteIP != gatewayIP) {
+    Logger.log(Info,
+               "Discarded packet not originating from IGD - gatewayIP [%s] "
+               "remoteIP [%s]",
+               toStr(gatewayIP), toStr(remoteIP));
     return newSsdpDevice;
   }
 
-  debugPrint(F("Received packet of size ["));
-  debugPrint(String(packetSize));
-  debugPrint(F("]"));
-  debugPrint(F(" ip ["));
-  for (int i = 0; i < 4; i++) {
-    debugPrint(String(remoteIP[i]));  // Decimal
-    if (i < 3) {
-      debugPrint(F("."));
-    }
-  }
-  debugPrint(F("] port ["));
-  debugPrint(String(p_udp->remotePort()));
-  debugPrintln(F("]"));
+  Logger.log(Info, "Received packet of size [%d] ip [%s] ] port [%d]",
+             packetSize, remoteIP, p_udp->remotePort());
 
   // sanity check
   if (packetSize > UPNP_UDP_TX_RESPONSE_MAX_SIZE) {
-    debugPrint(
-        F("Received packet with size larged than the response buffer, cannot "
-          "proceed."));
+    (Logger.log(
+        Error,
+        "Received packet with size larged than the response buffer, cannot "
+        "proceed."));
     return newSsdpDevice;
   }
 
@@ -647,40 +654,34 @@ SsdpDevice UPnP::waitForUnicastResponseToMSearch(IPAddress gatewayIP) {
     if (len <= 0) {
       break;
     }
-    debugPrint(F("UDP packet read bytes ["));
-    debugPrint(String(len));
-    debugPrint(F("] out of ["));
-    debugPrint(String(packetSize));
-    debugPrintln(F("]"));
+    Logger.log(Info, "UDP packet read bytes [%d]  out of [%d]", len,
+               packetSize);
     memcpy(responseBuffer + idx, packetBuffer, len);
     idx += len;
   }
   responseBuffer[idx] = '\0';
 
-  debugPrintln(F("Gateway packet content:"));
-  debugPrintln(responseBuffer);
+  Logger.log(Info, "Gateway packet content: %s", responseBuffer);
 
   const char *const *deviceList = deviceListUpnp;
-  if (gatewayIP == ipNull) {
+  if (gatewayIP == NullIP) {
     deviceList = deviceListSsdpAll;
   }
 
   // only continue if the packet is a response to M-SEARCH and it originated
   // from a gateway device for SSDP discovery we continue anyway
-  if (gatewayIP != ipNull) {  // for the use of listDevices
+  if (gatewayIP != NullIP) {  // for the use of listDevices
     bool foundIGD = false;
     for (int i = 0; deviceList[i]; i++) {
       if (strstr(responseBuffer, deviceList[i]) != nullptr) {
         foundIGD = true;
-        debugPrint(F("IGD of type ["));
-        debugPrint(deviceList[i]);
-        debugPrintln(F("] found"));
+        Logger.log(Info, "IGD of type [%s] found", deviceList[i]);
         break;
       }
     }
 
     if (!foundIGD) {
-      debugPrintln(F("IGD was not found"));
+      Logger.log(Warning, "IGD was not found");
       return newSsdpDevice;
     }
   }
@@ -707,17 +708,15 @@ SsdpDevice UPnP::waitForUnicastResponseToMSearch(IPAddress gatewayIP) {
       location = String(locationCharArr);
       location.trim();
     } else {
-      debugPrintln(F("ERROR: could not extract value from LOCATION param"));
+      Logger.log(Error, "ERROR: could not extract value from LOCATION param");
       return newSsdpDevice;
     }
   } else {
-    debugPrintln(F("ERROR: LOCATION param was not found"));
+    Logger.log(Error, "ERROR: LOCATION param was not found");
     return newSsdpDevice;
   }
 
-  debugPrint(F("Device location found ["));
-  debugPrint(location);
-  debugPrintln(F("]"));
+  Logger.log(Info, "Device location found [%s]", location);
 
   IPAddress host = getHost(location);
   int port = getPort(location);
@@ -727,22 +726,15 @@ SsdpDevice UPnP::waitForUnicastResponseToMSearch(IPAddress gatewayIP) {
   newSsdpDevice.port = port;
   newSsdpDevice.path = path;
 
-  // debugPrintln(host.toString());
-  // debugPrintln(String(port));
-  // debugPrintln(path);
-
   return newSsdpDevice;
 }
 
 // a single trial to connect to the IGD (with TCP)
 bool UPnP::connectToIGD(IPAddress host, int port) {
-  debugPrint(F("Connecting to IGD with host ["));
-  debugPrint(host.toString());
-  debugPrint(F("] port ["));
-  debugPrint(String(port));
-  debugPrintln(F("]"));
+  Logger.log(Info, "Connecting to IGD with host [%s] port [%d] ", toStr(host),
+             port);
   if (p_client->connect(host, port)) {
-    debugPrintln(F("Connected to IGD"));
+    Logger.log(Info, "Connected to IGD");
     return true;
   }
   return false;
@@ -750,12 +742,10 @@ bool UPnP::connectToIGD(IPAddress host, int port) {
 
 // updates deviceInfo with the commands' information of the IGD
 bool UPnP::getIGDEventURLs(GatewayInfo *deviceInfo) {
-  debugPrintln(F("called getIGDEventURLs"));
-  debugPrint(F("deviceInfo->actionPath ["));
-  debugPrint(deviceInfo->actionPath);
-  debugPrint(F("] deviceInfo->path ["));
-  debugPrint(deviceInfo->path);
-  debugPrintln(F("]"));
+  Logger.log(Info,
+             "called getIGDEventURLs deviceInfo->actionPath [%s] "
+             "deviceInfo->path [%s]",
+             deviceInfo->actionPath, deviceInfo->path);
 
   // make an HTTP request
   p_client->print(F("GET "));
@@ -763,7 +753,7 @@ bool UPnP::getIGDEventURLs(GatewayInfo *deviceInfo) {
   p_client->println(F(" HTTP/1.1"));
   p_client->println(F("Content-Type: text/xml; charset=\"utf-8\""));
   // p_client->println(F("Connection: close"));
-  p_client->println("Host: " + deviceInfo->host.toString() + ":" +
+  p_client->println(String("Host: ") + toStr(deviceInfo->host) + ":" +
                     String(deviceInfo->actionPort));
   p_client->println(F("Content-Length: 0"));
   p_client->println();
@@ -772,7 +762,8 @@ bool UPnP::getIGDEventURLs(GatewayInfo *deviceInfo) {
   unsigned long timeout = millis();
   while (p_client->available() == 0) {
     if (millis() - timeout > TCP_CONNECTION_TIMEOUT_MS) {
-      debugPrintln(F("TCP connection timeout while executing getIGDEventURLs"));
+      Logger.log(Error,
+                 "TCP connection timeout while executing getIGDEventURLs");
       p_client->stop();
       return false;
     }
@@ -784,7 +775,7 @@ bool UPnP::getIGDEventURLs(GatewayInfo *deviceInfo) {
   while (p_client->available()) {
     String line = p_client->readStringUntil('\r');
     int index_in_line = 0;
-    debugPrint(line);
+    Logger.log(Debug, line.c_str());
     if (!urlBaseFound && line.indexOf(F("<URLBase>")) >= 0) {
       // e.g. <URLBase>http://192.168.1.1:5432/</URLBase>
       // Note: assuming URL path will only be found in a specific action under
@@ -797,14 +788,9 @@ bool UPnP::getIGDEventURLs(GatewayInfo *deviceInfo) {
         int port = getPort(baseUrl);
         deviceInfo->actionPort = port;
 
-        debugPrint(F("URLBase tag found ["));
-        debugPrint(baseUrl);
-        debugPrintln(F("]"));
-        debugPrint(F("Translated to base host ["));
-        debugPrint(host.toString());
-        debugPrint(F("] and base port ["));
-        debugPrint(String(port));
-        debugPrintln(F("]"));
+        Logger.log(Info, "URLBase tag found [%s]", baseUrl);
+        Logger.log(Info, "Translated to base host [%s] and base port [%d]",
+                   toStr(host), port);
         urlBaseFound = true;
       }
     }
@@ -816,11 +802,8 @@ bool UPnP::getIGDEventURLs(GatewayInfo *deviceInfo) {
       int service_type_index =
           line.indexOf(String(UPNP_SERVICE_TYPE_TAG_START) + deviceListUpnp[i]);
       if (service_type_index >= 0) {
-        debugPrint(F("["));
-        debugPrint(deviceInfo->serviceTypeName);
-        debugPrint(F("] service_type_index ["));
-        debugPrint(String(service_type_index));
-        debugPrintln("]");
+        Logger.log(Info, "[%s] service_type_index [%d]",
+                   deviceInfo->serviceTypeName, service_type_index);
         service_type_index_start = service_type_index;
         service_type_index =
             line.indexOf(UPNP_SERVICE_TYPE_TAG_END, service_type_index_start);
@@ -831,11 +814,8 @@ bool UPnP::getIGDEventURLs(GatewayInfo *deviceInfo) {
         deviceInfo->serviceTypeName =
             getTagContent(line.substring(service_type_index_start),
                           UPNP_SERVICE_TYPE_TAG_NAME);
-        debugPrint(F("["));
-        debugPrint(deviceInfo->serviceTypeName);
-        debugPrint(F("] service found! deviceType ["));
-        debugPrint(deviceListUpnp[i]);
-        debugPrintln(F("]"));
+        Logger.log(Info, "[%s] service found! deviceType [%s]",
+                   deviceInfo->serviceTypeName, deviceListUpnp[i]);
         break;  // will start looking for 'controlURL' now
       }
     }
@@ -846,13 +826,11 @@ bool UPnP::getIGDEventURLs(GatewayInfo *deviceInfo) {
           getTagContent(line.substring(index_in_line), "controlURL");
       if (controlURLContent.length() > 0) {
         deviceInfo->actionPath = controlURLContent;
-
-        debugPrint(F("controlURL tag found! setting actionPath to ["));
-        debugPrint(controlURLContent);
-        debugPrintln(F("]"));
+        Logger.log(Info, "controlURL tag found! setting actionPath to [%s]",
+                   controlURLContent);
 
         // clear buffer
-        debugPrintln(F("Flushing the rest of the response"));
+        Logger.log(Info, "Flushing the rest of the response");
         while (p_client->available()) {
           p_client->read();
         }
@@ -871,7 +849,7 @@ bool UPnP::getIGDEventURLs(GatewayInfo *deviceInfo) {
 bool UPnP::addPortMappingEntry(GatewayInfo *deviceInfo, UpnpRule *rule_ptr) {
   UpnpRule &rule = *rule_ptr;
   char integer_string[32];
-  debugPrintln(F("called addPortMappingEntry"));
+  Logger.log(Info, "called addPortMappingEntry");
 
   // connect to IGD (TCP connection) again, if needed, in case we got
   // disconnected after the previous query
@@ -879,7 +857,7 @@ bool UPnP::addPortMappingEntry(GatewayInfo *deviceInfo, UpnpRule *rule_ptr) {
   if (!p_client->connected()) {
     while (!connectToIGD(gatewayInfo.host, gatewayInfo.actionPort)) {
       if (millis() > timeout) {
-        debugPrintln(F("Timeout expired while trying to connect to the IGD"));
+        Logger.log(Error, "Timeout expired while trying to connect to the IGD");
         p_client->stop();
         return false;
       }
@@ -887,13 +865,9 @@ bool UPnP::addPortMappingEntry(GatewayInfo *deviceInfo, UpnpRule *rule_ptr) {
     }
   }
 
-  debugPrint(F("deviceInfo->actionPath ["));
-  debugPrint(deviceInfo->actionPath);
-  debugPrintln(F("]"));
-
-  debugPrint(F("deviceInfo->serviceTypeName ["));
-  debugPrint(deviceInfo->serviceTypeName);
-  debugPrintln(F("]"));
+  Logger.log(Info, "deviceInfo->actionPath [%s]", deviceInfo->actionPath);
+  Logger.log(Info, "deviceInfo->serviceTypeName [%s]",
+             deviceInfo->serviceTypeName);
 
   strcpy_P(body_tmp,
            PSTR("<?xml version=\"1.0\"?><s:Envelope "
@@ -912,8 +886,8 @@ bool UPnP::addPortMappingEntry(GatewayInfo *deviceInfo, UpnpRule *rule_ptr) {
   strcat_P(body_tmp, integer_string);
   strcat_P(body_tmp, PSTR("</NewInternalPort><NewInternalClient>"));
   IPAddress ipAddress =
-      (rule.internalAddr == ipNull) ? WiFi.localIP() : rule.internalAddr;
-  strcat_P(body_tmp, ipAddress.toString().c_str());
+      (rule.internalAddr == NullIP) ? localIP : rule.internalAddr;
+  strcat_P(body_tmp, toStr(ipAddress));
   strcat_P(body_tmp, PSTR("</NewInternalClient><NewEnabled>1</"
                           "NewEnabled><NewPortMappingDescription>"));
   strcat_P(body_tmp, rule.devFriendlyName.c_str());
@@ -924,14 +898,14 @@ bool UPnP::addPortMappingEntry(GatewayInfo *deviceInfo, UpnpRule *rule_ptr) {
       body_tmp,
       PSTR("</NewLeaseDuration></u:AddPortMapping></s:Body></s:Envelope>"));
 
-  sprintf(integer_string, "%d", strlen(body_tmp));
+  sprintf(integer_string, "%d", (int)strlen(body_tmp));
 
   p_client->print(F("POST "));
   p_client->print(deviceInfo->actionPath);
   p_client->println(F(" HTTP/1.1"));
   // p_client->println(F("Connection: close"));
   p_client->println(F("Content-Type: text/xml; charset=\"utf-8\""));
-  p_client->println("Host: " + deviceInfo->host.toString() + ":" +
+  p_client->println(String("Host: ") + toStr(deviceInfo->host) + ":" +
                     String(deviceInfo->actionPort));
   // p_client->println(F("Accept: */*"));
   // p_client->println(F("Content-Type: application/x-www-form-urlencoded"));
@@ -946,15 +920,13 @@ bool UPnP::addPortMappingEntry(GatewayInfo *deviceInfo, UpnpRule *rule_ptr) {
   p_client->println(body_tmp);
   p_client->println();
 
-  debugPrint(F("Content-Length was: "));
-  debugPrintln(integer_string);
-
-  debugPrintln(body_tmp);
+  Logger.log(Info, "Content-Length was: %s", integer_string);
+  Logger.log(Debug, body_tmp);
 
   timeout = millis();
   while (p_client->available() == 0) {
     if (millis() - timeout > TCP_CONNECTION_TIMEOUT_MS) {
-      debugPrintln(F("TCP connection timeout while adding a port mapping"));
+      Logger.log(Error, "TCP connection timeout while adding a port mapping");
       p_client->stop();
       return false;
     }
@@ -967,9 +939,8 @@ bool UPnP::addPortMappingEntry(GatewayInfo *deviceInfo, UpnpRule *rule_ptr) {
     if (line.indexOf(F("errorCode")) >= 0) {
       isSuccess = false;
     }
-    debugPrintln(line);
+    Logger.log(Debug, line.c_str());
   }
-  debugPrintln("");  // \n
 
   if (!isSuccess) {
     p_client->stop();
@@ -978,12 +949,13 @@ bool UPnP::addPortMappingEntry(GatewayInfo *deviceInfo, UpnpRule *rule_ptr) {
   return isSuccess;
 }
 
-bool UPnP::debugPortMappings() {
+bool UPnP::updatePortMappings() {
+  ruleNodes.clear();
   char integer_string[32];
   // verify gateway information is valid
   // TODO: use this _gwInfo to skip the UDP part completely if it is not empty
   if (!gatewayInfo) {
-    debugPrintln(F("Invalid router info, cannot continue"));
+    Logger.log(Error, "Invalid router info, cannot continue");
     return false;
   }
 
@@ -997,7 +969,8 @@ bool UPnP::debugPortMappings() {
     if (!p_client->connected()) {
       while (!connectToIGD(gatewayInfo.host, gatewayInfo.actionPort)) {
         if (millis() > timeout) {
-          debugPrint(F("Timeout expired while trying to connect to the IGD"));
+          Logger.log(Error,
+                     "Timeout expired while trying to connect to the IGD");
           p_client->stop();
           ruleNodes.clear();
           return false;
@@ -1006,9 +979,7 @@ bool UPnP::debugPortMappings() {
       }
     }
 
-    debugPrint(F("Sending query for index ["));
-    debugPrint(String(index));
-    debugPrintln(F("]"));
+    Logger.log(Info, "Sending query for index [%d]", index);
 
     strcpy_P(
         body_tmp,
@@ -1029,14 +1000,14 @@ bool UPnP::debugPortMappings() {
                             "</s:Body>"
                             "</s:Envelope>"));
 
-    sprintf(integer_string, "%d", strlen(body_tmp));
+    sprintf(integer_string, "%d", (int)strlen(body_tmp));
 
     p_client->print(F("POST "));
     p_client->print(gatewayInfo.actionPath);
     p_client->println(F(" HTTP/1.1"));
     p_client->println(F("Connection: keep-alive"));
     p_client->println(F("Content-Type: text/xml; charset=\"utf-8\""));
-    p_client->println("Host: " + gatewayInfo.host.toString() + ":" +
+    p_client->println(String("Host: ") + toStr(gatewayInfo.host) + ":" +
                       String(gatewayInfo.actionPort));
     p_client->print(F("SOAPAction: \""));
     p_client->print(gatewayInfo.serviceTypeName);
@@ -1052,8 +1023,8 @@ bool UPnP::debugPortMappings() {
     timeout = millis() + TCP_CONNECTION_TIMEOUT_MS;
     while (p_client->available() == 0) {
       if (millis() > timeout) {
-        debugPrintln(
-            F("TCP connection timeout while retrieving port mappings"));
+        Logger.log(Error,
+                   "TCP connection timeout while retrieving port mappings");
         p_client->stop();
         ruleNodes.clear();
         return false;
@@ -1062,16 +1033,17 @@ bool UPnP::debugPortMappings() {
 
     while (p_client->available()) {
       String line = p_client->readStringUntil('\r');
-      debugPrint(line);
+      Logger.log(Debug, line.c_str());
       if (line.indexOf(PORT_MAPPING_INVALID_INDEX) >= 0) {
         reachedEnd = true;
       } else if (line.indexOf(PORT_MAPPING_INVALID_ACTION) >= 0) {
-        debugPrint(F("Invalid action while reading port mappings"));
+        Logger.log(Error, "Invalid action while reading port mappings");
         reachedEnd = true;
       } else if (line.indexOf(F("HTTP/1.1 500 ")) >= 0) {
-        debugPrint(
-            F("Internal server error, likely because we have shown all the "
-              "mappings"));
+        Logger.log(
+            Error,
+            "Internal server error, likely because we have shown all the "
+            "mappings");
         reachedEnd = true;
       } else if (line.indexOf(F("GetGenericPortMappingEntryResponse")) >= 0) {
         UpnpRule rule;
@@ -1094,91 +1066,25 @@ bool UPnP::debugPortMappings() {
     index++;
     delay(250);
   }
-
-  // print nicely and free heap memory
-  debugPrintln(F("IGD current port mappings:"));
-  for (auto &rule : ruleNodes) {
-    upnpRuleToString(&rule);
-  }
-  ruleNodes.clear();
-  debugPrintln("");  // \n
-
   p_client->stop();
-
-  return true;
+  return ruleNodes;
 }
 
-void UPnP::debugConfig() {
-  debugPrintln(F("UPnP configured port mappings:"));
-  for (auto &rule : ruleNodes) {
-    upnpRuleToString(&rule);
+Vector<UpnpRule> UPnP::listConfig() { return ruleNodes; }
+
+void UPnP::logSsdpDevice(SsdpDevice *ssdpDevice) {
+  Logger.log(Info, "SSDP device [%s] port [%d] path [%s]",
+             toStr(ssdpDevice->host), ssdpDevice->port, ssdpDevice->path);
+}
+
+const char *UPnP::spaces(int num) {
+  static char result[80] = {0};
+  if (num < 0) num = 1;
+  if (num >= 78) num = 78;
+  for (int j = 0; j < num; j++) {
+    result[j] = ' ';
   }
-  debugPrintln("");  // \n
-}
-
-// TODO: remove use of String
-void UPnP::upnpRuleToString(UpnpRule *rule_ptr) {
-  UpnpRule &rule = *rule_ptr;
-  String index = String(rule.index);
-  debugPrint(index);
-  debugPrint(".");
-  debugPrint(
-      getSpacesString(5 - (index.length() + 1)));  // considering the '.' too
-
-  String devFriendlyName = rule.devFriendlyName;
-  debugPrint(devFriendlyName);
-  debugPrint(getSpacesString(30 - devFriendlyName.length()));
-
-  IPAddress ipAddress =
-      (rule.internalAddr == ipNull) ? WiFi.localIP() : rule.internalAddr;
-  String internalAddr = ipAddress.toString();
-  debugPrint(internalAddr);
-  debugPrint(getSpacesString(18 - internalAddr.length()));
-
-  String internalPort = String(rule.internalPort);
-  debugPrint(internalPort);
-  debugPrint(getSpacesString(7 - internalPort.length()));
-
-  String externalPort = String(rule.externalPort);
-  debugPrint(externalPort);
-  debugPrint(getSpacesString(7 - externalPort.length()));
-
-  String protocol = rule.protocol;
-  debugPrint(protocol);
-  debugPrint(getSpacesString(7 - protocol.length()));
-
-  String leaseDuration = String(rule.leaseDurationSec);
-  debugPrint(leaseDuration);
-  debugPrint(getSpacesString(7 - leaseDuration.length()));
-
-  debugPrintln("");
-}
-
-void UPnP::debugDevices() {
-  for (auto &device : listDevices()) {
-    debugSsdpDevice(&device);
-  }
-}
-
-void UPnP::debugSsdpDevice(SsdpDevice *ssdpDevice) {
-  debugPrint(F("SSDP device ["));
-  debugPrint(ssdpDevice->host.toString());
-  debugPrint(F("] port ["));
-  debugPrint(String(ssdpDevice->port));
-  debugPrint(F("] path ["));
-  debugPrint(ssdpDevice->path);
-  debugPrintln(F("]"));
-}
-
-String UPnP::getSpacesString(int num) {
-  if (num < 0) {
-    num = 1;
-  }
-  String spaces = "";
-  for (int i = 0; i < num; i++) {
-    spaces += " ";
-  }
-  return spaces;
+  return result;
 }
 
 IPAddress UPnP::getHost(String url) {
@@ -1233,9 +1139,7 @@ String UPnP::getPath(String url) {
   }
   int firstSlashIndex = url.indexOf("/");
   if (firstSlashIndex == -1) {
-    debugPrint(F("ERROR: Cannot find path in url ["));
-    debugPrint(url);
-    debugPrintln(F("]"));
+    Logger.log(Error, "ERROR: Cannot find path in url [%s]", url);
     return "";
   }
   return url.substring(firstSlashIndex, url.length());
@@ -1244,21 +1148,18 @@ String UPnP::getPath(String url) {
 String UPnP::getTagContent(const String &line, String tagName) {
   int startIndex = line.indexOf("<" + tagName + ">");
   if (startIndex == -1) {
-    debugPrint(F("ERROR: Cannot find tag content in line ["));
-    debugPrint(line);
-    debugPrint(F("] for start tag [<"));
-    debugPrint(tagName);
-    debugPrintln(F(">]"));
+    Logger.log(
+        Error,
+        "ERROR: Cannot find tag content in line [%s] for start tag [<%s>]",
+        line, tagName);
     return "";
   }
   startIndex += tagName.length() + 2;
   int endIndex = line.indexOf("</" + tagName + ">", startIndex);
   if (endIndex == -1) {
-    debugPrint(F("ERROR: Cannot find tag content in line ["));
-    debugPrint(line);
-    debugPrint(F("] for end tag [</"));
-    debugPrint(tagName);
-    debugPrintln(F(">]"));
+    Logger.log(Error,
+               "ERROR: Cannot find tag content in line [] for end tag [<>]",
+               line, tagName);
     return "";
   }
   return line.substring(startIndex, endIndex);

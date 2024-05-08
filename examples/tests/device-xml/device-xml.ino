@@ -1,3 +1,4 @@
+// Test XML generation for Device
 #include "DLNA.h"
 
 Device device;
@@ -29,7 +30,7 @@ void setupDevice() {
 }
 
 void setup() {
-  Serial.begin(119200);
+  //Serial.begin(119200);
   
   setupDevice();
   // render device XML

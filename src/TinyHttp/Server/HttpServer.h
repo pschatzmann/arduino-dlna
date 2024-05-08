@@ -4,13 +4,13 @@
 #include "Basic/List.h"
 #include "Server.h"
 #include "Client.h"
-#include "HTTPClient.h"
 #include "HttpHeader.h"
 #include "HttpRequestHandlerLine.h"
 #include "HttpRequestRewrite.h"
 #include "HttpChunkWriter.h"
 #include "HttpTunnel.h"
 #include <WiFi.h>
+#include "HardwareSerial.h"
 
 
 namespace tiny_dlna {
@@ -40,6 +40,7 @@ class HttpServer {
 
         /// Starts the server on the indicated port - calls WiFi.begin(ssid, password);
         bool begin(int port, const char* ssid, const char* password){
+#
             if (WiFi.status() != WL_CONNECTED && ssid!=nullptr && password!=nullptr){
                 WiFi.begin(ssid, password);
                 while (WiFi.status() != WL_CONNECTED) {        
@@ -379,7 +380,7 @@ class HttpServer {
         /// Determines the local ip address 
         const char *localHost() {
             if (local_host==nullptr){
-                local_host = WiFi.localIP().toString().c_str();
+                local_host = toStr(WiFi.localIP());
             }
             return local_host;
         }
@@ -454,7 +455,6 @@ class HttpServer {
             bool result = StrView(request_mime).contains(handler_mime);
             return result;
         }
-
 
 };
 

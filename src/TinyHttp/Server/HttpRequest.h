@@ -7,6 +7,9 @@
 
 namespace tiny_dlna {
 
+#ifdef IS_DESKTOP
+using WiFiClientSecure = WiFiClient;
+#endif
 
 /**
  * @brief Simple API to process get, put, post, del http requests
