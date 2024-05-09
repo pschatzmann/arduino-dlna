@@ -598,9 +598,8 @@ Vector<SsdpDevice> UPnP::listDevices() {
 
   SsdpDevice ssdpDevice;
   while (true) {
-    ssdpDevice = waitForUnicastResponseToMSearch(
-        NullIP);  // nullptr will cause finding all SSDP device (not just the
-                  // IGD)
+    // nullptr will cause finding all SSDP device (not just the IGD)
+    ssdpDevice = waitForUnicastResponseToMSearch(NullIP);
     if (timeoutMs > 0 && (millis() - startTime > timeoutMs)) {
       DlnaLogger.log(
           DlnaInfo,
@@ -652,7 +651,7 @@ SsdpDevice UPnP::waitForUnicastResponseToMSearch(IPAddress gatewayIP) {
   }
 
   DlnaLogger.log(DlnaInfo, "Received packet of size [%d] ip [%s] ] port [%d]",
-                 packetSize, remoteIP, p_udp->remotePort());
+                 packetSize, toStr(remoteIP), p_udp->remotePort());
 
   // sanity check
   if (packetSize > UPNP_UDP_TX_RESPONSE_MAX_SIZE) {
@@ -732,7 +731,7 @@ SsdpDevice UPnP::waitForUnicastResponseToMSearch(IPAddress gatewayIP) {
     return newSsdpDevice;
   }
 
-  DlnaLogger.log(DlnaInfo, "Device location found [%s]", location);
+  DlnaLogger.log(DlnaInfo, "Device location found [%s]", location.c_str());
 
   IPAddress host = getHost(location);
   int port = getPort(location);

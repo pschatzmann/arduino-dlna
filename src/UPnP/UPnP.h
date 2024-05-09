@@ -90,10 +90,10 @@ class UPnP {
  public:
   /// timeoutMs - timeout in milli seconds for the operations of this class, 0
   /// for blocking operation
-  UPnP(unsigned long timeoutMs = 20000) { timeoutMs = timeoutMs; }
+  UPnP(unsigned long timeoutMs = 20000) { this->timeoutMs = timeoutMs; }
 
   UPnP(Client &client, UDP &udp, bool isWifi, unsigned long timeoutMs = 20000) {
-    timeoutMs = timeoutMs;
+    this->timeoutMs = timeoutMs;
     p_udp = &udp;
     p_client = &client;
     is_wifi = isWifi;

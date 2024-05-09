@@ -41,7 +41,7 @@ void connectWiFi() {
 
 void setup(void) {
   Serial.begin(115200);
-  DlnaLogger.begin(Serial, DlnaInfo);
+  DlnaLogger.begin(Serial, DlnaDebug);
   Serial.println("Starting...");
 
   connectWiFi();
