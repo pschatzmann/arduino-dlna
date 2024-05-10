@@ -1,9 +1,10 @@
 #pragma once
 
+#include <WiFi.h>
 #include "HttpHeader.h" 
 //#include "Platform/AltClient.h"
 #include "HttpChunkReader.h"
-#include <WiFi.h>
+#include "WiFiClient.h"
 
 namespace tiny_dlna {
 
@@ -20,7 +21,7 @@ class HttpRequest{
     public:
         HttpRequest() {
             DlnaLogger.log(DlnaInfo,"HttpRequest");
-            default_client.setInsecure();
+            //default_client.setInsecure();
             setClient(default_client);
         }
 
@@ -127,7 +128,7 @@ class HttpRequest{
         }
    
     protected:
-        WiFiClientSecure default_client;
+        WiFiClient default_client;
         Client *client_ptr;
         Url url;
         HttpRequestHeader request_header;

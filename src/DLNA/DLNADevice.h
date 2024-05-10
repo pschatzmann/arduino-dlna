@@ -1,229 +1,183 @@
-#include "DLNA/Device.h"
+#pragma once
+
+#include "DLNADevice.h"
+#include "DLNADeviceInfo.h"
+#include "DLNARequestParser.h"
+#include "Schedule.h"
 #include "TinyHttp/HttpServer.h"
 #include "TinyHttp/Server/Url.h"
-#include "UPnP/UPnP.h"
 
 namespace tiny_dlna {
 
 /**
- * @brief Abstract DLNADevice. The device registers itself to the network
- * and answers to the DLNA queries and requests.
+ * @brief Abstract DLNA Device service setup. The device registers itself to the
+ * network and answers to the DLNA queries and requests.
+ * A DLNA device uses UDP, Http, XML and Soap to discover and manage a service,
+ * so there is quite some complexity involved:
+ * - We handle the UDP communication via a Scheduler and a Request Parser
+ * - We handle the Http request with the help of the TinyHttp Server
+ * - The XML service descriptions can be stored as char arrays in progmem or
+ * generated dynamically with the help of the XMLPrinter class.
+ * @author Phil Schatzmann
  */
 class DLNADevice {
  public:
-  bool begin(Url baseUrl, Device& device, HttpServer& server) {
+  bool begin(DLNADeviceInfo& device, UDPService& udp, HttpServer& server) {
+    DlnaLogger.log(DlnaInfo, "DLNADevice::begin");
+
     p_server = &server;
-    p_device = &device;
-    base_url = baseUrl;
+    p_udp = &udp;
+    addDevice(device);
 
-    // define base url
-    p_device->setURLBase(baseUrl.url());
+    // check base url
+    Url baseUrl = device.getBaseURL();
+    DlnaLogger.log(DlnaInfo, "base URL: %s", baseUrl.url());
 
-    setupServices();
+    if (StrView(device.getBaseURL().host()).equals("localhost")) {
+      DlnaLogger.log(DlnaError, "invalid base address: %s", baseUrl.url());
+      return false;
+    }
+
+    for (auto& p_device : devices) setupServices(*p_device);
 
     setupDLNAServer(server);
+
+    setupScheduler();
 
     return true;
   }
 
+  /// We potentially support some additional devices on top of the one defined
+  /// via begin
+  void addDevice(DLNADeviceInfo& device) { devices.push_back(&device); }
+
   void end() {
-    for (int j = 0; j < 3; j++) {
-      notifyBye();
-      delay(200);
-    }
-    p_device->clear();
+    // send 3 bye messages
+    PostByeSchedule bye;
+    bye.end_time = millis() + 60000;
+    bye.repeat_ms = 20000;
+    scheduler.add(bye);
+
+    for (auto& p_device : devices) p_device->clear();
+
     p_server->end();
   }
 
-  void notifyBye() {
-    const char* tmp =
-        "NOTIFY * HTTP/1.1\r\n"
-        "HOST: %s\r\n"
-        "CACHE-CONTROL: max-age = %d\r\n"
-        "LOCATION: *\r\n"
-        "NT: %s\r\n"
-        "NTS: ssdp:byebye\r\n"
-        "USN: %s\r\n";
-    snprintf(upnp.getTempBuffer(), MAX_TMP_SIZE, tmp, getMulticastAddress(),
-             max_age, getNT(), getUSN());
-    send(upnp.getTempBuffer());
-  }
+  bool loop() {
+    if (!is_active) return false;
 
-  void notifyAlive() {
-    const char* tmp =
-        "NOTIFY * HTTP/1.1\r\n"
-        "HOST:%s\r\n"
-        "CACHE-CONTROL: max-age = %d\r\n"
-        "LOCATION: *\r\n"
-        "NT: %s\r\n"
-        "NTS: ssdp:alive\r\n"
-        "USN: %s\r\n";
-    snprintf(upnp.getTempBuffer(), MAX_TMP_SIZE, tmp, getMulticastAddress(),
-             max_age, getNT(), getUSN());
-    send(upnp.getTempBuffer());
-  }
-
-  void sendMSearchReply() {
-    const char* tmp =
-        "HTTP/1.1 200 OK\r\n"
-        "CACHE-CONTROL: max-age = %d\r\n"
-        "LOCATION: %s\r\n"
-        "ST: %s\r\n"
-        "USN: %s\r\n";
-    snprintf(upnp.getTempBuffer(), MAX_TMP_SIZE, tmp, max_age, base_url.url(),
-             getST(), getUSN());
-    send(upnp.getTempBuffer());
-  }
-
-  void loop() {
     // handle server requests
     if (p_server) p_server->doLoop();
 
-    // update upnp
-    upnp.update(1000 * 60 * 5);
+    // process UDP requests
+    RequestData req = p_udp->receive();
+    Schedule schedule = parser.parse(req);
+    if (schedule) {
+      scheduler.add(schedule);
+    }
 
-    // send Alive
-    if (millis() > send_alive_timeout) {
-      notifyAlive();
-      send_alive_timeout = millis() + (send_alive_interval_sec * 1000);
+    // execute scheduled udp replys
+    scheduler.execute(*p_udp, getDevice());
+
+    // be nice, if we have other tasks
+    delay(10);
+
+    return true;
+  }
+
+  DLNAServiceInfo getService(const char* id, int deviceIdx = 0) {
+    return devices[deviceIdx]->getService(id);
+  }
+
+  DLNADeviceInfo& getDevice(int deviceIdx = 0) { return *devices[deviceIdx]; }
+
+ protected:
+  Scheduler scheduler;
+  DLNARequestParser parser;
+  UDPService* p_udp = nullptr;
+  Vector<DLNADeviceInfo*> devices;
+  HttpServer* p_server = nullptr;
+  bool is_active = false;
+
+  void setupScheduler() {
+    // schedule post alive messages: Usually repeated 3 times (because UDP
+    // messages might be lost)
+    DlnaLogger.log(DlnaInfo, "schedule PostAliveSchedule");
+    PostAliveSchedule postAlive[3];
+    postAlive[1].time = millis() + 100;
+    postAlive[2].time = millis() + 300;
+    for (auto& schedule : postAlive) {
+      scheduler.add(schedule);
     }
   }
 
-  Service getService(const char* id) { return p_device->getService(id); }
-
-  void setMaxAge(int sec) { max_age = sec; }
-
-  void setSendAliveInterval(int sec) { send_alive_interval_sec = sec; }
-
-  const char* getUDN() { return p_device->getUDN(); }
-
-  virtual const char* getUSN() = 0;
-
-  virtual const char* getST() = 0;
-
-  virtual const char* getNT() { return getST(); };
-
-  virtual const char* getMulticastAddress() { return multicast_address; }
-
-  Device& getDevice() { return *p_device;}
-
- protected:
-  UPnP upnp;
-  Url base_url;
-  int max_age = 60 * 5;
-  int send_alive_interval_sec = 10;
-  uint32_t send_alive_timeout = 0;
-  const char* multicast_address = "239.255.255.250:1900";
-  Device* p_device = nullptr;
-  HttpServer* p_server = nullptr;
-
-  void send(const char* msg) {
-    auto& udp = *upnp.getUDP();
-    udp.beginPacket(udp.remoteIP(), udp.remotePort());
-    udp.print(msg);
-    udp.endPacket();
-  }
-
-  void setupDLNAServer(HttpServer& srv) {
+  virtual void setupDLNAServer(HttpServer& srv) {
     auto xmlDevice = [](HttpServer* server, const char* requestPath,
                         HttpRequestHandlerLine* hl) {
       // auto cb = [&](Stream& out) { p_device->write(out); };
       server->reply("text/xml", "");
     };
 
-    // device
-    p_server->rewrite("/", "/device");
-    p_server->rewrite("/index.html", "/device");
-    p_server->on("/device", T_GET, xmlDevice);
+    // Setup services for all devices
+    for (auto& p_device : devices) {
+      // add device url to server
+      const char* device_path = p_device->getDeviceURL().path();
+      DlnaLogger.log(DlnaInfo, "Setting up device path: %s", device_path);
 
-    // Register Service URLs
-    for (Service& service : p_device->getServices()) {
-      p_server->on(service.scp_url, T_GET, service.scp_cb);
-      p_server->on(service.control_url, T_POST, service.control_cb);
-      p_server->on(service.event_sub_url, T_GET, service.event_sub_cb);
+      if (StrView(device_path).isEmpty()) {
+        p_server->rewrite("/", device_path);
+        p_server->rewrite("/index.html", device_path);
+        p_server->on(device_path, T_GET, xmlDevice);
+      }
+
+      // Register Service URLs
+      for (DLNAServiceInfo& service : p_device->getServices()) {
+        p_server->on(service.scp_url, T_GET, service.scp_cb);
+        p_server->on(service.control_url, T_POST, service.control_cb);
+        p_server->on(service.event_sub_url, T_GET, service.event_sub_cb);
+      }
     }
   }
 
-  const char* soapReplySuccess(const char* service, const char* name) {
-    const char* tmp =
-        "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
-        "<s:Envelope "
-        "s:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\" "
-        "xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\">"
-        "<s:Body><u:%sResponse "
-        "xmlns:u=\"urn:schemas-upnp-org:service:%s:1\">%s</u:%sResponse></"
-        "s:Body>"
-        "</s:Envelope>";
-    sprintf(upnp.getTempBuffer(), tmp, service, name);
-    return upnp.getTempBuffer();
-  }
+  // const char* soapReplySuccess(const char* service, const char* name) {
+  //   const char* tmp =
+  //       "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+  //       "<s:Envelope "
+  //       "s:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\" "
+  //       "xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\">"
+  //       "<s:Body><u:%sResponse "
+  //       "xmlns:u=\"urn:schemas-upnp-org:service:%s:1\">%s</u:%sResponse></"
+  //       "s:Body>"
+  //       "</s:Envelope>";
+  //   sprintf(upnp.getTempBuffer(), tmp, service, name);
+  //   return upnp.getTempBuffer();
+  // }
 
-  const char* soapReplyDlnaError(const char* error, int errorCode) {
-    const char* tmp =
-        "<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\" "
-        "s:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\">"
-        "<s:Body>"
-        "<s:Fault>"
-        "<faultcode>s:Client</faultcode>"
-        "<faultstring>UPnPDlnaError</faultstring>"
-        "<detail>"
-        "<UPnPDlnaError xmlns=\"urn:schemas-upnp-org:control-1-0\">"
-        "<errorCode>%d</errorCode>"
-        "<errorDescription>%s</errorDescription>"
-        "</UPnPDlnaError>"
-        "</detail>"
-        "</s:Fault>"
-        "</s:Body>"
-        "</s:Envelope>";
-    sprintf(upnp.getTempBuffer(), tmp, errorCode, error);
-    return upnp.getTempBuffer();
-  }
+  // const char* soapReplyDlnaError(const char* error, int errorCode) {
+  //   const char* tmp =
+  //       "<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\" "
+  //       "s:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\">"
+  //       "<s:Body>"
+  //       "<s:Fault>"
+  //       "<faultcode>s:Client</faultcode>"
+  //       "<faultstring>UPnPDlnaError</faultstring>"
+  //       "<detail>"
+  //       "<UPnPDlnaError xmlns=\"urn:schemas-upnp-org:control-1-0\">"
+  //       "<errorCode>%d</errorCode>"
+  //       "<errorDescription>%s</errorDescription>"
+  //       "</UPnPDlnaError>"
+  //       "</detail>"
+  //       "</s:Fault>"
+  //       "</s:Body>"
+  //       "</s:Envelope>";
+  //   sprintf(upnp.getTempBuffer(), tmp, errorCode, error);
+  //   return upnp.getTempBuffer();
+  // }
 
-  virtual void setupServices() = 0;
-};
-
-/**
- * @brief MediaRenderer DLNA Device
- *
- */
-
-class MediaRenderer : public DLNADevice {
- public:
-  const char* getUSN() override { return usn; }
-
-  const char* getST() override { return st; }
-
- protected:
-  // Renderer, Player or Server
-  const char* st = "urn:schemas-upnp-org:device:MediaRenderer:1";
-  const char* usn = "09349455-2941-4cf7-9847-1dd5ab210e97";
-
-  void setupServices() override {
-    p_device->clear();
-
-    auto dummy = [](HttpServer* server, const char* requestPath,
-                    HttpRequestHandlerLine* hl) {
-      server->reply("text/xml", "");
-    };
-
-    // define services
-    Service rc, cm, avt;
-    rc.setup("RenderingControl",
-             "urn:schemas-upnporg:service:RenderingControl:1",
-             "urn:upnp-org:serviceId:RenderingControl", "RC/SCP", dummy,
-             "RC/URL", dummy, "RC/EV", dummy);
-    cm.setup("ConnectionManager",
-             "urn:schemas-upnporg:service:ConnectionManager:1",
-             "urn:upnp-org:serviceId:ConnectionManager", "CM/SCP", dummy,
-             "CM/URL", dummy, "CM/EV", dummy);
-    avt.setup("AVTransport", "urn:schemas-upnp-org:service:AVTransport:1",
-              "urn:upnp-org:serviceId:AVTransport", "AVT/SCP", dummy, "AVT/URL",
-              dummy, "AVT/EV", dummy);
-
-    p_device->addService(rc);
-    p_device->addService(cm);
-    p_device->addService(avt);
-  }
+  /// If you dont already provid a complete DLNADeviceInfo you can overwrite
+  /// this method and add some custom device specific logic to implement a new
+  /// device. The MediaRenderer is using this approach!
+  virtual void setupServices(DLNADeviceInfo& deviceInfo) {};
 };
 
 }  // namespace tiny_dlna

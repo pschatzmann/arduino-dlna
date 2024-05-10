@@ -1,19 +1,24 @@
 #pragma once
+
 #include "TinyHttp/HttpServer.h"
 
 namespace tiny_dlna {
 
-typedef void (*http_callback)(HttpServer* server, const char* requestPath, HttpRequestHandlerLine* hl);
+typedef void (*http_callback)(HttpServer* server, const char* requestPath,
+                              HttpRequestHandlerLine* hl);
 
 /**
  * @brief Attributes needed for the DLNA Service Definition
+ * @author Phil Schatzmann
  */
-class Service {
-public:
-  //Service() = default;
-  //Service(&Service) = default;
-  void setup(const char* key, const char* type, const char* id, const char* scp, http_callback cbScp,
-          const char* control, http_callback cbControl, const char* event, http_callback cbEvent) {
+class DLNAServiceInfo {
+ public:
+  void setup(const char* key, const char* type, const char* id, const char* scp,
+             http_callback cbScp, const char* control, http_callback cbControl,
+             const char* event, http_callback cbEvent) {
+    DlnaLogger.log(DlnaInfo, "setting up %s: %s | %s | %s", key, scp, control,
+                   event);
+
     name = key;
     service_type = type;
     service_id = id;
@@ -32,7 +37,7 @@ public:
   const char* event_sub_url = nullptr;
   http_callback scp_cb = nullptr;
   http_callback control_cb = nullptr;
-  http_callback event_sub_cb = nullptr; 
+  http_callback event_sub_cb = nullptr;
 };
 
-} // ns
+}  // namespace tiny_dlna

@@ -1,38 +1,82 @@
 
 #pragma once
 
-#include <functional>
-
-#include "Service.h"
 #include "Basic/Vector.h"
+#include "DLNAServiceInfo.h"
 #include "XMLPrinter.h"
 
 namespace tiny_dlna {
 
 /**
- * @brief Print Device XML using urn:schemas-upnp-org:device-1-0"
+ * @brief Device Attributes and generation of XML using
+ * urn:schemas-upnp-org:device-1-0. We could just reutrn a predefined device xml
+ * document, but we provide a dynamic generation of the service xml which should
+ * be more memory efficient.
+ * @author Phil Schatzmann
  */
 
-class Device {
+class DLNADeviceInfo {
  public:
   /// renderes the device xml
   void print(Print& out) {
     xml.setOutput(out);
     xml.printXMLHeader();
-    auto printRootCb = std::bind(&Device::printRoot, this);
+    auto printRootCb = std::bind(&DLNADeviceInfo::printRoot, this);
     xml.printNode("root", printRootCb, ns);
   }
+
+  // sets the device type (ST or NT)
+  void setDeviceType(const char* st) { device_type = st; }
+
+  const char* getDeviceType() { return device_type; }
 
   /// Define the udn uuid
   void setUDN(const char* id) { udn = id; }
 
   const char* getUDN() { return udn; }
 
-  /// Defines the base URL
-  void setURLBase(const char* url) { url_base = url; }
+  void setBaseURL(Url url) { base_url = url; }
+
+  Url& getBaseURL() {
+    // replace localhost url
+    if (StrView(base_url.host()).contains("localhost")) {
+      String url_str;
+      url_str = base_url.url();
+      url_str.replace("localhost", getIPStr());
+      Url new_url{url_str.c_str()};
+      base_url = new_url;
+    }
+    return base_url;
+  }
+
+  Url& getDeviceURL() {
+    if (!device_url) {
+      Str str = getBaseURL().url();
+      if (!str.endsWith("/")) str += "/";
+      str += "device";
+      Url new_url(str.c_str());
+      device_url = new_url;
+    }
+    return device_url;
+  }
+
+  void setIPAddress(IPAddress address) { localhost = address; }
+
+  IPAddress getIPAddress() { return localhost; }
+
+  /// Provides the local address as string
+  const char* getIPStr() {
+    static char result[80] = {0};
+    snprintf(result, 80, "%d.%d.%d.%d", localhost[0], localhost[1],
+             localhost[2], localhost[3]);
+    return result;
+  }
+
   void setNS(const char* ns) { this->ns = ns; }
-  void setDeviceType(const char* dt) { device_type = dt; }
-  void setDevieTypeName(const char* name) { device_type_name = name; }
+  const char* getNS() { return ns; }
+
+  /// Defines the base URL
+  void setDeviceTypeName(const char* name) { device_type_name = name; }
   void setManufacturer(const char* man) { manufacturer = man; }
   void setManufacturerURL(const char* url) { manufacturer_url = url; }
   void setModelDescription(const char* descr) { model_description = descr; }
@@ -47,11 +91,11 @@ class Device {
   void setIconURL(const char* url) { icon_url = url; }
 
   /// Adds a service defintion
-  void addService(Service s) { services.push_back(s); }
+  void addService(DLNAServiceInfo s) { services.push_back(s); }
 
   /// Finds a service definition by name
-  Service getService(const char* id) {
-    Service result;
+  DLNAServiceInfo getService(const char* id) {
+    DLNAServiceInfo result;
     for (auto& service : services) {
       if (StrView(service.name).equals(id)) {
         return result;
@@ -60,39 +104,39 @@ class Device {
     return result;
   }
 
-  Vector<Service>& getServices() { return services; }
+  Vector<DLNAServiceInfo>& getServices() { return services; }
 
   void clear() { services.clear(); }
 
-  const char* getDeviceType() { return device_type; }
-
  protected:
   XMLPrinter xml;
+  Url base_url{"http://localhost:80/dlna"};
+  Url device_url;
+  IPAddress localhost;
   const char* udn = "09349455-2941-4cf7-9847-0dd5ab210e97";
-  const char* url_base = "";
   const char* ns = "xmlns=\" urn:schemas-upnp-org:device-1-0\"";
   const char* device_type = "urn:schemas-upnp-org:device:MediaRenderer:1";
-  const char* device_type_name = "Media Renderer";
-  const char* manufacturer = "pschatzmann";
-  const char* manufacturer_url = "https://pschatzmann.ch";
-  const char* model_description = "n/a";
-  const char* model_name = "n/a";
-  const char* model_number = "00000001";
-  const char* serial_number = "00000001";
-  const char* universal_product_code = "n/a";
+  const char* device_type_name = nullptr;
+  const char* manufacturer = nullptr;
+  const char* manufacturer_url = nullptr;
+  const char* model_description = nullptr;
+  const char* model_name = nullptr;
+  const char* model_number = nullptr;
+  const char* serial_number = nullptr;
+  const char* universal_product_code = nullptr;
   const char* icon_mime = "image/png";
   int icon_width = 512;
   int icon_height = 512;
   int icon_depth = 8;
   const char* icon_url =
       "https://cdn-icons-png.flaticon.com/512/9973/9973171.png";
-  Vector<Service> services;
+  Vector<DLNAServiceInfo> services;
 
   void printRoot() {
-    auto printSpecVersionB = std::bind(&Device::printSpecVersion, this);
+    auto printSpecVersionB = std::bind(&DLNADeviceInfo::printSpecVersion, this);
     xml.printNode("specVersion", printSpecVersionB);
-    xml.printNode("URLBase", url_base);
-    auto printDeviceB = std::bind(&Device::printDevice, this);
+    xml.printNode("URLBase", base_url.url());
+    auto printDeviceB = std::bind(&DLNADeviceInfo::printDevice, this);
     xml.printNode("device", printDeviceB);
   }
 
@@ -107,9 +151,10 @@ class Device {
     xml.printNode("serialNumber", serial_number);
     xml.printNode("UDN", getUDN());
     xml.printNode("UPC", universal_product_code);
-    auto printIconListCb = std::bind(&Device::printIconList, this);
+    auto printIconListCb = std::bind(&DLNADeviceInfo::printIconList, this);
     xml.printNode("iconList", printIconListCb);
-    auto printServiceListCb = std::bind(&Device::printServiceList, this);
+    auto printServiceListCb =
+        std::bind(&DLNADeviceInfo::printServiceList, this);
     xml.printNode("serviceList", printServiceListCb);
   }
 
@@ -120,13 +165,14 @@ class Device {
 
   void printServiceList() {
     for (auto& service : services) {
-      auto printServiceCb = std::bind(&Device::printService, this, &service);
+      auto printServiceCb =
+          std::bind(&DLNADeviceInfo::printService, this, &service);
       xml.printNodeArg("service", printServiceCb);
     }
   }
 
   void printService(void* srv) {
-    Service* service = (Service*)srv;
+    DLNAServiceInfo* service = (DLNAServiceInfo*)srv;
     xml.printNode("serviceType", service->service_type);
     xml.printNode("serviceId", service->service_id);
     xml.printNode("SCPDURL", service->scp_url);
@@ -135,16 +181,19 @@ class Device {
   }
 
   void printIconList() {
-    auto printIconDlnaInfoCb = std::bind(&Device::printIconDlnaInfo, this);
+    auto printIconDlnaInfoCb =
+        std::bind(&DLNADeviceInfo::printIconDlnaInfo, this);
     xml.printNode("icon", printIconDlnaInfoCb);
   }
 
   void printIconDlnaInfo() {
-    xml.printNode("mimetype", "image/png");
-    xml.printNode("width", icon_width);
-    xml.printNode("height", icon_height);
-    xml.printNode("depth", icon_depth);
-    xml.printNode("url", icon_url);
+    if (!StrView(icon_url).isEmpty()) {
+      xml.printNode("mimetype", "image/png");
+      xml.printNode("width", icon_width);
+      xml.printNode("height", icon_height);
+      xml.printNode("depth", icon_depth);
+      xml.printNode("url", icon_url);
+    }
   }
 };
 

@@ -19,11 +19,11 @@ class Url {
     public:
         // empty url
         Url() {
-            DlnaLogger.log(DlnaInfo,"Url");
+            DlnaLogger.log(DlnaDebug,"Url");
         }
         
         ~Url() {
-            DlnaLogger.log(DlnaInfo,"~Url");
+            DlnaLogger.log(DlnaDebug,"~Url");
             pathStr.clear();
             hostStr.clear();
             protocolStr.clear();
@@ -33,13 +33,13 @@ class Url {
 
         // setup url with string
         Url(const char *url){
-            DlnaLogger.log(DlnaInfo,"Url %s",url);
+            DlnaLogger.log(DlnaDebug,"Url %s",url);
             setUrl(url);
         }
 
         // copy constructor
         Url(Url &url){
-            DlnaLogger.log(DlnaInfo,"Url %s",url.url());
+            DlnaLogger.log(DlnaDebug,"Url %s",url.url());
             setUrl(url.url());
         }
 
@@ -51,11 +51,13 @@ class Url {
         int port() {return portInt;}
 
         void setUrl(const char* url){
-            DlnaLogger.log(DlnaInfo,"setUrl %s",url);
+            DlnaLogger.log(DlnaDebug,"setUrl %s",url);
             this->urlStr = url;
             parse();
         }
 
+        operator bool() { return !urlStr.isEmpty();}
+ 
     protected:
         Str pathStr = Str(40);
         Str hostStr = Str(20);
@@ -65,7 +67,7 @@ class Url {
         int portInt;
 
         void parse() {
-            DlnaLogger.log(DlnaInfo,"Url::parse");
+            DlnaLogger.log(DlnaDebug,"Url::parse");
             
             int protocolEnd = urlStr.indexOf("://");
             if (protocolEnd==-1){
@@ -101,8 +103,8 @@ class Url {
                 pathStr.trim();
                 urlRootStr.substring(urlStr, 0, pathStart);
             }
-            DlnaLogger.log(DlnaInfo,"url-> %s",url());
-            DlnaLogger.log(DlnaInfo,"path-> %s",path());
+            DlnaLogger.log(DlnaDebug,"url-> %s",url());
+            DlnaLogger.log(DlnaDebug,"path-> %s",path());
            
         }
 
