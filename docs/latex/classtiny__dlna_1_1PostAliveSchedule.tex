@@ -1,0 +1,86 @@
+\hypertarget{classtiny__dlna_1_1PostAliveSchedule}{}\doxysection{tiny\+\_\+dlna\+::Post\+Alive\+Schedule Class Reference}
+\label{classtiny__dlna_1_1PostAliveSchedule}\index{tiny\_dlna::PostAliveSchedule@{tiny\_dlna::PostAliveSchedule}}
+
+
+Send out Post\+Alive messages\+: Repeated every 5 seconds.  
+
+
+
+
+{\ttfamily \#include $<$Schedule.\+h$>$}
+
+
+
+Inheritance diagram for tiny\+\_\+dlna\+::Post\+Alive\+Schedule\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=238pt]{classtiny__dlna_1_1PostAliveSchedule__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for tiny\+\_\+dlna\+::Post\+Alive\+Schedule\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=238pt]{classtiny__dlna_1_1PostAliveSchedule__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classtiny__dlna_1_1PostAliveSchedule_a26fb5826fa32375d2d95667664c79cfe}{Post\+Alive\+Schedule}} (int repeat\+Ms=\mbox{\hyperlink{Schedule_8h_a3944c1db46ef503cfa808c7d4b40dbf6}{ALIVE\+\_\+\+MS}})
+\item 
+bool \mbox{\hyperlink{classtiny__dlna_1_1PostAliveSchedule_a177126cf815a7b5755bf62eea03d6b12}{process}} (\mbox{\hyperlink{classtiny__dlna_1_1UDPService}{UDPService}} \&udp, \mbox{\hyperlink{classtiny__dlna_1_1DLNADeviceInfo}{DLNADevice\+Info}} \&device) override
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{classtiny__dlna_1_1PostAliveSchedule_a13761fc5515d7d2ccb612035d8d89410}{max\+\_\+age}} = 60
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Send out Post\+Alive messages\+: Repeated every 5 seconds. 
+
+\begin{DoxyAuthor}{Author}
+Phil Schatzmann 
+\end{DoxyAuthor}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classtiny__dlna_1_1PostAliveSchedule_a26fb5826fa32375d2d95667664c79cfe}\label{classtiny__dlna_1_1PostAliveSchedule_a26fb5826fa32375d2d95667664c79cfe}} 
+\index{tiny\_dlna::PostAliveSchedule@{tiny\_dlna::PostAliveSchedule}!PostAliveSchedule@{PostAliveSchedule}}
+\index{PostAliveSchedule@{PostAliveSchedule}!tiny\_dlna::PostAliveSchedule@{tiny\_dlna::PostAliveSchedule}}
+\doxysubsubsection{\texorpdfstring{PostAliveSchedule()}{PostAliveSchedule()}}
+{\footnotesize\ttfamily tiny\+\_\+dlna\+::\+Post\+Alive\+Schedule\+::\+Post\+Alive\+Schedule (\begin{DoxyParamCaption}\item[{int}]{repeat\+Ms = {\ttfamily \mbox{\hyperlink{Schedule_8h_a3944c1db46ef503cfa808c7d4b40dbf6}{ALIVE\+\_\+\+MS}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classtiny__dlna_1_1PostAliveSchedule_a177126cf815a7b5755bf62eea03d6b12}\label{classtiny__dlna_1_1PostAliveSchedule_a177126cf815a7b5755bf62eea03d6b12}} 
+\index{tiny\_dlna::PostAliveSchedule@{tiny\_dlna::PostAliveSchedule}!process@{process}}
+\index{process@{process}!tiny\_dlna::PostAliveSchedule@{tiny\_dlna::PostAliveSchedule}}
+\doxysubsubsection{\texorpdfstring{process()}{process()}}
+{\footnotesize\ttfamily bool tiny\+\_\+dlna\+::\+Post\+Alive\+Schedule\+::process (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classtiny__dlna_1_1UDPService}{UDPService}} \&}]{udp,  }\item[{\mbox{\hyperlink{classtiny__dlna_1_1DLNADeviceInfo}{DLNADevice\+Info}} \&}]{device }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{structtiny__dlna_1_1Schedule_adbea57d1ee3f0cc82765e55ffa5e4bc4}{tiny\+\_\+dlna\+::\+Schedule}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classtiny__dlna_1_1PostAliveSchedule_a13761fc5515d7d2ccb612035d8d89410}\label{classtiny__dlna_1_1PostAliveSchedule_a13761fc5515d7d2ccb612035d8d89410}} 
+\index{tiny\_dlna::PostAliveSchedule@{tiny\_dlna::PostAliveSchedule}!max\_age@{max\_age}}
+\index{max\_age@{max\_age}!tiny\_dlna::PostAliveSchedule@{tiny\_dlna::PostAliveSchedule}}
+\doxysubsubsection{\texorpdfstring{max\_age}{max\_age}}
+{\footnotesize\ttfamily int tiny\+\_\+dlna\+::\+Post\+Alive\+Schedule\+::max\+\_\+age = 60\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+DLNA/\mbox{\hyperlink{Schedule_8h}{Schedule.\+h}}\end{DoxyCompactItemize}

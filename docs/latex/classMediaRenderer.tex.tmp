@@ -1,0 +1,51 @@
+\hypertarget{classMediaRenderer}{}\doxysection{Media\+Renderer Class Reference}
+\label{classMediaRenderer}\index{MediaRenderer@{MediaRenderer}}
+
+
+\mbox{\hyperlink{classMediaRenderer}{Media\+Renderer}} UPnP Device.  
+
+
+
+
+{\ttfamily \#include $<$UPn\+PDevice.\+h$>$}
+
+
+
+Inheritance diagram for Media\+Renderer\+:
+% FIG 0
+
+
+Collaboration diagram for Media\+Renderer\+:
+% FIG 1
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classMediaRenderer_a2a18c94206bb7574618f06774bf00b25}\label{classMediaRenderer_a2a18c94206bb7574618f06774bf00b25}} 
+const char $\ast$ {\bfseries get\+USN} () override
+\item 
+\mbox{\Hypertarget{classMediaRenderer_a8b0f16c0c9632c84717ef109eda82fb9}\label{classMediaRenderer_a8b0f16c0c9632c84717ef109eda82fb9}} 
+const char $\ast$ {\bfseries get\+ST} () override
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classMediaRenderer_a62398d2771265720e36cbe7819b84f2f}\label{classMediaRenderer_a62398d2771265720e36cbe7819b84f2f}} 
+void {\bfseries setup\+Services} () override
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classMediaRenderer_afe9a41c299e7f897501e339c8e38fd8c}\label{classMediaRenderer_afe9a41c299e7f897501e339c8e38fd8c}} 
+const char $\ast$ {\bfseries st} = \char`\"{}urn\+:schemas-\/upnp-\/org\+:device\+:\+Media\+Renderer\+:1\char`\"{}
+\item 
+\mbox{\Hypertarget{classMediaRenderer_a8aacaed711bdd19be22c616694ddba90}\label{classMediaRenderer_a8aacaed711bdd19be22c616694ddba90}} 
+const char $\ast$ {\bfseries usn} = \char`\"{}09349455-\/2941-\/4cf7-\/9847-\/1dd5ab210e97\char`\"{}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\mbox{\hyperlink{classMediaRenderer}{Media\+Renderer}} UPnP Device. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/UPn\+PDevice.\+h\end{DoxyCompactItemize}

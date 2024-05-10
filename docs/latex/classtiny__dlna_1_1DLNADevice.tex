@@ -1,0 +1,173 @@
+\hypertarget{classtiny__dlna_1_1DLNADevice}{}\doxysection{tiny\+\_\+dlna\+::DLNADevice Class Reference}
+\label{classtiny__dlna_1_1DLNADevice}\index{tiny\_dlna::DLNADevice@{tiny\_dlna::DLNADevice}}
+
+
+Abstract DLNA Device service setup. The device registers itself to the network and answers to the DLNA queries and requests. A DLNA device uses UDP, Http, XML and Soap to discover and manage a service, so there is quite some complexity involved\+:  
+
+
+
+
+{\ttfamily \#include $<$DLNADevice.\+h$>$}
+
+
+
+Collaboration diagram for tiny\+\_\+dlna\+::DLNADevice\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classtiny__dlna_1_1DLNADevice__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classtiny__dlna_1_1DLNADevice_a492ca994d00b6a8180cea63745c31271}{begin}} (\mbox{\hyperlink{classtiny__dlna_1_1DLNADeviceInfo}{DLNADevice\+Info}} \&device, \mbox{\hyperlink{classtiny__dlna_1_1UDPService}{UDPService}} \&udp, Http\+Server \&server)
+\item 
+void \mbox{\hyperlink{classtiny__dlna_1_1DLNADevice_a69b372ecf2a74bcbc7db72d7ebe43c90}{add\+Device}} (\mbox{\hyperlink{classtiny__dlna_1_1DLNADeviceInfo}{DLNADevice\+Info}} \&device)
+\item 
+void \mbox{\hyperlink{classtiny__dlna_1_1DLNADevice_a176de5b2819aa7d3b2f5b112f2be5664}{end}} ()
+\item 
+bool \mbox{\hyperlink{classtiny__dlna_1_1DLNADevice_afe6f1b0d2a28c4f276fa5359419d6b7e}{loop}} ()
+\item 
+\mbox{\hyperlink{classtiny__dlna_1_1DLNAServiceInfo}{DLNAService\+Info}} \mbox{\hyperlink{classtiny__dlna_1_1DLNADevice_a68a68602f4f51ecf37184d8bee7cc55e}{get\+Service}} (const char $\ast$id, int device\+Idx=0)
+\item 
+\mbox{\hyperlink{classtiny__dlna_1_1DLNADeviceInfo}{DLNADevice\+Info}} \& \mbox{\hyperlink{classtiny__dlna_1_1DLNADevice_a0a00e51a1cdfe07d14b391f25e7d740e}{get\+Device}} (int device\+Idx=0)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classtiny__dlna_1_1DLNADevice_a406f6248f6bf81d774688d356a170f14}{setup\+Scheduler}} ()
+\item 
+virtual void \mbox{\hyperlink{classtiny__dlna_1_1DLNADevice_ac78e37f5479a6774e311ed3065694d35}{setup\+DLNAServer}} (Http\+Server \&srv)
+\item 
+virtual void \mbox{\hyperlink{classtiny__dlna_1_1DLNADevice_a8862b0b566e1656331c66f3aa734b170}{setup\+Services}} (\mbox{\hyperlink{classtiny__dlna_1_1DLNADeviceInfo}{DLNADevice\+Info}} \&device\+Info)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classtiny__dlna_1_1Scheduler}{Scheduler}} \mbox{\hyperlink{classtiny__dlna_1_1DLNADevice_a5fb3bb1fc28dbc81fbfaa144167e60e7}{scheduler}}
+\item 
+\mbox{\hyperlink{classtiny__dlna_1_1DLNARequestParser}{DLNARequest\+Parser}} \mbox{\hyperlink{classtiny__dlna_1_1DLNADevice_a5be6535d2a0d49a4bf6d94423da32f95}{parser}}
+\item 
+\mbox{\hyperlink{classtiny__dlna_1_1UDPService}{UDPService}} $\ast$ \mbox{\hyperlink{classtiny__dlna_1_1DLNADevice_a67e89968e9e9991f8e5f665aab6a25c8}{p\+\_\+udp}} = nullptr
+\item 
+\mbox{\hyperlink{classtiny__dlna_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classtiny__dlna_1_1DLNADeviceInfo}{DLNADevice\+Info}} $\ast$ $>$ \mbox{\hyperlink{classtiny__dlna_1_1DLNADevice_ac756cfa06c63ddb2a718559cf033d18d}{devices}}
+\item 
+Http\+Server $\ast$ \mbox{\hyperlink{classtiny__dlna_1_1DLNADevice_aa6a6dd349a8eda3d93f31ab9e2bcf125}{p\+\_\+server}} = nullptr
+\item 
+bool \mbox{\hyperlink{classtiny__dlna_1_1DLNADevice_a3dc4fb6e238eedf0a5d5626ab4857fb2}{is\+\_\+active}} = false
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Abstract DLNA Device service setup. The device registers itself to the network and answers to the DLNA queries and requests. A DLNA device uses UDP, Http, XML and Soap to discover and manage a service, so there is quite some complexity involved\+: 
+
+
+\begin{DoxyItemize}
+\item We handle the UDP communication via a \mbox{\hyperlink{classtiny__dlna_1_1Scheduler}{Scheduler}} and a Request Parser
+\item We handle the Http request with the help of the Tiny\+Http Server
+\item The XML service descriptions can be stored as char arrays in progmem or generated dynamically with the help of the \mbox{\hyperlink{structtiny__dlna_1_1XMLPrinter}{XMLPrinter}} class. \begin{DoxyAuthor}{Author}
+Phil Schatzmann 
+\end{DoxyAuthor}
+
+\end{DoxyItemize}
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classtiny__dlna_1_1DLNADevice_a69b372ecf2a74bcbc7db72d7ebe43c90}\label{classtiny__dlna_1_1DLNADevice_a69b372ecf2a74bcbc7db72d7ebe43c90}} 
+\index{tiny\_dlna::DLNADevice@{tiny\_dlna::DLNADevice}!addDevice@{addDevice}}
+\index{addDevice@{addDevice}!tiny\_dlna::DLNADevice@{tiny\_dlna::DLNADevice}}
+\doxysubsubsection{\texorpdfstring{addDevice()}{addDevice()}}
+{\footnotesize\ttfamily void tiny\+\_\+dlna\+::\+DLNADevice\+::add\+Device (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classtiny__dlna_1_1DLNADeviceInfo}{DLNADevice\+Info}} \&}]{device }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+We potentially support some additional devices on top of the one defined via begin \mbox{\Hypertarget{classtiny__dlna_1_1DLNADevice_a492ca994d00b6a8180cea63745c31271}\label{classtiny__dlna_1_1DLNADevice_a492ca994d00b6a8180cea63745c31271}} 
+\index{tiny\_dlna::DLNADevice@{tiny\_dlna::DLNADevice}!begin@{begin}}
+\index{begin@{begin}!tiny\_dlna::DLNADevice@{tiny\_dlna::DLNADevice}}
+\doxysubsubsection{\texorpdfstring{begin()}{begin()}}
+{\footnotesize\ttfamily bool tiny\+\_\+dlna\+::\+DLNADevice\+::begin (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classtiny__dlna_1_1DLNADeviceInfo}{DLNADevice\+Info}} \&}]{device,  }\item[{\mbox{\hyperlink{classtiny__dlna_1_1UDPService}{UDPService}} \&}]{udp,  }\item[{Http\+Server \&}]{server }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1DLNADevice_a176de5b2819aa7d3b2f5b112f2be5664}\label{classtiny__dlna_1_1DLNADevice_a176de5b2819aa7d3b2f5b112f2be5664}} 
+\index{tiny\_dlna::DLNADevice@{tiny\_dlna::DLNADevice}!end@{end}}
+\index{end@{end}!tiny\_dlna::DLNADevice@{tiny\_dlna::DLNADevice}}
+\doxysubsubsection{\texorpdfstring{end()}{end()}}
+{\footnotesize\ttfamily void tiny\+\_\+dlna\+::\+DLNADevice\+::end (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1DLNADevice_a0a00e51a1cdfe07d14b391f25e7d740e}\label{classtiny__dlna_1_1DLNADevice_a0a00e51a1cdfe07d14b391f25e7d740e}} 
+\index{tiny\_dlna::DLNADevice@{tiny\_dlna::DLNADevice}!getDevice@{getDevice}}
+\index{getDevice@{getDevice}!tiny\_dlna::DLNADevice@{tiny\_dlna::DLNADevice}}
+\doxysubsubsection{\texorpdfstring{getDevice()}{getDevice()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classtiny__dlna_1_1DLNADeviceInfo}{DLNADevice\+Info}}\& tiny\+\_\+dlna\+::\+DLNADevice\+::get\+Device (\begin{DoxyParamCaption}\item[{int}]{device\+Idx = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1DLNADevice_a68a68602f4f51ecf37184d8bee7cc55e}\label{classtiny__dlna_1_1DLNADevice_a68a68602f4f51ecf37184d8bee7cc55e}} 
+\index{tiny\_dlna::DLNADevice@{tiny\_dlna::DLNADevice}!getService@{getService}}
+\index{getService@{getService}!tiny\_dlna::DLNADevice@{tiny\_dlna::DLNADevice}}
+\doxysubsubsection{\texorpdfstring{getService()}{getService()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classtiny__dlna_1_1DLNAServiceInfo}{DLNAService\+Info}} tiny\+\_\+dlna\+::\+DLNADevice\+::get\+Service (\begin{DoxyParamCaption}\item[{const char $\ast$}]{id,  }\item[{int}]{device\+Idx = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1DLNADevice_afe6f1b0d2a28c4f276fa5359419d6b7e}\label{classtiny__dlna_1_1DLNADevice_afe6f1b0d2a28c4f276fa5359419d6b7e}} 
+\index{tiny\_dlna::DLNADevice@{tiny\_dlna::DLNADevice}!loop@{loop}}
+\index{loop@{loop}!tiny\_dlna::DLNADevice@{tiny\_dlna::DLNADevice}}
+\doxysubsubsection{\texorpdfstring{loop()}{loop()}}
+{\footnotesize\ttfamily bool tiny\+\_\+dlna\+::\+DLNADevice\+::loop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1DLNADevice_ac78e37f5479a6774e311ed3065694d35}\label{classtiny__dlna_1_1DLNADevice_ac78e37f5479a6774e311ed3065694d35}} 
+\index{tiny\_dlna::DLNADevice@{tiny\_dlna::DLNADevice}!setupDLNAServer@{setupDLNAServer}}
+\index{setupDLNAServer@{setupDLNAServer}!tiny\_dlna::DLNADevice@{tiny\_dlna::DLNADevice}}
+\doxysubsubsection{\texorpdfstring{setupDLNAServer()}{setupDLNAServer()}}
+{\footnotesize\ttfamily virtual void tiny\+\_\+dlna\+::\+DLNADevice\+::setup\+DLNAServer (\begin{DoxyParamCaption}\item[{Http\+Server \&}]{srv }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1DLNADevice_a406f6248f6bf81d774688d356a170f14}\label{classtiny__dlna_1_1DLNADevice_a406f6248f6bf81d774688d356a170f14}} 
+\index{tiny\_dlna::DLNADevice@{tiny\_dlna::DLNADevice}!setupScheduler@{setupScheduler}}
+\index{setupScheduler@{setupScheduler}!tiny\_dlna::DLNADevice@{tiny\_dlna::DLNADevice}}
+\doxysubsubsection{\texorpdfstring{setupScheduler()}{setupScheduler()}}
+{\footnotesize\ttfamily void tiny\+\_\+dlna\+::\+DLNADevice\+::setup\+Scheduler (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1DLNADevice_a8862b0b566e1656331c66f3aa734b170}\label{classtiny__dlna_1_1DLNADevice_a8862b0b566e1656331c66f3aa734b170}} 
+\index{tiny\_dlna::DLNADevice@{tiny\_dlna::DLNADevice}!setupServices@{setupServices}}
+\index{setupServices@{setupServices}!tiny\_dlna::DLNADevice@{tiny\_dlna::DLNADevice}}
+\doxysubsubsection{\texorpdfstring{setupServices()}{setupServices()}}
+{\footnotesize\ttfamily virtual void tiny\+\_\+dlna\+::\+DLNADevice\+::setup\+Services (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classtiny__dlna_1_1DLNADeviceInfo}{DLNADevice\+Info}} \&}]{device\+Info }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+If you dont already provid a complete \mbox{\hyperlink{classtiny__dlna_1_1DLNADeviceInfo}{DLNADevice\+Info}} you can overwrite this method and add some custom device specific logic to implement a new device. The Media\+Renderer is using this approach! 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classtiny__dlna_1_1DLNADevice_ac756cfa06c63ddb2a718559cf033d18d}\label{classtiny__dlna_1_1DLNADevice_ac756cfa06c63ddb2a718559cf033d18d}} 
+\index{tiny\_dlna::DLNADevice@{tiny\_dlna::DLNADevice}!devices@{devices}}
+\index{devices@{devices}!tiny\_dlna::DLNADevice@{tiny\_dlna::DLNADevice}}
+\doxysubsubsection{\texorpdfstring{devices}{devices}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classtiny__dlna_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classtiny__dlna_1_1DLNADeviceInfo}{DLNADevice\+Info}}$\ast$$>$ tiny\+\_\+dlna\+::\+DLNADevice\+::devices\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1DLNADevice_a3dc4fb6e238eedf0a5d5626ab4857fb2}\label{classtiny__dlna_1_1DLNADevice_a3dc4fb6e238eedf0a5d5626ab4857fb2}} 
+\index{tiny\_dlna::DLNADevice@{tiny\_dlna::DLNADevice}!is\_active@{is\_active}}
+\index{is\_active@{is\_active}!tiny\_dlna::DLNADevice@{tiny\_dlna::DLNADevice}}
+\doxysubsubsection{\texorpdfstring{is\_active}{is\_active}}
+{\footnotesize\ttfamily bool tiny\+\_\+dlna\+::\+DLNADevice\+::is\+\_\+active = false\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1DLNADevice_aa6a6dd349a8eda3d93f31ab9e2bcf125}\label{classtiny__dlna_1_1DLNADevice_aa6a6dd349a8eda3d93f31ab9e2bcf125}} 
+\index{tiny\_dlna::DLNADevice@{tiny\_dlna::DLNADevice}!p\_server@{p\_server}}
+\index{p\_server@{p\_server}!tiny\_dlna::DLNADevice@{tiny\_dlna::DLNADevice}}
+\doxysubsubsection{\texorpdfstring{p\_server}{p\_server}}
+{\footnotesize\ttfamily Http\+Server$\ast$ tiny\+\_\+dlna\+::\+DLNADevice\+::p\+\_\+server = nullptr\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1DLNADevice_a67e89968e9e9991f8e5f665aab6a25c8}\label{classtiny__dlna_1_1DLNADevice_a67e89968e9e9991f8e5f665aab6a25c8}} 
+\index{tiny\_dlna::DLNADevice@{tiny\_dlna::DLNADevice}!p\_udp@{p\_udp}}
+\index{p\_udp@{p\_udp}!tiny\_dlna::DLNADevice@{tiny\_dlna::DLNADevice}}
+\doxysubsubsection{\texorpdfstring{p\_udp}{p\_udp}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classtiny__dlna_1_1UDPService}{UDPService}}$\ast$ tiny\+\_\+dlna\+::\+DLNADevice\+::p\+\_\+udp = nullptr\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1DLNADevice_a5be6535d2a0d49a4bf6d94423da32f95}\label{classtiny__dlna_1_1DLNADevice_a5be6535d2a0d49a4bf6d94423da32f95}} 
+\index{tiny\_dlna::DLNADevice@{tiny\_dlna::DLNADevice}!parser@{parser}}
+\index{parser@{parser}!tiny\_dlna::DLNADevice@{tiny\_dlna::DLNADevice}}
+\doxysubsubsection{\texorpdfstring{parser}{parser}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classtiny__dlna_1_1DLNARequestParser}{DLNARequest\+Parser}} tiny\+\_\+dlna\+::\+DLNADevice\+::parser\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1DLNADevice_a5fb3bb1fc28dbc81fbfaa144167e60e7}\label{classtiny__dlna_1_1DLNADevice_a5fb3bb1fc28dbc81fbfaa144167e60e7}} 
+\index{tiny\_dlna::DLNADevice@{tiny\_dlna::DLNADevice}!scheduler@{scheduler}}
+\index{scheduler@{scheduler}!tiny\_dlna::DLNADevice@{tiny\_dlna::DLNADevice}}
+\doxysubsubsection{\texorpdfstring{scheduler}{scheduler}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classtiny__dlna_1_1Scheduler}{Scheduler}} tiny\+\_\+dlna\+::\+DLNADevice\+::scheduler\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+DLNA/\mbox{\hyperlink{DLNADevice_8h}{DLNADevice.\+h}}\end{DoxyCompactItemize}

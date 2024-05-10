@@ -1,0 +1,126 @@
+\hypertarget{structtiny__dlna_1_1XMLPrinter}{}\doxysection{tiny\+\_\+dlna\+::XMLPrinter Struct Reference}
+\label{structtiny__dlna_1_1XMLPrinter}\index{tiny\_dlna::XMLPrinter@{tiny\_dlna::XMLPrinter}}
+
+
+Functions to efficiently output XML. XML data contains a lot of redundancy so it is more memory efficient to generate the data instead of using a predefined XML document.  
+
+
+
+
+{\ttfamily \#include $<$XMLPrinter.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structtiny__dlna_1_1XMLPrinter_a91340050b791e0087fe36b04ff65d5ec}{XMLPrinter}} ()=default
+\item 
+\mbox{\hyperlink{structtiny__dlna_1_1XMLPrinter_a720a01f678ab668d4db810e43e3baa1e}{XMLPrinter}} (Print \&output)
+\item 
+void \mbox{\hyperlink{structtiny__dlna_1_1XMLPrinter_ac33a7ac306583618bcbd98dcf8303a31}{set\+Output}} (Print \&output)
+\begin{DoxyCompactList}\small\item\em Defines the output. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{structtiny__dlna_1_1XMLPrinter_a5a03d2532312258e71c5e0599fb1df21}{print\+XMLHeader}} ()
+\item 
+void \mbox{\hyperlink{structtiny__dlna_1_1XMLPrinter_ae76f7170cf215a19e17cec3a98a2a8d2}{print\+Node}} (const char $\ast$node, const char $\ast$txt, const char $\ast$attributes=nullptr)
+\item 
+void \mbox{\hyperlink{structtiny__dlna_1_1XMLPrinter_ae288b3a47913064eb5e83a767bfbe881}{print\+Node}} (const char $\ast$node, int txt, const char $\ast$attributes=nullptr)
+\item 
+void \mbox{\hyperlink{structtiny__dlna_1_1XMLPrinter_a53c073f912557ba5071dea2fe6d3d796}{print\+Node}} (const char $\ast$node, std\+::function$<$ void(void)$>$ callback, const char $\ast$attributes=nullptr)
+\item 
+void \mbox{\hyperlink{structtiny__dlna_1_1XMLPrinter_aecb21861b0cf8ca7a93524bef1610591}{print\+Node\+Arg}} (const char $\ast$node, std\+::function$<$ void(void)$>$ callback)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{structtiny__dlna_1_1XMLPrinter_a3675bc1fea4c1ac7b9afc1ddd59afb41}{println}} (const char $\ast$txt)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Print $\ast$ \mbox{\hyperlink{structtiny__dlna_1_1XMLPrinter_a2dc1d4b4eb340078fb6b2f7993cc163f}{p\+\_\+out}} = \&Serial
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Functions to efficiently output XML. XML data contains a lot of redundancy so it is more memory efficient to generate the data instead of using a predefined XML document. 
+
+\begin{DoxyAuthor}{Author}
+Phil Schatzmann 
+\end{DoxyAuthor}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{structtiny__dlna_1_1XMLPrinter_a91340050b791e0087fe36b04ff65d5ec}\label{structtiny__dlna_1_1XMLPrinter_a91340050b791e0087fe36b04ff65d5ec}} 
+\index{tiny\_dlna::XMLPrinter@{tiny\_dlna::XMLPrinter}!XMLPrinter@{XMLPrinter}}
+\index{XMLPrinter@{XMLPrinter}!tiny\_dlna::XMLPrinter@{tiny\_dlna::XMLPrinter}}
+\doxysubsubsection{\texorpdfstring{XMLPrinter()}{XMLPrinter()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily tiny\+\_\+dlna\+::\+XMLPrinter\+::\+XMLPrinter (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\mbox{\Hypertarget{structtiny__dlna_1_1XMLPrinter_a720a01f678ab668d4db810e43e3baa1e}\label{structtiny__dlna_1_1XMLPrinter_a720a01f678ab668d4db810e43e3baa1e}} 
+\index{tiny\_dlna::XMLPrinter@{tiny\_dlna::XMLPrinter}!XMLPrinter@{XMLPrinter}}
+\index{XMLPrinter@{XMLPrinter}!tiny\_dlna::XMLPrinter@{tiny\_dlna::XMLPrinter}}
+\doxysubsubsection{\texorpdfstring{XMLPrinter()}{XMLPrinter()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily tiny\+\_\+dlna\+::\+XMLPrinter\+::\+XMLPrinter (\begin{DoxyParamCaption}\item[{Print \&}]{output }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{structtiny__dlna_1_1XMLPrinter_a3675bc1fea4c1ac7b9afc1ddd59afb41}\label{structtiny__dlna_1_1XMLPrinter_a3675bc1fea4c1ac7b9afc1ddd59afb41}} 
+\index{tiny\_dlna::XMLPrinter@{tiny\_dlna::XMLPrinter}!println@{println}}
+\index{println@{println}!tiny\_dlna::XMLPrinter@{tiny\_dlna::XMLPrinter}}
+\doxysubsubsection{\texorpdfstring{println()}{println()}}
+{\footnotesize\ttfamily void tiny\+\_\+dlna\+::\+XMLPrinter\+::println (\begin{DoxyParamCaption}\item[{const char $\ast$}]{txt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+\mbox{\Hypertarget{structtiny__dlna_1_1XMLPrinter_ae76f7170cf215a19e17cec3a98a2a8d2}\label{structtiny__dlna_1_1XMLPrinter_ae76f7170cf215a19e17cec3a98a2a8d2}} 
+\index{tiny\_dlna::XMLPrinter@{tiny\_dlna::XMLPrinter}!printNode@{printNode}}
+\index{printNode@{printNode}!tiny\_dlna::XMLPrinter@{tiny\_dlna::XMLPrinter}}
+\doxysubsubsection{\texorpdfstring{printNode()}{printNode()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily void tiny\+\_\+dlna\+::\+XMLPrinter\+::print\+Node (\begin{DoxyParamCaption}\item[{const char $\ast$}]{node,  }\item[{const char $\ast$}]{txt,  }\item[{const char $\ast$}]{attributes = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{structtiny__dlna_1_1XMLPrinter_ae288b3a47913064eb5e83a767bfbe881}\label{structtiny__dlna_1_1XMLPrinter_ae288b3a47913064eb5e83a767bfbe881}} 
+\index{tiny\_dlna::XMLPrinter@{tiny\_dlna::XMLPrinter}!printNode@{printNode}}
+\index{printNode@{printNode}!tiny\_dlna::XMLPrinter@{tiny\_dlna::XMLPrinter}}
+\doxysubsubsection{\texorpdfstring{printNode()}{printNode()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily void tiny\+\_\+dlna\+::\+XMLPrinter\+::print\+Node (\begin{DoxyParamCaption}\item[{const char $\ast$}]{node,  }\item[{int}]{txt,  }\item[{const char $\ast$}]{attributes = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{structtiny__dlna_1_1XMLPrinter_a53c073f912557ba5071dea2fe6d3d796}\label{structtiny__dlna_1_1XMLPrinter_a53c073f912557ba5071dea2fe6d3d796}} 
+\index{tiny\_dlna::XMLPrinter@{tiny\_dlna::XMLPrinter}!printNode@{printNode}}
+\index{printNode@{printNode}!tiny\_dlna::XMLPrinter@{tiny\_dlna::XMLPrinter}}
+\doxysubsubsection{\texorpdfstring{printNode()}{printNode()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily void tiny\+\_\+dlna\+::\+XMLPrinter\+::print\+Node (\begin{DoxyParamCaption}\item[{const char $\ast$}]{node,  }\item[{std\+::function$<$ void(void)$>$}]{callback,  }\item[{const char $\ast$}]{attributes = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{structtiny__dlna_1_1XMLPrinter_aecb21861b0cf8ca7a93524bef1610591}\label{structtiny__dlna_1_1XMLPrinter_aecb21861b0cf8ca7a93524bef1610591}} 
+\index{tiny\_dlna::XMLPrinter@{tiny\_dlna::XMLPrinter}!printNodeArg@{printNodeArg}}
+\index{printNodeArg@{printNodeArg}!tiny\_dlna::XMLPrinter@{tiny\_dlna::XMLPrinter}}
+\doxysubsubsection{\texorpdfstring{printNodeArg()}{printNodeArg()}}
+{\footnotesize\ttfamily void tiny\+\_\+dlna\+::\+XMLPrinter\+::print\+Node\+Arg (\begin{DoxyParamCaption}\item[{const char $\ast$}]{node,  }\item[{std\+::function$<$ void(void)$>$}]{callback }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{structtiny__dlna_1_1XMLPrinter_a5a03d2532312258e71c5e0599fb1df21}\label{structtiny__dlna_1_1XMLPrinter_a5a03d2532312258e71c5e0599fb1df21}} 
+\index{tiny\_dlna::XMLPrinter@{tiny\_dlna::XMLPrinter}!printXMLHeader@{printXMLHeader}}
+\index{printXMLHeader@{printXMLHeader}!tiny\_dlna::XMLPrinter@{tiny\_dlna::XMLPrinter}}
+\doxysubsubsection{\texorpdfstring{printXMLHeader()}{printXMLHeader()}}
+{\footnotesize\ttfamily void tiny\+\_\+dlna\+::\+XMLPrinter\+::print\+XMLHeader (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{structtiny__dlna_1_1XMLPrinter_ac33a7ac306583618bcbd98dcf8303a31}\label{structtiny__dlna_1_1XMLPrinter_ac33a7ac306583618bcbd98dcf8303a31}} 
+\index{tiny\_dlna::XMLPrinter@{tiny\_dlna::XMLPrinter}!setOutput@{setOutput}}
+\index{setOutput@{setOutput}!tiny\_dlna::XMLPrinter@{tiny\_dlna::XMLPrinter}}
+\doxysubsubsection{\texorpdfstring{setOutput()}{setOutput()}}
+{\footnotesize\ttfamily void tiny\+\_\+dlna\+::\+XMLPrinter\+::set\+Output (\begin{DoxyParamCaption}\item[{Print \&}]{output }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Defines the output. 
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{structtiny__dlna_1_1XMLPrinter_a2dc1d4b4eb340078fb6b2f7993cc163f}\label{structtiny__dlna_1_1XMLPrinter_a2dc1d4b4eb340078fb6b2f7993cc163f}} 
+\index{tiny\_dlna::XMLPrinter@{tiny\_dlna::XMLPrinter}!p\_out@{p\_out}}
+\index{p\_out@{p\_out}!tiny\_dlna::XMLPrinter@{tiny\_dlna::XMLPrinter}}
+\doxysubsubsection{\texorpdfstring{p\_out}{p\_out}}
+{\footnotesize\ttfamily Print$\ast$ tiny\+\_\+dlna\+::\+XMLPrinter\+::p\+\_\+out = \&Serial\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+DLNA/\mbox{\hyperlink{XMLPrinter_8h}{XMLPrinter.\+h}}\end{DoxyCompactItemize}

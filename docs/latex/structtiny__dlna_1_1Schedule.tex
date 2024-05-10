@@ -1,0 +1,105 @@
+\hypertarget{structtiny__dlna_1_1Schedule}{}\doxysection{tiny\+\_\+dlna\+::Schedule Struct Reference}
+\label{structtiny__dlna_1_1Schedule}\index{tiny\_dlna::Schedule@{tiny\_dlna::Schedule}}
+
+
+An individual \mbox{\hyperlink{structtiny__dlna_1_1Schedule}{Schedule}} (to send out UDP messages)  
+
+
+
+
+{\ttfamily \#include $<$Schedule.\+h$>$}
+
+
+
+Inheritance diagram for tiny\+\_\+dlna\+::Schedule\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{structtiny__dlna_1_1Schedule__inherit__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual bool \mbox{\hyperlink{structtiny__dlna_1_1Schedule_adbea57d1ee3f0cc82765e55ffa5e4bc4}{process}} (\mbox{\hyperlink{classtiny__dlna_1_1UDPService}{UDPService}} \&udp, \mbox{\hyperlink{classtiny__dlna_1_1DLNADeviceInfo}{DLNADevice\+Info}} \&device)
+\item 
+\mbox{\hyperlink{structtiny__dlna_1_1Schedule_ab68a78be25e74294fbac6839bd5111ae}{operator bool}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{structtiny__dlna_1_1Schedule_aef42336ee989f5e3b64387a6b78dc30e}{id}} = 0
+\item 
+uint32\+\_\+t \mbox{\hyperlink{structtiny__dlna_1_1Schedule_a362781d6bbd24cedcad0aaf72872e689}{time}} = 0
+\item 
+int \mbox{\hyperlink{structtiny__dlna_1_1Schedule_a4e5ce8b2302ac82a91f414a5edb61974}{repeat\+\_\+ms}} = 0
+\item 
+uint32\+\_\+t \mbox{\hyperlink{structtiny__dlna_1_1Schedule_a74fb7da531d36621cab452da63355058}{end\+\_\+time}} = 0
+\item 
+bool \mbox{\hyperlink{structtiny__dlna_1_1Schedule_a2b21ee1493e6c9d19f9b0a0d07bffc41}{active}} = false
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+An individual \mbox{\hyperlink{structtiny__dlna_1_1Schedule}{Schedule}} (to send out UDP messages) 
+
+\begin{DoxyAuthor}{Author}
+Phil Schatzmann 
+\end{DoxyAuthor}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{structtiny__dlna_1_1Schedule_ab68a78be25e74294fbac6839bd5111ae}\label{structtiny__dlna_1_1Schedule_ab68a78be25e74294fbac6839bd5111ae}} 
+\index{tiny\_dlna::Schedule@{tiny\_dlna::Schedule}!operator bool@{operator bool}}
+\index{operator bool@{operator bool}!tiny\_dlna::Schedule@{tiny\_dlna::Schedule}}
+\doxysubsubsection{\texorpdfstring{operator bool()}{operator bool()}}
+{\footnotesize\ttfamily tiny\+\_\+dlna\+::\+Schedule\+::operator bool (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{structtiny__dlna_1_1Schedule_adbea57d1ee3f0cc82765e55ffa5e4bc4}\label{structtiny__dlna_1_1Schedule_adbea57d1ee3f0cc82765e55ffa5e4bc4}} 
+\index{tiny\_dlna::Schedule@{tiny\_dlna::Schedule}!process@{process}}
+\index{process@{process}!tiny\_dlna::Schedule@{tiny\_dlna::Schedule}}
+\doxysubsubsection{\texorpdfstring{process()}{process()}}
+{\footnotesize\ttfamily virtual bool tiny\+\_\+dlna\+::\+Schedule\+::process (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classtiny__dlna_1_1UDPService}{UDPService}} \&}]{udp,  }\item[{\mbox{\hyperlink{classtiny__dlna_1_1DLNADeviceInfo}{DLNADevice\+Info}} \&}]{device }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented in \mbox{\hyperlink{classtiny__dlna_1_1PostByeSchedule_aa9ee4964c51794a2dfa60ecdda49ff5b}{tiny\+\_\+dlna\+::\+Post\+Bye\+Schedule}}, \mbox{\hyperlink{classtiny__dlna_1_1PostAliveSchedule_a177126cf815a7b5755bf62eea03d6b12}{tiny\+\_\+dlna\+::\+Post\+Alive\+Schedule}}, and \mbox{\hyperlink{classtiny__dlna_1_1MSearchReplySchedule_aa6b1f21e12c9d43468852bf96ab5ca6b}{tiny\+\_\+dlna\+::\+MSearch\+Reply\+Schedule}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{structtiny__dlna_1_1Schedule_a2b21ee1493e6c9d19f9b0a0d07bffc41}\label{structtiny__dlna_1_1Schedule_a2b21ee1493e6c9d19f9b0a0d07bffc41}} 
+\index{tiny\_dlna::Schedule@{tiny\_dlna::Schedule}!active@{active}}
+\index{active@{active}!tiny\_dlna::Schedule@{tiny\_dlna::Schedule}}
+\doxysubsubsection{\texorpdfstring{active}{active}}
+{\footnotesize\ttfamily bool tiny\+\_\+dlna\+::\+Schedule\+::active = false}
+
+\mbox{\Hypertarget{structtiny__dlna_1_1Schedule_a74fb7da531d36621cab452da63355058}\label{structtiny__dlna_1_1Schedule_a74fb7da531d36621cab452da63355058}} 
+\index{tiny\_dlna::Schedule@{tiny\_dlna::Schedule}!end\_time@{end\_time}}
+\index{end\_time@{end\_time}!tiny\_dlna::Schedule@{tiny\_dlna::Schedule}}
+\doxysubsubsection{\texorpdfstring{end\_time}{end\_time}}
+{\footnotesize\ttfamily uint32\+\_\+t tiny\+\_\+dlna\+::\+Schedule\+::end\+\_\+time = 0}
+
+\mbox{\Hypertarget{structtiny__dlna_1_1Schedule_aef42336ee989f5e3b64387a6b78dc30e}\label{structtiny__dlna_1_1Schedule_aef42336ee989f5e3b64387a6b78dc30e}} 
+\index{tiny\_dlna::Schedule@{tiny\_dlna::Schedule}!id@{id}}
+\index{id@{id}!tiny\_dlna::Schedule@{tiny\_dlna::Schedule}}
+\doxysubsubsection{\texorpdfstring{id}{id}}
+{\footnotesize\ttfamily int tiny\+\_\+dlna\+::\+Schedule\+::id = 0}
+
+\mbox{\Hypertarget{structtiny__dlna_1_1Schedule_a4e5ce8b2302ac82a91f414a5edb61974}\label{structtiny__dlna_1_1Schedule_a4e5ce8b2302ac82a91f414a5edb61974}} 
+\index{tiny\_dlna::Schedule@{tiny\_dlna::Schedule}!repeat\_ms@{repeat\_ms}}
+\index{repeat\_ms@{repeat\_ms}!tiny\_dlna::Schedule@{tiny\_dlna::Schedule}}
+\doxysubsubsection{\texorpdfstring{repeat\_ms}{repeat\_ms}}
+{\footnotesize\ttfamily int tiny\+\_\+dlna\+::\+Schedule\+::repeat\+\_\+ms = 0}
+
+\mbox{\Hypertarget{structtiny__dlna_1_1Schedule_a362781d6bbd24cedcad0aaf72872e689}\label{structtiny__dlna_1_1Schedule_a362781d6bbd24cedcad0aaf72872e689}} 
+\index{tiny\_dlna::Schedule@{tiny\_dlna::Schedule}!time@{time}}
+\index{time@{time}!tiny\_dlna::Schedule@{tiny\_dlna::Schedule}}
+\doxysubsubsection{\texorpdfstring{time}{time}}
+{\footnotesize\ttfamily uint32\+\_\+t tiny\+\_\+dlna\+::\+Schedule\+::time = 0}
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+DLNA/\mbox{\hyperlink{Schedule_8h}{Schedule.\+h}}\end{DoxyCompactItemize}

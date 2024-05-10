@@ -1,0 +1,155 @@
+\hypertarget{classtiny__dlna_1_1RingBuffer}{}\doxysection{tiny\+\_\+dlna\+::Ring\+Buffer Class Reference}
+\label{classtiny__dlna_1_1RingBuffer}\index{tiny\_dlna::RingBuffer@{tiny\_dlna::RingBuffer}}
+
+
+Implementation of a Simple Circular Buffer. Instead of comparing the position of the read and write pointer in order to figure out if we still have characters available or space left to write we keep track of the actual length which is easier to follow.  
+
+
+
+
+{\ttfamily \#include $<$Ring\+Buffer.\+h$>$}
+
+
+
+Collaboration diagram for tiny\+\_\+dlna\+::Ring\+Buffer\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=199pt]{classtiny__dlna_1_1RingBuffer__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classtiny__dlna_1_1RingBuffer_a1d5b85e6e7051598879c2b70961cd434}{Ring\+Buffer}} (int size=512)
+\item 
+int \mbox{\hyperlink{classtiny__dlna_1_1RingBuffer_a5610eeb7ddd26da38f6f0c41d47de6e3}{available}} ()
+\item 
+int \mbox{\hyperlink{classtiny__dlna_1_1RingBuffer_aa20c6e1c797b33c4f0b9985c3ad189b2}{available\+To\+Write}} ()
+\item 
+int \mbox{\hyperlink{classtiny__dlna_1_1RingBuffer_adc35c02f0a20a77d1780407ca0c0fcc6}{read}} ()
+\item 
+int \mbox{\hyperlink{classtiny__dlna_1_1RingBuffer_a200217f35a0d5f47bed14b8f9eb4c85a}{read}} (uint8\+\_\+t $\ast$str, int len)
+\item 
+int \mbox{\hyperlink{classtiny__dlna_1_1RingBuffer_a1f9bb36d3045d188c8afac3a6332a299}{peek}} ()
+\item 
+size\+\_\+t \mbox{\hyperlink{classtiny__dlna_1_1RingBuffer_a02c1482262b14b2d0f3381ecb153f7a3}{write}} (uint8\+\_\+t ch)
+\item 
+size\+\_\+t \mbox{\hyperlink{classtiny__dlna_1_1RingBuffer_a84143fd57930b817e6ff8330dd2a2471}{write}} (uint8\+\_\+t $\ast$str, int len)
+\item 
+void \mbox{\hyperlink{classtiny__dlna_1_1RingBuffer_a25612ad86bbd660594e2c104640579e3}{resize}} (int size)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classtiny__dlna_1_1Vector}{Vector}}$<$ char $>$ \mbox{\hyperlink{classtiny__dlna_1_1RingBuffer_aa995f8fa5778d4c11d129c92c06d36fa}{buffer}} \{0\}
+\item 
+int \mbox{\hyperlink{classtiny__dlna_1_1RingBuffer_a74e2bfdbc22da549e34702d780498870}{max\+\_\+len}}
+\item 
+int \mbox{\hyperlink{classtiny__dlna_1_1RingBuffer_a8adba8eab50cb005d64f952d15e7c67c}{actual\+\_\+len}} = 0
+\item 
+int \mbox{\hyperlink{classtiny__dlna_1_1RingBuffer_ab69f4f70198adf5e49e3084ba3b5721d}{actual\+\_\+read\+\_\+pos}} = 0
+\item 
+int \mbox{\hyperlink{classtiny__dlna_1_1RingBuffer_a6176a15411db9e9b679d64ba167d1288}{actual\+\_\+write\+\_\+pos}} = 0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Implementation of a Simple Circular Buffer. Instead of comparing the position of the read and write pointer in order to figure out if we still have characters available or space left to write we keep track of the actual length which is easier to follow. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classtiny__dlna_1_1RingBuffer_a1d5b85e6e7051598879c2b70961cd434}\label{classtiny__dlna_1_1RingBuffer_a1d5b85e6e7051598879c2b70961cd434}} 
+\index{tiny\_dlna::RingBuffer@{tiny\_dlna::RingBuffer}!RingBuffer@{RingBuffer}}
+\index{RingBuffer@{RingBuffer}!tiny\_dlna::RingBuffer@{tiny\_dlna::RingBuffer}}
+\doxysubsubsection{\texorpdfstring{RingBuffer()}{RingBuffer()}}
+{\footnotesize\ttfamily tiny\+\_\+dlna\+::\+Ring\+Buffer\+::\+Ring\+Buffer (\begin{DoxyParamCaption}\item[{int}]{size = {\ttfamily 512} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classtiny__dlna_1_1RingBuffer_a5610eeb7ddd26da38f6f0c41d47de6e3}\label{classtiny__dlna_1_1RingBuffer_a5610eeb7ddd26da38f6f0c41d47de6e3}} 
+\index{tiny\_dlna::RingBuffer@{tiny\_dlna::RingBuffer}!available@{available}}
+\index{available@{available}!tiny\_dlna::RingBuffer@{tiny\_dlna::RingBuffer}}
+\doxysubsubsection{\texorpdfstring{available()}{available()}}
+{\footnotesize\ttfamily int tiny\+\_\+dlna\+::\+Ring\+Buffer\+::available (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1RingBuffer_aa20c6e1c797b33c4f0b9985c3ad189b2}\label{classtiny__dlna_1_1RingBuffer_aa20c6e1c797b33c4f0b9985c3ad189b2}} 
+\index{tiny\_dlna::RingBuffer@{tiny\_dlna::RingBuffer}!availableToWrite@{availableToWrite}}
+\index{availableToWrite@{availableToWrite}!tiny\_dlna::RingBuffer@{tiny\_dlna::RingBuffer}}
+\doxysubsubsection{\texorpdfstring{availableToWrite()}{availableToWrite()}}
+{\footnotesize\ttfamily int tiny\+\_\+dlna\+::\+Ring\+Buffer\+::available\+To\+Write (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1RingBuffer_a1f9bb36d3045d188c8afac3a6332a299}\label{classtiny__dlna_1_1RingBuffer_a1f9bb36d3045d188c8afac3a6332a299}} 
+\index{tiny\_dlna::RingBuffer@{tiny\_dlna::RingBuffer}!peek@{peek}}
+\index{peek@{peek}!tiny\_dlna::RingBuffer@{tiny\_dlna::RingBuffer}}
+\doxysubsubsection{\texorpdfstring{peek()}{peek()}}
+{\footnotesize\ttfamily int tiny\+\_\+dlna\+::\+Ring\+Buffer\+::peek (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1RingBuffer_adc35c02f0a20a77d1780407ca0c0fcc6}\label{classtiny__dlna_1_1RingBuffer_adc35c02f0a20a77d1780407ca0c0fcc6}} 
+\index{tiny\_dlna::RingBuffer@{tiny\_dlna::RingBuffer}!read@{read}}
+\index{read@{read}!tiny\_dlna::RingBuffer@{tiny\_dlna::RingBuffer}}
+\doxysubsubsection{\texorpdfstring{read()}{read()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily int tiny\+\_\+dlna\+::\+Ring\+Buffer\+::read (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1RingBuffer_a200217f35a0d5f47bed14b8f9eb4c85a}\label{classtiny__dlna_1_1RingBuffer_a200217f35a0d5f47bed14b8f9eb4c85a}} 
+\index{tiny\_dlna::RingBuffer@{tiny\_dlna::RingBuffer}!read@{read}}
+\index{read@{read}!tiny\_dlna::RingBuffer@{tiny\_dlna::RingBuffer}}
+\doxysubsubsection{\texorpdfstring{read()}{read()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily int tiny\+\_\+dlna\+::\+Ring\+Buffer\+::read (\begin{DoxyParamCaption}\item[{uint8\+\_\+t $\ast$}]{str,  }\item[{int}]{len }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1RingBuffer_a25612ad86bbd660594e2c104640579e3}\label{classtiny__dlna_1_1RingBuffer_a25612ad86bbd660594e2c104640579e3}} 
+\index{tiny\_dlna::RingBuffer@{tiny\_dlna::RingBuffer}!resize@{resize}}
+\index{resize@{resize}!tiny\_dlna::RingBuffer@{tiny\_dlna::RingBuffer}}
+\doxysubsubsection{\texorpdfstring{resize()}{resize()}}
+{\footnotesize\ttfamily void tiny\+\_\+dlna\+::\+Ring\+Buffer\+::resize (\begin{DoxyParamCaption}\item[{int}]{size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1RingBuffer_a84143fd57930b817e6ff8330dd2a2471}\label{classtiny__dlna_1_1RingBuffer_a84143fd57930b817e6ff8330dd2a2471}} 
+\index{tiny\_dlna::RingBuffer@{tiny\_dlna::RingBuffer}!write@{write}}
+\index{write@{write}!tiny\_dlna::RingBuffer@{tiny\_dlna::RingBuffer}}
+\doxysubsubsection{\texorpdfstring{write()}{write()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily size\+\_\+t tiny\+\_\+dlna\+::\+Ring\+Buffer\+::write (\begin{DoxyParamCaption}\item[{uint8\+\_\+t $\ast$}]{str,  }\item[{int}]{len }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1RingBuffer_a02c1482262b14b2d0f3381ecb153f7a3}\label{classtiny__dlna_1_1RingBuffer_a02c1482262b14b2d0f3381ecb153f7a3}} 
+\index{tiny\_dlna::RingBuffer@{tiny\_dlna::RingBuffer}!write@{write}}
+\index{write@{write}!tiny\_dlna::RingBuffer@{tiny\_dlna::RingBuffer}}
+\doxysubsubsection{\texorpdfstring{write()}{write()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily size\+\_\+t tiny\+\_\+dlna\+::\+Ring\+Buffer\+::write (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{ch }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classtiny__dlna_1_1RingBuffer_a8adba8eab50cb005d64f952d15e7c67c}\label{classtiny__dlna_1_1RingBuffer_a8adba8eab50cb005d64f952d15e7c67c}} 
+\index{tiny\_dlna::RingBuffer@{tiny\_dlna::RingBuffer}!actual\_len@{actual\_len}}
+\index{actual\_len@{actual\_len}!tiny\_dlna::RingBuffer@{tiny\_dlna::RingBuffer}}
+\doxysubsubsection{\texorpdfstring{actual\_len}{actual\_len}}
+{\footnotesize\ttfamily int tiny\+\_\+dlna\+::\+Ring\+Buffer\+::actual\+\_\+len = 0\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1RingBuffer_ab69f4f70198adf5e49e3084ba3b5721d}\label{classtiny__dlna_1_1RingBuffer_ab69f4f70198adf5e49e3084ba3b5721d}} 
+\index{tiny\_dlna::RingBuffer@{tiny\_dlna::RingBuffer}!actual\_read\_pos@{actual\_read\_pos}}
+\index{actual\_read\_pos@{actual\_read\_pos}!tiny\_dlna::RingBuffer@{tiny\_dlna::RingBuffer}}
+\doxysubsubsection{\texorpdfstring{actual\_read\_pos}{actual\_read\_pos}}
+{\footnotesize\ttfamily int tiny\+\_\+dlna\+::\+Ring\+Buffer\+::actual\+\_\+read\+\_\+pos = 0\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1RingBuffer_a6176a15411db9e9b679d64ba167d1288}\label{classtiny__dlna_1_1RingBuffer_a6176a15411db9e9b679d64ba167d1288}} 
+\index{tiny\_dlna::RingBuffer@{tiny\_dlna::RingBuffer}!actual\_write\_pos@{actual\_write\_pos}}
+\index{actual\_write\_pos@{actual\_write\_pos}!tiny\_dlna::RingBuffer@{tiny\_dlna::RingBuffer}}
+\doxysubsubsection{\texorpdfstring{actual\_write\_pos}{actual\_write\_pos}}
+{\footnotesize\ttfamily int tiny\+\_\+dlna\+::\+Ring\+Buffer\+::actual\+\_\+write\+\_\+pos = 0\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1RingBuffer_aa995f8fa5778d4c11d129c92c06d36fa}\label{classtiny__dlna_1_1RingBuffer_aa995f8fa5778d4c11d129c92c06d36fa}} 
+\index{tiny\_dlna::RingBuffer@{tiny\_dlna::RingBuffer}!buffer@{buffer}}
+\index{buffer@{buffer}!tiny\_dlna::RingBuffer@{tiny\_dlna::RingBuffer}}
+\doxysubsubsection{\texorpdfstring{buffer}{buffer}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classtiny__dlna_1_1Vector}{Vector}}$<$char$>$ tiny\+\_\+dlna\+::\+Ring\+Buffer\+::buffer \{0\}\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1RingBuffer_a74e2bfdbc22da549e34702d780498870}\label{classtiny__dlna_1_1RingBuffer_a74e2bfdbc22da549e34702d780498870}} 
+\index{tiny\_dlna::RingBuffer@{tiny\_dlna::RingBuffer}!max\_len@{max\_len}}
+\index{max\_len@{max\_len}!tiny\_dlna::RingBuffer@{tiny\_dlna::RingBuffer}}
+\doxysubsubsection{\texorpdfstring{max\_len}{max\_len}}
+{\footnotesize\ttfamily int tiny\+\_\+dlna\+::\+Ring\+Buffer\+::max\+\_\+len\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Basic/\mbox{\hyperlink{RingBuffer_8h}{Ring\+Buffer.\+h}}\end{DoxyCompactItemize}

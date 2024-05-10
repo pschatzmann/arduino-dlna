@@ -1,0 +1,521 @@
+\hypertarget{classtiny__dlna_1_1Vector}{}\doxysection{tiny\+\_\+dlna\+::Vector$<$ T $>$ Class Template Reference}
+\label{classtiny__dlna_1_1Vector}\index{tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}}
+
+
+\mbox{\hyperlink{classtiny__dlna_1_1Vector}{Vector}} implementation which provides the most important methods as defined by std\+::vector. This class it is quite handy to have and most of the times quite better then dealing with raw c arrays.  
+
+
+
+
+{\ttfamily \#include $<$Vector.\+h$>$}
+
+
+
+Collaboration diagram for tiny\+\_\+dlna\+::Vector$<$ T $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=207pt]{classtiny__dlna_1_1Vector__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classtiny__dlna_1_1Vector_1_1iterator}{iterator}}
+\begin{DoxyCompactList}\small\item\em Iterator for the \mbox{\hyperlink{classtiny__dlna_1_1Vector}{Vector}} class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classtiny__dlna_1_1Vector_af6aed31db9ee1176f281a9be7ef27baf}{Vector}} (size\+\_\+t \mbox{\hyperlink{classtiny__dlna_1_1Vector_abc61d2836d97b5a611f49a17167402cb}{len}}=0, \mbox{\hyperlink{classtiny__dlna_1_1Allocator}{Allocator}} \&allocator=Default\+Allocator)
+\begin{DoxyCompactList}\small\item\em Default constructor\+: size 0 with Default\+Allocator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classtiny__dlna_1_1Vector_a3c064494c852cabc5d1ce02615d1b3d2}{Vector}} (\mbox{\hyperlink{classtiny__dlna_1_1Allocator}{Allocator}} \&allocator)
+\begin{DoxyCompactList}\small\item\em Constructor with only allocator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classtiny__dlna_1_1Vector_ad9318caefe54e061f1c5ad209fca07b2}{Vector}} (int \mbox{\hyperlink{classtiny__dlna_1_1Vector_a4daa0bf8a1ecc28beee8682e506c5b78}{size}}, T value, \mbox{\hyperlink{classtiny__dlna_1_1Allocator}{Allocator}} \&allocator=Default\+Allocator)
+\begin{DoxyCompactList}\small\item\em Allocate size and initialize array. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classtiny__dlna_1_1Vector_a37aef63a49af96ff0e148c826acfca6b}{Vector}} (\mbox{\hyperlink{classtiny__dlna_1_1Vector}{Vector}}$<$ T $>$ \&\&move\+From)
+\begin{DoxyCompactList}\small\item\em Move constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classtiny__dlna_1_1Vector}{Vector}} \& \mbox{\hyperlink{classtiny__dlna_1_1Vector_a161c380ab63dbc3cf1b952e010f33d80}{operator=}} (\mbox{\hyperlink{classtiny__dlna_1_1Vector}{Vector}} \&\&move\+From)
+\begin{DoxyCompactList}\small\item\em Move operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classtiny__dlna_1_1Vector_addc5a92799e8be135cf0b4427670e2bd}{Vector}} (\mbox{\hyperlink{classtiny__dlna_1_1Vector}{Vector}}$<$ T $>$ \&copy\+From)
+\begin{DoxyCompactList}\small\item\em copy constructor \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classtiny__dlna_1_1Vector}{Vector}}$<$ T $>$ \& \mbox{\hyperlink{classtiny__dlna_1_1Vector_a186941196e5d897d819d7e79b4433fc5}{operator=}} (\mbox{\hyperlink{classtiny__dlna_1_1Vector}{Vector}}$<$ T $>$ \&copy\+From)
+\begin{DoxyCompactList}\small\item\em copy operator \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classtiny__dlna_1_1Vector_a3987679b32754ba5dfe7867e7bc33f88}{Vector}} (T $\ast$from, T $\ast$to, \mbox{\hyperlink{classtiny__dlna_1_1Allocator}{Allocator}} \&allocator=Default\+Allocator)
+\begin{DoxyCompactList}\small\item\em legacy constructor with pointer range \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classtiny__dlna_1_1Vector_a00e7ebb14d6500cd7a19298ebfc618d8}{$\sim$\+Vector}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classtiny__dlna_1_1Vector_afb674845dda61383ad0544d2ab3e4fe8}{set\+Allocator}} (\mbox{\hyperlink{classtiny__dlna_1_1Allocator}{Allocator}} \&allocator)
+\item 
+void \mbox{\hyperlink{classtiny__dlna_1_1Vector_a1a623d1c06470b858fea4bbb48405468}{clear}} ()
+\item 
+int \mbox{\hyperlink{classtiny__dlna_1_1Vector_a4daa0bf8a1ecc28beee8682e506c5b78}{size}} ()
+\item 
+bool \mbox{\hyperlink{classtiny__dlna_1_1Vector_a31a6b685655806a0b4737f844b118867}{empty}} ()
+\item 
+void \mbox{\hyperlink{classtiny__dlna_1_1Vector_a59b9e97bfbbb7de5f802fca0ed621981}{push\+\_\+back}} (T \&\&value)
+\item 
+void \mbox{\hyperlink{classtiny__dlna_1_1Vector_ad9156bd9e73229317d83767cd5a85fe2}{push\+\_\+back}} (T \&value)
+\item 
+void \mbox{\hyperlink{classtiny__dlna_1_1Vector_aae0e88fb836cdac747f8c4a1f5fe2324}{push\+\_\+front}} (T \&value)
+\item 
+void \mbox{\hyperlink{classtiny__dlna_1_1Vector_ab1ea214bfc122278384098e50afe890b}{push\+\_\+front}} (T \&\&value)
+\item 
+void \mbox{\hyperlink{classtiny__dlna_1_1Vector_adacfacc9de75534eeffdcc72178e9a43}{pop\+\_\+back}} ()
+\item 
+void \mbox{\hyperlink{classtiny__dlna_1_1Vector_a9ed1f0a8210b81847f4890ea594a2c8a}{pop\+\_\+front}} ()
+\item 
+void \mbox{\hyperlink{classtiny__dlna_1_1Vector_a0656ecbcd3c3658f9082a8eac1712399}{assign}} (\mbox{\hyperlink{classtiny__dlna_1_1Vector_1_1iterator}{iterator}} v1, \mbox{\hyperlink{classtiny__dlna_1_1Vector_1_1iterator}{iterator}} v2)
+\item 
+void \mbox{\hyperlink{classtiny__dlna_1_1Vector_a3525cd7584cb9e693e8627be863f50b0}{assign}} (size\+\_\+t number, T value)
+\item 
+void \mbox{\hyperlink{classtiny__dlna_1_1Vector_a9d2303d73af72fd30fa91b1006fbbcb0}{swap}} (\mbox{\hyperlink{classtiny__dlna_1_1Vector}{Vector}}$<$ T $>$ \&in)
+\item 
+T \& \mbox{\hyperlink{classtiny__dlna_1_1Vector_a079f1896c68727e5f1242746eb7ed0c7}{operator\mbox{[}$\,$\mbox{]}}} (int index)
+\item 
+T \& \mbox{\hyperlink{classtiny__dlna_1_1Vector_a7be5c07e7a7c956209a6669a4b8ef04e}{operator\mbox{[}$\,$\mbox{]}}} (const int index) const
+\item 
+bool \mbox{\hyperlink{classtiny__dlna_1_1Vector_a2ca30f178aa10cd1d5d7126bc33727f0}{resize}} (int new\+Size, T value)
+\item 
+void \mbox{\hyperlink{classtiny__dlna_1_1Vector_ac162664118be261ff8d31719a341c02a}{shrink\+\_\+to\+\_\+fit}} ()
+\item 
+int \mbox{\hyperlink{classtiny__dlna_1_1Vector_af5f989de02a0c735a009e0adcc8ca876}{capacity}} ()
+\item 
+bool \mbox{\hyperlink{classtiny__dlna_1_1Vector_a8db0341e0a464aff42c84c015128005c}{resize}} (int new\+Size)
+\item 
+\mbox{\hyperlink{classtiny__dlna_1_1Vector_1_1iterator}{iterator}} \mbox{\hyperlink{classtiny__dlna_1_1Vector_a890d815fa5c4b982e90c63e29a73b932}{begin}} ()
+\item 
+T \& \mbox{\hyperlink{classtiny__dlna_1_1Vector_a68e70df37c8d4c5760e76c7df10a8178}{back}} ()
+\item 
+\mbox{\hyperlink{classtiny__dlna_1_1Vector_1_1iterator}{iterator}} \mbox{\hyperlink{classtiny__dlna_1_1Vector_a48bd340a3fa29e5a9e60ae3b5c5ab2ca}{end}} ()
+\item 
+void \mbox{\hyperlink{classtiny__dlna_1_1Vector_af094b9ec9e67911f46f146f33910b2cf}{erase}} (\mbox{\hyperlink{classtiny__dlna_1_1Vector_1_1iterator}{iterator}} it)
+\item 
+void \mbox{\hyperlink{classtiny__dlna_1_1Vector_a07ff9c1dbe5ab6003917f181f5b17417}{erase}} (int pos)
+\item 
+T $\ast$ \mbox{\hyperlink{classtiny__dlna_1_1Vector_ad0ddd333ea1432da7720e7706ce679fd}{data}} ()
+\item 
+\mbox{\hyperlink{classtiny__dlna_1_1Vector_a1eba9c325d7c464bb1d16545d3154f79}{operator bool}} () const
+\item 
+int \mbox{\hyperlink{classtiny__dlna_1_1Vector_aad7b2434e4389c3244a418a0530dcd7b}{index\+Of}} (T obj)
+\item 
+bool \mbox{\hyperlink{classtiny__dlna_1_1Vector_a55440ef21b10c603fdd6a4c05f5c092b}{contains}} (T obj)
+\item 
+void \mbox{\hyperlink{classtiny__dlna_1_1Vector_a11002a287375cf7962ed1988bd9a2ef3}{swap}} (T \&other)
+\item 
+void \mbox{\hyperlink{classtiny__dlna_1_1Vector_a46c6b9c2bca3e28af0cb6a3909109616}{reset}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classtiny__dlna_1_1Vector_a0df8f9e7a4b2e79bb787dabb563ae10f}{resize\+\_\+internal}} (int new\+Size, bool copy, bool shrink=false)
+\item 
+T $\ast$ \mbox{\hyperlink{classtiny__dlna_1_1Vector_af5d4ce7a1bee81d69b292674e36a1bfc}{new\+Array}} (int new\+Size)
+\item 
+void \mbox{\hyperlink{classtiny__dlna_1_1Vector_ad54de0e9d4d7990ed493297cc1a17fd3}{delete\+Array}} (T $\ast$old\+Data, int old\+Buffer\+Len)
+\item 
+void \mbox{\hyperlink{classtiny__dlna_1_1Vector_a2c30290f6d66f8f3002a53c1b2280e34}{cleanup}} (T $\ast$\mbox{\hyperlink{classtiny__dlna_1_1Vector_ad0ddd333ea1432da7720e7706ce679fd}{data}}, int from, int to)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{classtiny__dlna_1_1Vector_a96156d1b34a1e3c58b7dc5e0b044ef85}{buffer\+Len}} = 0
+\item 
+int \mbox{\hyperlink{classtiny__dlna_1_1Vector_abc61d2836d97b5a611f49a17167402cb}{len}} = 0
+\item 
+T $\ast$ \mbox{\hyperlink{classtiny__dlna_1_1Vector_aceb5f64cd7332966ea8c8d6d7c1c30ec}{p\+\_\+data}} = nullptr
+\item 
+\mbox{\hyperlink{classtiny__dlna_1_1Allocator}{Allocator}} $\ast$ \mbox{\hyperlink{classtiny__dlna_1_1Vector_a1449f5311d237199a5a7e796f201ddae}{p\+\_\+allocator}} = \&Default\+Allocator
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class T$>$\newline
+class tiny\+\_\+dlna\+::\+Vector$<$ T $>$}
+
+\mbox{\hyperlink{classtiny__dlna_1_1Vector}{Vector}} implementation which provides the most important methods as defined by std\+::vector. This class it is quite handy to have and most of the times quite better then dealing with raw c arrays. 
+
+\begin{DoxyAuthor}{Author}
+Phil Schatzmann 
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+GPLv3 
+\end{DoxyCopyright}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classtiny__dlna_1_1Vector_af6aed31db9ee1176f281a9be7ef27baf}\label{classtiny__dlna_1_1Vector_af6aed31db9ee1176f281a9be7ef27baf}} 
+\index{tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}!Vector@{Vector}}
+\index{Vector@{Vector}!tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Vector()}{Vector()}\hspace{0.1cm}{\footnotesize\ttfamily [1/6]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{classtiny__dlna_1_1Vector}{tiny\+\_\+dlna\+::\+Vector}}$<$ T $>$\+::\mbox{\hyperlink{classtiny__dlna_1_1Vector}{Vector}} (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{len = {\ttfamily 0},  }\item[{\mbox{\hyperlink{classtiny__dlna_1_1Allocator}{Allocator}} \&}]{allocator = {\ttfamily DefaultAllocator} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Default constructor\+: size 0 with Default\+Allocator. 
+
+\mbox{\Hypertarget{classtiny__dlna_1_1Vector_a3c064494c852cabc5d1ce02615d1b3d2}\label{classtiny__dlna_1_1Vector_a3c064494c852cabc5d1ce02615d1b3d2}} 
+\index{tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}!Vector@{Vector}}
+\index{Vector@{Vector}!tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Vector()}{Vector()}\hspace{0.1cm}{\footnotesize\ttfamily [2/6]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{classtiny__dlna_1_1Vector}{tiny\+\_\+dlna\+::\+Vector}}$<$ T $>$\+::\mbox{\hyperlink{classtiny__dlna_1_1Vector}{Vector}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classtiny__dlna_1_1Allocator}{Allocator}} \&}]{allocator }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor with only allocator. 
+
+\mbox{\Hypertarget{classtiny__dlna_1_1Vector_ad9318caefe54e061f1c5ad209fca07b2}\label{classtiny__dlna_1_1Vector_ad9318caefe54e061f1c5ad209fca07b2}} 
+\index{tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}!Vector@{Vector}}
+\index{Vector@{Vector}!tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Vector()}{Vector()}\hspace{0.1cm}{\footnotesize\ttfamily [3/6]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{classtiny__dlna_1_1Vector}{tiny\+\_\+dlna\+::\+Vector}}$<$ T $>$\+::\mbox{\hyperlink{classtiny__dlna_1_1Vector}{Vector}} (\begin{DoxyParamCaption}\item[{int}]{size,  }\item[{T}]{value,  }\item[{\mbox{\hyperlink{classtiny__dlna_1_1Allocator}{Allocator}} \&}]{allocator = {\ttfamily DefaultAllocator} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Allocate size and initialize array. 
+
+\mbox{\Hypertarget{classtiny__dlna_1_1Vector_a37aef63a49af96ff0e148c826acfca6b}\label{classtiny__dlna_1_1Vector_a37aef63a49af96ff0e148c826acfca6b}} 
+\index{tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}!Vector@{Vector}}
+\index{Vector@{Vector}!tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Vector()}{Vector()}\hspace{0.1cm}{\footnotesize\ttfamily [4/6]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{classtiny__dlna_1_1Vector}{tiny\+\_\+dlna\+::\+Vector}}$<$ T $>$\+::\mbox{\hyperlink{classtiny__dlna_1_1Vector}{Vector}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classtiny__dlna_1_1Vector}{Vector}}$<$ T $>$ \&\&}]{move\+From }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Move constructor. 
+
+\mbox{\Hypertarget{classtiny__dlna_1_1Vector_addc5a92799e8be135cf0b4427670e2bd}\label{classtiny__dlna_1_1Vector_addc5a92799e8be135cf0b4427670e2bd}} 
+\index{tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}!Vector@{Vector}}
+\index{Vector@{Vector}!tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Vector()}{Vector()}\hspace{0.1cm}{\footnotesize\ttfamily [5/6]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{classtiny__dlna_1_1Vector}{tiny\+\_\+dlna\+::\+Vector}}$<$ T $>$\+::\mbox{\hyperlink{classtiny__dlna_1_1Vector}{Vector}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classtiny__dlna_1_1Vector}{Vector}}$<$ T $>$ \&}]{copy\+From }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+copy constructor 
+
+\mbox{\Hypertarget{classtiny__dlna_1_1Vector_a3987679b32754ba5dfe7867e7bc33f88}\label{classtiny__dlna_1_1Vector_a3987679b32754ba5dfe7867e7bc33f88}} 
+\index{tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}!Vector@{Vector}}
+\index{Vector@{Vector}!tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Vector()}{Vector()}\hspace{0.1cm}{\footnotesize\ttfamily [6/6]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{classtiny__dlna_1_1Vector}{tiny\+\_\+dlna\+::\+Vector}}$<$ T $>$\+::\mbox{\hyperlink{classtiny__dlna_1_1Vector}{Vector}} (\begin{DoxyParamCaption}\item[{T $\ast$}]{from,  }\item[{T $\ast$}]{to,  }\item[{\mbox{\hyperlink{classtiny__dlna_1_1Allocator}{Allocator}} \&}]{allocator = {\ttfamily DefaultAllocator} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+legacy constructor with pointer range 
+
+\mbox{\Hypertarget{classtiny__dlna_1_1Vector_a00e7ebb14d6500cd7a19298ebfc618d8}\label{classtiny__dlna_1_1Vector_a00e7ebb14d6500cd7a19298ebfc618d8}} 
+\index{tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}!````~Vector@{$\sim$Vector}}
+\index{````~Vector@{$\sim$Vector}!tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{$\sim$Vector()}{~Vector()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+virtual \mbox{\hyperlink{classtiny__dlna_1_1Vector}{tiny\+\_\+dlna\+::\+Vector}}$<$ T $>$\+::$\sim$\mbox{\hyperlink{classtiny__dlna_1_1Vector}{Vector}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Destructor. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classtiny__dlna_1_1Vector_a0656ecbcd3c3658f9082a8eac1712399}\label{classtiny__dlna_1_1Vector_a0656ecbcd3c3658f9082a8eac1712399}} 
+\index{tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}!assign@{assign}}
+\index{assign@{assign}!tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{assign()}{assign()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \mbox{\hyperlink{classtiny__dlna_1_1Vector}{tiny\+\_\+dlna\+::\+Vector}}$<$ T $>$\+::assign (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classtiny__dlna_1_1Vector_1_1iterator}{iterator}}}]{v1,  }\item[{\mbox{\hyperlink{classtiny__dlna_1_1Vector_1_1iterator}{iterator}}}]{v2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1Vector_a3525cd7584cb9e693e8627be863f50b0}\label{classtiny__dlna_1_1Vector_a3525cd7584cb9e693e8627be863f50b0}} 
+\index{tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}!assign@{assign}}
+\index{assign@{assign}!tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{assign()}{assign()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \mbox{\hyperlink{classtiny__dlna_1_1Vector}{tiny\+\_\+dlna\+::\+Vector}}$<$ T $>$\+::assign (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{number,  }\item[{T}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1Vector_a68e70df37c8d4c5760e76c7df10a8178}\label{classtiny__dlna_1_1Vector_a68e70df37c8d4c5760e76c7df10a8178}} 
+\index{tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}!back@{back}}
+\index{back@{back}!tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{back()}{back()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+T\& \mbox{\hyperlink{classtiny__dlna_1_1Vector}{tiny\+\_\+dlna\+::\+Vector}}$<$ T $>$\+::back (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1Vector_a890d815fa5c4b982e90c63e29a73b932}\label{classtiny__dlna_1_1Vector_a890d815fa5c4b982e90c63e29a73b932}} 
+\index{tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}!begin@{begin}}
+\index{begin@{begin}!tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{begin()}{begin()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{classtiny__dlna_1_1Vector_1_1iterator}{iterator}} \mbox{\hyperlink{classtiny__dlna_1_1Vector}{tiny\+\_\+dlna\+::\+Vector}}$<$ T $>$\+::begin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1Vector_af5f989de02a0c735a009e0adcc8ca876}\label{classtiny__dlna_1_1Vector_af5f989de02a0c735a009e0adcc8ca876}} 
+\index{tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}!capacity@{capacity}}
+\index{capacity@{capacity}!tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{capacity()}{capacity()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+int \mbox{\hyperlink{classtiny__dlna_1_1Vector}{tiny\+\_\+dlna\+::\+Vector}}$<$ T $>$\+::capacity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1Vector_a2c30290f6d66f8f3002a53c1b2280e34}\label{classtiny__dlna_1_1Vector_a2c30290f6d66f8f3002a53c1b2280e34}} 
+\index{tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}!cleanup@{cleanup}}
+\index{cleanup@{cleanup}!tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{cleanup()}{cleanup()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \mbox{\hyperlink{classtiny__dlna_1_1Vector}{tiny\+\_\+dlna\+::\+Vector}}$<$ T $>$\+::cleanup (\begin{DoxyParamCaption}\item[{T $\ast$}]{data,  }\item[{int}]{from,  }\item[{int}]{to }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1Vector_a1a623d1c06470b858fea4bbb48405468}\label{classtiny__dlna_1_1Vector_a1a623d1c06470b858fea4bbb48405468}} 
+\index{tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}!clear@{clear}}
+\index{clear@{clear}!tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{clear()}{clear()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \mbox{\hyperlink{classtiny__dlna_1_1Vector}{tiny\+\_\+dlna\+::\+Vector}}$<$ T $>$\+::clear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1Vector_a55440ef21b10c603fdd6a4c05f5c092b}\label{classtiny__dlna_1_1Vector_a55440ef21b10c603fdd6a4c05f5c092b}} 
+\index{tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}!contains@{contains}}
+\index{contains@{contains}!tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{contains()}{contains()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+bool \mbox{\hyperlink{classtiny__dlna_1_1Vector}{tiny\+\_\+dlna\+::\+Vector}}$<$ T $>$\+::contains (\begin{DoxyParamCaption}\item[{T}]{obj }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1Vector_ad0ddd333ea1432da7720e7706ce679fd}\label{classtiny__dlna_1_1Vector_ad0ddd333ea1432da7720e7706ce679fd}} 
+\index{tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}!data@{data}}
+\index{data@{data}!tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{data()}{data()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+T$\ast$ \mbox{\hyperlink{classtiny__dlna_1_1Vector}{tiny\+\_\+dlna\+::\+Vector}}$<$ T $>$\+::data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1Vector_ad54de0e9d4d7990ed493297cc1a17fd3}\label{classtiny__dlna_1_1Vector_ad54de0e9d4d7990ed493297cc1a17fd3}} 
+\index{tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}!deleteArray@{deleteArray}}
+\index{deleteArray@{deleteArray}!tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{deleteArray()}{deleteArray()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \mbox{\hyperlink{classtiny__dlna_1_1Vector}{tiny\+\_\+dlna\+::\+Vector}}$<$ T $>$\+::delete\+Array (\begin{DoxyParamCaption}\item[{T $\ast$}]{old\+Data,  }\item[{int}]{old\+Buffer\+Len }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1Vector_a31a6b685655806a0b4737f844b118867}\label{classtiny__dlna_1_1Vector_a31a6b685655806a0b4737f844b118867}} 
+\index{tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}!empty@{empty}}
+\index{empty@{empty}!tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{empty()}{empty()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+bool \mbox{\hyperlink{classtiny__dlna_1_1Vector}{tiny\+\_\+dlna\+::\+Vector}}$<$ T $>$\+::empty (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1Vector_a48bd340a3fa29e5a9e60ae3b5c5ab2ca}\label{classtiny__dlna_1_1Vector_a48bd340a3fa29e5a9e60ae3b5c5ab2ca}} 
+\index{tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}!end@{end}}
+\index{end@{end}!tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{end()}{end()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{classtiny__dlna_1_1Vector_1_1iterator}{iterator}} \mbox{\hyperlink{classtiny__dlna_1_1Vector}{tiny\+\_\+dlna\+::\+Vector}}$<$ T $>$\+::end (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1Vector_a07ff9c1dbe5ab6003917f181f5b17417}\label{classtiny__dlna_1_1Vector_a07ff9c1dbe5ab6003917f181f5b17417}} 
+\index{tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}!erase@{erase}}
+\index{erase@{erase}!tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{erase()}{erase()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \mbox{\hyperlink{classtiny__dlna_1_1Vector}{tiny\+\_\+dlna\+::\+Vector}}$<$ T $>$\+::erase (\begin{DoxyParamCaption}\item[{int}]{pos }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1Vector_af094b9ec9e67911f46f146f33910b2cf}\label{classtiny__dlna_1_1Vector_af094b9ec9e67911f46f146f33910b2cf}} 
+\index{tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}!erase@{erase}}
+\index{erase@{erase}!tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{erase()}{erase()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \mbox{\hyperlink{classtiny__dlna_1_1Vector}{tiny\+\_\+dlna\+::\+Vector}}$<$ T $>$\+::erase (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classtiny__dlna_1_1Vector_1_1iterator}{iterator}}}]{it }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1Vector_aad7b2434e4389c3244a418a0530dcd7b}\label{classtiny__dlna_1_1Vector_aad7b2434e4389c3244a418a0530dcd7b}} 
+\index{tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}!indexOf@{indexOf}}
+\index{indexOf@{indexOf}!tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{indexOf()}{indexOf()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+int \mbox{\hyperlink{classtiny__dlna_1_1Vector}{tiny\+\_\+dlna\+::\+Vector}}$<$ T $>$\+::index\+Of (\begin{DoxyParamCaption}\item[{T}]{obj }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1Vector_af5d4ce7a1bee81d69b292674e36a1bfc}\label{classtiny__dlna_1_1Vector_af5d4ce7a1bee81d69b292674e36a1bfc}} 
+\index{tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}!newArray@{newArray}}
+\index{newArray@{newArray}!tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{newArray()}{newArray()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+T$\ast$ \mbox{\hyperlink{classtiny__dlna_1_1Vector}{tiny\+\_\+dlna\+::\+Vector}}$<$ T $>$\+::new\+Array (\begin{DoxyParamCaption}\item[{int}]{new\+Size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1Vector_a1eba9c325d7c464bb1d16545d3154f79}\label{classtiny__dlna_1_1Vector_a1eba9c325d7c464bb1d16545d3154f79}} 
+\index{tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}!operator bool@{operator bool}}
+\index{operator bool@{operator bool}!tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator bool()}{operator bool()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{classtiny__dlna_1_1Vector}{tiny\+\_\+dlna\+::\+Vector}}$<$ T $>$\+::operator bool (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1Vector_a161c380ab63dbc3cf1b952e010f33d80}\label{classtiny__dlna_1_1Vector_a161c380ab63dbc3cf1b952e010f33d80}} 
+\index{tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{classtiny__dlna_1_1Vector}{Vector}}\& \mbox{\hyperlink{classtiny__dlna_1_1Vector}{tiny\+\_\+dlna\+::\+Vector}}$<$ T $>$\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classtiny__dlna_1_1Vector}{Vector}}$<$ T $>$ \&\&}]{move\+From }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Move operator. 
+
+\mbox{\Hypertarget{classtiny__dlna_1_1Vector_a186941196e5d897d819d7e79b4433fc5}\label{classtiny__dlna_1_1Vector_a186941196e5d897d819d7e79b4433fc5}} 
+\index{tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{classtiny__dlna_1_1Vector}{Vector}}$<$T$>$\& \mbox{\hyperlink{classtiny__dlna_1_1Vector}{tiny\+\_\+dlna\+::\+Vector}}$<$ T $>$\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classtiny__dlna_1_1Vector}{Vector}}$<$ T $>$ \&}]{copy\+From }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+copy operator 
+
+\mbox{\Hypertarget{classtiny__dlna_1_1Vector_a7be5c07e7a7c956209a6669a4b8ef04e}\label{classtiny__dlna_1_1Vector_a7be5c07e7a7c956209a6669a4b8ef04e}} 
+\index{tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+T\& \mbox{\hyperlink{classtiny__dlna_1_1Vector}{tiny\+\_\+dlna\+::\+Vector}}$<$ T $>$\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{const int}]{index }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1Vector_a079f1896c68727e5f1242746eb7ed0c7}\label{classtiny__dlna_1_1Vector_a079f1896c68727e5f1242746eb7ed0c7}} 
+\index{tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+T\& \mbox{\hyperlink{classtiny__dlna_1_1Vector}{tiny\+\_\+dlna\+::\+Vector}}$<$ T $>$\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{int}]{index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1Vector_adacfacc9de75534eeffdcc72178e9a43}\label{classtiny__dlna_1_1Vector_adacfacc9de75534eeffdcc72178e9a43}} 
+\index{tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}!pop\_back@{pop\_back}}
+\index{pop\_back@{pop\_back}!tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{pop\_back()}{pop\_back()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \mbox{\hyperlink{classtiny__dlna_1_1Vector}{tiny\+\_\+dlna\+::\+Vector}}$<$ T $>$\+::pop\+\_\+back (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1Vector_a9ed1f0a8210b81847f4890ea594a2c8a}\label{classtiny__dlna_1_1Vector_a9ed1f0a8210b81847f4890ea594a2c8a}} 
+\index{tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}!pop\_front@{pop\_front}}
+\index{pop\_front@{pop\_front}!tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{pop\_front()}{pop\_front()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \mbox{\hyperlink{classtiny__dlna_1_1Vector}{tiny\+\_\+dlna\+::\+Vector}}$<$ T $>$\+::pop\+\_\+front (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1Vector_a59b9e97bfbbb7de5f802fca0ed621981}\label{classtiny__dlna_1_1Vector_a59b9e97bfbbb7de5f802fca0ed621981}} 
+\index{tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}!push\_back@{push\_back}}
+\index{push\_back@{push\_back}!tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{push\_back()}{push\_back()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \mbox{\hyperlink{classtiny__dlna_1_1Vector}{tiny\+\_\+dlna\+::\+Vector}}$<$ T $>$\+::push\+\_\+back (\begin{DoxyParamCaption}\item[{T \&\&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1Vector_ad9156bd9e73229317d83767cd5a85fe2}\label{classtiny__dlna_1_1Vector_ad9156bd9e73229317d83767cd5a85fe2}} 
+\index{tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}!push\_back@{push\_back}}
+\index{push\_back@{push\_back}!tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{push\_back()}{push\_back()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \mbox{\hyperlink{classtiny__dlna_1_1Vector}{tiny\+\_\+dlna\+::\+Vector}}$<$ T $>$\+::push\+\_\+back (\begin{DoxyParamCaption}\item[{T \&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1Vector_ab1ea214bfc122278384098e50afe890b}\label{classtiny__dlna_1_1Vector_ab1ea214bfc122278384098e50afe890b}} 
+\index{tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}!push\_front@{push\_front}}
+\index{push\_front@{push\_front}!tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{push\_front()}{push\_front()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \mbox{\hyperlink{classtiny__dlna_1_1Vector}{tiny\+\_\+dlna\+::\+Vector}}$<$ T $>$\+::push\+\_\+front (\begin{DoxyParamCaption}\item[{T \&\&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1Vector_aae0e88fb836cdac747f8c4a1f5fe2324}\label{classtiny__dlna_1_1Vector_aae0e88fb836cdac747f8c4a1f5fe2324}} 
+\index{tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}!push\_front@{push\_front}}
+\index{push\_front@{push\_front}!tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{push\_front()}{push\_front()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \mbox{\hyperlink{classtiny__dlna_1_1Vector}{tiny\+\_\+dlna\+::\+Vector}}$<$ T $>$\+::push\+\_\+front (\begin{DoxyParamCaption}\item[{T \&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1Vector_a46c6b9c2bca3e28af0cb6a3909109616}\label{classtiny__dlna_1_1Vector_a46c6b9c2bca3e28af0cb6a3909109616}} 
+\index{tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}!reset@{reset}}
+\index{reset@{reset}!tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{reset()}{reset()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \mbox{\hyperlink{classtiny__dlna_1_1Vector}{tiny\+\_\+dlna\+::\+Vector}}$<$ T $>$\+::reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1Vector_a8db0341e0a464aff42c84c015128005c}\label{classtiny__dlna_1_1Vector_a8db0341e0a464aff42c84c015128005c}} 
+\index{tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}!resize@{resize}}
+\index{resize@{resize}!tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{resize()}{resize()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+bool \mbox{\hyperlink{classtiny__dlna_1_1Vector}{tiny\+\_\+dlna\+::\+Vector}}$<$ T $>$\+::resize (\begin{DoxyParamCaption}\item[{int}]{new\+Size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1Vector_a2ca30f178aa10cd1d5d7126bc33727f0}\label{classtiny__dlna_1_1Vector_a2ca30f178aa10cd1d5d7126bc33727f0}} 
+\index{tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}!resize@{resize}}
+\index{resize@{resize}!tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{resize()}{resize()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+bool \mbox{\hyperlink{classtiny__dlna_1_1Vector}{tiny\+\_\+dlna\+::\+Vector}}$<$ T $>$\+::resize (\begin{DoxyParamCaption}\item[{int}]{new\+Size,  }\item[{T}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1Vector_a0df8f9e7a4b2e79bb787dabb563ae10f}\label{classtiny__dlna_1_1Vector_a0df8f9e7a4b2e79bb787dabb563ae10f}} 
+\index{tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}!resize\_internal@{resize\_internal}}
+\index{resize\_internal@{resize\_internal}!tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{resize\_internal()}{resize\_internal()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \mbox{\hyperlink{classtiny__dlna_1_1Vector}{tiny\+\_\+dlna\+::\+Vector}}$<$ T $>$\+::resize\+\_\+internal (\begin{DoxyParamCaption}\item[{int}]{new\+Size,  }\item[{bool}]{copy,  }\item[{bool}]{shrink = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1Vector_afb674845dda61383ad0544d2ab3e4fe8}\label{classtiny__dlna_1_1Vector_afb674845dda61383ad0544d2ab3e4fe8}} 
+\index{tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}!setAllocator@{setAllocator}}
+\index{setAllocator@{setAllocator}!tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{setAllocator()}{setAllocator()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \mbox{\hyperlink{classtiny__dlna_1_1Vector}{tiny\+\_\+dlna\+::\+Vector}}$<$ T $>$\+::set\+Allocator (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classtiny__dlna_1_1Allocator}{Allocator}} \&}]{allocator }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1Vector_ac162664118be261ff8d31719a341c02a}\label{classtiny__dlna_1_1Vector_ac162664118be261ff8d31719a341c02a}} 
+\index{tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}!shrink\_to\_fit@{shrink\_to\_fit}}
+\index{shrink\_to\_fit@{shrink\_to\_fit}!tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{shrink\_to\_fit()}{shrink\_to\_fit()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \mbox{\hyperlink{classtiny__dlna_1_1Vector}{tiny\+\_\+dlna\+::\+Vector}}$<$ T $>$\+::shrink\+\_\+to\+\_\+fit (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1Vector_a4daa0bf8a1ecc28beee8682e506c5b78}\label{classtiny__dlna_1_1Vector_a4daa0bf8a1ecc28beee8682e506c5b78}} 
+\index{tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}!size@{size}}
+\index{size@{size}!tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+int \mbox{\hyperlink{classtiny__dlna_1_1Vector}{tiny\+\_\+dlna\+::\+Vector}}$<$ T $>$\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1Vector_a11002a287375cf7962ed1988bd9a2ef3}\label{classtiny__dlna_1_1Vector_a11002a287375cf7962ed1988bd9a2ef3}} 
+\index{tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}!swap@{swap}}
+\index{swap@{swap}!tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{swap()}{swap()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \mbox{\hyperlink{classtiny__dlna_1_1Vector}{tiny\+\_\+dlna\+::\+Vector}}$<$ T $>$\+::swap (\begin{DoxyParamCaption}\item[{T \&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1Vector_a9d2303d73af72fd30fa91b1006fbbcb0}\label{classtiny__dlna_1_1Vector_a9d2303d73af72fd30fa91b1006fbbcb0}} 
+\index{tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}!swap@{swap}}
+\index{swap@{swap}!tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{swap()}{swap()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \mbox{\hyperlink{classtiny__dlna_1_1Vector}{tiny\+\_\+dlna\+::\+Vector}}$<$ T $>$\+::swap (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classtiny__dlna_1_1Vector}{Vector}}$<$ T $>$ \&}]{in }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classtiny__dlna_1_1Vector_a96156d1b34a1e3c58b7dc5e0b044ef85}\label{classtiny__dlna_1_1Vector_a96156d1b34a1e3c58b7dc5e0b044ef85}} 
+\index{tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}!bufferLen@{bufferLen}}
+\index{bufferLen@{bufferLen}!tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{bufferLen}{bufferLen}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+int \mbox{\hyperlink{classtiny__dlna_1_1Vector}{tiny\+\_\+dlna\+::\+Vector}}$<$ T $>$\+::buffer\+Len = 0\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1Vector_abc61d2836d97b5a611f49a17167402cb}\label{classtiny__dlna_1_1Vector_abc61d2836d97b5a611f49a17167402cb}} 
+\index{tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}!len@{len}}
+\index{len@{len}!tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{len}{len}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+int \mbox{\hyperlink{classtiny__dlna_1_1Vector}{tiny\+\_\+dlna\+::\+Vector}}$<$ T $>$\+::len = 0\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1Vector_a1449f5311d237199a5a7e796f201ddae}\label{classtiny__dlna_1_1Vector_a1449f5311d237199a5a7e796f201ddae}} 
+\index{tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}!p\_allocator@{p\_allocator}}
+\index{p\_allocator@{p\_allocator}!tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{p\_allocator}{p\_allocator}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{classtiny__dlna_1_1Allocator}{Allocator}}$\ast$ \mbox{\hyperlink{classtiny__dlna_1_1Vector}{tiny\+\_\+dlna\+::\+Vector}}$<$ T $>$\+::p\+\_\+allocator = \&Default\+Allocator\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1Vector_aceb5f64cd7332966ea8c8d6d7c1c30ec}\label{classtiny__dlna_1_1Vector_aceb5f64cd7332966ea8c8d6d7c1c30ec}} 
+\index{tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}!p\_data@{p\_data}}
+\index{p\_data@{p\_data}!tiny\_dlna::Vector$<$ T $>$@{tiny\_dlna::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{p\_data}{p\_data}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+T$\ast$ \mbox{\hyperlink{classtiny__dlna_1_1Vector}{tiny\+\_\+dlna\+::\+Vector}}$<$ T $>$\+::p\+\_\+data = nullptr\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Basic/\mbox{\hyperlink{Vector_8h}{Vector.\+h}}\end{DoxyCompactItemize}

@@ -8,7 +8,7 @@ void setupDevice() {
 
   auto dummy = [](HttpServer* server, const char* requestPath,
                   HttpRequestHandlerLine* hl) {
-    server->reply("text/xml", "");
+    server->reply("text/xml", "<test/>");
   };
 
   // define services

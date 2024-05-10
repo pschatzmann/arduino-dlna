@@ -1,0 +1,690 @@
+\hypertarget{classtiny__dlna_1_1UPnP}{}\doxysection{tiny\+\_\+dlna\+::UPnP Class Reference}
+\label{classtiny__dlna_1_1UPnP}\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}
+
+
+Basic \mbox{\hyperlink{classtiny__dlna_1_1UPnP}{UPnP}} Discovery Functionality.  
+
+
+
+
+{\ttfamily \#include $<$UPn\+P.\+h$>$}
+
+
+
+Collaboration diagram for tiny\+\_\+dlna\+::UPnP\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classtiny__dlna_1_1UPnP__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structtiny__dlna_1_1UPnP_1_1GatewayInfo}{Gateway\+Info}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classtiny__dlna_1_1UPnP}{UPnP}} Gateway Information. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structtiny__dlna_1_1UPnP_1_1SOAPAction}{SOAPAction}}
+\begin{DoxyCompactList}\small\item\em name of \mbox{\hyperlink{classtiny__dlna_1_1UPnP}{UPnP}} SOAP Action \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structtiny__dlna_1_1UPnP_1_1UpnpRule}{Upnp\+Rule}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classtiny__dlna_1_1UPnP}{UPnP}} Rule. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classtiny__dlna_1_1UPnP_a698acfa4e4d468e7b9542f26ab982fa6}{UPnP}} (unsigned long \mbox{\hyperlink{classtiny__dlna_1_1UPnP_a41d1dff84091de4ca54018249ebb2a87}{timeout\+Ms}}=20000)
+\item 
+\mbox{\hyperlink{classtiny__dlna_1_1UPnP_a0c7a43655da59504650cc333a40e71ef}{UPnP}} (Client \&client, UDP \&udp, bool is\+Wifi, unsigned long \mbox{\hyperlink{classtiny__dlna_1_1UPnP_a41d1dff84091de4ca54018249ebb2a87}{timeout\+Ms}}=20000)
+\item 
+void \mbox{\hyperlink{classtiny__dlna_1_1UPnP_a134fc5bb1c1657e2e62da155d2fe7ab8}{add\+Config}} (int rule\+Port, const char $\ast$rule\+Protocol, int rule\+Lease\+Duration\+Sec, const char $\ast$rule\+Friendly\+Name)
+\item 
+void \mbox{\hyperlink{classtiny__dlna_1_1UPnP_a7111e18a94e681d5852cd1d10b883e6f}{add\+Config}} (IPAddress rule\+IP, int rule\+Port, const char $\ast$rule\+Protocol, int rule\+Lease\+Duration\+Sec, const char $\ast$rule\+Friendly\+Name)
+\item 
+void \mbox{\hyperlink{classtiny__dlna_1_1UPnP_a3f02c42c7bbb10d26fa9079500652c3b}{add\+Config}} (IPAddress rule\+IP, int rule\+Internal\+Port, int rule\+External\+Port, const char $\ast$rule\+Protocol, int rule\+Lease\+Duration\+Sec, const char $\ast$rule\+Friendly\+Name)
+\item 
+bool \mbox{\hyperlink{classtiny__dlna_1_1UPnP_a150c220c6b5a583ff9e9c3b0fc7c285e}{begin}} ()
+\begin{DoxyCompactList}\small\item\em Discovers the devices on the network. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classtiny__dlna_1_1UPnP_aa8f07949568bd312be8e37357fa6ac43}{update}} (unsigned long interval\+Ms, \mbox{\hyperlink{namespacetiny__dlna_a97949802a78562c06367ad33400d733c}{callback\+\_\+function}} fallback=nullptr)
+\begin{DoxyCompactList}\small\item\em Rediscovers the devices on the network. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classtiny__dlna_1_1UPnP_a1f60220edd01275689a79075a1f0d2d1}{end}} ()
+\item 
+bool \mbox{\hyperlink{classtiny__dlna_1_1UPnP_a92c4cf098f8818bd84fa6132e43c90f3}{check\+Connectivity}} (unsigned long start\+Time=0)
+\begin{DoxyCompactList}\small\item\em checks access to the network \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classtiny__dlna_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{structtiny__dlna_1_1SsdpDevice}{Ssdp\+Device}} $>$ \mbox{\hyperlink{classtiny__dlna_1_1UPnP_a276ec4515c76558b6c9ce4dd7f59c3b3}{list\+Devices}} ()
+\begin{DoxyCompactList}\small\item\em will create an object with all SSDP devices on the network \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classtiny__dlna_1_1UPnP_a2d32660d0f250e88c78bdb7f506f750a}{log\+Devices}} ()
+\item 
+void \mbox{\hyperlink{classtiny__dlna_1_1UPnP_ae86c16b48e212d7276bcad41a396587e}{log\+Config}} ()
+\item 
+bool \mbox{\hyperlink{classtiny__dlna_1_1UPnP_a74293932114c36d5b3ba380b27bad3a9}{log\+Port\+Mappings}} ()
+\begin{DoxyCompactList}\small\item\em Retrievs and prints the port mappings from the network. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classtiny__dlna_1_1UPnP_a42f2e70b57bdfc03873153df1f6e8c1e}{set\+Gateway\+IP}} (IPAddress addr)
+\begin{DoxyCompactList}\small\item\em If the gatway can not be determined automatically you must set it yourself. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Types}
+\begin{DoxyCompactItemize}
+\item 
+enum class \mbox{\hyperlink{classtiny__dlna_1_1UPnP_ac4396aa0c007167610fc2dc1d30ef21e}{Port\+Mapping\+Result}} \{ \newline
+\mbox{\hyperlink{classtiny__dlna_1_1UPnP_ac4396aa0c007167610fc2dc1d30ef21ea696b031073e74bf2cb98e5ef201d4aa3}{UNKNOWN}}
+, \mbox{\hyperlink{classtiny__dlna_1_1UPnP_ac4396aa0c007167610fc2dc1d30ef21ead0749aaba8b833466dfcbb0428e4f89c}{SUCCESS}}
+, \mbox{\hyperlink{classtiny__dlna_1_1UPnP_ac4396aa0c007167610fc2dc1d30ef21ea90c6cb02cf9cba8a87dd0d67562f41bb}{ALREADY\+\_\+\+MAPPED}}
+, \mbox{\hyperlink{classtiny__dlna_1_1UPnP_ac4396aa0c007167610fc2dc1d30ef21eaf92e2c7b3d5ec22b39ea9115b5aae587}{EMPTY\+\_\+\+PORT\+\_\+\+MAPPING\+\_\+\+CONFIG}}
+, \newline
+\mbox{\hyperlink{classtiny__dlna_1_1UPnP_ac4396aa0c007167610fc2dc1d30ef21ea547ba52b62f9302ee1b6950111c36f9f}{NETWORK\+\_\+\+ERROR}}
+, \mbox{\hyperlink{classtiny__dlna_1_1UPnP_ac4396aa0c007167610fc2dc1d30ef21ea070a0fb40f6c308ab544b227660aadff}{TIMEOUT}}
+, \mbox{\hyperlink{classtiny__dlna_1_1UPnP_ac4396aa0c007167610fc2dc1d30ef21ea4eed0177f2593a164543593202187281}{VERIFICATION\+\_\+\+FAILED}}
+, \mbox{\hyperlink{classtiny__dlna_1_1UPnP_ac4396aa0c007167610fc2dc1d30ef21ea1a004f5abe2b334db21328be1ea6b593}{NOP}}
+ \}
+\begin{DoxyCompactList}\small\item\em Port\+Mapping\+Result enum. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+char $\ast$ \mbox{\hyperlink{classtiny__dlna_1_1UPnP_aa95feb70362a4f00420c84a87f57a4de}{get\+Temp\+Buffer}} ()
+\item 
+UDP $\ast$ \mbox{\hyperlink{classtiny__dlna_1_1UPnP_a89a6b0c26ad87f807809d37533857c0c}{get\+UDP}} ()
+\item 
+bool \mbox{\hyperlink{classtiny__dlna_1_1UPnP_ad287c914c1103c27f9c656a753eb49f2}{connect\+UDP}} ()
+\item 
+void \mbox{\hyperlink{classtiny__dlna_1_1UPnP_ac5f7c6d683ead4cb2ea4825139032200}{broadcast\+MSearch}} (bool is\+Ssdp\+All=false)
+\item 
+\mbox{\hyperlink{structtiny__dlna_1_1SsdpDevice}{Ssdp\+Device}} \mbox{\hyperlink{classtiny__dlna_1_1UPnP_a67b15ff92f0a2b7fe022d852f4f55d79}{wait\+For\+Unicast\+Response\+To\+MSearch}} (IPAddress \mbox{\hyperlink{classtiny__dlna_1_1UPnP_a83fa8e20c48c83166ca28b63659e6d0d}{gateway\+IP}})
+\item 
+bool \mbox{\hyperlink{classtiny__dlna_1_1UPnP_acc399af40bf7a88a99fc897f90c943a8}{get\+Gateway\+Info}} (\mbox{\hyperlink{structtiny__dlna_1_1UPnP_1_1GatewayInfo}{Gateway\+Info}} $\ast$device\+Info, long start\+Time)
+\item 
+bool \mbox{\hyperlink{classtiny__dlna_1_1UPnP_ad403c24e7a3972612622d00a24203043}{connect\+To\+IGD}} (IPAddress host, int port)
+\item 
+bool \mbox{\hyperlink{classtiny__dlna_1_1UPnP_ac84ae87a148e3b5296028fbc25ba4133}{get\+IGDEvent\+URLs}} (\mbox{\hyperlink{structtiny__dlna_1_1UPnP_1_1GatewayInfo}{Gateway\+Info}} $\ast$device\+Info)
+\item 
+bool \mbox{\hyperlink{classtiny__dlna_1_1UPnP_af557889bfb7430e50efd42d4d8e02181}{add\+Port\+Mapping\+Entry}} (\mbox{\hyperlink{structtiny__dlna_1_1UPnP_1_1GatewayInfo}{Gateway\+Info}} $\ast$device\+Info, \mbox{\hyperlink{structtiny__dlna_1_1UPnP_1_1UpnpRule}{Upnp\+Rule}} $\ast$rule\+\_\+ptr)
+\item 
+bool \mbox{\hyperlink{classtiny__dlna_1_1UPnP_a43458c985a127be1d42db5e136fe86a9}{verify\+Port\+Mapping}} (\mbox{\hyperlink{structtiny__dlna_1_1UPnP_1_1GatewayInfo}{Gateway\+Info}} $\ast$device\+Info, \mbox{\hyperlink{structtiny__dlna_1_1UPnP_1_1UpnpRule}{Upnp\+Rule}} $\ast$rule\+\_\+ptr)
+\item 
+bool \mbox{\hyperlink{classtiny__dlna_1_1UPnP_a59f4b31929087c449eeeaa2b953a618a}{delete\+Port\+Mapping}} (\mbox{\hyperlink{structtiny__dlna_1_1UPnP_1_1GatewayInfo}{Gateway\+Info}} $\ast$device\+Info, \mbox{\hyperlink{structtiny__dlna_1_1UPnP_1_1UpnpRule}{Upnp\+Rule}} $\ast$rule\+\_\+ptr)
+\item 
+bool \mbox{\hyperlink{classtiny__dlna_1_1UPnP_a4c18ddee52d079ed37a9f31b731a566c}{apply\+Action\+On\+Specific\+Port\+Mapping}} (\mbox{\hyperlink{structtiny__dlna_1_1UPnP_1_1SOAPAction}{SOAPAction}} $\ast$soap\+Action, \mbox{\hyperlink{structtiny__dlna_1_1UPnP_1_1GatewayInfo}{Gateway\+Info}} $\ast$device\+Info, \mbox{\hyperlink{structtiny__dlna_1_1UPnP_1_1UpnpRule}{Upnp\+Rule}} $\ast$rule\+\_\+ptr)
+\item 
+void \mbox{\hyperlink{classtiny__dlna_1_1UPnP_a483deae1ec1bdc0d5272c13c561f7683}{remove\+All\+Port\+Mappings\+From\+IGD}} ()
+\item 
+void \mbox{\hyperlink{classtiny__dlna_1_1UPnP_a61d2b52f537041563e3993d19be31ea8}{log\+Upnp\+Rule}} (\mbox{\hyperlink{structtiny__dlna_1_1UPnP_1_1UpnpRule}{Upnp\+Rule}} $\ast$rule\+\_\+ptr)
+\item 
+const char $\ast$ \mbox{\hyperlink{classtiny__dlna_1_1UPnP_a27f5fcff88b4e30c3b0157ebb15e69e6}{spaces}} (int num)
+\item 
+IPAddress \mbox{\hyperlink{classtiny__dlna_1_1UPnP_a969b2a88b8232e616144817a1f5433cc}{get\+Host}} (String url)
+\item 
+int \mbox{\hyperlink{classtiny__dlna_1_1UPnP_a0d1d3ddfdc47317c67c3520dcb32e734}{get\+Port}} (String url)
+\item 
+String \mbox{\hyperlink{classtiny__dlna_1_1UPnP_a10a38d6f337d7aaee1c0279810bb3e11}{get\+Path}} (String url)
+\item 
+String \mbox{\hyperlink{classtiny__dlna_1_1UPnP_a0f409a33fc7121d153755b13c1a554f0}{get\+Tag\+Content}} (const String \&line, String tag\+Name)
+\item 
+void \mbox{\hyperlink{classtiny__dlna_1_1UPnP_a22e064ce17f03da3965f9e3a29e18e91}{log\+Ssdp\+Device}} (\mbox{\hyperlink{structtiny__dlna_1_1SsdpDevice}{Ssdp\+Device}} $\ast$ssdp\+Device)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classtiny__dlna_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{structtiny__dlna_1_1UPnP_1_1UpnpRule}{Upnp\+Rule}} $>$ \mbox{\hyperlink{classtiny__dlna_1_1UPnP_a69e2210a454b89e40a781d8e001e5acb}{rule\+Nodes}} \{0\}
+\item 
+\mbox{\hyperlink{classtiny__dlna_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{structtiny__dlna_1_1SsdpDevice}{Ssdp\+Device}} $>$ \mbox{\hyperlink{classtiny__dlna_1_1UPnP_a8ee600b156e3aa6e4645c49024dba395}{devices}} \{0\}
+\item 
+bool \mbox{\hyperlink{classtiny__dlna_1_1UPnP_aaaea2b5e56eae412ff83f0321d408a10}{is\+\_\+wifi}} = true
+\item 
+unsigned long \mbox{\hyperlink{classtiny__dlna_1_1UPnP_a3fd0bf573e20bee2b2e12f56fde3cf56}{last\+Update\+Time}} = 0
+\item 
+long \mbox{\hyperlink{classtiny__dlna_1_1UPnP_a41d1dff84091de4ca54018249ebb2a87}{timeout\+Ms}}
+\item 
+Wi\+Fi\+UDP \mbox{\hyperlink{classtiny__dlna_1_1UPnP_a189eb4c48e05579a836488bd6469ed3b}{udp\+Client}}
+\item 
+IPAddress \mbox{\hyperlink{classtiny__dlna_1_1UPnP_a83fa8e20c48c83166ca28b63659e6d0d}{gateway\+IP}}
+\item 
+UDP $\ast$ \mbox{\hyperlink{classtiny__dlna_1_1UPnP_aa6eabadeed4726e0fbc0ad3eda7d0ac2}{p\+\_\+udp}} = \&\mbox{\hyperlink{classtiny__dlna_1_1UPnP_a189eb4c48e05579a836488bd6469ed3b}{udp\+Client}}
+\item 
+Wi\+Fi\+Client \mbox{\hyperlink{classtiny__dlna_1_1UPnP_a3096f67db6461145afa2e8cc851c80dd}{wifi\+Client}}
+\item 
+Client $\ast$ \mbox{\hyperlink{classtiny__dlna_1_1UPnP_a95aa9f83f13bbffb771cad03f63e9f1d}{p\+\_\+client}} = \&\mbox{\hyperlink{classtiny__dlna_1_1UPnP_a3096f67db6461145afa2e8cc851c80dd}{wifi\+Client}}
+\item 
+\mbox{\hyperlink{structtiny__dlna_1_1UPnP_1_1GatewayInfo}{Gateway\+Info}} \mbox{\hyperlink{classtiny__dlna_1_1UPnP_a3615bb327f320d8a29e3462cb85382d0}{gateway\+Info}}
+\item 
+unsigned long \mbox{\hyperlink{classtiny__dlna_1_1UPnP_adf6ff01901b5a12fcf01c83daedfcb56}{consequtive\+Fails}} = 0
+\item 
+\mbox{\hyperlink{classtiny__dlna_1_1UPnP_ac4396aa0c007167610fc2dc1d30ef21e}{Port\+Mapping\+Result}} \mbox{\hyperlink{classtiny__dlna_1_1UPnP_a90af6478d41e5c9bea4b725e54345a77}{last\+Result}} = \mbox{\hyperlink{classtiny__dlna_1_1UPnP_ac4396aa0c007167610fc2dc1d30ef21ea696b031073e74bf2cb98e5ef201d4aa3}{Port\+Mapping\+Result\+::\+UNKNOWN}}
+\item 
+bool \mbox{\hyperlink{classtiny__dlna_1_1UPnP_a9c2c4c1935b08cfae89aa8b35bf22fa8}{is\+Active}} = false
+\item 
+char \mbox{\hyperlink{classtiny__dlna_1_1UPnP_a079ab6719fe429c699840ea4ab7bc38b}{packet\+Buffer}} \mbox{[}\mbox{\hyperlink{UPnP_8h_ae5cb934a83109910664f0d1712207622}{UPNP\+\_\+\+UDP\+\_\+\+TX\+\_\+\+PACKET\+\_\+\+MAX\+\_\+\+SIZE}}\mbox{]}
+\item 
+char \mbox{\hyperlink{classtiny__dlna_1_1UPnP_acd14ea7398a85a29c2e04507d7829181}{response\+Buffer}} \mbox{[}\mbox{\hyperlink{UPnP_8h_a0ca708581548edfa53343597a875dddd}{UPNP\+\_\+\+UDP\+\_\+\+TX\+\_\+\+RESPONSE\+\_\+\+MAX\+\_\+\+SIZE}}\mbox{]}
+\item 
+char \mbox{\hyperlink{classtiny__dlna_1_1UPnP_a5fb07ea4aca73490c92287915070a61f}{body\+\_\+tmp}} \mbox{[}\mbox{\hyperlink{UPnP_8h_a0c8c33a678ae814e4f98c9536cd1b312}{MAX\+\_\+\+TMP\+\_\+\+SIZE}}\mbox{]}
+\item 
+const char $\ast$ \mbox{\hyperlink{classtiny__dlna_1_1UPnP_a102fd4cc6a7b513395d6de659983d32e}{UPNP\+\_\+\+SERVICE\+\_\+\+TYPE\+\_\+\+TAG\+\_\+\+NAME}} = \char`\"{}service\+Type\char`\"{}
+\item 
+const char $\ast$ \mbox{\hyperlink{classtiny__dlna_1_1UPnP_ad668a17fdc2fedcda544b4ad169e848a}{UPNP\+\_\+\+SERVICE\+\_\+\+TYPE\+\_\+\+TAG\+\_\+\+START}} = \char`\"{}$<$service\+Type$>$\char`\"{}
+\item 
+const char $\ast$ \mbox{\hyperlink{classtiny__dlna_1_1UPnP_aeaac0ce68d20678dffeecea642b61e36}{UPNP\+\_\+\+SERVICE\+\_\+\+TYPE\+\_\+\+TAG\+\_\+\+END}} = \char`\"{}$<$/service\+Type$>$\char`\"{}
+\item 
+const char $\ast$ \mbox{\hyperlink{classtiny__dlna_1_1UPnP_aa5eb647139b80a51a9fdc6dc2ccffbb9}{PORT\+\_\+\+MAPPING\+\_\+\+INVALID\+\_\+\+INDEX}}
+\item 
+const char $\ast$ \mbox{\hyperlink{classtiny__dlna_1_1UPnP_ae633965d9cba139d55c8fed53ab71150}{PORT\+\_\+\+MAPPING\+\_\+\+INVALID\+\_\+\+ACTION}}
+\item 
+const char $\ast$const \mbox{\hyperlink{classtiny__dlna_1_1UPnP_a3aad45e2ec380c2b62c7e63cc401da4b}{device\+List\+Upnp}} \mbox{[}6\mbox{]}
+\item 
+const char $\ast$const \mbox{\hyperlink{classtiny__dlna_1_1UPnP_a74d98e0a58d55ba693216b9025d5d82b}{device\+List\+Ssdp\+All}} \mbox{[}2\mbox{]} = \{\char`\"{}ssdp\+:all\char`\"{}, 0\}
+\item 
+IPAddress \mbox{\hyperlink{classtiny__dlna_1_1UPnP_ac6721c2858f5922a7c6b7c621e9415e6}{ip\+Multi}} \{239, 255, 255, 250\}
+\item 
+IPAddress \mbox{\hyperlink{classtiny__dlna_1_1UPnP_a0717d6611c443bc37130caf39a1f936c}{connectivity\+Test\+Ip}} \{64, 233, 187, 99\}
+\item 
+\mbox{\hyperlink{structtiny__dlna_1_1UPnP_1_1SOAPAction}{SOAPAction}} \mbox{\hyperlink{classtiny__dlna_1_1UPnP_abf73d4d5666bd66d8dbcc24a72e20c63}{SOAPAction\+Get\+Specific\+Port\+Mapping\+Entry}}
+\item 
+\mbox{\hyperlink{structtiny__dlna_1_1UPnP_1_1SOAPAction}{SOAPAction}} \mbox{\hyperlink{classtiny__dlna_1_1UPnP_a9e4ae7c11cd510883b887bae51ff903c}{SOAPAction\+Delete\+Port\+Mapping}} \{\char`\"{}Delete\+Port\+Mapping\char`\"{}\}
+\item 
+int \mbox{\hyperlink{classtiny__dlna_1_1UPnP_af9bf8b822f5ea3088c0f103158d623b4}{post\+Every\+Ms}} = 3000
+\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classtiny__dlna_1_1UPnP_ab3b12d07f1d959273932ffa0086f8e20}{DLNADevice}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Basic \mbox{\hyperlink{classtiny__dlna_1_1UPnP}{UPnP}} Discovery Functionality. 
+
+\doxysubsection{Member Enumeration Documentation}
+\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_ac4396aa0c007167610fc2dc1d30ef21e}\label{classtiny__dlna_1_1UPnP_ac4396aa0c007167610fc2dc1d30ef21e}} 
+\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!PortMappingResult@{PortMappingResult}}
+\index{PortMappingResult@{PortMappingResult}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}
+\doxysubsubsection{\texorpdfstring{PortMappingResult}{PortMappingResult}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{classtiny__dlna_1_1UPnP_ac4396aa0c007167610fc2dc1d30ef21e}{tiny\+\_\+dlna\+::\+UPn\+P\+::\+Port\+Mapping\+Result}}\hspace{0.3cm}{\ttfamily [strong]}, {\ttfamily [protected]}}
+
+
+
+Port\+Mapping\+Result enum. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UNKNOWN@{UNKNOWN}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!UNKNOWN@{UNKNOWN}}}\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_ac4396aa0c007167610fc2dc1d30ef21ea696b031073e74bf2cb98e5ef201d4aa3}\label{classtiny__dlna_1_1UPnP_ac4396aa0c007167610fc2dc1d30ef21ea696b031073e74bf2cb98e5ef201d4aa3}} 
+UNKNOWN&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SUCCESS@{SUCCESS}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!SUCCESS@{SUCCESS}}}\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_ac4396aa0c007167610fc2dc1d30ef21ead0749aaba8b833466dfcbb0428e4f89c}\label{classtiny__dlna_1_1UPnP_ac4396aa0c007167610fc2dc1d30ef21ead0749aaba8b833466dfcbb0428e4f89c}} 
+SUCCESS&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ALREADY\_MAPPED@{ALREADY\_MAPPED}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!ALREADY\_MAPPED@{ALREADY\_MAPPED}}}\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_ac4396aa0c007167610fc2dc1d30ef21ea90c6cb02cf9cba8a87dd0d67562f41bb}\label{classtiny__dlna_1_1UPnP_ac4396aa0c007167610fc2dc1d30ef21ea90c6cb02cf9cba8a87dd0d67562f41bb}} 
+ALREADY\+\_\+\+MAPPED&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{EMPTY\_PORT\_MAPPING\_CONFIG@{EMPTY\_PORT\_MAPPING\_CONFIG}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!EMPTY\_PORT\_MAPPING\_CONFIG@{EMPTY\_PORT\_MAPPING\_CONFIG}}}\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_ac4396aa0c007167610fc2dc1d30ef21eaf92e2c7b3d5ec22b39ea9115b5aae587}\label{classtiny__dlna_1_1UPnP_ac4396aa0c007167610fc2dc1d30ef21eaf92e2c7b3d5ec22b39ea9115b5aae587}} 
+EMPTY\+\_\+\+PORT\+\_\+\+MAPPING\+\_\+\+CONFIG&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{NETWORK\_ERROR@{NETWORK\_ERROR}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!NETWORK\_ERROR@{NETWORK\_ERROR}}}\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_ac4396aa0c007167610fc2dc1d30ef21ea547ba52b62f9302ee1b6950111c36f9f}\label{classtiny__dlna_1_1UPnP_ac4396aa0c007167610fc2dc1d30ef21ea547ba52b62f9302ee1b6950111c36f9f}} 
+NETWORK\+\_\+\+ERROR&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TIMEOUT@{TIMEOUT}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!TIMEOUT@{TIMEOUT}}}\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_ac4396aa0c007167610fc2dc1d30ef21ea070a0fb40f6c308ab544b227660aadff}\label{classtiny__dlna_1_1UPnP_ac4396aa0c007167610fc2dc1d30ef21ea070a0fb40f6c308ab544b227660aadff}} 
+TIMEOUT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{VERIFICATION\_FAILED@{VERIFICATION\_FAILED}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!VERIFICATION\_FAILED@{VERIFICATION\_FAILED}}}\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_ac4396aa0c007167610fc2dc1d30ef21ea4eed0177f2593a164543593202187281}\label{classtiny__dlna_1_1UPnP_ac4396aa0c007167610fc2dc1d30ef21ea4eed0177f2593a164543593202187281}} 
+VERIFICATION\+\_\+\+FAILED&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{NOP@{NOP}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!NOP@{NOP}}}\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_ac4396aa0c007167610fc2dc1d30ef21ea1a004f5abe2b334db21328be1ea6b593}\label{classtiny__dlna_1_1UPnP_ac4396aa0c007167610fc2dc1d30ef21ea1a004f5abe2b334db21328be1ea6b593}} 
+NOP&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_a698acfa4e4d468e7b9542f26ab982fa6}\label{classtiny__dlna_1_1UPnP_a698acfa4e4d468e7b9542f26ab982fa6}} 
+\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!UPnP@{UPnP}}
+\index{UPnP@{UPnP}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}
+\doxysubsubsection{\texorpdfstring{UPnP()}{UPnP()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily tiny\+\_\+dlna\+::\+UPn\+P\+::\+UPnP (\begin{DoxyParamCaption}\item[{unsigned long}]{timeout\+Ms = {\ttfamily 20000} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+timeout\+Ms -\/ timeout in milli seconds for the operations of this class, 0 for blocking operation \mbox{\Hypertarget{classtiny__dlna_1_1UPnP_a0c7a43655da59504650cc333a40e71ef}\label{classtiny__dlna_1_1UPnP_a0c7a43655da59504650cc333a40e71ef}} 
+\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!UPnP@{UPnP}}
+\index{UPnP@{UPnP}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}
+\doxysubsubsection{\texorpdfstring{UPnP()}{UPnP()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily tiny\+\_\+dlna\+::\+UPn\+P\+::\+UPnP (\begin{DoxyParamCaption}\item[{Client \&}]{client,  }\item[{UDP \&}]{udp,  }\item[{bool}]{is\+Wifi,  }\item[{unsigned long}]{timeout\+Ms = {\ttfamily 20000} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_a134fc5bb1c1657e2e62da155d2fe7ab8}\label{classtiny__dlna_1_1UPnP_a134fc5bb1c1657e2e62da155d2fe7ab8}} 
+\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!addConfig@{addConfig}}
+\index{addConfig@{addConfig}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}
+\doxysubsubsection{\texorpdfstring{addConfig()}{addConfig()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily void tiny\+\_\+dlna\+::\+UPn\+P\+::add\+Config (\begin{DoxyParamCaption}\item[{int}]{rule\+Port,  }\item[{const char $\ast$}]{rule\+Protocol,  }\item[{int}]{rule\+Lease\+Duration\+Sec,  }\item[{const char $\ast$}]{rule\+Friendly\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_a3f02c42c7bbb10d26fa9079500652c3b}\label{classtiny__dlna_1_1UPnP_a3f02c42c7bbb10d26fa9079500652c3b}} 
+\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!addConfig@{addConfig}}
+\index{addConfig@{addConfig}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}
+\doxysubsubsection{\texorpdfstring{addConfig()}{addConfig()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily void tiny\+\_\+dlna\+::\+UPn\+P\+::add\+Config (\begin{DoxyParamCaption}\item[{IPAddress}]{rule\+IP,  }\item[{int}]{rule\+Internal\+Port,  }\item[{int}]{rule\+External\+Port,  }\item[{const char $\ast$}]{rule\+Protocol,  }\item[{int}]{rule\+Lease\+Duration\+Sec,  }\item[{const char $\ast$}]{rule\+Friendly\+Name }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_a7111e18a94e681d5852cd1d10b883e6f}\label{classtiny__dlna_1_1UPnP_a7111e18a94e681d5852cd1d10b883e6f}} 
+\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!addConfig@{addConfig}}
+\index{addConfig@{addConfig}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}
+\doxysubsubsection{\texorpdfstring{addConfig()}{addConfig()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily void tiny\+\_\+dlna\+::\+UPn\+P\+::add\+Config (\begin{DoxyParamCaption}\item[{IPAddress}]{rule\+IP,  }\item[{int}]{rule\+Port,  }\item[{const char $\ast$}]{rule\+Protocol,  }\item[{int}]{rule\+Lease\+Duration\+Sec,  }\item[{const char $\ast$}]{rule\+Friendly\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_af557889bfb7430e50efd42d4d8e02181}\label{classtiny__dlna_1_1UPnP_af557889bfb7430e50efd42d4d8e02181}} 
+\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!addPortMappingEntry@{addPortMappingEntry}}
+\index{addPortMappingEntry@{addPortMappingEntry}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}
+\doxysubsubsection{\texorpdfstring{addPortMappingEntry()}{addPortMappingEntry()}}
+{\footnotesize\ttfamily bool tiny\+\_\+dlna\+::\+UPn\+P\+::add\+Port\+Mapping\+Entry (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structtiny__dlna_1_1UPnP_1_1GatewayInfo}{Gateway\+Info}} $\ast$}]{device\+Info,  }\item[{\mbox{\hyperlink{structtiny__dlna_1_1UPnP_1_1UpnpRule}{Upnp\+Rule}} $\ast$}]{rule\+\_\+ptr }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_a4c18ddee52d079ed37a9f31b731a566c}\label{classtiny__dlna_1_1UPnP_a4c18ddee52d079ed37a9f31b731a566c}} 
+\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!applyActionOnSpecificPortMapping@{applyActionOnSpecificPortMapping}}
+\index{applyActionOnSpecificPortMapping@{applyActionOnSpecificPortMapping}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}
+\doxysubsubsection{\texorpdfstring{applyActionOnSpecificPortMapping()}{applyActionOnSpecificPortMapping()}}
+{\footnotesize\ttfamily bool tiny\+\_\+dlna\+::\+UPn\+P\+::apply\+Action\+On\+Specific\+Port\+Mapping (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structtiny__dlna_1_1UPnP_1_1SOAPAction}{SOAPAction}} $\ast$}]{soap\+Action,  }\item[{\mbox{\hyperlink{structtiny__dlna_1_1UPnP_1_1GatewayInfo}{Gateway\+Info}} $\ast$}]{device\+Info,  }\item[{\mbox{\hyperlink{structtiny__dlna_1_1UPnP_1_1UpnpRule}{Upnp\+Rule}} $\ast$}]{rule\+\_\+ptr }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_a150c220c6b5a583ff9e9c3b0fc7c285e}\label{classtiny__dlna_1_1UPnP_a150c220c6b5a583ff9e9c3b0fc7c285e}} 
+\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!begin@{begin}}
+\index{begin@{begin}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}
+\doxysubsubsection{\texorpdfstring{begin()}{begin()}}
+{\footnotesize\ttfamily bool tiny\+\_\+dlna\+::\+UPn\+P\+::begin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Discovers the devices on the network. 
+
+\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_ac5f7c6d683ead4cb2ea4825139032200}\label{classtiny__dlna_1_1UPnP_ac5f7c6d683ead4cb2ea4825139032200}} 
+\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!broadcastMSearch@{broadcastMSearch}}
+\index{broadcastMSearch@{broadcastMSearch}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}
+\doxysubsubsection{\texorpdfstring{broadcastMSearch()}{broadcastMSearch()}}
+{\footnotesize\ttfamily void tiny\+\_\+dlna\+::\+UPn\+P\+::broadcast\+MSearch (\begin{DoxyParamCaption}\item[{bool}]{is\+Ssdp\+All = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_a92c4cf098f8818bd84fa6132e43c90f3}\label{classtiny__dlna_1_1UPnP_a92c4cf098f8818bd84fa6132e43c90f3}} 
+\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!checkConnectivity@{checkConnectivity}}
+\index{checkConnectivity@{checkConnectivity}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}
+\doxysubsubsection{\texorpdfstring{checkConnectivity()}{checkConnectivity()}}
+{\footnotesize\ttfamily bool tiny\+\_\+dlna\+::\+UPn\+P\+::check\+Connectivity (\begin{DoxyParamCaption}\item[{unsigned long}]{start\+Time = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+checks access to the network 
+
+\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_ad403c24e7a3972612622d00a24203043}\label{classtiny__dlna_1_1UPnP_ad403c24e7a3972612622d00a24203043}} 
+\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!connectToIGD@{connectToIGD}}
+\index{connectToIGD@{connectToIGD}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}
+\doxysubsubsection{\texorpdfstring{connectToIGD()}{connectToIGD()}}
+{\footnotesize\ttfamily bool tiny\+\_\+dlna\+::\+UPn\+P\+::connect\+To\+IGD (\begin{DoxyParamCaption}\item[{IPAddress}]{host,  }\item[{int}]{port }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_ad287c914c1103c27f9c656a753eb49f2}\label{classtiny__dlna_1_1UPnP_ad287c914c1103c27f9c656a753eb49f2}} 
+\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!connectUDP@{connectUDP}}
+\index{connectUDP@{connectUDP}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}
+\doxysubsubsection{\texorpdfstring{connectUDP()}{connectUDP()}}
+{\footnotesize\ttfamily bool tiny\+\_\+dlna\+::\+UPn\+P\+::connect\+UDP (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_a59f4b31929087c449eeeaa2b953a618a}\label{classtiny__dlna_1_1UPnP_a59f4b31929087c449eeeaa2b953a618a}} 
+\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!deletePortMapping@{deletePortMapping}}
+\index{deletePortMapping@{deletePortMapping}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}
+\doxysubsubsection{\texorpdfstring{deletePortMapping()}{deletePortMapping()}}
+{\footnotesize\ttfamily bool tiny\+\_\+dlna\+::\+UPn\+P\+::delete\+Port\+Mapping (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structtiny__dlna_1_1UPnP_1_1GatewayInfo}{Gateway\+Info}} $\ast$}]{device\+Info,  }\item[{\mbox{\hyperlink{structtiny__dlna_1_1UPnP_1_1UpnpRule}{Upnp\+Rule}} $\ast$}]{rule\+\_\+ptr }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_a1f60220edd01275689a79075a1f0d2d1}\label{classtiny__dlna_1_1UPnP_a1f60220edd01275689a79075a1f0d2d1}} 
+\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!end@{end}}
+\index{end@{end}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}
+\doxysubsubsection{\texorpdfstring{end()}{end()}}
+{\footnotesize\ttfamily void tiny\+\_\+dlna\+::\+UPn\+P\+::end (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_acc399af40bf7a88a99fc897f90c943a8}\label{classtiny__dlna_1_1UPnP_acc399af40bf7a88a99fc897f90c943a8}} 
+\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!getGatewayInfo@{getGatewayInfo}}
+\index{getGatewayInfo@{getGatewayInfo}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}
+\doxysubsubsection{\texorpdfstring{getGatewayInfo()}{getGatewayInfo()}}
+{\footnotesize\ttfamily bool tiny\+\_\+dlna\+::\+UPn\+P\+::get\+Gateway\+Info (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structtiny__dlna_1_1UPnP_1_1GatewayInfo}{Gateway\+Info}} $\ast$}]{device\+Info,  }\item[{long}]{start\+Time }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_a969b2a88b8232e616144817a1f5433cc}\label{classtiny__dlna_1_1UPnP_a969b2a88b8232e616144817a1f5433cc}} 
+\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!getHost@{getHost}}
+\index{getHost@{getHost}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}
+\doxysubsubsection{\texorpdfstring{getHost()}{getHost()}}
+{\footnotesize\ttfamily IPAddress tiny\+\_\+dlna\+::\+UPn\+P\+::get\+Host (\begin{DoxyParamCaption}\item[{String}]{url }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_ac84ae87a148e3b5296028fbc25ba4133}\label{classtiny__dlna_1_1UPnP_ac84ae87a148e3b5296028fbc25ba4133}} 
+\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!getIGDEventURLs@{getIGDEventURLs}}
+\index{getIGDEventURLs@{getIGDEventURLs}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}
+\doxysubsubsection{\texorpdfstring{getIGDEventURLs()}{getIGDEventURLs()}}
+{\footnotesize\ttfamily bool tiny\+\_\+dlna\+::\+UPn\+P\+::get\+IGDEvent\+URLs (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structtiny__dlna_1_1UPnP_1_1GatewayInfo}{Gateway\+Info}} $\ast$}]{device\+Info }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_a10a38d6f337d7aaee1c0279810bb3e11}\label{classtiny__dlna_1_1UPnP_a10a38d6f337d7aaee1c0279810bb3e11}} 
+\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!getPath@{getPath}}
+\index{getPath@{getPath}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}
+\doxysubsubsection{\texorpdfstring{getPath()}{getPath()}}
+{\footnotesize\ttfamily String tiny\+\_\+dlna\+::\+UPn\+P\+::get\+Path (\begin{DoxyParamCaption}\item[{String}]{url }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_a0d1d3ddfdc47317c67c3520dcb32e734}\label{classtiny__dlna_1_1UPnP_a0d1d3ddfdc47317c67c3520dcb32e734}} 
+\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!getPort@{getPort}}
+\index{getPort@{getPort}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}
+\doxysubsubsection{\texorpdfstring{getPort()}{getPort()}}
+{\footnotesize\ttfamily int tiny\+\_\+dlna\+::\+UPn\+P\+::get\+Port (\begin{DoxyParamCaption}\item[{String}]{url }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_a0f409a33fc7121d153755b13c1a554f0}\label{classtiny__dlna_1_1UPnP_a0f409a33fc7121d153755b13c1a554f0}} 
+\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!getTagContent@{getTagContent}}
+\index{getTagContent@{getTagContent}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}
+\doxysubsubsection{\texorpdfstring{getTagContent()}{getTagContent()}}
+{\footnotesize\ttfamily String tiny\+\_\+dlna\+::\+UPn\+P\+::get\+Tag\+Content (\begin{DoxyParamCaption}\item[{const String \&}]{line,  }\item[{String}]{tag\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_aa95feb70362a4f00420c84a87f57a4de}\label{classtiny__dlna_1_1UPnP_aa95feb70362a4f00420c84a87f57a4de}} 
+\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!getTempBuffer@{getTempBuffer}}
+\index{getTempBuffer@{getTempBuffer}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}
+\doxysubsubsection{\texorpdfstring{getTempBuffer()}{getTempBuffer()}}
+{\footnotesize\ttfamily char$\ast$ tiny\+\_\+dlna\+::\+UPn\+P\+::get\+Temp\+Buffer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_a89a6b0c26ad87f807809d37533857c0c}\label{classtiny__dlna_1_1UPnP_a89a6b0c26ad87f807809d37533857c0c}} 
+\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!getUDP@{getUDP}}
+\index{getUDP@{getUDP}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}
+\doxysubsubsection{\texorpdfstring{getUDP()}{getUDP()}}
+{\footnotesize\ttfamily UDP$\ast$ tiny\+\_\+dlna\+::\+UPn\+P\+::get\+UDP (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_a276ec4515c76558b6c9ce4dd7f59c3b3}\label{classtiny__dlna_1_1UPnP_a276ec4515c76558b6c9ce4dd7f59c3b3}} 
+\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!listDevices@{listDevices}}
+\index{listDevices@{listDevices}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}
+\doxysubsubsection{\texorpdfstring{listDevices()}{listDevices()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classtiny__dlna_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{structtiny__dlna_1_1SsdpDevice}{Ssdp\+Device}} $>$ tiny\+\_\+dlna\+::\+UPn\+P\+::list\+Devices (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+will create an object with all SSDP devices on the network 
+
+\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_ae86c16b48e212d7276bcad41a396587e}\label{classtiny__dlna_1_1UPnP_ae86c16b48e212d7276bcad41a396587e}} 
+\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!logConfig@{logConfig}}
+\index{logConfig@{logConfig}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}
+\doxysubsubsection{\texorpdfstring{logConfig()}{logConfig()}}
+{\footnotesize\ttfamily void tiny\+\_\+dlna\+::\+UPn\+P\+::log\+Config (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_a2d32660d0f250e88c78bdb7f506f750a}\label{classtiny__dlna_1_1UPnP_a2d32660d0f250e88c78bdb7f506f750a}} 
+\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!logDevices@{logDevices}}
+\index{logDevices@{logDevices}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}
+\doxysubsubsection{\texorpdfstring{logDevices()}{logDevices()}}
+{\footnotesize\ttfamily void tiny\+\_\+dlna\+::\+UPn\+P\+::log\+Devices (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_a74293932114c36d5b3ba380b27bad3a9}\label{classtiny__dlna_1_1UPnP_a74293932114c36d5b3ba380b27bad3a9}} 
+\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!logPortMappings@{logPortMappings}}
+\index{logPortMappings@{logPortMappings}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}
+\doxysubsubsection{\texorpdfstring{logPortMappings()}{logPortMappings()}}
+{\footnotesize\ttfamily bool tiny\+\_\+dlna\+::\+UPn\+P\+::log\+Port\+Mappings (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Retrievs and prints the port mappings from the network. 
+
+\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_a22e064ce17f03da3965f9e3a29e18e91}\label{classtiny__dlna_1_1UPnP_a22e064ce17f03da3965f9e3a29e18e91}} 
+\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!logSsdpDevice@{logSsdpDevice}}
+\index{logSsdpDevice@{logSsdpDevice}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}
+\doxysubsubsection{\texorpdfstring{logSsdpDevice()}{logSsdpDevice()}}
+{\footnotesize\ttfamily void tiny\+\_\+dlna\+::\+UPn\+P\+::log\+Ssdp\+Device (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structtiny__dlna_1_1SsdpDevice}{Ssdp\+Device}} $\ast$}]{ssdp\+Device }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_a61d2b52f537041563e3993d19be31ea8}\label{classtiny__dlna_1_1UPnP_a61d2b52f537041563e3993d19be31ea8}} 
+\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!logUpnpRule@{logUpnpRule}}
+\index{logUpnpRule@{logUpnpRule}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}
+\doxysubsubsection{\texorpdfstring{logUpnpRule()}{logUpnpRule()}}
+{\footnotesize\ttfamily void tiny\+\_\+dlna\+::\+UPn\+P\+::log\+Upnp\+Rule (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structtiny__dlna_1_1UPnP_1_1UpnpRule}{Upnp\+Rule}} $\ast$}]{rule\+\_\+ptr }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_a483deae1ec1bdc0d5272c13c561f7683}\label{classtiny__dlna_1_1UPnP_a483deae1ec1bdc0d5272c13c561f7683}} 
+\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!removeAllPortMappingsFromIGD@{removeAllPortMappingsFromIGD}}
+\index{removeAllPortMappingsFromIGD@{removeAllPortMappingsFromIGD}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}
+\doxysubsubsection{\texorpdfstring{removeAllPortMappingsFromIGD()}{removeAllPortMappingsFromIGD()}}
+{\footnotesize\ttfamily void tiny\+\_\+dlna\+::\+UPn\+P\+::remove\+All\+Port\+Mappings\+From\+IGD (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_a42f2e70b57bdfc03873153df1f6e8c1e}\label{classtiny__dlna_1_1UPnP_a42f2e70b57bdfc03873153df1f6e8c1e}} 
+\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!setGatewayIP@{setGatewayIP}}
+\index{setGatewayIP@{setGatewayIP}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}
+\doxysubsubsection{\texorpdfstring{setGatewayIP()}{setGatewayIP()}}
+{\footnotesize\ttfamily void tiny\+\_\+dlna\+::\+UPn\+P\+::set\+Gateway\+IP (\begin{DoxyParamCaption}\item[{IPAddress}]{addr }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+If the gatway can not be determined automatically you must set it yourself. 
+
+\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_a27f5fcff88b4e30c3b0157ebb15e69e6}\label{classtiny__dlna_1_1UPnP_a27f5fcff88b4e30c3b0157ebb15e69e6}} 
+\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!spaces@{spaces}}
+\index{spaces@{spaces}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}
+\doxysubsubsection{\texorpdfstring{spaces()}{spaces()}}
+{\footnotesize\ttfamily const char $\ast$ tiny\+\_\+dlna\+::\+UPn\+P\+::spaces (\begin{DoxyParamCaption}\item[{int}]{num }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_aa8f07949568bd312be8e37357fa6ac43}\label{classtiny__dlna_1_1UPnP_aa8f07949568bd312be8e37357fa6ac43}} 
+\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!update@{update}}
+\index{update@{update}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily bool tiny\+\_\+dlna\+::\+UPn\+P\+::update (\begin{DoxyParamCaption}\item[{unsigned long}]{interval\+Ms,  }\item[{\mbox{\hyperlink{namespacetiny__dlna_a97949802a78562c06367ad33400d733c}{callback\+\_\+function}}}]{fallback = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+
+
+Rediscovers the devices on the network. 
+
+\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_a43458c985a127be1d42db5e136fe86a9}\label{classtiny__dlna_1_1UPnP_a43458c985a127be1d42db5e136fe86a9}} 
+\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!verifyPortMapping@{verifyPortMapping}}
+\index{verifyPortMapping@{verifyPortMapping}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}
+\doxysubsubsection{\texorpdfstring{verifyPortMapping()}{verifyPortMapping()}}
+{\footnotesize\ttfamily bool tiny\+\_\+dlna\+::\+UPn\+P\+::verify\+Port\+Mapping (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structtiny__dlna_1_1UPnP_1_1GatewayInfo}{Gateway\+Info}} $\ast$}]{device\+Info,  }\item[{\mbox{\hyperlink{structtiny__dlna_1_1UPnP_1_1UpnpRule}{Upnp\+Rule}} $\ast$}]{rule\+\_\+ptr }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_a67b15ff92f0a2b7fe022d852f4f55d79}\label{classtiny__dlna_1_1UPnP_a67b15ff92f0a2b7fe022d852f4f55d79}} 
+\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!waitForUnicastResponseToMSearch@{waitForUnicastResponseToMSearch}}
+\index{waitForUnicastResponseToMSearch@{waitForUnicastResponseToMSearch}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}
+\doxysubsubsection{\texorpdfstring{waitForUnicastResponseToMSearch()}{waitForUnicastResponseToMSearch()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structtiny__dlna_1_1SsdpDevice}{Ssdp\+Device}} tiny\+\_\+dlna\+::\+UPn\+P\+::wait\+For\+Unicast\+Response\+To\+MSearch (\begin{DoxyParamCaption}\item[{IPAddress}]{gateway\+IP }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+\doxysubsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_ab3b12d07f1d959273932ffa0086f8e20}\label{classtiny__dlna_1_1UPnP_ab3b12d07f1d959273932ffa0086f8e20}} 
+\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!DLNADevice@{DLNADevice}}
+\index{DLNADevice@{DLNADevice}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}
+\doxysubsubsection{\texorpdfstring{DLNADevice}{DLNADevice}}
+{\footnotesize\ttfamily friend class \mbox{\hyperlink{classtiny__dlna_1_1DLNADevice}{DLNADevice}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_a5fb07ea4aca73490c92287915070a61f}\label{classtiny__dlna_1_1UPnP_a5fb07ea4aca73490c92287915070a61f}} 
+\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!body\_tmp@{body\_tmp}}
+\index{body\_tmp@{body\_tmp}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}
+\doxysubsubsection{\texorpdfstring{body\_tmp}{body\_tmp}}
+{\footnotesize\ttfamily char tiny\+\_\+dlna\+::\+UPn\+P\+::body\+\_\+tmp\mbox{[}\mbox{\hyperlink{UPnP_8h_a0c8c33a678ae814e4f98c9536cd1b312}{MAX\+\_\+\+TMP\+\_\+\+SIZE}}\mbox{]}\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_a0717d6611c443bc37130caf39a1f936c}\label{classtiny__dlna_1_1UPnP_a0717d6611c443bc37130caf39a1f936c}} 
+\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!connectivityTestIp@{connectivityTestIp}}
+\index{connectivityTestIp@{connectivityTestIp}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}
+\doxysubsubsection{\texorpdfstring{connectivityTestIp}{connectivityTestIp}}
+{\footnotesize\ttfamily IPAddress tiny\+\_\+dlna\+::\+UPn\+P\+::connectivity\+Test\+Ip \{64, 233, 187, 99\}\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_adf6ff01901b5a12fcf01c83daedfcb56}\label{classtiny__dlna_1_1UPnP_adf6ff01901b5a12fcf01c83daedfcb56}} 
+\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!consequtiveFails@{consequtiveFails}}
+\index{consequtiveFails@{consequtiveFails}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}
+\doxysubsubsection{\texorpdfstring{consequtiveFails}{consequtiveFails}}
+{\footnotesize\ttfamily unsigned long tiny\+\_\+dlna\+::\+UPn\+P\+::consequtive\+Fails = 0\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_a74d98e0a58d55ba693216b9025d5d82b}\label{classtiny__dlna_1_1UPnP_a74d98e0a58d55ba693216b9025d5d82b}} 
+\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!deviceListSsdpAll@{deviceListSsdpAll}}
+\index{deviceListSsdpAll@{deviceListSsdpAll}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}
+\doxysubsubsection{\texorpdfstring{deviceListSsdpAll}{deviceListSsdpAll}}
+{\footnotesize\ttfamily const char$\ast$ const tiny\+\_\+dlna\+::\+UPn\+P\+::device\+List\+Ssdp\+All\mbox{[}2\mbox{]} = \{\char`\"{}ssdp\+:all\char`\"{}, 0\}\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_a3aad45e2ec380c2b62c7e63cc401da4b}\label{classtiny__dlna_1_1UPnP_a3aad45e2ec380c2b62c7e63cc401da4b}} 
+\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!deviceListUpnp@{deviceListUpnp}}
+\index{deviceListUpnp@{deviceListUpnp}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}
+\doxysubsubsection{\texorpdfstring{deviceListUpnp}{deviceListUpnp}}
+{\footnotesize\ttfamily const char$\ast$ const tiny\+\_\+dlna\+::\+UPn\+P\+::device\+List\+Upnp\mbox{[}6\mbox{]}\hspace{0.3cm}{\ttfamily [protected]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{}
+\DoxyCodeLine{      \textcolor{stringliteral}{"{}urn:schemas-\/upnp-\/org:device:InternetGatewayDevice:1"{}},}
+\DoxyCodeLine{      \textcolor{stringliteral}{"{}urn:schemas-\/upnp-\/org:device:InternetGatewayDevice:2"{}},}
+\DoxyCodeLine{      \textcolor{stringliteral}{"{}urn:schemas-\/upnp-\/org:service:WANIPConnection:1"{}},}
+\DoxyCodeLine{      \textcolor{stringliteral}{"{}urn:schemas-\/upnp-\/org:service:WANIPConnection:2"{}},}
+\DoxyCodeLine{      \textcolor{stringliteral}{"{}urn:schemas-\/upnp-\/org:service:WANPPPConnection:1"{}},}
+\DoxyCodeLine{      }
+\DoxyCodeLine{      0\}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_a8ee600b156e3aa6e4645c49024dba395}\label{classtiny__dlna_1_1UPnP_a8ee600b156e3aa6e4645c49024dba395}} 
+\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!devices@{devices}}
+\index{devices@{devices}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}
+\doxysubsubsection{\texorpdfstring{devices}{devices}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classtiny__dlna_1_1Vector}{Vector}}$<$\mbox{\hyperlink{structtiny__dlna_1_1SsdpDevice}{Ssdp\+Device}}$>$ tiny\+\_\+dlna\+::\+UPn\+P\+::devices \{0\}\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_a3615bb327f320d8a29e3462cb85382d0}\label{classtiny__dlna_1_1UPnP_a3615bb327f320d8a29e3462cb85382d0}} 
+\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!gatewayInfo@{gatewayInfo}}
+\index{gatewayInfo@{gatewayInfo}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}
+\doxysubsubsection{\texorpdfstring{gatewayInfo}{gatewayInfo}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structtiny__dlna_1_1UPnP_1_1GatewayInfo}{Gateway\+Info}} tiny\+\_\+dlna\+::\+UPn\+P\+::gateway\+Info\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_a83fa8e20c48c83166ca28b63659e6d0d}\label{classtiny__dlna_1_1UPnP_a83fa8e20c48c83166ca28b63659e6d0d}} 
+\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!gatewayIP@{gatewayIP}}
+\index{gatewayIP@{gatewayIP}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}
+\doxysubsubsection{\texorpdfstring{gatewayIP}{gatewayIP}}
+{\footnotesize\ttfamily IPAddress tiny\+\_\+dlna\+::\+UPn\+P\+::gateway\+IP\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_ac6721c2858f5922a7c6b7c621e9415e6}\label{classtiny__dlna_1_1UPnP_ac6721c2858f5922a7c6b7c621e9415e6}} 
+\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!ipMulti@{ipMulti}}
+\index{ipMulti@{ipMulti}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}
+\doxysubsubsection{\texorpdfstring{ipMulti}{ipMulti}}
+{\footnotesize\ttfamily IPAddress tiny\+\_\+dlna\+::\+UPn\+P\+::ip\+Multi \{239, 255, 255, 250\}\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_aaaea2b5e56eae412ff83f0321d408a10}\label{classtiny__dlna_1_1UPnP_aaaea2b5e56eae412ff83f0321d408a10}} 
+\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!is\_wifi@{is\_wifi}}
+\index{is\_wifi@{is\_wifi}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}
+\doxysubsubsection{\texorpdfstring{is\_wifi}{is\_wifi}}
+{\footnotesize\ttfamily bool tiny\+\_\+dlna\+::\+UPn\+P\+::is\+\_\+wifi = true\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_a9c2c4c1935b08cfae89aa8b35bf22fa8}\label{classtiny__dlna_1_1UPnP_a9c2c4c1935b08cfae89aa8b35bf22fa8}} 
+\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!isActive@{isActive}}
+\index{isActive@{isActive}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}
+\doxysubsubsection{\texorpdfstring{isActive}{isActive}}
+{\footnotesize\ttfamily bool tiny\+\_\+dlna\+::\+UPn\+P\+::is\+Active = false\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_a90af6478d41e5c9bea4b725e54345a77}\label{classtiny__dlna_1_1UPnP_a90af6478d41e5c9bea4b725e54345a77}} 
+\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!lastResult@{lastResult}}
+\index{lastResult@{lastResult}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}
+\doxysubsubsection{\texorpdfstring{lastResult}{lastResult}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classtiny__dlna_1_1UPnP_ac4396aa0c007167610fc2dc1d30ef21e}{Port\+Mapping\+Result}} tiny\+\_\+dlna\+::\+UPn\+P\+::last\+Result = \mbox{\hyperlink{classtiny__dlna_1_1UPnP_ac4396aa0c007167610fc2dc1d30ef21ea696b031073e74bf2cb98e5ef201d4aa3}{Port\+Mapping\+Result\+::\+UNKNOWN}}\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_a3fd0bf573e20bee2b2e12f56fde3cf56}\label{classtiny__dlna_1_1UPnP_a3fd0bf573e20bee2b2e12f56fde3cf56}} 
+\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!lastUpdateTime@{lastUpdateTime}}
+\index{lastUpdateTime@{lastUpdateTime}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}
+\doxysubsubsection{\texorpdfstring{lastUpdateTime}{lastUpdateTime}}
+{\footnotesize\ttfamily unsigned long tiny\+\_\+dlna\+::\+UPn\+P\+::last\+Update\+Time = 0\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_a95aa9f83f13bbffb771cad03f63e9f1d}\label{classtiny__dlna_1_1UPnP_a95aa9f83f13bbffb771cad03f63e9f1d}} 
+\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!p\_client@{p\_client}}
+\index{p\_client@{p\_client}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}
+\doxysubsubsection{\texorpdfstring{p\_client}{p\_client}}
+{\footnotesize\ttfamily Client$\ast$ tiny\+\_\+dlna\+::\+UPn\+P\+::p\+\_\+client = \&\mbox{\hyperlink{classtiny__dlna_1_1UPnP_a3096f67db6461145afa2e8cc851c80dd}{wifi\+Client}}\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_aa6eabadeed4726e0fbc0ad3eda7d0ac2}\label{classtiny__dlna_1_1UPnP_aa6eabadeed4726e0fbc0ad3eda7d0ac2}} 
+\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!p\_udp@{p\_udp}}
+\index{p\_udp@{p\_udp}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}
+\doxysubsubsection{\texorpdfstring{p\_udp}{p\_udp}}
+{\footnotesize\ttfamily UDP$\ast$ tiny\+\_\+dlna\+::\+UPn\+P\+::p\+\_\+udp = \&\mbox{\hyperlink{classtiny__dlna_1_1UPnP_a189eb4c48e05579a836488bd6469ed3b}{udp\+Client}}\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_a079ab6719fe429c699840ea4ab7bc38b}\label{classtiny__dlna_1_1UPnP_a079ab6719fe429c699840ea4ab7bc38b}} 
+\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!packetBuffer@{packetBuffer}}
+\index{packetBuffer@{packetBuffer}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}
+\doxysubsubsection{\texorpdfstring{packetBuffer}{packetBuffer}}
+{\footnotesize\ttfamily char tiny\+\_\+dlna\+::\+UPn\+P\+::packet\+Buffer\mbox{[}\mbox{\hyperlink{UPnP_8h_ae5cb934a83109910664f0d1712207622}{UPNP\+\_\+\+UDP\+\_\+\+TX\+\_\+\+PACKET\+\_\+\+MAX\+\_\+\+SIZE}}\mbox{]}\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_ae633965d9cba139d55c8fed53ab71150}\label{classtiny__dlna_1_1UPnP_ae633965d9cba139d55c8fed53ab71150}} 
+\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!PORT\_MAPPING\_INVALID\_ACTION@{PORT\_MAPPING\_INVALID\_ACTION}}
+\index{PORT\_MAPPING\_INVALID\_ACTION@{PORT\_MAPPING\_INVALID\_ACTION}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}
+\doxysubsubsection{\texorpdfstring{PORT\_MAPPING\_INVALID\_ACTION}{PORT\_MAPPING\_INVALID\_ACTION}}
+{\footnotesize\ttfamily const char$\ast$ tiny\+\_\+dlna\+::\+UPn\+P\+::\+PORT\+\_\+\+MAPPING\+\_\+\+INVALID\+\_\+\+ACTION\hspace{0.3cm}{\ttfamily [protected]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=}
+\DoxyCodeLine{      \textcolor{stringliteral}{"{}<errorDescription>Invalid Action</errorDescription>"{}}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_aa5eb647139b80a51a9fdc6dc2ccffbb9}\label{classtiny__dlna_1_1UPnP_aa5eb647139b80a51a9fdc6dc2ccffbb9}} 
+\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!PORT\_MAPPING\_INVALID\_INDEX@{PORT\_MAPPING\_INVALID\_INDEX}}
+\index{PORT\_MAPPING\_INVALID\_INDEX@{PORT\_MAPPING\_INVALID\_INDEX}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}
+\doxysubsubsection{\texorpdfstring{PORT\_MAPPING\_INVALID\_INDEX}{PORT\_MAPPING\_INVALID\_INDEX}}
+{\footnotesize\ttfamily const char$\ast$ tiny\+\_\+dlna\+::\+UPn\+P\+::\+PORT\+\_\+\+MAPPING\+\_\+\+INVALID\+\_\+\+INDEX\hspace{0.3cm}{\ttfamily [protected]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=}
+\DoxyCodeLine{      \textcolor{stringliteral}{"{}<errorDescription>SpecifiedArrayIndexInvalid</errorDescription>"{}}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_af9bf8b822f5ea3088c0f103158d623b4}\label{classtiny__dlna_1_1UPnP_af9bf8b822f5ea3088c0f103158d623b4}} 
+\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!postEveryMs@{postEveryMs}}
+\index{postEveryMs@{postEveryMs}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}
+\doxysubsubsection{\texorpdfstring{postEveryMs}{postEveryMs}}
+{\footnotesize\ttfamily int tiny\+\_\+dlna\+::\+UPn\+P\+::post\+Every\+Ms = 3000\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_acd14ea7398a85a29c2e04507d7829181}\label{classtiny__dlna_1_1UPnP_acd14ea7398a85a29c2e04507d7829181}} 
+\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!responseBuffer@{responseBuffer}}
+\index{responseBuffer@{responseBuffer}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}
+\doxysubsubsection{\texorpdfstring{responseBuffer}{responseBuffer}}
+{\footnotesize\ttfamily char tiny\+\_\+dlna\+::\+UPn\+P\+::response\+Buffer\mbox{[}\mbox{\hyperlink{UPnP_8h_a0ca708581548edfa53343597a875dddd}{UPNP\+\_\+\+UDP\+\_\+\+TX\+\_\+\+RESPONSE\+\_\+\+MAX\+\_\+\+SIZE}}\mbox{]}\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_a69e2210a454b89e40a781d8e001e5acb}\label{classtiny__dlna_1_1UPnP_a69e2210a454b89e40a781d8e001e5acb}} 
+\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!ruleNodes@{ruleNodes}}
+\index{ruleNodes@{ruleNodes}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}
+\doxysubsubsection{\texorpdfstring{ruleNodes}{ruleNodes}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classtiny__dlna_1_1Vector}{Vector}}$<$\mbox{\hyperlink{structtiny__dlna_1_1UPnP_1_1UpnpRule}{Upnp\+Rule}}$>$ tiny\+\_\+dlna\+::\+UPn\+P\+::rule\+Nodes \{0\}\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_a9e4ae7c11cd510883b887bae51ff903c}\label{classtiny__dlna_1_1UPnP_a9e4ae7c11cd510883b887bae51ff903c}} 
+\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!SOAPActionDeletePortMapping@{SOAPActionDeletePortMapping}}
+\index{SOAPActionDeletePortMapping@{SOAPActionDeletePortMapping}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}
+\doxysubsubsection{\texorpdfstring{SOAPActionDeletePortMapping}{SOAPActionDeletePortMapping}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structtiny__dlna_1_1UPnP_1_1SOAPAction}{SOAPAction}} tiny\+\_\+dlna\+::\+UPn\+P\+::\+SOAPAction\+Delete\+Port\+Mapping \{\char`\"{}Delete\+Port\+Mapping\char`\"{}\}\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_abf73d4d5666bd66d8dbcc24a72e20c63}\label{classtiny__dlna_1_1UPnP_abf73d4d5666bd66d8dbcc24a72e20c63}} 
+\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!SOAPActionGetSpecificPortMappingEntry@{SOAPActionGetSpecificPortMappingEntry}}
+\index{SOAPActionGetSpecificPortMappingEntry@{SOAPActionGetSpecificPortMappingEntry}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}
+\doxysubsubsection{\texorpdfstring{SOAPActionGetSpecificPortMappingEntry}{SOAPActionGetSpecificPortMappingEntry}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structtiny__dlna_1_1UPnP_1_1SOAPAction}{SOAPAction}} tiny\+\_\+dlna\+::\+UPn\+P\+::\+SOAPAction\+Get\+Specific\+Port\+Mapping\+Entry\hspace{0.3cm}{\ttfamily [protected]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{      \textcolor{stringliteral}{"{}GetSpecificPortMappingEntry"{}}\}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_a41d1dff84091de4ca54018249ebb2a87}\label{classtiny__dlna_1_1UPnP_a41d1dff84091de4ca54018249ebb2a87}} 
+\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!timeoutMs@{timeoutMs}}
+\index{timeoutMs@{timeoutMs}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}
+\doxysubsubsection{\texorpdfstring{timeoutMs}{timeoutMs}}
+{\footnotesize\ttfamily long tiny\+\_\+dlna\+::\+UPn\+P\+::timeout\+Ms\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_a189eb4c48e05579a836488bd6469ed3b}\label{classtiny__dlna_1_1UPnP_a189eb4c48e05579a836488bd6469ed3b}} 
+\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!udpClient@{udpClient}}
+\index{udpClient@{udpClient}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}
+\doxysubsubsection{\texorpdfstring{udpClient}{udpClient}}
+{\footnotesize\ttfamily Wi\+Fi\+UDP tiny\+\_\+dlna\+::\+UPn\+P\+::udp\+Client\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_aeaac0ce68d20678dffeecea642b61e36}\label{classtiny__dlna_1_1UPnP_aeaac0ce68d20678dffeecea642b61e36}} 
+\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!UPNP\_SERVICE\_TYPE\_TAG\_END@{UPNP\_SERVICE\_TYPE\_TAG\_END}}
+\index{UPNP\_SERVICE\_TYPE\_TAG\_END@{UPNP\_SERVICE\_TYPE\_TAG\_END}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}
+\doxysubsubsection{\texorpdfstring{UPNP\_SERVICE\_TYPE\_TAG\_END}{UPNP\_SERVICE\_TYPE\_TAG\_END}}
+{\footnotesize\ttfamily const char$\ast$ tiny\+\_\+dlna\+::\+UPn\+P\+::\+UPNP\+\_\+\+SERVICE\+\_\+\+TYPE\+\_\+\+TAG\+\_\+\+END = \char`\"{}$<$/service\+Type$>$\char`\"{}\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_a102fd4cc6a7b513395d6de659983d32e}\label{classtiny__dlna_1_1UPnP_a102fd4cc6a7b513395d6de659983d32e}} 
+\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!UPNP\_SERVICE\_TYPE\_TAG\_NAME@{UPNP\_SERVICE\_TYPE\_TAG\_NAME}}
+\index{UPNP\_SERVICE\_TYPE\_TAG\_NAME@{UPNP\_SERVICE\_TYPE\_TAG\_NAME}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}
+\doxysubsubsection{\texorpdfstring{UPNP\_SERVICE\_TYPE\_TAG\_NAME}{UPNP\_SERVICE\_TYPE\_TAG\_NAME}}
+{\footnotesize\ttfamily const char$\ast$ tiny\+\_\+dlna\+::\+UPn\+P\+::\+UPNP\+\_\+\+SERVICE\+\_\+\+TYPE\+\_\+\+TAG\+\_\+\+NAME = \char`\"{}service\+Type\char`\"{}\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_ad668a17fdc2fedcda544b4ad169e848a}\label{classtiny__dlna_1_1UPnP_ad668a17fdc2fedcda544b4ad169e848a}} 
+\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!UPNP\_SERVICE\_TYPE\_TAG\_START@{UPNP\_SERVICE\_TYPE\_TAG\_START}}
+\index{UPNP\_SERVICE\_TYPE\_TAG\_START@{UPNP\_SERVICE\_TYPE\_TAG\_START}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}
+\doxysubsubsection{\texorpdfstring{UPNP\_SERVICE\_TYPE\_TAG\_START}{UPNP\_SERVICE\_TYPE\_TAG\_START}}
+{\footnotesize\ttfamily const char$\ast$ tiny\+\_\+dlna\+::\+UPn\+P\+::\+UPNP\+\_\+\+SERVICE\+\_\+\+TYPE\+\_\+\+TAG\+\_\+\+START = \char`\"{}$<$service\+Type$>$\char`\"{}\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1UPnP_a3096f67db6461145afa2e8cc851c80dd}\label{classtiny__dlna_1_1UPnP_a3096f67db6461145afa2e8cc851c80dd}} 
+\index{tiny\_dlna::UPnP@{tiny\_dlna::UPnP}!wifiClient@{wifiClient}}
+\index{wifiClient@{wifiClient}!tiny\_dlna::UPnP@{tiny\_dlna::UPnP}}
+\doxysubsubsection{\texorpdfstring{wifiClient}{wifiClient}}
+{\footnotesize\ttfamily Wi\+Fi\+Client tiny\+\_\+dlna\+::\+UPn\+P\+::wifi\+Client\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+UPn\+P/\mbox{\hyperlink{UPnP_8h}{UPn\+P.\+h}}\item 
+src/\+UPn\+P/\mbox{\hyperlink{UPnP_8cpp}{UPn\+P.\+cpp}}\end{DoxyCompactItemize}

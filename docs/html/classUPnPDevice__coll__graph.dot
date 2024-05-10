@@ -1,0 +1,23 @@
+digraph "UPnPDevice"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="UPnPDevice",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Abstract UPnPDevice."];
+  Node2 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" upnp" ,fontname="Helvetica"];
+  Node2 [label="tiny_dlna::UPnP",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classtiny__dlna_1_1UPnP.html",tooltip=" "];
+  Node3 -> Node2 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" gatewayInfo" ,fontname="Helvetica"];
+  Node3 [label="tiny_dlna::GatewayInfo",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structtiny__dlna_1_1GatewayInfo.html",tooltip=" "];
+  Node4 -> Node2 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" headRuleNode" ,fontname="Helvetica"];
+  Node4 [label="tiny_dlna::UpnpRuleNode",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structtiny__dlna_1_1UpnpRuleNode.html",tooltip=" "];
+  Node4 -> Node4 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" next" ,fontname="Helvetica"];
+  Node5 -> Node4 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" upnpRule" ,fontname="Helvetica"];
+  Node5 [label="tiny_dlna::UpnpRule",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structtiny__dlna_1_1UpnpRule.html",tooltip=" "];
+  Node6 -> Node2 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" SOAPActionDeletePortMapping\nSOAPActionGetSpecificPortMappingEntry" ,fontname="Helvetica"];
+  Node6 [label="tiny_dlna::SOAPAction",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structtiny__dlna_1_1SOAPAction.html",tooltip=" "];
+  Node7 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" p_device" ,fontname="Helvetica"];
+  Node7 [label="tiny_dlna::Device",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classtiny__dlna_1_1Device.html",tooltip="Print Device XML using urn:schemas-upnp-org:device-1-0\"."];
+  Node8 -> Node7 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" xml" ,fontname="Helvetica"];
+  Node8 [label="tiny_dlna::XMLPrint",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structtiny__dlna_1_1XMLPrint.html",tooltip=" "];
+}

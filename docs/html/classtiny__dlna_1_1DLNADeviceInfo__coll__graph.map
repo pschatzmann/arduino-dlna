@@ -1,0 +1,7 @@
+<map id="tiny_dlna::DLNADeviceInfo" name="tiny_dlna::DLNADeviceInfo">
+<area shape="rect" id="node1" title="Device Attributes and generation of XML using urn:schemas&#45;upnp&#45;org:device&#45;1&#45;0. We could just reutrn a..." alt="" coords="17,199,213,225"/>
+<area shape="rect" id="node2" href="$structtiny__dlna_1_1XMLPrinter.html" title="Functions to efficiently output XML. XML data contains a lot of redundancy so it is more memory effic..." alt="" coords="5,102,167,129"/>
+<area shape="rect" id="node3" href="$classtiny__dlna_1_1Vector.html" title=" " alt="" coords="191,95,410,136"/>
+<area shape="rect" id="node4" href="$classtiny__dlna_1_1DLNAServiceInfo.html" title="Attributes needed for the DLNA Service Definition." alt="" coords="103,5,301,32"/>
+<area shape="rect" id="node5" href="$classtiny__dlna_1_1Allocator.html" title="Memory allocateator which uses malloc." alt="" coords="325,5,473,32"/>
+</map>

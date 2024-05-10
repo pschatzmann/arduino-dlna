@@ -1,0 +1,94 @@
+\hypertarget{classtiny__dlna_1_1LoggerClass}{}\doxysection{tiny\+\_\+dlna\+::Logger\+Class Class Reference}
+\label{classtiny__dlna_1_1LoggerClass}\index{tiny\_dlna::LoggerClass@{tiny\_dlna::LoggerClass}}
+
+
+Logger that writes messages dependent on the log level.  
+
+
+
+
+{\ttfamily \#include $<$Logger.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classtiny__dlna_1_1LoggerClass_af975d9780bc3274b8e35d3d2d6f5adfb}{Logger\+Class}} ()
+\item 
+virtual void \mbox{\hyperlink{classtiny__dlna_1_1LoggerClass_a4acb24fe86764cae6f2a0f81f2c87657}{begin}} (Print \&out, \mbox{\hyperlink{namespacetiny__dlna_a5eabb92538a2ba1397f67b903cb9d35e}{Dlna\+Log\+Level}} level=\mbox{\hyperlink{namespacetiny__dlna_a5eabb92538a2ba1397f67b903cb9d35ea6e258539e070fc23ed840488d56f4f84}{Dlna\+Error}})
+\item 
+void \mbox{\hyperlink{classtiny__dlna_1_1LoggerClass_ab83a7d3b905ff49974f9ac32e04f3147}{set\+Level}} (\mbox{\hyperlink{namespacetiny__dlna_a5eabb92538a2ba1397f67b903cb9d35e}{Dlna\+Log\+Level}} l)
+\item 
+virtual bool \mbox{\hyperlink{classtiny__dlna_1_1LoggerClass_aff642399482bc1982afeff49b5bb5924}{is\+Logging}} ()
+\item 
+void \mbox{\hyperlink{classtiny__dlna_1_1LoggerClass_ab7ac4f166531a8d27e919b3f47fe8388}{log}} (\mbox{\hyperlink{namespacetiny__dlna_a5eabb92538a2ba1397f67b903cb9d35e}{Dlna\+Log\+Level}} current\+\_\+level, const char $\ast$fmt...)
+\begin{DoxyCompactList}\small\item\em Print log message. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Print $\ast$ \mbox{\hyperlink{classtiny__dlna_1_1LoggerClass_a704408410ecd0260af3659b212a10d8b}{log\+\_\+stream\+\_\+ptr}} = \&Serial
+\item 
+\mbox{\hyperlink{namespacetiny__dlna_a5eabb92538a2ba1397f67b903cb9d35e}{Dlna\+Log\+Level}} \mbox{\hyperlink{classtiny__dlna_1_1LoggerClass_a183ab881f8dc3feab082a38d7d301704}{log\+\_\+level}} = \mbox{\hyperlink{namespacetiny__dlna_a5eabb92538a2ba1397f67b903cb9d35ea68144f39e267932677747cfaf49da410}{Dlna\+Warning}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Logger that writes messages dependent on the log level. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classtiny__dlna_1_1LoggerClass_af975d9780bc3274b8e35d3d2d6f5adfb}\label{classtiny__dlna_1_1LoggerClass_af975d9780bc3274b8e35d3d2d6f5adfb}} 
+\index{tiny\_dlna::LoggerClass@{tiny\_dlna::LoggerClass}!LoggerClass@{LoggerClass}}
+\index{LoggerClass@{LoggerClass}!tiny\_dlna::LoggerClass@{tiny\_dlna::LoggerClass}}
+\doxysubsubsection{\texorpdfstring{LoggerClass()}{LoggerClass()}}
+{\footnotesize\ttfamily tiny\+\_\+dlna\+::\+Logger\+Class\+::\+Logger\+Class (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classtiny__dlna_1_1LoggerClass_a4acb24fe86764cae6f2a0f81f2c87657}\label{classtiny__dlna_1_1LoggerClass_a4acb24fe86764cae6f2a0f81f2c87657}} 
+\index{tiny\_dlna::LoggerClass@{tiny\_dlna::LoggerClass}!begin@{begin}}
+\index{begin@{begin}!tiny\_dlna::LoggerClass@{tiny\_dlna::LoggerClass}}
+\doxysubsubsection{\texorpdfstring{begin()}{begin()}}
+{\footnotesize\ttfamily virtual void tiny\+\_\+dlna\+::\+Logger\+Class\+::begin (\begin{DoxyParamCaption}\item[{Print \&}]{out,  }\item[{\mbox{\hyperlink{namespacetiny__dlna_a5eabb92538a2ba1397f67b903cb9d35e}{Dlna\+Log\+Level}}}]{level = {\ttfamily \mbox{\hyperlink{namespacetiny__dlna_a5eabb92538a2ba1397f67b903cb9d35ea6e258539e070fc23ed840488d56f4f84}{Dlna\+Error}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1LoggerClass_aff642399482bc1982afeff49b5bb5924}\label{classtiny__dlna_1_1LoggerClass_aff642399482bc1982afeff49b5bb5924}} 
+\index{tiny\_dlna::LoggerClass@{tiny\_dlna::LoggerClass}!isLogging@{isLogging}}
+\index{isLogging@{isLogging}!tiny\_dlna::LoggerClass@{tiny\_dlna::LoggerClass}}
+\doxysubsubsection{\texorpdfstring{isLogging()}{isLogging()}}
+{\footnotesize\ttfamily virtual bool tiny\+\_\+dlna\+::\+Logger\+Class\+::is\+Logging (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1LoggerClass_ab7ac4f166531a8d27e919b3f47fe8388}\label{classtiny__dlna_1_1LoggerClass_ab7ac4f166531a8d27e919b3f47fe8388}} 
+\index{tiny\_dlna::LoggerClass@{tiny\_dlna::LoggerClass}!log@{log}}
+\index{log@{log}!tiny\_dlna::LoggerClass@{tiny\_dlna::LoggerClass}}
+\doxysubsubsection{\texorpdfstring{log()}{log()}}
+{\footnotesize\ttfamily void tiny\+\_\+dlna\+::\+Logger\+Class\+::log (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacetiny__dlna_a5eabb92538a2ba1397f67b903cb9d35e}{Dlna\+Log\+Level}}}]{current\+\_\+level,  }\item[{const char $\ast$}]{fmt... }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Print log message. 
+
+\mbox{\Hypertarget{classtiny__dlna_1_1LoggerClass_ab83a7d3b905ff49974f9ac32e04f3147}\label{classtiny__dlna_1_1LoggerClass_ab83a7d3b905ff49974f9ac32e04f3147}} 
+\index{tiny\_dlna::LoggerClass@{tiny\_dlna::LoggerClass}!setLevel@{setLevel}}
+\index{setLevel@{setLevel}!tiny\_dlna::LoggerClass@{tiny\_dlna::LoggerClass}}
+\doxysubsubsection{\texorpdfstring{setLevel()}{setLevel()}}
+{\footnotesize\ttfamily void tiny\+\_\+dlna\+::\+Logger\+Class\+::set\+Level (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacetiny__dlna_a5eabb92538a2ba1397f67b903cb9d35e}{Dlna\+Log\+Level}}}]{l }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classtiny__dlna_1_1LoggerClass_a183ab881f8dc3feab082a38d7d301704}\label{classtiny__dlna_1_1LoggerClass_a183ab881f8dc3feab082a38d7d301704}} 
+\index{tiny\_dlna::LoggerClass@{tiny\_dlna::LoggerClass}!log\_level@{log\_level}}
+\index{log\_level@{log\_level}!tiny\_dlna::LoggerClass@{tiny\_dlna::LoggerClass}}
+\doxysubsubsection{\texorpdfstring{log\_level}{log\_level}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespacetiny__dlna_a5eabb92538a2ba1397f67b903cb9d35e}{Dlna\+Log\+Level}} tiny\+\_\+dlna\+::\+Logger\+Class\+::log\+\_\+level = \mbox{\hyperlink{namespacetiny__dlna_a5eabb92538a2ba1397f67b903cb9d35ea68144f39e267932677747cfaf49da410}{Dlna\+Warning}}\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1LoggerClass_a704408410ecd0260af3659b212a10d8b}\label{classtiny__dlna_1_1LoggerClass_a704408410ecd0260af3659b212a10d8b}} 
+\index{tiny\_dlna::LoggerClass@{tiny\_dlna::LoggerClass}!log\_stream\_ptr@{log\_stream\_ptr}}
+\index{log\_stream\_ptr@{log\_stream\_ptr}!tiny\_dlna::LoggerClass@{tiny\_dlna::LoggerClass}}
+\doxysubsubsection{\texorpdfstring{log\_stream\_ptr}{log\_stream\_ptr}}
+{\footnotesize\ttfamily Print$\ast$ tiny\+\_\+dlna\+::\+Logger\+Class\+::log\+\_\+stream\+\_\+ptr = \&Serial\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Basic/\mbox{\hyperlink{Logger_8h}{Logger.\+h}}\end{DoxyCompactItemize}

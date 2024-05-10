@@ -1,0 +1,105 @@
+\hypertarget{UPnP_8h}{}\doxysection{src/\+UPn\+P/\+UPnP.h File Reference}
+\label{UPnP_8h}\index{src/UPnP/UPnP.h@{src/UPnP/UPnP.h}}
+{\ttfamily \#include $<$Arduino.\+h$>$}\newline
+{\ttfamily \#include $<$Wi\+Fi\+Client.\+h$>$}\newline
+{\ttfamily \#include $<$Wi\+Fi\+Udp.\+h$>$}\newline
+{\ttfamily \#include $<$limits.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}Basic/\+Logger.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Basic/\+Vector.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Basic/\+Str\+View.\+h\char`\"{}}\newline
+Include dependency graph for UPn\+P.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{UPnP_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=340pt]{UPnP_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structtiny__dlna_1_1SsdpDevice}{tiny\+\_\+dlna\+::\+Ssdp\+Device}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classtiny__dlna_1_1UPnP}{UPnP}} \mbox{\hyperlink{classtiny__dlna_1_1Device}{Device}} information. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classtiny__dlna_1_1UPnP}{tiny\+\_\+dlna\+::\+UPnP}}
+\begin{DoxyCompactList}\small\item\em Basic \mbox{\hyperlink{classtiny__dlna_1_1UPnP}{UPnP}} Discovery Functionality. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structtiny__dlna_1_1UPnP_1_1SOAPAction}{tiny\+\_\+dlna\+::\+UPn\+P\+::\+SOAPAction}}
+\begin{DoxyCompactList}\small\item\em name of \mbox{\hyperlink{classtiny__dlna_1_1UPnP}{UPnP}} SOAP Action \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structtiny__dlna_1_1UPnP_1_1GatewayInfo}{tiny\+\_\+dlna\+::\+UPn\+P\+::\+Gateway\+Info}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classtiny__dlna_1_1UPnP}{UPnP}} Gateway Information. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structtiny__dlna_1_1UPnP_1_1UpnpRule}{tiny\+\_\+dlna\+::\+UPn\+P\+::\+Upnp\+Rule}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classtiny__dlna_1_1UPnP}{UPnP}} Rule. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespacetiny__dlna}{tiny\+\_\+dlna}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{UPnP_8h_a7549144622d491137788c5f37fa2cd77}{UPNP\+\_\+\+SSDP\+\_\+\+PORT}}~1900
+\item 
+\#define \mbox{\hyperlink{UPnP_8h_a569c7ec6a8ebce9e106034121abe3d30}{TCP\+\_\+\+CONNECTION\+\_\+\+TIMEOUT\+\_\+\+MS}}~6000
+\item 
+\#define \mbox{\hyperlink{UPnP_8h_adf879f7957e9e5fa6a05205fdc5cc427}{MAX\+\_\+\+NUM\+\_\+\+OF\+\_\+\+UPDATES\+\_\+\+WITH\+\_\+\+NO\+\_\+\+EFFECT}}~6
+\item 
+\#define \mbox{\hyperlink{UPnP_8h_ae5cb934a83109910664f0d1712207622}{UPNP\+\_\+\+UDP\+\_\+\+TX\+\_\+\+PACKET\+\_\+\+MAX\+\_\+\+SIZE}}~1000
+\item 
+\#define \mbox{\hyperlink{UPnP_8h_a0ca708581548edfa53343597a875dddd}{UPNP\+\_\+\+UDP\+\_\+\+TX\+\_\+\+RESPONSE\+\_\+\+MAX\+\_\+\+SIZE}}~8192
+\item 
+\#define \mbox{\hyperlink{UPnP_8h_a0c8c33a678ae814e4f98c9536cd1b312}{MAX\+\_\+\+TMP\+\_\+\+SIZE}}~1200
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef void($\ast$ \mbox{\hyperlink{namespacetiny__dlna_a97949802a78562c06367ad33400d733c}{tiny\+\_\+dlna\+::callback\+\_\+function}}) (void)
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+IPAddress \mbox{\hyperlink{namespacetiny__dlna_ad59bc50aca9dd454e22f09da8d9b7e32}{tiny\+\_\+dlna\+::\+Null\+IP}} (0, 0, 0, 0)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{UPnP_8h_adf879f7957e9e5fa6a05205fdc5cc427}\label{UPnP_8h_adf879f7957e9e5fa6a05205fdc5cc427}} 
+\index{UPnP.h@{UPnP.h}!MAX\_NUM\_OF\_UPDATES\_WITH\_NO\_EFFECT@{MAX\_NUM\_OF\_UPDATES\_WITH\_NO\_EFFECT}}
+\index{MAX\_NUM\_OF\_UPDATES\_WITH\_NO\_EFFECT@{MAX\_NUM\_OF\_UPDATES\_WITH\_NO\_EFFECT}!UPnP.h@{UPnP.h}}
+\doxysubsubsection{\texorpdfstring{MAX\_NUM\_OF\_UPDATES\_WITH\_NO\_EFFECT}{MAX\_NUM\_OF\_UPDATES\_WITH\_NO\_EFFECT}}
+{\footnotesize\ttfamily \#define MAX\+\_\+\+NUM\+\_\+\+OF\+\_\+\+UPDATES\+\_\+\+WITH\+\_\+\+NO\+\_\+\+EFFECT~6}
+
+\mbox{\Hypertarget{UPnP_8h_a0c8c33a678ae814e4f98c9536cd1b312}\label{UPnP_8h_a0c8c33a678ae814e4f98c9536cd1b312}} 
+\index{UPnP.h@{UPnP.h}!MAX\_TMP\_SIZE@{MAX\_TMP\_SIZE}}
+\index{MAX\_TMP\_SIZE@{MAX\_TMP\_SIZE}!UPnP.h@{UPnP.h}}
+\doxysubsubsection{\texorpdfstring{MAX\_TMP\_SIZE}{MAX\_TMP\_SIZE}}
+{\footnotesize\ttfamily \#define MAX\+\_\+\+TMP\+\_\+\+SIZE~1200}
+
+\mbox{\Hypertarget{UPnP_8h_a569c7ec6a8ebce9e106034121abe3d30}\label{UPnP_8h_a569c7ec6a8ebce9e106034121abe3d30}} 
+\index{UPnP.h@{UPnP.h}!TCP\_CONNECTION\_TIMEOUT\_MS@{TCP\_CONNECTION\_TIMEOUT\_MS}}
+\index{TCP\_CONNECTION\_TIMEOUT\_MS@{TCP\_CONNECTION\_TIMEOUT\_MS}!UPnP.h@{UPnP.h}}
+\doxysubsubsection{\texorpdfstring{TCP\_CONNECTION\_TIMEOUT\_MS}{TCP\_CONNECTION\_TIMEOUT\_MS}}
+{\footnotesize\ttfamily \#define TCP\+\_\+\+CONNECTION\+\_\+\+TIMEOUT\+\_\+\+MS~6000}
+
+\mbox{\Hypertarget{UPnP_8h_a7549144622d491137788c5f37fa2cd77}\label{UPnP_8h_a7549144622d491137788c5f37fa2cd77}} 
+\index{UPnP.h@{UPnP.h}!UPNP\_SSDP\_PORT@{UPNP\_SSDP\_PORT}}
+\index{UPNP\_SSDP\_PORT@{UPNP\_SSDP\_PORT}!UPnP.h@{UPnP.h}}
+\doxysubsubsection{\texorpdfstring{UPNP\_SSDP\_PORT}{UPNP\_SSDP\_PORT}}
+{\footnotesize\ttfamily \#define UPNP\+\_\+\+SSDP\+\_\+\+PORT~1900}
+
+\mbox{\Hypertarget{UPnP_8h_ae5cb934a83109910664f0d1712207622}\label{UPnP_8h_ae5cb934a83109910664f0d1712207622}} 
+\index{UPnP.h@{UPnP.h}!UPNP\_UDP\_TX\_PACKET\_MAX\_SIZE@{UPNP\_UDP\_TX\_PACKET\_MAX\_SIZE}}
+\index{UPNP\_UDP\_TX\_PACKET\_MAX\_SIZE@{UPNP\_UDP\_TX\_PACKET\_MAX\_SIZE}!UPnP.h@{UPnP.h}}
+\doxysubsubsection{\texorpdfstring{UPNP\_UDP\_TX\_PACKET\_MAX\_SIZE}{UPNP\_UDP\_TX\_PACKET\_MAX\_SIZE}}
+{\footnotesize\ttfamily \#define UPNP\+\_\+\+UDP\+\_\+\+TX\+\_\+\+PACKET\+\_\+\+MAX\+\_\+\+SIZE~1000}
+
+\mbox{\Hypertarget{UPnP_8h_a0ca708581548edfa53343597a875dddd}\label{UPnP_8h_a0ca708581548edfa53343597a875dddd}} 
+\index{UPnP.h@{UPnP.h}!UPNP\_UDP\_TX\_RESPONSE\_MAX\_SIZE@{UPNP\_UDP\_TX\_RESPONSE\_MAX\_SIZE}}
+\index{UPNP\_UDP\_TX\_RESPONSE\_MAX\_SIZE@{UPNP\_UDP\_TX\_RESPONSE\_MAX\_SIZE}!UPnP.h@{UPnP.h}}
+\doxysubsubsection{\texorpdfstring{UPNP\_UDP\_TX\_RESPONSE\_MAX\_SIZE}{UPNP\_UDP\_TX\_RESPONSE\_MAX\_SIZE}}
+{\footnotesize\ttfamily \#define UPNP\+\_\+\+UDP\+\_\+\+TX\+\_\+\+RESPONSE\+\_\+\+MAX\+\_\+\+SIZE~8192}
+

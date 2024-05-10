@@ -1,0 +1,4 @@
+<map id="tiny_dlna::Str" name="tiny_dlna::Str">
+<area shape="rect" id="node1" title="String implementation which keeps the data on the heap. We grow the allocated memory only if the copy..." alt="" coords="21,80,129,107"/>
+<area shape="rect" id="node2" href="$classtiny__dlna_1_1StrView.html" title="A simple wrapper to provide string functions on char*. If the underlying char* is a const we do not a..." alt="" coords="5,5,145,32"/>
+</map>

@@ -1,0 +1,16 @@
+<map id="tiny_dlna::MediaRenderer" name="tiny_dlna::MediaRenderer">
+<area shape="rect" id="node1" title="MediaRenderer DLNA Device." alt="" coords="1319,204,1508,231"/>
+<area shape="rect" id="node2" href="$classtiny__dlna_1_1DLNADevice.html" title="Abstract DLNADevice. The device registers itself to the network and answers to the DLNA queries and r..." alt="" coords="1099,204,1269,231"/>
+<area shape="rect" id="node3" href="$classtiny__dlna_1_1UPnP.html" title="Basic UPnP Discovery Functionality." alt="" coords="859,145,983,172"/>
+<area shape="rect" id="node4" href="$classtiny__dlna_1_1Vector.html" title=" " alt="" coords="325,138,540,179"/>
+<area shape="rect" id="node5" href="$structtiny__dlna_1_1UPnP_1_1UpnpRule.html" title="UPnP Rule." alt="" coords="5,104,200,131"/>
+<area shape="rect" id="node6" href="$classtiny__dlna_1_1Allocator.html" title="Memory allocateator which uses malloc." alt="" coords="29,195,177,221"/>
+<area shape="rect" id="node9" href="$classtiny__dlna_1_1Vector.html" title=" " alt="" coords="340,73,525,114"/>
+<area shape="rect" id="node12" href="$classtiny__dlna_1_1Vector.html" title=" " alt="" coords="354,255,511,297"/>
+<area shape="rect" id="node7" href="$structtiny__dlna_1_1UPnP_1_1GatewayInfo.html" title="UPnP Gateway Information." alt="" coords="325,204,540,231"/>
+<area shape="rect" id="node8" href="$structtiny__dlna_1_1UPnP_1_1SOAPAction.html" title="name of UPnP SOAP Action" alt="" coords="329,21,536,48"/>
+<area shape="rect" id="node10" href="$structtiny__dlna_1_1SsdpDevice.html" title="UPnP Device information." alt="" coords="19,53,186,80"/>
+<area shape="rect" id="node11" href="$classtiny__dlna_1_1Device.html" title="Print Device XML using urn:schemas&#45;upnp&#45;org:device&#45;1&#45;0&quot;." alt="" coords="853,263,988,289"/>
+<area shape="rect" id="node13" href="$classtiny__dlna_1_1Service.html" title="Attributes needed for the DLNA Service Definition." alt="" coords="33,285,172,312"/>
+<area shape="rect" id="node14" href="$structtiny__dlna_1_1XMLPrinter.html" title="Functions to efficiently output XML." alt="" coords="352,321,513,348"/>
+</map>

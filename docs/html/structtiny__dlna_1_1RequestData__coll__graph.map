@@ -1,0 +1,8 @@
+<map id="tiny_dlna::RequestData" name="tiny_dlna::RequestData">
+<area shape="rect" id="node1" title="Provides information of the received UDP which consists of the (xml) data and the peer address and po..." alt="" coords="144,288,319,315"/>
+<area shape="rect" id="node2" href="$classtiny__dlna_1_1Str.html" title="String implementation which keeps the data on the heap. We grow the allocated memory only if the copy..." alt="" coords="43,199,151,225"/>
+<area shape="rect" id="node3" href="$classtiny__dlna_1_1StrView.html" title="A simple wrapper to provide string functions on char*. If the underlying char* is a const we do not a..." alt="" coords="5,102,145,129"/>
+<area shape="rect" id="node4" href="$classtiny__dlna_1_1Vector.html" title=" " alt="" coords="169,95,312,136"/>
+<area shape="rect" id="node5" href="$classtiny__dlna_1_1Allocator.html" title="Memory allocateator which uses malloc." alt="" coords="167,5,315,32"/>
+<area shape="rect" id="node6" href="$structtiny__dlna_1_1IPAddressAndPort.html" title="IP Adress including Port information." alt="" coords="175,199,379,225"/>
+</map>

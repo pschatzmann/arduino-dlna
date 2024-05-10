@@ -1,0 +1,6 @@
+<map id="tiny_dlna::Scheduler" name="tiny_dlna::Scheduler">
+<area shape="rect" id="node1" title="Scheduler which processes all due Schedules (to send out UDP replies)" alt="" coords="108,228,263,255"/>
+<area shape="rect" id="node2" href="$classtiny__dlna_1_1List.html" title=" " alt="" coords="109,124,262,165"/>
+<area shape="rect" id="node3" href="$structtiny__dlna_1_1List_1_1Node.html" title=" " alt="" coords="5,5,141,47"/>
+<area shape="rect" id="node4" href="$classtiny__dlna_1_1Allocator.html" title="Memory allocateator which uses malloc." alt="" coords="223,13,371,39"/>
+</map>

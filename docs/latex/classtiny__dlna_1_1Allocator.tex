@@ -1,0 +1,125 @@
+\hypertarget{classtiny__dlna_1_1Allocator}{}\doxysection{tiny\+\_\+dlna\+::Allocator Class Reference}
+\label{classtiny__dlna_1_1Allocator}\index{tiny\_dlna::Allocator@{tiny\_dlna::Allocator}}
+
+
+Memory allocateator which uses malloc.  
+
+
+
+
+{\ttfamily \#include $<$Allocator.\+h$>$}
+
+
+
+Inheritance diagram for tiny\+\_\+dlna\+::Allocator\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=207pt]{classtiny__dlna_1_1Allocator__inherit__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class T $>$ }\\T $\ast$ \mbox{\hyperlink{classtiny__dlna_1_1Allocator_a53a79697a1491fe29a1f8642ec423689}{create}} ()
+\item 
+{\footnotesize template$<$class T $>$ }\\void \mbox{\hyperlink{classtiny__dlna_1_1Allocator_a016242083ffa9e88f1cd2dc9ab25e786}{remove}} (T $\ast$obj)
+\begin{DoxyCompactList}\small\item\em deletes an object \end{DoxyCompactList}\item 
+{\footnotesize template$<$class T $>$ }\\T $\ast$ \mbox{\hyperlink{classtiny__dlna_1_1Allocator_a59acd275ee018e7a38ed7c324d1c97b0}{create\+Array}} (int len)
+\item 
+{\footnotesize template$<$class T $>$ }\\void \mbox{\hyperlink{classtiny__dlna_1_1Allocator_a1279a634ad2017c0073cd6c92e23bf87}{remove\+Array}} (T $\ast$obj, int len)
+\item 
+virtual void $\ast$ \mbox{\hyperlink{classtiny__dlna_1_1Allocator_ab77507b7e4489883713ac22b7094dcea}{allocate}} (size\+\_\+t size)
+\begin{DoxyCompactList}\small\item\em Allocates memory. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classtiny__dlna_1_1Allocator_af3e92a21c1dbf85563d29425ba2be543}{stop}} ()
+\item 
+virtual void \mbox{\hyperlink{classtiny__dlna_1_1Allocator_acf6e5fd371c7845fa558196a6e1b18c0}{free}} (void $\ast$memory)
+\begin{DoxyCompactList}\small\item\em frees memory \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void $\ast$ \mbox{\hyperlink{classtiny__dlna_1_1Allocator_a4171e171a82c0f671cdb436a35ff9cc3}{do\+\_\+allocate}} (size\+\_\+t size)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Memory allocateator which uses malloc. 
+
+\begin{DoxyAuthor}{Author}
+Phil Schatzmann 
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+GPLv3 
+\end{DoxyCopyright}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classtiny__dlna_1_1Allocator_ab77507b7e4489883713ac22b7094dcea}\label{classtiny__dlna_1_1Allocator_ab77507b7e4489883713ac22b7094dcea}} 
+\index{tiny\_dlna::Allocator@{tiny\_dlna::Allocator}!allocate@{allocate}}
+\index{allocate@{allocate}!tiny\_dlna::Allocator@{tiny\_dlna::Allocator}}
+\doxysubsubsection{\texorpdfstring{allocate()}{allocate()}}
+{\footnotesize\ttfamily virtual void$\ast$ tiny\+\_\+dlna\+::\+Allocator\+::allocate (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Allocates memory. 
+
+\mbox{\Hypertarget{classtiny__dlna_1_1Allocator_a53a79697a1491fe29a1f8642ec423689}\label{classtiny__dlna_1_1Allocator_a53a79697a1491fe29a1f8642ec423689}} 
+\index{tiny\_dlna::Allocator@{tiny\_dlna::Allocator}!create@{create}}
+\index{create@{create}!tiny\_dlna::Allocator@{tiny\_dlna::Allocator}}
+\doxysubsubsection{\texorpdfstring{create()}{create()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+T$\ast$ tiny\+\_\+dlna\+::\+Allocator\+::create (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1Allocator_a59acd275ee018e7a38ed7c324d1c97b0}\label{classtiny__dlna_1_1Allocator_a59acd275ee018e7a38ed7c324d1c97b0}} 
+\index{tiny\_dlna::Allocator@{tiny\_dlna::Allocator}!createArray@{createArray}}
+\index{createArray@{createArray}!tiny\_dlna::Allocator@{tiny\_dlna::Allocator}}
+\doxysubsubsection{\texorpdfstring{createArray()}{createArray()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+T$\ast$ tiny\+\_\+dlna\+::\+Allocator\+::create\+Array (\begin{DoxyParamCaption}\item[{int}]{len }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1Allocator_a4171e171a82c0f671cdb436a35ff9cc3}\label{classtiny__dlna_1_1Allocator_a4171e171a82c0f671cdb436a35ff9cc3}} 
+\index{tiny\_dlna::Allocator@{tiny\_dlna::Allocator}!do\_allocate@{do\_allocate}}
+\index{do\_allocate@{do\_allocate}!tiny\_dlna::Allocator@{tiny\_dlna::Allocator}}
+\doxysubsubsection{\texorpdfstring{do\_allocate()}{do\_allocate()}}
+{\footnotesize\ttfamily virtual void$\ast$ tiny\+\_\+dlna\+::\+Allocator\+::do\+\_\+allocate (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1Allocator_acf6e5fd371c7845fa558196a6e1b18c0}\label{classtiny__dlna_1_1Allocator_acf6e5fd371c7845fa558196a6e1b18c0}} 
+\index{tiny\_dlna::Allocator@{tiny\_dlna::Allocator}!free@{free}}
+\index{free@{free}!tiny\_dlna::Allocator@{tiny\_dlna::Allocator}}
+\doxysubsubsection{\texorpdfstring{free()}{free()}}
+{\footnotesize\ttfamily virtual void tiny\+\_\+dlna\+::\+Allocator\+::free (\begin{DoxyParamCaption}\item[{void $\ast$}]{memory }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+frees memory 
+
+\mbox{\Hypertarget{classtiny__dlna_1_1Allocator_a016242083ffa9e88f1cd2dc9ab25e786}\label{classtiny__dlna_1_1Allocator_a016242083ffa9e88f1cd2dc9ab25e786}} 
+\index{tiny\_dlna::Allocator@{tiny\_dlna::Allocator}!remove@{remove}}
+\index{remove@{remove}!tiny\_dlna::Allocator@{tiny\_dlna::Allocator}}
+\doxysubsubsection{\texorpdfstring{remove()}{remove()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void tiny\+\_\+dlna\+::\+Allocator\+::remove (\begin{DoxyParamCaption}\item[{T $\ast$}]{obj }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+deletes an object 
+
+\mbox{\Hypertarget{classtiny__dlna_1_1Allocator_a1279a634ad2017c0073cd6c92e23bf87}\label{classtiny__dlna_1_1Allocator_a1279a634ad2017c0073cd6c92e23bf87}} 
+\index{tiny\_dlna::Allocator@{tiny\_dlna::Allocator}!removeArray@{removeArray}}
+\index{removeArray@{removeArray}!tiny\_dlna::Allocator@{tiny\_dlna::Allocator}}
+\doxysubsubsection{\texorpdfstring{removeArray()}{removeArray()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void tiny\+\_\+dlna\+::\+Allocator\+::remove\+Array (\begin{DoxyParamCaption}\item[{T $\ast$}]{obj,  }\item[{int}]{len }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1Allocator_af3e92a21c1dbf85563d29425ba2be543}\label{classtiny__dlna_1_1Allocator_af3e92a21c1dbf85563d29425ba2be543}} 
+\index{tiny\_dlna::Allocator@{tiny\_dlna::Allocator}!stop@{stop}}
+\index{stop@{stop}!tiny\_dlna::Allocator@{tiny\_dlna::Allocator}}
+\doxysubsubsection{\texorpdfstring{stop()}{stop()}}
+{\footnotesize\ttfamily void tiny\+\_\+dlna\+::\+Allocator\+::stop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Basic/\mbox{\hyperlink{Allocator_8h}{Allocator.\+h}}\end{DoxyCompactItemize}
