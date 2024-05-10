@@ -10,7 +10,7 @@
 namespace tiny_dlna {
 
 /**
- * @brief Abstract DLNA Device service setup. The device registers itself to the
+ * @brief Setup of a Basic DLNA Device service. The device registers itself to the
  * network and answers to the DLNA queries and requests.
  * A DLNA device uses UDP, Http, XML and Soap to discover and manage a service,
  * so there is quite some complexity involved:

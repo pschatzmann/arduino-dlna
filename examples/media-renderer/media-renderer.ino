@@ -1,3 +1,4 @@
+// Example for the ESP32 using the WiFi functionality 
 #include "DLNA.h"
 
 const char* ssid = "";
@@ -20,8 +21,10 @@ void setupWifi(){
 
 void setup() {
   Serial.begin(115200);
-  // setup device: set IPAddress or BaseURL
+  // setup device: set IPAddress or BaseURL and other optional information
   device.setIPAddress(WiFi.localIP());
+  device.setManufacturer("Phil Schatzmann");
+  device.setManufacturerURL("https://www.pschatzmann.ch/");
   mr.begin(device, udpService, server);
 }
 
