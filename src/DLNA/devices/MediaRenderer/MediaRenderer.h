@@ -2,7 +2,6 @@
 #include "conmgr.h"
 #include "control.h"
 #include "transport.h"
-#include "device.h"
 
 namespace tiny_dlna {
 
