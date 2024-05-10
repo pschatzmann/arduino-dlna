@@ -3,7 +3,6 @@
 #include <stdarg.h>
 #include <stdio.h>
 #include <string.h>
-//#include "Platform/AltStream.h"
 #include "Arduino.h"
 
 namespace tiny_dlna {
