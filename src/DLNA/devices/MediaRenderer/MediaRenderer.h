@@ -46,17 +46,17 @@ class MediaRenderer : public DLNADevice {
 
     // define services
     DLNAServiceInfo rc, cm, avt;
-    rc.setup("RenderingControl",
-             "urn:schemas-upnporg:service:RenderingControl:1",
-             "urn:upnp-org:serviceId:RenderingControl", "RC/SCP", dummyCB,
-             "RC/URL", controlCB, "RC/EV", dummyCB);
+    avt.setup("AVTransport", "urn:schemas-upnp-org:service:AVTransport:1",
+              "urn:upnp-org:serviceId:AVTransport", "AVT/SCP.xml", transportCB, "AVT/CTL",
+              dummyCB, "AVT/EV", dummyCB);
     cm.setup("ConnectionManager",
              "urn:schemas-upnporg:service:ConnectionManager:1",
-             "urn:upnp-org:serviceId:ConnectionManager", "CM/SCP", dummyCB,
-             "CM/URL", connmgrCB, "CM/EV", dummyCB);
-    avt.setup("AVTransport", "urn:schemas-upnp-org:service:AVTransport:1",
-              "urn:upnp-org:serviceId:AVTransport", "AVT/SCP", dummyCB, "AVT/URL",
-              transportCB, "AVT/EV", dummyCB);
+             "urn:upnp-org:serviceId:ConnectionManager", "CM/SCP.xml", connmgrCB,
+             "CM/CTL", dummyCB, "CM/EV", dummyCB);
+    rc.setup("RenderingControl",
+             "urn:schemas-upnporg:service:RenderingControl:1",
+             "urn:upnp-org:serviceId:RenderingControl", "RC/SCP.xml", controlCB,
+             "RC/CTL", dummyCB, "RC/EV", dummyCB);
 
     device.addService(rc);
     device.addService(cm);
