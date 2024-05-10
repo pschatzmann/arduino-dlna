@@ -25,7 +25,8 @@ class MediaRenderer : public DLNADevice {
 
     auto dummyCB = [](HttpServer* server, const char* requestPath,
                     HttpRequestHandlerLine* hl) {
-      server->reply("text/xml", "");
+      DlnaLogger.log(DlnaError, "Unhandled request: %s", requestPath);                
+      server->reply("text/xml", "<test/>");
     };
 
     auto transportCB = [](HttpServer* server, const char* requestPath,

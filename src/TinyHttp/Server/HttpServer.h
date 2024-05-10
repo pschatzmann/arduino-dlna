@@ -272,6 +272,19 @@ class HttpServer {
             endClient();
         }
 
+        /// write reply - using callback that writes to stream
+        void reply(const char* contentType, void(*callback)(Print&out), int status=200, const char* msg=SUCCESS){
+            DlnaLogger.log(DlnaInfo,"reply %s","callback");
+            reply_header.setValues(status, msg);
+            reply_header.put(CONTENT_TYPE,contentType);
+            reply_header.put(CONNECTION,CON_KEEP_ALIVE);
+            reply_header.write(this->client());
+            callback(*client_ptr);
+            //inputStream.close();
+            endClient();
+        }
+
+
         /// write reply - string with header size
         void reply(const char* contentType, const char* str, int status=200, const char* msg=SUCCESS){
             DlnaLogger.log(DlnaInfo,"reply %s","str");
@@ -326,13 +339,6 @@ class HttpServer {
             client_ptr->print("\r\n");
             client_ptr->flush();
         }
-
-        // /// registers an extension
-        // void addExtension(Extension &out){
-        //     DlnaLogger.log(DlnaInfo,"HttpServer %s","addExtension");
-        //     out.open(this);
-        //     extension_collection.push_back(&out);
-        // }
 
         /// adds a new handler
         void addHandler(HttpRequestHandlerLine *handlerLinePtr){
@@ -424,17 +430,6 @@ class HttpServer {
               //  replyNotFound();
             }                   
         }
-
-        // /// executes the doLoop of all extension_collection
-        // void processExtensions(){
-        //     //if (extension_collection.size()>0) DlnaLogger.log(DlnaInfo,"processExtensions");
-        //     // we handle all open clients
-        //     for (auto i = extension_collection.begin(); i != extension_collection.end(); ++i) {
-        //         Extension *ext = (*i);
-        //         // register new client
-        //         ext->doLoop();
-        //     }    
-        // }
 
         /// determiens the potentially rewritten url which should be used for the further processing
         const char *resolveRewrite(const char* from){

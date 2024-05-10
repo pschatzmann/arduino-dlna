@@ -114,8 +114,14 @@ class DLNADevice {
   virtual void setupDLNAServer(HttpServer& srv) {
     auto xmlDevice = [](HttpServer* server, const char* requestPath,
                         HttpRequestHandlerLine* hl) {
-      // auto cb = [&](Stream& out) { p_device->write(out); };
-      server->reply("text/xml", "");
+      DLNADeviceInfo* di = (DLNADeviceInfo*)hl->context[0];
+      DlnaLogger.log(DlnaInfo, "reply %s", "callback");
+      server->replyHeader().setValues(200, "SUCCESS");
+      server->replyHeader().put(CONTENT_TYPE, "text/xml");
+      server->replyHeader().put(CONNECTION, CON_KEEP_ALIVE);
+      // print xml result
+      di->print(server->client());
+      server->endClient();
     };
 
     // Setup services for all devices
@@ -123,18 +129,21 @@ class DLNADevice {
       // add device url to server
       const char* device_path = p_device->getDeviceURL().path();
       DlnaLogger.log(DlnaInfo, "Setting up device path: %s", device_path);
+      void* ref[1];
+      ref[0] = p_device;
 
       if (StrView(device_path).isEmpty()) {
         p_server->rewrite("/", device_path);
         p_server->rewrite("/index.html", device_path);
-        p_server->on(device_path, T_GET, xmlDevice);
+        p_server->on(device_path, T_GET, xmlDevice, ref, 1);
       }
 
       // Register Service URLs
       for (DLNAServiceInfo& service : p_device->getServices()) {
-        p_server->on(service.scp_url, T_GET, service.scp_cb);
-        p_server->on(service.control_url, T_POST, service.control_cb);
-        p_server->on(service.event_sub_url, T_GET, service.event_sub_cb);
+        p_server->on(service.scp_url, T_GET, service.scp_cb, ref, 1);
+        p_server->on(service.control_url, T_POST, service.control_cb, ref, 1);
+        p_server->on(service.event_sub_url, T_GET, service.event_sub_cb, ref,
+                     1);
       }
     }
   }
