@@ -22,18 +22,19 @@ class Scheduler {
     bool is_cleanup = false;
     for (auto &s : queue) {
       if (s.time >= millis()) {
-        // process end time
+        // handle end time: if expired set inactive
         if (s.end_time > millis()) {
           s.active = false;
         }
         // process active schedules
         if (s.active) {
-          is_cleanup = true;
           s.process(udp, device);
+          // reschedule if necessary
           if (s.repeat_ms > 0) {
             s.time = millis() + s.repeat_ms;
           } else {
             s.active = false;
+            is_cleanup = true;
           }
         }
       }

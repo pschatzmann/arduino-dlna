@@ -3,7 +3,7 @@
 #include "DLNADeviceInfo.h"
 #include "UDPService.h"
 
-#define MAX_TMP_SIZE 200
+#define MAX_TMP_SIZE 100
 #define ALIVE_MS 5000
 
 namespace tiny_dlna {
@@ -40,6 +40,7 @@ class MSearchReplySchedule : public Schedule {
  public:
   MSearchReplySchedule(IPAddressAndPort &addr) { p_addr = &addr; }
   bool process(UDPService &udp, DLNADeviceInfo &device) override {
+    // we keep the data on the stack
     char buffer[MAX_TMP_SIZE] = {0};
     const char *tmp =
         "HTTP/1.1 200 OK\r\n"
@@ -69,6 +70,7 @@ class PostAliveSchedule : public Schedule {
   PostAliveSchedule(int repeatMs = ALIVE_MS) { this->repeat_ms = repeatMs; }
 
   bool process(UDPService &udp, DLNADeviceInfo &device) override {
+    // we keep the data on the stack
     char buffer[MAX_TMP_SIZE] = {0};
     const char *tmp =
         "NOTIFY * HTTP/1.1\r\n"
@@ -98,6 +100,7 @@ class PostAliveSchedule : public Schedule {
 class PostByeSchedule : public Schedule {
  public:
   bool process(UDPService &udp, DLNADeviceInfo &device) override {
+    // we keep the data on the stack
     char buffer[MAX_TMP_SIZE] = {0};
     const char *tmp =
         "NOTIFY * HTTP/1.1\r\n"
