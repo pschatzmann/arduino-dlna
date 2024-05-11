@@ -1,6 +1,7 @@
 
 #pragma once
 
+#include <functional> // std::bind
 #include "Basic/Vector.h"
 #include "DLNAServiceInfo.h"
 #include "XMLPrinter.h"
@@ -76,7 +77,7 @@ class DLNADeviceInfo {
   const char* getNS() { return ns; }
 
   /// Defines the base URL
-  void setDeviceTypeName(const char* name) { device_type_name = name; }
+  void setFriendlyName(const char* name) { friendly_name = name; }
   void setManufacturer(const char* man) { manufacturer = man; }
   void setManufacturerURL(const char* url) { manufacturer_url = url; }
   void setModelDescription(const char* descr) { model_description = descr; }
@@ -116,7 +117,7 @@ class DLNADeviceInfo {
   const char* udn = "09349455-2941-4cf7-9847-0dd5ab210e97";
   const char* ns = "xmlns=\" urn:schemas-upnp-org:device-1-0\"";
   const char* device_type = "urn:schemas-upnp-org:device:MediaRenderer:1";
-  const char* device_type_name = nullptr;
+  const char* friendly_name = nullptr;
   const char* manufacturer = nullptr;
   const char* manufacturer_url = nullptr;
   const char* model_description = nullptr;
@@ -142,7 +143,7 @@ class DLNADeviceInfo {
 
   void printDevice() {
     xml.printNode("deviceType", getDeviceType());
-    xml.printNode("friendlyName", device_type_name);
+    xml.printNode("friendlyName", friendly_name);
     xml.printNode("manufacturer", manufacturer);
     xml.printNode("manufacturerURL", manufacturer_url);
     xml.printNode("modelDescription", model_description);

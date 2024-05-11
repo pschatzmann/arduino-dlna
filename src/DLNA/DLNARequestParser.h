@@ -33,7 +33,7 @@ class DLNARequestParser {
       Str mx_str(req.data.c_str() + pos + 3);
       int mx = mx_str.toInt();
       result.active = true;
-      result.time = millis() + random(0, mx * 1000);
+      result.time = millis() + random(mx * 1000);
       // // determine ST (Search Target)
       // int pos = req.data.indexOf("ST:");
       // if (pos >= 0) {

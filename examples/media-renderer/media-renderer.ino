@@ -21,10 +21,14 @@ void setupWifi(){
 
 void setup() {
   Serial.begin(115200);
+  // setup logger
+  DlnaLogger.begin(Serial, DlnaDebug);
+
   // setup device: set IPAddress or BaseURL and other optional information
   device.setIPAddress(WiFi.localIP());
   device.setManufacturer("Phil Schatzmann");
   device.setManufacturerURL("https://www.pschatzmann.ch/");
+  device.setFriendlyName("Arduino Media Renderer");
   mr.begin(device, udpService, server);
 }
 

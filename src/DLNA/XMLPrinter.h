@@ -30,7 +30,7 @@ struct XMLPrinter {
       p_out->print(attributes);
     }
     if (StrView(txt).isEmpty()) {
-      p_out->print("/>");
+      p_out->println("/>");
     } else {
       p_out->print(">");
       p_out->print(txt);

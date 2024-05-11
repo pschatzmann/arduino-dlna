@@ -26,12 +26,11 @@ add_library (dlna_server ${SRC_LIST_CPP})
 target_compile_options(dlna_server PUBLIC -DNO_GATEWAYIP -DIS_DESKTOP )
 
 # define location for header files
-target_include_directories(dlna_server PUBLIC ${CMAKE_SOURCE_DIR}/src ${CMAKE_SOURCE_DIR}/src/Basic ${CMAKE_SOURCE_DIR}/src/DLNA ${CMAKE_SOURCE_DIR}/src/Platform ${CMAKE_SOURCE_DIR}/src/TinyHttp ${CMAKE_SOURCE_DIR}/src/UPnP ${CMAKE_SOURCE_DIR}/src/DLNA )
+target_include_directories(dlna_server PUBLIC ${CMAKE_SOURCE_DIR}/src ${CMAKE_SOURCE_DIR}/src/Basic ${CMAKE_SOURCE_DIR}/src/DLNA ${CMAKE_SOURCE_DIR}/src/Platform ${CMAKE_SOURCE_DIR}/src/TinyHttp  ${CMAKE_SOURCE_DIR}/src/DLNA )
 
 # specify libraries
 target_link_libraries(dlna_server arduino_emulator)
 
 # build examples
 add_subdirectory( "${CMAKE_CURRENT_SOURCE_DIR}/examples/tests/device-xml")
-add_subdirectory( "${CMAKE_CURRENT_SOURCE_DIR}/examples/tests/upnp-list-all")
-add_subdirectory( "${CMAKE_CURRENT_SOURCE_DIR}/examples/tests/upnp-update")
+#add_subdirectory( "${CMAKE_CURRENT_SOURCE_DIR}/examples/media-renderer")
