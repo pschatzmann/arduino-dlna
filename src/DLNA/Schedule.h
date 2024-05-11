@@ -3,7 +3,7 @@
 #include "DLNADeviceInfo.h"
 #include "UDPService.h"
 
-#define MAX_TMP_SIZE 100
+#define MAX_TMP_SIZE 300
 #define ALIVE_MS 5000
 
 namespace tiny_dlna {
@@ -23,11 +23,14 @@ struct Schedule {
   int repeat_ms = 0;
   // repeat until;
   uint32_t end_time = 0;
+  // schedle is active
   bool active = false;
 
   virtual bool process(UDPService &udp, DLNADeviceInfo &device) {
     return false;
   }
+
+  virtual const char *name() { return "n/a"; };
 
   operator bool() { return active; }
 };
@@ -39,6 +42,8 @@ struct Schedule {
 class MSearchReplySchedule : public Schedule {
  public:
   MSearchReplySchedule(IPAddressAndPort &addr) { p_addr = &addr; }
+  const char *name() override { return "MSearchReply"; }
+
   bool process(UDPService &udp, DLNADeviceInfo &device) override {
     // we keep the data on the stack
     char buffer[MAX_TMP_SIZE] = {0};
@@ -48,10 +53,11 @@ class MSearchReplySchedule : public Schedule {
         "LOCATION: %s\r\n"
         "ST: %s\r\n"
         "USN: %s\r\n";
-    int n = snprintf(buffer, MAX_TMP_SIZE, tmp, max_age, device.getDeviceURL().url(),
-                     device.getDeviceType(), device.getUDN());
+    int n = snprintf(buffer, MAX_TMP_SIZE, tmp, max_age,
+                     device.getDeviceURL().url(), device.getDeviceType(),
+                     device.getUDN());
     assert(n < MAX_TMP_SIZE);
-    DlnaLogger.log(DlnaInfo, "sending: %s", buffer);
+    DlnaLogger.log(DlnaDebug, "sending: %s", buffer);
     udp.send(*p_addr, (uint8_t *)buffer, n);
     return true;
   }
@@ -68,6 +74,7 @@ class MSearchReplySchedule : public Schedule {
 class PostAliveSchedule : public Schedule {
  public:
   PostAliveSchedule(int repeatMs = ALIVE_MS) { this->repeat_ms = repeatMs; }
+  const char *name() override { return "PostAlive"; }
 
   bool process(UDPService &udp, DLNADeviceInfo &device) override {
     // we keep the data on the stack
@@ -84,7 +91,7 @@ class PostAliveSchedule : public Schedule {
                      max_age, device.getDeviceType(), device.getUDN());
 
     assert(n < MAX_TMP_SIZE);
-    DlnaLogger.log(DlnaInfo, "sending: %s", buffer);
+    DlnaLogger.log(DlnaDebug, "sending: %s", buffer);
     udp.send(DLNABroadcastAddress, (uint8_t *)buffer, n);
     return true;
   }
@@ -99,6 +106,7 @@ class PostAliveSchedule : public Schedule {
  */
 class PostByeSchedule : public Schedule {
  public:
+  const char *name() override { return "ByeBye"; }
   bool process(UDPService &udp, DLNADeviceInfo &device) override {
     // we keep the data on the stack
     char buffer[MAX_TMP_SIZE] = {0};
@@ -112,8 +120,8 @@ class PostByeSchedule : public Schedule {
         "USN: %s\r\n";
     int n = snprintf(buffer, MAX_TMP_SIZE, tmp, DLNABroadcastAddress.toString(),
                      max_age, device.getDeviceType(), device.getUDN());
-    
-    DlnaLogger.log(DlnaInfo, "sending: %s", buffer);
+
+    DlnaLogger.log(DlnaDebug, "sending: %s", buffer);
     udp.send(DLNABroadcastAddress, (uint8_t *)buffer, n);
     return true;
   }

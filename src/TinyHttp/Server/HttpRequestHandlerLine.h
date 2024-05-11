@@ -19,21 +19,21 @@ typedef void (*web_callback_fn)(HttpServer *server, const char* requestPath, Htt
 class HttpRequestHandlerLine {
     public:
         HttpRequestHandlerLine(int ctxSize=0){
-            DlnaLogger.log(DlnaInfo,"HttpRequestHandlerLine");
+            DlnaLogger.log(DlnaDebug,"HttpRequestHandlerLine");
             contextCount = ctxSize;
             context = new void*[ctxSize];
         }
 
         ~HttpRequestHandlerLine(){
-            DlnaLogger.log(DlnaInfo,"~HttpRequestHandlerLine");
+            DlnaLogger.log(DlnaDebug,"~HttpRequestHandlerLine");
             if (contextCount>0){
-                DlnaLogger.log(DlnaInfo,"HttpRequestHandlerLine %s","free");
+                DlnaLogger.log(DlnaDebug,"HttpRequestHandlerLine %s","free");
                 delete[] context;
             }
         }
 
         TinyMethodID method;
-        const char* path = nullptr;
+        Str path;
         const char* mime = nullptr;
         web_callback_fn fn;
         void** context;

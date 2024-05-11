@@ -36,8 +36,10 @@ class DLNADeviceInfo {
 
   const char* getUDN() { return udn; }
 
+  /// Defines the base url
   void setBaseURL(Url url) { base_url = url; }
 
+  /// Provides the base url
   Url& getBaseURL() {
     // replace localhost url
     if (StrView(base_url.host()).contains("localhost")) {
@@ -50,11 +52,12 @@ class DLNADeviceInfo {
     return base_url;
   }
 
+  /// This method returns base url/device.xml
   Url& getDeviceURL() {
     if (!device_url) {
       Str str = getBaseURL().url();
       if (!str.endsWith("/")) str += "/";
-      str += "device";
+      str += "device.xml";
       Url new_url(str.c_str());
       device_url = new_url;
     }

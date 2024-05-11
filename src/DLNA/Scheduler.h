@@ -1,8 +1,8 @@
 #pragma once
 
 #include "Arduino.h"  // for millis
-#include "Schedule.h"
 #include "DLNADeviceInfo.h"
+#include "Schedule.h"
 #include "UDPService.h"
 
 namespace tiny_dlna {
@@ -15,19 +15,28 @@ namespace tiny_dlna {
 class Scheduler {
  public:
   /// Add a schedule to the scheduler
-  void add(Schedule schedule) { queue.push_back(schedule); }
+  void add(Schedule *schedule) {
+    schedule->active = true;
+    DlnaLogger.log(DlnaInfo, "schedule: %s", schedule->name());
+    queue.push_back(schedule);
+  }
 
   /// Execute all due schedules
   void execute(UDPService &udp, DLNADeviceInfo &device) {
+    DlnaLogger.log(DlnaDebug, "Scheduler::execute");
     bool is_cleanup = false;
-    for (auto &s : queue) {
-      if (s.time >= millis()) {
+    for (auto &p_s : queue) {
+      if (p_s == nullptr) continue;
+      Schedule& s = *p_s;
+      if (millis() >= s.time) {
         // handle end time: if expired set inactive
         if (s.end_time > millis()) {
           s.active = false;
         }
         // process active schedules
         if (s.active) {
+          DlnaLogger.log(DlnaInfo, "Executing: %s", s.name());
+
           s.process(udp, device);
           // reschedule if necessary
           if (s.repeat_ms > 0) {
@@ -44,13 +53,17 @@ class Scheduler {
   }
 
  protected:
-  List<Schedule> queue;
+  Vector<Schedule*> queue;
 
   void cleanup() {
     for (auto it = queue.begin(); it != queue.end(); ++it) {
-      if (!(*it).active){
-        DlnaLogger.log(DlnaDebug, "cleanup queue");
+      auto p_rule = *it;
+      if (!(p_rule)->active) {
+        DlnaLogger.log(DlnaDebug, "cleanup queue: %s", p_rule->name());
+        // remove schedule from collection
         queue.erase(it);
+        // delete schedule
+        delete p_rule;
         break;
       }
     }

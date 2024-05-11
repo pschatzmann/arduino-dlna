@@ -174,6 +174,7 @@ class StrView {
   /// checks if the string starts with the indicated substring
   virtual bool startsWith(const char* str) {
     if (str == nullptr) return false;
+    if (chars == nullptr) return false;
     int len = strlen(str);
     return strncmp(this->chars, str, len) == 0;
   }

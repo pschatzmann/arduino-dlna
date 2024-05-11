@@ -67,7 +67,7 @@ class HttpServer {
 
         /// Starts the server on the indicated port
         bool begin(int port){
-            DlnaLogger.log(DlnaInfo,"HttpServer %s","begin");
+            DlnaLogger.log(DlnaInfo,"HttpServer begin at port %d", port);
             is_active = true;
             server_ptr->begin(port);
             return true;
@@ -88,7 +88,7 @@ class HttpServer {
 
         /// register a generic handler
         void on(const char* url, TinyMethodID method, web_callback_fn fn,void* ctx[]=nullptr, int ctxCount=0){
-            DlnaLogger.log(DlnaInfo,"on-generic %s",url);
+            DlnaLogger.log(DlnaInfo,"Serving at %s",url);
             HttpRequestHandlerLine *hl = new HttpRequestHandlerLine();
             hl->path = url;
             hl->fn = fn;
@@ -100,7 +100,7 @@ class HttpServer {
 
         /// register a handler with mime
         void on(const char* url, TinyMethodID method, const char* mime, web_callback_fn fn){
-            DlnaLogger.log(DlnaInfo,"on-mime %s",url);
+            DlnaLogger.log(DlnaInfo,"Serving at %s",url);
             HttpRequestHandlerLine *hl = new HttpRequestHandlerLine();
             hl->path = url;
             hl->fn = fn;
@@ -112,7 +112,7 @@ class HttpServer {
 
         /// register a handler which provides the indicated string
         void on(const char* url, TinyMethodID method, const char* mime, const char* result) {
-            DlnaLogger.log(DlnaInfo,"on-strings");
+            DlnaLogger.log(DlnaInfo,"Serving at %s",url);
 
             auto lambda = [](HttpServer *server_ptr,const char*requestPath, HttpRequestHandlerLine *hl) { 
                 DlnaLogger.log(DlnaInfo,"on-strings %s","lambda");
@@ -135,7 +135,7 @@ class HttpServer {
   
         /// register a redirection
         void on(const char*url, TinyMethodID method, Url &redirect){
-            DlnaLogger.log(DlnaInfo,"on-redirect");
+            DlnaLogger.log(DlnaInfo,"Serving at %s",url);
             auto lambda = [](HttpServer *server_ptr, const char*requestPath, HttpRequestHandlerLine *hl) { 
                 if (hl->contextCount<1){
                     DlnaLogger.log(DlnaError,"The context is not available");
@@ -163,7 +163,7 @@ class HttpServer {
 
         /// register a redirection
         void on(const char*url, TinyMethodID method, HttpTunnel &tunnel){
-            DlnaLogger.log(DlnaInfo,"on-HttpTunnel %s",url);
+            DlnaLogger.log(DlnaInfo,"Serving at %s",url);
 
             auto lambda = [](HttpServer *server_ptr,const char*requestPath, HttpRequestHandlerLine *hl) { 
                 DlnaLogger.log(DlnaInfo,"on-HttpTunnel %s","lambda");
@@ -198,16 +198,16 @@ class HttpServer {
 
         /// generic handler - you can overwrite this method to provide your specifc processing logic
         bool onRequest(const char* path) {
-            DlnaLogger.log(DlnaInfo,"onRequest %s", path);
+            DlnaLogger.log(DlnaInfo,"Serving at %s",path);
 
             bool result = false;
             // check in registered handlers
             StrView pathStr = StrView(path);
             for (auto it = handler_collection.begin() ; it != handler_collection.end(); ++it) {
                 HttpRequestHandlerLine *handler_line_ptr = *it;
-                DlnaLogger.log(DlnaInfo,"onRequest - checking: %s %s %s", nullstr(handler_line_ptr->path), methods[handler_line_ptr->method], nullstr(handler_line_ptr->mime));
+                DlnaLogger.log(DlnaInfo,"onRequest - checking: %s %s %s", nullstr(handler_line_ptr->path.c_str()), methods[handler_line_ptr->method], nullstr(handler_line_ptr->mime));
 
-                if (pathStr.matches(handler_line_ptr->path) 
+                if (pathStr.matches(handler_line_ptr->path.c_str()) 
                 && request_header.method() == handler_line_ptr->method
                 && matchesMime(handler_line_ptr->mime, request_header.accept())) {
                     // call registed handler function
@@ -374,7 +374,7 @@ class HttpServer {
         }
 
         /// Provides the current client
-        WiFiClient &client() {
+        Client &client() {
             return *client_ptr;
         }
 
@@ -402,7 +402,7 @@ class HttpServer {
         List<HttpRequestHandlerLine*> handler_collection;
         //List<Extension*> extension_collection;
         List<HttpRequestRewrite*> rewrite_collection;
-        WiFiClient *client_ptr;
+        Client *client_ptr;
         WiFiServer *server_ptr;
         bool is_active;
         char* buffer;

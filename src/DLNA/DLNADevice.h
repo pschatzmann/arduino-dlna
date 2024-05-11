@@ -10,10 +10,10 @@
 namespace tiny_dlna {
 
 /**
- * @brief Setup of a Basic DLNA Device service. The device registers itself to the
- * network and answers to the DLNA queries and requests.
- * A DLNA device uses UDP, Http, XML and Soap to discover and manage a service,
- * so there is quite some complexity involved:
+ * @brief Setup of a Basic DLNA Device service. The device registers itself to
+ * the network and answers to the DLNA queries and requests. A DLNA device uses
+ * UDP, Http, XML and Soap to discover and manage a service, so there is quite
+ * some complexity involved:
  * - We handle the UDP communication via a Scheduler and a Request Parser
  * - We handle the Http request with the help of the TinyHttp Server
  * - The XML service descriptions can be stored as char arrays in progmem or
@@ -38,12 +38,21 @@ class DLNADevice {
       return false;
     }
 
+    // setup all services
     for (auto& p_device : devices) setupServices(*p_device);
 
-    setupDLNAServer(server);
+    if (!setupDLNAServer(server)) {
+      return false;
+    }
 
-    setupScheduler();
+    if (!setupScheduler()) {
+      return false;
+    }
 
+    // start server
+    p_server->begin(baseUrl.port());
+
+    is_active = true;
     return true;
   }
 
@@ -53,9 +62,9 @@ class DLNADevice {
 
   void end() {
     // send 3 bye messages
-    PostByeSchedule bye;
-    bye.end_time = millis() + 60000;
-    bye.repeat_ms = 20000;
+    PostByeSchedule* bye = new PostByeSchedule();
+    bye->end_time = millis() + 60000;
+    bye->repeat_ms = 20000;
     scheduler.add(bye);
 
     for (auto& p_device : devices) p_device->clear();
@@ -71,7 +80,7 @@ class DLNADevice {
 
     // process UDP requests
     RequestData req = p_udp->receive();
-    Schedule schedule = parser.parse(req);
+    Schedule* schedule = parser.parse(req);
     if (schedule) {
       scheduler.add(schedule);
     }
@@ -99,30 +108,43 @@ class DLNADevice {
   HttpServer* p_server = nullptr;
   bool is_active = false;
 
-  void setupScheduler() {
-    // schedule post alive messages: Usually repeated 3 times (because UDP
+  bool setupScheduler() {
+    // schedule post alive messages: Usually repeated 2 times (because UDP
     // messages might be lost)
-    DlnaLogger.log(DlnaInfo, "schedule PostAliveSchedule");
-    PostAliveSchedule postAlive[3];
-    postAlive[1].time = millis() + 100;
-    postAlive[2].time = millis() + 300;
-    for (auto& schedule : postAlive) {
-      scheduler.add(schedule);
-    }
+    PostAliveSchedule* postAlive = new PostAliveSchedule();
+    PostAliveSchedule* postAlive1 = new PostAliveSchedule();
+    postAlive1->time = millis() + 100;
+    scheduler.add(postAlive);
+    scheduler.add(postAlive1);
+    return true;
   }
 
-  virtual void setupDLNAServer(HttpServer& srv) {
+  virtual bool setupDLNAServer(HttpServer& srv) {
     auto xmlDevice = [](HttpServer* server, const char* requestPath,
                         HttpRequestHandlerLine* hl) {
-      DLNADeviceInfo* di = (DLNADeviceInfo*)hl->context[0];
-      DlnaLogger.log(DlnaInfo, "reply %s", "callback");
-      server->replyHeader().setValues(200, "SUCCESS");
-      server->replyHeader().put(CONTENT_TYPE, "text/xml");
-      server->replyHeader().put(CONNECTION, CON_KEEP_ALIVE);
-      // print xml result
-      di->print(server->client());
-      server->endClient();
+      DLNADeviceInfo* device_xml = (DLNADeviceInfo*)hl->context[0];
+      if (device_xml != nullptr) {
+        Client& client = server->client();
+        assert(&client != nullptr);
+        DlnaLogger.log(DlnaInfo, "reply %s", "callback");
+        server->replyHeader().setValues(200, "SUCCESS");
+        server->replyHeader().put(CONTENT_TYPE, "text/xml");
+        server->replyHeader().put(CONNECTION, CON_KEEP_ALIVE);
+        server->replyHeader().write(client);
+
+        // print xml result
+        device_xml->print(client);
+        server->endClient();
+      } else {
+        DlnaLogger.log(DlnaError, "DLNADeviceInfo is null");
+        server->replyNotFound();
+      }
     };
+
+    if (devices.empty()) {
+      DlnaLogger.log(DlnaError, "No devices found");
+      return false;
+    }
 
     // Setup services for all devices
     for (auto& p_device : devices) {
@@ -132,20 +154,33 @@ class DLNADevice {
       void* ref[1];
       ref[0] = p_device;
 
-      if (StrView(device_path).isEmpty()) {
+      if (!StrView(device_path).isEmpty()) {
         p_server->rewrite("/", device_path);
         p_server->rewrite("/index.html", device_path);
         p_server->on(device_path, T_GET, xmlDevice, ref, 1);
       }
 
       // Register Service URLs
+      const char* prefix = p_device->getBaseURL().path();
+      char tmp[120];
       for (DLNAServiceInfo& service : p_device->getServices()) {
-        p_server->on(service.scp_url, T_GET, service.scp_cb, ref, 1);
-        p_server->on(service.control_url, T_POST, service.control_cb, ref, 1);
-        p_server->on(service.event_sub_url, T_GET, service.event_sub_cb, ref,
-                     1);
+        p_server->on(concat(prefix, service.scp_url, tmp, 120), T_GET,
+                     service.scp_cb, ref, 1);
+        p_server->on(concat(prefix, service.control_url, tmp, 120), T_POST,
+                     service.control_cb, ref, 1);
+        p_server->on(concat(prefix, service.event_sub_url, tmp, 120), T_GET,
+                     service.event_sub_cb, ref, 1);
       }
     }
+    return true;
+  }
+
+  const char* concat(const char* prefix, const char* addr, char* buffer,
+                     int len) {
+    strncpy(buffer, prefix, len);
+    strncat(buffer, "/", len);
+    strncat(buffer, addr, len);
+    return buffer;
   }
 
   // const char* soapReplySuccess(const char* service, const char* name) {

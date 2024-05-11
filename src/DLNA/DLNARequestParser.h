@@ -13,19 +13,19 @@ namespace tiny_dlna {
 
 class DLNARequestParser {
  public:
-  Schedule parse(RequestData &req) {
+  Schedule* parse(RequestData &req) {
     Schedule result;
     if (req.data.startsWith("M-SEARCH")) {
       return processMSearch(req);
     }
 
-    DlnaLogger.log(DlnaInfo, "invalid request: %s", req.data);
-    return result;
+    DlnaLogger.log(DlnaDebug, "invalid request: %s", req.data);
+    return nullptr;
   }
 
  protected:
-  Schedule processMSearch(RequestData &req) {
-    MSearchReplySchedule result{req.peer};
+  Schedule* processMSearch(RequestData &req) {
+    MSearchReplySchedule& result = *new MSearchReplySchedule{req.peer};
     // determine MX (seconds to delay response)
     int pos = req.data.indexOf("MX:");
     if (pos >= 0) {
@@ -42,7 +42,7 @@ class DLNARequestParser {
       // }
     }
 
-    return result;
+    return &result;
   }
 };
 

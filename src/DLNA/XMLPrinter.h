@@ -2,6 +2,7 @@
 
 #include "../Basic/StrView.h"
 #include "Print.h"
+#include "assert.h"
 
 namespace tiny_dlna {
 
@@ -19,10 +20,14 @@ struct XMLPrinter {
   /// Defines the output
   void setOutput(Print& output) { p_out = &output; }
 
-  void printXMLHeader() { p_out->println("<?xml version=\"1.0\"?>"); }
+  void printXMLHeader() { 
+    assert(p_out != nullptr);
+    p_out->println("<?xml version=\"1.0\"?>"); 
+  }
 
   void printNode(const char* node, const char* txt,
                  const char* attributes = nullptr) {
+    assert(p_out != nullptr);
     p_out->print("<");
     p_out->print(node);
     if (attributes) {
@@ -41,6 +46,7 @@ struct XMLPrinter {
   }
 
   void printNode(const char* node, int txt, const char* attributes = nullptr) {
+    assert(p_out != nullptr);
     p_out->print("<");
     p_out->print(node);
     if (attributes) {
@@ -56,6 +62,7 @@ struct XMLPrinter {
 
   void printNode(const char* node, std::function<void(void)> callback,
                  const char* attributes = nullptr) {
+    assert(p_out != nullptr);
     p_out->print("<");
     p_out->print(node);
     if (attributes) {
@@ -70,6 +77,7 @@ struct XMLPrinter {
   }
 
   void printNodeArg(const char* node, std::function<void(void)> callback) {
+    assert(p_out != nullptr);
     p_out->print("<");
     p_out->print(node);
     p_out->print(">");
@@ -82,7 +90,10 @@ struct XMLPrinter {
  protected:
   Print* p_out = &Serial;
 
-  void println(const char* txt) { p_out->println(txt); }
+  void println(const char* txt) { 
+    assert(p_out != nullptr);
+    p_out->println(txt); 
+  }
 };
 
 }  // namespace tiny_dlna
