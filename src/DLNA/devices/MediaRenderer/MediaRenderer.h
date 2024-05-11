@@ -19,7 +19,7 @@ class MediaRenderer : public DLNADevice {
   void setupServices(DLNADeviceInfo& device) override {
     DlnaLogger.log(DlnaInfo,"MediaRenderer::setupServices");
     device.clear();
-    device.setSerialNumber(usn);
+    device.setUDN(usn);
     device.setDeviceType(st);
 
     auto dummyCB = [](HttpServer* server, const char* requestPath,
