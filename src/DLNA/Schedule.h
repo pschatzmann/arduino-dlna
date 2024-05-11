@@ -4,7 +4,7 @@
 #include "UDPService.h"
 
 #define MAX_TMP_SIZE 300
-#define ALIVE_MS 5000
+#define ALIVE_MS 10000
 
 namespace tiny_dlna {
 
@@ -83,21 +83,19 @@ class PostAliveSchedule : public Schedule {
         "NOTIFY * HTTP/1.1\r\n"
         "HOST:%s\r\n"
         "CACHE-CONTROL: max-age = %d\r\n"
-        "LOCATION: *\r\n"
+        "LOCATION: %s\r\n"
         "NT: %s\r\n"
         "NTS: ssdp:alive\r\n"
         "USN: %s\r\n";
     int n = snprintf(buffer, MAX_TMP_SIZE, tmp, DLNABroadcastAddress.toString(),
-                     max_age, device.getDeviceType(), device.getUDN());
+                     (repeat_ms / 1000) + 1, device.getDeviceURL().url(), device.getDeviceType(),
+                     device.getUDN());
 
     assert(n < MAX_TMP_SIZE);
-    DlnaLogger.log(DlnaDebug, "sending: %s", buffer);
+    DlnaLogger.log(DlnaInfo, "sending: %s", buffer);
     udp.send(DLNABroadcastAddress, (uint8_t *)buffer, n);
     return true;
   }
-
- protected:
-  int max_age = 60;
 };
 
 /**

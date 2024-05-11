@@ -5,6 +5,8 @@
 #include <string.h>
 #include "Arduino.h"
 
+#define DLNA_MAX_LOG_SIZE 300
+
 namespace tiny_dlna {
 
 /**
@@ -41,13 +43,13 @@ class LoggerClass {
   void log(DlnaLogLevel current_level, const char* fmt...) {
     if (current_level >= log_level && log_stream_ptr != nullptr &&
         fmt != nullptr) {
-      char log_buffer[200];
+      char log_buffer[DLNA_MAX_LOG_SIZE];
       strcpy(log_buffer, "DLNA - ");
       strcat(log_buffer, HttpDlnaLogLevelStr[current_level]);
       strcat(log_buffer, ":     ");
       va_list arg;
       va_start(arg, fmt);
-      vsnprintf(log_buffer + 15, 200-15, fmt, arg);
+      vsnprintf(log_buffer + 15, DLNA_MAX_LOG_SIZE - 15, fmt, arg);
       va_end(arg);
       log_stream_ptr->println(log_buffer);
     }
