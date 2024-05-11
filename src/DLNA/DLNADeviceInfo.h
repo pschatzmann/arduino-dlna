@@ -118,7 +118,7 @@ class DLNADeviceInfo {
   Url device_url;
   IPAddress localhost;
   const char* udn = "09349455-2941-4cf7-9847-0dd5ab210e97";
-  const char* ns = "xmlns=\" urn:schemas-upnp-org:device-1-0\"";
+  const char* ns = "xmlns=\"urn:schemas-upnp-org:device-1-0\"";
   const char* device_type = "urn:schemas-upnp-org:device:MediaRenderer:1";
   const char* friendly_name = nullptr;
   const char* manufacturer = nullptr;

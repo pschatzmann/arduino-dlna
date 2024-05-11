@@ -31,7 +31,6 @@ struct XMLPrinter {
     p_out->print("<");
     p_out->print(node);
     if (attributes) {
-      p_out->print(" ");
       p_out->print(attributes);
     }
     if (StrView(txt).isEmpty()) {
@@ -50,7 +49,6 @@ struct XMLPrinter {
     p_out->print("<");
     p_out->print(node);
     if (attributes) {
-      p_out->print(" ");
       p_out->print(attributes);
     }
     p_out->print(">");
@@ -65,7 +63,7 @@ struct XMLPrinter {
     assert(p_out != nullptr);
     p_out->print("<");
     p_out->print(node);
-    if (attributes) {
+    if (attributes != nullptr) {
       p_out->print(" ");
       p_out->print(attributes);
     }

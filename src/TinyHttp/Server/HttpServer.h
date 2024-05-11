@@ -89,11 +89,12 @@ class HttpServer {
         /// register a generic handler
         void on(const char* url, TinyMethodID method, web_callback_fn fn,void* ctx[]=nullptr, int ctxCount=0){
             DlnaLogger.log(DlnaInfo,"Serving at %s",url);
-            HttpRequestHandlerLine *hl = new HttpRequestHandlerLine();
+            HttpRequestHandlerLine *hl = new HttpRequestHandlerLine(ctxCount);
             hl->path = url;
             hl->fn = fn;
             hl->method = method;
-            hl->context = ctx;
+            //hl->context = ctx;
+            memmove(hl->context, ctx, ctxCount * sizeof(void*));
             hl->contextCount = ctxCount;
             addHandler(hl);
         }
@@ -151,7 +152,7 @@ class HttpServer {
                 server_ptr->endClient(); 
             };
 
-            HttpRequestHandlerLine *hl = new HttpRequestHandlerLine(1);
+            HttpRequestHandlerLine *hl = new HttpRequestHandlerLine(2);
             const char* lh = localHost();
             hl->context[0] = new Url(redirect);
             hl->context[1] = (void*) lh;
@@ -187,7 +188,7 @@ class HttpServer {
                 server_ptr->reply(mime, *p_in, content_len_str.toInt());
             };
 
-            HttpRequestHandlerLine *hl = new HttpRequestHandlerLine();
+            HttpRequestHandlerLine *hl = new HttpRequestHandlerLine(1);
             hl->path = url;
             hl->method = method;
             hl->mime = tunnel.mime();

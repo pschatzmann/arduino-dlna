@@ -7,6 +7,8 @@
 #include "TinyHttp/HttpServer.h"
 #include "TinyHttp/Server/Url.h"
 
+#define DLNA_MAX_URL_LEN 120
+
 namespace tiny_dlna {
 
 /**
@@ -78,15 +80,17 @@ class DLNADevice {
     // handle server requests
     if (p_server) p_server->doLoop();
 
-    // process UDP requests
-    RequestData req = p_udp->receive();
-    Schedule* schedule = parser.parse(req);
-    if (schedule) {
-      scheduler.add(schedule);
-    }
+    if (isSchedulerActive()) {
+      // process UDP requests
+      RequestData req = p_udp->receive();
+      Schedule* schedule = parser.parse(req);
+      if (schedule) {
+        scheduler.add(schedule);
+      }
 
-    // execute scheduled udp replys
-    scheduler.execute(*p_udp, getDevice());
+      // execute scheduled udp replys
+      scheduler.execute(*p_udp, getDevice());
+    }
 
     // be nice, if we have other tasks
     delay(10);
@@ -100,6 +104,10 @@ class DLNADevice {
 
   DLNADeviceInfo& getDevice(int deviceIdx = 0) { return *devices[deviceIdx]; }
 
+  void setSchedulerActive(bool flag) { scheduler_active = flag; }
+
+  bool isSchedulerActive() { return scheduler_active; }
+
  protected:
   Scheduler scheduler;
   DLNARequestParser parser;
@@ -107,6 +115,7 @@ class DLNADevice {
   Vector<DLNADeviceInfo*> devices;
   HttpServer* p_server = nullptr;
   bool is_active = false;
+  bool scheduler_active = true;
 
   bool setupScheduler() {
     // schedule post alive messages: Usually repeated 2 times (because UDP
@@ -122,7 +131,8 @@ class DLNADevice {
   virtual bool setupDLNAServer(HttpServer& srv) {
     auto xmlDevice = [](HttpServer* server, const char* requestPath,
                         HttpRequestHandlerLine* hl) {
-      DLNADeviceInfo* device_xml = (DLNADeviceInfo*)hl->context[0];
+      DLNADeviceInfo* device_xml = (DLNADeviceInfo*)(hl->context[0]);
+      assert(device_xml != nullptr);
       if (device_xml != nullptr) {
         Client& client = server->client();
         assert(&client != nullptr);
@@ -151,8 +161,7 @@ class DLNADevice {
       // add device url to server
       const char* device_path = p_device->getDeviceURL().path();
       DlnaLogger.log(DlnaInfo, "Setting up device path: %s", device_path);
-      void* ref[1];
-      ref[0] = p_device;
+      void* ref[] = {p_device};
 
       if (!StrView(device_path).isEmpty()) {
         p_server->rewrite("/", device_path);
@@ -162,14 +171,15 @@ class DLNADevice {
 
       // Register Service URLs
       const char* prefix = p_device->getBaseURL().path();
-      char tmp[120];
+      char tmp[DLNA_MAX_URL_LEN];
       for (DLNAServiceInfo& service : p_device->getServices()) {
-        p_server->on(concat(prefix, service.scp_url, tmp, 120), T_GET,
-                     service.scp_cb, ref, 1);
-        p_server->on(concat(prefix, service.control_url, tmp, 120), T_POST,
-                     service.control_cb, ref, 1);
-        p_server->on(concat(prefix, service.event_sub_url, tmp, 120), T_GET,
-                     service.event_sub_cb, ref, 1);
+        p_server->on(concat(prefix, service.scp_url, tmp, DLNA_MAX_URL_LEN),
+                     T_GET, service.scp_cb, ref, 1);
+        p_server->on(concat(prefix, service.control_url, tmp, DLNA_MAX_URL_LEN),
+                     T_POST, service.control_cb, ref, 1);
+        p_server->on(
+            concat(prefix, service.event_sub_url, tmp, DLNA_MAX_URL_LEN), T_GET,
+            service.event_sub_cb, ref, 1);
       }
     }
     return true;
@@ -177,9 +187,11 @@ class DLNADevice {
 
   const char* concat(const char* prefix, const char* addr, char* buffer,
                      int len) {
-    strncpy(buffer, prefix, len);
-    strncat(buffer, "/", len);
-    strncat(buffer, addr, len);
+
+    StrView str(buffer, len);
+    str = prefix;
+    str += addr;  
+    str.replace("//", "/");               
     return buffer;
   }
 
