@@ -3,7 +3,7 @@
 #include "Arduino.h"  // for millis
 #include "DLNADeviceInfo.h"
 #include "Schedule.h"
-#include "UDPService.h"
+#include "IUDPService.h"
 
 namespace tiny_dlna {
 
@@ -17,13 +17,13 @@ class Scheduler {
   /// Add a schedule to the scheduler
   void add(Schedule *schedule) {
     schedule->active = true;
-    DlnaLogger.log(DlnaInfo, "schedule: %s", schedule->name());
+    DlnaLogger.log(DlnaInfo, "Schedule %s", schedule->name());
     queue.push_back(schedule);
   }
 
   /// Execute all due schedules
-  void execute(UDPService &udp, DLNADeviceInfo &device) {
-    DlnaLogger.log(DlnaDebug, "Scheduler::execute");
+  void execute(IUDPService &udp, DLNADeviceInfo &device) {
+    //DlnaLogger.log(DlnaDebug, "Scheduler::execute");
     bool is_cleanup = false;
     for (auto &p_s : queue) {
       if (p_s == nullptr) continue;
@@ -35,7 +35,7 @@ class Scheduler {
         }
         // process active schedules
         if (s.active) {
-          DlnaLogger.log(DlnaInfo, "Executing: %s", s.name());
+          DlnaLogger.log(DlnaInfo, "Executing %s", s.name());
 
           s.process(udp, device);
           // reschedule if necessary

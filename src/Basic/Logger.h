@@ -5,7 +5,7 @@
 #include <string.h>
 #include "Arduino.h"
 
-#define DLNA_MAX_LOG_SIZE 300
+#define DLNA_MAX_LOG_SIZE 400
 
 namespace tiny_dlna {
 

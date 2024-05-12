@@ -95,7 +95,7 @@ class Vector {
   /// Default constructor: size 0 with DefaultAllocator
   Vector(size_t len = 0, Allocator &allocator = DefaultAllocator) {
     setAllocator(allocator);
-    resize(len);
+    resize_internal(len, false);
   }
 
   /// Constructor with only allocator
@@ -225,16 +225,16 @@ class Vector {
   void swap(Vector<T> &in) {
     // save data
     T *dataCpy = p_data;
-    int bufferLenCpy = bufferLen;
+    int bufferLenCpy = max_capacity;
     int lenCpy = len;
     // swap this
     p_data = in.p_data;
     len = in.len;
-    bufferLen = in.bufferLen;
+    max_capacity = in.max_capacity;
     // swp in
     in.p_data = dataCpy;
     in.len = lenCpy;
-    in.bufferLen = bufferLenCpy;
+    in.max_capacity = bufferLenCpy;
   }
 
   T &operator[](int index) {
@@ -256,7 +256,7 @@ class Vector {
 
   void shrink_to_fit() { resize_internal(this->len, true, true); }
 
-  int capacity() { return this->bufferLen; }
+  int capacity() { return this->max_capacity; }
 
   bool resize(int newSize) {
     int oldSize = this->len;
@@ -306,11 +306,11 @@ class Vector {
 
   void swap(T &other) {
     // save values
-    int temp_blen = bufferLen;
+    int temp_blen = max_capacity;
     int temp_len = len;
     T *temp_data = p_data;
     // swap from other
-    bufferLen = other.bufferLen;
+    max_capacity = other.bufferLen;
     len = other.len;
     p_data = other.p_data;
     // set other
@@ -327,19 +327,19 @@ class Vector {
   }
 
  protected:
-  int bufferLen = 0;
+  int max_capacity = 0;
   int len = 0;
   T *p_data = nullptr;
   Allocator *p_allocator = &DefaultAllocator;
 
   void resize_internal(int newSize, bool copy, bool shrink = false) {
     if (newSize <= 0) return;
-    if (newSize > bufferLen || this->p_data == nullptr || shrink) {
+    if (newSize > max_capacity || this->p_data == nullptr || shrink) {
       T *oldData = p_data;
-      int oldBufferLen = this->bufferLen;
+      int oldBufferLen = this->max_capacity;
       p_data = newArray(newSize);  // new T[newSize+1];
       assert(p_data != nullptr);
-      this->bufferLen = newSize;
+      this->max_capacity = newSize;
       if (oldData != nullptr) {
         if (copy && this->len > 0) {
           // save existing data

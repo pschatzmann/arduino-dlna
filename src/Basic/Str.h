@@ -168,6 +168,13 @@ class Str : public StrView {
     chars = nullptr;
   }
 
+  void resize(int size) {
+    vector.resize(size);
+    maxlen = size;
+    len = size;
+    chars = vector.data();
+  }
+
   void swap(Str &other){
     int tmp_len = len;
     int tmp_maxlen = maxlen;

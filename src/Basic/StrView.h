@@ -193,18 +193,6 @@ class StrView {
     return strncmp_i(this->chars + (len - endlen), str, endlen) == 0;
   }
 
-  /// virtual bool matches(const char* match){
-  ///     int m_size = strlen(match);
-  ///     if (length() < m_size)
-  ///         return false;
-  ///     if (strncmp(this->chars,match,m_size-1)!=0)
-  ///         return false;
-  ///     if (match[m_size-1]=='*' || match[m_size-1]==this->chars[m_size-1] ){
-  ///         return true;
-  ///     }
-  ///     return false;
-  /// }
-
   /// file matching supporting * and ? - replacing regex which is not supported
   /// in all environments
   virtual bool matches(const char* pattern) {
@@ -552,6 +540,14 @@ class StrView {
   virtual void clear() {
     if (chars != nullptr && !isConst()) {
       chars[0] = 0;
+    }
+    len = 0;
+  }
+
+  virtual void clearAll(){
+    if (chars != nullptr && !isConst()) {
+      for (int j=0;j<maxlen;j++)
+        chars[j] = 0;
     }
     len = 0;
   }

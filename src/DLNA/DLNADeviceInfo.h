@@ -34,6 +34,7 @@ class DLNADeviceInfo {
   /// Define the udn uuid
   void setUDN(const char* id) { udn = id; }
 
+  /// Provide the udn uuid
   const char* getUDN() { return udn; }
 
   /// Defines the base url

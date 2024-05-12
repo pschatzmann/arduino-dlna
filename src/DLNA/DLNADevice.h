@@ -24,7 +24,7 @@ namespace tiny_dlna {
  */
 class DLNADevice {
  public:
-  bool begin(DLNADeviceInfo& device, UDPService& udp, HttpServer& server) {
+  bool begin(DLNADeviceInfo& device, IUDPService& udp, HttpServer& server) {
     DlnaLogger.log(DlnaInfo, "DLNADevice::begin");
 
     p_server = &server;
@@ -47,9 +47,17 @@ class DLNADevice {
       return false;
     }
 
+    // start udp
+    if (!p_udp->begin(DLNABroadcastAddress)) {
+      DlnaLogger.log(DlnaError, "UDP begin failed");
+      return false;
+    }
+
     if (!setupScheduler()) {
       return false;
     }
+
+    setupParser();
 
     // start server
     p_server->begin(baseUrl.port());
@@ -83,9 +91,11 @@ class DLNADevice {
     if (isSchedulerActive()) {
       // process UDP requests
       RequestData req = p_udp->receive();
-      Schedule* schedule = parser.parse(req);
-      if (schedule) {
-        scheduler.add(schedule);
+      if (req){
+        Schedule* schedule = parser.parse(req);
+        if (schedule) {
+          scheduler.add(schedule);
+        }
       }
 
       // execute scheduled udp replys
@@ -108,20 +118,35 @@ class DLNADevice {
 
   bool isSchedulerActive() { return scheduler_active; }
 
+  void setPostAliveRepeatMs(uint32_t ms) { post_alive_repeat_ms = ms; }
+
  protected:
   Scheduler scheduler;
   DLNARequestParser parser;
-  UDPService* p_udp = nullptr;
+  IUDPService* p_udp = nullptr;
   Vector<DLNADeviceInfo*> devices;
   HttpServer* p_server = nullptr;
   bool is_active = false;
   bool scheduler_active = true;
+  uint32_t post_alive_repeat_ms = 0;
 
+  /// MSearch requests reply to upnp:rootdevice and the device type defined in the device
+  bool setupParser() {
+    parser.addMSearchST("upnp:rootdevice");
+    parser.addMSearchST("ssdp:all");
+    for (auto& device : devices) {
+      parser.addMSearchST(device->getUDN());
+      parser.addMSearchST(device->getDeviceType());
+    }
+    return true;
+  }
+
+  /// Schedule PostAlive messages
   bool setupScheduler() {
-    // schedule post alive messages: Usually repeated 2 times (because UDP
-    // messages might be lost)
-    PostAliveSchedule* postAlive = new PostAliveSchedule();
-    PostAliveSchedule* postAlive1 = new PostAliveSchedule();
+    //schedule post alive messages: Usually repeated 2 times (because UDP
+    //messages might be lost)
+    PostAliveSchedule* postAlive = new PostAliveSchedule(post_alive_repeat_ms);
+    PostAliveSchedule* postAlive1 = new PostAliveSchedule(post_alive_repeat_ms);
     postAlive1->time = millis() + 100;
     scheduler.add(postAlive);
     scheduler.add(postAlive1);
@@ -187,11 +212,10 @@ class DLNADevice {
 
   const char* concat(const char* prefix, const char* addr, char* buffer,
                      int len) {
-
     StrView str(buffer, len);
     str = prefix;
-    str += addr;  
-    str.replace("//", "/");               
+    str += addr;
+    str.replace("//", "/");
     return buffer;
   }
 
