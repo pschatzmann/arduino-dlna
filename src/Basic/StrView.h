@@ -98,7 +98,6 @@ class StrView {
 
   virtual void swap(StrView& str) {
     char* cpy_chars = chars;
-    ;
     bool cpy_is_const = is_const;
     int cpy_len = len;
     int cpy_maxlen = maxlen;

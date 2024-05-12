@@ -93,7 +93,7 @@ class Str : public StrView {
   /// assigns a memory buffer
   void copyFrom(const char *source, int len, int maxlen = 0) {
     this->maxlen = maxlen == 0 ? len : maxlen;
-    grow(this->maxlen);
+    resize(this->maxlen);
     if (this->chars != nullptr) {
       this->len = len;
       this->is_const = false;
@@ -169,7 +169,7 @@ class Str : public StrView {
   }
 
   void resize(int size) {
-    vector.resize(size);
+    vector.resize(size+1);
     maxlen = size;
     len = size;
     chars = vector.data();
@@ -185,6 +185,7 @@ class Str : public StrView {
     other.chars = other.vector.data();
   }
 
+  const char* c_str() { return vector.data(); }
 
  protected:
   Vector<char> vector;
@@ -201,7 +202,6 @@ class Str : public StrView {
     if (newMaxLen < 0) return false;
 
     if (chars == nullptr || newMaxLen > maxlen) {
-
       grown = true;
       // we use at minimum the defined maxlen
       int newSize = newMaxLen > maxlen ? newMaxLen : maxlen;
