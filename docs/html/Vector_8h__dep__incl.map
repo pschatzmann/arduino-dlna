@@ -1,12 +1,12 @@
 <map id="src/Basic/Vector.h" name="src/Basic/Vector.h">
-<area shape="rect" id="node1" title=" " alt="" coords="221,5,357,32"/>
+<area shape="rect" id="node1" title=" " alt="" coords="223,5,359,32"/>
 <area shape="rect" id="node2" href="$DLNADeviceInfo_8h.html" title=" " alt="" coords="5,155,208,181"/>
-<area shape="rect" id="node8" href="$RingBuffer_8h.html" title=" " alt="" coords="371,80,533,107"/>
-<area shape="rect" id="node9" href="$Str_8h.html" title=" " alt="" coords="233,80,346,107"/>
-<area shape="rect" id="node3" href="$DLNADevice_8h.html" title=" " alt="" coords="24,453,203,480"/>
-<area shape="rect" id="node5" href="$Schedule_8h.html" title=" " alt="" coords="135,229,291,256"/>
-<area shape="rect" id="node6" href="$Scheduler_8h.html" title=" " alt="" coords="167,304,327,331"/>
-<area shape="rect" id="node4" href="$DLNA_8h.html" title=" " alt="" coords="67,528,160,555"/>
-<area shape="rect" id="node7" href="$DLNARequestParser_8h.html" title=" " alt="" coords="150,379,375,405"/>
-<area shape="rect" id="node10" href="$UDPService_8h.html" title=" " alt="" coords="237,155,411,181"/>
+<area shape="rect" id="node8" href="$RingBuffer_8h.html" title=" " alt="" coords="372,80,535,107"/>
+<area shape="rect" id="node9" href="$Str_8h.html" title=" " alt="" coords="234,80,347,107"/>
+<area shape="rect" id="node3" href="$DLNADevice_8h.html" title=" " alt="" coords="25,453,204,480"/>
+<area shape="rect" id="node5" href="$Schedule_8h.html" title=" " alt="" coords="137,229,293,256"/>
+<area shape="rect" id="node6" href="$Scheduler_8h.html" title=" " alt="" coords="168,304,328,331"/>
+<area shape="rect" id="node4" href="$DLNA_8h.html" title=" " alt="" coords="68,528,161,555"/>
+<area shape="rect" id="node7" href="$DLNARequestParser_8h.html" title=" " alt="" coords="151,379,377,405"/>
+<area shape="rect" id="node10" href="$IUDPService_8h.html" title=" " alt="" coords="237,155,414,181"/>
 </map>

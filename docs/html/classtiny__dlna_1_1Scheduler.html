@@ -84,21 +84,21 @@ Collaboration diagram for tiny_dlna::Scheduler:</div>
 <div class="dyncontent">
 <div class="center"><img src="classtiny__dlna_1_1Scheduler__coll__graph.png" border="0" usemap="#atiny__dlna_1_1Scheduler_coll__map" alt="Collaboration graph"/></div>
 <map name="atiny__dlna_1_1Scheduler_coll__map" id="atiny__dlna_1_1Scheduler_coll__map">
-<area shape="rect" title="Scheduler which processes all due Schedules (to send out UDP replies)" alt="" coords="108,228,263,255"/>
-<area shape="rect" href="classtiny__dlna_1_1List.html" title=" " alt="" coords="109,124,262,165"/>
-<area shape="rect" href="structtiny__dlna_1_1List_1_1Node.html" title=" " alt="" coords="5,5,141,47"/>
-<area shape="rect" href="classtiny__dlna_1_1Allocator.html" title="Memory allocateator which uses malloc." alt="" coords="223,13,371,39"/>
+<area shape="rect" title="Scheduler which processes all due Schedules (to send out UDP replies)" alt="" coords="89,199,244,225"/>
+<area shape="rect" href="classtiny__dlna_1_1Vector.html" title=" " alt="" coords="77,95,256,136"/>
+<area shape="rect" href="structtiny__dlna_1_1Schedule.html" title="An individual Schedule (to send out UDP messages)" alt="" coords="5,5,155,32"/>
+<area shape="rect" href="classtiny__dlna_1_1Allocator.html" title="Memory allocateator which uses malloc." alt="" coords="179,5,327,32"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aced10d3f8ae9ae211105b7afee5074ce"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Scheduler.html#aced10d3f8ae9ae211105b7afee5074ce">add</a> (<a class="el" href="structtiny__dlna_1_1Schedule.html">Schedule</a> schedule)</td></tr>
-<tr class="memdesc:aced10d3f8ae9ae211105b7afee5074ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a schedule to the scheduler.  <a href="classtiny__dlna_1_1Scheduler.html#aced10d3f8ae9ae211105b7afee5074ce">More...</a><br /></td></tr>
-<tr class="separator:aced10d3f8ae9ae211105b7afee5074ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a757e5032529f3d224ec56a3191735cc1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Scheduler.html#a757e5032529f3d224ec56a3191735cc1">execute</a> (<a class="el" href="classtiny__dlna_1_1UDPService.html">UDPService</a> &amp;udp, <a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html">DLNADeviceInfo</a> &amp;device)</td></tr>
-<tr class="memdesc:a757e5032529f3d224ec56a3191735cc1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute all due schedules.  <a href="classtiny__dlna_1_1Scheduler.html#a757e5032529f3d224ec56a3191735cc1">More...</a><br /></td></tr>
-<tr class="separator:a757e5032529f3d224ec56a3191735cc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc85d05e37658ccea53f4669c22e923a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Scheduler.html#adc85d05e37658ccea53f4669c22e923a">add</a> (<a class="el" href="structtiny__dlna_1_1Schedule.html">Schedule</a> *schedule)</td></tr>
+<tr class="memdesc:adc85d05e37658ccea53f4669c22e923a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a schedule to the scheduler.  <a href="classtiny__dlna_1_1Scheduler.html#adc85d05e37658ccea53f4669c22e923a">More...</a><br /></td></tr>
+<tr class="separator:adc85d05e37658ccea53f4669c22e923a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf67e59ef30510628d188352472dff7f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Scheduler.html#acf67e59ef30510628d188352472dff7f">execute</a> (<a class="el" href="classtiny__dlna_1_1IUDPService.html">IUDPService</a> &amp;udp, <a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html">DLNADeviceInfo</a> &amp;device)</td></tr>
+<tr class="memdesc:acf67e59ef30510628d188352472dff7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute all due schedules.  <a href="classtiny__dlna_1_1Scheduler.html#acf67e59ef30510628d188352472dff7f">More...</a><br /></td></tr>
+<tr class="separator:acf67e59ef30510628d188352472dff7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -107,15 +107,15 @@ Protected Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a9b75da29781450f19117c5eb7c5712f6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1List.html">List</a>&lt; <a class="el" href="structtiny__dlna_1_1Schedule.html">Schedule</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Scheduler.html#a9b75da29781450f19117c5eb7c5712f6">queue</a></td></tr>
-<tr class="separator:a9b75da29781450f19117c5eb7c5712f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc0f361ef0885ee7a345e8b1c6ecfcb7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt; <a class="el" href="structtiny__dlna_1_1Schedule.html">Schedule</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Scheduler.html#abc0f361ef0885ee7a345e8b1c6ecfcb7">queue</a></td></tr>
+<tr class="separator:abc0f361ef0885ee7a345e8b1c6ecfcb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="classtiny__dlna_1_1Scheduler.html" title="Scheduler which processes all due Schedules (to send out UDP replies)">Scheduler</a> which processes all due Schedules (to send out UDP replies) </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="aced10d3f8ae9ae211105b7afee5074ce"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aced10d3f8ae9ae211105b7afee5074ce">&#9670;&nbsp;</a></span>add()</h2>
+<a id="adc85d05e37658ccea53f4669c22e923a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc85d05e37658ccea53f4669c22e923a">&#9670;&nbsp;</a></span>add()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -126,7 +126,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">void tiny_dlna::Scheduler::add </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structtiny__dlna_1_1Schedule.html">Schedule</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="structtiny__dlna_1_1Schedule.html">Schedule</a> *&#160;</td>
           <td class="paramname"><em>schedule</em></td><td>)</td>
           <td></td>
         </tr>
@@ -167,8 +167,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a757e5032529f3d224ec56a3191735cc1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a757e5032529f3d224ec56a3191735cc1">&#9670;&nbsp;</a></span>execute()</h2>
+<a id="acf67e59ef30510628d188352472dff7f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf67e59ef30510628d188352472dff7f">&#9670;&nbsp;</a></span>execute()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -179,7 +179,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">void tiny_dlna::Scheduler::execute </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1UDPService.html">UDPService</a> &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1IUDPService.html">IUDPService</a> &amp;&#160;</td>
           <td class="paramname"><em>udp</em>, </td>
         </tr>
         <tr>
@@ -206,8 +206,8 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="a9b75da29781450f19117c5eb7c5712f6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9b75da29781450f19117c5eb7c5712f6">&#9670;&nbsp;</a></span>queue</h2>
+<a id="abc0f361ef0885ee7a345e8b1c6ecfcb7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc0f361ef0885ee7a345e8b1c6ecfcb7">&#9670;&nbsp;</a></span>queue</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -216,7 +216,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtiny__dlna_1_1List.html">List</a>&lt;<a class="el" href="structtiny__dlna_1_1Schedule.html">Schedule</a>&gt; tiny_dlna::Scheduler::queue</td>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt;<a class="el" href="structtiny__dlna_1_1Schedule.html">Schedule</a>*&gt; tiny_dlna::Scheduler::queue</td>
         </tr>
       </table>
   </td>

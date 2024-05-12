@@ -74,7 +74,7 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html">DLNADevice</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abstract DLNA Device service setup. The device registers itself to the network and answers to the DLNA queries and requests. A DLNA device uses UDP, Http, XML and Soap to discover and manage a service, so there is quite some complexity involved:  <a href="classtiny__dlna_1_1DLNADevice.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup of a Basic DLNA Device service. The device registers itself to the network and answers to the DLNA queries and requests. A DLNA device uses UDP, Http, XML and Soap to discover and manage a service, so there is quite some complexity involved:  <a href="classtiny__dlna_1_1DLNADevice.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html">DLNADeviceInfo</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Device Attributes and generation of XML using urn:schemas-upnp-org:device-1-0. We could just reutrn a predefined device xml document, but we provide a dynamic generation of the service xml which should be more memory efficient.  <a href="classtiny__dlna_1_1DLNADeviceInfo.html#details">More...</a><br /></td></tr>
@@ -84,6 +84,11 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html">DLNAServiceInfo</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attributes needed for the DLNA Service Definition.  <a href="classtiny__dlna_1_1DLNAServiceInfo.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1RequestData.html">RequestData</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides information of the received UDP which consists of the (xml) data and the peer address and port.  <a href="structtiny__dlna_1_1RequestData.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IUDPService.html">IUDPService</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1Schedule.html">Schedule</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">An individual <a class="el" href="structtiny__dlna_1_1Schedule.html" title="An individual Schedule (to send out UDP messages)">Schedule</a> (to send out UDP messages)  <a href="structtiny__dlna_1_1Schedule.html#details">More...</a><br /></td></tr>
@@ -99,12 +104,6 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Scheduler.html">Scheduler</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classtiny__dlna_1_1Scheduler.html" title="Scheduler which processes all due Schedules (to send out UDP replies)">Scheduler</a> which processes all due Schedules (to send out UDP replies)  <a href="classtiny__dlna_1_1Scheduler.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1RequestData.html">RequestData</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides information of the received UDP which consists of the (xml) data and the peer address and port.  <a href="structtiny__dlna_1_1RequestData.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1UDPService.html">UDPService</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to UDP functionality: sending and receiving of data.  <a href="classtiny__dlna_1_1UDPService.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1XMLPrinter.html">XMLPrinter</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Functions to efficiently output XML. XML data contains a lot of redundancy so it is more memory efficient to generate the data instead of using a predefined XML document.  <a href="structtiny__dlna_1_1XMLPrinter.html#details">More...</a><br /></td></tr>
@@ -123,6 +122,9 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1LoggerClass.html">LoggerClass</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Logger that writes messages dependent on the log level.  <a href="classtiny__dlna_1_1LoggerClass.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1QueueLockFree.html">QueueLockFree</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A simple single producer, single consumer lock free queue.  <a href="classtiny__dlna_1_1QueueLockFree.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1RingBuffer.html">RingBuffer</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implementation of a Simple Circular Buffer. Instead of comparing the position of the read and write pointer in order to figure out if we still have characters available or space left to write we keep track of the actual length which is easier to follow.  <a href="classtiny__dlna_1_1RingBuffer.html#details">More...</a><br /></td></tr>

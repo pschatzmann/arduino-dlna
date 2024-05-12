@@ -30,7 +30,9 @@ Collaboration diagram for tiny\+\_\+dlna\+::Post\+Bye\+Schedule\+:\nopagebreak
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-bool \mbox{\hyperlink{classtiny__dlna_1_1PostByeSchedule_aa9ee4964c51794a2dfa60ecdda49ff5b}{process}} (\mbox{\hyperlink{classtiny__dlna_1_1UDPService}{UDPService}} \&udp, \mbox{\hyperlink{classtiny__dlna_1_1DLNADeviceInfo}{DLNADevice\+Info}} \&device) override
+const char $\ast$ \mbox{\hyperlink{classtiny__dlna_1_1PostByeSchedule_abeeffadfb6b22c4944bcad652ffa6898}{name}} () override
+\item 
+bool \mbox{\hyperlink{classtiny__dlna_1_1PostByeSchedule_af21249223b13fa508b9b395a30cfb3eb}{process}} (\mbox{\hyperlink{classtiny__dlna_1_1IUDPService}{IUDPService}} \&udp, \mbox{\hyperlink{classtiny__dlna_1_1DLNADeviceInfo}{DLNADevice\+Info}} \&device) override
 \end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
@@ -49,15 +51,25 @@ Phil Schatzmann
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classtiny__dlna_1_1PostByeSchedule_aa9ee4964c51794a2dfa60ecdda49ff5b}\label{classtiny__dlna_1_1PostByeSchedule_aa9ee4964c51794a2dfa60ecdda49ff5b}} 
+\mbox{\Hypertarget{classtiny__dlna_1_1PostByeSchedule_abeeffadfb6b22c4944bcad652ffa6898}\label{classtiny__dlna_1_1PostByeSchedule_abeeffadfb6b22c4944bcad652ffa6898}} 
+\index{tiny\_dlna::PostByeSchedule@{tiny\_dlna::PostByeSchedule}!name@{name}}
+\index{name@{name}!tiny\_dlna::PostByeSchedule@{tiny\_dlna::PostByeSchedule}}
+\doxysubsubsection{\texorpdfstring{name()}{name()}}
+{\footnotesize\ttfamily const char$\ast$ tiny\+\_\+dlna\+::\+Post\+Bye\+Schedule\+::name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{structtiny__dlna_1_1Schedule_a7f84cd006a94d1749bd82843326f6876}{tiny\+\_\+dlna\+::\+Schedule}}.
+
+\mbox{\Hypertarget{classtiny__dlna_1_1PostByeSchedule_af21249223b13fa508b9b395a30cfb3eb}\label{classtiny__dlna_1_1PostByeSchedule_af21249223b13fa508b9b395a30cfb3eb}} 
 \index{tiny\_dlna::PostByeSchedule@{tiny\_dlna::PostByeSchedule}!process@{process}}
 \index{process@{process}!tiny\_dlna::PostByeSchedule@{tiny\_dlna::PostByeSchedule}}
 \doxysubsubsection{\texorpdfstring{process()}{process()}}
-{\footnotesize\ttfamily bool tiny\+\_\+dlna\+::\+Post\+Bye\+Schedule\+::process (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classtiny__dlna_1_1UDPService}{UDPService}} \&}]{udp,  }\item[{\mbox{\hyperlink{classtiny__dlna_1_1DLNADeviceInfo}{DLNADevice\+Info}} \&}]{device }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily bool tiny\+\_\+dlna\+::\+Post\+Bye\+Schedule\+::process (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classtiny__dlna_1_1IUDPService}{IUDPService}} \&}]{udp,  }\item[{\mbox{\hyperlink{classtiny__dlna_1_1DLNADeviceInfo}{DLNADevice\+Info}} \&}]{device }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
 
-Reimplemented from \mbox{\hyperlink{structtiny__dlna_1_1Schedule_adbea57d1ee3f0cc82765e55ffa5e4bc4}{tiny\+\_\+dlna\+::\+Schedule}}.
+Reimplemented from \mbox{\hyperlink{structtiny__dlna_1_1Schedule_a9739f92ce4dd5268aee8d647107b3e06}{tiny\+\_\+dlna\+::\+Schedule}}.
 
 
 

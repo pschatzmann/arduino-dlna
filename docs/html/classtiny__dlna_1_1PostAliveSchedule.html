@@ -67,7 +67,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="classtiny__dlna_1_1PostAliveSchedule-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">tiny_dlna::PostAliveSchedule Class Reference</div>  </div>
@@ -99,18 +99,24 @@ Collaboration diagram for tiny_dlna::PostAliveSchedule:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a26fb5826fa32375d2d95667664c79cfe"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1PostAliveSchedule.html#a26fb5826fa32375d2d95667664c79cfe">PostAliveSchedule</a> (int repeatMs=<a class="el" href="Schedule_8h.html#a3944c1db46ef503cfa808c7d4b40dbf6">ALIVE_MS</a>)</td></tr>
-<tr class="separator:a26fb5826fa32375d2d95667664c79cfe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a177126cf815a7b5755bf62eea03d6b12"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1PostAliveSchedule.html#a177126cf815a7b5755bf62eea03d6b12">process</a> (<a class="el" href="classtiny__dlna_1_1UDPService.html">UDPService</a> &amp;udp, <a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html">DLNADeviceInfo</a> &amp;device) override</td></tr>
-<tr class="separator:a177126cf815a7b5755bf62eea03d6b12"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a69d4661e009270b8802757f4238f10"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1PostAliveSchedule.html#a7a69d4661e009270b8802757f4238f10">PostAliveSchedule</a> (uint32_t repeatMs=<a class="el" href="Schedule_8h.html#a3944c1db46ef503cfa808c7d4b40dbf6">ALIVE_MS</a>)</td></tr>
+<tr class="separator:a7a69d4661e009270b8802757f4238f10"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aefbab567c1dbf90cda05135bec4c343b"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1PostAliveSchedule.html#aefbab567c1dbf90cda05135bec4c343b">name</a> () override</td></tr>
+<tr class="separator:aefbab567c1dbf90cda05135bec4c343b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0518db5c7ce7c13de7c935d411c9d35"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1PostAliveSchedule.html#ad0518db5c7ce7c13de7c935d411c9d35">setRepeatMs</a> (uint32_t ms)</td></tr>
+<tr class="separator:ad0518db5c7ce7c13de7c935d411c9d35"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ac7853020a2053d63ab88a5b10df2b1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1PostAliveSchedule.html#a1ac7853020a2053d63ab88a5b10df2b1">process</a> (<a class="el" href="classtiny__dlna_1_1IUDPService.html">IUDPService</a> &amp;udp, <a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html">DLNADeviceInfo</a> &amp;device) override</td></tr>
+<tr class="separator:a1ac7853020a2053d63ab88a5b10df2b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_structtiny__dlna_1_1Schedule"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_structtiny__dlna_1_1Schedule')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="structtiny__dlna_1_1Schedule.html">tiny_dlna::Schedule</a></td></tr>
 <tr class="memitem:ab68a78be25e74294fbac6839bd5111ae inherit pub_methods_structtiny__dlna_1_1Schedule"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1Schedule.html#ab68a78be25e74294fbac6839bd5111ae">operator bool</a> ()</td></tr>
 <tr class="separator:ab68a78be25e74294fbac6839bd5111ae inherit pub_methods_structtiny__dlna_1_1Schedule"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
-Protected Attributes</h2></td></tr>
-<tr class="memitem:a13761fc5515d7d2ccb612035d8d89410"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1PostAliveSchedule.html#a13761fc5515d7d2ccb612035d8d89410">max_age</a> = 60</td></tr>
-<tr class="separator:a13761fc5515d7d2ccb612035d8d89410"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:ae70155ab97a717cebfc3ebb9cbdcdd78"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1PostAliveSchedule.html#ae70155ab97a717cebfc3ebb9cbdcdd78">setupData</a> (const char *nt, const char *udn, char *result_nt, char *result_usn)</td></tr>
+<tr class="separator:ae70155ab97a717cebfc3ebb9cbdcdd78"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad976970954a9e560b52fb9ecf0182405"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1PostAliveSchedule.html#ad976970954a9e560b52fb9ecf0182405">process</a> (const char *nt, const char *usn, const char *device_url, int max_age, <a class="el" href="classtiny__dlna_1_1IUDPService.html">IUDPService</a> &amp;udp)</td></tr>
+<tr class="separator:ad976970954a9e560b52fb9ecf0182405"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -119,8 +125,8 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:aef42336ee989f5e3b64387a6b78dc30e inherit pub_attribs_structtiny__dlna_1_1Schedule"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a362781d6bbd24cedcad0aaf72872e689 inherit pub_attribs_structtiny__dlna_1_1Schedule"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1Schedule.html#a362781d6bbd24cedcad0aaf72872e689">time</a> = 0</td></tr>
 <tr class="separator:a362781d6bbd24cedcad0aaf72872e689 inherit pub_attribs_structtiny__dlna_1_1Schedule"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4e5ce8b2302ac82a91f414a5edb61974 inherit pub_attribs_structtiny__dlna_1_1Schedule"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1Schedule.html#a4e5ce8b2302ac82a91f414a5edb61974">repeat_ms</a> = 0</td></tr>
-<tr class="separator:a4e5ce8b2302ac82a91f414a5edb61974 inherit pub_attribs_structtiny__dlna_1_1Schedule"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae72839e74ad1799cb4320195bdb98622 inherit pub_attribs_structtiny__dlna_1_1Schedule"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1Schedule.html#ae72839e74ad1799cb4320195bdb98622">repeat_ms</a> = 0</td></tr>
+<tr class="separator:ae72839e74ad1799cb4320195bdb98622 inherit pub_attribs_structtiny__dlna_1_1Schedule"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a74fb7da531d36621cab452da63355058 inherit pub_attribs_structtiny__dlna_1_1Schedule"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1Schedule.html#a74fb7da531d36621cab452da63355058">end_time</a> = 0</td></tr>
 <tr class="separator:a74fb7da531d36621cab452da63355058 inherit pub_attribs_structtiny__dlna_1_1Schedule"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2b21ee1493e6c9d19f9b0a0d07bffc41 inherit pub_attribs_structtiny__dlna_1_1Schedule"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1Schedule.html#a2b21ee1493e6c9d19f9b0a0d07bffc41">active</a> = false</td></tr>
@@ -130,8 +136,8 @@ Additional Inherited Members</h2></td></tr>
 <div class="textblock"><p>Send out PostAlive messages: Repeated every 5 seconds. </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a26fb5826fa32375d2d95667664c79cfe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a26fb5826fa32375d2d95667664c79cfe">&#9670;&nbsp;</a></span>PostAliveSchedule()</h2>
+<a id="a7a69d4661e009270b8802757f4238f10"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a69d4661e009270b8802757f4238f10">&#9670;&nbsp;</a></span>PostAliveSchedule()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -142,7 +148,7 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="memname">tiny_dlna::PostAliveSchedule::PostAliveSchedule </td>
           <td>(</td>
-          <td class="paramtype">int&#160;</td>
+          <td class="paramtype">uint32_t&#160;</td>
           <td class="paramname"><em>repeatMs</em> = <code><a class="el" href="Schedule_8h.html#a3944c1db46ef503cfa808c7d4b40dbf6">ALIVE_MS</a></code></td><td>)</td>
           <td></td>
         </tr>
@@ -157,8 +163,35 @@ Additional Inherited Members</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a177126cf815a7b5755bf62eea03d6b12"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a177126cf815a7b5755bf62eea03d6b12">&#9670;&nbsp;</a></span>process()</h2>
+<a id="aefbab567c1dbf90cda05135bec4c343b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aefbab567c1dbf90cda05135bec4c343b">&#9670;&nbsp;</a></span>name()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* tiny_dlna::PostAliveSchedule::name </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="structtiny__dlna_1_1Schedule.html#a7f84cd006a94d1749bd82843326f6876">tiny_dlna::Schedule</a>.</p>
+
+</div>
+</div>
+<a id="ad976970954a9e560b52fb9ecf0182405"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad976970954a9e560b52fb9ecf0182405">&#9670;&nbsp;</a></span>process() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -169,7 +202,61 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="memname">bool tiny_dlna::PostAliveSchedule::process </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1UDPService.html">UDPService</a> &amp;&#160;</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>nt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>usn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>device_url</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>max_age</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1IUDPService.html">IUDPService</a> &amp;&#160;</td>
+          <td class="paramname"><em>udp</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1ac7853020a2053d63ab88a5b10df2b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1ac7853020a2053d63ab88a5b10df2b1">&#9670;&nbsp;</a></span>process() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool tiny_dlna::PostAliveSchedule::process </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1IUDPService.html">IUDPService</a> &amp;&#160;</td>
           <td class="paramname"><em>udp</em>, </td>
         </tr>
         <tr>
@@ -191,13 +278,12 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="structtiny__dlna_1_1Schedule.html#adbea57d1ee3f0cc82765e55ffa5e4bc4">tiny_dlna::Schedule</a>.</p>
+<p>Reimplemented from <a class="el" href="structtiny__dlna_1_1Schedule.html#a9739f92ce4dd5268aee8d647107b3e06">tiny_dlna::Schedule</a>.</p>
 
 </div>
 </div>
-<h2 class="groupheader">Member Data Documentation</h2>
-<a id="a13761fc5515d7d2ccb612035d8d89410"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a13761fc5515d7d2ccb612035d8d89410">&#9670;&nbsp;</a></span>max_age</h2>
+<a id="ad0518db5c7ce7c13de7c935d411c9d35"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad0518db5c7ce7c13de7c935d411c9d35">&#9670;&nbsp;</a></span>setRepeatMs()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -206,12 +292,64 @@ Additional Inherited Members</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int tiny_dlna::PostAliveSchedule::max_age = 60</td>
+          <td class="memname">void tiny_dlna::PostAliveSchedule::setRepeatMs </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>ms</em></td><td>)</td>
+          <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae70155ab97a717cebfc3ebb9cbdcdd78"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae70155ab97a717cebfc3ebb9cbdcdd78">&#9670;&nbsp;</a></span>setupData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tiny_dlna::PostAliveSchedule::setupData </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>nt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>udn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>result_nt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>result_usn</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">

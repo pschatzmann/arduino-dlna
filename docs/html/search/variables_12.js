@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['xml_736',['xml',['../classtiny__dlna_1_1Device.html#a0374c9c31e058882b5288d498f77ad63',1,'tiny_dlna::Device']]]
+  ['xml_687',['xml',['../classtiny__dlna_1_1DLNADeviceInfo.html#aa7460468c12c3e6a2300a5c6cc725492',1,'tiny_dlna::DLNADeviceInfo']]]
 ];

@@ -30,13 +30,13 @@ const char $\ast$ \mbox{\hyperlink{classtiny__dlna_1_1DLNADeviceInfo_adaed5de1a2
 void \mbox{\hyperlink{classtiny__dlna_1_1DLNADeviceInfo_aa21747b94417df4ee264f4f1d8708644}{set\+UDN}} (const char $\ast$id)
 \begin{DoxyCompactList}\small\item\em Define the udn uuid. \end{DoxyCompactList}\item 
 const char $\ast$ \mbox{\hyperlink{classtiny__dlna_1_1DLNADeviceInfo_abd11a82703c50b6c64c29bdd01a6f961}{get\+UDN}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Provide the udn uuid. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classtiny__dlna_1_1DLNADeviceInfo_aceb3f522a2cd6c315d2652725933b370}{set\+Base\+URL}} (Url url)
-\item 
+\begin{DoxyCompactList}\small\item\em Defines the base url. \end{DoxyCompactList}\item 
 Url \& \mbox{\hyperlink{classtiny__dlna_1_1DLNADeviceInfo_acba894fb58e4bbb7245d8330b2661d69}{get\+Base\+URL}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Provides the base url. \end{DoxyCompactList}\item 
 Url \& \mbox{\hyperlink{classtiny__dlna_1_1DLNADeviceInfo_aa60a8a1da3d38011f13b3f40cc118ad5}{get\+Device\+URL}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em This method returns base url/device.\+xml. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classtiny__dlna_1_1DLNADeviceInfo_acf3495d97f2b78feeef7a1454e49de93}{set\+IPAddress}} (IPAddress address)
 \item 
 IPAddress \mbox{\hyperlink{classtiny__dlna_1_1DLNADeviceInfo_aa37f3118fc3ae1ee711cf0cfa3e5a242}{get\+IPAddress}} ()
@@ -47,7 +47,7 @@ void \mbox{\hyperlink{classtiny__dlna_1_1DLNADeviceInfo_a4493db068eb875eff5b1eb7
 \item 
 const char $\ast$ \mbox{\hyperlink{classtiny__dlna_1_1DLNADeviceInfo_ae9b316895b6ab144d58ea2d044cf92ff}{get\+NS}} ()
 \item 
-void \mbox{\hyperlink{classtiny__dlna_1_1DLNADeviceInfo_abeca114a432ef66c4146d375a3d9e1a6}{set\+Device\+Type\+Name}} (const char $\ast$name)
+void \mbox{\hyperlink{classtiny__dlna_1_1DLNADeviceInfo_aa223cb1e5a3051d21a33ba27ae35061d}{set\+Friendly\+Name}} (const char $\ast$name)
 \begin{DoxyCompactList}\small\item\em Defines the base URL. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classtiny__dlna_1_1DLNADeviceInfo_a9d3d48bdee068f69e7e54c5b09e872b1}{set\+Manufacturer}} (const char $\ast$man)
 \item 
@@ -111,11 +111,11 @@ IPAddress \mbox{\hyperlink{classtiny__dlna_1_1DLNADeviceInfo_a28d8ce438c8338faf5
 \item 
 const char $\ast$ \mbox{\hyperlink{classtiny__dlna_1_1DLNADeviceInfo_ab63b6f9135b9c577d2dde4f4c67bf80c}{udn}} = \char`\"{}09349455-\/2941-\/4cf7-\/9847-\/0dd5ab210e97\char`\"{}
 \item 
-const char $\ast$ \mbox{\hyperlink{classtiny__dlna_1_1DLNADeviceInfo_a852f7a7baf10ff4d8e2d1953a5783901}{ns}} = \char`\"{}xmlns=\textbackslash{}\char`\"{} urn\+:schemas-\/upnp-\/org\+:device-\/1-\/0\textbackslash{}\char`\"{}\char`\"{}
+const char $\ast$ \mbox{\hyperlink{classtiny__dlna_1_1DLNADeviceInfo_a852f7a7baf10ff4d8e2d1953a5783901}{ns}} = \char`\"{}xmlns=\textbackslash{}\char`\"{}urn\+:schemas-\/upnp-\/org\+:device-\/1-\/0\textbackslash{}\char`\"{}\char`\"{}
 \item 
 const char $\ast$ \mbox{\hyperlink{classtiny__dlna_1_1DLNADeviceInfo_afdfeb8bfcadc3b17b28e331804373168}{device\+\_\+type}} = \char`\"{}urn\+:schemas-\/upnp-\/org\+:device\+:\+Media\+Renderer\+:1\char`\"{}
 \item 
-const char $\ast$ \mbox{\hyperlink{classtiny__dlna_1_1DLNADeviceInfo_a015a66128ddd0689037e150949e8ce36}{device\+\_\+type\+\_\+name}} = nullptr
+const char $\ast$ \mbox{\hyperlink{classtiny__dlna_1_1DLNADeviceInfo_a18aa46c7ec8845cc305d28a3bef2ab03}{friendly\+\_\+name}} = nullptr
 \item 
 const char $\ast$ \mbox{\hyperlink{classtiny__dlna_1_1DLNADeviceInfo_ab536b9c848895b3d98fe3f10a4f1fa23}{manufacturer}} = nullptr
 \item 
@@ -176,6 +176,10 @@ Adds a service defintion.
 \doxysubsubsection{\texorpdfstring{getBaseURL()}{getBaseURL()}}
 {\footnotesize\ttfamily Url\& tiny\+\_\+dlna\+::\+DLNADevice\+Info\+::get\+Base\+URL (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
+
+
+Provides the base url. 
+
 \mbox{\Hypertarget{classtiny__dlna_1_1DLNADeviceInfo_adaed5de1a275cf86aea2cc6b1e8d1415}\label{classtiny__dlna_1_1DLNADeviceInfo_adaed5de1a275cf86aea2cc6b1e8d1415}} 
 \index{tiny\_dlna::DLNADeviceInfo@{tiny\_dlna::DLNADeviceInfo}!getDeviceType@{getDeviceType}}
 \index{getDeviceType@{getDeviceType}!tiny\_dlna::DLNADeviceInfo@{tiny\_dlna::DLNADeviceInfo}}
@@ -187,6 +191,10 @@ Adds a service defintion.
 \index{getDeviceURL@{getDeviceURL}!tiny\_dlna::DLNADeviceInfo@{tiny\_dlna::DLNADeviceInfo}}
 \doxysubsubsection{\texorpdfstring{getDeviceURL()}{getDeviceURL()}}
 {\footnotesize\ttfamily Url\& tiny\+\_\+dlna\+::\+DLNADevice\+Info\+::get\+Device\+URL (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+This method returns base url/device.\+xml. 
 
 \mbox{\Hypertarget{classtiny__dlna_1_1DLNADeviceInfo_aa37f3118fc3ae1ee711cf0cfa3e5a242}\label{classtiny__dlna_1_1DLNADeviceInfo_aa37f3118fc3ae1ee711cf0cfa3e5a242}} 
 \index{tiny\_dlna::DLNADeviceInfo@{tiny\_dlna::DLNADeviceInfo}!getIPAddress@{getIPAddress}}
@@ -231,6 +239,10 @@ Finds a service definition by name.
 \index{getUDN@{getUDN}!tiny\_dlna::DLNADeviceInfo@{tiny\_dlna::DLNADeviceInfo}}
 \doxysubsubsection{\texorpdfstring{getUDN()}{getUDN()}}
 {\footnotesize\ttfamily const char$\ast$ tiny\+\_\+dlna\+::\+DLNADevice\+Info\+::get\+UDN (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Provide the udn uuid. 
 
 \mbox{\Hypertarget{classtiny__dlna_1_1DLNADeviceInfo_a367895351ae485ae432fb25d236d1559}\label{classtiny__dlna_1_1DLNADeviceInfo_a367895351ae485ae432fb25d236d1559}} 
 \index{tiny\_dlna::DLNADeviceInfo@{tiny\_dlna::DLNADeviceInfo}!print@{print}}
@@ -290,17 +302,21 @@ renderes the device xml
 \doxysubsubsection{\texorpdfstring{setBaseURL()}{setBaseURL()}}
 {\footnotesize\ttfamily void tiny\+\_\+dlna\+::\+DLNADevice\+Info\+::set\+Base\+URL (\begin{DoxyParamCaption}\item[{Url}]{url }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
+
+
+Defines the base url. 
+
 \mbox{\Hypertarget{classtiny__dlna_1_1DLNADeviceInfo_a2bf911c1f4b7e4a900b9e962b17d023d}\label{classtiny__dlna_1_1DLNADeviceInfo_a2bf911c1f4b7e4a900b9e962b17d023d}} 
 \index{tiny\_dlna::DLNADeviceInfo@{tiny\_dlna::DLNADeviceInfo}!setDeviceType@{setDeviceType}}
 \index{setDeviceType@{setDeviceType}!tiny\_dlna::DLNADeviceInfo@{tiny\_dlna::DLNADeviceInfo}}
 \doxysubsubsection{\texorpdfstring{setDeviceType()}{setDeviceType()}}
 {\footnotesize\ttfamily void tiny\+\_\+dlna\+::\+DLNADevice\+Info\+::set\+Device\+Type (\begin{DoxyParamCaption}\item[{const char $\ast$}]{st }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-\mbox{\Hypertarget{classtiny__dlna_1_1DLNADeviceInfo_abeca114a432ef66c4146d375a3d9e1a6}\label{classtiny__dlna_1_1DLNADeviceInfo_abeca114a432ef66c4146d375a3d9e1a6}} 
-\index{tiny\_dlna::DLNADeviceInfo@{tiny\_dlna::DLNADeviceInfo}!setDeviceTypeName@{setDeviceTypeName}}
-\index{setDeviceTypeName@{setDeviceTypeName}!tiny\_dlna::DLNADeviceInfo@{tiny\_dlna::DLNADeviceInfo}}
-\doxysubsubsection{\texorpdfstring{setDeviceTypeName()}{setDeviceTypeName()}}
-{\footnotesize\ttfamily void tiny\+\_\+dlna\+::\+DLNADevice\+Info\+::set\+Device\+Type\+Name (\begin{DoxyParamCaption}\item[{const char $\ast$}]{name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\Hypertarget{classtiny__dlna_1_1DLNADeviceInfo_aa223cb1e5a3051d21a33ba27ae35061d}\label{classtiny__dlna_1_1DLNADeviceInfo_aa223cb1e5a3051d21a33ba27ae35061d}} 
+\index{tiny\_dlna::DLNADeviceInfo@{tiny\_dlna::DLNADeviceInfo}!setFriendlyName@{setFriendlyName}}
+\index{setFriendlyName@{setFriendlyName}!tiny\_dlna::DLNADeviceInfo@{tiny\_dlna::DLNADeviceInfo}}
+\doxysubsubsection{\texorpdfstring{setFriendlyName()}{setFriendlyName()}}
+{\footnotesize\ttfamily void tiny\+\_\+dlna\+::\+DLNADevice\+Info\+::set\+Friendly\+Name (\begin{DoxyParamCaption}\item[{const char $\ast$}]{name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -415,17 +431,17 @@ Define the udn uuid.
 \doxysubsubsection{\texorpdfstring{device\_type}{device\_type}}
 {\footnotesize\ttfamily const char$\ast$ tiny\+\_\+dlna\+::\+DLNADevice\+Info\+::device\+\_\+type = \char`\"{}urn\+:schemas-\/upnp-\/org\+:device\+:\+Media\+Renderer\+:1\char`\"{}\hspace{0.3cm}{\ttfamily [protected]}}
 
-\mbox{\Hypertarget{classtiny__dlna_1_1DLNADeviceInfo_a015a66128ddd0689037e150949e8ce36}\label{classtiny__dlna_1_1DLNADeviceInfo_a015a66128ddd0689037e150949e8ce36}} 
-\index{tiny\_dlna::DLNADeviceInfo@{tiny\_dlna::DLNADeviceInfo}!device\_type\_name@{device\_type\_name}}
-\index{device\_type\_name@{device\_type\_name}!tiny\_dlna::DLNADeviceInfo@{tiny\_dlna::DLNADeviceInfo}}
-\doxysubsubsection{\texorpdfstring{device\_type\_name}{device\_type\_name}}
-{\footnotesize\ttfamily const char$\ast$ tiny\+\_\+dlna\+::\+DLNADevice\+Info\+::device\+\_\+type\+\_\+name = nullptr\hspace{0.3cm}{\ttfamily [protected]}}
-
 \mbox{\Hypertarget{classtiny__dlna_1_1DLNADeviceInfo_a0e471ff0296785d593b3560a00150388}\label{classtiny__dlna_1_1DLNADeviceInfo_a0e471ff0296785d593b3560a00150388}} 
 \index{tiny\_dlna::DLNADeviceInfo@{tiny\_dlna::DLNADeviceInfo}!device\_url@{device\_url}}
 \index{device\_url@{device\_url}!tiny\_dlna::DLNADeviceInfo@{tiny\_dlna::DLNADeviceInfo}}
 \doxysubsubsection{\texorpdfstring{device\_url}{device\_url}}
 {\footnotesize\ttfamily Url tiny\+\_\+dlna\+::\+DLNADevice\+Info\+::device\+\_\+url\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1DLNADeviceInfo_a18aa46c7ec8845cc305d28a3bef2ab03}\label{classtiny__dlna_1_1DLNADeviceInfo_a18aa46c7ec8845cc305d28a3bef2ab03}} 
+\index{tiny\_dlna::DLNADeviceInfo@{tiny\_dlna::DLNADeviceInfo}!friendly\_name@{friendly\_name}}
+\index{friendly\_name@{friendly\_name}!tiny\_dlna::DLNADeviceInfo@{tiny\_dlna::DLNADeviceInfo}}
+\doxysubsubsection{\texorpdfstring{friendly\_name}{friendly\_name}}
+{\footnotesize\ttfamily const char$\ast$ tiny\+\_\+dlna\+::\+DLNADevice\+Info\+::friendly\+\_\+name = nullptr\hspace{0.3cm}{\ttfamily [protected]}}
 
 \mbox{\Hypertarget{classtiny__dlna_1_1DLNADeviceInfo_afcd6eca5d11de914d4521db9229f2954}\label{classtiny__dlna_1_1DLNADeviceInfo_afcd6eca5d11de914d4521db9229f2954}} 
 \index{tiny\_dlna::DLNADeviceInfo@{tiny\_dlna::DLNADeviceInfo}!icon\_depth@{icon\_depth}}
@@ -503,7 +519,7 @@ Define the udn uuid.
 \index{tiny\_dlna::DLNADeviceInfo@{tiny\_dlna::DLNADeviceInfo}!ns@{ns}}
 \index{ns@{ns}!tiny\_dlna::DLNADeviceInfo@{tiny\_dlna::DLNADeviceInfo}}
 \doxysubsubsection{\texorpdfstring{ns}{ns}}
-{\footnotesize\ttfamily const char$\ast$ tiny\+\_\+dlna\+::\+DLNADevice\+Info\+::ns = \char`\"{}xmlns=\textbackslash{}\char`\"{} urn\+:schemas-\/upnp-\/org\+:device-\/1-\/0\textbackslash{}\char`\"{}\char`\"{}\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily const char$\ast$ tiny\+\_\+dlna\+::\+DLNADevice\+Info\+::ns = \char`\"{}xmlns=\textbackslash{}\char`\"{}urn\+:schemas-\/upnp-\/org\+:device-\/1-\/0\textbackslash{}\char`\"{}\char`\"{}\hspace{0.3cm}{\ttfamily [protected]}}
 
 \mbox{\Hypertarget{classtiny__dlna_1_1DLNADeviceInfo_a407af40786297b6e92a4091a1df3769f}\label{classtiny__dlna_1_1DLNADeviceInfo_a407af40786297b6e92a4091a1df3769f}} 
 \index{tiny\_dlna::DLNADeviceInfo@{tiny\_dlna::DLNADeviceInfo}!serial\_number@{serial\_number}}

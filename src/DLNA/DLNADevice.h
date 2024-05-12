@@ -24,12 +24,14 @@ namespace tiny_dlna {
  */
 class DLNADevice {
  public:
+  /// start the 
   bool begin(DLNADeviceInfo& device, IUDPService& udp, HttpServer& server) {
     DlnaLogger.log(DlnaInfo, "DLNADevice::begin");
 
     p_server = &server;
     p_udp = &udp;
     addDevice(device);
+    setupParser();
 
     // check base url
     Url baseUrl = device.getBaseURL();
@@ -43,26 +45,31 @@ class DLNADevice {
     // setup all services
     for (auto& p_device : devices) setupServices(*p_device);
 
-    setupParser();
-
+    // setup web server
     if (!setupDLNAServer(server)) {
+      DlnaLogger.log(DlnaError, "setupDLNAServer failed");
       return false;
     }
 
-    // start server
-    p_server->begin(baseUrl.port());
+    // start web server
+    if (!p_server->begin(baseUrl.port())){
+      DlnaLogger.log(DlnaError, "Server failed");
+      return false;
+    }
 
-    // start udp
+    // setup UDP
     if (!p_udp->begin(DLNABroadcastAddress)) {
       DlnaLogger.log(DlnaError, "UDP begin failed");
       return false;
     }
 
     if (!setupScheduler()) {
+      DlnaLogger.log(DlnaError, "Scheduler failed");
       return false;
     }
 
     is_active = true;
+    DlnaLogger.log(DlnaInfo, "Device successfully started");
     return true;
   }
 
@@ -70,6 +77,7 @@ class DLNADevice {
   /// via begin
   void addDevice(DLNADeviceInfo& device) { devices.push_back(&device); }
 
+  /// Stops the processing and releases the resources
   void end() {
     // send 3 bye messages
     PostByeSchedule* bye = new PostByeSchedule();
@@ -82,11 +90,12 @@ class DLNADevice {
     p_server->end();
   }
 
+  /// call this method in the Arduino loop as often as possible
   bool loop() {
     if (!is_active) return false;
 
     // handle server requests
-    if (p_server) p_server->doLoop();
+    p_server->doLoop();
 
     if (isSchedulerActive()) {
       // process UDP requests
@@ -108,16 +117,21 @@ class DLNADevice {
     return true;
   }
 
+  /// Provide addess to the service information
   DLNAServiceInfo getService(const char* id, int deviceIdx = 0) {
     return devices[deviceIdx]->getService(id);
   }
 
+  /// Provides the device
   DLNADeviceInfo& getDevice(int deviceIdx = 0) { return *devices[deviceIdx]; }
 
+  /// We can activate/deactivate the scheduler
   void setSchedulerActive(bool flag) { scheduler_active = flag; }
 
+  /// Checks if the scheduler is active
   bool isSchedulerActive() { return scheduler_active; }
 
+  /// Repeat the post-alive messages (default: 0 = no repeat). Call this method before calling begin!
   void setPostAliveRepeatMs(uint32_t ms) { post_alive_repeat_ms = ms; }
 
  protected:
@@ -153,6 +167,7 @@ class DLNADevice {
     return true;
   }
 
+  /// set up Web Server to handle Service Addresses
   virtual bool setupDLNAServer(HttpServer& srv) {
     auto xmlDevice = [](HttpServer* server, const char* requestPath,
                         HttpRequestHandlerLine* hl) {
@@ -210,6 +225,7 @@ class DLNADevice {
     return true;
   }
 
+  /// concatenate strings without allocating any heap memory
   const char* concat(const char* prefix, const char* addr, char* buffer,
                      int len) {
     StrView str(buffer, len);

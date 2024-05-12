@@ -1,5 +1,9 @@
 <map id="tiny_dlna::MSearchReplySchedule" name="tiny_dlna::MSearchReplySchedule">
-<area shape="rect" id="node1" title="Answer to MSearch request." alt="" coords="59,95,301,121"/>
-<area shape="rect" id="node2" href="$structtiny__dlna_1_1Schedule.html" title="An individual Schedule (to send out UDP messages)" alt="" coords="5,5,155,32"/>
-<area shape="rect" id="node3" href="$structtiny__dlna_1_1IPAddressAndPort.html" title="IP Adress including Port information." alt="" coords="179,5,383,32"/>
+<area shape="rect" id="node1" title="Answer to MSearch request." alt="" coords="112,288,355,315"/>
+<area shape="rect" id="node2" href="$structtiny__dlna_1_1Schedule.html" title="An individual Schedule (to send out UDP messages)" alt="" coords="5,199,155,225"/>
+<area shape="rect" id="node3" href="$classtiny__dlna_1_1Str.html" title="String implementation which keeps the data on the heap. We grow the allocated memory only if the copy..." alt="" coords="179,199,287,225"/>
+<area shape="rect" id="node4" href="$classtiny__dlna_1_1StrView.html" title="A simple wrapper to provide string functions on char*. If the underlying char* is a const we do not a..." alt="" coords="111,102,251,129"/>
+<area shape="rect" id="node5" href="$classtiny__dlna_1_1Vector.html" title=" " alt="" coords="275,95,418,136"/>
+<area shape="rect" id="node6" href="$classtiny__dlna_1_1Allocator.html" title="Memory allocateator which uses malloc." alt="" coords="273,5,421,32"/>
+<area shape="rect" id="node7" href="$structtiny__dlna_1_1IPAddressAndPort.html" title="IP Adress including Port information." alt="" coords="311,199,515,225"/>
 </map>

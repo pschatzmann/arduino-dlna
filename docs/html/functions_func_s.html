@@ -65,13 +65,14 @@ $(function() {
 
 <h3><a id="index_s"></a>- s -</h3><ul>
 <li>send()
-: <a class="el" href="classtiny__dlna_1_1UDPService.html#a76e870308f9d5b5ba4d957e5430a0d98">tiny_dlna::UDPService</a>
+: <a class="el" href="classtiny__dlna_1_1IUDPService.html#a6d29e48295121ba2b962514300f0e610">tiny_dlna::IUDPService</a>
 </li>
 <li>set()
-: <a class="el" href="classtiny__dlna_1_1StrView.html#aa902f71d4f03d151423f1a4464f185da">tiny_dlna::StrView</a>
+: <a class="el" href="classtiny__dlna_1_1StrView.html#a109f151dc164c117139912d53749adc5">tiny_dlna::StrView</a>
 </li>
 <li>setAllocator()
 : <a class="el" href="classtiny__dlna_1_1List.html#afc8376b2dbe0e347d484548dcba11bd5">tiny_dlna::List&lt; T &gt;</a>
+, <a class="el" href="classtiny__dlna_1_1QueueLockFree.html#af81e957f14272cf0022a5d93750a81a5">tiny_dlna::QueueLockFree&lt; T &gt;</a>
 , <a class="el" href="classtiny__dlna_1_1Vector.html#afb674845dda61383ad0544d2ab3e4fe8">tiny_dlna::Vector&lt; T &gt;</a>
 </li>
 <li>setBaseURL()
@@ -86,8 +87,8 @@ $(function() {
 <li>setDeviceType()
 : <a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#a2bf911c1f4b7e4a900b9e962b17d023d">tiny_dlna::DLNADeviceInfo</a>
 </li>
-<li>setDeviceTypeName()
-: <a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#abeca114a432ef66c4146d375a3d9e1a6">tiny_dlna::DLNADeviceInfo</a>
+<li>setFriendlyName()
+: <a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#aa223cb1e5a3051d21a33ba27ae35061d">tiny_dlna::DLNADeviceInfo</a>
 </li>
 <li>setIconDepth()
 : <a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#ac9e5290bf31496d8870cfd859603b8d6">tiny_dlna::DLNADeviceInfo</a>
@@ -137,6 +138,15 @@ $(function() {
 <li>setOutput()
 : <a class="el" href="structtiny__dlna_1_1XMLPrinter.html#ac33a7ac306583618bcbd98dcf8303a31">tiny_dlna::XMLPrinter</a>
 </li>
+<li>setPostAliveRepeatMs()
+: <a class="el" href="classtiny__dlna_1_1DLNADevice.html#a8605e44dd3ebb14e95c7d6b655700c1c">tiny_dlna::DLNADevice</a>
+</li>
+<li>setRepeatMs()
+: <a class="el" href="classtiny__dlna_1_1PostAliveSchedule.html#ad0518db5c7ce7c13de7c935d411c9d35">tiny_dlna::PostAliveSchedule</a>
+</li>
+<li>setSchedulerActive()
+: <a class="el" href="classtiny__dlna_1_1DLNADevice.html#a34d207937e90d0cbdde97d3da923f395">tiny_dlna::DLNADevice</a>
+</li>
 <li>setSerialNumber()
 : <a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#a8971083007dc11c569806adac18ee556">tiny_dlna::DLNADeviceInfo</a>
 </li>
@@ -149,11 +159,17 @@ $(function() {
 <li>setup()
 : <a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html#a35be4b0c07d566c57ae697f4de1c3021">tiny_dlna::DLNAServiceInfo</a>
 </li>
+<li>setupData()
+: <a class="el" href="classtiny__dlna_1_1PostAliveSchedule.html#ae70155ab97a717cebfc3ebb9cbdcdd78">tiny_dlna::PostAliveSchedule</a>
+</li>
 <li>setupDLNAServer()
-: <a class="el" href="classtiny__dlna_1_1DLNADevice.html#ac78e37f5479a6774e311ed3065694d35">tiny_dlna::DLNADevice</a>
+: <a class="el" href="classtiny__dlna_1_1DLNADevice.html#a719f93b5e657a7b8146cb5ab50ecf2a8">tiny_dlna::DLNADevice</a>
+</li>
+<li>setupParser()
+: <a class="el" href="classtiny__dlna_1_1DLNADevice.html#aee2a4ffa7f7db826d76a7a0ff196a029">tiny_dlna::DLNADevice</a>
 </li>
 <li>setupScheduler()
-: <a class="el" href="classtiny__dlna_1_1DLNADevice.html#a406f6248f6bf81d774688d356a170f14">tiny_dlna::DLNADevice</a>
+: <a class="el" href="classtiny__dlna_1_1DLNADevice.html#a346b6289f31030672d56f678c4ce56ee">tiny_dlna::DLNADevice</a>
 </li>
 <li>setupServices()
 : <a class="el" href="classtiny__dlna_1_1DLNADevice.html#a8862b0b566e1656331c66f3aa734b170">tiny_dlna::DLNADevice</a>
@@ -163,6 +179,7 @@ $(function() {
 </li>
 <li>size()
 : <a class="el" href="classtiny__dlna_1_1List.html#a47ccf75cae0fa4d4700dd00fc2c9f89b">tiny_dlna::List&lt; T &gt;</a>
+, <a class="el" href="classtiny__dlna_1_1QueueLockFree.html#a26d99a5f4836632c4e34884c52a92fa5">tiny_dlna::QueueLockFree&lt; T &gt;</a>
 , <a class="el" href="classtiny__dlna_1_1Vector.html#a4daa0bf8a1ecc28beee8682e506c5b78">tiny_dlna::Vector&lt; T &gt;</a>
 </li>
 <li>startsWith()

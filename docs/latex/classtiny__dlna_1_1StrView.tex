@@ -145,6 +145,8 @@ virtual void \mbox{\hyperlink{classtiny__dlna_1_1StrView_ae5ebc511810bb75b466476
 \begin{DoxyCompactList}\small\item\em remove trailing spaces \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classtiny__dlna_1_1StrView_ad07950e4352dac90ffee45c81994608e}{clear}} ()
 \begin{DoxyCompactList}\small\item\em clears the string by setting the terminating 0 at the beginning \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classtiny__dlna_1_1StrView_a2aaab314f38810279de74477ffdd5566}{clear\+All}} ()
+\item 
 virtual bool \mbox{\hyperlink{classtiny__dlna_1_1StrView_aed56fb00197bce11aaa99640c5ee1ca9}{is\+On\+Heap}} ()
 \begin{DoxyCompactList}\small\item\em checks if the string is on the heap \end{DoxyCompactList}\item 
 virtual bool \mbox{\hyperlink{classtiny__dlna_1_1StrView_aff57bc997fcf75c3b81ee51ab6b80a91}{is\+Const}} ()
@@ -314,6 +316,10 @@ adds a int value
 
 provides the string value as const char$\ast$ 
 
+
+
+Reimplemented in \mbox{\hyperlink{classtiny__dlna_1_1Str_af6c466b8eae0b29bdde09f2316681a84}{tiny\+\_\+dlna\+::\+Str}}.
+
 \mbox{\Hypertarget{classtiny__dlna_1_1StrView_ad07950e4352dac90ffee45c81994608e}\label{classtiny__dlna_1_1StrView_ad07950e4352dac90ffee45c81994608e}} 
 \index{tiny\_dlna::StrView@{tiny\_dlna::StrView}!clear@{clear}}
 \index{clear@{clear}!tiny\_dlna::StrView@{tiny\_dlna::StrView}}
@@ -327,6 +333,12 @@ clears the string by setting the terminating 0 at the beginning
 
 
 Reimplemented in \mbox{\hyperlink{classtiny__dlna_1_1Str_a3a6bb85880f0c222c8c772c01faf5b81}{tiny\+\_\+dlna\+::\+Str}}.
+
+\mbox{\Hypertarget{classtiny__dlna_1_1StrView_a2aaab314f38810279de74477ffdd5566}\label{classtiny__dlna_1_1StrView_a2aaab314f38810279de74477ffdd5566}} 
+\index{tiny\_dlna::StrView@{tiny\_dlna::StrView}!clearAll@{clearAll}}
+\index{clearAll@{clearAll}!tiny\_dlna::StrView@{tiny\_dlna::StrView}}
+\doxysubsubsection{\texorpdfstring{clearAll()}{clearAll()}}
+{\footnotesize\ttfamily virtual void tiny\+\_\+dlna\+::\+Str\+View\+::clear\+All (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 \mbox{\Hypertarget{classtiny__dlna_1_1StrView_af9555caf7b29fdc37bb4992951c959cb}\label{classtiny__dlna_1_1StrView_af9555caf7b29fdc37bb4992951c959cb}} 
 \index{tiny\_dlna::StrView@{tiny\_dlna::StrView}!contains@{contains}}
@@ -538,7 +550,7 @@ remove leading spaces
 \doxysubsubsection{\texorpdfstring{matches()}{matches()}}
 {\footnotesize\ttfamily virtual bool tiny\+\_\+dlna\+::\+Str\+View\+::matches (\begin{DoxyParamCaption}\item[{const char $\ast$}]{pattern }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
-virtual bool \mbox{\hyperlink{classtiny__dlna_1_1StrView_a6b7655154b8f5c983e1e8a88e7f8597b}{matches(const char$\ast$ match)}}\{ int m\+\_\+size = strlen(match); if (\mbox{\hyperlink{classtiny__dlna_1_1StrView_a78582c529db645801e23f41794055656}{length()}} $<$ m\+\_\+size) return false; if (strncmp(this-\/$>$chars,match,m\+\_\+size-\/1)!=0) return false; if (match\mbox{[}m\+\_\+size-\/1\mbox{]}==\textquotesingle{}$\ast$\textquotesingle{} $\vert$$\vert$ match\mbox{[}m\+\_\+size-\/1\mbox{]}==this-\/$>$chars\mbox{[}m\+\_\+size-\/1\mbox{]} )\{ return true; \} return false; \} file matching supporting $\ast$ and ? -\/ replacing regex which is not supported in all environments returns 1 (true) if there is a match returns 0 if the pattern is not whitin the line
+file matching supporting $\ast$ and ? -\/ replacing regex which is not supported in all environments returns 1 (true) if there is a match returns 0 if the pattern is not whitin the line
 
 the line is ended but char was expected
 

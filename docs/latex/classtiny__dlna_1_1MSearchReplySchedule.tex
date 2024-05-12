@@ -20,7 +20,8 @@ Inheritance diagram for tiny\+\_\+dlna\+::MSearch\+Reply\+Schedule\+:\nopagebrea
 \end{figure}
 
 
-Collaboration diagram for tiny\+\_\+dlna\+::MSearch\+Reply\+Schedule\+:\nopagebreak
+Collaboration diagram for tiny\+\_\+dlna\+::MSearch\+Reply\+Schedule\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -30,18 +31,26 @@ Collaboration diagram for tiny\+\_\+dlna\+::MSearch\+Reply\+Schedule\+:\nopagebr
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classtiny__dlna_1_1MSearchReplySchedule_abb98c8099904a87316230627229db76f}{MSearch\+Reply\+Schedule}} (\mbox{\hyperlink{structtiny__dlna_1_1IPAddressAndPort}{IPAddress\+And\+Port}} \&addr)
+\mbox{\hyperlink{classtiny__dlna_1_1MSearchReplySchedule_a1832424505240f1948f20f2cff222401}{MSearch\+Reply\+Schedule}} (\mbox{\hyperlink{structtiny__dlna_1_1IPAddressAndPort}{IPAddress\+And\+Port}} addr)
 \item 
-bool \mbox{\hyperlink{classtiny__dlna_1_1MSearchReplySchedule_aa6b1f21e12c9d43468852bf96ab5ca6b}{process}} (\mbox{\hyperlink{classtiny__dlna_1_1UDPService}{UDPService}} \&udp, \mbox{\hyperlink{classtiny__dlna_1_1DLNADeviceInfo}{DLNADevice\+Info}} \&device) override
+const char $\ast$ \mbox{\hyperlink{classtiny__dlna_1_1MSearchReplySchedule_a81fb968334e8aab4bc76854c8472885e}{name}} () override
+\item 
+bool \mbox{\hyperlink{classtiny__dlna_1_1MSearchReplySchedule_a536869661ccd44ddaa3e5c2790292de8}{process}} (\mbox{\hyperlink{classtiny__dlna_1_1IUDPService}{IUDPService}} \&udp, \mbox{\hyperlink{classtiny__dlna_1_1DLNADeviceInfo}{DLNADevice\+Info}} \&device) override
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classtiny__dlna_1_1Str}{Str}} \mbox{\hyperlink{classtiny__dlna_1_1MSearchReplySchedule_a0612c690074fc74241b39f209b79ff84}{search\+\_\+target}}
+\item 
+\mbox{\hyperlink{structtiny__dlna_1_1IPAddressAndPort}{IPAddress\+And\+Port}} \mbox{\hyperlink{classtiny__dlna_1_1MSearchReplySchedule_a9496e188318e6a0d7396a6b2b0bf7f35}{address}}
+\item 
+int \mbox{\hyperlink{classtiny__dlna_1_1MSearchReplySchedule_a3f029ab2f4c2660456ac3111c203dd8a}{mx}} = 0
 \end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{structtiny__dlna_1_1IPAddressAndPort}{IPAddress\+And\+Port}} $\ast$ \mbox{\hyperlink{classtiny__dlna_1_1MSearchReplySchedule_aea5741ea08ca5708d72bd77bf32f0681}{p\+\_\+addr}} = nullptr
-\item 
 int \mbox{\hyperlink{classtiny__dlna_1_1MSearchReplySchedule_af574dc17f8ea41f56fac1d588e7e1308}{max\+\_\+age}} = 60
 \end{DoxyCompactItemize}
-\doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
@@ -53,39 +62,61 @@ Phil Schatzmann
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{classtiny__dlna_1_1MSearchReplySchedule_abb98c8099904a87316230627229db76f}\label{classtiny__dlna_1_1MSearchReplySchedule_abb98c8099904a87316230627229db76f}} 
+\mbox{\Hypertarget{classtiny__dlna_1_1MSearchReplySchedule_a1832424505240f1948f20f2cff222401}\label{classtiny__dlna_1_1MSearchReplySchedule_a1832424505240f1948f20f2cff222401}} 
 \index{tiny\_dlna::MSearchReplySchedule@{tiny\_dlna::MSearchReplySchedule}!MSearchReplySchedule@{MSearchReplySchedule}}
 \index{MSearchReplySchedule@{MSearchReplySchedule}!tiny\_dlna::MSearchReplySchedule@{tiny\_dlna::MSearchReplySchedule}}
 \doxysubsubsection{\texorpdfstring{MSearchReplySchedule()}{MSearchReplySchedule()}}
-{\footnotesize\ttfamily tiny\+\_\+dlna\+::\+MSearch\+Reply\+Schedule\+::\+MSearch\+Reply\+Schedule (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structtiny__dlna_1_1IPAddressAndPort}{IPAddress\+And\+Port}} \&}]{addr }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily tiny\+\_\+dlna\+::\+MSearch\+Reply\+Schedule\+::\+MSearch\+Reply\+Schedule (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structtiny__dlna_1_1IPAddressAndPort}{IPAddress\+And\+Port}}}]{addr }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classtiny__dlna_1_1MSearchReplySchedule_aa6b1f21e12c9d43468852bf96ab5ca6b}\label{classtiny__dlna_1_1MSearchReplySchedule_aa6b1f21e12c9d43468852bf96ab5ca6b}} 
+\mbox{\Hypertarget{classtiny__dlna_1_1MSearchReplySchedule_a81fb968334e8aab4bc76854c8472885e}\label{classtiny__dlna_1_1MSearchReplySchedule_a81fb968334e8aab4bc76854c8472885e}} 
+\index{tiny\_dlna::MSearchReplySchedule@{tiny\_dlna::MSearchReplySchedule}!name@{name}}
+\index{name@{name}!tiny\_dlna::MSearchReplySchedule@{tiny\_dlna::MSearchReplySchedule}}
+\doxysubsubsection{\texorpdfstring{name()}{name()}}
+{\footnotesize\ttfamily const char$\ast$ tiny\+\_\+dlna\+::\+MSearch\+Reply\+Schedule\+::name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{structtiny__dlna_1_1Schedule_a7f84cd006a94d1749bd82843326f6876}{tiny\+\_\+dlna\+::\+Schedule}}.
+
+\mbox{\Hypertarget{classtiny__dlna_1_1MSearchReplySchedule_a536869661ccd44ddaa3e5c2790292de8}\label{classtiny__dlna_1_1MSearchReplySchedule_a536869661ccd44ddaa3e5c2790292de8}} 
 \index{tiny\_dlna::MSearchReplySchedule@{tiny\_dlna::MSearchReplySchedule}!process@{process}}
 \index{process@{process}!tiny\_dlna::MSearchReplySchedule@{tiny\_dlna::MSearchReplySchedule}}
 \doxysubsubsection{\texorpdfstring{process()}{process()}}
-{\footnotesize\ttfamily bool tiny\+\_\+dlna\+::\+MSearch\+Reply\+Schedule\+::process (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classtiny__dlna_1_1UDPService}{UDPService}} \&}]{udp,  }\item[{\mbox{\hyperlink{classtiny__dlna_1_1DLNADeviceInfo}{DLNADevice\+Info}} \&}]{device }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily bool tiny\+\_\+dlna\+::\+MSearch\+Reply\+Schedule\+::process (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classtiny__dlna_1_1IUDPService}{IUDPService}} \&}]{udp,  }\item[{\mbox{\hyperlink{classtiny__dlna_1_1DLNADeviceInfo}{DLNADevice\+Info}} \&}]{device }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
 
-Reimplemented from \mbox{\hyperlink{structtiny__dlna_1_1Schedule_adbea57d1ee3f0cc82765e55ffa5e4bc4}{tiny\+\_\+dlna\+::\+Schedule}}.
+Reimplemented from \mbox{\hyperlink{structtiny__dlna_1_1Schedule_a9739f92ce4dd5268aee8d647107b3e06}{tiny\+\_\+dlna\+::\+Schedule}}.
 
 
 
 \doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classtiny__dlna_1_1MSearchReplySchedule_a9496e188318e6a0d7396a6b2b0bf7f35}\label{classtiny__dlna_1_1MSearchReplySchedule_a9496e188318e6a0d7396a6b2b0bf7f35}} 
+\index{tiny\_dlna::MSearchReplySchedule@{tiny\_dlna::MSearchReplySchedule}!address@{address}}
+\index{address@{address}!tiny\_dlna::MSearchReplySchedule@{tiny\_dlna::MSearchReplySchedule}}
+\doxysubsubsection{\texorpdfstring{address}{address}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structtiny__dlna_1_1IPAddressAndPort}{IPAddress\+And\+Port}} tiny\+\_\+dlna\+::\+MSearch\+Reply\+Schedule\+::address}
+
 \mbox{\Hypertarget{classtiny__dlna_1_1MSearchReplySchedule_af574dc17f8ea41f56fac1d588e7e1308}\label{classtiny__dlna_1_1MSearchReplySchedule_af574dc17f8ea41f56fac1d588e7e1308}} 
 \index{tiny\_dlna::MSearchReplySchedule@{tiny\_dlna::MSearchReplySchedule}!max\_age@{max\_age}}
 \index{max\_age@{max\_age}!tiny\_dlna::MSearchReplySchedule@{tiny\_dlna::MSearchReplySchedule}}
 \doxysubsubsection{\texorpdfstring{max\_age}{max\_age}}
 {\footnotesize\ttfamily int tiny\+\_\+dlna\+::\+MSearch\+Reply\+Schedule\+::max\+\_\+age = 60\hspace{0.3cm}{\ttfamily [protected]}}
 
-\mbox{\Hypertarget{classtiny__dlna_1_1MSearchReplySchedule_aea5741ea08ca5708d72bd77bf32f0681}\label{classtiny__dlna_1_1MSearchReplySchedule_aea5741ea08ca5708d72bd77bf32f0681}} 
-\index{tiny\_dlna::MSearchReplySchedule@{tiny\_dlna::MSearchReplySchedule}!p\_addr@{p\_addr}}
-\index{p\_addr@{p\_addr}!tiny\_dlna::MSearchReplySchedule@{tiny\_dlna::MSearchReplySchedule}}
-\doxysubsubsection{\texorpdfstring{p\_addr}{p\_addr}}
-{\footnotesize\ttfamily \mbox{\hyperlink{structtiny__dlna_1_1IPAddressAndPort}{IPAddress\+And\+Port}}$\ast$ tiny\+\_\+dlna\+::\+MSearch\+Reply\+Schedule\+::p\+\_\+addr = nullptr\hspace{0.3cm}{\ttfamily [protected]}}
+\mbox{\Hypertarget{classtiny__dlna_1_1MSearchReplySchedule_a3f029ab2f4c2660456ac3111c203dd8a}\label{classtiny__dlna_1_1MSearchReplySchedule_a3f029ab2f4c2660456ac3111c203dd8a}} 
+\index{tiny\_dlna::MSearchReplySchedule@{tiny\_dlna::MSearchReplySchedule}!mx@{mx}}
+\index{mx@{mx}!tiny\_dlna::MSearchReplySchedule@{tiny\_dlna::MSearchReplySchedule}}
+\doxysubsubsection{\texorpdfstring{mx}{mx}}
+{\footnotesize\ttfamily int tiny\+\_\+dlna\+::\+MSearch\+Reply\+Schedule\+::mx = 0}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1MSearchReplySchedule_a0612c690074fc74241b39f209b79ff84}\label{classtiny__dlna_1_1MSearchReplySchedule_a0612c690074fc74241b39f209b79ff84}} 
+\index{tiny\_dlna::MSearchReplySchedule@{tiny\_dlna::MSearchReplySchedule}!search\_target@{search\_target}}
+\index{search\_target@{search\_target}!tiny\_dlna::MSearchReplySchedule@{tiny\_dlna::MSearchReplySchedule}}
+\doxysubsubsection{\texorpdfstring{search\_target}{search\_target}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classtiny__dlna_1_1Str}{Str}} tiny\+\_\+dlna\+::\+MSearch\+Reply\+Schedule\+::search\+\_\+target}
 
 
 

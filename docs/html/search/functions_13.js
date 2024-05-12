@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['xmlprinter_553',['XMLPrinter',['../structtiny__dlna_1_1XMLPrinter.html#a91340050b791e0087fe36b04ff65d5ec',1,'tiny_dlna::XMLPrinter::XMLPrinter()=default'],['../structtiny__dlna_1_1XMLPrinter.html#a720a01f678ab668d4db810e43e3baa1e',1,'tiny_dlna::XMLPrinter::XMLPrinter(Print &amp;output)']]]
+  ['write_595',['write',['../classtiny__dlna_1_1RingBuffer.html#a02c1482262b14b2d0f3381ecb153f7a3',1,'tiny_dlna::RingBuffer::write(uint8_t ch)'],['../classtiny__dlna_1_1RingBuffer.html#a84143fd57930b817e6ff8330dd2a2471',1,'tiny_dlna::RingBuffer::write(uint8_t *str, int len)']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['xml_632',['xml',['../classtiny__dlna_1_1DLNADeviceInfo.html#aa7460468c12c3e6a2300a5c6cc725492',1,'tiny_dlna::DLNADeviceInfo']]]
+  ['vector_686',['vector',['../classtiny__dlna_1_1QueueLockFree.html#a16d88662ec622854b00e0266120fd52b',1,'tiny_dlna::QueueLockFree::vector()'],['../classtiny__dlna_1_1Str.html#a730e4db6606710c7a2ec5648bed1a82d',1,'tiny_dlna::Str::vector()']]]
 ];

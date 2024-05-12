@@ -4,13 +4,17 @@
 \begin{DoxyCompactItemize}
 \item 
 class \mbox{\hyperlink{classtiny__dlna_1_1DLNADevice}{DLNADevice}}
-\begin{DoxyCompactList}\small\item\em Abstract DLNA Device service setup. The device registers itself to the network and answers to the DLNA queries and requests. A DLNA device uses UDP, Http, XML and Soap to discover and manage a service, so there is quite some complexity involved\+: \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Setup of a Basic DLNA Device service. The device registers itself to the network and answers to the DLNA queries and requests. A DLNA device uses UDP, Http, XML and Soap to discover and manage a service, so there is quite some complexity involved\+: \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classtiny__dlna_1_1DLNADeviceInfo}{DLNADevice\+Info}}
 \begin{DoxyCompactList}\small\item\em Device Attributes and generation of XML using urn\+:schemas-\/upnp-\/org\+:device-\/1-\/0. We could just reutrn a predefined device xml document, but we provide a dynamic generation of the service xml which should be more memory efficient. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classtiny__dlna_1_1DLNARequestParser}{DLNARequest\+Parser}}
 \begin{DoxyCompactList}\small\item\em Translates DLNA UDP Requests to \mbox{\hyperlink{structtiny__dlna_1_1Schedule}{Schedule}} so that we can schedule a reply. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classtiny__dlna_1_1DLNAServiceInfo}{DLNAService\+Info}}
 \begin{DoxyCompactList}\small\item\em Attributes needed for the DLNA Service Definition. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structtiny__dlna_1_1RequestData}{Request\+Data}}
+\begin{DoxyCompactList}\small\item\em Provides information of the received UDP which consists of the (xml) data and the peer address and port. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classtiny__dlna_1_1IUDPService}{IUDPService}}
+\item 
 struct \mbox{\hyperlink{structtiny__dlna_1_1Schedule}{Schedule}}
 \begin{DoxyCompactList}\small\item\em An individual \mbox{\hyperlink{structtiny__dlna_1_1Schedule}{Schedule}} (to send out UDP messages) \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classtiny__dlna_1_1MSearchReplySchedule}{MSearch\+Reply\+Schedule}}
@@ -21,10 +25,6 @@ class \mbox{\hyperlink{classtiny__dlna_1_1PostByeSchedule}{Post\+Bye\+Schedule}}
 \begin{DoxyCompactList}\small\item\em Send out Bye\+Bye message. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classtiny__dlna_1_1Scheduler}{Scheduler}}
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classtiny__dlna_1_1Scheduler}{Scheduler}} which processes all due Schedules (to send out UDP replies) \end{DoxyCompactList}\item 
-struct \mbox{\hyperlink{structtiny__dlna_1_1RequestData}{Request\+Data}}
-\begin{DoxyCompactList}\small\item\em Provides information of the received UDP which consists of the (xml) data and the peer address and port. \end{DoxyCompactList}\item 
-class \mbox{\hyperlink{classtiny__dlna_1_1UDPService}{UDPService}}
-\begin{DoxyCompactList}\small\item\em Access to UDP functionality\+: sending and receiving of data. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{structtiny__dlna_1_1XMLPrinter}{XMLPrinter}}
 \begin{DoxyCompactList}\small\item\em Functions to efficiently output XML. XML data contains a lot of redundancy so it is more memory efficient to generate the data instead of using a predefined XML document. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classtiny__dlna_1_1Allocator}{Allocator}}
@@ -37,6 +37,8 @@ class \mbox{\hyperlink{classtiny__dlna_1_1List}{List}}
 \begin{DoxyCompactList}\small\item\em Double linked list. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classtiny__dlna_1_1LoggerClass}{Logger\+Class}}
 \begin{DoxyCompactList}\small\item\em Logger that writes messages dependent on the log level. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classtiny__dlna_1_1QueueLockFree}{Queue\+Lock\+Free}}
+\begin{DoxyCompactList}\small\item\em A simple single producer, single consumer lock free queue. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classtiny__dlna_1_1RingBuffer}{Ring\+Buffer}}
 \begin{DoxyCompactList}\small\item\em Implementation of a Simple Circular Buffer. Instead of comparing the position of the read and write pointer in order to figure out if we still have characters available or space left to write we keep track of the actual length which is easier to follow. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classtiny__dlna_1_1Str}{Str}}

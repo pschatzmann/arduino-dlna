@@ -20,8 +20,7 @@ Inheritance diagram for tiny\+\_\+dlna\+::Str\+:\nopagebreak
 \end{figure}
 
 
-Collaboration diagram for tiny\+\_\+dlna\+::Str\+:
-\nopagebreak
+Collaboration diagram for tiny\+\_\+dlna\+::Str\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -77,8 +76,12 @@ void \mbox{\hyperlink{classtiny__dlna_1_1Str_a5fc09f908226045d08a72f8c2a7deea1}{
 \begin{DoxyCompactList}\small\item\em decodes a url encoded string \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classtiny__dlna_1_1Str_a3a6bb85880f0c222c8c772c01faf5b81}{clear}} () override
 \begin{DoxyCompactList}\small\item\em clears the string by setting the terminating 0 at the beginning \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classtiny__dlna_1_1Str_a022a33270a1807a3aa185ac8496d5763}{resize}} (int size)
+\item 
 void \mbox{\hyperlink{classtiny__dlna_1_1Str_a95ece663659680d7c6368050f6450fc3}{swap}} (\mbox{\hyperlink{classtiny__dlna_1_1Str}{Str}} \&other)
-\end{DoxyCompactItemize}
+\item 
+const char $\ast$ \mbox{\hyperlink{classtiny__dlna_1_1Str_af6c466b8eae0b29bdde09f2316681a84}{c\+\_\+str}} ()
+\begin{DoxyCompactList}\small\item\em provides the string value as const char$\ast$ \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -180,6 +183,20 @@ Destructor.
 \index{allocate@{allocate}!tiny\_dlna::Str@{tiny\_dlna::Str}}
 \doxysubsubsection{\texorpdfstring{allocate()}{allocate()}}
 {\footnotesize\ttfamily void tiny\+\_\+dlna\+::\+Str\+::allocate (\begin{DoxyParamCaption}\item[{int}]{len = {\ttfamily -\/1} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1Str_af6c466b8eae0b29bdde09f2316681a84}\label{classtiny__dlna_1_1Str_af6c466b8eae0b29bdde09f2316681a84}} 
+\index{tiny\_dlna::Str@{tiny\_dlna::Str}!c\_str@{c\_str}}
+\index{c\_str@{c\_str}!tiny\_dlna::Str@{tiny\_dlna::Str}}
+\doxysubsubsection{\texorpdfstring{c\_str()}{c\_str()}}
+{\footnotesize\ttfamily const char$\ast$ tiny\+\_\+dlna\+::\+Str\+::c\+\_\+str (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+provides the string value as const char$\ast$ 
+
+
+
+Reimplemented from \mbox{\hyperlink{classtiny__dlna_1_1StrView_a8710ede758294ee0ee50b0317141f9dc}{tiny\+\_\+dlna\+::\+Str\+View}}.
 
 \mbox{\Hypertarget{classtiny__dlna_1_1Str_a5f494008e17f8d3815e490022a592ac7}\label{classtiny__dlna_1_1Str_a5f494008e17f8d3815e490022a592ac7}} 
 \index{tiny\_dlna::Str@{tiny\_dlna::Str}!capacity@{capacity}}
@@ -340,6 +357,12 @@ Move assignment.
 
 
 Copy assingment. 
+
+\mbox{\Hypertarget{classtiny__dlna_1_1Str_a022a33270a1807a3aa185ac8496d5763}\label{classtiny__dlna_1_1Str_a022a33270a1807a3aa185ac8496d5763}} 
+\index{tiny\_dlna::Str@{tiny\_dlna::Str}!resize@{resize}}
+\index{resize@{resize}!tiny\_dlna::Str@{tiny\_dlna::Str}}
+\doxysubsubsection{\texorpdfstring{resize()}{resize()}}
+{\footnotesize\ttfamily void tiny\+\_\+dlna\+::\+Str\+::resize (\begin{DoxyParamCaption}\item[{int}]{size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 \mbox{\Hypertarget{classtiny__dlna_1_1Str_ad05066c8ecd54b751701c93bb2e49689}\label{classtiny__dlna_1_1Str_ad05066c8ecd54b751701c93bb2e49689}} 
 \index{tiny\_dlna::Str@{tiny\_dlna::Str}!setCapacity@{setCapacity}}

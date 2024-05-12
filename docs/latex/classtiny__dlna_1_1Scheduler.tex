@@ -11,19 +11,20 @@
 
 
 
-Collaboration diagram for tiny\+\_\+dlna\+::Scheduler\+:\nopagebreak
+Collaboration diagram for tiny\+\_\+dlna\+::Scheduler\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{classtiny__dlna_1_1Scheduler__coll__graph}
+\includegraphics[width=322pt]{classtiny__dlna_1_1Scheduler__coll__graph}
 \end{center}
 \end{figure}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{classtiny__dlna_1_1Scheduler_aced10d3f8ae9ae211105b7afee5074ce}{add}} (\mbox{\hyperlink{structtiny__dlna_1_1Schedule}{Schedule}} schedule)
+void \mbox{\hyperlink{classtiny__dlna_1_1Scheduler_adc85d05e37658ccea53f4669c22e923a}{add}} (\mbox{\hyperlink{structtiny__dlna_1_1Schedule}{Schedule}} $\ast$schedule)
 \begin{DoxyCompactList}\small\item\em Add a schedule to the scheduler. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classtiny__dlna_1_1Scheduler_a757e5032529f3d224ec56a3191735cc1}{execute}} (\mbox{\hyperlink{classtiny__dlna_1_1UDPService}{UDPService}} \&udp, \mbox{\hyperlink{classtiny__dlna_1_1DLNADeviceInfo}{DLNADevice\+Info}} \&device)
+void \mbox{\hyperlink{classtiny__dlna_1_1Scheduler_acf67e59ef30510628d188352472dff7f}{execute}} (\mbox{\hyperlink{classtiny__dlna_1_1IUDPService}{IUDPService}} \&udp, \mbox{\hyperlink{classtiny__dlna_1_1DLNADeviceInfo}{DLNADevice\+Info}} \&device)
 \begin{DoxyCompactList}\small\item\em Execute all due schedules. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
@@ -33,7 +34,7 @@ void \mbox{\hyperlink{classtiny__dlna_1_1Scheduler_a88473bfe610f57e787c10425f581
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classtiny__dlna_1_1List}{List}}$<$ \mbox{\hyperlink{structtiny__dlna_1_1Schedule}{Schedule}} $>$ \mbox{\hyperlink{classtiny__dlna_1_1Scheduler_a9b75da29781450f19117c5eb7c5712f6}{queue}}
+\mbox{\hyperlink{classtiny__dlna_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{structtiny__dlna_1_1Schedule}{Schedule}} $\ast$ $>$ \mbox{\hyperlink{classtiny__dlna_1_1Scheduler_abc0f361ef0885ee7a345e8b1c6ecfcb7}{queue}}
 \end{DoxyCompactItemize}
 
 
@@ -46,11 +47,11 @@ Phil Schatzmann
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classtiny__dlna_1_1Scheduler_aced10d3f8ae9ae211105b7afee5074ce}\label{classtiny__dlna_1_1Scheduler_aced10d3f8ae9ae211105b7afee5074ce}} 
+\mbox{\Hypertarget{classtiny__dlna_1_1Scheduler_adc85d05e37658ccea53f4669c22e923a}\label{classtiny__dlna_1_1Scheduler_adc85d05e37658ccea53f4669c22e923a}} 
 \index{tiny\_dlna::Scheduler@{tiny\_dlna::Scheduler}!add@{add}}
 \index{add@{add}!tiny\_dlna::Scheduler@{tiny\_dlna::Scheduler}}
 \doxysubsubsection{\texorpdfstring{add()}{add()}}
-{\footnotesize\ttfamily void tiny\+\_\+dlna\+::\+Scheduler\+::add (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structtiny__dlna_1_1Schedule}{Schedule}}}]{schedule }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void tiny\+\_\+dlna\+::\+Scheduler\+::add (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structtiny__dlna_1_1Schedule}{Schedule}} $\ast$}]{schedule }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -62,11 +63,11 @@ Add a schedule to the scheduler.
 \doxysubsubsection{\texorpdfstring{cleanup()}{cleanup()}}
 {\footnotesize\ttfamily void tiny\+\_\+dlna\+::\+Scheduler\+::cleanup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
-\mbox{\Hypertarget{classtiny__dlna_1_1Scheduler_a757e5032529f3d224ec56a3191735cc1}\label{classtiny__dlna_1_1Scheduler_a757e5032529f3d224ec56a3191735cc1}} 
+\mbox{\Hypertarget{classtiny__dlna_1_1Scheduler_acf67e59ef30510628d188352472dff7f}\label{classtiny__dlna_1_1Scheduler_acf67e59ef30510628d188352472dff7f}} 
 \index{tiny\_dlna::Scheduler@{tiny\_dlna::Scheduler}!execute@{execute}}
 \index{execute@{execute}!tiny\_dlna::Scheduler@{tiny\_dlna::Scheduler}}
 \doxysubsubsection{\texorpdfstring{execute()}{execute()}}
-{\footnotesize\ttfamily void tiny\+\_\+dlna\+::\+Scheduler\+::execute (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classtiny__dlna_1_1UDPService}{UDPService}} \&}]{udp,  }\item[{\mbox{\hyperlink{classtiny__dlna_1_1DLNADeviceInfo}{DLNADevice\+Info}} \&}]{device }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void tiny\+\_\+dlna\+::\+Scheduler\+::execute (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classtiny__dlna_1_1IUDPService}{IUDPService}} \&}]{udp,  }\item[{\mbox{\hyperlink{classtiny__dlna_1_1DLNADeviceInfo}{DLNADevice\+Info}} \&}]{device }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -75,11 +76,11 @@ Execute all due schedules.
 
 
 \doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{classtiny__dlna_1_1Scheduler_a9b75da29781450f19117c5eb7c5712f6}\label{classtiny__dlna_1_1Scheduler_a9b75da29781450f19117c5eb7c5712f6}} 
+\mbox{\Hypertarget{classtiny__dlna_1_1Scheduler_abc0f361ef0885ee7a345e8b1c6ecfcb7}\label{classtiny__dlna_1_1Scheduler_abc0f361ef0885ee7a345e8b1c6ecfcb7}} 
 \index{tiny\_dlna::Scheduler@{tiny\_dlna::Scheduler}!queue@{queue}}
 \index{queue@{queue}!tiny\_dlna::Scheduler@{tiny\_dlna::Scheduler}}
 \doxysubsubsection{\texorpdfstring{queue}{queue}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classtiny__dlna_1_1List}{List}}$<$\mbox{\hyperlink{structtiny__dlna_1_1Schedule}{Schedule}}$>$ tiny\+\_\+dlna\+::\+Scheduler\+::queue\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classtiny__dlna_1_1Vector}{Vector}}$<$\mbox{\hyperlink{structtiny__dlna_1_1Schedule}{Schedule}}$\ast$$>$ tiny\+\_\+dlna\+::\+Scheduler\+::queue\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 

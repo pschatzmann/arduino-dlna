@@ -9,15 +9,34 @@ Translates DLNA UDP Requests to \mbox{\hyperlink{structtiny__dlna_1_1Schedule}{S
 
 {\ttfamily \#include $<$DLNARequest\+Parser.\+h$>$}
 
+
+
+Collaboration diagram for tiny\+\_\+dlna\+::DLNARequest\+Parser\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=244pt]{classtiny__dlna_1_1DLNARequestParser__coll__graph}
+\end{center}
+\end{figure}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{structtiny__dlna_1_1Schedule}{Schedule}} \mbox{\hyperlink{classtiny__dlna_1_1DLNARequestParser_a7c36ec053ce2b9b42207c11d71c399e0}{parse}} (\mbox{\hyperlink{structtiny__dlna_1_1RequestData}{Request\+Data}} \&req)
+void \mbox{\hyperlink{classtiny__dlna_1_1DLNARequestParser_a2353bfb043e52a259cd48237edd27acf}{add\+MSearch\+ST}} (const char $\ast$accept)
+\item 
+\mbox{\hyperlink{structtiny__dlna_1_1Schedule}{Schedule}} $\ast$ \mbox{\hyperlink{classtiny__dlna_1_1DLNARequestParser_a5ae3c5ced33a75ab77ab7d4ef7f06c4f}{parse}} (\mbox{\hyperlink{structtiny__dlna_1_1RequestData}{Request\+Data}} \&req)
 \end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{structtiny__dlna_1_1Schedule}{Schedule}} \mbox{\hyperlink{classtiny__dlna_1_1DLNARequestParser_a2e24681a91d6faca3c28dc8acd338413}{process\+MSearch}} (\mbox{\hyperlink{structtiny__dlna_1_1RequestData}{Request\+Data}} \&req)
+\mbox{\hyperlink{structtiny__dlna_1_1Schedule}{Schedule}} $\ast$ \mbox{\hyperlink{classtiny__dlna_1_1DLNARequestParser_a3cfada27b4c272faf482805cc4ee6d8e}{process\+MSearch}} (\mbox{\hyperlink{structtiny__dlna_1_1RequestData}{Request\+Data}} \&req)
+\item 
+bool \mbox{\hyperlink{classtiny__dlna_1_1DLNARequestParser_a1cf8136cac8e6ada09e90b973072e3c0}{parse}} (\mbox{\hyperlink{classtiny__dlna_1_1Str}{Str}} \&in, const char $\ast$tag, \mbox{\hyperlink{classtiny__dlna_1_1StrView}{Str\+View}} \&result)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classtiny__dlna_1_1Vector}{Vector}}$<$ const char $\ast$ $>$ \mbox{\hyperlink{classtiny__dlna_1_1DLNARequestParser_a7aca78c963028e9dfdd612700b37ef0e}{mx\+\_\+vector}}
 \end{DoxyCompactItemize}
 
 
@@ -30,17 +49,38 @@ Phil Schatzmann
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classtiny__dlna_1_1DLNARequestParser_a7c36ec053ce2b9b42207c11d71c399e0}\label{classtiny__dlna_1_1DLNARequestParser_a7c36ec053ce2b9b42207c11d71c399e0}} 
+\mbox{\Hypertarget{classtiny__dlna_1_1DLNARequestParser_a2353bfb043e52a259cd48237edd27acf}\label{classtiny__dlna_1_1DLNARequestParser_a2353bfb043e52a259cd48237edd27acf}} 
+\index{tiny\_dlna::DLNARequestParser@{tiny\_dlna::DLNARequestParser}!addMSearchST@{addMSearchST}}
+\index{addMSearchST@{addMSearchST}!tiny\_dlna::DLNARequestParser@{tiny\_dlna::DLNARequestParser}}
+\doxysubsubsection{\texorpdfstring{addMSearchST()}{addMSearchST()}}
+{\footnotesize\ttfamily void tiny\+\_\+dlna\+::\+DLNARequest\+Parser\+::add\+MSearch\+ST (\begin{DoxyParamCaption}\item[{const char $\ast$}]{accept }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1DLNARequestParser_a5ae3c5ced33a75ab77ab7d4ef7f06c4f}\label{classtiny__dlna_1_1DLNARequestParser_a5ae3c5ced33a75ab77ab7d4ef7f06c4f}} 
 \index{tiny\_dlna::DLNARequestParser@{tiny\_dlna::DLNARequestParser}!parse@{parse}}
 \index{parse@{parse}!tiny\_dlna::DLNARequestParser@{tiny\_dlna::DLNARequestParser}}
-\doxysubsubsection{\texorpdfstring{parse()}{parse()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{structtiny__dlna_1_1Schedule}{Schedule}} tiny\+\_\+dlna\+::\+DLNARequest\+Parser\+::parse (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structtiny__dlna_1_1RequestData}{Request\+Data}} \&}]{req }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\doxysubsubsection{\texorpdfstring{parse()}{parse()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structtiny__dlna_1_1Schedule}{Schedule}}$\ast$ tiny\+\_\+dlna\+::\+DLNARequest\+Parser\+::parse (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structtiny__dlna_1_1RequestData}{Request\+Data}} \&}]{req }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-\mbox{\Hypertarget{classtiny__dlna_1_1DLNARequestParser_a2e24681a91d6faca3c28dc8acd338413}\label{classtiny__dlna_1_1DLNARequestParser_a2e24681a91d6faca3c28dc8acd338413}} 
+\mbox{\Hypertarget{classtiny__dlna_1_1DLNARequestParser_a1cf8136cac8e6ada09e90b973072e3c0}\label{classtiny__dlna_1_1DLNARequestParser_a1cf8136cac8e6ada09e90b973072e3c0}} 
+\index{tiny\_dlna::DLNARequestParser@{tiny\_dlna::DLNARequestParser}!parse@{parse}}
+\index{parse@{parse}!tiny\_dlna::DLNARequestParser@{tiny\_dlna::DLNARequestParser}}
+\doxysubsubsection{\texorpdfstring{parse()}{parse()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily bool tiny\+\_\+dlna\+::\+DLNARequest\+Parser\+::parse (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classtiny__dlna_1_1Str}{Str}} \&}]{in,  }\item[{const char $\ast$}]{tag,  }\item[{\mbox{\hyperlink{classtiny__dlna_1_1StrView}{Str\+View}} \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classtiny__dlna_1_1DLNARequestParser_a3cfada27b4c272faf482805cc4ee6d8e}\label{classtiny__dlna_1_1DLNARequestParser_a3cfada27b4c272faf482805cc4ee6d8e}} 
 \index{tiny\_dlna::DLNARequestParser@{tiny\_dlna::DLNARequestParser}!processMSearch@{processMSearch}}
 \index{processMSearch@{processMSearch}!tiny\_dlna::DLNARequestParser@{tiny\_dlna::DLNARequestParser}}
 \doxysubsubsection{\texorpdfstring{processMSearch()}{processMSearch()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{structtiny__dlna_1_1Schedule}{Schedule}} tiny\+\_\+dlna\+::\+DLNARequest\+Parser\+::process\+MSearch (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structtiny__dlna_1_1RequestData}{Request\+Data}} \&}]{req }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structtiny__dlna_1_1Schedule}{Schedule}}$\ast$ tiny\+\_\+dlna\+::\+DLNARequest\+Parser\+::process\+MSearch (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structtiny__dlna_1_1RequestData}{Request\+Data}} \&}]{req }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classtiny__dlna_1_1DLNARequestParser_a7aca78c963028e9dfdd612700b37ef0e}\label{classtiny__dlna_1_1DLNARequestParser_a7aca78c963028e9dfdd612700b37ef0e}} 
+\index{tiny\_dlna::DLNARequestParser@{tiny\_dlna::DLNARequestParser}!mx\_vector@{mx\_vector}}
+\index{mx\_vector@{mx\_vector}!tiny\_dlna::DLNARequestParser@{tiny\_dlna::DLNARequestParser}}
+\doxysubsubsection{\texorpdfstring{mx\_vector}{mx\_vector}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classtiny__dlna_1_1Vector}{Vector}}$<$const char$\ast$$>$ tiny\+\_\+dlna\+::\+DLNARequest\+Parser\+::mx\+\_\+vector\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 

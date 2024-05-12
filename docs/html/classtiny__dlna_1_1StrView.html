@@ -263,6 +263,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ad07950e4352dac90ffee45c81994608e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1StrView.html#ad07950e4352dac90ffee45c81994608e">clear</a> ()</td></tr>
 <tr class="memdesc:ad07950e4352dac90ffee45c81994608e"><td class="mdescLeft">&#160;</td><td class="mdescRight">clears the string by setting the terminating 0 at the beginning  <a href="classtiny__dlna_1_1StrView.html#ad07950e4352dac90ffee45c81994608e">More...</a><br /></td></tr>
 <tr class="separator:ad07950e4352dac90ffee45c81994608e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2aaab314f38810279de74477ffdd5566"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1StrView.html#a2aaab314f38810279de74477ffdd5566">clearAll</a> ()</td></tr>
+<tr class="separator:a2aaab314f38810279de74477ffdd5566"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aed56fb00197bce11aaa99640c5ee1ca9"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1StrView.html#aed56fb00197bce11aaa99640c5ee1ca9">isOnHeap</a> ()</td></tr>
 <tr class="memdesc:aed56fb00197bce11aaa99640c5ee1ca9"><td class="mdescLeft">&#160;</td><td class="mdescRight">checks if the string is on the heap  <a href="classtiny__dlna_1_1StrView.html#aed56fb00197bce11aaa99640c5ee1ca9">More...</a><br /></td></tr>
 <tr class="separator:aed56fb00197bce11aaa99640c5ee1ca9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -650,6 +652,8 @@ Protected Attributes</h2></td></tr>
 
 <p>provides the string value as const char* </p>
 
+<p>Reimplemented in <a class="el" href="classtiny__dlna_1_1Str.html#af6c466b8eae0b29bdde09f2316681a84">tiny_dlna::Str</a>.</p>
+
 </div>
 </div>
 <a id="ad07950e4352dac90ffee45c81994608e"></a>
@@ -678,6 +682,31 @@ Protected Attributes</h2></td></tr>
 <p>clears the string by setting the terminating 0 at the beginning </p>
 
 <p>Reimplemented in <a class="el" href="classtiny__dlna_1_1Str.html#a3a6bb85880f0c222c8c772c01faf5b81">tiny_dlna::Str</a>.</p>
+
+</div>
+</div>
+<a id="a2aaab314f38810279de74477ffdd5566"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2aaab314f38810279de74477ffdd5566">&#9670;&nbsp;</a></span>clearAll()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void tiny_dlna::StrView::clearAll </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -1379,7 +1408,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>virtual bool <a class="el" href="classtiny__dlna_1_1StrView.html#a6b7655154b8f5c983e1e8a88e7f8597b">matches(const char* match)</a>{ int m_size = strlen(match); if (<a class="el" href="classtiny__dlna_1_1StrView.html#a78582c529db645801e23f41794055656">length()</a> &lt; m_size) return false; if (strncmp(this-&gt;chars,match,m_size-1)!=0) return false; if (match[m_size-1]=='*' || match[m_size-1]==this-&gt;chars[m_size-1] ){ return true; } return false; } file matching supporting * and ? - replacing regex which is not supported in all environments </p>
+<p>file matching supporting * and ? - replacing regex which is not supported in all environments </p>
 <p>returns 1 (true) if there is a match returns 0 if the pattern is not whitin the line</p>
 <p>the line is ended but char was expected</p>
 <p>end of mask</p>
