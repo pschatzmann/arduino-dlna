@@ -66,7 +66,7 @@ class DLNARequestParser {
       DlnaLogger.log(DlnaInfo, "ST: not found");
     }
 
-    return &result;
+    return result.active ? &result : nullptr;
   }
 
   bool parse(Str& in, const char* tag, StrView& result) {

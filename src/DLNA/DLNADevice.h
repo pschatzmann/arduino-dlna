@@ -43,9 +43,14 @@ class DLNADevice {
     // setup all services
     for (auto& p_device : devices) setupServices(*p_device);
 
+    setupParser();
+
     if (!setupDLNAServer(server)) {
       return false;
     }
+
+    // start server
+    p_server->begin(baseUrl.port());
 
     // start udp
     if (!p_udp->begin(DLNABroadcastAddress)) {
@@ -56,11 +61,6 @@ class DLNADevice {
     if (!setupScheduler()) {
       return false;
     }
-
-    setupParser();
-
-    // start server
-    p_server->begin(baseUrl.port());
 
     is_active = true;
     return true;
@@ -93,7 +93,7 @@ class DLNADevice {
       RequestData req = p_udp->receive();
       if (req){
         Schedule* schedule = parser.parse(req);
-        if (schedule) {
+        if (schedule != nullptr) {
           scheduler.add(schedule);
         }
       }
