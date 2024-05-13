@@ -1,10 +1,12 @@
 
 #pragma once
 
-#include <functional> // std::bind
-#include "basic/Vector.h"
+#include <functional>  // std::bind
+
 #include "DLNAServiceInfo.h"
 #include "XMLPrinter.h"
+#include "basic/Vector.h"
+#include "basic/Icon.h"
 #include "service/Action.h"
 #include "service/NamedFunction.h"
 #include "vector"
@@ -92,11 +94,6 @@ class DLNADeviceInfo {
   void setModelNumber(const char* number) { model_number = number; }
   void setSerialNumber(const char* sn) { serial_number = sn; }
   void setUniveralProductCode(const char* upc) { universal_product_code = upc; }
-  void setIconMime(const char* mime) { icon_mime = mime; }
-  void setIconWidth(int width) { icon_width = width; }
-  void setIconHeight(int height) { icon_height = height; }
-  void setIconDepth(int depth) { icon_depth = depth; }
-  void setIconURL(const char* url) { icon_url = url; }
 
   /// Adds a service defintion
   void addService(DLNAServiceInfo s) { services.push_back(s); }
@@ -117,20 +114,31 @@ class DLNADeviceInfo {
   void clear() { services.clear(); }
 
   /// Register an generic action callback
-  void setAllActionsCallback(std::function<void(Action)> cb) { action_callback = cb; }
+  void setAllActionsCallback(std::function<void(Action)> cb) {
+    action_callback = cb;
+  }
 
   /// Register a callback for an action
-  void addActionCallback(const char* actionName, std::function<void(void)> func) {
+  void addActionCallback(const char* actionName,
+                         std::function<void(void)> func) {
     action_callback_vector.push_back(NamedFunction(actionName, func));
   }
 
+  /// Overwrite the default icon
+  void setIcon(Icon icn) {
+    icon = icn;
+  }
+
+  Icon getIcon() {
+    return icon;
+  }
 
  protected:
   XMLPrinter xml;
   Url base_url{"http://localhost:9876/dlna"};
   Url device_url;
   IPAddress localhost;
-  const char* udn = "09349455-2941-4cf7-9847-0dd5ab210e97";
+  const char* udn = "uuid:09349455-2941-4cf7-9847-0dd5ab210e97";
   const char* ns = "xmlns=\"urn:schemas-upnp-org:device-1-0\"";
   const char* device_type = "urn:schemas-upnp-org:device:MediaRenderer:1";
   const char* friendly_name = nullptr;
@@ -141,12 +149,7 @@ class DLNADeviceInfo {
   const char* model_number = nullptr;
   const char* serial_number = nullptr;
   const char* universal_product_code = nullptr;
-  const char* icon_mime = "image/png";
-  int icon_width = 512;
-  int icon_height = 512;
-  int icon_depth = 8;
-  const char* icon_url =
-      "https://cdn-icons-png.flaticon.com/512/9973/9973171.png";
+  Icon icon;
   Vector<DLNAServiceInfo> services;
   std::function<void(Action)> action_callback;
   Vector<NamedFunction> action_callback_vector;
@@ -214,12 +217,12 @@ class DLNADeviceInfo {
 
   size_t printIconDlnaInfo() {
     size_t result = 0;
-    if (!StrView(icon_url).isEmpty()) {
+    if (!StrView(icon.icon_url).isEmpty()) {
       result += xml.printNode("mimetype", "image/png");
-      result += xml.printNode("width", icon_width);
-      result += xml.printNode("height", icon_height);
-      result += xml.printNode("depth", icon_depth);
-      result += xml.printNode("url", icon_url);
+      result += xml.printNode("width", icon.width);
+      result += xml.printNode("height", icon.height);
+      result += xml.printNode("depth", icon.depth);
+      result += xml.printNode("url", icon.icon_url);
     }
     return result;
   }

@@ -10,7 +10,7 @@ WiFiServer wifi;           // Networking Server
 HttpServer server(wifi);   // Webserver
 UDPAsyncService udp
 const char* st = "urn:schemas-upnp-org:device:MediaRenderer:1";
-const char* usn = "09349455-2941-4cf7-9847-1dd5ab210e97";
+const char* usn = "uuid:09349455-2941-4cf7-9847-1dd5ab210e97";
 
 void setupWifi() {
   WiFi.begin(ssid, password);

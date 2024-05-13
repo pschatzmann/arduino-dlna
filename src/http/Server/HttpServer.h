@@ -23,9 +23,9 @@ namespace tiny_dlna {
  */
 class HttpServer {
  public:
-  HttpServer(WiFiServer& server_ptr, int bufferSize = 1024) {
+  HttpServer(WiFiServer& server, int bufferSize = 1024) {
     DlnaLogger.log(DlnaInfo, "HttpServer");
-    this->server_ptr = &server_ptr;
+    this->server_ptr = &server;
     this->buffer.resize(bufferSize);
   }
 
@@ -37,10 +37,16 @@ class HttpServer {
     rewrite_collection.clear();
   }
 
+  /// Provides the local ip address
+  IPAddress& localIP() {
+    static IPAddress address;
+    address = WiFi.localIP();
+    return address;
+  }
+
   /// Starts the server on the indicated port - calls WiFi.begin(ssid,
   /// password);
   bool begin(int port, const char* ssid, const char* password) {
-#
     if (WiFi.status() != WL_CONNECTED && ssid != nullptr &&
         password != nullptr) {
       WiFi.begin(ssid, password);
@@ -58,12 +64,6 @@ class HttpServer {
     return begin(port);
   }
 
-  /// Provides the local ip address
-  IPAddress& localIP() {
-    static IPAddress address;
-    address = WiFi.localIP();
-    return address;
-  }
 
   /// Starts the server on the indicated port
   bool begin(int port) {
@@ -81,6 +81,7 @@ class HttpServer {
 
   /// adds a rewrite rule
   void rewrite(const char* from, const char* to) {
+    DlnaLogger.log(DlnaInfo, "Rewriting %s to %s", from, to);
     HttpRequestRewrite* line = new HttpRequestRewrite(from, to);
     rewrite_collection.push_back(line);
   }
@@ -123,13 +124,43 @@ class HttpServer {
         DlnaLogger.log(DlnaError, "The context is not available");
         return;
       }
-      const char* mime = static_cast<StrView*>(hl->context[0])->c_str();
-      const char* msg = static_cast<StrView*>(hl->context[1])->c_str();
+      const char* mime = (const char*) hl->context[0];
+      const char* msg = (const char*) hl->context[1];
       server_ptr->reply(mime, msg, 200);
     };
     HttpRequestHandlerLine* hl = new HttpRequestHandlerLine(2);
-    hl->context[0] = new StrView(mime);
-    hl->context[1] = new StrView(result);
+    hl->context[0] = (void*)mime;
+    hl->context[1] = (void*)result;
+    hl->path = url;
+    hl->fn = lambda;
+    hl->method = method;
+    addHandler(hl);
+  }
+
+  /// register a handler which provides the indicated string
+  void on(const char* url, TinyMethodID method, const char* mime,
+          const uint8_t* data, int len) {
+    DlnaLogger.log(DlnaInfo, "Serving at %s", url);
+
+    auto lambda = [](HttpServer* server_ptr, const char* requestPath,
+                     HttpRequestHandlerLine* hl) {
+      DlnaLogger.log(DlnaInfo, "on-strings %s", "lambda");
+      if (hl->contextCount < 3) {
+        DlnaLogger.log(DlnaError, "The context is not available");
+        return;
+      }
+      const char* mime = static_cast<char*>(hl->context[0]);
+      const uint8_t* data = static_cast<uint8_t*>(hl->context[1]);
+      int *p_len = (int*) hl->context[2];
+      int len = *p_len;
+      delete p_len;
+      DlnaLogger.log(DlnaDebug, "Mime %d - Len: %d", mime, len);
+      server_ptr->reply(mime, data, len, 200);
+    };
+    HttpRequestHandlerLine* hl = new HttpRequestHandlerLine(3);
+    hl->context[0] = (void*)mime;
+    hl->context[1] = (void*)data;
+    hl->context[2] = new int(len);
     hl->path = url;
     hl->fn = lambda;
     hl->method = method;
@@ -313,6 +344,18 @@ class HttpServer {
     endClient();
   }
 
+  void reply(const char* contentType, const uint8_t* str, int len, int status = 200,
+             const char* msg = SUCCESS) {
+    DlnaLogger.log(DlnaInfo, "reply %s", "str");
+    reply_header.setValues(status, msg);
+    reply_header.put(CONTENT_LENGTH, len);
+    reply_header.put(CONTENT_TYPE, contentType);
+    reply_header.put(CONNECTION, CON_KEEP_ALIVE);
+    reply_header.write(this->client());
+    client_ptr->write((const uint8_t*)str, len);
+    endClient();
+  }
+
   /// write OK reply with 200 SUCCESS
   void replyOK() { reply(200, SUCCESS); }
 
@@ -414,7 +457,7 @@ class HttpServer {
   bool is_active;
   Vector<char> buffer{0};
   const char* local_host = nullptr;
-  int no_connect_delay = 50;
+  int no_connect_delay = 5;
 
   /// Converts null to an empty string
   const char* nullstr(const char* in) { return in == nullptr ? "" : in; }

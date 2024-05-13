@@ -14,7 +14,7 @@ class MediaRenderer : public DLNADevice {
  protected:
   // Renderer, Player or Server
   const char* st = "urn:schemas-upnp-org:device:MediaRenderer:1";
-  const char* usn = "09349455-2941-4cf7-9847-1dd5ab210e97";
+  const char* usn = "uuid:09349455-2941-4cf7-9847-1dd5ab210e97";
 
   void setupServices(DLNADeviceInfo& device) override {
     DlnaLogger.log(DlnaInfo,"MediaRenderer::setupServices");

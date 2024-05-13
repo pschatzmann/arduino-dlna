@@ -4,8 +4,8 @@
 #include "DLNADeviceInfo.h"
 #include "DLNARequestParser.h"
 #include "Schedule.h"
-#include "http/HttpServer.h"
 #include "basic/Url.h"
+#include "http/HttpServer.h"
 
 #define DLNA_MAX_URL_LEN 120
 
@@ -105,7 +105,6 @@ class DLNADevice {
     bool rc = p_server->doLoop();
     DlnaLogger.log(DlnaDebug, "server %s", rc ? "true" : "false");
 
-
     if (isSchedulerActive()) {
       // process UDP requests
       RequestData req = p_udp->receive();
@@ -121,7 +120,7 @@ class DLNADevice {
     }
 
     // be nice, if we have other tasks
-    delay(10);
+    delay(5);
 
     return true;
   }
@@ -220,8 +219,19 @@ class DLNADevice {
         p_server->on(device_path, T_GET, xmlDevice, ref, 1);
       }
 
-      // Register Service URLs
       const char* prefix = p_device->getBaseURL().path();
+
+      // Register icon
+      Icon icon = p_device->getIcon();
+      if (icon.icon_data != nullptr) {
+        char tmp[DLNA_MAX_URL_LEN];
+        const char* icon_path =
+            concat(prefix, icon.icon_url, tmp, DLNA_MAX_URL_LEN);
+        p_server->on(icon_path, T_GET, icon.mime,
+                     (const uint8_t*)icon.icon_data, icon.icon_size);
+      }
+
+      // Register Service URLs
       char tmp[DLNA_MAX_URL_LEN];
       for (DLNAServiceInfo& service : p_device->getServices()) {
         p_server->on(concat(prefix, service.scp_url, tmp, DLNA_MAX_URL_LEN),
@@ -245,41 +255,6 @@ class DLNADevice {
     str.replace("//", "/");
     return buffer;
   }
-
-  // const char* soapReplySuccess(const char* service, const char* name) {
-  //   const char* tmp =
-  //       "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
-  //       "<s:Envelope "
-  //       "s:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\" "
-  //       "xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\">"
-  //       "<s:Body><u:%sResponse "
-  //       "xmlns:u=\"urn:schemas-upnp-org:service:%s:1\">%s</u:%sResponse></"
-  //       "s:Body>"
-  //       "</s:Envelope>";
-  //   sprintf(upnp.getTempBuffer(), tmp, service, name);
-  //   return upnp.getTempBuffer();
-  // }
-
-  // const char* soapReplyDlnaError(const char* error, int errorCode) {
-  //   const char* tmp =
-  //       "<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\" "
-  //       "s:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\">"
-  //       "<s:Body>"
-  //       "<s:Fault>"
-  //       "<faultcode>s:Client</faultcode>"
-  //       "<faultstring>UPnPDlnaError</faultstring>"
-  //       "<detail>"
-  //       "<UPnPDlnaError xmlns=\"urn:schemas-upnp-org:control-1-0\">"
-  //       "<errorCode>%d</errorCode>"
-  //       "<errorDescription>%s</errorDescription>"
-  //       "</UPnPDlnaError>"
-  //       "</detail>"
-  //       "</s:Fault>"
-  //       "</s:Body>"
-  //       "</s:Envelope>";
-  //   sprintf(upnp.getTempBuffer(), tmp, errorCode, error);
-  //   return upnp.getTempBuffer();
-  // }
 
   /// If you dont already provid a complete DLNADeviceInfo you can overwrite
   /// this method and add some custom device specific logic to implement a new

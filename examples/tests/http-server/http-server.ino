@@ -6,10 +6,20 @@ WiFiServer wifi;
 HttpServer server(wifi);
 Url indexUrl("/index.html");
 
+void setupWifi() {
+  WiFi.begin(ssid, password);
+  Serial.print("Connecting to WiFi ..");
+  while (WiFi.status() != WL_CONNECTED) {
+    Serial.print('.');
+    delay(1000);
+  }
+}
+
 void setup() {
   Serial.begin(115200);
   // connect to WIFI
   DlnaLogger.begin(Serial, DlnaInfo);
+  setupWifi();
 
   const char* htmlHallo =
       "<!DOCTYPE html>"
@@ -24,9 +34,7 @@ void setup() {
   server.rewrite("/index.html", "/hallo.html");
 
   server.on("/hallo.html", T_GET, "text/html", htmlHallo);
-  server.on("/moved", T_GET, htmlHallo);
-
-  server.begin(80, ssid, password);
+  server.begin(80);
 }
 
 void loop() { server.doLoop(); }
