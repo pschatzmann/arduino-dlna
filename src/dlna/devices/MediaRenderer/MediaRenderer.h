@@ -1,4 +1,4 @@
-#include "DLNA/DLNADevice.h"
+#include "dlna/DLNADevice.h"
 #include "conmgr.h"
 #include "control.h"
 #include "transport.h"

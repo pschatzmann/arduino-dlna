@@ -1,7 +1,7 @@
 #pragma once
-#include "Basic/Str.h"
-#include "Basic/Vector.h"
-#include "Basic/Logger.h"
+#include "basic/Str.h"
+#include "basic/Vector.h"
+#include "basic/Logger.h"
 #include "Stream.h"
 #include <ctype.h>
 #include <stdlib.h>

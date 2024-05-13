@@ -2,7 +2,7 @@
 
 #include <WiFi.h>
 #include <WiFiUdp.h>
-#include "DLNA/IUDPService.h"
+#include "dlna/IUDPService.h"
 #include "assert.h"
 
 namespace tiny_dlna {

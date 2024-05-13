@@ -3,8 +3,8 @@
 #include <AsyncUDP.h>
 #include <WiFi.h>
 
-#include "Basic/QueueLockFree.h"
-#include "DLNA/IUDPService.h"
+#include "basic/QueueLockFree.h"
+#include "dlna/IUDPService.h"
 #include "assert.h"
 
 namespace tiny_dlna {

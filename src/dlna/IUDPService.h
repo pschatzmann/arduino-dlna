@@ -4,8 +4,8 @@
 #include <WiFi.h>
 #include <WiFiUdp.h>
 
-#include "../Basic/IPAddressAndPort.h"
-#include "../Basic/Str.h"
+#include "basic/IPAddressAndPort.h"
+#include "basic/Str.h"
 #include "assert.h"
 
 namespace tiny_dlna {

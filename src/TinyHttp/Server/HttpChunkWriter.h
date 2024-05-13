@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Client.h"
-#include "Basic/Logger.h"
+#include "basic/Logger.h"
 
 namespace tiny_dlna {
 

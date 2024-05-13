@@ -1,10 +1,10 @@
 #pragma once
 
 //#include "Platform/AltClient.h"
-#include "Basic/Str.h"
-#include "Basic/List.h"
+#include "basic/Str.h"
+#include "basic/List.h"
 #include "Url.h"
-#include "Basic/Logger.h" 
+#include "basic/Logger.h" 
 #include "HttpLineReader.h" 
 
 namespace tiny_dlna {

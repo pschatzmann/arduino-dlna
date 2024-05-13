@@ -24,7 +24,7 @@ namespace tiny_dlna {
  */
 class DLNADevice {
  public:
-  /// start the 
+  /// start the
   bool begin(DLNADeviceInfo& device, IUDPService& udp, HttpServer& server) {
     DlnaLogger.log(DlnaInfo, "DLNADevice::begin");
 
@@ -52,7 +52,7 @@ class DLNADevice {
     }
 
     // start web server
-    if (!p_server->begin(baseUrl.port())){
+    if (!p_server->begin(baseUrl.port())) {
       DlnaLogger.log(DlnaError, "Server failed");
       return false;
     }
@@ -79,15 +79,22 @@ class DLNADevice {
 
   /// Stops the processing and releases the resources
   void end() {
+    p_server->end();
+
     // send 3 bye messages
     PostByeSchedule* bye = new PostByeSchedule();
-    bye->end_time = millis() + 60000;
-    bye->repeat_ms = 20000;
+    bye->repeat_ms = 800;
     scheduler.add(bye);
+
+    // execute scheduler for 2 seconds
+    uint32_t end = millis() + 2000;
+    while (millis() < end) {
+      scheduler.execute(*p_udp, getDevice());
+    }
 
     for (auto& p_device : devices) p_device->clear();
 
-    p_server->end();
+    is_active = false;
   }
 
   /// call this method in the Arduino loop as often as possible
@@ -100,7 +107,7 @@ class DLNADevice {
     if (isSchedulerActive()) {
       // process UDP requests
       RequestData req = p_udp->receive();
-      if (req){
+      if (req) {
         Schedule* schedule = parser.parse(req);
         if (schedule != nullptr) {
           scheduler.add(schedule);
@@ -131,7 +138,8 @@ class DLNADevice {
   /// Checks if the scheduler is active
   bool isSchedulerActive() { return scheduler_active; }
 
-  /// Repeat the post-alive messages (default: 0 = no repeat). Call this method before calling begin!
+  /// Repeat the post-alive messages (default: 0 = no repeat). Call this method
+  /// before calling begin!
   void setPostAliveRepeatMs(uint32_t ms) { post_alive_repeat_ms = ms; }
 
  protected:
@@ -144,7 +152,8 @@ class DLNADevice {
   bool scheduler_active = true;
   uint32_t post_alive_repeat_ms = 0;
 
-  /// MSearch requests reply to upnp:rootdevice and the device type defined in the device
+  /// MSearch requests reply to upnp:rootdevice and the device type defined in
+  /// the device
   bool setupParser() {
     parser.addMSearchST("upnp:rootdevice");
     parser.addMSearchST("ssdp:all");
@@ -157,8 +166,8 @@ class DLNADevice {
 
   /// Schedule PostAlive messages
   bool setupScheduler() {
-    //schedule post alive messages: Usually repeated 2 times (because UDP
-    //messages might be lost)
+    // schedule post alive messages: Usually repeated 2 times (because UDP
+    // messages might be lost)
     PostAliveSchedule* postAlive = new PostAliveSchedule(post_alive_repeat_ms);
     PostAliveSchedule* postAlive1 = new PostAliveSchedule(post_alive_repeat_ms);
     postAlive1->time = millis() + 100;

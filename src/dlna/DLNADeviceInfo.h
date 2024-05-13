@@ -2,9 +2,12 @@
 #pragma once
 
 #include <functional> // std::bind
-#include "Basic/Vector.h"
+#include "basic/Vector.h"
 #include "DLNAServiceInfo.h"
 #include "XMLPrinter.h"
+#include "service/Action.h"
+#include "service/NamedFunction.h"
+#include "vector"
 
 namespace tiny_dlna {
 
@@ -113,6 +116,15 @@ class DLNADeviceInfo {
 
   void clear() { services.clear(); }
 
+  /// Register an generic action callback
+  void setAllActionsCallback(std::function<void(Action)> cb) { action_callback = cb; }
+
+  /// Register a callback for an action
+  void addActionCallback(const char* actionName, std::function<void(void)> func) {
+    action_callback_vector.push_back(NamedFunction(actionName, func));
+  }
+
+
  protected:
   XMLPrinter xml;
   Url base_url{"http://localhost:80/dlna"};
@@ -136,69 +148,80 @@ class DLNADeviceInfo {
   const char* icon_url =
       "https://cdn-icons-png.flaticon.com/512/9973/9973171.png";
   Vector<DLNAServiceInfo> services;
+  std::function<void(Action)> action_callback;
+  Vector<NamedFunction> action_callback_vector;
 
-  void printRoot() {
+  size_t printRoot() {
+    size_t result = 0;
     auto printSpecVersionB = std::bind(&DLNADeviceInfo::printSpecVersion, this);
-    xml.printNode("specVersion", printSpecVersionB);
-    xml.printNode("URLBase", base_url.url());
+    result += xml.printNode("specVersion", printSpecVersionB);
+    result += xml.printNode("URLBase", base_url.url());
     auto printDeviceB = std::bind(&DLNADeviceInfo::printDevice, this);
-    xml.printNode("device", printDeviceB);
+    result += xml.printNode("device", printDeviceB);
+    return result;
   }
 
-  void printDevice() {
-    xml.printNode("deviceType", getDeviceType());
-    xml.printNode("friendlyName", friendly_name);
-    xml.printNode("manufacturer", manufacturer);
-    xml.printNode("manufacturerURL", manufacturer_url);
-    xml.printNode("modelDescription", model_description);
-    xml.printNode("modelName", model_name);
-    xml.printNode("modelNumber", model_number);
-    xml.printNode("serialNumber", serial_number);
-    xml.printNode("UDN", getUDN());
-    xml.printNode("UPC", universal_product_code);
+  size_t printDevice() {
+    size_t result = 0;
+    result += xml.printNode("deviceType", getDeviceType());
+    result += xml.printNode("friendlyName", friendly_name);
+    result += xml.printNode("manufacturer", manufacturer);
+    result += xml.printNode("manufacturerURL", manufacturer_url);
+    result += xml.printNode("modelDescription", model_description);
+    result += xml.printNode("modelName", model_name);
+    result += xml.printNode("modelNumber", model_number);
+    result += xml.printNode("serialNumber", serial_number);
+    result += xml.printNode("UDN", getUDN());
+    result += xml.printNode("UPC", universal_product_code);
     auto printIconListCb = std::bind(&DLNADeviceInfo::printIconList, this);
-    xml.printNode("iconList", printIconListCb);
+    result += xml.printNode("iconList", printIconListCb);
     auto printServiceListCb =
         std::bind(&DLNADeviceInfo::printServiceList, this);
-    xml.printNode("serviceList", printServiceListCb);
+    result += xml.printNode("serviceList", printServiceListCb);
+    return result;
   }
 
-  void printSpecVersion() {
-    xml.printNode("major", "1");
-    xml.printNode("minor", "0");
+  size_t printSpecVersion() {
+    return xml.printNode("major", "1") + xml.printNode("minor", "0");
   }
 
-  void printServiceList() {
+  size_t printServiceList() {
+    size_t result = 0;
     for (auto& service : services) {
       auto printServiceCb =
           std::bind(&DLNADeviceInfo::printService, this, &service);
-      xml.printNodeArg("service", printServiceCb);
+      result += xml.printNodeArg("service", printServiceCb);
     }
+    return result;
   }
 
-  void printService(void* srv) {
+  size_t printService(void* srv) {
+    size_t result = 0;
     DLNAServiceInfo* service = (DLNAServiceInfo*)srv;
-    xml.printNode("serviceType", service->service_type);
-    xml.printNode("serviceId", service->service_id);
-    xml.printNode("SCPDURL", service->scp_url);
-    xml.printNode("controlURL", service->control_url);
-    xml.printNode("eventSubURL", service->event_sub_url);
+    result += xml.printNode("serviceType", service->service_type);
+    result += xml.printNode("serviceId", service->service_id);
+    result += xml.printNode("SCPDURL", service->scp_url);
+    result += xml.printNode("controlURL", service->control_url);
+    result += xml.printNode("eventSubURL", service->event_sub_url);
+    return result;
   }
 
-  void printIconList() {
+  size_t printIconList() {
     auto printIconDlnaInfoCb =
         std::bind(&DLNADeviceInfo::printIconDlnaInfo, this);
-    xml.printNode("icon", printIconDlnaInfoCb);
+    return xml.printNode("icon", printIconDlnaInfoCb);
   }
 
-  void printIconDlnaInfo() {
+  size_t printIconDlnaInfo() {
+    size_t result = 0;
     if (!StrView(icon_url).isEmpty()) {
-      xml.printNode("mimetype", "image/png");
-      xml.printNode("width", icon_width);
-      xml.printNode("height", icon_height);
-      xml.printNode("depth", icon_depth);
-      xml.printNode("url", icon_url);
+      result += xml.printNode("mimetype", "image/png");
+      result += xml.printNode("width", icon_width);
+      result += xml.printNode("height", icon_height);
+      result += xml.printNode("depth", icon_depth);
+      result += xml.printNode("url", icon_url);
     }
+    return result;
   }
 };
 

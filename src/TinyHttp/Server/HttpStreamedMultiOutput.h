@@ -3,8 +3,8 @@
 #include "HttpChunkWriter.h"
 #include "HttpStreamedOutput.h"
 #include "WiFi.h"
-#include "Basic/List.h"
-#include "Basic/Str.h"
+#include "basic/List.h"
+#include "basic/Str.h"
 
 namespace tiny_dlna {
 
