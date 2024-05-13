@@ -1,6 +1,6 @@
 #pragma once
 
-#include "TinyHttp/HttpServer.h"
+#include "http/HttpServer.h"
 
 namespace tiny_dlna {
 

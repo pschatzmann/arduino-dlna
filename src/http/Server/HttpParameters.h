@@ -1,11 +1,12 @@
 #pragma once
-#include "basic/Str.h"
-#include "basic/Vector.h"
-#include "basic/Logger.h"
-#include "Stream.h"
 #include <ctype.h>
 #include <stdlib.h>
 #include <string.h>
+
+#include "Stream.h"
+#include "basic/Logger.h"
+#include "basic/Str.h"
+#include "basic/Vector.h"
 
 namespace tiny_dlna {
 
@@ -24,7 +25,7 @@ class HttpParameters {
     }
   };
 
-public:
+ public:
   /// Default Constructor
   HttpParameters(const int maxLen = 256) { max_len = maxLen; };
 
@@ -43,7 +44,7 @@ public:
       DlnaLogger.log(DlnaInfo, "parameter decoded: %s", buffer);
       int pos = str.indexOf("=");
       if (pos > 0) {
-        buffer[pos] = 0; // delimit key
+        buffer[pos] = 0;  // delimit key
         const char *key = buffer;
         const char *value = buffer + pos + 1;
         DlnaLogger.log(DlnaDebug, "key: %s", key);
@@ -74,7 +75,7 @@ public:
       DlnaLogger.log(DlnaInfo, "parameter decoded: %s", buffer);
       int pos = str.indexOf("=");
       if (pos > 0) {
-        buffer[pos] = 0; // delimit key
+        buffer[pos] = 0;  // delimit key
         const char *key = buffer;
         const char *value = buffer + pos + 1;
         callback(key, value);
@@ -140,7 +141,7 @@ public:
     parameters.clear();
   }
 
-protected:
+ protected:
   Vector<HttpParameterEntry *> parameters;
   int max_len;
 
@@ -149,14 +150,12 @@ protected:
     while (*src) {
       if ((*src == '%') && ((a = src[1]) && (b = src[2])) &&
           (isxdigit(a) && isxdigit(b))) {
-        if (a >= 'a')
-          a -= 'a' - 'A';
+        if (a >= 'a') a -= 'a' - 'A';
         if (a >= 'A')
           a -= ('A' - 10);
         else
           a -= '0';
-        if (b >= 'a')
-          b -= 'a' - 'A';
+        if (b >= 'a') b -= 'a' - 'A';
         if (b >= 'A')
           b -= ('A' - 10);
         else
@@ -174,4 +173,4 @@ protected:
   }
 };
 
-} // namespace tiny_dlna
+}  // namespace tiny_dlna

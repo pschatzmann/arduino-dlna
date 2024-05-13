@@ -4,8 +4,8 @@
 #include "DLNADeviceInfo.h"
 #include "DLNARequestParser.h"
 #include "Schedule.h"
-#include "TinyHttp/HttpServer.h"
-#include "TinyHttp/Server/Url.h"
+#include "http/HttpServer.h"
+#include "basic/Url.h"
 
 #define DLNA_MAX_URL_LEN 120
 
@@ -102,7 +102,9 @@ class DLNADevice {
     if (!is_active) return false;
 
     // handle server requests
-    p_server->doLoop();
+    bool rc = p_server->doLoop();
+    DlnaLogger.log(DlnaDebug, "server %s", rc ? "true" : "false");
+
 
     if (isSchedulerActive()) {
       // process UDP requests
