@@ -22,11 +22,10 @@ class DLNARequestParser {
       return processMSearch(req);
     }
 
-    if (req.data.contains("SUBSCRIBE") || req.data.contains("NOTIFY") ||
-        req.data.contains("SEARCH")) {
-      DlnaLogger.log(DlnaInfo, "invalid request: %s", req.data);
+    if (req.data.contains("SUBSCRIBE") || req.data.contains("NOTIFY")) {
+      DlnaLogger.log(DlnaInfo, "invalid request: %s", req.data.c_str());
     } else {
-      DlnaLogger.log(DlnaDebug, "invalid request: %s", req.data);
+      DlnaLogger.log(DlnaDebug, "invalid request: %s", req.data.c_str());
     }
 
     return nullptr;
