@@ -179,28 +179,7 @@ class DLNADevice {
 
   /// set up Web Server to handle Service Addresses
   virtual bool setupDLNAServer(HttpServer& srv) {
-    auto xmlDevice = [](HttpServer* server, const char* requestPath,
-                        HttpRequestHandlerLine* hl) {
-      DLNADeviceInfo* device_xml = (DLNADeviceInfo*)(hl->context[0]);
-      assert(device_xml != nullptr);
-      if (device_xml != nullptr) {
-        Client& client = server->client();
-        assert(&client != nullptr);
-        DlnaLogger.log(DlnaInfo, "reply %s", "callback");
-        server->replyHeader().setValues(200, "SUCCESS");
-        server->replyHeader().put(CONTENT_TYPE, "text/xml");
-        server->replyHeader().put(CONNECTION, CON_KEEP_ALIVE);
-        server->replyHeader().write(client);
-
-        // print xml result
-        device_xml->print(client);
-        server->endClient();
-      } else {
-        DlnaLogger.log(DlnaError, "DLNADeviceInfo is null");
-        server->replyNotFound();
-      }
-    };
-
+    // make sure we have any devices
     if (devices.empty()) {
       DlnaLogger.log(DlnaError, "No devices found");
       return false;
@@ -210,24 +189,26 @@ class DLNADevice {
     for (auto& p_device : devices) {
       // add device url to server
       const char* device_path = p_device->getDeviceURL().path();
+      const char* prefix = p_device->getBaseURL().path();
+
       DlnaLogger.log(DlnaInfo, "Setting up device path: %s", device_path);
       void* ref[] = {p_device};
 
       if (!StrView(device_path).isEmpty()) {
         p_server->rewrite("/", device_path);
         p_server->rewrite("/index.html", device_path);
-        p_server->on(device_path, T_GET, xmlDevice, ref, 1);
+        p_server->on(device_path, T_GET, deviceXMLCallback, ref, 1);
       }
 
-      const char* prefix = p_device->getBaseURL().path();
-
-      // Register icon
+      // Register icon and privide favicon.ico
       Icon icon = p_device->getIcon();
       if (icon.icon_data != nullptr) {
         char tmp[DLNA_MAX_URL_LEN];
         const char* icon_path =
             concat(prefix, icon.icon_url, tmp, DLNA_MAX_URL_LEN);
         p_server->on(icon_path, T_GET, icon.mime,
+                     (const uint8_t*)icon.icon_data, icon.icon_size);
+        p_server->on("/favicon.ico", T_GET, icon.mime,
                      (const uint8_t*)icon.icon_data, icon.icon_size);
       }
 
@@ -255,6 +236,30 @@ class DLNADevice {
     str.replace("//", "/");
     return buffer;
   }
+
+  /// callback to provide device XML
+  static void deviceXMLCallback(HttpServer* server, const char* requestPath,
+                        HttpRequestHandlerLine* hl) {
+    DLNADeviceInfo* device_xml = (DLNADeviceInfo*)(hl->context[0]);
+    assert(device_xml != nullptr);
+    if (device_xml != nullptr) {
+      Client& client = server->client();
+      assert(&client != nullptr);
+      DlnaLogger.log(DlnaInfo, "reply %s", "callback");
+      server->replyHeader().setValues(200, "SUCCESS");
+      server->replyHeader().put(CONTENT_TYPE, "text/xml");
+      server->replyHeader().put(CONNECTION, CON_KEEP_ALIVE);
+      server->replyHeader().write(client);
+
+      // print xml result
+      device_xml->print(client);
+      server->endClient();
+    } else {
+      DlnaLogger.log(DlnaError, "DLNADeviceInfo is null");
+      server->replyNotFound();
+    }
+  }
+
 
   /// If you dont already provid a complete DLNADeviceInfo you can overwrite
   /// this method and add some custom device specific logic to implement a new
