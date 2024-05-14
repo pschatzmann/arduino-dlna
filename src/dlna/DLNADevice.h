@@ -245,7 +245,7 @@ class DLNADevice {
     if (device_xml != nullptr) {
       Client& client = server->client();
       assert(&client != nullptr);
-      DlnaLogger.log(DlnaInfo, "reply %s", "callback");
+      DlnaLogger.log(DlnaInfo, "reply %s", "DeviceXML");
       server->replyHeader().setValues(200, "SUCCESS");
       server->replyHeader().put(CONTENT_TYPE, "text/xml");
       server->replyHeader().put(CONNECTION, CON_KEEP_ALIVE);

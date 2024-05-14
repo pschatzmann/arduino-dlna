@@ -241,7 +241,7 @@ class HttpHeader {
       if (in.available() == 0) {
         DlnaLogger.log(DlnaWarning, "Waiting for data...");
         while (in.available() == 0) {
-          delay(500);
+          delay(50);
         }
       }
       readLine(in, line, MaxHeaderLineLength);

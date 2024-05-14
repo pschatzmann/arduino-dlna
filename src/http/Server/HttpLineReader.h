@@ -21,7 +21,7 @@ class HttpLineReader {
     DlnaLogger.log(DlnaDebug, "HttpLineReader", "readlnInternal");
     // wait for first character
     for (int w = 0; w < 20 && client.available() == 0; w++) {
-      delay(100);
+      delay(10);
     }
     // if we do not have any data we stop
     if (client.available() == 0) {

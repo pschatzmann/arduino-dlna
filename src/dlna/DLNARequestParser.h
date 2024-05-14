@@ -22,11 +22,18 @@ class DLNARequestParser {
       return processMSearch(req);
     }
 
-    if (req.data.contains("SUBSCRIBE") || req.data.contains("NOTIFY")) {
-      DlnaLogger.log(DlnaInfo, "invalid request: %s", req.data.c_str());
-    } else {
-      DlnaLogger.log(DlnaDebug, "invalid request: %s", req.data.c_str());
+    // We ignore alive notifications
+    if (req.data.contains("NOTIFY")) {
+      if (req.data.contains("ssdp:alive")) {
+        DlnaLogger.log(DlnaDebug, "invalid request: %s", req.data.c_str());
+      } else {
+        DlnaLogger.log(DlnaWarning, "invalid request: %s", req.data.c_str());
+      }
+      return nullptr;
     }
+
+    // We currently
+    DlnaLogger.log(DlnaWarning, "invalid request: %s", req.data.c_str());
 
     return nullptr;
   }
@@ -53,16 +60,16 @@ class DLNARequestParser {
       // determine ST if relevant for us
       for (auto mx : mx_vector) {
         if (result.search_target.equals(mx)) {
-          DlnaLogger.log(DlnaInfo, "MX: %s -> relevant", mx);
+          DlnaLogger.log(DlnaDebug, "MX: %s -> relevant", mx);
           result.active = true;
         }
       }
       if (!result.active) {
-        DlnaLogger.log(DlnaInfo, "MX: %s not relevant", tmp);
+        DlnaLogger.log(DlnaDebug, "MX: %s not relevant", tmp);
       }
 
     } else {
-      DlnaLogger.log(DlnaInfo, "ST: not found");
+      DlnaLogger.log(DlnaError, "ST: not found");
     }
 
     return result.active ? &result : nullptr;
@@ -77,7 +84,8 @@ class DLNARequestParser {
       if (end < 0) end = in.indexOf("\n", start);
       if (end >= 0) {
         result.substring(in.c_str(), start, end);
-        DlnaLogger.log(DlnaDebug, "%s substring (%d,%d)->%s",tag, start, end, result.c_str());
+        DlnaLogger.log(DlnaDebug, "%s substring (%d,%d)->%s", tag, start, end,
+                       result.c_str());
 
         result.trim();
         return true;

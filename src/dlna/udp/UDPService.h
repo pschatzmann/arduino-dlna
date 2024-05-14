@@ -46,9 +46,8 @@ class UDPService : public IUDPService {
       char tmp[packetSize + 1] = {0};
       int len = udp.readBytes(tmp, len);
       result.data = tmp;
-      DlnaLogger.log(DlnaInfo, "(%s [%d])->: %s", result.peer.toString(),
+      DlnaLogger.log(DlnaDebug, "(%s [%d])->: %s", result.peer.toString(),
                      packetSize, tmp);
-      Serial.write((uint8_t *)tmp, packetSize);
     }
     return result;
   }
