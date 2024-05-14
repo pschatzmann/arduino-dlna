@@ -1,3 +1,5 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classtiny__dlna_1_1Vector_1_1iterator.html" title="Iterator for the Vector class." alt="" coords="5,5,148,47"/>
+<area shape="rect" id="node1" href="$classtiny__dlna_1_1IUDPService.html" title="Abstract Interface for UDP API." alt="" coords="5,31,176,57"/>
+<area shape="rect" id="node2" href="$classtiny__dlna_1_1UDPAsyncService.html" title="Access to UDP functionality: sending and receiving of data using the Async API of the ESP32." alt="" coords="224,5,428,32"/>
+<area shape="rect" id="node3" href="$classtiny__dlna_1_1UDPService.html" title="Access to UDP functionality: sending and receiving of data It seems that the UDP receive is not worki..." alt="" coords="243,56,409,83"/>
 </map>

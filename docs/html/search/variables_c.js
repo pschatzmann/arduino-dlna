@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['queue_667',['queue',['../classtiny__dlna_1_1Scheduler.html#abc0f361ef0885ee7a345e8b1c6ecfcb7',1,'tiny_dlna::Scheduler']]]
+  ['open_5fchunk_5flen_1182',['open_chunk_len',['../classtiny__dlna_1_1HttpChunkReader.html#a105acae8b61ee6ca24d8c05b6e7b77f8',1,'tiny_dlna::HttpChunkReader']]],
+  ['output_5fsize_1183',['output_size',['../classtiny__dlna_1_1HttpStreamCopy.html#ab529df349ef38c0ccb5d2d01c0badc4e',1,'tiny_dlna::HttpStreamCopy']]]
 ];

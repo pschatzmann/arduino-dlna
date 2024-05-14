@@ -1,6 +1,11 @@
 var searchData=
 [
-  ['xml_336',['xml',['../classtiny__dlna_1_1DLNADeviceInfo.html#aa7460468c12c3e6a2300a5c6cc725492',1,'tiny_dlna::DLNADeviceInfo']]],
-  ['xmlprinter_337',['XMLPrinter',['../structtiny__dlna_1_1XMLPrinter.html',1,'tiny_dlna::XMLPrinter'],['../structtiny__dlna_1_1XMLPrinter.html#a91340050b791e0087fe36b04ff65d5ec',1,'tiny_dlna::XMLPrinter::XMLPrinter()=default'],['../structtiny__dlna_1_1XMLPrinter.html#a720a01f678ab668d4db810e43e3baa1e',1,'tiny_dlna::XMLPrinter::XMLPrinter(Print &amp;output)']]],
-  ['xmlprinter_2eh_338',['XMLPrinter.h',['../XMLPrinter_8h.html',1,'']]]
+  ['web_5fcallback_5ffn_606',['web_callback_fn',['../namespacetiny__dlna.html#a575a263fd75f2731f40accf7fa73dafe',1,'tiny_dlna']]],
+  ['width_607',['width',['../classtiny__dlna_1_1Icon.html#a3bc5075c9ed9da9e772faf25918ad39a',1,'tiny_dlna::Icon']]],
+  ['write_608',['write',['../classtiny__dlna_1_1RingBuffer.html#a02c1482262b14b2d0f3381ecb153f7a3',1,'tiny_dlna::RingBuffer::write(uint8_t ch)'],['../classtiny__dlna_1_1RingBuffer.html#a84143fd57930b817e6ff8330dd2a2471',1,'tiny_dlna::RingBuffer::write(uint8_t *str, int len)'],['../classtiny__dlna_1_1HttpHeader.html#af273ebfe4a371eb20a1f5c0fa45c2879',1,'tiny_dlna::HttpHeader::write()'],['../classtiny__dlna_1_1HttpStreamedMultiOutput.html#a6ae883773a3dc70cd16d74a930aec084',1,'tiny_dlna::HttpStreamedMultiOutput::write()'],['../classtiny__dlna_1_1HttpStreamedOutput.html#a5c64639e2d9dd6be4f4dded83c5a92d2',1,'tiny_dlna::HttpStreamedOutput::write()']]],
+  ['write1stline_609',['write1stLine',['../classtiny__dlna_1_1HttpHeader.html#a67ed66dffbe23e150574e7c7e05cffd6',1,'tiny_dlna::HttpHeader::write1stLine()'],['../classtiny__dlna_1_1HttpRequestHeader.html#a21e95bb09bbe09cec04eb58813436b5e',1,'tiny_dlna::HttpRequestHeader::write1stLine()'],['../classtiny__dlna_1_1HttpReplyHeader.html#a8c1b5a711d75d95d126f967c34a8978a',1,'tiny_dlna::HttpReplyHeader::write1stLine()']]],
+  ['writechunk_610',['writeChunk',['../classtiny__dlna_1_1HttpChunkWriter.html#a6df4bb24578c686c17ce753815c38d25',1,'tiny_dlna::HttpChunkWriter::writeChunk(Client &amp;client, const char *str, int len, const char *str1=nullptr, int len1=0)'],['../classtiny__dlna_1_1HttpChunkWriter.html#a822960b02a3aeeb99c89d94c9fad9dd7',1,'tiny_dlna::HttpChunkWriter::writeChunk(Client &amp;client, const char *str)']]],
+  ['writeend_611',['writeEnd',['../classtiny__dlna_1_1HttpChunkWriter.html#a82d27502d0b230461ef728d9bd4a3c13',1,'tiny_dlna::HttpChunkWriter']]],
+  ['writeheaderline_612',['writeHeaderLine',['../classtiny__dlna_1_1HttpHeader.html#a0e2c0a4ee304a7a69f53a99abb3bfdea',1,'tiny_dlna::HttpHeader']]],
+  ['writer_613',['writer',['../classtiny__dlna_1_1HttpStreamCopy.html#a61b4f643774bc15e2a1fa102c7e6473f',1,'tiny_dlna::HttpStreamCopy::writer()'],['../classtiny__dlna_1_1HttpStreamedMultiOutput.html#acb4f9b24e647941784c55ea154fbb9ec',1,'tiny_dlna::HttpStreamedMultiOutput::writer()']]]
 ];

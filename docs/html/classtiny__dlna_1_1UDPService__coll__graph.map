@@ -1,0 +1,5 @@
+<map id="tiny_dlna::UDPService" name="tiny_dlna::UDPService">
+<area shape="rect" id="node1" title="Access to UDP functionality: sending and receiving of data It seems that the UDP receive is not worki..." alt="" coords="113,95,279,121"/>
+<area shape="rect" id="node2" href="$classtiny__dlna_1_1IUDPService.html" title="Abstract Interface for UDP API." alt="" coords="5,5,176,32"/>
+<area shape="rect" id="node3" href="$structtiny__dlna_1_1IPAddressAndPort.html" title="IP Adress including Port information." alt="" coords="201,5,405,32"/>
+</map>

@@ -74,15 +74,36 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Access to UDP functionality: sending and receiving of data.  
+<p>Access to UDP functionality: sending and receiving of data It seems that the UDP receive is not working for.  
  <a href="classtiny__dlna_1_1UDPService.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="UDPService_8h_source.html">UDPService.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for tiny_dlna::UDPService:</div>
+<div class="dyncontent">
+<div class="center"><img src="classtiny__dlna_1_1UDPService__inherit__graph.png" border="0" usemap="#atiny__dlna_1_1UDPService_inherit__map" alt="Inheritance graph"/></div>
+<map name="atiny__dlna_1_1UDPService_inherit__map" id="atiny__dlna_1_1UDPService_inherit__map">
+<area shape="rect" title="Access to UDP functionality: sending and receiving of data It seems that the UDP receive is not worki..." alt="" coords="7,80,174,107"/>
+<area shape="rect" href="classtiny__dlna_1_1IUDPService.html" title="Abstract Interface for UDP API." alt="" coords="5,5,176,32"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<div class="dynheader">
+Collaboration diagram for tiny_dlna::UDPService:</div>
+<div class="dyncontent">
+<div class="center"><img src="classtiny__dlna_1_1UDPService__coll__graph.png" border="0" usemap="#atiny__dlna_1_1UDPService_coll__map" alt="Collaboration graph"/></div>
+<map name="atiny__dlna_1_1UDPService_coll__map" id="atiny__dlna_1_1UDPService_coll__map">
+<area shape="rect" title="Access to UDP functionality: sending and receiving of data It seems that the UDP receive is not worki..." alt="" coords="113,95,279,121"/>
+<area shape="rect" href="classtiny__dlna_1_1IUDPService.html" title="Abstract Interface for UDP API." alt="" coords="5,5,176,32"/>
+<area shape="rect" href="structtiny__dlna_1_1IPAddressAndPort.html" title="IP Adress including Port information." alt="" coords="201,5,405,32"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a20580d38b87199a38cd08ed70798a7df"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1UDPService.html#a20580d38b87199a38cd08ed70798a7df">UDPService</a> (WiFiUDP &amp;udp)</td></tr>
-<tr class="separator:a20580d38b87199a38cd08ed70798a7df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8180aca6a86279d4e9b2a9c2df1c562d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1UDPService.html#a8180aca6a86279d4e9b2a9c2df1c562d">begin</a> (<a class="el" href="structtiny__dlna_1_1IPAddressAndPort.html">IPAddressAndPort</a> addr)</td></tr>
+<tr class="separator:a8180aca6a86279d4e9b2a9c2df1c562d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4af63e73207857011af39e6f4ecbbfbd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1UDPService.html#a4af63e73207857011af39e6f4ecbbfbd">send</a> (uint8_t *data, int len)</td></tr>
+<tr class="separator:a4af63e73207857011af39e6f4ecbbfbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a76e870308f9d5b5ba4d957e5430a0d98"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1UDPService.html#a76e870308f9d5b5ba4d957e5430a0d98">send</a> (<a class="el" href="structtiny__dlna_1_1IPAddressAndPort.html">IPAddressAndPort</a> addr, uint8_t *data, int len)</td></tr>
 <tr class="separator:a76e870308f9d5b5ba4d957e5430a0d98"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2c2dd55fec7c897b73446d2ea8bd9497"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structtiny__dlna_1_1RequestData.html">RequestData</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1UDPService.html#a2c2dd55fec7c897b73446d2ea8bd9497">receive</a> ()</td></tr>
@@ -90,15 +111,17 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a830fdb76b7b2ca70bec79f8d5c7eb426"><td class="memItemLeft" align="right" valign="top">WiFiUDP *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1UDPService.html#a830fdb76b7b2ca70bec79f8d5c7eb426">p_udp</a> = nullptr</td></tr>
-<tr class="separator:a830fdb76b7b2ca70bec79f8d5c7eb426"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a980710fc6470fae481c2c40ef2cb6bf2"><td class="memItemLeft" align="right" valign="top">WiFiUDP&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1UDPService.html#a980710fc6470fae481c2c40ef2cb6bf2">udp</a></td></tr>
+<tr class="separator:a980710fc6470fae481c2c40ef2cb6bf2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2dc0935bb38578def9fd313fb6246915"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structtiny__dlna_1_1IPAddressAndPort.html">IPAddressAndPort</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1UDPService.html#a2dc0935bb38578def9fd313fb6246915">peer</a></td></tr>
+<tr class="separator:a2dc0935bb38578def9fd313fb6246915"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Access to UDP functionality: sending and receiving of data. </p>
+<div class="textblock"><p>Access to UDP functionality: sending and receiving of data It seems that the UDP receive is not working for. </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a20580d38b87199a38cd08ed70798a7df"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a20580d38b87199a38cd08ed70798a7df">&#9670;&nbsp;</a></span>UDPService()</h2>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a8180aca6a86279d4e9b2a9c2df1c562d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8180aca6a86279d4e9b2a9c2df1c562d">&#9670;&nbsp;</a></span>begin()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -107,23 +130,24 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">tiny_dlna::UDPService::UDPService </td>
+          <td class="memname">bool tiny_dlna::UDPService::begin </td>
           <td>(</td>
-          <td class="paramtype">WiFiUDP &amp;&#160;</td>
-          <td class="paramname"><em>udp</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="structtiny__dlna_1_1IPAddressAndPort.html">IPAddressAndPort</a>&#160;</td>
+          <td class="paramname"><em>addr</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
+<p>Implements <a class="el" href="classtiny__dlna_1_1IUDPService.html#abfb8daa5d9cb2a6573e75f123c2ff1ea">tiny_dlna::IUDPService</a>.</p>
+
 </div>
 </div>
-<h2 class="groupheader">Member Function Documentation</h2>
 <a id="a2c2dd55fec7c897b73446d2ea8bd9497"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2c2dd55fec7c897b73446d2ea8bd9497">&#9670;&nbsp;</a></span>receive()</h2>
 
@@ -142,15 +166,17 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
+<p>Implements <a class="el" href="classtiny__dlna_1_1IUDPService.html#a0d79ef948443dfeecc9bd90341893d2d">tiny_dlna::IUDPService</a>.</p>
+
 </div>
 </div>
 <a id="a76e870308f9d5b5ba4d957e5430a0d98"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a76e870308f9d5b5ba4d957e5430a0d98">&#9670;&nbsp;</a></span>send()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a76e870308f9d5b5ba4d957e5430a0d98">&#9670;&nbsp;</a></span>send() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -184,16 +210,17 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
+<p>Implements <a class="el" href="classtiny__dlna_1_1IUDPService.html#a6d29e48295121ba2b962514300f0e610">tiny_dlna::IUDPService</a>.</p>
+
 </div>
 </div>
-<h2 class="groupheader">Member Data Documentation</h2>
-<a id="a830fdb76b7b2ca70bec79f8d5c7eb426"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a830fdb76b7b2ca70bec79f8d5c7eb426">&#9670;&nbsp;</a></span>p_udp</h2>
+<a id="a4af63e73207857011af39e6f4ecbbfbd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4af63e73207857011af39e6f4ecbbfbd">&#9670;&nbsp;</a></span>send() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -202,7 +229,68 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">WiFiUDP* tiny_dlna::UDPService::p_udp = nullptr</td>
+          <td class="memname">bool tiny_dlna::UDPService::send </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>len</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implements <a class="el" href="classtiny__dlna_1_1IUDPService.html#aff5760f65e7e32da88170e34ada59c57">tiny_dlna::IUDPService</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a2dc0935bb38578def9fd313fb6246915"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2dc0935bb38578def9fd313fb6246915">&#9670;&nbsp;</a></span>peer</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structtiny__dlna_1_1IPAddressAndPort.html">IPAddressAndPort</a> tiny_dlna::UDPService::peer</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a980710fc6470fae481c2c40ef2cb6bf2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a980710fc6470fae481c2c40ef2cb6bf2">&#9670;&nbsp;</a></span>udp</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">WiFiUDP tiny_dlna::UDPService::udp</td>
         </tr>
       </table>
   </td>
@@ -215,7 +303,7 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/DLNA/<a class="el" href="UDPService_8h_source.html">UDPService.h</a></li>
+<li>src/dlna/udp/<a class="el" href="UDPService_8h_source.html">UDPService.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

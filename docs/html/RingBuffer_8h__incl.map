@@ -1,4 +1,4 @@
-<map id="src/Basic/RingBuffer.h" name="src/Basic/RingBuffer.h">
+<map id="src/basic/RingBuffer.h" name="src/basic/RingBuffer.h">
 <area shape="rect" id="node1" title=" " alt="" coords="113,5,276,32"/>
 <area shape="rect" id="node2" href="$Vector_8h.html" title=" " alt="" coords="59,80,133,107"/>
 <area shape="rect" id="node11" title=" " alt="" coords="157,80,232,107"/>
@@ -6,7 +6,7 @@
 <area shape="rect" id="node3" title=" " alt="" coords="5,155,80,181"/>
 <area shape="rect" id="node4" href="$Allocator_8h.html" title=" " alt="" coords="104,155,195,181"/>
 <area shape="rect" id="node5" title=" " alt="" coords="55,229,126,256"/>
-<area shape="rect" id="node6" href="$Logger_8h.html" title=" " alt="" coords="150,229,266,256"/>
+<area shape="rect" id="node6" href="$Logger_8h.html" title=" " alt="" coords="151,229,265,256"/>
 <area shape="rect" id="node7" title=" " alt="" coords="29,304,104,331"/>
 <area shape="rect" id="node8" title=" " alt="" coords="128,304,195,331"/>
 <area shape="rect" id="node9" title=" " alt="" coords="219,304,290,331"/>

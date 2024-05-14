@@ -1,8 +1,4 @@
-<map id="src/DLNA/UDPService.h" name="src/DLNA/UDPService.h">
-<area shape="rect" id="node1" title=" " alt="" coords="30,5,203,32"/>
-<area shape="rect" id="node2" href="$DLNARequestParser_8h.html" title=" " alt="" coords="5,229,231,256"/>
-<area shape="rect" id="node5" href="$Schedule_8h.html" title=" " alt="" coords="155,80,311,107"/>
-<area shape="rect" id="node6" href="$Scheduler_8h.html" title=" " alt="" coords="70,155,230,181"/>
-<area shape="rect" id="node3" href="$DLNADevice_8h.html" title=" " alt="" coords="103,304,282,331"/>
-<area shape="rect" id="node4" href="$DLNA_8h.html" title=" " alt="" coords="146,379,239,405"/>
+<map id="src/dlna/udp/UDPService.h" name="src/dlna/udp/UDPService.h">
+<area shape="rect" id="node1" title=" " alt="" coords="5,5,199,32"/>
+<area shape="rect" id="node2" href="$DLNA_8h.html" title=" " alt="" coords="55,80,149,107"/>
 </map>

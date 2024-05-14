@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Arduino DLNA Server: src/DLNA/Service.h File Reference</title>
+<title>Arduino DLNA Server: src/dlna/service/Service.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,42 +61,42 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_22061c2d75552632a4bc102d786ab225.html">DLNA</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_95ca7d69a617eba53e70afaf1b3c2114.html">dlna</a></li><li class="navelem"><a class="el" href="dir_0cc376a421adda5b51abf4399903838c.html">service</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a> &#124;
-<a href="#typedef-members">Typedefs</a>  </div>
+<a href="#namespaces">Namespaces</a>  </div>
   <div class="headertitle">
 <div class="title">Service.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="HttpServer_8h_source.html">TinyHttp/HttpServer.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="Vector_8h_source.html">basic/Vector.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="Action_8h_source.html">Action.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="State_8h_source.html">State.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="XMLPrinter_8h_source.html">dlna/XMLPrinter.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for Service.h:</div>
 <div class="dyncontent">
-<div class="center"><img src="Service_8h__incl.png" border="0" usemap="#asrc_2DLNA_2Service_8h" alt=""/></div>
-<map name="asrc_2DLNA_2Service_8h" id="asrc_2DLNA_2Service_8h">
-<area shape="rect" title=" " alt="" coords="383,5,529,32"/>
-<area shape="rect" href="HttpServer_8h.html" title=" " alt="" coords="375,80,537,107"/>
-<area shape="rect" title=" " alt="" coords="5,155,155,181"/>
-<area shape="rect" title=" " alt="" coords="179,155,341,181"/>
-<area shape="rect" title=" " alt="" coords="365,155,547,181"/>
-<area shape="rect" title=" " alt="" coords="572,155,679,181"/>
-<area shape="rect" title=" " alt="" coords="703,155,849,181"/>
-</map>
-</div>
-</div><div class="textblock"><div class="dynheader">
-This graph shows which files directly or indirectly include this file:</div>
-<div class="dyncontent">
-<div class="center"><img src="Service_8h__dep__incl.png" border="0" usemap="#asrc_2DLNA_2Service_8hdep" alt=""/></div>
-<map name="asrc_2DLNA_2Service_8hdep" id="asrc_2DLNA_2Service_8hdep">
-<area shape="rect" title=" " alt="" coords="22,5,167,32"/>
-<area shape="rect" href="Device_8h.html" title=" " alt="" coords="23,80,166,107"/>
-<area shape="rect" href="DLNADevice_8h.html" title=" " alt="" coords="5,155,184,181"/>
-<area shape="rect" href="DLNA_8h.html" title=" " alt="" coords="48,229,141,256"/>
+<div class="center"><img src="Service_8h__incl.png" border="0" usemap="#asrc_2dlna_2service_2Service_8h" alt=""/></div>
+<map name="asrc_2dlna_2service_2Service_8h" id="asrc_2dlna_2service_2Service_8h">
+<area shape="rect" title=" " alt="" coords="79,5,267,32"/>
+<area shape="rect" href="Vector_8h.html" title=" " alt="" coords="54,304,166,331"/>
+<area shape="rect" href="Action_8h.html" title=" " alt="" coords="173,80,247,107"/>
+<area shape="rect" href="State_8h.html" title=" " alt="" coords="124,155,192,181"/>
+<area shape="rect" href="XMLPrinter_8h.html" title=" " alt="" coords="173,229,309,256"/>
+<area shape="rect" title=" " alt="" coords="166,379,241,405"/>
+<area shape="rect" href="Allocator_8h.html" title=" " alt="" coords="51,379,142,405"/>
+<area shape="rect" title=" " alt="" coords="23,453,93,480"/>
+<area shape="rect" href="Logger_8h.html" title=" " alt="" coords="118,453,233,480"/>
+<area shape="rect" title=" " alt="" coords="114,528,189,555"/>
+<area shape="rect" title=" " alt="" coords="309,528,375,555"/>
+<area shape="rect" title=" " alt="" coords="213,528,284,555"/>
+<area shape="rect" title=" " alt="" coords="5,528,89,555"/>
+<area shape="rect" title=" " alt="" coords="241,304,305,331"/>
+<area shape="rect" href="StrView_8h.html" title=" " alt="" coords="281,453,403,480"/>
+<area shape="rect" title=" " alt="" coords="400,528,497,555"/>
 </map>
 </div>
 </div>
@@ -105,18 +105,13 @@ This graph shows which files directly or indirectly include this file:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Service.html">tiny_dlna::Service</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attributes needed for the DLNA <a class="el" href="classtiny__dlna_1_1Service.html" title="Attributes needed for the DLNA Service Definition.">Service</a> Definition.  <a href="classtiny__dlna_1_1Service.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">DLNA <a class="el" href="classtiny__dlna_1_1Service.html" title="DLNA Service: Actions and State information.">Service</a>: Actions and <a class="el" href="classtiny__dlna_1_1State.html" title="DLNA Service: Representation of a single State.">State</a> information.  <a href="classtiny__dlna_1_1Service.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
 <tr class="memitem:namespacetiny__dlna"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetiny__dlna.html">tiny_dlna</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
-Typedefs</h2></td></tr>
-<tr class="memitem:a1ac25cf2e9ceca6ae0e8fd2fd586470c"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetiny__dlna.html#a1ac25cf2e9ceca6ae0e8fd2fd586470c">tiny_dlna::http_callback</a>) (HttpServer *server, const char *requestPath, HttpRequestHandlerLine *hl)</td></tr>
-<tr class="separator:a1ac25cf2e9ceca6ae0e8fd2fd586470c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- start footer part -->

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Arduino DLNA Server: src/DLNA/UDPService.h File Reference</title>
+<title>Arduino DLNA Server: src/dlna/udp/UDPService.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,7 +61,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_22061c2d75552632a4bc102d786ab225.html">DLNA</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_95ca7d69a617eba53e70afaf1b3c2114.html">dlna</a></li><li class="navelem"><a class="el" href="dir_d15ecd6caac84bbf7f1a1bafbf6c836f.html">udp</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -74,43 +74,39 @@ $(function() {
 <div class="contents">
 <div class="textblock"><code>#include &lt;WiFi.h&gt;</code><br />
 <code>#include &lt;WiFiUdp.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="Str_8h_source.html">../Basic/Str.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="IPAddressAndPort_8h_source.html">../Basic/IPAddressAndPort.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="IUDPService_8h_source.html">dlna/IUDPService.h</a>&quot;</code><br />
 <code>#include &quot;assert.h&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for UDPService.h:</div>
 <div class="dyncontent">
-<div class="center"><img src="UDPService_8h__incl.png" border="0" usemap="#asrc_2DLNA_2UDPService_8h" alt=""/></div>
-<map name="asrc_2DLNA_2UDPService_8h" id="asrc_2DLNA_2UDPService_8h">
-<area shape="rect" title=" " alt="" coords="281,5,455,32"/>
-<area shape="rect" title=" " alt="" coords="117,80,179,107"/>
-<area shape="rect" title=" " alt="" coords="204,80,292,107"/>
-<area shape="rect" href="Str_8h.html" title=" " alt="" coords="317,80,419,107"/>
-<area shape="rect" title=" " alt="" coords="420,229,495,256"/>
-<area shape="rect" href="IPAddressAndPort_8h.html" title=" " alt="" coords="431,304,630,331"/>
-<area shape="rect" href="StrView_8h.html" title=" " alt="" coords="229,304,312,331"/>
-<area shape="rect" href="Vector_8h.html" title=" " alt="" coords="331,155,405,181"/>
-<area shape="rect" title=" " alt="" coords="213,379,280,405"/>
-<area shape="rect" title=" " alt="" coords="305,379,375,405"/>
-<area shape="rect" title=" " alt="" coords="441,379,538,405"/>
-<area shape="rect" href="Allocator_8h.html" title=" " alt="" coords="305,229,396,256"/>
-<area shape="rect" title=" " alt="" coords="337,304,407,331"/>
-<area shape="rect" href="Logger_8h.html" title=" " alt="" coords="89,304,205,331"/>
-<area shape="rect" title=" " alt="" coords="5,379,80,405"/>
-<area shape="rect" title=" " alt="" coords="105,379,189,405"/>
+<div class="center"><img src="UDPService_8h__incl.png" border="0" usemap="#asrc_2dlna_2udp_2UDPService_8h" alt=""/></div>
+<map name="asrc_2dlna_2udp_2UDPService_8h" id="asrc_2dlna_2udp_2UDPService_8h">
+<area shape="rect" title=" " alt="" coords="86,5,279,32"/>
+<area shape="rect" title=" " alt="" coords="11,155,74,181"/>
+<area shape="rect" title=" " alt="" coords="99,155,187,181"/>
+<area shape="rect" href="IUDPService_8h.html" title=" " alt="" coords="165,80,312,107"/>
+<area shape="rect" title=" " alt="" coords="432,304,507,331"/>
+<area shape="rect" href="IPAddressAndPort_8h.html" title=" " alt="" coords="5,379,192,405"/>
+<area shape="rect" href="Str_8h.html" title=" " alt="" coords="262,155,351,181"/>
+<area shape="rect" title=" " alt="" coords="50,453,147,480"/>
+<area shape="rect" title=" " alt="" coords="171,453,242,480"/>
+<area shape="rect" href="StrView_8h.html" title=" " alt="" coords="216,379,299,405"/>
+<area shape="rect" href="Vector_8h.html" title=" " alt="" coords="312,229,387,256"/>
+<area shape="rect" title=" " alt="" coords="267,453,333,480"/>
+<area shape="rect" href="Allocator_8h.html" title=" " alt="" coords="317,304,408,331"/>
+<area shape="rect" title=" " alt="" coords="462,379,533,405"/>
+<area shape="rect" href="Logger_8h.html" title=" " alt="" coords="323,379,437,405"/>
+<area shape="rect" title=" " alt="" coords="357,453,432,480"/>
+<area shape="rect" title=" " alt="" coords="457,453,541,480"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
-<div class="center"><img src="UDPService_8h__dep__incl.png" border="0" usemap="#asrc_2DLNA_2UDPService_8hdep" alt=""/></div>
-<map name="asrc_2DLNA_2UDPService_8hdep" id="asrc_2DLNA_2UDPService_8hdep">
-<area shape="rect" title=" " alt="" coords="30,5,203,32"/>
-<area shape="rect" href="DLNARequestParser_8h.html" title=" " alt="" coords="5,229,231,256"/>
-<area shape="rect" href="Schedule_8h.html" title=" " alt="" coords="155,80,311,107"/>
-<area shape="rect" href="Scheduler_8h.html" title=" " alt="" coords="70,155,230,181"/>
-<area shape="rect" href="DLNADevice_8h.html" title=" " alt="" coords="103,304,282,331"/>
-<area shape="rect" href="DLNA_8h.html" title=" " alt="" coords="146,379,239,405"/>
+<div class="center"><img src="UDPService_8h__dep__incl.png" border="0" usemap="#asrc_2dlna_2udp_2UDPService_8hdep" alt=""/></div>
+<map name="asrc_2dlna_2udp_2UDPService_8hdep" id="asrc_2dlna_2udp_2UDPService_8hdep">
+<area shape="rect" title=" " alt="" coords="5,5,199,32"/>
+<area shape="rect" href="DLNA_8h.html" title=" " alt="" coords="55,80,149,107"/>
 </map>
 </div>
 </div>
@@ -118,11 +114,8 @@ This graph shows which files directly or indirectly include this file:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1RequestData.html">tiny_dlna::RequestData</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides information of the received UDP which consists of the (xml) data and the peer address and port.  <a href="structtiny__dlna_1_1RequestData.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1UDPService.html">tiny_dlna::UDPService</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to UDP functionality: sending and receiving of data.  <a href="classtiny__dlna_1_1UDPService.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to UDP functionality: sending and receiving of data It seems that the UDP receive is not working for.  <a href="classtiny__dlna_1_1UDPService.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>

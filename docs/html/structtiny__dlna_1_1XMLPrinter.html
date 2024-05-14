@@ -89,21 +89,27 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac33a7ac306583618bcbd98dcf8303a31"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1XMLPrinter.html#ac33a7ac306583618bcbd98dcf8303a31">setOutput</a> (Print &amp;output)</td></tr>
 <tr class="memdesc:ac33a7ac306583618bcbd98dcf8303a31"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the output.  <a href="structtiny__dlna_1_1XMLPrinter.html#ac33a7ac306583618bcbd98dcf8303a31">More...</a><br /></td></tr>
 <tr class="separator:ac33a7ac306583618bcbd98dcf8303a31"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a03d2532312258e71c5e0599fb1df21"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1XMLPrinter.html#a5a03d2532312258e71c5e0599fb1df21">printXMLHeader</a> ()</td></tr>
-<tr class="separator:a5a03d2532312258e71c5e0599fb1df21"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae76f7170cf215a19e17cec3a98a2a8d2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1XMLPrinter.html#ae76f7170cf215a19e17cec3a98a2a8d2">printNode</a> (const char *node, const char *txt, const char *attributes=nullptr)</td></tr>
-<tr class="separator:ae76f7170cf215a19e17cec3a98a2a8d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae288b3a47913064eb5e83a767bfbe881"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1XMLPrinter.html#ae288b3a47913064eb5e83a767bfbe881">printNode</a> (const char *node, int txt, const char *attributes=nullptr)</td></tr>
-<tr class="separator:ae288b3a47913064eb5e83a767bfbe881"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a53c073f912557ba5071dea2fe6d3d796"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1XMLPrinter.html#a53c073f912557ba5071dea2fe6d3d796">printNode</a> (const char *node, std::function&lt; void(void)&gt; callback, const char *attributes=nullptr)</td></tr>
-<tr class="separator:a53c073f912557ba5071dea2fe6d3d796"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aecb21861b0cf8ca7a93524bef1610591"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1XMLPrinter.html#aecb21861b0cf8ca7a93524bef1610591">printNodeArg</a> (const char *node, std::function&lt; void(void)&gt; callback)</td></tr>
-<tr class="separator:aecb21861b0cf8ca7a93524bef1610591"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add0fbdcaae8599c44dd8b066c12a9e62"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1XMLPrinter.html#add0fbdcaae8599c44dd8b066c12a9e62">printXMLHeader</a> ()</td></tr>
+<tr class="separator:add0fbdcaae8599c44dd8b066c12a9e62"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3991c70e0c1f56da1cf72ae99e60484a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1XMLPrinter.html#a3991c70e0c1f56da1cf72ae99e60484a">printNode</a> (<a class="el" href="structtiny__dlna_1_1XMLNode.html">XMLNode</a> node)</td></tr>
+<tr class="separator:a3991c70e0c1f56da1cf72ae99e60484a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34b8aa6429d6bddd3aed24a577145235"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1XMLPrinter.html#a34b8aa6429d6bddd3aed24a577145235">printNode</a> (const char *node, <a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt; <a class="el" href="structtiny__dlna_1_1XMLNode.html">XMLNode</a> &gt; children, const char *attributes=nullptr)</td></tr>
+<tr class="separator:a34b8aa6429d6bddd3aed24a577145235"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29eee36f9362f5fab66ebeca6692cc25"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1XMLPrinter.html#a29eee36f9362f5fab66ebeca6692cc25">printNode</a> (const char *node, const char *txt, const char *attributes=nullptr)</td></tr>
+<tr class="separator:a29eee36f9362f5fab66ebeca6692cc25"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43fdc15666f5e1ebe96af3a6486aa7d4"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1XMLPrinter.html#a43fdc15666f5e1ebe96af3a6486aa7d4">printNode</a> (const char *node, int txt, const char *attributes=nullptr)</td></tr>
+<tr class="separator:a43fdc15666f5e1ebe96af3a6486aa7d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50b1f57e715608539ae2443fc2f24445"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1XMLPrinter.html#a50b1f57e715608539ae2443fc2f24445">printNode</a> (const char *node, std::function&lt; size_t(void)&gt; callback, const char *attributes=nullptr)</td></tr>
+<tr class="separator:a50b1f57e715608539ae2443fc2f24445"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a253c67cd4094736ae137903b89f14a8d"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1XMLPrinter.html#a253c67cd4094736ae137903b89f14a8d">printNodeArg</a> (const char *node, std::function&lt; size_t(void)&gt; callback)</td></tr>
+<tr class="separator:a253c67cd4094736ae137903b89f14a8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a3675bc1fea4c1ac7b9afc1ddd59afb41"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1XMLPrinter.html#a3675bc1fea4c1ac7b9afc1ddd59afb41">println</a> (const char *txt)</td></tr>
-<tr class="separator:a3675bc1fea4c1ac7b9afc1ddd59afb41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a832acd98296cf1845efbaa419ee5c39c"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1XMLPrinter.html#a832acd98296cf1845efbaa419ee5c39c">println</a> (const char *txt)</td></tr>
+<tr class="separator:a832acd98296cf1845efbaa419ee5c39c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab48696655cf89f109401f3fc30678e0f"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1XMLPrinter.html#ab48696655cf89f109401f3fc30678e0f">printChildren</a> (<a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt; <a class="el" href="structtiny__dlna_1_1XMLNode.html">XMLNode</a> &gt; &amp;children)</td></tr>
+<tr class="separator:ab48696655cf89f109401f3fc30678e0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -166,8 +172,8 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a3675bc1fea4c1ac7b9afc1ddd59afb41"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3675bc1fea4c1ac7b9afc1ddd59afb41">&#9670;&nbsp;</a></span>println()</h2>
+<a id="ab48696655cf89f109401f3fc30678e0f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab48696655cf89f109401f3fc30678e0f">&#9670;&nbsp;</a></span>printChildren()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -176,7 +182,33 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void tiny_dlna::XMLPrinter::println </td>
+          <td class="memname">size_t tiny_dlna::XMLPrinter::printChildren </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt; <a class="el" href="structtiny__dlna_1_1XMLNode.html">XMLNode</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>children</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a832acd98296cf1845efbaa419ee5c39c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a832acd98296cf1845efbaa419ee5c39c">&#9670;&nbsp;</a></span>println()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t tiny_dlna::XMLPrinter::println </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>txt</em></td><td>)</td>
@@ -192,8 +224,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ae76f7170cf215a19e17cec3a98a2a8d2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae76f7170cf215a19e17cec3a98a2a8d2">&#9670;&nbsp;</a></span>printNode() <span class="overload">[1/3]</span></h2>
+<a id="a29eee36f9362f5fab66ebeca6692cc25"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29eee36f9362f5fab66ebeca6692cc25">&#9670;&nbsp;</a></span>printNode() <span class="overload">[1/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -202,7 +234,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void tiny_dlna::XMLPrinter::printNode </td>
+          <td class="memname">size_t tiny_dlna::XMLPrinter::printNode </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>node</em>, </td>
@@ -234,8 +266,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ae288b3a47913064eb5e83a767bfbe881"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae288b3a47913064eb5e83a767bfbe881">&#9670;&nbsp;</a></span>printNode() <span class="overload">[2/3]</span></h2>
+<a id="a43fdc15666f5e1ebe96af3a6486aa7d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a43fdc15666f5e1ebe96af3a6486aa7d4">&#9670;&nbsp;</a></span>printNode() <span class="overload">[2/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -244,7 +276,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void tiny_dlna::XMLPrinter::printNode </td>
+          <td class="memname">size_t tiny_dlna::XMLPrinter::printNode </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>node</em>, </td>
@@ -276,8 +308,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a53c073f912557ba5071dea2fe6d3d796"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a53c073f912557ba5071dea2fe6d3d796">&#9670;&nbsp;</a></span>printNode() <span class="overload">[3/3]</span></h2>
+<a id="a50b1f57e715608539ae2443fc2f24445"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a50b1f57e715608539ae2443fc2f24445">&#9670;&nbsp;</a></span>printNode() <span class="overload">[3/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -286,7 +318,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void tiny_dlna::XMLPrinter::printNode </td>
+          <td class="memname">size_t tiny_dlna::XMLPrinter::printNode </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>node</em>, </td>
@@ -294,7 +326,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::function&lt; void(void)&gt;&#160;</td>
+          <td class="paramtype">std::function&lt; size_t(void)&gt;&#160;</td>
           <td class="paramname"><em>callback</em>, </td>
         </tr>
         <tr>
@@ -318,8 +350,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="aecb21861b0cf8ca7a93524bef1610591"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aecb21861b0cf8ca7a93524bef1610591">&#9670;&nbsp;</a></span>printNodeArg()</h2>
+<a id="a34b8aa6429d6bddd3aed24a577145235"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34b8aa6429d6bddd3aed24a577145235">&#9670;&nbsp;</a></span>printNode() <span class="overload">[4/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -328,7 +360,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void tiny_dlna::XMLPrinter::printNodeArg </td>
+          <td class="memname">size_t tiny_dlna::XMLPrinter::printNode </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>node</em>, </td>
@@ -336,7 +368,75 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::function&lt; void(void)&gt;&#160;</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt; <a class="el" href="structtiny__dlna_1_1XMLNode.html">XMLNode</a> &gt;&#160;</td>
+          <td class="paramname"><em>children</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>attributes</em> = <code>nullptr</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3991c70e0c1f56da1cf72ae99e60484a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3991c70e0c1f56da1cf72ae99e60484a">&#9670;&nbsp;</a></span>printNode() <span class="overload">[5/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t tiny_dlna::XMLPrinter::printNode </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structtiny__dlna_1_1XMLNode.html">XMLNode</a>&#160;</td>
+          <td class="paramname"><em>node</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a253c67cd4094736ae137903b89f14a8d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a253c67cd4094736ae137903b89f14a8d">&#9670;&nbsp;</a></span>printNodeArg()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t tiny_dlna::XMLPrinter::printNodeArg </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>node</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::function&lt; size_t(void)&gt;&#160;</td>
           <td class="paramname"><em>callback</em>&#160;</td>
         </tr>
         <tr>
@@ -354,8 +454,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a5a03d2532312258e71c5e0599fb1df21"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5a03d2532312258e71c5e0599fb1df21">&#9670;&nbsp;</a></span>printXMLHeader()</h2>
+<a id="add0fbdcaae8599c44dd8b066c12a9e62"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#add0fbdcaae8599c44dd8b066c12a9e62">&#9670;&nbsp;</a></span>printXMLHeader()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -364,7 +464,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void tiny_dlna::XMLPrinter::printXMLHeader </td>
+          <td class="memname">size_t tiny_dlna::XMLPrinter::printXMLHeader </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -431,7 +531,7 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
-<li>src/DLNA/<a class="el" href="XMLPrinter_8h_source.html">XMLPrinter.h</a></li>
+<li>src/dlna/<a class="el" href="XMLPrinter_8h_source.html">XMLPrinter.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

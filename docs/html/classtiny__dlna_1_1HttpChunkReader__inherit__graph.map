@@ -1,0 +1,4 @@
+<map id="tiny_dlna::HttpChunkReader" name="tiny_dlna::HttpChunkReader">
+<area shape="rect" id="node1" title="Http might reply with chunks. So we need to dechunk the data. see https://en.wikipedia...." alt="" coords="5,80,211,107"/>
+<area shape="rect" id="node2" href="$classtiny__dlna_1_1HttpLineReader.html" title="We read a single line. A terminating 0 is added to the string to make it compliant for c string funct..." alt="" coords="13,5,203,32"/>
+</map>

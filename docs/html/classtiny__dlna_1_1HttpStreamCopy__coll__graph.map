@@ -1,0 +1,4 @@
+<map id="tiny_dlna::HttpStreamCopy" name="tiny_dlna::HttpStreamCopy">
+<area shape="rect" id="node1" title="Processing of a single stream to a single client. In the loop we can simply provide individual small ..." alt="" coords="5,95,204,121"/>
+<area shape="rect" id="node2" href="$classtiny__dlna_1_1HttpChunkWriter.html" title="Writes the data chunked to the actual client." alt="" coords="5,5,204,32"/>
+</map>

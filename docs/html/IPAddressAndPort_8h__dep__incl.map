@@ -1,9 +1,12 @@
-<map id="src/Basic/IPAddressAndPort.h" name="src/Basic/IPAddressAndPort.h">
-<area shape="rect" id="node1" title=" " alt="" coords="11,5,222,32"/>
-<area shape="rect" id="node2" href="$IUDPService_8h.html" title=" " alt="" coords="28,80,205,107"/>
-<area shape="rect" id="node3" href="$DLNARequestParser_8h.html" title=" " alt="" coords="5,304,231,331"/>
-<area shape="rect" id="node6" href="$Schedule_8h.html" title=" " alt="" coords="155,155,311,181"/>
-<area shape="rect" id="node7" href="$Scheduler_8h.html" title=" " alt="" coords="70,229,230,256"/>
-<area shape="rect" id="node4" href="$DLNADevice_8h.html" title=" " alt="" coords="103,379,282,405"/>
-<area shape="rect" id="node5" href="$DLNA_8h.html" title=" " alt="" coords="146,453,239,480"/>
+<map id="src/basic/IPAddressAndPort.h" name="src/basic/IPAddressAndPort.h">
+<area shape="rect" id="node1" title=" " alt="" coords="155,5,364,32"/>
+<area shape="rect" id="node2" href="$IUDPService_8h.html" title=" " alt="" coords="175,80,344,107"/>
+<area shape="rect" id="node3" href="$DLNARequestParser_8h.html" title=" " alt="" coords="5,304,223,331"/>
+<area shape="rect" id="node7" href="$Schedule_8h.html" title=" " alt="" coords="185,155,333,181"/>
+<area shape="rect" id="node8" href="$Scheduler_8h.html" title=" " alt="" coords="71,229,223,256"/>
+<area shape="rect" id="node9" href="$UDPAsyncService_8h.html" title=" " alt="" coords="299,229,529,256"/>
+<area shape="rect" id="node10" href="$UDPService_8h.html" title=" " alt="" coords="465,304,659,331"/>
+<area shape="rect" id="node4" href="$DLNADevice_8h.html" title=" " alt="" coords="154,379,325,405"/>
+<area shape="rect" id="node5" href="$MediaRenderer_8h.html" title=" " alt="" coords="99,453,329,495"/>
+<area shape="rect" id="node6" href="$DLNA_8h.html" title=" " alt="" coords="346,543,439,569"/>
 </map>

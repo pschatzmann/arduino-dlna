@@ -66,7 +66,6 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="classtiny__dlna_1_1Service-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -74,239 +73,58 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Attributes needed for the DLNA <a class="el" href="classtiny__dlna_1_1Service.html" title="Attributes needed for the DLNA Service Definition.">Service</a> Definition.  
+<p>DLNA <a class="el" href="classtiny__dlna_1_1Service.html" title="DLNA Service: Actions and State information.">Service</a>: Actions and <a class="el" href="classtiny__dlna_1_1State.html" title="DLNA Service: Representation of a single State.">State</a> information.  
  <a href="classtiny__dlna_1_1Service.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="Service_8h_source.html">Service.h</a>&gt;</code></p>
+<div class="dynheader">
+Collaboration diagram for tiny_dlna::Service:</div>
+<div class="dyncontent">
+<div class="center"><img src="classtiny__dlna_1_1Service__coll__graph.png" border="0" usemap="#atiny__dlna_1_1Service_coll__map" alt="Collaboration graph"/></div>
+<map name="atiny__dlna_1_1Service_coll__map" id="atiny__dlna_1_1Service_coll__map">
+<area shape="rect" title="DLNA Service: Actions and State information." alt="" coords="89,392,228,419"/>
+<area shape="rect" href="classtiny__dlna_1_1Vector.html" title=" " alt="" coords="59,95,210,136"/>
+<area shape="rect" href="classtiny__dlna_1_1Action.html" title="DLNA Service: Action." alt="" coords="5,5,136,32"/>
+<area shape="rect" href="classtiny__dlna_1_1Allocator.html" title="Memory allocateator which uses malloc." alt="" coords="174,5,322,32"/>
+<area shape="rect" href="classtiny__dlna_1_1Vector.html" title=" " alt="" coords="177,288,319,329"/>
+<area shape="rect" href="classtiny__dlna_1_1Vector.html" title=" " alt="" coords="286,95,429,136"/>
+<area shape="rect" href="classtiny__dlna_1_1State.html" title="DLNA Service: Representation of a single State." alt="" coords="290,199,414,225"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
-Public Member Functions</h2></td></tr>
-<tr class="memitem:ae0aaf67fa68574ed7aec92766feaa095"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Service.html#ae0aaf67fa68574ed7aec92766feaa095">setup</a> (const char *key, const char *type, const char *id, const char *scp, <a class="el" href="namespacetiny__dlna.html#a1ac25cf2e9ceca6ae0e8fd2fd586470c">http_callback</a> cbScp, const char *control, <a class="el" href="namespacetiny__dlna.html#a1ac25cf2e9ceca6ae0e8fd2fd586470c">http_callback</a> cbControl, const char *event, <a class="el" href="namespacetiny__dlna.html#a1ac25cf2e9ceca6ae0e8fd2fd586470c">http_callback</a> cbEvent)</td></tr>
-<tr class="separator:ae0aaf67fa68574ed7aec92766feaa095"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a5e9959e8c71c9a99a175648938dbaad3"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Service.html#a5e9959e8c71c9a99a175648938dbaad3">name</a> = nullptr</td></tr>
-<tr class="separator:a5e9959e8c71c9a99a175648938dbaad3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a701986bfacfcf2852cde3ea9dee57561"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Service.html#a701986bfacfcf2852cde3ea9dee57561">service_type</a> = nullptr</td></tr>
-<tr class="separator:a701986bfacfcf2852cde3ea9dee57561"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af47442361b7a61113471993ab17ac47b"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Service.html#af47442361b7a61113471993ab17ac47b">service_id</a> = nullptr</td></tr>
-<tr class="separator:af47442361b7a61113471993ab17ac47b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad5e2341e788df0ab258c9e0e8548ba09"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Service.html#ad5e2341e788df0ab258c9e0e8548ba09">scp_url</a> = nullptr</td></tr>
-<tr class="separator:ad5e2341e788df0ab258c9e0e8548ba09"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af97a54fed7b65dd32ba06a68438e1f62"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Service.html#af97a54fed7b65dd32ba06a68438e1f62">control_url</a> = nullptr</td></tr>
-<tr class="separator:af97a54fed7b65dd32ba06a68438e1f62"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a18b9ed4e523055432fa88f6b803a48db"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Service.html#a18b9ed4e523055432fa88f6b803a48db">event_sub_url</a> = nullptr</td></tr>
-<tr class="separator:a18b9ed4e523055432fa88f6b803a48db"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:affeef0e666bec63df9619d89352aa64d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacetiny__dlna.html#a1ac25cf2e9ceca6ae0e8fd2fd586470c">http_callback</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Service.html#affeef0e666bec63df9619d89352aa64d">scp_cb</a> = nullptr</td></tr>
-<tr class="separator:affeef0e666bec63df9619d89352aa64d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0928df1044fbf7630460dfe8fec3343b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacetiny__dlna.html#a1ac25cf2e9ceca6ae0e8fd2fd586470c">http_callback</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Service.html#a0928df1044fbf7630460dfe8fec3343b">control_cb</a> = nullptr</td></tr>
-<tr class="separator:a0928df1044fbf7630460dfe8fec3343b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abe9984aca02c3bce231710eabe8d356e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacetiny__dlna.html#a1ac25cf2e9ceca6ae0e8fd2fd586470c">http_callback</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Service.html#abe9984aca02c3bce231710eabe8d356e">event_sub_cb</a> = nullptr</td></tr>
-<tr class="separator:abe9984aca02c3bce231710eabe8d356e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0336a32f16b0c9518eb4ed987afb5e26"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt; <a class="el" href="classtiny__dlna_1_1Action.html">Action</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Service.html#a0336a32f16b0c9518eb4ed987afb5e26">actions</a></td></tr>
+<tr class="separator:a0336a32f16b0c9518eb4ed987afb5e26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b667fc56372403a97dc4b650c5c9562"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt; <a class="el" href="classtiny__dlna_1_1State.html">State</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Service.html#a9b667fc56372403a97dc4b650c5c9562">state</a></td></tr>
+<tr class="separator:a9b667fc56372403a97dc4b650c5c9562"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Attributes needed for the DLNA <a class="el" href="classtiny__dlna_1_1Service.html" title="Attributes needed for the DLNA Service Definition.">Service</a> Definition. </p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="ae0aaf67fa68574ed7aec92766feaa095"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae0aaf67fa68574ed7aec92766feaa095">&#9670;&nbsp;</a></span>setup()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void tiny_dlna::Service::setup </td>
-          <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>key</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>type</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>id</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>scp</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="namespacetiny__dlna.html#a1ac25cf2e9ceca6ae0e8fd2fd586470c">http_callback</a>&#160;</td>
-          <td class="paramname"><em>cbScp</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>control</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="namespacetiny__dlna.html#a1ac25cf2e9ceca6ae0e8fd2fd586470c">http_callback</a>&#160;</td>
-          <td class="paramname"><em>cbControl</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>event</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="namespacetiny__dlna.html#a1ac25cf2e9ceca6ae0e8fd2fd586470c">http_callback</a>&#160;</td>
-          <td class="paramname"><em>cbEvent</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<h2 class="groupheader">Member Data Documentation</h2>
-<a id="a0928df1044fbf7630460dfe8fec3343b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0928df1044fbf7630460dfe8fec3343b">&#9670;&nbsp;</a></span>control_cb</h2>
+<div class="textblock"><p>DLNA <a class="el" href="classtiny__dlna_1_1Service.html" title="DLNA Service: Actions and State information.">Service</a>: Actions and <a class="el" href="classtiny__dlna_1_1State.html" title="DLNA Service: Representation of a single State.">State</a> information. </p>
+<dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
+</div><h2 class="groupheader">Member Data Documentation</h2>
+<a id="a0336a32f16b0c9518eb4ed987afb5e26"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0336a32f16b0c9518eb4ed987afb5e26">&#9670;&nbsp;</a></span>actions</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacetiny__dlna.html#a1ac25cf2e9ceca6ae0e8fd2fd586470c">http_callback</a> tiny_dlna::Service::control_cb = nullptr</td>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt;<a class="el" href="classtiny__dlna_1_1Action.html">Action</a>&gt; tiny_dlna::Service::actions</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="af97a54fed7b65dd32ba06a68438e1f62"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af97a54fed7b65dd32ba06a68438e1f62">&#9670;&nbsp;</a></span>control_url</h2>
+<a id="a9b667fc56372403a97dc4b650c5c9562"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b667fc56372403a97dc4b650c5c9562">&#9670;&nbsp;</a></span>state</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const char* tiny_dlna::Service::control_url = nullptr</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="abe9984aca02c3bce231710eabe8d356e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abe9984aca02c3bce231710eabe8d356e">&#9670;&nbsp;</a></span>event_sub_cb</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="namespacetiny__dlna.html#a1ac25cf2e9ceca6ae0e8fd2fd586470c">http_callback</a> tiny_dlna::Service::event_sub_cb = nullptr</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a18b9ed4e523055432fa88f6b803a48db"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a18b9ed4e523055432fa88f6b803a48db">&#9670;&nbsp;</a></span>event_sub_url</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const char* tiny_dlna::Service::event_sub_url = nullptr</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a5e9959e8c71c9a99a175648938dbaad3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5e9959e8c71c9a99a175648938dbaad3">&#9670;&nbsp;</a></span>name</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const char* tiny_dlna::Service::name = nullptr</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="affeef0e666bec63df9619d89352aa64d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#affeef0e666bec63df9619d89352aa64d">&#9670;&nbsp;</a></span>scp_cb</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="namespacetiny__dlna.html#a1ac25cf2e9ceca6ae0e8fd2fd586470c">http_callback</a> tiny_dlna::Service::scp_cb = nullptr</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ad5e2341e788df0ab258c9e0e8548ba09"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad5e2341e788df0ab258c9e0e8548ba09">&#9670;&nbsp;</a></span>scp_url</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const char* tiny_dlna::Service::scp_url = nullptr</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="af47442361b7a61113471993ab17ac47b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af47442361b7a61113471993ab17ac47b">&#9670;&nbsp;</a></span>service_id</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const char* tiny_dlna::Service::service_id = nullptr</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a701986bfacfcf2852cde3ea9dee57561"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a701986bfacfcf2852cde3ea9dee57561">&#9670;&nbsp;</a></span>service_type</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const char* tiny_dlna::Service::service_type = nullptr</td>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt;<a class="el" href="classtiny__dlna_1_1State.html">State</a>&gt; tiny_dlna::Service::state</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -314,7 +132,7 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/DLNA/<a class="el" href="Service_8h_source.html">Service.h</a></li>
+<li>src/dlna/service/<a class="el" href="Service_8h_source.html">Service.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

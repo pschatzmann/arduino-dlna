@@ -1,0 +1,5 @@
+<map id="tiny_dlna::HttpHeader" name="tiny_dlna::HttpHeader">
+<area shape="rect" id="node1" title="In a http request and reply we need to process header information. With this API we can define and qu..." alt="" coords="141,5,307,32"/>
+<area shape="rect" id="node2" href="$classtiny__dlna_1_1HttpReplyHeader.html" title="Reading and Writing of Http Replys." alt="" coords="5,80,208,107"/>
+<area shape="rect" id="node3" href="$classtiny__dlna_1_1HttpRequestHeader.html" title="Reading and writing of Http Requests." alt="" coords="232,80,451,107"/>
+</map>

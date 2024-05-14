@@ -2,6 +2,10 @@
 
 namespace tiny_dlna {
 
+/**
+ * @brief DLNA notification
+ * @author Phil Schatzmann
+*/
 class Notification {
  public:
   uint32_t valid_until;

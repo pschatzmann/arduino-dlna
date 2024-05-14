@@ -1,7 +1,4 @@
 var searchData=
 [
-  ['dlnadebug_690',['DlnaDebug',['../namespacetiny__dlna.html#a5eabb92538a2ba1397f67b903cb9d35ea13e02e4ae73a5cde2b13b8ff26b3f338',1,'tiny_dlna']]],
-  ['dlnaerror_691',['DlnaError',['../namespacetiny__dlna.html#a5eabb92538a2ba1397f67b903cb9d35ea6e258539e070fc23ed840488d56f4f84',1,'tiny_dlna']]],
-  ['dlnainfo_692',['DlnaInfo',['../namespacetiny__dlna.html#a5eabb92538a2ba1397f67b903cb9d35ea3025256626143c78182cf4ef054aa2f6',1,'tiny_dlna']]],
-  ['dlnawarning_693',['DlnaWarning',['../namespacetiny__dlna.html#a5eabb92538a2ba1397f67b903cb9d35ea68144f39e267932677747cfaf49da410',1,'tiny_dlna']]]
+  ['boolean_1263',['boolean',['../namespacetiny__dlna.html#a65d70e1527559b53691f0dca4c7065a9a84e2c64f38f78ba3ea5c905ab5a2da27',1,'tiny_dlna']]]
 ];

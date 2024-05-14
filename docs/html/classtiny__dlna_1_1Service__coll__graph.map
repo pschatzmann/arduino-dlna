@@ -1,5 +1,9 @@
 <map id="tiny_dlna::Service" name="tiny_dlna::Service">
-<area shape="rect" id="node1" title="Attributes needed for the DLNA Service Definition." alt="" coords="396,87,535,114"/>
-<area shape="rect" id="node2" title=" " alt="" coords="5,5,256,76"/>
-<area shape="rect" id="node3" title=" " alt="" coords="81,146,181,173"/>
+<area shape="rect" id="node1" title="DLNA Service: Actions and State information." alt="" coords="89,392,228,419"/>
+<area shape="rect" id="node2" href="$classtiny__dlna_1_1Vector.html" title=" " alt="" coords="59,95,210,136"/>
+<area shape="rect" id="node3" href="$classtiny__dlna_1_1Action.html" title="DLNA Service: Action." alt="" coords="5,5,136,32"/>
+<area shape="rect" id="node4" href="$classtiny__dlna_1_1Allocator.html" title="Memory allocateator which uses malloc." alt="" coords="174,5,322,32"/>
+<area shape="rect" id="node5" href="$classtiny__dlna_1_1Vector.html" title=" " alt="" coords="177,288,319,329"/>
+<area shape="rect" id="node7" href="$classtiny__dlna_1_1Vector.html" title=" " alt="" coords="286,95,429,136"/>
+<area shape="rect" id="node6" href="$classtiny__dlna_1_1State.html" title="DLNA Service: Representation of a single State." alt="" coords="290,199,414,225"/>
 </map>

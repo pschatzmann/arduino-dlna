@@ -6,6 +6,11 @@ namespace tiny_dlna {
 enum class DataType { boolean, string, ui2, i2 };
 const char* datatype_str[] = {"boolean", "string", "ui2", "u2"};
 
+/**
+ * @brief DLNA Service: Representation of a single State
+ * @author Phil Schatzmann
+*/
+
 class State {
  public:
   const char* name;

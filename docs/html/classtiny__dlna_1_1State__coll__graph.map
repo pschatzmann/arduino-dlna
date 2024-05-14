@@ -1,0 +1,5 @@
+<map id="tiny_dlna::State" name="tiny_dlna::State">
+<area shape="rect" id="node1" title="DLNA Service: Representation of a single State." alt="" coords="17,199,141,225"/>
+<area shape="rect" id="node2" href="$classtiny__dlna_1_1Vector.html" title=" " alt="" coords="8,95,151,136"/>
+<area shape="rect" id="node3" href="$classtiny__dlna_1_1Allocator.html" title="Memory allocateator which uses malloc." alt="" coords="5,5,153,32"/>
+</map>

@@ -5,6 +5,11 @@
 
 namespace tiny_dlna {
 
+/**
+ * @brief DLNA Service: Actions and State information
+ * @author Phil Schatzmann
+*/
+
 class Service {
  public:
   Vector<Action> actions;

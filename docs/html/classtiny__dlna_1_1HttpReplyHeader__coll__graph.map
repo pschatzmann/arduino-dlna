@@ -1,0 +1,11 @@
+<map id="tiny_dlna::HttpReplyHeader" name="tiny_dlna::HttpReplyHeader">
+<area shape="rect" id="node1" title="Reading and Writing of Http Replys." alt="" coords="1100,124,1303,151"/>
+<area shape="rect" id="node2" href="$classtiny__dlna_1_1HttpHeader.html" title="In a http request and reply we need to process header information. With this API we can define and qu..." alt="" coords="885,124,1051,151"/>
+<area shape="rect" id="node3" href="$classtiny__dlna_1_1Str.html" title="String implementation which keeps the data on the heap. We grow the allocated memory only if the copy..." alt="" coords="607,64,715,91"/>
+<area shape="rect" id="node4" href="$classtiny__dlna_1_1StrView.html" title="A simple wrapper to provide string functions on char*. If the underlying char* is a const we do not a..." alt="" coords="305,5,445,32"/>
+<area shape="rect" id="node5" href="$classtiny__dlna_1_1Vector.html" title=" " alt="" coords="304,57,447,98"/>
+<area shape="rect" id="node6" href="$classtiny__dlna_1_1Allocator.html" title="Memory allocateator which uses malloc." alt="" coords="5,64,153,91"/>
+<area shape="rect" id="node8" href="$classtiny__dlna_1_1List.html" title=" " alt="" coords="279,122,472,163"/>
+<area shape="rect" id="node7" href="$classtiny__dlna_1_1HttpLineReader.html" title="We read a single line. A terminating 0 is added to the string to make it compliant for c string funct..." alt="" coords="565,185,756,212"/>
+<area shape="rect" id="node9" href="$structtiny__dlna_1_1List_1_1Node.html" title=" " alt="" coords="11,169,147,210"/>
+</map>

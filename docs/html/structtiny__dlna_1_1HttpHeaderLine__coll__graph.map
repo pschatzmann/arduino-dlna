@@ -1,0 +1,7 @@
+<map id="tiny_dlna::HttpHeaderLine" name="tiny_dlna::HttpHeaderLine">
+<area shape="rect" id="node1" title="A individual key &#45; value header line." alt="" coords="31,303,223,329"/>
+<area shape="rect" id="node2" href="$classtiny__dlna_1_1Str.html" title="String implementation which keeps the data on the heap. We grow the allocated memory only if the copy..." alt="" coords="73,199,181,225"/>
+<area shape="rect" id="node3" href="$classtiny__dlna_1_1StrView.html" title="A simple wrapper to provide string functions on char*. If the underlying char* is a const we do not a..." alt="" coords="5,102,145,129"/>
+<area shape="rect" id="node4" href="$classtiny__dlna_1_1Vector.html" title=" " alt="" coords="169,95,312,136"/>
+<area shape="rect" id="node5" href="$classtiny__dlna_1_1Allocator.html" title="Memory allocateator which uses malloc." alt="" coords="167,5,315,32"/>
+</map>

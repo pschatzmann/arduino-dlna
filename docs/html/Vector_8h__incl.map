@@ -1,9 +1,9 @@
-<map id="src/Basic/Vector.h" name="src/Basic/Vector.h">
-<area shape="rect" id="node1" title=" " alt="" coords="28,5,164,32"/>
+<map id="src/basic/Vector.h" name="src/basic/Vector.h">
+<area shape="rect" id="node1" title=" " alt="" coords="29,5,163,32"/>
 <area shape="rect" id="node2" title=" " alt="" coords="5,80,80,107"/>
 <area shape="rect" id="node3" href="$Allocator_8h.html" title=" " alt="" coords="104,80,195,107"/>
 <area shape="rect" id="node4" title=" " alt="" coords="55,155,126,181"/>
-<area shape="rect" id="node5" href="$Logger_8h.html" title=" " alt="" coords="150,155,266,181"/>
+<area shape="rect" id="node5" href="$Logger_8h.html" title=" " alt="" coords="151,155,265,181"/>
 <area shape="rect" id="node6" title=" " alt="" coords="29,229,104,256"/>
 <area shape="rect" id="node7" title=" " alt="" coords="128,229,195,256"/>
 <area shape="rect" id="node8" title=" " alt="" coords="219,229,290,256"/>

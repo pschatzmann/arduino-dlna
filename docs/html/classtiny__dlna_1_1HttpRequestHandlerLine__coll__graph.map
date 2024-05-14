@@ -1,0 +1,16 @@
+<map id="tiny_dlna::HttpRequestHandlerLine" name="tiny_dlna::HttpRequestHandlerLine">
+<area shape="rect" id="node1" title="Used to register and process callbacks." alt="" coords="1803,373,2052,399"/>
+<area shape="rect" id="node2" href="$classtiny__dlna_1_1Str.html" title="String implementation which keeps the data on the heap. We grow the allocated memory only if the copy..." alt="" coords="664,370,772,397"/>
+<area shape="rect" id="node8" href="$classtiny__dlna_1_1HttpHeader.html" title="In a http request and reply we need to process header information. With this API we can define and qu..." alt="" coords="943,145,1108,171"/>
+<area shape="rect" id="node3" href="$classtiny__dlna_1_1StrView.html" title="A simple wrapper to provide string functions on char*. If the underlying char* is a const we do not a..." alt="" coords="334,411,474,438"/>
+<area shape="rect" id="node4" href="$classtiny__dlna_1_1Vector.html" title=" " alt="" coords="333,307,475,348"/>
+<area shape="rect" id="node6" href="$classtiny__dlna_1_1HttpServer.html" title="A Simple Header only implementation of Http Server that allows the registration of callback functions..." alt="" coords="1577,181,1737,207"/>
+<area shape="rect" id="node5" href="$classtiny__dlna_1_1Allocator.html" title="Memory allocateator which uses malloc." alt="" coords="5,209,153,235"/>
+<area shape="rect" id="node10" href="$classtiny__dlna_1_1List.html" title=" " alt="" coords="307,137,501,179"/>
+<area shape="rect" id="node12" href="$classtiny__dlna_1_1List.html" title=" " alt="" coords="293,35,515,76"/>
+<area shape="rect" id="node14" href="$classtiny__dlna_1_1List.html" title=" " alt="" coords="279,209,529,251"/>
+<area shape="rect" id="node7" href="$classtiny__dlna_1_1HttpReplyHeader.html" title="Reading and Writing of Http Replys." alt="" coords="1213,105,1416,131"/>
+<area shape="rect" id="node13" href="$classtiny__dlna_1_1HttpRequestHeader.html" title="Reading and writing of Http Requests." alt="" coords="1205,155,1424,182"/>
+<area shape="rect" id="node9" href="$classtiny__dlna_1_1HttpLineReader.html" title="We read a single line. A terminating 0 is added to the string to make it compliant for c string funct..." alt="" coords="623,93,813,119"/>
+<area shape="rect" id="node11" href="$structtiny__dlna_1_1List_1_1Node.html" title=" " alt="" coords="11,59,147,100"/>
+</map>

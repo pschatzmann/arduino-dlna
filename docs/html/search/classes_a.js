@@ -1,10 +1,9 @@
 var searchData=
 [
-  ['vector_366',['Vector',['../classtiny__dlna_1_1Vector.html',1,'tiny_dlna']]],
-  ['vector_3c_20char_20_3e_367',['Vector&lt; char &gt;',['../classtiny__dlna_1_1Vector.html',1,'tiny_dlna']]],
-  ['vector_3c_20const_20char_20_2a_20_3e_368',['Vector&lt; const char * &gt;',['../classtiny__dlna_1_1Vector.html',1,'tiny_dlna']]],
-  ['vector_3c_20tiny_5fdlna_3a_3adlnadeviceinfo_20_2a_20_3e_369',['Vector&lt; tiny_dlna::DLNADeviceInfo * &gt;',['../classtiny__dlna_1_1Vector.html',1,'tiny_dlna']]],
-  ['vector_3c_20tiny_5fdlna_3a_3adlnaserviceinfo_20_3e_370',['Vector&lt; tiny_dlna::DLNAServiceInfo &gt;',['../classtiny__dlna_1_1Vector.html',1,'tiny_dlna']]],
-  ['vector_3c_20tiny_5fdlna_3a_3aqueuelockfree_3a_3anode_20_3e_371',['Vector&lt; tiny_dlna::QueueLockFree::Node &gt;',['../classtiny__dlna_1_1Vector.html',1,'tiny_dlna']]],
-  ['vector_3c_20tiny_5fdlna_3a_3aschedule_20_2a_20_3e_372',['Vector&lt; tiny_dlna::Schedule * &gt;',['../classtiny__dlna_1_1Vector.html',1,'tiny_dlna']]]
+  ['schedule_675',['Schedule',['../structtiny__dlna_1_1Schedule.html',1,'tiny_dlna']]],
+  ['scheduler_676',['Scheduler',['../classtiny__dlna_1_1Scheduler.html',1,'tiny_dlna']]],
+  ['service_677',['Service',['../classtiny__dlna_1_1Service.html',1,'tiny_dlna']]],
+  ['state_678',['State',['../classtiny__dlna_1_1State.html',1,'tiny_dlna']]],
+  ['str_679',['Str',['../classtiny__dlna_1_1Str.html',1,'tiny_dlna']]],
+  ['strview_680',['StrView',['../classtiny__dlna_1_1StrView.html',1,'tiny_dlna']]]
 ];

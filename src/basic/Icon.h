@@ -3,7 +3,7 @@
 
 namespace tiny_dlna {
 /**
- * Information about the icon
+ * @brief Information about the icon
  * @author Phil Schatzmann
 */
 class Icon {

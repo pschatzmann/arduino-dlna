@@ -27,6 +27,11 @@ struct RequestData {
   operator bool() { return !data.isEmpty(); }
 };
 
+/**
+ * @brief Abstract Interface for UDP API
+ * @author Phil Schatzmann
+*/
+
 class IUDPService {
  public:
   virtual bool begin(IPAddressAndPort addr) = 0;
