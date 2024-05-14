@@ -177,6 +177,9 @@ class DLNADevice {
 
   /// set up Web Server to handle Service Addresses
   virtual bool setupDLNAServer(HttpServer& srv) {
+    char buffer[DLNA_MAX_URL_LEN] = {0};
+    StrView url(buffer, DLNA_MAX_URL_LEN);
+
     // make sure we have any devices
     if (devices.empty()) {
       DlnaLogger.log(DlnaError, "No devices found");
@@ -203,8 +206,7 @@ class DLNADevice {
       Icon icon = p_device->getIcon();
       if (icon.icon_data != nullptr) {
         char tmp[DLNA_MAX_URL_LEN];
-        const char* icon_path =
-            concat(prefix, icon.icon_url, tmp, DLNA_MAX_URL_LEN);
+        const char* icon_path = url.buildPath(prefix, icon.icon_url);
         p_server->on(icon_path, T_GET, icon.mime,
                      (const uint8_t*)icon.icon_data, icon.icon_size);
         p_server->on("/favicon.ico", T_GET, icon.mime,
@@ -212,33 +214,21 @@ class DLNADevice {
       }
 
       // Register Service URLs
-      char tmp[DLNA_MAX_URL_LEN];
       for (DLNAServiceInfo& service : p_device->getServices()) {
-        p_server->on(concat(prefix, service.scp_url, tmp, DLNA_MAX_URL_LEN),
-                     T_GET, service.scp_cb, ref, 1);
-        p_server->on(concat(prefix, service.control_url, tmp, DLNA_MAX_URL_LEN),
-                     T_POST, service.control_cb, ref, 1);
-        p_server->on(
-            concat(prefix, service.event_sub_url, tmp, DLNA_MAX_URL_LEN), T_GET,
-            service.event_sub_cb, ref, 1);
+        p_server->on(url.buildPath(prefix, service.scp_url), T_GET,
+                     service.scp_cb, ref, 1);
+        p_server->on(url.buildPath(prefix, service.control_url), T_POST,
+                     service.control_cb, ref, 1);
+        p_server->on(url.buildPath(prefix, service.event_sub_url), T_GET,
+                     service.event_sub_cb, ref, 1);
       }
     }
     return true;
   }
 
-  /// concatenate strings without allocating any heap memory
-  const char* concat(const char* prefix, const char* addr, char* buffer,
-                     int len) {
-    StrView str(buffer, len);
-    str = prefix;
-    str += addr;
-    str.replace("//", "/");
-    return buffer;
-  }
-
   /// callback to provide device XML
   static void deviceXMLCallback(HttpServer* server, const char* requestPath,
-                        HttpRequestHandlerLine* hl) {
+                                HttpRequestHandlerLine* hl) {
     DLNADeviceInfo* device_xml = (DLNADeviceInfo*)(hl->context[0]);
     assert(device_xml != nullptr);
     if (device_xml != nullptr) {
@@ -258,7 +248,6 @@ class DLNADevice {
       server->replyNotFound();
     }
   }
-
 
   /// If you dont already provid a complete DLNADeviceInfo you can overwrite
   /// this method and add some custom device specific logic to implement a new

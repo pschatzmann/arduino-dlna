@@ -201,26 +201,14 @@ class DLNADeviceInfo {
   size_t printService(void* srv) {
     size_t result = 0;
     char buffer[DLNA_MAX_URL_LEN] = {0};
+    StrView url(buffer, DLNA_MAX_URL_LEN);
     DLNAServiceInfo* service = (DLNAServiceInfo*)srv;
     result += xml.printNode("serviceType", service->service_type);
     result += xml.printNode("serviceId", service->service_id);
-    result += xml.printNode("SCPDURL", getBaseUrl(service->scp_url, buffer));
-    result += xml.printNode("controlURL", getBaseUrl(service->control_url, buffer));
-    result += xml.printNode("eventSubURL", getBaseUrl(service->event_sub_url, buffer));
+    result += xml.printNode("SCPDURL", url.buildPath(base_url.path(), service->scp_url));
+    result += xml.printNode("controlURL", url.buildPath(base_url.path(), service->control_url));
+    result += xml.printNode("eventSubURL", url.buildPath(base_url.path(), service->event_sub_url));
     return result;
-  }
-
-  const char* getBaseUrl(const char* url, char* buffer){
-    return concat(base_url.path(), url, buffer, 200);
-  }
-
-  const char* concat(const char* prefix, const char* addr, char* buffer,
-                     int len) {
-    StrView str(buffer, len);
-    str = prefix;
-    str += addr;
-    str.replace("//", "/");
-    return buffer;
   }
 
   size_t printIconList() {
@@ -232,11 +220,13 @@ class DLNADeviceInfo {
   size_t printIconDlnaInfo() {
     size_t result = 0;
     if (!StrView(icon.icon_url).isEmpty()) {
+      char buffer[DLNA_MAX_URL_LEN] = {0};
+      StrView url(buffer, DLNA_MAX_URL_LEN);
       result += xml.printNode("mimetype", "image/png");
       result += xml.printNode("width", icon.width);
       result += xml.printNode("height", icon.height);
       result += xml.printNode("depth", icon.depth);
-      result += xml.printNode("url", icon.icon_url);
+      result += xml.printNode("url", url.buildPath(base_url.path(),icon.icon_url));
     }
     return result;
   }
