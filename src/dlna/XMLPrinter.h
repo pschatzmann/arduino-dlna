@@ -53,7 +53,7 @@ struct XMLPrinter {
       result += p_out->print(" ");
       result += p_out->print(attributes);
     }
-    result += p_out->print(">");
+    result += p_out->println(">");
     result += printChildren(children);
     result += p_out->print("</");
     result += p_out->print(node);
@@ -111,7 +111,7 @@ struct XMLPrinter {
       result += p_out->print(" ");
       result += p_out->print(attributes);
     }
-    result += p_out->print(">");
+    result += p_out->println(">");
     result += callback();
     result += p_out->print("</");
     result += p_out->print(node);
@@ -125,7 +125,7 @@ struct XMLPrinter {
 
     result += p_out->print("<");
     result += p_out->print(node);
-    result += p_out->print(">");
+    result += p_out->println(">");
     result += callback();
     result += p_out->print("</");
     result += p_out->print(node);

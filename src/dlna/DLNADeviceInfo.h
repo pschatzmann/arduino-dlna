@@ -200,13 +200,27 @@ class DLNADeviceInfo {
 
   size_t printService(void* srv) {
     size_t result = 0;
+    char buffer[DLNA_MAX_URL_LEN] = {0};
     DLNAServiceInfo* service = (DLNAServiceInfo*)srv;
     result += xml.printNode("serviceType", service->service_type);
     result += xml.printNode("serviceId", service->service_id);
-    result += xml.printNode("SCPDURL", service->scp_url);
-    result += xml.printNode("controlURL", service->control_url);
-    result += xml.printNode("eventSubURL", service->event_sub_url);
+    result += xml.printNode("SCPDURL", getBaseUrl(service->scp_url, buffer));
+    result += xml.printNode("controlURL", getBaseUrl(service->control_url, buffer));
+    result += xml.printNode("eventSubURL", getBaseUrl(service->event_sub_url, buffer));
     return result;
+  }
+
+  const char* getBaseUrl(const char* url, char* buffer){
+    return concat(base_url.path(), url, buffer, 200);
+  }
+
+  const char* concat(const char* prefix, const char* addr, char* buffer,
+                     int len) {
+    StrView str(buffer, len);
+    str = prefix;
+    str += addr;
+    str.replace("//", "/");
+    return buffer;
   }
 
   size_t printIconList() {

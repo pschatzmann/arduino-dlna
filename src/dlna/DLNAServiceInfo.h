@@ -2,6 +2,8 @@
 
 #include "http/HttpServer.h"
 
+#define DLNA_MAX_URL_LEN 120
+
 namespace tiny_dlna {
 
 typedef void (*http_callback)(HttpServer* server, const char* requestPath,

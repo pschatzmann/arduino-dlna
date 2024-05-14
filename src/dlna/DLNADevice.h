@@ -7,8 +7,6 @@
 #include "basic/Url.h"
 #include "http/HttpServer.h"
 
-#define DLNA_MAX_URL_LEN 120
-
 namespace tiny_dlna {
 
 /**
@@ -196,6 +194,7 @@ class DLNADevice {
 
       if (!StrView(device_path).isEmpty()) {
         p_server->rewrite("/", device_path);
+        p_server->rewrite("/dlna/device.xml", device_path);
         p_server->rewrite("/index.html", device_path);
         p_server->on(device_path, T_GET, deviceXMLCallback, ref, 1);
       }

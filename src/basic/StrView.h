@@ -730,6 +730,16 @@ class StrView {
     return result;
   }
 
+  const char* buildPath(const char* start, const char* p1=nullptr, const char* p2=nullptr) {
+    set(start);
+    if (p1 != nullptr)
+      add(p1);
+    if (p2 != nullptr)
+      add(p2);
+    replaceAll("//", ",");
+    return chars;
+  }
+
  protected:
   char* chars = nullptr;
   bool is_const = false;

@@ -17,12 +17,13 @@ void setupWifi() {
     Serial.print('.');
     delay(1000);
   }
+  Serial.println("connected!");
 }
 
 void setup() {
   Serial.begin(115200);
   // setup logger
-  DlnaLogger.begin(Serial, DlnaInfo);
+  DlnaLogger.begin(Serial, DlnaWarning);
   setupWifi();
 
   // setup device: set IPAddress or BaseURL and other optional information

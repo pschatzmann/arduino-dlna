@@ -43,7 +43,7 @@ class MSearchReplySchedule : public Schedule {
 
   bool process(IUDPService &udp, DLNADeviceInfo &device) override {
     // we keep the data on the stack
-    DlnaLogger.log(DlnaInfo, "Sending %s to %s", name(), address.toString());
+    DlnaLogger.log(DlnaInfo, "Sending %s for %s to %s", name(), search_target.c_str(), address.toString());
 
     char buffer[MAX_TMP_SIZE] = {0};
     const char *tmp =

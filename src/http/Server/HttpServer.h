@@ -64,7 +64,6 @@ class HttpServer {
     return begin(port);
   }
 
-
   /// Starts the server on the indicated port
   bool begin(int port) {
     DlnaLogger.log(DlnaInfo, "HttpServer begin at port %d", port);
@@ -124,8 +123,8 @@ class HttpServer {
         DlnaLogger.log(DlnaError, "The context is not available");
         return;
       }
-      const char* mime = (const char*) hl->context[0];
-      const char* msg = (const char*) hl->context[1];
+      const char* mime = (const char*)hl->context[0];
+      const char* msg = (const char*)hl->context[1];
       server_ptr->reply(mime, msg, 200);
     };
     HttpRequestHandlerLine* hl = new HttpRequestHandlerLine(2);
@@ -151,7 +150,7 @@ class HttpServer {
       }
       const char* mime = static_cast<char*>(hl->context[0]);
       const uint8_t* data = static_cast<uint8_t*>(hl->context[1]);
-      int *p_len = (int*) hl->context[2];
+      int* p_len = (int*)hl->context[2];
       int len = *p_len;
       DlnaLogger.log(DlnaDebug, "Mime %d - Len: %d", mime, len);
       server_ptr->reply(mime, data, len, 200);
@@ -239,10 +238,9 @@ class HttpServer {
     bool result = false;
     // check in registered handlers
     StrView pathStr = StrView(path);
-    for (auto it = handler_collection.begin(); it != handler_collection.end();
-         ++it) {
-      HttpRequestHandlerLine* handler_line_ptr = *it;
-      DlnaLogger.log(DlnaInfo, "onRequest - checking: %s %s %s",
+    for (auto handler_line_ptr : handler_collection) {
+      DlnaLogger.log(DlnaInfo, "onRequest: %s vs: %s %s %s",
+                     path,
                      nullstr(handler_line_ptr->path.c_str()),
                      methods[handler_line_ptr->method],
                      nullstr(handler_line_ptr->mime));
@@ -251,12 +249,18 @@ class HttpServer {
           request_header.method() == handler_line_ptr->method &&
           matchesMime(handler_line_ptr->mime, request_header.accept())) {
         // call registed handler function
-        DlnaLogger.log(DlnaInfo, "onRequest %s", "->found");
+        DlnaLogger.log(DlnaInfo, "onRequest %s", "->found",
+                       nullstr(handler_line_ptr->path.c_str()));
         handler_line_ptr->fn(this, path, handler_line_ptr);
         result = true;
         break;
       }
     }
+
+    if (!result) {
+      DlnaLogger.log(DlnaError, "Request %s not available", path);
+    }
+
     return result;
   }
 
@@ -343,8 +347,8 @@ class HttpServer {
     endClient();
   }
 
-  void reply(const char* contentType, const uint8_t* str, int len, int status = 200,
-             const char* msg = SUCCESS) {
+  void reply(const char* contentType, const uint8_t* str, int len,
+             int status = 200, const char* msg = SUCCESS) {
     DlnaLogger.log(DlnaInfo, "reply %s", "str");
     reply_header.setValues(status, msg);
     reply_header.put(CONTENT_LENGTH, len);
@@ -472,7 +476,7 @@ class HttpServer {
     path = resolveRewrite(path);
     bool processed = onRequest(path);
     if (!processed) {
-      //  replyNotFound();
+        replyNotFound();
     }
   }
 

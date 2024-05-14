@@ -24,9 +24,6 @@ static const char* HttpDlnaLogLevelStr[] = {"Debug", "Info", "Warning", "Error"}
 
 class LoggerClass {
  public:
-  LoggerClass() {
-    Serial.println("LoggerClass");
-  };
 
   // activate the logging
   virtual void begin(Print& out, DlnaLogLevel level = DlnaError) {
