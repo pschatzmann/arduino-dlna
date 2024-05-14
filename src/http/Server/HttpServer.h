@@ -153,7 +153,6 @@ class HttpServer {
       const uint8_t* data = static_cast<uint8_t*>(hl->context[1]);
       int *p_len = (int*) hl->context[2];
       int len = *p_len;
-      delete p_len;
       DlnaLogger.log(DlnaDebug, "Mime %d - Len: %d", mime, len);
       server_ptr->reply(mime, data, len, 200);
     };
