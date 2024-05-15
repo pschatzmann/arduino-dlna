@@ -5,6 +5,7 @@
 
 #define MAX_TMP_SIZE 300
 #define ALIVE_MS 0
+#define MAX_AGE (60 * 60 * 24)
 
 namespace tiny_dlna {
 
@@ -66,7 +67,7 @@ class MSearchReplySchedule : public Schedule {
   int mx = 0;
 
  protected:
-  int max_age = 60;
+  int max_age = MAX_AGE;
 };
 
 /**
@@ -75,7 +76,7 @@ class MSearchReplySchedule : public Schedule {
  */
 class PostAliveSchedule : public Schedule {
  public:
-  PostAliveSchedule(uint32_t repeatMs = ALIVE_MS) { this->repeat_ms = repeatMs; }
+  PostAliveSchedule(uint32_t repeatMs) { this->repeat_ms = repeatMs; }
   const char *name() override { return "PostAlive"; }
 
   void setRepeatMs(uint32_t ms){

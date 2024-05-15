@@ -30,9 +30,11 @@ I decided to implement the functionality from scratch using the basic Arduino Ne
 The [DLNADevice](https://pschatzmann.github.io/arduino-dlna-server/docs/html/classtiny__dlna_1_1DLNADevice.html) class provides the setup of a Basic DLNA Device service. Devices are represented by the [DLNADeviceInfo](https://pschatzmann.github.io/arduino-dlna-server/docs/html/classtiny__dlna_1_1DLNADeviceInfo.html) class. The device registers itself to the network and answers to the UDP DLNA queries and requests:
 
 - We handle the UDP communication via a [Scheduler](https://pschatzmann.github.io/arduino-dlna-server/docs/html/classtiny__dlna_1_1Scheduler.html) and a [Request Parser](https://pschatzmann.github.io/arduino-dlna-server/docs/html/classtiny__dlna_1_1DLNARequestParser.html)
-- We handle the Http requests with the help of my TinyHttp Server
+- We handle the Http requests with the help of my [TinyHttp Server](https://pschatzmann.github.io/arduino-dlna-server/docs/html/classtiny__dlna_1_1HttpServer.html)
 - The XML service descriptions can be stored as char arrays in progmem or
   generated dynamically with the help of the [XMLPrinter](https://pschatzmann.github.io/arduino-dlna-server/docs/html/structtiny__dlna_1_1XMLPrinter.html) class.
+
+Developping and debugging on a microcontroller is quite tedious: therefore this project can also be compiled and run on a __linux desktop__.
 
 ## Project Documentation
 
