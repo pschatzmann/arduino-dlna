@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <IPAddress.h>
+#include <assert.h>
 
 namespace tiny_dlna {
 
@@ -128,8 +129,8 @@ class StrView {
   /// adds a int value
   virtual void add(int value) {
     if (!this->isConst()) {
-      grow(this->length() + 11);
-      sprintf(this->chars + len, "%d", value);
+      grow(len + 11);
+      snprintf((char*)c_str()+len, 11, "%d", value);
       len = strlen(chars);
     }
   }
@@ -158,9 +159,11 @@ class StrView {
   /// adds a character
   virtual void add(const char c) {
     if (!isConst() && len < maxlen - 1) {
-      grow(this->length() + 1);
+      grow(len + 1);
       chars[len] = c;
       chars[++len] = 0;
+    } else {
+      assert(false);
     }
   }
 

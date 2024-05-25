@@ -28,7 +28,7 @@ class UDPAsyncService : public IUDPService {
         RequestData result;
         result.peer.address = packet.remoteIP();
         result.peer.port = packet.remotePort();
-        assert(!result.peer.address == IPAddress());
+        assert(!(result.peer.address == IPAddress()));
         // save data
         result.data.copyFrom((const char*)packet.data(), packet.length());
 

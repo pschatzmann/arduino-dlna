@@ -187,6 +187,12 @@ class Str : public StrView {
 
   const char* c_str() { return vector.data(); }
 
+  // just sets the len to 0
+  void reset() {
+    memset(vector.data(),0, len);
+    len = 0;
+  }
+
  protected:
   Vector<char> vector;
 

@@ -4,12 +4,12 @@
 #include <functional>  // std::bind
 
 #include "DLNAServiceInfo.h"
-#include "XMLPrinter.h"
-#include "basic/Vector.h"
 #include "basic/Icon.h"
+#include "basic/Vector.h"
 #include "service/Action.h"
-#include "service/NamedFunction.h"
+//#include "service/NamedFunction.h"
 #include "vector"
+#include "xml/XMLPrinter.h"
 
 namespace tiny_dlna {
 
@@ -22,7 +22,13 @@ namespace tiny_dlna {
  */
 
 class DLNADeviceInfo {
+  friend class XMLDeviceParser;
+
+
  public:
+  DLNADeviceInfo(bool ok = true){
+    is_ok = true;
+  }
   /// renderes the device xml
   void print(Print& out) {
     xml.setOutput(out);
@@ -99,11 +105,11 @@ class DLNADeviceInfo {
   void addService(DLNAServiceInfo s) { services.push_back(s); }
 
   /// Finds a service definition by name
-  DLNAServiceInfo getService(const char* id) {
-    DLNAServiceInfo result;
+  DLNAServiceInfo& getService(const char* id) {
+    static DLNAServiceInfo result{false};
     for (auto& service : services) {
-      if (StrView(service.name).equals(id)) {
-        return result;
+      if (StrView(service.service_id).contains(id)) {
+        return service;
       }
     }
     return result;
@@ -111,33 +117,58 @@ class DLNADeviceInfo {
 
   Vector<DLNAServiceInfo>& getServices() { return services; }
 
-  void clear() { services.clear(); }
-
-  /// Register an generic action callback
-  void setAllActionsCallback(std::function<void(Action)> cb) {
-    action_callback = cb;
+  void clear() {
+    services.clear();
+    strings.clear();
+    udn = nullptr;
+    ns = nullptr;
+    device_type = nullptr;
+    friendly_name = nullptr;
+    manufacturer = nullptr;
+    manufacturer_url = nullptr;
+    model_description = nullptr;
+    model_name = nullptr;
+    model_number = nullptr;
+    serial_number = nullptr;
+    universal_product_code = nullptr;
   }
 
-  /// Register a callback for an action
-  void addActionCallback(const char* actionName,
-                         std::function<void(void)> func) {
-    action_callback_vector.push_back(NamedFunction(actionName, func));
-  }
+  // /// Register an generic action callback
+  // void setAllActionsCallback(std::function<void(Action)> cb) {
+  //   action_callback = cb;
+  // }
+
+  // /// Register a callback for an action
+  // void addActionCallback(const char* actionName,
+  //                        std::function<void(void)> func) {
+  //   action_callback_vector.push_back(NamedFunction(actionName, func));
+  // }
 
   /// Overwrite the default icon
-  void setIcon(Icon icn) {
-    icon = icn;
+  void clearIcons() { icons.clear(); }
+  void addIcon(Icon icon) { icons.push_back(icon); }
+  Icon getIcon(int idx = 0) { return icons[idx]; }
+
+  const char* addString(char* in){
+    for (auto str : strings){
+      if (str.equals(in)){
+        return str.c_str();
+      }
+    }
+    strings.push_back(in);
+    return strings[strings.size()-1].c_str();
   }
 
-  Icon getIcon() {
-    return icon;
-  }
-
+  uint32_t timestamp = 0;
+  operator bool() {return is_ok;}
  protected:
+  bool is_ok = true;
   XMLPrinter xml;
   Url base_url{"http://localhost:9876/dlna"};
   Url device_url;
   IPAddress localhost;
+  int version_major = 1;
+  int version_minor = 0;
   const char* udn = "uuid:09349455-2941-4cf7-9847-0dd5ab210e97";
   const char* ns = "xmlns=\"urn:schemas-upnp-org:device-1-0\"";
   const char* device_type = "urn:schemas-upnp-org:device:MediaRenderer:1";
@@ -146,13 +177,16 @@ class DLNADeviceInfo {
   const char* manufacturer_url = nullptr;
   const char* model_description = nullptr;
   const char* model_name = nullptr;
+  const char* model_url = nullptr;
   const char* model_number = nullptr;
   const char* serial_number = nullptr;
   const char* universal_product_code = nullptr;
   Icon icon;
   Vector<DLNAServiceInfo> services;
-  std::function<void(Action)> action_callback;
-  Vector<NamedFunction> action_callback_vector;
+  Vector<Icon> icons;
+  // std::function<void(Action)> action_callback;
+  // Vector<NamedFunction> action_callback_vector;
+  Vector<Str> strings;
 
   size_t printRoot() {
     size_t result = 0;
@@ -173,6 +207,7 @@ class DLNADeviceInfo {
     result += xml.printNode("modelDescription", model_description);
     result += xml.printNode("modelName", model_name);
     result += xml.printNode("modelNumber", model_number);
+    result += xml.printNode("modelURL", model_url);
     result += xml.printNode("serialNumber", serial_number);
     result += xml.printNode("UDN", getUDN());
     result += xml.printNode("UPC", universal_product_code);
@@ -185,7 +220,10 @@ class DLNADeviceInfo {
   }
 
   size_t printSpecVersion() {
-    return xml.printNode("major", "1") + xml.printNode("minor", "0");
+    char major[5], minor[5];
+    sprintf(major, "%d", this->version_major);
+    sprintf(minor, "%d", this->version_minor);
+    return xml.printNode("major", major) + xml.printNode("minor", minor);
   }
 
   size_t printServiceList() {
@@ -205,19 +243,33 @@ class DLNADeviceInfo {
     DLNAServiceInfo* service = (DLNAServiceInfo*)srv;
     result += xml.printNode("serviceType", service->service_type);
     result += xml.printNode("serviceId", service->service_id);
-    result += xml.printNode("SCPDURL", url.buildPath(base_url.path(), service->scp_url));
-    result += xml.printNode("controlURL", url.buildPath(base_url.path(), service->control_url));
-    result += xml.printNode("eventSubURL", url.buildPath(base_url.path(), service->event_sub_url));
+    result += xml.printNode("SCPDURL",
+                            url.buildPath(base_url.path(), service->scpd_url));
+    result += xml.printNode(
+        "controlURL", url.buildPath(base_url.path(), service->control_url));
+    result += xml.printNode(
+        "eventSubURL", url.buildPath(base_url.path(), service->event_sub_url));
     return result;
   }
 
   size_t printIconList() {
-    auto printIconDlnaInfoCb =
-        std::bind(&DLNADeviceInfo::printIconDlnaInfo, this);
-    return xml.printNode("icon", printIconDlnaInfoCb);
+    // make sure we have at least the default icon
+    Icon icon;
+    if (icons.empty()) {
+      icons.push_back(icon);
+    }
+    int result = 0;
+
+    // print all icons
+    for (auto icon : icons) {
+      auto printIconDlnaInfoCb =
+          std::bind(&DLNADeviceInfo::printIconDlnaInfo, this, icon);
+      result += xml.printNode("icon", printIconDlnaInfoCb);
+    }
+    return result;
   }
 
-  size_t printIconDlnaInfo() {
+  size_t printIconDlnaInfo(Icon& icon) {
     size_t result = 0;
     if (!StrView(icon.icon_url).isEmpty()) {
       char buffer[DLNA_MAX_URL_LEN] = {0};
@@ -226,7 +278,8 @@ class DLNADeviceInfo {
       result += xml.printNode("width", icon.width);
       result += xml.printNode("height", icon.height);
       result += xml.printNode("depth", icon.depth);
-      result += xml.printNode("url", url.buildPath(base_url.path(),icon.icon_url));
+      result +=
+          xml.printNode("url", url.buildPath(base_url.path(), icon.icon_url));
     }
     return result;
   }

@@ -1,0 +1,73 @@
+// Example to test the GUPnP Network Light Test Application - we do not do any discovery hand use 
+
+#include "DLNA.h"
+
+const char* ssid = "";
+const char* password = "";
+DLNAControlPoint cp;
+WiFiClient client;
+HttpRequest http(client);
+UDPAsyncService udp;
+uint32_t timeout = 0;
+bool current_status = false;
+const char* device_type = "urn:schemas-upnp-org:device:DimmableLight:1";
+Url baseUrl{"http://10.253.227.1:40271"};
+
+// login to wireless network
+void setupWifi() {
+  WiFi.begin(ssid, password);
+  Serial.print("Connecting to WiFi ..");
+  while (WiFi.status() != WL_CONNECTED) {
+    Serial.print('.');
+    delay(1000);
+  }
+  Serial.println("connected!");
+}
+
+// do not discover device but just use some hardcoded values
+void setupDevice() {
+  DLNADeviceInfo device;
+  device.setIPAddress(WiFi.localIP());
+  device.setDeviceType(device_type);
+  device.setBaseURL(baseUrl);
+  device.setUDN("uuid:50d8318f-6ea2-4d3b-813f-712dd27d015a");
+
+  DLNAServiceInfo service_switch;
+  service_switch.control_url = "/SwitchPower/Control";
+  service_switch.event_sub_url = "/SwitchPower/Events";
+  service_switch.service_type = "urn:schemas-upnp-org:service:SwitchPower:1";
+  service_switch.service_id = "urn:upnp-org:serviceId:SwitchPower:1";
+  device.addService(service_switch);
+
+  cp.setParseDevice(false);
+  cp.addDevice(device);
+}
+
+void setup() {
+  Serial.begin(115200);
+  DlnaLogger.begin(Serial, DlnaInfo);
+
+  setupWifi();
+  setupDevice();
+  if (!cp.begin(http, udp, device_type, 20000, true)) {
+    Serial.println("Dimmable Light not found");
+    while (true);  // stop processing
+  }
+}
+
+void switchLight() {
+  if (millis() > timeout) {
+    current_status = !current_status;
+    ActionRequest action(cp.getService("SwitchPower"), "SetTarget");
+    action.addArgument("newTargetValue", current_status ? "1" : "0");
+    cp.addAction(action);
+
+    auto reply = cp.executeActions();
+    timeout = millis() + 1000;
+  }
+}
+
+void loop() {
+  cp.loop();
+  switchLight();
+}

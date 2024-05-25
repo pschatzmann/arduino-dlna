@@ -1,7 +1,8 @@
+#pragma once
 #include "basic/Vector.h"
 #include "Action.h"
 #include "State.h"
-#include "dlna/XMLPrinter.h"
+#include "dlna/xml/XMLPrinter.h"
 
 namespace tiny_dlna {
 

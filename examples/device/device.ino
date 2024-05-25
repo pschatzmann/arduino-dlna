@@ -62,17 +62,15 @@ void setupDeviceInfo() {
 
   // define services
   DLNAServiceInfo rc, cm, avt;
-  avt.setup("AVTransport", "urn:schemas-upnp-org:service:AVTransport:1",
-            "urn:upnp-org:serviceId:AVTransport", "/AVT/service.xml",
-            transportCB, "/AVT/control", controlCB, "/AVT/event", eventCB);
-  cm.setup("ConnectionManager",
-           "urn:schemas-upnporg:service:ConnectionManager:1",
-           "urn:upnp-org:serviceId:ConnectionManager", "/CM/service.xml",
-           connmgrCB, "/CM/control", controlCB, "/CM/event", eventCB);
-  rc.setup("RenderingControl", "urn:schemas-upnporg:service:RenderingControl:1",
-           "urn:upnp-org:serviceId:RenderingControl", "/RC/service.xml",
-           controlCB, "/RC/control", controlCB, "/RC/event", eventCB);
-
+    // avt.setup("urn:schemas-upnp-org:service:AVTransport:1",
+    //           "urn:upnp-org:serviceId:AVTransport", "/AVT/service.xml",
+    //           transportCB, "/AVT/control", dummyCB, "/AVT/event", dummyCB);
+    // cm.setup("urn:schemas-upnporg:service:ConnectionManager:1",
+    //          "urn:upnp-org:serviceId:ConnectionManager", "/CM/service.xml",
+    //          connmgrCB, "/CM/control", dummyCB, "/CM/event", dummyCB);
+    // rc.setup("urn:schemas-upnporg:service:RenderingControl:1",
+    //          "urn:upnp-org:serviceId:RenderingControl", "/RC/service.xml",
+    //          controlCB, "/RC/control", dummyCB, "/RC/event", dummyCB);
   deviceInfo.addService(rc);
   deviceInfo.addService(cm);
   deviceInfo.addService(avt);

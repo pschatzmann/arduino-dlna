@@ -2,8 +2,8 @@
 
 #include "Arduino.h"  // for millis
 #include "DLNADeviceInfo.h"
-#include "Schedule.h"
 #include "IUDPService.h"
+#include "Schedule.h"
 
 namespace tiny_dlna {
 
@@ -22,12 +22,12 @@ class Scheduler {
   }
 
   /// Execute all due schedules
-  void execute(IUDPService &udp, DLNADeviceInfo &device) {
-    //DlnaLogger.log(DlnaDebug, "Scheduler::execute");
+  void execute(IUDPService &udp) {
+    // DlnaLogger.log(DlnaDebug, "Scheduler::execute");
     bool is_cleanup = false;
     for (auto &p_s : queue) {
       if (p_s == nullptr) continue;
-      Schedule& s = *p_s;
+      Schedule &s = *p_s;
       if (millis() >= s.time) {
         // handle end time: if expired set inactive
         if (s.end_time > millis()) {
@@ -37,7 +37,7 @@ class Scheduler {
         if (s.active) {
           DlnaLogger.log(DlnaInfo, "Executing %s", s.name());
 
-          s.process(udp, device);
+          s.process(udp);
           // reschedule if necessary
           if (s.repeat_ms > 0) {
             s.time = millis() + s.repeat_ms;
@@ -53,7 +53,7 @@ class Scheduler {
   }
 
  protected:
-  Vector<Schedule*> queue;
+  Vector<Schedule *> queue;
 
   void cleanup() {
     for (auto it = queue.begin(); it != queue.end(); ++it) {

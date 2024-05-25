@@ -138,7 +138,7 @@ class HttpHeader {
     // add value
     hl->value = value;
     hl->active = true;
-    DlnaLogger.log(DlnaInfo, key, hl->value.c_str());
+    DlnaLogger.log(DlnaInfo, "%s: %s", key, hl->value.c_str());
     return *this;
   }
 
@@ -239,9 +239,11 @@ class HttpHeader {
     char line[MaxHeaderLineLength];
     if (in.connected()) {
       if (in.available() == 0) {
+        int count = 0;
         DlnaLogger.log(DlnaWarning, "Waiting for data...");
         while (in.available() == 0) {
           delay(50);
+          if (count++>5) break;
         }
       }
       readLine(in, line, MaxHeaderLineLength);

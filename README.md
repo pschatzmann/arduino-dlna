@@ -14,6 +14,7 @@ Reference Documentation is hard to find. Therfore I am providing some valuable l
 https://embeddedinn.wordpress.com/tutorials/upnp-device-architecture/)
 - [UPnP Device Architecture](http://www.upnp.org/specs/arch/UPnP-arch-DeviceArchitecture-v1.1.pdf)
 
+https://openconnectivity.org/upnp-specs/UPnP-arch-DeviceArchitecture-v1.1.pdf
 
 I was struggling quite a bit to choose the right approach to implement something like this in Arduino. 
 On the desktop the the functionality can be provided with the help of the following projects:

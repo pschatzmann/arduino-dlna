@@ -1,4 +1,5 @@
 
+#pragma once
 #include "icons/icon.h"
 
 namespace tiny_dlna {

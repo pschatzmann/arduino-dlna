@@ -2,7 +2,7 @@
 
 #include "DLNADevice.h"
 #include "DLNADeviceInfo.h"
-#include "DLNARequestParser.h"
+#include "DLNADeviceRequestParser.h"
 #include "Schedule.h"
 #include "basic/Url.h"
 #include "http/HttpServer.h"
@@ -28,7 +28,7 @@ class DLNADevice {
 
     p_server = &server;
     p_udp = &udp;
-    addDevice(device);
+    setDevice(device);
     setupParser();
 
     // check base url
@@ -41,7 +41,7 @@ class DLNADevice {
     }
 
     // setup all services
-    for (auto& p_device : devices) setupServices(*p_device);
+    setupServices(*p_device);
 
     // setup web server
     if (!setupDLNAServer(server)) {
@@ -71,26 +71,22 @@ class DLNADevice {
     return true;
   }
 
-  /// We potentially support some additional devices on top of the one defined
-  /// via begin
-  void addDevice(DLNADeviceInfo& device) { devices.push_back(&device); }
+  void setDevice(DLNADeviceInfo& device) { p_device = &device; }
 
   /// Stops the processing and releases the resources
   void end() {
     p_server->end();
 
     // send 3 bye messages
-    PostByeSchedule* bye = new PostByeSchedule();
+    PostByeSchedule* bye = new PostByeSchedule(*p_device);
     bye->repeat_ms = 800;
     scheduler.add(bye);
 
     // execute scheduler for 2 seconds
     uint32_t end = millis() + 2000;
     while (millis() < end) {
-      scheduler.execute(*p_udp, getDevice());
+      scheduler.execute(*p_udp);
     }
-
-    for (auto& p_device : devices) p_device->clear();
 
     is_active = false;
   }
@@ -107,14 +103,14 @@ class DLNADevice {
       // process UDP requests
       RequestData req = p_udp->receive();
       if (req) {
-        Schedule* schedule = parser.parse(req);
+        Schedule* schedule = parser.parse(*p_device, req);
         if (schedule != nullptr) {
           scheduler.add(schedule);
         }
       }
 
       // execute scheduled udp replys
-      scheduler.execute(*p_udp, getDevice());
+      scheduler.execute(*p_udp);
     }
 
     // be nice, if we have other tasks
@@ -124,12 +120,12 @@ class DLNADevice {
   }
 
   /// Provide addess to the service information
-  DLNAServiceInfo getService(const char* id, int deviceIdx = 0) {
-    return devices[deviceIdx]->getService(id);
+  DLNAServiceInfo getService(const char* id) {
+    return p_device->getService(id);
   }
 
   /// Provides the device
-  DLNADeviceInfo& getDevice(int deviceIdx = 0) { return *devices[deviceIdx]; }
+  DLNADeviceInfo& getDevice() { return *p_device; }
 
   /// We can activate/deactivate the scheduler
   void setSchedulerActive(bool flag) { scheduler_active = flag; }
@@ -143,9 +139,9 @@ class DLNADevice {
 
  protected:
   Scheduler scheduler;
-  DLNARequestParser parser;
+  DLNADeviceRequestParser parser;
   IUDPService* p_udp = nullptr;
-  Vector<DLNADeviceInfo*> devices;
+  DLNADeviceInfo* p_device = nullptr;
   HttpServer* p_server = nullptr;
   bool is_active = false;
   bool scheduler_active = true;
@@ -156,10 +152,8 @@ class DLNADevice {
   bool setupParser() {
     parser.addMSearchST("upnp:rootdevice");
     parser.addMSearchST("ssdp:all");
-    for (auto& device : devices) {
-      parser.addMSearchST(device->getUDN());
-      parser.addMSearchST(device->getDeviceType());
-    }
+    parser.addMSearchST(p_device->getUDN());
+    parser.addMSearchST(p_device->getDeviceType());
     return true;
   }
 
@@ -167,8 +161,10 @@ class DLNADevice {
   bool setupScheduler() {
     // schedule post alive messages: Usually repeated 2 times (because UDP
     // messages might be lost)
-    PostAliveSchedule* postAlive = new PostAliveSchedule(post_alive_repeat_ms);
-    PostAliveSchedule* postAlive1 = new PostAliveSchedule(post_alive_repeat_ms);
+    PostAliveSchedule* postAlive =
+        new PostAliveSchedule(*p_device, post_alive_repeat_ms);
+    PostAliveSchedule* postAlive1 =
+        new PostAliveSchedule(*p_device, post_alive_repeat_ms);
     postAlive1->time = millis() + 100;
     scheduler.add(postAlive);
     scheduler.add(postAlive1);
@@ -180,49 +176,41 @@ class DLNADevice {
     char buffer[DLNA_MAX_URL_LEN] = {0};
     StrView url(buffer, DLNA_MAX_URL_LEN);
 
-    // make sure we have any devices
-    if (devices.empty()) {
-      DlnaLogger.log(DlnaError, "No devices found");
-      return false;
+    // add device url to server
+    const char* device_path = p_device->getDeviceURL().path();
+    const char* prefix = p_device->getBaseURL().path();
+
+    DlnaLogger.log(DlnaInfo, "Setting up device path: %s", device_path);
+    void* ref[] = {p_device};
+
+    if (!StrView(device_path).isEmpty()) {
+      p_server->rewrite("/", device_path);
+      p_server->rewrite("/dlna/device.xml", device_path);
+      p_server->rewrite("/index.html", device_path);
+      p_server->on(device_path, T_GET, deviceXMLCallback, ref, 1);
     }
 
-    // Setup services for all devices
-    for (auto& p_device : devices) {
-      // add device url to server
-      const char* device_path = p_device->getDeviceURL().path();
-      const char* prefix = p_device->getBaseURL().path();
-
-      DlnaLogger.log(DlnaInfo, "Setting up device path: %s", device_path);
-      void* ref[] = {p_device};
-
-      if (!StrView(device_path).isEmpty()) {
-        p_server->rewrite("/", device_path);
-        p_server->rewrite("/dlna/device.xml", device_path);
-        p_server->rewrite("/index.html", device_path);
-        p_server->on(device_path, T_GET, deviceXMLCallback, ref, 1);
-      }
-
-      // Register icon and privide favicon.ico
-      Icon icon = p_device->getIcon();
-      if (icon.icon_data != nullptr) {
-        char tmp[DLNA_MAX_URL_LEN];
-        const char* icon_path = url.buildPath(prefix, icon.icon_url);
-        p_server->on(icon_path, T_GET, icon.mime,
-                     (const uint8_t*)icon.icon_data, icon.icon_size);
-        p_server->on("/favicon.ico", T_GET, icon.mime,
-                     (const uint8_t*)icon.icon_data, icon.icon_size);
-      }
-
-      // Register Service URLs
-      for (DLNAServiceInfo& service : p_device->getServices()) {
-        p_server->on(url.buildPath(prefix, service.scp_url), T_GET,
-                     service.scp_cb, ref, 1);
-        p_server->on(url.buildPath(prefix, service.control_url), T_POST,
-                     service.control_cb, ref, 1);
-        p_server->on(url.buildPath(prefix, service.event_sub_url), T_GET,
-                     service.event_sub_cb, ref, 1);
-      }
+    // Register icon and privide favicon.ico
+    Icon icon = p_device->getIcon();
+    if (icon.icon_data != nullptr) {
+      char tmp[DLNA_MAX_URL_LEN];
+      const char* icon_path = url.buildPath(prefix, icon.icon_url);
+      p_server->on(icon_path, T_GET, icon.mime, (const uint8_t*)icon.icon_data,
+                   icon.icon_size);
+      p_server->on("/favicon.ico", T_GET, icon.mime,
+                   (const uint8_t*)icon.icon_data, icon.icon_size);
     }
+
+    // Register Service URLs
+    for (DLNAServiceInfo& service : p_device->getServices()) {
+      p_server->on(url.buildPath(prefix, service.scpd_url), T_GET,
+                   service.scp_cb, ref, 1);
+      p_server->on(url.buildPath(prefix, service.control_url), T_POST,
+                   service.control_cb, ref, 1);
+      p_server->on(url.buildPath(prefix, service.event_sub_url), T_GET,
+                   service.event_sub_cb, ref, 1);
+    }
+
     return true;
   }
 

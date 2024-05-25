@@ -108,6 +108,8 @@ class HttpRequest {
   // provides the head information of the reply
   virtual HttpReplyHeader &reply() { return reply_header; }
 
+  virtual HttpRequestHeader &request() { return request_header; }
+
   virtual void setAgent(const char *agent) { this->agent = agent; }
 
   virtual void setConnection(const char *connection) {
@@ -127,8 +129,8 @@ class HttpRequest {
   HttpRequestHeader request_header;
   HttpReplyHeader reply_header;
   HttpChunkReader chunk_reader{reply_header};
+  Str host_name;
   const char *agent = nullptr;
-  const char *host_name = nullptr;
   const char *connection = CON_CLOSE;
   const char *accept = ACCEPT_ALL;
   const char *accept_encoding = nullptr;
@@ -150,17 +152,21 @@ class HttpRequest {
       DlnaLogger.log(DlnaInfo, "process %s", msg);
 
       connect(url.host(), url.port());
-      if (host_name == nullptr) {
-        host_name = url.host();
-      }
+      if (host_name.isEmpty()) {
+         host_name = url.host();
+         host_name.add(":");
+         host_name.add(url.port());
+       }
     }
     request_header.setValues(action, url.path());
     if (len == -1 && data != nullptr) {
       len = strlen(data);
+    }
+    if (len > 0) {
       request_header.put(CONTENT_LENGTH, len);
     }
-    if (host_name != nullptr) {
-      request_header.put(HOST_C, host_name);
+    if (!host_name.isEmpty()) {
+      request_header.put(HOST_C, host_name.c_str());
     }
     if (agent != nullptr) {
       request_header.put(USER_AGENT, agent);

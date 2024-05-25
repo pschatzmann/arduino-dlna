@@ -9,11 +9,12 @@ namespace tiny_dlna {
 /**
  * @brief Represents a single XML element
  * @author Phil Schatzmann
-*/
+ */
 struct XMLNode {
-  const char* node;
-  const char* attributes;
-  const char* content;
+  const char* node = nullptr;
+  const char* attributes = nullptr;
+  const char* content = nullptr;
+  XMLNode() = default;
   XMLNode(const char* node, const char* content, const char* attr = nullptr) {
     this->node = node;
     this->attributes = attr;
@@ -43,26 +44,53 @@ struct XMLPrinter {
     return printNode(node.node, node.content, node.attributes);
   }
 
+  size_t printNode(const char* node, XMLNode child,
+                   const char* attributes = nullptr) {
+    Vector<XMLNode> children;
+    children.push_back(child);
+    return printNode(node, children, attributes);
+  }
+
   size_t printNode(const char* node, Vector<XMLNode> children,
-                 const char* attributes = nullptr) {
+                   const char* attributes = nullptr) {
+    assert(p_out != nullptr);
+    size_t result = printNodeBegin(node, attributes);
+    result += printChildren(children);
+    result += printNodeEnd(node);
+    return result;
+  }
+
+  size_t printNodeBegin(const char* node, const char* attributes = nullptr,
+                        const char* ns = nullptr) {
     assert(p_out != nullptr);
     size_t result = 0;
     result += p_out->print("<");
+    if (ns != nullptr) {
+      result += p_out->print(ns);
+      result += p_out->print(":");
+    }
     result += p_out->print(node);
     if (attributes != nullptr) {
       result += p_out->print(" ");
       result += p_out->print(attributes);
     }
     result += p_out->println(">");
-    result += printChildren(children);
-    result += p_out->print("</");
+    return result;
+  }
+
+  size_t printNodeEnd(const char* node, const char* ns = nullptr) {
+    size_t result = p_out->print("</");
+    if (ns != nullptr) {
+      result += p_out->print(ns);
+      result += p_out->print(":");
+    }
     result += p_out->print(node);
     result += p_out->println(">");
     return result;
   }
 
   size_t printNode(const char* node, const char* txt,
-                 const char* attributes = nullptr) {
+                   const char* attributes = nullptr) {
     assert(p_out != nullptr);
     size_t result = 0;
 
@@ -83,7 +111,8 @@ struct XMLPrinter {
     return result;
   }
 
-  size_t printNode(const char* node, int txt, const char* attributes = nullptr) {
+  size_t printNode(const char* node, int txt,
+                   const char* attributes = nullptr) {
     assert(p_out != nullptr);
     size_t result = 0;
 
@@ -101,7 +130,7 @@ struct XMLPrinter {
   }
 
   size_t printNode(const char* node, std::function<size_t(void)> callback,
-                 const char* attributes = nullptr) {
+                   const char* attributes = nullptr) {
     assert(p_out != nullptr);
     size_t result = 0;
 
@@ -142,7 +171,7 @@ struct XMLPrinter {
   }
 
  protected:
-  size_t printChildren(Vector<XMLNode> &children) {
+  size_t printChildren(Vector<XMLNode>& children) {
     size_t result = 0;
     for (auto& node : children) {
       result += printNode(node);

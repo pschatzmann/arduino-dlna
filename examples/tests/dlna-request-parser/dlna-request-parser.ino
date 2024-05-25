@@ -1,7 +1,7 @@
 #include "DLNA.h"
 
 RequestData data;
-DLNARequestParser rp;
+DLNADeviceRequestParser rp;
 
 void setup() {
   Serial.begin(115200);

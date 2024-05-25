@@ -21,7 +21,6 @@ static IPAddressAndPort DLNABroadcastAddress{IPAddress(239, 255, 255, 250),
  */
 
 struct RequestData {
-  //RequestData() = default;
   Str data{0};
   IPAddressAndPort peer;
   operator bool() { return !data.isEmpty(); }
