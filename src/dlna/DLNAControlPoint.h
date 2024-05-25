@@ -160,7 +160,7 @@ version: locate service of a given type
 
   /// Adds a new device
   void addDevice(DLNADeviceInfo dev) {
-    dev.timestamp = millis();
+    dev.updateTimestamp();
     for (auto& existing_device : devices) {
       if (dev.getUDN() == existing_device.getUDN()) {
         DlnaLogger.log(DlnaInfo, "Device '%s' already exists", dev.getUDN());

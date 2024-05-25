@@ -2,12 +2,11 @@
 #pragma once
 
 #include <functional>  // std::bind
-
 #include "DLNAServiceInfo.h"
+#include "StringRegistry.h"
 #include "basic/Icon.h"
 #include "basic/Vector.h"
 #include "service/Action.h"
-//#include "service/NamedFunction.h"
 #include "vector"
 #include "xml/XMLPrinter.h"
 
@@ -24,11 +23,8 @@ namespace tiny_dlna {
 class DLNADeviceInfo {
   friend class XMLDeviceParser;
 
-
  public:
-  DLNADeviceInfo(bool ok = true){
-    is_ok = true;
-  }
+  DLNADeviceInfo(bool ok = true) { is_ok = true; }
   /// renderes the device xml
   void print(Print& out) {
     xml.setOutput(out);
@@ -93,13 +89,21 @@ class DLNADeviceInfo {
 
   /// Defines the base URL
   void setFriendlyName(const char* name) { friendly_name = name; }
+  const char* getFriendlyName() { return friendly_name; }
   void setManufacturer(const char* man) { manufacturer = man; }
+  const char* getManufacturer() { return manufacturer; }
   void setManufacturerURL(const char* url) { manufacturer_url = url; }
+  const char* getManufacturerURL() { return manufacturer_url; }
   void setModelDescription(const char* descr) { model_description = descr; }
+  const char* getModelDescription() { return model_description; }
   void setModelName(const char* name) { model_name = name; }
+  const char* getModelName() { return model_name; }
   void setModelNumber(const char* number) { model_number = number; }
+  const char* getModelNumber() { return model_number; }
   void setSerialNumber(const char* sn) { serial_number = sn; }
+  const char* getSerialNumber() { return serial_number; }
   void setUniveralProductCode(const char* upc) { universal_product_code = upc; }
+  const char* getUniveralProductCode() { return universal_product_code; }
 
   /// Adds a service defintion
   void addService(DLNAServiceInfo s) { services.push_back(s); }
@@ -133,35 +137,31 @@ class DLNADeviceInfo {
     universal_product_code = nullptr;
   }
 
-  // /// Register an generic action callback
-  // void setAllActionsCallback(std::function<void(Action)> cb) {
-  //   action_callback = cb;
-  // }
-
-  // /// Register a callback for an action
-  // void addActionCallback(const char* actionName,
-  //                        std::function<void(void)> func) {
-  //   action_callback_vector.push_back(NamedFunction(actionName, func));
-  // }
-
   /// Overwrite the default icon
   void clearIcons() { icons.clear(); }
   void addIcon(Icon icon) { icons.push_back(icon); }
   Icon getIcon(int idx = 0) { return icons[idx]; }
 
-  const char* addString(char* in){
-    for (auto str : strings){
-      if (str.equals(in)){
-        return str.c_str();
-      }
-    }
-    strings.push_back(in);
-    return strings[strings.size()-1].c_str();
+
+  operator bool() { return is_ok; }
+
+  /// Adds a string to the string repository
+  const char* addString(char* string){
+    return strings.add(string);
   }
 
-  uint32_t timestamp = 0;
-  operator bool() {return is_ok;}
+  /// Update the timestamp
+  void updateTimestamp(){
+    timestamp = millis();
+  }
+
+  /// Returns the time when this object has been updated
+  uint32_t getTimestamp(){
+    return timestamp;
+  }
+
  protected:
+  uint32_t timestamp = 0;
   bool is_ok = true;
   XMLPrinter xml;
   Url base_url{"http://localhost:9876/dlna"};
@@ -184,9 +184,7 @@ class DLNADeviceInfo {
   Icon icon;
   Vector<DLNAServiceInfo> services;
   Vector<Icon> icons;
-  // std::function<void(Action)> action_callback;
-  // Vector<NamedFunction> action_callback_vector;
-  Vector<Str> strings;
+  StringRegistry strings;
 
   size_t printRoot() {
     size_t result = 0;
