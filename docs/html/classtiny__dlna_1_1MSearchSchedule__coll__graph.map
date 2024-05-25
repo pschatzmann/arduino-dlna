@@ -1,0 +1,5 @@
+<map id="tiny_dlna::MSearchSchedule" name="tiny_dlna::MSearchSchedule">
+<area shape="rect" id="node1" title="Send MSearch request." alt="" coords="77,95,283,121"/>
+<area shape="rect" id="node2" href="$structtiny__dlna_1_1Schedule.html" title="An individual Schedule (to send out UDP messages)" alt="" coords="5,5,155,32"/>
+<area shape="rect" id="node3" href="$structtiny__dlna_1_1IPAddressAndPort.html" title="IP Adress including Port information." alt="" coords="179,5,383,32"/>
+</map>

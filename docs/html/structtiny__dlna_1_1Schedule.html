@@ -83,17 +83,21 @@ Inheritance diagram for tiny_dlna::Schedule:</div>
 <div class="dyncontent">
 <div class="center"><img src="structtiny__dlna_1_1Schedule__inherit__graph.png" border="0" usemap="#atiny__dlna_1_1Schedule_inherit__map" alt="Inheritance graph"/></div>
 <map name="atiny__dlna_1_1Schedule_inherit__map" id="atiny__dlna_1_1Schedule_inherit__map">
-<area shape="rect" title="An individual Schedule (to send out UDP messages)" alt="" coords="5,56,155,83"/>
-<area shape="rect" href="classtiny__dlna_1_1MSearchReplySchedule.html" title="Answer to MSearch request." alt="" coords="203,5,445,32"/>
-<area shape="rect" href="classtiny__dlna_1_1PostAliveSchedule.html" title="Send out PostAlive messages: Repeated every 5 seconds." alt="" coords="219,56,429,83"/>
-<area shape="rect" href="classtiny__dlna_1_1PostByeSchedule.html" title="Send out ByeBye message." alt="" coords="223,107,425,133"/>
+<area shape="rect" title="An individual Schedule (to send out UDP messages)" alt="" coords="5,157,155,184"/>
+<area shape="rect" href="classtiny__dlna_1_1MSearchReplyCP.html" title="Processing at control point to handle a MSearchReply from the device." alt="" coords="224,5,424,32"/>
+<area shape="rect" href="classtiny__dlna_1_1MSearchReplySchedule.html" title="Answer from device to MSearch request by sending a reply." alt="" coords="203,56,445,83"/>
+<area shape="rect" href="classtiny__dlna_1_1MSearchSchedule.html" title="Send MSearch request." alt="" coords="221,107,427,133"/>
+<area shape="rect" href="classtiny__dlna_1_1NotifyReplyCP.html" title=" " alt="" coords="233,157,415,184"/>
+<area shape="rect" href="classtiny__dlna_1_1PostAliveSchedule.html" title="Send out PostAlive messages: Repeated every 5 seconds." alt="" coords="219,208,429,235"/>
+<area shape="rect" href="classtiny__dlna_1_1PostByeSchedule.html" title="Send out ByeBye message." alt="" coords="223,259,425,285"/>
+<area shape="rect" href="classtiny__dlna_1_1PostSubscribe.html" title="Send SUBSCRIBE message via UDP unicast." alt="" coords="233,309,415,336"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a9739f92ce4dd5268aee8d647107b3e06"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1Schedule.html#a9739f92ce4dd5268aee8d647107b3e06">process</a> (<a class="el" href="classtiny__dlna_1_1IUDPService.html">IUDPService</a> &amp;udp, <a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html">DLNADeviceInfo</a> &amp;device)</td></tr>
-<tr class="separator:a9739f92ce4dd5268aee8d647107b3e06"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a914855b088ede397dc656784b8cf9875"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1Schedule.html#a914855b088ede397dc656784b8cf9875">process</a> (<a class="el" href="classtiny__dlna_1_1IUDPService.html">IUDPService</a> &amp;udp)</td></tr>
+<tr class="separator:a914855b088ede397dc656784b8cf9875"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7f84cd006a94d1749bd82843326f6876"><td class="memItemLeft" align="right" valign="top">virtual const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1Schedule.html#a7f84cd006a94d1749bd82843326f6876">name</a> ()</td></tr>
 <tr class="separator:a7f84cd006a94d1749bd82843326f6876"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab68a78be25e74294fbac6839bd5111ae"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1Schedule.html#ab68a78be25e74294fbac6839bd5111ae">operator bool</a> ()</td></tr>
@@ -139,7 +143,7 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="classtiny__dlna_1_1PostByeSchedule.html#abeeffadfb6b22c4944bcad652ffa6898">tiny_dlna::PostByeSchedule</a>, <a class="el" href="classtiny__dlna_1_1PostAliveSchedule.html#aefbab567c1dbf90cda05135bec4c343b">tiny_dlna::PostAliveSchedule</a>, and <a class="el" href="classtiny__dlna_1_1MSearchReplySchedule.html#a81fb968334e8aab4bc76854c8472885e">tiny_dlna::MSearchReplySchedule</a>.</p>
+<p>Reimplemented in <a class="el" href="classtiny__dlna_1_1PostSubscribe.html#a877f0f0bf43d2f42829dce8d222e5cda">tiny_dlna::PostSubscribe</a>, <a class="el" href="classtiny__dlna_1_1PostByeSchedule.html#abeeffadfb6b22c4944bcad652ffa6898">tiny_dlna::PostByeSchedule</a>, <a class="el" href="classtiny__dlna_1_1PostAliveSchedule.html#aefbab567c1dbf90cda05135bec4c343b">tiny_dlna::PostAliveSchedule</a>, <a class="el" href="classtiny__dlna_1_1NotifyReplyCP.html#a11cfcb54f18134da0ec1fe6bb419c50d">tiny_dlna::NotifyReplyCP</a>, <a class="el" href="classtiny__dlna_1_1MSearchReplyCP.html#a4db045a36a75bfc96ed6e28e3fe1fc9a">tiny_dlna::MSearchReplyCP</a>, <a class="el" href="classtiny__dlna_1_1MSearchReplySchedule.html#a81fb968334e8aab4bc76854c8472885e">tiny_dlna::MSearchReplySchedule</a>, and <a class="el" href="classtiny__dlna_1_1MSearchSchedule.html#a53cf48f476928d0cfd4e013b8a81228d">tiny_dlna::MSearchSchedule</a>.</p>
 
 </div>
 </div>
@@ -168,8 +172,8 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a9739f92ce4dd5268aee8d647107b3e06"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9739f92ce4dd5268aee8d647107b3e06">&#9670;&nbsp;</a></span>process()</h2>
+<a id="a914855b088ede397dc656784b8cf9875"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a914855b088ede397dc656784b8cf9875">&#9670;&nbsp;</a></span>process()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -181,18 +185,8 @@ Public Attributes</h2></td></tr>
           <td class="memname">virtual bool tiny_dlna::Schedule::process </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classtiny__dlna_1_1IUDPService.html">IUDPService</a> &amp;&#160;</td>
-          <td class="paramname"><em>udp</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"><em>udp</em></td><td>)</td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html">DLNADeviceInfo</a> &amp;&#160;</td>
-          <td class="paramname"><em>device</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -202,7 +196,7 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="classtiny__dlna_1_1PostByeSchedule.html#af21249223b13fa508b9b395a30cfb3eb">tiny_dlna::PostByeSchedule</a>, <a class="el" href="classtiny__dlna_1_1PostAliveSchedule.html#a1ac7853020a2053d63ab88a5b10df2b1">tiny_dlna::PostAliveSchedule</a>, and <a class="el" href="classtiny__dlna_1_1MSearchReplySchedule.html#a536869661ccd44ddaa3e5c2790292de8">tiny_dlna::MSearchReplySchedule</a>.</p>
+<p>Reimplemented in <a class="el" href="classtiny__dlna_1_1PostSubscribe.html#ad96cd29a9bd0f93ed3131a39bee57e59">tiny_dlna::PostSubscribe</a>, <a class="el" href="classtiny__dlna_1_1PostByeSchedule.html#a64092006b5c7f71126db1bb00634e227">tiny_dlna::PostByeSchedule</a>, <a class="el" href="classtiny__dlna_1_1PostAliveSchedule.html#aa54e34df318100330642e2e49f65eb84">tiny_dlna::PostAliveSchedule</a>, <a class="el" href="classtiny__dlna_1_1MSearchReplySchedule.html#a532217a17d9ebeb6ecaea3768889c500">tiny_dlna::MSearchReplySchedule</a>, and <a class="el" href="classtiny__dlna_1_1MSearchSchedule.html#a78d50ea3f56af5d5c5122d598828472f">tiny_dlna::MSearchSchedule</a>.</p>
 
 </div>
 </div>

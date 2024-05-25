@@ -84,19 +84,19 @@ Collaboration diagram for tiny_dlna::HttpRequest:</div>
 <div class="dyncontent">
 <div class="center"><img src="classtiny__dlna_1_1HttpRequest__coll__graph.png" border="0" usemap="#atiny__dlna_1_1HttpRequest_coll__map" alt="Collaboration graph"/></div>
 <map name="atiny__dlna_1_1HttpRequest_coll__map" id="atiny__dlna_1_1HttpRequest_coll__map">
-<area shape="rect" title="Simple API to process get, put, post, del http requests I tried to use Arduino HttpClient,..." alt="" coords="2024,103,2195,129"/>
-<area shape="rect" href="classtiny__dlna_1_1HttpReplyHeader.html" title="Reading and Writing of Http Replys." alt="" coords="1208,71,1411,97"/>
-<area shape="rect" href="classtiny__dlna_1_1HttpChunkReader.html" title="Http might reply with chunks. So we need to dechunk the data. see https://en.wikipedia...." alt="" coords="1677,19,1883,45"/>
-<area shape="rect" href="classtiny__dlna_1_1HttpHeader.html" title="In a http request and reply we need to process header information. With this API we can define and qu..." alt="" coords="885,71,1051,97"/>
-<area shape="rect" href="classtiny__dlna_1_1HttpRequestHeader.html" title="Reading and writing of Http Requests." alt="" coords="1435,131,1653,157"/>
-<area shape="rect" href="classtiny__dlna_1_1Str.html" title="String implementation which keeps the data on the heap. We grow the allocated memory only if the copy..." alt="" coords="607,156,715,183"/>
-<area shape="rect" href="classtiny__dlna_1_1Url.html" title="URL parser which breaks a full url string up into its individual parts." alt="" coords="1075,227,1184,253"/>
-<area shape="rect" href="classtiny__dlna_1_1StrView.html" title="A simple wrapper to provide string functions on char*. If the underlying char* is a const we do not a..." alt="" coords="305,129,445,156"/>
-<area shape="rect" href="classtiny__dlna_1_1Vector.html" title=" " alt="" coords="304,181,447,222"/>
-<area shape="rect" href="classtiny__dlna_1_1Allocator.html" title="Memory allocateator which uses malloc." alt="" coords="5,155,153,181"/>
-<area shape="rect" href="classtiny__dlna_1_1List.html" title=" " alt="" coords="279,63,472,105"/>
+<area shape="rect" title="Simple API to process get, put, post, del http requests I tried to use Arduino HttpClient,..." alt="" coords="2024,128,2195,155"/>
+<area shape="rect" href="classtiny__dlna_1_1Str.html" title="String implementation which keeps the data on the heap. We grow the allocated memory only if the copy..." alt="" coords="607,189,715,216"/>
+<area shape="rect" href="classtiny__dlna_1_1HttpHeader.html" title="In a http request and reply we need to process header information. With this API we can define and qu..." alt="" coords="885,75,1051,101"/>
+<area shape="rect" href="classtiny__dlna_1_1Url.html" title="URL parser which breaks a full url string up into its individual parts." alt="" coords="1075,275,1184,301"/>
+<area shape="rect" href="classtiny__dlna_1_1StrView.html" title="A simple wrapper to provide string functions on char*. If the underlying char* is a const we do not a..." alt="" coords="305,133,445,160"/>
+<area shape="rect" href="classtiny__dlna_1_1Vector.html" title=" " alt="" coords="304,185,447,226"/>
+<area shape="rect" href="classtiny__dlna_1_1Allocator.html" title="Memory allocateator which uses malloc." alt="" coords="5,149,153,176"/>
+<area shape="rect" href="classtiny__dlna_1_1List.html" title=" " alt="" coords="279,67,472,109"/>
+<area shape="rect" href="classtiny__dlna_1_1HttpReplyHeader.html" title="Reading and Writing of Http Replys." alt="" coords="1208,65,1411,92"/>
+<area shape="rect" href="classtiny__dlna_1_1HttpChunkReader.html" title="Http might reply with chunks. So we need to dechunk the data. see https://en.wikipedia...." alt="" coords="1677,13,1883,40"/>
+<area shape="rect" href="classtiny__dlna_1_1HttpRequestHeader.html" title="Reading and writing of Http Requests." alt="" coords="1435,125,1653,152"/>
 <area shape="rect" href="classtiny__dlna_1_1HttpLineReader.html" title="We read a single line. A terminating 0 is added to the string to make it compliant for c string funct..." alt="" coords="565,5,756,32"/>
-<area shape="rect" href="structtiny__dlna_1_1List_1_1Node.html" title=" " alt="" coords="11,63,147,105"/>
+<area shape="rect" href="structtiny__dlna_1_1List_1_1Node.html" title=" " alt="" coords="11,67,147,109"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -134,6 +134,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aa5af7f5360d0a7a997afec34950a9987"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a372a85d16e9c9641d3badab133d995e6"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classtiny__dlna_1_1HttpReplyHeader.html">HttpReplyHeader</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpRequest.html#a372a85d16e9c9641d3badab133d995e6">reply</a> ()</td></tr>
 <tr class="separator:a372a85d16e9c9641d3badab133d995e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a279396b187a13f9d9bba113101ad9e90"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classtiny__dlna_1_1HttpRequestHeader.html">HttpRequestHeader</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpRequest.html#a279396b187a13f9d9bba113101ad9e90">request</a> ()</td></tr>
+<tr class="separator:a279396b187a13f9d9bba113101ad9e90"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6a6b3306d45a6c6fdd8b2d987a8ef420"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpRequest.html#a6a6b3306d45a6c6fdd8b2d987a8ef420">setAgent</a> (const char *<a class="el" href="classtiny__dlna_1_1HttpRequest.html#a26fdc17696a6af0261b55be781d1c436">agent</a>)</td></tr>
 <tr class="separator:a6a6b3306d45a6c6fdd8b2d987a8ef420"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7b9d46d2c50676f5f500a67a0442cdd6"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpRequest.html#a7b9d46d2c50676f5f500a67a0442cdd6">setConnection</a> (const char *<a class="el" href="classtiny__dlna_1_1HttpRequest.html#ac939fa1d54b109536dbf199afd84d9a2">connection</a>)</td></tr>
@@ -166,10 +168,10 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a40c60afd13fc4b2b3464233aced63ce2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aec6a43015da78bc1a13bde9b2fa44fcf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1HttpChunkReader.html">HttpChunkReader</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpRequest.html#aec6a43015da78bc1a13bde9b2fa44fcf">chunk_reader</a> {<a class="el" href="classtiny__dlna_1_1HttpRequest.html#a40c60afd13fc4b2b3464233aced63ce2">reply_header</a>}</td></tr>
 <tr class="separator:aec6a43015da78bc1a13bde9b2fa44fcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a53002a65ce482b0006800151d7d498fb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Str.html">Str</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpRequest.html#a53002a65ce482b0006800151d7d498fb">host_name</a></td></tr>
+<tr class="separator:a53002a65ce482b0006800151d7d498fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a26fdc17696a6af0261b55be781d1c436"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpRequest.html#a26fdc17696a6af0261b55be781d1c436">agent</a> = nullptr</td></tr>
 <tr class="separator:a26fdc17696a6af0261b55be781d1c436"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1846adb638584fcce28a1d34916ae428"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpRequest.html#a1846adb638584fcce28a1d34916ae428">host_name</a> = nullptr</td></tr>
-<tr class="separator:a1846adb638584fcce28a1d34916ae428"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac939fa1d54b109536dbf199afd84d9a2"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpRequest.html#ac939fa1d54b109536dbf199afd84d9a2">connection</a> = <a class="el" href="namespacetiny__dlna.html#a7154cacff6f729ca8f7f65e6c4f2bb13">CON_CLOSE</a></td></tr>
 <tr class="separator:ac939fa1d54b109536dbf199afd84d9a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c8903c949d8ac6d05eb79afafcc2c19"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpRequest.html#a4c8903c949d8ac6d05eb79afafcc2c19">accept</a> = <a class="el" href="namespacetiny__dlna.html#ae2cb69e94584c8dbf2b9877ed6b87058">ACCEPT_ALL</a></td></tr>
@@ -766,6 +768,31 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a279396b187a13f9d9bba113101ad9e90"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a279396b187a13f9d9bba113101ad9e90">&#9670;&nbsp;</a></span>request()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="classtiny__dlna_1_1HttpRequestHeader.html">HttpRequestHeader</a>&amp; tiny_dlna::HttpRequest::request </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a69b33da7790990650a6f2cb3804bfc2d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a69b33da7790990650a6f2cb3804bfc2d">&#9670;&nbsp;</a></span>setAcceptsEncoding()</h2>
 
@@ -1102,8 +1129,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a1846adb638584fcce28a1d34916ae428"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1846adb638584fcce28a1d34916ae428">&#9670;&nbsp;</a></span>host_name</h2>
+<a id="a53002a65ce482b0006800151d7d498fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a53002a65ce482b0006800151d7d498fb">&#9670;&nbsp;</a></span>host_name</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1112,7 +1139,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const char* tiny_dlna::HttpRequest::host_name = nullptr</td>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1Str.html">Str</a> tiny_dlna::HttpRequest::host_name</td>
         </tr>
       </table>
   </td>

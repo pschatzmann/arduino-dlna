@@ -91,6 +91,8 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1LoggerClass.html">LoggerClass</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Logger that writes messages dependent on the log level.  <a href="classtiny__dlna_1_1LoggerClass.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1NullPrint.html">NullPrint</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1QueueLockFree.html">QueueLockFree</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A simple single producer, single consumer lock free queue.  <a href="classtiny__dlna_1_1QueueLockFree.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -99,6 +101,8 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html">Str</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">String implementation which keeps the data on the heap. We grow the allocated memory only if the copy source is not fitting.  <a href="classtiny__dlna_1_1Str.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1StrPrint.html">StrPrint</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1StrView.html">StrView</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A simple wrapper to provide string functions on char*. If the underlying char* is a const we do not allow any updates; The ownership of the chr* must be managed externally!  <a href="classtiny__dlna_1_1StrView.html#details">More...</a><br /></td></tr>
@@ -112,14 +116,20 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaRenderer.html">MediaRenderer</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classtiny__dlna_1_1MediaRenderer.html" title="MediaRenderer DLNA Device.">MediaRenderer</a> DLNA Device.  <a href="classtiny__dlna_1_1MediaRenderer.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html">DLNAControlPoint</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup of a Basic DLNA Control Point. The control point.  <a href="classtiny__dlna_1_1DLNAControlPoint.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointRequestParser.html">DLNAControlPointRequestParser</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Translates DLNA UDP Requests to <a class="el" href="structtiny__dlna_1_1Schedule.html" title="An individual Schedule (to send out UDP messages)">Schedule</a> so that we can schedule a reply.  <a href="classtiny__dlna_1_1DLNAControlPointRequestParser.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html">DLNADevice</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup of a Basic DLNA Device service. The device registers itself to the network and answers to the DLNA queries and requests. A DLNA device uses UDP, Http, XML and Soap to discover and manage a service, so there is quite some complexity involved:  <a href="classtiny__dlna_1_1DLNADevice.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html">DLNADeviceInfo</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Device Attributes and generation of XML using urn:schemas-upnp-org:device-1-0. We could just reutrn a predefined device xml document, but we provide a dynamic generation of the service xml which should be more memory efficient.  <a href="classtiny__dlna_1_1DLNADeviceInfo.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNARequestParser.html">DLNARequestParser</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Translates DLNA UDP Requests to <a class="el" href="structtiny__dlna_1_1Schedule.html" title="An individual Schedule (to send out UDP messages)">Schedule</a> so that we can schedule a reply.  <a href="classtiny__dlna_1_1DLNARequestParser.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceRequestParser.html">DLNADeviceRequestParser</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Translates DLNA UDP Requests to <a class="el" href="structtiny__dlna_1_1Schedule.html" title="An individual Schedule (to send out UDP messages)">Schedule</a> so that we can schedule a reply.  <a href="classtiny__dlna_1_1DLNADeviceRequestParser.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html">DLNAServiceInfo</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attributes needed for the DLNA <a class="el" href="classtiny__dlna_1_1Service.html" title="DLNA Service: Actions and State information.">Service</a> Definition.  <a href="classtiny__dlna_1_1DLNAServiceInfo.html#details">More...</a><br /></td></tr>
@@ -136,8 +146,16 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1Schedule.html">Schedule</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">An individual <a class="el" href="structtiny__dlna_1_1Schedule.html" title="An individual Schedule (to send out UDP messages)">Schedule</a> (to send out UDP messages)  <a href="structtiny__dlna_1_1Schedule.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MSearchSchedule.html">MSearchSchedule</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send MSearch request.  <a href="classtiny__dlna_1_1MSearchSchedule.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MSearchReplySchedule.html">MSearchReplySchedule</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Answer to MSearch request.  <a href="classtiny__dlna_1_1MSearchReplySchedule.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Answer from device to MSearch request by sending a reply.  <a href="classtiny__dlna_1_1MSearchReplySchedule.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MSearchReplyCP.html">MSearchReplyCP</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Processing at control point to handle a MSearchReply from the device.  <a href="classtiny__dlna_1_1MSearchReplyCP.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1NotifyReplyCP.html">NotifyReplyCP</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1PostAliveSchedule.html">PostAliveSchedule</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send out PostAlive messages: Repeated every 5 seconds.  <a href="classtiny__dlna_1_1PostAliveSchedule.html#details">More...</a><br /></td></tr>
@@ -145,29 +163,29 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1PostByeSchedule.html">PostByeSchedule</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send out ByeBye message.  <a href="classtiny__dlna_1_1PostByeSchedule.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1PostSubscribe.html">PostSubscribe</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send SUBSCRIBE message via UDP unicast.  <a href="classtiny__dlna_1_1PostSubscribe.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Scheduler.html">Scheduler</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classtiny__dlna_1_1Scheduler.html" title="Scheduler which processes all due Schedules (to send out UDP replies)">Scheduler</a> which processes all due Schedules (to send out UDP replies)  <a href="classtiny__dlna_1_1Scheduler.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Argument.html">Argument</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">DLNA <a class="el" href="classtiny__dlna_1_1Service.html" title="DLNA Service: Actions and State information.">Service</a>: <a class="el" href="classtiny__dlna_1_1Action.html" title="DLNA Service: Action.">Action</a> <a class="el" href="classtiny__dlna_1_1Argument.html" title="DLNA Service: Action Argument.">Argument</a>.  <a href="classtiny__dlna_1_1Argument.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">DLNA <a class="el" href="classtiny__dlna_1_1Service.html" title="DLNA Service: Actions and State information.">Service</a>: Action <a class="el" href="classtiny__dlna_1_1Argument.html" title="DLNA Service: Action Argument.">Argument</a>.  <a href="classtiny__dlna_1_1Argument.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Action.html">Action</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">DLNA <a class="el" href="classtiny__dlna_1_1Service.html" title="DLNA Service: Actions and State information.">Service</a>: <a class="el" href="classtiny__dlna_1_1Action.html" title="DLNA Service: Action.">Action</a>.  <a href="classtiny__dlna_1_1Action.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1ActionReply.html">ActionReply</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1NamedFunction.html">NamedFunction</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">DLNA <a class="el" href="classtiny__dlna_1_1Service.html" title="DLNA Service: Actions and State information.">Service</a>: Named callback function.  <a href="structtiny__dlna_1_1NamedFunction.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Service.html">Service</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">DLNA <a class="el" href="classtiny__dlna_1_1Service.html" title="DLNA Service: Actions and State information.">Service</a>: Actions and <a class="el" href="classtiny__dlna_1_1State.html" title="DLNA Service: Representation of a single State.">State</a> information.  <a href="classtiny__dlna_1_1Service.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1State.html">State</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">DLNA <a class="el" href="classtiny__dlna_1_1Service.html" title="DLNA Service: Actions and State information.">Service</a>: Representation of a single <a class="el" href="classtiny__dlna_1_1State.html" title="DLNA Service: Representation of a single State.">State</a>.  <a href="classtiny__dlna_1_1State.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1StateValue.html">StateValue</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1UDPAsyncService.html">UDPAsyncService</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to UDP functionality: sending and receiving of data using the Async API of the ESP32.  <a href="classtiny__dlna_1_1UDPAsyncService.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1UDPService.html">UDPService</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to UDP functionality: sending and receiving of data It seems that the UDP receive is not working for.  <a href="classtiny__dlna_1_1UDPService.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1XMLDeviceParser.html">XMLDeviceParser</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parses an DLNA device xml string to fill the <a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html" title="Device Attributes and generation of XML using urn:schemas-upnp-org:device-1-0. We could just reutrn a...">DLNADeviceInfo</a> data structure.  <a href="classtiny__dlna_1_1XMLDeviceParser.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1XMLNode.html">XMLNode</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a single XML element.  <a href="structtiny__dlna_1_1XMLNode.html#details">More...</a><br /></td></tr>
@@ -226,6 +244,12 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpTunnel.html">HttpTunnel</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Forwards a request to a destination URL and provides a pointer to the result stream.  <a href="classtiny__dlna_1_1HttpTunnel.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1NamedFunction.html">NamedFunction</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">DLNA <a class="el" href="classtiny__dlna_1_1Service.html" title="DLNA Service: Actions and State information.">Service</a>: Named callback function.  <a href="structtiny__dlna_1_1NamedFunction.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Service.html">Service</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">DLNA <a class="el" href="classtiny__dlna_1_1Service.html" title="DLNA Service: Actions and State information.">Service</a>: Actions and State information.  <a href="classtiny__dlna_1_1Service.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
@@ -243,16 +267,6 @@ Enumerations</h2></td></tr>
  }</td></tr>
 <tr class="memdesc:a5eabb92538a2ba1397f67b903cb9d35e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Supported log levels.  <a href="namespacetiny__dlna.html#a5eabb92538a2ba1397f67b903cb9d35e">More...</a><br /></td></tr>
 <tr class="separator:a5eabb92538a2ba1397f67b903cb9d35e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a539d83363da4d04dac19bd91c9bacc38"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetiny__dlna.html#a539d83363da4d04dac19bd91c9bacc38">Direction</a> { <a class="el" href="namespacetiny__dlna.html#a539d83363da4d04dac19bd91c9bacc38aefeb369cccbd560588a756610865664c">In</a>
-, <a class="el" href="namespacetiny__dlna.html#a539d83363da4d04dac19bd91c9bacc38a7c147cda9e49590f6abe83d118b7353b">Out</a>
- }</td></tr>
-<tr class="separator:a539d83363da4d04dac19bd91c9bacc38"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a65d70e1527559b53691f0dca4c7065a9"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetiny__dlna.html#a65d70e1527559b53691f0dca4c7065a9">DataType</a> { <a class="el" href="namespacetiny__dlna.html#a65d70e1527559b53691f0dca4c7065a9a84e2c64f38f78ba3ea5c905ab5a2da27">boolean</a>
-, <a class="el" href="namespacetiny__dlna.html#a65d70e1527559b53691f0dca4c7065a9ab45cffe084dd3d20d928bee85e7b0f21">string</a>
-, <a class="el" href="namespacetiny__dlna.html#a65d70e1527559b53691f0dca4c7065a9adf224ff05c34d0549ac8a408a0bb68e1">ui2</a>
-, <a class="el" href="namespacetiny__dlna.html#a65d70e1527559b53691f0dca4c7065a9afc46f8e70489b90fa373d93109479ca5">i2</a>
- }</td></tr>
-<tr class="separator:a65d70e1527559b53691f0dca4c7065a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8b30900e538135f563c83e48319e5247"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetiny__dlna.html#a8b30900e538135f563c83e48319e5247">TinyMethodID</a> { <br />
 &#160;&#160;<a class="el" href="namespacetiny__dlna.html#a8b30900e538135f563c83e48319e5247a38bf86d84d310d359e8de997cf53b32f">T_UNDEFINED</a>
 , <a class="el" href="namespacetiny__dlna.html#a8b30900e538135f563c83e48319e5247a97fc3ce47a74a4e9ed375738b0b77c17">T_GET</a>
@@ -274,10 +288,6 @@ Enumerations</h2></td></tr>
 Variables</h2></td></tr>
 <tr class="memitem:ad1a9a726ef5546aa12b5f58a2af3db3c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1LoggerClass.html">LoggerClass</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetiny__dlna.html#ad1a9a726ef5546aa12b5f58a2af3db3c">DlnaLogger</a></td></tr>
 <tr class="separator:ad1a9a726ef5546aa12b5f58a2af3db3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab7b7faa9cdf1265f930ee6bef7dcc2b8"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetiny__dlna.html#ab7b7faa9cdf1265f930ee6bef7dcc2b8">direction_str</a> [] = {&quot;in&quot;, &quot;out&quot;}</td></tr>
-<tr class="separator:ab7b7faa9cdf1265f930ee6bef7dcc2b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a471b0516d485c379faed2f266983fc33"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetiny__dlna.html#a471b0516d485c379faed2f266983fc33">datatype_str</a> [] = {&quot;boolean&quot;, &quot;string&quot;, &quot;ui2&quot;, &quot;u2&quot;}</td></tr>
-<tr class="separator:a471b0516d485c379faed2f266983fc33"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a340729a42649b279fdfa96185a9cc3cd"><td class="memItemLeft" align="right" valign="top">constexpr const <a class="el" href="structtiny__dlna_1_1MimeExtension.html">MimeExtension</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetiny__dlna.html#a340729a42649b279fdfa96185a9cc3cd">defaultMimeTable</a> []</td></tr>
 <tr class="separator:a340729a42649b279fdfa96185a9cc3cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a782f756c20c2950e76b5d377df3f3e86"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structtiny__dlna_1_1MimeExtension.html">MimeExtension</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetiny__dlna.html#a782f756c20c2950e76b5d377df3f3e86">mimeTable</a></td></tr>
@@ -349,60 +359,6 @@ Variables</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Enumeration Type Documentation</h2>
-<a id="a65d70e1527559b53691f0dca4c7065a9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a65d70e1527559b53691f0dca4c7065a9">&#9670;&nbsp;</a></span>DataType</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="namespacetiny__dlna.html#a65d70e1527559b53691f0dca4c7065a9">tiny_dlna::DataType</a></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a65d70e1527559b53691f0dca4c7065a9a84e2c64f38f78ba3ea5c905ab5a2da27"></a>boolean&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a65d70e1527559b53691f0dca4c7065a9ab45cffe084dd3d20d928bee85e7b0f21"></a>string&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a65d70e1527559b53691f0dca4c7065a9adf224ff05c34d0549ac8a408a0bb68e1"></a>ui2&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a65d70e1527559b53691f0dca4c7065a9afc46f8e70489b90fa373d93109479ca5"></a>i2&#160;</td><td class="fielddoc"></td></tr>
-</table>
-
-</div>
-</div>
-<a id="a539d83363da4d04dac19bd91c9bacc38"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a539d83363da4d04dac19bd91c9bacc38">&#9670;&nbsp;</a></span>Direction</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="namespacetiny__dlna.html#a539d83363da4d04dac19bd91c9bacc38">tiny_dlna::Direction</a></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a539d83363da4d04dac19bd91c9bacc38aefeb369cccbd560588a756610865664c"></a>In&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a539d83363da4d04dac19bd91c9bacc38a7c147cda9e49590f6abe83d118b7353b"></a>Out&#160;</td><td class="fielddoc"></td></tr>
-</table>
-
-</div>
-</div>
 <a id="a5eabb92538a2ba1397f67b903cb9d35e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5eabb92538a2ba1397f67b903cb9d35e">&#9670;&nbsp;</a></span>DlnaLogLevel</h2>
 
@@ -578,20 +534,6 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a471b0516d485c379faed2f266983fc33"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a471b0516d485c379faed2f266983fc33">&#9670;&nbsp;</a></span>datatype_str</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const char* tiny_dlna::datatype_str[] = {&quot;boolean&quot;, &quot;string&quot;, &quot;ui2&quot;, &quot;u2&quot;}</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="a1d88fd006909da8ab5cd52b0af310b04"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1d88fd006909da8ab5cd52b0af310b04">&#9670;&nbsp;</a></span>DEFAULT_AGENT</h2>
 
@@ -635,20 +577,6 @@ Variables</h2></td></tr>
 <div class="line">    {<span class="stringliteral">&quot;.pdf&quot;</span>, <span class="stringliteral">&quot;application/pdf&quot;</span>}, {<span class="stringliteral">&quot;.zip&quot;</span>, <span class="stringliteral">&quot;application/zip&quot;</span>},</div>
 <div class="line">    {<span class="keyword">nullptr</span>, <span class="keyword">nullptr</span>}}</div>
 </div><!-- fragment -->
-</div>
-</div>
-<a id="ab7b7faa9cdf1265f930ee6bef7dcc2b8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab7b7faa9cdf1265f930ee6bef7dcc2b8">&#9670;&nbsp;</a></span>direction_str</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const char* tiny_dlna::direction_str[] = {&quot;in&quot;, &quot;out&quot;}</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
 </div>
 </div>
 <a id="ad1a9a726ef5546aa12b5f58a2af3db3c"></a>

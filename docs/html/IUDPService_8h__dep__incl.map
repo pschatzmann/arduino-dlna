@@ -1,11 +1,13 @@
 <map id="src/dlna/IUDPService.h" name="src/dlna/IUDPService.h">
-<area shape="rect" id="node1" title=" " alt="" coords="175,5,344,32"/>
-<area shape="rect" id="node2" href="$DLNARequestParser_8h.html" title=" " alt="" coords="5,229,223,256"/>
-<area shape="rect" id="node6" href="$Schedule_8h.html" title=" " alt="" coords="185,80,333,107"/>
-<area shape="rect" id="node7" href="$Scheduler_8h.html" title=" " alt="" coords="71,155,223,181"/>
-<area shape="rect" id="node8" href="$UDPAsyncService_8h.html" title=" " alt="" coords="299,155,529,181"/>
-<area shape="rect" id="node9" href="$UDPService_8h.html" title=" " alt="" coords="465,229,659,256"/>
-<area shape="rect" id="node3" href="$DLNADevice_8h.html" title=" " alt="" coords="154,304,325,331"/>
-<area shape="rect" id="node4" href="$MediaRenderer_8h.html" title=" " alt="" coords="99,379,329,420"/>
-<area shape="rect" id="node5" href="$DLNA_8h.html" title=" " alt="" coords="346,468,439,495"/>
+<area shape="rect" id="node1" title=" " alt="" coords="263,5,433,32"/>
+<area shape="rect" id="node2" href="$DLNAControlPointRequestParser_8h.html" title=" " alt="" coords="183,229,377,271"/>
+<area shape="rect" id="node4" href="$DLNADeviceRequestParser_8h.html" title=" " alt="" coords="5,393,216,435"/>
+<area shape="rect" id="node8" href="$Schedule_8h.html" title=" " alt="" coords="330,80,478,107"/>
+<area shape="rect" id="node9" href="$Scheduler_8h.html" title=" " alt="" coords="103,155,255,181"/>
+<area shape="rect" id="node10" href="$UDPAsyncService_8h.html" title=" " alt="" coords="503,155,734,181"/>
+<area shape="rect" id="node11" href="$UDPService_8h.html" title=" " alt="" coords="639,237,833,263"/>
+<area shape="rect" id="node3" href="$DLNAControlPoint_8h.html" title=" " alt="" coords="168,319,373,345"/>
+<area shape="rect" id="node7" href="$DLNA_8h.html" title=" " alt="" coords="368,647,461,673"/>
+<area shape="rect" id="node5" href="$DLNADevice_8h.html" title=" " alt="" coords="176,483,347,509"/>
+<area shape="rect" id="node6" href="$MediaRenderer_8h.html" title=" " alt="" coords="146,557,377,599"/>
 </map>

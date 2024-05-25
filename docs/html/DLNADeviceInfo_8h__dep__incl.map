@@ -1,9 +1,12 @@
 <map id="src/dlna/DLNADeviceInfo.h" name="src/dlna/DLNADeviceInfo.h">
-<area shape="rect" id="node1" title=" " alt="" coords="147,5,342,32"/>
-<area shape="rect" id="node2" href="$DLNADevice_8h.html" title=" " alt="" coords="111,304,282,331"/>
-<area shape="rect" id="node5" href="$Schedule_8h.html" title=" " alt="" coords="171,80,319,107"/>
-<area shape="rect" id="node6" href="$Scheduler_8h.html" title=" " alt="" coords="267,155,419,181"/>
-<area shape="rect" id="node3" href="$MediaRenderer_8h.html" title=" " alt="" coords="5,379,236,420"/>
-<area shape="rect" id="node4" href="$DLNA_8h.html" title=" " alt="" coords="150,468,243,495"/>
-<area shape="rect" id="node7" href="$DLNARequestParser_8h.html" title=" " alt="" coords="235,229,452,256"/>
+<area shape="rect" id="node1" title=" " alt="" coords="362,5,557,32"/>
+<area shape="rect" id="node2" href="$DLNAControlPoint_8h.html" title=" " alt="" coords="282,319,487,345"/>
+<area shape="rect" id="node4" href="$DLNADevice_8h.html" title=" " alt="" coords="473,483,643,509"/>
+<area shape="rect" id="node7" href="$Schedule_8h.html" title=" " alt="" coords="385,80,533,107"/>
+<area shape="rect" id="node9" href="$Scheduler_8h.html" title=" " alt="" coords="497,155,649,181"/>
+<area shape="rect" id="node10" href="$XMLDeviceParser_8h.html" title=" " alt="" coords="5,155,236,181"/>
+<area shape="rect" id="node3" href="$DLNADeviceRequestParser_8h.html" title=" " alt="" coords="447,393,658,435"/>
+<area shape="rect" id="node6" href="$DLNA_8h.html" title=" " alt="" coords="363,647,457,673"/>
+<area shape="rect" id="node5" href="$MediaRenderer_8h.html" title=" " alt="" coords="448,557,679,599"/>
+<area shape="rect" id="node8" href="$DLNAControlPointRequestParser_8h.html" title=" " alt="" coords="363,229,556,271"/>
 </map>

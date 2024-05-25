@@ -71,7 +71,8 @@ $(function() {
 : <a class="el" href="classtiny__dlna_1_1StrView.html#a5b54f2348ae274eba10caedcf04845b5">tiny_dlna::StrView</a>
 </li>
 <li>scheduler
-: <a class="el" href="classtiny__dlna_1_1DLNADevice.html#a5fb3bb1fc28dbc81fbfaa144167e60e7">tiny_dlna::DLNADevice</a>
+: <a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a62768dadbf31216631308dd4a94b112a">tiny_dlna::DLNAControlPoint</a>
+, <a class="el" href="classtiny__dlna_1_1DLNADevice.html#a5fb3bb1fc28dbc81fbfaa144167e60e7">tiny_dlna::DLNADevice</a>
 </li>
 <li>scheduler_active
 : <a class="el" href="classtiny__dlna_1_1DLNADevice.html#a51ea0d65f49a67ad11ff4519ca022927">tiny_dlna::DLNADevice</a>
@@ -79,19 +80,18 @@ $(function() {
 <li>scp_cb
 : <a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html#a4a3fe462de28ecd980fdb16a64a98372">tiny_dlna::DLNAServiceInfo</a>
 </li>
-<li>scp_url
-: <a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html#a274451cc1ccf59d3a94bb2f965be24ae">tiny_dlna::DLNAServiceInfo</a>
+<li>scpd_url
+: <a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html#a12877943a6f4dc0cac998c11dd818d1b">tiny_dlna::DLNAServiceInfo</a>
 </li>
 <li>search_target
-: <a class="el" href="classtiny__dlna_1_1MSearchReplySchedule.html#a0612c690074fc74241b39f209b79ff84">tiny_dlna::MSearchReplySchedule</a>
+: <a class="el" href="classtiny__dlna_1_1MSearchReplyCP.html#ac2c8140854fd4ce1520b95aa7aeebe04">tiny_dlna::MSearchReplyCP</a>
+, <a class="el" href="classtiny__dlna_1_1MSearchReplySchedule.html#a0612c690074fc74241b39f209b79ff84">tiny_dlna::MSearchReplySchedule</a>
+, <a class="el" href="classtiny__dlna_1_1MSearchSchedule.html#a2b8d502d4bf5349fe26ab656ae85a534">tiny_dlna::MSearchSchedule</a>
 </li>
 <li>send()
 : <a class="el" href="classtiny__dlna_1_1IUDPService.html#aff5760f65e7e32da88170e34ada59c57">tiny_dlna::IUDPService</a>
 , <a class="el" href="classtiny__dlna_1_1UDPAsyncService.html#af41645c5541241a1acba5e8c6cdff9a1">tiny_dlna::UDPAsyncService</a>
 , <a class="el" href="classtiny__dlna_1_1UDPService.html#a4af63e73207857011af39e6f4ecbbfbd">tiny_dlna::UDPService</a>
-</li>
-<li>send_events
-: <a class="el" href="classtiny__dlna_1_1State.html#a293c8a41bd1afaabfc7eee1126aff71c">tiny_dlna::State</a>
 </li>
 <li>serial_number
 : <a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#a407af40786297b6e92a4091a1df3769f">tiny_dlna::DLNADeviceInfo</a>
@@ -114,11 +114,11 @@ $(function() {
 <li>setAcceptsEncoding()
 : <a class="el" href="classtiny__dlna_1_1HttpRequest.html#a69b33da7790990650a6f2cb3804bfc2d">tiny_dlna::HttpRequest</a>
 </li>
+<li>setActive()
+: <a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#afa8dc43da6dd4779fbe6b6fcb6efca42">tiny_dlna::DLNAControlPoint</a>
+</li>
 <li>setAgent()
 : <a class="el" href="classtiny__dlna_1_1HttpRequest.html#a6a6b3306d45a6c6fdd8b2d987a8ef420">tiny_dlna::HttpRequest</a>
-</li>
-<li>setAllActionsCallback()
-: <a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#a9bdedd85395156ddf7d644c6d384dc7a">tiny_dlna::DLNADeviceInfo</a>
 </li>
 <li>setAllocator()
 : <a class="el" href="classtiny__dlna_1_1List.html#afc8376b2dbe0e347d484548dcba11bd5">tiny_dlna::List&lt; T &gt;</a>
@@ -143,17 +143,23 @@ $(function() {
 <li>setConnection()
 : <a class="el" href="classtiny__dlna_1_1HttpRequest.html#a7b9d46d2c50676f5f500a67a0442cdd6">tiny_dlna::HttpRequest</a>
 </li>
+<li>setDestination()
+: <a class="el" href="classtiny__dlna_1_1PostSubscribe.html#a1494980fd4d399bb03a64c9fba5d727d">tiny_dlna::PostSubscribe</a>
+</li>
+<li>setDevice()
+: <a class="el" href="classtiny__dlna_1_1DLNADevice.html#aeb95ac967ac9b1401ac50d12380820a9">tiny_dlna::DLNADevice</a>
+</li>
 <li>setDeviceType()
 : <a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#a2bf911c1f4b7e4a900b9e962b17d023d">tiny_dlna::DLNADeviceInfo</a>
+</li>
+<li>setDuration()
+: <a class="el" href="classtiny__dlna_1_1PostSubscribe.html#a403350ce396516ba3aa0f52f2cfc55e5">tiny_dlna::PostSubscribe</a>
 </li>
 <li>setFriendlyName()
 : <a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#aa223cb1e5a3051d21a33ba27ae35061d">tiny_dlna::DLNADeviceInfo</a>
 </li>
 <li>setHost()
 : <a class="el" href="classtiny__dlna_1_1HttpRequest.html#a85df240e4294483b69e776d06c001d12">tiny_dlna::HttpRequest</a>
-</li>
-<li>setIcon()
-: <a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#afbfcf0dab00072a1555a3b87da61ae02">tiny_dlna::DLNADeviceInfo</a>
 </li>
 <li>setIPAddress()
 : <a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#acf3495d97f2b78feeef7a1454e49de93">tiny_dlna::DLNADeviceInfo</a>
@@ -191,6 +197,9 @@ $(function() {
 <li>setOutput()
 : <a class="el" href="structtiny__dlna_1_1XMLPrinter.html#ac33a7ac306583618bcbd98dcf8303a31">tiny_dlna::XMLPrinter</a>
 </li>
+<li>setParseDevice()
+: <a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a0b374b67a066285b7c028205a17776da">tiny_dlna::DLNAControlPoint</a>
+</li>
 <li>setPostAliveRepeatMs()
 : <a class="el" href="classtiny__dlna_1_1DLNADevice.html#a8605e44dd3ebb14e95c7d6b655700c1c">tiny_dlna::DLNADevice</a>
 </li>
@@ -210,7 +219,7 @@ $(function() {
 : <a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#a0e9659dfa922035e9c06c88c649c4d6f">tiny_dlna::DLNADeviceInfo</a>
 </li>
 <li>setup()
-: <a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html#a35be4b0c07d566c57ae697f4de1c3021">tiny_dlna::DLNAServiceInfo</a>
+: <a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html#a7f54faba8f7706ef57354200c3091d9b">tiny_dlna::DLNAServiceInfo</a>
 </li>
 <li>setupData()
 : <a class="el" href="classtiny__dlna_1_1PostAliveSchedule.html#ae70155ab97a717cebfc3ebb9cbdcdd78">tiny_dlna::PostAliveSchedule</a>
@@ -230,6 +239,9 @@ $(function() {
 </li>
 <li>setUrl()
 : <a class="el" href="classtiny__dlna_1_1Url.html#a6f5ea150b3c3c5ca130b1392713a920d">tiny_dlna::Url</a>
+</li>
+<li>setValid()
+: <a class="el" href="classtiny__dlna_1_1ActionReply.html#a6260705bcdfc8d780f5bee243501d05e">tiny_dlna::ActionReply</a>
 </li>
 <li>setValues()
 : <a class="el" href="classtiny__dlna_1_1HttpReplyHeader.html#a98e757b6a864794ce031abc43938263f">tiny_dlna::HttpReplyHeader</a>
@@ -267,9 +279,6 @@ $(function() {
 <li>statusMessage()
 : <a class="el" href="classtiny__dlna_1_1HttpHeader.html#aef3cacb531c7041c995649fd2a1b39c3">tiny_dlna::HttpHeader</a>
 </li>
-<li>step
-: <a class="el" href="classtiny__dlna_1_1State.html#ad674fbc86f442810b910ab72954c2aa6">tiny_dlna::State</a>
-</li>
 <li>stop()
 : <a class="el" href="classtiny__dlna_1_1Allocator.html#af3e92a21c1dbf85563d29425ba2be543">tiny_dlna::Allocator</a>
 , <a class="el" href="classtiny__dlna_1_1HttpRequest.html#ae5e6e7c493ffcaf7096e9f494e454bc8">tiny_dlna::HttpRequest</a>
@@ -278,10 +287,20 @@ $(function() {
 : <a class="el" href="classtiny__dlna_1_1HttpRequest.html#a90be279e0ebd0877d54dcde02d5e0340">tiny_dlna::HttpRequest</a>
 </li>
 <li>Str()
-: <a class="el" href="classtiny__dlna_1_1Str.html#a679d2042d7a648df0d2cccc4e4f9347e">tiny_dlna::Str</a>
+: <a class="el" href="classtiny__dlna_1_1Str.html#a470fba61cf7ef17c0dbda62fbc9da333">tiny_dlna::Str</a>
+</li>
+<li>str
+: <a class="el" href="classtiny__dlna_1_1StrPrint.html#ab8c21371e0024c1197869fae875f7458">tiny_dlna::StrPrint</a>
+, <a class="el" href="classtiny__dlna_1_1XMLDeviceParser.html#a9d3a0cd1d6d57c627fbe3bd7dcd800a5">tiny_dlna::XMLDeviceParser</a>
+</li>
+<li>strings
+: <a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#a8dd209205243c97ac574fd12725df0c3">tiny_dlna::DLNADeviceInfo</a>
 </li>
 <li>strncmp_i()
 : <a class="el" href="classtiny__dlna_1_1StrView.html#ab0d28be39f13f8cc9a0b0ac6a59db7fb">tiny_dlna::StrView</a>
+</li>
+<li>StrPrint()
+: <a class="el" href="classtiny__dlna_1_1StrPrint.html#adec4edc8b8b3220cd34054bfed9d0aea">tiny_dlna::StrPrint</a>
 </li>
 <li>strToBin()
 : <a class="el" href="classtiny__dlna_1_1Str.html#a993badfe332ef20cc837a58019f22157">tiny_dlna::Str</a>
@@ -289,8 +308,12 @@ $(function() {
 <li>StrView()
 : <a class="el" href="classtiny__dlna_1_1StrView.html#a27820838075a2d520dbb48ce842a0d7c">tiny_dlna::StrView</a>
 </li>
+<li>subscription_id
+: <a class="el" href="classtiny__dlna_1_1NotifyReplyCP.html#a9287087fcd4f2649588ab1ca5af371d7">tiny_dlna::NotifyReplyCP</a>
+</li>
 <li>substring()
 : <a class="el" href="classtiny__dlna_1_1StrView.html#aa96d55fa35dbeaa360e0b2fbbedb457b">tiny_dlna::StrView</a>
+, <a class="el" href="classtiny__dlna_1_1XMLDeviceParser.html#a05e24ad8974c25024a3e8ff0a424c51a">tiny_dlna::XMLDeviceParser</a>
 </li>
 <li>swap()
 : <a class="el" href="classtiny__dlna_1_1List.html#a1f66b464ed68fd477c63479bd648f39d">tiny_dlna::List&lt; T &gt;</a>

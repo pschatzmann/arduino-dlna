@@ -75,7 +75,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Answer to MSearch request.  
+<p>Answer from device to MSearch request by sending a reply.  
  <a href="classtiny__dlna_1_1MSearchReplySchedule.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="Schedule_8h_source.html">Schedule.h</a>&gt;</code></p>
@@ -84,7 +84,7 @@ Inheritance diagram for tiny_dlna::MSearchReplySchedule:</div>
 <div class="dyncontent">
 <div class="center"><img src="classtiny__dlna_1_1MSearchReplySchedule__inherit__graph.png" border="0" usemap="#atiny__dlna_1_1MSearchReplySchedule_inherit__map" alt="Inheritance graph"/></div>
 <map name="atiny__dlna_1_1MSearchReplySchedule_inherit__map" id="atiny__dlna_1_1MSearchReplySchedule_inherit__map">
-<area shape="rect" title="Answer to MSearch request." alt="" coords="5,80,248,107"/>
+<area shape="rect" title="Answer from device to MSearch request by sending a reply." alt="" coords="5,80,248,107"/>
 <area shape="rect" href="structtiny__dlna_1_1Schedule.html" title="An individual Schedule (to send out UDP messages)" alt="" coords="52,5,201,32"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
@@ -93,24 +93,41 @@ Collaboration diagram for tiny_dlna::MSearchReplySchedule:</div>
 <div class="dyncontent">
 <div class="center"><img src="classtiny__dlna_1_1MSearchReplySchedule__coll__graph.png" border="0" usemap="#atiny__dlna_1_1MSearchReplySchedule_coll__map" alt="Collaboration graph"/></div>
 <map name="atiny__dlna_1_1MSearchReplySchedule_coll__map" id="atiny__dlna_1_1MSearchReplySchedule_coll__map">
-<area shape="rect" title="Answer to MSearch request." alt="" coords="112,288,355,315"/>
-<area shape="rect" href="structtiny__dlna_1_1Schedule.html" title="An individual Schedule (to send out UDP messages)" alt="" coords="5,199,155,225"/>
-<area shape="rect" href="classtiny__dlna_1_1Str.html" title="String implementation which keeps the data on the heap. We grow the allocated memory only if the copy..." alt="" coords="179,199,287,225"/>
-<area shape="rect" href="classtiny__dlna_1_1StrView.html" title="A simple wrapper to provide string functions on char*. If the underlying char* is a const we do not a..." alt="" coords="111,102,251,129"/>
-<area shape="rect" href="classtiny__dlna_1_1Vector.html" title=" " alt="" coords="275,95,418,136"/>
-<area shape="rect" href="classtiny__dlna_1_1Allocator.html" title="Memory allocateator which uses malloc." alt="" coords="273,5,421,32"/>
-<area shape="rect" href="structtiny__dlna_1_1IPAddressAndPort.html" title="IP Adress including Port information." alt="" coords="311,199,515,225"/>
+<area shape="rect" title="Answer from device to MSearch request by sending a reply." alt="" coords="2907,626,3149,653"/>
+<area shape="rect" href="structtiny__dlna_1_1Schedule.html" title="An individual Schedule (to send out UDP messages)" alt="" coords="2619,499,2769,526"/>
+<area shape="rect" href="classtiny__dlna_1_1Str.html" title="String implementation which keeps the data on the heap. We grow the allocated memory only if the copy..." alt="" coords="696,525,804,551"/>
+<area shape="rect" href="classtiny__dlna_1_1Url.html" title="URL parser which breaks a full url string up into its individual parts." alt="" coords="1164,525,1273,551"/>
+<area shape="rect" href="classtiny__dlna_1_1Vector.html" title=" " alt="" coords="986,611,1129,652"/>
+<area shape="rect" href="classtiny__dlna_1_1HttpHeader.html" title="In a http request and reply we need to process header information. With this API we can define and qu..." alt="" coords="975,87,1140,114"/>
+<area shape="rect" href="classtiny__dlna_1_1StrView.html" title="A simple wrapper to provide string functions on char*. If the underlying char* is a const we do not a..." alt="" coords="334,525,474,551"/>
+<area shape="rect" href="classtiny__dlna_1_1Vector.html" title=" " alt="" coords="333,357,475,399"/>
+<area shape="rect" href="classtiny__dlna_1_1HttpServer.html" title="A Simple Header only implementation of Http Server that allows the registration of callback functions..." alt="" coords="1669,154,1829,181"/>
+<area shape="rect" href="classtiny__dlna_1_1Allocator.html" title="Memory allocateator which uses malloc." alt="" coords="5,306,153,333"/>
+<area shape="rect" href="classtiny__dlna_1_1Vector.html" title=" " alt="" coords="2305,396,2447,437"/>
+<area shape="rect" href="classtiny__dlna_1_1Vector.html" title=" " alt="" coords="2267,299,2485,340"/>
+<area shape="rect" href="classtiny__dlna_1_1List.html" title=" " alt="" coords="307,19,501,60"/>
+<area shape="rect" href="classtiny__dlna_1_1List.html" title=" " alt="" coords="293,131,515,172"/>
+<area shape="rect" href="classtiny__dlna_1_1List.html" title=" " alt="" coords="279,239,529,280"/>
+<area shape="rect" href="classtiny__dlna_1_1DLNADeviceInfo.html" title="Device Attributes and generation of XML using urn:schemas&#45;upnp&#45;org:device&#45;1&#45;0. We could just reutrn a..." alt="" coords="2596,550,2792,577"/>
+<area shape="rect" href="classtiny__dlna_1_1Icon.html" title="Information about the icon." alt="" coords="2011,459,2129,486"/>
+<area shape="rect" href="structtiny__dlna_1_1XMLPrinter.html" title="Functions to efficiently output XML. XML data contains a lot of redundancy so it is more memory effic..." alt="" coords="2295,575,2457,602"/>
+<area shape="rect" href="classtiny__dlna_1_1DLNAServiceInfo.html" title="Attributes needed for the DLNA Service Definition." alt="" coords="1971,198,2169,225"/>
+<area shape="rect" href="classtiny__dlna_1_1HttpReplyHeader.html" title="Reading and Writing of Http Replys." alt="" coords="1305,89,1508,115"/>
+<area shape="rect" href="classtiny__dlna_1_1HttpRequestHeader.html" title="Reading and writing of Http Requests." alt="" coords="1297,38,1516,65"/>
+<area shape="rect" href="classtiny__dlna_1_1HttpLineReader.html" title="We read a single line. A terminating 0 is added to the string to make it compliant for c string funct..." alt="" coords="655,87,845,114"/>
+<area shape="rect" href="structtiny__dlna_1_1List_1_1Node.html" title=" " alt="" coords="11,59,147,100"/>
+<area shape="rect" href="structtiny__dlna_1_1IPAddressAndPort.html" title="IP Adress including Port information." alt="" coords="2592,727,2796,754"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a1832424505240f1948f20f2cff222401"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MSearchReplySchedule.html#a1832424505240f1948f20f2cff222401">MSearchReplySchedule</a> (<a class="el" href="structtiny__dlna_1_1IPAddressAndPort.html">IPAddressAndPort</a> addr)</td></tr>
-<tr class="separator:a1832424505240f1948f20f2cff222401"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a797d2fc636c7f13f9b1662863aa42650"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MSearchReplySchedule.html#a797d2fc636c7f13f9b1662863aa42650">MSearchReplySchedule</a> (<a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html">DLNADeviceInfo</a> &amp;device, <a class="el" href="structtiny__dlna_1_1IPAddressAndPort.html">IPAddressAndPort</a> addr)</td></tr>
+<tr class="separator:a797d2fc636c7f13f9b1662863aa42650"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a81fb968334e8aab4bc76854c8472885e"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MSearchReplySchedule.html#a81fb968334e8aab4bc76854c8472885e">name</a> () override</td></tr>
 <tr class="separator:a81fb968334e8aab4bc76854c8472885e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a536869661ccd44ddaa3e5c2790292de8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MSearchReplySchedule.html#a536869661ccd44ddaa3e5c2790292de8">process</a> (<a class="el" href="classtiny__dlna_1_1IUDPService.html">IUDPService</a> &amp;udp, <a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html">DLNADeviceInfo</a> &amp;device) override</td></tr>
-<tr class="separator:a536869661ccd44ddaa3e5c2790292de8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a532217a17d9ebeb6ecaea3768889c500"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MSearchReplySchedule.html#a532217a17d9ebeb6ecaea3768889c500">process</a> (<a class="el" href="classtiny__dlna_1_1IUDPService.html">IUDPService</a> &amp;udp) override</td></tr>
+<tr class="separator:a532217a17d9ebeb6ecaea3768889c500"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_structtiny__dlna_1_1Schedule"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_structtiny__dlna_1_1Schedule')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="structtiny__dlna_1_1Schedule.html">tiny_dlna::Schedule</a></td></tr>
 <tr class="memitem:ab68a78be25e74294fbac6839bd5111ae inherit pub_methods_structtiny__dlna_1_1Schedule"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1Schedule.html#ab68a78be25e74294fbac6839bd5111ae">operator bool</a> ()</td></tr>
 <tr class="separator:ab68a78be25e74294fbac6839bd5111ae inherit pub_methods_structtiny__dlna_1_1Schedule"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -121,6 +138,8 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a0612c690074fc74241b39f209b79ff84"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9496e188318e6a0d7396a6b2b0bf7f35"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structtiny__dlna_1_1IPAddressAndPort.html">IPAddressAndPort</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MSearchReplySchedule.html#a9496e188318e6a0d7396a6b2b0bf7f35">address</a></td></tr>
 <tr class="separator:a9496e188318e6a0d7396a6b2b0bf7f35"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa68ce94b02976c77ee45d89a02fb06dd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html">DLNADeviceInfo</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MSearchReplySchedule.html#aa68ce94b02976c77ee45d89a02fb06dd">p_device</a></td></tr>
+<tr class="separator:aa68ce94b02976c77ee45d89a02fb06dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3f029ab2f4c2660456ac3111c203dd8a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MSearchReplySchedule.html#a3f029ab2f4c2660456ac3111c203dd8a">mx</a> = 0</td></tr>
 <tr class="separator:a3f029ab2f4c2660456ac3111c203dd8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_attribs_structtiny__dlna_1_1Schedule"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_structtiny__dlna_1_1Schedule')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="structtiny__dlna_1_1Schedule.html">tiny_dlna::Schedule</a></td></tr>
@@ -137,15 +156,15 @@ Public Attributes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:af574dc17f8ea41f56fac1d588e7e1308"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MSearchReplySchedule.html#af574dc17f8ea41f56fac1d588e7e1308">max_age</a> = 60</td></tr>
+<tr class="memitem:af574dc17f8ea41f56fac1d588e7e1308"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MSearchReplySchedule.html#af574dc17f8ea41f56fac1d588e7e1308">max_age</a> = <a class="el" href="Schedule_8h.html#a22c87c874ff5382c5d082b860110e363">MAX_AGE</a></td></tr>
 <tr class="separator:af574dc17f8ea41f56fac1d588e7e1308"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Answer to MSearch request. </p>
+<div class="textblock"><p>Answer from device to MSearch request by sending a reply. </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a1832424505240f1948f20f2cff222401"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1832424505240f1948f20f2cff222401">&#9670;&nbsp;</a></span>MSearchReplySchedule()</h2>
+<a id="a797d2fc636c7f13f9b1662863aa42650"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a797d2fc636c7f13f9b1662863aa42650">&#9670;&nbsp;</a></span>MSearchReplySchedule()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -156,9 +175,19 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">tiny_dlna::MSearchReplySchedule::MSearchReplySchedule </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structtiny__dlna_1_1IPAddressAndPort.html">IPAddressAndPort</a>&#160;</td>
-          <td class="paramname"><em>addr</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html">DLNADeviceInfo</a> &amp;&#160;</td>
+          <td class="paramname"><em>device</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="structtiny__dlna_1_1IPAddressAndPort.html">IPAddressAndPort</a>&#160;</td>
+          <td class="paramname"><em>addr</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -198,8 +227,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a536869661ccd44ddaa3e5c2790292de8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a536869661ccd44ddaa3e5c2790292de8">&#9670;&nbsp;</a></span>process()</h2>
+<a id="a532217a17d9ebeb6ecaea3768889c500"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a532217a17d9ebeb6ecaea3768889c500">&#9670;&nbsp;</a></span>process()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -211,18 +240,8 @@ Protected Attributes</h2></td></tr>
           <td class="memname">bool tiny_dlna::MSearchReplySchedule::process </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classtiny__dlna_1_1IUDPService.html">IUDPService</a> &amp;&#160;</td>
-          <td class="paramname"><em>udp</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"><em>udp</em></td><td>)</td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html">DLNADeviceInfo</a> &amp;&#160;</td>
-          <td class="paramname"><em>device</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -232,7 +251,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="structtiny__dlna_1_1Schedule.html#a9739f92ce4dd5268aee8d647107b3e06">tiny_dlna::Schedule</a>.</p>
+<p>Reimplemented from <a class="el" href="structtiny__dlna_1_1Schedule.html#a914855b088ede397dc656784b8cf9875">tiny_dlna::Schedule</a>.</p>
 
 </div>
 </div>
@@ -261,7 +280,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int tiny_dlna::MSearchReplySchedule::max_age = 60</td>
+          <td class="memname">int tiny_dlna::MSearchReplySchedule::max_age = <a class="el" href="Schedule_8h.html#a22c87c874ff5382c5d082b860110e363">MAX_AGE</a></td>
         </tr>
       </table>
   </td>
@@ -281,6 +300,20 @@ Protected Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">int tiny_dlna::MSearchReplySchedule::mx = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa68ce94b02976c77ee45d89a02fb06dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa68ce94b02976c77ee45d89a02fb06dd">&#9670;&nbsp;</a></span>p_device</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html">DLNADeviceInfo</a>* tiny_dlna::MSearchReplySchedule::p_device</td>
         </tr>
       </table>
 </div><div class="memdoc">

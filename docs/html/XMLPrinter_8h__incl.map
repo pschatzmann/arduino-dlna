@@ -1,15 +1,15 @@
-<map id="src/dlna/XMLPrinter.h" name="src/dlna/XMLPrinter.h">
-<area shape="rect" id="node1" title=" " alt="" coords="74,5,233,32"/>
+<map id="src/dlna/xml/XMLPrinter.h" name="src/dlna/xml/XMLPrinter.h">
+<area shape="rect" id="node1" title=" " alt="" coords="102,5,290,32"/>
 <area shape="rect" id="node2" title=" " alt="" coords="5,80,69,107"/>
-<area shape="rect" id="node3" title=" " alt="" coords="65,155,140,181"/>
-<area shape="rect" id="node4" href="$StrView_8h.html" title=" " alt="" coords="291,229,413,256"/>
-<area shape="rect" id="node8" href="$Vector_8h.html" title=" " alt="" coords="144,80,256,107"/>
-<area shape="rect" id="node5" title=" " alt="" coords="225,304,292,331"/>
-<area shape="rect" id="node6" title=" " alt="" coords="317,304,387,331"/>
-<area shape="rect" id="node7" title=" " alt="" coords="411,304,509,331"/>
-<area shape="rect" id="node9" href="$Allocator_8h.html" title=" " alt="" coords="164,155,255,181"/>
-<area shape="rect" id="node10" title=" " alt="" coords="57,229,127,256"/>
-<area shape="rect" id="node11" href="$Logger_8h.html" title=" " alt="" coords="152,229,267,256"/>
-<area shape="rect" id="node12" title=" " alt="" coords="17,304,92,331"/>
-<area shape="rect" id="node13" title=" " alt="" coords="117,304,201,331"/>
+<area shape="rect" id="node3" title=" " alt="" coords="205,155,280,181"/>
+<area shape="rect" id="node4" href="$StrView_8h.html" title=" " alt="" coords="281,80,402,107"/>
+<area shape="rect" id="node8" href="$Vector_8h.html" title=" " alt="" coords="93,80,205,107"/>
+<area shape="rect" id="node5" title=" " alt="" coords="263,304,329,331"/>
+<area shape="rect" id="node6" title=" " alt="" coords="354,304,425,331"/>
+<area shape="rect" id="node7" title=" " alt="" coords="406,155,503,181"/>
+<area shape="rect" id="node9" href="$Allocator_8h.html" title=" " alt="" coords="91,155,181,181"/>
+<area shape="rect" id="node10" title=" " alt="" coords="59,229,130,256"/>
+<area shape="rect" id="node11" href="$Logger_8h.html" title=" " alt="" coords="155,229,269,256"/>
+<area shape="rect" id="node12" title=" " alt="" coords="164,304,239,331"/>
+<area shape="rect" id="node13" title=" " alt="" coords="55,304,139,331"/>
 </map>
