@@ -1,8 +1,8 @@
 #pragma once
 
 #include "DLNAControlPointRequestParser.h"
+#include "DLNADeviceMgr.h"
 #include "DLNADevice.h"
-#include "DLNADeviceInfo.h"
 #include "Schedule.h"
 #include "Scheduler.h"
 #include "basic/StrPrint.h"
@@ -12,8 +12,8 @@
 
 namespace tiny_dlna {
 
-class DLNAControlPoint;
-DLNAControlPoint* selfDLNAControlPoint = nullptr;
+class DLNAControlPointMgr;
+DLNAControlPointMgr* selfDLNAControlPoint = nullptr;
 
 /**
  * @brief Setup of a Basic DLNA Control Point.
@@ -29,9 +29,9 @@ DLNAControlPoint* selfDLNAControlPoint = nullptr;
  *
  * @author Phil Schatzmann
  */
-class DLNAControlPoint {
+class DLNAControlPointMgr {
  public:
-  DLNAControlPoint() { selfDLNAControlPoint = this; }
+  DLNAControlPointMgr() { selfDLNAControlPoint = this; }
   /// Requests the parsing of the device information
   void setParseDevice(bool flag) { is_parse_device = flag; }
 
@@ -150,10 +150,10 @@ version: locate service of a given type
   }
 
   /// Provides the device information by index
-  DLNADeviceInfo& getDevice(int deviceIdx = 0) { return devices[deviceIdx]; }
+  DLNADevice& getDevice(int deviceIdx = 0) { return devices[deviceIdx]; }
 
   /// Provides the device for a service
-  DLNADeviceInfo& getDevice(DLNAServiceInfo& service) {
+  DLNADevice& getDevice(DLNAServiceInfo& service) {
     for (auto& dev : devices) {
       for (auto& srv : dev.getServices()) {
         if (srv == srv) return dev;
@@ -163,7 +163,7 @@ version: locate service of a given type
   }
 
   /// Get a device for a Url
-  DLNADeviceInfo& getDevice(Url location) {
+  DLNADevice& getDevice(Url location) {
     for (auto& dev : devices) {
       if (dev.getDeviceURL() == location) {
         return dev;
@@ -173,7 +173,7 @@ version: locate service of a given type
   }
 
   /// Adds a new device
-  bool addDevice(DLNADeviceInfo dev) {
+  bool addDevice(DLNADevice dev) {
     dev.updateTimestamp();
     for (auto& existing_device : devices) {
       if (dev.getUDN() == existing_device.getUDN()) {
@@ -188,7 +188,7 @@ version: locate service of a given type
 
   /// Adds the device from the device xml url if it does not already exist
   bool addDevice(Url url) {
-    DLNADeviceInfo& device = getDevice(url);
+    DLNADevice& device = getDevice(url);
     if (device != NO_DEVICE){
       // device already exists
       device.setActive(true);
@@ -214,7 +214,7 @@ version: locate service of a given type
     req.stop();
     
     // parse xml
-    DLNADeviceInfo new_device;
+    DLNADevice new_device;
     XMLDeviceParser parser;
     parser.parse(new_device, xml.c_str());
     devices.push_back(new_device);
@@ -232,13 +232,13 @@ version: locate service of a given type
   Scheduler scheduler;
   IUDPService* p_udp = nullptr;
   HttpRequest* p_http = nullptr;
-  Vector<DLNADeviceInfo> devices;
+  Vector<DLNADevice> devices;
   // Vector<StateValue> state;
   Vector<ActionRequest> actions;
   XMLPrinter xml;
   bool is_active = false;
   bool is_parse_device = false;
-  DLNADeviceInfo NO_DEVICE{false};
+  DLNADevice NO_DEVICE{false};
   const char* search_target;
 
   /// Processes a NotifyReplyCP message
@@ -336,7 +336,7 @@ version: locate service of a given type
 
   ActionReply postAction(ActionRequest& action) {
     DLNAServiceInfo& service = *action.p_service;
-    DLNADeviceInfo& device = getDevice(service);
+    DLNADevice& device = getDevice(service);
 
     // create XML
     StrPrint str_print;

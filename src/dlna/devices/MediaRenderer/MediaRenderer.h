@@ -1,6 +1,6 @@
 #include "conmgr.h"
 #include "control.h"
-#include "dlna/DLNADevice.h"
+#include "dlna/DLNADeviceMgr.h"
 #include "transport.h"
 
 namespace tiny_dlna {
@@ -9,14 +9,14 @@ namespace tiny_dlna {
  * @brief MediaRenderer DLNA Device
  * @author Phil Schatzmann
  */
-class MediaRenderer : public DLNADevice {
+class MediaRenderer : public DLNADeviceMgr {
  public:
  protected:
   // Renderer, Player or Server
   const char* st = "urn:schemas-upnp-org:device:MediaRenderer:1";
   const char* usn = "uuid:09349455-2941-4cf7-9847-1dd5ab210e97";
 
-  void setupServices(DLNADeviceInfo& device) override {
+  void setupServices(DLNADevice& device) override {
     DlnaLogger.log(DlnaInfo, "MediaRenderer::setupServices");
     device.clear();
     device.setUDN(usn);

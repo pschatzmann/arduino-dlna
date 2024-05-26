@@ -4,8 +4,8 @@
 
 const char* ssid = "your SSID";
 const char* password = "your Password";
-DLNADeviceInfo deviceInfo; // information about your device
-DLNADevice device;         // basic device API
+DLNADevice deviceInfo; // information about your device
+DLNADeviceMgr device;         // basic device API
 WiFiServer wifi;           // Networking Server
 HttpServer server(wifi);   // Webserver
 UDPAsyncService udp

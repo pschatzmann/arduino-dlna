@@ -4,7 +4,7 @@
 
 const char* ssid = "";
 const char* password = "";
-DLNAControlPoint cp;
+DLNAControlPointMgr cp;
 WiFiClient client;
 HttpRequest http(client);
 UDPAsyncService udp;
@@ -26,7 +26,7 @@ void setupWifi() {
 
 // do not discover device but just use some hardcoded values
 void setupDevice() {
-  DLNADeviceInfo device;
+  DLNADevice device;
   device.setIPAddress(WiFi.localIP());
   device.setDeviceType(device_type);
   device.setBaseURL(baseUrl);

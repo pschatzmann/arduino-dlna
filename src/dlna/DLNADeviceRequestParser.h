@@ -2,7 +2,7 @@
 
 #include "IUDPService.h"
 #include "Scheduler.h"
-#include "DLNAControlPoint.h"
+#include "DLNAControlPointMgr.h"
 
 namespace tiny_dlna {
 
@@ -17,7 +17,7 @@ class DLNADeviceRequestParser {
   // add ST that we consider as valid for the actual device
   void addMSearchST(const char* accept) { mx_vector.push_back(accept); }
 
-  Schedule* parse(DLNADeviceInfo& device, RequestData& req) {
+  Schedule* parse(DLNADevice& device, RequestData& req) {
     p_device = &device;
     Schedule result;
     if (req.data.contains("M-SEARCH")) {
@@ -42,7 +42,7 @@ class DLNADeviceRequestParser {
 
  protected:
   Vector<const char*> mx_vector;
-  DLNADeviceInfo* p_device = nullptr;
+  DLNADevice* p_device = nullptr;
 
   Schedule* processMSearch(RequestData& req) {
     assert(p_device != nullptr);

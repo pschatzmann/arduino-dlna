@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Arduino.h"  // for millis
-#include "DLNADeviceInfo.h"
+#include "DLNADevice.h"
 #include "IUDPService.h"
 #include "Schedule.h"
 

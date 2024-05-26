@@ -1,6 +1,6 @@
 #pragma once
-#include "dlna/DLNAControlPoint.h"
-#include "dlna/DLNADevice.h"
+#include "dlna/DLNAControlPointMgr.h"
+#include "dlna/DLNADeviceMgr.h"
 #include "dlna/devices/MediaRenderer/MediaRenderer.h"
 #include "dlna/udp/UDPService.h"
 #ifndef IS_DESKTOP

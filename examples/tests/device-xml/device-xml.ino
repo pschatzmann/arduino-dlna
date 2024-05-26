@@ -1,7 +1,7 @@
 // Test XML generation for Device
 #include "DLNA.h"
 
-DLNADeviceInfo device;
+DLNADevice device;
 
 void setupDevice() {
   device.setBaseURL("http:/localhost:80/test");

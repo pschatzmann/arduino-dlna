@@ -4,7 +4,7 @@
 const char* ssid = "";
 const char* password = "";
 MediaRenderer mr;
-DLNADeviceInfo device;
+DLNADevice device;
 WiFiServer wifi;
 HttpServer server(wifi);
 UDPAsyncService udp;
