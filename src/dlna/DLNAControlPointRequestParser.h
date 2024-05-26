@@ -19,6 +19,10 @@ class DLNAControlPointRequestParser {
       return parseNotifyReply(req);
     } else if (req.data.startsWith("HTTP/1.1 200 OK")) {
       return parseMSearchReply(req);
+    } else if (req.data.startsWith("M-SEARCH")) {
+      DlnaLogger.log(DlnaDebug, "M-SEARCH request ignored");
+    } else {
+      DlnaLogger.log(DlnaInfo, "Not handled: %s", req.data);
     }
     return nullptr;
   }
@@ -35,23 +39,27 @@ class DLNAControlPointRequestParser {
   NotifyReplyCP* parseNotifyReply(RequestData& req) {
     NotifyReplyCP* result = new NotifyReplyCP();
     parse(req.data, "NOTIFY:", result->delivery_path);
-    parse(req.data, "HOST:", result->delivery_host_and_port);
+    parse(req.data, "NTS:", result->nts);
+    parse(req.data, "NT:", result->search_target);
+    parse(req.data, "Location:", result->location);
+    parse(req.data, "USN:", result->usn);
+    parse(req.data, "Host:", result->delivery_host_and_port);
     parse(req.data, "SID:", result->subscription_id);
     parse(req.data, "SEQ:", result->event_key);
     parse(req.data, "<e:propertyset", result->xml, "</e:propertyset>");
     return result;
   }
-  
+
   bool parse(Str& in, const char* tag, Str& result, const char* end = "\r\n") {
     result.clearAll();
-    int start = in.indexOf(tag);
-    if (start >= 0) {
-      start += strlen(tag);
-      int end = in.indexOf(end, start);
-      if (end < 0) end = in.indexOf("\n", start);
-      if (end >= 0) {
-        result.substring(in.c_str(), start, end);
-        DlnaLogger.log(DlnaDebug, "%s substring (%d,%d)->%s", tag, start, end,
+    int start_pos = in.indexOf(tag);
+    if (start_pos >= 0) {
+      int end_pos = in.indexOf(end, start_pos);
+      start_pos += strlen(tag);
+      if (end_pos < 0) end_pos = in.indexOf("\n", start_pos);
+      if (end_pos >= 0) {
+        result.substring(in.c_str(), start_pos, end_pos);
+        DlnaLogger.log(DlnaDebug, "%s substring (%d,%d)->%s", tag, start_pos, end_pos,
                        result.c_str());
 
         result.trim();

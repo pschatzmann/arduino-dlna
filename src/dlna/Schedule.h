@@ -9,18 +9,19 @@
 
 namespace tiny_dlna {
 
+
 /**
  * @brief An individual Schedule (to send out UDP messages)
  * @author Phil Schatzmann
  */
 struct Schedule {
-  int id = 0;
+  //int id = 0;
   // scheduled next execution time
-  uint32_t time = 0;
+  uint64_t time = 0;
   // repeat every n ms
   uint32_t repeat_ms = 0;
   // repeat until;
-  uint32_t end_time = 0;
+  uint64_t end_time = 0;
   // schedle is active
   bool active = false;
 
@@ -45,7 +46,7 @@ class MSearchSchedule : public Schedule {
 
   bool process(IUDPService &udp) override {
     // we keep the data on the stack
-    DlnaLogger.log(DlnaInfo, "Sending %s for %s to %s", name(), search_target,
+    DlnaLogger.log(DlnaDebug, "Sending %s for %s to %s", name(), search_target,
                    address.toString());
 
     char buffer[MAX_TMP_SIZE] = {0};
@@ -53,9 +54,10 @@ class MSearchSchedule : public Schedule {
         "M-SEARCH * HTTP/1.1\r\n"
         "HOST: %s\r\n"
         "MAN: \"ssdp:discover\"\r\n"
-        "MX: %dr\n"
+        "MX: %d\r\n"
         "ST: %s\r\n\r\n";
-    int n = snprintf(buffer, MAX_TMP_SIZE, tmp, address.toString(), max_age, search_target);
+    int n = snprintf(buffer, MAX_TMP_SIZE, tmp, address.toString(), max_age,
+                     search_target);
     assert(n < MAX_TMP_SIZE);
     DlnaLogger.log(DlnaDebug, "sending: %s", buffer);
     udp.send(address, (uint8_t *)buffer, n);
@@ -122,16 +124,35 @@ class MSearchReplyCP : public Schedule {
   Str location;
   Str usn;
   Str search_target;
+
+  bool process(IUDPService &udp) override {
+    DlnaLogger.log(DlnaInfo, "-> %s not processed", search_target.c_str());
+    return true;
+  }
+
 };
 
-class NotifyReplyCP : public Schedule {
+class NotifyReplyCP : public MSearchReplyCP {
  public:
   const char *name() override { return "NotifyReplyCP"; }
+  Str nts;
   Str delivery_host_and_port;
   Str delivery_path;
   Str subscription_id;
   Str event_key;
   Str xml;
+
+  // callback 
+  std::function<bool(NotifyReplyCP &ref)> callback;
+
+  bool process(IUDPService &udp) override {
+    if (callback(*this)){
+      return true;
+    }
+
+    DlnaLogger.log(DlnaInfo, "-> %s not processed", nts.c_str());
+    return true;
+  }
 };
 
 /**

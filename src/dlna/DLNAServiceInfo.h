@@ -15,7 +15,7 @@ typedef void (*http_callback)(HttpServer* server, const char* requestPath,
  */
 class DLNAServiceInfo {
  public:
-  DLNAServiceInfo(bool flag = true) { is_ok = flag; }
+  DLNAServiceInfo(bool flag = true) { is_active = flag; }
   void setup(const char* type, const char* id, const char* scp,
              http_callback cbScp, const char* control, http_callback cbControl,
              const char* event, http_callback cbEvent) {
@@ -38,8 +38,8 @@ class DLNAServiceInfo {
   http_callback scp_cb = nullptr;
   http_callback control_cb = nullptr;
   http_callback event_sub_cb = nullptr;
-  bool is_ok = true;
-  operator bool() { return is_ok; }
+  bool is_active = true;
+  operator bool() { return is_active; }
 };
 
 }  // namespace tiny_dlna

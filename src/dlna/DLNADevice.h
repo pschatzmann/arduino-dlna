@@ -83,7 +83,7 @@ class DLNADevice {
     scheduler.add(bye);
 
     // execute scheduler for 2 seconds
-    uint32_t end = millis() + 2000;
+    uint64_t end = millis() + 2000;
     while (millis() < end) {
       scheduler.execute(*p_udp);
     }

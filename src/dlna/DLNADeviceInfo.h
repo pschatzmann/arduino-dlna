@@ -22,9 +22,10 @@ namespace tiny_dlna {
 
 class DLNADeviceInfo {
   friend class XMLDeviceParser;
+  friend class DLNAControlPoint;
 
  public:
-  DLNADeviceInfo(bool ok = true) { is_ok = true; }
+  DLNADeviceInfo(bool ok = true) { is_active = true; }
   /// renderes the device xml
   void print(Print& out) {
     xml.setOutput(out);
@@ -86,8 +87,6 @@ class DLNADeviceInfo {
 
   void setNS(const char* ns) { this->ns = ns; }
   const char* getNS() { return ns; }
-
-  /// Defines the base URL
   void setFriendlyName(const char* name) { friendly_name = name; }
   const char* getFriendlyName() { return friendly_name; }
   void setManufacturer(const char* man) { manufacturer = man; }
@@ -143,7 +142,7 @@ class DLNADeviceInfo {
   Icon getIcon(int idx = 0) { return icons[idx]; }
 
 
-  operator bool() { return is_ok; }
+  operator bool() { return is_active; }
 
   /// Adds a string to the string repository
   const char* addString(char* string){
@@ -160,9 +159,13 @@ class DLNADeviceInfo {
     return timestamp;
   }
 
+  void setActive(bool flag){
+    is_active = flag;
+  }
+
  protected:
-  uint32_t timestamp = 0;
-  bool is_ok = true;
+  uint64_t timestamp = 0;
+  bool is_active = true;
   XMLPrinter xml;
   Url base_url{"http://localhost:9876/dlna"};
   Url device_url;

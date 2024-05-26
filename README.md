@@ -3,7 +3,7 @@
 
 ## Brief
 
-This example demonstrates the process of running a UPnP/DLNA __media renderer__ in Arduino.
+This library provides the functionality to implement a UPnP/DLNA [device](https://pschatzmann.github.io/arduino-dlna/docs/html/classtiny__dlna_1_1DLNADevice.html) and [control point](https://pschatzmann.github.io/arduino-dlna/docs/html/classtiny__dlna_1_1DLNAControlPoint.html) in Arduino.
 
 The Digital Living Network Alliance (DLNA) aims to establish the interoperability among PCs, consumer appliances, and mobile devices in wireless networks and wired networks. The purpose is to provide a solution for sharing between digital media and content services.
 
@@ -13,8 +13,6 @@ Reference Documentation is hard to find. Therfore I am providing some valuable l
 - [UPnP Device Architecture Tutorial](
 https://embeddedinn.wordpress.com/tutorials/upnp-device-architecture/)
 - [UPnP Device Architecture](http://www.upnp.org/specs/arch/UPnP-arch-DeviceArchitecture-v1.1.pdf)
-
-https://openconnectivity.org/upnp-specs/UPnP-arch-DeviceArchitecture-v1.1.pdf
 
 I was struggling quite a bit to choose the right approach to implement something like this in Arduino. 
 On the desktop the the functionality can be provided with the help of the following projects:
@@ -39,4 +37,5 @@ Developping and debugging on a microcontroller is quite tedious: therefore this 
 
 ## Project Documentation
 
-- [Class Documentation](https://pschatzmann.github.io/arduino-dlna-server/docs/html/annotated.html)
+- [Wiki](https://github.com/pschatzmann/arduino-dlna/wiki)
+- [Class Documentation](https://pschatzmann.github.io/arduino-dlna/docs/html/annotated.html)

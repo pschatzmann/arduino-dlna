@@ -12,6 +12,9 @@
 
 namespace tiny_dlna {
 
+class DLNAControlPoint;
+DLNAControlPoint* selfDLNAControlPoint = nullptr;
+
 /**
  * @brief Setup of a Basic DLNA Control Point.
  * The control point
@@ -28,6 +31,7 @@ namespace tiny_dlna {
  */
 class DLNAControlPoint {
  public:
+  DLNAControlPoint() { selfDLNAControlPoint = this; }
   /// Requests the parsing of the device information
   void setParseDevice(bool flag) { is_parse_device = flag; }
 
@@ -47,7 +51,8 @@ version: locate service of a given type
              const char* searchTarget = "ssdp:all", uint32_t processingTime = 0,
              bool stopWhenFound = true) {
     DlnaLogger.log(DlnaInfo, "DLNADevice::begin");
-
+    search_target = searchTarget;
+    is_active = true;
     p_udp = &udp;
     p_http = &http;
 
@@ -58,20 +63,22 @@ version: locate service of a given type
     }
 
     // Send MSearch request via UDP
-    scheduler.add(new MSearchSchedule(DLNABroadcastAddress, searchTarget));
+    MSearchSchedule* search =
+        new MSearchSchedule(DLNABroadcastAddress, searchTarget);
+    search->end_time = millis() + 3000;
+    search->repeat_ms = 1000;
+    scheduler.add(search);
 
     // if processingTime > 0 we do some loop processing already here
-    uint32_t end = millis() + processingTime;
+    uint64_t end = millis() + processingTime;
     while (millis() < end) {
       if (stopWhenFound && devices.size() > 0) break;
       loop();
     }
 
-    is_active = true;
-    DlnaLogger.log(DlnaInfo,
-                   "Control Point successfully started with %d devices found",
+    DlnaLogger.log(DlnaInfo, "Control Point started with %d devices found",
                    devices.size());
-    return true;
+    return devices.size() > 0;
   }
 
   /// Stops the processing and releases the resources
@@ -115,6 +122,11 @@ version: locate service of a given type
     if (req) {
       Schedule* schedule = parser.parse(req);
       if (schedule != nullptr) {
+        // handle NotifyReplyCP
+        if (StrView(schedule->name()).equals("NotifyReplyCP")) {
+          NotifyReplyCP& notify_schedule = *(NotifyReplyCP*)schedule;
+          notify_schedule.callback = processDevice;
+        }
         scheduler.add(schedule);
       }
     }
@@ -140,35 +152,74 @@ version: locate service of a given type
   /// Provides the device information by index
   DLNADeviceInfo& getDevice(int deviceIdx = 0) { return devices[deviceIdx]; }
 
+  /// Provides the device for a service
   DLNADeviceInfo& getDevice(DLNAServiceInfo& service) {
     for (auto& dev : devices) {
       for (auto& srv : dev.getServices()) {
         if (srv == srv) return dev;
       }
     }
-    return no_device;
+    return NO_DEVICE;
   }
 
+  /// Get a device for a Url
   DLNADeviceInfo& getDevice(Url location) {
     for (auto& dev : devices) {
       if (dev.getDeviceURL() == location) {
         return dev;
       }
     }
-    return no_device;
+    return NO_DEVICE;
   }
 
   /// Adds a new device
-  void addDevice(DLNADeviceInfo dev) {
+  bool addDevice(DLNADeviceInfo dev) {
     dev.updateTimestamp();
     for (auto& existing_device : devices) {
       if (dev.getUDN() == existing_device.getUDN()) {
         DlnaLogger.log(DlnaInfo, "Device '%s' already exists", dev.getUDN());
-        return;
+        return false;
       }
     }
     DlnaLogger.log(DlnaInfo, "Device '%s' has been added", dev.getUDN());
     devices.push_back(dev);
+    return true;
+  }
+
+  /// Adds the device from the device xml url if it does not already exist
+  bool addDevice(Url url) {
+    DLNADeviceInfo& device = getDevice(url);
+    if (device != NO_DEVICE){
+      // device already exists
+      device.setActive(true);
+      return true;
+    }
+    // http get
+    StrPrint xml;
+    HttpRequest req;
+    int rc = req.get(url, "text/xml");
+
+    if (rc != 200) {
+      DlnaLogger.log(DlnaError, "Http get to '%s' failed with %d", url.url(), rc);
+      req.stop();
+      return false;
+    }
+    // get xml
+    uint8_t buffer[512];
+    while(true){
+      int len = req.read(buffer, 512);
+      if (len == 0) break;
+      xml.write(buffer, len);
+    }
+    req.stop();
+    
+    // parse xml
+    DLNADeviceInfo new_device;
+    XMLDeviceParser parser;
+    parser.parse(new_device, xml.c_str());
+    devices.push_back(new_device);
+    new_device.device_url = url;
+    return true;
   }
 
   /// We can activate/deactivate the scheduler
@@ -187,7 +238,50 @@ version: locate service of a given type
   XMLPrinter xml;
   bool is_active = false;
   bool is_parse_device = false;
-  DLNADeviceInfo no_device{false};
+  DLNADeviceInfo NO_DEVICE{false};
+  const char* search_target;
+
+  /// Processes a NotifyReplyCP message
+  static bool processDevice(NotifyReplyCP& data) {
+    Str& nts = data.nts;
+    if (nts.equals("ssdp:byebye")) {
+      selfDLNAControlPoint->processBye(nts);
+      return true;
+    }
+    if (nts.equals("ssdp:alive")) {
+      bool select = selfDLNAControlPoint->matches(data.usn.c_str());
+      DlnaLogger.log(DlnaInfo, "addDevice: %s -> %s", data.usn.c_str(),
+                     select ? "added" : "filtered");
+      Url url{data.location.c_str()};
+      selfDLNAControlPoint->addDevice(url);
+      return true;
+    }
+    return false;
+  }
+
+  /// checks if the usn contains the search target
+  bool matches(const char* usn) {
+    if (StrView(search_target).equals("ssdp:all")) return true;
+    return StrView(usn).contains(search_target);
+  }
+
+  /// processes a bye-bye message
+  bool processBye(Str& usn) {
+    for (auto& dev : devices) {
+      if (usn.startsWith(dev.getUDN())) {
+        for (auto& srv : dev.getServices()) {
+          srv.is_active = false;
+          if (usn.endsWith(srv.service_type)) {
+            if (srv.is_active) {
+              DlnaLogger.log(DlnaInfo, "removeDevice: %s", usn);
+              srv.is_active = false;
+            }
+          }
+        }
+      }
+    }
+    return false;
+  }
 
   /**
    * Creates the Action Soap XML request. E.g
@@ -262,7 +356,7 @@ version: locate service of a given type
 
     p_http->request().put("SOAPACTION", action_str.c_str());
 
-    // crate control url 
+    // crate control url
     char url_buffer[200];
     StrView url_str{url_buffer, 200};
     url_str = device.getBaseURL().url();
@@ -270,16 +364,17 @@ version: locate service of a given type
     Url post_url{url_str.c_str()};
 
     // post the request
-    int rc = p_http->post(post_url, "text/xml", str_print.c_str(), str_print.length());
+    int rc = p_http->post(post_url, "text/xml", str_print.c_str(),
+                          str_print.length());
     DlnaLogger.log(DlnaInfo, "==> %d", rc);
 
     // receive result
     str_print.reset();
     uint8_t buffer[200];
-    while(p_http->client()->available()){
+    while (p_http->client()->available()) {
       int len = p_http->client()->read(buffer, 200);
       str_print.write(buffer, len);
-    } 
+    }
 
     // log result
     DlnaLogger.log(DlnaInfo, str_print.c_str());
@@ -288,7 +383,6 @@ version: locate service of a given type
     ActionReply result(rc == 200);
     return result;
   }
-
 };
 
 }  // namespace tiny_dlna
