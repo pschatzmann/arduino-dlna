@@ -349,6 +349,7 @@ class StrView {
 
   /// checks if the indicated string is equal to the current string
   virtual bool operator==(const char* alt) const {
+    if (alt == nullptr) return len == 0;;
     return strncmp(this->chars, alt, this->len) == 0;
   }
 
