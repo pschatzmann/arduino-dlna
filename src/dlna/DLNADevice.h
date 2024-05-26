@@ -30,6 +30,8 @@ class DLNADevice {
 
  public:
   DLNADevice(bool ok = true) { is_active = true; }
+  ~DLNADevice() { DlnaLogger.log(DlnaDebug, "~DLNADevice()"); }
+
   /// renderes the device xml
   void print(Print& out) {
     xml.setOutput(out);
@@ -50,25 +52,21 @@ class DLNADevice {
   const char* getUDN() { return udn; }
 
   /// Defines the base url
-  void setBaseURL(Url url) { base_url = url; }
+  void setBaseURL(const char* url) { base_url = url; }
 
   /// Provides the base url
-  Url& getBaseURL() {
+  const char* getBaseURL() {
     // replace localhost url
-    if (StrView(base_url.host()).contains("localhost")) {
-      String url_str;
-      url_str = base_url.url();
-      url_str.replace("localhost", getIPStr());
-      Url new_url{url_str.c_str()};
-      base_url = new_url;
-    }
+    // if (base_url.contains("localhost")) {
+    //   base_url.replace("localhost", getIPStr());
+    // }
     return base_url;
   }
 
   /// This method returns base url/device.xml
   Url& getDeviceURL() {
     if (!device_url) {
-      Str str = getBaseURL().url();
+      Str str = getBaseURL();
       if (!str.endsWith("/")) str += "/";
       str += "device.xml";
       Url new_url(str.c_str());
@@ -126,7 +124,6 @@ class DLNADevice {
 
   void clear() {
     services.clear();
-    strings.clear();
     udn = nullptr;
     ns = nullptr;
     device_type = nullptr;
@@ -147,9 +144,6 @@ class DLNADevice {
 
   operator bool() { return is_active; }
 
-  /// Adds a string to the string repository
-  const char* addString(char* string) { return strings.add(string); }
-
   /// Update the timestamp
   void updateTimestamp() { timestamp = millis(); }
 
@@ -158,17 +152,15 @@ class DLNADevice {
 
   void setActive(bool flag) { is_active = flag; }
 
-  StringRegistry& getStringRegistry() { return strings; }
-
  protected:
   uint64_t timestamp = 0;
   bool is_active = true;
   XMLPrinter xml;
-  Url base_url{"http://localhost:9876/dlna"};
   Url device_url;
   IPAddress localhost;
   int version_major = 1;
   int version_minor = 0;
+  const char* base_url = "http://localhost:9876/dlna";
   const char* udn = "uuid:09349455-2941-4cf7-9847-0dd5ab210e97";
   const char* ns = "xmlns=\"urn:schemas-upnp-org:device-1-0\"";
   const char* device_type = nullptr;
@@ -184,13 +176,12 @@ class DLNADevice {
   Icon icon;
   Vector<DLNAServiceInfo> services;
   Vector<Icon> icons;
-  StringRegistry strings;
 
   size_t printRoot() {
     size_t result = 0;
     auto printSpecVersionB = std::bind(&DLNADevice::printSpecVersion, this);
     result += xml.printNode("specVersion", printSpecVersionB);
-    result += xml.printNode("URLBase", base_url.url());
+    result += xml.printNode("URLBase", base_url);
     auto printDeviceB = std::bind(&DLNADevice::printDevice, this);
     result += xml.printNode("device", printDeviceB);
     return result;
@@ -241,11 +232,11 @@ class DLNADevice {
     result += xml.printNode("serviceType", service->service_type);
     result += xml.printNode("serviceId", service->service_id);
     result += xml.printNode("SCPDURL",
-                            url.buildPath(base_url.path(), service->scpd_url));
+                            url.buildPath(base_url, service->scpd_url));
     result += xml.printNode(
-        "controlURL", url.buildPath(base_url.path(), service->control_url));
+        "controlURL", url.buildPath(base_url, service->control_url));
     result += xml.printNode(
-        "eventSubURL", url.buildPath(base_url.path(), service->event_sub_url));
+        "eventSubURL", url.buildPath(base_url, service->event_sub_url));
     return result;
   }
 
@@ -276,7 +267,7 @@ class DLNADevice {
       result += xml.printNode("height", icon.height);
       result += xml.printNode("depth", icon.depth);
       result +=
-          xml.printNode("url", url.buildPath(base_url.path(), icon.icon_url));
+          xml.printNode("url", url.buildPath(base_url, icon.icon_url));
     }
     return result;
   }

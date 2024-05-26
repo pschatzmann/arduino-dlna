@@ -32,11 +32,11 @@ class DLNADeviceMgr {
     setupParser();
 
     // check base url
-    Url baseUrl = device.getBaseURL();
-    DlnaLogger.log(DlnaInfo, "base URL: %s", baseUrl.url());
+    const char* baseUrl = device.getBaseURL();
+    DlnaLogger.log(DlnaInfo, "base URL: %s", baseUrl);
 
-    if (StrView(device.getBaseURL().host()).equals("localhost")) {
-      DlnaLogger.log(DlnaError, "invalid base address: %s", baseUrl.url());
+    if (StrView(device.getBaseURL()).contains("localhost")) {
+      DlnaLogger.log(DlnaError, "invalid base address: %s", baseUrl);
       return false;
     }
 
@@ -50,7 +50,8 @@ class DLNADeviceMgr {
     }
 
     // start web server
-    if (!p_server->begin(baseUrl.port())) {
+    Url url{baseUrl};
+    if (!p_server->begin(url.port())) {
       DlnaLogger.log(DlnaError, "Server failed");
       return false;
     }
@@ -178,7 +179,7 @@ class DLNADeviceMgr {
 
     // add device url to server
     const char* device_path = p_device->getDeviceURL().path();
-    const char* prefix = p_device->getBaseURL().path();
+    const char* prefix = p_device->getBaseURL();
 
     DlnaLogger.log(DlnaInfo, "Setting up device path: %s", device_path);
     void* ref[] = {p_device};

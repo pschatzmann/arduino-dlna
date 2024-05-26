@@ -220,9 +220,9 @@ version: locate service of a given type
     // parse xml
     DLNADevice new_device;
     XMLDeviceParser parser;
-    parser.parse(new_device, xml.c_str());
-    devices.push_back(new_device);
+    parser.parse(new_device, strings, xml.c_str());
     new_device.device_url = url;
+    devices.push_back(new_device);
     return true;
   }
 
@@ -244,6 +244,7 @@ version: locate service of a given type
   bool is_parse_device = false;
   DLNADevice NO_DEVICE{false};
   const char* search_target;
+  StringRegistry strings;
 
   /// Processes a NotifyReplyCP message
   static bool processDevice(NotifyReplyCP& data) {
@@ -362,9 +363,16 @@ version: locate service of a given type
     p_http->request().put("SOAPACTION", action_str.c_str());
 
     // crate control url
-    char url_buffer[200];
+    char url_buffer[200] = {0};
     StrView url_str{url_buffer, 200};
-    url_str = device.getBaseURL().url();
+    url_str = device.getBaseURL();
+    if (url_str == nullptr){
+      url_str.add(device.getDeviceURL().protocol());
+      url_str.add("://");
+      url_str.add(device.getDeviceURL().host());
+      url_str.add(":");
+      url_str.add(device.getDeviceURL().port());
+    }
     url_str.add(service.control_url);
     Url post_url{url_str.c_str()};
 

@@ -10,7 +10,7 @@ class StringRegistry {
  public:
   /// adds a string
   const char* add(char* in) {
-    for (auto str : strings) {
+    for (auto& str : strings) {
       if (str.equals(in)) {
         return str.c_str();
       }

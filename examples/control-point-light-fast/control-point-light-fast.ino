@@ -11,7 +11,7 @@ UDPAsyncService udp;
 uint32_t timeout = 0;
 bool current_status = false;
 const char* device_type = "urn:schemas-upnp-org:device:DimmableLight:1";
-Url baseUrl{"http://10.253.227.1:40271"};
+const char* baseUrl = "http://10.253.227.1:40271";
 
 // login to wireless network
 void setupWifi() {

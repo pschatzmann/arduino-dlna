@@ -16,9 +16,13 @@ namespace tiny_dlna {
 
 class XMLDeviceParser {
  public:
-  void parse(DLNADevice& result, const char* xmlStr) {
+  void parse(DLNADevice& result, StringRegistry& strings, const char* xmlStr) {
+    p_strings = &strings;
     StrView tmp(xmlStr);
     str.swap(tmp);
+    Url empty_url;
+    result.base_url = nullptr;
+    result.device_url = empty_url;
     p_device = &result;
     parseVersion(result);
     parseIcons(result);
@@ -28,6 +32,7 @@ class XMLDeviceParser {
  protected:
   StrView str;
   DLNADevice* p_device = nullptr;
+  StringRegistry* p_strings = nullptr;
 
   /// extract string, add to string repository and return repository string
   const char* substring(char* in, int pos, int end) {
@@ -35,7 +40,7 @@ class XMLDeviceParser {
     char tmp[len];
     StrView tmp_str(tmp, len);
     tmp_str.substring(in, pos, end);
-    return p_device->addString((char*)tmp_str.c_str());
+    return p_strings->add((char*)tmp_str.c_str());
   }
 
   void parseVersion(DLNADevice& result) {
@@ -52,7 +57,7 @@ class XMLDeviceParser {
     parseStr("<modelName>", result.model_name);
     parseStr("<modelNumber>", result.model_number);
     parseStr("<modelURL>", result.model_url);
-    parseStr("<serialNumber>", result.serial_number);
+    parseStr("<URLBase>", result.base_url);
     parseServices();
   };
 
