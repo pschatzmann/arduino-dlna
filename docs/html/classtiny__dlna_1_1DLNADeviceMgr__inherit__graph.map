@@ -1,0 +1,4 @@
+<map id="tiny_dlna::DLNADeviceMgr" name="tiny_dlna::DLNADeviceMgr">
+<area shape="rect" id="node1" title="Setup of a Basic DLNA Device service. The device registers itself to the network and answers to the D..." alt="" coords="5,5,201,32"/>
+<area shape="rect" id="node2" href="$classtiny__dlna_1_1MediaRenderer.html" title="MediaRenderer DLNA Device." alt="" coords="9,80,198,107"/>
+</map>

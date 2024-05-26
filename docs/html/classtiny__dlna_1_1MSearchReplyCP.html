@@ -84,6 +84,7 @@ Inheritance diagram for tiny_dlna::MSearchReplyCP:</div>
 <div class="center"><img src="classtiny__dlna_1_1MSearchReplyCP__inherit__graph.png" border="0" usemap="#atiny__dlna_1_1MSearchReplyCP_inherit__map" alt="Inheritance graph"/></div>
 <map name="atiny__dlna_1_1MSearchReplyCP_inherit__map" id="atiny__dlna_1_1MSearchReplyCP_inherit__map">
 <area shape="rect" title="Processing at control point to handle a MSearchReply from the device." alt="" coords="5,80,205,107"/>
+<area shape="rect" href="classtiny__dlna_1_1NotifyReplyCP.html" title=" " alt="" coords="14,155,197,181"/>
 <area shape="rect" href="structtiny__dlna_1_1Schedule.html" title="An individual Schedule (to send out UDP messages)" alt="" coords="31,5,180,32"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
@@ -105,9 +106,9 @@ Collaboration diagram for tiny_dlna::MSearchReplyCP:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a4db045a36a75bfc96ed6e28e3fe1fc9a"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MSearchReplyCP.html#a4db045a36a75bfc96ed6e28e3fe1fc9a">name</a> () override</td></tr>
 <tr class="separator:a4db045a36a75bfc96ed6e28e3fe1fc9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad7bc110096f06973f23a27f5e3a3ccbd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MSearchReplyCP.html#ad7bc110096f06973f23a27f5e3a3ccbd">process</a> (<a class="el" href="classtiny__dlna_1_1IUDPService.html">IUDPService</a> &amp;udp) override</td></tr>
+<tr class="separator:ad7bc110096f06973f23a27f5e3a3ccbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_structtiny__dlna_1_1Schedule"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_structtiny__dlna_1_1Schedule')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="structtiny__dlna_1_1Schedule.html">tiny_dlna::Schedule</a></td></tr>
-<tr class="memitem:a914855b088ede397dc656784b8cf9875 inherit pub_methods_structtiny__dlna_1_1Schedule"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1Schedule.html#a914855b088ede397dc656784b8cf9875">process</a> (<a class="el" href="classtiny__dlna_1_1IUDPService.html">IUDPService</a> &amp;udp)</td></tr>
-<tr class="separator:a914855b088ede397dc656784b8cf9875 inherit pub_methods_structtiny__dlna_1_1Schedule"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab68a78be25e74294fbac6839bd5111ae inherit pub_methods_structtiny__dlna_1_1Schedule"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1Schedule.html#ab68a78be25e74294fbac6839bd5111ae">operator bool</a> ()</td></tr>
 <tr class="separator:ab68a78be25e74294fbac6839bd5111ae inherit pub_methods_structtiny__dlna_1_1Schedule"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -120,14 +121,12 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:ac2c8140854fd4ce1520b95aa7aeebe04"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Str.html">Str</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MSearchReplyCP.html#ac2c8140854fd4ce1520b95aa7aeebe04">search_target</a></td></tr>
 <tr class="separator:ac2c8140854fd4ce1520b95aa7aeebe04"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_attribs_structtiny__dlna_1_1Schedule"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_structtiny__dlna_1_1Schedule')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="structtiny__dlna_1_1Schedule.html">tiny_dlna::Schedule</a></td></tr>
-<tr class="memitem:aef42336ee989f5e3b64387a6b78dc30e inherit pub_attribs_structtiny__dlna_1_1Schedule"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1Schedule.html#aef42336ee989f5e3b64387a6b78dc30e">id</a> = 0</td></tr>
-<tr class="separator:aef42336ee989f5e3b64387a6b78dc30e inherit pub_attribs_structtiny__dlna_1_1Schedule"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a362781d6bbd24cedcad0aaf72872e689 inherit pub_attribs_structtiny__dlna_1_1Schedule"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1Schedule.html#a362781d6bbd24cedcad0aaf72872e689">time</a> = 0</td></tr>
-<tr class="separator:a362781d6bbd24cedcad0aaf72872e689 inherit pub_attribs_structtiny__dlna_1_1Schedule"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0fdcc689c16e045b7e8c7893c340d3f inherit pub_attribs_structtiny__dlna_1_1Schedule"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1Schedule.html#aa0fdcc689c16e045b7e8c7893c340d3f">time</a> = 0</td></tr>
+<tr class="separator:aa0fdcc689c16e045b7e8c7893c340d3f inherit pub_attribs_structtiny__dlna_1_1Schedule"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae72839e74ad1799cb4320195bdb98622 inherit pub_attribs_structtiny__dlna_1_1Schedule"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1Schedule.html#ae72839e74ad1799cb4320195bdb98622">repeat_ms</a> = 0</td></tr>
 <tr class="separator:ae72839e74ad1799cb4320195bdb98622 inherit pub_attribs_structtiny__dlna_1_1Schedule"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a74fb7da531d36621cab452da63355058 inherit pub_attribs_structtiny__dlna_1_1Schedule"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1Schedule.html#a74fb7da531d36621cab452da63355058">end_time</a> = 0</td></tr>
-<tr class="separator:a74fb7da531d36621cab452da63355058 inherit pub_attribs_structtiny__dlna_1_1Schedule"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0669dbd26f762e660768570bdc902c05 inherit pub_attribs_structtiny__dlna_1_1Schedule"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1Schedule.html#a0669dbd26f762e660768570bdc902c05">end_time</a> = 0</td></tr>
+<tr class="separator:a0669dbd26f762e660768570bdc902c05 inherit pub_attribs_structtiny__dlna_1_1Schedule"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2b21ee1493e6c9d19f9b0a0d07bffc41 inherit pub_attribs_structtiny__dlna_1_1Schedule"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1Schedule.html#a2b21ee1493e6c9d19f9b0a0d07bffc41">active</a> = false</td></tr>
 <tr class="separator:a2b21ee1493e6c9d19f9b0a0d07bffc41 inherit pub_attribs_structtiny__dlna_1_1Schedule"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -159,6 +158,38 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Reimplemented from <a class="el" href="structtiny__dlna_1_1Schedule.html#a7f84cd006a94d1749bd82843326f6876">tiny_dlna::Schedule</a>.</p>
+
+<p>Reimplemented in <a class="el" href="classtiny__dlna_1_1NotifyReplyCP.html#a11cfcb54f18134da0ec1fe6bb419c50d">tiny_dlna::NotifyReplyCP</a>.</p>
+
+</div>
+</div>
+<a id="ad7bc110096f06973f23a27f5e3a3ccbd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad7bc110096f06973f23a27f5e3a3ccbd">&#9670;&nbsp;</a></span>process()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool tiny_dlna::MSearchReplyCP::process </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1IUDPService.html">IUDPService</a> &amp;&#160;</td>
+          <td class="paramname"><em>udp</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="structtiny__dlna_1_1Schedule.html#a914855b088ede397dc656784b8cf9875">tiny_dlna::Schedule</a>.</p>
+
+<p>Reimplemented in <a class="el" href="classtiny__dlna_1_1NotifyReplyCP.html#af2c2fb38004e4f9cf56dcb8a8470c8e9">tiny_dlna::NotifyReplyCP</a>.</p>
 
 </div>
 </div>

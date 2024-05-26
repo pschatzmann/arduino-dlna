@@ -80,8 +80,9 @@ Inheritance diagram for tiny_dlna::NotifyReplyCP:</div>
 <div class="dyncontent">
 <div class="center"><img src="classtiny__dlna_1_1NotifyReplyCP__inherit__graph.png" border="0" usemap="#atiny__dlna_1_1NotifyReplyCP_inherit__map" alt="Inheritance graph"/></div>
 <map name="atiny__dlna_1_1NotifyReplyCP_inherit__map" id="atiny__dlna_1_1NotifyReplyCP_inherit__map">
-<area shape="rect" title=" " alt="" coords="5,80,188,107"/>
-<area shape="rect" href="structtiny__dlna_1_1Schedule.html" title="An individual Schedule (to send out UDP messages)" alt="" coords="22,5,171,32"/>
+<area shape="rect" title=" " alt="" coords="14,155,197,181"/>
+<area shape="rect" href="classtiny__dlna_1_1MSearchReplyCP.html" title="Processing at control point to handle a MSearchReply from the device." alt="" coords="5,80,205,107"/>
+<area shape="rect" href="structtiny__dlna_1_1Schedule.html" title="An individual Schedule (to send out UDP messages)" alt="" coords="31,5,180,32"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
@@ -89,12 +90,13 @@ Collaboration diagram for tiny_dlna::NotifyReplyCP:</div>
 <div class="dyncontent">
 <div class="center"><img src="classtiny__dlna_1_1NotifyReplyCP__coll__graph.png" border="0" usemap="#atiny__dlna_1_1NotifyReplyCP_coll__map" alt="Collaboration graph"/></div>
 <map name="atiny__dlna_1_1NotifyReplyCP_coll__map" id="atiny__dlna_1_1NotifyReplyCP_coll__map">
-<area shape="rect" title=" " alt="" coords="10,347,193,373"/>
-<area shape="rect" href="structtiny__dlna_1_1Schedule.html" title="An individual Schedule (to send out UDP messages)" alt="" coords="5,199,155,225"/>
-<area shape="rect" href="classtiny__dlna_1_1Str.html" title="String implementation which keeps the data on the heap. We grow the allocated memory only if the copy..." alt="" coords="179,199,287,225"/>
-<area shape="rect" href="classtiny__dlna_1_1StrView.html" title="A simple wrapper to provide string functions on char*. If the underlying char* is a const we do not a..." alt="" coords="111,102,251,129"/>
-<area shape="rect" href="classtiny__dlna_1_1Vector.html" title=" " alt="" coords="275,95,418,136"/>
-<area shape="rect" href="classtiny__dlna_1_1Allocator.html" title="Memory allocateator which uses malloc." alt="" coords="273,5,421,32"/>
+<area shape="rect" title=" " alt="" coords="87,469,270,496"/>
+<area shape="rect" href="classtiny__dlna_1_1MSearchReplyCP.html" title="Processing at control point to handle a MSearchReply from the device." alt="" coords="5,355,205,382"/>
+<area shape="rect" href="structtiny__dlna_1_1Schedule.html" title="An individual Schedule (to send out UDP messages)" alt="" coords="25,199,175,225"/>
+<area shape="rect" href="classtiny__dlna_1_1Str.html" title="String implementation which keeps the data on the heap. We grow the allocated memory only if the copy..." alt="" coords="199,199,307,225"/>
+<area shape="rect" href="classtiny__dlna_1_1StrView.html" title="A simple wrapper to provide string functions on char*. If the underlying char* is a const we do not a..." alt="" coords="131,102,271,129"/>
+<area shape="rect" href="classtiny__dlna_1_1Vector.html" title=" " alt="" coords="295,95,438,136"/>
+<area shape="rect" href="classtiny__dlna_1_1Allocator.html" title="Memory allocateator which uses malloc." alt="" coords="293,5,441,32"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -102,14 +104,16 @@ Collaboration diagram for tiny_dlna::NotifyReplyCP:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a11cfcb54f18134da0ec1fe6bb419c50d"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1NotifyReplyCP.html#a11cfcb54f18134da0ec1fe6bb419c50d">name</a> () override</td></tr>
 <tr class="separator:a11cfcb54f18134da0ec1fe6bb419c50d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af2c2fb38004e4f9cf56dcb8a8470c8e9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1NotifyReplyCP.html#af2c2fb38004e4f9cf56dcb8a8470c8e9">process</a> (<a class="el" href="classtiny__dlna_1_1IUDPService.html">IUDPService</a> &amp;udp) override</td></tr>
+<tr class="separator:af2c2fb38004e4f9cf56dcb8a8470c8e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_structtiny__dlna_1_1Schedule"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_structtiny__dlna_1_1Schedule')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="structtiny__dlna_1_1Schedule.html">tiny_dlna::Schedule</a></td></tr>
-<tr class="memitem:a914855b088ede397dc656784b8cf9875 inherit pub_methods_structtiny__dlna_1_1Schedule"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1Schedule.html#a914855b088ede397dc656784b8cf9875">process</a> (<a class="el" href="classtiny__dlna_1_1IUDPService.html">IUDPService</a> &amp;udp)</td></tr>
-<tr class="separator:a914855b088ede397dc656784b8cf9875 inherit pub_methods_structtiny__dlna_1_1Schedule"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab68a78be25e74294fbac6839bd5111ae inherit pub_methods_structtiny__dlna_1_1Schedule"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1Schedule.html#ab68a78be25e74294fbac6839bd5111ae">operator bool</a> ()</td></tr>
 <tr class="separator:ab68a78be25e74294fbac6839bd5111ae inherit pub_methods_structtiny__dlna_1_1Schedule"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
+<tr class="memitem:af6d4a28af16fe48612e2f8f2de246cbd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Str.html">Str</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1NotifyReplyCP.html#af6d4a28af16fe48612e2f8f2de246cbd">nts</a></td></tr>
+<tr class="separator:af6d4a28af16fe48612e2f8f2de246cbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4a12cffe8b7cdc4e175115b07a3e716a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Str.html">Str</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1NotifyReplyCP.html#a4a12cffe8b7cdc4e175115b07a3e716a">delivery_host_and_port</a></td></tr>
 <tr class="separator:a4a12cffe8b7cdc4e175115b07a3e716a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aca6add36f3d7b963afdc24f340f65aed"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Str.html">Str</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1NotifyReplyCP.html#aca6add36f3d7b963afdc24f340f65aed">delivery_path</a></td></tr>
@@ -120,15 +124,22 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a871f2c344fea14af3afae67d98498692"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a863f13e8c11a084051e6b07c2abf15bb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Str.html">Str</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1NotifyReplyCP.html#a863f13e8c11a084051e6b07c2abf15bb">xml</a></td></tr>
 <tr class="separator:a863f13e8c11a084051e6b07c2abf15bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61ae5af364eee306a21e1db47d5b563c"><td class="memItemLeft" align="right" valign="top">std::function&lt; bool(<a class="el" href="classtiny__dlna_1_1NotifyReplyCP.html">NotifyReplyCP</a> &amp;ref)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1NotifyReplyCP.html#a61ae5af364eee306a21e1db47d5b563c">callback</a></td></tr>
+<tr class="separator:a61ae5af364eee306a21e1db47d5b563c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_attribs_classtiny__dlna_1_1MSearchReplyCP"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_classtiny__dlna_1_1MSearchReplyCP')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="classtiny__dlna_1_1MSearchReplyCP.html">tiny_dlna::MSearchReplyCP</a></td></tr>
+<tr class="memitem:ac2c66bea457ce9b9337d8e5b27e53971 inherit pub_attribs_classtiny__dlna_1_1MSearchReplyCP"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Str.html">Str</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MSearchReplyCP.html#ac2c66bea457ce9b9337d8e5b27e53971">location</a></td></tr>
+<tr class="separator:ac2c66bea457ce9b9337d8e5b27e53971 inherit pub_attribs_classtiny__dlna_1_1MSearchReplyCP"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06629b151daa78ef93ff7901fc2beadc inherit pub_attribs_classtiny__dlna_1_1MSearchReplyCP"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Str.html">Str</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MSearchReplyCP.html#a06629b151daa78ef93ff7901fc2beadc">usn</a></td></tr>
+<tr class="separator:a06629b151daa78ef93ff7901fc2beadc inherit pub_attribs_classtiny__dlna_1_1MSearchReplyCP"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2c8140854fd4ce1520b95aa7aeebe04 inherit pub_attribs_classtiny__dlna_1_1MSearchReplyCP"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Str.html">Str</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MSearchReplyCP.html#ac2c8140854fd4ce1520b95aa7aeebe04">search_target</a></td></tr>
+<tr class="separator:ac2c8140854fd4ce1520b95aa7aeebe04 inherit pub_attribs_classtiny__dlna_1_1MSearchReplyCP"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_attribs_structtiny__dlna_1_1Schedule"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_structtiny__dlna_1_1Schedule')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="structtiny__dlna_1_1Schedule.html">tiny_dlna::Schedule</a></td></tr>
-<tr class="memitem:aef42336ee989f5e3b64387a6b78dc30e inherit pub_attribs_structtiny__dlna_1_1Schedule"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1Schedule.html#aef42336ee989f5e3b64387a6b78dc30e">id</a> = 0</td></tr>
-<tr class="separator:aef42336ee989f5e3b64387a6b78dc30e inherit pub_attribs_structtiny__dlna_1_1Schedule"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a362781d6bbd24cedcad0aaf72872e689 inherit pub_attribs_structtiny__dlna_1_1Schedule"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1Schedule.html#a362781d6bbd24cedcad0aaf72872e689">time</a> = 0</td></tr>
-<tr class="separator:a362781d6bbd24cedcad0aaf72872e689 inherit pub_attribs_structtiny__dlna_1_1Schedule"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0fdcc689c16e045b7e8c7893c340d3f inherit pub_attribs_structtiny__dlna_1_1Schedule"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1Schedule.html#aa0fdcc689c16e045b7e8c7893c340d3f">time</a> = 0</td></tr>
+<tr class="separator:aa0fdcc689c16e045b7e8c7893c340d3f inherit pub_attribs_structtiny__dlna_1_1Schedule"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae72839e74ad1799cb4320195bdb98622 inherit pub_attribs_structtiny__dlna_1_1Schedule"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1Schedule.html#ae72839e74ad1799cb4320195bdb98622">repeat_ms</a> = 0</td></tr>
 <tr class="separator:ae72839e74ad1799cb4320195bdb98622 inherit pub_attribs_structtiny__dlna_1_1Schedule"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a74fb7da531d36621cab452da63355058 inherit pub_attribs_structtiny__dlna_1_1Schedule"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1Schedule.html#a74fb7da531d36621cab452da63355058">end_time</a> = 0</td></tr>
-<tr class="separator:a74fb7da531d36621cab452da63355058 inherit pub_attribs_structtiny__dlna_1_1Schedule"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0669dbd26f762e660768570bdc902c05 inherit pub_attribs_structtiny__dlna_1_1Schedule"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1Schedule.html#a0669dbd26f762e660768570bdc902c05">end_time</a> = 0</td></tr>
+<tr class="separator:a0669dbd26f762e660768570bdc902c05 inherit pub_attribs_structtiny__dlna_1_1Schedule"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2b21ee1493e6c9d19f9b0a0d07bffc41 inherit pub_attribs_structtiny__dlna_1_1Schedule"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1Schedule.html#a2b21ee1493e6c9d19f9b0a0d07bffc41">active</a> = false</td></tr>
 <tr class="separator:a2b21ee1493e6c9d19f9b0a0d07bffc41 inherit pub_attribs_structtiny__dlna_1_1Schedule"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -156,11 +167,53 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="structtiny__dlna_1_1Schedule.html#a7f84cd006a94d1749bd82843326f6876">tiny_dlna::Schedule</a>.</p>
+<p>Reimplemented from <a class="el" href="classtiny__dlna_1_1MSearchReplyCP.html#a4db045a36a75bfc96ed6e28e3fe1fc9a">tiny_dlna::MSearchReplyCP</a>.</p>
+
+</div>
+</div>
+<a id="af2c2fb38004e4f9cf56dcb8a8470c8e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af2c2fb38004e4f9cf56dcb8a8470c8e9">&#9670;&nbsp;</a></span>process()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool tiny_dlna::NotifyReplyCP::process </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1IUDPService.html">IUDPService</a> &amp;&#160;</td>
+          <td class="paramname"><em>udp</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="classtiny__dlna_1_1MSearchReplyCP.html#ad7bc110096f06973f23a27f5e3a3ccbd">tiny_dlna::MSearchReplyCP</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="a61ae5af364eee306a21e1db47d5b563c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a61ae5af364eee306a21e1db47d5b563c">&#9670;&nbsp;</a></span>callback</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::function&lt;bool(<a class="el" href="classtiny__dlna_1_1NotifyReplyCP.html">NotifyReplyCP</a> &amp;ref)&gt; tiny_dlna::NotifyReplyCP::callback</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a4a12cffe8b7cdc4e175115b07a3e716a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4a12cffe8b7cdc4e175115b07a3e716a">&#9670;&nbsp;</a></span>delivery_host_and_port</h2>
 
@@ -197,6 +250,20 @@ Public Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classtiny__dlna_1_1Str.html">Str</a> tiny_dlna::NotifyReplyCP::event_key</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af6d4a28af16fe48612e2f8f2de246cbd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af6d4a28af16fe48612e2f8f2de246cbd">&#9670;&nbsp;</a></span>nts</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1Str.html">Str</a> tiny_dlna::NotifyReplyCP::nts</td>
         </tr>
       </table>
 </div><div class="memdoc">

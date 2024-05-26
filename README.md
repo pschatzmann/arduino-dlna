@@ -3,7 +3,7 @@
 
 ## Brief
 
-This library provides the functionality to implement a UPnP/DLNA [device](https://pschatzmann.github.io/arduino-dlna/docs/html/classtiny__dlna_1_1DLNADevice.html) and [control point](https://pschatzmann.github.io/arduino-dlna/docs/html/classtiny__dlna_1_1DLNAControlPoint.html) in Arduino.
+This library provides the functionality to implement a UPnP/DLNA [device](https://pschatzmann.github.io/arduino-dlna/docs/html/classtiny__dlna_1_1DLNADeviceMgr.html) and [control point](https://pschatzmann.github.io/arduino-dlna/docs/html/classtiny__dlna_1_1DLNAControlPointMgr.html) in Arduino.
 
 The Digital Living Network Alliance (DLNA) aims to establish the interoperability among PCs, consumer appliances, and mobile devices in wireless networks and wired networks. The purpose is to provide a solution for sharing between digital media and content services.
 
