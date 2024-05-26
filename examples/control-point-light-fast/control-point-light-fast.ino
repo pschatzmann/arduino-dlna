@@ -1,9 +1,9 @@
-// Example to test the GUPnP Network Light Test Application - we do not do any discovery hand use 
+// Example to test the GUPnP Network Light Test Application - we do not do any discovery
 
 #include "DLNA.h"
 
-const char* ssid = "";
-const char* password = "";
+const char* ssid = "SSID";
+const char* password = "PASSWORD";
 DLNAControlPointMgr cp;
 WiFiClient client;
 HttpRequest http(client);

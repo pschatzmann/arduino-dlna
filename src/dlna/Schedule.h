@@ -147,6 +147,7 @@ class NotifyReplyCP : public MSearchReplyCP {
 
   bool process(IUDPService &udp) override {
     if (callback(*this)){
+      DlnaLogger.log(DlnaInfo, "%s -> %s", name(), nts.c_str());
       return true;
     }
 

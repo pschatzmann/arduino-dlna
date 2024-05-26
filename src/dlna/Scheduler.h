@@ -35,7 +35,7 @@ class Scheduler {
         }
         // process active schedules
         if (s.active) {
-          DlnaLogger.log(DlnaInfo, "Executing %s", s.name());
+          DlnaLogger.log(DlnaDebug, "Executing %s", s.name());
 
           s.process(udp);
           // reschedule if necessary

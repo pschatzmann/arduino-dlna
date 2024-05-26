@@ -172,6 +172,10 @@ version: locate service of a given type
     return NO_DEVICE;
   }
 
+  Vector<DLNADevice> &getDevices(){
+    return devices;
+  }
+
   /// Adds a new device
   bool addDevice(DLNADevice dev) {
     dev.updateTimestamp();
@@ -314,7 +318,7 @@ version: locate service of a given type
     bool ok = namespace_str.replace("%1", action.getServiceType());
     DlnaLogger.log(DlnaInfo, "ns = '%s'", namespace_str.c_str());
 
-    assert(ok);
+    //assert(ok);
     result += xml.printNodeBegin(action.action, namespace_str.c_str(), "u");
     for (auto arg : action.arguments) {
       result += xml.printNode(arg.name, arg.value.c_str());
@@ -329,7 +333,8 @@ version: locate service of a given type
   ActionReply postAllActions() {
     ActionReply result;
     for (auto& action : actions) {
-      result.add(postAction(action));
+      if (action.getServiceType()!=nullptr)
+        result.add(postAction(action));
     }
     return result;
   }

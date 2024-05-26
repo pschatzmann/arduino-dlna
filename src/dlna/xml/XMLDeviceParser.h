@@ -88,6 +88,8 @@ class XMLDeviceParser {
       result = substring((char*)str.c_str(), start_pos, end_str);
       DlnaLogger.log(DlnaDebug, "device xml %s : %s", name, result);
       end = str.indexOf(">", end_str);
+    } else {
+      result = nullptr;
     }
     return end;
   }

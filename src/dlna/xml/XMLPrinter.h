@@ -54,8 +54,42 @@ struct XMLPrinter {
   size_t printNode(const char* node, Vector<XMLNode> children,
                    const char* attributes = nullptr) {
     assert(p_out != nullptr);
-    size_t result = printNodeBegin(node, attributes);
+    size_t result = printNodeBeginNl(node, attributes);
     result += printChildren(children);
+    result += printNodeEnd(node);
+    return result;
+  }
+
+  size_t printNode(const char* node, const char* txt = nullptr,
+                   const char* attributes = nullptr) {
+    assert(p_out != nullptr);
+    int result = 0;
+    if (StrView(txt).isEmpty()) {
+      result += p_out->print("<");
+      result += p_out->print(node);
+      result += p_out->println("/>");
+    } else {
+      result += printNodeBegin(node, attributes);
+      result += p_out->print(txt);
+      result += printNodeEnd(node);
+    }
+    return result;
+  }
+
+  size_t printNode(const char* node, int txt,
+                   const char* attributes = nullptr) {
+    assert(p_out != nullptr);
+    size_t result = printNodeBegin(node, attributes);
+    result += p_out->print(txt);
+    result += printNodeEnd(node);
+    return result;
+  }
+
+  size_t printNode(const char* node, std::function<size_t(void)> callback,
+                   const char* attributes = nullptr) {
+    assert(p_out != nullptr);
+    size_t result = printNodeBeginNl(node, attributes);
+    result += callback();
     result += printNodeEnd(node);
     return result;
   }
@@ -74,7 +108,14 @@ struct XMLPrinter {
       result += p_out->print(" ");
       result += p_out->print(attributes);
     }
-    result += p_out->println(">");
+    result += p_out->print(">");
+    return result;
+  }
+
+  size_t printNodeBeginNl(const char* node, const char* attributes = nullptr,
+                          const char* ns = nullptr) {
+    size_t result = printNodeBegin(node, attributes, ns);
+    result = +p_out->println();
     return result;
   }
 
@@ -84,79 +125,6 @@ struct XMLPrinter {
       result += p_out->print(ns);
       result += p_out->print(":");
     }
-    result += p_out->print(node);
-    result += p_out->println(">");
-    return result;
-  }
-
-  size_t printNode(const char* node, const char* txt,
-                   const char* attributes = nullptr) {
-    assert(p_out != nullptr);
-    size_t result = 0;
-
-    result += p_out->print("<");
-    result += p_out->print(node);
-    if (attributes) {
-      result += p_out->print(attributes);
-    }
-    if (StrView(txt).isEmpty()) {
-      result += p_out->println("/>");
-    } else {
-      result += p_out->print(">");
-      result += p_out->print(txt);
-      result += p_out->print("</");
-      result += p_out->print(node);
-      result += p_out->println(">");
-    }
-    return result;
-  }
-
-  size_t printNode(const char* node, int txt,
-                   const char* attributes = nullptr) {
-    assert(p_out != nullptr);
-    size_t result = 0;
-
-    result += p_out->print("<");
-    result += p_out->print(node);
-    if (attributes) {
-      result += p_out->print(attributes);
-    }
-    result += p_out->print(">");
-    result += p_out->print(txt);
-    result += p_out->print("</");
-    result += p_out->print(node);
-    result += p_out->println(">");
-    return result;
-  }
-
-  size_t printNode(const char* node, std::function<size_t(void)> callback,
-                   const char* attributes = nullptr) {
-    assert(p_out != nullptr);
-    size_t result = 0;
-
-    result += p_out->print("<");
-    result += p_out->print(node);
-    if (attributes != nullptr) {
-      result += p_out->print(" ");
-      result += p_out->print(attributes);
-    }
-    result += p_out->println(">");
-    result += callback();
-    result += p_out->print("</");
-    result += p_out->print(node);
-    result += p_out->println(">");
-    return result;
-  }
-
-  size_t printNodeArg(const char* node, std::function<size_t(void)> callback) {
-    assert(p_out != nullptr);
-    size_t result = 0;
-
-    result += p_out->print("<");
-    result += p_out->print(node);
-    result += p_out->println(">");
-    result += callback();
-    result += p_out->print("</");
     result += p_out->print(node);
     result += p_out->println(">");
     return result;

@@ -228,7 +228,7 @@ class DLNADevice {
     for (auto& service : services) {
       auto printServiceCb =
           std::bind(&DLNADevice::printService, this, &service);
-      result += xml.printNodeArg("service", printServiceCb);
+      result += xml.printNode("service", printServiceCb);
     }
     return result;
   }

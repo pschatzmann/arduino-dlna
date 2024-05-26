@@ -1,9 +1,10 @@
-// Example to test the GUPnP Network Light Test Application - we do not do any discovery hand use 
+// Example to test the GUPnP Network Light Test Application - we perform a DLNA
+// discovery
 
 #include "DLNA.h"
 
-const char* ssid = "";
-const char* password = "";
+const char* ssid = "SSID";
+const char* password = "PASSWORD";
 DLNAControlPointMgr cp;
 WiFiClient client;
 HttpRequest http(client);
@@ -22,6 +23,16 @@ void setupWifi() {
   Serial.println("connected!");
 }
 
+void listServices() {
+  for (auto &dev : cp.getDevices()){
+    Serial.print("- Device: ");
+    Serial.println(dev.getDeviceType());
+    for (auto &srv : dev.getServices()){
+      Serial.print("  - ");
+      Serial.println(srv.service_type);
+    }    
+  }
+}
 
 void setup() {
   Serial.begin(115200);
@@ -32,16 +43,20 @@ void setup() {
     Serial.println("Dimmable Light not found");
     while (true);  // stop processing
   }
+  listServices();
 }
 
 void switchLight() {
   if (millis() > timeout) {
     current_status = !current_status;
-    ActionRequest action(cp.getService("SwitchPower"), "SetTarget");
-    action.addArgument("newTargetValue", current_status ? "1" : "0");
-    cp.addAction(action);
-
+    auto service = cp.getService("SwitchPower");
+    if (service) {
+      ActionRequest action(service, "SetTarget");
+      action.addArgument("newTargetValue", current_status ? "1" : "0");
+      cp.addAction(action);
+    }
     auto reply = cp.executeActions();
+
     timeout = millis() + 1000;
   }
 }
