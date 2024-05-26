@@ -76,7 +76,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Device Attributes and generation of XML using urn:schemas-upnp-org:device-1-0. We could just reutrn a predefined device xml document, but we provide a dynamic generation of the service xml which should be more memory efficient.  
+<p>Device Attributes and generation of XML using urn:schemas-upnp-org:device-1-0. We could just return a predefined device xml document, but we provide a dynamic generation of the service xml which should be more memory efficient. Strings are represented as char*, so you can assign values that are stored in ProgMem to mimimize the RAM useage. If you need to keep the values on the heap you can use <a class="el" href="classtiny__dlna_1_1DLNADevice.html#a332ef8fd3e60d36bbc26da250b0ef656" title="Adds a string to the string repository.">addString()</a> method.  
  <a href="classtiny__dlna_1_1DLNADevice.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="DLNADevice_8h_source.html">DLNADevice.h</a>&gt;</code></p>
@@ -85,7 +85,7 @@ Collaboration diagram for tiny_dlna::DLNADevice:</div>
 <div class="dyncontent">
 <div class="center"><img src="classtiny__dlna_1_1DLNADevice__coll__graph.png" border="0" usemap="#atiny__dlna_1_1DLNADevice_coll__map" alt="Collaboration graph"/></div>
 <map name="atiny__dlna_1_1DLNADevice_coll__map" id="atiny__dlna_1_1DLNADevice_coll__map">
-<area shape="rect" title="Device Attributes and generation of XML using urn:schemas&#45;upnp&#45;org:device&#45;1&#45;0. We could just reutrn a..." alt="" coords="2665,161,2836,188"/>
+<area shape="rect" title="Device Attributes and generation of XML using urn:schemas&#45;upnp&#45;org:device&#45;1&#45;0. We could just return a..." alt="" coords="2665,161,2836,188"/>
 <area shape="rect" href="classtiny__dlna_1_1Url.html" title="URL parser which breaks a full url string up into its individual parts." alt="" coords="1164,224,1273,251"/>
 <area shape="rect" href="classtiny__dlna_1_1Str.html" title="String implementation which keeps the data on the heap. We grow the allocated memory only if the copy..." alt="" coords="696,256,804,283"/>
 <area shape="rect" href="classtiny__dlna_1_1Vector.html" title=" " alt="" coords="986,123,1129,165"/>
@@ -209,6 +209,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a1bbfe285af32498cab669ae3d147f6f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a16a054acacfc7af5bf74b213ae76061f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a16a054acacfc7af5bf74b213ae76061f">setActive</a> (bool flag)</td></tr>
 <tr class="separator:a16a054acacfc7af5bf74b213ae76061f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a142056910669e35747a5c39703c372a7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1StringRegistry.html">StringRegistry</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a142056910669e35747a5c39703c372a7">getStringRegistry</a> ()</td></tr>
+<tr class="separator:a142056910669e35747a5c39703c372a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -249,7 +251,7 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:ad66e7cd67cee1f6c43cedd885eef8525"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac36b1c90b8f7683268877ad2d5bd7b5d"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#ac36b1c90b8f7683268877ad2d5bd7b5d">ns</a> = &quot;xmlns=\&quot;urn:schemas-upnp-org:device-1-0\&quot;&quot;</td></tr>
 <tr class="separator:ac36b1c90b8f7683268877ad2d5bd7b5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a25175faaeae2a21500de9eaef7cf5756"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a25175faaeae2a21500de9eaef7cf5756">device_type</a> = &quot;urn:schemas-upnp-org:device:MediaRenderer:1&quot;</td></tr>
+<tr class="memitem:a25175faaeae2a21500de9eaef7cf5756"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a25175faaeae2a21500de9eaef7cf5756">device_type</a> = nullptr</td></tr>
 <tr class="separator:a25175faaeae2a21500de9eaef7cf5756"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1808d05e130d59edd5dbd585dca828d7"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a1808d05e130d59edd5dbd585dca828d7">friendly_name</a> = nullptr</td></tr>
 <tr class="separator:a1808d05e130d59edd5dbd585dca828d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -286,7 +288,7 @@ Friends</h2></td></tr>
 <tr class="separator:a19fb9b4f1138c9fe18c6847b17063e3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Device Attributes and generation of XML using urn:schemas-upnp-org:device-1-0. We could just reutrn a predefined device xml document, but we provide a dynamic generation of the service xml which should be more memory efficient. </p>
+<div class="textblock"><p>Device Attributes and generation of XML using urn:schemas-upnp-org:device-1-0. We could just return a predefined device xml document, but we provide a dynamic generation of the service xml which should be more memory efficient. Strings are represented as char*, so you can assign values that are stored in ProgMem to mimimize the RAM useage. If you need to keep the values on the heap you can use <a class="el" href="classtiny__dlna_1_1DLNADevice.html#a332ef8fd3e60d36bbc26da250b0ef656" title="Adds a string to the string repository.">addString()</a> method. </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="af8ecb5cb4540dbe15a3a62537e53b290"></a>
@@ -846,6 +848,31 @@ Friends</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt;<a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html">DLNAServiceInfo</a>&gt;&amp; tiny_dlna::DLNADevice::getServices </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a142056910669e35747a5c39703c372a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a142056910669e35747a5c39703c372a7">&#9670;&nbsp;</a></span>getStringRegistry()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1StringRegistry.html">StringRegistry</a>&amp; tiny_dlna::DLNADevice::getStringRegistry </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1642,7 +1669,7 @@ Friends</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const char* tiny_dlna::DLNADevice::device_type = &quot;urn:schemas-upnp-org:device:MediaRenderer:1&quot;</td>
+          <td class="memname">const char* tiny_dlna::DLNADevice::device_type = nullptr</td>
         </tr>
       </table>
   </td>

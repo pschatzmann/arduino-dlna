@@ -40,7 +40,7 @@ var searchData=
   ['control_5fxml_5flen_80',['control_xml_len',['../control_8h.html#a6e96c356777eb8215d9d39f98d2ca7eb',1,'control.h']]],
   ['copy_81',['copy',['../classtiny__dlna_1_1HttpServer.html#a21c5fcc5ea86d304d9be3c893a776658',1,'tiny_dlna::HttpServer']]],
   ['copyfrom_82',['copyFrom',['../classtiny__dlna_1_1Str.html#a56653e05cf303fd8b3651fd8e4d88228',1,'tiny_dlna::Str']]],
-  ['count_83',['count',['../classtiny__dlna_1_1StrView.html#a8c85877e7ff4592f05d2102e6db8bd33',1,'tiny_dlna::StrView']]],
+  ['count_83',['count',['../classtiny__dlna_1_1StringRegistry.html#a8e17e3e5ef6e10cf888b0981a3ad6f92',1,'tiny_dlna::StringRegistry::count()'],['../classtiny__dlna_1_1StrView.html#a8c85877e7ff4592f05d2102e6db8bd33',1,'tiny_dlna::StrView::count()']]],
   ['create_84',['create',['../classtiny__dlna_1_1Allocator.html#a53a79697a1491fe29a1f8642ec423689',1,'tiny_dlna::Allocator']]],
   ['create_5fnew_5flines_85',['create_new_lines',['../classtiny__dlna_1_1HttpHeader.html#ae65ce804cc67d1e029084535ccd5dfd2',1,'tiny_dlna::HttpHeader']]],
   ['createarray_86',['createArray',['../classtiny__dlna_1_1Allocator.html#a59acd275ee018e7a38ed7c324d1c97b0',1,'tiny_dlna::Allocator']]],

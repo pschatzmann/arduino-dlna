@@ -1,6 +1,6 @@
 <map id="tiny_dlna::DLNADeviceRequestParser" name="tiny_dlna::DLNADeviceRequestParser">
 <area shape="rect" id="node1" title="Translates DLNA UDP Requests to Schedule so that we can schedule a reply." alt="" coords="3012,167,3236,208"/>
-<area shape="rect" id="node2" href="$classtiny__dlna_1_1DLNADevice.html" title="Device Attributes and generation of XML using urn:schemas&#45;upnp&#45;org:device&#45;1&#45;0. We could just reutrn a..." alt="" coords="2731,323,2901,350"/>
+<area shape="rect" id="node2" href="$classtiny__dlna_1_1DLNADevice.html" title="Device Attributes and generation of XML using urn:schemas&#45;upnp&#45;org:device&#45;1&#45;0. We could just return a..." alt="" coords="2731,323,2901,350"/>
 <area shape="rect" id="node3" href="$classtiny__dlna_1_1Url.html" title="URL parser which breaks a full url string up into its individual parts." alt="" coords="1229,238,1339,265"/>
 <area shape="rect" id="node4" href="$classtiny__dlna_1_1Str.html" title="String implementation which keeps the data on the heap. We grow the allocated memory only if the copy..." alt="" coords="761,214,869,241"/>
 <area shape="rect" id="node11" href="$classtiny__dlna_1_1Vector.html" title=" " alt="" coords="1051,103,1194,144"/>

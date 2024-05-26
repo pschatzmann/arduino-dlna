@@ -1,7 +1,7 @@
 <map id="tiny_dlna::MediaRenderer" name="tiny_dlna::MediaRenderer">
 <area shape="rect" id="node1" title="MediaRenderer DLNA Device." alt="" coords="3652,559,3841,585"/>
 <area shape="rect" id="node2" href="$classtiny__dlna_1_1DLNADeviceMgr.html" title="Setup of a Basic DLNA Device service. The device registers itself to the network and answers to the D..." alt="" coords="3407,559,3603,585"/>
-<area shape="rect" id="node3" href="$classtiny__dlna_1_1DLNADevice.html" title="Device Attributes and generation of XML using urn:schemas&#45;upnp&#45;org:device&#45;1&#45;0. We could just reutrn a..." alt="" coords="2808,533,2979,560"/>
+<area shape="rect" id="node3" href="$classtiny__dlna_1_1DLNADevice.html" title="Device Attributes and generation of XML using urn:schemas&#45;upnp&#45;org:device&#45;1&#45;0. We could just return a..." alt="" coords="2808,533,2979,560"/>
 <area shape="rect" id="node25" href="$classtiny__dlna_1_1DLNADeviceRequestParser.html" title="Translates DLNA UDP Requests to Schedule so that we can schedule a reply." alt="" coords="3089,491,3313,533"/>
 <area shape="rect" id="node4" href="$classtiny__dlna_1_1Url.html" title="URL parser which breaks a full url string up into its individual parts." alt="" coords="1304,439,1413,465"/>
 <area shape="rect" id="node5" href="$classtiny__dlna_1_1Str.html" title="String implementation which keeps the data on the heap. We grow the allocated memory only if the copy..." alt="" coords="763,471,871,497"/>

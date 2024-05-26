@@ -1,6 +1,6 @@
 <map id="tiny_dlna::DLNAControlPointMgr" name="tiny_dlna::DLNAControlPointMgr">
 <area shape="rect" id="node1" title="Setup of a Basic DLNA Control Point. The control point." alt="" coords="3369,435,3600,461"/>
-<area shape="rect" id="node2" href="$classtiny__dlna_1_1DLNADevice.html" title="Device Attributes and generation of XML using urn:schemas&#45;upnp&#45;org:device&#45;1&#45;0. We could just reutrn a..." alt="" coords="2792,487,2963,513"/>
+<area shape="rect" id="node2" href="$classtiny__dlna_1_1DLNADevice.html" title="Device Attributes and generation of XML using urn:schemas&#45;upnp&#45;org:device&#45;1&#45;0. We could just return a..." alt="" coords="2792,487,2963,513"/>
 <area shape="rect" id="node24" href="$classtiny__dlna_1_1Vector.html" title=" " alt="" coords="3076,306,3267,347"/>
 <area shape="rect" id="node3" href="$classtiny__dlna_1_1Url.html" title="URL parser which breaks a full url string up into its individual parts." alt="" coords="1837,640,1947,667"/>
 <area shape="rect" id="node30" href="$classtiny__dlna_1_1HttpRequest.html" title="Simple API to process get, put, post, del http requests I tried to use Arduino HttpClient,..." alt="" coords="2150,763,2321,789"/>
