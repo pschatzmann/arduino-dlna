@@ -2,6 +2,7 @@
 #pragma once
 
 #include <functional>  // std::bind
+
 #include "DLNAServiceInfo.h"
 #include "StringRegistry.h"
 #include "basic/Icon.h"
@@ -14,9 +15,12 @@ namespace tiny_dlna {
 
 /**
  * @brief Device Attributes and generation of XML using
- * urn:schemas-upnp-org:device-1-0. We could just reutrn a predefined device xml
+ * urn:schemas-upnp-org:device-1-0. We could just return a predefined device xml
  * document, but we provide a dynamic generation of the service xml which should
  * be more memory efficient.
+ * Strings are represented as char*, so you can assign values that are stored in
+ * ProgMem to mimimize the RAM useage. If you need to keep the values on the
+ * heap you can use addString() method.
  * @author Phil Schatzmann
  */
 
@@ -141,27 +145,20 @@ class DLNADevice {
   void addIcon(Icon icon) { icons.push_back(icon); }
   Icon getIcon(int idx = 0) { return icons[idx]; }
 
-
   operator bool() { return is_active; }
 
   /// Adds a string to the string repository
-  const char* addString(char* string){
-    return strings.add(string);
-  }
+  const char* addString(char* string) { return strings.add(string); }
 
   /// Update the timestamp
-  void updateTimestamp(){
-    timestamp = millis();
-  }
+  void updateTimestamp() { timestamp = millis(); }
 
   /// Returns the time when this object has been updated
-  uint32_t getTimestamp(){
-    return timestamp;
-  }
+  uint32_t getTimestamp() { return timestamp; }
 
-  void setActive(bool flag){
-    is_active = flag;
-  }
+  void setActive(bool flag) { is_active = flag; }
+
+  StringRegistry& getStringRegistry() { return strings; }
 
  protected:
   uint64_t timestamp = 0;
@@ -214,8 +211,7 @@ class DLNADevice {
     result += xml.printNode("UPC", universal_product_code);
     auto printIconListCb = std::bind(&DLNADevice::printIconList, this);
     result += xml.printNode("iconList", printIconListCb);
-    auto printServiceListCb =
-        std::bind(&DLNADevice::printServiceList, this);
+    auto printServiceListCb = std::bind(&DLNADevice::printServiceList, this);
     result += xml.printNode("serviceList", printServiceListCb);
     return result;
   }

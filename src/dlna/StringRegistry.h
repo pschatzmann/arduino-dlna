@@ -21,6 +21,18 @@ class StringRegistry {
 
   void clear() { strings.clear(); }
 
+  /// Reports the number of strings
+  size_t count() { return strings.size();}
+
+  /// Reports the total size of all allocated strings
+  size_t size() {
+    size_t total = 0;
+    for (auto &str : strings){
+      total += str.length();
+    }
+    return total;
+  }
+
  protected:
   Vector<Str> strings;
 };
