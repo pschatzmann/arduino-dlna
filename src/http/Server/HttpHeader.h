@@ -196,8 +196,8 @@ class HttpHeader {
       return;
     }
 
-    char msg[200];
-    StrView msg_str(msg, 200);
+    char msg[400];
+    StrView msg_str(msg, 400);
     msg_str = header->key.c_str();
     msg_str += ": ";
     msg_str += header->value.c_str();
@@ -238,12 +238,13 @@ class HttpHeader {
 
     char line[MaxHeaderLineLength];
     if (in.connected()) {
+      delay(200);
       if (in.available() == 0) {
-        int count = 0;
         DlnaLogger.log(DlnaWarning, "Waiting for data...");
+        uint64_t end = millis() + in.getTimeout();
         while (in.available() == 0) {
           delay(100);
-          if (count++ > 10) break;
+          if (millis()>end) break;
         }
       }
       readLine(in, line, MaxHeaderLineLength);

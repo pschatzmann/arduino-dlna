@@ -317,7 +317,7 @@ version: locate service of a given type
     StrView namespace_str(ns, 200);
     namespace_str = "xmlns:u=\"%1\"";
     bool ok = namespace_str.replace("%1", action.getServiceType());
-    DlnaLogger.log(DlnaInfo, "ns = '%s'", namespace_str.c_str());
+    DlnaLogger.log(DlnaDebug, "ns = '%s'", namespace_str.c_str());
 
     //assert(ok);
     result += xml.printNodeBegin(action.action, namespace_str.c_str(), "u");
@@ -348,8 +348,6 @@ version: locate service of a given type
     StrPrint str_print;
     xml.setOutput(str_print);
     createXML(action);
-    // log xml request
-    DlnaLogger.log(DlnaInfo, str_print.c_str());
 
     // create SOAPACTION header
     char act[200];
@@ -379,7 +377,17 @@ version: locate service of a given type
     // post the request
     int rc = p_http->post(post_url, "text/xml", str_print.c_str(),
                           str_print.length());
-    DlnaLogger.log(DlnaInfo, "==> %d", rc);
+
+    // check result
+    DlnaLogger.log(DlnaInfo, "==> http rc %d", rc);
+    ActionReply result(rc == 200);
+    if (rc != 200) {
+      p_http->stop();
+      return result;
+    }
+
+    // log xml request
+    DlnaLogger.log(DlnaDebug, str_print.c_str());
 
     // receive result
     str_print.reset();
@@ -390,10 +398,9 @@ version: locate service of a given type
     }
 
     // log result
-    DlnaLogger.log(DlnaInfo, str_print.c_str());
+    DlnaLogger.log(DlnaDebug, str_print.c_str());
     p_http->stop();
 
-    ActionReply result(rc == 200);
     return result;
   }
 };

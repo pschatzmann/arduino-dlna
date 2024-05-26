@@ -122,6 +122,8 @@ class HttpRequest {
 
   Client *client() { return client_ptr; }
 
+  void setTimeout(int ms) { client_ptr->setTimeout(ms); }
+
  protected:
   WiFiClient default_client;
   Client *client_ptr;
@@ -140,24 +142,33 @@ class HttpRequest {
   // opens a connection to the indicated host
   virtual int connect(const char *ip, uint16_t port) {
     DlnaLogger.log(DlnaInfo, "connect %s", ip);
-    return this->client_ptr->connect(ip, port);
+    int rc = this->client_ptr->connect(ip, port);
+    uint64_t end = millis() + client_ptr->getTimeout();
+    DlnaLogger.log(DlnaInfo, "Connected: %s (rc=%d) with timeout %ld", connected()? "true" : "false", rc, client_ptr->getTimeout());
+    return rc;
   }
 
   // sends request and reads the reply_header from the server
   virtual int process(TinyMethodID action, Url &url, const char *mime,
                       const char *data, int len = -1) {
     if (!connected()) {
-      char msg[1024];
-      sprintf(msg, "connecting to host %s port %d", url.host(), url.port());
-      DlnaLogger.log(DlnaInfo, "process %s", msg);
+      DlnaLogger.log(DlnaInfo, "Connecting to host %s port %d", url.host(),
+                     url.port());
 
       connect(url.host(), url.port());
-      if (host_name.isEmpty()) {
-         host_name = url.host();
-         host_name.add(":");
-         host_name.add(url.port());
-       }
     }
+
+    if (!connected()) {
+      DlnaLogger.log(DlnaInfo, "Connected: %s", connected()? "true" : "false");
+      return -1;
+    }
+
+    if (host_name.isEmpty()) {
+      host_name = url.host();
+      host_name.add(":");
+      host_name.add(url.port());
+    }
+
     request_header.setValues(action, url.path());
     if (len == -1 && data != nullptr) {
       len = strlen(data);
