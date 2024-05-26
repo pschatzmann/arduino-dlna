@@ -10,7 +10,10 @@ void setup() {
   DlnaLogger.begin(Serial, DlnaDebug);
   parser.parse(device,(const char*) device_xml);
   Serial.print("Parsing done with total string bytes ");
-  Serial.print(device.getStringRegistry().size());
+  Serial.println(device.getStringRegistry().size());
+  device.clear();
+  assert(device.getStringRegistry().size() ==0);
+  Serial.println("---end---");
 }
 
 void loop() {}

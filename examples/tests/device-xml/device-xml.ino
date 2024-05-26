@@ -5,7 +5,9 @@ DLNADevice device;
 
 void setupDevice() {
   device.setBaseURL("http:/localhost:80/test");
-
+  device.setDeviceType("urn:schemas-upnp-org:device:MediaRenderer:1");
+  device.setUDN("uuid:09349455-2941-4cf7-9847-0dd5ab210e97");
+  
   auto dummyCB = [](HttpServer* server, const char* requestPath,
                     HttpRequestHandlerLine* hl) {
     DlnaLogger.log(DlnaError, "Unhandled request: %s", requestPath);
