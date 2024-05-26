@@ -33,6 +33,7 @@ target_link_libraries(dlna_server arduino_emulator)
 
 # build examples
 add_subdirectory( "${CMAKE_CURRENT_SOURCE_DIR}/examples/tests/device-xml")
+add_subdirectory( "${CMAKE_CURRENT_SOURCE_DIR}/examples/tests/device-xml-parser")
 add_subdirectory( "${CMAKE_CURRENT_SOURCE_DIR}/examples/device-media-renderer")
 add_subdirectory( "${CMAKE_CURRENT_SOURCE_DIR}/examples/control-point-light")
 add_subdirectory( "${CMAKE_CURRENT_SOURCE_DIR}/examples/control-point-light-fast")

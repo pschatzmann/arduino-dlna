@@ -39,8 +39,8 @@ class XMLDeviceParser {
   }
 
   void parseVersion(DLNADevice& result) {
-    parseInt(0, "major", result.version_major);
-    parseInt(0, "minor", result.version_minor);
+    parseInt(0, "<major>", result.version_major);
+    parseInt(0, "<minor>", result.version_minor);
   }
 
   void parseDevice(DLNADevice& result) {
@@ -61,44 +61,36 @@ class XMLDeviceParser {
   }
 
   int parseInt(int pos, const char* name, int& result) {
-    char temp[50];
+    char temp[50] = {0};
     StrView temp_view(temp, 50);
-    int idx = str.indexOf(name, pos);
-    int end = -1;
-    if (idx > 0) {
+    int start_pos = str.indexOf(name, pos);
+    int end_pos = -1;
+    if (start_pos > 0) {
       StrView tag(name);
-      idx += tag.length();
-      int end_str = str.indexOf("</", idx);
-      temp_view = substring((char*)str.c_str(), pos, end_str);
+      start_pos += tag.length();
+      end_pos = str.indexOf("</", start_pos);
+      temp_view.substring((char*)str.c_str(), start_pos, end_pos);
       result = temp_view.toInt();
-      end = str.indexOf(">", end_str);
+      DlnaLogger.log(DlnaDebug, "device xml %s : %s / %d", name, temp_view.c_str(), result);
+
+      end_pos = str.indexOf(">", end_pos);
     }
-    return end;
+    return end_pos;
   }
 
   int parseStr(int pos, const char* name, const char*& result) {
-    int idx = str.indexOf(name, pos);
+    int start_pos = str.indexOf(name, pos);
     int end = -1;
-    if (idx > 0) {
+    if (start_pos > 0) {
       StrView tag(name);
-      pos += tag.length();
-      int end_str = str.indexOf("</", idx);
-      result = substring((char*)str.c_str(), pos, end_str);
-      DlnaLogger.log(DlnaInfo, "device xml %s : %s", name, result);
+      start_pos += tag.length();
+      int end_str = str.indexOf("</", start_pos);
+      result = substring((char*)str.c_str(), start_pos, end_str);
+      DlnaLogger.log(DlnaDebug, "device xml %s : %s", name, result);
       end = str.indexOf(">", end_str);
     }
     return end;
   }
-
-  // /// adds a substring
-  // const char* addString(const char* str, int from, int to) {
-  //   char tmp[to - from + 1] = {0};
-  //   int tmp_pos = 0;
-  //   for (int j = from; j < to; j++) {
-  //     tmp[tmp_pos++] = str[j];
-  //   }
-  //   return p_device->addString(tmp);
-  // }
 
   void parseIcons(DLNADevice& device) {
     int pos = 0;
