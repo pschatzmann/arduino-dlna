@@ -42,11 +42,12 @@ enum TinyMethodID {
   T_TRACE,
   T_OPTIONS,
   T_CONNECT,
-  T_PATCH
+  T_PATCH,
+  T_SUBSCRIBE
 };
 const char* methods[] = {"?",       "GET",    "HEAD",  "POST",
                          "PUT",     "DELETE", "TRACE", "OPTIONS",
-                         "CONNECT", "PATCH",  nullptr};
+                         "CONNECT", "PATCH", "SUBSCRIBE",  nullptr};
 
 /**
  * @brief A individual key - value header line

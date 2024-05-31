@@ -7,12 +7,6 @@
 
 namespace tiny_dlna {
 
-static const char *toStr(IPAddress address) {
-  static char result[20];
-  sprintf(result, "%d.%d.%d.%d", address[0], address[1], address[2],
-          address[3]);
-  return result;
-}
 
 /**
  * @brief A simple  wrapper to provide string functions on char*.

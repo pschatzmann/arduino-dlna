@@ -21,6 +21,20 @@ class UDPAsyncService : public IUDPService {
     peer = addr;
     DlnaLogger.log(DlnaInfo, "beginMulticast: %s", addr.toString());
 
+    if (udp.listen(addr.port)){
+       udp.onPacket([&](AsyncUDPPacket packet) {
+        RequestData result;
+        result.peer.address = packet.remoteIP();
+        result.peer.port = packet.remotePort();
+        assert(!(result.peer.address == IPAddress()));
+        // save data
+        result.data.copyFrom((const char*)packet.data(), packet.length());
+
+        //queue.push_back(result);
+        queue.enqueue(result);
+      });     
+    }
+
     if (udp.listenMulticast(addr.address,
                             addr.port)) {  // Start listening for UDP Multicast
                                            // on AP interface only

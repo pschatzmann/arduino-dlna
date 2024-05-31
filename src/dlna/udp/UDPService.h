@@ -15,28 +15,36 @@ namespace tiny_dlna {
 
 class UDPService : public IUDPService {
  public:
+  UDPService() = default;
 
-  bool begin(IPAddressAndPort addr) {
+  bool begin(int port) override {
+    DlnaLogger.log(DlnaInfo, "begin: %d", port);
+    is_multicast = false;
+    return udp.begin(port);
+  }
+
+  bool begin(IPAddressAndPort addr) override {
     peer = addr;
+    is_multicast = true;
     DlnaLogger.log(DlnaInfo, "beginMulticast: %s", addr.toString());
     return udp.beginMulticast(addr.address, addr.port);
   }
 
-  bool send(uint8_t *data, int len) { return send(peer, data, len); }
+  bool send(uint8_t *data, int len) override { return send(peer, data, len); }
 
-  bool send(IPAddressAndPort addr, uint8_t *data, int len) {
+  bool send(IPAddressAndPort addr, uint8_t *data, int len) override {
     DlnaLogger.log(DlnaDebug, "sending %d bytes", len);
     udp.beginPacket(addr.address, addr.port);
     int sent = udp.write(data, len);
     assert(sent == len);
     bool result = udp.endPacket();
     if (!result) {
-      DlnaLogger.log(DlnaDebug, "Sending failed");
+      DlnaLogger.log(DlnaError, "Sending failed");
     }
     return result;
   }
 
-  RequestData receive() {
+  RequestData receive() override {
     RequestData result;
     // udp.flush();
     int packetSize = udp.parsePacket();
@@ -55,6 +63,7 @@ class UDPService : public IUDPService {
  protected:
   WiFiUDP udp;
   IPAddressAndPort peer;
+  bool is_multicast = false;
 };
 
 }  // namespace tiny_dlna

@@ -7,12 +7,14 @@ const char *password = "password";
 AsyncUDP udp;
 
 void setupWifi() {
+#ifndef IS_DESKTOP
   WiFi.begin(ssid, password);
   Serial.print("Connecting to WiFi ..");
   while (WiFi.status() != WL_CONNECTED) {
     Serial.print('.');
     delay(1000);
   }
+#endif
 }
 
 void setup() {

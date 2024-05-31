@@ -86,6 +86,11 @@ class HttpRequest {
     return process(T_HEAD, url, nullptr, data, len);
   }
 
+  virtual int subscribe(Url &url) {
+    DlnaLogger.log(DlnaInfo, "post %s", url.url());
+    return process(T_SUBSCRIBE, url, nullptr, nullptr, 0);
+  }
+
   // reads the reply data
   virtual int read(uint8_t *str, int len) {
     if (reply_header.isChunked()) {

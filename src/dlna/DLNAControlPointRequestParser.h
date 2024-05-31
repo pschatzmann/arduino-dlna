@@ -42,8 +42,15 @@ class DLNAControlPointRequestParser {
     parse(req.data, "NTS:", result->nts);
     parse(req.data, "NT:", result->search_target);
     parse(req.data, "Location:", result->location);
+    if (result->location.isEmpty()){
+      parse(req.data, "LOCATION:", result->location);
+    }
     parse(req.data, "USN:", result->usn);
     parse(req.data, "Host:", result->delivery_host_and_port);
+    if (result->delivery_host_and_port.isEmpty()){
+      parse(req.data, "HOST:", result->delivery_host_and_port);
+    }
+
     parse(req.data, "SID:", result->subscription_id);
     parse(req.data, "SEQ:", result->event_key);
     parse(req.data, "<e:propertyset", result->xml, "</e:propertyset>");

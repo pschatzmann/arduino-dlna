@@ -59,7 +59,7 @@ class MSearchSchedule : public Schedule {
     int n = snprintf(buffer, MAX_TMP_SIZE, tmp, address.toString(), max_age,
                      search_target);
     assert(n < MAX_TMP_SIZE);
-    DlnaLogger.log(DlnaDebug, "sending: %s", buffer);
+    DlnaLogger.log(DlnaInfo, "sending: %s", buffer);
     udp.send(address, (uint8_t *)buffer, n);
     return true;
   }

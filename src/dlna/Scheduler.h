@@ -30,12 +30,12 @@ class Scheduler {
       Schedule &s = *p_s;
       if (millis() >= s.time) {
         // handle end time: if expired set inactive
-        if (s.end_time > millis()) {
+        if (s.end_time != 0ul && millis() > s.end_time) {
           s.active = false;
         }
         // process active schedules
         if (s.active) {
-          DlnaLogger.log(DlnaDebug, "Executing %s", s.name());
+          DlnaLogger.log(DlnaDebug, "Executing", s.name());
 
           s.process(udp);
           // reschedule if necessary
@@ -45,6 +45,8 @@ class Scheduler {
             s.active = false;
             is_cleanup = true;
           }
+        } else {
+          DlnaLogger.log(DlnaDebug, "Inactive", s.name());
         }
       }
     }

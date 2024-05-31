@@ -33,6 +33,7 @@ struct RequestData {
 
 class IUDPService {
  public:
+  virtual bool begin(int port) = 0;
   virtual bool begin(IPAddressAndPort addr) = 0;
   virtual bool send(uint8_t *data, int len) = 0;
   virtual bool send(IPAddressAndPort addr, uint8_t *data, int len) = 0;

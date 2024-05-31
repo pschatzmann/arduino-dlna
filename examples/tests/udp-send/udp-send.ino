@@ -6,7 +6,7 @@
 const char *ssid = "";
 const char *password = "";
 WiFiUDP wudp;
-UDPService udp{wudp};
+UDPService udp;
 
 void setupWifi() {
   WiFi.begin(ssid, password);
@@ -27,6 +27,6 @@ void setup() {
 void loop() {
   Serial.println("sending...");
   const char *msg = "test";
-  udp.send((uint8_t *)msg, strlen(msg));
+  udp.send(DLNABroadcastAddress,(uint8_t *)msg, strlen(msg));
   delay(5000);
 }

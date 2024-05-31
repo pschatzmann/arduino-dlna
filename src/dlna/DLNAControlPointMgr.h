@@ -1,8 +1,8 @@
 #pragma once
 
 #include "DLNAControlPointRequestParser.h"
-#include "DLNADeviceMgr.h"
 #include "DLNADevice.h"
+#include "DLNADeviceMgr.h"
 #include "Schedule.h"
 #include "Scheduler.h"
 #include "basic/StrPrint.h"
@@ -34,6 +34,8 @@ class DLNAControlPointMgr {
   DLNAControlPointMgr() { selfDLNAControlPoint = this; }
   /// Requests the parsing of the device information
   void setParseDevice(bool flag) { is_parse_device = flag; }
+  /// Defines the lacal url (needed for subscriptions)
+  void setLocalURL(Url url) { local_url = url; }
 
   /**
    * @brief start the processing by sending out a MSearch. For the search target
@@ -47,7 +49,7 @@ given type (as defined by working committee)
 version: locate service of a given type
    */
 
-  bool begin(HttpRequest& http, IUDPService& udp,
+  bool begin(HttpRequest& http, IUDPService &udp,
              const char* searchTarget = "ssdp:all", uint32_t processingTime = 0,
              bool stopWhenFound = true) {
     DlnaLogger.log(DlnaInfo, "DLNADevice::begin");
@@ -56,8 +58,8 @@ version: locate service of a given type
     p_udp = &udp;
     p_http = &http;
 
-    // setup UDP
-    if (!p_udp->begin(DLNABroadcastAddress)) {
+    // setup multicast UDP
+    if (!(p_udp->begin(DLNABroadcastAddress))) {
       DlnaLogger.log(DlnaError, "UDP begin failed");
       return false;
     }
@@ -99,6 +101,36 @@ version: locate service of a given type
     ActionReply result = postAllActions();
     actions.clear();
     return result;
+  }
+
+  /// Subscribe to changes
+  bool subscribe(const char* serviceName, int seconds) {
+    auto service = getService(serviceName);
+    if (!service) {
+      DlnaLogger.log(DlnaError, "No service found for %s", serviceName);
+      return false;
+    }
+
+    auto& device = getDevice(service);
+    if (!device) {
+      DlnaLogger.log(DlnaError, "Device not found");
+      return false;
+    }
+
+    if (StrView(local_url.url()).isEmpty()) {
+      DlnaLogger.log(DlnaError, "Local URL not defined");
+      return false;
+    }
+    char url_buffer[200] = {0};
+    char seconds_txt[80] = {0};
+    Url url{getUrl(device, service.event_sub_url, url_buffer, 200)};
+    snprintf(seconds_txt, 80, "Second-%d", seconds);
+    p_http->request().put("NT", "upnp:event");
+    p_http->request().put("TIMEOUT", seconds_txt);
+    p_http->request().put("CALLBACK", local_url.url());
+    int rc = p_http->subscribe(url);
+    DlnaLogger.log(DlnaInfo, "Http rc: %s", rc);
+    return rc == 200;
   }
 
   // /// Provides the actual state value
@@ -172,9 +204,7 @@ version: locate service of a given type
     return NO_DEVICE;
   }
 
-  Vector<DLNADevice> &getDevices(){
-    return devices;
-  }
+  Vector<DLNADevice>& getDevices() { return devices; }
 
   /// Adds a new device
   bool addDevice(DLNADevice dev) {
@@ -193,7 +223,7 @@ version: locate service of a given type
   /// Adds the device from the device xml url if it does not already exist
   bool addDevice(Url url) {
     DLNADevice& device = getDevice(url);
-    if (device != NO_DEVICE){
+    if (device != NO_DEVICE) {
       // device already exists
       device.setActive(true);
       return true;
@@ -204,19 +234,20 @@ version: locate service of a given type
     int rc = req.get(url, "text/xml");
 
     if (rc != 200) {
-      DlnaLogger.log(DlnaError, "Http get to '%s' failed with %d", url.url(), rc);
+      DlnaLogger.log(DlnaError, "Http get to '%s' failed with %d", url.url(),
+                     rc);
       req.stop();
       return false;
     }
     // get xml
     uint8_t buffer[512];
-    while(true){
+    while (true) {
       int len = req.read(buffer, 512);
       if (len == 0) break;
       xml.write(buffer, len);
     }
     req.stop();
-    
+
     // parse xml
     DLNADevice new_device;
     XMLDeviceParser parser;
@@ -234,10 +265,9 @@ version: locate service of a given type
 
  protected:
   Scheduler scheduler;
-  IUDPService* p_udp = nullptr;
   HttpRequest* p_http = nullptr;
+  IUDPService* p_udp = nullptr;
   Vector<DLNADevice> devices;
-  // Vector<StateValue> state;
   Vector<ActionRequest> actions;
   XMLPrinter xml;
   bool is_active = false;
@@ -245,6 +275,7 @@ version: locate service of a given type
   DLNADevice NO_DEVICE{false};
   const char* search_target;
   StringRegistry strings;
+  Url local_url;
 
   /// Processes a NotifyReplyCP message
   static bool processDevice(NotifyReplyCP& data) {
@@ -319,7 +350,7 @@ version: locate service of a given type
     bool ok = namespace_str.replace("%1", action.getServiceType());
     DlnaLogger.log(DlnaDebug, "ns = '%s'", namespace_str.c_str());
 
-    //assert(ok);
+    // assert(ok);
     result += xml.printNodeBegin(action.action, namespace_str.c_str(), "u");
     for (auto arg : action.arguments) {
       result += xml.printNode(arg.name, arg.value.c_str());
@@ -334,8 +365,7 @@ version: locate service of a given type
   ActionReply postAllActions() {
     ActionReply result;
     for (auto& action : actions) {
-      if (action.getServiceType()!=nullptr)
-        result.add(postAction(action));
+      if (action.getServiceType() != nullptr) result.add(postAction(action));
     }
     return result;
   }
@@ -362,17 +392,7 @@ version: locate service of a given type
 
     // crate control url
     char url_buffer[200] = {0};
-    StrView url_str{url_buffer, 200};
-    url_str = device.getBaseURL();
-    if (url_str == nullptr){
-      url_str.add(device.getDeviceURL().protocol());
-      url_str.add("://");
-      url_str.add(device.getDeviceURL().host());
-      url_str.add(":");
-      url_str.add(device.getDeviceURL().port());
-    }
-    url_str.add(service.control_url);
-    Url post_url{url_str.c_str()};
+    Url post_url{getUrl(device, service.control_url, url_buffer, 200)};
 
     // post the request
     int rc = p_http->post(post_url, "text/xml", str_print.c_str(),
@@ -402,6 +422,21 @@ version: locate service of a given type
     p_http->stop();
 
     return result;
+  }
+
+  const char* getUrl(DLNADevice& device, const char* suffix, const char* buffer,
+                     int len) {
+    StrView url_str{(char*)buffer, len};
+    url_str = device.getBaseURL();
+    if (url_str == nullptr) {
+      url_str.add(device.getDeviceURL().protocol());
+      url_str.add("://");
+      url_str.add(device.getDeviceURL().host());
+      url_str.add(":");
+      url_str.add(device.getDeviceURL().port());
+    }
+    url_str.add(suffix);
+    return buffer;
   }
 };
 
