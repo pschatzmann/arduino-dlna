@@ -19,7 +19,7 @@ void setupWifi() {
 
 void setup() {
   Serial.begin(114200);
-  DlnaLogger.begin(Serial, DlnaDebug);
+  DlnaLogger.begin(Serial, DlnaLogLevel::Debug);
   setupWifi();
   udp.begin(DLNABroadcastAddress);
 }

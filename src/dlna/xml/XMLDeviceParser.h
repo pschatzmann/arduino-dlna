@@ -76,7 +76,7 @@ class XMLDeviceParser {
       end_pos = str.indexOf("</", start_pos);
       temp_view.substrView((char*)str.c_str(), start_pos, end_pos);
       result = temp_view.toInt();
-      DlnaLogger.log(DlnaDebug, "device xml %s : %s / %d", name, temp_view.c_str(), result);
+      DlnaLogger.log(DlnaLogLevel::Debug, "device xml %s : %s / %d", name, temp_view.c_str(), result);
 
       end_pos = str.indexOf(">", end_pos);
     }
@@ -91,7 +91,7 @@ class XMLDeviceParser {
       start_pos += tag.length();
       int end_str = str.indexOf("</", start_pos);
       result = substrView((char*)str.c_str(), start_pos, end_str);
-      DlnaLogger.log(DlnaDebug, "device xml %s : %s", name, result);
+      DlnaLogger.log(DlnaLogLevel::Debug, "device xml %s : %s", name, result);
       end = str.indexOf(">", end_str);
     } else {
       result = nullptr;

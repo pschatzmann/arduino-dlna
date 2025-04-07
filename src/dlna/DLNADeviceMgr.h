@@ -24,7 +24,7 @@ class DLNADeviceMgr {
  public:
   /// start the
   bool begin(DLNADevice& device, IUDPService& udp, HttpServer& server) {
-    DlnaLogger.log(DlnaInfo, "DLNADevice::begin");
+    DlnaLogger.log(DlnaLogLevel::Info, "DLNADevice::begin");
 
     p_server = &server;
     p_udp = &udp;
@@ -33,10 +33,10 @@ class DLNADeviceMgr {
 
     // check base url
     const char* baseUrl = device.getBaseURL();
-    DlnaLogger.log(DlnaInfo, "base URL: %s", baseUrl);
+    DlnaLogger.log(DlnaLogLevel::Info, "base URL: %s", baseUrl);
 
     if (StrView(device.getBaseURL()).contains("localhost")) {
-      DlnaLogger.log(DlnaError, "invalid base address: %s", baseUrl);
+      DlnaLogger.log(DlnaLogLevel::Error, "invalid base address: %s", baseUrl);
       return false;
     }
 
@@ -46,30 +46,30 @@ class DLNADeviceMgr {
 
     // setup web server
     if (!setupDLNAServer(server)) {
-      DlnaLogger.log(DlnaError, "setupDLNAServer failed");
+      DlnaLogger.log(DlnaLogLevel::Error, "setupDLNAServer failed");
       return false;
     }
 
     // start web server
     Url url{baseUrl};
     if (!p_server->begin(url.port())) {
-      DlnaLogger.log(DlnaError, "Server failed");
+      DlnaLogger.log(DlnaLogLevel::Error, "Server failed");
       return false;
     }
 
     // setup UDP
     if (!p_udp->begin(DLNABroadcastAddress)) {
-      DlnaLogger.log(DlnaError, "UDP begin failed");
+      DlnaLogger.log(DlnaLogLevel::Error, "UDP begin failed");
       return false;
     }
 
     if (!setupScheduler()) {
-      DlnaLogger.log(DlnaError, "Scheduler failed");
+      DlnaLogger.log(DlnaLogLevel::Error, "Scheduler failed");
       return false;
     }
 
     is_active = true;
-    DlnaLogger.log(DlnaInfo, "Device successfully started");
+    DlnaLogger.log(DlnaLogLevel::Info, "Device successfully started");
     return true;
   }
 
@@ -97,7 +97,7 @@ class DLNADeviceMgr {
 
     // handle server requests
     bool rc = p_server->doLoop();
-    DlnaLogger.log(DlnaDebug, "server %s", rc ? "true" : "false");
+    DlnaLogger.log(DlnaLogLevel::Debug, "server %s", rc ? "true" : "false");
 
     if (isSchedulerActive()) {
       // process UDP requests
@@ -182,7 +182,7 @@ class DLNADeviceMgr {
     const char* device_path = p_device->getDeviceURL().path();
     const char* prefix = p_device->getBaseURL();
 
-    DlnaLogger.log(DlnaInfo, "Setting up device path: %s", device_path);
+    DlnaLogger.log(DlnaLogLevel::Info, "Setting up device path: %s", device_path);
     void* ref[] = {p_device};
 
     if (!StrView(device_path).isEmpty()) {
@@ -224,7 +224,7 @@ class DLNADeviceMgr {
     if (device_xml != nullptr) {
       Client& client = server->client();
       assert(&client != nullptr);
-      DlnaLogger.log(DlnaInfo, "reply %s", "DeviceXML");
+      DlnaLogger.log(DlnaLogLevel::Info, "reply %s", "DeviceXML");
       server->replyHeader().setValues(200, "SUCCESS");
       server->replyHeader().put(CONTENT_TYPE, "text/xml");
       server->replyHeader().put(CONNECTION, CON_KEEP_ALIVE);
@@ -234,7 +234,7 @@ class DLNADeviceMgr {
       device_xml->print(client);
       server->endClient();
     } else {
-      DlnaLogger.log(DlnaError, "DLNADevice is null");
+      DlnaLogger.log(DlnaLogLevel::Error, "DLNADevice is null");
       server->replyNotFound();
     }
   }

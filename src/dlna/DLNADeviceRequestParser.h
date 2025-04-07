@@ -27,15 +27,15 @@ class DLNADeviceRequestParser {
     // We ignore alive notifications
     if (req.data.contains("NOTIFY")) {
       if (req.data.contains("ssdp:alive")) {
-        DlnaLogger.log(DlnaDebug, "invalid request: %s", req.data.c_str());
+        DlnaLogger.log(DlnaLogLevel::Debug, "invalid request: %s", req.data.c_str());
       } else {
-        DlnaLogger.log(DlnaWarning, "invalid request: %s", req.data.c_str());
+        DlnaLogger.log(DlnaLogLevel::Warning, "invalid request: %s", req.data.c_str());
       }
       return nullptr;
     }
 
     // We currently
-    DlnaLogger.log(DlnaWarning, "invalid request: %s", req.data.c_str());
+    DlnaLogger.log(DlnaLogLevel::Warning, "invalid request: %s", req.data.c_str());
 
     return nullptr;
   }
@@ -51,7 +51,7 @@ class DLNADeviceRequestParser {
     char tmp[200];
     StrView tmp_str(tmp, 200);
 
-    DlnaLogger.log(DlnaInfo, "Parsing MSSearch");
+    DlnaLogger.log(DlnaLogLevel::Info, "Parsing MSSearch");
 
     // determine MX (seconds to delay response)
     if (parse(req.data, "\nMX:", tmp_str)) {
@@ -67,16 +67,16 @@ class DLNADeviceRequestParser {
       // determine ST if relevant for us
       for (auto mx : mx_vector) {
         if (result.search_target.equals(mx)) {
-          DlnaLogger.log(DlnaDebug, "MX: %s -> relevant", mx);
+          DlnaLogger.log(DlnaLogLevel::Debug, "MX: %s -> relevant", mx);
           result.active = true;
         }
       }
       if (!result.active) {
-        DlnaLogger.log(DlnaDebug, "MX: %s not relevant", tmp);
+        DlnaLogger.log(DlnaLogLevel::Debug, "MX: %s not relevant", tmp);
       }
 
     } else {
-      DlnaLogger.log(DlnaError, "ST: not found");
+      DlnaLogger.log(DlnaLogLevel::Error, "ST: not found");
     }
 
     return result.active ? &result : nullptr;
@@ -91,7 +91,7 @@ class DLNADeviceRequestParser {
       if (end < 0) end = in.indexOf("\n", start);
       if (end >= 0) {
         result.substrView(in.c_str(), start, end);
-        DlnaLogger.log(DlnaDebug, "%s substrView (%d,%d)->%s", tag, start, end,
+        DlnaLogger.log(DlnaLogLevel::Debug, "%s substrView (%d,%d)->%s", tag, start, end,
                        result.c_str());
 
         result.trim();

@@ -23,9 +23,9 @@ void setupWifi() {
 void setup() {
   Serial.begin(115200);
   // setup logger
-  DlnaLogger.begin(Serial, DlnaWarning);
+  DlnaLogger.begin(Serial, DlnaLogLevel::Info);
   setupWifi();
-
+  media_renderer.setBaseURL("http://192.168.1.39:9999");
   // setup device: set IPAddress or BaseURL and other optional information
   device_mgr.begin(media_renderer, udp, server);
 }

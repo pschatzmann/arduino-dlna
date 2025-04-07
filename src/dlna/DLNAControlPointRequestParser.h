@@ -20,9 +20,9 @@ class DLNAControlPointRequestParser {
     } else if (req.data.startsWith("HTTP/1.1 200 OK")) {
       return parseMSearchReply(req);
     } else if (req.data.startsWith("M-SEARCH")) {
-      DlnaLogger.log(DlnaDebug, "M-SEARCH request ignored");
+      DlnaLogger.log(DlnaLogLevel::Debug, "M-SEARCH request ignored");
     } else {
-      DlnaLogger.log(DlnaInfo, "Not handled: %s", req.data);
+      DlnaLogger.log(DlnaLogLevel::Info, "Not handled: %s", req.data);
     }
     return nullptr;
   }
@@ -66,7 +66,7 @@ class DLNAControlPointRequestParser {
       if (end_pos < 0) end_pos = in.indexOf("\n", start_pos);
       if (end_pos >= 0) {
         result.substrView(in.c_str(), start_pos, end_pos);
-        DlnaLogger.log(DlnaDebug, "%s substrView (%d,%d)->%s", tag, start_pos, end_pos,
+        DlnaLogger.log(DlnaLogLevel::Debug, "%s substrView (%d,%d)->%s", tag, start_pos, end_pos,
                        result.c_str());
 
         result.trim();

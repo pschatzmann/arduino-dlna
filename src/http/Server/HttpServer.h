@@ -24,13 +24,13 @@ namespace tiny_dlna {
 class HttpServer {
  public:
   HttpServer(WiFiServer& server, int bufferSize = 1024) {
-    DlnaLogger.log(DlnaInfo, "HttpServer");
+    DlnaLogger.log(DlnaLogLevel::Info, "HttpServer");
     this->server_ptr = &server;
     this->buffer.resize(bufferSize);
   }
 
   ~HttpServer() {
-    DlnaLogger.log(DlnaInfo, "~HttpServer");
+    DlnaLogger.log(DlnaLogLevel::Info, "~HttpServer");
     handler_collection.clear();
     request_header.clear(false);
     reply_header.clear(false);
@@ -66,7 +66,7 @@ class HttpServer {
 
   /// Starts the server on the indicated port
   bool begin(int port) {
-    DlnaLogger.log(DlnaInfo, "HttpServer begin at port %d", port);
+    DlnaLogger.log(DlnaLogLevel::Info, "HttpServer begin at port %d", port);
     is_active = true;
     server_ptr->begin(port);
     return true;
@@ -74,13 +74,13 @@ class HttpServer {
 
   /// stops the server_ptr
   void end() {
-    DlnaLogger.log(DlnaInfo, "HttpServer %s", "stop");
+    DlnaLogger.log(DlnaLogLevel::Info, "HttpServer %s", "stop");
     is_active = false;
   }
 
   /// adds a rewrite rule
   void rewrite(const char* from, const char* to) {
-    DlnaLogger.log(DlnaInfo, "Rewriting %s to %s", from, to);
+    DlnaLogger.log(DlnaLogLevel::Info, "Rewriting %s to %s", from, to);
     HttpRequestRewrite* line = new HttpRequestRewrite(from, to);
     rewrite_collection.push_back(line);
   }
@@ -88,7 +88,7 @@ class HttpServer {
   /// register a generic handler
   void on(const char* url, TinyMethodID method, web_callback_fn fn,
           void* ctx[] = nullptr, int ctxCount = 0) {
-    DlnaLogger.log(DlnaInfo, "Serving at %s", url);
+    DlnaLogger.log(DlnaLogLevel::Info, "Serving at %s", url);
     HttpRequestHandlerLine* hl = new HttpRequestHandlerLine(ctxCount);
     hl->path = url;
     hl->fn = fn;
@@ -102,7 +102,7 @@ class HttpServer {
   /// register a handler with mime
   void on(const char* url, TinyMethodID method, const char* mime,
           web_callback_fn fn) {
-    DlnaLogger.log(DlnaInfo, "Serving at %s", url);
+    DlnaLogger.log(DlnaLogLevel::Info, "Serving at %s", url);
     HttpRequestHandlerLine* hl = new HttpRequestHandlerLine();
     hl->path = url;
     hl->fn = fn;
@@ -114,13 +114,13 @@ class HttpServer {
   /// register a handler which provides the indicated string
   void on(const char* url, TinyMethodID method, const char* mime,
           const char* result) {
-    DlnaLogger.log(DlnaInfo, "Serving at %s", url);
+    DlnaLogger.log(DlnaLogLevel::Info, "Serving at %s", url);
 
     auto lambda = [](HttpServer* server_ptr, const char* requestPath,
                      HttpRequestHandlerLine* hl) {
-      DlnaLogger.log(DlnaInfo, "on-strings %s", "lambda");
+      DlnaLogger.log(DlnaLogLevel::Info, "on-strings %s", "lambda");
       if (hl->contextCount < 2) {
-        DlnaLogger.log(DlnaError, "The context is not available");
+        DlnaLogger.log(DlnaLogLevel::Error, "The context is not available");
         return;
       }
       const char* mime = (const char*)hl->context[0];
@@ -139,20 +139,20 @@ class HttpServer {
   /// register a handler which provides the indicated string
   void on(const char* url, TinyMethodID method, const char* mime,
           const uint8_t* data, int len) {
-    DlnaLogger.log(DlnaInfo, "Serving at %s", url);
+    DlnaLogger.log(DlnaLogLevel::Info, "Serving at %s", url);
 
     auto lambda = [](HttpServer* server_ptr, const char* requestPath,
                      HttpRequestHandlerLine* hl) {
-      DlnaLogger.log(DlnaInfo, "on-strings %s", "lambda");
+      DlnaLogger.log(DlnaLogLevel::Info, "on-strings %s", "lambda");
       if (hl->contextCount < 3) {
-        DlnaLogger.log(DlnaError, "The context is not available");
+        DlnaLogger.log(DlnaLogLevel::Error, "The context is not available");
         return;
       }
       const char* mime = static_cast<char*>(hl->context[0]);
       const uint8_t* data = static_cast<uint8_t*>(hl->context[1]);
       int* p_len = (int*)hl->context[2];
       int len = *p_len;
-      DlnaLogger.log(DlnaDebug, "Mime %d - Len: %d", mime, len);
+      DlnaLogger.log(DlnaLogLevel::Debug, "Mime %d - Len: %d", mime, len);
       server_ptr->reply(mime, data, len, 200);
     };
     HttpRequestHandlerLine* hl = new HttpRequestHandlerLine(3);
@@ -167,14 +167,14 @@ class HttpServer {
 
   /// register a redirection
   void on(const char* url, TinyMethodID method, Url& redirect) {
-    DlnaLogger.log(DlnaInfo, "Serving at %s", url);
+    DlnaLogger.log(DlnaLogLevel::Info, "Serving at %s", url);
     auto lambda = [](HttpServer* server_ptr, const char* requestPath,
                      HttpRequestHandlerLine* hl) {
       if (hl->contextCount < 1) {
-        DlnaLogger.log(DlnaError, "The context is not available");
+        DlnaLogger.log(DlnaLogLevel::Error, "The context is not available");
         return;
       }
-      DlnaLogger.log(DlnaInfo, "on-redirect %s", "lambda");
+      DlnaLogger.log(DlnaLogLevel::Info, "on-redirect %s", "lambda");
       HttpReplyHeader reply_header;
       Url* url = static_cast<Url*>(hl->context[0]);
       reply_header.setValues(301, "Moved");
@@ -196,14 +196,14 @@ class HttpServer {
 
   /// register a redirection
   void on(const char* url, TinyMethodID method, HttpTunnel& tunnel) {
-    DlnaLogger.log(DlnaInfo, "Serving at %s", url);
+    DlnaLogger.log(DlnaLogLevel::Info, "Serving at %s", url);
 
     auto lambda = [](HttpServer* server_ptr, const char* requestPath,
                      HttpRequestHandlerLine* hl) {
-      DlnaLogger.log(DlnaInfo, "on-HttpTunnel %s", "lambda");
+      DlnaLogger.log(DlnaLogLevel::Info, "on-HttpTunnel %s", "lambda");
       HttpTunnel* p_tunnel = static_cast<HttpTunnel*>(hl->context[0]);
       if (p_tunnel == nullptr) {
-        DlnaLogger.log(DlnaError, "p_tunnel is null");
+        DlnaLogger.log(DlnaLogLevel::Error, "p_tunnel is null");
         server_ptr->replyNotFound();
         return;
       }
@@ -211,7 +211,7 @@ class HttpServer {
       // execute T_GET request
       Stream* p_in = p_tunnel->get();
       if (p_in == nullptr) {
-        DlnaLogger.log(DlnaError, "p_in is null");
+        DlnaLogger.log(DlnaLogLevel::Error, "p_in is null");
         server_ptr->replyNotFound();
         return;
       }
@@ -233,13 +233,13 @@ class HttpServer {
   /// generic handler - you can overwrite this method to provide your specifc
   /// processing logic
   bool onRequest(const char* path) {
-    DlnaLogger.log(DlnaInfo, "Serving at %s", path);
+    DlnaLogger.log(DlnaLogLevel::Info, "Serving at %s", path);
 
     bool result = false;
     // check in registered handlers
     StrView pathStr = StrView(path);
     for (auto handler_line_ptr : handler_collection) {
-      DlnaLogger.log(DlnaInfo, "onRequest: %s vs: %s %s %s",
+      DlnaLogger.log(DlnaLogLevel::Info, "onRequest: %s vs: %s %s %s",
                      path,
                      nullstr(handler_line_ptr->path.c_str()),
                      methods[handler_line_ptr->method],
@@ -249,7 +249,7 @@ class HttpServer {
           request_header.method() == handler_line_ptr->method &&
           matchesMime(handler_line_ptr->mime, request_header.accept())) {
         // call registed handler function
-        DlnaLogger.log(DlnaInfo, "onRequest %s", "->found",
+        DlnaLogger.log(DlnaLogLevel::Info, "onRequest %s", "->found",
                        nullstr(handler_line_ptr->path.c_str()));
         handler_line_ptr->fn(this, path, handler_line_ptr);
         result = true;
@@ -258,7 +258,7 @@ class HttpServer {
     }
 
     if (!result) {
-      DlnaLogger.log(DlnaError, "Request %s not available", path);
+      DlnaLogger.log(DlnaLogLevel::Error, "Request %s not available", path);
     }
 
     return result;
@@ -281,7 +281,7 @@ class HttpServer {
   /// start of chunked reply: use HttpChunkWriter to provde the data
   void replyChunked(const char* contentType, int status = 200,
                     const char* msg = SUCCESS) {
-    DlnaLogger.log(DlnaInfo, "reply %s", "replyChunked");
+    DlnaLogger.log(DlnaLogLevel::Info, "reply %s", "replyChunked");
     reply_header.setValues(status, msg);
     reply_header.put(TRANSFER_ENCODING, CHUNKED);
     reply_header.put(CONTENT_TYPE, contentType);
@@ -292,7 +292,7 @@ class HttpServer {
   /// write reply - copies data from input stream with header size
   void reply(const char* contentType, Stream& inputStream, int size,
              int status = 200, const char* msg = SUCCESS) {
-    DlnaLogger.log(DlnaInfo, "reply %s", "stream");
+    DlnaLogger.log(DlnaLogLevel::Info, "reply %s", "stream");
     reply_header.setValues(status, msg);
     reply_header.put(CONTENT_LENGTH, size);
     reply_header.put(CONTENT_TYPE, contentType);
@@ -310,7 +310,7 @@ class HttpServer {
   /// write reply - using callback that writes to stream
   void reply(const char* contentType, void (*callback)(Stream& out),
              int status = 200, const char* msg = SUCCESS) {
-    DlnaLogger.log(DlnaInfo, "reply %s", "callback");
+    DlnaLogger.log(DlnaLogLevel::Info, "reply %s", "callback");
     reply_header.setValues(status, msg);
     reply_header.put(CONTENT_TYPE, contentType);
     reply_header.put(CONNECTION, CON_KEEP_ALIVE);
@@ -323,7 +323,7 @@ class HttpServer {
   /// write reply - using callback that writes to stream
   void reply(const char* contentType, void (*callback)(Print& out),
              int status = 200, const char* msg = SUCCESS) {
-    DlnaLogger.log(DlnaInfo, "reply %s", "callback");
+    DlnaLogger.log(DlnaLogLevel::Info, "reply %s", "callback");
     reply_header.setValues(status, msg);
     reply_header.put(CONTENT_TYPE, contentType);
     reply_header.put(CONNECTION, CON_KEEP_ALIVE);
@@ -336,7 +336,7 @@ class HttpServer {
   /// write reply - string with header size
   void reply(const char* contentType, const char* str, int status = 200,
              const char* msg = SUCCESS) {
-    DlnaLogger.log(DlnaInfo, "reply %s", "str");
+    DlnaLogger.log(DlnaLogLevel::Info, "reply %s", "str");
     int len = strlen(str);
     reply_header.setValues(status, msg);
     reply_header.put(CONTENT_LENGTH, len);
@@ -349,7 +349,7 @@ class HttpServer {
 
   void reply(const char* contentType, const uint8_t* str, int len,
              int status = 200, const char* msg = SUCCESS) {
-    DlnaLogger.log(DlnaInfo, "reply %s", "str");
+    DlnaLogger.log(DlnaLogLevel::Info, "reply %s", "str");
     reply_header.setValues(status, msg);
     reply_header.put(CONTENT_LENGTH, len);
     reply_header.put(CONTENT_TYPE, contentType);
@@ -364,13 +364,13 @@ class HttpServer {
 
   /// write 404 reply
   void replyNotFound() {
-    DlnaLogger.log(DlnaInfo, "reply %s", "404");
+    DlnaLogger.log(DlnaLogLevel::Info, "reply %s", "404");
     reply(404, "Page Not Found");
   }
 
   /// Writes the status and message to the reply
   void reply(int status, const char* msg) {
-    DlnaLogger.log(DlnaInfo, "reply %d", status);
+    DlnaLogger.log(DlnaLogLevel::Info, "reply %d", status);
     reply_header.setValues(status, msg);
     reply_header.write(this->client());
     endClient();
@@ -384,7 +384,7 @@ class HttpServer {
 
   /// closes the connection to the current client_ptr
   void endClient() {
-    DlnaLogger.log(DlnaInfo, "HttpServer %s", "endClient");
+    DlnaLogger.log(DlnaLogLevel::Info, "HttpServer %s", "endClient");
     client_ptr->flush();
     client_ptr->stop();
   }
@@ -410,7 +410,7 @@ class HttpServer {
     if (is_active) {
       WiFiClient client = server_ptr->accept();
       if (client) {
-        DlnaLogger.log(DlnaInfo, "doLoop->hasClient");
+        DlnaLogger.log(DlnaLogLevel::Info, "doLoop->hasClient");
         client_ptr = &client;
 
         // process the new client with standard functionality
@@ -424,10 +424,10 @@ class HttpServer {
       } else {
         // give other tasks a chance
         delay(no_connect_delay);
-        // DlnaLogger.log(DlnaDebug, "HttpServer no client available");
+        // DlnaLogger.log(DlnaLogLevel::Debug, "HttpServer no client available");
       }
     } else {
-      DlnaLogger.log(DlnaWarning, "HttpServer inactive");
+      DlnaLogger.log(DlnaLogLevel::Warning, "HttpServer inactive");
     }
     return result;
   }
@@ -479,7 +479,7 @@ class HttpServer {
 
   // process a full request and send the reply
   void processRequest() {
-    DlnaLogger.log(DlnaInfo, "processRequest");
+    DlnaLogger.log(DlnaLogLevel::Info, "processRequest");
     request_header.read(this->client());
     // provide reply with empty header
     reply_header.clear();

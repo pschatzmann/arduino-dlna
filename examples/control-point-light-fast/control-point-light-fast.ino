@@ -45,7 +45,7 @@ void setupDevice() {
 
 void setup() {
   Serial.begin(115200);
-  DlnaLogger.begin(Serial, DlnaInfo);
+  DlnaLogger.begin(Serial, DlnaLogLevel::Info);
 
   setupWifi();
   setupDevice();

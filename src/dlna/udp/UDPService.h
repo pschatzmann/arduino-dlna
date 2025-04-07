@@ -18,7 +18,7 @@ class UDPService : public IUDPService {
   UDPService() = default;
 
   bool begin(int port) override {
-    DlnaLogger.log(DlnaInfo, "begin: %d", port);
+    DlnaLogger.log(DlnaLogLevel::Info, "begin: %d", port);
     is_multicast = false;
     return udp.begin(port);
   }
@@ -26,20 +26,20 @@ class UDPService : public IUDPService {
   bool begin(IPAddressAndPort addr) override {
     peer = addr;
     is_multicast = true;
-    DlnaLogger.log(DlnaInfo, "beginMulticast: %s", addr.toString());
+    DlnaLogger.log(DlnaLogLevel::Info, "beginMulticast: %s", addr.toString());
     return udp.beginMulticast(addr.address, addr.port);
   }
 
   bool send(uint8_t *data, int len) override { return send(peer, data, len); }
 
   bool send(IPAddressAndPort addr, uint8_t *data, int len) override {
-    DlnaLogger.log(DlnaDebug, "sending %d bytes", len);
+    DlnaLogger.log(DlnaLogLevel::Debug, "sending %d bytes", len);
     udp.beginPacket(addr.address, addr.port);
     int sent = udp.write(data, len);
     assert(sent == len);
     bool result = udp.endPacket();
     if (!result) {
-      DlnaLogger.log(DlnaError, "Sending failed");
+      DlnaLogger.log(DlnaLogLevel::Error, "Sending failed");
     }
     return result;
   }
@@ -54,7 +54,7 @@ class UDPService : public IUDPService {
       char tmp[packetSize + 1] = {0};
       int len = udp.readBytes(tmp, len);
       result.data = tmp;
-      DlnaLogger.log(DlnaDebug, "(%s [%d])->: %s", result.peer.toString(),
+      DlnaLogger.log(DlnaLogLevel::Debug, "(%s [%d])->: %s", result.peer.toString(),
                      packetSize, tmp);
     }
     return result;

@@ -742,7 +742,6 @@ class StrView {
       add(p1);
     if (p2 != nullptr)
       add(p2);
-    replaceAll("//", ",");
     return chars;
   }
 

@@ -19,7 +19,7 @@ class DLNAServiceInfo {
   void setup(const char* type, const char* id, const char* scp,
              http_callback cbScp, const char* control, http_callback cbControl,
              const char* event, http_callback cbEvent) {
-    DlnaLogger.log(DlnaInfo, "setting up: %s | %s | %s", scp, control, event);
+    DlnaLogger.log(DlnaLogLevel::Info, "setting up: %s | %s | %s", scp, control, event);
 
     service_type = type;
     service_id = id;

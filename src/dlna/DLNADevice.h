@@ -31,7 +31,7 @@ class DLNADevice {
 
  public:
   DLNADevice(bool ok = true) { is_active = true; }
-  ~DLNADevice() { DlnaLogger.log(DlnaDebug, "~DLNADevice()"); }
+  ~DLNADevice() { DlnaLogger.log(DlnaLogLevel::Debug, "~DLNADevice()"); }
 
   /// renderes the device xml
   void print(Print& out) {
@@ -58,9 +58,11 @@ class DLNADevice {
   /// Provides the base url
   const char* getBaseURL() {
     // replace localhost url
-    // if (base_url.contains("localhost")) {
-    //   base_url.replace("localhost", getIPStr());
-    // }
+    if (StrView(base_url).contains("localhost")) {
+      url_str = base_url;
+      url_str.replace("localhost", getIPStr());
+      base_url = url_str.c_str();
+     }
     return base_url;
   }
 
@@ -186,6 +188,7 @@ class DLNADevice {
   Icon icon;
   Vector<DLNAServiceInfo> services;
   Vector<Icon> icons;
+  Str url_str; 
 
   /// to be implemented by subclasses
   virtual void setupServices(HttpServer& server, IUDPService& udp){}

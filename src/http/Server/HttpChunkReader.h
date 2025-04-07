@@ -26,14 +26,14 @@ class HttpChunkReader : public HttpLineReader {
   }
 
   void open(Client &client) {
-    DlnaLogger.log(DlnaDebug, "HttpChunkReader %s", "open");
+    DlnaLogger.log(DlnaLogLevel::Debug, "HttpChunkReader %s", "open");
     has_ended = false;
     readChunkLen(client);
   }
 
   // reads a block of data from the chunks
   virtual int read(Client &client, uint8_t *str, int len) {
-    DlnaLogger.log(DlnaDebug, "HttpChunkReader %s", "read");
+    DlnaLogger.log(DlnaLogLevel::Debug, "HttpChunkReader %s", "read");
     if (has_ended && open_chunk_len == 0) return 0;
 
     // read the chunk data - but not more then available
@@ -54,7 +54,7 @@ class HttpChunkReader : public HttpLineReader {
   // reads a single line from the chunks
   virtual int readln(Client &client, uint8_t *str, int len,
                      bool incl_nl = true) {
-    DlnaLogger.log(DlnaDebug, "HttpChunkReader %s", "readln");
+    DlnaLogger.log(DlnaLogLevel::Debug, "HttpChunkReader %s", "readln");
     if (has_ended && open_chunk_len == 0) return 0;
 
     int read_max = len < open_chunk_len ? len : open_chunk_len;
@@ -72,7 +72,7 @@ class HttpChunkReader : public HttpLineReader {
 
   int available() {
     int result = has_ended ? 0 : open_chunk_len;
-    DlnaLogger.log(DlnaDebug, "HttpChunkReader available=>%d", result);
+    DlnaLogger.log(DlnaLogLevel::Debug, "HttpChunkReader available=>%d", result);
 
     return result;
   }
@@ -83,35 +83,35 @@ class HttpChunkReader : public HttpLineReader {
   HttpReplyHeader *http_heaer_ptr;
 
   void removeCRLF(Client &client) {
-    DlnaLogger.log(DlnaDebug, "HttpChunkReader %s", "removeCRLF");
+    DlnaLogger.log(DlnaLogLevel::Debug, "HttpChunkReader %s", "removeCRLF");
     // remove traling CR LF from data
     if (client.peek() == '\r') {
-      DlnaLogger.log(DlnaDebug, "HttpChunkReader %s", "removeCR");
+      DlnaLogger.log(DlnaLogLevel::Debug, "HttpChunkReader %s", "removeCR");
       client.read();
     }
     if (client.peek() == '\n') {
-      DlnaLogger.log(DlnaDebug, "HttpChunkReader %s", "removeLF");
+      DlnaLogger.log(DlnaLogLevel::Debug, "HttpChunkReader %s", "removeLF");
       client.read();
     }
   }
 
   // we read the chunk length which is indicated as hex value
   virtual void readChunkLen(Client &client) {
-    DlnaLogger.log(DlnaDebug, "HttpChunkReader::readChunkLen");
+    DlnaLogger.log(DlnaLogLevel::Debug, "HttpChunkReader::readChunkLen");
     uint8_t len_str[51];
     readlnInternal(client, len_str, 50, false);
-    DlnaLogger.log(DlnaDebug, "HttpChunkReader::readChunkLen %s",
+    DlnaLogger.log(DlnaLogLevel::Debug, "HttpChunkReader::readChunkLen %s",
                    (const char *)len_str);
-    DlnaLogger.log(DlnaDebug, "\n");
+    DlnaLogger.log(DlnaLogLevel::Debug, "\n");
     open_chunk_len = strtol((char *)len_str, nullptr, 16);
 
     char msg[40];
     sprintf(msg, "chunk_len: %d", open_chunk_len);
-    DlnaLogger.log(DlnaDebug, "HttpChunkReader::readChunkLen->%s", msg);
+    DlnaLogger.log(DlnaLogLevel::Debug, "HttpChunkReader::readChunkLen->%s", msg);
 
     if (open_chunk_len == 0) {
       has_ended = true;
-      DlnaLogger.log(DlnaDebug, "HttpChunkReader::readChunkLen %s",
+      DlnaLogger.log(DlnaLogLevel::Debug, "HttpChunkReader::readChunkLen %s",
                      "last chunk received");
       // processing of additinal final headers after the chunk end
       if (http_heaer_ptr != nullptr) {

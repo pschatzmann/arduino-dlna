@@ -35,14 +35,14 @@ void setupDeviceInfo() {
   // // to be implemented
   // auto controlCB = [](HttpServer* server, const char* requestPath,
   //                     HttpRequestHandlerLine* hl) {
-  //   DlnaLogger.log(DlnaError, "Unhandled request: %s", requestPath);
+  //   DlnaLogger.log(DlnaLogLevel::Error, "Unhandled request: %s", requestPath);
   //   server->reply("text/xml", "<test/>");
   // };
 
   // // to be implemented
   // auto eventCB = [](HttpServer* server, const char* requestPath,
   //                   HttpRequestHandlerLine* hl) {
-  //   DlnaLogger.log(DlnaError, "Unhandled request: %s", requestPath);
+  //   DlnaLogger.log(DlnaLogLevel::Error, "Unhandled request: %s", requestPath);
   //   server->reply("text/xml", "<test/>");
   // };
 
@@ -80,7 +80,7 @@ void setupDeviceInfo() {
 void setup() {
   Serial.begin(115200);
   // setup logger
-  DlnaLogger.begin(Serial, DlnaInfo);
+  DlnaLogger.begin(Serial, DlnaLogLevel::Info);
   // start Wifi
   setupWifi();
 

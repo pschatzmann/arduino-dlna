@@ -21,14 +21,14 @@ class MediaRenderer : public DLNADevice {
  public:
   MediaRenderer() {
     // Constructor
-    DlnaLogger.log(DlnaInfo, "MediaRenderer::MediaRenderer");
+    DlnaLogger.log(DlnaLogLevel::Info, "MediaRenderer::MediaRenderer");
     setSerialNumber(usn);
     setDeviceType(st);
     setFriendlyName("MediaRenderer");
     setManufacturer("TinyDLNA");
     setModelName("TinyDLNA");
     setModelNumber("1.0");
-    setBaseURL("http://0.0.0.0:44757");
+    setBaseURL("http://localhost:44757");
   }
 
   MediaRenderer(AudioStream& out, AudioDecoder& decoder) : MediaRenderer() {
@@ -56,11 +56,11 @@ class MediaRenderer : public DLNADevice {
 
   bool begin() {
     if (!p_decoder) {
-      DlnaLogger.log(DlnaError, "No decoder set");
+      DlnaLogger.log(DlnaLogLevel::Error, "No decoder set");
       return false;
     }
     if (!p_stream && !p_out && !p_print) {
-      DlnaLogger.log(DlnaError, "No output stream set");
+      DlnaLogger.log(DlnaLogLevel::Error, "No output stream set");
       return false;
     }
 
@@ -79,7 +79,7 @@ class MediaRenderer : public DLNADevice {
     } else if (p_print) {
       pipeline.setOutput(*p_print);
     } else {
-      DlnaLogger.log(DlnaError, "No output stream set");
+      DlnaLogger.log(DlnaLogLevel::Error, "No output stream set");
       return false;
     }
     bool result = pipeline.begin();
@@ -96,14 +96,14 @@ class MediaRenderer : public DLNADevice {
   /// Defines and opens the URL to be played
   bool play(const char* urlStr) {
     if (urlStr == nullptr) return false;
-    DlnaLogger.log(DlnaInfo, "is_active URL: %s", urlStr);
+    DlnaLogger.log(DlnaLogLevel::Info, "is_active URL: %s", urlStr);
 
     // Stop any current playback
     stop();
 
     // Start network stream
     if (!url.begin(urlStr)) {
-      DlnaLogger.log(DlnaError, "Failed to open URL");
+      DlnaLogger.log(DlnaLogLevel::Error, "Failed to open URL");
       return false;
     }
 
@@ -142,7 +142,7 @@ class MediaRenderer : public DLNADevice {
 
   bool seek(unsigned long position) {
     // Not fully supported with most streams
-    DlnaLogger.log(DlnaWarning, "Seek not fully supported");
+    DlnaLogger.log(DlnaLogLevel::Warning, "Seek not fully supported");
     return false;
   }
 
@@ -212,7 +212,7 @@ class MediaRenderer : public DLNADevice {
                                  HttpRequestHandlerLine* hl) {
     // Parse SOAP request and extract action
     Str soap = server->contentStr();
-    DlnaLogger.log(DlnaInfo, "Transport Control: %s", soap.c_str());
+    DlnaLogger.log(DlnaLogLevel::Info, "Transport Control: %s", soap.c_str());
     MediaRenderer& media_renderer = *((MediaRenderer*)hl->context[0]);
 
     Str reply_str{reply()};
@@ -250,7 +250,7 @@ class MediaRenderer : public DLNADevice {
     // Parse SOAP request and extract action
     MediaRenderer& media_renderer = *((MediaRenderer*)hl->context[0]);
     Str soap = server->contentStr();
-    DlnaLogger.log(DlnaInfo, "Rendering Control: %s", soap.c_str());
+    DlnaLogger.log(DlnaLogLevel::Info, "Rendering Control: %s", soap.c_str());
     Str reply_str{reply()};
     reply_str.replaceAll("%2", "RenderingControl");
 
@@ -278,7 +278,7 @@ class MediaRenderer : public DLNADevice {
   };
 
   void setupServicesImpl(HttpServer* server) {
-    DlnaLogger.log(DlnaInfo, "MediaRenderer::setupServices");
+    DlnaLogger.log(DlnaLogLevel::Info, "MediaRenderer::setupServices");
 
     auto transportCB = [](HttpServer* server, const char* requestPath,
                           HttpRequestHandlerLine* hl) {

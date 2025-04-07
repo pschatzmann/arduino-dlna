@@ -29,7 +29,7 @@ class HttpStreamedMultiOutput : public HttpStreamedOutput {
   HttpStreamedMultiOutput(const char *mime, const char *startHtml = nullptr,
                           const char *endHtml = nullptr,
                           int maxHistoryLength = 0) {
-    DlnaLogger.log(DlnaInfo, "HttpStreamedMultiOutput");
+    DlnaLogger.log(DlnaLogLevel::Info, "HttpStreamedMultiOutput");
     this->start = startHtml;
     this->end = endHtml;
     this->mime_type = mime;
@@ -50,7 +50,7 @@ class HttpStreamedMultiOutput : public HttpStreamedOutput {
 
   // content that is written when the request is opened
   virtual void open(WiFiClient &client) {
-    DlnaLogger.log(DlnaInfo, "HttpStreamedMultiOutput::open");
+    DlnaLogger.log(DlnaLogLevel::Info, "HttpStreamedMultiOutput::open");
     if (client.connected()) {
       // create a copy
       // we handle only valid clents
@@ -63,7 +63,7 @@ class HttpStreamedMultiOutput : public HttpStreamedOutput {
       }
 
       // add client to list of open clients
-      DlnaLogger.log(DlnaWarning, "new client");
+      DlnaLogger.log(DlnaLogLevel::Warning, "new client");
       clients.push_back(client);
     }
   }
@@ -104,7 +104,7 @@ class HttpStreamedMultiOutput : public HttpStreamedOutput {
     for (auto i = clients.begin(); i != clients.end(); ++i) {
       WiFiClient client = *i;
       if (isValid(client)) {
-        DlnaLogger.log(DlnaDebug, "HttpStreamedMultiOutput::write");
+        DlnaLogger.log(DlnaLogLevel::Debug, "HttpStreamedMultiOutput::write");
         writer.writeChunk(client, (const char *)content, len);
       }
     }
@@ -118,7 +118,7 @@ class HttpStreamedMultiOutput : public HttpStreamedOutput {
     for (auto i = clients.begin(); i != clients.end(); ++i) {
       WiFiClient client = *i;
       if (isValid(client)) {
-        DlnaLogger.log(DlnaDebug, "HttpStreamedMultiOutput::print");
+        DlnaLogger.log(DlnaLogLevel::Debug, "HttpStreamedMultiOutput::print");
         writer.writeChunk(client, (const char *)str, len);
       }
     }
@@ -133,7 +133,7 @@ class HttpStreamedMultiOutput : public HttpStreamedOutput {
     for (auto i = clients.begin(); i != clients.end(); ++i) {
       WiFiClient client = *i;
       if (isValid(client)) {
-        DlnaLogger.log(DlnaDebug, "HttpStreamedMultiOutput::println");
+        DlnaLogger.log(DlnaLogLevel::Debug, "HttpStreamedMultiOutput::println");
         writer.writeChunk(client, str, len, "<br>", 4);
       }
     }
@@ -159,7 +159,7 @@ class HttpStreamedMultiOutput : public HttpStreamedOutput {
     for (int pos = clients.size() - 1; pos >= 0; pos--) {
       WiFiClient client = clients[pos];
       if (!isValid(client)) {
-        DlnaLogger.log(DlnaWarning, "HttpStreamedMultiOutput::closed");
+        DlnaLogger.log(DlnaLogLevel::Warning, "HttpStreamedMultiOutput::closed");
         clients.erase(clients.begin() + pos);
       }
     }
@@ -168,7 +168,7 @@ class HttpStreamedMultiOutput : public HttpStreamedOutput {
   /// content that is written when the request is opened
   void onClose(WiFiClient &client) {
     if (end != nullptr) {
-      DlnaLogger.log(DlnaInfo, "HttpStreamedMultiOutput::onClose");
+      DlnaLogger.log(DlnaLogLevel::Info, "HttpStreamedMultiOutput::onClose");
       int len = strlen(end);
       writer.writeChunk(client, end, len);
     }

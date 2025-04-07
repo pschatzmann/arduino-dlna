@@ -12,14 +12,14 @@ namespace tiny_dlna {
 class HttpTunnel {
  public:
   HttpTunnel(const char* url, const char* mime = "text/html") {
-    DlnaLogger.log(DlnaInfo, "HttpTunnel: %s", url);
+    DlnaLogger.log(DlnaLogLevel::Info, "HttpTunnel: %s", url);
     v_url.setUrl(url);
     v_mime = mime;
   }
 
   /// Executes the get request
   Stream* get() {
-    DlnaLogger.log(DlnaInfo, "HttpTunnel::get");
+    DlnaLogger.log(DlnaLogLevel::Info, "HttpTunnel::get");
     if (isOk(v_request.get(v_url, v_mime))) {
       return v_request.client();
     }

@@ -17,13 +17,13 @@ class Scheduler {
   /// Add a schedule to the scheduler
   void add(Schedule *schedule) {
     schedule->active = true;
-    DlnaLogger.log(DlnaInfo, "Schedule %s", schedule->name());
+    DlnaLogger.log(DlnaLogLevel::Info, "Schedule %s", schedule->name());
     queue.push_back(schedule);
   }
 
   /// Execute all due schedules
   void execute(IUDPService &udp) {
-    // DlnaLogger.log(DlnaDebug, "Scheduler::execute");
+    // DlnaLogger.log(DlnaLogLevel::Debug, "Scheduler::execute");
     bool is_cleanup = false;
     for (auto &p_s : queue) {
       if (p_s == nullptr) continue;
@@ -35,7 +35,7 @@ class Scheduler {
         }
         // process active schedules
         if (s.active) {
-          DlnaLogger.log(DlnaDebug, "Executing", s.name());
+          DlnaLogger.log(DlnaLogLevel::Debug, "Executing", s.name());
 
           s.process(udp);
           // reschedule if necessary
@@ -46,7 +46,7 @@ class Scheduler {
             is_cleanup = true;
           }
         } else {
-          DlnaLogger.log(DlnaDebug, "Inactive", s.name());
+          DlnaLogger.log(DlnaLogLevel::Debug, "Inactive", s.name());
         }
       }
     }
@@ -61,7 +61,7 @@ class Scheduler {
     for (auto it = queue.begin(); it != queue.end(); ++it) {
       auto p_rule = *it;
       if (!(p_rule)->active) {
-        DlnaLogger.log(DlnaDebug, "cleanup queue: %s", p_rule->name());
+        DlnaLogger.log(DlnaLogLevel::Debug, "cleanup queue: %s", p_rule->name());
         // remove schedule from collection
         queue.erase(it);
         // delete schedule

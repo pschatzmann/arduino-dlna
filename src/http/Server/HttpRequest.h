@@ -21,13 +21,13 @@ namespace tiny_dlna {
 class HttpRequest {
  public:
   HttpRequest() {
-    DlnaLogger.log(DlnaInfo, "HttpRequest");
+    DlnaLogger.log(DlnaLogLevel::Info, "HttpRequest");
     // default_client.setInsecure();
     setClient(default_client);
   }
 
   HttpRequest(Client &client) {
-    DlnaLogger.log(DlnaInfo, "HttpRequest");
+    DlnaLogger.log(DlnaLogLevel::Info, "HttpRequest");
     setClient(client);
   }
 
@@ -36,7 +36,7 @@ class HttpRequest {
   // the requests usually need a host. This needs to be set if we did not
   // provide a URL
   void setHost(const char *host) {
-    DlnaLogger.log(DlnaInfo, "setHost", host);
+    DlnaLogger.log(DlnaLogLevel::Info, "setHost", host);
     this->host_name = host;
   }
 
@@ -52,42 +52,42 @@ class HttpRequest {
   }
 
   virtual void stop() {
-    DlnaLogger.log(DlnaInfo, "stop");
+    DlnaLogger.log(DlnaLogLevel::Info, "stop");
     client_ptr->stop();
   }
 
   virtual int post(Url &url, const char *mime, const char *data, int len = -1) {
-    DlnaLogger.log(DlnaInfo, "post %s", url.url());
+    DlnaLogger.log(DlnaLogLevel::Info, "post %s", url.url());
     return process(T_POST, url, mime, data, len);
   }
 
   virtual int put(Url &url, const char *mime, const char *data, int len = -1) {
-    DlnaLogger.log(DlnaInfo, "put %s", url.url());
+    DlnaLogger.log(DlnaLogLevel::Info, "put %s", url.url());
     return process(T_PUT, url, mime, data, len);
   }
 
   virtual int del(Url &url, const char *mime = nullptr,
                   const char *data = nullptr, int len = -1) {
-    DlnaLogger.log(DlnaInfo, "del %s", url.url());
+    DlnaLogger.log(DlnaLogLevel::Info, "del %s", url.url());
     return process(T_DELETE, url, mime, data, len);
   }
 
   virtual int get(Url &url, const char *acceptMime = nullptr,
                   const char *data = nullptr, int len = -1) {
-    DlnaLogger.log(DlnaInfo, "get %s", str(url.url()));
+    DlnaLogger.log(DlnaLogLevel::Info, "get %s", str(url.url()));
     this->accept = acceptMime;
     return process(T_GET, url, nullptr, data, len);
   }
 
   virtual int head(Url &url, const char *acceptMime = nullptr,
                    const char *data = nullptr, int len = -1) {
-    DlnaLogger.log(DlnaInfo, "head %s", url.url());
+    DlnaLogger.log(DlnaLogLevel::Info, "head %s", url.url());
     this->accept = acceptMime;
     return process(T_HEAD, url, nullptr, data, len);
   }
 
   virtual int subscribe(Url &url) {
-    DlnaLogger.log(DlnaInfo, "post %s", url.url());
+    DlnaLogger.log(DlnaLogLevel::Info, "post %s", url.url());
     return process(T_SUBSCRIBE, url, nullptr, nullptr, 0);
   }
 
@@ -146,10 +146,10 @@ class HttpRequest {
 
   // opens a connection to the indicated host
   virtual int connect(const char *ip, uint16_t port) {
-    DlnaLogger.log(DlnaInfo, "connect %s", ip);
+    DlnaLogger.log(DlnaLogLevel::Info, "connect %s", ip);
     int rc = this->client_ptr->connect(ip, port);
     uint64_t end = millis() + client_ptr->getTimeout();
-    DlnaLogger.log(DlnaInfo, "Connected: %s (rc=%d) with timeout %ld",
+    DlnaLogger.log(DlnaLogLevel::Info, "Connected: %s (rc=%d) with timeout %ld",
                    connected() ? "true" : "false", rc,
                    client_ptr->getTimeout());
     return rc;
@@ -159,14 +159,14 @@ class HttpRequest {
   virtual int process(TinyMethodID action, Url &url, const char *mime,
                       const char *data, int len = -1) {
     if (!connected()) {
-      DlnaLogger.log(DlnaInfo, "Connecting to host %s port %d", url.host(),
+      DlnaLogger.log(DlnaLogLevel::Info, "Connecting to host %s port %d", url.host(),
                      url.port());
 
       connect(url.host(), url.port());
     }
 
     if (!connected()) {
-      DlnaLogger.log(DlnaInfo, "Connected: %s", connected() ? "true" : "false");
+      DlnaLogger.log(DlnaLogLevel::Info, "Connected: %s", connected() ? "true" : "false");
       return -1;
     }
 
@@ -202,7 +202,7 @@ class HttpRequest {
     request_header.write(*client_ptr);
 
     if (len > 0) {
-      DlnaLogger.log(DlnaInfo, "process - writing data");
+      DlnaLogger.log(DlnaLogLevel::Info, "process - writing data");
       client_ptr->write((const uint8_t *)data, len);
     }
 

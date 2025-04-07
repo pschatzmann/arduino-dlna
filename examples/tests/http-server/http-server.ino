@@ -18,7 +18,7 @@ void setupWifi() {
 void setup() {
   Serial.begin(115200);
   // connect to WIFI
-  DlnaLogger.begin(Serial, DlnaInfo);
+  DlnaLogger.begin(Serial, DlnaLogLevel::Info);
   setupWifi();
 
   const char* htmlHallo =

@@ -8,7 +8,7 @@ StringRegistry strings;
 
 void setup() {
   Serial.begin(119200);
-  DlnaLogger.begin(Serial, DlnaDebug);
+  DlnaLogger.begin(Serial, DlnaLogLevel::Debug);
   parser.parse(device, strings, (const char*) device_xml);
 }
 

@@ -36,7 +36,7 @@ void listServices() {
 
 void setup() {
   Serial.begin(115200);
-  DlnaLogger.begin(Serial, DlnaInfo);
+  DlnaLogger.begin(Serial, DlnaLogLevel::Info);
 
   setupWifi();
   if (!cp.begin(http, udp, "ssdp:all", 200000, true)) {

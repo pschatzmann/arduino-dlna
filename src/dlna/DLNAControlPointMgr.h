@@ -52,7 +52,7 @@ version: locate service of a given type
   bool begin(DLNAHttpRequest& http, IUDPService &udp,
              const char* searchTarget = "ssdp:all", uint32_t processingTime = 0,
              bool stopWhenFound = true) {
-    DlnaLogger.log(DlnaInfo, "DLNADevice::begin");
+    DlnaLogger.log(DlnaLogLevel::Info, "DLNADevice::begin");
     search_target = searchTarget;
     is_active = true;
     p_udp = &udp;
@@ -60,7 +60,7 @@ version: locate service of a given type
 
     // setup multicast UDP
     if (!(p_udp->begin(DLNABroadcastAddress))) {
-      DlnaLogger.log(DlnaError, "UDP begin failed");
+      DlnaLogger.log(DlnaLogLevel::Error, "UDP begin failed");
       return false;
     }
 
@@ -78,7 +78,7 @@ version: locate service of a given type
       loop();
     }
 
-    DlnaLogger.log(DlnaInfo, "Control Point started with %d devices found",
+    DlnaLogger.log(DlnaLogLevel::Info, "Control Point started with %d devices found",
                    devices.size());
     return devices.size() > 0;
   }
@@ -107,18 +107,18 @@ version: locate service of a given type
   bool subscribe(const char* serviceName, int seconds) {
     auto service = getService(serviceName);
     if (!service) {
-      DlnaLogger.log(DlnaError, "No service found for %s", serviceName);
+      DlnaLogger.log(DlnaLogLevel::Error, "No service found for %s", serviceName);
       return false;
     }
 
     auto& device = getDevice(service);
     if (!device) {
-      DlnaLogger.log(DlnaError, "Device not found");
+      DlnaLogger.log(DlnaLogLevel::Error, "Device not found");
       return false;
     }
 
     if (StrView(local_url.url()).isEmpty()) {
-      DlnaLogger.log(DlnaError, "Local URL not defined");
+      DlnaLogger.log(DlnaLogLevel::Error, "Local URL not defined");
       return false;
     }
     char url_buffer[200] = {0};
@@ -129,7 +129,7 @@ version: locate service of a given type
     p_http->request().put("TIMEOUT", seconds_txt);
     p_http->request().put("CALLBACK", local_url.url());
     int rc = p_http->subscribe(url);
-    DlnaLogger.log(DlnaInfo, "Http rc: %s", rc);
+    DlnaLogger.log(DlnaLogLevel::Info, "Http rc: %s", rc);
     return rc == 200;
   }
 
@@ -211,11 +211,11 @@ version: locate service of a given type
     dev.updateTimestamp();
     for (auto& existing_device : devices) {
       if (dev.getUDN() == existing_device.getUDN()) {
-        DlnaLogger.log(DlnaInfo, "Device '%s' already exists", dev.getUDN());
+        DlnaLogger.log(DlnaLogLevel::Info, "Device '%s' already exists", dev.getUDN());
         return false;
       }
     }
-    DlnaLogger.log(DlnaInfo, "Device '%s' has been added", dev.getUDN());
+    DlnaLogger.log(DlnaLogLevel::Info, "Device '%s' has been added", dev.getUDN());
     devices.push_back(dev);
     return true;
   }
@@ -234,7 +234,7 @@ version: locate service of a given type
     int rc = req.get(url, "text/xml");
 
     if (rc != 200) {
-      DlnaLogger.log(DlnaError, "Http get to '%s' failed with %d", url.url(),
+      DlnaLogger.log(DlnaLogLevel::Error, "Http get to '%s' failed with %d", url.url(),
                      rc);
       req.stop();
       return false;
@@ -286,7 +286,7 @@ version: locate service of a given type
     }
     if (nts.equals("ssdp:alive")) {
       bool select = selfDLNAControlPoint->matches(data.usn.c_str());
-      DlnaLogger.log(DlnaInfo, "addDevice: %s -> %s", data.usn.c_str(),
+      DlnaLogger.log(DlnaLogLevel::Info, "addDevice: %s -> %s", data.usn.c_str(),
                      select ? "added" : "filtered");
       Url url{data.location.c_str()};
       selfDLNAControlPoint->addDevice(url);
@@ -309,7 +309,7 @@ version: locate service of a given type
           srv.is_active = false;
           if (usn.endsWith(srv.service_type)) {
             if (srv.is_active) {
-              DlnaLogger.log(DlnaInfo, "removeDevice: %s", usn);
+              DlnaLogger.log(DlnaLogLevel::Info, "removeDevice: %s", usn);
               srv.is_active = false;
             }
           }
@@ -348,7 +348,7 @@ version: locate service of a given type
     StrView namespace_str(ns, 200);
     namespace_str = "xmlns:u=\"%1\"";
     bool ok = namespace_str.replace("%1", action.getServiceType());
-    DlnaLogger.log(DlnaDebug, "ns = '%s'", namespace_str.c_str());
+    DlnaLogger.log(DlnaLogLevel::Debug, "ns = '%s'", namespace_str.c_str());
 
     // assert(ok);
     result += xml.printNodeBegin(action.action, namespace_str.c_str(), "u");
@@ -399,7 +399,7 @@ version: locate service of a given type
                           str_print.length());
 
     // check result
-    DlnaLogger.log(DlnaInfo, "==> http rc %d", rc);
+    DlnaLogger.log(DlnaLogLevel::Info, "==> http rc %d", rc);
     ActionReply result(rc == 200);
     if (rc != 200) {
       p_http->stop();
@@ -407,7 +407,7 @@ version: locate service of a given type
     }
 
     // log xml request
-    DlnaLogger.log(DlnaDebug, str_print.c_str());
+    DlnaLogger.log(DlnaLogLevel::Debug, str_print.c_str());
 
     // receive result
     str_print.reset();
@@ -418,7 +418,7 @@ version: locate service of a given type
     }
 
     // log result
-    DlnaLogger.log(DlnaDebug, str_print.c_str());
+    DlnaLogger.log(DlnaLogLevel::Debug, str_print.c_str());
     p_http->stop();
 
     return result;

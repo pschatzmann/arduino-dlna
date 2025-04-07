@@ -69,14 +69,14 @@ struct HttpHeaderLine {
 class HttpHeader {
  public:
   HttpHeader() {
-    DlnaLogger.log(DlnaDebug, "HttpHeader");
+    DlnaLogger.log(DlnaLogLevel::Debug, "HttpHeader");
     // set default values
     protocol_str = "HTTP/1.1";
     url_path = "/";
     status_msg = "";
   }
   ~HttpHeader() {
-    DlnaLogger.log(DlnaDebug, "~HttpHeader");
+    DlnaLogger.log(DlnaLogLevel::Debug, "~HttpHeader");
     clear(false);
   }
 
@@ -104,24 +104,24 @@ class HttpHeader {
     if (value != nullptr) {
       HttpHeaderLine* hl = headerLine(key);
       if (hl == nullptr) {
-        DlnaLogger.log(DlnaError,
+        DlnaLogger.log(DlnaLogLevel::Error,
                        "HttpHeader::put - did not add HttpHeaderLine for %s",
                        key);
         return *this;
       }
 
       // log entry
-      DlnaLogger.log(DlnaDebug, "HttpHeader::put '%s' : %s", key, value);
+      DlnaLogger.log(DlnaLogLevel::Debug, "HttpHeader::put '%s' : %s", key, value);
       hl->value = value;
       hl->active = true;
 
       if (StrView(key) == TRANSFER_ENCODING && StrView(value) == CHUNKED) {
-        DlnaLogger.log(DlnaInfo, "HttpHeader::put -> is_chunked!!!");
+        DlnaLogger.log(DlnaLogLevel::Info, "HttpHeader::put -> is_chunked!!!");
         this->is_chunked = true;
       }
     } else {
       DlnaLogger.log(
-          DlnaInfo, "HttpHeader::put - value ignored because it is null for %s",
+          DlnaLogLevel::Info, "HttpHeader::put - value ignored because it is null for %s",
           key);
     }
     return *this;
@@ -129,23 +129,23 @@ class HttpHeader {
 
   /// adds a new line to the header - e.g. for content size
   HttpHeader& put(const char* key, int value) {
-    DlnaLogger.log(DlnaDebug, "HttpHeader::put %s %d", key, value);
+    DlnaLogger.log(DlnaLogLevel::Debug, "HttpHeader::put %s %d", key, value);
     HttpHeaderLine* hl = headerLine(key);
 
     if (value > 1024) {
-      DlnaLogger.log(DlnaWarning, "value %d is > 1024 for %s", value, key);
+      DlnaLogger.log(DlnaLogLevel::Warning, "value %d is > 1024 for %s", value, key);
     }
 
     // add value
     hl->value = value;
     hl->active = true;
-    DlnaLogger.log(DlnaInfo, "%s: %s", key, hl->value.c_str());
+    DlnaLogger.log(DlnaLogLevel::Info, "%s: %s", key, hl->value.c_str());
     return *this;
   }
 
   /// adds a  received new line to the header
   HttpHeader& put(const char* line) {
-    DlnaLogger.log(DlnaDebug, "HttpHeader::put -> %s", (const char*)line);
+    DlnaLogger.log(DlnaLogLevel::Debug, "HttpHeader::put -> %s", (const char*)line);
     StrView keyStr(line);
     int pos = keyStr.indexOf(":");
     char* key = (char*)line;
@@ -175,24 +175,24 @@ class HttpHeader {
   // reads a single header line
   void readLine(Client& in, char* str, int len) {
     reader.readlnInternal(in, (uint8_t*)str, len, false);
-    DlnaLogger.log(DlnaInfo, "HttpHeader::readLine -> %s", str);
+    DlnaLogger.log(DlnaLogLevel::Info, "HttpHeader::readLine -> %s", str);
   }
 
   // writes a lingle header line
   void writeHeaderLine(Client& out, HttpHeaderLine* header) {
     if (header == nullptr) {
-      DlnaLogger.log(DlnaInfo, "HttpHeader::writeHeaderLine",
+      DlnaLogger.log(DlnaLogLevel::Info, "HttpHeader::writeHeaderLine",
                      "the value must not be null");
       return;
     }
     if (!header->active) {
-      DlnaLogger.log(DlnaInfo, "HttpHeader::writeHeaderLine %s - not active",
+      DlnaLogger.log(DlnaLogLevel::Info, "HttpHeader::writeHeaderLine %s - not active",
                      header->key.c_str());
       return;
     }
     if (header->value.c_str() == nullptr) {
       DlnaLogger.log(
-          DlnaInfo,
+          DlnaLogLevel::Info,
           "HttpHeader::writeHeaderLine - ignored because value is null");
       return;
     }
@@ -208,7 +208,7 @@ class HttpHeader {
     // remove crlf from log
     int len = strnlen(msg, 200);
     msg[len - 2] = 0;
-    DlnaLogger.log(DlnaInfo, "writeHeaderLine -> %s", msg);
+    DlnaLogger.log(DlnaLogLevel::Info, "writeHeaderLine -> %s", msg);
 
     // marke as processed
     header->active = false;
@@ -233,7 +233,7 @@ class HttpHeader {
 
   // reads the full header from the request (stream)
   void read(Client& in) {
-    DlnaLogger.log(DlnaInfo, "HttpHeader::read");
+    DlnaLogger.log(DlnaLogLevel::Info, "HttpHeader::read");
     // remove all existing value
     clear();
 
@@ -241,7 +241,7 @@ class HttpHeader {
     if (in.connected()) {
       delay(200);
       if (in.available() == 0) {
-        DlnaLogger.log(DlnaWarning, "Waiting for data...");
+        DlnaLogger.log(DlnaLogLevel::Warning, "Waiting for data...");
         uint64_t end = millis() + in.getTimeout();
         while (in.available() == 0) {
           delay(100);
@@ -266,7 +266,7 @@ class HttpHeader {
 
   // writes the full header to the indicated HttpStreamedMultiOutput stream
   void write(Client& out) {
-    DlnaLogger.log(DlnaInfo, "HttpHeader::write");
+    DlnaLogger.log(DlnaLogLevel::Info, "HttpHeader::write");
     write1stLine(out);
     for (auto it = lines.begin(); it != lines.end(); ++it) {
       writeHeaderLine(out, *it);
@@ -305,7 +305,7 @@ class HttpHeader {
   // the headers need to delimited with CR LF
   void crlf(Client& out) {
     out.print(CRLF);
-    DlnaLogger.log(DlnaInfo, " -> %s", "<CR LF>");
+    DlnaLogger.log(DlnaLogLevel::Info, " -> %s", "<CR LF>");
   }
 
   // gets or creates a header line by key
@@ -322,7 +322,7 @@ class HttpHeader {
       }
       if (create_new_lines) {
         HttpHeaderLine* newLine = new HttpHeaderLine();
-        DlnaLogger.log(DlnaDebug,
+        DlnaLogger.log(DlnaLogLevel::Debug,
                        "HttpHeader::headerLine - new line created for %s", key);
         newLine->active = true;
         newLine->key = key;
@@ -330,7 +330,7 @@ class HttpHeader {
         return newLine;
       }
     } else {
-      DlnaLogger.log(DlnaError, "HttpHeader::headerLine",
+      DlnaLogger.log(DlnaLogLevel::Error, "HttpHeader::headerLine",
                      "The key must not be null");
     }
     return nullptr;
@@ -364,7 +364,7 @@ class HttpRequestHeader : public HttpHeader {
     this->method_id = id;
     this->url_path = urlPath;
 
-    DlnaLogger.log(DlnaInfo, "HttpRequestHeader::setValues - path: %s",
+    DlnaLogger.log(DlnaLogLevel::Info, "HttpRequestHeader::setValues - path: %s",
                    this->url_path.c_str());
     if (protocol != nullptr) {
       this->protocol_str = protocol;
@@ -384,13 +384,13 @@ class HttpRequestHeader : public HttpHeader {
     strncat(msg, this->protocol_str.c_str(), 200);
     strncat(msg, CRLF, 200);
     out.print(msg);
-    DlnaLogger.log(DlnaInfo, "HttpRequestHeader::write1stLine:  %s", msg);
+    DlnaLogger.log(DlnaLogLevel::Info, "HttpRequestHeader::write1stLine:  %s", msg);
   }
 
   // parses the requestline
   // Request-Line = Method SP Request-URI SP HTTP-Version CRLF
   void parse1stLine(const char* line) {
-    DlnaLogger.log(DlnaInfo, "HttpRequestHeader::parse1stLine %s", line);
+    DlnaLogger.log(DlnaLogLevel::Info, "HttpRequestHeader::parse1stLine %s", line);
     StrView line_str(line);
     int space1 = line_str.indexOf(" ");
     int space2 = line_str.indexOf(" ", space1 + 1);
@@ -400,9 +400,9 @@ class HttpRequestHeader : public HttpHeader {
     this->url_path.substrView(line_str, space1 + 1, space2);
     this->url_path.trim();
 
-    DlnaLogger.log(DlnaInfo, "->method: %s", methods[this->method_id]);
-    DlnaLogger.log(DlnaInfo, "->protocol: %s", protocol_str.c_str());
-    DlnaLogger.log(DlnaInfo, "->url_path: %s", url_path.c_str());
+    DlnaLogger.log(DlnaLogLevel::Info, "->method: %s", methods[this->method_id]);
+    DlnaLogger.log(DlnaLogLevel::Info, "->protocol: %s", protocol_str.c_str());
+    DlnaLogger.log(DlnaLogLevel::Info, "->url_path: %s", url_path.c_str());
   }
 };
 
@@ -415,7 +415,7 @@ class HttpReplyHeader : public HttpHeader {
   // defines the values for the rely
   void setValues(int statusCode, const char* msg = "",
                  const char* protocol = nullptr) {
-    DlnaLogger.log(DlnaInfo, "HttpReplyHeader::setValues %d", statusCode);
+    DlnaLogger.log(DlnaLogLevel::Info, "HttpReplyHeader::setValues %d", statusCode);
     status_msg = msg;
     status_code = statusCode;
     if (protocol != nullptr) {
@@ -425,7 +425,7 @@ class HttpReplyHeader : public HttpHeader {
 
   // reads the final chunked reply headers
   void readExt(Client& in) {
-    DlnaLogger.log(DlnaInfo, "HttpReplyHeader::readExt");
+    DlnaLogger.log(DlnaLogLevel::Info, "HttpReplyHeader::readExt");
     char line[MaxHeaderLineLength];
     readLine(in, line, MaxHeaderLineLength);
     while (strlen(line) != 0) {
@@ -443,7 +443,7 @@ class HttpReplyHeader : public HttpHeader {
     msg_str += this->status_code;
     msg_str += " ";
     msg_str += this->status_msg.c_str();
-    DlnaLogger.log(DlnaInfo, "HttpReplyHeader::write1stLine: %s", msg);
+    DlnaLogger.log(DlnaLogLevel::Info, "HttpReplyHeader::write1stLine: %s", msg);
     out.print(msg);
     crlf(out);
   }
@@ -452,7 +452,7 @@ class HttpReplyHeader : public HttpHeader {
   // we just update the pointers to point to the correct position in the
   // http_status_line
   void parse1stLine(const char* line) {
-    DlnaLogger.log(DlnaInfo, "HttpReplyHeader::parse1stLine %s", line);
+    DlnaLogger.log(DlnaLogLevel::Info, "HttpReplyHeader::parse1stLine %s", line);
     StrView line_str(line);
     int space1 = line_str.indexOf(' ', 0);
     int space2 = line_str.indexOf(' ', space1 + 1);

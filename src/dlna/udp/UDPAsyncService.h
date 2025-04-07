@@ -25,7 +25,7 @@ class UDPAsyncService : public IUDPService {
 
   bool begin(IPAddressAndPort addr) {
     peer = addr;
-    DlnaLogger.log(DlnaInfo, "beginMulticast: %s", addr.toString());
+    DlnaLogger.log(DlnaLogLevel::Info, "beginMulticast: %s", addr.toString());
 
     if (udp.listen(addr.port)) {
       udp.onPacket([&](AsyncUDPPacket packet) {
@@ -62,10 +62,10 @@ class UDPAsyncService : public IUDPService {
   bool send(uint8_t* data, int len) { return send(peer, data, len); }
 
   bool send(IPAddressAndPort addr, uint8_t* data, int len) {
-    DlnaLogger.log(DlnaDebug, "sending %d bytes", len);
+    DlnaLogger.log(DlnaLogLevel::Debug, "sending %d bytes", len);
     int sent = udp.writeTo(data, len, addr.address, addr.port);
     if (sent != len) {
-      DlnaLogger.log(DlnaError, "sending %d bytes -> %d", len, sent);
+      DlnaLogger.log(DlnaLogLevel::Error, "sending %d bytes -> %d", len, sent);
     }
     return sent == len;
   }

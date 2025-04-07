@@ -13,7 +13,7 @@ class HttpChunkWriter {
  public:
   int writeChunk(Client& client, const char* str, int len,
                  const char* str1 = nullptr, int len1 = 0) {
-    DlnaLogger.log(DlnaDebug, "HttpChunkWriter", "writeChunk");
+    DlnaLogger.log(DlnaLogLevel::Debug, "HttpChunkWriter", "writeChunk");
     client.println(len + len1, HEX);
     int result = client.write((uint8_t*)str, len);
     if (str1 != nullptr) {

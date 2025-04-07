@@ -46,7 +46,7 @@ class MSearchSchedule : public Schedule {
 
   bool process(IUDPService &udp) override {
     // we keep the data on the stack
-    DlnaLogger.log(DlnaDebug, "Sending %s for %s to %s", name(), search_target,
+    DlnaLogger.log(DlnaLogLevel::Debug, "Sending %s for %s to %s", name(), search_target,
                    address.toString());
 
     char buffer[MAX_TMP_SIZE] = {0};
@@ -59,7 +59,7 @@ class MSearchSchedule : public Schedule {
     int n = snprintf(buffer, MAX_TMP_SIZE, tmp, address.toString(), max_age,
                      search_target);
     assert(n < MAX_TMP_SIZE);
-    DlnaLogger.log(DlnaInfo, "sending: %s", buffer);
+    DlnaLogger.log(DlnaLogLevel::Info, "sending: %s", buffer);
     udp.send(address, (uint8_t *)buffer, n);
     return true;
   }
@@ -84,7 +84,7 @@ class MSearchReplySchedule : public Schedule {
 
   bool process(IUDPService &udp) override {
     // we keep the data on the stack
-    DlnaLogger.log(DlnaInfo, "Sending %s for %s to %s", name(),
+    DlnaLogger.log(DlnaLogLevel::Info, "Sending %s for %s to %s", name(),
                    search_target.c_str(), address.toString());
 
     DLNADevice &device = *p_device;
@@ -99,7 +99,7 @@ class MSearchReplySchedule : public Schedule {
                      device.getDeviceURL().url(), search_target.c_str(),
                      device.getUDN());
     assert(n < MAX_TMP_SIZE);
-    DlnaLogger.log(DlnaDebug, "sending: %s", buffer);
+    DlnaLogger.log(DlnaLogLevel::Debug, "sending: %s", buffer);
     udp.send(address, (uint8_t *)buffer, n);
     return true;
   }
@@ -126,7 +126,7 @@ class MSearchReplyCP : public Schedule {
   Str search_target;
 
   bool process(IUDPService &udp) override {
-    DlnaLogger.log(DlnaInfo, "-> %s not processed", search_target.c_str());
+    DlnaLogger.log(DlnaLogLevel::Info, "-> %s not processed", search_target.c_str());
     return true;
   }
 
@@ -147,11 +147,11 @@ class NotifyReplyCP : public MSearchReplyCP {
 
   bool process(IUDPService &udp) override {
     if (callback(*this)){
-      DlnaLogger.log(DlnaInfo, "%s -> %s", name(), nts.c_str());
+      DlnaLogger.log(DlnaLogLevel::Info, "%s -> %s", name(), nts.c_str());
       return true;
     }
 
-    DlnaLogger.log(DlnaInfo, "-> %s not processed", nts.c_str());
+    DlnaLogger.log(DlnaLogLevel::Info, "-> %s not processed", nts.c_str());
     return true;
   }
 };
@@ -171,7 +171,7 @@ class PostAliveSchedule : public Schedule {
   void setRepeatMs(uint32_t ms) { this->repeat_ms = ms; }
 
   bool process(IUDPService &udp) override {
-    DlnaLogger.log(DlnaInfo, "Sending %s to %s", name(),
+    DlnaLogger.log(DlnaLogLevel::Info, "Sending %s to %s", name(),
                    DLNABroadcastAddress.toString());
     DLNADevice &device = *p_device;
     char nt[100];
@@ -222,7 +222,7 @@ class PostAliveSchedule : public Schedule {
                      max_age, device_url, nt, usn);
 
     assert(n < MAX_TMP_SIZE);
-    DlnaLogger.log(DlnaDebug, "sending: %s", buffer);
+    DlnaLogger.log(DlnaLogLevel::Debug, "sending: %s", buffer);
     udp.send(DLNABroadcastAddress, (uint8_t *)buffer, n);
     return true;
   }
@@ -237,7 +237,7 @@ class PostByeSchedule : public Schedule {
   PostByeSchedule(DLNADevice &device) { p_device = &device; }
   const char *name() override { return "ByeBye"; }
   bool process(IUDPService &udp) override {
-    DlnaLogger.log(DlnaInfo, "Sending %s to %s", name(),
+    DlnaLogger.log(DlnaLogLevel::Info, "Sending %s to %s", name(),
                    DLNABroadcastAddress.toString());
     // we keep the data on the stack
     char buffer[MAX_TMP_SIZE] = {0};
@@ -252,7 +252,7 @@ class PostByeSchedule : public Schedule {
     int n = snprintf(buffer, MAX_TMP_SIZE, tmp, DLNABroadcastAddress.toString(),
                      max_age, p_device->getDeviceType(), p_device->getUDN());
 
-    DlnaLogger.log(DlnaDebug, "sending: %s", buffer);
+    DlnaLogger.log(DlnaLogLevel::Debug, "sending: %s", buffer);
     udp.send(DLNABroadcastAddress, (uint8_t *)buffer, n);
     return true;
   }
@@ -276,7 +276,7 @@ class PostSubscribe : public Schedule {
 
   bool process(IUDPService &udp) override {
     ///
-    DlnaLogger.log(DlnaInfo, "Sending Subscribe  to %s", address);
+    DlnaLogger.log(DlnaLogLevel::Info, "Sending Subscribe  to %s", address);
 
     char buffer[MAX_TMP_SIZE] = {0};
     const char *tmp =
@@ -288,7 +288,7 @@ class PostSubscribe : public Schedule {
     int n = snprintf(buffer, MAX_TMP_SIZE, tmp, path, address.toString(),
                      durationSec);
     assert(n < MAX_TMP_SIZE);
-    DlnaLogger.log(DlnaDebug, "sending: %s", buffer);
+    DlnaLogger.log(DlnaLogLevel::Debug, "sending: %s", buffer);
     udp.send(address, (uint8_t *)buffer, n);
     return true;
   }

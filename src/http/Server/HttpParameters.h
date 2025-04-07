@@ -39,16 +39,16 @@ class HttpParameters {
       memset(buffer, 0, max_len);
       in.readBytesUntil('&', buffer, max_len);
       StrView str(buffer);
-      DlnaLogger.log(DlnaInfo, "parameter: %s", buffer);
+      DlnaLogger.log(DlnaLogLevel::Info, "parameter: %s", buffer);
       urldecode2(buffer, buffer);
-      DlnaLogger.log(DlnaInfo, "parameter decoded: %s", buffer);
+      DlnaLogger.log(DlnaLogLevel::Info, "parameter decoded: %s", buffer);
       int pos = str.indexOf("=");
       if (pos > 0) {
         buffer[pos] = 0;  // delimit key
         const char *key = buffer;
         const char *value = buffer + pos + 1;
-        DlnaLogger.log(DlnaDebug, "key: %s", key);
-        DlnaLogger.log(DlnaDebug, "value: %s", value);
+        DlnaLogger.log(DlnaLogLevel::Debug, "key: %s", key);
+        DlnaLogger.log(DlnaLogLevel::Debug, "value: %s", value);
         HttpParameterEntry *entry = getParameter(key);
         if (entry != nullptr) {
           entry->value = value;
@@ -70,9 +70,9 @@ class HttpParameters {
       memset(buffer, 0, max_len);
       in.readBytesUntil('&', buffer, max_len);
       StrView str(buffer);
-      DlnaLogger.log(DlnaInfo, "parameter: %s", buffer);
+      DlnaLogger.log(DlnaLogLevel::Info, "parameter: %s", buffer);
       urldecode2(buffer, buffer);
-      DlnaLogger.log(DlnaInfo, "parameter decoded: %s", buffer);
+      DlnaLogger.log(DlnaLogLevel::Info, "parameter decoded: %s", buffer);
       int pos = str.indexOf("=");
       if (pos > 0) {
         buffer[pos] = 0;  // delimit key

@@ -5,7 +5,7 @@ DLNADeviceRequestParser rp;
 
 void setup() {
   Serial.begin(115200);
-  DlnaLogger.begin(Serial, DlnaDebug);
+  DlnaLogger.begin(Serial, DlnaLogLevel::Debug);
 
   data.peer.address = IPAddress(1,2,3,4);
   data.peer.port = 5;

@@ -13,7 +13,7 @@ namespace tiny_dlna {
  * @brief Supported log levels
  *
  */
-enum DlnaLogLevel { DlnaDebug, DlnaInfo, DlnaWarning, DlnaError };
+enum class DlnaLogLevel { Debug, Info, Warning, Error };
 
 static const char* HttpDlnaLogLevelStr[] = {"Debug", "Info", "Warning", "Error"};
 
@@ -26,7 +26,7 @@ class LoggerClass {
  public:
 
   // activate the logging
-  virtual void begin(Print& out, DlnaLogLevel level = DlnaError) {
+  virtual void begin(Print& out, DlnaLogLevel level = DlnaLogLevel::Error) {
     this->log_stream_ptr = &out;
     this->log_level = level;
   }
@@ -42,7 +42,7 @@ class LoggerClass {
         fmt != nullptr) {
       char log_buffer[DLNA_MAX_LOG_SIZE];
       strcpy(log_buffer, "DLNA - ");
-      strcat(log_buffer, HttpDlnaLogLevelStr[current_level]);
+      strcat(log_buffer, HttpDlnaLogLevelStr[(int)current_level]);
       strcat(log_buffer, ":     ");
       va_list arg;
       va_start(arg, fmt);
@@ -54,7 +54,7 @@ class LoggerClass {
 
  protected:
   Print* log_stream_ptr = &Serial;
-  DlnaLogLevel log_level = DlnaWarning;
+  DlnaLogLevel log_level = DlnaLogLevel::Warning;
 };
 
 extern LoggerClass DlnaLogger;

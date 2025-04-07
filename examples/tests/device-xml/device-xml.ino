@@ -10,7 +10,7 @@ void setupDevice() {
   
   auto dummyCB = [](HttpServer* server, const char* requestPath,
                     HttpRequestHandlerLine* hl) {
-    DlnaLogger.log(DlnaError, "Unhandled request: %s", requestPath);
+    DlnaLogger.log(DlnaLogLevel::Error, "Unhandled request: %s", requestPath);
     server->reply("text/xml", "<test/>");
   };
 
@@ -48,7 +48,7 @@ void setupDevice() {
 
 void setup() {
   Serial.begin(119200);
-  DlnaLogger.begin(Serial, DlnaInfo);
+  DlnaLogger.begin(Serial, DlnaLogLevel::Info);
 
   setupDevice();
   // render device XML

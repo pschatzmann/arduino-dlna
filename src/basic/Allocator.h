@@ -61,10 +61,10 @@ class Allocator {
   virtual void* allocate(size_t size) {
     void* result = do_allocate(size);
     if (result == nullptr) {
-      DlnaLogger.log(DlnaError, "Allocateation failed for %zu bytes", size);
+      DlnaLogger.log(DlnaLogLevel::Error, "Allocateation failed for %zu bytes", size);
       stop();
     } else {
-      DlnaLogger.log(DlnaDebug, "Allocated %zu", size);
+      DlnaLogger.log(DlnaLogLevel::Debug, "Allocated %zu", size);
     }
     return result;
   }
@@ -100,7 +100,7 @@ class AllocatorExt : public Allocator {
 #endif
     if (result == nullptr) result = malloc(size);
     if (result == nullptr) {
-      DlnaLogger.log(DlnaError, "allocateation failed for %zu bytes", size);
+      DlnaLogger.log(DlnaLogLevel::Error, "allocateation failed for %zu bytes", size);
       stop();
     }
     // initialize object
@@ -125,7 +125,7 @@ class AllocatorPSRAM : public Allocator {
     void* result = nullptr;
     result = ps_calloc(1, size);
     if (result == nullptr) {
-      DlnaLogger.log(DlnaError, "allocateation failed for %zu bytes", size);
+      DlnaLogger.log(DlnaLogLevel::Error, "allocateation failed for %zu bytes", size);
       stop();
     }
     return result;
