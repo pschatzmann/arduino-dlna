@@ -418,8 +418,6 @@ class HttpServer {
           processRequest();
         }
 
-        // process doLoop of all registed (and opened) extension_collection
-        // processExtensions();
         result = true;
       } else {
         // give other tasks a chance

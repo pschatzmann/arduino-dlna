@@ -41,7 +41,6 @@ class DLNADeviceMgr {
     }
 
     // setup all services
-    setupServices(*p_device);
     device.setupServices(server, udp);
 
     // setup web server
@@ -238,11 +237,6 @@ class DLNADeviceMgr {
       server->replyNotFound();
     }
   }
-
-  /// If you dont already provid a complete DLNADevice you can overwrite
-  /// this method and add some custom device specific logic to implement a new
-  /// device. The MediaRenderer is using this approach!
-  virtual void setupServices(DLNADevice& deviceInfo) {};
 };
 
 }  // namespace tiny_dlna
