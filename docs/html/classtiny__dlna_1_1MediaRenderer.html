@@ -66,7 +66,9 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pro-static-methods">Static Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classtiny__dlna_1_1MediaRenderer-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -83,8 +85,8 @@ Inheritance diagram for tiny_dlna::MediaRenderer:</div>
 <div class="dyncontent">
 <div class="center"><img src="classtiny__dlna_1_1MediaRenderer__inherit__graph.png" border="0" usemap="#atiny__dlna_1_1MediaRenderer_inherit__map" alt="Inheritance graph"/></div>
 <map name="atiny__dlna_1_1MediaRenderer_inherit__map" id="atiny__dlna_1_1MediaRenderer_inherit__map">
-<area shape="rect" title="MediaRenderer DLNA Device." alt="" coords="9,80,198,107"/>
-<area shape="rect" href="classtiny__dlna_1_1DLNADeviceMgr.html" title="Setup of a Basic DLNA Device service. The device registers itself to the network and answers to the D..." alt="" coords="5,5,201,32"/>
+<area shape="rect" title="MediaRenderer DLNA Device." alt="" coords="5,80,195,107"/>
+<area shape="rect" href="classtiny__dlna_1_1DLNADevice.html" title="Device Attributes and generation of XML using urn:schemas&#45;upnp&#45;org:device&#45;1&#45;0. We could just return a..." alt="" coords="15,5,185,32"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
@@ -92,116 +94,1060 @@ Collaboration diagram for tiny_dlna::MediaRenderer:</div>
 <div class="dyncontent">
 <div class="center"><img src="classtiny__dlna_1_1MediaRenderer__coll__graph.png" border="0" usemap="#atiny__dlna_1_1MediaRenderer_coll__map" alt="Collaboration graph"/></div>
 <map name="atiny__dlna_1_1MediaRenderer_coll__map" id="atiny__dlna_1_1MediaRenderer_coll__map">
-<area shape="rect" title="MediaRenderer DLNA Device." alt="" coords="3652,559,3841,585"/>
-<area shape="rect" href="classtiny__dlna_1_1DLNADeviceMgr.html" title="Setup of a Basic DLNA Device service. The device registers itself to the network and answers to the D..." alt="" coords="3407,559,3603,585"/>
-<area shape="rect" href="classtiny__dlna_1_1DLNADevice.html" title="Device Attributes and generation of XML using urn:schemas&#45;upnp&#45;org:device&#45;1&#45;0. We could just return a..." alt="" coords="2808,533,2979,560"/>
-<area shape="rect" href="classtiny__dlna_1_1DLNADeviceRequestParser.html" title="Translates DLNA UDP Requests to Schedule so that we can schedule a reply." alt="" coords="3089,491,3313,533"/>
-<area shape="rect" href="classtiny__dlna_1_1Url.html" title="URL parser which breaks a full url string up into its individual parts." alt="" coords="1304,439,1413,465"/>
-<area shape="rect" href="classtiny__dlna_1_1Str.html" title="String implementation which keeps the data on the heap. We grow the allocated memory only if the copy..." alt="" coords="763,471,871,497"/>
-<area shape="rect" href="classtiny__dlna_1_1Vector.html" title=" " alt="" coords="1126,522,1269,563"/>
-<area shape="rect" href="classtiny__dlna_1_1HttpHeader.html" title="In a http request and reply we need to process header information. With this API we can define and qu..." alt="" coords="1115,255,1280,281"/>
-<area shape="rect" href="classtiny__dlna_1_1StrView.html" title="A simple wrapper to provide string functions on char*. If the underlying char* is a const we do not a..." alt="" coords="335,471,475,497"/>
-<area shape="rect" href="classtiny__dlna_1_1Vector.html" title=" " alt="" coords="334,385,477,426"/>
-<area shape="rect" href="classtiny__dlna_1_1HttpServer.html" title="A Simple Header only implementation of Http Server that allows the registration of callback functions..." alt="" coords="1887,256,2047,283"/>
-<area shape="rect" href="classtiny__dlna_1_1Allocator.html" title="Memory allocateator which uses malloc." alt="" coords="6,392,154,419"/>
-<area shape="rect" href="classtiny__dlna_1_1Vector.html" title=" " alt="" coords="2518,689,2661,730"/>
-<area shape="rect" href="classtiny__dlna_1_1Vector.html" title=" " alt="" coords="2480,559,2699,601"/>
-<area shape="rect" href="classtiny__dlna_1_1List.html" title=" " alt="" coords="309,239,502,281"/>
-<area shape="rect" href="classtiny__dlna_1_1List.html" title=" " alt="" coords="294,163,517,205"/>
-<area shape="rect" href="classtiny__dlna_1_1List.html" title=" " alt="" coords="280,98,531,139"/>
-<area shape="rect" href="classtiny__dlna_1_1Vector.html" title=" " alt="" coords="555,38,697,79"/>
-<area shape="rect" href="classtiny__dlna_1_1Vector.html" title=" " alt="" coords="316,755,495,797"/>
-<area shape="rect" href="classtiny__dlna_1_1Icon.html" title="Information about the icon." alt="" coords="2225,648,2342,675"/>
-<area shape="rect" href="classtiny__dlna_1_1StringRegistry.html" title=" " alt="" coords="1680,487,1863,513"/>
-<area shape="rect" href="structtiny__dlna_1_1XMLPrinter.html" title="Functions to efficiently output XML. XML data contains a lot of redundancy so it is more memory effic..." alt="" coords="2509,508,2670,535"/>
-<area shape="rect" href="classtiny__dlna_1_1DLNAServiceInfo.html" title="Attributes needed for the DLNA Service Definition." alt="" coords="2184,337,2383,364"/>
-<area shape="rect" href="classtiny__dlna_1_1HttpReplyHeader.html" title="Reading and Writing of Http Replys." alt="" coords="1445,256,1648,283"/>
-<area shape="rect" href="classtiny__dlna_1_1HttpRequestHeader.html" title="Reading and writing of Http Requests." alt="" coords="1437,205,1656,232"/>
-<area shape="rect" href="classtiny__dlna_1_1HttpLineReader.html" title="We read a single line. A terminating 0 is added to the string to make it compliant for c string funct..." alt="" coords="721,268,912,295"/>
-<area shape="rect" href="structtiny__dlna_1_1List_1_1Node.html" title=" " alt="" coords="12,134,148,175"/>
-<area shape="rect" href="classtiny__dlna_1_1IUDPService.html" title="Abstract Interface for UDP API." alt="" coords="3116,807,3287,833"/>
-<area shape="rect" href="classtiny__dlna_1_1Scheduler.html" title="Scheduler which processes all due Schedules (to send out UDP replies)" alt="" coords="936,757,1091,784"/>
-<area shape="rect" href="structtiny__dlna_1_1Schedule.html" title="An individual Schedule (to send out UDP messages)" alt="" coords="5,784,155,811"/>
+<area shape="rect" title="MediaRenderer DLNA Device." alt="" coords="2776,136,2965,163"/>
+<area shape="rect" href="classtiny__dlna_1_1DLNADevice.html" title="Device Attributes and generation of XML using urn:schemas&#45;upnp&#45;org:device&#45;1&#45;0. We could just return a..." alt="" coords="2556,136,2727,163"/>
+<area shape="rect" href="classtiny__dlna_1_1Url.html" title="URL parser which breaks a full url string up into its individual parts." alt="" coords="1132,424,1241,451"/>
+<area shape="rect" href="classtiny__dlna_1_1Str.html" title="String implementation which keeps the data on the heap. We grow the allocated memory only if the copy..." alt="" coords="664,396,772,423"/>
+<area shape="rect" href="classtiny__dlna_1_1HttpHeader.html" title="In a http request and reply we need to process header information. With this API we can define and qu..." alt="" coords="943,231,1108,257"/>
+<area shape="rect" href="classtiny__dlna_1_1StrView.html" title="A simple wrapper to provide string functions on char*. If the underlying char* is a const we do not a..." alt="" coords="334,411,474,437"/>
+<area shape="rect" href="classtiny__dlna_1_1Vector.html" title=" " alt="" coords="333,325,475,366"/>
+<area shape="rect" href="classtiny__dlna_1_1HttpServer.html" title="A Simple Header only implementation of Http Server that allows the registration of callback functions..." alt="" coords="1637,308,1797,335"/>
+<area shape="rect" href="classtiny__dlna_1_1Allocator.html" title="Memory allocateator which uses malloc." alt="" coords="5,264,153,291"/>
+<area shape="rect" href="classtiny__dlna_1_1Vector.html" title=" " alt="" coords="2269,63,2411,105"/>
+<area shape="rect" href="classtiny__dlna_1_1Vector.html" title=" " alt="" coords="2231,129,2449,170"/>
+<area shape="rect" href="classtiny__dlna_1_1List.html" title=" " alt="" coords="307,234,501,275"/>
+<area shape="rect" href="classtiny__dlna_1_1List.html" title=" " alt="" coords="293,462,515,503"/>
+<area shape="rect" href="classtiny__dlna_1_1List.html" title=" " alt="" coords="279,530,529,571"/>
+<area shape="rect" href="classtiny__dlna_1_1Icon.html" title="Information about the icon." alt="" coords="1975,12,2093,39"/>
+<area shape="rect" href="structtiny__dlna_1_1XMLPrinter.html" title="Functions to efficiently output XML. XML data contains a lot of redundancy so it is more memory effic..." alt="" coords="2259,195,2421,221"/>
+<area shape="rect" href="classtiny__dlna_1_1DLNAServiceInfo.html" title="Attributes needed for the DLNA Service Definition." alt="" coords="1935,219,2133,245"/>
+<area shape="rect" href="classtiny__dlna_1_1HttpReplyHeader.html" title="Reading and Writing of Http Replys." alt="" coords="1273,281,1476,308"/>
+<area shape="rect" href="classtiny__dlna_1_1HttpRequestHeader.html" title="Reading and writing of Http Requests." alt="" coords="1265,231,1484,257"/>
+<area shape="rect" href="classtiny__dlna_1_1HttpLineReader.html" title="We read a single line. A terminating 0 is added to the string to make it compliant for c string funct..." alt="" coords="623,240,813,267"/>
+<area shape="rect" href="structtiny__dlna_1_1List_1_1Node.html" title=" " alt="" coords="11,445,147,486"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a938794223ebc46d6ae05b2067bef1acf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaRenderer.html#a938794223ebc46d6ae05b2067bef1acf">MediaRenderer</a> ()</td></tr>
+<tr class="separator:a938794223ebc46d6ae05b2067bef1acf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73407c597c78fbce0d9a6c16147c152f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaRenderer.html#a73407c597c78fbce0d9a6c16147c152f">MediaRenderer</a> (AudioStream &amp;out, AudioDecoder &amp;decoder)</td></tr>
+<tr class="separator:a73407c597c78fbce0d9a6c16147c152f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6095eefea82fecc0ebac38253736fd10"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaRenderer.html#a6095eefea82fecc0ebac38253736fd10">MediaRenderer</a> (AudioOutput &amp;out, AudioDecoder &amp;decoder)</td></tr>
+<tr class="separator:a6095eefea82fecc0ebac38253736fd10"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2887aec924c6620a627384866171a3c2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaRenderer.html#a2887aec924c6620a627384866171a3c2">MediaRenderer</a> (Print &amp;out, AudioDecoder &amp;decoder)</td></tr>
+<tr class="separator:a2887aec924c6620a627384866171a3c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a601782abb83c8700816c04f201effc92"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaRenderer.html#a601782abb83c8700816c04f201effc92">~MediaRenderer</a> ()</td></tr>
+<tr class="separator:a601782abb83c8700816c04f201effc92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c894e9993ff7b42bc5a0a2e674d29c7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaRenderer.html#a3c894e9993ff7b42bc5a0a2e674d29c7">setLogin</a> (const char *ssid, const char *password)</td></tr>
+<tr class="memdesc:a3c894e9993ff7b42bc5a0a2e674d29c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the optional login information.  <a href="classtiny__dlna_1_1MediaRenderer.html#a3c894e9993ff7b42bc5a0a2e674d29c7">More...</a><br /></td></tr>
+<tr class="separator:a3c894e9993ff7b42bc5a0a2e674d29c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf57b8e31603bc5fadc0201fa52974ce"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaRenderer.html#aaf57b8e31603bc5fadc0201fa52974ce">begin</a> ()</td></tr>
+<tr class="separator:aaf57b8e31603bc5fadc0201fa52974ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f5710e72cb1a9840e53fec3a928eb6a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaRenderer.html#a8f5710e72cb1a9840e53fec3a928eb6a">end</a> ()</td></tr>
+<tr class="separator:a8f5710e72cb1a9840e53fec3a928eb6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a120f5d031b70fbfc37b0a0f3185f1aa9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaRenderer.html#a120f5d031b70fbfc37b0a0f3185f1aa9">play</a> (const char *urlStr)</td></tr>
+<tr class="memdesc:a120f5d031b70fbfc37b0a0f3185f1aa9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines and opens the URL to be played.  <a href="classtiny__dlna_1_1MediaRenderer.html#a120f5d031b70fbfc37b0a0f3185f1aa9">More...</a><br /></td></tr>
+<tr class="separator:a120f5d031b70fbfc37b0a0f3185f1aa9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4da804a8ea08fab5e88921366d057b4c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaRenderer.html#a4da804a8ea08fab5e88921366d057b4c">stop</a> ()</td></tr>
+<tr class="separator:a4da804a8ea08fab5e88921366d057b4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aefe9d28a951252efc4864f77c1ad4941"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaRenderer.html#aefe9d28a951252efc4864f77c1ad4941">pause</a> ()</td></tr>
+<tr class="separator:aefe9d28a951252efc4864f77c1ad4941"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4be199aa9f14f06cff71dbbe2caf39d1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaRenderer.html#a4be199aa9f14f06cff71dbbe2caf39d1">resume</a> ()</td></tr>
+<tr class="separator:a4be199aa9f14f06cff71dbbe2caf39d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a354dfa767325fc8cb07cd5dd2a7b24bc"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaRenderer.html#a354dfa767325fc8cb07cd5dd2a7b24bc">setVolume</a> (uint8_t volumePercent)</td></tr>
+<tr class="memdesc:a354dfa767325fc8cb07cd5dd2a7b24bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the volume in percent (0-100)  <a href="classtiny__dlna_1_1MediaRenderer.html#a354dfa767325fc8cb07cd5dd2a7b24bc">More...</a><br /></td></tr>
+<tr class="separator:a354dfa767325fc8cb07cd5dd2a7b24bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6545dad5e1785a59ac409d5cc8140404"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaRenderer.html#a6545dad5e1785a59ac409d5cc8140404">getVolume</a> ()</td></tr>
+<tr class="memdesc:a6545dad5e1785a59ac409d5cc8140404"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the volume in percent (0-100)  <a href="classtiny__dlna_1_1MediaRenderer.html#a6545dad5e1785a59ac409d5cc8140404">More...</a><br /></td></tr>
+<tr class="separator:a6545dad5e1785a59ac409d5cc8140404"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8517c31057de17a470e7fb0caf8601f0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaRenderer.html#a8517c31057de17a470e7fb0caf8601f0">setMute</a> (bool mute)</td></tr>
+<tr class="separator:a8517c31057de17a470e7fb0caf8601f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc01fd2f81e6f6862fb02765e65a4172"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaRenderer.html#afc01fd2f81e6f6862fb02765e65a4172">isMuted</a> ()</td></tr>
+<tr class="separator:afc01fd2f81e6f6862fb02765e65a4172"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad1bedfbdab17502272bba39dd61dd5ca"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaRenderer.html#ad1bedfbdab17502272bba39dd61dd5ca">isPlaying</a> ()</td></tr>
+<tr class="separator:ad1bedfbdab17502272bba39dd61dd5ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae15e13e27cfdecc5b9539789536f447f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaRenderer.html#ae15e13e27cfdecc5b9539789536f447f">isPaused</a> ()</td></tr>
+<tr class="separator:ae15e13e27cfdecc5b9539789536f447f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ab960c589685b8177948f59f6c2106e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaRenderer.html#a6ab960c589685b8177948f59f6c2106e">seek</a> (unsigned long position)</td></tr>
+<tr class="separator:a6ab960c589685b8177948f59f6c2106e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb57bcd81d0654cdeb2324f32f711847"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaRenderer.html#abb57bcd81d0654cdeb2324f32f711847">getPosition</a> ()</td></tr>
+<tr class="separator:abb57bcd81d0654cdeb2324f32f711847"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7e154fda60e3554f12ac6d20c8717d0"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaRenderer.html#aa7e154fda60e3554f12ac6d20c8717d0">getDuration</a> ()</td></tr>
+<tr class="separator:aa7e154fda60e3554f12ac6d20c8717d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c288b60320af83ec22325ce2e590a7f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaRenderer.html#a1c288b60320af83ec22325ce2e590a7f">setOutput</a> (AudioStream &amp;out)</td></tr>
+<tr class="separator:a1c288b60320af83ec22325ce2e590a7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f014845746d775f0b70b05a55936d9f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaRenderer.html#a5f014845746d775f0b70b05a55936d9f">setOutput</a> (AudioOutput &amp;out)</td></tr>
+<tr class="separator:a5f014845746d775f0b70b05a55936d9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50595618dce39fe98e5090a612078c53"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaRenderer.html#a50595618dce39fe98e5090a612078c53">setOutput</a> (Print &amp;out)</td></tr>
+<tr class="separator:a50595618dce39fe98e5090a612078c53"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b22089272f563d9b495f0d4c9a14d43"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaRenderer.html#a7b22089272f563d9b495f0d4c9a14d43">setDecoder</a> (AudioDecoder &amp;decoder)</td></tr>
+<tr class="separator:a7b22089272f563d9b495f0d4c9a14d43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a11430f610ddb96924fb6dba39b817715"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaRenderer.html#a11430f610ddb96924fb6dba39b817715">copy</a> ()</td></tr>
+<tr class="separator:a11430f610ddb96924fb6dba39b817715"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1976cc628ec2429c926ff6a02c0ea9d6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaRenderer.html#a1976cc628ec2429c926ff6a02c0ea9d6">loop</a> ()</td></tr>
+<tr class="memdesc:a1976cc628ec2429c926ff6a02c0ea9d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">loop called by DeviceMgr  <a href="classtiny__dlna_1_1MediaRenderer.html#a1976cc628ec2429c926ff6a02c0ea9d6">More...</a><br /></td></tr>
+<tr class="separator:a1976cc628ec2429c926ff6a02c0ea9d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad74e9ebf8fe530adfd266b3ed73ebd1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaRenderer.html#aad74e9ebf8fe530adfd266b3ed73ebd1">setupServices</a> (<a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;server, <a class="el" href="classtiny__dlna_1_1IUDPService.html">IUDPService</a> &amp;udp)</td></tr>
+<tr class="separator:aad74e9ebf8fe530adfd266b3ed73ebd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classtiny__dlna_1_1DLNADevice"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classtiny__dlna_1_1DLNADevice')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classtiny__dlna_1_1DLNADevice.html">tiny_dlna::DLNADevice</a></td></tr>
+<tr class="memitem:af8ecb5cb4540dbe15a3a62537e53b290 inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#af8ecb5cb4540dbe15a3a62537e53b290">DLNADevice</a> (bool ok=true)</td></tr>
+<tr class="separator:af8ecb5cb4540dbe15a3a62537e53b290 inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5bb49d6aa2116319d6ec580fa2a17601 inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a5bb49d6aa2116319d6ec580fa2a17601">~DLNADevice</a> ()</td></tr>
+<tr class="separator:a5bb49d6aa2116319d6ec580fa2a17601 inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8833507ced6d3d84082d38f4c0d4a704 inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a8833507ced6d3d84082d38f4c0d4a704">print</a> (Print &amp;out)</td></tr>
+<tr class="memdesc:a8833507ced6d3d84082d38f4c0d4a704 inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="mdescLeft">&#160;</td><td class="mdescRight">renderes the device xml  <a href="classtiny__dlna_1_1DLNADevice.html#a8833507ced6d3d84082d38f4c0d4a704">More...</a><br /></td></tr>
+<tr class="separator:a8833507ced6d3d84082d38f4c0d4a704 inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c00cbd2e31f3d70ac8b6adef9cb23c1 inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a0c00cbd2e31f3d70ac8b6adef9cb23c1">setDeviceType</a> (const char *st)</td></tr>
+<tr class="separator:a0c00cbd2e31f3d70ac8b6adef9cb23c1 inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3ef1488415d09890a342ff341685193 inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#ac3ef1488415d09890a342ff341685193">getDeviceType</a> ()</td></tr>
+<tr class="separator:ac3ef1488415d09890a342ff341685193 inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0975c23ee95e0ba469741d3f479f16a inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#ac0975c23ee95e0ba469741d3f479f16a">setUDN</a> (const char *id)</td></tr>
+<tr class="memdesc:ac0975c23ee95e0ba469741d3f479f16a inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define the udn uuid.  <a href="classtiny__dlna_1_1DLNADevice.html#ac0975c23ee95e0ba469741d3f479f16a">More...</a><br /></td></tr>
+<tr class="separator:ac0975c23ee95e0ba469741d3f479f16a inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac822b6690b89a4a7a61af30247d04dd8 inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#ac822b6690b89a4a7a61af30247d04dd8">getUDN</a> ()</td></tr>
+<tr class="memdesc:ac822b6690b89a4a7a61af30247d04dd8 inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provide the udn uuid.  <a href="classtiny__dlna_1_1DLNADevice.html#ac822b6690b89a4a7a61af30247d04dd8">More...</a><br /></td></tr>
+<tr class="separator:ac822b6690b89a4a7a61af30247d04dd8 inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a180079b47ed959ab7a2840c11a552155 inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a180079b47ed959ab7a2840c11a552155">setBaseURL</a> (const char *url)</td></tr>
+<tr class="memdesc:a180079b47ed959ab7a2840c11a552155 inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the base url.  <a href="classtiny__dlna_1_1DLNADevice.html#a180079b47ed959ab7a2840c11a552155">More...</a><br /></td></tr>
+<tr class="separator:a180079b47ed959ab7a2840c11a552155 inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaeb931b13b71f4d058f2b9cc3a8dde38 inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#aaeb931b13b71f4d058f2b9cc3a8dde38">getBaseURL</a> ()</td></tr>
+<tr class="memdesc:aaeb931b13b71f4d058f2b9cc3a8dde38 inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the base url.  <a href="classtiny__dlna_1_1DLNADevice.html#aaeb931b13b71f4d058f2b9cc3a8dde38">More...</a><br /></td></tr>
+<tr class="separator:aaeb931b13b71f4d058f2b9cc3a8dde38 inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e046bbb008ef898f4920b1ccc4b274e inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Url.html">Url</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a6e046bbb008ef898f4920b1ccc4b274e">getDeviceURL</a> ()</td></tr>
+<tr class="memdesc:a6e046bbb008ef898f4920b1ccc4b274e inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns base url/device.xml.  <a href="classtiny__dlna_1_1DLNADevice.html#a6e046bbb008ef898f4920b1ccc4b274e">More...</a><br /></td></tr>
+<tr class="separator:a6e046bbb008ef898f4920b1ccc4b274e inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaedc0454e0e49f15e71b57df607c8323 inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#aaedc0454e0e49f15e71b57df607c8323">setIPAddress</a> (IPAddress address)</td></tr>
+<tr class="separator:aaedc0454e0e49f15e71b57df607c8323 inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a634983d245b4e6ce5da1651e338cd6aa inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top">IPAddress&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a634983d245b4e6ce5da1651e338cd6aa">getIPAddress</a> ()</td></tr>
+<tr class="separator:a634983d245b4e6ce5da1651e338cd6aa inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad268db7627ece3eebdd70b328c2de91d inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#ad268db7627ece3eebdd70b328c2de91d">getIPStr</a> ()</td></tr>
+<tr class="memdesc:ad268db7627ece3eebdd70b328c2de91d inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the local address as string.  <a href="classtiny__dlna_1_1DLNADevice.html#ad268db7627ece3eebdd70b328c2de91d">More...</a><br /></td></tr>
+<tr class="separator:ad268db7627ece3eebdd70b328c2de91d inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc6ca88234975da3739e7740183a90f0 inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#abc6ca88234975da3739e7740183a90f0">setNS</a> (const char *<a class="el" href="classtiny__dlna_1_1DLNADevice.html#ac36b1c90b8f7683268877ad2d5bd7b5d">ns</a>)</td></tr>
+<tr class="separator:abc6ca88234975da3739e7740183a90f0 inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4215da4bf0d42f55028270b72ae522a inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#ad4215da4bf0d42f55028270b72ae522a">getNS</a> ()</td></tr>
+<tr class="separator:ad4215da4bf0d42f55028270b72ae522a inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38f45bed3d98408d6b3c1519dcf1af18 inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a38f45bed3d98408d6b3c1519dcf1af18">setFriendlyName</a> (const char *name)</td></tr>
+<tr class="separator:a38f45bed3d98408d6b3c1519dcf1af18 inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ec9ba05f319e6e750c2359ccc3edb08 inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a8ec9ba05f319e6e750c2359ccc3edb08">getFriendlyName</a> ()</td></tr>
+<tr class="separator:a8ec9ba05f319e6e750c2359ccc3edb08 inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7dd553e6fe0442acccadeff990b04b7a inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a7dd553e6fe0442acccadeff990b04b7a">setManufacturer</a> (const char *man)</td></tr>
+<tr class="separator:a7dd553e6fe0442acccadeff990b04b7a inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a487315d4687b6f9704873ec21d6b591c inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a487315d4687b6f9704873ec21d6b591c">getManufacturer</a> ()</td></tr>
+<tr class="separator:a487315d4687b6f9704873ec21d6b591c inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0903091e4b698a5af9a1e153afe5d3ff inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a0903091e4b698a5af9a1e153afe5d3ff">setManufacturerURL</a> (const char *url)</td></tr>
+<tr class="separator:a0903091e4b698a5af9a1e153afe5d3ff inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c22fc519713d5490b084a5951837ff1 inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a8c22fc519713d5490b084a5951837ff1">getManufacturerURL</a> ()</td></tr>
+<tr class="separator:a8c22fc519713d5490b084a5951837ff1 inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ed3ee18d8c23d64fc7c1525ac652754 inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a1ed3ee18d8c23d64fc7c1525ac652754">setModelDescription</a> (const char *descr)</td></tr>
+<tr class="separator:a1ed3ee18d8c23d64fc7c1525ac652754 inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16a417584a61dacb3c876177f0b58d37 inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a16a417584a61dacb3c876177f0b58d37">getModelDescription</a> ()</td></tr>
+<tr class="separator:a16a417584a61dacb3c876177f0b58d37 inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad33d8dc0d5151515ad35f9341c3bd772 inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#ad33d8dc0d5151515ad35f9341c3bd772">setModelName</a> (const char *name)</td></tr>
+<tr class="separator:ad33d8dc0d5151515ad35f9341c3bd772 inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28e25c75e37ab61b29c8ac8d91aa1767 inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a28e25c75e37ab61b29c8ac8d91aa1767">getModelName</a> ()</td></tr>
+<tr class="separator:a28e25c75e37ab61b29c8ac8d91aa1767 inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a82637c09c37bbb31f2377f956b3f40 inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a9a82637c09c37bbb31f2377f956b3f40">setModelNumber</a> (const char *number)</td></tr>
+<tr class="separator:a9a82637c09c37bbb31f2377f956b3f40 inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c7688b0d70ed87d4c5497cbe020028b inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a1c7688b0d70ed87d4c5497cbe020028b">getModelNumber</a> ()</td></tr>
+<tr class="separator:a1c7688b0d70ed87d4c5497cbe020028b inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12196bd63a3b9b3b74dee953a7f568af inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a12196bd63a3b9b3b74dee953a7f568af">setSerialNumber</a> (const char *sn)</td></tr>
+<tr class="separator:a12196bd63a3b9b3b74dee953a7f568af inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04c6a4e30cd57a377d0289f2d40c4947 inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a04c6a4e30cd57a377d0289f2d40c4947">getSerialNumber</a> ()</td></tr>
+<tr class="separator:a04c6a4e30cd57a377d0289f2d40c4947 inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5dac0d8aa981a481b22dc8eb204b789 inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#aa5dac0d8aa981a481b22dc8eb204b789">setUniveralProductCode</a> (const char *upc)</td></tr>
+<tr class="separator:aa5dac0d8aa981a481b22dc8eb204b789 inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb32f330a8aa1269b8e650bf80a695a6 inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#aeb32f330a8aa1269b8e650bf80a695a6">getUniveralProductCode</a> ()</td></tr>
+<tr class="separator:aeb32f330a8aa1269b8e650bf80a695a6 inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c5eb4c70df599f097e716d19ea06840 inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a9c5eb4c70df599f097e716d19ea06840">addService</a> (<a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html">DLNAServiceInfo</a> s)</td></tr>
+<tr class="memdesc:a9c5eb4c70df599f097e716d19ea06840 inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a service defintion.  <a href="classtiny__dlna_1_1DLNADevice.html#a9c5eb4c70df599f097e716d19ea06840">More...</a><br /></td></tr>
+<tr class="separator:a9c5eb4c70df599f097e716d19ea06840 inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49a0b9864aaab03b750d8252291d75da inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html">DLNAServiceInfo</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a49a0b9864aaab03b750d8252291d75da">getService</a> (const char *id)</td></tr>
+<tr class="memdesc:a49a0b9864aaab03b750d8252291d75da inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds a service definition by name.  <a href="classtiny__dlna_1_1DLNADevice.html#a49a0b9864aaab03b750d8252291d75da">More...</a><br /></td></tr>
+<tr class="separator:a49a0b9864aaab03b750d8252291d75da inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a284c6f5444bde67b0df7b85925261dad inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt; <a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html">DLNAServiceInfo</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a284c6f5444bde67b0df7b85925261dad">getServices</a> ()</td></tr>
+<tr class="separator:a284c6f5444bde67b0df7b85925261dad inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b031ba0ee6e41731b2223ee93ef4605 inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a3b031ba0ee6e41731b2223ee93ef4605">clear</a> ()</td></tr>
+<tr class="separator:a3b031ba0ee6e41731b2223ee93ef4605 inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac509c73f6c6033ee09ff8c1b1a38b729 inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#ac509c73f6c6033ee09ff8c1b1a38b729">clearIcons</a> ()</td></tr>
+<tr class="memdesc:ac509c73f6c6033ee09ff8c1b1a38b729 inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overwrite the default icon.  <a href="classtiny__dlna_1_1DLNADevice.html#ac509c73f6c6033ee09ff8c1b1a38b729">More...</a><br /></td></tr>
+<tr class="separator:ac509c73f6c6033ee09ff8c1b1a38b729 inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad7338e57df4f3249c5049097454963ce inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#ad7338e57df4f3249c5049097454963ce">addIcon</a> (<a class="el" href="classtiny__dlna_1_1Icon.html">Icon</a> <a class="el" href="classtiny__dlna_1_1DLNADevice.html#a2bfdb7c33e2c7b4e3bc5600084be118a">icon</a>)</td></tr>
+<tr class="separator:ad7338e57df4f3249c5049097454963ce inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac51f04fe0532371c55497b7db240eaed inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Icon.html">Icon</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#ac51f04fe0532371c55497b7db240eaed">getIcon</a> (int idx=0)</td></tr>
+<tr class="separator:ac51f04fe0532371c55497b7db240eaed inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6500c422098b76c3873f81a695ea96d9 inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a6500c422098b76c3873f81a695ea96d9">operator bool</a> ()</td></tr>
+<tr class="separator:a6500c422098b76c3873f81a695ea96d9 inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0c6ac06317229e04bd502d628be866a inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#ae0c6ac06317229e04bd502d628be866a">updateTimestamp</a> ()</td></tr>
+<tr class="memdesc:ae0c6ac06317229e04bd502d628be866a inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the timestamp.  <a href="classtiny__dlna_1_1DLNADevice.html#ae0c6ac06317229e04bd502d628be866a">More...</a><br /></td></tr>
+<tr class="separator:ae0c6ac06317229e04bd502d628be866a inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1bbfe285af32498cab669ae3d147f6f5 inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a1bbfe285af32498cab669ae3d147f6f5">getTimestamp</a> ()</td></tr>
+<tr class="memdesc:a1bbfe285af32498cab669ae3d147f6f5 inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the time when this object has been updated.  <a href="classtiny__dlna_1_1DLNADevice.html#a1bbfe285af32498cab669ae3d147f6f5">More...</a><br /></td></tr>
+<tr class="separator:a1bbfe285af32498cab669ae3d147f6f5 inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16a054acacfc7af5bf74b213ae76061f inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a16a054acacfc7af5bf74b213ae76061f">setActive</a> (bool flag)</td></tr>
+<tr class="separator:a16a054acacfc7af5bf74b213ae76061f inherit pub_methods_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a9911078deadf8a87f19aa302d0354804"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaRenderer.html#a9911078deadf8a87f19aa302d0354804">setupServices</a> (<a class="el" href="classtiny__dlna_1_1DLNADevice.html">DLNADevice</a> &amp;device) override</td></tr>
-<tr class="separator:a9911078deadf8a87f19aa302d0354804"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pro_methods_classtiny__dlna_1_1DLNADeviceMgr"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classtiny__dlna_1_1DLNADeviceMgr')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classtiny__dlna_1_1DLNADeviceMgr.html">tiny_dlna::DLNADeviceMgr</a></td></tr>
-<tr class="memitem:a22448d7c24642eda80d5d2a8f5dbb80f inherit pro_methods_classtiny__dlna_1_1DLNADeviceMgr"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceMgr.html#a22448d7c24642eda80d5d2a8f5dbb80f">setDevice</a> (<a class="el" href="classtiny__dlna_1_1DLNADevice.html">DLNADevice</a> &amp;device)</td></tr>
-<tr class="separator:a22448d7c24642eda80d5d2a8f5dbb80f inherit pro_methods_classtiny__dlna_1_1DLNADeviceMgr"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3285d8b7d2cf554038f26baf08915e77 inherit pro_methods_classtiny__dlna_1_1DLNADeviceMgr"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceMgr.html#a3285d8b7d2cf554038f26baf08915e77">setupParser</a> ()</td></tr>
-<tr class="separator:a3285d8b7d2cf554038f26baf08915e77 inherit pro_methods_classtiny__dlna_1_1DLNADeviceMgr"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a72ab531e2dbdccae9c3d3fc2cfd7497a inherit pro_methods_classtiny__dlna_1_1DLNADeviceMgr"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceMgr.html#a72ab531e2dbdccae9c3d3fc2cfd7497a">setupScheduler</a> ()</td></tr>
-<tr class="memdesc:a72ab531e2dbdccae9c3d3fc2cfd7497a inherit pro_methods_classtiny__dlna_1_1DLNADeviceMgr"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structtiny__dlna_1_1Schedule.html" title="An individual Schedule (to send out UDP messages)">Schedule</a> PostAlive messages.  <a href="classtiny__dlna_1_1DLNADeviceMgr.html#a72ab531e2dbdccae9c3d3fc2cfd7497a">More...</a><br /></td></tr>
-<tr class="separator:a72ab531e2dbdccae9c3d3fc2cfd7497a inherit pro_methods_classtiny__dlna_1_1DLNADeviceMgr"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a658b5bc13fe59385d7d4446441cd4f2a inherit pro_methods_classtiny__dlna_1_1DLNADeviceMgr"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceMgr.html#a658b5bc13fe59385d7d4446441cd4f2a">setupDLNAServer</a> (<a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;srv)</td></tr>
-<tr class="memdesc:a658b5bc13fe59385d7d4446441cd4f2a inherit pro_methods_classtiny__dlna_1_1DLNADeviceMgr"><td class="mdescLeft">&#160;</td><td class="mdescRight">set up Web Server to handle Service Addresses  <a href="classtiny__dlna_1_1DLNADeviceMgr.html#a658b5bc13fe59385d7d4446441cd4f2a">More...</a><br /></td></tr>
-<tr class="separator:a658b5bc13fe59385d7d4446441cd4f2a inherit pro_methods_classtiny__dlna_1_1DLNADeviceMgr"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50d892e722dd4e30ae6e0d73b2d21f01"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaRenderer.html#a50d892e722dd4e30ae6e0d73b2d21f01">setupServicesImpl</a> (<a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> *server)</td></tr>
+<tr class="separator:a50d892e722dd4e30ae6e0d73b2d21f01"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_methods_classtiny__dlna_1_1DLNADevice"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classtiny__dlna_1_1DLNADevice')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classtiny__dlna_1_1DLNADevice.html">tiny_dlna::DLNADevice</a></td></tr>
+<tr class="memitem:a3a3f3b55fbaaa6c4316aff41c949c88b inherit pro_methods_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a3a3f3b55fbaaa6c4316aff41c949c88b">printRoot</a> ()</td></tr>
+<tr class="separator:a3a3f3b55fbaaa6c4316aff41c949c88b inherit pro_methods_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65ae501d01a96c1906ea8bb488ea5548 inherit pro_methods_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a65ae501d01a96c1906ea8bb488ea5548">printDevice</a> ()</td></tr>
+<tr class="separator:a65ae501d01a96c1906ea8bb488ea5548 inherit pro_methods_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7725cc8fbfe802c8c4d6c402e4a9ae52 inherit pro_methods_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a7725cc8fbfe802c8c4d6c402e4a9ae52">printSpecVersion</a> ()</td></tr>
+<tr class="separator:a7725cc8fbfe802c8c4d6c402e4a9ae52 inherit pro_methods_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b9b7cd88a0cc11923318ebdf09f369b inherit pro_methods_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a9b9b7cd88a0cc11923318ebdf09f369b">printServiceList</a> ()</td></tr>
+<tr class="separator:a9b9b7cd88a0cc11923318ebdf09f369b inherit pro_methods_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ab862209cd090981b3d562f6624b1ec inherit pro_methods_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a0ab862209cd090981b3d562f6624b1ec">printService</a> (void *srv)</td></tr>
+<tr class="separator:a0ab862209cd090981b3d562f6624b1ec inherit pro_methods_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a532ef94edc0e6be150d9313f21074a60 inherit pro_methods_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a532ef94edc0e6be150d9313f21074a60">printIconList</a> ()</td></tr>
+<tr class="separator:a532ef94edc0e6be150d9313f21074a60 inherit pro_methods_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aafbb2580a7afd2dfdf2ff14f1f9a306a inherit pro_methods_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#aafbb2580a7afd2dfdf2ff14f1f9a306a">printIconDlnaInfo</a> (<a class="el" href="classtiny__dlna_1_1Icon.html">Icon</a> &amp;<a class="el" href="classtiny__dlna_1_1DLNADevice.html#a2bfdb7c33e2c7b4e3bc5600084be118a">icon</a>)</td></tr>
+<tr class="separator:aafbb2580a7afd2dfdf2ff14f1f9a306a inherit pro_methods_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-static-methods"></a>
+Static Protected Member Functions</h2></td></tr>
+<tr class="memitem:a6a37b1e0357d9dd6712d9874b2b84a61"><td class="memItemLeft" align="right" valign="top">static const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaRenderer.html#a6a37b1e0357d9dd6712d9874b2b84a61">reply</a> ()</td></tr>
+<tr class="separator:a6a37b1e0357d9dd6712d9874b2b84a61"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a424b5fd52529241b220c7e9052710c3b"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaRenderer.html#a424b5fd52529241b220c7e9052710c3b">transportControlCB</a> (<a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> *server, const char *requestPath, <a class="el" href="classtiny__dlna_1_1HttpRequestHandlerLine.html">HttpRequestHandlerLine</a> *hl)</td></tr>
+<tr class="separator:a424b5fd52529241b220c7e9052710c3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade700ac972a00084ccce048cdf577d58"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaRenderer.html#ade700ac972a00084ccce048cdf577d58">renderingControlCB</a> (<a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> *server, const char *requestPath, <a class="el" href="classtiny__dlna_1_1HttpRequestHandlerLine.html">HttpRequestHandlerLine</a> *hl)</td></tr>
+<tr class="separator:ade700ac972a00084ccce048cdf577d58"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
+<tr class="memitem:adbf5b1a8265836f4c158c84957807019"><td class="memItemLeft" align="right" valign="top">URLStream&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaRenderer.html#adbf5b1a8265836f4c158c84957807019">url</a></td></tr>
+<tr class="separator:adbf5b1a8265836f4c158c84957807019"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24014644c4c3e08528dfda6b80078fba"><td class="memItemLeft" align="right" valign="top">Pipeline&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaRenderer.html#a24014644c4c3e08528dfda6b80078fba">pipeline</a></td></tr>
+<tr class="separator:a24014644c4c3e08528dfda6b80078fba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58b116f3f129fbeba6b1c8e4ca7b8f76"><td class="memItemLeft" align="right" valign="top">AudioDecoder *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaRenderer.html#a58b116f3f129fbeba6b1c8e4ca7b8f76">p_decoder</a> = nullptr</td></tr>
+<tr class="separator:a58b116f3f129fbeba6b1c8e4ca7b8f76"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf8b2f6a2f8eef8d3d896f7fb0a6c9f4"><td class="memItemLeft" align="right" valign="top">EncodedAudioStream&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaRenderer.html#acf8b2f6a2f8eef8d3d896f7fb0a6c9f4">dec_stream</a></td></tr>
+<tr class="separator:acf8b2f6a2f8eef8d3d896f7fb0a6c9f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aced80dc9f2e089974232dbc2db0ab465"><td class="memItemLeft" align="right" valign="top">VolumeStream&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaRenderer.html#aced80dc9f2e089974232dbc2db0ab465">volume</a></td></tr>
+<tr class="separator:aced80dc9f2e089974232dbc2db0ab465"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09713c3ba688a5601071f176763cac32"><td class="memItemLeft" align="right" valign="top">AudioStream *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaRenderer.html#a09713c3ba688a5601071f176763cac32">p_stream</a> = nullptr</td></tr>
+<tr class="separator:a09713c3ba688a5601071f176763cac32"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80e3655d8d4c6f67f2854c3f2645016a"><td class="memItemLeft" align="right" valign="top">AudioOutput *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaRenderer.html#a80e3655d8d4c6f67f2854c3f2645016a">p_out</a> = nullptr</td></tr>
+<tr class="separator:a80e3655d8d4c6f67f2854c3f2645016a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac60e89255be23fcd484afc9f48b0172b"><td class="memItemLeft" align="right" valign="top">Print *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaRenderer.html#ac60e89255be23fcd484afc9f48b0172b">p_print</a> = nullptr</td></tr>
+<tr class="separator:ac60e89255be23fcd484afc9f48b0172b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aecf45a35b7660e1d08f702b0fec614f7"><td class="memItemLeft" align="right" valign="top">StreamCopy&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaRenderer.html#aecf45a35b7660e1d08f702b0fec614f7">copier</a> {<a class="el" href="classtiny__dlna_1_1MediaRenderer.html#a24014644c4c3e08528dfda6b80078fba">pipeline</a>, <a class="el" href="classtiny__dlna_1_1MediaRenderer.html#adbf5b1a8265836f4c158c84957807019">url</a>}</td></tr>
+<tr class="separator:aecf45a35b7660e1d08f702b0fec614f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a973c4d0e814332c99d3537c8890e2b7d"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaRenderer.html#a973c4d0e814332c99d3537c8890e2b7d">current_volume</a> = 50</td></tr>
+<tr class="separator:a973c4d0e814332c99d3537c8890e2b7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ea089d76823eb246567e1a4ba432da8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaRenderer.html#a5ea089d76823eb246567e1a4ba432da8">is_muted</a> = false</td></tr>
+<tr class="separator:a5ea089d76823eb246567e1a4ba432da8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abafd5b548da71bf508ad6fa0e1091d7e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaRenderer.html#abafd5b548da71bf508ad6fa0e1091d7e">playing</a> = false</td></tr>
+<tr class="separator:abafd5b548da71bf508ad6fa0e1091d7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af90221586c2766997abdec7293ab54de"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaRenderer.html#af90221586c2766997abdec7293ab54de">start_time</a> = 0</td></tr>
+<tr class="separator:af90221586c2766997abdec7293ab54de"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac29f459242a02a1a33bdeaf4fc2c38f9"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaRenderer.html#ac29f459242a02a1a33bdeaf4fc2c38f9">st</a> = &quot;urn:schemas-upnp-org:device:MediaRenderer:1&quot;</td></tr>
 <tr class="separator:ac29f459242a02a1a33bdeaf4fc2c38f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adaca8f13ef6be1e015680bdbc9c229ca"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaRenderer.html#adaca8f13ef6be1e015680bdbc9c229ca">usn</a> = &quot;uuid:09349455-2941-4cf7-9847-1dd5ab210e97&quot;</td></tr>
 <tr class="separator:adaca8f13ef6be1e015680bdbc9c229ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pro_attribs_classtiny__dlna_1_1DLNADeviceMgr"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classtiny__dlna_1_1DLNADeviceMgr')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classtiny__dlna_1_1DLNADeviceMgr.html">tiny_dlna::DLNADeviceMgr</a></td></tr>
-<tr class="memitem:adf6809b1b47266d2868b5f7e9f536ed5 inherit pro_attribs_classtiny__dlna_1_1DLNADeviceMgr"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Scheduler.html">Scheduler</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceMgr.html#adf6809b1b47266d2868b5f7e9f536ed5">scheduler</a></td></tr>
-<tr class="separator:adf6809b1b47266d2868b5f7e9f536ed5 inherit pro_attribs_classtiny__dlna_1_1DLNADeviceMgr"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad9f04273c17eeae257d89c6c553c17fb inherit pro_attribs_classtiny__dlna_1_1DLNADeviceMgr"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1DLNADeviceRequestParser.html">DLNADeviceRequestParser</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceMgr.html#ad9f04273c17eeae257d89c6c553c17fb">parser</a></td></tr>
-<tr class="separator:ad9f04273c17eeae257d89c6c553c17fb inherit pro_attribs_classtiny__dlna_1_1DLNADeviceMgr"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aec0801941e0a789a6aace7709f08557e inherit pro_attribs_classtiny__dlna_1_1DLNADeviceMgr"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1IUDPService.html">IUDPService</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceMgr.html#aec0801941e0a789a6aace7709f08557e">p_udp</a> = nullptr</td></tr>
-<tr class="separator:aec0801941e0a789a6aace7709f08557e inherit pro_attribs_classtiny__dlna_1_1DLNADeviceMgr"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2876a7bce929eb1aecd2a52df8aea1f7 inherit pro_attribs_classtiny__dlna_1_1DLNADeviceMgr"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1DLNADevice.html">DLNADevice</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceMgr.html#a2876a7bce929eb1aecd2a52df8aea1f7">p_device</a> = nullptr</td></tr>
-<tr class="separator:a2876a7bce929eb1aecd2a52df8aea1f7 inherit pro_attribs_classtiny__dlna_1_1DLNADeviceMgr"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acc48aef18f3c64377a0b656df4967187 inherit pro_attribs_classtiny__dlna_1_1DLNADeviceMgr"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceMgr.html#acc48aef18f3c64377a0b656df4967187">p_server</a> = nullptr</td></tr>
-<tr class="separator:acc48aef18f3c64377a0b656df4967187 inherit pro_attribs_classtiny__dlna_1_1DLNADeviceMgr"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3116efe7fc78cd59c68d99fe735e506b inherit pro_attribs_classtiny__dlna_1_1DLNADeviceMgr"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceMgr.html#a3116efe7fc78cd59c68d99fe735e506b">is_active</a> = false</td></tr>
-<tr class="separator:a3116efe7fc78cd59c68d99fe735e506b inherit pro_attribs_classtiny__dlna_1_1DLNADeviceMgr"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a48f625711b5d3570f7aaa65937f9b5c7 inherit pro_attribs_classtiny__dlna_1_1DLNADeviceMgr"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceMgr.html#a48f625711b5d3570f7aaa65937f9b5c7">scheduler_active</a> = true</td></tr>
-<tr class="separator:a48f625711b5d3570f7aaa65937f9b5c7 inherit pro_attribs_classtiny__dlna_1_1DLNADeviceMgr"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1b86722098513ecc0d2b82ec7bfb8298 inherit pro_attribs_classtiny__dlna_1_1DLNADeviceMgr"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceMgr.html#a1b86722098513ecc0d2b82ec7bfb8298">post_alive_repeat_ms</a> = 0</td></tr>
-<tr class="separator:a1b86722098513ecc0d2b82ec7bfb8298 inherit pro_attribs_classtiny__dlna_1_1DLNADeviceMgr"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
-Additional Inherited Members</h2></td></tr>
-<tr class="inherit_header pub_methods_classtiny__dlna_1_1DLNADeviceMgr"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classtiny__dlna_1_1DLNADeviceMgr')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classtiny__dlna_1_1DLNADeviceMgr.html">tiny_dlna::DLNADeviceMgr</a></td></tr>
-<tr class="memitem:a93f3305f1fc915d7aba14026b11ce7dc inherit pub_methods_classtiny__dlna_1_1DLNADeviceMgr"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceMgr.html#a93f3305f1fc915d7aba14026b11ce7dc">begin</a> (<a class="el" href="classtiny__dlna_1_1DLNADevice.html">DLNADevice</a> &amp;device, <a class="el" href="classtiny__dlna_1_1IUDPService.html">IUDPService</a> &amp;udp, <a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;server)</td></tr>
-<tr class="memdesc:a93f3305f1fc915d7aba14026b11ce7dc inherit pub_methods_classtiny__dlna_1_1DLNADeviceMgr"><td class="mdescLeft">&#160;</td><td class="mdescRight">start the  <a href="classtiny__dlna_1_1DLNADeviceMgr.html#a93f3305f1fc915d7aba14026b11ce7dc">More...</a><br /></td></tr>
-<tr class="separator:a93f3305f1fc915d7aba14026b11ce7dc inherit pub_methods_classtiny__dlna_1_1DLNADeviceMgr"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:add3a779cf545e72a0ef370bd303d4e54 inherit pub_methods_classtiny__dlna_1_1DLNADeviceMgr"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceMgr.html#add3a779cf545e72a0ef370bd303d4e54">end</a> ()</td></tr>
-<tr class="memdesc:add3a779cf545e72a0ef370bd303d4e54 inherit pub_methods_classtiny__dlna_1_1DLNADeviceMgr"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stops the processing and releases the resources.  <a href="classtiny__dlna_1_1DLNADeviceMgr.html#add3a779cf545e72a0ef370bd303d4e54">More...</a><br /></td></tr>
-<tr class="separator:add3a779cf545e72a0ef370bd303d4e54 inherit pub_methods_classtiny__dlna_1_1DLNADeviceMgr"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a912c1f35fd657d9ecafd1cceb61671ab inherit pub_methods_classtiny__dlna_1_1DLNADeviceMgr"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceMgr.html#a912c1f35fd657d9ecafd1cceb61671ab">loop</a> ()</td></tr>
-<tr class="memdesc:a912c1f35fd657d9ecafd1cceb61671ab inherit pub_methods_classtiny__dlna_1_1DLNADeviceMgr"><td class="mdescLeft">&#160;</td><td class="mdescRight">call this method in the Arduino loop as often as possible  <a href="classtiny__dlna_1_1DLNADeviceMgr.html#a912c1f35fd657d9ecafd1cceb61671ab">More...</a><br /></td></tr>
-<tr class="separator:a912c1f35fd657d9ecafd1cceb61671ab inherit pub_methods_classtiny__dlna_1_1DLNADeviceMgr"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a48a2b74bb874a695a47e7430e9995b18 inherit pub_methods_classtiny__dlna_1_1DLNADeviceMgr"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html">DLNAServiceInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceMgr.html#a48a2b74bb874a695a47e7430e9995b18">getService</a> (const char *id)</td></tr>
-<tr class="memdesc:a48a2b74bb874a695a47e7430e9995b18 inherit pub_methods_classtiny__dlna_1_1DLNADeviceMgr"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provide addess to the service information.  <a href="classtiny__dlna_1_1DLNADeviceMgr.html#a48a2b74bb874a695a47e7430e9995b18">More...</a><br /></td></tr>
-<tr class="separator:a48a2b74bb874a695a47e7430e9995b18 inherit pub_methods_classtiny__dlna_1_1DLNADeviceMgr"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af25e1245a93c392273b103f6303f34a6 inherit pub_methods_classtiny__dlna_1_1DLNADeviceMgr"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1DLNADevice.html">DLNADevice</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceMgr.html#af25e1245a93c392273b103f6303f34a6">getDevice</a> ()</td></tr>
-<tr class="memdesc:af25e1245a93c392273b103f6303f34a6 inherit pub_methods_classtiny__dlna_1_1DLNADeviceMgr"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the device.  <a href="classtiny__dlna_1_1DLNADeviceMgr.html#af25e1245a93c392273b103f6303f34a6">More...</a><br /></td></tr>
-<tr class="separator:af25e1245a93c392273b103f6303f34a6 inherit pub_methods_classtiny__dlna_1_1DLNADeviceMgr"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad5e09477b034a52fcdddfa848d3ad3a4 inherit pub_methods_classtiny__dlna_1_1DLNADeviceMgr"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceMgr.html#ad5e09477b034a52fcdddfa848d3ad3a4">setSchedulerActive</a> (bool flag)</td></tr>
-<tr class="memdesc:ad5e09477b034a52fcdddfa848d3ad3a4 inherit pub_methods_classtiny__dlna_1_1DLNADeviceMgr"><td class="mdescLeft">&#160;</td><td class="mdescRight">We can activate/deactivate the scheduler.  <a href="classtiny__dlna_1_1DLNADeviceMgr.html#ad5e09477b034a52fcdddfa848d3ad3a4">More...</a><br /></td></tr>
-<tr class="separator:ad5e09477b034a52fcdddfa848d3ad3a4 inherit pub_methods_classtiny__dlna_1_1DLNADeviceMgr"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a401bd8bfb5856211d5917a58b9442b6d inherit pub_methods_classtiny__dlna_1_1DLNADeviceMgr"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceMgr.html#a401bd8bfb5856211d5917a58b9442b6d">isSchedulerActive</a> ()</td></tr>
-<tr class="memdesc:a401bd8bfb5856211d5917a58b9442b6d inherit pub_methods_classtiny__dlna_1_1DLNADeviceMgr"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the scheduler is active.  <a href="classtiny__dlna_1_1DLNADeviceMgr.html#a401bd8bfb5856211d5917a58b9442b6d">More...</a><br /></td></tr>
-<tr class="separator:a401bd8bfb5856211d5917a58b9442b6d inherit pub_methods_classtiny__dlna_1_1DLNADeviceMgr"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aca7db7bdea0b1408d5a4b2fce7ea7c41 inherit pub_methods_classtiny__dlna_1_1DLNADeviceMgr"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceMgr.html#aca7db7bdea0b1408d5a4b2fce7ea7c41">setPostAliveRepeatMs</a> (uint32_t ms)</td></tr>
-<tr class="separator:aca7db7bdea0b1408d5a4b2fce7ea7c41 inherit pub_methods_classtiny__dlna_1_1DLNADeviceMgr"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pro_static_methods_classtiny__dlna_1_1DLNADeviceMgr"><td colspan="2" onclick="javascript:toggleInherit('pro_static_methods_classtiny__dlna_1_1DLNADeviceMgr')"><img src="closed.png" alt="-"/>&#160;Static Protected Member Functions inherited from <a class="el" href="classtiny__dlna_1_1DLNADeviceMgr.html">tiny_dlna::DLNADeviceMgr</a></td></tr>
-<tr class="memitem:a58be56f145454e056c4db23ea73bae78 inherit pro_static_methods_classtiny__dlna_1_1DLNADeviceMgr"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceMgr.html#a58be56f145454e056c4db23ea73bae78">deviceXMLCallback</a> (<a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> *server, const char *requestPath, <a class="el" href="classtiny__dlna_1_1HttpRequestHandlerLine.html">HttpRequestHandlerLine</a> *hl)</td></tr>
-<tr class="memdesc:a58be56f145454e056c4db23ea73bae78 inherit pro_static_methods_classtiny__dlna_1_1DLNADeviceMgr"><td class="mdescLeft">&#160;</td><td class="mdescRight">callback to provide device XML  <a href="classtiny__dlna_1_1DLNADeviceMgr.html#a58be56f145454e056c4db23ea73bae78">More...</a><br /></td></tr>
-<tr class="separator:a58be56f145454e056c4db23ea73bae78 inherit pro_static_methods_classtiny__dlna_1_1DLNADeviceMgr"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_classtiny__dlna_1_1DLNADevice"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classtiny__dlna_1_1DLNADevice')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classtiny__dlna_1_1DLNADevice.html">tiny_dlna::DLNADevice</a></td></tr>
+<tr class="memitem:ad199b67af906d96030de6f4592e61cf9 inherit pro_attribs_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#ad199b67af906d96030de6f4592e61cf9">timestamp</a> = 0</td></tr>
+<tr class="separator:ad199b67af906d96030de6f4592e61cf9 inherit pro_attribs_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3dc4fb6e238eedf0a5d5626ab4857fb2 inherit pro_attribs_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a3dc4fb6e238eedf0a5d5626ab4857fb2">is_active</a> = true</td></tr>
+<tr class="separator:a3dc4fb6e238eedf0a5d5626ab4857fb2 inherit pro_attribs_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea07984734bbdb7e36363ef6eccd2b37 inherit pro_attribs_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structtiny__dlna_1_1XMLPrinter.html">XMLPrinter</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#aea07984734bbdb7e36363ef6eccd2b37">xml</a></td></tr>
+<tr class="separator:aea07984734bbdb7e36363ef6eccd2b37 inherit pro_attribs_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e31b3575401dedf8c5f38d4e65c75d1 inherit pro_attribs_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Url.html">Url</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a9e31b3575401dedf8c5f38d4e65c75d1">device_url</a></td></tr>
+<tr class="separator:a9e31b3575401dedf8c5f38d4e65c75d1 inherit pro_attribs_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a47a4034967480b6621a08d0fbf800a28 inherit pro_attribs_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top">IPAddress&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a47a4034967480b6621a08d0fbf800a28">localhost</a></td></tr>
+<tr class="separator:a47a4034967480b6621a08d0fbf800a28 inherit pro_attribs_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4a5346b70ccb5d10f8cbc0d9414966c inherit pro_attribs_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#ad4a5346b70ccb5d10f8cbc0d9414966c">version_major</a> = 1</td></tr>
+<tr class="separator:ad4a5346b70ccb5d10f8cbc0d9414966c inherit pro_attribs_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abcdda81d3921552331a8345ef11bb643 inherit pro_attribs_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#abcdda81d3921552331a8345ef11bb643">version_minor</a> = 0</td></tr>
+<tr class="separator:abcdda81d3921552331a8345ef11bb643 inherit pro_attribs_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7554a80c0b5ef50fadb600524cd6bd3a inherit pro_attribs_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a7554a80c0b5ef50fadb600524cd6bd3a">base_url</a> = &quot;http://localhost:9876/dlna&quot;</td></tr>
+<tr class="separator:a7554a80c0b5ef50fadb600524cd6bd3a inherit pro_attribs_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad66e7cd67cee1f6c43cedd885eef8525 inherit pro_attribs_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#ad66e7cd67cee1f6c43cedd885eef8525">udn</a> = &quot;uuid:09349455-2941-4cf7-9847-0dd5ab210e97&quot;</td></tr>
+<tr class="separator:ad66e7cd67cee1f6c43cedd885eef8525 inherit pro_attribs_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac36b1c90b8f7683268877ad2d5bd7b5d inherit pro_attribs_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#ac36b1c90b8f7683268877ad2d5bd7b5d">ns</a> = &quot;xmlns=\&quot;urn:schemas-upnp-org:device-1-0\&quot;&quot;</td></tr>
+<tr class="separator:ac36b1c90b8f7683268877ad2d5bd7b5d inherit pro_attribs_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25175faaeae2a21500de9eaef7cf5756 inherit pro_attribs_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a25175faaeae2a21500de9eaef7cf5756">device_type</a> = nullptr</td></tr>
+<tr class="separator:a25175faaeae2a21500de9eaef7cf5756 inherit pro_attribs_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1808d05e130d59edd5dbd585dca828d7 inherit pro_attribs_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a1808d05e130d59edd5dbd585dca828d7">friendly_name</a> = nullptr</td></tr>
+<tr class="separator:a1808d05e130d59edd5dbd585dca828d7 inherit pro_attribs_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a487b261277a5104276c417d7d7151ec0 inherit pro_attribs_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a487b261277a5104276c417d7d7151ec0">manufacturer</a> = nullptr</td></tr>
+<tr class="separator:a487b261277a5104276c417d7d7151ec0 inherit pro_attribs_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2dcba14b410536a750eb290b2a678a20 inherit pro_attribs_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a2dcba14b410536a750eb290b2a678a20">manufacturer_url</a> = nullptr</td></tr>
+<tr class="separator:a2dcba14b410536a750eb290b2a678a20 inherit pro_attribs_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16b334585f30c2f34a65e04cc31fe162 inherit pro_attribs_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a16b334585f30c2f34a65e04cc31fe162">model_description</a> = nullptr</td></tr>
+<tr class="separator:a16b334585f30c2f34a65e04cc31fe162 inherit pro_attribs_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48159182ce4e17a5b972d88298bcf9d6 inherit pro_attribs_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a48159182ce4e17a5b972d88298bcf9d6">model_name</a> = nullptr</td></tr>
+<tr class="separator:a48159182ce4e17a5b972d88298bcf9d6 inherit pro_attribs_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a474f6a2b5af6f44de6ee863b9b202027 inherit pro_attribs_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a474f6a2b5af6f44de6ee863b9b202027">model_url</a> = nullptr</td></tr>
+<tr class="separator:a474f6a2b5af6f44de6ee863b9b202027 inherit pro_attribs_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a05a0409b00aeb5c7a3661b0919acf744 inherit pro_attribs_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a05a0409b00aeb5c7a3661b0919acf744">model_number</a> = nullptr</td></tr>
+<tr class="separator:a05a0409b00aeb5c7a3661b0919acf744 inherit pro_attribs_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ee0c365464db15df7c606d9d65127c9 inherit pro_attribs_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a9ee0c365464db15df7c606d9d65127c9">serial_number</a> = nullptr</td></tr>
+<tr class="separator:a9ee0c365464db15df7c606d9d65127c9 inherit pro_attribs_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a394cfddae5c99259d0eff151c60ec9a4 inherit pro_attribs_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a394cfddae5c99259d0eff151c60ec9a4">universal_product_code</a> = nullptr</td></tr>
+<tr class="separator:a394cfddae5c99259d0eff151c60ec9a4 inherit pro_attribs_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2bfdb7c33e2c7b4e3bc5600084be118a inherit pro_attribs_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Icon.html">Icon</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a2bfdb7c33e2c7b4e3bc5600084be118a">icon</a></td></tr>
+<tr class="separator:a2bfdb7c33e2c7b4e3bc5600084be118a inherit pro_attribs_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04024c1102e6bb7cc4d359dadc6a2a33 inherit pro_attribs_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt; <a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html">DLNAServiceInfo</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a04024c1102e6bb7cc4d359dadc6a2a33">services</a></td></tr>
+<tr class="separator:a04024c1102e6bb7cc4d359dadc6a2a33 inherit pro_attribs_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6600cf2073e5e933a5d149e72608b9a inherit pro_attribs_classtiny__dlna_1_1DLNADevice"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt; <a class="el" href="classtiny__dlna_1_1Icon.html">Icon</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#af6600cf2073e5e933a5d149e72608b9a">icons</a></td></tr>
+<tr class="separator:af6600cf2073e5e933a5d149e72608b9a inherit pro_attribs_classtiny__dlna_1_1DLNADevice"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="classtiny__dlna_1_1MediaRenderer.html" title="MediaRenderer DLNA Device.">MediaRenderer</a> DLNA Device. </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
-</div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a9911078deadf8a87f19aa302d0354804"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9911078deadf8a87f19aa302d0354804">&#9670;&nbsp;</a></span>setupServices()</h2>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a938794223ebc46d6ae05b2067bef1acf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a938794223ebc46d6ae05b2067bef1acf">&#9670;&nbsp;</a></span>MediaRenderer() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">tiny_dlna::MediaRenderer::MediaRenderer </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a73407c597c78fbce0d9a6c16147c152f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73407c597c78fbce0d9a6c16147c152f">&#9670;&nbsp;</a></span>MediaRenderer() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">tiny_dlna::MediaRenderer::MediaRenderer </td>
+          <td>(</td>
+          <td class="paramtype">AudioStream &amp;&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">AudioDecoder &amp;&#160;</td>
+          <td class="paramname"><em>decoder</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6095eefea82fecc0ebac38253736fd10"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6095eefea82fecc0ebac38253736fd10">&#9670;&nbsp;</a></span>MediaRenderer() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">tiny_dlna::MediaRenderer::MediaRenderer </td>
+          <td>(</td>
+          <td class="paramtype">AudioOutput &amp;&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">AudioDecoder &amp;&#160;</td>
+          <td class="paramname"><em>decoder</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2887aec924c6620a627384866171a3c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2887aec924c6620a627384866171a3c2">&#9670;&nbsp;</a></span>MediaRenderer() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">tiny_dlna::MediaRenderer::MediaRenderer </td>
+          <td>(</td>
+          <td class="paramtype">Print &amp;&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">AudioDecoder &amp;&#160;</td>
+          <td class="paramname"><em>decoder</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a601782abb83c8700816c04f201effc92"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a601782abb83c8700816c04f201effc92">&#9670;&nbsp;</a></span>~MediaRenderer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">tiny_dlna::MediaRenderer::~MediaRenderer </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="aaf57b8e31603bc5fadc0201fa52974ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf57b8e31603bc5fadc0201fa52974ce">&#9670;&nbsp;</a></span>begin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool tiny_dlna::MediaRenderer::begin </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a11430f610ddb96924fb6dba39b817715"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a11430f610ddb96924fb6dba39b817715">&#9670;&nbsp;</a></span>copy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t tiny_dlna::MediaRenderer::copy </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8f5710e72cb1a9840e53fec3a928eb6a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f5710e72cb1a9840e53fec3a928eb6a">&#9670;&nbsp;</a></span>end()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tiny_dlna::MediaRenderer::end </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa7e154fda60e3554f12ac6d20c8717d0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7e154fda60e3554f12ac6d20c8717d0">&#9670;&nbsp;</a></span>getDuration()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned long tiny_dlna::MediaRenderer::getDuration </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abb57bcd81d0654cdeb2324f32f711847"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb57bcd81d0654cdeb2324f32f711847">&#9670;&nbsp;</a></span>getPosition()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned long tiny_dlna::MediaRenderer::getPosition </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6545dad5e1785a59ac409d5cc8140404"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6545dad5e1785a59ac409d5cc8140404">&#9670;&nbsp;</a></span>getVolume()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t tiny_dlna::MediaRenderer::getVolume </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the volume in percent (0-100) </p>
+
+</div>
+</div>
+<a id="afc01fd2f81e6f6862fb02765e65a4172"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afc01fd2f81e6f6862fb02765e65a4172">&#9670;&nbsp;</a></span>isMuted()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool tiny_dlna::MediaRenderer::isMuted </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae15e13e27cfdecc5b9539789536f447f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae15e13e27cfdecc5b9539789536f447f">&#9670;&nbsp;</a></span>isPaused()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool tiny_dlna::MediaRenderer::isPaused </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad1bedfbdab17502272bba39dd61dd5ca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad1bedfbdab17502272bba39dd61dd5ca">&#9670;&nbsp;</a></span>isPlaying()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool tiny_dlna::MediaRenderer::isPlaying </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1976cc628ec2429c926ff6a02c0ea9d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1976cc628ec2429c926ff6a02c0ea9d6">&#9670;&nbsp;</a></span>loop()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tiny_dlna::MediaRenderer::loop </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>loop called by DeviceMgr </p>
+
+<p>Reimplemented from <a class="el" href="classtiny__dlna_1_1DLNADevice.html#ae657163038662c239441c471cc140f05">tiny_dlna::DLNADevice</a>.</p>
+
+</div>
+</div>
+<a id="aefe9d28a951252efc4864f77c1ad4941"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aefe9d28a951252efc4864f77c1ad4941">&#9670;&nbsp;</a></span>pause()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool tiny_dlna::MediaRenderer::pause </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a120f5d031b70fbfc37b0a0f3185f1aa9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a120f5d031b70fbfc37b0a0f3185f1aa9">&#9670;&nbsp;</a></span>play()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool tiny_dlna::MediaRenderer::play </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>urlStr</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Defines and opens the URL to be played. </p>
+
+</div>
+</div>
+<a id="ade700ac972a00084ccce048cdf577d58"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade700ac972a00084ccce048cdf577d58">&#9670;&nbsp;</a></span>renderingControlCB()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void tiny_dlna::MediaRenderer::renderingControlCB </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> *&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>requestPath</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1HttpRequestHandlerLine.html">HttpRequestHandlerLine</a> *&#160;</td>
+          <td class="paramname"><em>hl</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6a37b1e0357d9dd6712d9874b2b84a61"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a37b1e0357d9dd6712d9874b2b84a61">&#9670;&nbsp;</a></span>reply()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static const char* tiny_dlna::MediaRenderer::reply </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4be199aa9f14f06cff71dbbe2caf39d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4be199aa9f14f06cff71dbbe2caf39d1">&#9670;&nbsp;</a></span>resume()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool tiny_dlna::MediaRenderer::resume </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6ab960c589685b8177948f59f6c2106e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ab960c589685b8177948f59f6c2106e">&#9670;&nbsp;</a></span>seek()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool tiny_dlna::MediaRenderer::seek </td>
+          <td>(</td>
+          <td class="paramtype">unsigned long&#160;</td>
+          <td class="paramname"><em>position</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7b22089272f563d9b495f0d4c9a14d43"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b22089272f563d9b495f0d4c9a14d43">&#9670;&nbsp;</a></span>setDecoder()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tiny_dlna::MediaRenderer::setDecoder </td>
+          <td>(</td>
+          <td class="paramtype">AudioDecoder &amp;&#160;</td>
+          <td class="paramname"><em>decoder</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3c894e9993ff7b42bc5a0a2e674d29c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c894e9993ff7b42bc5a0a2e674d29c7">&#9670;&nbsp;</a></span>setLogin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tiny_dlna::MediaRenderer::setLogin </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>ssid</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>password</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Provides the optional login information. </p>
+
+</div>
+</div>
+<a id="a8517c31057de17a470e7fb0caf8601f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8517c31057de17a470e7fb0caf8601f0">&#9670;&nbsp;</a></span>setMute()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool tiny_dlna::MediaRenderer::setMute </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>mute</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5f014845746d775f0b70b05a55936d9f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f014845746d775f0b70b05a55936d9f">&#9670;&nbsp;</a></span>setOutput() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tiny_dlna::MediaRenderer::setOutput </td>
+          <td>(</td>
+          <td class="paramtype">AudioOutput &amp;&#160;</td>
+          <td class="paramname"><em>out</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1c288b60320af83ec22325ce2e590a7f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c288b60320af83ec22325ce2e590a7f">&#9670;&nbsp;</a></span>setOutput() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tiny_dlna::MediaRenderer::setOutput </td>
+          <td>(</td>
+          <td class="paramtype">AudioStream &amp;&#160;</td>
+          <td class="paramname"><em>out</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a50595618dce39fe98e5090a612078c53"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a50595618dce39fe98e5090a612078c53">&#9670;&nbsp;</a></span>setOutput() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tiny_dlna::MediaRenderer::setOutput </td>
+          <td>(</td>
+          <td class="paramtype">Print &amp;&#160;</td>
+          <td class="paramname"><em>out</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aad74e9ebf8fe530adfd266b3ed73ebd1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad74e9ebf8fe530adfd266b3ed73ebd1">&#9670;&nbsp;</a></span>setupServices()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -212,24 +1158,374 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="memname">void tiny_dlna::MediaRenderer::setupServices </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1DLNADevice.html">DLNADevice</a> &amp;&#160;</td>
-          <td class="paramname"><em>deviceInfo</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1IUDPService.html">IUDPService</a> &amp;&#160;</td>
+          <td class="paramname"><em>udp</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="classtiny__dlna_1_1DLNADevice.html#a4f6efb95ae846231dff71e77c2f352d9">tiny_dlna::DLNADevice</a>.</p>
+
+</div>
+</div>
+<a id="a50d892e722dd4e30ae6e0d73b2d21f01"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a50d892e722dd4e30ae6e0d73b2d21f01">&#9670;&nbsp;</a></span>setupServicesImpl()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tiny_dlna::MediaRenderer::setupServicesImpl </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> *&#160;</td>
+          <td class="paramname"><em>server</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>If you dont already provid a complete <a class="el" href="classtiny__dlna_1_1DLNADevice.html" title="Device Attributes and generation of XML using urn:schemas-upnp-org:device-1-0. We could just return a...">DLNADevice</a> you can overwrite this method and add some custom device specific logic to implement a new device. The <a class="el" href="classtiny__dlna_1_1MediaRenderer.html" title="MediaRenderer DLNA Device.">MediaRenderer</a> is using this approach! </p>
 
-<p>Reimplemented from <a class="el" href="classtiny__dlna_1_1DLNADeviceMgr.html#ade47f1c407fdc9c3227eed7eaa16da8a">tiny_dlna::DLNADeviceMgr</a>.</p>
+</div>
+</div>
+<a id="a354dfa767325fc8cb07cd5dd2a7b24bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a354dfa767325fc8cb07cd5dd2a7b24bc">&#9670;&nbsp;</a></span>setVolume()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool tiny_dlna::MediaRenderer::setVolume </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>volumePercent</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Defines the volume in percent (0-100) </p>
+
+</div>
+</div>
+<a id="a4da804a8ea08fab5e88921366d057b4c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4da804a8ea08fab5e88921366d057b4c">&#9670;&nbsp;</a></span>stop()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool tiny_dlna::MediaRenderer::stop </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a424b5fd52529241b220c7e9052710c3b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a424b5fd52529241b220c7e9052710c3b">&#9670;&nbsp;</a></span>transportControlCB()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void tiny_dlna::MediaRenderer::transportControlCB </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> *&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>requestPath</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1HttpRequestHandlerLine.html">HttpRequestHandlerLine</a> *&#160;</td>
+          <td class="paramname"><em>hl</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="aecf45a35b7660e1d08f702b0fec614f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aecf45a35b7660e1d08f702b0fec614f7">&#9670;&nbsp;</a></span>copier</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">StreamCopy tiny_dlna::MediaRenderer::copier {<a class="el" href="classtiny__dlna_1_1MediaRenderer.html#a24014644c4c3e08528dfda6b80078fba">pipeline</a>, <a class="el" href="classtiny__dlna_1_1MediaRenderer.html#adbf5b1a8265836f4c158c84957807019">url</a>}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a973c4d0e814332c99d3537c8890e2b7d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a973c4d0e814332c99d3537c8890e2b7d">&#9670;&nbsp;</a></span>current_volume</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t tiny_dlna::MediaRenderer::current_volume = 50</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="acf8b2f6a2f8eef8d3d896f7fb0a6c9f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf8b2f6a2f8eef8d3d896f7fb0a6c9f4">&#9670;&nbsp;</a></span>dec_stream</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">EncodedAudioStream tiny_dlna::MediaRenderer::dec_stream</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5ea089d76823eb246567e1a4ba432da8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ea089d76823eb246567e1a4ba432da8">&#9670;&nbsp;</a></span>is_muted</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool tiny_dlna::MediaRenderer::is_muted = false</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a58b116f3f129fbeba6b1c8e4ca7b8f76"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a58b116f3f129fbeba6b1c8e4ca7b8f76">&#9670;&nbsp;</a></span>p_decoder</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">AudioDecoder* tiny_dlna::MediaRenderer::p_decoder = nullptr</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a80e3655d8d4c6f67f2854c3f2645016a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a80e3655d8d4c6f67f2854c3f2645016a">&#9670;&nbsp;</a></span>p_out</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">AudioOutput* tiny_dlna::MediaRenderer::p_out = nullptr</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac60e89255be23fcd484afc9f48b0172b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac60e89255be23fcd484afc9f48b0172b">&#9670;&nbsp;</a></span>p_print</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Print* tiny_dlna::MediaRenderer::p_print = nullptr</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a09713c3ba688a5601071f176763cac32"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a09713c3ba688a5601071f176763cac32">&#9670;&nbsp;</a></span>p_stream</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">AudioStream* tiny_dlna::MediaRenderer::p_stream = nullptr</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a24014644c4c3e08528dfda6b80078fba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a24014644c4c3e08528dfda6b80078fba">&#9670;&nbsp;</a></span>pipeline</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Pipeline tiny_dlna::MediaRenderer::pipeline</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abafd5b548da71bf508ad6fa0e1091d7e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abafd5b548da71bf508ad6fa0e1091d7e">&#9670;&nbsp;</a></span>playing</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool tiny_dlna::MediaRenderer::playing = false</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="ac29f459242a02a1a33bdeaf4fc2c38f9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac29f459242a02a1a33bdeaf4fc2c38f9">&#9670;&nbsp;</a></span>st</h2>
 
@@ -252,6 +1548,50 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
+<a id="af90221586c2766997abdec7293ab54de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af90221586c2766997abdec7293ab54de">&#9670;&nbsp;</a></span>start_time</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned long tiny_dlna::MediaRenderer::start_time = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adbf5b1a8265836f4c158c84957807019"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adbf5b1a8265836f4c158c84957807019">&#9670;&nbsp;</a></span>url</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">URLStream tiny_dlna::MediaRenderer::url</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="adaca8f13ef6be1e015680bdbc9c229ca"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adaca8f13ef6be1e015680bdbc9c229ca">&#9670;&nbsp;</a></span>usn</h2>
 
@@ -263,6 +1603,28 @@ Additional Inherited Members</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">const char* tiny_dlna::MediaRenderer::usn = &quot;uuid:09349455-2941-4cf7-9847-1dd5ab210e97&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aced80dc9f2e089974232dbc2db0ab465"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aced80dc9f2e089974232dbc2db0ab465">&#9670;&nbsp;</a></span>volume</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">VolumeStream tiny_dlna::MediaRenderer::volume</td>
         </tr>
       </table>
   </td>

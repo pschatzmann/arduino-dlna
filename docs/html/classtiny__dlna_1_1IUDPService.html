@@ -90,6 +90,8 @@ Inheritance diagram for tiny_dlna::IUDPService:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:ac6a40de224b4147a78a6da72acbb4103"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IUDPService.html#ac6a40de224b4147a78a6da72acbb4103">begin</a> (int port)=0</td></tr>
+<tr class="separator:ac6a40de224b4147a78a6da72acbb4103"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abfb8daa5d9cb2a6573e75f123c2ff1ea"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IUDPService.html#abfb8daa5d9cb2a6573e75f123c2ff1ea">begin</a> (<a class="el" href="structtiny__dlna_1_1IPAddressAndPort.html">IPAddressAndPort</a> addr)=0</td></tr>
 <tr class="separator:abfb8daa5d9cb2a6573e75f123c2ff1ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aff5760f65e7e32da88170e34ada59c57"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IUDPService.html#aff5760f65e7e32da88170e34ada59c57">send</a> (uint8_t *data, int len)=0</td></tr>
@@ -103,8 +105,36 @@ Public Member Functions</h2></td></tr>
 <div class="textblock"><p>Abstract Interface for UDP API. </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="ac6a40de224b4147a78a6da72acbb4103"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac6a40de224b4147a78a6da72acbb4103">&#9670;&nbsp;</a></span>begin() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool tiny_dlna::IUDPService::begin </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>port</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="classtiny__dlna_1_1UDPService.html#a156a45f4c65c5bf68f545a311210b6b8">tiny_dlna::UDPService</a>, and <a class="el" href="classtiny__dlna_1_1UDPAsyncService.html#af16d6d30a85620ff4bf5bb4f2c8eed5b">tiny_dlna::UDPAsyncService</a>.</p>
+
+</div>
+</div>
 <a id="abfb8daa5d9cb2a6573e75f123c2ff1ea"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abfb8daa5d9cb2a6573e75f123c2ff1ea">&#9670;&nbsp;</a></span>begin()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#abfb8daa5d9cb2a6573e75f123c2ff1ea">&#9670;&nbsp;</a></span>begin() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -127,7 +157,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="classtiny__dlna_1_1UDPService.html#a8180aca6a86279d4e9b2a9c2df1c562d">tiny_dlna::UDPService</a>, and <a class="el" href="classtiny__dlna_1_1UDPAsyncService.html#a4326cbcf7ca082d844dff8eb76c9d3a2">tiny_dlna::UDPAsyncService</a>.</p>
+<p>Implemented in <a class="el" href="classtiny__dlna_1_1UDPService.html#a2ed64dc911b1402f317984288239cc56">tiny_dlna::UDPService</a>, and <a class="el" href="classtiny__dlna_1_1UDPAsyncService.html#a4326cbcf7ca082d844dff8eb76c9d3a2">tiny_dlna::UDPAsyncService</a>.</p>
 
 </div>
 </div>
@@ -154,7 +184,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="classtiny__dlna_1_1UDPService.html#a2c2dd55fec7c897b73446d2ea8bd9497">tiny_dlna::UDPService</a>, and <a class="el" href="classtiny__dlna_1_1UDPAsyncService.html#ae4184704292a49a63d732c9408e985a8">tiny_dlna::UDPAsyncService</a>.</p>
+<p>Implemented in <a class="el" href="classtiny__dlna_1_1UDPService.html#a64bb84dae2bdc03c42c9130bfae2e9ba">tiny_dlna::UDPService</a>, and <a class="el" href="classtiny__dlna_1_1UDPAsyncService.html#ae4184704292a49a63d732c9408e985a8">tiny_dlna::UDPAsyncService</a>.</p>
 
 </div>
 </div>
@@ -198,7 +228,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="classtiny__dlna_1_1UDPService.html#a76e870308f9d5b5ba4d957e5430a0d98">tiny_dlna::UDPService</a>, and <a class="el" href="classtiny__dlna_1_1UDPAsyncService.html#ae3e4b99aa2b5ef4879f54fa3847d1082">tiny_dlna::UDPAsyncService</a>.</p>
+<p>Implemented in <a class="el" href="classtiny__dlna_1_1UDPService.html#a9140f0056c1f33b6443f21915e7c4003">tiny_dlna::UDPService</a>, and <a class="el" href="classtiny__dlna_1_1UDPAsyncService.html#ae3e4b99aa2b5ef4879f54fa3847d1082">tiny_dlna::UDPAsyncService</a>.</p>
 
 </div>
 </div>
@@ -236,7 +266,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="classtiny__dlna_1_1UDPService.html#a4af63e73207857011af39e6f4ecbbfbd">tiny_dlna::UDPService</a>, and <a class="el" href="classtiny__dlna_1_1UDPAsyncService.html#af41645c5541241a1acba5e8c6cdff9a1">tiny_dlna::UDPAsyncService</a>.</p>
+<p>Implemented in <a class="el" href="classtiny__dlna_1_1UDPService.html#a539c370a0f6fe3b511667a6673b29e2b">tiny_dlna::UDPService</a>, and <a class="el" href="classtiny__dlna_1_1UDPAsyncService.html#af41645c5541241a1acba5e8c6cdff9a1">tiny_dlna::UDPAsyncService</a>.</p>
 
 </div>
 </div>

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['http_5fcallback_1387',['http_callback',['../namespacetiny__dlna.html#a1ac25cf2e9ceca6ae0e8fd2fd586470c',1,'tiny_dlna']]]
+  ['dlnahttprequest_1460',['DLNAHttpRequest',['../namespacetiny__dlna.html#ad910622e470286a7c1774b545d469d00',1,'tiny_dlna']]]
 ];

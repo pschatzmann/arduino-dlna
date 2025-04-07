@@ -123,7 +123,7 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Translates DLNA UDP Requests to <a class="el" href="structtiny__dlna_1_1Schedule.html" title="An individual Schedule (to send out UDP messages)">Schedule</a> so that we can schedule a reply.  <a href="classtiny__dlna_1_1DLNAControlPointRequestParser.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html">DLNADevice</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Device Attributes and generation of XML using urn:schemas-upnp-org:device-1-0. We could just return a predefined device xml document, but we provide a dynamic generation of the service xml which should be more memory efficient. Strings are represented as char*, so you can assign values that are stored in ProgMem to mimimize the RAM useage. If you need to keep the values on the heap you can use <a class="el" href="classtiny__dlna_1_1DLNADevice.html#a332ef8fd3e60d36bbc26da250b0ef656" title="Adds a string to the string repository.">addString()</a> method.  <a href="classtiny__dlna_1_1DLNADevice.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Device Attributes and generation of XML using urn:schemas-upnp-org:device-1-0. We could just return a predefined device xml document, but we provide a dynamic generation of the service xml which should be more memory efficient. Strings are represented as char*, so you can assign values that are stored in ProgMem to mimimize the RAM useage. If you need to keep the values on the heap you can use addString() method.  <a href="classtiny__dlna_1_1DLNADevice.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceMgr.html">DLNADeviceMgr</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup of a Basic DLNA Device service. The device registers itself to the network and answers to the DLNA queries and requests. A DLNA device uses UDP, Http, XML and Soap to discover and manage a service, so there is quite some complexity involved:  <a href="classtiny__dlna_1_1DLNADeviceMgr.html#details">More...</a><br /></td></tr>
@@ -251,6 +251,8 @@ Classes</h2></td></tr>
 Typedefs</h2></td></tr>
 <tr class="memitem:a1ac25cf2e9ceca6ae0e8fd2fd586470c"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetiny__dlna.html#a1ac25cf2e9ceca6ae0e8fd2fd586470c">http_callback</a>) (<a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> *server, const char *requestPath, <a class="el" href="classtiny__dlna_1_1HttpRequestHandlerLine.html">HttpRequestHandlerLine</a> *hl)</td></tr>
 <tr class="separator:a1ac25cf2e9ceca6ae0e8fd2fd586470c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad910622e470286a7c1774b545d469d00"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetiny__dlna.html#ad910622e470286a7c1774b545d469d00">DLNAHttpRequest</a> = <a class="el" href="classtiny__dlna_1_1HttpRequest.html">tiny_dlna::HttpRequest</a></td></tr>
+<tr class="separator:ad910622e470286a7c1774b545d469d00"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a575a263fd75f2731f40accf7fa73dafe"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetiny__dlna.html#a575a263fd75f2731f40accf7fa73dafe">web_callback_fn</a>) (<a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> *server, const char *requestPath, <a class="el" href="classtiny__dlna_1_1HttpRequestHandlerLine.html">HttpRequestHandlerLine</a> *handlerLine)</td></tr>
 <tr class="separator:a575a263fd75f2731f40accf7fa73dafe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -276,6 +278,7 @@ Enumerations</h2></td></tr>
 , <br />
 &#160;&#160;<a class="el" href="namespacetiny__dlna.html#a8b30900e538135f563c83e48319e5247a2cdcc24012398a6731aae7ecc14c60fc">T_CONNECT</a>
 , <a class="el" href="namespacetiny__dlna.html#a8b30900e538135f563c83e48319e5247acaf97fba9939f1bea8cd1141de6b7666">T_PATCH</a>
+, <a class="el" href="namespacetiny__dlna.html#a8b30900e538135f563c83e48319e5247a78d7f90932c20309de58ac2111387323">T_SUBSCRIBE</a>
 <br />
  }</td></tr>
 <tr class="separator:a8b30900e538135f563c83e48319e5247"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -328,6 +331,20 @@ Variables</h2></td></tr>
 <tr class="separator:a676cf5a0a4c1f7a8fe5653e1ccff1eb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Typedef Documentation</h2>
+<a id="ad910622e470286a7c1774b545d469d00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad910622e470286a7c1774b545d469d00">&#9670;&nbsp;</a></span>DLNAHttpRequest</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespacetiny__dlna.html#ad910622e470286a7c1774b545d469d00">tiny_dlna::DLNAHttpRequest</a> = typedef <a class="el" href="classtiny__dlna_1_1HttpRequest.html">tiny_dlna::HttpRequest</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a1ac25cf2e9ceca6ae0e8fd2fd586470c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1ac25cf2e9ceca6ae0e8fd2fd586470c">&#9670;&nbsp;</a></span>http_callback</h2>
 
@@ -401,6 +418,7 @@ Variables</h2></td></tr>
 <tr><td class="fieldname"><a id="a8b30900e538135f563c83e48319e5247a439b85af4776b7be46ca12db98031c03"></a>T_OPTIONS&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a8b30900e538135f563c83e48319e5247a2cdcc24012398a6731aae7ecc14c60fc"></a>T_CONNECT&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a8b30900e538135f563c83e48319e5247acaf97fba9939f1bea8cd1141de6b7666"></a>T_PATCH&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a8b30900e538135f563c83e48319e5247a78d7f90932c20309de58ac2111387323"></a>T_SUBSCRIBE&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
 </div>
@@ -660,7 +678,7 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">= {<span class="stringliteral">&quot;?&quot;</span>,       <span class="stringliteral">&quot;GET&quot;</span>,    <span class="stringliteral">&quot;HEAD&quot;</span>,  <span class="stringliteral">&quot;POST&quot;</span>,</div>
 <div class="line">                         <span class="stringliteral">&quot;PUT&quot;</span>,     <span class="stringliteral">&quot;DELETE&quot;</span>, <span class="stringliteral">&quot;TRACE&quot;</span>, <span class="stringliteral">&quot;OPTIONS&quot;</span>,</div>
-<div class="line">                         <span class="stringliteral">&quot;CONNECT&quot;</span>, <span class="stringliteral">&quot;PATCH&quot;</span>,  <span class="keyword">nullptr</span>}</div>
+<div class="line">                         <span class="stringliteral">&quot;CONNECT&quot;</span>, <span class="stringliteral">&quot;PATCH&quot;</span>, <span class="stringliteral">&quot;SUBSCRIBE&quot;</span>,  <span class="keyword">nullptr</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
