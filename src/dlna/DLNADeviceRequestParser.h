@@ -56,6 +56,8 @@ class DLNADeviceRequestParser {
     // determine MX (seconds to delay response)
     if (parse(req.data, "\nMX:", tmp_str)) {
       result.mx = tmp_str.toInt();
+    } else {
+      result.mx = 1;
     }
     result.time = millis() + random(result.mx * 1000);
 

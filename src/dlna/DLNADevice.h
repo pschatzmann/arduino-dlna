@@ -27,6 +27,7 @@ namespace tiny_dlna {
 class DLNADevice {
   friend class XMLDeviceParser;
   friend class DLNAControlPointMgr;
+  friend class DLNADeviceMgr;
 
  public:
   DLNADevice(bool ok = true) { is_active = true; }
@@ -161,8 +162,6 @@ class DLNADevice {
     delay(1);
   }
 
-  virtual void setupServices(HttpServer& server, IUDPService& udp){}
-
  protected:
   uint64_t timestamp = 0;
   bool is_active = true;
@@ -188,6 +187,9 @@ class DLNADevice {
   Vector<DLNAServiceInfo> services;
   Vector<Icon> icons;
 
+  /// to be implemented by subclasses
+  virtual void setupServices(HttpServer& server, IUDPService& udp){}
+ 
   size_t printRoot() {
     size_t result = 0;
     auto printSpecVersionB = std::bind(&DLNADevice::printSpecVersion, this);

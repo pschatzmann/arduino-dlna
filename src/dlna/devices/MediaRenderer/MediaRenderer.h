@@ -96,7 +96,7 @@ class MediaRenderer : public DLNADevice {
   /// Defines and opens the URL to be played
   bool play(const char* urlStr) {
     if (urlStr == nullptr) return false;
-    DlnaLogger.log(DlnaInfo, "Playing URL: %s", urlStr);
+    DlnaLogger.log(DlnaInfo, "is_active URL: %s", urlStr);
 
     // Stop any current playback
     stop();
@@ -107,24 +107,8 @@ class MediaRenderer : public DLNADevice {
       return false;
     }
 
-    playing = true;
+    is_active = true;
     start_time = millis();
-    return true;
-  }
-
-  bool stop() {
-    playing = false;
-    return true;
-  }
-
-  bool pause() {
-    if (!playing) return false;
-    playing = false;
-    return true;
-  }
-
-  bool resume() {
-    playing = true;
     return true;
   }
 
@@ -152,9 +136,9 @@ class MediaRenderer : public DLNADevice {
 
   bool isMuted() { return is_muted; }
 
-  bool isPlaying() { return playing; }
+  bool isActive() { return is_active; }
 
-  bool isPaused() { return !playing; }
+  void setActive(bool active) { is_active = active; }
 
   bool seek(unsigned long position) {
     // Not fully supported with most streams
@@ -179,7 +163,7 @@ class MediaRenderer : public DLNADevice {
   size_t copy() {
     // Call this in your main loop
     size_t bytes = 0;
-    if (playing) {
+    if (is_active) {
       bytes = copier.copy();
     } else {
       delay(5);
@@ -187,12 +171,9 @@ class MediaRenderer : public DLNADevice {
     return bytes;
   }
 
-  /// loop called by DeviceMgr
+  /// loop called by DeviceMgr: just calls copy()
   void loop() { copy(); }
 
-  void setupServices(HttpServer& server, IUDPService& udp) {
-    setupServicesImpl(&server);
-  }
 
  protected:
   URLStream url;
@@ -206,10 +187,15 @@ class MediaRenderer : public DLNADevice {
   StreamCopy copier{pipeline, url};
   uint8_t current_volume = 50;
   bool is_muted = false;
-  bool playing = false;
+  bool is_active = false;
   unsigned long start_time = 0;
   const char* st = "urn:schemas-upnp-org:device:MediaRenderer:1";
   const char* usn = "uuid:09349455-2941-4cf7-9847-1dd5ab210e97";
+
+  void setupServices(HttpServer& server, IUDPService& udp) {
+    setupServicesImpl(&server);
+  }
+
 
   static const char* reply() {
     static const char* result =
@@ -232,15 +218,15 @@ class MediaRenderer : public DLNADevice {
     Str reply_str{reply()};
     reply_str.replaceAll("%2", "AVTransport");
     if (soap.indexOf("Play") >= 0) {
-      media_renderer.resume();
+      media_renderer.setActive(true);
       reply_str.replaceAll("%1", "PlayResponse");
       server->reply("text/xml", reply_str.c_str());
     } else if (soap.indexOf("Pause") >= 0) {
-      media_renderer.pause();
+      media_renderer.setActive(false);
       reply_str.replaceAll("%1", "PauseResponse");
       server->reply("text/xml", reply_str.c_str());
     } else if (soap.indexOf("Stop") >= 0) {
-      media_renderer.stop();
+      media_renderer.setActive(false);
       reply_str.replaceAll("%1", "StopResponse");
       server->reply("text/xml", reply_str.c_str());
     } else if (soap.indexOf("SetAVTransportURI") >= 0) {
