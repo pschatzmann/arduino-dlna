@@ -67,16 +67,16 @@ class DLNADeviceRequestParser {
       // determine ST if relevant for us
       for (auto mx : mx_vector) {
         if (result.search_target.equals(mx)) {
-          DlnaLogger.log(DlnaLogLevel::Debug, "MX: %s -> relevant", mx);
+          DlnaLogger.log(DlnaLogLevel::Info, "- MX: %s -> relevant", mx);
           result.active = true;
         }
       }
       if (!result.active) {
-        DlnaLogger.log(DlnaLogLevel::Debug, "MX: %s not relevant", tmp);
+        DlnaLogger.log(DlnaLogLevel::Info, "-> MX: %s not relevant", tmp);
       }
 
     } else {
-      DlnaLogger.log(DlnaLogLevel::Error, "ST: not found");
+      DlnaLogger.log(DlnaLogLevel::Error, "-> ST: not found");
     }
 
     return result.active ? &result : nullptr;
