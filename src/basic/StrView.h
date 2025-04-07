@@ -149,6 +149,14 @@ class StrView {
       len = strlen(chars);
     }
   }
+  virtual void add(const uint8_t* append, int len) {
+    if (!isConst() && append != nullptr) {
+      int append_len = len;
+      int old_len = length();
+      grow(old_len + append_len );
+      memcpy(chars+old_len, append, len);
+    }
+  }
 
   /// adds a character
   virtual void add(const char c) {
@@ -475,7 +483,7 @@ class StrView {
   }
 
   /// copies a substring into the current string
-  virtual void substring(StrView& from, int start, int end) {
+  virtual void substrView(StrView& from, int start, int end) {
     if (end > start) {
       int len = end - start;
       grow(len);
@@ -489,7 +497,7 @@ class StrView {
   }
 
   /// copies a substring into the current string
-  virtual void substring(const char* from, int start, int end) {
+  virtual void substrView(const char* from, int start, int end) {
     if (end > start) {
       int len = end - start;
       grow(len);

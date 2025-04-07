@@ -73,14 +73,14 @@ class Url {
             if (protocolEnd==-1){
                 return;
             }
-            protocolStr.substring(urlStr, 0,protocolEnd);
+            protocolStr.substrView(urlStr, 0,protocolEnd);
             int portStart = urlStr.indexOf(":",protocolEnd+3);            
             int hostEnd = portStart!=-1 ? portStart : urlStr.indexOf("/",protocolEnd+4);
             // we have not path -> so then host end is the end of string
             if (hostEnd==-1){
                 hostEnd = urlStr.length();                
             }
-            hostStr.substring(urlStr, protocolEnd+3,hostEnd);
+            hostStr.substrView(urlStr, protocolEnd+3,hostEnd);
             if (portStart>0){
                 portInt = atoi(urlStr.c_str()+portStart+1);
             } else {
@@ -99,9 +99,9 @@ class Url {
                 pathStr = "/";
                 urlRootStr = urlStr;
             } else {
-                pathStr.substring(urlStr, pathStart, urlStr.length());
+                pathStr.substrView(urlStr, pathStart, urlStr.length());
                 pathStr.trim();
-                urlRootStr.substring(urlStr, 0, pathStart);
+                urlRootStr.substrView(urlStr, 0, pathStart);
             }
             DlnaLogger.log(DlnaDebug,"url-> %s",url());
             DlnaLogger.log(DlnaDebug,"path-> %s",path());

@@ -448,6 +448,18 @@ class HttpServer {
 
   void setNoConnectDelay(int delay) { no_connect_delay = delay; }
 
+  /// converts the client content to a string
+  Str contentStr() {
+    uint8_t buffer[1024];
+    Str result;
+    while(client_ptr->available()) {
+      int len = client_ptr->readBytes(buffer, sizeof(buffer));
+      result.add((const uint8_t*)buffer, len);
+    }
+    result.add("\0");
+    return result;
+  }
+
  protected:
   // data
   HttpRequestHeader request_header;

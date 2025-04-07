@@ -49,7 +49,7 @@ given type (as defined by working committee)
 version: locate service of a given type
    */
 
-  bool begin(HttpRequest& http, IUDPService &udp,
+  bool begin(DLNAHttpRequest& http, IUDPService &udp,
              const char* searchTarget = "ssdp:all", uint32_t processingTime = 0,
              bool stopWhenFound = true) {
     DlnaLogger.log(DlnaInfo, "DLNADevice::begin");
@@ -230,7 +230,7 @@ version: locate service of a given type
     }
     // http get
     StrPrint xml;
-    HttpRequest req;
+    DLNAHttpRequest req;
     int rc = req.get(url, "text/xml");
 
     if (rc != 200) {
@@ -265,7 +265,7 @@ version: locate service of a given type
 
  protected:
   Scheduler scheduler;
-  HttpRequest* p_http = nullptr;
+  DLNAHttpRequest* p_http = nullptr;
   IUDPService* p_udp = nullptr;
   Vector<DLNADevice> devices;
   Vector<ActionRequest> actions;

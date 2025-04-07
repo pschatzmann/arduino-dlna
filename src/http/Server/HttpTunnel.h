@@ -26,13 +26,13 @@ class HttpTunnel {
     return nullptr;
   }
 
-  HttpRequest& request() { return v_request; }
+  DLNAHttpRequest& request() { return v_request; }
 
   const char* mime() { return v_mime; }
 
  protected:
   Url v_url;
-  HttpRequest v_request;
+  DLNAHttpRequest v_request;
   const char* v_mime;
 
   bool isOk(int code) { return code >= 200 && code < 300; }

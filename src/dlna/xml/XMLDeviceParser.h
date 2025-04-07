@@ -35,11 +35,11 @@ class XMLDeviceParser {
   StringRegistry* p_strings = nullptr;
 
   /// extract string, add to string repository and return repository string
-  const char* substring(char* in, int pos, int end) {
+  const char* substrView(char* in, int pos, int end) {
     const int len = end - pos + 1;
     char tmp[len];
     StrView tmp_str(tmp, len);
-    tmp_str.substring(in, pos, end);
+    tmp_str.substrView(in, pos, end);
     return p_strings->add((char*)tmp_str.c_str());
   }
 
@@ -74,7 +74,7 @@ class XMLDeviceParser {
       StrView tag(name);
       start_pos += tag.length();
       end_pos = str.indexOf("</", start_pos);
-      temp_view.substring((char*)str.c_str(), start_pos, end_pos);
+      temp_view.substrView((char*)str.c_str(), start_pos, end_pos);
       result = temp_view.toInt();
       DlnaLogger.log(DlnaDebug, "device xml %s : %s / %d", name, temp_view.c_str(), result);
 
@@ -90,7 +90,7 @@ class XMLDeviceParser {
       StrView tag(name);
       start_pos += tag.length();
       int end_str = str.indexOf("</", start_pos);
-      result = substring((char*)str.c_str(), start_pos, end_str);
+      result = substrView((char*)str.c_str(), start_pos, end_str);
       DlnaLogger.log(DlnaDebug, "device xml %s : %s", name, result);
       end = str.indexOf(">", end_str);
     } else {

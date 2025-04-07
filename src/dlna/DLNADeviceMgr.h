@@ -42,6 +42,7 @@ class DLNADeviceMgr {
 
     // setup all services
     setupServices(*p_device);
+    device.setupServices(server, udp);
 
     // setup web server
     if (!setupDLNAServer(server)) {
@@ -113,7 +114,7 @@ class DLNADeviceMgr {
     }
 
     // be nice, if we have other tasks
-    delay(5);
+    p_device->loop();
 
     return true;
   }

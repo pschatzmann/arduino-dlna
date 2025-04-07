@@ -65,8 +65,8 @@ class DLNAControlPointRequestParser {
       start_pos += strlen(tag);
       if (end_pos < 0) end_pos = in.indexOf("\n", start_pos);
       if (end_pos >= 0) {
-        result.substring(in.c_str(), start_pos, end_pos);
-        DlnaLogger.log(DlnaDebug, "%s substring (%d,%d)->%s", tag, start_pos, end_pos,
+        result.substrView(in.c_str(), start_pos, end_pos);
+        DlnaLogger.log(DlnaDebug, "%s substrView (%d,%d)->%s", tag, start_pos, end_pos,
                        result.c_str());
 
         result.trim();

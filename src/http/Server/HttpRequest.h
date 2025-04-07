@@ -149,7 +149,9 @@ class HttpRequest {
     DlnaLogger.log(DlnaInfo, "connect %s", ip);
     int rc = this->client_ptr->connect(ip, port);
     uint64_t end = millis() + client_ptr->getTimeout();
-    DlnaLogger.log(DlnaInfo, "Connected: %s (rc=%d) with timeout %ld", connected()? "true" : "false", rc, client_ptr->getTimeout());
+    DlnaLogger.log(DlnaInfo, "Connected: %s (rc=%d) with timeout %ld",
+                   connected() ? "true" : "false", rc,
+                   client_ptr->getTimeout());
     return rc;
   }
 
@@ -164,7 +166,7 @@ class HttpRequest {
     }
 
     if (!connected()) {
-      DlnaLogger.log(DlnaInfo, "Connected: %s", connected()? "true" : "false");
+      DlnaLogger.log(DlnaInfo, "Connected: %s", connected() ? "true" : "false");
       return -1;
     }
 
@@ -214,5 +216,7 @@ class HttpRequest {
     return reply_header.statusCode();
   }
 };
+
+using DLNAHttpRequest = tiny_dlna::HttpRequest;
 
 }  // namespace tiny_dlna

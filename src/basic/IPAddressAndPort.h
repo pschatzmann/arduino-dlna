@@ -20,8 +20,8 @@ static const char *toStr(IPAddress address) {
 struct IPAddressAndPort {
   IPAddressAndPort() = default;
   IPAddressAndPort(IPAddress addr, int prt) { address = addr, port = prt; }
-  IPAddress address;
-  int port;
+  IPAddress address = IPAddress(0, 0, 0, 0);
+  int port = 0;
 
   const char *toString() {
     static char result[80] = {0};

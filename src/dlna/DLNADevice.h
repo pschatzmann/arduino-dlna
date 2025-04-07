@@ -140,7 +140,12 @@ class DLNADevice {
   /// Overwrite the default icon
   void clearIcons() { icons.clear(); }
   void addIcon(Icon icon) { icons.push_back(icon); }
-  Icon getIcon(int idx = 0) { return icons[idx]; }
+  Icon getIcon(int idx = 0) { 
+    if (icons.size()==0){
+      Icon empty;
+      return empty;
+    }
+    return icons[idx]; }
 
   operator bool() { return is_active; }
 
@@ -151,6 +156,12 @@ class DLNADevice {
   uint32_t getTimestamp() { return timestamp; }
 
   void setActive(bool flag) { is_active = flag; }
+
+  virtual void loop(){
+    delay(1);
+  }
+
+  virtual void setupServices(HttpServer& server, IUDPService& udp){}
 
  protected:
   uint64_t timestamp = 0;

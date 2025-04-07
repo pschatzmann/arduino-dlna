@@ -88,8 +88,8 @@ class DLNADeviceRequestParser {
       int end = in.indexOf("\r\n", start);
       if (end < 0) end = in.indexOf("\n", start);
       if (end >= 0) {
-        result.substring(in.c_str(), start, end);
-        DlnaLogger.log(DlnaDebug, "%s substring (%d,%d)->%s", tag, start, end,
+        result.substrView(in.c_str(), start, end);
+        DlnaLogger.log(DlnaDebug, "%s substrView (%d,%d)->%s", tag, start, end,
                        result.c_str());
 
         result.trim();

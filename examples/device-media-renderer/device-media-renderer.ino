@@ -3,8 +3,8 @@
 
 const char* ssid = "";
 const char* password = "";
-MediaRenderer mr;
-DLNADevice device;
+MediaRenderer media_renderer;
+DLNADeviceMgr device_mgr;         // basic device API
 WiFiServer wifi;
 HttpServer server(wifi);
 UDPAsyncService udp;
@@ -27,11 +27,7 @@ void setup() {
   setupWifi();
 
   // setup device: set IPAddress or BaseURL and other optional information
-  device.setIPAddress(WiFi.localIP());
-  device.setManufacturer("Phil Schatzmann");
-  device.setManufacturerURL("https://www.pschatzmann.ch/");
-  device.setFriendlyName("Arduino Media Renderer");
-  mr.begin(device, udp, server);
+  device_mgr.begin(media_renderer, udp, server);
 }
 
-void loop() { mr.loop(); }
+void loop() { device_mgr.loop(); }

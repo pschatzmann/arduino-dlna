@@ -192,6 +192,20 @@ class Str : public StrView {
     memset(vector.data(),0, len);
     len = 0;
   }
+  /// copies a substring into the current string
+  Str substring(int start, int end) {
+    Str result;
+    if (end > start && this->chars != nullptr) {
+      int len = end - start;
+      result.grow(len);
+      len = len < this->maxlen ? len : this->maxlen;
+      char* target = (char*) result.c_str();
+      strncpy(target, this->c_str() + start, len);
+      target[len] = 0;
+    }
+    return result;
+  }
+
 
  protected:
   Vector<char> vector;

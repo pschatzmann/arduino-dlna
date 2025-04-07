@@ -4,12 +4,12 @@
 
 const char* ssid = "your SSID";
 const char* password = "your Password";
-DLNADevice deviceInfo; // information about your device
-DLNADeviceMgr device;         // basic device API
+DLNADevice device;         // information about your device
+DLNADeviceMgr device_mgr;  // basic device API
 WiFiServer wifi;           // Networking Server
 HttpServer server(wifi);   // Webserver
-UDPAsyncService udp
-const char* st = "urn:schemas-upnp-org:device:MediaRenderer:1";
+UDPAsyncService udp const char* st =
+    "urn:schemas-upnp-org:device:MediaRenderer:1";
 const char* usn = "uuid:09349455-2941-4cf7-9847-1dd5ab210e97";
 
 void setupWifi() {
@@ -22,29 +22,31 @@ void setupWifi() {
 }
 
 void setupDeviceInfo() {
-  deviceInfo.clear();
-  deviceInfo.setUDN(usn);
-  deviceInfo.setDeviceType(st);
-  deviceInfo.setIPAddress(WiFi.localIP());
-  deviceInfo.setManufacturer("Phil Schatzmann");
-  deviceInfo.setManufacturerURL("https://www.pschatzmann.ch/");
-  deviceInfo.setFriendlyName("Arduino Media Renderer");
+  DLNAServiceInfo rc, cm, avt;
 
-  // to be implemented 
-  auto controlCB = [](HttpServer* server, const char* requestPath,
-                    HttpRequestHandlerLine* hl) {
-    DlnaLogger.log(DlnaError, "Unhandled request: %s", requestPath);
-    server->reply("text/xml", "<test/>");
-  };
+  device.clear();
+  device.setUDN(usn);
+  device.setDeviceType(st);
+  device.setIPAddress(WiFi.localIP());
+  device.setManufacturer("Phil Schatzmann");
+  device.setManufacturerURL("https://www.pschatzmann.ch/");
+  device.setFriendlyName("Arduino Media Renderer");
 
-  // to be implemented 
-  auto eventCB = [](HttpServer* server, const char* requestPath,
-                    HttpRequestHandlerLine* hl) {
-    DlnaLogger.log(DlnaError, "Unhandled request: %s", requestPath);
-    server->reply("text/xml", "<test/>");
-  };
+  // // to be implemented
+  // auto controlCB = [](HttpServer* server, const char* requestPath,
+  //                     HttpRequestHandlerLine* hl) {
+  //   DlnaLogger.log(DlnaError, "Unhandled request: %s", requestPath);
+  //   server->reply("text/xml", "<test/>");
+  // };
 
-  // provide 
+  // // to be implemented
+  // auto eventCB = [](HttpServer* server, const char* requestPath,
+  //                   HttpRequestHandlerLine* hl) {
+  //   DlnaLogger.log(DlnaError, "Unhandled request: %s", requestPath);
+  //   server->reply("text/xml", "<test/>");
+  // };
+
+  // provide
   auto transportCB = [](HttpServer* server, const char* requestPath,
                         HttpRequestHandlerLine* hl) {
     server->reply("text/xml", transport_xml);
@@ -61,19 +63,18 @@ void setupDeviceInfo() {
   };
 
   // define services
-  DLNAServiceInfo rc, cm, avt;
-    // avt.setup("urn:schemas-upnp-org:service:AVTransport:1",
-    //           "urn:upnp-org:serviceId:AVTransport", "/AVT/service.xml",
-    //           transportCB, "/AVT/control", dummyCB, "/AVT/event", dummyCB);
-    // cm.setup("urn:schemas-upnporg:service:ConnectionManager:1",
-    //          "urn:upnp-org:serviceId:ConnectionManager", "/CM/service.xml",
-    //          connmgrCB, "/CM/control", dummyCB, "/CM/event", dummyCB);
-    // rc.setup("urn:schemas-upnporg:service:RenderingControl:1",
-    //          "urn:upnp-org:serviceId:RenderingControl", "/RC/service.xml",
-    //          controlCB, "/RC/control", dummyCB, "/RC/event", dummyCB);
-  deviceInfo.addService(rc);
-  deviceInfo.addService(cm);
-  deviceInfo.addService(avt);
+  avt.setup("urn:schemas-upnp-org:service:AVTransport:1",
+            "urn:upnp-org:serviceId:AVTransport", "/AVT/service.xml",
+            transportCB, "/AVT/control", dummyCB, "/AVT/event", dummyCB);
+  cm.setup("urn:schemas-upnporg:service:ConnectionManager:1",
+           "urn:upnp-org:serviceId:ConnectionManager", "/CM/service.xml",
+           connmgrCB, "/CM/control", dummyCB, "/CM/event", dummyCB);
+  rc.setup("urn:schemas-upnporg:service:RenderingControl:1",
+           "urn:upnp-org:serviceId:RenderingControl", "/RC/service.xml",
+           controlCB, "/RC/control", dummyCB, "/RC/event", dummyCB);
+  device.addService(rc);
+  device.addService(cm);
+  device.addService(avt);
 }
 
 void setup() {
@@ -87,7 +88,7 @@ void setup() {
   setupDeviceInfo();
 
   // start device
-  device.begin(deviceInfo, udp, server);
+  device_mgr.begin(device, udp, server);
 }
 
-void loop() { device.loop(); }
+void loop() { device_mgr.loop(); }

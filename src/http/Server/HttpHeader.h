@@ -396,8 +396,8 @@ class HttpRequestHeader : public HttpHeader {
     int space2 = line_str.indexOf(" ", space1 + 1);
 
     this->method_id = getMethod(line);
-    this->protocol_str.substring(line_str, space2 + 1, line_str.length());
-    this->url_path.substring(line_str, space1 + 1, space2);
+    this->protocol_str.substrView(line_str, space2 + 1, line_str.length());
+    this->url_path.substrView(line_str, space1 + 1, space2);
     this->url_path.trim();
 
     DlnaLogger.log(DlnaInfo, "->method: %s", methods[this->method_id]);
@@ -458,16 +458,16 @@ class HttpReplyHeader : public HttpHeader {
     int space2 = line_str.indexOf(' ', space1 + 1);
 
     // save http version
-    protocol_str.substring(line_str, 0, space1);
+    protocol_str.substrView(line_str, 0, space1);
 
     // find response status code after the first space
     char status_c[6];
     StrView status(status_c, 6);
-    status.substring(line_str, space1 + 1, space2);
+    status.substrView(line_str, space1 + 1, space2);
     status_code = atoi(status_c);
 
     // get reason-phrase after last SP
-    status_msg.substring(line_str, space2 + 1, line_str.length());
+    status_msg.substrView(line_str, space2 + 1, line_str.length());
   }
 };
 
