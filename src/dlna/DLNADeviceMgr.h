@@ -195,8 +195,8 @@ class DLNADeviceMgr {
     Icon icon = p_device->getIcon();
     if (icon.icon_data != nullptr) {
       char tmp[DLNA_MAX_URL_LEN];
-      const char* icon_path = url.buildPath(prefix, icon.icon_url);
-      p_server->on(icon_path, T_GET, icon.mime, (const uint8_t*)icon.icon_data,
+      // const char* icon_path = url.buildPath(prefix, icon.icon_url);
+      p_server->on(icon.icon_url, T_GET, icon.mime, (const uint8_t*)icon.icon_data,
                    icon.icon_size);
       p_server->on("/favicon.ico", T_GET, icon.mime,
                    (const uint8_t*)icon.icon_data, icon.icon_size);
@@ -204,11 +204,11 @@ class DLNADeviceMgr {
 
     // Register Service URLs
     for (DLNAServiceInfo& service : p_device->getServices()) {
-      p_server->on(url.buildPath(prefix, service.scpd_url), T_GET,
+      p_server->on(service.scpd_url, T_GET,
                    service.scp_cb, ref, 1);
-      p_server->on(url.buildPath(prefix, service.control_url), T_POST,
+      p_server->on(service.control_url, T_POST,
                    service.control_cb, ref, 1);
-      p_server->on(url.buildPath(prefix, service.event_sub_url), T_GET,
+      p_server->on(service.event_sub_url, T_GET,
                    service.event_sub_cb, ref, 1);
     }
 

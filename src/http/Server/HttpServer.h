@@ -409,7 +409,7 @@ class HttpServer {
     // get the actual client_ptr
     if (is_active) {
       WiFiClient client = server_ptr->accept();
-      if (client) {
+      if (client.connected()) {
         DlnaLogger.log(DlnaLogLevel::Info, "doLoop->hasClient");
         client_ptr = &client;
 
