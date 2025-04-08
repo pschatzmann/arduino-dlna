@@ -133,16 +133,6 @@ version: locate service of a given type
     return rc == 200;
   }
 
-  // /// Provides the actual state value
-  // const char* getStateValue(const char* name) {
-  //   for (auto& st : state) {
-  //     if (st.name == name) {
-  //       return st.value.c_str();
-  //     }
-  //   }
-  //   return nullptr;
-  // }
-
   /// call this method in the Arduino loop as often as possible: the processes
   /// all replys
   bool loop() {
