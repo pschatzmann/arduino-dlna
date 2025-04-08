@@ -1,5 +1,5 @@
-const char connmgr_xml[] = "\
-<?xml version=\"1.0\" encoding=\"utf-8\"?>\
+const char connmgr_xml[] =
+    "<?xml version=\"1.0\" encoding=\"utf-8\"?>\
 <scpd xmlns=\"urn:schemas-upnp-org:service-1-0\">\
   <specVersion>\
     <major>1</major>\

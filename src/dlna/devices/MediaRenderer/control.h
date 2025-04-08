@@ -1,13 +1,11 @@
 /// Rendering control, controls volume, mute, and other rendering settings.
 const char* control_xml =
-    "\
-<?xml version=\"1.0\" encoding=\"utf-8\"?>\
+"<?xml version=\"1.0\" encoding=\"utf-8\"?>\
 <scpd xmlns=\"urn:schemas-upnp-org:service-1-0\">\
   <specVersion>\
     <major>1</major>\
     <minor>0</minor>\
   </specVersion>\
-\
   <actionList>\
     <action>\
       <name>GetVolume</name>\
@@ -29,7 +27,6 @@ const char* control_xml =
         </argument>\
       </argumentList>\
     </action>\
-\
     <action>\
       <name>SetVolume</name>\
       <argumentList>\
@@ -50,7 +47,6 @@ const char* control_xml =
         </argument>\
       </argumentList>\
     </action>\
-\
     <action>\
       <name>GetMute</name>\
       <argumentList>\
@@ -71,7 +67,6 @@ const char* control_xml =
         </argument>\
       </argumentList>\
     </action>\
-\
     <action>\
       <name>SetMute</name>\
       <argumentList>\
@@ -93,7 +88,6 @@ const char* control_xml =
       </argumentList>\
     </action>\
   </actionList>\
-\
   <serviceStateTable>\
     <stateVariable sendEvents=\"no\">\
       <name>Volume</name>\
@@ -104,17 +98,14 @@ const char* control_xml =
         <step>1</step>\
       </allowedValueRange>\
     </stateVariable>\
-\
     <stateVariable sendEvents=\"no\">\
       <name>Mute</name>\
       <dataType>boolean</dataType>\
     </stateVariable>\
-\
     <stateVariable sendEvents=\"no\">\
       <name>A_ARG_TYPE_InstanceID</name>\
       <dataType>ui4</dataType>\
     </stateVariable>\
-\
     <stateVariable sendEvents=\"no\">\
       <name>A_ARG_TYPE_Channel</name>\
       <dataType>string</dataType>\
@@ -122,11 +113,5 @@ const char* control_xml =
         <allowedValue>Master</allowedValue>\
       </allowedValueList>\
     </stateVariable>\
-  </serviceStateTable<service>\
-  <serviceType>urn:schemas-upnp-org:service:RenderingControl:1</serviceType>\
-  <serviceId>urn:upnp-org:serviceId:RenderingControl</serviceId>\
-  <SCPDURL>/RenderingControl/desc.xml</SCPDURL>\
-  <controlURL>/RenderingControl/control</controlURL>\
-  <eventSubURL>/RenderingControl/event</eventSubURL>\
-</service>\
+  </serviceStateTable>\
 </scpd>";
