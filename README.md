@@ -3,28 +3,28 @@
 
 ## Brief
 
-This library provides the functionality to implement a UPnP/DLNA [device](https://pschatzmann.github.io/arduino-dlna/docs/html/classtiny__dlna_1_1DLNADeviceMgr.html) and [control point](https://pschatzmann.github.io/arduino-dlna/docs/html/classtiny__dlna_1_1DLNAControlPointMgr.html) in Arduino.
+This library provides the functionality to implement a UPnP/DLNA [device](https://pschatzmann.github.io/arduino-dlna/docs/html/classtiny__dlna_1_1DLNADeviceMgr.html) and a [control point](https://pschatzmann.github.io/arduino-dlna/docs/html/classtiny__dlna_1_1DLNAControlPointMgr.html) for Arduino.
 
-The Digital Living Network Alliance (DLNA) aims to establish the interoperability among PCs, consumer appliances, and mobile devices in wireless networks and wired networks. The purpose is to provide a solution for sharing between digital media and content services.
+The Digital Living Network Alliance (DLNA) aims to establish interoperability among PCs, consumer appliances, and mobile devices across wired and wireless networks. The goal is to provide a common solution for sharing digital media and content services.
 
-Reference Documentation is hard to find. Therfore I am providing some valuable links:
+Reference documentation can be hard to find. Therefore I am providing some useful links:
 
 - [UPnP and UDA Tutorial](https://upnp.org/resources/documents/UPnP_UDA_tutorial_July2014.pdf)
 - [UPnP Device Architecture Tutorial](
 https://embeddedinn.wordpress.com/tutorials/upnp-device-architecture/)
 - [UPnP Device Architecture](http://www.upnp.org/specs/arch/UPnP-arch-DeviceArchitecture-v1.1.pdf)
 
-I was struggling quite a bit to choose the right approach to implement something like this in Arduino. 
-On the desktop the the functionality can be provided with the help of the following projects:
+I struggled to choose the right approach to implement this on Arduino.
+On the desktop, similar functionality can be provided with the following projects:
 
 - [pupnp](https://github.com/pupnp/pupnp) A Portable SDK for UPnP* Devices
 - [gmrender-resurrect](https://github.com/hzeller/gmrender-resurrect): A headless UPnP/DLNA media renderer based on pupnp
 
-This library provides some memory efficient classes to implement DLNA devices and clients (=control points).
+This library provides memory-efficient classes to implement DLNA devices and clients (control points).
 
 ## Device Types and Control Points
 
-Appart from the generic functionality, this project also contains some easy to use classes 
+In addition to the core functionality, this project includes some easy-to-use classes:
 
 - Devices
   - MediaRenderer
@@ -36,23 +36,22 @@ Appart from the generic functionality, this project also contains some easy to u
 
 ## Implementation Approach
 
-A DLNA device uses UDP, Http, XML and Soap to discover and manage the services, so there is quite some complexity involved. 
+A DLNA device uses UDP, HTTP, XML and SOAP to discover and manage services, which adds complexity.
 
-I decided to implement the functionality from scratch using the basic Arduino Network API and I do not rely on any external libraries.
+I implemented the functionality from scratch using the basic Arduino network API and avoided external dependencies where possible.
 
-The [DLNAControlPointMgr](https://pschatzmann.github.io/arduino-dlna/docs/html/classtiny__dlna_1_1DLNAControlPointMgr.html) is setting up a control point and lets you execute actions.
-The [DLNADeviceMgr](https://pschatzmann.github.io/arduino-dlna/docs/html/classtiny__dlna_1_1DLNADeviceMgr.html) class provides the setup of a Basic DLNA Device service. Devices are represented by the [DLNADevice](https://pschatzmann.github.io/arduino-dlna/docs/html/classtiny__dlna_1_1DLNADevice.html) class. The device registers itself to the network and answers to the UDP DLNA queries and requests:
+The [DLNAControlPointMgr](https://pschatzmann.github.io/arduino-dlna/docs/html/classtiny__dlna_1_1DLNAControlPointMgr.html) sets up a control point and lets you execute actions.
+The [DLNADeviceMgr](https://pschatzmann.github.io/arduino-dlna/docs/html/classtiny__dlna_1_1DLNADeviceMgr.html) class provides the setup for a basic DLNA device service. Devices are represented by the [DLNADevice](https://pschatzmann.github.io/arduino-dlna/docs/html/classtiny__dlna_1_1DLNADevice.html) class. A device registers itself on the network and answers UDP DLNA queries and requests:
 
-- We handle the UDP communication via a [Scheduler](https://pschatzmann.github.io/arduino-dlna/docs/html/classtiny__dlna_1_1Scheduler.html) and a [Request Parser](https://pschatzmann.github.io/arduino-dlna/docs/html/classtiny__dlna_1_1DLNARequestParser.html)
-- We handle the Http requests with the help of my [TinyHttp Server](https://pschatzmann.github.io/arduino-dlna/docs/html/classtiny__dlna_1_1HttpServer.html)
-- The XML service descriptions can be stored as char arrays in progmem or
-  generated dynamically with the help of the [XMLPrinter](https://pschatzmann.github.io/arduino-dlna/docs/html/structtiny__dlna_1_1XMLPrinter.html) class.
+- UDP communication is handled via a [Scheduler](https://pschatzmann.github.io/arduino-dlna/docs/html/classtiny__dlna_1_1Scheduler.html) and a [Request Parser](https://pschatzmann.github.io/arduino-dlna/docs/html/classtiny__dlna_1_1DLNARequestParser.html).
+- HTTP requests are handled with the bundled [TinyHttp Server](https://pschatzmann.github.io/arduino-dlna/docs/html/classtiny__dlna_1_1HttpServer.html).
+- XML service descriptions can be stored as char arrays in progmem or generated dynamically using the [XMLPrinter](https://pschatzmann.github.io/arduino-dlna/docs/html/structtiny__dlna_1_1XMLPrinter.html) class.
 
-Developping and debugging on a microcontroller is quite tedious: therefore this project can also be compiled and run on a __linux desktop__.
+Developing and debugging on a microcontroller is tedious; therefore this project can also be compiled and run on a __Linux desktop__.
 
 ## Project Documentation
 
-- [Wiki](https://github.com/pschatzmann/arduino-dlna/wiki)
-- [Class Documentation](https://pschatzmann.github.io/arduino-dlna/docs/html/annotated.html)
+* [Wiki](https://github.com/pschatzmann/arduino-dlna/wiki)
+* [Class Documentation](https://pschatzmann.github.io/arduino-dlna/docs/html/annotated.html)
 
 
