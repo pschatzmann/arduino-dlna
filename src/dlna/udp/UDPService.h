@@ -1,7 +1,7 @@
 #pragma once
 
 #include <WiFi.h>
-#include <WiFiUdp.h>
+#include <WiFiUDP.h>
 #include "dlna/IUDPService.h"
 #include "assert.h"
 

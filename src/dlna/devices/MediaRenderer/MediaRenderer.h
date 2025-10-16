@@ -5,7 +5,7 @@
 #include "AudioTools/CoreAudio/StreamCopy.h"
 #include "AudioTools/CoreAudio/Pipeline.h"
 #include "AudioTools/CoreAudio/VolumeStream.h"
-#include "AudioTools/CoreAudio/AudioHttp/URLStream.h"
+#include "AudioTools/Communication/HTTP/URLStream.h"
 #include "conmgr.h"
 #include "control.h"
 #include "dlna/DLNADeviceMgr.h"

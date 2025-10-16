@@ -465,8 +465,8 @@ class HttpServer {
   List<HttpRequestHandlerLine*> handler_collection;
   // List<Extension*> extension_collection;
   List<HttpRequestRewrite*> rewrite_collection;
-  Client* client_ptr;
-  WiFiServer* server_ptr;
+  Client* client_ptr = nullptr;
+  WiFiServer* server_ptr = nullptr;
   bool is_active;
   Vector<char> buffer{0};
   const char* local_host = nullptr;
