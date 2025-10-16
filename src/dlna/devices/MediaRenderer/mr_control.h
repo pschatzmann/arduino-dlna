@@ -1,5 +1,5 @@
 /// Rendering control, controls volume, mute, and other rendering settings.
-const char* control_xml =
+const char* mr_control_xml =
 "<?xml version=\"1.0\" encoding=\"utf-8\"?>\
 <scpd xmlns=\"urn:schemas-upnp-org:service-1-0\">\
   <specVersion>\

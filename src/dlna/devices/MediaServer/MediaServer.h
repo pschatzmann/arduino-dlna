@@ -6,8 +6,8 @@
 #include "dlna/DLNADeviceMgr.h"
 #include "http/HttpServer.h"
 // Generated SCPD headers
-#include "connmgr.h"
-#include "content_dir.h"
+#include "ms_connmgr.h"
+#include "ms_content_dir.h"
 #include "dlna/xml/XMLPrinter.h"
 
 namespace tiny_dlna {

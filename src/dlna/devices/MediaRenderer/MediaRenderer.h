@@ -7,10 +7,10 @@
 #include "AudioTools/CoreAudio/Pipeline.h"
 #include "AudioTools/CoreAudio/VolumeStream.h"
 #include "AudioTools/Communication/HTTP/URLStream.h"
-#include "conmgr.h"
-#include "control.h"
+#include "mr_conmgr.h"
+#include "mr_control.h"
+#include "mr_transport.h"
 #include "dlna/DLNADeviceMgr.h"
-#include "transport.h"
 
 namespace tiny_dlna {
 
@@ -344,17 +344,17 @@ class MediaRenderer : public DLNADevice {
 
     auto transportCB = [](HttpServer* server, const char* requestPath,
                           HttpRequestHandlerLine* hl) {
-      server->reply("text/xml", transport_xml);
+      server->reply("text/xml", mr_connmgr_xml);
     };
 
     auto connmgrCB = [](HttpServer* server, const char* requestPath,
                         HttpRequestHandlerLine* hl) {
-      server->reply("text/xml", connmgr_xml);
+      server->reply("text/xml", mr_connmgr_xml);
     };
 
     auto controlCB = [](HttpServer* server, const char* requestPath,
                         HttpRequestHandlerLine* hl) {
-      server->reply("text/xml", control_xml);
+      server->reply("text/xml", mr_control_xml);
     };
 
     // define services

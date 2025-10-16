@@ -1,6 +1,6 @@
 // Handles media URIs, play/pause/stop, seek, etc.
 
-const char transport_xml[] =
+const char mr_transport_xml[] =
     "<?xml version=\"1.0\" encoding=\"utf-8\"?>\
   <scpd xmlns=\"urn:schemas-upnp-org:service-1-0\">\
     <specVersion>\
