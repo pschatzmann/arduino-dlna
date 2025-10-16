@@ -85,8 +85,9 @@ Inheritance diagram for tiny_dlna::DLNADevice:</div>
 <div class="dyncontent">
 <div class="center"><img src="classtiny__dlna_1_1DLNADevice__inherit__graph.png" border="0" usemap="#atiny__dlna_1_1DLNADevice_inherit__map" alt="Inheritance graph"/></div>
 <map name="atiny__dlna_1_1DLNADevice_inherit__map" id="atiny__dlna_1_1DLNADevice_inherit__map">
-<area shape="rect" title="Device Attributes and generation of XML using urn:schemas&#45;upnp&#45;org:device&#45;1&#45;0. We could just return a..." alt="" coords="15,5,185,32"/>
+<area shape="rect" title="Device Attributes and generation of XML using urn:schemas&#45;upnp&#45;org:device&#45;1&#45;0. We could just return a..." alt="" coords="117,5,288,32"/>
 <area shape="rect" href="classtiny__dlna_1_1MediaRenderer.html" title="MediaRenderer DLNA Device." alt="" coords="5,80,195,107"/>
+<area shape="rect" href="classtiny__dlna_1_1MediaServer.html" title="Minimal Digital Media Server implementation." alt="" coords="219,80,391,107"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
@@ -94,26 +95,26 @@ Collaboration diagram for tiny_dlna::DLNADevice:</div>
 <div class="dyncontent">
 <div class="center"><img src="classtiny__dlna_1_1DLNADevice__coll__graph.png" border="0" usemap="#atiny__dlna_1_1DLNADevice_coll__map" alt="Collaboration graph"/></div>
 <map name="atiny__dlna_1_1DLNADevice_coll__map" id="atiny__dlna_1_1DLNADevice_coll__map">
-<area shape="rect" title="Device Attributes and generation of XML using urn:schemas&#45;upnp&#45;org:device&#45;1&#45;0. We could just return a..." alt="" coords="2556,136,2727,163"/>
-<area shape="rect" href="classtiny__dlna_1_1Url.html" title="URL parser which breaks a full url string up into its individual parts." alt="" coords="1132,424,1241,451"/>
-<area shape="rect" href="classtiny__dlna_1_1Str.html" title="String implementation which keeps the data on the heap. We grow the allocated memory only if the copy..." alt="" coords="664,396,772,423"/>
-<area shape="rect" href="classtiny__dlna_1_1HttpHeader.html" title="In a http request and reply we need to process header information. With this API we can define and qu..." alt="" coords="943,231,1108,257"/>
-<area shape="rect" href="classtiny__dlna_1_1StrView.html" title="A simple wrapper to provide string functions on char*. If the underlying char* is a const we do not a..." alt="" coords="334,411,474,437"/>
-<area shape="rect" href="classtiny__dlna_1_1Vector.html" title=" " alt="" coords="333,325,475,366"/>
-<area shape="rect" href="classtiny__dlna_1_1HttpServer.html" title="A Simple Header only implementation of Http Server that allows the registration of callback functions..." alt="" coords="1637,308,1797,335"/>
-<area shape="rect" href="classtiny__dlna_1_1Allocator.html" title="Memory allocateator which uses malloc." alt="" coords="5,264,153,291"/>
-<area shape="rect" href="classtiny__dlna_1_1Vector.html" title=" " alt="" coords="2269,63,2411,105"/>
-<area shape="rect" href="classtiny__dlna_1_1Vector.html" title=" " alt="" coords="2231,129,2449,170"/>
-<area shape="rect" href="classtiny__dlna_1_1List.html" title=" " alt="" coords="307,234,501,275"/>
-<area shape="rect" href="classtiny__dlna_1_1List.html" title=" " alt="" coords="293,462,515,503"/>
-<area shape="rect" href="classtiny__dlna_1_1List.html" title=" " alt="" coords="279,530,529,571"/>
-<area shape="rect" href="classtiny__dlna_1_1Icon.html" title="Information about the icon." alt="" coords="1975,12,2093,39"/>
-<area shape="rect" href="structtiny__dlna_1_1XMLPrinter.html" title="Functions to efficiently output XML. XML data contains a lot of redundancy so it is more memory effic..." alt="" coords="2259,195,2421,221"/>
-<area shape="rect" href="classtiny__dlna_1_1DLNAServiceInfo.html" title="Attributes needed for the DLNA Service Definition." alt="" coords="1935,219,2133,245"/>
-<area shape="rect" href="classtiny__dlna_1_1HttpReplyHeader.html" title="Reading and Writing of Http Replys." alt="" coords="1273,281,1476,308"/>
-<area shape="rect" href="classtiny__dlna_1_1HttpRequestHeader.html" title="Reading and writing of Http Requests." alt="" coords="1265,231,1484,257"/>
-<area shape="rect" href="classtiny__dlna_1_1HttpLineReader.html" title="We read a single line. A terminating 0 is added to the string to make it compliant for c string funct..." alt="" coords="623,240,813,267"/>
-<area shape="rect" href="structtiny__dlna_1_1List_1_1Node.html" title=" " alt="" coords="11,445,147,486"/>
+<area shape="rect" title="Device Attributes and generation of XML using urn:schemas&#45;upnp&#45;org:device&#45;1&#45;0. We could just return a..." alt="" coords="2556,363,2727,389"/>
+<area shape="rect" href="classtiny__dlna_1_1Str.html" title="String implementation which keeps the data on the heap. We grow the allocated memory only if the copy..." alt="" coords="664,457,772,484"/>
+<area shape="rect" href="classtiny__dlna_1_1Url.html" title="URL parser which breaks a full url string up into its individual parts." alt="" coords="1132,452,1241,479"/>
+<area shape="rect" href="classtiny__dlna_1_1HttpHeader.html" title="In a http request and reply we need to process header information. With this API we can define and qu..." alt="" coords="943,159,1108,185"/>
+<area shape="rect" href="classtiny__dlna_1_1StrView.html" title="A simple wrapper to provide string functions on char*. If the underlying char* is a const we do not a..." alt="" coords="334,457,474,484"/>
+<area shape="rect" href="classtiny__dlna_1_1Vector.html" title=" " alt="" coords="333,305,475,346"/>
+<area shape="rect" href="classtiny__dlna_1_1HttpServer.html" title="A Simple Header only implementation of Http Server that allows the registration of callback functions..." alt="" coords="1637,211,1797,237"/>
+<area shape="rect" href="classtiny__dlna_1_1Allocator.html" title="Memory allocateator which uses malloc." alt="" coords="5,115,153,141"/>
+<area shape="rect" href="classtiny__dlna_1_1Vector.html" title=" " alt="" coords="2269,18,2411,59"/>
+<area shape="rect" href="classtiny__dlna_1_1Vector.html" title=" " alt="" coords="2231,203,2449,245"/>
+<area shape="rect" href="classtiny__dlna_1_1List.html" title=" " alt="" coords="307,151,501,193"/>
+<area shape="rect" href="classtiny__dlna_1_1List.html" title=" " alt="" coords="293,217,515,258"/>
+<area shape="rect" href="classtiny__dlna_1_1List.html" title=" " alt="" coords="279,383,529,425"/>
+<area shape="rect" href="classtiny__dlna_1_1Icon.html" title="Information about the icon." alt="" coords="1975,60,2093,87"/>
+<area shape="rect" href="structtiny__dlna_1_1XMLPrinter.html" title="Functions to efficiently output XML. XML data contains a lot of redundancy so it is more memory effic..." alt="" coords="2259,479,2421,505"/>
+<area shape="rect" href="classtiny__dlna_1_1DLNAServiceInfo.html" title="Attributes needed for the DLNA Service Definition." alt="" coords="1935,211,2133,237"/>
+<area shape="rect" href="classtiny__dlna_1_1HttpReplyHeader.html" title="Reading and Writing of Http Replys." alt="" coords="1273,160,1476,187"/>
+<area shape="rect" href="classtiny__dlna_1_1HttpRequestHeader.html" title="Reading and writing of Http Requests." alt="" coords="1265,109,1484,136"/>
+<area shape="rect" href="classtiny__dlna_1_1HttpLineReader.html" title="We read a single line. A terminating 0 is added to the string to make it compliant for c string funct..." alt="" coords="623,108,813,135"/>
+<area shape="rect" href="structtiny__dlna_1_1List_1_1Node.html" title=" " alt="" coords="11,295,147,337"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -123,6 +124,9 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:af8ecb5cb4540dbe15a3a62537e53b290"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5bb49d6aa2116319d6ec580fa2a17601"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a5bb49d6aa2116319d6ec580fa2a17601">~DLNADevice</a> ()</td></tr>
 <tr class="separator:a5bb49d6aa2116319d6ec580fa2a17601"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abaa1a3e7c166f961118e9fa3654b6c67"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#abaa1a3e7c166f961118e9fa3654b6c67">begin</a> ()</td></tr>
+<tr class="memdesc:abaa1a3e7c166f961118e9fa3654b6c67"><td class="mdescLeft">&#160;</td><td class="mdescRight">Override to initialize the device.  <a href="classtiny__dlna_1_1DLNADevice.html#abaa1a3e7c166f961118e9fa3654b6c67">More...</a><br /></td></tr>
+<tr class="separator:abaa1a3e7c166f961118e9fa3654b6c67"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8833507ced6d3d84082d38f4c0d4a704"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a8833507ced6d3d84082d38f4c0d4a704">print</a> (Print &amp;out)</td></tr>
 <tr class="memdesc:a8833507ced6d3d84082d38f4c0d4a704"><td class="mdescLeft">&#160;</td><td class="mdescRight">renderes the device xml  <a href="classtiny__dlna_1_1DLNADevice.html#a8833507ced6d3d84082d38f4c0d4a704">More...</a><br /></td></tr>
 <tr class="separator:a8833507ced6d3d84082d38f4c0d4a704"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -139,6 +143,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a180079b47ed959ab7a2840c11a552155"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a180079b47ed959ab7a2840c11a552155">setBaseURL</a> (const char *url)</td></tr>
 <tr class="memdesc:a180079b47ed959ab7a2840c11a552155"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the base url.  <a href="classtiny__dlna_1_1DLNADevice.html#a180079b47ed959ab7a2840c11a552155">More...</a><br /></td></tr>
 <tr class="separator:a180079b47ed959ab7a2840c11a552155"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a59302478d23eb510dad38a5a01125d5f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a59302478d23eb510dad38a5a01125d5f">setBaseURL</a> (IPAddress ip, int port, const char *path=&quot;&quot;)</td></tr>
+<tr class="memdesc:a59302478d23eb510dad38a5a01125d5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the base URL.  <a href="classtiny__dlna_1_1DLNADevice.html#a59302478d23eb510dad38a5a01125d5f">More...</a><br /></td></tr>
+<tr class="separator:a59302478d23eb510dad38a5a01125d5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaeb931b13b71f4d058f2b9cc3a8dde38"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#aaeb931b13b71f4d058f2b9cc3a8dde38">getBaseURL</a> ()</td></tr>
 <tr class="memdesc:aaeb931b13b71f4d058f2b9cc3a8dde38"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the base url.  <a href="classtiny__dlna_1_1DLNADevice.html#aaeb931b13b71f4d058f2b9cc3a8dde38">More...</a><br /></td></tr>
 <tr class="separator:aaeb931b13b71f4d058f2b9cc3a8dde38"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -217,11 +224,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a16a054acacfc7af5bf74b213ae76061f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae657163038662c239441c471cc140f05"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#ae657163038662c239441c471cc140f05">loop</a> ()</td></tr>
 <tr class="separator:ae657163038662c239441c471cc140f05"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4f6efb95ae846231dff71e77c2f352d9"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a4f6efb95ae846231dff71e77c2f352d9">setupServices</a> (<a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;server, <a class="el" href="classtiny__dlna_1_1IUDPService.html">IUDPService</a> &amp;udp)</td></tr>
-<tr class="separator:a4f6efb95ae846231dff71e77c2f352d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
+<tr class="memitem:a4f6efb95ae846231dff71e77c2f352d9"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a4f6efb95ae846231dff71e77c2f352d9">setupServices</a> (<a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;server, <a class="el" href="classtiny__dlna_1_1IUDPService.html">IUDPService</a> &amp;udp)</td></tr>
+<tr class="memdesc:a4f6efb95ae846231dff71e77c2f352d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">to be implemented by subclasses  <a href="classtiny__dlna_1_1DLNADevice.html#a4f6efb95ae846231dff71e77c2f352d9">More...</a><br /></td></tr>
+<tr class="separator:a4f6efb95ae846231dff71e77c2f352d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3a3f3b55fbaaa6c4316aff41c949c88b"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a3a3f3b55fbaaa6c4316aff41c949c88b">printRoot</a> ()</td></tr>
 <tr class="separator:a3a3f3b55fbaaa6c4316aff41c949c88b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a65ae501d01a96c1906ea8bb488ea5548"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a65ae501d01a96c1906ea8bb488ea5548">printDevice</a> ()</td></tr>
@@ -285,6 +293,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a04024c1102e6bb7cc4d359dadc6a2a33"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af6600cf2073e5e933a5d149e72608b9a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt; <a class="el" href="classtiny__dlna_1_1Icon.html">Icon</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#af6600cf2073e5e933a5d149e72608b9a">icons</a></td></tr>
 <tr class="separator:af6600cf2073e5e933a5d149e72608b9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07706c7166d2ea435108f5d8168617f2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Str.html">Str</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a07706c7166d2ea435108f5d8168617f2">url_str</a></td></tr>
+<tr class="separator:a07706c7166d2ea435108f5d8168617f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
 Friends</h2></td></tr>
@@ -292,6 +302,8 @@ Friends</h2></td></tr>
 <tr class="separator:aa599c93e903741a3014259be62c1fc6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a19fb9b4f1138c9fe18c6847b17063e3f"><td class="memItemLeft" align="right" valign="top">class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a19fb9b4f1138c9fe18c6847b17063e3f">DLNAControlPointMgr</a></td></tr>
 <tr class="separator:a19fb9b4f1138c9fe18c6847b17063e3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2f3a80700262f56511684b4b3771304"><td class="memItemLeft" align="right" valign="top">class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#aa2f3a80700262f56511684b4b3771304">DLNADeviceMgr</a></td></tr>
+<tr class="separator:aa2f3a80700262f56511684b4b3771304"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Device Attributes and generation of XML using urn:schemas-upnp-org:device-1-0. We could just return a predefined device xml document, but we provide a dynamic generation of the service xml which should be more memory efficient. Strings are represented as char*, so you can assign values that are stored in ProgMem to mimimize the RAM useage. If you need to keep the values on the heap you can use addString() method. </p>
@@ -400,6 +412,35 @@ Friends</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Adds a service defintion. </p>
+
+</div>
+</div>
+<a id="abaa1a3e7c166f961118e9fa3654b6c67"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abaa1a3e7c166f961118e9fa3654b6c67">&#9670;&nbsp;</a></span>begin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool tiny_dlna::DLNADevice::begin </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Override to initialize the device. </p>
+
+<p>Reimplemented in <a class="el" href="classtiny__dlna_1_1MediaRenderer.html#a314f90cbb6e8793b9bb1b0a811683e67">tiny_dlna::MediaRenderer</a>.</p>
 
 </div>
 </div>
@@ -1228,7 +1269,7 @@ Friends</h2></td></tr>
 </div>
 </div>
 <a id="a180079b47ed959ab7a2840c11a552155"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a180079b47ed959ab7a2840c11a552155">&#9670;&nbsp;</a></span>setBaseURL()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a180079b47ed959ab7a2840c11a552155">&#9670;&nbsp;</a></span>setBaseURL() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1252,6 +1293,50 @@ Friends</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Defines the base url. </p>
+
+</div>
+</div>
+<a id="a59302478d23eb510dad38a5a01125d5f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a59302478d23eb510dad38a5a01125d5f">&#9670;&nbsp;</a></span>setBaseURL() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tiny_dlna::DLNADevice::setBaseURL </td>
+          <td>(</td>
+          <td class="paramtype">IPAddress&#160;</td>
+          <td class="paramname"><em>ip</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>port</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>path</em> = <code>&quot;&quot;</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Defines the base URL. </p>
 
 </div>
 </div>
@@ -1598,12 +1683,14 @@ Friends</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="classtiny__dlna_1_1MediaRenderer.html#aad74e9ebf8fe530adfd266b3ed73ebd1">tiny_dlna::MediaRenderer</a>.</p>
+<p>to be implemented by subclasses </p>
+
+<p>Reimplemented in <a class="el" href="classtiny__dlna_1_1MediaServer.html#aa17658369edcc1654448edc9f833fc24">tiny_dlna::MediaServer</a>, and <a class="el" href="classtiny__dlna_1_1MediaRenderer.html#aad74e9ebf8fe530adfd266b3ed73ebd1">tiny_dlna::MediaRenderer</a>.</p>
 
 </div>
 </div>
@@ -1646,6 +1733,28 @@ Friends</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">friend class <a class="el" href="classtiny__dlna_1_1DLNAControlPointMgr.html">DLNAControlPointMgr</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa2f3a80700262f56511684b4b3771304"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2f3a80700262f56511684b4b3771304">&#9670;&nbsp;</a></span>DLNADeviceMgr</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">friend class <a class="el" href="classtiny__dlna_1_1DLNADeviceMgr.html">DLNADeviceMgr</a></td>
         </tr>
       </table>
   </td>
@@ -2109,6 +2218,28 @@ Friends</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">const char* tiny_dlna::DLNADevice::universal_product_code = nullptr</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a07706c7166d2ea435108f5d8168617f2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a07706c7166d2ea435108f5d8168617f2">&#9670;&nbsp;</a></span>url_str</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1Str.html">Str</a> tiny_dlna::DLNADevice::url_str</td>
         </tr>
       </table>
   </td>

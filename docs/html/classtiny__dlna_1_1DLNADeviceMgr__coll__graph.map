@@ -1,29 +1,29 @@
 <map id="tiny_dlna::DLNADeviceMgr" name="tiny_dlna::DLNADeviceMgr">
-<area shape="rect" id="node1" title="Setup of a Basic DLNA Device service. The device registers itself to the network and answers to the D..." alt="" coords="3329,424,3525,451"/>
-<area shape="rect" id="node2" href="$classtiny__dlna_1_1DLNADevice.html" title="Device Attributes and generation of XML using urn:schemas&#45;upnp&#45;org:device&#45;1&#45;0. We could just return a..." alt="" coords="2731,196,2901,223"/>
-<area shape="rect" id="node22" href="$classtiny__dlna_1_1DLNADeviceRequestParser.html" title="Translates DLNA UDP Requests to Schedule so that we can schedule a reply." alt="" coords="3012,189,3236,230"/>
-<area shape="rect" id="node3" href="$classtiny__dlna_1_1Url.html" title="URL parser which breaks a full url string up into its individual parts." alt="" coords="1304,296,1413,323"/>
-<area shape="rect" id="node4" href="$classtiny__dlna_1_1Str.html" title="String implementation which keeps the data on the heap. We grow the allocated memory only if the copy..." alt="" coords="763,292,871,319"/>
-<area shape="rect" id="node15" href="$classtiny__dlna_1_1HttpHeader.html" title="In a http request and reply we need to process header information. With this API we can define and qu..." alt="" coords="1115,403,1280,429"/>
-<area shape="rect" id="node5" href="$classtiny__dlna_1_1StrView.html" title="A simple wrapper to provide string functions on char*. If the underlying char* is a const we do not a..." alt="" coords="335,260,475,287"/>
-<area shape="rect" id="node6" href="$classtiny__dlna_1_1Vector.html" title=" " alt="" coords="334,311,477,353"/>
-<area shape="rect" id="node13" href="$classtiny__dlna_1_1HttpServer.html" title="A Simple Header only implementation of Http Server that allows the registration of callback functions..." alt="" coords="1809,428,1969,455"/>
-<area shape="rect" id="node7" href="$classtiny__dlna_1_1Allocator.html" title="Memory allocateator which uses malloc." alt="" coords="6,311,154,337"/>
+<area shape="rect" id="node1" title="Setup of a Basic DLNA Device service. The device registers itself to the network and answers to the D..." alt="" coords="3329,451,3525,477"/>
+<area shape="rect" id="node2" href="$classtiny__dlna_1_1DLNADevice.html" title="Device Attributes and generation of XML using urn:schemas&#45;upnp&#45;org:device&#45;1&#45;0. We could just return a..." alt="" coords="2731,245,2901,272"/>
+<area shape="rect" id="node22" href="$classtiny__dlna_1_1DLNADeviceRequestParser.html" title="Translates DLNA UDP Requests to Schedule so that we can schedule a reply." alt="" coords="3012,238,3236,279"/>
+<area shape="rect" id="node3" href="$classtiny__dlna_1_1Str.html" title="String implementation which keeps the data on the heap. We grow the allocated memory only if the copy..." alt="" coords="763,352,871,379"/>
+<area shape="rect" id="node7" href="$classtiny__dlna_1_1Url.html" title="URL parser which breaks a full url string up into its individual parts." alt="" coords="1304,301,1413,328"/>
+<area shape="rect" id="node15" href="$classtiny__dlna_1_1HttpHeader.html" title="In a http request and reply we need to process header information. With this API we can define and qu..." alt="" coords="1115,564,1280,591"/>
+<area shape="rect" id="node4" href="$classtiny__dlna_1_1StrView.html" title="A simple wrapper to provide string functions on char*. If the underlying char* is a const we do not a..." alt="" coords="335,309,475,336"/>
+<area shape="rect" id="node5" href="$classtiny__dlna_1_1Vector.html" title=" " alt="" coords="334,361,477,402"/>
+<area shape="rect" id="node13" href="$classtiny__dlna_1_1HttpServer.html" title="A Simple Header only implementation of Http Server that allows the registration of callback functions..." alt="" coords="1809,467,1969,493"/>
+<area shape="rect" id="node6" href="$classtiny__dlna_1_1Allocator.html" title="Memory allocateator which uses malloc." alt="" coords="6,359,154,385"/>
 <area shape="rect" id="node9" href="$classtiny__dlna_1_1Vector.html" title=" " alt="" coords="2441,109,2583,150"/>
 <area shape="rect" id="node11" href="$classtiny__dlna_1_1Vector.html" title=" " alt="" coords="2403,238,2621,279"/>
-<area shape="rect" id="node17" href="$classtiny__dlna_1_1List.html" title=" " alt="" coords="309,386,502,427"/>
-<area shape="rect" id="node19" href="$classtiny__dlna_1_1List.html" title=" " alt="" coords="294,594,517,635"/>
-<area shape="rect" id="node21" href="$classtiny__dlna_1_1List.html" title=" " alt="" coords="280,491,531,533"/>
+<area shape="rect" id="node17" href="$classtiny__dlna_1_1List.html" title=" " alt="" coords="309,582,502,623"/>
+<area shape="rect" id="node19" href="$classtiny__dlna_1_1List.html" title=" " alt="" coords="294,447,517,489"/>
+<area shape="rect" id="node21" href="$classtiny__dlna_1_1List.html" title=" " alt="" coords="280,647,531,689"/>
 <area shape="rect" id="node23" href="$classtiny__dlna_1_1Vector.html" title=" " alt="" coords="555,10,697,51"/>
-<area shape="rect" id="node26" href="$classtiny__dlna_1_1Vector.html" title=" " alt="" coords="316,659,495,701"/>
-<area shape="rect" id="node8" href="$classtiny__dlna_1_1Icon.html" title="Information about the icon." alt="" coords="2147,149,2265,176"/>
+<area shape="rect" id="node26" href="$classtiny__dlna_1_1Vector.html" title=" " alt="" coords="316,723,495,765"/>
+<area shape="rect" id="node8" href="$classtiny__dlna_1_1Icon.html" title="Information about the icon." alt="" coords="2147,148,2265,175"/>
 <area shape="rect" id="node10" href="$structtiny__dlna_1_1XMLPrinter.html" title="Functions to efficiently output XML. XML data contains a lot of redundancy so it is more memory effic..." alt="" coords="2431,57,2593,84"/>
-<area shape="rect" id="node12" href="$classtiny__dlna_1_1DLNAServiceInfo.html" title="Attributes needed for the DLNA Service Definition." alt="" coords="2107,253,2305,280"/>
-<area shape="rect" id="node14" href="$classtiny__dlna_1_1HttpReplyHeader.html" title="Reading and Writing of Http Replys." alt="" coords="1445,377,1648,404"/>
-<area shape="rect" id="node20" href="$classtiny__dlna_1_1HttpRequestHeader.html" title="Reading and writing of Http Requests." alt="" coords="1437,428,1656,455"/>
-<area shape="rect" id="node16" href="$classtiny__dlna_1_1HttpLineReader.html" title="We read a single line. A terminating 0 is added to the string to make it compliant for c string funct..." alt="" coords="721,371,912,397"/>
-<area shape="rect" id="node18" href="$structtiny__dlna_1_1List_1_1Node.html" title=" " alt="" coords="12,491,148,533"/>
-<area shape="rect" id="node24" href="$classtiny__dlna_1_1IUDPService.html" title="Abstract Interface for UDP API." alt="" coords="3039,475,3209,501"/>
-<area shape="rect" id="node25" href="$classtiny__dlna_1_1Scheduler.html" title="Scheduler which processes all due Schedules (to send out UDP replies)" alt="" coords="936,667,1091,693"/>
-<area shape="rect" id="node27" href="$structtiny__dlna_1_1Schedule.html" title="An individual Schedule (to send out UDP messages)" alt="" coords="5,695,155,721"/>
+<area shape="rect" id="node12" href="$classtiny__dlna_1_1DLNAServiceInfo.html" title="Attributes needed for the DLNA Service Definition." alt="" coords="2107,252,2305,279"/>
+<area shape="rect" id="node14" href="$classtiny__dlna_1_1HttpReplyHeader.html" title="Reading and Writing of Http Replys." alt="" coords="1445,568,1648,595"/>
+<area shape="rect" id="node20" href="$classtiny__dlna_1_1HttpRequestHeader.html" title="Reading and writing of Http Requests." alt="" coords="1437,517,1656,544"/>
+<area shape="rect" id="node16" href="$classtiny__dlna_1_1HttpLineReader.html" title="We read a single line. A terminating 0 is added to the string to make it compliant for c string funct..." alt="" coords="721,556,912,583"/>
+<area shape="rect" id="node18" href="$structtiny__dlna_1_1List_1_1Node.html" title=" " alt="" coords="12,585,148,626"/>
+<area shape="rect" id="node24" href="$classtiny__dlna_1_1IUDPService.html" title="Abstract Interface for UDP API." alt="" coords="3039,501,3209,528"/>
+<area shape="rect" id="node25" href="$classtiny__dlna_1_1Scheduler.html" title="Scheduler which processes all due Schedules (to send out UDP replies)" alt="" coords="936,731,1091,757"/>
+<area shape="rect" id="node27" href="$structtiny__dlna_1_1Schedule.html" title="An individual Schedule (to send out UDP messages)" alt="" coords="5,743,155,769"/>
 </map>

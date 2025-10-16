@@ -1,21 +1,26 @@
 <map id="src/dlna" name="src/dlna">
-<area shape="rect" id="node1" href="dir_2d29d7dff7c7baf1180920f6796c23ae.html" title="http" alt="" coords="451,159,523,207"/>
-<area shape="rect" id="node2" href="dir_38cd9eca440b760dc966f21b1f8d8f41.html" title="basic" alt="" coords="496,351,568,399"/>
-<area shape="rect" id="edge8-headlabel" href="dir_000009_000001.html" title="15" alt="" coords="522,323,539,338"/>
-<area shape="rect" id="edge5-headlabel" href="dir_000002_000009.html" title="3" alt="" coords="431,140,441,154"/>
-<area shape="rect" id="edge6-headlabel" href="dir_000002_000001.html" title="15" alt="" coords="538,327,556,341"/>
-<area shape="rect" id="node6" href="dir_0cc376a421adda5b51abf4399903838c.html" title="service" alt="" coords="227,159,299,207"/>
-<area shape="rect" id="edge4-headlabel" href="dir_000002_000007.html" title="1" alt="" coords="209,140,218,155"/>
-<area shape="rect" id="node8" href="dir_a6405f155ca617a002fcd0aa13cdc1f6.html" title="xml" alt="" coords="227,255,299,303"/>
-<area shape="rect" id="edge7-headlabel" href="dir_000002_000008.html" title="4" alt="" coords="228,228,238,243"/>
-<area shape="rect" id="node4" href="dir_5afe0b184293b52e5f1fc331cd3e5a76.html" title="devices" alt="" coords="261,63,333,111"/>
-<area shape="rect" id="node5" href="dir_13b9b4b2aa5135da948b073ae92fef0a.html" title="notifications" alt="" coords="134,63,237,111"/>
-<area shape="rect" id="edge1-headlabel" href="dir_000006_000001.html" title="1" alt="" coords="555,330,564,345"/>
-<area shape="rect" id="edge2-headlabel" href="dir_000007_000001.html" title="1" alt="" coords="485,326,494,340"/>
-<area shape="rect" id="edge3-headlabel" href="dir_000007_000008.html" title="2" alt="" coords="266,229,276,244"/>
-<area shape="rect" id="node7" href="dir_d15ecd6caac84bbf7f1a1bafbf6c836f.html" title="udp" alt="" coords="357,63,429,111"/>
-<area shape="rect" id="edge10-headlabel" href="dir_000005_000001.html" title="1" alt="" coords="571,334,580,349"/>
-<area shape="rect" id="edge9-headlabel" href="dir_000008_000001.html" title="4" alt="" coords="475,350,484,365"/>
-<area shape="rect" id="clust2" href="dir_95ca7d69a617eba53e70afaf1b3c2114.html" alt="" coords="27,52,440,313"/>
-<area shape="rect" id="clust1" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html" title="src" alt="" coords="16,16,613,409"/>
+<area shape="rect" id="node1" href="dir_2d29d7dff7c7baf1180920f6796c23ae.html" title="http" alt="" coords="355,255,427,303"/>
+<area shape="rect" id="node2" href="dir_38cd9eca440b760dc966f21b1f8d8f41.html" title="basic" alt="" coords="355,351,427,399"/>
+<area shape="rect" id="edge10-headlabel" href="dir_000011_000001.html" title="15" alt="" coords="390,325,408,340"/>
+<area shape="rect" id="edge7-headlabel" href="dir_000002_000011.html" title="4" alt="" coords="338,234,347,249"/>
+<area shape="rect" id="edge8-headlabel" href="dir_000002_000001.html" title="17" alt="" coords="356,324,373,339"/>
+<area shape="rect" id="node9" href="dir_a6405f155ca617a002fcd0aa13cdc1f6.html" title="xml" alt="" coords="171,255,243,303"/>
+<area shape="rect" id="edge9-headlabel" href="dir_000002_000010.html" title="5" alt="" coords="208,229,217,243"/>
+<area shape="rect" id="node4" href="dir_4285eb314f49c6672f41711e4d2bebac.html" title="clients" alt="" coords="37,63,109,111"/>
+<area shape="rect" id="node5" href="dir_5afe0b184293b52e5f1fc331cd3e5a76.html" title="devices" alt="" coords="261,159,333,207"/>
+<area shape="rect" id="edge13-headlabel" href="dir_000003_000004.html" title="1" alt="" coords="243,142,253,156"/>
+<area shape="rect" id="node7" href="dir_0cc376a421adda5b51abf4399903838c.html" title="service" alt="" coords="69,159,141,207"/>
+<area shape="rect" id="edge12-headlabel" href="dir_000003_000009.html" title="2" alt="" coords="95,131,104,146"/>
+<area shape="rect" id="edge2-headlabel" href="dir_000004_000011.html" title="1" alt="" coords="356,228,366,243"/>
+<area shape="rect" id="edge1-headlabel" href="dir_000004_000001.html" title="2" alt="" coords="428,335,438,349"/>
+<area shape="rect" id="edge3-headlabel" href="dir_000004_000010.html" title="1" alt="" coords="243,240,252,255"/>
+<area shape="rect" id="node6" href="dir_13b9b4b2aa5135da948b073ae92fef0a.html" title="notifications" alt="" coords="134,63,237,111"/>
+<area shape="rect" id="edge4-headlabel" href="dir_000008_000001.html" title="1" alt="" coords="436,336,445,351"/>
+<area shape="rect" id="edge5-headlabel" href="dir_000009_000001.html" title="1" alt="" coords="336,338,346,353"/>
+<area shape="rect" id="edge6-headlabel" href="dir_000009_000010.html" title="2" alt="" coords="170,229,179,243"/>
+<area shape="rect" id="node8" href="dir_d15ecd6caac84bbf7f1a1bafbf6c836f.html" title="udp" alt="" coords="261,63,333,111"/>
+<area shape="rect" id="edge14-headlabel" href="dir_000007_000001.html" title="1" alt="" coords="442,353,452,368"/>
+<area shape="rect" id="edge11-headlabel" href="dir_000010_000001.html" title="4" alt="" coords="335,340,345,354"/>
+<area shape="rect" id="clust2" href="dir_95ca7d69a617eba53e70afaf1b3c2114.html" alt="" coords="27,52,344,313"/>
+<area shape="rect" id="clust1" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html" title="src" alt="" coords="16,16,517,409"/>
 </map>

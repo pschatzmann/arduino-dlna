@@ -20,6 +20,20 @@ On the desktop the the functionality can be provided with the help of the follow
 - [pupnp](https://github.com/pupnp/pupnp) A Portable SDK for UPnP* Devices
 - [gmrender-resurrect](https://github.com/hzeller/gmrender-resurrect): A headless UPnP/DLNA media renderer based on pupnp
 
+This library provides some memory efficient classes to implement DLNA devices and clients (=control points).
+
+## Device Types and Control Points
+
+Appart from the generic functionality, this project also contains some easy to use classes 
+
+- Devices
+  - MediaRenderer
+  - MediaServer
+- Control Points
+  - ControlPointMediaRenderer
+  - ControlPointMediaServer
+
+
 ## Implementation Approach
 
 A DLNA device uses UDP, Http, XML and Soap to discover and manage the services, so there is quite some complexity involved. 

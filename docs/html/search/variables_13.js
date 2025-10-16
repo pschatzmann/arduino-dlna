@@ -1,12 +1,13 @@
 var searchData=
 [
-  ['v_5fmime_1448',['v_mime',['../classtiny__dlna_1_1HttpTunnel.html#ab702357f2dd242936285f27d6cde5a72',1,'tiny_dlna::HttpTunnel']]],
-  ['v_5frequest_1449',['v_request',['../classtiny__dlna_1_1HttpTunnel.html#a2951fbec95a85fe967df07d2e919aa79',1,'tiny_dlna::HttpTunnel']]],
-  ['v_5furl_1450',['v_url',['../classtiny__dlna_1_1HttpTunnel.html#a782d4d7ffec9038a71da7051786062e5',1,'tiny_dlna::HttpTunnel']]],
-  ['valid_5funtil_1451',['valid_until',['../classtiny__dlna_1_1Notification.html#aceb1289e20aa7b7729a6bd6351998a72',1,'tiny_dlna::Notification']]],
-  ['value_1452',['value',['../classtiny__dlna_1_1Argument.html#a97a9d3c7f42ea33fc1bc294415b3baff',1,'tiny_dlna::Argument::value()'],['../structtiny__dlna_1_1StateValue.html#a711b7486dabe60d5465e11dc1446178a',1,'tiny_dlna::StateValue::value()'],['../structtiny__dlna_1_1HttpHeaderLine.html#a930804c8ac0794590c6f8d19553a9035',1,'tiny_dlna::HttpHeaderLine::value()']]],
-  ['vector_1453',['vector',['../classtiny__dlna_1_1QueueLockFree.html#a16d88662ec622854b00e0266120fd52b',1,'tiny_dlna::QueueLockFree::vector()'],['../classtiny__dlna_1_1Str.html#a730e4db6606710c7a2ec5648bed1a82d',1,'tiny_dlna::Str::vector()']]],
-  ['version_5fmajor_1454',['version_major',['../classtiny__dlna_1_1DLNADevice.html#ad4a5346b70ccb5d10f8cbc0d9414966c',1,'tiny_dlna::DLNADevice']]],
-  ['version_5fminor_1455',['version_minor',['../classtiny__dlna_1_1DLNADevice.html#abcdda81d3921552331a8345ef11bb643',1,'tiny_dlna::DLNADevice']]],
-  ['volume_1456',['volume',['../classtiny__dlna_1_1MediaRenderer.html#aced80dc9f2e089974232dbc2db0ab465',1,'tiny_dlna::MediaRenderer']]]
+  ['udn_1563',['udn',['../classtiny__dlna_1_1DLNADevice.html#ad66e7cd67cee1f6c43cedd885eef8525',1,'tiny_dlna::DLNADevice']]],
+  ['udp_1564',['udp',['../classtiny__dlna_1_1UDPAsyncService.html#a857ddf3ee53e8ffe6169fefa1e5a8132',1,'tiny_dlna::UDPAsyncService::udp()'],['../classtiny__dlna_1_1UDPService.html#a980710fc6470fae481c2c40ef2cb6bf2',1,'tiny_dlna::UDPService::udp()']]],
+  ['universal_5fproduct_5fcode_1565',['universal_product_code',['../classtiny__dlna_1_1DLNADevice.html#a394cfddae5c99259d0eff151c60ec9a4',1,'tiny_dlna::DLNADevice']]],
+  ['url_1566',['url',['../classtiny__dlna_1_1MediaRenderer.html#adbf5b1a8265836f4c158c84957807019',1,'tiny_dlna::MediaRenderer::url()'],['../classtiny__dlna_1_1HttpRequest.html#a19af9228538c3291902a6df9815883c8',1,'tiny_dlna::HttpRequest::url()']]],
+  ['url_5fpath_1567',['url_path',['../classtiny__dlna_1_1HttpHeader.html#a7cd1f1c729fd7790971592b810e2a81b',1,'tiny_dlna::HttpHeader']]],
+  ['url_5fstr_1568',['url_str',['../classtiny__dlna_1_1DLNADevice.html#a07706c7166d2ea435108f5d8168617f2',1,'tiny_dlna::DLNADevice']]],
+  ['urlrootstr_1569',['urlRootStr',['../classtiny__dlna_1_1Url.html#aba1e15e94ea6ab6dbc765f2d969877ac',1,'tiny_dlna::Url']]],
+  ['urlstr_1570',['urlStr',['../classtiny__dlna_1_1Url.html#a73d3be7052549f7ca936f55d2e3ce28d',1,'tiny_dlna::Url']]],
+  ['user_5fagent_1571',['USER_AGENT',['../namespacetiny__dlna.html#aea36f7fa0a36cefb6f1b6ff0c28f3245',1,'tiny_dlna']]],
+  ['usn_1572',['usn',['../classtiny__dlna_1_1MediaRenderer.html#adaca8f13ef6be1e015680bdbc9c229ca',1,'tiny_dlna::MediaRenderer::usn()'],['../classtiny__dlna_1_1MediaServer.html#a5200c43c38935c6a8ee1bbd0896d2069',1,'tiny_dlna::MediaServer::usn()'],['../classtiny__dlna_1_1MSearchReplyCP.html#a06629b151daa78ef93ff7901fc2beadc',1,'tiny_dlna::MSearchReplyCP::usn()']]]
 ];

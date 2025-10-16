@@ -1,10 +1,13 @@
 <map id="src/dlna/Schedule.h" name="src/dlna/Schedule.h">
-<area shape="rect" id="node1" title=" " alt="" coords="119,5,267,32"/>
-<area shape="rect" id="node2" href="$DLNAControlPointMgr_8h.html" title=" " alt="" coords="25,244,218,285"/>
-<area shape="rect" id="node4" href="$DLNADeviceMgr_8h.html" title=" " alt="" coords="167,423,361,449"/>
-<area shape="rect" id="node7" href="$DLNAControlPointRequestParser_8h.html" title=" " alt="" coords="25,155,218,196"/>
-<area shape="rect" id="node8" href="$Scheduler_8h.html" title=" " alt="" coords="169,80,321,107"/>
-<area shape="rect" id="node3" href="$DLNADeviceRequestParser_8h.html" title=" " alt="" coords="159,333,369,375"/>
-<area shape="rect" id="node6" href="$DLNA_8h.html" title=" " alt="" coords="177,587,271,613"/>
-<area shape="rect" id="node5" href="$MediaRenderer_8h.html" title=" " alt="" coords="109,497,339,539"/>
+<area shape="rect" id="node1" title=" " alt="" coords="257,5,405,32"/>
+<area shape="rect" id="node2" href="$DLNAControlPointMgr_8h.html" title=" " alt="" coords="158,244,351,285"/>
+<area shape="rect" id="node7" href="$DLNADeviceMgr_8h.html" title=" " alt="" coords="393,430,588,457"/>
+<area shape="rect" id="node10" href="$DLNAControlPointRequestParser_8h.html" title=" " alt="" coords="162,155,355,196"/>
+<area shape="rect" id="node11" href="$Scheduler_8h.html" title=" " alt="" coords="307,80,459,107"/>
+<area shape="rect" id="node3" href="$ControlPointMediaRenderer_8h.html" title=" " alt="" coords="43,423,213,464"/>
+<area shape="rect" id="node4" href="$DLNA_8h.html" title=" " alt="" coords="287,691,380,717"/>
+<area shape="rect" id="node5" href="$ControlPointMediaServer_8h.html" title=" " alt="" coords="187,601,357,643"/>
+<area shape="rect" id="node6" href="$DLNADeviceRequestParser_8h.html" title=" " alt="" coords="339,333,549,375"/>
+<area shape="rect" id="node8" href="$MediaRenderer_8h.html" title=" " alt="" coords="577,601,807,643"/>
+<area shape="rect" id="node9" href="$MediaServer_8h.html" title=" " alt="" coords="288,512,501,553"/>
 </map>
