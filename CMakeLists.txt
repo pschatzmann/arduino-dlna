@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.16)
 project(dlna_server)
 
 # Option to enable/disable building examples (default: ON)
-option(BUILD_EXAMPLES "Build example sketches" ON)
+option(DLNA_BUILD_EXAMPLES "Build example sketches" ON)
 
 
 # lots of warnings and all warnings as errors
@@ -45,6 +45,6 @@ target_include_directories(dlna_server PUBLIC ${CMAKE_SOURCE_DIR}/src ${CMAKE_SO
 # specify libraries
 target_link_libraries(dlna_server arduino_emulator arduino-audio-tools)
 
-if(BUILD_EXAMPLES)
+if(DLNA_BUILD_EXAMPLES)
     add_subdirectory("examples")
 endif()
