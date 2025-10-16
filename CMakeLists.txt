@@ -3,6 +3,10 @@ cmake_minimum_required(VERSION 3.16)
 # set the project name
 project(dlna_server)
 
+# Option to enable/disable building examples (default: ON)
+option(BUILD_EXAMPLES "Build example sketches" ON)
+
+
 # lots of warnings and all warnings as errors
 ## add_compile_options(-Wall -Wextra )
 set(CMAKE_CXX_STANDARD 17)
@@ -41,12 +45,6 @@ target_include_directories(dlna_server PUBLIC ${CMAKE_SOURCE_DIR}/src ${CMAKE_SO
 # specify libraries
 target_link_libraries(dlna_server arduino_emulator arduino-audio-tools)
 
-# build examples
-add_subdirectory( "${CMAKE_CURRENT_SOURCE_DIR}/examples/tests/device-xml")
-add_subdirectory( "${CMAKE_CURRENT_SOURCE_DIR}/examples/tests/device-xml-parser")
-add_subdirectory( "${CMAKE_CURRENT_SOURCE_DIR}/examples/tests/udp-send")
-add_subdirectory( "${CMAKE_CURRENT_SOURCE_DIR}/examples/tests/udp-receive")
-add_subdirectory( "${CMAKE_CURRENT_SOURCE_DIR}/examples/tests/udp-receive1")
-add_subdirectory( "${CMAKE_CURRENT_SOURCE_DIR}/examples/device-media-renderer")
-add_subdirectory( "${CMAKE_CURRENT_SOURCE_DIR}/examples/control-point-light")
-add_subdirectory( "${CMAKE_CURRENT_SOURCE_DIR}/examples/control-point-light-fast")
+if(BUILD_EXAMPLES)
+    add_subdirectory("examples")
+endif()

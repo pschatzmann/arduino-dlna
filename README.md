@@ -40,3 +40,25 @@ Developping and debugging on a microcontroller is quite tedious: therefore this 
 
 - [Wiki](https://github.com/pschatzmann/arduino-dlna/wiki)
 - [Class Documentation](https://pschatzmann.github.io/arduino-dlna/docs/html/annotated.html)
+
+## Building examples
+
+You can enable or disable building the example sketches with CMake. By default
+examples are built. To disable all examples:
+
+```bash
+cmake -S . -B build -DBUILD_EXAMPLES=OFF
+cmake --build build -j2
+```
+
+You can also specify a comma-separated list of example folder names to build
+using `EXAMPLES_LIST`. If left empty, all examples are built when
+`BUILD_EXAMPLES=ON`.
+
+Example: build only the desktop control-point examples
+
+```bash
+cmake -S . -B build -DBUILD_EXAMPLES=ON -DEXAMPLES_LIST="control-point-light,control-point-light-fast"
+cmake --build build -j2
+```
+

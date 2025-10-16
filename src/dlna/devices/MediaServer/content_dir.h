@@ -1,0 +1,72 @@
+#pragma once
+
+static const char ms_content_dir_xml[] = \
+"<?xml version=\"1.0\"?>\n" \
+"<scpd xmlns=\"urn:schemas-upnp-org:service-1-0\">\n" \
+"<specVersion>\n" \
+"<major>1</major>\n" \
+"<minor>0</minor>\n" \
+"</specVersion>\n" \
+"<actionList>\n" \
+"<action>\n" \
+"<name>Browse</name>\n" \
+"<argumentList>\n" \
+"<argument>\n" \
+"<name>ObjectID</name>\n" \
+"<direction>in</direction>\n" \
+"</argument>\n" \
+"<argument>\n" \
+"<name>BrowseFlag</name>\n" \
+"<direction>in</direction>\n" \
+"</argument>\n" \
+"<argument>\n" \
+"<name>Filter</name>\n" \
+"<direction>in</direction>\n" \
+"</argument>\n" \
+"<argument>\n" \
+"<name>StartingIndex</name>\n" \
+"<direction>in</direction>\n" \
+"</argument>\n" \
+"<argument>\n" \
+"<name>RequestedCount</name>\n" \
+"<direction>in</direction>\n" \
+"</argument>\n" \
+"<argument>\n" \
+"<name>SortCriteria</name>\n" \
+"<direction>in</direction>\n" \
+"</argument>\n" \
+"<argument>\n" \
+"<name>Result</name>\n" \
+"<direction>out</direction>\n" \
+"</argument>\n" \
+"<argument>\n" \
+"<name>NumberReturned</name>\n" \
+"<direction>out</direction>\n" \
+"</argument>\n" \
+"<argument>\n" \
+"<name>TotalMatches</name>\n" \
+"<direction>out</direction>\n" \
+"</argument>\n" \
+"<argument>\n" \
+"<name>UpdateID</name>\n" \
+"<direction>out</direction>\n" \
+"</argument>\n" \
+"</argumentList>\n" \
+"</action>\n" \
+"<action>\n" \
+"<name>GetSearchCapabilities</name>\n" \
+"</action>\n" \
+"<action>\n" \
+"<name>GetSortCapabilities</name>\n" \
+"</action>\n" \
+"<action>\n" \
+"<name>GetSystemUpdateID</name>\n" \
+"</action>\n" \
+"</actionList>\n" \
+"<serviceStateTable>\n" \
+"<stateVariable sendEvents=\"no\">\n" \
+"<name>SystemUpdateID</name>\n" \
+"<dataType>ui4</dataType>\n" \
+"</stateVariable>\n" \
+"</serviceStateTable>\n" \
+"</scpd>\n";

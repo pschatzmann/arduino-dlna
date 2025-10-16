@@ -33,6 +33,9 @@ class DLNADevice {
   DLNADevice(bool ok = true) { is_active = true; }
   ~DLNADevice() { DlnaLogger.log(DlnaLogLevel::Debug, "~DLNADevice()"); }
 
+  /// Override to initialize the device
+  virtual bool begin() { return true; } 
+
   /// renderes the device xml
   void print(Print& out) {
     xml.setOutput(out);
@@ -54,6 +57,24 @@ class DLNADevice {
 
   /// Defines the base url
   void setBaseURL(const char* url) { base_url = url; }
+  /// Defines the base URL
+  void setBaseURL(IPAddress ip, int port, const char* path="") { 
+    static Str str = "http://";
+    str += ip[0];
+    str += ".";
+    str += ip[1];
+    str += ".";
+    str += ip[2];
+    str += ".";
+    str += ip[3];
+    str += ":";
+    str += port;
+    if (!StrView(path).startsWith("/")){
+      str += "/";
+    }
+    str += path;
+    setBaseURL(str.c_str());
+   }
 
   /// Provides the base url
   const char* getBaseURL() {

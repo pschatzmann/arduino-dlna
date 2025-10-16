@@ -411,6 +411,89 @@ version: locate service of a given type
     DlnaLogger.log(DlnaLogLevel::Debug, str_print.c_str());
     p_http->stop();
 
+    // Try to parse SOAP response body and extract return arguments
+    // e.g. <u:SomeActionResponse> <TrackDuration>01:23:45</TrackDuration> ...</u:SomeActionResponse>
+    const char* resp = str_print.c_str();
+    if (resp != nullptr && *resp != '\0') {
+      StrView soap(resp);
+
+      // Build response tag name: ActionNameResponse
+      char respTagBuf[200] = {0};
+      snprintf(respTagBuf, sizeof(respTagBuf), "%sResponse", action.action);
+      int respPos = soap.indexOf(respTagBuf);
+      if (respPos >= 0) {
+        // find opening '<' before respPos
+        int openPos = respPos;
+        while (openPos > 0 && soap[openPos] != '<') openPos--;
+        if (openPos < 0) openPos = 0;
+        int openEnd = soap.indexOf('>', openPos);
+        if (openEnd >= 0) {
+          int payloadStart = openEnd + 1;
+          // find end tag
+          char endTagBuf[220] = {0};
+          snprintf(endTagBuf, sizeof(endTagBuf), "</%sResponse>", action.action);
+          int payloadEnd = soap.indexOf(endTagBuf, payloadStart);
+          if (payloadEnd < 0) payloadEnd = soap.length();
+
+          int pos = payloadStart;
+          // iterate over child elements inside the response
+          while (true) {
+            int lt = soap.indexOf('<', pos);
+            if (lt < 0 || lt >= payloadEnd) break;
+            // skip closing tags
+            if (lt + 1 < soap.length() && soap[lt + 1] == '/') {
+              pos = lt + 2;
+              continue;
+            }
+            int nameStart = lt + 1;
+            // read element name until space or '>'
+            int nameEnd = nameStart;
+            while (nameEnd < soap.length()) {
+              char c = soap[nameEnd];
+              if (c == '>' || c == ' ' || c == '\t' || c == '\r' || c == '\n') break;
+              nameEnd++;
+            }
+            if (nameEnd <= nameStart) break;
+
+            // extract name and value
+            Str nameStr;
+            nameStr.copyFrom(soap.c_str() + nameStart, nameEnd - nameStart);
+
+            int valueStart = soap.indexOf('>', lt);
+            if (valueStart < 0) break;
+            valueStart += 1;
+            // closing tag for this element
+            char closeTag[220] = {0};
+            // use name without any namespace prefix
+            const char* fullName = nameStr.c_str();
+            const char* sep = strchr(fullName, ':');
+            const char* nameOnly = fullName;
+            if (sep) nameOnly = sep + 1;
+            snprintf(closeTag, sizeof(closeTag), "</%s>", nameOnly);
+            int closePos = soap.indexOf(closeTag, valueStart);
+            if (closePos < 0 || closePos > payloadEnd) break;
+
+            Str valueStr;
+            valueStr.copyFrom(soap.c_str() + valueStart, closePos - valueStart);
+
+            // trim whitespace
+            valueStr.trim();
+
+            // store in string registry so pointers remain valid
+            const char* namePtr = strings.add((char*)nameOnly);
+            const char* valuePtr = strings.add((char*)valueStr.c_str());
+
+            Argument arg;
+            arg.name = namePtr;
+            arg.value = valuePtr;
+            result.arguments.push_back(arg);
+
+            pos = closePos + strlen(closeTag);
+          }
+        }
+      }
+    }
+
     return result;
   }
 

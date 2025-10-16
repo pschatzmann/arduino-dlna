@@ -40,8 +40,12 @@ class DLNADeviceMgr {
       return false;
     }
 
-    // setup all services
+    // setup device
     device.setupServices(server, udp);
+    if (!device.begin()) {
+      DlnaLogger.log(DlnaLogLevel::Error, "Device begin failed");
+      return false;
+    }
 
     // setup web server
     if (!setupDLNAServer(server)) {

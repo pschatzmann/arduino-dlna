@@ -1,4 +1,6 @@
-const char connmgr_xml[] =
+#pragma once
+
+static const char connmgr_xml[] =
     "<?xml version=\"1.0\" encoding=\"utf-8\"?>\
 <scpd xmlns=\"urn:schemas-upnp-org:service-1-0\">\
   <specVersion>\

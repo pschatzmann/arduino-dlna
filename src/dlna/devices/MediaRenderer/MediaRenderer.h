@@ -1,3 +1,4 @@
+#pragma once
 #include "AudioToolsConfig.h"
 #include "AudioTools/CoreAudio/AudioStreams.h"
 #include "AudioTools/CoreAudio/AudioOutput.h"
@@ -15,10 +16,36 @@ namespace tiny_dlna {
 
 /**
  * @brief MediaRenderer DLNA Device
- * @author Phil Schatzmann
+ *
+ * MediaRenderer implements a simple UPnP/DLNA Media Renderer device. It
+ * provides functionality to receive a stream URL via UPnP AVTransport actions
+ * and play it through an audio pipeline composed of a decoder, volume
+ * control and an output stream. The class also exposes basic rendering
+ * control actions such as volume, mute and transport controls (play/pause/stop).
+ *
+ * Usage summary:
+ * - Configure an audio output and a decoder using setOutput() and
+ *   setDecoder().
+ * - Optionally provide WiFi credentials using setLogin().
+ * - Call begin() to initialize the audio pipeline before playback.
+ * - Use play(url) to start playback of a network stream (URLStream).
+ * - Call loop() or copy() periodically from the main loop to process audio.
+ *
+ * This class intentionally keeps the implementation small and Arduino
+ * friendly: methods return bool for success/failure and avoid dynamic memory
+ * allocations in the hot path.
+ *
+ * Author: Phil Schatzmann
  */
 class MediaRenderer : public DLNADevice {
  public:
+  /**
+   * @brief Default constructor
+   *
+   * Initializes device metadata (friendly name, manufacturer, model) and
+   * sets default base URL and identifiers. It does not configure any audio
+   * pipeline components; use setOutput() and setDecoder() for that.
+   */
   MediaRenderer() {
     // Constructor
     DlnaLogger.log(DlnaLogLevel::Info, "MediaRenderer::MediaRenderer");
@@ -48,13 +75,14 @@ class MediaRenderer : public DLNADevice {
 
   ~MediaRenderer() { end(); }
 
-  /// Provides the optional login information
+  /// Provide optional login information (SSID, password)
   void setLogin(const char* ssid, const char* password) {
     url.setPassword(password);
     url.setSSID(ssid);
   }
 
-  bool begin() {
+  /// Initializes the audio pipeline; must be called before playback
+  bool begin() override {
     if (!p_decoder) {
       DlnaLogger.log(DlnaLogLevel::Error, "No decoder set");
       return false;
@@ -83,17 +111,22 @@ class MediaRenderer : public DLNADevice {
       return false;
     }
     bool result = pipeline.begin();
+    if (!result) {
+      DlnaLogger.log(DlnaLogLevel::Error, "Pipeline begin failed");
+      return false;
+    }
 
     return true;
   }
 
+  /// ends the renderer
   void end() {
     // Stop playback and clean up
     stop();
     pipeline.end();
   }
 
-  /// Defines and opens the URL to be played
+  /// Start playback of a network resource (returns true on success)
   bool play(const char* urlStr) {
     if (urlStr == nullptr) return false;
     DlnaLogger.log(DlnaLogLevel::Info, "is_active URL: %s", urlStr);
@@ -112,7 +145,7 @@ class MediaRenderer : public DLNADevice {
     return true;
   }
 
-  /// Defines the volume in percent (0-100)
+  /// Set the renderer volume (0..100 percent)
   bool setVolume(uint8_t volumePercent) {
     if (volumePercent > 100) volumePercent = 100;
     float volumeFloat = volumePercent / 100.0;
@@ -121,9 +154,10 @@ class MediaRenderer : public DLNADevice {
     return true;
   }
 
-  /// Returns the volume in percent (0-100)
+  /// Get current volume (0..100 percent)
   uint8_t getVolume() { return current_volume; }
 
+  /// Enable or disable mute
   bool setMute(bool mute) {
     is_muted = mute;
     if (mute) {
@@ -134,32 +168,42 @@ class MediaRenderer : public DLNADevice {
     return true;
   }
 
+  /// Query mute state
   bool isMuted() { return is_muted; }
 
+  /// Query whether renderer is active (playing or ready)
   bool isActive() { return is_active; }
 
+  /// Set the active state (used by transport callbacks)
   void setActive(bool active) { is_active = active; }
 
+  /// Seek to a position (ms) — typically unsupported and returns false
   bool seek(unsigned long position) {
     // Not fully supported with most streams
     DlnaLogger.log(DlnaLogLevel::Warning, "Seek not fully supported");
     return false;
   }
 
+  /// Get estimated playback position (ms)
   unsigned long getPosition() {
-    // Estimate position
+    // Estimate position; return 0 if not active or start_time not set
+    if (!is_active || start_time == 0) return 0;
     return millis() - start_time;
   }
 
+  /// Get duration of the current media (returns 0 when unknown)
   unsigned long getDuration() {
     return 0;  // Unknown for most streams
   }
 
+  /// Output and decoder configuration methods
   void setOutput(AudioStream& out) { p_stream = &out; }
   void setOutput(AudioOutput& out) { p_out = &out; }
   void setOutput(Print& out) { p_print = &out; }
   void setDecoder(AudioDecoder& decoder) { this->p_decoder = &decoder; }
+  
 
+  /// Process pending audio data; call regularly from main loop
   size_t copy() {
     // Call this in your main loop
     size_t bytes = 0;
@@ -172,6 +216,7 @@ class MediaRenderer : public DLNADevice {
   }
 
   /// loop called by DeviceMgr: just calls copy()
+  /// Per-device loop (delegates to copy())
   void loop() { copy(); }
 
 
@@ -195,7 +240,6 @@ class MediaRenderer : public DLNADevice {
   void setupServices(HttpServer& server, IUDPService& udp) {
     setupServicesImpl(&server);
   }
-
 
   static const char* reply() {
     static const char* result =
@@ -230,11 +274,17 @@ class MediaRenderer : public DLNADevice {
       reply_str.replaceAll("%1", "StopResponse");
       server->reply("text/xml", reply_str.c_str());
     } else if (soap.indexOf("SetAVTransportURI") >= 0) {
-      // Extract URL from SOAP request
-      int urlStart = soap.indexOf("<CurrentURI>") + 12;
-      int urlEnd = soap.indexOf("</CurrentURI>");
-      Str url = soap.substring(urlStart, urlEnd);
-      media_renderer.play(url.c_str());
+      // Extract URL from SOAP request safely
+      int urlTagStart = soap.indexOf("<CurrentURI>");
+      int urlTagEnd = soap.indexOf("</CurrentURI>");
+      if (urlTagStart >= 0 && urlTagEnd > urlTagStart) {
+        int urlStart = urlTagStart + (int)strlen("<CurrentURI>");
+        Str url = soap.substring(urlStart, urlTagEnd);
+        media_renderer.play(url.c_str());
+      } else {
+        DlnaLogger.log(DlnaLogLevel::Warning,
+                       "SetAVTransportURI called with invalid SOAP payload");
+      }
       reply_str.replaceAll("%1", "SetAVTransportURIResponse");
       server->reply("text/xml", reply_str.c_str());
     } else {
@@ -255,19 +305,31 @@ class MediaRenderer : public DLNADevice {
     reply_str.replaceAll("%2", "RenderingControl");
 
     if (soap.indexOf("SetVolume") >= 0) {
-      // Extract volume from SOAP request
-      int volStart = soap.indexOf("<DesiredVolume>") + 15;
-      int volEnd = soap.indexOf("</DesiredVolume>");
-      int volume = soap.substring(volStart, volEnd).toInt();
-      media_renderer.setVolume(volume);
+      // Extract volume from SOAP request safely
+      int volTagStart = soap.indexOf("<DesiredVolume>");
+      int volTagEnd = soap.indexOf("</DesiredVolume>");
+      if (volTagStart >= 0 && volTagEnd > volTagStart) {
+        int volStart = volTagStart + (int)strlen("<DesiredVolume>");
+        int volume = soap.substring(volStart, volTagEnd).toInt();
+        media_renderer.setVolume(volume);
+      } else {
+        DlnaLogger.log(DlnaLogLevel::Warning,
+                       "SetVolume called with invalid SOAP payload");
+      }
       reply_str.replaceAll("%1", "SetVolumeResponse");
       server->reply("text/xml", reply_str.c_str());
     } else if (soap.indexOf("SetMute") >= 0) {
-      // Extract mute state from SOAP request
-      int muteStart = soap.indexOf("<DesiredMute>") + 13;
-      int muteEnd = soap.indexOf("</DesiredMute>");
-      bool mute = (soap.substring(muteStart, muteEnd) == "1");
-      media_renderer.setMute(mute);
+      // Extract mute state from SOAP request safely
+      int muteTagStart = soap.indexOf("<DesiredMute>");
+      int muteTagEnd = soap.indexOf("</DesiredMute>");
+      if (muteTagStart >= 0 && muteTagEnd > muteTagStart) {
+        int muteStart = muteTagStart + (int)strlen("<DesiredMute>");
+        bool mute = (soap.substring(muteStart, muteTagEnd) == "1");
+        media_renderer.setMute(mute);
+      } else {
+        DlnaLogger.log(DlnaLogLevel::Warning,
+                       "SetMute called with invalid SOAP payload");
+      }
       reply_str.replaceAll("%1", "SetMuteResponse");
       server->reply("text/xml", reply_str.c_str());
     } else {
@@ -303,8 +365,8 @@ class MediaRenderer : public DLNADevice {
               [](HttpServer* server, const char* requestPath,
                  HttpRequestHandlerLine* hl) { server->replyOK(); });
 
-    cm.setup(
-        "urn:schemas-upnporg:service:ConnectionManager:1",
+  cm.setup(
+    "urn:schemas-upnp-org:service:ConnectionManager:1",
         "urn:upnp-org:serviceId:ConnectionManager", "/CM/service.xml",
         connmgrCB, "/CM/control",
         [](HttpServer* server, const char* requestPath,
@@ -313,13 +375,13 @@ class MediaRenderer : public DLNADevice {
         [](HttpServer* server, const char* requestPath,
            HttpRequestHandlerLine* hl) { server->replyOK(); });
 
-    rc.setup("urn:schemas-upnporg:service:RenderingControl:1",
+  rc.setup("urn:schemas-upnp-org:service:RenderingControl:1",
              "urn:upnp-org:serviceId:RenderingControl", "/RC/service.xml",
              controlCB, "/RC/control", renderingControlCB, "/RC/event",
              [](HttpServer* server, const char* requestPath,
                 HttpRequestHandlerLine* hl) { server->replyOK(); });
-
-    addService(rc);
+    
+  addService(rc);
     addService(cm);
     addService(avt);
   }
