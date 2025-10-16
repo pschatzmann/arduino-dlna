@@ -4,7 +4,7 @@ const char* ssid = "SSID";
 const char* password = "PASSWORD";
 WiFiServer wifi;
 HttpServer server(wifi);
-Url indexUrl("/index.html");
+tiny_dlna::Url indexUrl("/index.html");
 
 void setupWifi() {
   WiFi.begin(ssid, password);
