@@ -197,7 +197,7 @@ class MediaServer : public DLNADevice {
     }
   }
 
-  // Print wrapper that escapes & < > while forwarding to an underlying Print
+  /// Print wrapper that escapes & < > while forwarding to an underlying Print
   struct EscapingPrint : public Print {
     Print& dest;
     EscapingPrint(Print& d) : dest(d) {}
