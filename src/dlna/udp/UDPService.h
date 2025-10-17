@@ -1,7 +1,5 @@
 #pragma once
 
-#include <WiFi.h>
-#include <WiFiUDP.h>
 #include "dlna/IUDPService.h"
 #include "assert.h"
 
@@ -9,10 +7,21 @@ namespace tiny_dlna {
 
 /**
  * @brief Access to UDP functionality: sending and receiving of data
- * It seems that the UDP receive is not working for 
+ *
+ * This class is a template and requires you to specify the UDP implementation type.
+ * For example, use UDPService<WiFiUDP> for WiFiUDP or UDPService<MyUDPType> for a custom UDP class.
+ *
+ * Usage:
+ *   UDPService<WiFiUDP> udp; // Uses WiFiUDP
+ *   UDPService<MyUDPType> udp2; // Uses custom UDP type
+ *
+ * Implements IUDPService for sending and receiving UDP packets, including
+ * multicast support.
+ *
  * @author Phil Schatzmann
  */
 
+template <typename UDPType>
 class UDPService : public IUDPService {
  public:
   UDPService() = default;
@@ -52,7 +61,7 @@ class UDPService : public IUDPService {
       result.peer.address = udp.remoteIP();
       result.peer.port = udp.remotePort();
       char tmp[packetSize + 1] = {0};
-      int len = udp.readBytes(tmp, len);
+      int len = udp.readBytes(tmp, packetSize);
       result.data = tmp;
       DlnaLogger.log(DlnaLogLevel::Debug, "(%s [%d])->: %s", result.peer.toString(),
                      packetSize, tmp);
@@ -61,7 +70,7 @@ class UDPService : public IUDPService {
   }
 
  protected:
-  WiFiUDP udp;
+  UDPType udp;
   IPAddressAndPort peer;
   bool is_multicast = false;
 };

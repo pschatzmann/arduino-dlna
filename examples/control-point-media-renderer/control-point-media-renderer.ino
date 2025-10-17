@@ -12,7 +12,6 @@ DLNAControlPointMgr cp;
 WiFiClient client;
 DLNAHttpRequest http(client);
 UDPAsyncService udp;
-
 ControlPointMediaRenderer renderer(cp);
 
 void setupWifi() {

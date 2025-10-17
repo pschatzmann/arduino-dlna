@@ -5,10 +5,12 @@
 #include "basic/StrPrint.h"
 #include "dlna/DLNADeviceMgr.h"
 #include "http/HttpServer.h"
-// Generated SCPD headers
+#include "dlna/devices/MediaServer/MediaItem.h"
+#include "dlna/xml/XMLPrinter.h"
 #include "ms_connmgr.h"
 #include "ms_content_dir.h"
-#include "dlna/xml/XMLPrinter.h"
+#include "basic/EscapingPrint.h"
+#include "MediaItem.h"
 
 namespace tiny_dlna {
 
@@ -17,34 +19,37 @@ namespace tiny_dlna {
  *
  * This class implements a lightweight DLNA MediaServer device with a
  * ContentDirectory service (Browse) and a ConnectionManager service.
+ *
+ * The API is designed for embedding custom content lists and streaming logic.
+ * Instead of a single browse callback, the API now uses two callbacks:
+ *   - PrepareDataCallback: Called to determine the number of items, total matches, and update ID for a Browse request.
+ *   - GetDataCallback: Called for each item to retrieve its metadata (MediaItem) by index.
+ *
+ * A user reference pointer can be set with setReference(void*), and is passed to both callbacks for custom context or data.
+ *
+ * Example usage:
+ *   - Implement PrepareDataCallback and GetDataCallback.
+ *   - Register them with setPrepareDataCallback() and setGetDataCallback().
+ *   - Optionally set a reference pointer with setReference().
+ *
  * The implementation is intentionally compact and suitable as a starting
- * point for embedding content lists. It returns a single test item for
- * Browse requests.
+ * point for embedded or test DLNA servers.
  */
 class MediaServer : public DLNADevice {
  public:
-  /// Media item description used to build DIDL-Lite entries
-  struct MediaItem {
-    const char* id = nullptr;
-    const char* parentID = "0";
-    bool restricted = true;
-    const char* title = nullptr;
-    const char* res = nullptr;  // resource URL
-    const char* mimeType = nullptr;
-    // Additional optional metadata fields could be added here (duration,
-    // creator...)
-  };
+  // MediaItem is now defined in MediaItem.h
 
-  // Browse callback signature:
+  // PrepareData callback signature:
   // objectID, browseFlag, filter, startingIndex, requestedCount, sortCriteria,
-  // results vector (to be filled by callback), numberReturned (out),
-  // totalMatches (out), updateID (out)
-  typedef void (*BrowseCallback)(const char* objectID, const char* browseFlag,
-                                 const char* filter, int startingIndex,
-                                 int requestedCount, const char* sortCriteria,
-                                 Vector<MediaItem>& results,
-                                 int& numberReturned, int& totalMatches,
-                                 int& updateID);
+  // numberReturned (out), totalMatches (out), updateID (out), reference
+  typedef void (*PrepareDataCallback)(
+      const char* objectID, const char* browseFlag, const char* filter,
+      int startingIndex, int requestedCount, const char* sortCriteria,
+      int& numberReturned, int& totalMatches, int& updateID, void* reference);
+
+  // GetData callback signature:
+  // index, MediaItem (out), reference
+  typedef bool (*GetDataCallback)(int index, MediaItem& item, void* reference);
 
   MediaServer() {
     DlnaLogger.log(DlnaLogLevel::Info, "MediaServer::MediaServer");
@@ -66,18 +71,65 @@ class MediaServer : public DLNADevice {
     p_server = &server;
   }
 
-  /// Sets the browse callback
-  void setBrowseCallback(BrowseCallback cb) { browse_cb = cb; }
+  /// Sets the PrepareData callback
+  void setPrepareDataCallback(PrepareDataCallback cb) { prepare_data_cb = cb; }
+
+  /// Sets the GetData callback
+  void setGetDataCallback(GetDataCallback cb) { get_data_cb = cb; }
+
+  /// Sets a user reference pointer, available in callbacks
+  void setReference(void* ref) { reference_ = ref; }
 
   /// Provides access to the http server
-  HttpServer* getHttpServer() { return p_server; }  
+  HttpServer* getHttpServer() { return p_server; }
 
  protected:
   const char* st = "urn:schemas-upnp-org:device:MediaServer:1";
   const char* usn = "uuid:media-server-0000-0000-0000-000000000001";
-  // stored browse callback
-  BrowseCallback browse_cb = nullptr;
+  // stored callbacks
+  PrepareDataCallback prepare_data_cb = nullptr;
+  GetDataCallback get_data_cb = nullptr;
   HttpServer* p_server = nullptr;
+  void* reference_ = nullptr;
+  // Globals used by the streaming callback. These are set immediately
+  // before calling server->reply(...) and cleared afterwards. This is
+  // safe in the single-threaded server model.
+  static inline GetDataCallback g_stream_get_data_cb = nullptr;
+  static inline int g_stream_numberReturned = 0;
+  static inline int g_stream_totalMatches = 0;
+  static inline int g_stream_updateID = 0;
+  static inline void* g_stream_reference = nullptr;
+
+  void setupServicesImpl(HttpServer* server) {
+    DlnaLogger.log(DlnaLogLevel::Info, "MediaServer::setupServices");
+
+    auto contentDescCB = [](HttpServer* server, const char* requestPath,
+                            HttpRequestHandlerLine* hl) {
+      server->reply("text/xml", ms_content_dir_xml);
+    };
+    auto connDescCB = [](HttpServer* server, const char* requestPath,
+                         HttpRequestHandlerLine* hl) {
+      server->reply("text/xml", ms_conmgr_xml);
+    };
+
+    DLNAServiceInfo cd;
+    cd.setup("urn:schemas-upnp-org:service:ContentDirectory:1",
+             "urn:upnp-org:serviceId:ContentDirectory", "/CD/service.xml",
+             contentDescCB, "/CD/control", contentDirectoryControlCB,
+             "/CD/event",
+             [](HttpServer* server, const char* requestPath,
+                HttpRequestHandlerLine* hl) { server->replyOK(); });
+
+    DLNAServiceInfo cm;
+    cm.setup("urn:schemas-upnp-org:service:ConnectionManager:1",
+             "urn:upnp-org:serviceId:ConnectionManager", "/CM/service.xml",
+             connDescCB, "/CM/control", connmgrControlCB, "/CM/event",
+             [](HttpServer* server, const char* requestPath,
+                HttpRequestHandlerLine* hl) { server->replyOK(); });
+
+    addService(cd);
+    addService(cm);
+  }
 
   /// generic SOAP reply template with placeholders: %1 = ActionResponse, %2 =
   /// ServiceName, %3 = inner payload
@@ -138,23 +190,15 @@ class MediaServer : public DLNADevice {
     MediaServer* ms = nullptr;
     if (hl && hl->context[0]) ms = (MediaServer*)hl->context[0];
 
-    Vector<MediaItem> results;
     int numberReturned = 0;
     int totalMatches = 0;
     int updateID = 1;
-    if (ms && ms->browse_cb) {
-      ms->browse_cb(obj.c_str(), flag.c_str(), filter.c_str(), startingIndex,
-                    requestedCount, sort.c_str(), results, numberReturned,
-                    totalMatches, updateID);
+    if (ms && ms->prepare_data_cb) {
+      ms->prepare_data_cb(obj.c_str(), flag.c_str(), filter.c_str(),
+                          startingIndex, requestedCount, sort.c_str(),
+                          numberReturned, totalMatches, updateID,
+                          ms->reference_);
     } else {
-      MediaItem it;
-      it.id = "1";
-      it.parentID = "0";
-      it.restricted = true;
-      it.title = "Test Item";
-      it.res = "http://example.com/track.mp3";
-      it.mimeType = "audio/mpeg";
-      results.push_back(it);
       numberReturned = 1;
       totalMatches = 1;
       updateID = 1;
@@ -162,25 +206,20 @@ class MediaServer : public DLNADevice {
 
     // Stream response via Print-callback and generate DIDL on-the-fly.
     // Set globals that the callback will read while running synchronously.
-    g_stream_items = &results;
     g_stream_numberReturned = numberReturned;
     g_stream_totalMatches = totalMatches;
     g_stream_updateID = updateID;
+    g_stream_get_data_cb = ms ? ms->get_data_cb : nullptr;
+    g_stream_reference = ms ? ms->reference_ : nullptr;
     server->reply("text/xml", streamReplyCallback);
     // clear globals after reply returns
-    g_stream_items = nullptr;
     g_stream_numberReturned = 0;
     g_stream_totalMatches = 0;
     g_stream_updateID = 0;
+    g_stream_get_data_cb = nullptr;
+    g_stream_reference = nullptr;
   }
 
-  // Globals used by the streaming callback. These are set immediately
-  // before calling server->reply(...) and cleared afterwards. This is
-  // safe in the single-threaded server model.
-  static inline Vector<MediaItem>* g_stream_items = nullptr;
-  static inline int g_stream_numberReturned = 0;
-  static inline int g_stream_totalMatches = 0;
-  static inline int g_stream_updateID = 0;
 
   // helper to write text content with minimal XML-escaping for &, < and >
   static void writeEscapedText(Print& out, const char* s) {
@@ -197,23 +236,6 @@ class MediaServer : public DLNADevice {
     }
   }
 
-  /// Print wrapper that escapes & < > while forwarding to an underlying Print
-  struct EscapingPrint : public Print {
-    Print& dest;
-    EscapingPrint(Print& d) : dest(d) {}
-    size_t write(uint8_t c) override {
-      if (c == '&') return dest.print("&amp;");
-      if (c == '<') return dest.print("&lt;");
-      if (c == '>') return dest.print("&gt;");
-      return dest.write(&c, 1);
-    }
-    size_t write(const uint8_t* buffer, size_t size) override {
-      size_t r = 0;
-      for (size_t i = 0; i < size; ++i) r += write(buffer[i]);
-      return r;
-    }
-    int available() { return 0; }
-  };
 
   // streaming reply callback: writes the full SOAP envelope and escapes
   // DIDL tags while streaming the items from g_stream_items.
@@ -233,15 +255,7 @@ class MediaServer : public DLNADevice {
 
     // Result node: use callback to stream escaped DIDL
     xml.printNode("Result", [&]() -> size_t {
-      if (g_stream_items)
-        buildEscapedDIDL(out, *g_stream_items);
-      else {
-        out.print(
-            "&lt;DIDL-Lite xmlns:dc=\"http://purl.org/dc/elements/1.1/\" "
-            "xmlns:upnp=\"urn:schemas-upnp-org:metadata-1-0/upnp/\" "
-            "xmlns=\"urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/\"&gt;&lt;/"
-            "DIDL-Lite&gt;");
-      }
+      buildEscapedDIDL(out, g_stream_get_data_cb, g_stream_numberReturned);
       return 0;
     });
 
@@ -256,10 +270,8 @@ class MediaServer : public DLNADevice {
   }
 
   // helper: stream DIDL-Lite (escaped) for the provided items to the Print
-  static void buildEscapedDIDL(Print& out, Vector<MediaItem>& items) {
-    // Use XMLPrinter to generate DIDL elements, but wrap the output with
-    // EscapingPrint so '<' and '>' are emitted as escaped text into the
-    // surrounding SOAP <Result> element.
+  static void buildEscapedDIDL(Print& out, GetDataCallback get_data_cb,
+                               int count) {
     EscapingPrint esc(out);
     XMLPrinter didl(esc);
 
@@ -269,28 +281,51 @@ class MediaServer : public DLNADevice {
         "xmlns=\"urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/\"";
     didl.printNodeBeginNl("DIDL-Lite", didlAttrs);
 
-    for (auto it = items.begin(); it != items.end(); ++it) {
-      const MediaItem& item = *it;
+    if (get_data_cb) {
+      for (int i = 0; i < count; ++i) {
+        MediaItem item;
+        if (!get_data_cb(i, item, g_stream_reference)) break;
+        char itemAttr[256];
+        snprintf(itemAttr, sizeof(itemAttr),
+                 "id=\"%s\" parentID=\"%s\" restricted=\"%d\"",
+                 item.id ? item.id : "", item.parentID ? item.parentID : "0",
+                 item.restricted ? 1 : 0);
+        didl.printNodeBeginNl("item", itemAttr);
+
+        // title
+        didl.printNode("dc:title", item.title ? item.title : "");
+
+        // res with optional protocolInfo attribute
+        if (item.mimeType) {
+          char resAttr[128];
+          snprintf(resAttr, sizeof(resAttr), "protocolInfo=\"%s\"",
+                   item.mimeType);
+          didl.printNode("res", item.res ? item.res : "", resAttr);
+        } else {
+          didl.printNode("res", item.res ? item.res : "");
+        }
+
+        didl.printNodeEnd("item");
+      }
+    } else {
+      // fallback: single test item
+      MediaItem item;
+      item.id = "1";
+      item.parentID = "0";
+      item.restricted = true;
+      item.title = "Test Item";
+      item.res = "http://example.com/track.mp3";
+      item.mimeType = "audio/mpeg";
       char itemAttr[256];
       snprintf(itemAttr, sizeof(itemAttr),
                "id=\"%s\" parentID=\"%s\" restricted=\"%d\"",
                item.id ? item.id : "", item.parentID ? item.parentID : "0",
                item.restricted ? 1 : 0);
       didl.printNodeBeginNl("item", itemAttr);
-
-      // title
       didl.printNode("dc:title", item.title ? item.title : "");
-
-      // res with optional protocolInfo attribute
-      if (item.mimeType) {
-        char resAttr[128];
-        snprintf(resAttr, sizeof(resAttr), "protocolInfo=\"%s\"",
-                 item.mimeType);
-        didl.printNode("res", item.res ? item.res : "", resAttr);
-      } else {
-        didl.printNode("res", item.res ? item.res : "");
-      }
-
+      char resAttr[128];
+      snprintf(resAttr, sizeof(resAttr), "protocolInfo=\"%s\"", item.mimeType);
+      didl.printNode("res", item.res ? item.res : "", resAttr);
       didl.printNodeEnd("item");
     }
 
@@ -307,39 +342,6 @@ class MediaServer : public DLNADevice {
     reply_str.replaceAll("%3", "");
     server->reply("text/xml", reply_str.c_str());
   }
-
-  void setupServicesImpl(HttpServer* server) {
-    DlnaLogger.log(DlnaLogLevel::Info, "MediaServer::setupServices");
-
-    auto contentDescCB = [](HttpServer* server, const char* requestPath,
-                            HttpRequestHandlerLine* hl) {
-      server->reply("text/xml", ms_content_dir_xml);
-    };
-    auto connDescCB = [](HttpServer* server, const char* requestPath,
-                         HttpRequestHandlerLine* hl) {
-      server->reply("text/xml", ms_conmgr_xml);
-    };
-
-    DLNAServiceInfo cd;
-    cd.setup("urn:schemas-upnp-org:service:ContentDirectory:1",
-             "urn:upnp-org:serviceId:ContentDirectory", "/CD/service.xml",
-             contentDescCB, "/CD/control", contentDirectoryControlCB,
-             "/CD/event",
-             [](HttpServer* server, const char* requestPath,
-                HttpRequestHandlerLine* hl) { server->replyOK(); });
-
-    DLNAServiceInfo cm;
-    cm.setup("urn:schemas-upnp-org:service:ConnectionManager:1",
-             "urn:upnp-org:serviceId:ConnectionManager", "/CM/service.xml",
-             connDescCB, "/CM/control", connmgrControlCB, "/CM/event",
-             [](HttpServer* server, const char* requestPath,
-                HttpRequestHandlerLine* hl) { server->replyOK(); });
-
-    addService(cd);
-    addService(cm);
-  }
 };
-
-// service description strings are provided by the generated headers
 
 }  // namespace tiny_dlna

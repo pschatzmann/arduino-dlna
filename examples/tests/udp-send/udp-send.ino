@@ -6,7 +6,7 @@
 const char *ssid = "";
 const char *password = "";
 WiFiUDP wudp;
-UDPService udp;
+UDPService<WiFiUDP> udp;
 
 void setupWifi() {
   WiFi.begin(ssid, password);

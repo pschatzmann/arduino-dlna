@@ -14,5 +14,5 @@
 using namespace tiny_dlna;
 
 #ifdef IS_DESKTOP
-using UDPAsyncService = UDPService;
+using UDPAsyncService = UDPService<WiFiUDP>;
 #endif

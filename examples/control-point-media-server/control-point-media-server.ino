@@ -10,11 +10,10 @@ DLNAControlPointMgr cp;
 WiFiClient client;
 DLNAHttpRequest http(client);
 UDPAsyncService udp;
-
 ControlPointMediaServer cpms(cp);
 
 // Simple callback that prints item metadata
-void printItemCallback(const tiny_dlna::MediaServer::MediaItem& item, void* ref) {
+void printItemCallback(const tiny_dlna::MediaItem& item, void* ref) {
   (void)ref;
   Serial.print("Item ID: ");
   Serial.println(item.id ? item.id : "(null)");

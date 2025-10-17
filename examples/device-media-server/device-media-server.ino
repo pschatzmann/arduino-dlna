@@ -13,12 +13,18 @@ DLNADeviceMgr devMgr;
 WiFiClient client;
 DLNAHttpRequest http(client);
 UDPAsyncService udp;
-
-// HttpServer requires a WiFiServer reference for its socket handling
 WiFiServer wifi;
 HttpServer server(wifi);
 MediaServer mediaServer;
 
+// Store items as a global const array (for PROGMEM/flash storage)
+const MediaItem items[] = {
+  { "1", "0", true, "Test Song 1", "http://192.168.1.2/media/song1.mp3", "audio/mpeg" },
+  { "2", "0", true, "Test Song 2", "http://192.168.1.2/media/song2.mp3", "audio/mpeg" }
+};
+constexpr int itemCount = sizeof(items) / sizeof(items[0]);
+
+// log into wifi
 void setupWifi() {
   WiFi.begin(ssid, password);
   Serial.print("Connecting to WiFi ..");
@@ -29,35 +35,24 @@ void setupWifi() {
   Serial.println("connected!");
 }
 
-// Browse callback: returns two test media items
-void myBrowseCallback(const char* objectID, const char* browseFlag,
-                      const char* filter, int startingIndex,
-                      int requestedCount, const char* sortCriteria,
-                      tiny_dlna::Vector<MediaServer::MediaItem>& results,
-                      int& numberReturned, int& totalMatches, int& updateID) {
+// PrepareData callback: sets number of items, etc.
+void myPrepareData(const char* objectID, const char* browseFlag,
+                   const char* filter, int startingIndex, int requestedCount,
+                   const char* sortCriteria, int& numberReturned,
+                   int& totalMatches, int& updateID, void* reference) {
   (void)objectID; (void)browseFlag; (void)filter; (void)startingIndex;
-  (void)requestedCount; (void)sortCriteria; (void)updateID;
-  results.clear();
-
-  MediaServer::MediaItem it1;
-  it1.id = "1";
-  it1.parentID = "0";
-  it1.title = "Test Song 1";
-  it1.res = "http://192.168.1.2/media/song1.mp3";
-  it1.mimeType = "audio/mpeg";
-  results.push_back(it1);
-
-  MediaServer::MediaItem it2;
-  it2.id = "2";
-  it2.parentID = "0";
-  it2.title = "Test Song 2";
-  it2.res = "http://192.168.1.2/media/song2.mp3";
-  it2.mimeType = "audio/mpeg";
-  results.push_back(it2);
-
-  numberReturned = (int)results.size();
-  totalMatches = numberReturned;
+  (void)requestedCount; (void)sortCriteria; (void)reference;
+  numberReturned = itemCount;
+  totalMatches = itemCount;
   updateID = 1;
+}
+
+// GetData callback: returns each item by index
+bool myGetData(int index, MediaItem& item, void* reference) {
+  (void)reference;
+  if (index < 0 || index >= itemCount) return false;
+  item = items[index];
+  return true;
 }
 
 void setup() {
@@ -66,23 +61,17 @@ void setup() {
 
   setupWifi();
 
-  // set a base URL appropriate for your device/network
   mediaServer.setBaseURL("http://192.168.1.50:44757");
-
-  // register our browse callback
-  mediaServer.setBrowseCallback(myBrowseCallback);
-
-  // setup services on the HTTP server and start SSDP/advertising
+  mediaServer.setReference(nullptr); // not needed for this example
+  mediaServer.setPrepareDataCallback(myPrepareData);
+  mediaServer.setGetDataCallback(myGetData);
   mediaServer.setupServices(server, udp);
-
-  // register device with manager and start (begin registers the device)
-  // DLNADeviceMgr::begin(device, udp, server)
+  
   devMgr.begin(mediaServer, udp, server);
 
   Serial.println("MediaServer started");
 }
 
 void loop() {
-  // run device manager tasks (handles SSDP/HTTP handling internally)
   devMgr.loop();
 }

@@ -3,7 +3,7 @@
 
 const char *ssid = "";
 const char *password = "";
-UDPService udp;
+UDPService<WiFiUDP> udp;
 //UDPAsyncService udp;
 
 void setupWifi() {

@@ -17,7 +17,7 @@ namespace tiny_dlna {
  */
 class ControlPointMediaServer {
  public:
-  typedef void (*ItemCallback)(const MediaServer::MediaItem& item, void* ref);
+  typedef void (*ItemCallback)(const MediaItem& item, void* ref);
 
   ControlPointMediaServer(DLNAControlPointMgr& mgr) : mgr(mgr) {}
 
@@ -203,7 +203,7 @@ class ControlPointMediaServer {
       int headerEnd = res.indexOf('>', itPos);
       if (headerEnd < 0 || headerEnd >= itEnd) break;
 
-      MediaServer::MediaItem item;
+  tiny_dlna::MediaItem item;
       // extract id attribute
       int idPos = res.indexOf("id=\"", itPos);
       if (idPos >= 0 && idPos < headerEnd) {
