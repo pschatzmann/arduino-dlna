@@ -264,7 +264,7 @@ class HttpHeader {
     }
   }
 
-  // writes the full header to the indicated HttpStreamedMultiOutput stream
+  // writes the full header to the indicated stream
   void write(Client& out) {
     DlnaLogger.log(DlnaLogLevel::Info, "HttpHeader::write");
     write1stLine(out);

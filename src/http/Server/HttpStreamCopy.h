@@ -14,7 +14,7 @@ namespace tiny_dlna {
 
 class HttpStreamCopy {
  public:
-  HttpStreamCopy(Stream &input, WiFiClient &client, int outputSize = 215) {
+  HttpStreamCopy(Stream &input, Client &client, int outputSize = 215) {
     this->is_open = true;
     this->input_ptr = &input;
     this->client_ptr = &client;
