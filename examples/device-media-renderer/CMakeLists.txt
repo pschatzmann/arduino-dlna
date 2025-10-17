@@ -21,4 +21,4 @@ target_compile_definitions(arduino_emulator PUBLIC -DDEFINE_MAIN)
 target_compile_definitions(device-media-renderer PUBLIC -DARDUINO -DIS_DESKTOP -DEXIT_ON_STOP)
 
 # specify libraries
-target_link_libraries(device-media-renderer arduino_emulator dlna_server)
+target_link_libraries(device-media-renderer arduino_emulator arduino-dlna)
