@@ -1,7 +1,5 @@
 // Example for creating a Media Renderer
 #include "DLNA.h"
-#include "AudioTools.h"
-#include "AudioTools/AudioCodecs/MultiDecoder.h"
 
 const char* ssid = "";
 const char* password = "";
@@ -10,9 +8,8 @@ DLNADeviceMgr device_mgr;         // basic device API
 WiFiServer wifi;
 HttpServer server(wifi);
 UDPAsyncService udp;
-CsvOutput out(Serial);  
-MultiDecoder multi_decoder;
-WAVDecoder dec_wav;
+// Use Serial as a simple output when no audio stack is present
+Print& out = Serial;
 
 void setupWifi() {
   WiFi.begin(ssid, password);
@@ -32,11 +29,34 @@ void setup() {
   // start Wifi
   setupWifi();
 
-  // setup media renderer
-  multi_decoder.addDecoder(dec_wav,"audio/wav");
-  media_renderer.setDecoder(multi_decoder);
+  // setup media renderer (use event callbacks to handle audio at app level)
   media_renderer.setBaseURL(WiFi.localIP(), 9999);
-  media_renderer.setOutput(out);
+  media_renderer.setMediaEventHandler(
+    [](MediaEvent ev, MediaRenderer& mr) {
+      switch (ev) {
+        case MediaEvent::SET_URI:
+          Serial.print("Event: SET_URI ");
+          if (mr.getCurrentUri()) Serial.println(mr.getCurrentUri());
+          else Serial.println("(null)");
+          break;
+        case MediaEvent::PLAY:
+          Serial.println("Event: PLAY");
+          break;
+        case MediaEvent::STOP:
+          Serial.println("Event: STOP");
+          break;
+        case MediaEvent::SET_VOLUME:
+          Serial.print("Event: SET_VOLUME ");
+          Serial.println(mr.getVolume());
+          break;
+        case MediaEvent::SET_MUTE:
+          Serial.print("Event: SET_MUTE ");
+          Serial.println(mr.isMuted() ? 1 : 0);
+          break;
+        default:
+          Serial.println("Event: OTHER");
+      }
+    });
 
   // setup device: set IPAddress or BaseURL and other optional information
   device_mgr.begin(media_renderer, udp, server);

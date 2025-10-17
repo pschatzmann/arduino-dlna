@@ -10,8 +10,7 @@ library (for example `MediaRenderer`).
 
 This guide explains how to add a new DLNA device to the library. The
 `MediaRenderer` device in this folder is a good example: it implements a
-minimal UPnP/DLNA Media Renderer that receives an AVTransport URI and plays
-audio through the Arduino-friendly AudioTools pipeline.
+minimal UPnP/DLNA Media Renderer that receives an AVTransport URI.
 
 Follow these steps to add your own device:
 

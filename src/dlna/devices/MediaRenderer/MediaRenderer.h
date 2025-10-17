@@ -1,44 +1,69 @@
 #pragma once
-#include "AudioToolsConfig.h"
-#include "AudioTools/CoreAudio/AudioStreams.h"
-#include "AudioTools/CoreAudio/AudioOutput.h"
-#include "AudioTools/AudioCodecs/AudioEncoded.h"
-#include "AudioTools/CoreAudio/StreamCopy.h"
-#include "AudioTools/CoreAudio/Pipeline.h"
-#include "AudioTools/CoreAudio/VolumeStream.h"
-#include "AudioTools/Communication/HTTP/URLStream.h"
+#include <cctype>
+#include <cstring>
+
+#include "basic/Str.h"
+#include "dlna/DLNADeviceMgr.h"
+#include "dlna/xml/XMLAttributeParser.h"
 #include "mr_conmgr.h"
 #include "mr_control.h"
 #include "mr_transport.h"
-#include "dlna/DLNADeviceMgr.h"
 
 namespace tiny_dlna {
+/**
+ * @enum MediaEvent
+ * @brief Events emitted by the MediaRenderer to notify the application
+ *        about playback and rendering control changes.
+ *
+ * The application registers a callback using setMediaEventHandler() and
+ * will receive the event along with a reference to the emitting
+ * MediaRenderer instance. The handler should query the renderer (for
+ * example getCurrentUri(), getVolume(), getMime()) to determine the
+ * appropriate action for each event.
+ *
+ * Events:
+ * - SET_URI:    The renderer received a new URI (use getCurrentUri()).
+ * - PLAY:       Start or resume playback of the current URI.
+ * - PAUSE:      Pause playback.
+ * - STOP:       Stop playback and reset playback state.
+ * - SET_VOLUME: The volume was changed (use getVolume()).
+ * - SET_MUTE:   The mute state changed (use isMuted()).
+ */
+enum class MediaEvent { SET_URI, PLAY, PAUSE, STOP, SET_VOLUME, SET_MUTE };
 
 /**
  * @brief MediaRenderer DLNA Device
  *
  * MediaRenderer implements a simple UPnP/DLNA Media Renderer device. It
- * provides functionality to receive a stream URL via UPnP AVTransport actions
- * and play it through an audio pipeline composed of a decoder, volume
- * control and an output stream. The class also exposes basic rendering
- * control actions such as volume, mute and transport controls (play/pause/stop).
+ * receives stream URIs via UPnP AVTransport actions and delegates actual
+ * playback and rendering to the application through an event callback API.
+ * This removes any dependency on an internal audio stack: applications
+ * handle playback themselves by registering a handler with
+ * setMediaEventHandler(). The device still supports rendering controls
+ * (volume, mute) and transport controls (play/pause/stop) and provides
+ * helper accessors like getCurrentUri() and getMime().
  *
  * Usage summary:
- * - Configure an audio output and a decoder using setOutput() and
- *   setDecoder().
- * - Optionally provide WiFi credentials using setLogin().
- * - Call begin() to initialize the audio pipeline before playback.
- * - Use play(url) to start playback of a network stream (URLStream).
- * - Call loop() or copy() periodically from the main loop to process audio.
+ * - Register an event handler with setMediaEventHandler() to receive
+ *   MediaEvent notifications (SET_URI, PLAY, PAUSE, STOP, SET_VOLUME,
+ *   SET_MUTE).
+ * - In the handler query the renderer (getCurrentUri(), getVolume(),
+ *   isMuted(), getMime()) and implement platform-specific playback.
+ * - Use play(url) to programmatically start playback; the handler will
+ *   also be notified of SET_URI and PLAY when the device receives a
+ *   SetAVTransportURI SOAP action.
  *
- * This class intentionally keeps the implementation small and Arduino
- * friendly: methods return bool for success/failure and avoid dynamic memory
- * allocations in the hot path.
+ * This class is intentionally small and Arduino-friendly: methods return
+ * bool for success/failure and avoid heavy dynamic memory allocations in
+ * the hot path.
  *
  * Author: Phil Schatzmann
  */
 class MediaRenderer : public DLNADevice {
  public:
+  // event handler: (event, reference to MediaRenderer)
+  typedef void (*MediaEventHandler)(MediaEvent event, MediaRenderer& renderer);
+
   /**
    * @brief Default constructor
    *
@@ -58,99 +83,15 @@ class MediaRenderer : public DLNADevice {
     setBaseURL("http://localhost:44757");
   }
 
-  MediaRenderer(AudioStream& out, AudioDecoder& decoder) : MediaRenderer() {
-    setOutput(out);
-    setDecoder(decoder);
-  }
-
-  MediaRenderer(AudioOutput& out, AudioDecoder& decoder) : MediaRenderer() {
-    setOutput(out);
-    setDecoder(decoder);
-  }
-
-  MediaRenderer(Print& out, AudioDecoder& decoder) : MediaRenderer() {
-    setOutput(out);
-    setDecoder(decoder);
-  }
-
-  ~MediaRenderer() { end(); }
-
-  /// Provide optional login information (SSID, password)
-  void setLogin(const char* ssid, const char* password) {
-    url.setPassword(password);
-    url.setSSID(ssid);
-  }
-
-  /// Initializes the audio pipeline; must be called before playback
-  bool begin() override {
-    if (!p_decoder) {
-      DlnaLogger.log(DlnaLogLevel::Error, "No decoder set");
-      return false;
-    }
-    if (!p_stream && !p_out && !p_print) {
-      DlnaLogger.log(DlnaLogLevel::Error, "No output stream set");
-      return false;
-    }
-
-    dec_stream.setDecoder(p_decoder);
-    // Connect components
-    // Set up audio pipeline
-    if (pipeline.size() == 0) {
-      pipeline.add(dec_stream);
-      pipeline.add(volume);
-    }
-    // Add output stream
-    if (p_stream) {
-      pipeline.setOutput(*p_stream);
-    } else if (p_out) {
-      pipeline.setOutput(*p_out);
-    } else if (p_print) {
-      pipeline.setOutput(*p_print);
-    } else {
-      DlnaLogger.log(DlnaLogLevel::Error, "No output stream set");
-      return false;
-    }
-    bool result = pipeline.begin();
-    if (!result) {
-      DlnaLogger.log(DlnaLogLevel::Error, "Pipeline begin failed");
-      return false;
-    }
-
-    return true;
-  }
-
-  /// ends the renderer
-  void end() {
-    // Stop playback and clean up
-    stop();
-    pipeline.end();
-  }
-
-  /// Start playback of a network resource (returns true on success)
-  bool play(const char* urlStr) {
-    if (urlStr == nullptr) return false;
-    DlnaLogger.log(DlnaLogLevel::Info, "is_active URL: %s", urlStr);
-
-    // Stop any current playback
-    stop();
-
-    // Start network stream
-    if (!url.begin(urlStr)) {
-      DlnaLogger.log(DlnaLogLevel::Error, "Failed to open URL");
-      return false;
-    }
-
-    is_active = true;
-    start_time = millis();
-    return true;
-  }
+  /// Register a media event handler callback
+  void setMediaEventHandler(MediaEventHandler cb) { event_cb = cb; }
 
   /// Set the renderer volume (0..100 percent)
   bool setVolume(uint8_t volumePercent) {
     if (volumePercent > 100) volumePercent = 100;
-    float volumeFloat = volumePercent / 100.0;
-    volume.setVolume(volumeFloat);
+    DlnaLogger.log(DlnaLogLevel::Info, "Set volume: %d", volumePercent);
     current_volume = volumePercent;
+    if (event_cb) event_cb(MediaEvent::SET_VOLUME, *this);
     return true;
   }
 
@@ -160,11 +101,8 @@ class MediaRenderer : public DLNADevice {
   /// Enable or disable mute
   bool setMute(bool mute) {
     is_muted = mute;
-    if (mute) {
-      volume.setVolume(0);
-    } else {
-      volume.setVolume(current_volume / 100.0);
-    }
+    DlnaLogger.log(DlnaLogLevel::Info, "Set mute: %s", mute ? "true" : "false");
+    if (event_cb) event_cb(MediaEvent::SET_MUTE, *this);
     return true;
   }
 
@@ -175,13 +113,10 @@ class MediaRenderer : public DLNADevice {
   bool isActive() { return is_active; }
 
   /// Set the active state (used by transport callbacks)
-  void setActive(bool active) { is_active = active; }
-
-  /// Seek to a position (ms) — typically unsupported and returns false
-  bool seek(unsigned long position) {
-    // Not fully supported with most streams
-    DlnaLogger.log(DlnaLogLevel::Warning, "Seek not fully supported");
-    return false;
+  void setActive(bool active) {
+    DlnaLogger.log(DlnaLogLevel::Info, "Set active: %s",
+                   active ? "true" : "false");
+    is_active = active;
   }
 
   /// Get estimated playback position (ms)
@@ -191,45 +126,20 @@ class MediaRenderer : public DLNADevice {
     return millis() - start_time;
   }
 
-  /// Get duration of the current media (returns 0 when unknown)
-  unsigned long getDuration() {
-    return 0;  // Unknown for most streams
+  /// Provides the mime from the DIDL or nullptr
+  const char* getMime() {
+    // Prefer explicit MIME from DIDL if available
+    if (!current_mime.isEmpty()) return current_mime.c_str();
+    return nullptr;
   }
 
-  /// Output and decoder configuration methods
-  void setOutput(AudioStream& out) { p_stream = &out; }
-  void setOutput(AudioOutput& out) { p_out = &out; }
-  void setOutput(Print& out) { p_print = &out; }
-  void setDecoder(AudioDecoder& decoder) { this->p_decoder = &decoder; }
-  
-
-  /// Process pending audio data; call regularly from main loop
-  size_t copy() {
-    // Call this in your main loop
-    size_t bytes = 0;
-    if (is_active) {
-      bytes = copier.copy();
-    } else {
-      delay(5);
-    }
-    return bytes;
-  }
-
-  /// loop called by DeviceMgr: just calls copy()
-  /// Per-device loop (delegates to copy())
-  void loop() { copy(); }
-
+  // Access current URI
+  const char* getCurrentUri() { return current_uri.c_str(); }
 
  protected:
-  URLStream url;
-  Pipeline pipeline;
-  AudioDecoder* p_decoder = nullptr;
-  EncodedAudioStream dec_stream;
-  VolumeStream volume;
-  AudioStream* p_stream = nullptr;
-  AudioOutput* p_out = nullptr;
-  Print* p_print = nullptr;
-  StreamCopy copier{pipeline, url};
+  tiny_dlna::Str current_uri;
+  tiny_dlna::Str current_mime;
+  MediaEventHandler event_cb = nullptr;
   uint8_t current_volume = 50;
   bool is_muted = false;
   bool is_active = false;
@@ -239,6 +149,43 @@ class MediaRenderer : public DLNADevice {
 
   void setupServices(HttpServer& server, IUDPService& udp) {
     setupServicesImpl(&server);
+  }
+  /// Start playback of a network resource (returns true on success)
+  bool play(const char* urlStr) {
+    if (urlStr == nullptr) return false;
+    DlnaLogger.log(DlnaLogLevel::Info, "play URL: %s", urlStr);
+    // store URI
+    current_uri = Str(urlStr);
+    // notify handler about the new URI and play
+    if (event_cb) {
+      event_cb(MediaEvent::SET_URI, *this);
+      event_cb(MediaEvent::PLAY, *this);
+    }
+    is_active = true;
+    start_time = millis();
+    return true;
+  }
+
+  /// Set MIME explicitly (used when DIDL-Lite metadata provides protocolInfo)
+  void setMime(const char* mime) {
+    if (mime) {
+      current_mime = mime;
+      DlnaLogger.log(DlnaLogLevel::Info, "Set mime: %s", current_mime.c_str());
+    }
+  }
+
+  /// Try to parse a DIDL-Lite snippet and extract the protocolInfo MIME from
+  /// the <res> element. If found, set current_mime.
+  void setMimeFromDIDL(const char* didl) {
+    if (!didl) return;
+    // Convenience helper: extract protocolInfo attribute from a tag and
+    // return the contentFormat (3rd token) portion, e.g. from
+    // protocolInfo="http-get:*:audio/mpeg:*" -> "audio/mpeg".
+    char mimeBuf[64] = {0};
+    if (XMLAttributeParser::extractAttributeToken(
+            didl, "<res", "protocolInfo=", 3, mimeBuf, sizeof(mimeBuf))) {
+      setMime(mimeBuf);
+    }
   }
 
   static const char* reply() {
@@ -365,8 +312,8 @@ class MediaRenderer : public DLNADevice {
               [](HttpServer* server, const char* requestPath,
                  HttpRequestHandlerLine* hl) { server->replyOK(); });
 
-  cm.setup(
-    "urn:schemas-upnp-org:service:ConnectionManager:1",
+    cm.setup(
+        "urn:schemas-upnp-org:service:ConnectionManager:1",
         "urn:upnp-org:serviceId:ConnectionManager", "/CM/service.xml",
         connmgrCB, "/CM/control",
         [](HttpServer* server, const char* requestPath,
@@ -375,13 +322,13 @@ class MediaRenderer : public DLNADevice {
         [](HttpServer* server, const char* requestPath,
            HttpRequestHandlerLine* hl) { server->replyOK(); });
 
-  rc.setup("urn:schemas-upnp-org:service:RenderingControl:1",
+    rc.setup("urn:schemas-upnp-org:service:RenderingControl:1",
              "urn:upnp-org:serviceId:RenderingControl", "/RC/service.xml",
              controlCB, "/RC/control", renderingControlCB, "/RC/event",
              [](HttpServer* server, const char* requestPath,
                 HttpRequestHandlerLine* hl) { server->replyOK(); });
-    
-  addService(rc);
+
+    addService(rc);
     addService(cm);
     addService(avt);
   }
