@@ -9,12 +9,12 @@
 const char* ssid = "YOUR_SSID";
 const char* password = "YOUR_PASSWORD";
 
+WiFiServer wifi;
+HttpServer server(wifi);
 DLNADeviceMgr devMgr;
 WiFiClient client;
 DLNAHttpRequest http(client);
 UDPAsyncService udp;
-WiFiServer wifi;
-HttpServer server(wifi);
 MediaServer mediaServer;
 
 // Store items as a global const array (for PROGMEM/flash storage)

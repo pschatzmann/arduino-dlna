@@ -8,7 +8,9 @@
 const char* ssid = "YOUR_SSID";
 const char* password = "YOUR_PASSWORD";
 
-DLNAControlPointMgr cp;
+WiFiServer wifi;
+HttpServer server(wifi);
+DLNAControlPointMgr cp(server); // with Notifications
 WiFiClient client;
 DLNAHttpRequest http(client);
 UDPAsyncService udp;
@@ -31,28 +33,23 @@ void setup() {
   setupWifi();
 
   // Start control point to discover devices
-  if (!cp.begin(http, udp, "ssdp:all", 3000, true)) {
+  while (!renderer.begin(http, udp, 3000, true)) {
     Serial.println("No devices found");
-    while (true) delay(1000);
+    delay(1000);
   }
 
+  // Print number of discovered renderers
   Serial.print("Renderer count: ");
   Serial.println(renderer.getDeviceCount());
 
-  if (renderer.getDeviceCount() == 0) return;
+  // Use first discovered renderer device
+  renderer.setDeviceIndex(0);
+  // Subscribe to event notifications
+  renderer.subscribeNotifications(300);
 
-  // Example media URI. Replace with a reachable HTTP URL for your network.
-  const char* mediaUri = "http://192.168.1.2/media/sample.mp3";
-
-  Serial.println("Setting AVTransport URI...");
-  if (!renderer.setAVTransportURI(mediaUri)) {
-    Serial.println("Failed to set AVTransport URI");
-  } else {
-    Serial.println("URI set");
-  }
-
+  // Starting playback
   Serial.println("Starting playback...");
-  if (!renderer.play()) {
+  if (!renderer.play("http://192.168.1.2/media/sample.mp3")) {
     Serial.println("Play failed");
   } else {
     Serial.println("Play command sent");
@@ -70,6 +67,4 @@ void setup() {
   Serial.println(state ? state : "(unknown)");
 }
 
-void loop() {
-  cp.loop();
-}
+void loop() { cp.loop(); }

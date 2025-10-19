@@ -59,6 +59,7 @@ class DLNADevice {
   void setBaseURL(const char* url) { base_url = url; }
   /// Defines the base URL
   void setBaseURL(IPAddress ip, int port, const char* path="") { 
+    localhost = ip;
     static Str str = "http://";
     str += ip[0];
     str += ".";
@@ -99,8 +100,10 @@ class DLNADevice {
     return device_url;
   }
 
+  /// Defines the local IP address
   void setIPAddress(IPAddress address) { localhost = address; }
 
+  /// Provides the local IP address
   IPAddress getIPAddress() { return localhost; }
 
   /// Provides the local address as string

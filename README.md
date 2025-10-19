@@ -12,13 +12,16 @@ Reference documentation can be hard to find. Therefore I am providing some usefu
 - [UPnP and UDA Tutorial](https://upnp.org/resources/documents/UPnP_UDA_tutorial_July2014.pdf)
 - [UPnP Device Architecture Tutorial](
 https://embeddedinn.wordpress.com/tutorials/upnp-device-architecture/)
-- [UPnP Device Architecture](http://www.upnp.org/specs/arch/UPnP-arch-DeviceArchitecture-v1.1.pdf)
+- [UPnP Device Architecture 1.1](http://www.upnp.org/specs/arch/UPnP-arch-DeviceArchitecture-v1.1.pdf)
+- [UPnP Device Architecture 2.0](https://openconnectivity.org/upnp-specs/UPnP-arch-DeviceArchitecture-v2.0-20200417.pdf)
+
 
 I struggled to choose the right approach to implement this on Arduino.
 On the desktop, similar functionality can be provided with the following projects:
 
 - [pupnp](https://github.com/pupnp/pupnp) A Portable SDK for UPnP* Devices
 - [gmrender-resurrect](https://github.com/hzeller/gmrender-resurrect): A headless UPnP/DLNA media renderer based on pupnp
+- [usahre](https://github.com/yitsunweng/ushare) A UPnP/DLNA media server
 
 This library provides memory-efficient classes to implement DLNA devices and clients (control points).
 

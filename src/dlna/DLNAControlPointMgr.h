@@ -1,5 +1,7 @@
 #pragma once
 
+#include <functional>
+
 #include "DLNAControlPointRequestParser.h"
 #include "DLNADevice.h"
 #include "DLNADeviceMgr.h"
@@ -9,6 +11,7 @@
 #include "basic/Url.h"
 #include "http/HttpServer.h"
 #include "xml/XMLDeviceParser.h"
+#include "xml/XMLParser.h"
 
 namespace tiny_dlna {
 
@@ -16,40 +19,69 @@ class DLNAControlPointMgr;
 DLNAControlPointMgr* selfDLNAControlPoint = nullptr;
 
 /**
- * @brief Setup of a Basic DLNA Control Point.
- * The control point
- * - send out an MSearch request
- * - processes the MSearch replys
- *   - parses the Device xml
- *   - parses the Service xml
- * - subscribes to events
- * - pocesses the events
+ * @brief Lightweight DLNA control point manager
  *
- * The control point can also execute Actions
+ * This class implements a compact, embeddable DLNA/UPnP control point
+ * suitable for small devices and emulators. It provides the core
+ * responsibilities a control point needs in order to discover devices,
+ * subscribe to service events, and invoke actions on services:
+ *
+ * - Discover devices using SSDP M-SEARCH and collect device/service
+ *   descriptions (HTTP GET + XML parsing).
+ * - Maintain a list of discovered `DLNADevice` objects and their
+ *   `DLNAServiceInfo` entries.
+ * - Subscribe to service event notifications (SUBSCRIBE) and accept
+ *   incoming NOTIFY requests via an attached `HttpServer`.
+ * - Parse event property-change XML and dispatch callbacks to the
+ *   application (via `onNotification`).
+ * - Execute SOAP actions on services (builds and posts SOAP XML).
+ *
+ * Notes and usage:
+ * - To receive HTTP-based event notifications register an `HttpServer`
+ *   with `setHttpServer()` (or construct with a server). The server's
+ *   request handler will forward NOTIFY bodies to this manager.
+ * - Register an application callback with `onNotification()` to receive
+ *   parsed property updates. An opaque reference pointer may be stored
+ *   with `setReference()` and will be passed back with the callback.
+ * - Call `begin()` to start discovery and `loop()` frequently (e.g.
+ *   from the device main loop) to process incoming network events and
+ *   scheduled tasks.
+ *
+ * The class is intentionally small and avoids dynamic STL-heavy
+ * constructs so it can run in constrained environments. It is not a
+ * full-featured UPnP stack but provides the common features required by
+ * many DLNA control point use cases.
  *
  * @author Phil Schatzmann
  */
 class DLNAControlPointMgr {
  public:
+  /// Default constructor w/o Notifications
   DLNAControlPointMgr() { selfDLNAControlPoint = this; }
+
+  /// Constructor supporting Notifications
+  DLNAControlPointMgr(HttpServer& server, int port = 80)
+      : DLNAControlPointMgr() {
+    setHttpServer(server, port);
+  }
   /// Requests the parsing of the device information
   void setParseDevice(bool flag) { is_parse_device = flag; }
+
   /// Defines the lacal url (needed for subscriptions)
   void setLocalURL(Url url) { local_url = url; }
 
   /**
    * @brief start the processing by sending out a MSearch. For the search target
    * you can use:
-     - ssdp:all : to search all UPnP devices,
-     - upnp:rootdevice: only root devices . Embedded devices will not respond
-     - uuid:device-uuid: search a device by vendor supplied unique id
-     - urn:schemas-upnp-org:device:deviceType- version: locates all devices of a
-given type (as defined by working committee)
-     - urn:schemas-upnp-org:service:serviceType-
-version: locate service of a given type
+   *  - ssdp:all : to search all UPnP devices,
+   *  - upnp:rootdevice: only root devices . Embedded devices will not respond
+   *  - uuid:device-uuid: search a device by vendor supplied unique id
+   *  - urn:schemas-upnp-org:device:deviceType- version: locates all devices of
+   * a given type (as defined by working committee)
+   *  - urn:schemas-upnp-org:service:serviceType-version: locate service of a
+   * given type
    */
-
-  bool begin(DLNAHttpRequest& http, IUDPService &udp,
+  bool begin(DLNAHttpRequest& http, IUDPService& udp,
              const char* searchTarget = "ssdp:all", uint32_t processingTime = 0,
              bool stopWhenFound = true) {
     DlnaLogger.log(DlnaLogLevel::Info, "DLNADevice::begin");
@@ -57,6 +89,14 @@ version: locate service of a given type
     is_active = true;
     p_udp = &udp;
     p_http = &http;
+
+    if (p_http_server && http_server_port > 0 && eventCallback != nullptr) {
+      // handle server requests
+      if (!p_http_server->begin(http_server_port)) {
+        DlnaLogger.log(DlnaLogLevel::Error, "HttpServer begin failed");
+        return false;
+      }
+    }
 
     // setup multicast UDP
     if (!(p_udp->begin(DLNABroadcastAddress))) {
@@ -78,7 +118,8 @@ version: locate service of a given type
       loop();
     }
 
-    DlnaLogger.log(DlnaLogLevel::Info, "Control Point started with %d devices found",
+    DlnaLogger.log(DlnaLogLevel::Info,
+                   "Control Point started with %d devices found",
                    devices.size());
     return devices.size() > 0;
   }
@@ -88,6 +129,9 @@ version: locate service of a given type
     // p_server->end();
     for (auto& device : devices) device.clear();
     is_active = false;
+    if (p_http_server) {
+      p_http_server->end();
+    }
   }
 
   /// Registers a method that will be called
@@ -103,24 +147,43 @@ version: locate service of a given type
     return result;
   }
 
-  /// Subscribe to changes
-  bool subscribe(const char* serviceName, int seconds) {
-    auto service = getService(serviceName);
-    if (!service) {
-      DlnaLogger.log(DlnaLogLevel::Error, "No service found for %s", serviceName);
+  /// Subscribe to changes for all device services
+  bool subscribeNotifications(DLNADevice& device, int seconds = 60) {
+    if (p_http_server==nullptr){
+      DlnaLogger.log(DlnaLogLevel::Error, "HttpServer not defined - cannot subscribe to notifications");
       return false;
     }
-
-    auto& device = getDevice(service);
-    if (!device) {
-      DlnaLogger.log(DlnaLogLevel::Error, "Device not found");
-      return false;
-    }
-
     if (StrView(local_url.url()).isEmpty()) {
       DlnaLogger.log(DlnaLogLevel::Error, "Local URL not defined");
       return false;
     }
+    for (auto& service : device.getServices()) {
+      if (StrView(service.event_sub_url).isEmpty()) {
+        DlnaLogger.log(DlnaLogLevel::Warning,
+                       "Service %s has no eventSubURL defined",
+                       service.service_id);
+        continue;
+      }
+      if (!subscribeNotifications(service, seconds)) {
+        DlnaLogger.log(DlnaLogLevel::Error, "Subscription to service %s failed",
+                       service.service_id);
+        return false;
+      }
+      DlnaLogger.log(DlnaLogLevel::Info,
+                     "Subscribed to service %s successfully",
+                     service.service_id);
+    }
+    return true;
+  }
+
+  /// Subscribe to changes for defined device service
+  bool subscribeNotifications(DLNAServiceInfo& service, int seconds = 60) {
+    if (p_http_server==nullptr){
+      DlnaLogger.log(DlnaLogLevel::Error, "HttpServer not defined - cannot subscribe to notifications");
+      return false;
+    }
+    DLNADevice& device = getDevice(service);
+
     char url_buffer[200] = {0};
     char seconds_txt[80] = {0};
     Url url{getUrl(device, service.event_sub_url, url_buffer, 200)};
@@ -131,6 +194,24 @@ version: locate service of a given type
     int rc = p_http->subscribe(url);
     DlnaLogger.log(DlnaLogLevel::Info, "Http rc: %s", rc);
     return rc == 200;
+  }
+
+  /// Register a callback that will be invoked for incoming event notification
+  void onNotification(
+      std::function<void(void* reference, const char* sid, const char* varName,
+                         const char* newValue)>
+          cb) {
+    eventCallback = cb;
+  }
+
+  /// Attach an opaque reference pointer (optional, for caller context)
+  void setReference(void* ref) { reference = ref; }
+
+  /// Set HttpServer instance and register the notify handler
+  void setHttpServer(HttpServer& server, int port = 80) {
+    p_http_server = &server;
+    http_server_port = port;
+    attachHttpServer(server);
   }
 
   /// call this method in the Arduino loop as often as possible: the processes
@@ -155,6 +236,11 @@ version: locate service of a given type
 
     // execute scheduled udp replys
     scheduler.execute(*p_udp);
+
+    if (p_http_server) {
+      // handle server requests
+      bool rc = p_http_server->doLoop();
+    }
 
     // be nice, if we have other tasks
     delay(5);
@@ -201,11 +287,13 @@ version: locate service of a given type
     dev.updateTimestamp();
     for (auto& existing_device : devices) {
       if (dev.getUDN() == existing_device.getUDN()) {
-        DlnaLogger.log(DlnaLogLevel::Info, "Device '%s' already exists", dev.getUDN());
+        DlnaLogger.log(DlnaLogLevel::Info, "Device '%s' already exists",
+                       dev.getUDN());
         return false;
       }
     }
-    DlnaLogger.log(DlnaLogLevel::Info, "Device '%s' has been added", dev.getUDN());
+    DlnaLogger.log(DlnaLogLevel::Info, "Device '%s' has been added",
+                   dev.getUDN());
     devices.push_back(dev);
     return true;
   }
@@ -224,8 +312,8 @@ version: locate service of a given type
     int rc = req.get(url, "text/xml");
 
     if (rc != 200) {
-      DlnaLogger.log(DlnaLogLevel::Error, "Http get to '%s' failed with %d", url.url(),
-                     rc);
+      DlnaLogger.log(DlnaLogLevel::Error, "Http get to '%s' failed with %d",
+                     url.url(), rc);
       req.stop();
       return false;
     }
@@ -266,6 +354,57 @@ version: locate service of a given type
   const char* search_target;
   StringRegistry strings;
   Url local_url;
+  HttpServer* p_http_server = nullptr;
+  int http_server_port = 0;
+  void* reference = nullptr;
+  std::function<void(void* reference, const char* sid, const char* varName,
+                     const char* newValue)> eventCallback;
+
+  /// Attach an HttpServer so the control point can receive HTTP NOTIFY event
+  /// messages. This registers a handler at the configured local URL path
+  /// (see `local_url`) which will extract the SID header and body and call
+  /// parseAndDispatchEvent() to dispatch property changes.
+  void attachHttpServer(HttpServer& server) {
+    p_http_server = &server;
+    // register handler at the local path. If local_url is not set we use
+    // a default path "/dlna/events"
+    const char* path =
+        StrView(local_url.url()).isEmpty() ? "/dlna/events" : local_url.path();
+
+    // handler lambda: reads SID and body, forwards to parseAndDispatchEvent
+    auto notifyHandler = [](HttpServer* server, const char* requestPath,
+                            HttpRequestHandlerLine* hl) {
+      // The DLNAControlPointMgr instance is passed as context[0]
+      DLNAControlPointMgr* cp = nullptr;
+      if (hl->contextCount > 0)
+        cp = static_cast<DLNAControlPointMgr*>(hl->context[0]);
+      if (!cp) {
+        server->replyNotFound();
+        return;
+      }
+
+      // read headers
+      HttpRequestHeader& req = server->requestHeader();
+      const char* sid = req.get("SID");
+
+      // read body
+      Str body = server->contentStr();
+
+      // build temporary NotifyReplyCP and forward
+      NotifyReplyCP tmp;
+      if (sid) tmp.subscription_id = sid;
+      tmp.xml = body.c_str();
+
+      cp->parseAndDispatchEvent(tmp);
+
+      server->replyOK();
+    };
+
+    void* ctx[1];
+    ctx[0] = this;
+    server.on(path, T_POST, notifyHandler, ctx, 1);
+  }
+
 
   /// Processes a NotifyReplyCP message
   static bool processDevice(NotifyReplyCP& data) {
@@ -276,13 +415,47 @@ version: locate service of a given type
     }
     if (nts.equals("ssdp:alive")) {
       bool select = selfDLNAControlPoint->matches(data.usn.c_str());
-      DlnaLogger.log(DlnaLogLevel::Info, "addDevice: %s -> %s", data.usn.c_str(),
-                     select ? "added" : "filtered");
+      DlnaLogger.log(DlnaLogLevel::Info, "addDevice: %s -> %s",
+                     data.usn.c_str(), select ? "added" : "filtered");
       Url url{data.location.c_str()};
       selfDLNAControlPoint->addDevice(url);
       return true;
     }
     return false;
+  }
+
+  // Parse the xml content of a NotifyReplyCP and dispatch each property
+  void parseAndDispatchEvent(NotifyReplyCP& data) {
+    // data.xml contains the <e:propertyset ...>...</e:propertyset> as a
+    // string
+    const char* xmlBuf = data.xml.c_str();
+    if (xmlBuf == nullptr || *xmlBuf == '\0') return;
+
+    struct CBRef {
+      DLNAControlPointMgr* self;
+      NotifyReplyCP* data;
+    } ref;
+    ref.self = this;
+    ref.data = &data;
+
+    // Simple callback: whenever the parser reports a text node (non-empty
+    // `text`), treat `nodeName` as the variable name and `text` as its value.
+    auto cb = [](Str& nodeName, Vector<Str>& /*path*/, Str& text, int /*start*/,
+                 int /*len*/, void* vref) {
+      CBRef* r = static_cast<CBRef*>(vref);
+      if (text.length() > 0 && r->self && r->self->eventCallback) {
+        const char* sid = r->data->subscription_id.c_str();
+        // store stable copies in the control point's string registry
+        const char* namePtr = r->self->strings.add((char*)nodeName.c_str());
+        const char* valPtr = r->self->strings.add((char*)text.c_str());
+        // pass stored opaque reference as first parameter
+        r->self->eventCallback(r->self->reference, sid, namePtr, valPtr);
+      }
+    };
+
+    XMLParser parser(xmlBuf, cb);
+    parser.setReference(&ref);
+    parser.parse();
   }
 
   /// checks if the usn contains the search target
@@ -435,61 +608,48 @@ version: locate service of a given type
           int payloadEnd = soap.indexOf(endTagBuf, payloadStart);
           if (payloadEnd < 0) payloadEnd = soap.length();
 
-          int pos = payloadStart;
-          // iterate over child elements inside the response
-          while (true) {
-            int lt = soap.indexOf('<', pos);
-            if (lt < 0 || lt >= payloadEnd) break;
-            // skip closing tags
-            if (lt + 1 < soap.length() && soap[lt + 1] == '/') {
-              pos = lt + 2;
-              continue;
-            }
-            int nameStart = lt + 1;
-            // read element name until space or '>'
-            int nameEnd = nameStart;
-            while (nameEnd < soap.length()) {
-              char c = soap[nameEnd];
-              if (c == '>' || c == ' ' || c == '\t' || c == '\r' || c == '\n') break;
-              nameEnd++;
-            }
-            if (nameEnd <= nameStart) break;
+          // Extract payload substring and parse with XMLParser to get child elements
+          Str payload;
+          payload.copyFrom(soap.c_str() + payloadStart, payloadEnd - payloadStart);
 
-            // extract name and value
-            Str nameStr;
-            nameStr.copyFrom(soap.c_str() + nameStart, nameEnd - nameStart);
+          struct CBRef {
+            DLNAControlPointMgr* self;
+            ActionReply* out;
+          } cbref;
+          cbref.self = this;
+          cbref.out = &result;
 
-            int valueStart = soap.indexOf('>', lt);
-            if (valueStart < 0) break;
-            valueStart += 1;
-            // closing tag for this element
-            char closeTag[220] = {0};
-            // use name without any namespace prefix
-            const char* fullName = nameStr.c_str();
+          auto xmlcb = [](Str& nodeName, Vector<Str>& /*path*/, Str& text,
+                          int /*start*/, int /*len*/, void* vref) {
+            CBRef* r = static_cast<CBRef*>(vref);
+            // trim text and ignore empty nodes
+            Str value = text;
+            value.trim();
+            if (value.length() == 0) return;
+
+            // strip namespace prefix from node name if present
+            const char* fullName = nodeName.c_str();
             const char* sep = strchr(fullName, ':');
-            const char* nameOnly = fullName;
-            if (sep) nameOnly = sep + 1;
-            snprintf(closeTag, sizeof(closeTag), "</%s>", nameOnly);
-            int closePos = soap.indexOf(closeTag, valueStart);
-            if (closePos < 0 || closePos > payloadEnd) break;
+            const char* nameOnly = sep ? sep + 1 : fullName;
 
-            Str valueStr;
-            valueStr.copyFrom(soap.c_str() + valueStart, closePos - valueStart);
-
-            // trim whitespace
-            valueStr.trim();
-
-            // store in string registry so pointers remain valid
-            const char* namePtr = strings.add((char*)nameOnly);
-            const char* valuePtr = strings.add((char*)valueStr.c_str());
+            const char* namePtr = r->self->strings.add((char*)nameOnly);
+            const char* valuePtr = r->self->strings.add((char*)value.c_str());
 
             Argument arg;
             arg.name = namePtr;
             arg.value = valuePtr;
-            result.arguments.push_back(arg);
+            r->out->arguments.push_back(arg);
 
-            pos = closePos + strlen(closeTag);
-          }
+            // Also notify application about this name/value via eventCallback
+            if (r->self && r->self->eventCallback) {
+              // SID is not applicable here (action response), pass nullptr
+              r->self->eventCallback(r->self->reference, "", namePtr, valuePtr);
+            }
+          };
+
+          XMLParser parser(payload.c_str(), xmlcb);
+          parser.setReference(&cbref);
+          parser.parse();
         }
       }
     }

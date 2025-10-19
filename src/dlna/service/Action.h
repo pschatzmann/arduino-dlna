@@ -40,6 +40,7 @@ class ActionReply {
   ActionReply(bool valid = true) { is_valid = valid; }
   Vector<Argument> arguments;
   operator bool() { return is_valid; }
+  bool isValid() const { return is_valid; }
   void setValid(bool flag) { is_valid = flag; }
   void add(ActionReply alt) {
     if (!alt) setValid(false);

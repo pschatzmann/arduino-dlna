@@ -136,6 +136,9 @@ class MediaRenderer : public DLNADevice {
   // Access current URI
   const char* getCurrentUri() { return current_uri.c_str(); }
 
+  /// Get textual transport state
+  const char* getTransportState() { return transport_state.c_str(); }
+
  protected:
   tiny_dlna::Str current_uri;
   tiny_dlna::Str current_mime;
@@ -144,12 +147,16 @@ class MediaRenderer : public DLNADevice {
   bool is_muted = false;
   bool is_active = false;
   unsigned long start_time = 0;
+  // Current transport state string (e.g. "STOPPED", "PLAYING", "PAUSED_PLAYBACK")
+  tiny_dlna::Str transport_state = "NO_MEDIA_PRESENT";
   const char* st = "urn:schemas-upnp-org:device:MediaRenderer:1";
   const char* usn = "uuid:09349455-2941-4cf7-9847-1dd5ab210e97";
 
+  /// Setup the HTTP and UDP services
   void setupServices(HttpServer& server, IUDPService& udp) {
     setupServicesImpl(&server);
   }
+
   /// Start playback of a network resource (returns true on success)
   bool play(const char* urlStr) {
     if (urlStr == nullptr) return false;
@@ -171,6 +178,28 @@ class MediaRenderer : public DLNADevice {
     if (mime) {
       current_mime = mime;
       DlnaLogger.log(DlnaLogLevel::Info, "Set mime: %s", current_mime.c_str());
+    }
+  }
+
+  /**
+   * @brief Notify the renderer that playback completed.
+   *
+   * This helper updates the internal transport state to "STOPPED",
+   * marks the renderer inactive, resets the start time, logs the event and
+   * notifies the application event handler with MediaEvent::STOP so the
+   * application can perform cleanup (release resources, update UI, etc.).
+   */
+  void playbackCompleted() {
+    DlnaLogger.log(DlnaLogLevel::Info, "Playback completed");
+    transport_state = "STOPPED";
+    is_active = false;
+    start_time = 0;
+    // notify application handler about the stop
+    if (event_cb) event_cb(MediaEvent::STOP, *this);
+    // publish UPnP event to subscribers (if subscription manager available)
+    SubscriptionMgr* mgr = tiny_dlna::DLNADeviceMgr::getSubscriptionMgr();
+    if (mgr) {
+      mgr->publishProperty("/AVT/event", "TransportState", "STOPPED");
     }
   }
 
@@ -291,17 +320,17 @@ class MediaRenderer : public DLNADevice {
 
     auto transportCB = [](HttpServer* server, const char* requestPath,
                           HttpRequestHandlerLine* hl) {
-      server->reply("text/xml", mr_connmgr_xml);
+            server->reply("text/xml", [](Print& out){ mr_connmgr_xml_printer(out); });
     };
 
     auto connmgrCB = [](HttpServer* server, const char* requestPath,
                         HttpRequestHandlerLine* hl) {
-      server->reply("text/xml", mr_connmgr_xml);
+      server->reply("text/xml", [](Print& out){ mr_connmgr_xml_printer(out); });
     };
 
     auto controlCB = [](HttpServer* server, const char* requestPath,
                         HttpRequestHandlerLine* hl) {
-      server->reply("text/xml", mr_control_xml);
+      server->reply("text/xml", [](Print& out){ mr_control_xml_printer(out); });
     };
 
     // define services

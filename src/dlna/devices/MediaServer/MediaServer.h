@@ -1,16 +1,16 @@
 // Minimal header-only Digital Media Server (MediaServer) device
 #pragma once
 
+#include "MediaItem.h"
+#include "basic/EscapingPrint.h"
 #include "basic/Str.h"
 #include "basic/StrPrint.h"
 #include "dlna/DLNADeviceMgr.h"
-#include "http/HttpServer.h"
 #include "dlna/devices/MediaServer/MediaItem.h"
 #include "dlna/xml/XMLPrinter.h"
+#include "http/HttpServer.h"
 #include "ms_connmgr.h"
 #include "ms_content_dir.h"
-#include "basic/EscapingPrint.h"
-#include "MediaItem.h"
 
 namespace tiny_dlna {
 
@@ -22,10 +22,13 @@ namespace tiny_dlna {
  *
  * The API is designed for embedding custom content lists and streaming logic.
  * Instead of a single browse callback, the API now uses two callbacks:
- *   - PrepareDataCallback: Called to determine the number of items, total matches, and update ID for a Browse request.
- *   - GetDataCallback: Called for each item to retrieve its metadata (MediaItem) by index.
+ *   - PrepareDataCallback: Called to determine the number of items, total
+ * matches, and update ID for a Browse request.
+ *   - GetDataCallback: Called for each item to retrieve its metadata
+ * (MediaItem) by index.
  *
- * A user reference pointer can be set with setReference(void*), and is passed to both callbacks for custom context or data.
+ * A user reference pointer can be set with setReference(void*), and is passed
+ * to both callbacks for custom context or data.
  *
  * Example usage:
  *   - Implement PrepareDataCallback and GetDataCallback.
@@ -50,6 +53,8 @@ class MediaServer : public DLNADevice {
   // GetData callback signature:
   // index, MediaItem (out), reference
   typedef bool (*GetDataCallback)(int index, MediaItem& item, void* reference);
+
+  // (No default GetDataCallback — user must register one to serve items.)
 
   MediaServer() {
     DlnaLogger.log(DlnaLogLevel::Info, "MediaServer::MediaServer");
@@ -105,11 +110,13 @@ class MediaServer : public DLNADevice {
 
     auto contentDescCB = [](HttpServer* server, const char* requestPath,
                             HttpRequestHandlerLine* hl) {
-      server->reply("text/xml", ms_content_dir_xml);
+      server->reply("text/xml",
+                    [](Print& out) { ms_content_dir_xml_printer(out); });
     };
     auto connDescCB = [](HttpServer* server, const char* requestPath,
                          HttpRequestHandlerLine* hl) {
-      server->reply("text/xml", ms_conmgr_xml);
+      server->reply("text/xml",
+                    [](Print& out) { ms_connmgr_xml_printer(out); });
     };
 
     DLNAServiceInfo cd;
@@ -199,9 +206,9 @@ class MediaServer : public DLNADevice {
                           numberReturned, totalMatches, updateID,
                           ms->reference_);
     } else {
-      numberReturned = 1;
-      totalMatches = 1;
-      updateID = 1;
+      numberReturned = 0;
+      totalMatches = 0;
+      updateID = 0;
     }
 
     // Stream response via Print-callback and generate DIDL on-the-fly.
@@ -220,7 +227,6 @@ class MediaServer : public DLNADevice {
     g_stream_reference = nullptr;
   }
 
-
   // helper to write text content with minimal XML-escaping for &, < and >
   static void writeEscapedText(Print& out, const char* s) {
     if (!s) return;
@@ -235,7 +241,6 @@ class MediaServer : public DLNADevice {
         out.write((const uint8_t)*p);
     }
   }
-
 
   // streaming reply callback: writes the full SOAP envelope and escapes
   // DIDL tags while streaming the items from g_stream_items.
@@ -307,28 +312,7 @@ class MediaServer : public DLNADevice {
 
         didl.printNodeEnd("item");
       }
-    } else {
-      // fallback: single test item
-      MediaItem item;
-      item.id = "1";
-      item.parentID = "0";
-      item.restricted = true;
-      item.title = "Test Item";
-      item.res = "http://example.com/track.mp3";
-      item.mimeType = "audio/mpeg";
-      char itemAttr[256];
-      snprintf(itemAttr, sizeof(itemAttr),
-               "id=\"%s\" parentID=\"%s\" restricted=\"%d\"",
-               item.id ? item.id : "", item.parentID ? item.parentID : "0",
-               item.restricted ? 1 : 0);
-      didl.printNodeBeginNl("item", itemAttr);
-      didl.printNode("dc:title", item.title ? item.title : "");
-      char resAttr[128];
-      snprintf(resAttr, sizeof(resAttr), "protocolInfo=\"%s\"", item.mimeType);
-      didl.printNode("res", item.res ? item.res : "", resAttr);
-      didl.printNodeEnd("item");
-    }
-
+    }  // end if get_data_cb
     didl.printNodeEnd("DIDL-Lite");
   }
 

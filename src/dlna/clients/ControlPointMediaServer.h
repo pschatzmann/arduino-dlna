@@ -21,13 +21,24 @@ class ControlPointMediaServer {
 
   ControlPointMediaServer(DLNAControlPointMgr& mgr) : mgr(mgr) {}
 
+  /// Begin discovery / processing — forwards to the underlying control point
+  bool begin(DLNAHttpRequest& http, IUDPService& udp,
+             uint32_t processingTime = 0, bool stopWhenFound = true) {
+    DlnaLogger.log(DlnaLogLevel::Info,
+                   "ControlPointMediaServer::begin device_type_filter='%s'",
+                   device_type_filter ? device_type_filter : "(null)");
+    return mgr.begin(http, udp, device_type_filter, processingTime,
+                     stopWhenFound);
+  }
+
   /// Return number of discovered devices known to the control point
   int getDeviceCount() {
     // count only devices matching the device_type_filter
     int count = 0;
-    for (auto &d : mgr.getDevices()) {
+    for (auto& d : mgr.getDevices()) {
       const char* dt = d.getDeviceType();
-      if (!device_type_filter || StrView(dt).contains(device_type_filter)) count++;
+      if (!device_type_filter || StrView(dt).contains(device_type_filter))
+        count++;
     }
     return count;
   }
@@ -40,28 +51,28 @@ class ControlPointMediaServer {
 
   /// Restrict this control helper to devices of the given device type
   /// e.g. "urn:schemas-upnp-org:device:MediaServer:1". Pass nullptr to
-  /// disable filtering.
-  void setDeviceTypeFilter(const char* filter) { device_type_filter = filter; }
+  /// set to default.
+  void setDeviceTypeFilter(const char* filter) { device_type_filter = filter ? filter : device_type_filter_default; }
 
   /// Attach an opaque reference pointer (optional, for caller context)
   void setReference(void* ref) { reference = ref; }
 
   /**
-   * Browse the given objectID and fill the provided results vector with
+   * Browse the given object_id and fill the provided results vector with
    * MediaServer::MediaItem entries. Returns true on success.
    * NOTE: This implementation delegates actual parsing of the DIDL result to
    * the caller. Here we return the raw Result XML string in last_reply so the
    * caller can parse it, or a helper parser can be added later.
    */
-  // itemCallback will be called for each parsed MediaItem. The opaque
-  // reference (set via setReference) is passed as second parameter.
-  bool browse(const char* objectID, const char* browseFlag, int startingIndex,
-              int requestedCount, ItemCallback itemCallback,
-              int& numberReturned, int& totalMatches, int& updateID) {
+  bool browse(int startingIndex, int requestedCount,
+              ItemCallback itemCallback, int& numberReturned, int& totalMatches,
+              int& updateID, const char* browseFlag=nullptr) {
     // Build and post browse action
-    DLNAServiceInfo& svc = selectService("urn:upnp-org:serviceId:ContentDirectory");
+    DLNAServiceInfo& svc =
+        selectService("urn:upnp-org:serviceId:ContentDirectory");
     if (!svc) return false;
-    ActionRequest act = createBrowseAction(svc, objectID, browseFlag, startingIndex, requestedCount);
+    ActionRequest act =
+        createBrowseAction(svc, browseFlag, startingIndex, requestedCount);
     mgr.addAction(act);
     last_reply = mgr.executeActions();
     if (!last_reply) return false;
@@ -75,10 +86,10 @@ class ControlPointMediaServer {
     return true;
   }
 
-  // Get the current system update ID for the ContentDirectory
+  /// Get the current system update ID for the ContentDirectory
   int getSystemUpdateID() {
     DLNAServiceInfo& svc =
-       selectService("urn:upnp-org:serviceId:ContentDirectory");
+        selectService("urn:upnp-org:serviceId:ContentDirectory");
     if (!svc) return -1;
     ActionRequest act(svc, "GetSystemUpdateID");
     mgr.addAction(act);
@@ -89,10 +100,10 @@ class ControlPointMediaServer {
     return v ? atoi(v) : -1;
   }
 
-  // Get the search capabilities string
+  /// Get the search capabilities string
   const char* getSearchCapabilities() {
     DLNAServiceInfo& svc =
-       selectService("urn:upnp-org:serviceId:ContentDirectory");
+        selectService("urn:upnp-org:serviceId:ContentDirectory");
     if (!svc) return nullptr;
     ActionRequest act(svc, "GetSearchCapabilities");
     mgr.addAction(act);
@@ -101,10 +112,10 @@ class ControlPointMediaServer {
     return findArgument(last_reply, "SearchCaps");
   }
 
-  // Get the sort capabilities string
+  /// Get the sort capabilities string
   const char* getSortCapabilities() {
     DLNAServiceInfo& svc =
-       selectService("urn:upnp-org:serviceId:ContentDirectory");
+        selectService("urn:upnp-org:serviceId:ContentDirectory");
     if (!svc) return nullptr;
     ActionRequest act(svc, "GetSortCapabilities");
     mgr.addAction(act);
@@ -113,10 +124,10 @@ class ControlPointMediaServer {
     return findArgument(last_reply, "SortCaps");
   }
 
-  // GetProtocolInfo from ConnectionManager
+  /// GetProtocolInfo from ConnectionManager
   const char* getProtocolInfo() {
     DLNAServiceInfo& svc =
-       selectService("urn:upnp-org:serviceId:ConnectionManager");
+        selectService("urn:upnp-org:serviceId:ConnectionManager");
     if (!svc) return nullptr;
     ActionRequest act(svc, "GetProtocolInfo");
     mgr.addAction(act);
@@ -125,17 +136,31 @@ class ControlPointMediaServer {
     return findArgument(last_reply, "Source");
   }
 
+  /// Set alternative object id (default is "0")
+  void setObjectID(const char* id) { object_id = id; }
+
+  /// Returns the current object id
+  const char* getObjectID() const { return object_id; }
+
  protected:
-  // Select the service from the device at device_index when possible. If the
-  // index is out of range or the device does not expose the requested
-  // service, fall back to a global search across all discovered devices.
+  DLNAControlPointMgr& mgr;
+  int device_index = 0;
+  const char* device_type_filter_default = "urn:schemas-upnp-org:device:MediaServer:1";
+  const char* device_type_filter = device_type_filter_default;
+  ActionReply last_reply;
+  StringRegistry strings;
+  void* reference = nullptr;
+  const char* object_id = "0";
+
+  /// Select service by id
   DLNAServiceInfo& selectService(const char* id) {
     // Build list of devices matching the optional filter
     Vector<DLNADevice>& all = mgr.getDevices();
     int idx = 0;
-    for (auto &d : all) {
+    for (auto& d : all) {
       const char* dt = d.getDeviceType();
-      if (device_type_filter && !StrView(dt).contains(device_type_filter)) continue;
+      if (device_type_filter && !StrView(dt).contains(device_type_filter))
+        continue;
       if (idx == device_index) {
         DLNAServiceInfo& s = d.getService(id);
         if (s) return s;
@@ -146,12 +171,6 @@ class ControlPointMediaServer {
     // fallback: global search
     return mgr.getService(id);
   }
-  DLNAControlPointMgr& mgr;
-  int device_index = 0;
-  const char* device_type_filter = "urn:schemas-upnp-org:device:MediaServer:1";
-  ActionReply last_reply;
-  StringRegistry strings;
-  void* reference = nullptr;
 
   const char* findArgument(ActionReply& r, const char* name) {
     for (auto& a : r.arguments) {
@@ -163,13 +182,13 @@ class ControlPointMediaServer {
     return nullptr;
   }
 
-  // Build a Browse ActionRequest
-  ActionRequest createBrowseAction(DLNAServiceInfo& svc, const char* objectID,
-                                   const char* browseFlag, int startingIndex,
-                                   int requestedCount) {
+  /// Build a Browse ActionRequest
+  ActionRequest createBrowseAction(DLNAServiceInfo& svc, const char* browseFlag,
+                                   int startingIndex, int requestedCount) {
     ActionRequest act(svc, "Browse");
-    act.addArgument("ObjectID", objectID ? objectID : "0");
-    act.addArgument("BrowseFlag", browseFlag ? browseFlag : "BrowseDirectChildren");
+    act.addArgument("object_id", object_id);
+    act.addArgument("BrowseFlag",
+                    browseFlag ? browseFlag : "BrowseDirectChildren");
     act.addArgument("Filter", "*");
     char buf[32];
     snprintf(buf, sizeof(buf), "%d", startingIndex);
@@ -180,8 +199,9 @@ class ControlPointMediaServer {
     return act;
   }
 
-  // Parse numeric result fields from an ActionReply
-  void parseNumericFields(ActionReply& reply, int& numberReturned, int& totalMatches, int& updateID) {
+  /// Parse numeric result fields from an ActionReply
+  void parseNumericFields(ActionReply& reply, int& numberReturned,
+                          int& totalMatches, int& updateID) {
     const char* nret = findArgument(reply, "NumberReturned");
     const char* tmatch = findArgument(reply, "TotalMatches");
     const char* uid = findArgument(reply, "UpdateID");
@@ -190,7 +210,7 @@ class ControlPointMediaServer {
     updateID = uid ? atoi(uid) : 0;
   }
 
-  // Parse DIDL-Lite Result and invoke callback for each item
+  /// Parse DIDL-Lite Result and invoke callback for each item
   void processResult(const char* resultXml, ItemCallback itemCallback) {
     if (!resultXml) return;
     StrView res(resultXml);
@@ -203,7 +223,7 @@ class ControlPointMediaServer {
       int headerEnd = res.indexOf('>', itPos);
       if (headerEnd < 0 || headerEnd >= itEnd) break;
 
-  tiny_dlna::MediaItem item;
+      tiny_dlna::MediaItem item;
       // extract id attribute
       int idPos = res.indexOf("id=\"", itPos);
       if (idPos >= 0 && idPos < headerEnd) {

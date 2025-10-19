@@ -16,17 +16,17 @@ void setupDevice() {
 
   auto transportCB = [](HttpServer* server, const char* requestPath,
                         HttpRequestHandlerLine* hl) {
-    server->reply("text/xml", mr_transport_xml);
+  server->reply("text/xml", [](Print& out){ mr_transport_xml_printer(out); });
   };
 
   auto connmgrCB = [](HttpServer* server, const char* requestPath,
                       HttpRequestHandlerLine* hl) {
-    server->reply("text/xml", mr_connmgr_xml);
+  server->reply("text/xml", [](Print& out){ mr_connmgr_xml_printer(out); });
   };
 
   auto controlCB = [](HttpServer* server, const char* requestPath,
                       HttpRequestHandlerLine* hl) {
-    server->reply("text/xml", mr_control_xml);
+  server->reply("text/xml", [](Print& out){ mr_control_xml_printer(out); });
   };
 
   // define services
