@@ -1,9 +1,0 @@
-<map id="tiny_dlna::UDPAsyncService" name="tiny_dlna::UDPAsyncService">
-<area shape="rect" id="node1" title="Access to UDP functionality: sending and receiving of data using the Async API of the ESP32." alt="" coords="907,64,1111,91"/>
-<area shape="rect" id="node2" href="$classtiny__dlna_1_1IUDPService.html" title="Abstract Interface for UDP API." alt="" coords="626,5,797,32"/>
-<area shape="rect" id="node3" href="$classtiny__dlna_1_1QueueLockFree.html" title=" " alt="" coords="609,57,813,98"/>
-<area shape="rect" id="node4" href="$classtiny__dlna_1_1Vector.html" title=" " alt="" coords="321,99,516,155"/>
-<area shape="rect" id="node5" href="$structtiny__dlna_1_1QueueLockFree_1_1Node.html" title=" " alt="" coords="5,41,196,82"/>
-<area shape="rect" id="node6" href="$classtiny__dlna_1_1Allocator.html" title="Memory allocateator which uses malloc." alt="" coords="27,117,175,144"/>
-<area shape="rect" id="node7" href="$structtiny__dlna_1_1IPAddressAndPort.html" title="IP Adress including Port information." alt="" coords="609,123,813,149"/>
-</map>

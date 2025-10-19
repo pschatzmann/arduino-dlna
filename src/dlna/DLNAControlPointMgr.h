@@ -71,19 +71,20 @@ class DLNAControlPointMgr {
   void setLocalURL(Url url) { local_url = url; }
 
   /**
-   * @brief start the processing by sending out a MSearch. For the search target
-   * you can use:
-   *  - ssdp:all : to search all UPnP devices,
-   *  - upnp:rootdevice: only root devices . Embedded devices will not respond
-   *  - uuid:device-uuid: search a device by vendor supplied unique id
-   *  - urn:schemas-upnp-org:device:deviceType- version: locates all devices of
-   * a given type (as defined by working committee)
-   *  - urn:schemas-upnp-org:service:serviceType-version: locate service of a
-   * given type
+   * @brief Start discovery by sending M-SEARCH requests and process replies.
+   *
+   * searchTarget: the SSDP search target (e.g. "ssdp:all", device/service urn)
+   * minWaitMs: minimum time in milliseconds to wait before returning a result
+   *             (default: 3000 ms)
+   * maxWaitMs: maximum time in milliseconds to wait for replies (M-SEARCH window)
+   *             (default: 60000 ms)
+   * Behavior: the function will wait at least `minWaitMs` and at most
+   * `maxWaitMs`. If a device is discovered after `minWaitMs` elapsed the
+   * function will return early; otherwise it will block until `maxWaitMs`.
    */
-  bool begin(DLNAHttpRequest& http, IUDPService& udp,
-             const char* searchTarget = "ssdp:all", uint32_t processingTime = 0,
-             bool stopWhenFound = true) {
+    bool begin(DLNAHttpRequest& http, IUDPService& udp,
+               const char* searchTarget = "ssdp:all", uint32_t minWaitMs = 3000,
+               uint32_t maxWaitMs = 60000) {
     DlnaLogger.log(DlnaLogLevel::Info, "DLNADevice::begin");
     search_target = searchTarget;
     is_active = true;
@@ -104,17 +105,26 @@ class DLNAControlPointMgr {
       return false;
     }
 
-    // Send MSearch request via UDP
+    // Send MSearch request via UDP. Use maxWaitMs as the emission window.
     MSearchSchedule* search =
         new MSearchSchedule(DLNABroadcastAddress, searchTarget);
-    search->end_time = millis() + 3000;
+    // ensure min <= max
+    if (minWaitMs > maxWaitMs) minWaitMs = maxWaitMs;
+    search->end_time = millis() + maxWaitMs;
     search->repeat_ms = 1000;
     scheduler.add(search);
 
-    // if processingTime > 0 we do some loop processing already here
-    uint64_t end = millis() + processingTime;
-    while (millis() < end) {
-      if (stopWhenFound && devices.size() > 0) break;
+    // if maxWaitMs > 0 we will block here and process events. We guarantee
+    // we wait at least minWaitMs before returning; we stop waiting after
+    // maxWaitMs or earlier if stopWhenFound is true AND minWaitMs has elapsed
+    uint64_t start = millis();
+    uint64_t minEnd = start + minWaitMs;
+    uint64_t maxEnd = start + maxWaitMs;
+    while (millis() < maxEnd) {
+      // if a device is found and we've satisfied the minimum wait, we can
+      // return early (we always allow early return after minWaitMs when a
+      // device has been discovered)
+      if (devices.size() > 0 && millis() >= minEnd) break;
       loop();
     }
 
@@ -148,7 +158,7 @@ class DLNAControlPointMgr {
   }
 
   /// Subscribe to changes for all device services
-  bool subscribeNotifications(DLNADevice& device, int seconds = 60) {
+  bool subscribeNotifications(DLNADevice& device, int timeoutSeconds = 60) {
     if (p_http_server==nullptr){
       DlnaLogger.log(DlnaLogLevel::Error, "HttpServer not defined - cannot subscribe to notifications");
       return false;
@@ -164,7 +174,7 @@ class DLNAControlPointMgr {
                        service.service_id);
         continue;
       }
-      if (!subscribeNotifications(service, seconds)) {
+      if (!subscribeNotifications(service, timeoutSeconds)) {
         DlnaLogger.log(DlnaLogLevel::Error, "Subscription to service %s failed",
                        service.service_id);
         return false;
@@ -177,7 +187,7 @@ class DLNAControlPointMgr {
   }
 
   /// Subscribe to changes for defined device service
-  bool subscribeNotifications(DLNAServiceInfo& service, int seconds = 60) {
+  bool subscribeNotifications(DLNAServiceInfo& service, int timoutSeconds = 60) {
     if (p_http_server==nullptr){
       DlnaLogger.log(DlnaLogLevel::Error, "HttpServer not defined - cannot subscribe to notifications");
       return false;
@@ -187,7 +197,7 @@ class DLNAControlPointMgr {
     char url_buffer[200] = {0};
     char seconds_txt[80] = {0};
     Url url{getUrl(device, service.event_sub_url, url_buffer, 200)};
-    snprintf(seconds_txt, 80, "Second-%d", seconds);
+    snprintf(seconds_txt, 80, "Second-%d", timoutSeconds);
     p_http->request().put("NT", "upnp:event");
     p_http->request().put("TIMEOUT", seconds_txt);
     p_http->request().put("CALLBACK", local_url.url());

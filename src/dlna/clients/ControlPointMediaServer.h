@@ -18,20 +18,37 @@ namespace tiny_dlna {
 class ControlPointMediaServer {
  public:
   typedef void (*ItemCallback)(const MediaItem& item, void* ref);
+  typedef void (*NotificationCallback)(void* reference, const char* sid,
+                                       const char* varName,
+                                       const char* newValue);
 
+  /**
+   * @brief Construct helper with reference to control point manager
+   * @param mgr Reference to DLNAControlPointMgr used to send actions and
+   *            manage discovery/subscriptions
+   */
   ControlPointMediaServer(DLNAControlPointMgr& mgr) : mgr(mgr) {}
 
-  /// Begin discovery / processing — forwards to the underlying control point
+  /**
+   * @brief Begin discovery and processing (forwards to underlying control point)
+   * @param http  Http server wrapper used for subscription callbacks
+   * @param udp   UDP service used for SSDP discovery
+   * @param minWaitMs Minimum time in milliseconds to wait before returning
+   * @param maxWaitMs Maximum time in milliseconds to wait for discovery
+   * @return true on success, false on error
+   */
   bool begin(DLNAHttpRequest& http, IUDPService& udp,
-             uint32_t processingTime = 0, bool stopWhenFound = true) {
+             uint32_t minWaitMs = 3000, uint32_t maxWaitMs = 60000) {
     DlnaLogger.log(DlnaLogLevel::Info,
                    "ControlPointMediaServer::begin device_type_filter='%s'",
                    device_type_filter ? device_type_filter : "(null)");
-    return mgr.begin(http, udp, device_type_filter, processingTime,
-                     stopWhenFound);
+    return mgr.begin(http, udp, device_type_filter, minWaitMs, maxWaitMs);
   }
 
-  /// Return number of discovered devices known to the control point
+  /**
+   * @brief Return number of discovered devices known to the control point
+   * @return number of devices matching the optional device type filter
+   */
   int getDeviceCount() {
     // count only devices matching the device_type_filter
     int count = 0;
@@ -43,30 +60,67 @@ class ControlPointMediaServer {
     return count;
   }
 
-  /// Returns the reply from the last request
+  /**
+   * @brief Return the ActionReply from the last synchronous request
+   * @return reference to the last ActionReply
+   */
   const ActionReply& getLastReply() const { return last_reply; }
 
-  /// Selects a device by index
+  /**
+   * @brief Select a device by index (0-based) for subsequent actions
+   * @param idx Device index
+   */
   void setDeviceIndex(int idx) { device_index = idx; }
 
-  /// Restrict this control helper to devices of the given device type
-  /// e.g. "urn:schemas-upnp-org:device:MediaServer:1". Pass nullptr to
-  /// set to default.
-  void setDeviceTypeFilter(const char* filter) { device_type_filter = filter ? filter : device_type_filter_default; }
+  /**
+   * @brief Subscribe to event notifications for the selected server/device
+   * @param timeoutSeconds Subscription timeout in seconds (default: 60)
+   * @param cb Optional notification callback; if nullptr the default
+   *           `processNotification` will be used
+   * @return true on successful SUBSCRIBE, false otherwise
+   */
+  bool subscribeNotifications(int timeoutSeconds = 60,
+                              NotificationCallback cb = nullptr) {
+    mgr.setReference(this);
+    // register provided callback or fallback to the default processNotification
+    if (cb)
+      mgr.onNotification(cb);
+    else
+      mgr.onNotification(processNotification);
+    auto& device = mgr.getDevice(device_index);
+    return mgr.subscribeNotifications(device, timeoutSeconds);
+  }
 
-  /// Attach an opaque reference pointer (optional, for caller context)
+  /**
+   * @brief Restrict this helper to devices of the given device type
+   * @param filter Device type string (e.g. "urn:schemas-upnp-org:device:MediaServer:1")
+   *               Pass nullptr to restore the default filter
+   */
+  void setDeviceTypeFilter(const char* filter) {
+    device_type_filter = filter ? filter : device_type_filter_default;
+  }
+
+  /**
+   * @brief Attach an opaque reference pointer passed to callbacks
+   * @param ref Opaque user pointer
+   */
   void setReference(void* ref) { reference = ref; }
 
   /**
-   * Browse the given object_id and fill the provided results vector with
-   * MediaServer::MediaItem entries. Returns true on success.
-   * NOTE: This implementation delegates actual parsing of the DIDL result to
-   * the caller. Here we return the raw Result XML string in last_reply so the
-   * caller can parse it, or a helper parser can be added later.
+   * @brief Browse the given object_id and invoke callback for each returned item
+   * @param startingIndex Starting index for the browse request
+   * @param requestedCount Number of items requested
+   * @param itemCallback Callback invoked per MediaItem result (may be nullptr)
+   * @param numberReturned Output: number of items returned by server
+   * @param totalMatches Output: total matches available on server
+   * @param updateID Output: server UpdateID
+   * @param browseFlag Optional BrowseFlag (defaults to BrowseDirectChildren)
+   * @return true on success, false on error
+   * @note The raw DIDL-Lite XML result is available via getLastReply() -> "Result"
    */
-  bool browse(int startingIndex, int requestedCount,
-              ItemCallback itemCallback, int& numberReturned, int& totalMatches,
-              int& updateID, const char* browseFlag=nullptr) {
+  bool browse(int startingIndex, int requestedCount, ItemCallback itemCallback,
+              int& numberReturned, int& totalMatches, int& updateID,
+              const char* browseFlag = nullptr) {
     // Build and post browse action
     DLNAServiceInfo& svc =
         selectService("urn:upnp-org:serviceId:ContentDirectory");
@@ -86,7 +140,10 @@ class ControlPointMediaServer {
     return true;
   }
 
-  /// Get the current system update ID for the ContentDirectory
+  /**
+   * @brief Get current SystemUpdateID for the ContentDirectory
+   * @return numeric SystemUpdateID, or -1 on error
+   */
   int getSystemUpdateID() {
     DLNAServiceInfo& svc =
         selectService("urn:upnp-org:serviceId:ContentDirectory");
@@ -100,7 +157,10 @@ class ControlPointMediaServer {
     return v ? atoi(v) : -1;
   }
 
-  /// Get the search capabilities string
+  /**
+   * @brief Get the ContentDirectory SearchCapabilities string
+   * @return pointer to capability string owned by reply, or nullptr on error
+   */
   const char* getSearchCapabilities() {
     DLNAServiceInfo& svc =
         selectService("urn:upnp-org:serviceId:ContentDirectory");
@@ -112,7 +172,10 @@ class ControlPointMediaServer {
     return findArgument(last_reply, "SearchCaps");
   }
 
-  /// Get the sort capabilities string
+  /**
+   * @brief Get the ContentDirectory SortCapabilities string
+   * @return pointer to sort capabilities, or nullptr on error
+   */
   const char* getSortCapabilities() {
     DLNAServiceInfo& svc =
         selectService("urn:upnp-org:serviceId:ContentDirectory");
@@ -124,7 +187,10 @@ class ControlPointMediaServer {
     return findArgument(last_reply, "SortCaps");
   }
 
-  /// GetProtocolInfo from ConnectionManager
+  /**
+   * @brief Query ConnectionManager:GetProtocolInfo
+   * @return pointer to protocol info string (Source), or nullptr on error
+   */
   const char* getProtocolInfo() {
     DLNAServiceInfo& svc =
         selectService("urn:upnp-org:serviceId:ConnectionManager");
@@ -136,21 +202,38 @@ class ControlPointMediaServer {
     return findArgument(last_reply, "Source");
   }
 
-  /// Set alternative object id (default is "0")
+  /**
+   * @brief Set the object id used for browse operations (default: "0")
+   * @param id C-string object id
+   */
   void setObjectID(const char* id) { object_id = id; }
 
-  /// Returns the current object id
+  /**
+   * @brief Return the current object id used for browse
+   * @return C-string object id
+   */
   const char* getObjectID() const { return object_id; }
 
  protected:
   DLNAControlPointMgr& mgr;
   int device_index = 0;
-  const char* device_type_filter_default = "urn:schemas-upnp-org:device:MediaServer:1";
+  const char* device_type_filter_default =
+      "urn:schemas-upnp-org:device:MediaServer:1";
   const char* device_type_filter = device_type_filter_default;
   ActionReply last_reply;
   StringRegistry strings;
   void* reference = nullptr;
   const char* object_id = "0";
+
+  /// Notification callback: just log for now
+  static void processNotification(void* reference, const char* sid,
+                                  const char* varName, const char* newValue) {
+    // Log every notification invocation for debugging/visibility
+    DlnaLogger.log(DlnaLogLevel::Info,
+                   "processNotification sid='%s' var='%s' value='%s'",
+                   sid ? sid : "(null)", varName ? varName : "(null)",
+                   newValue ? newValue : "(null)");
+  }
 
   /// Select service by id
   DLNAServiceInfo& selectService(const char* id) {

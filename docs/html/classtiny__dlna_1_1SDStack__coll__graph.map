@@ -1,5 +1,0 @@
-<map id="tiny_dlna::SDStack" name="tiny_dlna::SDStack">
-<area shape="rect" id="node1" title="Using a SD file for stack operations on a entries which are potentially of different size." alt="" coords="5,171,149,197"/>
-<area shape="rect" id="node2" href="$classtiny__dlna_1_1Str.html" title="String implementation which keeps the data on the heap. We grow the allocated memory only if the copy..." alt="" coords="23,81,131,108"/>
-<area shape="rect" id="node3" href="$classtiny__dlna_1_1StrView.html" title="A simple wrapper to provide string functions on char*. If the underlying char* is a const we do not a..." alt="" coords="7,5,147,32"/>
-</map>

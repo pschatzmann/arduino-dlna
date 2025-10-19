@@ -1,4 +1,0 @@
-<map id="tiny_dlna::MediaServer" name="tiny_dlna::MediaServer">
-<area shape="rect" id="node1" title="Minimal Digital Media Server implementation." alt="" coords="5,80,177,107"/>
-<area shape="rect" id="node2" href="$classtiny__dlna_1_1DLNADevice.html" title="Device Attributes and generation of XML using urn:schemas&#45;upnp&#45;org:device&#45;1&#45;0. We could just return a..." alt="" coords="6,5,177,32"/>
-</map>

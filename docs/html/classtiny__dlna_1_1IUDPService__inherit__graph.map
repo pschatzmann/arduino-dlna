@@ -1,5 +1,0 @@
-<map id="tiny_dlna::IUDPService" name="tiny_dlna::IUDPService">
-<area shape="rect" id="node1" title="Abstract Interface for UDP API." alt="" coords="126,5,297,32"/>
-<area shape="rect" id="node2" href="$classtiny__dlna_1_1UDPAsyncService.html" title="Access to UDP functionality: sending and receiving of data using the Async API of the ESP32." alt="" coords="5,87,209,114"/>
-<area shape="rect" id="node3" href="$classtiny__dlna_1_1UDPService.html" title="Access to UDP functionality: sending and receiving of data." alt="" coords="233,80,400,121"/>
-</map>

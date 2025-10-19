@@ -1,4 +1,0 @@
-<map id="tiny_dlna::HttpRequestRewrite" name="tiny_dlna::HttpRequestRewrite">
-<area shape="rect" id="node1" title="Object which information about the rewrite rule." alt="" coords="5,109,227,136"/>
-<area shape="rect" id="node2" href="$classtiny__dlna_1_1StrView.html" title="A simple wrapper to provide string functions on char*. If the underlying char* is a const we do not a..." alt="" coords="46,5,186,32"/>
-</map>

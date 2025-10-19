@@ -1,4 +1,0 @@
-<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classtiny__dlna_1_1HttpLineReader.html" title="We read a single line. A terminating 0 is added to the string to make it compliant for c string funct..." alt="" coords="5,5,196,32"/>
-<area shape="rect" id="node2" href="$classtiny__dlna_1_1HttpChunkReader.html" title="Http might reply with chunks. So we need to dechunk the data. see https://en.wikipedia...." alt="" coords="244,5,449,32"/>
-</map>

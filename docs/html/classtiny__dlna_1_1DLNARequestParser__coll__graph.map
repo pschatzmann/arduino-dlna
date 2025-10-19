@@ -1,5 +1,0 @@
-<map id="tiny_dlna::DLNARequestParser" name="tiny_dlna::DLNARequestParser">
-<area shape="rect" id="node1" title="Translates DLNA UDP Requests to Schedule so that we can schedule a reply." alt="" coords="5,199,224,225"/>
-<area shape="rect" id="node2" href="$classtiny__dlna_1_1Vector.html" title=" " alt="" coords="43,95,186,136"/>
-<area shape="rect" id="node3" href="$classtiny__dlna_1_1Allocator.html" title="Memory allocateator which uses malloc." alt="" coords="41,5,189,32"/>
-</map>

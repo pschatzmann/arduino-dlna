@@ -17,24 +17,42 @@ namespace tiny_dlna {
  */
 class ControlPointMediaRenderer {
  public:
+  /**
+   * @brief Construct the helper with a reference to the control point mgr
+   * @param mgr Reference to the underlying DLNAControlPointMgr used to send
+   *            actions and manage discovery/subscriptions
+   */
   ControlPointMediaRenderer(DLNAControlPointMgr& mgr) : mgr(mgr) {}
-  /// Restrict this helper to devices of the given device type (default:
-  /// MediaRenderer)
+
+  /**
+   * @brief Restrict this helper to devices of the given device type
+   * @param filter Device type filter, e.g. "urn:schemas-upnp-org:device:MediaRenderer:1".
+   *               Pass nullptr to use the default MediaRenderer filter.
+   */
   void setDeviceTypeFilter(const char* filter) {
     device_type_filter = filter ? filter : device_type_filter_default;
   }
 
-  /// Begin discovery / processing — forwards to the underlying control point
+  /**
+   * @brief Begin discovery and processing
+   * @param http  Http server wrapper used for subscription callbacks
+   * @param udp   UDP service used for SSDP discovery
+   * @param minWaitMs Minimum time in milliseconds to wait before returning
+   * @param maxWaitMs Maximum time in milliseconds to wait for discovery
+   * @return true on success, false on error
+   */
   bool begin(DLNAHttpRequest& http, IUDPService& udp,
-             uint32_t processingTime = 0, bool stopWhenFound = true) {
+             uint32_t minWaitMs = 3000, uint32_t maxWaitMs = 60000) {
     DlnaLogger.log(DlnaLogLevel::Info,
                    "ControlPointMediaServer::begin device_type_filter='%s'",
                    device_type_filter ? device_type_filter : "(null)");
-    return mgr.begin(http, udp, device_type_filter, processingTime,
-                     stopWhenFound);
+    return mgr.begin(http, udp, device_type_filter, minWaitMs, maxWaitMs);
   }
 
-  /// Return number of discovered devices matching the renderer filter
+  /**
+   * @brief Return the number of discovered devices matching the renderer filter
+   * @return number of matching devices
+   */
   int getDeviceCount() {
     int count = 0;
     for (auto& d : mgr.getDevices()) {
@@ -45,22 +63,46 @@ class ControlPointMediaRenderer {
     return count;
   }
 
-  /// Set the active renderer by index (optional). Default uses first matching
-  /// service.
+  /**
+   * @brief Select the active renderer by index (0-based)
+   * @param idx Index of the device to select; defaults to 0
+   */
   void setDeviceIndex(int idx) { device_index = idx; }
 
-  /// Subscribe to event notifications for the selected renderer
-  bool subscribeNotifications(int duration = 60) {
+  typedef void (*NotificationCallback)(void* reference, const char* sid,
+                                       const char* varName,
+                                       const char* newValue);
+
+  /**
+   * @brief Subscribe to event notifications for the selected renderer
+   * @param timeoutSeconds Subscription timeout in seconds (suggested default: 60)
+   * @param cb Optional callback to invoke for incoming notifications. If
+   *           nullptr the helper's default `processNotification` will be used.
+   * @return true on successful SUBSCRIBE, false otherwise
+   */
+  bool subscribeNotifications(int timeoutSeconds = 60,
+                              NotificationCallback cb = nullptr) {
     mgr.setReference(this);
-    mgr.onNotification(processNotification);
+    // register provided callback or fallback to the default processNotification
+    if (cb)
+      mgr.onNotification(cb);
+    else
+      mgr.onNotification(processNotification);
     auto& device = mgr.getDevice(device_index);
-    return mgr.subscribeNotifications(device, duration);
+    return mgr.subscribeNotifications(device, timeoutSeconds);
   }
 
-  /// Set the InstanceID used for action requests (default: "0")
+  /**
+   * @brief Set the InstanceID used for AVTransport and RenderingControl actions
+   * @param id C-string InstanceID (default is "0")
+   */
   void setInstanceID(const char* id) { instance_id = id; }
 
-  /// Set media URI on the renderer (synchronous)
+  /**
+   * @brief Set the media URI on the renderer
+   * @param uri The media URI to play on the renderer
+   * @return true on success, false on error
+   */
   bool setMediaURI(const char* uri) {
     DLNAServiceInfo& svc = selectService("urn:upnp-org:serviceId:AVTransport");
     if (!svc) {
@@ -76,7 +118,10 @@ class ControlPointMediaRenderer {
     return (bool)last_reply;
   }
 
-  /// Play (speed defaults to "1")
+  /**
+   * @brief Start playback on the renderer
+   * @return true on success, false on error
+   */
   bool play() {
     DLNAServiceInfo& svc = selectService("urn:upnp-org:serviceId:AVTransport");
     if (!svc) {
@@ -92,13 +137,20 @@ class ControlPointMediaRenderer {
     return (bool)last_reply;
   }
 
-  /// Play a given URI
+  /**
+   * @brief Set the media URI and start playback
+   * @param uri URI to play
+   * @return true on success, false on error
+   */
   bool play(const char* uri) {
     if (!setMediaURI(uri)) return false;
     return play();
   }
 
-  /// Pause
+  /**
+   * @brief Pause playback
+   * @return true on success, false on error
+   */
   bool pause() {
     DLNAServiceInfo& svc = selectService("urn:upnp-org:serviceId:AVTransport");
     if (!svc) return false;
@@ -110,7 +162,10 @@ class ControlPointMediaRenderer {
     return (bool)last_reply;
   }
 
-  /// Stop
+  /**
+   * @brief Stop playback
+   * @return true on success, false on error
+   */
   bool stop() {
     DLNAServiceInfo& svc = selectService("urn:upnp-org:serviceId:AVTransport");
     if (!svc) return false;
@@ -122,7 +177,11 @@ class ControlPointMediaRenderer {
     return (bool)last_reply;
   }
 
-  /// Set volume (0..100)
+  /**
+   * @brief Set renderer volume
+   * @param volumePercent Desired volume 0..100
+   * @return true on success, false on error
+   */
   bool setVolume(int volumePercent) {
     if (volumePercent < 0) volumePercent = 0;
     if (volumePercent > 100) volumePercent = 100;
@@ -143,7 +202,11 @@ class ControlPointMediaRenderer {
     return (bool)last_reply;
   }
 
-  /// Set mute state (true = muted)
+  /**
+   * @brief Set mute state on the renderer
+   * @param mute true to mute, false to unmute
+   * @return true on success, false on error
+   */
   bool setMute(bool mute) {
     DLNAServiceInfo& svc =
         selectService("urn:upnp-org:serviceId:RenderingControl");
@@ -159,7 +222,7 @@ class ControlPointMediaRenderer {
 
   /**
    * @brief Query the current volume from the renderer
-   * @return volume 0..100, or -1 on error
+   * @return current volume 0..100, or -1 on error
    */
   int getVolume() {
     DLNAServiceInfo& svc =
@@ -196,7 +259,7 @@ class ControlPointMediaRenderer {
   }
 
   /**
-   * @brief Query current playback position (RelTime) from AVTransport
+   * @brief Query current playback position (RelTime)
    * @return position in milliseconds, or 0 if unknown/error
    */
   unsigned long getPositionMs() {
@@ -214,7 +277,8 @@ class ControlPointMediaRenderer {
 
   /**
    * @brief Query transport state (e.g. STOPPED, PLAYING, PAUSED_PLAYBACK)
-   * @return pointer to string (owned by StringRegistry) or nullptr on error
+   * @return pointer to a string owned by the helper's registry, or nullptr
+   *         on error
    */
   const char* getTransportState() {
     DLNAServiceInfo& svc = selectService("urn:upnp-org:serviceId:AVTransport");
@@ -228,8 +292,8 @@ class ControlPointMediaRenderer {
   }
 
   /**
-   * @brief Get the current media URI
-   * @return pointer to URI string or nullptr
+   * @brief Get the current media URI from the renderer
+   * @return pointer to URI string (owned by reply registry) or nullptr
    */
   const char* getCurrentURI() {
     DLNAServiceInfo& svc = selectService("urn:upnp-org:serviceId:AVTransport");
@@ -260,7 +324,7 @@ class ControlPointMediaRenderer {
   }
 
   /**
-   * @brief Get total media duration as milliseconds (from MediaDuration)
+   * @brief Get total media duration in milliseconds (from MediaDuration)
    * @return milliseconds or 0 on error/unknown
    */
   unsigned long getMediaDurationMs() {
@@ -310,18 +374,29 @@ class ControlPointMediaRenderer {
     return parseTimeToMs(td);
   }
 
-  /// Return last ActionReply (from the most recent call)
+  /**
+   * @brief Return last ActionReply (from the most recent synchronous call)
+   * @return reference to the last ActionReply
+   */
   const ActionReply& getLastReply() const { return last_reply; }
 
-  /// Returns true if we are currently playing
+  /**
+   * @brief Query if the helper considers the renderer to be actively playing
+   * @return true if playing, false otherwise
+   */
   bool isActive() { return is_active; }
 
-  /// Defines a reference object that will be provided by the callbacks
+  /**
+   * @brief Attach an opaque reference object that will be passed to callbacks
+   * @param ref Opaque pointer provided by the caller
+   */
   void setReference(void* ref) { reference = ref; }
 
-  /// Register a callback invoked when the active (playing) state changes
-  /// The callback receives the new active state as first parameter and
-  /// the opaque reference (set via setReference) as second parameter.
+  /**
+   * @brief Register a callback invoked when the active (playing) state changes
+   * @param cb Function taking (bool active, void* reference). 'reference' is
+   *           the pointer set via setReference().
+   */
   void onActiveChanged(std::function<void(bool, void*)> cb) { activeChangedCallback = cb; }
 
  protected:

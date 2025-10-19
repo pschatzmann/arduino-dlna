@@ -40,8 +40,8 @@ void setup() {
 
   setupWifi();
 
-  // Start control point and wait briefly to collect devices
-  if (!cpms.begin(http, udp, 3000, true)) {
+  // Start control point and wait to find relevant devices: 10 min
+  if (!cpms.begin(http, udp, 1000, 10 * 60 * 1000)) {
     Serial.println("No devices found");
     while (true) delay(1000);
   }

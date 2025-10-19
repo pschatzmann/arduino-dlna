@@ -1,4 +1,0 @@
-<map id="tiny_dlna::HttpStreamedMultiOutput" name="tiny_dlna::HttpStreamedMultiOutput">
-<area shape="rect" id="node1" title="Generic HttpStreamedMultiOutput Class which handles multicast streaming. We can optionally define som..." alt="" coords="11,80,225,121"/>
-<area shape="rect" id="node2" href="$classtiny__dlna_1_1HttpStreamedOutput.html" title="Abstract class for handling streamed output." alt="" coords="5,5,231,32"/>
-</map>

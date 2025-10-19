@@ -1,6 +1,0 @@
-<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" title=" " alt="" coords="5,56,57,83"/>
-<area shape="rect" id="node2" href="$structtiny__dlna_1_1EscapingPrint.html" title="Print wrapper that escapes &amp; &lt; &gt; while forwarding to an underlying Print." alt="" coords="105,5,284,32"/>
-<area shape="rect" id="node3" href="$classtiny__dlna_1_1NullPrint.html" title=" " alt="" coords="121,56,268,83"/>
-<area shape="rect" id="node4" href="$classtiny__dlna_1_1StrPrint.html" title=" " alt="" coords="125,107,264,133"/>
-</map>

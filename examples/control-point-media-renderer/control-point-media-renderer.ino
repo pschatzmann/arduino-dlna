@@ -32,10 +32,10 @@ void setup() {
 
   setupWifi();
 
-  // Start control point to discover devices
-  while (!renderer.begin(http, udp, 3000, true)) {
+  // Start control point to discover devices: 10 min
+  if (!renderer.begin(http, udp, 1000, 10 * 60 * 1000)) {
     Serial.println("No devices found");
-    delay(1000);
+    return;
   }
 
   // Print number of discovered renderers

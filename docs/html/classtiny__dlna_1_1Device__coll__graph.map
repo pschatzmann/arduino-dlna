@@ -1,7 +1,0 @@
-<map id="tiny_dlna::Device" name="tiny_dlna::Device">
-<area shape="rect" id="node1" title="Print Device XML using urn:schemas&#45;upnp&#45;org:device&#45;1&#45;0&quot;." alt="" coords="188,199,323,225"/>
-<area shape="rect" id="node2" href="$classtiny__dlna_1_1Vector.html" title=" " alt="" coords="85,95,242,136"/>
-<area shape="rect" id="node3" href="$classtiny__dlna_1_1Allocator.html" title="Memory allocateator which uses malloc." alt="" coords="5,5,153,32"/>
-<area shape="rect" id="node4" href="$classtiny__dlna_1_1Service.html" title="Attributes needed for the DLNA Service Definition." alt="" coords="178,5,317,32"/>
-<area shape="rect" id="node5" href="$structtiny__dlna_1_1XMLPrinter.html" title="Functions to efficiently output XML." alt="" coords="267,102,428,129"/>
-</map>

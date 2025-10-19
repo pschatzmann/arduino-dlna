@@ -1,4 +1,0 @@
-<map id="tiny_dlna::MediaServer::EscapingPrint" name="tiny_dlna::MediaServer::EscapingPrint">
-<area shape="rect" id="node1" title="Print wrapper that escapes &amp; &lt; &gt; while forwarding to an underlying Print." alt="" coords="5,80,177,121"/>
-<area shape="rect" id="node2" title=" " alt="" coords="65,5,117,32"/>
-</map>
