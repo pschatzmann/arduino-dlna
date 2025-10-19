@@ -1,11 +1,12 @@
 <map id="src/basic/StrPrint.h" name="src/basic/StrPrint.h">
-<area shape="rect" id="node1" title=" " alt="" coords="183,5,326,32"/>
-<area shape="rect" id="node2" href="$MediaServer_8h.html" title=" " alt="" coords="5,348,219,389"/>
-<area shape="rect" id="node5" href="$DLNAControlPointMgr_8h.html" title=" " alt="" coords="373,80,566,121"/>
-<area shape="rect" id="node3" href="$ControlPointMediaServer_8h.html" title=" " alt="" coords="149,437,320,479"/>
-<area shape="rect" id="node4" href="$DLNA_8h.html" title=" " alt="" coords="387,527,480,553"/>
-<area shape="rect" id="node6" href="$ControlPointMediaRenderer_8h.html" title=" " alt="" coords="536,259,707,300"/>
-<area shape="rect" id="node7" href="$DLNADeviceRequestParser_8h.html" title=" " alt="" coords="293,169,504,211"/>
-<area shape="rect" id="node8" href="$DLNADeviceMgr_8h.html" title=" " alt="" coords="293,266,488,293"/>
-<area shape="rect" id="node9" href="$MediaRenderer_8h.html" title=" " alt="" coords="395,437,626,479"/>
+<area shape="rect" id="node1" title=" " alt="" coords="270,5,413,32"/>
+<area shape="rect" id="node2" href="$MediaServer_8h.html" title=" " alt="" coords="209,348,423,389"/>
+<area shape="rect" id="node5" href="$DLNAControlPointMgr_8h.html" title=" " alt="" coords="379,80,573,121"/>
+<area shape="rect" id="node10" href="$SubscriptionMgr_8h.html" title=" " alt="" coords="10,87,203,114"/>
+<area shape="rect" id="node3" href="$ControlPointMediaServer_8h.html" title=" " alt="" coords="339,437,509,479"/>
+<area shape="rect" id="node4" href="$DLNA_8h.html" title=" " alt="" coords="316,527,409,553"/>
+<area shape="rect" id="node6" href="$ControlPointMediaRenderer_8h.html" title=" " alt="" coords="584,259,755,300"/>
+<area shape="rect" id="node7" href="$DLNADeviceRequestParser_8h.html" title=" " alt="" coords="43,169,253,211"/>
+<area shape="rect" id="node8" href="$DLNADeviceMgr_8h.html" title=" " alt="" coords="51,266,245,293"/>
+<area shape="rect" id="node9" href="$MediaRenderer_8h.html" title=" " alt="" coords="33,437,263,479"/>
 </map>

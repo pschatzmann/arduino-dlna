@@ -64,17 +64,14 @@ $(function() {
 &#160;
 
 <h3><a id="index_s"></a>- s -</h3><ul>
-<li>seek()
-: <a class="el" href="classtiny__dlna_1_1MediaRenderer.html#a6ab960c589685b8177948f59f6c2106e">tiny_dlna::MediaRenderer</a>
-</li>
 <li>selectService()
 : <a class="el" href="classtiny__dlna_1_1ControlPointMediaRenderer.html#aaa5546cdb4858a453a7f2ba574feeaa2">tiny_dlna::ControlPointMediaRenderer</a>
 , <a class="el" href="classtiny__dlna_1_1ControlPointMediaServer.html#a57213fffc93d312e8f015bbd864b12db">tiny_dlna::ControlPointMediaServer</a>
 </li>
 <li>send()
-: <a class="el" href="classtiny__dlna_1_1IUDPService.html#aff5760f65e7e32da88170e34ada59c57">tiny_dlna::IUDPService</a>
-, <a class="el" href="classtiny__dlna_1_1UDPAsyncService.html#af41645c5541241a1acba5e8c6cdff9a1">tiny_dlna::UDPAsyncService</a>
-, <a class="el" href="classtiny__dlna_1_1UDPService.html#a539c370a0f6fe3b511667a6673b29e2b">tiny_dlna::UDPService</a>
+: <a class="el" href="classtiny__dlna_1_1IUDPService.html#a6d29e48295121ba2b962514300f0e610">tiny_dlna::IUDPService</a>
+, <a class="el" href="classtiny__dlna_1_1UDPAsyncService.html#ae3e4b99aa2b5ef4879f54fa3847d1082">tiny_dlna::UDPAsyncService</a>
+, <a class="el" href="classtiny__dlna_1_1UDPService.html#a704d645ffaae9dfacf6a861e934aeae5">tiny_dlna::UDPService&lt; UDPType &gt;</a>
 </li>
 <li>set()
 : <a class="el" href="classtiny__dlna_1_1StrView.html#aa902f71d4f03d151423f1a4464f185da">tiny_dlna::StrView</a>
@@ -87,6 +84,9 @@ $(function() {
 , <a class="el" href="classtiny__dlna_1_1DLNADevice.html#a16a054acacfc7af5bf74b213ae76061f">tiny_dlna::DLNADevice</a>
 , <a class="el" href="classtiny__dlna_1_1MediaRenderer.html#a0f8c2bbc1b889c37b06e611ef94439d8">tiny_dlna::MediaRenderer</a>
 </li>
+<li>setActiveState()
+: <a class="el" href="classtiny__dlna_1_1ControlPointMediaRenderer.html#a0b42fdc86da64d946b2d991c34253ddb">tiny_dlna::ControlPointMediaRenderer</a>
+</li>
 <li>setAgent()
 : <a class="el" href="classtiny__dlna_1_1HttpRequest.html#a6a6b3306d45a6c6fdd8b2d987a8ef420">tiny_dlna::HttpRequest</a>
 </li>
@@ -98,14 +98,11 @@ $(function() {
 <li>setAutoCreateLines()
 : <a class="el" href="classtiny__dlna_1_1HttpHeader.html#ae025244e2797d7ceee538ff982ce2a4d">tiny_dlna::HttpHeader</a>
 </li>
-<li>setAVTransportURI()
-: <a class="el" href="classtiny__dlna_1_1ControlPointMediaRenderer.html#a5548fc1eb095998f59e83c96260640a4">tiny_dlna::ControlPointMediaRenderer</a>
-</li>
 <li>setBaseURL()
 : <a class="el" href="classtiny__dlna_1_1DLNADevice.html#a180079b47ed959ab7a2840c11a552155">tiny_dlna::DLNADevice</a>
 </li>
-<li>setBrowseCallback()
-: <a class="el" href="classtiny__dlna_1_1MediaServer.html#a8cfa06f448c08de659b0bba66a0d1cd9">tiny_dlna::MediaServer</a>
+<li>setCallback()
+: <a class="el" href="classtiny__dlna_1_1XMLParser.html#a0a4e68a6270aa47253c83eee43972e3d">tiny_dlna::XMLParser</a>
 </li>
 <li>setCapacity()
 : <a class="el" href="classtiny__dlna_1_1Str.html#ad05066c8ecd54b751701c93bb2e49689">tiny_dlna::Str</a>
@@ -118,9 +115,6 @@ $(function() {
 </li>
 <li>setConnection()
 : <a class="el" href="classtiny__dlna_1_1HttpRequest.html#a7b9d46d2c50676f5f500a67a0442cdd6">tiny_dlna::HttpRequest</a>
-</li>
-<li>setDecoder()
-: <a class="el" href="classtiny__dlna_1_1MediaRenderer.html#a7b22089272f563d9b495f0d4c9a14d43">tiny_dlna::MediaRenderer</a>
 </li>
 <li>setDestination()
 : <a class="el" href="classtiny__dlna_1_1PostSubscribe.html#a1494980fd4d399bb03a64c9fba5d727d">tiny_dlna::PostSubscribe</a>
@@ -145,8 +139,17 @@ $(function() {
 <li>setFriendlyName()
 : <a class="el" href="classtiny__dlna_1_1DLNADevice.html#a38f45bed3d98408d6b3c1519dcf1af18">tiny_dlna::DLNADevice</a>
 </li>
+<li>setGetDataCallback()
+: <a class="el" href="classtiny__dlna_1_1MediaServer.html#aa1beaaed7198bbf30655cdb72612bf5f">tiny_dlna::MediaServer</a>
+</li>
 <li>setHost()
 : <a class="el" href="classtiny__dlna_1_1HttpRequest.html#a85df240e4294483b69e776d06c001d12">tiny_dlna::HttpRequest</a>
+</li>
+<li>setHttpServer()
+: <a class="el" href="classtiny__dlna_1_1DLNAControlPointMgr.html#a15bb2d5c5470f8c2a09b5e96fc84e90a">tiny_dlna::DLNAControlPointMgr</a>
+</li>
+<li>setInstanceID()
+: <a class="el" href="classtiny__dlna_1_1ControlPointMediaRenderer.html#a7f75120a9200b1774d657cce1f014403">tiny_dlna::ControlPointMediaRenderer</a>
 </li>
 <li>setIPAddress()
 : <a class="el" href="classtiny__dlna_1_1DLNADevice.html#aaedc0454e0e49f15e71b57df607c8323">tiny_dlna::DLNADevice</a>
@@ -163,14 +166,23 @@ $(function() {
 <li>setLocalURL()
 : <a class="el" href="classtiny__dlna_1_1DLNAControlPointMgr.html#ac4b5151d4004a837a39f9da9ffc17aa0">tiny_dlna::DLNAControlPointMgr</a>
 </li>
-<li>setLogin()
-: <a class="el" href="classtiny__dlna_1_1MediaRenderer.html#a3c894e9993ff7b42bc5a0a2e674d29c7">tiny_dlna::MediaRenderer</a>
-</li>
 <li>setManufacturer()
 : <a class="el" href="classtiny__dlna_1_1DLNADevice.html#a7dd553e6fe0442acccadeff990b04b7a">tiny_dlna::DLNADevice</a>
 </li>
 <li>setManufacturerURL()
 : <a class="el" href="classtiny__dlna_1_1DLNADevice.html#a0903091e4b698a5af9a1e153afe5d3ff">tiny_dlna::DLNADevice</a>
+</li>
+<li>setMediaEventHandler()
+: <a class="el" href="classtiny__dlna_1_1MediaRenderer.html#a89bfa0c29656e578700582c0983883e9">tiny_dlna::MediaRenderer</a>
+</li>
+<li>setMediaURI()
+: <a class="el" href="classtiny__dlna_1_1ControlPointMediaRenderer.html#a5f0869a60c1a1413008420a7733d4944">tiny_dlna::ControlPointMediaRenderer</a>
+</li>
+<li>setMime()
+: <a class="el" href="classtiny__dlna_1_1MediaRenderer.html#a95db23b87e0eb0e6ee906198a0b5140d">tiny_dlna::MediaRenderer</a>
+</li>
+<li>setMimeFromDIDL()
+: <a class="el" href="classtiny__dlna_1_1MediaRenderer.html#abd12385c588029df69b36d606b69e665">tiny_dlna::MediaRenderer</a>
 </li>
 <li>setModelDescription()
 : <a class="el" href="classtiny__dlna_1_1DLNADevice.html#a1ed3ee18d8c23d64fc7c1525ac652754">tiny_dlna::DLNADevice</a>
@@ -191,9 +203,11 @@ $(function() {
 <li>setNS()
 : <a class="el" href="classtiny__dlna_1_1DLNADevice.html#abc6ca88234975da3739e7740183a90f0">tiny_dlna::DLNADevice</a>
 </li>
+<li>setObjectID()
+: <a class="el" href="classtiny__dlna_1_1ControlPointMediaServer.html#a6543c26e14ecccc021bd095bc920cb04">tiny_dlna::ControlPointMediaServer</a>
+</li>
 <li>setOutput()
-: <a class="el" href="classtiny__dlna_1_1MediaRenderer.html#a1c288b60320af83ec22325ce2e590a7f">tiny_dlna::MediaRenderer</a>
-, <a class="el" href="structtiny__dlna_1_1XMLPrinter.html#ac33a7ac306583618bcbd98dcf8303a31">tiny_dlna::XMLPrinter</a>
+: <a class="el" href="structtiny__dlna_1_1XMLPrinter.html#ac33a7ac306583618bcbd98dcf8303a31">tiny_dlna::XMLPrinter</a>
 </li>
 <li>setParseDevice()
 : <a class="el" href="classtiny__dlna_1_1DLNAControlPointMgr.html#a04bb689c64445b01c04ed9914c29cfb9">tiny_dlna::DLNAControlPointMgr</a>
@@ -201,8 +215,15 @@ $(function() {
 <li>setPostAliveRepeatMs()
 : <a class="el" href="classtiny__dlna_1_1DLNADeviceMgr.html#aca7db7bdea0b1408d5a4b2fce7ea7c41">tiny_dlna::DLNADeviceMgr</a>
 </li>
+<li>setPrepareDataCallback()
+: <a class="el" href="classtiny__dlna_1_1MediaServer.html#a47728ae11ac3616cdbac058048c2ba49">tiny_dlna::MediaServer</a>
+</li>
 <li>setReference()
-: <a class="el" href="classtiny__dlna_1_1ControlPointMediaServer.html#aacb7792bef485353b5b2bf849a8c7c0b">tiny_dlna::ControlPointMediaServer</a>
+: <a class="el" href="classtiny__dlna_1_1ControlPointMediaRenderer.html#a83102327013fb41e391d74e4bb74eb9c">tiny_dlna::ControlPointMediaRenderer</a>
+, <a class="el" href="classtiny__dlna_1_1ControlPointMediaServer.html#aacb7792bef485353b5b2bf849a8c7c0b">tiny_dlna::ControlPointMediaServer</a>
+, <a class="el" href="classtiny__dlna_1_1DLNAControlPointMgr.html#a2bff392e76cf89b49e1f16ee9f0f1d64">tiny_dlna::DLNAControlPointMgr</a>
+, <a class="el" href="classtiny__dlna_1_1MediaServer.html#afe7fd9e1455b70c53431b540a4a63417">tiny_dlna::MediaServer</a>
+, <a class="el" href="classtiny__dlna_1_1XMLParser.html#aa3b6e87f1d91fa792feacc45063baaae">tiny_dlna::XMLParser</a>
 </li>
 <li>setRepeatMs()
 : <a class="el" href="classtiny__dlna_1_1PostAliveSchedule.html#ad0518db5c7ce7c13de7c935d411c9d35">tiny_dlna::PostAliveSchedule</a>
@@ -260,6 +281,9 @@ $(function() {
 : <a class="el" href="classtiny__dlna_1_1ControlPointMediaRenderer.html#a931963189b33c6e5f77015ebc2cbbbc3">tiny_dlna::ControlPointMediaRenderer</a>
 , <a class="el" href="classtiny__dlna_1_1MediaRenderer.html#a354dfa767325fc8cb07cd5dd2a7b24bc">tiny_dlna::MediaRenderer</a>
 </li>
+<li>setXml()
+: <a class="el" href="classtiny__dlna_1_1XMLParser.html#a57ccf1c9d45265ac7a976feff1fbc79f">tiny_dlna::XMLParser</a>
+</li>
 <li>shrink_to_fit()
 : <a class="el" href="classtiny__dlna_1_1Vector.html#ac162664118be261ff8d31719a341c02a">tiny_dlna::Vector&lt; T &gt;</a>
 </li>
@@ -287,7 +311,7 @@ $(function() {
 : <a class="el" href="classtiny__dlna_1_1HttpRequest.html#a90be279e0ebd0877d54dcde02d5e0340">tiny_dlna::HttpRequest</a>
 </li>
 <li>Str()
-: <a class="el" href="classtiny__dlna_1_1Str.html#a57d50923e56467900839ad3a27e222e2">tiny_dlna::Str</a>
+: <a class="el" href="classtiny__dlna_1_1Str.html#a679d2042d7a648df0d2cccc4e4f9347e">tiny_dlna::Str</a>
 </li>
 <li>streamReplyCallback()
 : <a class="el" href="classtiny__dlna_1_1MediaServer.html#a994325de16187b37c3c6cee62ee3fa92">tiny_dlna::MediaServer</a>
@@ -302,11 +326,18 @@ $(function() {
 : <a class="el" href="classtiny__dlna_1_1Str.html#a993badfe332ef20cc837a58019f22157">tiny_dlna::Str</a>
 </li>
 <li>StrView()
-: <a class="el" href="classtiny__dlna_1_1StrView.html#a8b8e3cd9d03977667e1133aae896ddb9">tiny_dlna::StrView</a>
+: <a class="el" href="classtiny__dlna_1_1StrView.html#a8410095334e01521dc09acbc108ceb0e">tiny_dlna::StrView</a>
 </li>
 <li>subscribe()
-: <a class="el" href="classtiny__dlna_1_1DLNAControlPointMgr.html#a90878be8f006d32ffb4c82cf2e3598a7">tiny_dlna::DLNAControlPointMgr</a>
-, <a class="el" href="classtiny__dlna_1_1HttpRequest.html#a39318d2923779bc9d753a8ca7febb6b5">tiny_dlna::HttpRequest</a>
+: <a class="el" href="classtiny__dlna_1_1HttpRequest.html#a39318d2923779bc9d753a8ca7febb6b5">tiny_dlna::HttpRequest</a>
+, <a class="el" href="classtiny__dlna_1_1SubscriptionMgr.html#af63ee3e1713171da1fc6c3ca182da7bb">tiny_dlna::SubscriptionMgr</a>
+</li>
+<li>subscribeNotifications()
+: <a class="el" href="classtiny__dlna_1_1ControlPointMediaRenderer.html#a7c331d2aba24c4fdf3ad4f7937593802">tiny_dlna::ControlPointMediaRenderer</a>
+, <a class="el" href="classtiny__dlna_1_1DLNAControlPointMgr.html#a44a0957db21aa14e65d88fbef8590c1e">tiny_dlna::DLNAControlPointMgr</a>
+</li>
+<li>SubscriptionMgr()
+: <a class="el" href="classtiny__dlna_1_1SubscriptionMgr.html#ae140cecc68067f4526a700081200f2dc">tiny_dlna::SubscriptionMgr</a>
 </li>
 <li>substring()
 : <a class="el" href="classtiny__dlna_1_1Str.html#a3d82412d8ccb0adedc1189b4bf592354">tiny_dlna::Str</a>

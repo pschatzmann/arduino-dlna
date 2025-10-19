@@ -76,7 +76,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Setup of a Basic DLNA Control Point. The control point.  
+<p>Lightweight DLNA control point manager.  
  <a href="classtiny__dlna_1_1DLNAControlPointMgr.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="DLNAControlPointMgr_8h_source.html">DLNAControlPointMgr.h</a>&gt;</code></p>
@@ -85,47 +85,51 @@ Collaboration diagram for tiny_dlna::DLNAControlPointMgr:</div>
 <div class="dyncontent">
 <div class="center"><img src="classtiny__dlna_1_1DLNAControlPointMgr__coll__graph.png" border="0" usemap="#atiny__dlna_1_1DLNAControlPointMgr_coll__map" alt="Collaboration graph"/></div>
 <map name="atiny__dlna_1_1DLNAControlPointMgr_coll__map" id="atiny__dlna_1_1DLNAControlPointMgr_coll__map">
-<area shape="rect" title="Setup of a Basic DLNA Control Point. The control point." alt="" coords="3375,652,3605,679"/>
-<area shape="rect" href="classtiny__dlna_1_1DLNADevice.html" title="Device Attributes and generation of XML using urn:schemas&#45;upnp&#45;org:device&#45;1&#45;0. We could just return a..." alt="" coords="2797,247,2968,273"/>
-<area shape="rect" href="classtiny__dlna_1_1Vector.html" title=" " alt="" coords="3081,239,3272,281"/>
-<area shape="rect" href="classtiny__dlna_1_1Str.html" title="String implementation which keeps the data on the heap. We grow the allocated memory only if the copy..." alt="" coords="697,597,805,624"/>
-<area shape="rect" href="classtiny__dlna_1_1Url.html" title="URL parser which breaks a full url string up into its individual parts." alt="" coords="1837,653,1947,680"/>
-<area shape="rect" href="classtiny__dlna_1_1HttpHeader.html" title="In a http request and reply we need to process header information. With this API we can define and qu..." alt="" coords="1049,445,1215,472"/>
-<area shape="rect" href="classtiny__dlna_1_1Argument.html" title="DLNA Service: Action Argument." alt="" coords="1055,681,1209,708"/>
-<area shape="rect" href="classtiny__dlna_1_1Vector.html" title=" " alt="" coords="1061,837,1203,878"/>
-<area shape="rect" href="classtiny__dlna_1_1HttpRequest.html" title="Simple API to process get, put, post, del http requests I tried to use Arduino HttpClient,..." alt="" coords="2150,576,2321,603"/>
-<area shape="rect" href="classtiny__dlna_1_1StrView.html" title="A simple wrapper to provide string functions on char*. If the underlying char* is a const we do not a..." alt="" coords="335,597,475,624"/>
-<area shape="rect" href="classtiny__dlna_1_1Vector.html" title=" " alt="" coords="334,457,477,498"/>
-<area shape="rect" href="classtiny__dlna_1_1HttpServer.html" title="A Simple Header only implementation of Http Server that allows the registration of callback functions..." alt="" coords="1812,368,1972,395"/>
-<area shape="rect" href="classtiny__dlna_1_1Allocator.html" title="Memory allocateator which uses malloc." alt="" coords="6,419,154,445"/>
-<area shape="rect" href="classtiny__dlna_1_1Vector.html" title=" " alt="" coords="2493,110,2635,151"/>
-<area shape="rect" href="classtiny__dlna_1_1Vector.html" title=" " alt="" coords="2455,239,2673,281"/>
-<area shape="rect" href="classtiny__dlna_1_1List.html" title=" " alt="" coords="309,370,502,411"/>
-<area shape="rect" href="classtiny__dlna_1_1List.html" title=" " alt="" coords="294,201,517,242"/>
-<area shape="rect" href="classtiny__dlna_1_1List.html" title=" " alt="" coords="280,266,531,307"/>
-<area shape="rect" href="classtiny__dlna_1_1Vector.html" title=" " alt="" coords="2781,697,2984,738"/>
-<area shape="rect" href="classtiny__dlna_1_1Vector.html" title=" " alt="" coords="1363,715,1536,757"/>
-<area shape="rect" href="classtiny__dlna_1_1Vector.html" title=" " alt="" coords="316,913,495,954"/>
-<area shape="rect" href="classtiny__dlna_1_1Icon.html" title="Information about the icon." alt="" coords="2177,152,2294,179"/>
-<area shape="rect" href="structtiny__dlna_1_1XMLPrinter.html" title="Functions to efficiently output XML. XML data contains a lot of redundancy so it is more memory effic..." alt="" coords="2483,57,2645,84"/>
-<area shape="rect" href="classtiny__dlna_1_1DLNAServiceInfo.html" title="Attributes needed for the DLNA Service Definition." alt="" coords="2136,369,2335,396"/>
-<area shape="rect" href="classtiny__dlna_1_1ActionRequest.html" title=" " alt="" coords="2472,681,2656,708"/>
-<area shape="rect" href="classtiny__dlna_1_1HttpReplyHeader.html" title="Reading and Writing of Http Replys." alt="" coords="1348,489,1551,516"/>
-<area shape="rect" href="classtiny__dlna_1_1HttpChunkReader.html" title="Http might reply with chunks. So we need to dechunk the data. see https://en.wikipedia...." alt="" coords="1789,603,1995,629"/>
-<area shape="rect" href="classtiny__dlna_1_1HttpRequestHeader.html" title="Reading and writing of Http Requests." alt="" coords="1340,439,1559,465"/>
-<area shape="rect" href="classtiny__dlna_1_1HttpLineReader.html" title="We read a single line. A terminating 0 is added to the string to make it compliant for c string funct..." alt="" coords="656,489,847,516"/>
-<area shape="rect" href="structtiny__dlna_1_1List_1_1Node.html" title=" " alt="" coords="12,261,148,302"/>
-<area shape="rect" href="classtiny__dlna_1_1IUDPService.html" title="Abstract Interface for UDP API." alt="" coords="3091,652,3262,679"/>
-<area shape="rect" href="classtiny__dlna_1_1StringRegistry.html" title=" " alt="" coords="1583,841,1765,868"/>
-<area shape="rect" href="classtiny__dlna_1_1Scheduler.html" title="Scheduler which processes all due Schedules (to send out UDP replies)" alt="" coords="871,908,1025,935"/>
-<area shape="rect" href="structtiny__dlna_1_1Schedule.html" title="An individual Schedule (to send out UDP messages)" alt="" coords="5,941,155,968"/>
+<area shape="rect" title="Lightweight DLNA control point manager." alt="" coords="3408,469,3639,496"/>
+<area shape="rect" href="classtiny__dlna_1_1DLNADevice.html" title="Device Attributes and generation of XML using urn:schemas&#45;upnp&#45;org:device&#45;1&#45;0. We could just return a..." alt="" coords="2831,341,3001,368"/>
+<area shape="rect" href="classtiny__dlna_1_1Vector.html" title=" " alt="" coords="3115,315,3305,357"/>
+<area shape="rect" href="classtiny__dlna_1_1Str.html" title="String implementation which keeps the data on the heap. We grow the allocated memory only if the copy..." alt="" coords="697,471,805,497"/>
+<area shape="rect" href="classtiny__dlna_1_1Url.html" title="URL parser which breaks a full url string up into its individual parts." alt="" coords="1837,492,1947,519"/>
+<area shape="rect" href="classtiny__dlna_1_1HttpHeader.html" title="In a http request and reply we need to process header information. With this API we can define and qu..." alt="" coords="1049,883,1215,909"/>
+<area shape="rect" href="classtiny__dlna_1_1Argument.html" title="DLNA Service: Action Argument." alt="" coords="1055,439,1209,465"/>
+<area shape="rect" href="classtiny__dlna_1_1Vector.html" title=" " alt="" coords="1061,146,1203,187"/>
+<area shape="rect" href="classtiny__dlna_1_1HttpRequest.html" title="Simple API to process get, put, post, del http requests I tried to use Arduino HttpClient,..." alt="" coords="2150,827,2321,853"/>
+<area shape="rect" href="classtiny__dlna_1_1StrView.html" title="A simple wrapper to provide string functions on char*. If the underlying char* is a const we do not a..." alt="" coords="335,457,475,484"/>
+<area shape="rect" href="classtiny__dlna_1_1Vector.html" title=" " alt="" coords="334,586,477,627"/>
+<area shape="rect" href="classtiny__dlna_1_1HttpServer.html" title="A Simple Header only implementation of Http Server that allows the registration of callback functions..." alt="" coords="1812,733,1972,760"/>
+<area shape="rect" href="classtiny__dlna_1_1Allocator.html" title="Memory allocateator which uses malloc." alt="" coords="6,375,154,401"/>
+<area shape="rect" href="classtiny__dlna_1_1Vector.html" title=" " alt="" coords="2493,195,2635,237"/>
+<area shape="rect" href="classtiny__dlna_1_1Vector.html" title=" " alt="" coords="2455,375,2673,417"/>
+<area shape="rect" href="classtiny__dlna_1_1List.html" title=" " alt="" coords="309,875,502,917"/>
+<area shape="rect" href="classtiny__dlna_1_1List.html" title=" " alt="" coords="294,789,517,830"/>
+<area shape="rect" href="classtiny__dlna_1_1List.html" title=" " alt="" coords="280,667,531,709"/>
+<area shape="rect" href="classtiny__dlna_1_1Vector.html" title=" " alt="" coords="2815,594,3017,635"/>
+<area shape="rect" href="classtiny__dlna_1_1Vector.html" title=" " alt="" coords="1363,391,1536,433"/>
+<area shape="rect" href="classtiny__dlna_1_1Vector.html" title=" " alt="" coords="316,23,495,65"/>
+<area shape="rect" href="classtiny__dlna_1_1Icon.html" title="Information about the icon." alt="" coords="2177,257,2294,284"/>
+<area shape="rect" href="structtiny__dlna_1_1XMLPrinter.html" title="Functions to efficiently output XML. XML data contains a lot of redundancy so it is more memory effic..." alt="" coords="2483,492,2645,519"/>
+<area shape="rect" href="classtiny__dlna_1_1DLNAServiceInfo.html" title="Attributes needed for the DLNA Service Definition." alt="" coords="2136,596,2335,623"/>
+<area shape="rect" href="classtiny__dlna_1_1ActionRequest.html" title=" " alt="" coords="2472,596,2656,623"/>
+<area shape="rect" href="classtiny__dlna_1_1HttpReplyHeader.html" title="Reading and Writing of Http Replys." alt="" coords="1348,924,1551,951"/>
+<area shape="rect" href="classtiny__dlna_1_1HttpChunkReader.html" title="Http might reply with chunks. So we need to dechunk the data. see https://en.wikipedia...." alt="" coords="1789,985,1995,1012"/>
+<area shape="rect" href="classtiny__dlna_1_1HttpRequestHeader.html" title="Reading and writing of Http Requests." alt="" coords="1340,873,1559,900"/>
+<area shape="rect" href="classtiny__dlna_1_1HttpLineReader.html" title="We read a single line. A terminating 0 is added to the string to make it compliant for c string funct..." alt="" coords="656,968,847,995"/>
+<area shape="rect" href="structtiny__dlna_1_1List_1_1Node.html" title=" " alt="" coords="12,818,148,859"/>
+<area shape="rect" href="classtiny__dlna_1_1IUDPService.html" title="Abstract Interface for UDP API." alt="" coords="3125,495,3295,521"/>
+<area shape="rect" href="classtiny__dlna_1_1StringRegistry.html" title=" " alt="" coords="1583,148,1765,175"/>
+<area shape="rect" href="classtiny__dlna_1_1Scheduler.html" title="Scheduler which processes all due Schedules (to send out UDP replies)" alt="" coords="871,31,1025,57"/>
+<area shape="rect" href="structtiny__dlna_1_1Schedule.html" title="An individual Schedule (to send out UDP messages)" alt="" coords="5,5,155,32"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a6932477a3be457666018b7b9325cc1c2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMgr.html#a6932477a3be457666018b7b9325cc1c2">DLNAControlPointMgr</a> ()</td></tr>
+<tr class="memdesc:a6932477a3be457666018b7b9325cc1c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor w/o Notifications.  <a href="classtiny__dlna_1_1DLNAControlPointMgr.html#a6932477a3be457666018b7b9325cc1c2">More...</a><br /></td></tr>
 <tr class="separator:a6932477a3be457666018b7b9325cc1c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29986fc5a83612c6bd6e7ebc54e2a61d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMgr.html#a29986fc5a83612c6bd6e7ebc54e2a61d">DLNAControlPointMgr</a> (<a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;server, int port=80)</td></tr>
+<tr class="memdesc:a29986fc5a83612c6bd6e7ebc54e2a61d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor supporting Notifications.  <a href="classtiny__dlna_1_1DLNAControlPointMgr.html#a29986fc5a83612c6bd6e7ebc54e2a61d">More...</a><br /></td></tr>
+<tr class="separator:a29986fc5a83612c6bd6e7ebc54e2a61d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a04bb689c64445b01c04ed9914c29cfb9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMgr.html#a04bb689c64445b01c04ed9914c29cfb9">setParseDevice</a> (bool flag)</td></tr>
 <tr class="memdesc:a04bb689c64445b01c04ed9914c29cfb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Requests the parsing of the device information.  <a href="classtiny__dlna_1_1DLNAControlPointMgr.html#a04bb689c64445b01c04ed9914c29cfb9">More...</a><br /></td></tr>
 <tr class="separator:a04bb689c64445b01c04ed9914c29cfb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -133,6 +137,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ac4b5151d4004a837a39f9da9ffc17aa0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the lacal url (needed for subscriptions)  <a href="classtiny__dlna_1_1DLNAControlPointMgr.html#ac4b5151d4004a837a39f9da9ffc17aa0">More...</a><br /></td></tr>
 <tr class="separator:ac4b5151d4004a837a39f9da9ffc17aa0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a93da0d41688a4985c54822b5b6e61f38"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMgr.html#a93da0d41688a4985c54822b5b6e61f38">begin</a> (<a class="el" href="namespacetiny__dlna.html#ad910622e470286a7c1774b545d469d00">DLNAHttpRequest</a> &amp;http, <a class="el" href="classtiny__dlna_1_1IUDPService.html">IUDPService</a> &amp;udp, const char *searchTarget=&quot;ssdp:all&quot;, uint32_t processingTime=0, bool stopWhenFound=true)</td></tr>
+<tr class="memdesc:a93da0d41688a4985c54822b5b6e61f38"><td class="mdescLeft">&#160;</td><td class="mdescRight">start the processing by sending out a MSearch. For the search target you can use:  <a href="classtiny__dlna_1_1DLNAControlPointMgr.html#a93da0d41688a4985c54822b5b6e61f38">More...</a><br /></td></tr>
 <tr class="separator:a93da0d41688a4985c54822b5b6e61f38"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:add1915b191b9503fdf027e012f424ad5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMgr.html#add1915b191b9503fdf027e012f424ad5">end</a> ()</td></tr>
 <tr class="memdesc:add1915b191b9503fdf027e012f424ad5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stops the processing and releases the resources.  <a href="classtiny__dlna_1_1DLNAControlPointMgr.html#add1915b191b9503fdf027e012f424ad5">More...</a><br /></td></tr>
@@ -143,9 +148,21 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aef3e00c48e84b09be582d7f7d9e47489"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1ActionReply.html">ActionReply</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMgr.html#aef3e00c48e84b09be582d7f7d9e47489">executeActions</a> ()</td></tr>
 <tr class="memdesc:aef3e00c48e84b09be582d7f7d9e47489"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes all registered methods.  <a href="classtiny__dlna_1_1DLNAControlPointMgr.html#aef3e00c48e84b09be582d7f7d9e47489">More...</a><br /></td></tr>
 <tr class="separator:aef3e00c48e84b09be582d7f7d9e47489"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a90878be8f006d32ffb4c82cf2e3598a7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMgr.html#a90878be8f006d32ffb4c82cf2e3598a7">subscribe</a> (const char *serviceName, int seconds)</td></tr>
-<tr class="memdesc:a90878be8f006d32ffb4c82cf2e3598a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subscribe to changes.  <a href="classtiny__dlna_1_1DLNAControlPointMgr.html#a90878be8f006d32ffb4c82cf2e3598a7">More...</a><br /></td></tr>
-<tr class="separator:a90878be8f006d32ffb4c82cf2e3598a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44a0957db21aa14e65d88fbef8590c1e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMgr.html#a44a0957db21aa14e65d88fbef8590c1e">subscribeNotifications</a> (<a class="el" href="classtiny__dlna_1_1DLNADevice.html">DLNADevice</a> &amp;device, int seconds=60)</td></tr>
+<tr class="memdesc:a44a0957db21aa14e65d88fbef8590c1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subscribe to changes for all device services.  <a href="classtiny__dlna_1_1DLNAControlPointMgr.html#a44a0957db21aa14e65d88fbef8590c1e">More...</a><br /></td></tr>
+<tr class="separator:a44a0957db21aa14e65d88fbef8590c1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae371403e0f21044d3bbeb8137f093c21"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMgr.html#ae371403e0f21044d3bbeb8137f093c21">subscribeNotifications</a> (<a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html">DLNAServiceInfo</a> &amp;service, int seconds=60)</td></tr>
+<tr class="memdesc:ae371403e0f21044d3bbeb8137f093c21"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subscribe to changes for defined device service.  <a href="classtiny__dlna_1_1DLNAControlPointMgr.html#ae371403e0f21044d3bbeb8137f093c21">More...</a><br /></td></tr>
+<tr class="separator:ae371403e0f21044d3bbeb8137f093c21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a292b548924d3c5aae95c061d8a9d94b3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMgr.html#a292b548924d3c5aae95c061d8a9d94b3">onNotification</a> (std::function&lt; void(void *<a class="el" href="classtiny__dlna_1_1DLNAControlPointMgr.html#a14377aba34f4e0fdc80f304dbd6d2766">reference</a>, const char *sid, const char *varName, const char *newValue)&gt; cb)</td></tr>
+<tr class="memdesc:a292b548924d3c5aae95c061d8a9d94b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a callback that will be invoked for incoming event notification.  <a href="classtiny__dlna_1_1DLNAControlPointMgr.html#a292b548924d3c5aae95c061d8a9d94b3">More...</a><br /></td></tr>
+<tr class="separator:a292b548924d3c5aae95c061d8a9d94b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2bff392e76cf89b49e1f16ee9f0f1d64"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMgr.html#a2bff392e76cf89b49e1f16ee9f0f1d64">setReference</a> (void *ref)</td></tr>
+<tr class="memdesc:a2bff392e76cf89b49e1f16ee9f0f1d64"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attach an opaque reference pointer (optional, for caller context)  <a href="classtiny__dlna_1_1DLNAControlPointMgr.html#a2bff392e76cf89b49e1f16ee9f0f1d64">More...</a><br /></td></tr>
+<tr class="separator:a2bff392e76cf89b49e1f16ee9f0f1d64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15bb2d5c5470f8c2a09b5e96fc84e90a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMgr.html#a15bb2d5c5470f8c2a09b5e96fc84e90a">setHttpServer</a> (<a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;server, int port=80)</td></tr>
+<tr class="memdesc:a15bb2d5c5470f8c2a09b5e96fc84e90a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set <a class="el" href="classtiny__dlna_1_1HttpServer.html" title="A Simple Header only implementation of Http Server that allows the registration of callback functions...">HttpServer</a> instance and register the notify handler.  <a href="classtiny__dlna_1_1DLNAControlPointMgr.html#a15bb2d5c5470f8c2a09b5e96fc84e90a">More...</a><br /></td></tr>
+<tr class="separator:a15bb2d5c5470f8c2a09b5e96fc84e90a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a20937a568582f4259d45a68b949da809"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMgr.html#a20937a568582f4259d45a68b949da809">loop</a> ()</td></tr>
 <tr class="separator:a20937a568582f4259d45a68b949da809"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afc290d6f2fbe36b6427b4807bd00b0a8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html">DLNAServiceInfo</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMgr.html#afc290d6f2fbe36b6427b4807bd00b0a8">getService</a> (const char *id)</td></tr>
@@ -177,6 +194,10 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
+<tr class="memitem:a62d0df2a0648eaba0a38cce94af544a3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMgr.html#a62d0df2a0648eaba0a38cce94af544a3">attachHttpServer</a> (<a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;server)</td></tr>
+<tr class="separator:a62d0df2a0648eaba0a38cce94af544a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a884e1cce842f1a5ecf9fe386565c946d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMgr.html#a884e1cce842f1a5ecf9fe386565c946d">parseAndDispatchEvent</a> (<a class="el" href="classtiny__dlna_1_1NotifyReplyCP.html">NotifyReplyCP</a> &amp;data)</td></tr>
+<tr class="separator:a884e1cce842f1a5ecf9fe386565c946d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a13aae4b5c18a4563be4f468b8e239f0d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMgr.html#a13aae4b5c18a4563be4f468b8e239f0d">matches</a> (const char *usn)</td></tr>
 <tr class="memdesc:a13aae4b5c18a4563be4f468b8e239f0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">checks if the usn contains the search target  <a href="classtiny__dlna_1_1DLNAControlPointMgr.html#a13aae4b5c18a4563be4f468b8e239f0d">More...</a><br /></td></tr>
 <tr class="separator:a13aae4b5c18a4563be4f468b8e239f0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -224,24 +245,35 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a665c88bd141249169f78f12620a5f498"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9ec7efe52d7a7e12de4356f42387f3d8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Url.html">Url</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMgr.html#a9ec7efe52d7a7e12de4356f42387f3d8">local_url</a></td></tr>
 <tr class="separator:a9ec7efe52d7a7e12de4356f42387f3d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08d92b18dfcf2dbe2022bb84811827de"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMgr.html#a08d92b18dfcf2dbe2022bb84811827de">p_http_server</a> = nullptr</td></tr>
+<tr class="separator:a08d92b18dfcf2dbe2022bb84811827de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a3bb27dae8c6c96ce034893b7c0e20c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMgr.html#a4a3bb27dae8c6c96ce034893b7c0e20c">http_server_port</a> = 0</td></tr>
+<tr class="separator:a4a3bb27dae8c6c96ce034893b7c0e20c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a14377aba34f4e0fdc80f304dbd6d2766"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMgr.html#a14377aba34f4e0fdc80f304dbd6d2766">reference</a> = nullptr</td></tr>
+<tr class="separator:a14377aba34f4e0fdc80f304dbd6d2766"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2c2d8d2db77a1f63d31aab68717c50a"><td class="memItemLeft" align="right" valign="top">std::function&lt; void(void *<a class="el" href="classtiny__dlna_1_1DLNAControlPointMgr.html#a14377aba34f4e0fdc80f304dbd6d2766">reference</a>, const char *sid, const char *varName, const char *newValue)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMgr.html#aa2c2d8d2db77a1f63d31aab68717c50a">eventCallback</a></td></tr>
+<tr class="separator:aa2c2d8d2db77a1f63d31aab68717c50a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Setup of a Basic DLNA Control Point. The control point. </p>
+<div class="textblock"><p>Lightweight DLNA control point manager. </p>
+<p>This class implements a compact, embeddable DLNA/UPnP control point suitable for small devices and emulators. It provides the core responsibilities a control point needs in order to discover devices, subscribe to service events, and invoke actions on services:</p>
 <ul>
-<li>send out an MSearch request</li>
-<li>processes the MSearch replys<ul>
-<li>parses the Device xml</li>
-<li>parses the Service xml</li>
+<li>Discover devices using SSDP M-SEARCH and collect device/service descriptions (HTTP GET + XML parsing).</li>
+<li>Maintain a list of discovered <code><a class="el" href="classtiny__dlna_1_1DLNADevice.html" title="Device Attributes and generation of XML using urn:schemas-upnp-org:device-1-0. We could just return a...">DLNADevice</a></code> objects and their <code><a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html" title="Attributes needed for the DLNA Service Definition.">DLNAServiceInfo</a></code> entries.</li>
+<li>Subscribe to service event notifications (SUBSCRIBE) and accept incoming NOTIFY requests via an attached <code><a class="el" href="classtiny__dlna_1_1HttpServer.html" title="A Simple Header only implementation of Http Server that allows the registration of callback functions...">HttpServer</a></code>.</li>
+<li>Parse event property-change XML and dispatch callbacks to the application (via <code>onNotification</code>).</li>
+<li>Execute SOAP actions on services (builds and posts SOAP XML).</li>
 </ul>
-</li>
-<li>subscribes to events</li>
-<li>pocesses the events</li>
+<p>Notes and usage:</p><ul>
+<li>To receive HTTP-based event notifications register an <code><a class="el" href="classtiny__dlna_1_1HttpServer.html" title="A Simple Header only implementation of Http Server that allows the registration of callback functions...">HttpServer</a></code> with <code><a class="el" href="classtiny__dlna_1_1DLNAControlPointMgr.html#a15bb2d5c5470f8c2a09b5e96fc84e90a" title="Set HttpServer instance and register the notify handler.">setHttpServer()</a></code> (or construct with a server). The server's request handler will forward NOTIFY bodies to this manager.</li>
+<li>Register an application callback with <code><a class="el" href="classtiny__dlna_1_1DLNAControlPointMgr.html#a292b548924d3c5aae95c061d8a9d94b3" title="Register a callback that will be invoked for incoming event notification.">onNotification()</a></code> to receive parsed property updates. An opaque reference pointer may be stored with <code><a class="el" href="classtiny__dlna_1_1DLNAControlPointMgr.html#a2bff392e76cf89b49e1f16ee9f0f1d64" title="Attach an opaque reference pointer (optional, for caller context)">setReference()</a></code> and will be passed back with the callback.</li>
+<li>Call <code><a class="el" href="classtiny__dlna_1_1DLNAControlPointMgr.html#a93da0d41688a4985c54822b5b6e61f38" title="start the processing by sending out a MSearch. For the search target you can use:">begin()</a></code> to start discovery and <code><a class="el" href="classtiny__dlna_1_1DLNAControlPointMgr.html#a20937a568582f4259d45a68b949da809">loop()</a></code> frequently (e.g. from the device main loop) to process incoming network events and scheduled tasks.</li>
 </ul>
-<p>The control point can also execute Actions</p>
+<p>The class is intentionally small and avoids dynamic STL-heavy constructs so it can run in constrained environments. It is not a full-featured UPnP stack but provides the common features required by many DLNA control point use cases.</p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a6932477a3be457666018b7b9325cc1c2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6932477a3be457666018b7b9325cc1c2">&#9670;&nbsp;</a></span>DLNAControlPointMgr()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a6932477a3be457666018b7b9325cc1c2">&#9670;&nbsp;</a></span>DLNAControlPointMgr() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -262,6 +294,46 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Default constructor w/o Notifications. </p>
+
+</div>
+</div>
+<a id="a29986fc5a83612c6bd6e7ebc54e2a61d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29986fc5a83612c6bd6e7ebc54e2a61d">&#9670;&nbsp;</a></span>DLNAControlPointMgr() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">tiny_dlna::DLNAControlPointMgr::DLNAControlPointMgr </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>port</em> = <code>80</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor supporting Notifications. </p>
 
 </div>
 </div>
@@ -350,6 +422,33 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a62d0df2a0648eaba0a38cce94af544a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62d0df2a0648eaba0a38cce94af544a3">&#9670;&nbsp;</a></span>attachHttpServer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tiny_dlna::DLNAControlPointMgr::attachHttpServer </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;&#160;</td>
+          <td class="paramname"><em>server</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Attach an <a class="el" href="classtiny__dlna_1_1HttpServer.html" title="A Simple Header only implementation of Http Server that allows the registration of callback functions...">HttpServer</a> so the control point can receive HTTP NOTIFY event messages. This registers a handler at the configured local URL path (see <code>local_url</code>) which will extract the SID header and body and call <a class="el" href="classtiny__dlna_1_1DLNAControlPointMgr.html#a884e1cce842f1a5ecf9fe386565c946d">parseAndDispatchEvent()</a> to dispatch property changes. </p>
+
+</div>
+</div>
 <a id="a93da0d41688a4985c54822b5b6e61f38"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a93da0d41688a4985c54822b5b6e61f38">&#9670;&nbsp;</a></span>begin()</h2>
 
@@ -401,14 +500,14 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<pre class="fragment"> @brief start the processing by sending out a MSearch. For the search target
- you can use:
- - ssdp:all : to search all UPnP devices,
- - upnp:rootdevice: only root devices . Embedded devices will not respond
- - uuid:device-uuid: search a device by vendor supplied unique id
- - urn:schemas-upnp-org:device:deviceType- version: locates all devices of a
-</pre><p> given type (as defined by working committee)</p><ul>
-<li>urn:schemas-upnp-org:service:serviceType- version: locate service of a given type </li>
+
+<p>start the processing by sending out a MSearch. For the search target you can use: </p>
+<ul>
+<li>ssdp:all : to search all UPnP devices,</li>
+<li>upnp:rootdevice: only root devices . Embedded devices will not respond</li>
+<li>uuid:device-uuid: search a device by vendor supplied unique id</li>
+<li>urn:schemas-upnp-org:device:deviceType- version: locates all devices of a given type (as defined by working committee)</li>
+<li>urn:schemas-upnp-org:service:serviceType-version: locate service of a given type </li>
 </ul>
 
 </div>
@@ -778,6 +877,60 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a292b548924d3c5aae95c061d8a9d94b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a292b548924d3c5aae95c061d8a9d94b3">&#9670;&nbsp;</a></span>onNotification()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tiny_dlna::DLNAControlPointMgr::onNotification </td>
+          <td>(</td>
+          <td class="paramtype">std::function&lt; void(void *<a class="el" href="classtiny__dlna_1_1DLNAControlPointMgr.html#a14377aba34f4e0fdc80f304dbd6d2766">reference</a>, const char *sid, const char *varName, const char *newValue)&gt;&#160;</td>
+          <td class="paramname"><em>cb</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Register a callback that will be invoked for incoming event notification. </p>
+
+</div>
+</div>
+<a id="a884e1cce842f1a5ecf9fe386565c946d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a884e1cce842f1a5ecf9fe386565c946d">&#9670;&nbsp;</a></span>parseAndDispatchEvent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tiny_dlna::DLNAControlPointMgr::parseAndDispatchEvent </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1NotifyReplyCP.html">NotifyReplyCP</a> &amp;&#160;</td>
+          <td class="paramname"><em>data</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a4a671a8240863822a99d14f060af8651"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4a671a8240863822a99d14f060af8651">&#9670;&nbsp;</a></span>postAction()</h2>
 
@@ -913,6 +1066,44 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a15bb2d5c5470f8c2a09b5e96fc84e90a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a15bb2d5c5470f8c2a09b5e96fc84e90a">&#9670;&nbsp;</a></span>setHttpServer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tiny_dlna::DLNAControlPointMgr::setHttpServer </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>port</em> = <code>80</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set <a class="el" href="classtiny__dlna_1_1HttpServer.html" title="A Simple Header only implementation of Http Server that allows the registration of callback functions...">HttpServer</a> instance and register the notify handler. </p>
+
+</div>
+</div>
 <a id="ac4b5151d4004a837a39f9da9ffc17aa0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac4b5151d4004a837a39f9da9ffc17aa0">&#9670;&nbsp;</a></span>setLocalURL()</h2>
 
@@ -969,8 +1160,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a90878be8f006d32ffb4c82cf2e3598a7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a90878be8f006d32ffb4c82cf2e3598a7">&#9670;&nbsp;</a></span>subscribe()</h2>
+<a id="a2bff392e76cf89b49e1f16ee9f0f1d64"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2bff392e76cf89b49e1f16ee9f0f1d64">&#9670;&nbsp;</a></span>setReference()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -979,16 +1170,44 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool tiny_dlna::DLNAControlPointMgr::subscribe </td>
+          <td class="memname">void tiny_dlna::DLNAControlPointMgr::setReference </td>
           <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>serviceName</em>, </td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>ref</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Attach an opaque reference pointer (optional, for caller context) </p>
+
+</div>
+</div>
+<a id="a44a0957db21aa14e65d88fbef8590c1e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a44a0957db21aa14e65d88fbef8590c1e">&#9670;&nbsp;</a></span>subscribeNotifications() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool tiny_dlna::DLNAControlPointMgr::subscribeNotifications </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1DLNADevice.html">DLNADevice</a> &amp;&#160;</td>
+          <td class="paramname"><em>device</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>seconds</em>&#160;</td>
+          <td class="paramname"><em>seconds</em> = <code>60</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1003,7 +1222,45 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Subscribe to changes. </p>
+<p>Subscribe to changes for all device services. </p>
+
+</div>
+</div>
+<a id="ae371403e0f21044d3bbeb8137f093c21"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae371403e0f21044d3bbeb8137f093c21">&#9670;&nbsp;</a></span>subscribeNotifications() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool tiny_dlna::DLNAControlPointMgr::subscribeNotifications </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html">DLNAServiceInfo</a> &amp;&#160;</td>
+          <td class="paramname"><em>service</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>seconds</em> = <code>60</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Subscribe to changes for defined device service. </p>
 
 </div>
 </div>
@@ -1041,6 +1298,50 @@ Protected Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt;<a class="el" href="classtiny__dlna_1_1DLNADevice.html">DLNADevice</a>&gt; tiny_dlna::DLNAControlPointMgr::devices</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa2c2d8d2db77a1f63d31aab68717c50a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2c2d8d2db77a1f63d31aab68717c50a">&#9670;&nbsp;</a></span>eventCallback</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::function&lt;void(void* <a class="el" href="classtiny__dlna_1_1DLNAControlPointMgr.html#a14377aba34f4e0fdc80f304dbd6d2766">reference</a>, const char* sid, const char* varName, const char* newValue)&gt; tiny_dlna::DLNAControlPointMgr::eventCallback</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4a3bb27dae8c6c96ce034893b7c0e20c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a3bb27dae8c6c96ce034893b7c0e20c">&#9670;&nbsp;</a></span>http_server_port</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int tiny_dlna::DLNAControlPointMgr::http_server_port = 0</td>
         </tr>
       </table>
   </td>
@@ -1162,6 +1463,28 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a08d92b18dfcf2dbe2022bb84811827de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08d92b18dfcf2dbe2022bb84811827de">&#9670;&nbsp;</a></span>p_http_server</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a>* tiny_dlna::DLNAControlPointMgr::p_http_server = nullptr</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a8b5ac4af2337b4fcf506b6b149895f34"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8b5ac4af2337b4fcf506b6b149895f34">&#9670;&nbsp;</a></span>p_udp</h2>
 
@@ -1173,6 +1496,28 @@ Protected Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classtiny__dlna_1_1IUDPService.html">IUDPService</a>* tiny_dlna::DLNAControlPointMgr::p_udp = nullptr</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a14377aba34f4e0fdc80f304dbd6d2766"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a14377aba34f4e0fdc80f304dbd6d2766">&#9670;&nbsp;</a></span>reference</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void* tiny_dlna::DLNAControlPointMgr::reference = nullptr</td>
         </tr>
       </table>
   </td>

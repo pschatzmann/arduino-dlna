@@ -1,14 +1,16 @@
 <map id="src/dlna/devices" name="src/dlna/devices">
-<area shape="rect" id="node1" href="dir_a6405f155ca617a002fcd0aa13cdc1f6.html" title="xml" alt="" coords="53,159,125,207"/>
-<area shape="rect" id="node5" href="dir_38cd9eca440b760dc966f21b1f8d8f41.html" title="basic" alt="" coords="127,255,199,303"/>
-<area shape="rect" id="edge5-headlabel" href="dir_000010_000001.html" title="4" alt="" coords="136,228,145,242"/>
-<area shape="rect" id="node3" href="dir_da6d4372abaf50927730daa102fef4b6.html" title="MediaRenderer" alt="" coords="166,63,287,111"/>
-<area shape="rect" id="node4" href="dir_fc30ef43b2e888f2899cdd925b11cb02.html" title="MediaServer" alt="" coords="37,63,141,111"/>
-<area shape="rect" id="edge3-headlabel" href="dir_000006_000010.html" title="1" alt="" coords="93,133,102,148"/>
-<area shape="rect" id="edge2-headlabel" href="dir_000006_000001.html" title="2" alt="" coords="165,229,174,243"/>
+<area shape="rect" id="node1" href="dir_a6405f155ca617a002fcd0aa13cdc1f6.html" title="xml" alt="" coords="200,159,272,207"/>
+<area shape="rect" id="node5" href="dir_38cd9eca440b760dc966f21b1f8d8f41.html" title="basic" alt="" coords="361,255,433,303"/>
+<area shape="rect" id="edge7-headlabel" href="dir_000010_000001.html" title="8" alt="" coords="345,233,354,247"/>
+<area shape="rect" id="node3" href="dir_da6d4372abaf50927730daa102fef4b6.html" title="MediaRenderer" alt="" coords="38,63,159,111"/>
+<area shape="rect" id="edge5-headlabel" href="dir_000005_000010.html" title="4" alt="" coords="187,134,197,149"/>
+<area shape="rect" id="edge4-headlabel" href="dir_000005_000001.html" title="1" alt="" coords="386,227,395,242"/>
+<area shape="rect" id="node4" href="dir_fc30ef43b2e888f2899cdd925b11cb02.html" title="MediaServer" alt="" coords="184,63,288,111"/>
+<area shape="rect" id="edge3-headlabel" href="dir_000006_000010.html" title="3" alt="" coords="240,133,249,148"/>
+<area shape="rect" id="edge2-headlabel" href="dir_000006_000001.html" title="3" alt="" coords="449,260,458,275"/>
 <area shape="rect" id="node6" href="dir_2d29d7dff7c7baf1180920f6796c23ae.html" title="http" alt="" coords="416,159,488,207"/>
-<area shape="rect" id="edge1-headlabel" href="dir_000006_000011.html" title="1" alt="" coords="394,159,404,174"/>
-<area shape="rect" id="edge4-headlabel" href="dir_000011_000001.html" title="15" alt="" coords="210,261,227,276"/>
+<area shape="rect" id="edge1-headlabel" href="dir_000006_000011.html" title="1" alt="" coords="397,147,407,161"/>
+<area shape="rect" id="edge6-headlabel" href="dir_000011_000001.html" title="13" alt="" coords="418,236,436,250"/>
 <area shape="rect" id="clust2" href="dir_5afe0b184293b52e5f1fc331cd3e5a76.html" alt="" coords="27,52,395,121"/>
 <area shape="rect" id="clust1" href="dir_95ca7d69a617eba53e70afaf1b3c2114.html" title="dlna" alt="" coords="16,16,405,217"/>
 </map>

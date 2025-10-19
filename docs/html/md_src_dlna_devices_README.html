@@ -71,7 +71,7 @@ DLNA Devices</h1>
 <p>This directory contains implementations of DLNA devices used by the library (for example <code>MediaRenderer</code>).</p>
 <h2><a class="anchor" id="autotoc_md1"></a>
 Creating a new DLNA device</h2>
-<p>This guide explains how to add a new DLNA device to the library. The <code>MediaRenderer</code> device in this folder is a good example: it implements a minimal UPnP/DLNA Media Renderer that receives an AVTransport URI and plays audio through the Arduino-friendly AudioTools pipeline.</p>
+<p>This guide explains how to add a new DLNA device to the library. The <code>MediaRenderer</code> device in this folder is a good example: it implements a minimal UPnP/DLNA Media Renderer that receives an AVTransport URI.</p>
 <p>Follow these steps to add your own device:</p>
 <ol type="1">
 <li>Create a new header file for your device in this folder, for example <code>MyDevice.h</code> (this library is header-only; do not add <code>.cpp</code> files).</li>
@@ -114,16 +114,19 @@ Creating a new DLNA device</h2>
 <div class="line">  renderer.begin();</div>
 <div class="line"> </div>
 <div class="line">  <span class="comment">// Register device with manager (assumes a global manager exists)</span></div>
-<div class="line">  DLNADeviceMgr::instance().addDevice(renderer);</div>
-<div class="line">  DLNADeviceMgr::instance().begin();</div>
+<div class="line">  <a class="code" href="classtiny__dlna_1_1DLNADeviceMgr.html#a8bca108e8978b2b2de2256303b01d49b">DLNADeviceMgr::instance</a>().addDevice(renderer);</div>
+<div class="line">  <a class="code" href="classtiny__dlna_1_1DLNADeviceMgr.html#a8bca108e8978b2b2de2256303b01d49b">DLNADeviceMgr::instance</a>().<a class="code" href="classtiny__dlna_1_1DLNADeviceMgr.html#a93f3305f1fc915d7aba14026b11ce7dc">begin</a>();</div>
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">void</span> loop() {</div>
 <div class="line">  <span class="comment">// Regularly call the device manager loop which in turn calls device loops</span></div>
-<div class="line">  DLNADeviceMgr::instance().loop();</div>
+<div class="line">  <a class="code" href="classtiny__dlna_1_1DLNADeviceMgr.html#a8bca108e8978b2b2de2256303b01d49b">DLNADeviceMgr::instance</a>().<a class="code" href="classtiny__dlna_1_1DLNADeviceMgr.html#a912c1f35fd657d9ecafd1cceb61671ab">loop</a>();</div>
 <div class="line">}</div>
 <div class="ttc" id="aDLNADeviceMgr_8h_html"><div class="ttname"><a href="DLNADeviceMgr_8h.html">DLNADeviceMgr.h</a></div></div>
 <div class="ttc" id="aMediaRenderer_8h_html"><div class="ttname"><a href="MediaRenderer_8h.html">MediaRenderer.h</a></div></div>
+<div class="ttc" id="aclasstiny__dlna_1_1DLNADeviceMgr_html_a8bca108e8978b2b2de2256303b01d49b"><div class="ttname"><a href="classtiny__dlna_1_1DLNADeviceMgr.html#a8bca108e8978b2b2de2256303b01d49b">tiny_dlna::DLNADeviceMgr::instance</a></div><div class="ttdeci">static DLNADeviceMgr * instance</div><div class="ttdef"><b>Definition:</b> DLNADeviceMgr.h:160</div></div>
+<div class="ttc" id="aclasstiny__dlna_1_1DLNADeviceMgr_html_a912c1f35fd657d9ecafd1cceb61671ab"><div class="ttname"><a href="classtiny__dlna_1_1DLNADeviceMgr.html#a912c1f35fd657d9ecafd1cceb61671ab">tiny_dlna::DLNADeviceMgr::loop</a></div><div class="ttdeci">bool loop()</div><div class="ttdoc">call this method in the Arduino loop as often as possible</div><div class="ttdef"><b>Definition:</b> DLNADeviceMgr.h:105</div></div>
+<div class="ttc" id="aclasstiny__dlna_1_1DLNADeviceMgr_html_a93f3305f1fc915d7aba14026b11ce7dc"><div class="ttname"><a href="classtiny__dlna_1_1DLNADeviceMgr.html#a93f3305f1fc915d7aba14026b11ce7dc">tiny_dlna::DLNADeviceMgr::begin</a></div><div class="ttdeci">bool begin(DLNADevice &amp;device, IUDPService &amp;udp, HttpServer &amp;server)</div><div class="ttdoc">start the</div><div class="ttdef"><b>Definition:</b> DLNADeviceMgr.h:27</div></div>
 <div class="ttc" id="anamespacetiny__dlna_html"><div class="ttname"><a href="namespacetiny__dlna.html">tiny_dlna</a></div><div class="ttdef"><b>Definition:</b> Allocator.h:6</div></div>
 </div><!-- fragment --><ol type="1">
 <li>Test with a control point. You can use standard UPnP control point applications (e.g., VLC, BubbleUPnP on Android) to discover and control the device. Use the control point to send <code>SetAVTransportURI</code> then <code>Play</code> and verify audio plays through the configured output.</li>
