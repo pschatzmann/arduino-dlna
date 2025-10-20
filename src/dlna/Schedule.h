@@ -132,6 +132,33 @@ class MSearchReplyCP : public Schedule {
 
 };
 
+/**
+ * @class NotifyReplyCP
+ * @brief Represents a notification/notify reply scheduled for control-point
+ * processing.
+ *
+ * Instances are created when the control-point receives SSDP/HTTP notify
+ * messages (for example via an attached HTTP server or UDP listener). The
+ * object carries parsed headers and the event payload and provides a
+ * `callback` that the control-point can invoke to let an application
+ * consumer handle the notification.
+ *
+ * Fields of interest:
+ * - `nts` : the NTS header value (e.g. "ssdp:alive" or "ssdp:byebye").
+ * - `delivery_host_and_port` : host:port that delivered the notification.
+ * - `delivery_path` : path portion of the delivery URL (if available).
+ * - `subscription_id` : SID header (subscription identifier) for eventing.
+ * - `event_key` : optional event sequence key.
+ * - `xml` : raw event XML body (for property change parsing).
+ * - `callback` : application-provided handler with signature
+ *                `bool callback(NotifyReplyCP &ref)`. The handler should
+ *                return true if it handled the notification, false if it
+ *                did not.
+ *
+ * The `process()` implementation calls `callback` and logs whether the
+ * notification was handled. This struct inherits from `MSearchReplyCP` so
+ * it can be scheduled and executed by the control-point scheduler.
+ */
 class NotifyReplyCP : public MSearchReplyCP {
  public:
   const char *name() override { return "NotifyReplyCP"; }
@@ -142,7 +169,8 @@ class NotifyReplyCP : public MSearchReplyCP {
   Str event_key;
   Str xml;
 
-  // callback 
+  // callback invoked by the scheduler when processing this notification.
+  // Return true if the notification was handled; false otherwise.
   std::function<bool(NotifyReplyCP &ref)> callback;
 
   bool process(IUDPService &udp) override {

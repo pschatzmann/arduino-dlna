@@ -18,12 +18,14 @@ namespace tiny_dlna {
 template <class T>
 class List {
  public:
+  /// List Node
   struct Node {
     Node *next = nullptr;
     Node *prior = nullptr;
     T data;
   };
 
+  /// List Iterator
   class Iterator {
    public:
     Iterator(Node *node) { this->node = node; }

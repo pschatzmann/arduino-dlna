@@ -5,15 +5,39 @@
 
 namespace tiny_dlna {
 
-// Small utility to extract attributes from a start-tag in an XML fragment.
-// It does not attempt full XML validation but is safe for small embedded
-// parsing tasks (e.g. DIDL <res ... protocolInfo="...">).
+/**
+ * @class XMLAttributeParser
+ * @brief Small utility to extract attributes from a start-tag in an XML
+ * fragment.
+ *
+ * This helper does not attempt full XML validation but is suitable for
+ * small embedded parsing tasks (for example: extracting the
+ * protocolInfo attribute from a DIDL-Lite <res ...> element).
+ */
 class XMLAttributeParser {
  public:
-  // Find the first occurrence of `tagName` (e.g. "<res") in `xml` and
-  // extract the value of attribute `attrName` into `outBuf` (size `bufSize`).
-  // Returns true on success and fills outBuf (null-terminated). If the
-  // attribute value is longer than bufSize-1, it will be truncated.
+  /**
+   * @brief Find the first occurrence of a start-tag and extract an attribute
+   * value.
+   *
+   * This searches for the first occurrence of `tagName` (for example
+   * "<res") in `xml` and looks for the attribute named `attrName` inside
+   * that tag. If found, the attribute value (the text between the surrounding
+   * double quotes) is copied into `outBuf` (null-terminated).
+   *
+   * @param xml Pointer to a null-terminated XML fragment to search.
+   * @param tagName Start-tag to locate (e.g. "<res").
+   * @param attrName Attribute name to extract (e.g. "protocolInfo" or
+   *                 "protocolInfo="). The function expects a double-quoted
+   *                 value (attrName="...").
+   * @param outBuf Destination buffer where the extracted value will be
+   *               written (null-terminated). Must be non-null.
+   * @param bufSize Size of `outBuf` in bytes; if the attribute value is
+   *                longer than `bufSize - 1` it will be truncated.
+   * @return true if a non-empty attribute value was found and written into
+   *         `outBuf`, false otherwise (invalid inputs, tag/attribute not
+   *         found, malformed tag).
+   */
   static bool extractAttribute(const char* xml, const char* tagName,
                                const char* attrName, char* outBuf,
                                size_t bufSize) {
@@ -40,37 +64,33 @@ class XMLAttributeParser {
     return false;
   }
 
-  // Generic helper: extract the nth (1-based) colon-separated token from the
-  // value of attribute `attrName` on the first occurrence of `tagName`.
-  //
-  // Behavior and parameters:
-  // - `xml`       : pointer to a null-terminated XML fragment to search.
-  // - `tagName`   : start-tag to locate (for example "<res"). The first
-  //                 occurrence is scanned; the search does not validate full
-  //                 XML correctness.
-  // - `attrName`  : attribute name to extract. Can be passed either with or
-  //                 without the trailing '=' (e.g. "protocolInfo" or
-  //                 "protocolInfo="). The function looks for the attribute
-  //                 inside the located start-tag and expects a double-quoted
-  //                 value: protocolInfo="...".
-  // - `n`         : 1-based index of the colon-separated token to return.
-  //                 n==1 returns the first token. Tokens are split on ':'
-  //                 characters and are not trimmed; embedded XML entities are
-  //                 not decoded.
-  // - `outBuf`/`bufSize`: destination buffer and its size (must be > 0).
-  //
-  // Return value and truncation:
-  // - On success the requested token (non-empty) is copied into `outBuf`,
-  //   null-terminated. If the token is longer than `bufSize - 1` it will be
-  //   truncated to fit and still null-terminated. The function returns true
-  //   when a non-empty token was extracted into `outBuf`.
-  // - The function returns false if any input is invalid, the tag or
-  //   attribute cannot be found inside the tag, or the requested token index
-  //   does not exist (or is empty).
-  //
-  // Example:
-  //   attrName = "protocolInfo" (or "protocolInfo="), n = 3
-  //   protocolInfo="http-get:*:audio/mpeg:*" -> returns "audio/mpeg".
+  /**
+   * @brief Extract the nth (1-based) colon-separated token from an
+   * attribute value located on the first occurrence of `tagName`.
+   *
+   * This helper locates `tagName` (for example "<res") and extracts the
+   * value of `attrName` (expects a double-quoted value). The attribute
+   * value is split on ':' characters and the nth token (1-based) is copied
+   * into `outBuf`.
+   *
+   * @param xml Pointer to a null-terminated XML fragment to search.
+   * @param tagName Start-tag to locate (e.g. "<res"). Only the first
+   *                occurrence is scanned.
+   * @param attrName Attribute name to extract (with or without trailing
+   *                 '='). The function expects a double-quoted value.
+   * @param n 1-based index of the colon-separated token to return.
+   * @param outBuf Destination buffer where the token will be written
+   *               (null-terminated). Must be non-null.
+   * @param bufSize Size of `outBuf` in bytes; if the token is longer than
+   *                `bufSize - 1` it will be truncated.
+   * @return true if the requested token was found and written into `outBuf`,
+   *         false otherwise (invalid inputs, tag/attribute not found, index
+   *         out of range).
+   *
+   * Example:
+   *   attrName = "protocolInfo" (or "protocolInfo="), n = 3
+   *   protocolInfo="http-get:*:audio/mpeg:*" -> returns "audio/mpeg".
+   */
   static bool extractAttributeToken(const char* xml, const char* tagName,
                                      const char* attrName, int n,
                                      char* outBuf, size_t bufSize) {

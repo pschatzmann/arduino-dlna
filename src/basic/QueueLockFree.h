@@ -97,6 +97,7 @@ class QueueLockFree {
   }
 
  protected:
+  /// QueueLockFree Node
   struct Node {
     T data;
     std::atomic<size_t> tail;

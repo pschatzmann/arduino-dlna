@@ -20,63 +20,68 @@ namespace tiny_dlna {
 template <class T>
 class Vector {
  public:
-  /**
-   *   @brief Iterator for the Vector class
-   *
-   *   by Phil Schatzmann
-   **/
 
-  class iterator {
+  /**
+   * @class iterator
+   * @brief Lightweight iterator for `tiny_dlna::Vector<T>`.
+   *
+   * Provides a minimal iterator interface (increment, decrement, dereference,
+   * comparison) suitable for range-style loops and manual iteration. This
+   * iterator holds a raw pointer to the element storage and a position index
+   * (`pos_`). Note that it is a simple forward/backward iterator and does
+   * not provide full random-access iterator guarantees beyond `operator+`.
+   */
+  class Iterator {
    protected:
     T *ptr;
     size_t pos_;
 
    public:
-    iterator() {}
-    iterator(T *parPtr, size_t pos) {
+    Iterator() {}
+    Iterator(T *parPtr, size_t pos) {
       this->ptr = parPtr;
       this->pos_ = pos;
     }
     // copy constructor
-    iterator(const iterator &copyFrom) {
+    Iterator(const Iterator &copyFrom) {
       ptr = copyFrom.ptr;
       pos_ = copyFrom.pos_;
     }
-    iterator operator++(int n) {
+    Iterator operator++(int n) {
       ptr++;
       pos_++;
       return *this;
     }
-    iterator operator++() {
+    Iterator operator++() {
       ptr++;
       pos_++;
       return *this;
     }
-    iterator operator--(int n) {
+    Iterator operator--(int n) {
       ptr--;
       pos_--;
       return *this;
     }
-    iterator operator--() {
+    Iterator operator--() {
       ptr--;
       pos_--;
       return *this;
     }
-    iterator operator+(int offset) {
+    Iterator operator+(int offset) {
       pos_ += offset;
-      return iterator(ptr + offset, offset);
+      return Iterator(ptr + offset, offset);
     }
-    bool operator==(iterator it) { return ptr == it.getPtr(); }
-    bool operator<(iterator it) { return ptr < it.getPtr(); }
-    bool operator<=(iterator it) { return ptr <= it.getPtr(); }
-    bool operator>(iterator it) { return ptr > it.getPtr(); }
-    bool operator>=(iterator it) { return ptr >= it.getPtr(); }
-    bool operator!=(iterator it) { return ptr != it.getPtr(); }
+    bool operator==(Iterator it) { return ptr == it.getPtr(); }
+    bool operator<(Iterator it) { return ptr < it.getPtr(); }
+    bool operator<=(Iterator it) { return ptr <= it.getPtr(); }
+    bool operator>(Iterator it) { return ptr > it.getPtr(); }
+    bool operator>=(Iterator it) { return ptr >= it.getPtr(); }
+    bool operator!=(Iterator it) { return ptr != it.getPtr(); }
     T &operator*() { return *ptr; }
     T *operator->() { return ptr; }
     T *getPtr() { return ptr; }
     size_t pos() { return pos_; }
-    size_t operator-(iterator it) { return (ptr - it.getPtr()); }
+    size_t operator-(Iterator it) { return (ptr - it.getPtr()); }
   };
 
 #ifdef USE_INITIALIZER_LIST
@@ -204,7 +209,7 @@ class Vector {
 
   void pop_front() { erase(0); }
 
-  void assign(iterator v1, iterator v2) {
+  void assign(Iterator v1, Iterator v2) {
     size_t newLen = v2 - v1;
     resize_internal(newLen, false);
     this->len = newLen;
@@ -265,14 +270,14 @@ class Vector {
     return this->len != oldSize;
   }
 
-  iterator begin() { return iterator(p_data, 0); }
+  Iterator begin() { return Iterator(p_data, 0); }
 
-  T &back() { return *iterator(p_data + (len - 1), len - 1); }
+  T &back() { return *Iterator(p_data + (len - 1), len - 1); }
 
-  iterator end() { return iterator(p_data + len, len); }
+  Iterator end() { return Iterator(p_data + len, len); }
 
   // removes a single element
-  void erase(iterator it) { return erase(it.pos()); }
+  void erase(Iterator it) { return erase(it.pos()); }
 
   // removes a single element
   void erase(int pos) {

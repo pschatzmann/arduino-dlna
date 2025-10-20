@@ -9,9 +9,16 @@
 
 namespace tiny_dlna {
 
-// Minimal subscription manager: stores subscriptions per service and allows
-// publishing of simple property change notifications (evented variables).
 
+/**
+ * @struct Subscription
+ * @brief Represents a single event subscription for a service.
+ *
+ * Holds the subscription identifier (SID), the subscriber's callback URL
+ * (as provided in the CALLBACK header), the negotiated timeout (seconds),
+ * a delivery sequence counter (`seq`) and an absolute expiration timestamp
+ * (`expires_at`). Instances are stored by `SubscriptionMgr` per-service.
+ */
 struct Subscription {
   Str sid;
   Str callback_url; // as provided in CALLBACK header
@@ -20,6 +27,21 @@ struct Subscription {
   uint64_t expires_at = 0;
 };
 
+/**
+ * @class SubscriptionMgr
+ * @brief Manages event subscriptions and notification delivery.
+ *
+ * The manager maintains per-service lists of `Subscription` entries. It
+ * provides methods to subscribe/unsubscribe clients and to publish state
+ * variable changes (which will be delivered as UPnP event NOTIFY requests
+ * to each subscriber's callback URL).
+ *
+ * Notes:
+ * - Subscriptions are tracked in simple parallel vectors (service names and
+ *   lists) rather than a hash map for minimal embedded footprint.
+ * - `subscribe()` returns the assigned SID (generated when creating a new
+ *   subscription). `unsubscribe()` removes a subscription by SID.
+ */
 class SubscriptionMgr {
  public:
   SubscriptionMgr() {}

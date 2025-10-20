@@ -4,7 +4,7 @@
 
 namespace tiny_dlna {
 
-/***
+/**
  * @brief Print to a dynamic string
  * @author Phil Schatzmann
  * @copyright GPLv3

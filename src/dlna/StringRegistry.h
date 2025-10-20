@@ -2,7 +2,7 @@
 #include "basic/Str.h"
 
 namespace tiny_dlna {
-/***
+/**
  * @brief Make sure that a string is stored only once
  * @author Phil Schatzmann
  */

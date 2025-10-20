@@ -44,9 +44,9 @@ A DLNA device uses UDP, HTTP, XML and SOAP to discover and manage services, whic
 I implemented the functionality from scratch using the basic Arduino network API and avoided external dependencies where possible.
 
 The [DLNAControlPointMgr](https://pschatzmann.github.io/arduino-dlna/classtiny__dlna_1_1DLNAControlPointMgr.html) sets up a control point and lets you execute actions.
-The [DLNADeviceMgr](https://pschatzmann.github.io/arduino-dlna/classtiny__dlna_1_1DLNADeviceMgr.html) class provides the setup for a basic DLNA device service. Devices are represented by the [DLNADevice](https://pschatzmann.github.io/arduino-dlna/classtiny__dlna_1_1DLNADevice.html) class. A device registers itself on the network and answers UDP DLNA queries and requests:
+The [DLNADevice](https://pschatzmann.github.io/arduino-dlna/classtiny__dlna_1_1DLNADevice.html) class provides the setup for a basic DLNA device service. Devices are represented by the [DLNADeviceInfo](https://pschatzmann.github.io/arduino-dlna/classtiny__dlna_1_1DLNADeviceInfo.html) class. A device registers itself on the network and answers UDP DLNA queries and requests:
 
-- UDP communication is handled via a [Scheduler](https://pschatzmann.github.io/arduino-dlna/classtiny__dlna_1_1Scheduler.html) and a [Request Parser](https://pschatzmann.github.io/arduino-dlna/classtiny__dlna_1_1DLNARequestParser.html).
+- UDP communication is handled via a [Scheduler](https://pschatzmann.github.io/arduino-dlna/classtiny__dlna_1_1Scheduler.html) and a [Request Parser](https://pschatzmann.github.io/arduino-dlna/classtiny__dlna_1_1DLNADeviceRequestParser.html).
 - HTTP requests are handled with the bundled [TinyHttp Server](https://pschatzmann.github.io/arduino-dlna/classtiny__dlna_1_1HttpServer.html).
 - XML service descriptions can be stored as char arrays in progmem or generated dynamically using the [XMLPrinter](https://pschatzmann.github.io/arduino-dlna/structtiny__dlna_1_1XMLPrinter.html) class.
 

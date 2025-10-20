@@ -2,7 +2,7 @@
 
 namespace tiny_dlna {
 
-/***
+/**
  * @brief Class with does not do any output: it can be used to determine
  * the length of the output
  * @author Phil Schatzmann
