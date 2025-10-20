@@ -5,7 +5,7 @@
 #include "basic/EscapingPrint.h"
 #include "basic/Str.h"
 #include "basic/StrPrint.h"
-#include "dlna/DLNADeviceMgr.h"
+#include "dlna/DLNADevice.h"
 #include "dlna/devices/MediaServer/MediaItem.h"
 #include "dlna/xml/XMLPrinter.h"
 #include "http/HttpServer.h"
@@ -38,7 +38,7 @@ namespace tiny_dlna {
  * The implementation is intentionally compact and suitable as a starting
  * point for embedded or test DLNA servers.
  */
-class MediaServer : public DLNADevice {
+class MediaServer : public DLNADeviceInfo {
  public:
   // MediaItem is now defined in MediaItem.h
 

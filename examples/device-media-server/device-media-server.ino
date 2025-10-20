@@ -11,7 +11,7 @@ const char* password = "YOUR_PASSWORD";
 
 WiFiServer wifi;
 HttpServer server(wifi);
-DLNADeviceMgr devMgr;
+DLNADevice device;
 WiFiClient client;
 DLNAHttpRequest http(client);
 UDPAsyncService udp;
@@ -67,11 +67,11 @@ void setup() {
   mediaServer.setGetDataCallback(myGetData);
   mediaServer.setupServices(server, udp);
   
-  devMgr.begin(mediaServer, udp, server);
+  device.begin(mediaServer, udp, server);
 
   Serial.println("MediaServer started");
 }
 
 void loop() {
-  devMgr.loop();
+  device.loop();
 }

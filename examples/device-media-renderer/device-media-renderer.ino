@@ -4,7 +4,7 @@
 const char* ssid = "";
 const char* password = "";
 MediaRenderer media_renderer;
-DLNADeviceMgr device_mgr;         // basic device API
+DLNADevice device;         // basic device API
 WiFiServer wifi;
 HttpServer server(wifi);
 UDPAsyncService udp;
@@ -59,7 +59,7 @@ void setup() {
     });
 
   // setup device: set IPAddress or BaseURL and other optional information
-  device_mgr.begin(media_renderer, udp, server);
+  device.begin(media_renderer, udp, server);
 }
 
-void loop() { device_mgr.loop(); }
+void loop() { device.loop(); }

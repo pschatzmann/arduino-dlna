@@ -1,6 +1,6 @@
 #pragma once
 #include "dlna/DLNAControlPointMgr.h"
-#include "dlna/DLNADeviceMgr.h"
+#include "dlna/DLNADevice.h"
 #include "dlna/devices/MediaRenderer/MediaRenderer.h"
 #include "dlna/udp/UDPService.h"
 #include "dlna/clients/ControlPointMediaRenderer.h"

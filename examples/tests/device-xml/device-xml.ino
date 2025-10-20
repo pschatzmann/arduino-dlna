@@ -1,12 +1,12 @@
 // Test XML generation for Device
 #include "DLNA.h"
 
-DLNADevice device;
+DLNADeviceInfo device_info;
 
 void setupDevice() {
-  device.setBaseURL("http:/localhost:80/test");
-  device.setDeviceType("urn:schemas-upnp-org:device:MediaRenderer:1");
-  device.setUDN("uuid:09349455-2941-4cf7-9847-0dd5ab210e97");
+  device_info.setBaseURL("http:/localhost:80/test");
+  device_info.setDeviceType("urn:schemas-upnp-org:device:MediaRenderer:1");
+  device_info.setUDN("uuid:09349455-2941-4cf7-9847-0dd5ab210e97");
   
   auto dummyCB = [](HttpServer* server, const char* requestPath,
                     HttpRequestHandlerLine* hl) {
@@ -41,9 +41,9 @@ void setupDevice() {
            "urn:upnp-org:serviceId:RenderingControl", "/RC/service.xml",
            controlCB, "/RC/control", dummyCB, "/RC/event", dummyCB);
 
-  device.addService(rc);
-  device.addService(cm);
-  device.addService(avt);
+  device_info.addService(rc);
+  device_info.addService(cm);
+  device_info.addService(avt);
 }
 
 void setup() {
@@ -52,7 +52,7 @@ void setup() {
 
   setupDevice();
   // render device XML
-  device.print(Serial);
+  device_info.print(Serial);
 }
 
 void loop() {}

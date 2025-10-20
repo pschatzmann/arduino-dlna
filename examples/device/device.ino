@@ -4,8 +4,8 @@
 
 const char* ssid = "your SSID";
 const char* password = "your Password";
-DLNADevice device;         // information about your device
-DLNADeviceMgr device_mgr;  // basic device API
+DLNADeviceInfo device_info;         // information about your device
+DLNADevice device;  // basic device API
 WiFiServer wifi;           // Networking Server
 HttpServer server(wifi);   // Webserver
 UDPAsyncService udp const char* st =
@@ -24,13 +24,13 @@ void setupWifi() {
 void setupDeviceInfo() {
   DLNAServiceInfo rc, cm, avt;
 
-  device.clear();
-  device.setUDN(usn);
-  device.setDeviceType(st);
-  device.setIPAddress(WiFi.localIP());
-  device.setManufacturer("Phil Schatzmann");
-  device.setManufacturerURL("https://www.pschatzmann.ch/");
-  device.setFriendlyName("Arduino Media Renderer");
+  device_info.clear();
+  device_info.setUDN(usn);
+  device_info.setDeviceType(st);
+  device_info.setIPAddress(WiFi.localIP());
+  device_info.setManufacturer("Phil Schatzmann");
+  device_info.setManufacturerURL("https://www.pschatzmann.ch/");
+  device_info.setFriendlyName("Arduino Media Renderer");
 
   // // to be implemented
   // auto controlCB = [](HttpServer* server, const char* requestPath,
@@ -72,9 +72,9 @@ void setupDeviceInfo() {
   rc.setup("urn:schemas-upnporg:service:RenderingControl:1",
            "urn:upnp-org:serviceId:RenderingControl", "/RC/service.xml",
            controlCB, "/RC/control", dummyCB, "/RC/event", dummyCB);
-  device.addService(rc);
-  device.addService(cm);
-  device.addService(avt);
+  device_info.addService(rc);
+  device_info.addService(cm);
+  device_info.addService(avt);
 }
 
 void setup() {
@@ -88,7 +88,7 @@ void setup() {
   setupDeviceInfo();
 
   // start device
-  device_mgr.begin(device, udp, server);
+  device.begin(device_info, udp, server);
 }
 
-void loop() { device_mgr.loop(); }
+void loop() { device.loop(); }

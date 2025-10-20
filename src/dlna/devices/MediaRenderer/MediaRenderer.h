@@ -3,7 +3,7 @@
 #include <cstring>
 
 #include "basic/Str.h"
-#include "dlna/DLNADeviceMgr.h"
+#include "dlna/DLNADevice.h"
 #include "dlna/xml/XMLAttributeParser.h"
 #include "mr_conmgr.h"
 #include "mr_control.h"
@@ -59,7 +59,7 @@ enum class MediaEvent { SET_URI, PLAY, PAUSE, STOP, SET_VOLUME, SET_MUTE };
  *
  * Author: Phil Schatzmann
  */
-class MediaRenderer : public DLNADevice {
+class MediaRenderer : public DLNADeviceInfo {
  public:
   // event handler: (event, reference to MediaRenderer)
   typedef void (*MediaEventHandler)(MediaEvent event, MediaRenderer& renderer);
@@ -197,7 +197,7 @@ class MediaRenderer : public DLNADevice {
     // notify application handler about the stop
     if (event_cb) event_cb(MediaEvent::STOP, *this);
     // publish UPnP event to subscribers (if subscription manager available)
-    SubscriptionMgr* mgr = tiny_dlna::DLNADeviceMgr::getSubscriptionMgr();
+    SubscriptionMgr* mgr = tiny_dlna::DLNADevice::getSubscriptionMgr();
     if (mgr) {
       mgr->publishProperty("/AVT/event", "TransportState", "STOPPED");
     }

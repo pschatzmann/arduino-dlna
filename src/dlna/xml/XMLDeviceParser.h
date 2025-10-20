@@ -4,7 +4,7 @@
 #include "assert.h"
 #include "basic/Icon.h"
 #include "basic/StrView.h"
-#include "dlna/DLNADevice.h"
+#include "dlna/DLNADeviceInfo.h"
 
 namespace tiny_dlna {
 
@@ -16,7 +16,7 @@ namespace tiny_dlna {
 
 class XMLDeviceParser {
  public:
-  void parse(DLNADevice& result, StringRegistry& strings, const char* xmlStr) {
+  void parse(DLNADeviceInfo& result, StringRegistry& strings, const char* xmlStr) {
     p_strings = &strings;
     StrView tmp(xmlStr);
     str.swap(tmp);
@@ -31,7 +31,7 @@ class XMLDeviceParser {
 
  protected:
   StrView str;
-  DLNADevice* p_device = nullptr;
+  DLNADeviceInfo* p_device = nullptr;
   StringRegistry* p_strings = nullptr;
 
   /// extract string, add to string repository and return repository string
@@ -43,12 +43,12 @@ class XMLDeviceParser {
     return p_strings->add((char*)tmp_str.c_str());
   }
 
-  void parseVersion(DLNADevice& result) {
+  void parseVersion(DLNADeviceInfo& result) {
     parseInt(0, "<major>", result.version_major);
     parseInt(0, "<minor>", result.version_minor);
   }
 
-  void parseDevice(DLNADevice& result) {
+  void parseDevice(DLNADeviceInfo& result) {
     parseStr("<deviceType>", result.device_type);
     parseStr("<friendlyName>", result.friendly_name);
     parseStr("<manufacturer>", result.manufacturer);
@@ -99,14 +99,14 @@ class XMLDeviceParser {
     return end;
   }
 
-  void parseIcons(DLNADevice& device) {
+  void parseIcons(DLNADeviceInfo& device) {
     int pos = 0;
     do {
       pos = parseIcon(device, pos);
     } while (pos > 0);
   }
 
-  int parseIcon(DLNADevice& device, int pos) {
+  int parseIcon(DLNADeviceInfo& device, int pos) {
     Icon icon;
     int result = -1;
     int iconPos = str.indexOf("<icon>", pos);

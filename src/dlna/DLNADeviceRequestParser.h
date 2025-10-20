@@ -17,7 +17,7 @@ class DLNADeviceRequestParser {
   // add ST that we consider as valid for the actual device
   void addMSearchST(const char* accept) { mx_vector.push_back(accept); }
 
-  Schedule* parse(DLNADevice& device, RequestData& req) {
+  Schedule* parse(DLNADeviceInfo& device, RequestData& req) {
     p_device = &device;
     Schedule result;
     if (req.data.contains("M-SEARCH")) {
@@ -42,7 +42,7 @@ class DLNADeviceRequestParser {
 
  protected:
   Vector<const char*> mx_vector;
-  DLNADevice* p_device = nullptr;
+  DLNADeviceInfo* p_device = nullptr;
 
   Schedule* processMSearch(RequestData& req) {
     assert(p_device != nullptr);

@@ -21,9 +21,8 @@ namespace tiny_dlna {
 
 class Str : public StrView {
  public:
-  Str() = default;
 
-  Str(int initialAllocatedLength) : Str() {
+  Str(int initialAllocatedLength = 0)  {
     maxlen = initialAllocatedLength;
     is_const = false;
     grow(maxlen);

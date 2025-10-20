@@ -1,6 +1,6 @@
 #pragma once
 
-#include "DLNADevice.h"
+#include "DLNADeviceInfo.h"
 #include "IUDPService.h"
 
 #define MAX_TMP_SIZE 300
@@ -76,7 +76,7 @@ class MSearchSchedule : public Schedule {
  */
 class MSearchReplySchedule : public Schedule {
  public:
-  MSearchReplySchedule(DLNADevice &device, IPAddressAndPort addr) {
+  MSearchReplySchedule(DLNADeviceInfo &device, IPAddressAndPort addr) {
     address = addr;
     p_device = &device;
   }
@@ -87,7 +87,7 @@ class MSearchReplySchedule : public Schedule {
     DlnaLogger.log(DlnaLogLevel::Info, "Sending %s for %s to %s", name(),
                    search_target.c_str(), address.toString());
 
-    DLNADevice &device = *p_device;
+    DLNADeviceInfo &device = *p_device;
     char buffer[MAX_TMP_SIZE] = {0};
     const char *tmp =
         "HTTP/1.1 200 OK\r\n"
@@ -106,7 +106,7 @@ class MSearchReplySchedule : public Schedule {
 
   Str search_target;
   IPAddressAndPort address;
-  DLNADevice *p_device;
+  DLNADeviceInfo *p_device;
   int mx = 0;
 
  protected:
@@ -162,7 +162,7 @@ class NotifyReplyCP : public MSearchReplyCP {
  */
 class PostAliveSchedule : public Schedule {
  public:
-  PostAliveSchedule(DLNADevice &device, uint32_t repeatMs) {
+  PostAliveSchedule(DLNADeviceInfo &device, uint32_t repeatMs) {
     p_device = &device;
     this->repeat_ms = repeatMs;
   }
@@ -173,7 +173,7 @@ class PostAliveSchedule : public Schedule {
   bool process(IUDPService &udp) override {
     DlnaLogger.log(DlnaLogLevel::Info, "Sending %s to %s", name(),
                    DLNABroadcastAddress.toString());
-    DLNADevice &device = *p_device;
+    DLNADeviceInfo &device = *p_device;
     char nt[100];
     char usn[200];
 
@@ -197,7 +197,7 @@ class PostAliveSchedule : public Schedule {
   }
 
  protected:
-  DLNADevice *p_device;
+  DLNADeviceInfo *p_device;
   void setupData(const char *nt, const char *udn, char *result_nt,
                  char *result_usn) {
     strcpy(result_nt, nt);
@@ -234,7 +234,7 @@ class PostAliveSchedule : public Schedule {
  */
 class PostByeSchedule : public Schedule {
  public:
-  PostByeSchedule(DLNADevice &device) { p_device = &device; }
+  PostByeSchedule(DLNADeviceInfo &device) { p_device = &device; }
   const char *name() override { return "ByeBye"; }
   bool process(IUDPService &udp) override {
     DlnaLogger.log(DlnaLogLevel::Info, "Sending %s to %s", name(),
@@ -259,7 +259,7 @@ class PostByeSchedule : public Schedule {
 
  protected:
   int max_age = 120;
-  DLNADevice *p_device;
+  DLNADeviceInfo *p_device;
 };
 
 /**

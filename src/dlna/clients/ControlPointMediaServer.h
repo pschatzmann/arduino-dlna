@@ -238,7 +238,7 @@ class ControlPointMediaServer {
   /// Select service by id
   DLNAServiceInfo& selectService(const char* id) {
     // Build list of devices matching the optional filter
-    Vector<DLNADevice>& all = mgr.getDevices();
+    Vector<DLNADeviceInfo>& all = mgr.getDevices();
     int idx = 0;
     for (auto& d : all) {
       const char* dt = d.getDeviceType();

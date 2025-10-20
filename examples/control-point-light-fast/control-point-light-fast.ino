@@ -26,7 +26,7 @@ void setupWifi() {
 
 // do not discover device but just use some hardcoded values
 void setupDevice() {
-  DLNADevice device;
+  DLNADeviceInfo device;
   device.setIPAddress(WiFi.localIP());
   device.setDeviceType(device_type);
   device.setBaseURL(baseUrl);

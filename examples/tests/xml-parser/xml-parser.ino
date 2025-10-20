@@ -4,21 +4,25 @@
 using namespace tiny_dlna;
 
 // Simple callback that prints events to Serial
-void xmlCallback(Str& nodeName, Vector<Str>& path, Str& text, int start,
+void xmlCallback(Str& nodeName, Vector<Str>& path, Str& text, Str& attributes, int start,
                  int len, void* ref) {
   // Build a simple path string
-  Str pathStr;
+  Str pathStr(100);
+  // Ensure the buffer is zero-terminated before using strncat/append
+  pathStr.set("");
   for (int i = 0; i < (int)path.size(); ++i) {
     if (i > 0) pathStr.add('/');
     pathStr.add(path[i].c_str());
   }
 
   Serial.print("NODE: '");
-  Serial.print(nodeName.c_str());
+  Serial.print(nodeName.length() > 0 ? nodeName.c_str() : "");
   Serial.print("' PATH: '");
-  Serial.print(pathStr.c_str());
+  Serial.print(pathStr.length() > 0 ? pathStr.c_str() : "");
   Serial.print("' TEXT: '");
-  Serial.print(text.c_str());
+  Serial.print(text.length() > 0 ? text.c_str() : "");
+  Serial.print("' ATTR: '");
+  Serial.print(attributes.length() > 0 ? attributes.c_str() : "");
   Serial.print("' [start=");
   Serial.print(start);
   Serial.print(" len=");
@@ -29,7 +33,7 @@ void xmlCallback(Str& nodeName, Vector<Str>& path, Str& text, int start,
 void runTest(const char* xml) {
   Serial.println("---- Test start ----");
   Serial.println(xml);
-  XMLParser p(xml, xmlCallback);
+  XMLParser p(xml, xmlCallback, true);
   p.parse();
   Serial.println("---- Test end ----\n");
 }

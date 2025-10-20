@@ -747,7 +747,7 @@ class StrView {
 
  protected:
   char* chars = nullptr;
-  bool is_const = false;
+  bool is_const = true;
   int len = 0;
   int maxlen = 0;
   int savedLen = -1;

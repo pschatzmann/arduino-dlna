@@ -41,12 +41,14 @@ class XMLParser {
    * nodes)
    * - start,len: numeric offset/length in the original buffer for the reported
    * fragment
-   */
+   * @param textOnly If true, only report nodes with text content.
+  */
   XMLParser(const char* xmlStr,
             void (*callback)(Str& nodeName, Vector<Str>& path,
-                             Str& text, int start, int len, void* ref)) {
+                             Str& text, Str& attributes, int start, int len, void* ref), bool textOnly=false) {
     setXml(xmlStr);
     setCallback(callback);
+    setReportTextOnly(textOnly);
   }
 
   /**
@@ -70,7 +72,7 @@ class XMLParser {
    * docs.
    */
   void setCallback(void (*cb)(Str& nodeName, Vector<Str>& path,
-                              Str& text, int start, int len, void* ref)) {
+                              Str& text, Str& attributes, int start, int len, void* ref)) {
     this->callback = cb;
   }
 
@@ -83,6 +85,10 @@ class XMLParser {
    */
   void parse() { do_parse(); }
 
+
+  /// report only nodes with text
+  void setReportTextOnly(bool flag) { report_text_only = flag; }
+
  protected:
   StrView str_view;
   Vector<Str> path;
@@ -90,6 +96,9 @@ class XMLParser {
   Str node_name;
   Str txt;
   Str str;
+  // last parsed attributes for the most recent start tag
+  Str last_attributes;
+  bool report_text_only = true;
 
   // callback signature: nodeName, path, text (inner text for elements or
   // trimmed text), start, len, ref
@@ -98,7 +107,7 @@ class XMLParser {
   // valid for the duration of the callback invocation. If the callback
   // needs to retain the data it must make its own copy.
   void (*callback)(Str& nodeName, Vector<Str>& path,
-                   Str& text, int start, int len, void* ref) = nullptr;
+                   Str& text, Str& attributes, int start, int len, void* ref) = nullptr;
   Vector<int> contentStarts;  // parallel stack to `path`: start position of
                               // content (after the start tag)
   // user-provided opaque pointer for convenience
@@ -129,28 +138,18 @@ class XMLParser {
     if (te > ts && callback) {
       txt.copyFrom(s + ts, te - ts);
       node_name = path.size() > 0 ? path.back() : empty_str;
-      callback(node_name, path, txt, ts, te - ts, reference);
+      invokeCallback(node_name, path, txt, last_attributes, ts, te - ts);
     }
   }
 
   void emitTagSegment(const char* s, int lt, int gt) {
     if (callback) {
       node_name = path.size() > 0 ? path.back() : empty_str;
-      callback(node_name, path, empty_str, lt, gt - lt + 1, reference);
+      invokeCallback(node_name, path, empty_str, last_attributes, lt, gt - lt + 1);
     }
   }
 
   int handleEndTag(const char* s, int lt, int gt) {
-    // compute inner content range and invoke callback before popping
-    if (contentStarts.size() > 0 && callback) {
-      int innerStart = contentStarts.back();
-      int innerLen = lt - innerStart;
-      if (innerLen > 0) {
-        str.copyFrom(s + innerStart, innerLen);
-        node_name = path.size() > 0 ? path.back() : empty_str;
-        callback(node_name, path, str, innerStart, innerLen, reference);
-      }
-    }
     if (path.size() > 0) path.erase(path.size() - 1);
     if (contentStarts.size() > 0) contentStarts.erase(contentStarts.size() - 1);
     return gt + 1;
@@ -168,6 +167,23 @@ class XMLParser {
       path.push_back(node_name);
       int contentStart = gt + 1;
       contentStarts.push_back(contentStart);
+      // extract raw attribute text (between name end and tag end), exclude
+      // trailing '/' for self-closing tags
+      int attrStart = nameEnd;
+      int attrEnd = gt;
+      // back up one if tag ends with '/>'
+      int back = gt - 1;
+      while (back > lt && isspace((unsigned char)s[back])) back--;
+      if (back > lt && s[back] == '/') attrEnd = back;
+      // trim leading/trailing whitespace for attributes
+      while (attrStart < attrEnd && isspace((unsigned char)s[attrStart]))
+        attrStart++;
+      while (attrEnd > attrStart && isspace((unsigned char)s[attrEnd - 1]))
+        attrEnd--;
+      if (attrEnd > attrStart)
+        last_attributes.copyFrom(s + attrStart, attrEnd - attrStart);
+      else
+        last_attributes.set("");
     }
   }
 
@@ -186,16 +202,21 @@ class XMLParser {
     return lt;  // not a comment/PI
   }
 
-  void handleTrailingText(const char* s, int len) {
-    int ts = 0;
-    int te = len;
-    while (ts < te && isspace((unsigned char)s[ts])) ts++;
-    while (te > ts && isspace((unsigned char)s[te - 1])) te--;
-    if (te > ts && callback) {
-      str.copyFrom(s + ts, te - ts);
-      node_name = path.size() > 0 ? path.back() : empty_str;
-      callback(node_name, path, str, ts, te - ts, reference);
+  // Helper: invoke the registered callback but pass a path that excludes the
+  // current node (only ancestor elements). This keeps the `nodeName`
+  // parameter as the current element while `path` contains only parents.
+  void invokeCallback(Str& nodeName, Vector<Str>& fullPath, Str& text,
+                      Str& attributes, int start, int len) {
+    if (!callback) return;
+    if (report_text_only && text.isEmpty()) return;
+    Vector<Str> ancestorPath;
+    int ancCount = fullPath.size() > 0 ? (int)fullPath.size() - 1 : 0;
+    for (int i = 0; i < ancCount; ++i) {
+      // Make a fresh copy of the ancestor name to avoid any aliasing
+      // or lifetime issues with parser-owned storage.
+      ancestorPath.push_back(Str(fullPath[i].c_str()));
     }
+    callback(nodeName, ancestorPath, text, attributes, start, len, reference);
   }
   // Run the parser. This is a small, forgiving parser suitable for the
   // embedded use-cases in this project (DIDL fragments, simple SCPD parsing).
@@ -259,10 +280,6 @@ class XMLParser {
       }
     }
 
-    // trailing text
-    int firstLt = str_view.indexOf('<', 0);
-    if (firstLt < 0) firstLt = 0;
-    if (firstLt < len) handleTrailingText(s, len);
   }
 };
 

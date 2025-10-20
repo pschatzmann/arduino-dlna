@@ -3,8 +3,8 @@
 #include <functional>
 
 #include "DLNAControlPointRequestParser.h"
+#include "DLNADeviceInfo.h"
 #include "DLNADevice.h"
-#include "DLNADeviceMgr.h"
 #include "Schedule.h"
 #include "Scheduler.h"
 #include "basic/StrPrint.h"
@@ -158,7 +158,7 @@ class DLNAControlPointMgr {
   }
 
   /// Subscribe to changes for all device services
-  bool subscribeNotifications(DLNADevice& device, int timeoutSeconds = 60) {
+  bool subscribeNotifications(DLNADeviceInfo& device, int timeoutSeconds = 60) {
     if (p_http_server==nullptr){
       DlnaLogger.log(DlnaLogLevel::Error, "HttpServer not defined - cannot subscribe to notifications");
       return false;
@@ -192,7 +192,7 @@ class DLNAControlPointMgr {
       DlnaLogger.log(DlnaLogLevel::Error, "HttpServer not defined - cannot subscribe to notifications");
       return false;
     }
-    DLNADevice& device = getDevice(service);
+    DLNADeviceInfo& device = getDevice(service);
 
     char url_buffer[200] = {0};
     char seconds_txt[80] = {0};
@@ -268,10 +268,10 @@ class DLNAControlPointMgr {
   }
 
   /// Provides the device information by index
-  DLNADevice& getDevice(int deviceIdx = 0) { return devices[deviceIdx]; }
+  DLNADeviceInfo& getDevice(int deviceIdx = 0) { return devices[deviceIdx]; }
 
   /// Provides the device for a service
-  DLNADevice& getDevice(DLNAServiceInfo& service) {
+  DLNADeviceInfo& getDevice(DLNAServiceInfo& service) {
     for (auto& dev : devices) {
       for (auto& srv : dev.getServices()) {
         if (srv == srv) return dev;
@@ -281,7 +281,7 @@ class DLNAControlPointMgr {
   }
 
   /// Get a device for a Url
-  DLNADevice& getDevice(Url location) {
+  DLNADeviceInfo& getDevice(Url location) {
     for (auto& dev : devices) {
       if (dev.getDeviceURL() == location) {
         return dev;
@@ -290,10 +290,10 @@ class DLNAControlPointMgr {
     return NO_DEVICE;
   }
 
-  Vector<DLNADevice>& getDevices() { return devices; }
+  Vector<DLNADeviceInfo>& getDevices() { return devices; }
 
   /// Adds a new device
-  bool addDevice(DLNADevice dev) {
+  bool addDevice(DLNADeviceInfo dev) {
     dev.updateTimestamp();
     for (auto& existing_device : devices) {
       if (dev.getUDN() == existing_device.getUDN()) {
@@ -310,7 +310,7 @@ class DLNAControlPointMgr {
 
   /// Adds the device from the device xml url if it does not already exist
   bool addDevice(Url url) {
-    DLNADevice& device = getDevice(url);
+    DLNADeviceInfo& device = getDevice(url);
     if (device != NO_DEVICE) {
       // device already exists
       device.setActive(true);
@@ -337,7 +337,7 @@ class DLNAControlPointMgr {
     req.stop();
 
     // parse xml
-    DLNADevice new_device;
+    DLNADeviceInfo new_device;
     XMLDeviceParser parser;
     parser.parse(new_device, strings, xml.c_str());
     new_device.device_url = url;
@@ -355,12 +355,12 @@ class DLNAControlPointMgr {
   Scheduler scheduler;
   DLNAHttpRequest* p_http = nullptr;
   IUDPService* p_udp = nullptr;
-  Vector<DLNADevice> devices;
+  Vector<DLNADeviceInfo> devices;
   Vector<ActionRequest> actions;
   XMLPrinter xml;
   bool is_active = false;
   bool is_parse_device = false;
-  DLNADevice NO_DEVICE{false};
+  DLNADeviceInfo NO_DEVICE{false};
   const char* search_target;
   StringRegistry strings;
   Url local_url;
@@ -450,7 +450,7 @@ class DLNAControlPointMgr {
 
     // Simple callback: whenever the parser reports a text node (non-empty
     // `text`), treat `nodeName` as the variable name and `text` as its value.
-    auto cb = [](Str& nodeName, Vector<Str>& /*path*/, Str& text, int /*start*/,
+    auto cb = [](Str& nodeName, Vector<Str>& /*path*/, Str& text, Str& /*attributes*/, int /*start*/,
                  int /*len*/, void* vref) {
       CBRef* r = static_cast<CBRef*>(vref);
       if (text.length() > 0 && r->self && r->self->eventCallback) {
@@ -545,7 +545,7 @@ class DLNAControlPointMgr {
 
   ActionReply postAction(ActionRequest& action) {
     DLNAServiceInfo& service = *action.p_service;
-    DLNADevice& device = getDevice(service);
+    DLNADeviceInfo& device = getDevice(service);
 
     // create XML
     StrPrint str_print;
@@ -629,7 +629,7 @@ class DLNAControlPointMgr {
           cbref.self = this;
           cbref.out = &result;
 
-          auto xmlcb = [](Str& nodeName, Vector<Str>& /*path*/, Str& text,
+          auto xmlcb = [](Str& nodeName, Vector<Str>& /*path*/, Str& text, Str& /*attributes*/,
                           int /*start*/, int /*len*/, void* vref) {
             CBRef* r = static_cast<CBRef*>(vref);
             // trim text and ignore empty nodes
@@ -667,7 +667,7 @@ class DLNAControlPointMgr {
     return result;
   }
 
-  const char* getUrl(DLNADevice& device, const char* suffix, const char* buffer,
+  const char* getUrl(DLNADeviceInfo& device, const char* suffix, const char* buffer,
                      int len) {
     StrView url_str{(char*)buffer, len};
     url_str = device.getBaseURL();

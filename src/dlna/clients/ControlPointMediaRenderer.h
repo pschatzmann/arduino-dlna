@@ -482,7 +482,7 @@ class ControlPointMediaRenderer {
 
   // Select service on a device filtered by device_type_filter
   DLNAServiceInfo& selectService(const char* id) {
-    Vector<DLNADevice>& all = mgr.getDevices();
+    Vector<DLNADeviceInfo>& all = mgr.getDevices();
     int idx = 0;
     for (auto& d : all) {
       const char* dt = d.getDeviceType();

@@ -1,315 +1,310 @@
-
 #pragma once
 
-#include <functional>  // std::bind
-
-#include "DLNAServiceInfo.h"
-#include "StringRegistry.h"
-#include "basic/Icon.h"
-#include "basic/Vector.h"
-#include "service/Action.h"
-#include "vector"
-#include "xml/XMLPrinter.h"
+#include "DLNADeviceInfo.h"
+#include "DLNADevice.h"
+#include "DLNADeviceRequestParser.h"
+#include "Schedule.h"
+#include "SubscriptionMgr.h"
+#include "basic/Url.h"
+#include "http/HttpServer.h"
 
 namespace tiny_dlna {
 
 /**
- * @brief Device Attributes and generation of XML using
- * urn:schemas-upnp-org:device-1-0. We could just return a predefined device xml
- * document, but we provide a dynamic generation of the service xml which should
- * be more memory efficient.
- * Strings are represented as char*, so you can assign values that are stored in
- * ProgMem to mimimize the RAM useage. If you need to keep the values on the
- * heap you can use addString() method.
+ * @brief Setup of a Basic DLNA Device service. The device registers itself to
+ * the network and answers to the DLNA queries and requests. A DLNA device uses
+ * UDP, Http, XML and Soap to discover and manage a service, so there is quite
+ * some complexity involved:
+ * - We handle the UDP communication via a Scheduler and a Request Parser
+ * - We handle the Http request with the help of the TinyHttp Server
+ * - The XML service descriptions can be stored as char arrays in progmem or
+ * generated dynamically with the help of the XMLPrinter class.
  * @author Phil Schatzmann
  */
-
 class DLNADevice {
-  friend class XMLDeviceParser;
-  friend class DLNAControlPointMgr;
-  friend class DLNADeviceMgr;
-
  public:
-  DLNADevice(bool ok = true) { is_active = true; }
-  ~DLNADevice() { DlnaLogger.log(DlnaLogLevel::Debug, "~DLNADevice()"); }
+  /// start the
+  bool begin(DLNADeviceInfo& device, IUDPService& udp, HttpServer& server) {
+    DlnaLogger.log(DlnaLogLevel::Info, "DLNADevice::begin");
 
-  /// Override to initialize the device
-  virtual bool begin() { return true; } 
+    p_server = &server;
+    p_udp = &udp;
+    setDevice(device);
+    setupParser();
 
-  /// renderes the device xml
-  void print(Print& out) {
-    xml.setOutput(out);
-    xml.printXMLHeader();
-    auto printRootCb = std::bind(&DLNADevice::printRoot, this);
-    xml.printNode("root", printRootCb, ns);
-  }
+    // check base url
+    const char* baseUrl = device.getBaseURL();
+    DlnaLogger.log(DlnaLogLevel::Info, "base URL: %s", baseUrl);
 
-  // sets the device type (ST or NT)
-  void setDeviceType(const char* st) { device_type = st; }
-
-  const char* getDeviceType() { return device_type; }
-
-  /// Define the udn uuid
-  void setUDN(const char* id) { udn = id; }
-
-  /// Provide the udn uuid
-  const char* getUDN() { return udn; }
-
-  /// Defines the base url
-  void setBaseURL(const char* url) { base_url = url; }
-  /// Defines the base URL
-  void setBaseURL(IPAddress ip, int port, const char* path="") { 
-    localhost = ip;
-    static Str str = "http://";
-    str += ip[0];
-    str += ".";
-    str += ip[1];
-    str += ".";
-    str += ip[2];
-    str += ".";
-    str += ip[3];
-    str += ":";
-    str += port;
-    if (!StrView(path).startsWith("/")){
-      str += "/";
+    if (StrView(device.getBaseURL()).contains("localhost")) {
+      DlnaLogger.log(DlnaLogLevel::Error, "invalid base address: %s", baseUrl);
+      return false;
     }
-    str += path;
-    setBaseURL(str.c_str());
-   }
 
-  /// Provides the base url
-  const char* getBaseURL() {
-    // replace localhost url
-    if (StrView(base_url).contains("localhost")) {
-      url_str = base_url;
-      url_str.replace("localhost", getIPStr());
-      base_url = url_str.c_str();
-     }
-    return base_url;
-  }
-
-  /// This method returns base url/device.xml
-  Url& getDeviceURL() {
-    if (!device_url) {
-      Str str = getBaseURL();
-      if (!str.endsWith("/")) str += "/";
-      str += "device.xml";
-      Url new_url(str.c_str());
-      device_url = new_url;
+    // setup device
+    device.setupServices(server, udp);
+    if (!device.begin()) {
+      DlnaLogger.log(DlnaLogLevel::Error, "Device begin failed");
+      return false;
     }
-    return device_url;
+
+    // setup web server
+    if (!setupDLNAServer(server)) {
+      DlnaLogger.log(DlnaLogLevel::Error, "setupDLNAServer failed");
+      return false;
+    }
+
+    // start web server
+    Url url{baseUrl};
+    if (!p_server->begin(url.port())) {
+      DlnaLogger.log(DlnaLogLevel::Error, "Server failed");
+      return false;
+    }
+
+    // setup UDP
+    if (!p_udp->begin(DLNABroadcastAddress)) {
+      DlnaLogger.log(DlnaLogLevel::Error, "UDP begin failed");
+      return false;
+    }
+
+    if (!setupScheduler()) {
+      DlnaLogger.log(DlnaLogLevel::Error, "Scheduler failed");
+      return false;
+    }
+
+    is_active = true;
+    DlnaLogger.log(DlnaLogLevel::Info, "Device successfully started");
+    // expose singleton for subscription publishing
+    instance = this;
+    return true;
   }
 
-  /// Defines the local IP address
-  void setIPAddress(IPAddress address) { localhost = address; }
-
-  /// Provides the local IP address
-  IPAddress getIPAddress() { return localhost; }
-
-  /// Provides the local address as string
-  const char* getIPStr() {
-    static char result[80] = {0};
-    snprintf(result, 80, "%d.%d.%d.%d", localhost[0], localhost[1],
-             localhost[2], localhost[3]);
-    return result;
+  static SubscriptionMgr* getSubscriptionMgr() {
+    return instance ? &instance->subscriptionMgr : nullptr;
   }
 
-  void setNS(const char* ns) { this->ns = ns; }
-  const char* getNS() { return ns; }
-  void setFriendlyName(const char* name) { friendly_name = name; }
-  const char* getFriendlyName() { return friendly_name; }
-  void setManufacturer(const char* man) { manufacturer = man; }
-  const char* getManufacturer() { return manufacturer; }
-  void setManufacturerURL(const char* url) { manufacturer_url = url; }
-  const char* getManufacturerURL() { return manufacturer_url; }
-  void setModelDescription(const char* descr) { model_description = descr; }
-  const char* getModelDescription() { return model_description; }
-  void setModelName(const char* name) { model_name = name; }
-  const char* getModelName() { return model_name; }
-  void setModelNumber(const char* number) { model_number = number; }
-  const char* getModelNumber() { return model_number; }
-  void setSerialNumber(const char* sn) { serial_number = sn; }
-  const char* getSerialNumber() { return serial_number; }
-  void setUniveralProductCode(const char* upc) { universal_product_code = upc; }
-  const char* getUniveralProductCode() { return universal_product_code; }
+  /// Stops the processing and releases the resources
+  void end() {
+    p_server->end();
 
-  /// Adds a service defintion
-  void addService(DLNAServiceInfo s) { services.push_back(s); }
+    // send 3 bye messages
+    PostByeSchedule* bye = new PostByeSchedule(*p_device);
+    bye->repeat_ms = 800;
+    scheduler.add(bye);
 
-  /// Finds a service definition by name
-  DLNAServiceInfo& getService(const char* id) {
-    static DLNAServiceInfo result{false};
-    for (auto& service : services) {
-      if (StrView(service.service_id).contains(id)) {
-        return service;
+    // execute scheduler for 2 seconds
+    uint64_t end = millis() + 2000;
+    while (millis() < end) {
+      scheduler.execute(*p_udp);
+    }
+
+    is_active = false;
+  }
+
+  /// call this method in the Arduino loop as often as possible
+  bool loop() {
+    if (!is_active) return false;
+
+    // handle server requests
+    bool rc = p_server->doLoop();
+    DlnaLogger.log(DlnaLogLevel::Debug, "server %s", rc ? "true" : "false");
+
+    if (isSchedulerActive()) {
+      // process UDP requests
+      RequestData req = p_udp->receive();
+      if (req) {
+        Schedule* schedule = parser.parse(*p_device, req);
+        if (schedule != nullptr) {
+          scheduler.add(schedule);
+        }
       }
+
+      // execute scheduled udp replys
+      scheduler.execute(*p_udp);
     }
-    return result;
+
+    // be nice, if we have other tasks
+    p_device->loop();
+
+    return true;
   }
 
-  Vector<DLNAServiceInfo>& getServices() { return services; }
-
-  void clear() {
-    services.clear();
-    udn = nullptr;
-    ns = nullptr;
-    device_type = nullptr;
-    friendly_name = nullptr;
-    manufacturer = nullptr;
-    manufacturer_url = nullptr;
-    model_description = nullptr;
-    model_name = nullptr;
-    model_number = nullptr;
-    serial_number = nullptr;
-    universal_product_code = nullptr;
+  /// Provide addess to the service information
+  DLNAServiceInfo getService(const char* id) {
+    return p_device->getService(id);
   }
 
-  /// Overwrite the default icon
-  void clearIcons() { icons.clear(); }
-  void addIcon(Icon icon) { icons.push_back(icon); }
-  Icon getIcon(int idx = 0) { 
-    if (icons.size()==0){
-      Icon empty;
-      return empty;
-    }
-    return icons[idx]; }
+  /// Provides the device
+  DLNADeviceInfo& getDevice() { return *p_device; }
 
-  operator bool() { return is_active; }
+  /// We can activate/deactivate the scheduler
+  void setSchedulerActive(bool flag) { scheduler_active = flag; }
 
-  /// Update the timestamp
-  void updateTimestamp() { timestamp = millis(); }
+  /// Checks if the scheduler is active
+  bool isSchedulerActive() { return scheduler_active; }
 
-  /// Returns the time when this object has been updated
-  uint32_t getTimestamp() { return timestamp; }
-
-  void setActive(bool flag) { is_active = flag; }
-
-  virtual void loop(){
-    delay(1);
-  }
+  /// Repeat the post-alive messages (default: 0 = no repeat). Call this method
+  /// before calling begin!
+  void setPostAliveRepeatMs(uint32_t ms) { post_alive_repeat_ms = ms; }
 
  protected:
-  uint64_t timestamp = 0;
-  bool is_active = true;
-  XMLPrinter xml;
-  Url device_url;
-  IPAddress localhost;
-  int version_major = 1;
-  int version_minor = 0;
-  const char* base_url = "http://localhost:9876/dlna";
-  const char* udn = "uuid:09349455-2941-4cf7-9847-0dd5ab210e97";
-  const char* ns = "xmlns=\"urn:schemas-upnp-org:device-1-0\"";
-  const char* device_type = nullptr;
-  const char* friendly_name = nullptr;
-  const char* manufacturer = nullptr;
-  const char* manufacturer_url = nullptr;
-  const char* model_description = nullptr;
-  const char* model_name = nullptr;
-  const char* model_url = nullptr;
-  const char* model_number = nullptr;
-  const char* serial_number = nullptr;
-  const char* universal_product_code = nullptr;
-  Icon icon;
-  Vector<DLNAServiceInfo> services;
-  Vector<Icon> icons;
-  Str url_str; 
+  Scheduler scheduler;
+  DLNADeviceRequestParser parser;
+  IUDPService* p_udp = nullptr;
+  DLNADeviceInfo* p_device = nullptr;
+  HttpServer* p_server = nullptr;
+  bool is_active = false;
+  bool scheduler_active = true;
+  uint32_t post_alive_repeat_ms = 0;
+  SubscriptionMgr subscriptionMgr;
+  inline static DLNADevice* instance = nullptr;
 
-  /// to be implemented by subclasses
-  virtual void setupServices(HttpServer& server, IUDPService& udp){}
- 
-  size_t printRoot() {
-    size_t result = 0;
-    auto printSpecVersionB = std::bind(&DLNADevice::printSpecVersion, this);
-    result += xml.printNode("specVersion", printSpecVersionB);
-    result += xml.printNode("URLBase", base_url);
-    auto printDeviceB = std::bind(&DLNADevice::printDevice, this);
-    result += xml.printNode("device", printDeviceB);
-    return result;
+  void setDevice(DLNADeviceInfo& device) { p_device = &device; }
+
+  /// MSearch requests reply to upnp:rootdevice and the device type defined in
+  /// the device
+  bool setupParser() {
+    parser.addMSearchST("upnp:rootdevice");
+    parser.addMSearchST("ssdp:all");
+    parser.addMSearchST(p_device->getUDN());
+    parser.addMSearchST(p_device->getDeviceType());
+    return true;
   }
 
-  size_t printDevice() {
-    size_t result = 0;
-    result += xml.printNode("deviceType", getDeviceType());
-    result += xml.printNode("friendlyName", friendly_name);
-    result += xml.printNode("manufacturer", manufacturer);
-    result += xml.printNode("manufacturerURL", manufacturer_url);
-    result += xml.printNode("modelDescription", model_description);
-    result += xml.printNode("modelName", model_name);
-    result += xml.printNode("modelNumber", model_number);
-    result += xml.printNode("modelURL", model_url);
-    result += xml.printNode("serialNumber", serial_number);
-    result += xml.printNode("UDN", getUDN());
-    result += xml.printNode("UPC", universal_product_code);
-    auto printIconListCb = std::bind(&DLNADevice::printIconList, this);
-    result += xml.printNode("iconList", printIconListCb);
-    auto printServiceListCb = std::bind(&DLNADevice::printServiceList, this);
-    result += xml.printNode("serviceList", printServiceListCb);
-    return result;
+  /// Schedule PostAlive messages
+  bool setupScheduler() {
+    // schedule post alive messages: Usually repeated 2 times (because UDP
+    // messages might be lost)
+    PostAliveSchedule* postAlive =
+        new PostAliveSchedule(*p_device, post_alive_repeat_ms);
+    PostAliveSchedule* postAlive1 =
+        new PostAliveSchedule(*p_device, post_alive_repeat_ms);
+    postAlive1->time = millis() + 100;
+    scheduler.add(postAlive);
+    scheduler.add(postAlive1);
+    return true;
   }
 
-  size_t printSpecVersion() {
-    char major[5], minor[5];
-    sprintf(major, "%d", this->version_major);
-    sprintf(minor, "%d", this->version_minor);
-    return xml.printNode("major", major) + xml.printNode("minor", minor);
-  }
-
-  size_t printServiceList() {
-    size_t result = 0;
-    for (auto& service : services) {
-      auto printServiceCb =
-          std::bind(&DLNADevice::printService, this, &service);
-      result += xml.printNode("service", printServiceCb);
-    }
-    return result;
-  }
-
-  size_t printService(void* srv) {
-    size_t result = 0;
+  /// set up Web Server to handle Service Addresses
+  virtual bool setupDLNAServer(HttpServer& srv) {
     char buffer[DLNA_MAX_URL_LEN] = {0};
     StrView url(buffer, DLNA_MAX_URL_LEN);
-    DLNAServiceInfo* service = (DLNAServiceInfo*)srv;
-    result += xml.printNode("serviceType", service->service_type);
-    result += xml.printNode("serviceId", service->service_id);
-    result += xml.printNode("SCPDURL",
-                            url.buildPath(base_url, service->scpd_url));
-    result += xml.printNode(
-        "controlURL", url.buildPath(base_url, service->control_url));
-    result += xml.printNode(
-        "eventSubURL", url.buildPath(base_url, service->event_sub_url));
-    return result;
+
+    // add device url to server
+    const char* device_path = p_device->getDeviceURL().path();
+    const char* prefix = p_device->getBaseURL();
+
+    DlnaLogger.log(DlnaLogLevel::Info, "Setting up device path: %s",
+                   device_path);
+    void* ref[] = {p_device};
+
+    if (!StrView(device_path).isEmpty()) {
+      p_server->rewrite("/", device_path);
+      p_server->rewrite("/dlna/device.xml", device_path);
+      p_server->rewrite("/index.html", device_path);
+      p_server->on(device_path, T_GET, deviceXMLCallback, ref, 1);
+    }
+
+    // Register icon and privide favicon.ico
+    Icon icon = p_device->getIcon();
+    if (icon.icon_data != nullptr) {
+      char tmp[DLNA_MAX_URL_LEN];
+      // const char* icon_path = url.buildPath(prefix, icon.icon_url);
+      p_server->on(icon.icon_url, T_GET, icon.mime,
+                   (const uint8_t*)icon.icon_data, icon.icon_size);
+      p_server->on("/favicon.ico", T_GET, icon.mime,
+                   (const uint8_t*)icon.icon_data, icon.icon_size);
+    }
+
+    // Register Service URLs
+    for (DLNAServiceInfo& service : p_device->getServices()) {
+      p_server->on(service.scpd_url, T_GET, service.scp_cb, ref, 1);
+      p_server->on(service.control_url, T_POST, service.control_cb, ref, 1);
+      // register event subscription handler - wrappers for
+      // SUBSCRIBE/UNSUBSCRIBE
+      auto eventHandler = [](HttpServer* server, const char* requestPath,
+                             HttpRequestHandlerLine* hl) {
+        // context[0] contains DLNADevice*
+        DLNADeviceInfo* device = (DLNADeviceInfo*)(hl->context[0]);
+        if (!device) {
+          server->replyNotFound();
+          return;
+        }
+        // header parsing
+        HttpRequestHeader& req = server->requestHeader();
+        // SUBSCRIBE handling
+        if (req.method() == T_SUBSCRIBE) {
+          const char* cb = req.get("CALLBACK");
+          const char* timeout = req.get("TIMEOUT");
+          Str cbStr;
+          if (cb) {
+            cbStr = cb;
+            cbStr.replace("<", "");
+            cbStr.replace(">", "");
+          }
+          uint32_t tsec = 1800;
+          if (timeout && StrView(timeout).startsWith("Second-")) {
+            tsec = atoi(timeout + 7);
+          }
+          // Use the service event path as key for subscriptions
+          const char* svcKey = requestPath;
+          if (DLNADevice::instance) {
+            Str sid = DLNADevice::instance->subscriptionMgr.subscribe(
+                svcKey, cbStr.c_str(), tsec);
+            server->replyHeader().setValues(200, "OK");
+            server->replyHeader().put("SID", sid.c_str());
+            server->replyHeader().put("TIMEOUT", "Second-1800");
+            server->replyHeader().write(server->client());
+            server->endClient();
+            return;
+          }
+          server->replyNotFound();
+          return;
+        }
+        // UNSUBSCRIBE: handle via SID header
+        if (req.method() == T_POST) {
+          // Some stacks use POST for unsubscribe; try to handle SID
+          const char* sid = req.get("SID");
+          if (sid && DLNADevice::instance) {
+            bool ok = DLNADevice::instance->subscriptionMgr.unsubscribe(
+                requestPath, sid);
+            if (ok) {
+              server->replyOK();
+              return;
+            }
+          }
+        }
+        // default reply OK
+        server->replyOK();
+      };
+
+      p_server->on(service.event_sub_url, T_GET, eventHandler, ref, 1);
+    }
+
+    return true;
   }
 
-  size_t printIconList() {
-    // make sure we have at least the default icon
-    Icon icon;
-    if (icons.empty()) {
-      icons.push_back(icon);
-    }
-    int result = 0;
+  /// callback to provide device XML
+  static void deviceXMLCallback(HttpServer* server, const char* requestPath,
+                                HttpRequestHandlerLine* hl) {
+    DLNADeviceInfo* device_xml = (DLNADeviceInfo*)(hl->context[0]);
+    assert(device_xml != nullptr);
+    if (device_xml != nullptr) {
+      Client& client = server->client();
+      assert(&client != nullptr);
+      DlnaLogger.log(DlnaLogLevel::Info, "reply %s", "DeviceXML");
+      server->replyHeader().setValues(200, "SUCCESS");
+      server->replyHeader().put(CONTENT_TYPE, "text/xml");
+      server->replyHeader().put(CONNECTION, CON_KEEP_ALIVE);
+      server->replyHeader().write(client);
 
-    // print all icons
-    for (auto icon : icons) {
-      auto printIconDlnaInfoCb =
-          std::bind(&DLNADevice::printIconDlnaInfo, this, icon);
-      result += xml.printNode("icon", printIconDlnaInfoCb);
+      // print xml result
+      device_xml->print(client);
+      server->endClient();
+    } else {
+      DlnaLogger.log(DlnaLogLevel::Error, "DLNADevice is null");
+      server->replyNotFound();
     }
-    return result;
-  }
-
-  size_t printIconDlnaInfo(Icon& icon) {
-    size_t result = 0;
-    if (!StrView(icon.icon_url).isEmpty()) {
-      char buffer[DLNA_MAX_URL_LEN] = {0};
-      StrView url(buffer, DLNA_MAX_URL_LEN);
-      result += xml.printNode("mimetype", "image/png");
-      result += xml.printNode("width", icon.width);
-      result += xml.printNode("height", icon.height);
-      result += xml.printNode("depth", icon.depth);
-      result +=
-          xml.printNode("url", url.buildPath(base_url, icon.icon_url));
-    }
-    return result;
   }
 };
 
