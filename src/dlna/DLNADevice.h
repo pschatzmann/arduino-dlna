@@ -19,6 +19,7 @@ namespace tiny_dlna {
  * - We handle the Http request with the help of the TinyHttp Server
  * - The XML service descriptions can be stored as char arrays in progmem or
  * generated dynamically with the help of the XMLPrinter class.
+ * 
  * @author Phil Schatzmann
  */
 class DLNADevice {
