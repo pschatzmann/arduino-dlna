@@ -3,7 +3,7 @@
 
 ## Brief
 
-This library provides the functionality to implement a UPnP/DLNA [device](https://pschatzmann.github.io/arduino-dlna/docs/html/classtiny__dlna_1_1DLNADeviceMgr.html) and a [control point](https://pschatzmann.github.io/arduino-dlna/docs/html/classtiny__dlna_1_1DLNAControlPointMgr.html) for Arduino.
+This library provides the functionality to implement a UPnP/DLNA [device](https://pschatzmann.github.io/arduino-dlna/classtiny__dlna_1_1DLNADeviceMgr.html) and a [control point](https://pschatzmann.github.io/arduino-dlna/classtiny__dlna_1_1DLNAControlPointMgr.html) for Arduino.
 
 The Digital Living Network Alliance (DLNA) aims to establish interoperability among PCs, consumer appliances, and mobile devices across wired and wireless networks. The goal is to provide a common solution for sharing digital media and content services.
 
@@ -43,18 +43,18 @@ A DLNA device uses UDP, HTTP, XML and SOAP to discover and manage services, whic
 
 I implemented the functionality from scratch using the basic Arduino network API and avoided external dependencies where possible.
 
-The [DLNAControlPointMgr](https://pschatzmann.github.io/arduino-dlna/docs/html/classtiny__dlna_1_1DLNAControlPointMgr.html) sets up a control point and lets you execute actions.
-The [DLNADeviceMgr](https://pschatzmann.github.io/arduino-dlna/docs/html/classtiny__dlna_1_1DLNADeviceMgr.html) class provides the setup for a basic DLNA device service. Devices are represented by the [DLNADevice](https://pschatzmann.github.io/arduino-dlna/docs/html/classtiny__dlna_1_1DLNADevice.html) class. A device registers itself on the network and answers UDP DLNA queries and requests:
+The [DLNAControlPointMgr](https://pschatzmann.github.io/arduino-dlna/classtiny__dlna_1_1DLNAControlPointMgr.html) sets up a control point and lets you execute actions.
+The [DLNADeviceMgr](https://pschatzmann.github.io/arduino-dlna/classtiny__dlna_1_1DLNADeviceMgr.html) class provides the setup for a basic DLNA device service. Devices are represented by the [DLNADevice](https://pschatzmann.github.io/arduino-dlna/classtiny__dlna_1_1DLNADevice.html) class. A device registers itself on the network and answers UDP DLNA queries and requests:
 
-- UDP communication is handled via a [Scheduler](https://pschatzmann.github.io/arduino-dlna/docs/html/classtiny__dlna_1_1Scheduler.html) and a [Request Parser](https://pschatzmann.github.io/arduino-dlna/docs/html/classtiny__dlna_1_1DLNARequestParser.html).
-- HTTP requests are handled with the bundled [TinyHttp Server](https://pschatzmann.github.io/arduino-dlna/docs/html/classtiny__dlna_1_1HttpServer.html).
-- XML service descriptions can be stored as char arrays in progmem or generated dynamically using the [XMLPrinter](https://pschatzmann.github.io/arduino-dlna/docs/html/structtiny__dlna_1_1XMLPrinter.html) class.
+- UDP communication is handled via a [Scheduler](https://pschatzmann.github.io/arduino-dlna/classtiny__dlna_1_1Scheduler.html) and a [Request Parser](https://pschatzmann.github.io/arduino-dlna/classtiny__dlna_1_1DLNARequestParser.html).
+- HTTP requests are handled with the bundled [TinyHttp Server](https://pschatzmann.github.io/arduino-dlna/classtiny__dlna_1_1HttpServer.html).
+- XML service descriptions can be stored as char arrays in progmem or generated dynamically using the [XMLPrinter](https://pschatzmann.github.io/arduino-dlna/structtiny__dlna_1_1XMLPrinter.html) class.
 
 Developing and debugging on a microcontroller is tedious; therefore this project can also be compiled and run on a __Linux desktop__.
 
 ## Project Documentation
 
 * [Wiki](https://github.com/pschatzmann/arduino-dlna/wiki)
-* [Class Documentation](https://pschatzmann.github.io/arduino-dlna/docs/html/annotated.html)
+* [Class Documentation](https://pschatzmann.github.io/arduino-dlna/annotated.html)
 
 
