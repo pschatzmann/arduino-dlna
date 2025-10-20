@@ -82,13 +82,16 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>Represents a request to invoke a remote DLNA service action.  
+ <a href="classtiny__dlna_1_1ActionRequest.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="Action_8h_source.html">Action.h</a>&gt;</code></p>
 <div class="dynheader">
 Collaboration diagram for tiny_dlna::ActionRequest:</div>
 <div class="dyncontent">
 <div class="center"><img src="classtiny__dlna_1_1ActionRequest__coll__graph.png" border="0" usemap="#atiny__dlna_1_1ActionRequest_coll__map" alt="Collaboration graph"/></div>
 <map name="atiny__dlna_1_1ActionRequest_coll__map" id="atiny__dlna_1_1ActionRequest_coll__map">
-<area shape="rect" title=" " alt="" coords="2188,50,2372,75"/>
+<area shape="rect" title="Represents a request to invoke a remote DLNA service action." alt="" coords="2188,50,2372,75"/>
 <area shape="rect" href="classtiny__dlna_1_1DLNAServiceInfo.html" title="Attributes needed for the DLNA Service Definition." alt="" coords="1875,87,2073,113"/>
 <area shape="rect" href="classtiny__dlna_1_1HttpServer.html" title="A Simple Header only implementation of Http Server that allows the registration of callback functions..." alt="" coords="1577,213,1737,238"/>
 <area shape="rect" href="classtiny__dlna_1_1HttpRequestHeader.html" title="Reading and writing of Http Requests." alt="" coords="1205,237,1424,262"/>
@@ -113,7 +116,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a27485e7a956725486e6e1ff55e166362"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1ActionRequest.html#a27485e7a956725486e6e1ff55e166362">ActionRequest</a> ()=default</td></tr>
 <tr class="separator:a27485e7a956725486e6e1ff55e166362"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adda62b3f790daa973179594d4077c1bf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1ActionRequest.html#adda62b3f790daa973179594d4077c1bf">ActionRequest</a> (<a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html">DLNAServiceInfo</a> &amp;srv, const char *act)</td></tr>
-<tr class="memdesc:adda62b3f790daa973179594d4077c1bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a request to invoke a DLNA service action.  <br /></td></tr>
 <tr class="separator:adda62b3f790daa973179594d4077c1bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2ef3f8fe5fcb0bfbe38b43683f471360"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1ActionRequest.html#a2ef3f8fe5fcb0bfbe38b43683f471360">addArgument</a> (<a class="el" href="classtiny__dlna_1_1Argument.html">Argument</a> arg)</td></tr>
 <tr class="separator:a2ef3f8fe5fcb0bfbe38b43683f471360"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -140,7 +142,10 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:a0a21c9a7f2a5aa8dfbf917740aeec333"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1ActionRequest.html#a0a21c9a7f2a5aa8dfbf917740aeec333">is_valid</a> = false</td></tr>
 <tr class="separator:a0a21c9a7f2a5aa8dfbf917740aeec333"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Represents a request to invoke a remote DLNA service action. </p>
+<p>An <a class="el" href="classtiny__dlna_1_1ActionRequest.html" title="Represents a request to invoke a remote DLNA service action.">ActionRequest</a> contains a pointer to the target <code><a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html" title="Attributes needed for the DLNA Service Definition.">DLNAServiceInfo</a></code>, the action name to call and a list of input <code><a class="el" href="classtiny__dlna_1_1Argument.html" title="DLNA Service: Action Argument.">Argument</a></code> items. It is used by the control point to serialize and post a SOAP request to the service's control URL. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a27485e7a956725486e6e1ff55e166362" name="a27485e7a956725486e6e1ff55e166362"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a27485e7a956725486e6e1ff55e166362">&#9670;&#160;</a></span>ActionRequest() <span class="overload">[1/2]</span></h2>
 
@@ -199,20 +204,6 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Represents a request to invoke a DLNA service action. </p>
-<p>An <a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> bundles the target service (<code>p_service</code>), the action name (<code>action</code>) and a collection of input arguments. It is used by the control point when building and posting SOAP requests to a service's control URL.</p>
-<p>Fields:</p><ul>
-<li><code>p_service</code>: pointer to the target <code><a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html" title="Attributes needed for the DLNA Service Definition.">DLNAServiceInfo</a></code> describing the service to call (may be null until assigned).</li>
-<li><code>action</code>: name of the action to invoke (e.g. "SetAVTransportURI").</li>
-<li><code>arguments</code>: list of input <code><a class="el" href="classtiny__dlna_1_1Argument.html" title="DLNA Service: Action Argument.">Argument</a></code> items to include in the SOAP request body.</li>
-<li><code>result_count</code>: optional counter used by callers to track returned results.</li>
-</ul>
-<p>Usage:</p><ul>
-<li>Construct with the target service and action name using the <a class="el" href="classtiny__dlna_1_1ActionRequest.html#adda62b3f790daa973179594d4077c1bf" title="Represents a request to invoke a DLNA service action.">ActionRequest(DLNAServiceInfo&amp;, const char*)</a> constructor.</li>
-<li>Add input arguments via <code><a class="el" href="classtiny__dlna_1_1ActionRequest.html#a2ef3f8fe5fcb0bfbe38b43683f471360">addArgument()</a></code>.</li>
-<li>The request is then passed to the control point which will serialize it into SOAP XML and post it to the service. </li>
-</ul>
 
 </div>
 </div>

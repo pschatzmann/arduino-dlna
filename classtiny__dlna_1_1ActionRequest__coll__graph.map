@@ -1,5 +1,5 @@
 <map id="tiny_dlna::ActionRequest" name="tiny_dlna::ActionRequest">
-<area shape="rect" id="node1" title=" " alt="" coords="2188,50,2372,75"/>
+<area shape="rect" id="node1" title="Represents a request to invoke a remote DLNA service action." alt="" coords="2188,50,2372,75"/>
 <area shape="rect" id="node2" href="$classtiny__dlna_1_1DLNAServiceInfo.html" title="Attributes needed for the DLNA Service Definition." alt="" coords="1875,87,2073,113"/>
 <area shape="rect" id="node3" href="$classtiny__dlna_1_1HttpServer.html" title="A Simple Header only implementation of Http Server that allows the registration of callback functions..." alt="" coords="1577,213,1737,238"/>
 <area shape="rect" id="node4" href="$classtiny__dlna_1_1HttpRequestHeader.html" title="Reading and writing of Http Requests." alt="" coords="1205,237,1424,262"/>

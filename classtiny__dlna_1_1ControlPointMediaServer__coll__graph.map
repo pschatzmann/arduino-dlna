@@ -32,7 +32,7 @@
 <area shape="rect" id="node22" href="$structtiny__dlna_1_1XMLPrinter.html" title="Functions to efficiently output XML. XML data contains a lot of redundancy so it is more memory effic..." alt="" coords="2481,775,2642,801"/>
 <area shape="rect" id="node23" href="$classtiny__dlna_1_1Icon.html" title="Information about the icon." alt="" coords="2174,611,2291,637"/>
 <area shape="rect" id="node25" href="$classtiny__dlna_1_1DLNAServiceInfo.html" title="Attributes needed for the DLNA Service Definition." alt="" coords="2133,703,2332,729"/>
-<area shape="rect" id="node31" href="$classtiny__dlna_1_1ActionRequest.html" title=" " alt="" coords="2469,322,2653,347"/>
+<area shape="rect" id="node31" href="$classtiny__dlna_1_1ActionRequest.html" title="Represents a request to invoke a remote DLNA service action." alt="" coords="2469,322,2653,347"/>
 <area shape="rect" id="node36" href="$classtiny__dlna_1_1ActionReply.html" title="Represents the result of invoking a DLNA service Action." alt="" coords="1941,215,2109,241"/>
 <area shape="rect" id="node34" href="$classtiny__dlna_1_1StringRegistry.html" title="Make sure that a string is stored only once." alt="" coords="3128,119,3311,145"/>
 </map>
