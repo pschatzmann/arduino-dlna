@@ -1,0 +1,4 @@
+<map id="tiny_dlna::PostAliveSchedule" name="tiny_dlna::PostAliveSchedule">
+<area shape="rect" id="node1" title="Send out PostAlive messages: Repeated every 5 seconds." alt="" coords="5,79,216,104"/>
+<area shape="rect" id="node2" href="$structtiny__dlna_1_1Schedule.html" title="An individual Schedule (to send out UDP messages)" alt="" coords="36,5,185,31"/>
+</map>

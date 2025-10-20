@@ -1,0 +1,4 @@
+<map id="tiny_dlna::MSearchReplySchedule" name="tiny_dlna::MSearchReplySchedule">
+<area shape="rect" id="node1" title="Answer from device to MSearch request by sending a reply." alt="" coords="5,79,248,104"/>
+<area shape="rect" id="node2" href="$structtiny__dlna_1_1Schedule.html" title="An individual Schedule (to send out UDP messages)" alt="" coords="52,5,201,31"/>
+</map>

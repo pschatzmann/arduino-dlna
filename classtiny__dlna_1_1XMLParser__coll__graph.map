@@ -1,0 +1,9 @@
+<map id="tiny_dlna::XMLParser" name="tiny_dlna::XMLParser">
+<area shape="rect" id="node1" title="Lightweight streaming XML parser." alt="" coords="1084,129,1243,154"/>
+<area shape="rect" id="node2" href="$classtiny__dlna_1_1StrView.html" title="A simple wrapper to provide string functions on char*. If the underlying char* is a const we do not a..." alt="" coords="280,29,420,54"/>
+<area shape="rect" id="node4" href="$classtiny__dlna_1_1Str.html" title="String implementation which keeps the data on the heap. We grow the allocated memory only if the copy..." alt="" coords="612,114,720,139"/>
+<area shape="rect" id="node3" href="$classtiny__dlna_1_1Vector.html" title=" " alt="" coords="860,171,1003,211"/>
+<area shape="rect" id="node5" href="$classtiny__dlna_1_1Vector.html" title=" " alt="" coords="279,117,421,157"/>
+<area shape="rect" id="node6" href="$classtiny__dlna_1_1Allocator.html" title="Memory allocateator which uses malloc." alt="" coords="5,189,153,214"/>
+<area shape="rect" id="node7" href="$classtiny__dlna_1_1Vector.html" title=" " alt="" coords="445,232,588,272"/>
+</map>

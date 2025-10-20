@@ -1,0 +1,23 @@
+<map id="src/http/Server/HttpRequest.h" name="src/http/Server/HttpRequest.h">
+<area shape="rect" id="node1" title=" " alt="" coords="518,5,733,31"/>
+<area shape="rect" id="node2" title=" " alt="" coords="469,79,531,104"/>
+<area shape="rect" id="node3" href="$HttpHeader_8h.html" title=" " alt="" coords="515,152,623,177"/>
+<area shape="rect" id="node20" href="$HttpChunkReader_8h.html" title=" " alt="" coords="607,79,755,104"/>
+<area shape="rect" id="node21" title=" " alt="" coords="779,79,879,104"/>
+<area shape="rect" id="node4" href="$HttpLineReader_8h.html" title=" " alt="" coords="614,225,749,251"/>
+<area shape="rect" id="node5" href="$Logger_8h.html" title=" " alt="" coords="468,519,583,544"/>
+<area shape="rect" id="node10" href="$Url_8h.html" title=" " alt="" coords="448,225,539,251"/>
+<area shape="rect" id="node11" href="$Str_8h.html" title=" " alt="" coords="270,299,359,324"/>
+<area shape="rect" id="node18" href="$List_8h.html" title=" " alt="" coords="363,372,458,397"/>
+<area shape="rect" id="node6" title=" " alt="" coords="436,592,511,617"/>
+<area shape="rect" id="node7" title=" " alt="" coords="284,592,351,617"/>
+<area shape="rect" id="node8" title=" " alt="" coords="67,592,138,617"/>
+<area shape="rect" id="node9" title=" " alt="" coords="535,592,619,617"/>
+<area shape="rect" id="node12" href="$StrView_8h.html" title=" " alt="" coords="85,372,168,397"/>
+<area shape="rect" id="node15" href="$Vector_8h.html" title=" " alt="" coords="264,372,339,397"/>
+<area shape="rect" id="node13" title=" " alt="" coords="78,445,175,471"/>
+<area shape="rect" id="node14" title=" " alt="" coords="200,445,275,471"/>
+<area shape="rect" id="node16" href="$Allocator_8h.html" title=" " alt="" coords="299,445,389,471"/>
+<area shape="rect" id="node17" title=" " alt="" coords="309,519,379,544"/>
+<area shape="rect" id="node19" title=" " alt="" coords="413,445,488,471"/>
+</map>
