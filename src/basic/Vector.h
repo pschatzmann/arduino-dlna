@@ -22,7 +22,6 @@ class Vector {
  public:
 
   /**
-   * @class iterator
    * @brief Lightweight iterator for `tiny_dlna::Vector<T>`.
    *
    * Provides a minimal iterator interface (increment, decrement, dereference,

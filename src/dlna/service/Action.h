@@ -23,7 +23,6 @@ class Argument {
 
 
 /**
- * @class ActionReply
  * @brief Represents the result of invoking a DLNA service Action.
  *
  * An ActionReply collects the returned output arguments of a successful
@@ -61,34 +60,18 @@ class ActionReply {
   bool is_valid = true;
 };
 
+
+/**
+ * @brief Represents a request to invoke a remote DLNA service action.
+ *
+ * An ActionRequest contains a pointer to the target `DLNAServiceInfo`, the
+ * action name to call and a list of input `Argument` items. It is used by
+ * the control point to serialize and post a SOAP request to the service's
+ * control URL.
+ */
 class ActionRequest {
  public:
   ActionRequest() = default;
-
-  /**
-   * @brief Represents a request to invoke a DLNA service action.
-   *
-   * An ActionRequest bundles the target service (`p_service`), the action
-   * name (`action`) and a collection of input arguments. It is used by the
-   * control point when building and posting SOAP requests to a service's
-   * control URL.
-   *
-   * Fields:
-   * - `p_service`: pointer to the target `DLNAServiceInfo` describing the
-   *   service to call (may be null until assigned).
-   * - `action`: name of the action to invoke (e.g. "SetAVTransportURI").
-   * - `arguments`: list of input `Argument` items to include in the SOAP
-   *   request body.
-   * - `result_count`: optional counter used by callers to track returned
-   *   results.
-   *
-   * Usage:
-   * - Construct with the target service and action name using the
-   *   ActionRequest(DLNAServiceInfo&, const char*) constructor.
-   * - Add input arguments via `addArgument()`.
-   * - The request is then passed to the control point which will serialize
-   *   it into SOAP XML and post it to the service.
-   */
 
   ActionRequest(DLNAServiceInfo& srv, const char* act) {
     p_service = &srv;
