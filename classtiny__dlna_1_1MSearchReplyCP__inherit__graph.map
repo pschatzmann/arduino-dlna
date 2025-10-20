@@ -1,5 +1,5 @@
 <map id="tiny_dlna::MSearchReplyCP" name="tiny_dlna::MSearchReplyCP">
 <area shape="rect" id="node1" title="Processing at control point to handle a MSearchReply from the device." alt="" coords="5,79,205,104"/>
-<area shape="rect" id="node3" href="$classtiny__dlna_1_1NotifyReplyCP.html" title=" " alt="" coords="14,152,197,177"/>
+<area shape="rect" id="node3" href="$classtiny__dlna_1_1NotifyReplyCP.html" title="Represents a notification/notify reply scheduled for control&#45;point processing." alt="" coords="14,152,197,177"/>
 <area shape="rect" id="node2" href="$structtiny__dlna_1_1Schedule.html" title="An individual Schedule (to send out UDP messages)" alt="" coords="31,5,180,31"/>
 </map>

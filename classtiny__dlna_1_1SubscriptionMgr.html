@@ -82,13 +82,16 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>Manages event subscriptions and notification delivery.  
+ <a href="classtiny__dlna_1_1SubscriptionMgr.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="SubscriptionMgr_8h_source.html">SubscriptionMgr.h</a>&gt;</code></p>
 <div class="dynheader">
 Collaboration diagram for tiny_dlna::SubscriptionMgr:</div>
 <div class="dyncontent">
 <div class="center"><img src="classtiny__dlna_1_1SubscriptionMgr__coll__graph.png" border="0" usemap="#atiny__dlna_1_1SubscriptionMgr_coll__map" alt="Collaboration graph"/></div>
 <map name="atiny__dlna_1_1SubscriptionMgr_coll__map" id="atiny__dlna_1_1SubscriptionMgr_coll__map">
-<area shape="rect" title=" " alt="" coords="1208,152,1403,177"/>
+<area shape="rect" title="Manages event subscriptions and notification delivery." alt="" coords="1208,152,1403,177"/>
 <area shape="rect" href="classtiny__dlna_1_1Vector.html" title=" " alt="" coords="915,113,1057,153"/>
 <area shape="rect" href="classtiny__dlna_1_1Str.html" title="String implementation which keeps the data on the heap. We grow the allocated memory only if the copy..." alt="" coords="673,63,781,88"/>
 <area shape="rect" href="classtiny__dlna_1_1StrView.html" title="A simple wrapper to provide string functions on char*. If the underlying char* is a const we do not a..." alt="" coords="280,5,420,31"/>
@@ -121,7 +124,14 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:afd57d61aa601316058f8a0f327b064fa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt; <a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt; <a class="el" href="structtiny__dlna_1_1Subscription.html">Subscription</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgr.html#afd57d61aa601316058f8a0f327b064fa">service_lists</a></td></tr>
 <tr class="separator:afd57d61aa601316058f8a0f327b064fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Manages event subscriptions and notification delivery. </p>
+<p>The manager maintains per-service lists of <code><a class="el" href="structtiny__dlna_1_1Subscription.html" title="Represents a single event subscription for a service.">Subscription</a></code> entries. It provides methods to subscribe/unsubscribe clients and to publish state variable changes (which will be delivered as UPnP event NOTIFY requests to each subscriber's callback URL).</p>
+<p>Notes:</p><ul>
+<li>Subscriptions are tracked in simple parallel vectors (service names and lists) rather than a hash map for minimal embedded footprint.</li>
+<li><code><a class="el" href="classtiny__dlna_1_1SubscriptionMgr.html#af63ee3e1713171da1fc6c3ca182da7bb">subscribe()</a></code> returns the assigned SID (generated when creating a new subscription). <code><a class="el" href="classtiny__dlna_1_1SubscriptionMgr.html#a0b4780117914bb94b69ecf1ceb4cefea">unsubscribe()</a></code> removes a subscription by SID. </li>
+</ul>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ae140cecc68067f4526a700081200f2dc" name="ae140cecc68067f4526a700081200f2dc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae140cecc68067f4526a700081200f2dc">&#9670;&#160;</a></span>SubscriptionMgr()</h2>
 

@@ -19,6 +19,6 @@
 <area shape="rect" id="node12" href="$classtiny__dlna_1_1DLNAServiceInfo.html" title="Attributes needed for the DLNA Service Definition." alt="" coords="1935,229,2133,255"/>
 <area shape="rect" id="node14" href="$classtiny__dlna_1_1HttpRequestHeader.html" title="Reading and writing of Http Requests." alt="" coords="1265,312,1484,337"/>
 <area shape="rect" id="node19" href="$classtiny__dlna_1_1HttpReplyHeader.html" title="Reading and Writing of Http Replys." alt="" coords="1273,263,1476,288"/>
-<area shape="rect" id="node17" href="$structtiny__dlna_1_1List_1_1Node.html" title=" " alt="" coords="11,331,147,371"/>
+<area shape="rect" id="node17" href="$structtiny__dlna_1_1List_1_1Node.html" title="List Node." alt="" coords="11,331,147,371"/>
 <area shape="rect" id="node18" href="$classtiny__dlna_1_1HttpLineReader.html" title="We read a single line. A terminating 0 is added to the string to make it compliant for c string funct..." alt="" coords="623,263,813,288"/>
 </map>

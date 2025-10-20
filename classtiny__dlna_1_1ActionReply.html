@@ -82,13 +82,16 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>Represents the result of invoking a DLNA service Action.  
+ <a href="classtiny__dlna_1_1ActionReply.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="Action_8h_source.html">Action.h</a>&gt;</code></p>
 <div class="dynheader">
 Collaboration diagram for tiny_dlna::ActionReply:</div>
 <div class="dyncontent">
 <div class="center"><img src="classtiny__dlna_1_1ActionReply__coll__graph.png" border="0" usemap="#atiny__dlna_1_1ActionReply_coll__map" alt="Collaboration graph"/></div>
 <map name="atiny__dlna_1_1ActionReply_coll__map" id="atiny__dlna_1_1ActionReply_coll__map">
-<area shape="rect" title=" " alt="" coords="209,475,377,500"/>
+<area shape="rect" title="Represents the result of invoking a DLNA service Action." alt="" coords="209,475,377,500"/>
 <area shape="rect" href="classtiny__dlna_1_1Vector.html" title=" " alt="" coords="206,372,379,412"/>
 <area shape="rect" href="classtiny__dlna_1_1Argument.html" title="DLNA Service: Action Argument." alt="" coords="158,284,313,309"/>
 <area shape="rect" href="classtiny__dlna_1_1Str.html" title="String implementation which keeps the data on the heap. We grow the allocated memory only if the copy..." alt="" coords="181,196,289,221"/>
@@ -121,7 +124,17 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:abe1df4cc1a81298cbf5e1acaa3fd2bdd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1ActionReply.html#abe1df4cc1a81298cbf5e1acaa3fd2bdd">is_valid</a> = true</td></tr>
 <tr class="separator:abe1df4cc1a81298cbf5e1acaa3fd2bdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Represents the result of invoking a DLNA service Action. </p>
+<p>An <a class="el" href="classtiny__dlna_1_1ActionReply.html" title="Represents the result of invoking a DLNA service Action.">ActionReply</a> collects the returned output arguments of a successful action invocation and carries a validity flag indicating whether the action succeeded. Callers may inspect the reply using the boolean operator or the <code><a class="el" href="classtiny__dlna_1_1ActionReply.html#a10e2f756a6ed65769e146ef31509022b">isValid()</a></code> accessor. Returned output arguments are stored in the public <code>arguments</code> vector as <code><a class="el" href="classtiny__dlna_1_1Argument.html" title="DLNA Service: Action Argument.">Argument</a></code> entries.</p>
+<p>Usage:</p><ul>
+<li>Construct an <a class="el" href="classtiny__dlna_1_1ActionReply.html" title="Represents the result of invoking a DLNA service Action.">ActionReply</a> (defaults to valid=true).</li>
+<li>Inspect success with <code>if (reply)</code> or <code>reply.isValid()</code>.</li>
+<li>Access returned arguments via <code>reply.arguments</code>.</li>
+<li>Use <code><a class="el" href="classtiny__dlna_1_1ActionReply.html#a4ac823dd00aa41cd19551060ecb30fa0">add()</a></code> to merge another <a class="el" href="classtiny__dlna_1_1ActionReply.html" title="Represents the result of invoking a DLNA service Action.">ActionReply</a> (useful when aggregating results); if the merged reply is invalid the receiver is marked invalid as well.</li>
+</ul>
+<p>Note: The class is intentionally small and POD-like to keep embedded footprints minimal. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a04d7be997bf88a46db697c621c4d4f51" name="a04d7be997bf88a46db697c621c4d4f51"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a04d7be997bf88a46db697c621c4d4f51">&#9670;&#160;</a></span>ActionReply()</h2>
 

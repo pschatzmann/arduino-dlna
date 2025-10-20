@@ -103,7 +103,7 @@ Collaboration diagram for tiny_dlna::ActionRequest:</div>
 <area shape="rect" href="classtiny__dlna_1_1List.html" title=" " alt="" coords="279,320,529,360"/>
 <area shape="rect" href="classtiny__dlna_1_1List.html" title=" " alt="" coords="293,384,515,424"/>
 <area shape="rect" href="classtiny__dlna_1_1Vector.html" title=" " alt="" coords="1228,5,1401,45"/>
-<area shape="rect" href="structtiny__dlna_1_1List_1_1Node.html" title=" " alt="" coords="11,324,147,364"/>
+<area shape="rect" href="structtiny__dlna_1_1List_1_1Node.html" title="List Node." alt="" coords="11,324,147,364"/>
 <area shape="rect" href="classtiny__dlna_1_1HttpLineReader.html" title="We read a single line. A terminating 0 is added to the string to make it compliant for c string funct..." alt="" coords="623,278,813,303"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
@@ -113,6 +113,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a27485e7a956725486e6e1ff55e166362"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1ActionRequest.html#a27485e7a956725486e6e1ff55e166362">ActionRequest</a> ()=default</td></tr>
 <tr class="separator:a27485e7a956725486e6e1ff55e166362"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adda62b3f790daa973179594d4077c1bf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1ActionRequest.html#adda62b3f790daa973179594d4077c1bf">ActionRequest</a> (<a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html">DLNAServiceInfo</a> &amp;srv, const char *act)</td></tr>
+<tr class="memdesc:adda62b3f790daa973179594d4077c1bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a request to invoke a DLNA service action.  <br /></td></tr>
 <tr class="separator:adda62b3f790daa973179594d4077c1bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2ef3f8fe5fcb0bfbe38b43683f471360"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1ActionRequest.html#a2ef3f8fe5fcb0bfbe38b43683f471360">addArgument</a> (<a class="el" href="classtiny__dlna_1_1Argument.html">Argument</a> arg)</td></tr>
 <tr class="separator:a2ef3f8fe5fcb0bfbe38b43683f471360"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -198,6 +199,20 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Represents a request to invoke a DLNA service action. </p>
+<p>An <a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> bundles the target service (<code>p_service</code>), the action name (<code>action</code>) and a collection of input arguments. It is used by the control point when building and posting SOAP requests to a service's control URL.</p>
+<p>Fields:</p><ul>
+<li><code>p_service</code>: pointer to the target <code><a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html" title="Attributes needed for the DLNA Service Definition.">DLNAServiceInfo</a></code> describing the service to call (may be null until assigned).</li>
+<li><code>action</code>: name of the action to invoke (e.g. "SetAVTransportURI").</li>
+<li><code>arguments</code>: list of input <code><a class="el" href="classtiny__dlna_1_1Argument.html" title="DLNA Service: Action Argument.">Argument</a></code> items to include in the SOAP request body.</li>
+<li><code>result_count</code>: optional counter used by callers to track returned results.</li>
+</ul>
+<p>Usage:</p><ul>
+<li>Construct with the target service and action name using the <a class="el" href="classtiny__dlna_1_1ActionRequest.html#adda62b3f790daa973179594d4077c1bf" title="Represents a request to invoke a DLNA service action.">ActionRequest(DLNAServiceInfo&amp;, const char*)</a> constructor.</li>
+<li>Add input arguments via <code><a class="el" href="classtiny__dlna_1_1ActionRequest.html#a2ef3f8fe5fcb0bfbe38b43683f471360">addArgument()</a></code>.</li>
+<li>The request is then passed to the control point which will serialize it into SOAP XML and post it to the service. </li>
+</ul>
 
 </div>
 </div>

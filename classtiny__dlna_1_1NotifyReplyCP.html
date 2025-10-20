@@ -81,13 +81,16 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>Represents a notification/notify reply scheduled for control-point processing.  
+ <a href="classtiny__dlna_1_1NotifyReplyCP.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="Schedule_8h_source.html">Schedule.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for tiny_dlna::NotifyReplyCP:</div>
 <div class="dyncontent">
 <div class="center"><img src="classtiny__dlna_1_1NotifyReplyCP__inherit__graph.png" border="0" usemap="#atiny__dlna_1_1NotifyReplyCP_inherit__map" alt="Inheritance graph"/></div>
 <map name="atiny__dlna_1_1NotifyReplyCP_inherit__map" id="atiny__dlna_1_1NotifyReplyCP_inherit__map">
-<area shape="rect" title=" " alt="" coords="14,152,197,177"/>
+<area shape="rect" title="Represents a notification/notify reply scheduled for control&#45;point processing." alt="" coords="14,152,197,177"/>
 <area shape="rect" href="classtiny__dlna_1_1MSearchReplyCP.html" title="Processing at control point to handle a MSearchReply from the device." alt="" coords="5,79,205,104"/>
 <area shape="rect" href="structtiny__dlna_1_1Schedule.html" title="An individual Schedule (to send out UDP messages)" alt="" coords="31,5,180,31"/>
 </map>
@@ -97,7 +100,7 @@ Collaboration diagram for tiny_dlna::NotifyReplyCP:</div>
 <div class="dyncontent">
 <div class="center"><img src="classtiny__dlna_1_1NotifyReplyCP__coll__graph.png" border="0" usemap="#atiny__dlna_1_1NotifyReplyCP_coll__map" alt="Collaboration graph"/></div>
 <map name="atiny__dlna_1_1NotifyReplyCP_coll__map" id="atiny__dlna_1_1NotifyReplyCP_coll__map">
-<area shape="rect" title=" " alt="" coords="87,465,270,491"/>
+<area shape="rect" title="Represents a notification/notify reply scheduled for control&#45;point processing." alt="" coords="87,465,270,491"/>
 <area shape="rect" href="classtiny__dlna_1_1MSearchReplyCP.html" title="Processing at control point to handle a MSearchReply from the device." alt="" coords="5,352,205,377"/>
 <area shape="rect" href="structtiny__dlna_1_1Schedule.html" title="An individual Schedule (to send out UDP messages)" alt="" coords="25,196,175,221"/>
 <area shape="rect" href="classtiny__dlna_1_1Str.html" title="String implementation which keeps the data on the heap. We grow the allocated memory only if the copy..." alt="" coords="199,196,307,221"/>
@@ -158,7 +161,20 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a2b21ee1493e6c9d19f9b0a0d07bffc41 inherit pub_attribs_structtiny__dlna_1_1Schedule"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1Schedule.html#a2b21ee1493e6c9d19f9b0a0d07bffc41">active</a> = false</td></tr>
 <tr class="separator:a2b21ee1493e6c9d19f9b0a0d07bffc41 inherit pub_attribs_structtiny__dlna_1_1Schedule"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Represents a notification/notify reply scheduled for control-point processing. </p>
+<p>Instances are created when the control-point receives SSDP/HTTP notify messages (for example via an attached HTTP server or UDP listener). The object carries parsed headers and the event payload and provides a <code>callback</code> that the control-point can invoke to let an application consumer handle the notification.</p>
+<p>Fields of interest:</p><ul>
+<li><code>nts</code> : the NTS header value (e.g. "ssdp:alive" or "ssdp:byebye").</li>
+<li><code>delivery_host_and_port</code> : host:port that delivered the notification.</li>
+<li><code>delivery_path</code> : path portion of the delivery URL (if available).</li>
+<li><code>subscription_id</code> : SID header (subscription identifier) for eventing.</li>
+<li><code>event_key</code> : optional event sequence key.</li>
+<li><code>xml</code> : raw event XML body (for property change parsing).</li>
+<li><code>callback</code> : application-provided handler with signature <code>bool callback(<a class="el" href="classtiny__dlna_1_1NotifyReplyCP.html" title="Represents a notification/notify reply scheduled for control-point processing.">NotifyReplyCP</a> &amp;ref)</code>. The handler should return true if it handled the notification, false if it did not.</li>
+</ul>
+<p>The <code><a class="el" href="classtiny__dlna_1_1NotifyReplyCP.html#af2c2fb38004e4f9cf56dcb8a8470c8e9">process()</a></code> implementation calls <code>callback</code> and logs whether the notification was handled. This struct inherits from <code><a class="el" href="classtiny__dlna_1_1MSearchReplyCP.html" title="Processing at control point to handle a MSearchReply from the device.">MSearchReplyCP</a></code> so it can be scheduled and executed by the control-point scheduler. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="aebe3d7a569626a84abc6caec9403f7ce" name="aebe3d7a569626a84abc6caec9403f7ce"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aebe3d7a569626a84abc6caec9403f7ce">&#9670;&#160;</a></span>name()</h2>
 
