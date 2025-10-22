@@ -38,9 +38,10 @@ struct Schedule {
  */
 class MSearchSchedule : public Schedule {
  public:
-  MSearchSchedule(IPAddressAndPort addr, const char *searchTarget) {
+  MSearchSchedule(IPAddressAndPort addr, const char *searchTarget, int mx = 3) {
     address = addr;
     search_target = searchTarget;
+    max_age = mx;
   }
   const char *name() override { return "MSearch"; }
 
@@ -65,7 +66,7 @@ class MSearchSchedule : public Schedule {
   }
 
  protected:
-  int max_age = 2;
+  int max_age = 3;
   IPAddressAndPort address;
   const char *search_target = nullptr;
 };

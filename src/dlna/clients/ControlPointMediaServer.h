@@ -30,15 +30,16 @@ class ControlPointMediaServer {
   ControlPointMediaServer(DLNAControlPointMgr& mgr) : mgr(mgr) {}
 
   /**
-   * @brief Begin discovery and processing (forwards to underlying control point)
+   * @brief Begin discovery and processing (forwards to underlying control
+   * point)
    * @param http  Http server wrapper used for subscription callbacks
    * @param udp   UDP service used for SSDP discovery
    * @param minWaitMs Minimum time in milliseconds to wait before returning
    * @param maxWaitMs Maximum time in milliseconds to wait for discovery
    * @return true on success, false on error
    */
-  bool begin(DLNAHttpRequest& http, IUDPService& udp,
-             uint32_t minWaitMs = 3000, uint32_t maxWaitMs = 60000) {
+  bool begin(DLNAHttpRequest& http, IUDPService& udp, uint32_t minWaitMs = 3000,
+             uint32_t maxWaitMs = 60000) {
     DlnaLogger.log(DlnaLogLevel::Info,
                    "ControlPointMediaServer::begin device_type_filter='%s'",
                    device_type_filter ? device_type_filter : "(null)");
@@ -93,8 +94,9 @@ class ControlPointMediaServer {
 
   /**
    * @brief Restrict this helper to devices of the given device type
-   * @param filter Device type string (e.g. "urn:schemas-upnp-org:device:MediaServer:1")
-   *               Pass nullptr to restore the default filter
+   * @param filter Device type string (e.g.
+   * "urn:schemas-upnp-org:device:MediaServer:1") Pass nullptr to restore the
+   * default filter
    */
   void setDeviceTypeFilter(const char* filter) {
     device_type_filter = filter ? filter : device_type_filter_default;
@@ -107,7 +109,8 @@ class ControlPointMediaServer {
   void setReference(void* ref) { reference = ref; }
 
   /**
-   * @brief Browse the given object_id and invoke callback for each returned item
+   * @brief Browse the given object_id and invoke callback for each returned
+   * item
    * @param startingIndex Starting index for the browse request
    * @param requestedCount Number of items requested
    * @param itemCallback Callback invoked per MediaItem result (may be nullptr)
@@ -116,7 +119,8 @@ class ControlPointMediaServer {
    * @param updateID Output: server UpdateID
    * @param browseFlag Optional BrowseFlag (defaults to BrowseDirectChildren)
    * @return true on success, false on error
-   * @note The raw DIDL-Lite XML result is available via getLastReply() -> "Result"
+   * @note The raw DIDL-Lite XML result is available via getLastReply() ->
+   * "Result"
    */
   bool browse(int startingIndex, int requestedCount, ItemCallback itemCallback,
               int& numberReturned, int& totalMatches, int& updateID,
@@ -269,7 +273,8 @@ class ControlPointMediaServer {
   ActionRequest createBrowseAction(DLNAServiceInfo& svc, const char* browseFlag,
                                    int startingIndex, int requestedCount) {
     ActionRequest act(svc, "Browse");
-    act.addArgument("object_id", object_id);
+    // Use the canonical argument name expected by ContentDirectory: "ObjectID"
+    act.addArgument("ObjectID", object_id);
     act.addArgument("BrowseFlag",
                     browseFlag ? browseFlag : "BrowseDirectChildren");
     act.addArgument("Filter", "*");

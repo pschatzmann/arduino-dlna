@@ -15,7 +15,8 @@ ControlPointMediaServer cpms(cp);
 // Simple callback that prints item metadata
 void printItemCallback(const tiny_dlna::MediaItem& item, void* ref) {
   (void)ref;
-  Serial.print("Item ID: ");
+  Serial.println("[printItemCallback] invoked");
+  Serial.print(" Item ID: ");
   Serial.println(item.id ? item.id : "(null)");
   Serial.print(" Title: ");
   Serial.println(item.title ? item.title : "(no title)");
@@ -58,8 +59,10 @@ void setup() {
 
   // Browse root on first matching MediaServer
   int numberReturned = 0, totalMatches = 0, updateID = 0;
+  Serial.println("Sending Browse action (ObjectID=0)...");
   bool ok = cpms.browse(0, 10, printItemCallback, numberReturned, totalMatches,
                         updateID);
+  Serial.println("Browse action completed (executeActions returned)");
   Serial.print("Browse ok: ");
   Serial.println(ok ? "yes" : "no");
   Serial.print("NumberReturned: ");

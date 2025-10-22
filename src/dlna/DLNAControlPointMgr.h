@@ -67,8 +67,13 @@ class DLNAControlPointMgr {
   /// Requests the parsing of the device information
   void setParseDevice(bool flag) { is_parse_device = flag; }
 
-  /// Defines the lacal url (needed for subscriptions)
+  /// Defines the local url (needed for subscriptions)
   void setLocalURL(Url url) { local_url = url; }
+  
+  /// Sets the repeat interval for M-SEARCH requests (define before begin)
+  void setSearchRepeatMs(int repeatMs) {
+    msearch_repeat_ms = repeatMs;
+  }
 
   /**
    * @brief Start discovery by sending M-SEARCH requests and process replies.
@@ -111,7 +116,7 @@ class DLNAControlPointMgr {
     // ensure min <= max
     if (minWaitMs > maxWaitMs) minWaitMs = maxWaitMs;
     search->end_time = millis() + maxWaitMs;
-    search->repeat_ms = 1000;
+    search->repeat_ms = msearch_repeat_ms;
     scheduler.add(search);
 
     // if maxWaitMs > 0 we will block here and process events. We guarantee
@@ -351,6 +356,7 @@ class DLNAControlPointMgr {
   /// Checks if the scheduler is active
   bool isActive() { return is_active; }
 
+
  protected:
   Scheduler scheduler;
   DLNAHttpRequest* p_http = nullptr;
@@ -358,6 +364,7 @@ class DLNAControlPointMgr {
   Vector<DLNADeviceInfo> devices;
   Vector<ActionRequest> actions;
   XMLPrinter xml;
+  int msearch_repeat_ms = 10000;
   bool is_active = false;
   bool is_parse_device = false;
   DLNADeviceInfo NO_DEVICE{false};
