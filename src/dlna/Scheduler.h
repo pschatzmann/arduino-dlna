@@ -54,6 +54,16 @@ class Scheduler {
     if (is_cleanup) cleanup();
   }
 
+  /// Returns true if there is any active schedule with name "MSearch"
+  bool isMSearchActive() {
+    for (auto &p_s : queue) {
+      if (p_s == nullptr) continue;
+      Schedule &s = *p_s;
+      if (s.active && StrView(s.name()).equals("MSearch")) return true;
+    }
+    return false;
+  }
+
  protected:
   Vector<Schedule *> queue;
 

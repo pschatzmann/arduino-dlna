@@ -109,9 +109,7 @@ class DLNAControlPointMgr {
     }
 
     // Send MSearch request via UDP. Use maxWaitMs as the emission window.
-    if (search == nullptr) {
-      search = new MSearchSchedule(DLNABroadcastAddress, searchTarget);
-    }
+    MSearchSchedule* search = new MSearchSchedule(DLNABroadcastAddress, searchTarget);
 
     // ensure min <= max
     if (minWaitMs > maxWaitMs) minWaitMs = maxWaitMs;
@@ -255,7 +253,7 @@ class DLNAControlPointMgr {
 
     // process UDP requests
     RequestData req = p_udp->receive();
-    if (req && search->active) {
+    if (req && scheduler.isMSearchActive()) {
       Schedule* schedule = parser.parse(req);
       if (schedule != nullptr) {
         // handle NotifyReplyCP
@@ -410,7 +408,6 @@ class DLNAControlPointMgr {
  protected:
   Scheduler scheduler;
   DLNAHttpRequest* p_http = nullptr;
-  MSearchSchedule* search = nullptr;
   IUDPService* p_udp = nullptr;
   Vector<DLNADeviceInfo> devices;
   Vector<ActionRequest> actions;
