@@ -129,7 +129,7 @@ class ControlPointMediaServer {
     DLNAServiceInfo& svc =
         selectService("urn:upnp-org:serviceId:ContentDirectory");
     if (!svc) return false;
-    ActionRequest act =
+    ActionRequest &act =
         createBrowseAction(svc, browseFlag, startingIndex, requestedCount);
     mgr.addAction(act);
     last_reply = mgr.executeActions();
@@ -270,14 +270,14 @@ class ControlPointMediaServer {
   }
 
   /// Build a Browse ActionRequest
-  ActionRequest createBrowseAction(DLNAServiceInfo& svc, const char* browseFlag,
+  ActionRequest &createBrowseAction(DLNAServiceInfo& svc, const char* browseFlag,
                                    int startingIndex, int requestedCount) {
-    ActionRequest act(svc, "Browse");
+    static ActionRequest act(svc, "Browse");
     // Use the canonical argument name expected by ContentDirectory: "ObjectID"
     act.addArgument("ObjectID", object_id);
     act.addArgument("BrowseFlag",
                     browseFlag ? browseFlag : "BrowseDirectChildren");
-    act.addArgument("Filter", "*");
+    act.addArgument("Filter", "");
     char buf[32];
     snprintf(buf, sizeof(buf), "%d", startingIndex);
     act.addArgument("StartingIndex", buf);

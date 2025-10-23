@@ -35,7 +35,7 @@ class Scheduler {
         }
         // process active schedules
         if (s.active) {
-          DlnaLogger.log(DlnaLogLevel::Debug, "Executing", s.name());
+          DlnaLogger.log(DlnaLogLevel::Debug, "Scheduler::execute %s: Executing", s.name());
 
           s.process(udp);
           // reschedule if necessary
@@ -46,7 +46,7 @@ class Scheduler {
             is_cleanup = true;
           }
         } else {
-          DlnaLogger.log(DlnaLogLevel::Debug, "Inactive", s.name());
+          DlnaLogger.log(DlnaLogLevel::Debug, "Scheduler::execute %s: Inactive", s.name());
         }
       }
     }
@@ -61,7 +61,7 @@ class Scheduler {
     for (auto it = queue.begin(); it != queue.end(); ++it) {
       auto p_rule = *it;
       if (!(p_rule)->active) {
-        DlnaLogger.log(DlnaLogLevel::Debug, "cleanup queue: %s", p_rule->name());
+        DlnaLogger.log(DlnaLogLevel::Debug, "Scheduler::cleanup queue: %s", p_rule->name());
         // remove schedule from collection
         queue.erase(it);
         // delete schedule

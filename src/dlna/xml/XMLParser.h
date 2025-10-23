@@ -64,7 +64,7 @@ class XMLParser {
    * @param xmlStr Null-terminated XML buffer. The parser stores a non-owning
    *               view — the buffer must remain valid until parsing finishes.
    */
-  void setXml(const char* xmlStr) { str_view = xmlStr; }
+  void setXml(const char* xmlStr) { str_view.set(xmlStr); }
 
   /**
    * @brief Set the callback to be invoked for parsed fragments
@@ -91,11 +91,11 @@ class XMLParser {
 
  protected:
   StrView str_view;
-  Vector<Str> path;
-  Str empty_str;
-  Str node_name;
-  Str txt;
-  Str str;
+  Vector<Str> path{5};
+  Str empty_str{0};
+  Str node_name{40};
+  Str txt{100};
+  Str str{100};
   // last parsed attributes for the most recent start tag
   Str last_attributes;
   bool report_text_only = true;

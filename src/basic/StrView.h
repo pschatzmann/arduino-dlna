@@ -54,9 +54,11 @@ class StrView {
         this->maxlen = this->len;
         this->chars = (char*)alt;
       } else {
-        /// if the StrView is an external buffer we need to copy
-        strncpy(this->chars, alt, this->maxlen);
-        this->chars[len] = 0;
+        if (this->len > 0) {
+          /// if the StrView is an external buffer we need to copy
+          strncpy(this->chars, alt, this->maxlen);
+          this->chars[len] = 0;
+        }
       }
     }
   }

@@ -39,7 +39,7 @@ void setup() {
   DlnaLogger.begin(Serial, DlnaLogLevel::Info);
 
   setupWifi();
-  if (!cp.begin(http, udp, "ssdp:all", 200000, true)) {
+  if (!cp.begin(http, udp, "urn:schemas-upnp-org:device:DimmableLight:1", 1000, 60*10000)) {
     Serial.println("Dimmable Light not found");
     while (true);  // stop processing
   }

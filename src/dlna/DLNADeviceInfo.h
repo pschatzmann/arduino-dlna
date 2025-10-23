@@ -30,7 +30,7 @@ class DLNADeviceInfo {
   friend class DLNADevice;
 
  public:
-  DLNADeviceInfo(bool ok = true) { is_active = true; }
+  DLNADeviceInfo(bool ok = true) { is_active = ok; }
   ~DLNADeviceInfo() { DlnaLogger.log(DlnaLogLevel::Debug, "~DLNADevice()"); }
 
   /// Override to initialize the device

@@ -21,13 +21,13 @@ namespace tiny_dlna {
 class HttpRequest {
  public:
   HttpRequest() {
-    DlnaLogger.log(DlnaLogLevel::Info, "HttpRequest");
+    DlnaLogger.log(DlnaLogLevel::Debug, "HttpRequest");
     // default_client.setInsecure();
     setClient(default_client);
   }
 
   HttpRequest(Client &client) {
-    DlnaLogger.log(DlnaLogLevel::Info, "HttpRequest");
+    DlnaLogger.log(DlnaLogLevel::Debug, "HttpRequest");
     setClient(client);
   }
 

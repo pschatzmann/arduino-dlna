@@ -15,10 +15,8 @@ class Argument {
     name = nme;
     value = val;
   }
-  const char* name;
-  // Direction direction;
-  // StateInformation* related_state;
-  Str value;
+  const char* name = nullptr;
+  Str value = "";
 };
 
 
@@ -86,7 +84,7 @@ class ActionRequest {
 
   DLNAServiceInfo* p_service = nullptr;
   const char* action;
-  Vector<Argument> arguments;
+  Vector<Argument> arguments{10};
   int result_count = 0;
   operator bool() { return is_valid; }
   const char* getServiceType() { return p_service->service_type; }

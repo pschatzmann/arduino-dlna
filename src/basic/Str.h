@@ -207,7 +207,7 @@ class Str : public StrView {
 
 
  protected:
-  Vector<char> vector;
+  Vector<char> vector{0};
 
   Str& move(Str &other) {
     swap(other);
@@ -219,6 +219,7 @@ class Str : public StrView {
     bool grown = false;
     assert(newMaxLen < 1024 * 10);
     if (newMaxLen < 0) return false;
+    if (newMaxLen == 0 && chars == nullptr) return false;
 
     if (chars == nullptr || newMaxLen > maxlen) {
       grown = true;

@@ -18,10 +18,9 @@ namespace tiny_dlna {
 class Url {
  public:
   // empty url
-  Url() { DlnaLogger.log(DlnaLogLevel::Debug, "Url"); }
+  Url() = default;
 
   ~Url() {
-    DlnaLogger.log(DlnaLogLevel::Debug, "~Url");
     pathStr.clear();
     hostStr.clear();
     protocolStr.clear();
@@ -58,6 +57,13 @@ class Url {
 
   operator bool() { return !urlStr.isEmpty(); }
 
+  bool operator ==(Url& other) {
+    return this->urlStr.equals(other.urlStr.c_str());
+  }
+  bool operator !=(Url& other) {
+    return !(*this == other);
+  }
+
  protected:
   Str pathStr = Str(40);
   Str hostStr = Str(20);
@@ -67,7 +73,7 @@ class Url {
   int portInt;
 
   void parse() {
-    DlnaLogger.log(DlnaLogLevel::Debug, "Url::parse");
+    DlnaLogger.log(DlnaLogLevel::Debug, "Url::parse()");
 
     int protocolEnd = urlStr.indexOf("://");
     if (protocolEnd == -1) {

@@ -370,6 +370,7 @@ class Vector {
   }
 
   void deleteArray(T *oldData, int oldBufferLen) {
+    if (oldData == nullptr) return;
 #if USE_ALLOCATOR
     p_allocator->removeArray(oldData, oldBufferLen);  // delete [] oldData;
 #else

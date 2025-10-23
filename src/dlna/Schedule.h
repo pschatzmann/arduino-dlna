@@ -85,7 +85,7 @@ class MSearchReplySchedule : public Schedule {
 
   bool process(IUDPService &udp) override {
     // we keep the data on the stack
-    DlnaLogger.log(DlnaLogLevel::Info, "Sending %s for %s to %s", name(),
+    DlnaLogger.log(DlnaLogLevel::Debug, "Sending %s for %s to %s", name(),
                    search_target.c_str(), address.toString());
 
     DLNADeviceInfo &device = *p_device;
@@ -163,7 +163,7 @@ class MSearchReplyCP : public Schedule {
 class NotifyReplyCP : public MSearchReplyCP {
  public:
   const char *name() override { return "NotifyReplyCP"; }
-  Str nts;
+  Str nts{80};
   Str delivery_host_and_port;
   Str delivery_path;
   Str subscription_id;
