@@ -3,7 +3,7 @@
 <area shape="rect" id="node2" href="$classtiny__dlna_1_1DLNAServiceInfo.html" title="Attributes needed for the DLNA Service Definition." alt="" coords="1875,87,2073,113"/>
 <area shape="rect" id="node3" href="$classtiny__dlna_1_1HttpServer.html" title="A Simple Header only implementation of Http Server that allows the registration of callback functions..." alt="" coords="1577,213,1737,238"/>
 <area shape="rect" id="node4" href="$classtiny__dlna_1_1HttpRequestHeader.html" title="Reading and writing of Http Requests." alt="" coords="1205,237,1424,262"/>
-<area shape="rect" id="node5" href="$classtiny__dlna_1_1HttpHeader.html" title="In a http request and reply we need to process header information. With this API we can define and qu..." alt="" coords="943,223,1108,249"/>
+<area shape="rect" id="node5" href="$classtiny__dlna_1_1HttpHeader.html" title="In a http request and reply we need to process header Debugrmation. With this API we can define and q..." alt="" coords="943,223,1108,249"/>
 <area shape="rect" id="node13" href="$classtiny__dlna_1_1HttpReplyHeader.html" title="Reading and Writing of Http Replys." alt="" coords="1213,187,1416,213"/>
 <area shape="rect" id="node6" href="$classtiny__dlna_1_1Str.html" title="String implementation which keeps the data on the heap. We grow the allocated memory only if the copy..." alt="" coords="664,135,772,161"/>
 <area shape="rect" id="node17" href="$classtiny__dlna_1_1Argument.html" title="DLNA Service: Action Argument." alt="" coords="948,131,1103,157"/>

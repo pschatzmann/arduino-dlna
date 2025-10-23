@@ -5,7 +5,7 @@
 <area shape="rect" id="node3" href="$classtiny__dlna_1_1DLNADeviceInfo.html" title="Device Attributes and generation of XML using urn:schemas&#45;upnp&#45;org:device&#45;1&#45;0. We could just return a..." alt="" coords="2680,239,2876,265"/>
 <area shape="rect" id="node4" href="$structtiny__dlna_1_1XMLPrinter.html" title="Functions to efficiently output XML. XML data contains a lot of redundancy so it is more memory effic..." alt="" coords="2383,482,2545,507"/>
 <area shape="rect" id="node5" href="$classtiny__dlna_1_1Url.html" title="URL parser which breaks a full url string up into its individual parts." alt="" coords="1164,214,1273,239"/>
-<area shape="rect" id="node14" href="$classtiny__dlna_1_1HttpHeader.html" title="In a http request and reply we need to process header information. With this API we can define and qu..." alt="" coords="975,539,1140,565"/>
+<area shape="rect" id="node14" href="$classtiny__dlna_1_1HttpHeader.html" title="In a http request and reply we need to process header Debugrmation. With this API we can define and q..." alt="" coords="975,539,1140,565"/>
 <area shape="rect" id="node23" href="$classtiny__dlna_1_1Vector.html" title=" " alt="" coords="986,67,1129,107"/>
 <area shape="rect" id="node7" href="$classtiny__dlna_1_1Vector.html" title=" " alt="" coords="333,220,475,260"/>
 <area shape="rect" id="node12" href="$classtiny__dlna_1_1HttpServer.html" title="A Simple Header only implementation of Http Server that allows the registration of callback functions..." alt="" coords="1747,475,1907,501"/>

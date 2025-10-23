@@ -1,7 +1,7 @@
 <map id="tiny_dlna::HttpChunkReader" name="tiny_dlna::HttpChunkReader">
 <area shape="rect" id="node1" title="Http might reply with chunks. So we need to dechunk the data. see https://en.wikipedia...." alt="" coords="1451,13,1656,39"/>
 <area shape="rect" id="node2" href="$classtiny__dlna_1_1HttpLineReader.html" title="We read a single line. A terminating 0 is added to the string to make it compliant for c string funct..." alt="" coords="565,5,756,31"/>
-<area shape="rect" id="node4" href="$classtiny__dlna_1_1HttpHeader.html" title="In a http request and reply we need to process header information. With this API we can define and qu..." alt="" coords="885,68,1051,93"/>
+<area shape="rect" id="node4" href="$classtiny__dlna_1_1HttpHeader.html" title="In a http request and reply we need to process header Debugrmation. With this API we can define and q..." alt="" coords="885,68,1051,93"/>
 <area shape="rect" id="node3" href="$classtiny__dlna_1_1HttpReplyHeader.html" title="Reading and Writing of Http Replys." alt="" coords="1100,39,1303,64"/>
 <area shape="rect" id="node5" href="$classtiny__dlna_1_1Str.html" title="String implementation which keeps the data on the heap. We grow the allocated memory only if the copy..." alt="" coords="607,89,715,115"/>
 <area shape="rect" id="node6" href="$classtiny__dlna_1_1StrView.html" title="A simple wrapper to provide string functions on char*. If the underlying char* is a const we do not a..." alt="" coords="305,32,445,57"/>

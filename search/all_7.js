@@ -40,7 +40,7 @@ var searchData=
   ['httprequestrewrite_37',['HttpRequestRewrite',['../classtiny__dlna_1_1HttpRequestRewrite.html#a6e89e0a5d9147acee904df4b9e74ab43',1,'tiny_dlna::HttpRequestRewrite::HttpRequestRewrite()'],['../classtiny__dlna_1_1HttpRequestRewrite.html',1,'tiny_dlna::HttpRequestRewrite']]],
   ['httprequestrewrite_2eh_38',['HttpRequestRewrite.h',['../HttpRequestRewrite_8h.html',1,'']]],
   ['httpserver_39',['HttpServer',['../classtiny__dlna_1_1HttpServer.html#ae52b3bbe1b696fc11a953650456eac06',1,'tiny_dlna::HttpServer::HttpServer()'],['../classtiny__dlna_1_1HttpServer.html',1,'tiny_dlna::HttpServer']]],
-  ['httpserver_2eh_40',['HttpServer.h',['../HttpServer_8h.html',1,'(Global Namespace)'],['../Server_2HttpServer_8h.html',1,'(Global Namespace)']]],
+  ['httpserver_2eh_40',['HttpServer.h',['../Server_2HttpServer_8h.html',1,'(Global Namespace)'],['../HttpServer_8h.html',1,'(Global Namespace)']]],
   ['httpstreamcopy_41',['HttpStreamCopy',['../classtiny__dlna_1_1HttpStreamCopy.html#af33ad0060f62d49578f33b42d240f852',1,'tiny_dlna::HttpStreamCopy::HttpStreamCopy()'],['../classtiny__dlna_1_1HttpStreamCopy.html',1,'tiny_dlna::HttpStreamCopy']]],
   ['httpstreamcopy_2eh_42',['HttpStreamCopy.h',['../HttpStreamCopy_8h.html',1,'']]],
   ['httpstreamedoutput_43',['HttpStreamedOutput',['../classtiny__dlna_1_1HttpStreamedOutput.html',1,'tiny_dlna']]],

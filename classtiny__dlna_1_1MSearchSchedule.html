@@ -107,8 +107,8 @@ Collaboration diagram for tiny_dlna::MSearchSchedule:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a2fd0ef2354b6fb9db8db9eab551e1a6a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MSearchSchedule.html#a2fd0ef2354b6fb9db8db9eab551e1a6a">MSearchSchedule</a> (<a class="el" href="structtiny__dlna_1_1IPAddressAndPort.html">IPAddressAndPort</a> addr, const char *searchTarget)</td></tr>
-<tr class="separator:a2fd0ef2354b6fb9db8db9eab551e1a6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae29a86226fe9c3376436b07c2dfb0ed4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MSearchSchedule.html#ae29a86226fe9c3376436b07c2dfb0ed4">MSearchSchedule</a> (<a class="el" href="structtiny__dlna_1_1IPAddressAndPort.html">IPAddressAndPort</a> addr, const char *searchTarget, int mx=3)</td></tr>
+<tr class="separator:ae29a86226fe9c3376436b07c2dfb0ed4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa697dec451cb06b4d85360842e788fff"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MSearchSchedule.html#aa697dec451cb06b4d85360842e788fff">name</a> () override</td></tr>
 <tr class="separator:aa697dec451cb06b4d85360842e788fff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a78d50ea3f56af5d5c5122d598828472f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MSearchSchedule.html#a78d50ea3f56af5d5c5122d598828472f">process</a> (<a class="el" href="classtiny__dlna_1_1IUDPService.html">IUDPService</a> &amp;udp) override</td></tr>
@@ -123,7 +123,7 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:aea75da3d93ec82ddcc71102b84501a6a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MSearchSchedule.html#aea75da3d93ec82ddcc71102b84501a6a">max_age</a> = 2</td></tr>
+<tr class="memitem:aea75da3d93ec82ddcc71102b84501a6a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MSearchSchedule.html#aea75da3d93ec82ddcc71102b84501a6a">max_age</a> = 3</td></tr>
 <tr class="separator:aea75da3d93ec82ddcc71102b84501a6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a16bb4b4f7c2e4d16649fc1847f21d0c6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structtiny__dlna_1_1IPAddressAndPort.html">IPAddressAndPort</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MSearchSchedule.html#a16bb4b4f7c2e4d16649fc1847f21d0c6">address</a></td></tr>
 <tr class="separator:a16bb4b4f7c2e4d16649fc1847f21d0c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -146,8 +146,8 @@ Additional Inherited Members</h2></td></tr>
 <div class="textblock"><p>Send MSearch request. </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a2fd0ef2354b6fb9db8db9eab551e1a6a" name="a2fd0ef2354b6fb9db8db9eab551e1a6a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2fd0ef2354b6fb9db8db9eab551e1a6a">&#9670;&#160;</a></span>MSearchSchedule()</h2>
+<a id="ae29a86226fe9c3376436b07c2dfb0ed4" name="ae29a86226fe9c3376436b07c2dfb0ed4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae29a86226fe9c3376436b07c2dfb0ed4">&#9670;&#160;</a></span>MSearchSchedule()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -165,7 +165,13 @@ Additional Inherited Members</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>searchTarget</em>&#160;</td>
+          <td class="paramname"><em>searchTarget</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>mx</em> = <code>3</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -271,7 +277,7 @@ Additional Inherited Members</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int tiny_dlna::MSearchSchedule::max_age = 2</td>
+          <td class="memname">int tiny_dlna::MSearchSchedule::max_age = 3</td>
         </tr>
       </table>
   </td>

@@ -18,6 +18,7 @@ var searchData=
   ['model_5fname_15',['model_name',['../classtiny__dlna_1_1DLNADeviceInfo.html#a63dc6e552e83f84342ac288a9aa53ac9',1,'tiny_dlna::DLNADeviceInfo']]],
   ['model_5fnumber_16',['model_number',['../classtiny__dlna_1_1DLNADeviceInfo.html#a82ca06eae1e282335cc80d4fec0e1c0e',1,'tiny_dlna::DLNADeviceInfo']]],
   ['model_5furl_17',['model_url',['../classtiny__dlna_1_1DLNADeviceInfo.html#a487cbc3893d5040c470d8603009b6db1',1,'tiny_dlna::DLNADeviceInfo']]],
-  ['mx_18',['mx',['../classtiny__dlna_1_1MSearchReplySchedule.html#a3f029ab2f4c2660456ac3111c203dd8a',1,'tiny_dlna::MSearchReplySchedule']]],
-  ['mx_5fvector_19',['mx_vector',['../classtiny__dlna_1_1DLNADeviceRequestParser.html#acc4399bb0142b826470158645795280a',1,'tiny_dlna::DLNADeviceRequestParser']]]
+  ['msearch_5frepeat_5fms_18',['msearch_repeat_ms',['../classtiny__dlna_1_1DLNAControlPointMgr.html#aab8f75a347c8c48b9a3360a8b0ed5043',1,'tiny_dlna::DLNAControlPointMgr']]],
+  ['mx_19',['mx',['../classtiny__dlna_1_1MSearchReplySchedule.html#a3f029ab2f4c2660456ac3111c203dd8a',1,'tiny_dlna::MSearchReplySchedule']]],
+  ['mx_5fvector_20',['mx_vector',['../classtiny__dlna_1_1DLNADeviceRequestParser.html#acc4399bb0142b826470158645795280a',1,'tiny_dlna::DLNADeviceRequestParser']]]
 ];

@@ -39,9 +39,10 @@ var searchData=
   ['mr_5ftransport_2eh_36',['mr_transport.h',['../mr__transport_8h.html',1,'']]],
   ['ms_5fconnmgr_2eh_37',['ms_connmgr.h',['../ms__connmgr_8h.html',1,'']]],
   ['ms_5fcontent_5fdir_2eh_38',['ms_content_dir.h',['../ms__content__dir_8h.html',1,'']]],
-  ['msearchreplycp_39',['MSearchReplyCP',['../classtiny__dlna_1_1MSearchReplyCP.html',1,'tiny_dlna']]],
-  ['msearchreplyschedule_40',['MSearchReplySchedule',['../classtiny__dlna_1_1MSearchReplySchedule.html#a797d2fc636c7f13f9b1662863aa42650',1,'tiny_dlna::MSearchReplySchedule::MSearchReplySchedule()'],['../classtiny__dlna_1_1MSearchReplySchedule.html',1,'tiny_dlna::MSearchReplySchedule']]],
-  ['msearchschedule_41',['MSearchSchedule',['../classtiny__dlna_1_1MSearchSchedule.html#a2fd0ef2354b6fb9db8db9eab551e1a6a',1,'tiny_dlna::MSearchSchedule::MSearchSchedule()'],['../classtiny__dlna_1_1MSearchSchedule.html',1,'tiny_dlna::MSearchSchedule']]],
-  ['mx_42',['mx',['../classtiny__dlna_1_1MSearchReplySchedule.html#a3f029ab2f4c2660456ac3111c203dd8a',1,'tiny_dlna::MSearchReplySchedule']]],
-  ['mx_5fvector_43',['mx_vector',['../classtiny__dlna_1_1DLNADeviceRequestParser.html#acc4399bb0142b826470158645795280a',1,'tiny_dlna::DLNADeviceRequestParser']]]
+  ['msearch_5frepeat_5fms_39',['msearch_repeat_ms',['../classtiny__dlna_1_1DLNAControlPointMgr.html#aab8f75a347c8c48b9a3360a8b0ed5043',1,'tiny_dlna::DLNAControlPointMgr']]],
+  ['msearchreplycp_40',['MSearchReplyCP',['../classtiny__dlna_1_1MSearchReplyCP.html',1,'tiny_dlna']]],
+  ['msearchreplyschedule_41',['MSearchReplySchedule',['../classtiny__dlna_1_1MSearchReplySchedule.html#a797d2fc636c7f13f9b1662863aa42650',1,'tiny_dlna::MSearchReplySchedule::MSearchReplySchedule()'],['../classtiny__dlna_1_1MSearchReplySchedule.html',1,'tiny_dlna::MSearchReplySchedule']]],
+  ['msearchschedule_42',['MSearchSchedule',['../classtiny__dlna_1_1MSearchSchedule.html#ae29a86226fe9c3376436b07c2dfb0ed4',1,'tiny_dlna::MSearchSchedule::MSearchSchedule()'],['../classtiny__dlna_1_1MSearchSchedule.html',1,'tiny_dlna::MSearchSchedule']]],
+  ['mx_43',['mx',['../classtiny__dlna_1_1MSearchReplySchedule.html#a3f029ab2f4c2660456ac3111c203dd8a',1,'tiny_dlna::MSearchReplySchedule']]],
+  ['mx_5fvector_44',['mx_vector',['../classtiny__dlna_1_1DLNADeviceRequestParser.html#acc4399bb0142b826470158645795280a',1,'tiny_dlna::DLNADeviceRequestParser']]]
 ];
