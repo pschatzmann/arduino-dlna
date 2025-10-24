@@ -27,7 +27,6 @@ void setup() {
   Serial.println("XMLParserPrint test starting");
 
   XMLParserPrint xp;
-  xp.setReportTextOnly(false);
 
   // We'll feed the XML in two parts to simulate incremental arrival.
   const char* part1 = "<root><item id=\"1\">Hello";
