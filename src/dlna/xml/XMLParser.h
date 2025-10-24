@@ -42,10 +42,11 @@ class XMLParser {
    * - start,len: numeric offset/length in the original buffer for the reported
    * fragment
    * @param textOnly If true, only report nodes with text content.
-  */
+   */
   XMLParser(const char* xmlStr,
-            void (*callback)(Str& nodeName, Vector<Str>& path,
-                             Str& text, Str& attributes, int start, int len, void* ref), bool textOnly=false) {
+            void (*callback)(Str& nodeName, Vector<Str>& path, Str& text,
+                             Str& attributes, int start, int len, void* ref),
+            bool textOnly = false) {
     setXml(xmlStr);
     setCallback(callback);
     setReportTextOnly(textOnly);
@@ -64,15 +65,18 @@ class XMLParser {
    * @param xmlStr Null-terminated XML buffer. The parser stores a non-owning
    *               view — the buffer must remain valid until parsing finishes.
    */
-  void setXml(const char* xmlStr) { str_view.set(xmlStr); }
+  void setXml(const char* xmlStr) {
+    str_view.set(xmlStr);
+    parsePos = 0;
+  }
 
   /**
    * @brief Set the callback to be invoked for parsed fragments
    * @param cb Function pointer with signature described in the constructor
    * docs.
    */
-  void setCallback(void (*cb)(Str& nodeName, Vector<Str>& path,
-                              Str& text, Str& attributes, int start, int len, void* ref)) {
+  void setCallback(void (*cb)(Str& nodeName, Vector<Str>& path, Str& text,
+                              Str& attributes, int start, int len, void* ref)) {
     this->callback = cb;
   }
 
@@ -97,9 +101,7 @@ class XMLParser {
    * @return true if a fragment was parsed and the callback invoked, false
    *         if no more parseable fragments are available.
    */
-  bool parseSingle() {
-    return do_parse_single();
-  }
+  bool parseSingle() { return do_parse_single(); }
 
   /**
    * @brief Reset the internal parse position so subsequent parseSingle()
@@ -107,9 +109,26 @@ class XMLParser {
    */
   void resetParse() { parsePos = 0; }
 
+  /**
+   * @brief Fully reset parser state (parse position, path stack and content
+   * starts). Use this when the underlying buffer has been trimmed/changed
+   * so the parser's internal stacks do not retain state from the previous
+   * buffer view.
+   */
+  void resetParser() {
+    parsePos = 0;
+    path.resize(0);
+    contentStarts.resize(0);
+    last_attributes.set("");
+    node_name.set("");
+    txt.set("");
+  }
 
   /// report only nodes with text
   void setReportTextOnly(bool flag) { report_text_only = flag; }
+
+  /// Expose current parse position for incremental wrappers
+  int getParsePos() { return parsePos; }
 
  protected:
   StrView str_view;
@@ -121,15 +140,14 @@ class XMLParser {
   // last parsed attributes for the most recent start tag
   Str last_attributes;
   bool report_text_only = true;
-
   // callback signature: nodeName, path, text (inner text for elements or
   // trimmed text), start, len, ref
   // NOTE: the `Str` references passed to the callback (nodeName and text)
   // are backed by parser-owned storage (members of this class) and are only
   // valid for the duration of the callback invocation. If the callback
   // needs to retain the data it must make its own copy.
-  void (*callback)(Str& nodeName, Vector<Str>& path,
-                   Str& text, Str& attributes, int start, int len, void* ref) = nullptr;
+  void (*callback)(Str& nodeName, Vector<Str>& path, Str& text, Str& attributes,
+                   int start, int len, void* ref) = nullptr;
   Vector<int> contentStarts;  // parallel stack to `path`: start position of
                               // content (after the start tag)
   // user-provided opaque pointer for convenience
@@ -162,6 +180,8 @@ class XMLParser {
     if (te > ts && callback) {
       txt.copyFrom(s + ts, te - ts);
       node_name = path.size() > 0 ? path.back() : empty_str;
+      // Entity expansion is performed at setXml() time. Callbacks receive
+      // the parser-owned (or expanded) text directly.
       invokeCallback(node_name, path, txt, last_attributes, ts, te - ts);
     }
   }
@@ -169,7 +189,8 @@ class XMLParser {
   void emitTagSegment(const char* s, int lt, int gt) {
     if (callback) {
       node_name = path.size() > 0 ? path.back() : empty_str;
-      invokeCallback(node_name, path, empty_str, last_attributes, lt, gt - lt + 1);
+      invokeCallback(node_name, path, empty_str, last_attributes, lt,
+                     gt - lt + 1);
     }
   }
 
@@ -180,12 +201,19 @@ class XMLParser {
   }
 
   void handleStartTag(const char* s, int lt, int gt) {
+    // Clear previous attributes first to avoid carrying attributes from a
+    // previously parsed tag into the current element when the current
+    // tag contains no attributes. Use clear() so the underlying char buffer
+    // is zero-terminated and not accidentally read as a C-string by callers
+    // that use attributes.c_str().
+    last_attributes.clear();
     int nameStart = lt + 1;
     while (nameStart < gt && isspace((unsigned char)s[nameStart])) nameStart++;
     int nameEnd = nameStart;
     while (nameEnd < gt && !isspace((unsigned char)s[nameEnd]) &&
            s[nameEnd] != '/' && s[nameEnd] != '>')
       nameEnd++;
+
     if (nameEnd > nameStart) {
       node_name.copyFrom(s + nameStart, nameEnd - nameStart);
       path.push_back(node_name);
@@ -204,10 +232,11 @@ class XMLParser {
         attrStart++;
       while (attrEnd > attrStart && isspace((unsigned char)s[attrEnd - 1]))
         attrEnd--;
-      if (attrEnd > attrStart)
+      if (attrEnd > attrStart) {
         last_attributes.copyFrom(s + attrStart, attrEnd - attrStart);
-      else
-        last_attributes.set("");
+      } else {
+        last_attributes.clear();
+      }
     }
   }
 
@@ -229,10 +258,10 @@ class XMLParser {
   // Helper: invoke the registered callback but pass a path that excludes the
   // current node (only ancestor elements). This keeps the `nodeName`
   // parameter as the current element while `path` contains only parents.
-  void invokeCallback(Str& nodeName, Vector<Str>& fullPath, Str& text,
+  bool invokeCallback(Str& nodeName, Vector<Str>& fullPath, Str& text,
                       Str& attributes, int start, int len) {
-    if (!callback) return;
-    if (report_text_only && text.isEmpty()) return;
+    if (!callback) return false;
+    if (report_text_only && text.isEmpty()) return false;
     Vector<Str> ancestorPath;
     int ancCount = fullPath.size() > 0 ? (int)fullPath.size() - 1 : 0;
     for (int i = 0; i < ancCount; ++i) {
@@ -241,8 +270,8 @@ class XMLParser {
       ancestorPath.push_back(Str(fullPath[i].c_str()));
     }
     callback(nodeName, ancestorPath, text, attributes, start, len, reference);
+    return true;
   }
-
 
   // Run the parser. This is a small, forgiving parser suitable for the
   // embedded use-cases in this project (DIDL fragments, simple SCPD parsing).
@@ -305,7 +334,6 @@ class XMLParser {
           contentStarts.erase(contentStarts.size() - 1);
       }
     }
-
   }
 
   // Incremental single-callback parser. It will resume from `parsePos`
@@ -316,6 +344,7 @@ class XMLParser {
     const char* s = str_view.c_str();
     int len = str_view.length();
     int pos = parsePos;
+    bool result = false;
 
     while (pos < len) {
       int lt = str_view.indexOf('<', pos);
@@ -331,9 +360,12 @@ class XMLParser {
           // emit this text segment and advance parsePos past it
           txt.copyFrom(s + ts, te - ts);
           node_name = path.size() > 0 ? path.back() : empty_str;
-          invokeCallback(node_name, path, txt, last_attributes, ts, te - ts);
-          parsePos = te; // next position is end of emitted text
-          return true;
+          // Entity expansion is handled in setXml(); the callback receives
+          // the parser text as-is.
+          result = invokeCallback(node_name, path, txt, last_attributes, ts,
+                                  te - ts);
+          parsePos = te;  // next position is end of emitted text
+          return result;
         }
       }
 
@@ -342,7 +374,7 @@ class XMLParser {
       if (newPos != lt) {
         pos = newPos;
         parsePos = pos;
-        continue; // comments/PI produce no callback
+        continue;  // comments/PI produce no callback
       }
 
       // find closing '>' (respect quotes)
@@ -365,7 +397,8 @@ class XMLParser {
       // callback for the tag itself
       if (callback) {
         node_name = path.size() > 0 ? path.back() : empty_str;
-        invokeCallback(node_name, path, empty_str, last_attributes, lt, gt - lt + 1);
+        result = invokeCallback(node_name, path, empty_str, last_attributes, lt,
+                                gt - lt + 1);
         // detect self-closing and pop if needed
         bool selfClosing = false;
         int back = gt - 1;
@@ -378,7 +411,7 @@ class XMLParser {
             contentStarts.erase(contentStarts.size() - 1);
         }
         parsePos = pos;
-        return true;
+        return result;
       }
 
       pos = gt + 1;

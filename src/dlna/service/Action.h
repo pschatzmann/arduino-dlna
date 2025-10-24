@@ -19,7 +19,6 @@ class Argument {
   Str value = "";
 };
 
-
 /**
  * @brief Represents the result of invoking a DLNA service Action.
  *
@@ -53,11 +52,11 @@ class ActionReply {
       arguments.push_back(arg);
     }
   }
+  void clear() { arguments.clear(); }
 
  protected:
   bool is_valid = true;
 };
-
 
 /**
  * @brief Represents a request to invoke a remote DLNA service action.

@@ -12,6 +12,7 @@
 #include "http/HttpServer.h"
 #include "xml/XMLDeviceParser.h"
 #include "xml/XMLParser.h"
+#include "xml/XMLParserPrint.h"
 
 namespace tiny_dlna {
 
@@ -109,7 +110,8 @@ class DLNAControlPointMgr {
     }
 
     // Send MSearch request via UDP. Use maxWaitMs as the emission window.
-    MSearchSchedule* search = new MSearchSchedule(DLNABroadcastAddress, searchTarget);
+    MSearchSchedule* search =
+        new MSearchSchedule(DLNABroadcastAddress, searchTarget);
 
     // ensure min <= max
     if (minWaitMs > maxWaitMs) minWaitMs = maxWaitMs;
@@ -163,16 +165,25 @@ class DLNAControlPointMgr {
   }
 
   /// Executes all registered methods
-  ActionReply executeActions() {
+  ActionReply& executeActions() {
     DlnaLogger.log(DlnaLogLevel::Debug, "DLNAControlPointMgr::executeActions");
-    ActionReply result = postAllActions();
+    reply.clear();
+    postAllActions();
     actions.clear();
-    return result;
+    // Debug: dump collected reply arguments for verification
+    DlnaLogger.log(DlnaLogLevel::Info, "Collected reply arguments: %d",
+                   (int)reply.arguments.size());
+    for (auto& a : reply.arguments) {
+      DlnaLogger.log(DlnaLogLevel::Info, "  -> %s = %s",
+                     a.name ? a.name : "(null)", a.value.c_str());
+    }
+    return reply;
   }
 
   /// Subscribe to changes for all device services
   bool subscribeNotifications(DLNADeviceInfo& device, int timeoutSeconds = 60) {
-    DlnaLogger.log(DlnaLogLevel::Debug, "DLNAControlPointMgr::subscribeNotifications");
+    DlnaLogger.log(DlnaLogLevel::Debug,
+                   "DLNAControlPointMgr::subscribeNotifications");
     if (p_http_server == nullptr) {
       DlnaLogger.log(
           DlnaLogLevel::Error,
@@ -211,7 +222,8 @@ class DLNAControlPointMgr {
           "HttpServer not defined - cannot subscribe to notifications");
       return false;
     }
-    DlnaLogger.log(DlnaLogLevel::Debug, "DLNAControlPointMgr::subscribeNotifications");
+    DlnaLogger.log(DlnaLogLevel::Debug,
+                   "DLNAControlPointMgr::subscribeNotifications");
     DLNADeviceInfo& device = getDevice(service);
 
     char url_buffer[200] = {0};
@@ -364,7 +376,6 @@ class DLNAControlPointMgr {
     if (rc != 200) {
       DlnaLogger.log(DlnaLogLevel::Error, "Http get to '%s' failed with %d",
                      url.url(), rc);
-      req.stop();
       return false;
     }
     // get xml
@@ -374,7 +385,6 @@ class DLNAControlPointMgr {
       if (len == 0) break;
       xml.write(buffer, len);
     }
-    req.stop();
 
     // parse xml
     DLNADeviceInfo new_device;
@@ -382,7 +392,7 @@ class DLNAControlPointMgr {
     parser.parse(new_device, strings, xml.c_str());
     new_device.device_url = url;
     // Avoid adding the same device multiple times: check UDN uniqueness
-    for (auto &existing_device : devices) {
+    for (auto& existing_device : devices) {
       if (existing_device.getUDN() == new_device.getUDN()) {
         DlnaLogger.log(DlnaLogLevel::Debug,
                        "Device '%s' already exists (skipping add)",
@@ -411,6 +421,7 @@ class DLNAControlPointMgr {
   IUDPService* p_udp = nullptr;
   Vector<DLNADeviceInfo> devices;
   Vector<ActionRequest> actions;
+  ActionReply reply;
   XMLPrinter xml;
   int msearch_repeat_ms = 10000;
   bool is_active = false;
@@ -487,7 +498,7 @@ class DLNAControlPointMgr {
     if (!usn_c || *usn_c == '\0') return false;
     const char* sep = strstr(usn_c, "::");
     int udn_len = sep ? (int)(sep - usn_c) : (int)strlen(usn_c);
-    for (auto &dev : selfDLNAControlPoint->devices) {
+    for (auto& dev : selfDLNAControlPoint->devices) {
       const char* known_udn = dev.getUDN();
       if (known_udn && strncmp(known_udn, usn_c, udn_len) == 0 &&
           (int)strlen(known_udn) == udn_len) {
@@ -500,8 +511,8 @@ class DLNAControlPointMgr {
 
   static bool handleNotifyAlive(NotifyReplyCP& data) {
     bool select = selfDLNAControlPoint->matches(data.usn.c_str());
-    DlnaLogger.log(DlnaLogLevel::Debug, "addDevice: %s -> %s",
-                   data.usn.c_str(), select ? "added" : "filtered");
+    DlnaLogger.log(DlnaLogLevel::Debug, "addDevice: %s -> %s", data.usn.c_str(),
+                   select ? "added" : "filtered");
     if (!select) return false;
 
     DLNADeviceInfo* existing = nullptr;
@@ -546,7 +557,7 @@ class DLNAControlPointMgr {
     if (usn_c && *usn_c) {
       const char* sep = strstr(usn_c, "::");
       int udn_len = sep ? (int)(sep - usn_c) : (int)strlen(usn_c);
-      for (auto &dev : selfDLNAControlPoint->devices) {
+      for (auto& dev : selfDLNAControlPoint->devices) {
         const char* known_udn = dev.getUDN();
         if (known_udn && strncmp(known_udn, usn_c, udn_len) == 0 &&
             (int)strlen(known_udn) == udn_len) {
@@ -669,18 +680,21 @@ class DLNAControlPointMgr {
     return result;
   }
 
-  ActionReply postAllActions() {
+  ActionReply& getLastReply() { return reply; }
+
+  ActionReply& postAllActions() {
+    reply.clear();
     DlnaLogger.log(DlnaLogLevel::Debug, "DLNAControlPointMgr::postAllActions");
-    ActionReply result;
     for (auto& action : actions) {
-      if (action.getServiceType() != nullptr) result.add(postAction(action));
+      if (action.getServiceType() != nullptr) reply.add(postAction(action));
     }
-    return result;
+    return reply;
   }
 
-  ActionReply postAction(ActionRequest& action) {
-    DlnaLogger.log(DlnaLogLevel::Debug,
-                   "DLNAControlPointMgr::postAction: %s", action.action);
+  ActionReply& postAction(ActionRequest& action) {
+    DlnaLogger.log(DlnaLogLevel::Debug, "DLNAControlPointMgr::postAction: %s",
+                   action.action);
+    reply.clear();
     DLNAServiceInfo& service = *action.p_service;
     DLNADeviceInfo& device = getDevice(service);
 
@@ -701,25 +715,9 @@ class DLNAControlPointMgr {
     char url_buffer[200] = {0};
     Url post_url{getUrl(device, service.control_url, url_buffer, 200)};
 
-    // send HTTP POST and collect response
-    StrPrint responseBody;
-    int rc = sendActionHttpPost(post_url, requestBody, responseBody,
-                                action_str.c_str());
-
-    DlnaLogger.log(DlnaLogLevel::Info, "==> http rc %d", rc);
-    ActionReply result(rc == 200);
-    if (rc != 200) {
-      return result;
-    }
-
-    // log request and response for debugging
-    DlnaLogger.log(DlnaLogLevel::Debug, requestBody.c_str());
-    DlnaLogger.log(DlnaLogLevel::Debug, responseBody.c_str());
-
-    // parse response and extract returned arguments
-    parseActionResponse(responseBody, result, action.action);
-
-    return result;
+    // send HTTP POST and collect response into an XMLParserPrint so we can
+    // parse incrementally
+    return processActionHttpPost(post_url, requestBody, action_str.c_str());
   }
 
   /// Build the SOAP XML request body for the action into `out`
@@ -728,99 +726,54 @@ class DLNAControlPointMgr {
     createXML(action);
   }
 
-  /// Send an HTTP POST for the given URL and request body. On success the
-  /// response body is written into `responseOut`. Returns the HTTP rc.
-  int sendActionHttpPost(Url& post_url, StrPrint& requestBody, StrPrint& responseOut, const char* soapAction) {
+  // Send an HTTP POST for the given URL and request body. On success the
+  /// response body is written into `responseOut` (an XMLParserPrint). Returns
+  /// the HTTP rc.
+  ActionReply& processActionHttpPost(Url& post_url, StrPrint& requestBody,
+                                     const char* soapAction) {
+    XMLParserPrint xml_parser;
+    uint8_t buffer[200];
+    Str outNodeName;
+    Vector<Str> outPath;
+    Str outText;
+    Str outAttributes;
+    xml_parser.setExpandEncoded(true);
+
     // set header and post
+    p_http->stop();
     p_http->request().put("SOAPACTION", soapAction);
-    int rc = p_http->post(post_url, "text/xml", requestBody.c_str(), requestBody.length());
+    int rc = p_http->post(post_url, "text/xml", requestBody.c_str(),
+                          requestBody.length());
     if (rc != 200) {
       p_http->stop();
-      return rc;
+      reply.setValid(false);
+      return reply;
     }
-    // read response into responseOut
-    responseOut.reset();
-    uint8_t buffer[200];
+
+    reply.setValid(true);
+    // parse response
     while (p_http->client()->available()) {
       int len = p_http->client()->read(buffer, 200);
-      responseOut.write(buffer, len);
-    }
-    p_http->stop();
-    return rc;
-  }
-
-  /// Parse the SOAP action response body (in `response`) and append discovered
-  /// return arguments into `out`. Also notify the application via eventCallback
-  /// for each returned name/value pair.
-  void parseActionResponse(StrPrint& response, ActionReply& out,
-                           const char* actionName) {
-    const char* resp = response.c_str();
-    if (resp == nullptr || *resp == '\0') return;
-    StrView soap(resp);
-
-    // Build response tag name: ActionNameResponse
-    char respTagBuf[200] = {0};
-    snprintf(respTagBuf, sizeof(respTagBuf), "%sResponse", actionName);
-    int respPos = soap.indexOf(respTagBuf);
-    if (respPos >= 0) {
-      // find opening '<' before respPos
-      int openPos = respPos;
-      while (openPos > 0 && soap[openPos] != '<') openPos--;
-      if (openPos < 0) openPos = 0;
-      int openEnd = soap.indexOf('>', openPos);
-      if (openEnd >= 0) {
-        int payloadStart = openEnd + 1;
-        // find end tag
-        char endTagBuf[220] = {0};
-        snprintf(endTagBuf, sizeof(endTagBuf), "</%sResponse>", actionName);
-        int payloadEnd = soap.indexOf(endTagBuf, payloadStart);
-        if (payloadEnd < 0) payloadEnd = soap.length();
-
-        // Extract payload substring and parse with XMLParser to get child
-        // elements
-        Str payload;
-        payload.copyFrom(soap.c_str() + payloadStart, payloadEnd - payloadStart);
-
-        struct CBRef {
-          DLNAControlPointMgr* self;
-          ActionReply* out;
-        } cbref;
-        cbref.self = this;
-        cbref.out = &out;
-
-        auto xmlcb = [](Str& nodeName, Vector<Str>& /*path*/, Str& text,
-                        Str& /*attributes*/, int /*start*/, int /*len*/, void* vref) {
-          CBRef* r = static_cast<CBRef*>(vref);
-          // trim text and ignore empty nodes
-          Str value = text;
-          value.trim();
-          if (value.length() == 0) return;
-
-          // strip namespace prefix from node name if present
-          const char* fullName = nodeName.c_str();
-          const char* sep = strchr(fullName, ':');
-          const char* nameOnly = sep ? sep + 1 : fullName;
-
-          const char* namePtr = r->self->strings.add((char*)nameOnly);
-          const char* valuePtr = r->self->strings.add((char*)value.c_str());
-
-          Argument arg;
-          arg.name = namePtr;
-          arg.value = valuePtr;
-          r->out->arguments.push_back(arg);
-
-          // Also notify application about this name/value via eventCallback
-          if (r->self && r->self->eventCallback) {
-            // SID is not applicable here (action response), pass nullptr
-            r->self->eventCallback(r->self->reference, "", namePtr, valuePtr);
+      if (len > 0) {
+        // Serial.write(buffer, len);
+        xml_parser.write(buffer, len);
+        while (xml_parser.parse(outNodeName, outPath, outText, outAttributes)) {
+          // skip didl
+          if (!outNodeName.equals("Result")) {
+            Argument arg;
+            // persist the argument name in the control point's string registry
+            arg.name = strings.add((char*)outNodeName.c_str());
+            arg.value = outText;
+            if (!arg.value.isEmpty()) {
+              reply.arguments.push_back(arg);
+              DlnaLogger.log(DlnaLogLevel::Info, "ActionReplay '%s': %s",
+                             outNodeName.c_str(), outText.c_str());
+            }
           }
-        };
-
-        XMLParser parser(payload.c_str(), xmlcb);
-        parser.setReference(&cbref);
-        parser.parse();
+        }
       }
     }
+    return reply;
   }
 
   const char* getUrl(DLNADeviceInfo& device, const char* suffix,

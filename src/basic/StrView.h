@@ -165,7 +165,7 @@ class StrView {
 
   /// adds a character
   virtual void add(const char c) {
-    if (!isConst() && len < maxlen - 1) {
+    if (!isConst()) {
       grow(len + 1);
       chars[len] = c;
       chars[++len] = 0;

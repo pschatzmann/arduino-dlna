@@ -304,9 +304,21 @@ class ControlPointMediaServer {
     StrView res(resultXml);
     int pos = 0;
     while (true) {
-      int itPos = res.indexOf("<item", pos);
+      // find next <item or <container element
+      int itPos1 = res.indexOf("<item", pos);
+      int itPos2 = res.indexOf("<container", pos);
+      int itPos = -1;
+      bool isContainer = false;
+      if (itPos1 >= 0 && (itPos2 < 0 || itPos1 < itPos2)) {
+        itPos = itPos1;
+        isContainer = false;
+      } else if (itPos2 >= 0) {
+        itPos = itPos2;
+        isContainer = true;
+      }
       if (itPos < 0) break;
-      int itEnd = res.indexOf("</item>", itPos);
+      int itEnd = isContainer ? res.indexOf("</container>", itPos)
+                              : res.indexOf("</item>", itPos);
       if (itEnd < 0) break;
       int headerEnd = res.indexOf('>', itPos);
       if (headerEnd < 0 || headerEnd >= itEnd) break;

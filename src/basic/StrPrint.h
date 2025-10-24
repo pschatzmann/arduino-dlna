@@ -25,6 +25,13 @@ class StrPrint : public Print {
     for (int j = 0; j < size; j++) {
       result += write(buffer[j]);
     }
+    // expand encoded entities if desired
+    if (expand_encoded) {
+      str.replaceAll("&amp;", "&");
+      str.replaceAll("&lt;", "<");
+      str.replaceAll("&gt;", ">");
+    }
+
     return result;
   }
 
@@ -34,13 +41,14 @@ class StrPrint : public Print {
 
   void reset() { str.reset(); }
 
-  void consume(int n) {
-    str.remove(n);
-  }
+  void consume(int n) { str.remove(n); }
+
+  void setExpandEncoded(bool flag) { expand_encoded = flag; }
 
  protected:
   Str str{200};
   int inc_size;
+  bool expand_encoded = false;
 };
 
 }  // namespace tiny_dlna

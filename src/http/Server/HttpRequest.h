@@ -31,6 +31,8 @@ class HttpRequest {
     setClient(client);
   }
 
+  ~HttpRequest() { stop(); }
+
   void setClient(Client &client) { this->client_ptr = &client; }
 
   // the requests usually need a host. This needs to be set if we did not
