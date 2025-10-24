@@ -361,6 +361,10 @@ class DLNAControlPointMgr {
 
   /// Adds the device from the device xml url if it does not already exist
   bool addDevice(Url url) {
+    if (StrView(url.host()).equals("127.0.0.1")){
+      DlnaLogger.log(DlnaLogLevel::Info, "Ignoring localhost device");
+      return false;
+    }
     DlnaLogger.log(DlnaLogLevel::Debug, "DLNAControlPointMgr::addDevice");
     DLNADeviceInfo& device = getDevice(url);
     if (device != NO_DEVICE) {
