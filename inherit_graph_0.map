@@ -1,6 +1,7 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" title=" " alt="" coords="5,55,57,80"/>
-<area shape="rect" id="node2" href="$structtiny__dlna_1_1EscapingPrint.html" title="Print wrapper that escapes &amp; &lt; &gt; while forwarding to an underlying Print." alt="" coords="105,5,284,31"/>
-<area shape="rect" id="node3" href="$classtiny__dlna_1_1NullPrint.html" title="Class with does not do any output: it can be used to determine the length of the output." alt="" coords="121,55,268,80"/>
-<area shape="rect" id="node4" href="$classtiny__dlna_1_1StrPrint.html" title="Print to a dynamic string." alt="" coords="125,104,264,129"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,80,57,105"/>
+<area shape="rect" id="node2" href="$structtiny__dlna_1_1EscapingPrint.html" title="Print wrapper that escapes &amp; &lt; &gt; while forwarding to an underlying Print." alt="" coords="110,5,289,31"/>
+<area shape="rect" id="node3" href="$classtiny__dlna_1_1NullPrint.html" title="Class with does not do any output: it can be used to determine the length of the output." alt="" coords="126,55,273,80"/>
+<area shape="rect" id="node4" href="$classtiny__dlna_1_1StrPrint.html" title="Print to a dynamic string." alt="" coords="130,104,269,129"/>
+<area shape="rect" id="node5" href="$classtiny__dlna_1_1XMLParserPrint.html" title="Helper that implements a Print interface to accumulate XML data and then parse it using XMLParser." alt="" coords="105,153,293,179"/>
 </map>

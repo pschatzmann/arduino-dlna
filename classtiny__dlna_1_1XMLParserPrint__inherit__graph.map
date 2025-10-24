@@ -1,0 +1,4 @@
+<map id="tiny_dlna::XMLParserPrint" name="tiny_dlna::XMLParserPrint">
+<area shape="rect" id="node1" title="Helper that implements a Print interface to accumulate XML data and then parse it using XMLParser." alt="" coords="5,79,193,104"/>
+<area shape="rect" id="node2" title=" " alt="" coords="73,5,125,31"/>
+</map>

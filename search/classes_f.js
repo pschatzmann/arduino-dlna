@@ -4,5 +4,6 @@ var searchData=
   ['xmldeviceparser_1',['XMLDeviceParser',['../classtiny__dlna_1_1XMLDeviceParser.html',1,'tiny_dlna']]],
   ['xmlnode_2',['XMLNode',['../structtiny__dlna_1_1XMLNode.html',1,'tiny_dlna']]],
   ['xmlparser_3',['XMLParser',['../classtiny__dlna_1_1XMLParser.html',1,'tiny_dlna']]],
-  ['xmlprinter_4',['XMLPrinter',['../structtiny__dlna_1_1XMLPrinter.html',1,'tiny_dlna']]]
+  ['xmlparserprint_4',['XMLParserPrint',['../classtiny__dlna_1_1XMLParserPrint.html',1,'tiny_dlna']]],
+  ['xmlprinter_5',['XMLPrinter',['../structtiny__dlna_1_1XMLPrinter.html',1,'tiny_dlna']]]
 ];
