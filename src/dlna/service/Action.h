@@ -53,6 +53,16 @@ class ActionReply {
     }
   }
   void clear() { arguments.clear(); }
+  void addArgument(Argument arg){
+    for (auto& a : arguments) {
+      if (StrView(a.name).equals(arg.name)) {
+        a.value = arg.value;
+        return;
+      }
+    }
+    arguments.push_back(arg);
+  }
+
 
  protected:
   bool is_valid = true;

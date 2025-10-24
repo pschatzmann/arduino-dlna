@@ -686,7 +686,7 @@ class DLNAControlPointMgr {
     reply.clear();
     DlnaLogger.log(DlnaLogLevel::Debug, "DLNAControlPointMgr::postAllActions");
     for (auto& action : actions) {
-      if (action.getServiceType() != nullptr) reply.add(postAction(action));
+      if (action.getServiceType() != nullptr) postAction(action);
     }
     return reply;
   }
@@ -751,6 +751,7 @@ class DLNAControlPointMgr {
     }
 
     reply.setValid(true);
+    reply.arguments.clear();
     // parse response
     while (p_http->client()->available()) {
       int len = p_http->client()->read(buffer, 200);
@@ -764,10 +765,10 @@ class DLNAControlPointMgr {
             // persist the argument name in the control point's string registry
             arg.name = strings.add((char*)outNodeName.c_str());
             arg.value = outText;
-            if (!arg.value.isEmpty()) {
-              reply.arguments.push_back(arg);
-              DlnaLogger.log(DlnaLogLevel::Info, "ActionReplay '%s': %s",
-                             outNodeName.c_str(), outText.c_str());
+            if (!(outText.isEmpty() && outAttributes.isEmpty())) {
+              reply.addArgument(arg);
+              DlnaLogger.log(DlnaLogLevel::Info, "ActionReplay '%s': %s (%s)",
+                             outNodeName.c_str(), outText.c_str(), outAttributes.c_str());
             }
           }
         }
