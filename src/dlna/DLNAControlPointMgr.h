@@ -474,43 +474,59 @@ class DLNAControlPointMgr {
   }
 
   /// Processes a NotifyReplyCP message
-  static bool processDevice(NotifyReplyCP& data) {
-    DlnaLogger.log(DlnaLogLevel::Debug, "DLNAControlPointMgr::processDevice");
+  /// Note: split into smaller helpers for clarity and testability.
+  static bool handleNotifyByebye(Str& usn) {
+    // delegate to existing bye handling
+    return selfDLNAControlPoint->processBye(usn);
+  }
 
-    Str& nts = data.nts;
-    if (nts.equals("ssdp:byebye")) {
-      selfDLNAControlPoint->processBye(nts);
+  /// Returns true and sets outDev if a device with the UDN part of `usn_c` is
+  /// already present in the device list.
+  static bool isUdnKnown(const char* usn_c, DLNADeviceInfo*& outDev) {
+    outDev = nullptr;
+    if (!usn_c || *usn_c == '\0') return false;
+    const char* sep = strstr(usn_c, "::");
+    int udn_len = sep ? (int)(sep - usn_c) : (int)strlen(usn_c);
+    for (auto &dev : selfDLNAControlPoint->devices) {
+      const char* known_udn = dev.getUDN();
+      if (known_udn && strncmp(known_udn, usn_c, udn_len) == 0 &&
+          (int)strlen(known_udn) == udn_len) {
+        outDev = &dev;
+        return true;
+      }
+    }
+    return false;
+  }
+
+  static bool handleNotifyAlive(NotifyReplyCP& data) {
+    bool select = selfDLNAControlPoint->matches(data.usn.c_str());
+    DlnaLogger.log(DlnaLogLevel::Debug, "addDevice: %s -> %s",
+                   data.usn.c_str(), select ? "added" : "filtered");
+    if (!select) return false;
+
+    DLNADeviceInfo* existing = nullptr;
+    if (isUdnKnown(data.usn.c_str(), existing)) {
+      DlnaLogger.log(DlnaLogLevel::Debug,
+                     "Device '%s' already known (skip GET)",
+                     existing ? existing->getUDN() : "<unknown>");
+      if (existing) existing->setActive(true);
       return true;
     }
+
+    // Not known -> fetch and add device description
+    Url url{data.location.c_str()};
+    selfDLNAControlPoint->addDevice(url);
+    return true;
+  }
+
+  static bool processDevice(NotifyReplyCP& data) {
+    DlnaLogger.log(DlnaLogLevel::Debug, "DLNAControlPointMgr::processDevice");
+    Str& nts = data.nts;
+    if (nts.equals("ssdp:byebye")) {
+      return handleNotifyByebye(nts);
+    }
     if (nts.equals("ssdp:alive")) {
-      bool select = selfDLNAControlPoint->matches(data.usn.c_str());
-      DlnaLogger.log(DlnaLogLevel::Debug, "addDevice: %s -> %s",
-                     data.usn.c_str(), select ? "added" : "filtered");
-      if (!select) return false;
-      // If we already know the device UDN, avoid fetching the device xml
-      // repeatedly from multiple Location URLs. Extract the UDN part from
-      // the USN (up to the first "::" if present) and check the existing
-      // device list.
-      const char* usn_c = data.usn.c_str();
-      const char* sep = strstr(usn_c, "::");
-      int udn_len = sep ? (int)(sep - usn_c) : (int)strlen(usn_c);
-      bool known = false;
-      for (auto &dev : selfDLNAControlPoint->devices) {
-        const char* known_udn = dev.getUDN();
-        if (known_udn && strncmp(known_udn, usn_c, udn_len) == 0 &&
-            (int)strlen(known_udn) == udn_len) {
-          DlnaLogger.log(DlnaLogLevel::Debug,
-                         "Device '%s' already known (skip GET)", known_udn);
-          dev.setActive(true);
-          known = true;
-          break;
-        }
-      }
-      if (!known) {
-        Url url{data.location.c_str()};
-        selfDLNAControlPoint->addDevice(url);
-      }
-      return true;
+      return handleNotifyAlive(data);
     }
     return false;
   }
@@ -548,7 +564,7 @@ class DLNAControlPointMgr {
     return true;
   }
 
-  // Parse the xml content of a NotifyReplyCP and dispatch each property
+  /// Parse the xml content of a NotifyReplyCP and dispatch each property
   void parseAndDispatchEvent(NotifyReplyCP& data) {
     DlnaLogger.log(DlnaLogLevel::Debug,
                    "DLNAControlPointMgr::parseAndDispatchEvent");
@@ -663,16 +679,16 @@ class DLNAControlPointMgr {
   }
 
   ActionReply postAction(ActionRequest& action) {
-    DlnaLogger.log(DlnaLogLevel::Debug, "DLNAControlPointMgr::postAction: %s", action.action);
+    DlnaLogger.log(DlnaLogLevel::Debug,
+                   "DLNAControlPointMgr::postAction: %s", action.action);
     DLNAServiceInfo& service = *action.p_service;
     DLNADeviceInfo& device = getDevice(service);
 
-    // create XML
-    StrPrint str_print;
-    xml.setOutput(str_print);
-    createXML(action);
+    // Build request body
+    StrPrint requestBody;
+    buildActionBody(action, requestBody);
 
-    // create SOAPACTION header
+    // create SOAPACTION header value
     char act[200];
     StrView action_str{act, 200};
     action_str = "\"";
@@ -681,115 +697,130 @@ class DLNAControlPointMgr {
     action_str.add(action.action);
     action_str.add("\"");
 
-    p_http->request().put("SOAPACTION", action_str.c_str());
-
     // crate control url
     char url_buffer[200] = {0};
     Url post_url{getUrl(device, service.control_url, url_buffer, 200)};
 
-    // post the request
-    int rc = p_http->post(post_url, "text/xml", str_print.c_str(),
-                          str_print.length());
+    // send HTTP POST and collect response
+    StrPrint responseBody;
+    int rc = sendActionHttpPost(post_url, requestBody, responseBody,
+                                action_str.c_str());
 
-    // check result
     DlnaLogger.log(DlnaLogLevel::Info, "==> http rc %d", rc);
     ActionReply result(rc == 200);
     if (rc != 200) {
-      p_http->stop();
       return result;
     }
 
-    // log xml request
-    DlnaLogger.log(DlnaLogLevel::Debug, str_print.c_str());
+    // log request and response for debugging
+    DlnaLogger.log(DlnaLogLevel::Debug, requestBody.c_str());
+    DlnaLogger.log(DlnaLogLevel::Debug, responseBody.c_str());
 
-    // receive result
-    str_print.reset();
+    // parse response and extract returned arguments
+    parseActionResponse(responseBody, result, action.action);
+
+    return result;
+  }
+
+  /// Build the SOAP XML request body for the action into `out`
+  void buildActionBody(ActionRequest& action, StrPrint& out) {
+    xml.setOutput(out);
+    createXML(action);
+  }
+
+  /// Send an HTTP POST for the given URL and request body. On success the
+  /// response body is written into `responseOut`. Returns the HTTP rc.
+  int sendActionHttpPost(Url& post_url, StrPrint& requestBody, StrPrint& responseOut, const char* soapAction) {
+    // set header and post
+    p_http->request().put("SOAPACTION", soapAction);
+    int rc = p_http->post(post_url, "text/xml", requestBody.c_str(), requestBody.length());
+    if (rc != 200) {
+      p_http->stop();
+      return rc;
+    }
+    // read response into responseOut
+    responseOut.reset();
     uint8_t buffer[200];
     while (p_http->client()->available()) {
       int len = p_http->client()->read(buffer, 200);
-      str_print.write(buffer, len);
+      responseOut.write(buffer, len);
     }
-
-    // log result
-    DlnaLogger.log(DlnaLogLevel::Debug, str_print.c_str());
     p_http->stop();
+    return rc;
+  }
 
-    // Try to parse SOAP response body and extract return arguments
-    // e.g. <u:SomeActionResponse> <TrackDuration>01:23:45</TrackDuration>
-    // ...</u:SomeActionResponse>
-    const char* resp = str_print.c_str();
-    if (resp != nullptr && *resp != '\0') {
-      StrView soap(resp);
+  /// Parse the SOAP action response body (in `response`) and append discovered
+  /// return arguments into `out`. Also notify the application via eventCallback
+  /// for each returned name/value pair.
+  void parseActionResponse(StrPrint& response, ActionReply& out,
+                           const char* actionName) {
+    const char* resp = response.c_str();
+    if (resp == nullptr || *resp == '\0') return;
+    StrView soap(resp);
 
-      // Build response tag name: ActionNameResponse
-      char respTagBuf[200] = {0};
-      snprintf(respTagBuf, sizeof(respTagBuf), "%sResponse", action.action);
-      int respPos = soap.indexOf(respTagBuf);
-      if (respPos >= 0) {
-        // find opening '<' before respPos
-        int openPos = respPos;
-        while (openPos > 0 && soap[openPos] != '<') openPos--;
-        if (openPos < 0) openPos = 0;
-        int openEnd = soap.indexOf('>', openPos);
-        if (openEnd >= 0) {
-          int payloadStart = openEnd + 1;
-          // find end tag
-          char endTagBuf[220] = {0};
-          snprintf(endTagBuf, sizeof(endTagBuf), "</%sResponse>",
-                   action.action);
-          int payloadEnd = soap.indexOf(endTagBuf, payloadStart);
-          if (payloadEnd < 0) payloadEnd = soap.length();
+    // Build response tag name: ActionNameResponse
+    char respTagBuf[200] = {0};
+    snprintf(respTagBuf, sizeof(respTagBuf), "%sResponse", actionName);
+    int respPos = soap.indexOf(respTagBuf);
+    if (respPos >= 0) {
+      // find opening '<' before respPos
+      int openPos = respPos;
+      while (openPos > 0 && soap[openPos] != '<') openPos--;
+      if (openPos < 0) openPos = 0;
+      int openEnd = soap.indexOf('>', openPos);
+      if (openEnd >= 0) {
+        int payloadStart = openEnd + 1;
+        // find end tag
+        char endTagBuf[220] = {0};
+        snprintf(endTagBuf, sizeof(endTagBuf), "</%sResponse>", actionName);
+        int payloadEnd = soap.indexOf(endTagBuf, payloadStart);
+        if (payloadEnd < 0) payloadEnd = soap.length();
 
-          // Extract payload substring and parse with XMLParser to get child
-          // elements
-          Str payload;
-          payload.copyFrom(soap.c_str() + payloadStart,
-                           payloadEnd - payloadStart);
+        // Extract payload substring and parse with XMLParser to get child
+        // elements
+        Str payload;
+        payload.copyFrom(soap.c_str() + payloadStart, payloadEnd - payloadStart);
 
-          struct CBRef {
-            DLNAControlPointMgr* self;
-            ActionReply* out;
-          } cbref;
-          cbref.self = this;
-          cbref.out = &result;
+        struct CBRef {
+          DLNAControlPointMgr* self;
+          ActionReply* out;
+        } cbref;
+        cbref.self = this;
+        cbref.out = &out;
 
-          auto xmlcb = [](Str& nodeName, Vector<Str>& /*path*/, Str& text,
-                          Str& /*attributes*/, int /*start*/, int /*len*/,
-                          void* vref) {
-            CBRef* r = static_cast<CBRef*>(vref);
-            // trim text and ignore empty nodes
-            Str value = text;
-            value.trim();
-            if (value.length() == 0) return;
+        auto xmlcb = [](Str& nodeName, Vector<Str>& /*path*/, Str& text,
+                        Str& /*attributes*/, int /*start*/, int /*len*/, void* vref) {
+          CBRef* r = static_cast<CBRef*>(vref);
+          // trim text and ignore empty nodes
+          Str value = text;
+          value.trim();
+          if (value.length() == 0) return;
 
-            // strip namespace prefix from node name if present
-            const char* fullName = nodeName.c_str();
-            const char* sep = strchr(fullName, ':');
-            const char* nameOnly = sep ? sep + 1 : fullName;
+          // strip namespace prefix from node name if present
+          const char* fullName = nodeName.c_str();
+          const char* sep = strchr(fullName, ':');
+          const char* nameOnly = sep ? sep + 1 : fullName;
 
-            const char* namePtr = r->self->strings.add((char*)nameOnly);
-            const char* valuePtr = r->self->strings.add((char*)value.c_str());
+          const char* namePtr = r->self->strings.add((char*)nameOnly);
+          const char* valuePtr = r->self->strings.add((char*)value.c_str());
 
-            Argument arg;
-            arg.name = namePtr;
-            arg.value = valuePtr;
-            r->out->arguments.push_back(arg);
+          Argument arg;
+          arg.name = namePtr;
+          arg.value = valuePtr;
+          r->out->arguments.push_back(arg);
 
-            // Also notify application about this name/value via eventCallback
-            if (r->self && r->self->eventCallback) {
-              // SID is not applicable here (action response), pass nullptr
-              r->self->eventCallback(r->self->reference, "", namePtr, valuePtr);
-            }
-          };
+          // Also notify application about this name/value via eventCallback
+          if (r->self && r->self->eventCallback) {
+            // SID is not applicable here (action response), pass nullptr
+            r->self->eventCallback(r->self->reference, "", namePtr, valuePtr);
+          }
+        };
 
-          XMLParser parser(payload.c_str(), xmlcb);
-          parser.setReference(&cbref);
-          parser.parse();
-        }
+        XMLParser parser(payload.c_str(), xmlcb);
+        parser.setReference(&cbref);
+        parser.parse();
       }
     }
-
-    return result;
   }
 
   const char* getUrl(DLNADeviceInfo& device, const char* suffix,

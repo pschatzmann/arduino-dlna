@@ -85,6 +85,28 @@ class XMLParser {
    */
   void parse() { do_parse(); }
 
+  /**
+   * @brief Parse a single fragment (one callback invocation) from the
+   * previously set XML buffer.
+   *
+   * This allows incremental parsing of a larger buffer by repeatedly calling
+   * `parseSingle()` until it returns false. The parser will resume from the
+   * last position between calls. Call `resetParse()` to start parsing from
+   * the beginning again.
+   *
+   * @return true if a fragment was parsed and the callback invoked, false
+   *         if no more parseable fragments are available.
+   */
+  bool parseSingle() {
+    return do_parse_single();
+  }
+
+  /**
+   * @brief Reset the internal parse position so subsequent parseSingle()
+   * calls start from the beginning of the buffer.
+   */
+  void resetParse() { parsePos = 0; }
+
 
   /// report only nodes with text
   void setReportTextOnly(bool flag) { report_text_only = flag; }
@@ -112,6 +134,8 @@ class XMLParser {
                               // content (after the start tag)
   // user-provided opaque pointer for convenience
   void* reference = nullptr;
+  // Resume position for incremental parseSingle() calls.
+  // (declared above in protected members)
   // Helper methods used by the parser loop (kept protected for
   // testing/extension)
   int findGt(const char* s, int start, int len) {
@@ -218,6 +242,8 @@ class XMLParser {
     }
     callback(nodeName, ancestorPath, text, attributes, start, len, reference);
   }
+
+
   // Run the parser. This is a small, forgiving parser suitable for the
   // embedded use-cases in this project (DIDL fragments, simple SCPD parsing).
   // It is not a full XML validator but handles start/end tags, comments,
@@ -281,6 +307,91 @@ class XMLParser {
     }
 
   }
+
+  // Incremental single-callback parser. It will resume from `parsePos`
+  // and advance `parsePos` past the fragment it invoked (or to the end
+  // if nothing more is parseable). Returns true if a callback was
+  // invoked.
+  bool do_parse_single() {
+    const char* s = str_view.c_str();
+    int len = str_view.length();
+    int pos = parsePos;
+
+    while (pos < len) {
+      int lt = str_view.indexOf('<', pos);
+      if (lt < 0) break;
+
+      // Handle text between pos and lt
+      if (lt > pos) {
+        int ts = pos;
+        int te = lt;
+        while (ts < te && isspace((unsigned char)s[ts])) ts++;
+        while (te > ts && isspace((unsigned char)s[te - 1])) te--;
+        if (te > ts && callback) {
+          // emit this text segment and advance parsePos past it
+          txt.copyFrom(s + ts, te - ts);
+          node_name = path.size() > 0 ? path.back() : empty_str;
+          invokeCallback(node_name, path, txt, last_attributes, ts, te - ts);
+          parsePos = te; // next position is end of emitted text
+          return true;
+        }
+      }
+
+      // comment or processing instruction handling
+      int newPos = handleCommentOrPI(lt, s, len);
+      if (newPos != lt) {
+        pos = newPos;
+        parsePos = pos;
+        continue; // comments/PI produce no callback
+      }
+
+      // find closing '>' (respect quotes)
+      int gt = findGt(s, lt, len);
+      if (gt < 0) break;  // malformed
+
+      // end tag
+      if (lt + 1 < len && s[lt + 1] == '/') {
+        // handle end tag; this may not produce a callback by itself
+        pos = handleEndTag(s, lt, gt);
+        parsePos = pos;
+        // End tags don't generate callbacks in this parser's model unless
+        // there is trimmed text to emit; continue to next loop iteration.
+        continue;
+      }
+
+      // start tag (or self-closing)
+      handleStartTag(s, lt, gt);
+
+      // callback for the tag itself
+      if (callback) {
+        node_name = path.size() > 0 ? path.back() : empty_str;
+        invokeCallback(node_name, path, empty_str, last_attributes, lt, gt - lt + 1);
+        // detect self-closing and pop if needed
+        bool selfClosing = false;
+        int back = gt - 1;
+        while (back > lt && isspace((unsigned char)s[back])) back--;
+        if (back > lt && s[back] == '/') selfClosing = true;
+        pos = gt + 1;
+        if (selfClosing && path.size() > 0) {
+          path.erase(path.size() - 1);
+          if (contentStarts.size() > 0)
+            contentStarts.erase(contentStarts.size() - 1);
+        }
+        parsePos = pos;
+        return true;
+      }
+
+      pos = gt + 1;
+      parsePos = pos;
+    }
+
+    // nothing left to parse
+    parsePos = pos;
+    return false;
+  }
+
+  // Resume position for incremental parseSingle() calls.
+  int parsePos = 0;
 };
 
 }  // namespace tiny_dlna

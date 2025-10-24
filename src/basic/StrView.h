@@ -72,6 +72,9 @@ class StrView {
       /// if the StrView is a const we replace the pointer
       this->chars = alt.chars;
     } else {
+      if (this->chars == nullptr && len == 0) {
+        return;
+      }
       /// if the StrView is an external buffer we need to copy
       strncpy(this->chars, alt.chars, this->maxlen);
       this->chars[len] = 0;
@@ -188,6 +191,7 @@ class StrView {
   /// checks if the string ends with the indicated substring
   virtual bool endsWith(const char* str) {
     if (str == nullptr) return false;
+    if (this->chars == nullptr) return false;
     int endlen = strlen(str);
     return strncmp(this->chars + (len - endlen), str, endlen) == 0;
   }
@@ -327,6 +331,7 @@ class StrView {
       this->chars += n;
       this->len -= n;
     } else {
+      if (this->chars == nullptr) return;
       memmove(this->chars, this->chars + n, len + 1);
     }
   }

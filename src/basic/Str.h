@@ -205,6 +205,20 @@ class Str : public StrView {
     return result;
   }
 
+  /// removes the first n characters
+  void remove(int n) {
+    if (n >= this->length()) {
+      reset();
+    } else if (n <= 0) {
+      return;
+    } else {
+      int remaining = this->length() - n;
+      memmove(this->chars, this->chars + n, remaining);
+      this->chars[remaining] = 0;
+      this->len = remaining;
+    }
+  }
+
 
  protected:
   Vector<char> vector{0};

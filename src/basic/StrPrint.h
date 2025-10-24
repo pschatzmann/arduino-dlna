@@ -34,6 +34,10 @@ class StrPrint : public Print {
 
   void reset() { str.reset(); }
 
+  void consume(int n) {
+    str.remove(n);
+  }
+
  protected:
   Str str{200};
   int inc_size;

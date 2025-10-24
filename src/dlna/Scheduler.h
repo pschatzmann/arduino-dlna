@@ -47,6 +47,7 @@ class Scheduler {
           }
         } else {
           DlnaLogger.log(DlnaLogLevel::Debug, "Scheduler::execute %s: Inactive", s.name());
+          is_cleanup = true;
         }
       }
     }
