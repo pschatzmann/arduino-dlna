@@ -175,7 +175,7 @@ class DLNAControlPointMgr {
                    (int)reply.arguments.size());
     for (auto& a : reply.arguments) {
       DlnaLogger.log(DlnaLogLevel::Info, "  -> %s = %s",
-                     a.name ? a.name : "(null)", a.value.c_str());
+                     toStr(a.name), toStr(a.value));
     }
     return reply;
   }
@@ -361,7 +361,7 @@ class DLNAControlPointMgr {
 
   /// Adds the device from the device xml url if it does not already exist
   bool addDevice(Url url) {
-    if (StrView(url.host()).equals("127.0.0.1")){
+    if (!allow_localhost && StrView(url.host()).equals("127.0.0.1")){
       DlnaLogger.log(DlnaLogLevel::Info, "Ignoring localhost device");
       return false;
     }
@@ -419,6 +419,9 @@ class DLNAControlPointMgr {
   /// Checks if the scheduler is active
   bool isActive() { return is_active; }
 
+  /// Defines if localhost devices should be allowed
+  void setAllowLocalhost(bool flag) { allow_localhost = flag; } 
+
  protected:
   Scheduler scheduler;
   DLNAHttpRequest* p_http = nullptr;
@@ -434,6 +437,7 @@ class DLNAControlPointMgr {
   const char* search_target;
   StringRegistry strings;
   Url local_url;
+  bool allow_localhost = false;
   HttpServer* p_http_server = nullptr;
   int http_server_port = 0;
   void* reference = nullptr;
@@ -690,14 +694,14 @@ class DLNAControlPointMgr {
     reply.clear();
     DlnaLogger.log(DlnaLogLevel::Debug, "DLNAControlPointMgr::postAllActions");
     for (auto& action : actions) {
-      if (action.getServiceType() != nullptr) postAction(action);
+      if (action) postAction(action);
     }
     return reply;
   }
 
   ActionReply& postAction(ActionRequest& action) {
     DlnaLogger.log(DlnaLogLevel::Debug, "DLNAControlPointMgr::postAction: %s",
-                   action.action);
+                   action.action!=nullptr ? action.action : "(null)");
     reply.clear();
     DLNAServiceInfo& service = *action.p_service;
     DLNADeviceInfo& device = getDevice(service);
@@ -730,6 +734,14 @@ class DLNAControlPointMgr {
     createXML(action);
   }
 
+  const char* toStr(const char* str) {
+    return str==nullptr ? "(null)" : str;
+  }
+
+  const char* toStr(Str& str) {
+    return str.isEmpty() ? "(null)" : str.c_str();
+  }
+  
   // Send an HTTP POST for the given URL and request body. On success the
   /// response body is written into `responseOut` (an XMLParserPrint). Returns
   /// the HTTP rc.
@@ -772,7 +784,7 @@ class DLNAControlPointMgr {
             if (!(outText.isEmpty() && outAttributes.isEmpty())) {
               reply.addArgument(arg);
               DlnaLogger.log(DlnaLogLevel::Info, "ActionReplay '%s': %s (%s)",
-                             outNodeName.c_str(), outText.c_str(), outAttributes.c_str());
+                             toStr(outNodeName), toStr(outText), toStr(outAttributes));
             }
           }
         }

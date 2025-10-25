@@ -204,7 +204,7 @@ class HttpRequest {
     request_header.write(*client_ptr);
 
     if (len > 0) {
-      DlnaLogger.log(DlnaLogLevel::Info, "process - writing data");
+      DlnaLogger.log(DlnaLogLevel::Info, "process - writing data: %d bytes", len);
       client_ptr->write((const uint8_t *)data, len);
     }
 

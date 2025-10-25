@@ -92,14 +92,12 @@ class ActionRequest {
   }
 
   DLNAServiceInfo* p_service = nullptr;
-  const char* action;
+  const char* action = nullptr;
   Vector<Argument> arguments{10};
   int result_count = 0;
-  operator bool() { return is_valid; }
+  operator bool() { return p_service != nullptr && action != nullptr && p_service->service_type!=nullptr; }
   const char* getServiceType() { return p_service->service_type; }
 
- protected:
-  bool is_valid = false;
 };
 
 }  // namespace tiny_dlna

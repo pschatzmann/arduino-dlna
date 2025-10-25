@@ -2,7 +2,7 @@
 #pragma once
 
 #include <WiFi.h>
-#include <WiFiUDP.h>
+#include <WiFiUdp.h>
 
 #include "basic/IPAddressAndPort.h"
 #include "basic/Str.h"

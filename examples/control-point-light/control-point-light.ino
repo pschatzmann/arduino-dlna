@@ -20,6 +20,7 @@ void setupWifi() {
     Serial.print('.');
     delay(1000);
   }
+  WiFi.setSleep(false);
   Serial.println("connected!");
 }
 
