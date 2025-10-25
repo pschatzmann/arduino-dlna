@@ -83,7 +83,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Device Attributes and generation of XML using urn:schemas-upnp-org:device-1-0. We could just return a predefined device xml document, but we provide a dynamic generation of the service xml which should be more memory efficient. Strings are represented as char*, so you can assign values that are stored in ProgMem to mimimize the RAM useage. If you need to keep the values on the heap you can use addString() method.  
+<p>Device Attributes and generation of XML using urn:schemas-upnp-org:device-1-0. We could just return a predefined device xml document, but we provide a dynamic generation of the service xml which should be more memory efficient. Strings are represented as char*, so you can assign values that are stored in ProgMem to minimize the RAM usage. If you need to keep the values on the heap you can use addString() method.  
  <a href="classtiny__dlna_1_1DLNADeviceInfo.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="DLNADeviceInfo_8h_source.html">DLNADeviceInfo.h</a>&gt;</code></p>
@@ -135,7 +135,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a94db5b6be4e38324789d7529140faa5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Override to initialize the device.  <br /></td></tr>
 <tr class="separator:a94db5b6be4e38324789d7529140faa5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a367895351ae485ae432fb25d236d1559"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#a367895351ae485ae432fb25d236d1559">print</a> (Print &amp;out)</td></tr>
-<tr class="memdesc:a367895351ae485ae432fb25d236d1559"><td class="mdescLeft">&#160;</td><td class="mdescRight">renderes the device xml  <br /></td></tr>
+<tr class="memdesc:a367895351ae485ae432fb25d236d1559"><td class="mdescLeft">&#160;</td><td class="mdescRight">renders the device xml  <br /></td></tr>
 <tr class="separator:a367895351ae485ae432fb25d236d1559"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2bf911c1f4b7e4a900b9e962b17d023d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#a2bf911c1f4b7e4a900b9e962b17d023d">setDeviceType</a> (const char *st)</td></tr>
 <tr class="separator:a2bf911c1f4b7e4a900b9e962b17d023d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -200,12 +200,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a8971083007dc11c569806adac18ee556"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad022e09cf0783fd00f40984cec5fe428"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#ad022e09cf0783fd00f40984cec5fe428">getSerialNumber</a> ()</td></tr>
 <tr class="separator:ad022e09cf0783fd00f40984cec5fe428"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0e9659dfa922035e9c06c88c649c4d6f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#a0e9659dfa922035e9c06c88c649c4d6f">setUniveralProductCode</a> (const char *upc)</td></tr>
-<tr class="separator:a0e9659dfa922035e9c06c88c649c4d6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2e3038e39782b3ee6376178928ffa8ac"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#a2e3038e39782b3ee6376178928ffa8ac">getUniveralProductCode</a> ()</td></tr>
-<tr class="separator:a2e3038e39782b3ee6376178928ffa8ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb9094b0571fd7c96074d22095b8803a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#afb9094b0571fd7c96074d22095b8803a">setUniversalProductCode</a> (const char *upc)</td></tr>
+<tr class="separator:afb9094b0571fd7c96074d22095b8803a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b20af8df263f19506f12fb25d78eefe"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#a7b20af8df263f19506f12fb25d78eefe">getUniversalProductCode</a> ()</td></tr>
+<tr class="separator:a7b20af8df263f19506f12fb25d78eefe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3e4197f385ea2cd791e773b2b9a7cf50"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#a3e4197f385ea2cd791e773b2b9a7cf50">addService</a> (<a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html">DLNAServiceInfo</a> s)</td></tr>
-<tr class="memdesc:a3e4197f385ea2cd791e773b2b9a7cf50"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a service defintion.  <br /></td></tr>
+<tr class="memdesc:a3e4197f385ea2cd791e773b2b9a7cf50"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a service definition.  <br /></td></tr>
 <tr class="separator:a3e4197f385ea2cd791e773b2b9a7cf50"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5c8b2ddeb01e82ba3154c1986e53b636"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html">DLNAServiceInfo</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#a5c8b2ddeb01e82ba3154c1986e53b636">getService</a> (const char *id)</td></tr>
 <tr class="memdesc:a5c8b2ddeb01e82ba3154c1986e53b636"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds a service definition by name.  <br /></td></tr>
@@ -315,7 +315,7 @@ Friends</h2></td></tr>
 <tr class="separator:ab3b12d07f1d959273932ffa0086f8e20"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Device Attributes and generation of XML using urn:schemas-upnp-org:device-1-0. We could just return a predefined device xml document, but we provide a dynamic generation of the service xml which should be more memory efficient. Strings are represented as char*, so you can assign values that are stored in ProgMem to mimimize the RAM useage. If you need to keep the values on the heap you can use addString() method. </p>
+<div class="textblock"><p>Device Attributes and generation of XML using urn:schemas-upnp-org:device-1-0. We could just return a predefined device xml document, but we provide a dynamic generation of the service xml which should be more memory efficient. Strings are represented as char*, so you can assign values that are stored in ProgMem to minimize the RAM usage. If you need to keep the values on the heap you can use addString() method. </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ac9a74b9751b1558d9b335f702df5a6b9" name="ac9a74b9751b1558d9b335f702df5a6b9"></a>
@@ -420,7 +420,7 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Adds a service defintion. </p>
+<p>Adds a service definition. </p>
 
 </div>
 </div>
@@ -969,8 +969,8 @@ Friends</h2></td></tr>
 
 </div>
 </div>
-<a id="a2e3038e39782b3ee6376178928ffa8ac" name="a2e3038e39782b3ee6376178928ffa8ac"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2e3038e39782b3ee6376178928ffa8ac">&#9670;&#160;</a></span>getUniveralProductCode()</h2>
+<a id="a7b20af8df263f19506f12fb25d78eefe" name="a7b20af8df263f19506f12fb25d78eefe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b20af8df263f19506f12fb25d78eefe">&#9670;&#160;</a></span>getUniversalProductCode()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -979,7 +979,7 @@ Friends</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const char * tiny_dlna::DLNADeviceInfo::getUniveralProductCode </td>
+          <td class="memname">const char * tiny_dlna::DLNADeviceInfo::getUniversalProductCode </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1068,7 +1068,7 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>renderes the device xml </p>
+<p>renders the device xml </p>
 
 </div>
 </div>
@@ -1637,8 +1637,8 @@ Friends</h2></td></tr>
 
 </div>
 </div>
-<a id="a0e9659dfa922035e9c06c88c649c4d6f" name="a0e9659dfa922035e9c06c88c649c4d6f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0e9659dfa922035e9c06c88c649c4d6f">&#9670;&#160;</a></span>setUniveralProductCode()</h2>
+<a id="afb9094b0571fd7c96074d22095b8803a" name="afb9094b0571fd7c96074d22095b8803a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb9094b0571fd7c96074d22095b8803a">&#9670;&#160;</a></span>setUniversalProductCode()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1647,7 +1647,7 @@ Friends</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void tiny_dlna::DLNADeviceInfo::setUniveralProductCode </td>
+          <td class="memname">void tiny_dlna::DLNADeviceInfo::setUniversalProductCode </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>upc</em></td><td>)</td>

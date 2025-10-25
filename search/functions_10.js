@@ -58,7 +58,7 @@ var searchData=
   ['setserialnumber_55',['setSerialNumber',['../classtiny__dlna_1_1DLNADeviceInfo.html#a8971083007dc11c569806adac18ee556',1,'tiny_dlna::DLNADeviceInfo']]],
   ['settimeout_56',['setTimeout',['../classtiny__dlna_1_1HttpRequest.html#a1575d93818e8eaf27c7b7d871b6d191e',1,'tiny_dlna::HttpRequest']]],
   ['setudn_57',['setUDN',['../classtiny__dlna_1_1DLNADeviceInfo.html#aa21747b94417df4ee264f4f1d8708644',1,'tiny_dlna::DLNADeviceInfo']]],
-  ['setuniveralproductcode_58',['setUniveralProductCode',['../classtiny__dlna_1_1DLNADeviceInfo.html#a0e9659dfa922035e9c06c88c649c4d6f',1,'tiny_dlna::DLNADeviceInfo']]],
+  ['setuniversalproductcode_58',['setUniversalProductCode',['../classtiny__dlna_1_1DLNADeviceInfo.html#afb9094b0571fd7c96074d22095b8803a',1,'tiny_dlna::DLNADeviceInfo']]],
   ['setup_59',['setup',['../classtiny__dlna_1_1DLNAServiceInfo.html#a7f54faba8f7706ef57354200c3091d9b',1,'tiny_dlna::DLNAServiceInfo']]],
   ['setupdata_60',['setupData',['../classtiny__dlna_1_1PostAliveSchedule.html#ae70155ab97a717cebfc3ebb9cbdcdd78',1,'tiny_dlna::PostAliveSchedule']]],
   ['setupdlnaserver_61',['setupDLNAServer',['../classtiny__dlna_1_1DLNADevice.html#a719f93b5e657a7b8146cb5ab50ecf2a8',1,'tiny_dlna::DLNADevice']]],

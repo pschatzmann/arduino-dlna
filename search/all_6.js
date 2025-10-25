@@ -58,7 +58,7 @@ var searchData=
   ['gettrackindex_55',['getTrackIndex',['../classtiny__dlna_1_1ControlPointMediaRenderer.html#a65b9ad90817ea4f9832a1f88f77c52d7',1,'tiny_dlna::ControlPointMediaRenderer']]],
   ['gettransportstate_56',['getTransportState',['../classtiny__dlna_1_1ControlPointMediaRenderer.html#af2f7f73c8cce4ac197f905f9ebf08233',1,'tiny_dlna::ControlPointMediaRenderer::getTransportState()'],['../classtiny__dlna_1_1MediaRenderer.html#adbb97dbf22368bce6ea9db34b94f1993',1,'tiny_dlna::MediaRenderer::getTransportState()']]],
   ['getudn_57',['getUDN',['../classtiny__dlna_1_1DLNADeviceInfo.html#a753fc8431d08e07e2b3e4bff18a7eb84',1,'tiny_dlna::DLNADeviceInfo']]],
-  ['getuniveralproductcode_58',['getUniveralProductCode',['../classtiny__dlna_1_1DLNADeviceInfo.html#a2e3038e39782b3ee6376178928ffa8ac',1,'tiny_dlna::DLNADeviceInfo']]],
+  ['getuniversalproductcode_58',['getUniversalProductCode',['../classtiny__dlna_1_1DLNADeviceInfo.html#a7b20af8df263f19506f12fb25d78eefe',1,'tiny_dlna::DLNADeviceInfo']]],
   ['geturl_59',['getUrl',['../classtiny__dlna_1_1DLNAControlPoint.html#a21e62d75a0be44526ee65255a19b34f2',1,'tiny_dlna::DLNAControlPoint']]],
   ['getvalue_60',['getValue',['../classtiny__dlna_1_1HttpParameters.html#adc71a0a477f4f053d94f22d67c695a44',1,'tiny_dlna::HttpParameters']]],
   ['getvolume_61',['getVolume',['../classtiny__dlna_1_1ControlPointMediaRenderer.html#a0e436c1cb8fe9353ff77d2f2be40aeba',1,'tiny_dlna::ControlPointMediaRenderer::getVolume()'],['../classtiny__dlna_1_1MediaRenderer.html#a6545dad5e1785a59ac409d5cc8140404',1,'tiny_dlna::MediaRenderer::getVolume()']]],
