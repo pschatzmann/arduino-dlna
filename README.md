@@ -5,7 +5,9 @@
 
 This library provides the functionality to implement a UPnP/DLNA [device](https://pschatzmann.github.io/arduino-dlna/classtiny__dlna_1_1DLNADeviceMgr.html) and a [control point](https://pschatzmann.github.io/arduino-dlna/classtiny__dlna_1_1DLNAControlPointMgr.html) for Arduino.
 
-The Digital Living Network Alliance (DLNA) aims to establish interoperability among PCs, consumer appliances, and mobile devices across wired and wireless networks. The goal is to provide a common solution for sharing digital media and content services.
+The Digital Living Network Alliance (DLNA) aimed to establish interoperability among PCs, consumer appliances, and mobile devices across wired and wireless networks. The goal was to provide a common solution for sharing digital media and content services. Thugh this technology can be considered as obsolete, it is still quite useful for some use cases.
+
+## The Standard
 
 Reference documentation can be hard to find. Therefore I am providing some useful links:
 
@@ -30,9 +32,11 @@ This library provides memory-efficient classes to implement DLNA devices and cli
 In addition to the core functionality, this project includes some easy-to-use classes:
 
 - Devices
+  - DLNADevice (Generic Device API)
   - MediaRenderer
   - MediaServer
 - Control Points
+  - DLNAControlPoint (Generic Control Point API)
   - ControlPointMediaRenderer
   - ControlPointMediaServer
 
@@ -43,7 +47,7 @@ A DLNA device uses UDP, HTTP, XML and SOAP to discover and manage services, whic
 
 I implemented the functionality from scratch using the basic Arduino network API and avoided external dependencies where possible.
 
-The [DLNAControlPointMgr](https://pschatzmann.github.io/arduino-dlna/classtiny__dlna_1_1DLNAControlPointMgr.html) sets up a control point and lets you execute actions.
+The [DLNAControlPoint](https://pschatzmann.github.io/arduino-dlna/classtiny__dlna_1_1DLNAControlPoint.html) sets up a control point and lets you execute actions.
 The [DLNADevice](https://pschatzmann.github.io/arduino-dlna/classtiny__dlna_1_1DLNADevice.html) class provides the setup for a basic DLNA device service. Devices are represented by the [DLNADeviceInfo](https://pschatzmann.github.io/arduino-dlna/classtiny__dlna_1_1DLNADeviceInfo.html) class. A device registers itself on the network and answers UDP DLNA queries and requests:
 
 - UDP communication is handled via a [Scheduler](https://pschatzmann.github.io/arduino-dlna/classtiny__dlna_1_1Scheduler.html) and a [Request Parser](https://pschatzmann.github.io/arduino-dlna/classtiny__dlna_1_1DLNADeviceRequestParser.html).

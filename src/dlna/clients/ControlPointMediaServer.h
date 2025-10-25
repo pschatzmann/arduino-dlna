@@ -1,7 +1,7 @@
 // Header-only control point helper for MediaServer devices
 #pragma once
 
-#include "dlna/DLNAControlPointMgr.h"
+#include "dlna/DLNAControlPoint.h"
 #include "dlna/devices/MediaServer/MediaServer.h"
 #include "dlna/service/Action.h"
 
@@ -27,7 +27,7 @@ class ControlPointMediaServer {
    * @param mgr Reference to DLNAControlPointMgr used to send actions and
    *            manage discovery/subscriptions
    */
-  ControlPointMediaServer(DLNAControlPointMgr& mgr) : mgr(mgr) {}
+  ControlPointMediaServer(DLNAControlPoint& mgr) : mgr(mgr) {}
 
   /**
    * @brief Begin discovery and processing (forwards to underlying control
@@ -219,7 +219,7 @@ class ControlPointMediaServer {
   const char* getObjectID() const { return object_id; }
 
  protected:
-  DLNAControlPointMgr& mgr;
+  DLNAControlPoint& mgr;
   int device_index = 0;
   const char* device_type_filter_default =
       "urn:schemas-upnp-org:device:MediaServer:1";

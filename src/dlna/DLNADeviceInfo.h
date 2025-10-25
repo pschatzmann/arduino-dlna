@@ -26,7 +26,7 @@ namespace tiny_dlna {
 
 class DLNADeviceInfo {
   friend class XMLDeviceParser;
-  friend class DLNAControlPointMgr;
+  friend class DLNAControlPoint;
   friend class DLNADevice;
 
  public:
