@@ -202,6 +202,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a1bd8a334627dd6b4147877f7eb406173"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMgr.html#a1bd8a334627dd6b4147877f7eb406173">isActive</a> ()</td></tr>
 <tr class="memdesc:a1bd8a334627dd6b4147877f7eb406173"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the scheduler is active.  <br /></td></tr>
 <tr class="separator:a1bd8a334627dd6b4147877f7eb406173"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7fb774048e9ff301faf884f72970aaf9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMgr.html#a7fb774048e9ff301faf884f72970aaf9">setAllowLocalhost</a> (bool flag)</td></tr>
+<tr class="memdesc:a7fb774048e9ff301faf884f72970aaf9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines if localhost devices should be allowed.  <br /></td></tr>
+<tr class="separator:a7fb774048e9ff301faf884f72970aaf9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -227,6 +230,10 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a5738644e9c04a706aba23d263fc19f84"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMgr.html#a5738644e9c04a706aba23d263fc19f84">buildActionBody</a> (<a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;action, <a class="el" href="classtiny__dlna_1_1StrPrint.html">StrPrint</a> &amp;out)</td></tr>
 <tr class="memdesc:a5738644e9c04a706aba23d263fc19f84"><td class="mdescLeft">&#160;</td><td class="mdescRight">Build the SOAP XML request body for the action into <code>out</code>  <br /></td></tr>
 <tr class="separator:a5738644e9c04a706aba23d263fc19f84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30296368b658ac4ab8090cf0e9c53726"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMgr.html#a30296368b658ac4ab8090cf0e9c53726">toStr</a> (const char *str)</td></tr>
+<tr class="separator:a30296368b658ac4ab8090cf0e9c53726"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac32542fe0ddb451f9e04b94d0ab0b9bd"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMgr.html#ac32542fe0ddb451f9e04b94d0ab0b9bd">toStr</a> (<a class="el" href="classtiny__dlna_1_1Str.html">Str</a> &amp;str)</td></tr>
+<tr class="separator:ac32542fe0ddb451f9e04b94d0ab0b9bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac83430bf519ff6a97fdf2c3a87b20205"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1ActionReply.html">ActionReply</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMgr.html#ac83430bf519ff6a97fdf2c3a87b20205">processActionHttpPost</a> (<a class="el" href="classtiny__dlna_1_1Url.html">Url</a> &amp;post_url, <a class="el" href="classtiny__dlna_1_1StrPrint.html">StrPrint</a> &amp;requestBody, const char *soapAction)</td></tr>
 <tr class="separator:ac83430bf519ff6a97fdf2c3a87b20205"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6c0ccae3b3b445f96ed6c85df17c75a9"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMgr.html#a6c0ccae3b3b445f96ed6c85df17c75a9">getUrl</a> (<a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html">DLNADeviceInfo</a> &amp;device, const char *suffix, const char *buffer, int len)</td></tr>
@@ -276,6 +283,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a665c88bd141249169f78f12620a5f498"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9ec7efe52d7a7e12de4356f42387f3d8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Url.html">Url</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMgr.html#a9ec7efe52d7a7e12de4356f42387f3d8">local_url</a></td></tr>
 <tr class="separator:a9ec7efe52d7a7e12de4356f42387f3d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28365f76a21836ee1962d6beed15cab7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMgr.html#a28365f76a21836ee1962d6beed15cab7">allow_localhost</a> = false</td></tr>
+<tr class="separator:a28365f76a21836ee1962d6beed15cab7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a08d92b18dfcf2dbe2022bb84811827de"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMgr.html#a08d92b18dfcf2dbe2022bb84811827de">p_http_server</a> = nullptr</td></tr>
 <tr class="separator:a08d92b18dfcf2dbe2022bb84811827de"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4a3bb27dae8c6c96ce034893b7c0e20c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMgr.html#a4a3bb27dae8c6c96ce034893b7c0e20c">http_server_port</a> = 0</td></tr>
@@ -1298,6 +1307,34 @@ xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n" "s:encodingStyle=\"ht
 
 </div>
 </div>
+<a id="a7fb774048e9ff301faf884f72970aaf9" name="a7fb774048e9ff301faf884f72970aaf9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7fb774048e9ff301faf884f72970aaf9">&#9670;&#160;</a></span>setAllowLocalhost()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tiny_dlna::DLNAControlPointMgr::setAllowLocalhost </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>flag</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Defines if localhost devices should be allowed. </p>
+
+</div>
+</div>
 <a id="a15bb2d5c5470f8c2a09b5e96fc84e90a" name="a15bb2d5c5470f8c2a09b5e96fc84e90a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a15bb2d5c5470f8c2a09b5e96fc84e90a">&#9670;&#160;</a></span>setHttpServer()</h2>
 
@@ -1524,6 +1561,58 @@ xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n" "s:encodingStyle=\"ht
 
 </div>
 </div>
+<a id="a30296368b658ac4ab8090cf0e9c53726" name="a30296368b658ac4ab8090cf0e9c53726"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a30296368b658ac4ab8090cf0e9c53726">&#9670;&#160;</a></span>toStr() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char * tiny_dlna::DLNAControlPointMgr::toStr </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>str</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac32542fe0ddb451f9e04b94d0ab0b9bd" name="ac32542fe0ddb451f9e04b94d0ab0b9bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac32542fe0ddb451f9e04b94d0ab0b9bd">&#9670;&#160;</a></span>toStr() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char * tiny_dlna::DLNAControlPointMgr::toStr </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1Str.html">Str</a> &amp;&#160;</td>
+          <td class="paramname"><em>str</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <h2 class="groupheader">Member Data Documentation</h2>
 <a id="aab37f3378afa7dc7d17017382eedef7f" name="aab37f3378afa7dc7d17017382eedef7f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aab37f3378afa7dc7d17017382eedef7f">&#9670;&#160;</a></span>actions</h2>
@@ -1536,6 +1625,28 @@ xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n" "s:encodingStyle=\"ht
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt;<a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a>&gt; tiny_dlna::DLNAControlPointMgr::actions</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a28365f76a21836ee1962d6beed15cab7" name="a28365f76a21836ee1962d6beed15cab7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28365f76a21836ee1962d6beed15cab7">&#9670;&#160;</a></span>allow_localhost</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool tiny_dlna::DLNAControlPointMgr::allow_localhost = false</td>
         </tr>
       </table>
   </td>
