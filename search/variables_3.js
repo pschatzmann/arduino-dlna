@@ -13,7 +13,7 @@ var searchData=
   ['device_5ftype_5ffilter_10',['device_type_filter',['../classtiny__dlna_1_1ControlPointMediaServer.html#abc4ffd9abdaa4c5cd4466f6595e769e2',1,'tiny_dlna::ControlPointMediaServer::device_type_filter()'],['../classtiny__dlna_1_1ControlPointMediaRenderer.html#a523a727c1475767cf81453f7e1c8d7ec',1,'tiny_dlna::ControlPointMediaRenderer::device_type_filter()']]],
   ['device_5ftype_5ffilter_5fdefault_11',['device_type_filter_default',['../classtiny__dlna_1_1ControlPointMediaRenderer.html#a2574d2f51beea9f04d6154ec3814168c',1,'tiny_dlna::ControlPointMediaRenderer::device_type_filter_default()'],['../classtiny__dlna_1_1ControlPointMediaServer.html#a8822b6e68c5cde6d5fb5a2a01c97ca85',1,'tiny_dlna::ControlPointMediaServer::device_type_filter_default()']]],
   ['device_5furl_12',['device_url',['../classtiny__dlna_1_1DLNADeviceInfo.html#a0e471ff0296785d593b3560a00150388',1,'tiny_dlna::DLNADeviceInfo']]],
-  ['devices_13',['devices',['../classtiny__dlna_1_1DLNAControlPointMgr.html#acd7850dbcdcd0552e8eb0b961b7c16d5',1,'tiny_dlna::DLNAControlPointMgr']]],
+  ['devices_13',['devices',['../classtiny__dlna_1_1DLNAControlPoint.html#a34d238dc5a4e126f3b865623a4e5b1f9',1,'tiny_dlna::DLNAControlPoint']]],
   ['dlnalogger_14',['DlnaLogger',['../namespacetiny__dlna.html#ad1a9a726ef5546aa12b5f58a2af3db3c',1,'tiny_dlna']]],
   ['durationsec_15',['durationSec',['../classtiny__dlna_1_1PostSubscribe.html#ab78c892847793c4f3185bead180621c4',1,'tiny_dlna::PostSubscribe']]]
 ];

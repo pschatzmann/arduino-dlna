@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['matches_0',['matches',['../classtiny__dlna_1_1StrView.html#a6b7655154b8f5c983e1e8a88e7f8597b',1,'tiny_dlna::StrView::matches()'],['../classtiny__dlna_1_1DLNAControlPointMgr.html#a13aae4b5c18a4563be4f468b8e239f0d',1,'tiny_dlna::DLNAControlPointMgr::matches()']]],
+  ['matches_0',['matches',['../classtiny__dlna_1_1StrView.html#a6b7655154b8f5c983e1e8a88e7f8597b',1,'tiny_dlna::StrView::matches()'],['../classtiny__dlna_1_1DLNAControlPoint.html#a21c77981aa7035fc939e66a12683d066',1,'tiny_dlna::DLNAControlPoint::matches()']]],
   ['matchesmime_1',['matchesMime',['../classtiny__dlna_1_1HttpServer.html#a5896428e85ce317a3fdf4eba774cd054',1,'tiny_dlna::HttpServer']]],
   ['maxlength_2',['maxLength',['../classtiny__dlna_1_1StrView.html#a21728fa3fe1b4775d11811d318df1242',1,'tiny_dlna::StrView']]],
   ['mediarenderer_3',['MediaRenderer',['../classtiny__dlna_1_1MediaRenderer.html#a938794223ebc46d6ae05b2067bef1acf',1,'tiny_dlna::MediaRenderer']]],

@@ -1,7 +1,7 @@
 var searchData=
 [
   ['dlna_2eh_0',['DLNA.h',['../DLNA_8h.html',1,'']]],
-  ['dlnacontrolpointmgr_2eh_1',['DLNAControlPointMgr.h',['../DLNAControlPointMgr_8h.html',1,'']]],
+  ['dlnacontrolpoint_2eh_1',['DLNAControlPoint.h',['../DLNAControlPoint_8h.html',1,'']]],
   ['dlnacontrolpointrequestparser_2eh_2',['DLNAControlPointRequestParser.h',['../DLNAControlPointRequestParser_8h.html',1,'']]],
   ['dlnadevice_2eh_3',['DLNADevice.h',['../DLNADevice_8h.html',1,'']]],
   ['dlnadeviceinfo_2eh_4',['DLNADeviceInfo.h',['../DLNADeviceInfo_8h.html',1,'']]],

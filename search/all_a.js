@@ -15,7 +15,7 @@ var searchData=
   ['list_3c_20tiny_5fdlna_3a_3ahttprequesthandlerline_20_2a_20_3e_12',['List&lt; tiny_dlna::HttpRequestHandlerLine * &gt;',['../classtiny__dlna_1_1List.html',1,'tiny_dlna']]],
   ['list_3c_20tiny_5fdlna_3a_3ahttprequestrewrite_20_2a_20_3e_13',['List&lt; tiny_dlna::HttpRequestRewrite * &gt;',['../classtiny__dlna_1_1List.html',1,'tiny_dlna']]],
   ['local_5fhost_14',['local_host',['../classtiny__dlna_1_1HttpServer.html#a47eeb593260afbfb1e03587f010289bd',1,'tiny_dlna::HttpServer']]],
-  ['local_5furl_15',['local_url',['../classtiny__dlna_1_1DLNAControlPointMgr.html#a9ec7efe52d7a7e12de4356f42387f3d8',1,'tiny_dlna::DLNAControlPointMgr']]],
+  ['local_5furl_15',['local_url',['../classtiny__dlna_1_1DLNAControlPoint.html#a3a1bb5777ddf5319020bdea9a92c14a7',1,'tiny_dlna::DLNAControlPoint']]],
   ['localhost_16',['localhost',['../classtiny__dlna_1_1DLNADeviceInfo.html#a28d8ce438c8338faf5ad279f2f26d9b4',1,'tiny_dlna::DLNADeviceInfo']]],
   ['localhost_17',['localHost',['../classtiny__dlna_1_1HttpServer.html#a0351a570f910ee1493235e7811da1b36',1,'tiny_dlna::HttpServer']]],
   ['localip_18',['localIP',['../classtiny__dlna_1_1HttpServer.html#a7f5681c2c7b4a8e35ffdc5e28a04ecb9',1,'tiny_dlna::HttpServer']]],
@@ -27,6 +27,6 @@ var searchData=
   ['logger_2ecpp_24',['Logger.cpp',['../Logger_8cpp.html',1,'']]],
   ['logger_2eh_25',['Logger.h',['../Logger_8h.html',1,'']]],
   ['loggerclass_26',['LoggerClass',['../classtiny__dlna_1_1LoggerClass.html',1,'tiny_dlna']]],
-  ['loop_27',['loop',['../classtiny__dlna_1_1DLNAControlPointMgr.html#a20937a568582f4259d45a68b949da809',1,'tiny_dlna::DLNAControlPointMgr::loop()'],['../classtiny__dlna_1_1DLNADevice.html#afe6f1b0d2a28c4f276fa5359419d6b7e',1,'tiny_dlna::DLNADevice::loop()'],['../classtiny__dlna_1_1DLNADeviceInfo.html#a1318397e562e532ad344e9d029ed876b',1,'tiny_dlna::DLNADeviceInfo::loop()']]],
+  ['loop_27',['loop',['../classtiny__dlna_1_1DLNAControlPoint.html#a59e2688e61b8179a0423129dfaa9fcd4',1,'tiny_dlna::DLNAControlPoint::loop()'],['../classtiny__dlna_1_1DLNADevice.html#afe6f1b0d2a28c4f276fa5359419d6b7e',1,'tiny_dlna::DLNADevice::loop()'],['../classtiny__dlna_1_1DLNADeviceInfo.html#a1318397e562e532ad344e9d029ed876b',1,'tiny_dlna::DLNADeviceInfo::loop()']]],
   ['ltrim_28',['ltrim',['../classtiny__dlna_1_1StrView.html#ad3263bf622a96e970cfae7b6a0418272',1,'tiny_dlna::StrView']]]
 ];

@@ -4,7 +4,7 @@ var searchData=
   ['newarray_1',['newArray',['../classtiny__dlna_1_1Vector.html#a5f5d3d4715f0bf3d496b7efcb14b8ea9',1,'tiny_dlna::Vector']]],
   ['next_2',['next',['../structtiny__dlna_1_1List_1_1Node.html#a60c74f6ed9b2fe029e6b03335b6705dc',1,'tiny_dlna::List::Node']]],
   ['no_5fconnect_5fdelay_3',['no_connect_delay',['../classtiny__dlna_1_1HttpServer.html#ad2e1c3274f2f2a70177c8506e1ab6752',1,'tiny_dlna::HttpServer']]],
-  ['no_5fdevice_4',['NO_DEVICE',['../classtiny__dlna_1_1DLNAControlPointMgr.html#ad56e54060d1d4059525d464a4e6e1f19',1,'tiny_dlna::DLNAControlPointMgr']]],
+  ['no_5fdevice_4',['NO_DEVICE',['../classtiny__dlna_1_1DLNAControlPoint.html#a705bb322d14429ea6d3c31a4b05a0023',1,'tiny_dlna::DLNAControlPoint']]],
   ['node_5',['node',['../classtiny__dlna_1_1List_1_1Iterator.html#a7fc691985dddc548f746fff028eb67e0',1,'tiny_dlna::List::Iterator::node()'],['../structtiny__dlna_1_1XMLNode.html#a642ef4a437ff8167f5848cedea8b19cd',1,'tiny_dlna::XMLNode::node()']]],
   ['node_6',['Node',['../structtiny__dlna_1_1List_1_1Node.html',1,'tiny_dlna::List&lt; T &gt;::Node'],['../structtiny__dlna_1_1QueueLockFree_1_1Node.html',1,'tiny_dlna::QueueLockFree&lt; T &gt;::Node']]],
   ['node_5fname_7',['node_name',['../classtiny__dlna_1_1XMLParser.html#a43ebbd2f48238f3edbf923a18c1f6952',1,'tiny_dlna::XMLParser']]],

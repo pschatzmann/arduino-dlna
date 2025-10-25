@@ -6,7 +6,7 @@ var searchData=
   ['len_3',['len',['../classtiny__dlna_1_1StrView.html#a84766049d01621d878a6aafe1c7c35f4',1,'tiny_dlna::StrView::len()'],['../classtiny__dlna_1_1Vector.html#abc61d2836d97b5a611f49a17167402cb',1,'tiny_dlna::Vector::len()'],['../structtiny__dlna_1_1XMLParserPrint_1_1CBRef.html#a0d9526b4399cf64825e2b0d12240a261',1,'tiny_dlna::XMLParserPrint::CBRef::len()']]],
   ['lines_4',['lines',['../classtiny__dlna_1_1HttpHeader.html#a0303dd1387028e16f3c48b312e28a44c',1,'tiny_dlna::HttpHeader']]],
   ['local_5fhost_5',['local_host',['../classtiny__dlna_1_1HttpServer.html#a47eeb593260afbfb1e03587f010289bd',1,'tiny_dlna::HttpServer']]],
-  ['local_5furl_6',['local_url',['../classtiny__dlna_1_1DLNAControlPointMgr.html#a9ec7efe52d7a7e12de4356f42387f3d8',1,'tiny_dlna::DLNAControlPointMgr']]],
+  ['local_5furl_6',['local_url',['../classtiny__dlna_1_1DLNAControlPoint.html#a3a1bb5777ddf5319020bdea9a92c14a7',1,'tiny_dlna::DLNAControlPoint']]],
   ['localhost_7',['localhost',['../classtiny__dlna_1_1DLNADeviceInfo.html#a28d8ce438c8338faf5ad279f2f26d9b4',1,'tiny_dlna::DLNADeviceInfo']]],
   ['location_8',['location',['../classtiny__dlna_1_1MSearchReplyCP.html#ac2c66bea457ce9b9337d8e5b27e53971',1,'tiny_dlna::MSearchReplyCP']]],
   ['location_9',['LOCATION',['../namespacetiny__dlna.html#afce8f59f39df8a9aed9f14e4c56dcd84',1,'tiny_dlna']]],

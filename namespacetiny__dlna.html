@@ -101,8 +101,8 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1ControlPointMediaServer.html">ControlPointMediaServer</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper class to control/query a <a class="el" href="classtiny__dlna_1_1MediaServer.html" title="Minimal Digital Media Server implementation.">MediaServer</a> from a control point.  <a href="classtiny__dlna_1_1ControlPointMediaServer.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMgr.html">DLNAControlPointMgr</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lightweight DLNA control point manager.  <a href="classtiny__dlna_1_1DLNAControlPointMgr.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html">DLNAControlPoint</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lightweight DLNA control point manager.  <a href="classtiny__dlna_1_1DLNAControlPoint.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointRequestParser.html">DLNAControlPointRequestParser</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Translates DLNA UDP Requests to <a class="el" href="structtiny__dlna_1_1Schedule.html" title="An individual Schedule (to send out UDP messages)">Schedule</a> so that we can schedule a reply.  <a href="classtiny__dlna_1_1DLNAControlPointRequestParser.html#details">More...</a><br /></td></tr>
@@ -337,8 +337,8 @@ Enumerations</h2></td></tr>
 Variables</h2></td></tr>
 <tr class="memitem:ad1a9a726ef5546aa12b5f58a2af3db3c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1LoggerClass.html">LoggerClass</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetiny__dlna.html#ad1a9a726ef5546aa12b5f58a2af3db3c">DlnaLogger</a></td></tr>
 <tr class="separator:ad1a9a726ef5546aa12b5f58a2af3db3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9a29414b1830f399232a90214ff7cdee"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMgr.html">DLNAControlPointMgr</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetiny__dlna.html#a9a29414b1830f399232a90214ff7cdee">selfDLNAControlPoint</a> = nullptr</td></tr>
-<tr class="separator:a9a29414b1830f399232a90214ff7cdee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc6e7eb7763b852f949101cb5450dd0f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html">DLNAControlPoint</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetiny__dlna.html#acc6e7eb7763b852f949101cb5450dd0f">selfDLNAControlPoint</a> = nullptr</td></tr>
+<tr class="separator:acc6e7eb7763b852f949101cb5450dd0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a340729a42649b279fdfa96185a9cc3cd"><td class="memItemLeft" align="right" valign="top">constexpr const <a class="el" href="structtiny__dlna_1_1MimeExtension.html">MimeExtension</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetiny__dlna.html#a340729a42649b279fdfa96185a9cc3cd">defaultMimeTable</a> []</td></tr>
 <tr class="separator:a340729a42649b279fdfa96185a9cc3cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a782f756c20c2950e76b5d377df3f3e86"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structtiny__dlna_1_1MimeExtension.html">MimeExtension</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetiny__dlna.html#a782f756c20c2950e76b5d377df3f3e86">mimeTable</a></td></tr>
@@ -795,14 +795,14 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a9a29414b1830f399232a90214ff7cdee" name="a9a29414b1830f399232a90214ff7cdee"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9a29414b1830f399232a90214ff7cdee">&#9670;&#160;</a></span>selfDLNAControlPoint</h2>
+<a id="acc6e7eb7763b852f949101cb5450dd0f" name="acc6e7eb7763b852f949101cb5450dd0f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc6e7eb7763b852f949101cb5450dd0f">&#9670;&#160;</a></span>selfDLNAControlPoint</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMgr.html">DLNAControlPointMgr</a>* tiny_dlna::selfDLNAControlPoint = nullptr</td>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html">DLNAControlPoint</a>* tiny_dlna::selfDLNAControlPoint = nullptr</td>
         </tr>
       </table>
 </div><div class="memdoc">

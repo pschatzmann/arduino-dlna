@@ -6,7 +6,7 @@ var searchData=
   ['deletenode_3',['deleteNode',['../classtiny__dlna_1_1List.html#a805b2a9870aa20fd3e375e49fef27676',1,'tiny_dlna::List']]],
   ['dequeue_4',['dequeue',['../classtiny__dlna_1_1QueueLockFree.html#a2104af47878f3295cf63ae768226882c',1,'tiny_dlna::QueueLockFree::dequeue(const T &amp;&amp;data)'],['../classtiny__dlna_1_1QueueLockFree.html#ac4c1cd465798cbf610971b31856c1f42',1,'tiny_dlna::QueueLockFree::dequeue(T &amp;result)']]],
   ['devicexmlcallback_5',['deviceXMLCallback',['../classtiny__dlna_1_1DLNADevice.html#a8dd243b964f5a19924a388a2e0f27968',1,'tiny_dlna::DLNADevice']]],
-  ['dlnacontrolpointmgr_6',['DLNAControlPointMgr',['../classtiny__dlna_1_1DLNAControlPointMgr.html#a29986fc5a83612c6bd6e7ebc54e2a61d',1,'tiny_dlna::DLNAControlPointMgr::DLNAControlPointMgr(HttpServer &amp;server, int port=80)'],['../classtiny__dlna_1_1DLNAControlPointMgr.html#a6932477a3be457666018b7b9325cc1c2',1,'tiny_dlna::DLNAControlPointMgr::DLNAControlPointMgr()']]],
+  ['dlnacontrolpoint_6',['DLNAControlPoint',['../classtiny__dlna_1_1DLNAControlPoint.html#a828c3639df1722fbbfa3aa19da6ecb19',1,'tiny_dlna::DLNAControlPoint::DLNAControlPoint(HttpServer &amp;server, int port=80)'],['../classtiny__dlna_1_1DLNAControlPoint.html#ae6ccf08f93ce155cec8964b07b466cbd',1,'tiny_dlna::DLNAControlPoint::DLNAControlPoint()']]],
   ['dlnadeviceinfo_7',['DLNADeviceInfo',['../classtiny__dlna_1_1DLNADeviceInfo.html#ac9a74b9751b1558d9b335f702df5a6b9',1,'tiny_dlna::DLNADeviceInfo']]],
   ['dlnaserviceinfo_8',['DLNAServiceInfo',['../classtiny__dlna_1_1DLNAServiceInfo.html#a94dd33503dd2ab0979a3441fae237873',1,'tiny_dlna::DLNAServiceInfo']]],
   ['do_5fallocate_9',['do_allocate',['../classtiny__dlna_1_1Allocator.html#ac06b356163fdaebccf953b46da04fd2e',1,'tiny_dlna::Allocator']]],

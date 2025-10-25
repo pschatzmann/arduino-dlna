@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['xml_0',['xml',['../classtiny__dlna_1_1NotifyReplyCP.html#a863f13e8c11a084051e6b07c2abf15bb',1,'tiny_dlna::NotifyReplyCP::xml()'],['../classtiny__dlna_1_1DLNADeviceInfo.html#aa7460468c12c3e6a2300a5c6cc725492',1,'tiny_dlna::DLNADeviceInfo::xml()'],['../classtiny__dlna_1_1DLNAControlPointMgr.html#a951e68cc7323ffa906a80aaf5ab10594',1,'tiny_dlna::DLNAControlPointMgr::xml()']]],
+  ['xml_0',['xml',['../classtiny__dlna_1_1NotifyReplyCP.html#a863f13e8c11a084051e6b07c2abf15bb',1,'tiny_dlna::NotifyReplyCP::xml()'],['../classtiny__dlna_1_1DLNADeviceInfo.html#aa7460468c12c3e6a2300a5c6cc725492',1,'tiny_dlna::DLNADeviceInfo::xml()'],['../classtiny__dlna_1_1DLNAControlPoint.html#a993efdd562a20ec5221986a040cfda3c',1,'tiny_dlna::DLNAControlPoint::xml()']]],
   ['xmlattributeparser_1',['XMLAttributeParser',['../classtiny__dlna_1_1XMLAttributeParser.html',1,'tiny_dlna']]],
   ['xmlattributeparser_2eh_2',['XMLAttributeParser.h',['../XMLAttributeParser_8h.html',1,'']]],
   ['xmldeviceparser_3',['XMLDeviceParser',['../classtiny__dlna_1_1XMLDeviceParser.html',1,'tiny_dlna::XMLDeviceParser'],['../classtiny__dlna_1_1DLNADeviceInfo.html#aa599c93e903741a3014259be62c1fc6a',1,'tiny_dlna::DLNADeviceInfo::XMLDeviceParser()']]],

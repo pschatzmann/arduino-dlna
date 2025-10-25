@@ -17,8 +17,8 @@ var searchData=
   ['containsnumber_14',['containsNumber',['../classtiny__dlna_1_1StrView.html#a142ce719b35683c76f3b46f49730370a',1,'tiny_dlna::StrView']]],
   ['contentdirectorycontrolcb_15',['contentDirectoryControlCB',['../classtiny__dlna_1_1MediaServer.html#a87be17bbe5b21605d23c582343b35648',1,'tiny_dlna::MediaServer']]],
   ['contentstr_16',['contentStr',['../classtiny__dlna_1_1HttpServer.html#a5a8f23bf03bc3d5ccbbe4ed5d317b1b2',1,'tiny_dlna::HttpServer']]],
-  ['controlpointmediarenderer_17',['ControlPointMediaRenderer',['../classtiny__dlna_1_1ControlPointMediaRenderer.html#a99cabd1db27010bda2313aea4891d8a5',1,'tiny_dlna::ControlPointMediaRenderer']]],
-  ['controlpointmediaserver_18',['ControlPointMediaServer',['../classtiny__dlna_1_1ControlPointMediaServer.html#ad67867b36c92a75a8e5048caade7c217',1,'tiny_dlna::ControlPointMediaServer']]],
+  ['controlpointmediarenderer_17',['ControlPointMediaRenderer',['../classtiny__dlna_1_1ControlPointMediaRenderer.html#ad3b5d11dea100f9e4dafb0e5b21ae2c7',1,'tiny_dlna::ControlPointMediaRenderer']]],
+  ['controlpointmediaserver_18',['ControlPointMediaServer',['../classtiny__dlna_1_1ControlPointMediaServer.html#a92e522970f6154f86eb6e03caeec5e56',1,'tiny_dlna::ControlPointMediaServer']]],
   ['copy_19',['copy',['../classtiny__dlna_1_1HttpServer.html#a21c5fcc5ea86d304d9be3c893a776658',1,'tiny_dlna::HttpServer']]],
   ['copyfrom_20',['copyFrom',['../classtiny__dlna_1_1Str.html#a56653e05cf303fd8b3651fd8e4d88228',1,'tiny_dlna::Str']]],
   ['count_21',['count',['../classtiny__dlna_1_1StrView.html#a8c85877e7ff4592f05d2102e6db8bd33',1,'tiny_dlna::StrView::count()'],['../classtiny__dlna_1_1StringRegistry.html#a8e17e3e5ef6e10cf888b0981a3ad6f92',1,'tiny_dlna::StringRegistry::count()']]],
@@ -26,6 +26,6 @@ var searchData=
   ['createarray_23',['createArray',['../classtiny__dlna_1_1Allocator.html#adb33f1e134011c74aa522015a698aaee',1,'tiny_dlna::Allocator']]],
   ['createbrowseaction_24',['createBrowseAction',['../classtiny__dlna_1_1ControlPointMediaServer.html#a07f831b7c0d9dabf220f6dea0ff48b54',1,'tiny_dlna::ControlPointMediaServer']]],
   ['createnode_25',['createNode',['../classtiny__dlna_1_1List.html#a2fbf0414b947fbbd3e0e090b61255731',1,'tiny_dlna::List']]],
-  ['createxml_26',['createXML',['../classtiny__dlna_1_1DLNAControlPointMgr.html#a0b6dd3e83bc2aebc069d7f62bdf7e0b8',1,'tiny_dlna::DLNAControlPointMgr']]],
+  ['createxml_26',['createXML',['../classtiny__dlna_1_1DLNAControlPoint.html#a264865ba29d1d52b546bac2ed3c6d392',1,'tiny_dlna::DLNAControlPoint']]],
   ['crlf_27',['crlf',['../classtiny__dlna_1_1HttpHeader.html#a60f18f92f996799ea4b6cc6b642bac84',1,'tiny_dlna::HttpHeader::crlf()'],['../classtiny__dlna_1_1HttpServer.html#ab54de9871805f143d7637ccdc2ed27b7',1,'tiny_dlna::HttpServer::crlf()']]]
 ];

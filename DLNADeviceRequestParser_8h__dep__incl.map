@@ -1,8 +1,8 @@
 <map id="src/dlna/DLNADeviceRequestParser.h" name="src/dlna/DLNADeviceRequestParser.h">
-<area shape="rect" id="node1" title=" " alt="" coords="240,5,451,45"/>
+<area shape="rect" id="node1" title=" " alt="" coords="237,5,448,45"/>
 <area shape="rect" id="node2" href="$DLNADevice_8h.html" title=" " alt="" coords="373,93,544,119"/>
 <area shape="rect" id="node3" href="$DLNA_8h.html" title=" " alt="" coords="351,343,444,368"/>
-<area shape="rect" id="node4" href="$DLNAControlPointMgr_8h.html" title=" " alt="" coords="134,167,327,207"/>
+<area shape="rect" id="node4" href="$DLNAControlPoint_8h.html" title=" " alt="" coords="123,174,328,199"/>
 <area shape="rect" id="node7" href="$MediaRenderer_8h.html" title=" " alt="" coords="497,255,727,295"/>
 <area shape="rect" id="node8" href="$MediaServer_8h.html" title=" " alt="" coords="352,167,565,207"/>
 <area shape="rect" id="node5" href="$ControlPointMediaRenderer_8h.html" title=" " alt="" coords="5,255,176,295"/>

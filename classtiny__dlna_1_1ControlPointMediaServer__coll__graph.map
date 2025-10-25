@@ -1,6 +1,6 @@
 <map id="tiny_dlna::ControlPointMediaServer" name="tiny_dlna::ControlPointMediaServer">
-<area shape="rect" id="node1" title="Helper class to control/query a MediaServer from a control point." alt="" coords="3812,464,4023,504"/>
-<area shape="rect" id="node2" href="$classtiny__dlna_1_1DLNAControlPointMgr.html" title="Lightweight DLNA control point manager." alt="" coords="3503,471,3733,497"/>
+<area shape="rect" id="node1" title="Helper class to control/query a MediaServer from a control point." alt="" coords="3788,464,3999,504"/>
+<area shape="rect" id="node2" href="$classtiny__dlna_1_1DLNAControlPoint.html" title="Lightweight DLNA control point manager." alt="" coords="3503,471,3709,497"/>
 <area shape="rect" id="node3" href="$classtiny__dlna_1_1Scheduler.html" title="Scheduler which processes all due Schedules (to send out UDP replies)" alt="" coords="871,14,1025,39"/>
 <area shape="rect" id="node4" href="$classtiny__dlna_1_1Vector.html" title=" " alt="" coords="316,40,495,80"/>
 <area shape="rect" id="node5" href="$structtiny__dlna_1_1Schedule.html" title="An individual Schedule (to send out UDP messages)" alt="" coords="5,47,155,73"/>

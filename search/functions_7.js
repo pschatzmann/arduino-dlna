@@ -2,8 +2,8 @@ var searchData=
 [
   ['handlecommentorpi_0',['handleCommentOrPI',['../classtiny__dlna_1_1XMLParser.html#a06179542d312c4067a3d0bf4bab7afbb',1,'tiny_dlna::XMLParser']]],
   ['handleendtag_1',['handleEndTag',['../classtiny__dlna_1_1XMLParser.html#a43d0385d76e906082bea173036e09c68',1,'tiny_dlna::XMLParser']]],
-  ['handlenotifyalive_2',['handleNotifyAlive',['../classtiny__dlna_1_1DLNAControlPointMgr.html#a59cbbca421ea3516f6ed01690c5c2433',1,'tiny_dlna::DLNAControlPointMgr']]],
-  ['handlenotifybyebye_3',['handleNotifyByebye',['../classtiny__dlna_1_1DLNAControlPointMgr.html#a16dfcb7e8ee82749139f53ff0c533f41',1,'tiny_dlna::DLNAControlPointMgr']]],
+  ['handlenotifyalive_2',['handleNotifyAlive',['../classtiny__dlna_1_1DLNAControlPoint.html#a2f48a6bc2b19efa408755cf68f7b7721',1,'tiny_dlna::DLNAControlPoint']]],
+  ['handlenotifybyebye_3',['handleNotifyByebye',['../classtiny__dlna_1_1DLNAControlPoint.html#a02247cc25ee4ba7953b4dd09dc88a4a6',1,'tiny_dlna::DLNAControlPoint']]],
   ['handlestarttag_4',['handleStartTag',['../classtiny__dlna_1_1XMLParser.html#a76fc8377cfacfda1a6f65388fcf7ce04',1,'tiny_dlna::XMLParser']]],
   ['haskey_5',['hasKey',['../classtiny__dlna_1_1HttpParameters.html#a44c129cdb36c7463465a47cecd70b58f',1,'tiny_dlna::HttpParameters']]],
   ['head_6',['head',['../classtiny__dlna_1_1HttpRequest.html#a87557981cdf4f4f707c4c8867420432e',1,'tiny_dlna::HttpRequest']]],

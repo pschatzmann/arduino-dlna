@@ -8,6 +8,6 @@ var searchData=
   ['localhost_5',['localHost',['../classtiny__dlna_1_1HttpServer.html#a0351a570f910ee1493235e7811da1b36',1,'tiny_dlna::HttpServer']]],
   ['localip_6',['localIP',['../classtiny__dlna_1_1HttpServer.html#a7f5681c2c7b4a8e35ffdc5e28a04ecb9',1,'tiny_dlna::HttpServer']]],
   ['log_7',['log',['../classtiny__dlna_1_1LoggerClass.html#ab7ac4f166531a8d27e919b3f47fe8388',1,'tiny_dlna::LoggerClass']]],
-  ['loop_8',['loop',['../classtiny__dlna_1_1DLNAControlPointMgr.html#a20937a568582f4259d45a68b949da809',1,'tiny_dlna::DLNAControlPointMgr::loop()'],['../classtiny__dlna_1_1DLNADevice.html#afe6f1b0d2a28c4f276fa5359419d6b7e',1,'tiny_dlna::DLNADevice::loop()'],['../classtiny__dlna_1_1DLNADeviceInfo.html#a1318397e562e532ad344e9d029ed876b',1,'tiny_dlna::DLNADeviceInfo::loop()']]],
+  ['loop_8',['loop',['../classtiny__dlna_1_1DLNAControlPoint.html#a59e2688e61b8179a0423129dfaa9fcd4',1,'tiny_dlna::DLNAControlPoint::loop()'],['../classtiny__dlna_1_1DLNADevice.html#afe6f1b0d2a28c4f276fa5359419d6b7e',1,'tiny_dlna::DLNADevice::loop()'],['../classtiny__dlna_1_1DLNADeviceInfo.html#a1318397e562e532ad344e9d029ed876b',1,'tiny_dlna::DLNADeviceInfo::loop()']]],
   ['ltrim_9',['ltrim',['../classtiny__dlna_1_1StrView.html#ad3263bf622a96e970cfae7b6a0418272',1,'tiny_dlna::StrView']]]
 ];
