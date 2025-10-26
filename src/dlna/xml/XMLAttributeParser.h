@@ -48,20 +48,58 @@ class XMLAttributeParser {
       if (!tagEnd) return false;
       const char* attrPos = strstr(p, attrName);
       if (attrPos && attrPos < tagEnd) {
-        const char* q = strchr(attrPos, '"');
-        if (!q || q > tagEnd) return false;
-        q++;
-        const char* qend = strchr(q, '"');
-        if (!qend || qend > tagEnd) return false;
-        size_t vlen = (size_t)(qend - q);
-        size_t copyLen = vlen < (bufSize - 1) ? vlen : (bufSize - 1);
-        if (copyLen > 0) memcpy(outBuf, q, copyLen);
-        outBuf[copyLen] = '\0';
-        return true;
+        // delegate actual quoted-value extraction to helper
+        return extractQuotedValue(attrPos, tagEnd, outBuf, bufSize);
       }
       p = strstr(p + 1, tagName);
     }
     return false;
+  }
+
+  /**
+   * @brief Extract an attribute value directly from an attributes string
+   *
+   * This is a lightweight helper that searches `attrs` for `attrName` and
+   * extracts the double-quoted value that follows. Use this when you already
+   * have the contents of a start-tag (everything between '<tag' and '>') and
+   * don't want to search for a tag name first.
+   *
+   * @param attrs Null-terminated string containing attributes (e.g.
+   *              `protocolInfo="http-get:*:audio/mpeg:*" other="..."`).
+   * @param attrName Name of the attribute to find (with or without trailing
+   *                 '='). Example: "protocolInfo" or "protocolInfo=".
+   * @param outBuf Destination buffer for the attribute value (null-terminated).
+   * @param bufSize Size of outBuf in bytes.
+   * @return true if a non-empty value was found and written into outBuf.
+   */
+  static bool extractAttribute(const char* attrs, const char* attrName,
+                                         char* outBuf, size_t bufSize) {
+    if (!attrs || !attrName || !outBuf || bufSize == 0) return false;
+    const char* attrPos = strstr(attrs, attrName);
+    if (!attrPos) return false;
+    // No explicit boundary for attributes-only strings
+    return extractQuotedValue(attrPos, nullptr, outBuf, bufSize);
+  }
+
+  // Helper: given a pointer somewhere at/after the attribute name, find the
+  // next double-quoted value and copy it to outBuf. If `boundary` is non-null
+  // the quotes must be before or equal to boundary.
+  static bool extractQuotedValue(const char* attrPos, const char* boundary,
+                                  char* outBuf, size_t bufSize) {
+    if (!attrPos || !outBuf || bufSize == 0) return false;
+    memset(outBuf, 0, bufSize);
+    const char* q = strchr(attrPos, '"');
+    if (!q) return false;
+    if (boundary && q > boundary) return false;
+    q++;
+    const char* qend = strchr(q, '"');
+    if (!qend) return false;
+    if (boundary && qend > boundary) return false;
+    size_t vlen = (size_t)(qend - q);
+    size_t copyLen = vlen < (bufSize - 1) ? vlen : (bufSize - 1);
+    if (copyLen > 0) memcpy(outBuf, q, copyLen);
+    outBuf[copyLen] = '\0';
+    return copyLen > 0;
   }
 
   /**

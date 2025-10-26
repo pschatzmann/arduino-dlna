@@ -17,7 +17,7 @@ namespace tiny_dlna {
  */
 class ControlPointMediaServer {
  public:
-  typedef void (*ItemCallback)(const MediaItem& item, void* ref);
+  typedef void (*XMLCallback)(const char* name, const char* test, const char* attributes);
   typedef void (*NotificationCallback)(void* reference, const char* sid,
                                        const char* varName,
                                        const char* newValue);
@@ -110,10 +110,10 @@ class ControlPointMediaServer {
 
   /**
    * @brief Browse the given object_id and invoke callback for each returned
-   * item
+   * xml element
    * @param startingIndex Starting index for the browse request
    * @param requestedCount Number of items requested
-   * @param itemCallback Callback invoked per MediaItem result (may be nullptr)
+   * @param XMLCallback Callback invoked per MediaItem result (may be nullptr)
    * @param numberReturned Output: number of items returned by server
    * @param totalMatches Output: total matches available on server
    * @param updateID Output: server UpdateID
@@ -122,9 +122,12 @@ class ControlPointMediaServer {
    * @note The raw DIDL-Lite XML result is available via getLastReply() ->
    * "Result"
    */
-  bool browse(int startingIndex, int requestedCount, ItemCallback itemCallback,
+  bool browse(int startingIndex, int requestedCount, XMLCallback XMLCallback,
               int& numberReturned, int& totalMatches, int& updateID,
               const char* browseFlag = nullptr) {
+
+    // Register item callback            
+    this->mgr.onResultNode(XMLCallback);            
     // Build and post browse action
     DLNAServiceInfo& svc =
         selectService("urn:upnp-org:serviceId:ContentDirectory");
@@ -138,9 +141,42 @@ class ControlPointMediaServer {
     // parse numeric result fields
     parseNumericFields(last_reply, numberReturned, totalMatches, updateID);
 
-    // process DIDL Result and call callback per item
-    const char* resultXml = findArgument(last_reply, "Result");
-    if (resultXml) processResult(resultXml, itemCallback);
+    return true;
+  }
+
+  /**
+   * @brief Search the ContentDirectory using SearchCriteria and invoke callback
+   * for each returned xml element.
+   * @param searchCriteria Search criteria string as defined by ContentDirectory
+   * @param startingIndex Starting index for the search request
+   * @param requestedCount Number of items requested
+   * @param XMLCallback Callback invoked per MediaItem result (may be nullptr)
+   * @param numberReturned Output: number of items returned by server
+   * @param totalMatches Output: total matches available on server
+   * @param updateID Output: server UpdateID
+   * @param filter Optional Filter argument (defaults to empty string)
+   * @param sortCriteria Optional SortCriteria (defaults to empty string)
+   * @return true on success, false on error
+   */
+  bool search(const char* searchCriteria, int startingIndex, int requestedCount,
+              XMLCallback XMLCallback, int& numberReturned, int& totalMatches,
+              int& updateID, const char* filter = "",
+              const char* sortCriteria = "") {
+
+    // Register item callback
+    this->mgr.onResultNode(XMLCallback);
+
+    DLNAServiceInfo& svc = selectService("urn:upnp-org:serviceId:ContentDirectory");
+    if (!svc) return false;
+
+    ActionRequest &act = createSearchAction(svc, searchCriteria, filter,
+                                            startingIndex, requestedCount,
+                                            sortCriteria);
+    mgr.addAction(act);
+    last_reply = mgr.executeActions();
+    if (!last_reply) return false;
+
+    parseNumericFields(last_reply, numberReturned, totalMatches, updateID);
     return true;
   }
 
@@ -287,6 +323,23 @@ class ControlPointMediaServer {
     return act;
   }
 
+  /// Build a Search ActionRequest
+  ActionRequest &createSearchAction(DLNAServiceInfo& svc, const char* searchCriteria,
+                                    const char* filter, int startingIndex,
+                                    int requestedCount, const char* sortCriteria) {
+    static ActionRequest act(svc, "Search");
+    act.addArgument("ContainerID", object_id);
+    act.addArgument("SearchCriteria", searchCriteria ? searchCriteria : "");
+    act.addArgument("Filter", filter ? filter : "");
+    char buf[32];
+    snprintf(buf, sizeof(buf), "%d", startingIndex);
+    act.addArgument("StartingIndex", buf);
+    snprintf(buf, sizeof(buf), "%d", requestedCount);
+    act.addArgument("RequestedCount", buf);
+    act.addArgument("SortCriteria", sortCriteria ? sortCriteria : "");
+    return act;
+  }
+
   /// Parse numeric result fields from an ActionReply
   void parseNumericFields(ActionReply& reply, int& numberReturned,
                           int& totalMatches, int& updateID) {
@@ -296,76 +349,6 @@ class ControlPointMediaServer {
     numberReturned = nret ? atoi(nret) : 0;
     totalMatches = tmatch ? atoi(tmatch) : 0;
     updateID = uid ? atoi(uid) : 0;
-  }
-
-  /// Parse DIDL-Lite Result and invoke callback for each item
-  void processResult(const char* resultXml, ItemCallback itemCallback) {
-    if (!resultXml) return;
-    StrView res(resultXml);
-    int pos = 0;
-    while (true) {
-      // find next <item or <container element
-      int itPos1 = res.indexOf("<item", pos);
-      int itPos2 = res.indexOf("<container", pos);
-      int itPos = -1;
-      bool isContainer = false;
-      if (itPos1 >= 0 && (itPos2 < 0 || itPos1 < itPos2)) {
-        itPos = itPos1;
-        isContainer = false;
-      } else if (itPos2 >= 0) {
-        itPos = itPos2;
-        isContainer = true;
-      }
-      if (itPos < 0) break;
-      int itEnd = isContainer ? res.indexOf("</container>", itPos)
-                              : res.indexOf("</item>", itPos);
-      if (itEnd < 0) break;
-      int headerEnd = res.indexOf('>', itPos);
-      if (headerEnd < 0 || headerEnd >= itEnd) break;
-
-      tiny_dlna::MediaItem item;
-      // extract id attribute
-      int idPos = res.indexOf("id=\"", itPos);
-      if (idPos >= 0 && idPos < headerEnd) {
-        int valStart = idPos + 4;
-        int valEnd = res.indexOf('"', valStart);
-        if (valEnd > valStart) {
-          Str tmp;
-          tmp.copyFrom(res.c_str() + valStart, valEnd - valStart);
-          item.id = strings.add((char*)tmp.c_str());
-        }
-      }
-
-      // title
-      int t1 = res.indexOf("<dc:title>", headerEnd);
-      if (t1 >= 0 && t1 < itEnd) {
-        int t1s = t1 + strlen("<dc:title>");
-        int t1e = res.indexOf("</dc:title>", t1s);
-        if (t1e > t1s) {
-          Str tmp;
-          tmp.copyFrom(res.c_str() + t1s, t1e - t1s);
-          item.title = strings.add((char*)tmp.c_str());
-        }
-      }
-
-      // res
-      int r1 = res.indexOf("<res", headerEnd);
-      if (r1 >= 0 && r1 < itEnd) {
-        int r1s = res.indexOf('>', r1);
-        if (r1s >= 0 && r1s < itEnd) {
-          r1s += 1;
-          int r1e = res.indexOf("</res>", r1s);
-          if (r1e > r1s) {
-            Str tmp;
-            tmp.copyFrom(res.c_str() + r1s, r1e - r1s);
-            item.res = strings.add((char*)tmp.c_str());
-          }
-        }
-      }
-
-      if (itemCallback) itemCallback(item, reference);
-      pos = itEnd + 7;
-    }
   }
 };
 

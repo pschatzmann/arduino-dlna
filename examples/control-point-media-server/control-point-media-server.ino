@@ -9,20 +9,29 @@ const char* password = "YOUR_PASSWORD";
 WiFiClient client;
 DLNAHttpRequest http(client);
 UDPAsyncService udp;
-DLNAControlPoint cp; // no notifications needed
+DLNAControlPoint cp;  // no notifications needed
 ControlPointMediaServer cpms(cp);
 
-// Simple callback that prints item metadata
-void printItemCallback(const tiny_dlna::MediaItem& item, void* ref) {
-  (void)ref;
-  Serial.println("[printItemCallback] invoked");
-  Serial.print(" Item ID: ");
-  Serial.println(item.id ? item.id : "(null)");
-  Serial.print(" Title: ");
-  Serial.println(item.title ? item.title : "(no title)");
-  Serial.print(" Resource: ");
-  Serial.println(item.res ? item.res : "(no res)");
-  Serial.println("---");
+/// Simple callback that extracts and prints the item metadata
+void printItemCallback(const char* name, const char* text,
+                       const char* attributes) {
+  const int buffer_size = 200;
+  char buffer[buffer_size];
+  static Str id;
+  static Str parentID;
+  if (StrView(name) == "container") {
+    XMLAttributeParser::extractAttribute(attributes, "id=", buffer, buffer_size);
+    id.set(buffer);
+    XMLAttributeParser::extractAttribute(attributes, "parentID=", buffer, buffer_size);
+    parentID.set(buffer);
+  } else if (StrView(name) == "dc:title") {
+    Serial.print("Item: ID=");
+    Serial.print(id.c_str());
+    Serial.print(" ParentID=");
+    Serial.print(parentID.c_str());
+    Serial.print(" Title=");
+    Serial.println(text);
+  }
 }
 
 void setupWifi() {

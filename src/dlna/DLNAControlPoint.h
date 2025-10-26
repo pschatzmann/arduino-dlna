@@ -95,7 +95,7 @@ class DLNAControlPoint {
     p_udp = &udp;
     p_http = &http;
 
-    if (p_http_server && http_server_port > 0 && eventCallback != nullptr) {
+    if (p_http_server && http_server_port > 0 && event_callback != nullptr) {
       // handle server requests
       if (!p_http_server->begin(http_server_port)) {
         DlnaLogger.log(DlnaLogLevel::Error, "HttpServer begin failed");
@@ -243,7 +243,16 @@ class DLNAControlPoint {
       std::function<void(void* reference, const char* sid, const char* varName,
                          const char* newValue)>
           cb) {
-    eventCallback = cb;
+    event_callback = cb;
+  }
+
+  /// Register a callback that will be invoked when parsing SOAP/Action results
+  /// Signature: void(const char* nodeName, const char* text, const char* attributes)
+  void onResultNode(
+      std::function<void(const char* nodeName, const char* text,
+                         const char* attributes)>
+          cb) {
+    result_callback = cb;
   }
 
   /// Attach an opaque reference pointer (optional, for caller context)
@@ -441,9 +450,12 @@ class DLNAControlPoint {
   HttpServer* p_http_server = nullptr;
   int http_server_port = 0;
   void* reference = nullptr;
+  std::function<void(const char* nodeName, const char* text, const char* attributes)>
+      result_callback;
   std::function<void(void* reference, const char* sid, const char* varName,
                      const char* newValue)>
-      eventCallback;
+      event_callback;
+  
 
   /// Attach an HttpServer so the control point can receive HTTP NOTIFY event
   /// messages. This registers a handler at the configured local URL path
@@ -604,13 +616,13 @@ class DLNAControlPoint {
     auto cb = [](Str& nodeName, Vector<Str>& /*path*/, Str& text,
                  Str& /*attributes*/, int /*start*/, int /*len*/, void* vref) {
       CBRef* r = static_cast<CBRef*>(vref);
-      if (text.length() > 0 && r->self && r->self->eventCallback) {
+      if (text.length() > 0 && r->self && r->self->event_callback) {
         const char* sid = r->data->subscription_id.c_str();
         // store stable copies in the control point's string registry
         const char* namePtr = r->self->strings.add((char*)nodeName.c_str());
         const char* valPtr = r->self->strings.add((char*)text.c_str());
         // pass stored opaque reference as first parameter
-        r->self->eventCallback(r->self->reference, sid, namePtr, valPtr);
+        r->self->event_callback(r->self->reference, sid, namePtr, valPtr);
       }
     };
 
@@ -734,12 +746,12 @@ class DLNAControlPoint {
     createXML(action);
   }
 
-  const char* toStr(const char* str) {
-    return str==nullptr ? "(null)" : str;
+  const char* toStr(const char* str, const char* empty="(null)") {
+    return str==nullptr ? empty : str;
   }
 
-  const char* toStr(Str& str) {
-    return str.isEmpty() ? "(null)" : str.c_str();
+  const char* toStr(Str& str, const char* empty="(null)") {
+    return str.isEmpty() ? empty : str.c_str();
   }
   
   // Send an HTTP POST for the given URL and request body. On success the
@@ -785,6 +797,9 @@ class DLNAControlPoint {
               reply.addArgument(arg);
               DlnaLogger.log(DlnaLogLevel::Info, "ActionReplay '%s': %s (%s)",
                              toStr(outNodeName), toStr(outText), toStr(outAttributes));
+              if (result_callback) {
+                result_callback(toStr(arg.name,""), toStr(outText,""), toStr(outAttributes,""));
+              }
             }
           }
         }
