@@ -147,20 +147,20 @@ class ControlPointMediaServer {
   /**
    * @brief Search the ContentDirectory using SearchCriteria and invoke callback
    * for each returned xml element.
-   * @param searchCriteria Search criteria string as defined by ContentDirectory
    * @param startingIndex Starting index for the search request
    * @param requestedCount Number of items requested
    * @param XMLCallback Callback invoked per MediaItem result (may be nullptr)
    * @param numberReturned Output: number of items returned by server
    * @param totalMatches Output: total matches available on server
    * @param updateID Output: server UpdateID
+   * @param searchCriteria Search criteria string as defined by ContentDirectory
    * @param filter Optional Filter argument (defaults to empty string)
    * @param sortCriteria Optional SortCriteria (defaults to empty string)
    * @return true on success, false on error
    */
-  bool search(const char* searchCriteria, int startingIndex, int requestedCount,
+  bool search(int startingIndex, int requestedCount,
               XMLCallback XMLCallback, int& numberReturned, int& totalMatches,
-              int& updateID, const char* filter = "",
+              int& updateID, const char* searchCriteria = "",const char* filter = "",
               const char* sortCriteria = "") {
 
     // Register item callback
