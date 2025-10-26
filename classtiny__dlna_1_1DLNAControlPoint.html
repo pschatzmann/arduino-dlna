@@ -159,12 +159,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a84bb0f5aad9d9b9653a2f49f51010257"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1ActionReply.html">ActionReply</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a84bb0f5aad9d9b9653a2f49f51010257">executeActions</a> ()</td></tr>
 <tr class="memdesc:a84bb0f5aad9d9b9653a2f49f51010257"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes all registered methods.  <br /></td></tr>
 <tr class="separator:a84bb0f5aad9d9b9653a2f49f51010257"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a77fd9a373617719c87c8e58f3a7e35a0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a77fd9a373617719c87c8e58f3a7e35a0">subscribeNotifications</a> (<a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html">DLNADeviceInfo</a> &amp;device, int timeoutSeconds=60)</td></tr>
-<tr class="memdesc:a77fd9a373617719c87c8e58f3a7e35a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subscribe to changes for all device services.  <br /></td></tr>
-<tr class="separator:a77fd9a373617719c87c8e58f3a7e35a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5df16a69396d925782a0d357fcff41d6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a5df16a69396d925782a0d357fcff41d6">subscribeNotifications</a> (<a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html">DLNAServiceInfo</a> &amp;service, int timoutSeconds=60)</td></tr>
-<tr class="memdesc:a5df16a69396d925782a0d357fcff41d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subscribe to changes for defined device service.  <br /></td></tr>
-<tr class="separator:a5df16a69396d925782a0d357fcff41d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27cb0e646f820cbc118f806104ba7c44"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a27cb0e646f820cbc118f806104ba7c44">subscribeNotifications</a> (<a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html">DLNADeviceInfo</a> &amp;device, int timeoutSeconds=1800)</td></tr>
+<tr class="memdesc:a27cb0e646f820cbc118f806104ba7c44"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subscribe to changes for all device services.  <br /></td></tr>
+<tr class="separator:a27cb0e646f820cbc118f806104ba7c44"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea7b42e380e37a38518b1395da5776d7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#aea7b42e380e37a38518b1395da5776d7">subscribeNotifications</a> (<a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html">DLNAServiceInfo</a> &amp;service, int timoutSeconds=1800)</td></tr>
+<tr class="memdesc:aea7b42e380e37a38518b1395da5776d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subscribe to changes for defined device service.  <br /></td></tr>
+<tr class="separator:aea7b42e380e37a38518b1395da5776d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac2c0bcf61eb407a9018f1990d9dcd9aa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#ac2c0bcf61eb407a9018f1990d9dcd9aa">onNotification</a> (std::function&lt; void(void *<a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a058a06da3022d8fd6835b13d9a6c3f4e">reference</a>, const char *sid, const char *varName, const char *newValue)&gt; cb)</td></tr>
 <tr class="memdesc:ac2c0bcf61eb407a9018f1990d9dcd9aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a callback that will be invoked for incoming event notification.  <br /></td></tr>
 <tr class="separator:ac2c0bcf61eb407a9018f1990d9dcd9aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -212,9 +212,6 @@ Public Member Functions</h2></td></tr>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:a2b3201e3acf5076d9e7749f0a93b9b6e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a2b3201e3acf5076d9e7749f0a93b9b6e">attachHttpServer</a> (<a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;server)</td></tr>
 <tr class="separator:a2b3201e3acf5076d9e7749f0a93b9b6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac0b018f493059737a8adf990ab68254c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#ac0b018f493059737a8adf990ab68254c">parseAndDispatchEvent</a> (<a class="el" href="classtiny__dlna_1_1NotifyReplyCP.html">NotifyReplyCP</a> &amp;data)</td></tr>
-<tr class="memdesc:ac0b018f493059737a8adf990ab68254c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parse the xml content of a <a class="el" href="classtiny__dlna_1_1NotifyReplyCP.html" title="Represents a notification/notify reply scheduled for control-point processing.">NotifyReplyCP</a> and dispatch each property.  <br /></td></tr>
-<tr class="separator:ac0b018f493059737a8adf990ab68254c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a21c77981aa7035fc939e66a12683d066"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a21c77981aa7035fc939e66a12683d066">matches</a> (const char *usn)</td></tr>
 <tr class="memdesc:a21c77981aa7035fc939e66a12683d066"><td class="mdescLeft">&#160;</td><td class="mdescRight">checks if the usn contains the search target  <br /></td></tr>
 <tr class="separator:a21c77981aa7035fc939e66a12683d066"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -232,10 +229,10 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:ac30ba98e9b47c5330ce13c9683acb7d2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#ac30ba98e9b47c5330ce13c9683acb7d2">buildActionBody</a> (<a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;action, <a class="el" href="classtiny__dlna_1_1StrPrint.html">StrPrint</a> &amp;out)</td></tr>
 <tr class="memdesc:ac30ba98e9b47c5330ce13c9683acb7d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Build the SOAP XML request body for the action into <code>out</code>  <br /></td></tr>
 <tr class="separator:ac30ba98e9b47c5330ce13c9683acb7d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a385e8e719df4cfb663779b2d1761c6f5"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a385e8e719df4cfb663779b2d1761c6f5">toStr</a> (const char *str, const char *empty=&quot;(null)&quot;)</td></tr>
-<tr class="separator:a385e8e719df4cfb663779b2d1761c6f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad7e3d3330c28ab99bdec49fb5511f395"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#ad7e3d3330c28ab99bdec49fb5511f395">toStr</a> (<a class="el" href="classtiny__dlna_1_1Str.html">Str</a> &amp;str, const char *empty=&quot;(null)&quot;)</td></tr>
-<tr class="separator:ad7e3d3330c28ab99bdec49fb5511f395"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab013ca8dbcf5e61b37681bf9729172b2"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#ab013ca8dbcf5e61b37681bf9729172b2">nullStr</a> (const char *str, const char *empty=&quot;(null)&quot;)</td></tr>
+<tr class="separator:ab013ca8dbcf5e61b37681bf9729172b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0dc7dd2de4c8bae0c37a4011b18b9f24"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a0dc7dd2de4c8bae0c37a4011b18b9f24">nullStr</a> (<a class="el" href="classtiny__dlna_1_1Str.html">Str</a> &amp;str, const char *empty=&quot;(null)&quot;)</td></tr>
+<tr class="separator:a0dc7dd2de4c8bae0c37a4011b18b9f24"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9c83abf56c73291476a5a50b71a77e00"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1ActionReply.html">ActionReply</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a9c83abf56c73291476a5a50b71a77e00">processActionHttpPost</a> (<a class="el" href="classtiny__dlna_1_1Url.html">Url</a> &amp;post_url, <a class="el" href="classtiny__dlna_1_1StrPrint.html">StrPrint</a> &amp;requestBody, const char *soapAction)</td></tr>
 <tr class="separator:a9c83abf56c73291476a5a50b71a77e00"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a21e62d75a0be44526ee65255a19b34f2"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a21e62d75a0be44526ee65255a19b34f2">getUrl</a> (<a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html">DLNADeviceInfo</a> &amp;device, const char *suffix, const char *buffer, int len)</td></tr>
@@ -243,6 +240,8 @@ Protected Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
 Static Protected Member Functions</h2></td></tr>
+<tr class="memitem:a184421d123fed36f9b5fe95bd7e562da"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a184421d123fed36f9b5fe95bd7e562da">notifyHandler</a> (<a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> *server, const char *requestPath, <a class="el" href="classtiny__dlna_1_1HttpRequestHandlerLine.html">HttpRequestHandlerLine</a> *hl)</td></tr>
+<tr class="separator:a184421d123fed36f9b5fe95bd7e562da"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a02247cc25ee4ba7953b4dd09dc88a4a6"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a02247cc25ee4ba7953b4dd09dc88a4a6">handleNotifyByebye</a> (<a class="el" href="classtiny__dlna_1_1Str.html">Str</a> &amp;usn)</td></tr>
 <tr class="separator:a02247cc25ee4ba7953b4dd09dc88a4a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a98e7d35683a1d18017f1aabaca41c433"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a98e7d35683a1d18017f1aabaca41c433">isUdnKnown</a> (const char *usn_c, <a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html">DLNADeviceInfo</a> *&amp;outDev)</td></tr>
@@ -489,7 +488,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Attach an <a class="el" href="classtiny__dlna_1_1HttpServer.html" title="A Simple Header only implementation of Http Server that allows the registration of callback functions...">HttpServer</a> so the control point can receive HTTP NOTIFY event messages. This registers a handler at the configured local URL path (see <code>local_url</code>) which will extract the SID header and body and call <a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#ac0b018f493059737a8adf990ab68254c" title="Parse the xml content of a NotifyReplyCP and dispatch each property.">parseAndDispatchEvent()</a> to dispatch property changes. </p>
+<p>Attach an <a class="el" href="classtiny__dlna_1_1HttpServer.html" title="A Simple Header only implementation of Http Server that allows the registration of callback functions...">HttpServer</a> so the control point can receive HTTP NOTIFY event messages. This registers a handler at the configured local URL path (see <code>local_url</code>) which will extract the SID header and body and call parseAndDispatchEvent() to dispatch property changes. </p>
 
 </div>
 </div>
@@ -1051,6 +1050,123 @@ xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n" "s:encodingStyle=\"ht
 
 </div>
 </div>
+<a id="a184421d123fed36f9b5fe95bd7e562da" name="a184421d123fed36f9b5fe95bd7e562da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a184421d123fed36f9b5fe95bd7e562da">&#9670;&#160;</a></span>notifyHandler()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void tiny_dlna::DLNAControlPoint::notifyHandler </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> *&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>requestPath</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1HttpRequestHandlerLine.html">HttpRequestHandlerLine</a> *&#160;</td>
+          <td class="paramname"><em>hl</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Static HTTP handler for incoming NOTIFY event callbacks. The <a class="el" href="classtiny__dlna_1_1HttpServer.html" title="A Simple Header only implementation of Http Server that allows the registration of callback functions...">HttpServer</a> will pass the control point instance as context[0] so we can retrieve the instance and forward the event to parseAndDispatchEvent(). </p>
+<p>Parse body</p>
+<p>Activate callback</p>
+
+</div>
+</div>
+<a id="ab013ca8dbcf5e61b37681bf9729172b2" name="ab013ca8dbcf5e61b37681bf9729172b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab013ca8dbcf5e61b37681bf9729172b2">&#9670;&#160;</a></span>nullStr() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char * tiny_dlna::DLNAControlPoint::nullStr </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>str</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>empty</em> = <code>&quot;(null)&quot;</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0dc7dd2de4c8bae0c37a4011b18b9f24" name="a0dc7dd2de4c8bae0c37a4011b18b9f24"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0dc7dd2de4c8bae0c37a4011b18b9f24">&#9670;&#160;</a></span>nullStr() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char * tiny_dlna::DLNAControlPoint::nullStr </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1Str.html">Str</a> &amp;&#160;</td>
+          <td class="paramname"><em>str</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>empty</em> = <code>&quot;(null)&quot;</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="ac2c0bcf61eb407a9018f1990d9dcd9aa" name="ac2c0bcf61eb407a9018f1990d9dcd9aa"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac2c0bcf61eb407a9018f1990d9dcd9aa">&#9670;&#160;</a></span>onNotification()</h2>
 
@@ -1102,35 +1218,8 @@ xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n" "s:encodingStyle=\"ht
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Register a callback that will be invoked when parsing SOAP/Action results Signature: void(const char* nodeName, const char* text, const char* attributes) </p>
-
-</div>
-</div>
-<a id="ac0b018f493059737a8adf990ab68254c" name="ac0b018f493059737a8adf990ab68254c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac0b018f493059737a8adf990ab68254c">&#9670;&#160;</a></span>parseAndDispatchEvent()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void tiny_dlna::DLNAControlPoint::parseAndDispatchEvent </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1NotifyReplyCP.html">NotifyReplyCP</a> &amp;&#160;</td>
-          <td class="paramname"><em>data</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Parse the xml content of a <a class="el" href="classtiny__dlna_1_1NotifyReplyCP.html" title="Represents a notification/notify reply scheduled for control-point processing.">NotifyReplyCP</a> and dispatch each property. </p>
+<p>Register a callback that will be invoked when parsing SOAP/Action results Signature: void(const char* nodeName, const char* text, const char*
+attributes) </p>
 
 </div>
 </div>
@@ -1516,8 +1605,8 @@ xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n" "s:encodingStyle=\"ht
 
 </div>
 </div>
-<a id="a77fd9a373617719c87c8e58f3a7e35a0" name="a77fd9a373617719c87c8e58f3a7e35a0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a77fd9a373617719c87c8e58f3a7e35a0">&#9670;&#160;</a></span>subscribeNotifications() <span class="overload">[1/2]</span></h2>
+<a id="a27cb0e646f820cbc118f806104ba7c44" name="a27cb0e646f820cbc118f806104ba7c44"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a27cb0e646f820cbc118f806104ba7c44">&#9670;&#160;</a></span>subscribeNotifications() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1535,7 +1624,7 @@ xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n" "s:encodingStyle=\"ht
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>timeoutSeconds</em> = <code>60</code>&#160;</td>
+          <td class="paramname"><em>timeoutSeconds</em> = <code>1800</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1554,8 +1643,8 @@ xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n" "s:encodingStyle=\"ht
 
 </div>
 </div>
-<a id="a5df16a69396d925782a0d357fcff41d6" name="a5df16a69396d925782a0d357fcff41d6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5df16a69396d925782a0d357fcff41d6">&#9670;&#160;</a></span>subscribeNotifications() <span class="overload">[2/2]</span></h2>
+<a id="aea7b42e380e37a38518b1395da5776d7" name="aea7b42e380e37a38518b1395da5776d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aea7b42e380e37a38518b1395da5776d7">&#9670;&#160;</a></span>subscribeNotifications() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1573,7 +1662,7 @@ xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n" "s:encodingStyle=\"ht
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>timoutSeconds</em> = <code>60</code>&#160;</td>
+          <td class="paramname"><em>timoutSeconds</em> = <code>1800</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1589,78 +1678,6 @@ xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n" "s:encodingStyle=\"ht
 </div><div class="memdoc">
 
 <p>Subscribe to changes for defined device service. </p>
-
-</div>
-</div>
-<a id="a385e8e719df4cfb663779b2d1761c6f5" name="a385e8e719df4cfb663779b2d1761c6f5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a385e8e719df4cfb663779b2d1761c6f5">&#9670;&#160;</a></span>toStr() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const char * tiny_dlna::DLNAControlPoint::toStr </td>
-          <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>str</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>empty</em> = <code>&quot;(null)&quot;</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ad7e3d3330c28ab99bdec49fb5511f395" name="ad7e3d3330c28ab99bdec49fb5511f395"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad7e3d3330c28ab99bdec49fb5511f395">&#9670;&#160;</a></span>toStr() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const char * tiny_dlna::DLNAControlPoint::toStr </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1Str.html">Str</a> &amp;&#160;</td>
-          <td class="paramname"><em>str</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>empty</em> = <code>&quot;(null)&quot;</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
 
 </div>
 </div>
