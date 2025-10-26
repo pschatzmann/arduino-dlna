@@ -38,7 +38,7 @@ class HttpRequest {
   // the requests usually need a host. This needs to be set if we did not
   // provide a URL
   void setHost(const char *host) {
-    DlnaLogger.log(DlnaLogLevel::Info, "setHost", host);
+    DlnaLogger.log(DlnaLogLevel::Info, "HttpRequest::setHost: ", host);
     this->host_name = host;
   }
 
@@ -54,7 +54,7 @@ class HttpRequest {
   }
 
   virtual void stop() {
-    DlnaLogger.log(DlnaLogLevel::Info, "stop");
+    DlnaLogger.log(DlnaLogLevel::Info, "HttpRequest::stop");
     client_ptr->stop();
   }
 
@@ -148,7 +148,7 @@ class HttpRequest {
 
   // opens a connection to the indicated host
   virtual int connect(const char *ip, uint16_t port) {
-    DlnaLogger.log(DlnaLogLevel::Info, "connect %s", ip);
+    DlnaLogger.log(DlnaLogLevel::Info, "HttpRequest::connect %s", ip);
     int rc = this->client_ptr->connect(ip, port);
     uint64_t end = millis() + client_ptr->getTimeout();
     DlnaLogger.log(DlnaLogLevel::Info, "Connected: %s (rc=%d) with timeout %ld",
