@@ -134,8 +134,8 @@ Collaboration diagram for tiny_dlna::ControlPointMediaServer:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a36eae88aa73203569e54b03b85f994e9"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1ControlPointMediaServer.html#a36eae88aa73203569e54b03b85f994e9">ItemCallback</a>) (const <a class="el" href="structtiny__dlna_1_1MediaItem.html">MediaItem</a> &amp;item, void *ref)</td></tr>
-<tr class="separator:a36eae88aa73203569e54b03b85f994e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a235d9cbe1ba015e8d64622fe41df17c5"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1ControlPointMediaServer.html#a235d9cbe1ba015e8d64622fe41df17c5">XMLCallback</a>) (const char *name, const char *test, const char *attributes)</td></tr>
+<tr class="separator:a235d9cbe1ba015e8d64622fe41df17c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4876165c84594e64b7b5cb37d9575a3c"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1ControlPointMediaServer.html#a4876165c84594e64b7b5cb37d9575a3c">NotificationCallback</a>) (void *<a class="el" href="classtiny__dlna_1_1ControlPointMediaServer.html#a7bf9c2dd8e8648f787c24b217ec56a8e">reference</a>, const char *sid, const char *varName, const char *newValue)</td></tr>
 <tr class="separator:a4876165c84594e64b7b5cb37d9575a3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -165,9 +165,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aacb7792bef485353b5b2bf849a8c7c0b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1ControlPointMediaServer.html#aacb7792bef485353b5b2bf849a8c7c0b">setReference</a> (void *ref)</td></tr>
 <tr class="memdesc:aacb7792bef485353b5b2bf849a8c7c0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attach an opaque reference pointer passed to callbacks.  <br /></td></tr>
 <tr class="separator:aacb7792bef485353b5b2bf849a8c7c0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa61b5e348fe9d64ffc020d0f634b24d4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1ControlPointMediaServer.html#aa61b5e348fe9d64ffc020d0f634b24d4">browse</a> (int startingIndex, int requestedCount, <a class="el" href="classtiny__dlna_1_1ControlPointMediaServer.html#a36eae88aa73203569e54b03b85f994e9">ItemCallback</a> itemCallback, int &amp;numberReturned, int &amp;totalMatches, int &amp;updateID, const char *browseFlag=nullptr)</td></tr>
-<tr class="memdesc:aa61b5e348fe9d64ffc020d0f634b24d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Browse the given object_id and invoke callback for each returned item.  <br /></td></tr>
-<tr class="separator:aa61b5e348fe9d64ffc020d0f634b24d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c0179751115a41827292877e0038eda"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1ControlPointMediaServer.html#a4c0179751115a41827292877e0038eda">browse</a> (int startingIndex, int requestedCount, <a class="el" href="classtiny__dlna_1_1ControlPointMediaServer.html#a235d9cbe1ba015e8d64622fe41df17c5">XMLCallback</a> <a class="el" href="classtiny__dlna_1_1ControlPointMediaServer.html#a235d9cbe1ba015e8d64622fe41df17c5">XMLCallback</a>, int &amp;numberReturned, int &amp;totalMatches, int &amp;updateID, const char *browseFlag=nullptr)</td></tr>
+<tr class="memdesc:a4c0179751115a41827292877e0038eda"><td class="mdescLeft">&#160;</td><td class="mdescRight">Browse the given object_id and invoke callback for each returned xml element.  <br /></td></tr>
+<tr class="separator:a4c0179751115a41827292877e0038eda"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5804084b3bd4e7e5973a64c435089fb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1ControlPointMediaServer.html#af5804084b3bd4e7e5973a64c435089fb">search</a> (const char *searchCriteria, int startingIndex, int requestedCount, <a class="el" href="classtiny__dlna_1_1ControlPointMediaServer.html#a235d9cbe1ba015e8d64622fe41df17c5">XMLCallback</a> <a class="el" href="classtiny__dlna_1_1ControlPointMediaServer.html#a235d9cbe1ba015e8d64622fe41df17c5">XMLCallback</a>, int &amp;numberReturned, int &amp;totalMatches, int &amp;updateID, const char *filter=&quot;&quot;, const char *sortCriteria=&quot;&quot;)</td></tr>
+<tr class="memdesc:af5804084b3bd4e7e5973a64c435089fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Search the ContentDirectory using SearchCriteria and invoke callback for each returned xml element.  <br /></td></tr>
+<tr class="separator:af5804084b3bd4e7e5973a64c435089fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a502e93f53989f6cfb25209df2738d345"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1ControlPointMediaServer.html#a502e93f53989f6cfb25209df2738d345">getSystemUpdateID</a> ()</td></tr>
 <tr class="memdesc:a502e93f53989f6cfb25209df2738d345"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get current SystemUpdateID for the ContentDirectory.  <br /></td></tr>
 <tr class="separator:a502e93f53989f6cfb25209df2738d345"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -197,12 +200,12 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a07f831b7c0d9dabf220f6dea0ff48b54"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1ControlPointMediaServer.html#a07f831b7c0d9dabf220f6dea0ff48b54">createBrowseAction</a> (<a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html">DLNAServiceInfo</a> &amp;svc, const char *browseFlag, int startingIndex, int requestedCount)</td></tr>
 <tr class="memdesc:a07f831b7c0d9dabf220f6dea0ff48b54"><td class="mdescLeft">&#160;</td><td class="mdescRight">Build a Browse <a class="el" href="classtiny__dlna_1_1ActionRequest.html" title="Represents a request to invoke a remote DLNA service action.">ActionRequest</a>.  <br /></td></tr>
 <tr class="separator:a07f831b7c0d9dabf220f6dea0ff48b54"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71e8c9a136403015d1e3145053e659ca"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1ControlPointMediaServer.html#a71e8c9a136403015d1e3145053e659ca">createSearchAction</a> (<a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html">DLNAServiceInfo</a> &amp;svc, const char *searchCriteria, const char *filter, int startingIndex, int requestedCount, const char *sortCriteria)</td></tr>
+<tr class="memdesc:a71e8c9a136403015d1e3145053e659ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Build a Search <a class="el" href="classtiny__dlna_1_1ActionRequest.html" title="Represents a request to invoke a remote DLNA service action.">ActionRequest</a>.  <br /></td></tr>
+<tr class="separator:a71e8c9a136403015d1e3145053e659ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8283e138b8ba418d5e059cbd2d36336a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1ControlPointMediaServer.html#a8283e138b8ba418d5e059cbd2d36336a">parseNumericFields</a> (<a class="el" href="classtiny__dlna_1_1ActionReply.html">ActionReply</a> &amp;reply, int &amp;numberReturned, int &amp;totalMatches, int &amp;updateID)</td></tr>
 <tr class="memdesc:a8283e138b8ba418d5e059cbd2d36336a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parse numeric result fields from an <a class="el" href="classtiny__dlna_1_1ActionReply.html" title="Represents the result of invoking a DLNA service Action.">ActionReply</a>.  <br /></td></tr>
 <tr class="separator:a8283e138b8ba418d5e059cbd2d36336a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae7a0ad1098012de3463434cd3ece316f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1ControlPointMediaServer.html#ae7a0ad1098012de3463434cd3ece316f">processResult</a> (const char *resultXml, <a class="el" href="classtiny__dlna_1_1ControlPointMediaServer.html#a36eae88aa73203569e54b03b85f994e9">ItemCallback</a> itemCallback)</td></tr>
-<tr class="memdesc:ae7a0ad1098012de3463434cd3ece316f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parse DIDL-Lite Result and invoke callback for each item.  <br /></td></tr>
-<tr class="separator:ae7a0ad1098012de3463434cd3ece316f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
 Static Protected Member Functions</h2></td></tr>
@@ -233,20 +236,6 @@ Protected Attributes</h2></td></tr>
 <div class="textblock"><p>Helper class to control/query a <a class="el" href="classtiny__dlna_1_1MediaServer.html" title="Minimal Digital Media Server implementation.">MediaServer</a> from a control point. </p>
 <p>Provides convenient wrappers around common ContentDirectory and ConnectionManager actions (Browse, GetSystemUpdateID, GetSearchCapabilities, GetProtocolInfo). Methods are synchronous and return boolean success or populate output parameters. </p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
-<a id="a36eae88aa73203569e54b03b85f994e9" name="a36eae88aa73203569e54b03b85f994e9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a36eae88aa73203569e54b03b85f994e9">&#9670;&#160;</a></span>ItemCallback</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef void(* tiny_dlna::ControlPointMediaServer::ItemCallback) (const <a class="el" href="structtiny__dlna_1_1MediaItem.html">MediaItem</a> &amp;item, void *ref)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="a4876165c84594e64b7b5cb37d9575a3c" name="a4876165c84594e64b7b5cb37d9575a3c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4876165c84594e64b7b5cb37d9575a3c">&#9670;&#160;</a></span>NotificationCallback</h2>
 
@@ -255,6 +244,20 @@ Protected Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">typedef void(* tiny_dlna::ControlPointMediaServer::NotificationCallback) (void *<a class="el" href="classtiny__dlna_1_1ControlPointMediaServer.html#a7bf9c2dd8e8648f787c24b217ec56a8e">reference</a>, const char *sid, const char *varName, const char *newValue)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a235d9cbe1ba015e8d64622fe41df17c5" name="a235d9cbe1ba015e8d64622fe41df17c5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a235d9cbe1ba015e8d64622fe41df17c5">&#9670;&#160;</a></span>XMLCallback</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef void(* tiny_dlna::ControlPointMediaServer::XMLCallback) (const char *name, const char *test, const char *attributes)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -357,8 +360,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="aa61b5e348fe9d64ffc020d0f634b24d4" name="aa61b5e348fe9d64ffc020d0f634b24d4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa61b5e348fe9d64ffc020d0f634b24d4">&#9670;&#160;</a></span>browse()</h2>
+<a id="a4c0179751115a41827292877e0038eda" name="a4c0179751115a41827292877e0038eda"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c0179751115a41827292877e0038eda">&#9670;&#160;</a></span>browse()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -381,8 +384,8 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1ControlPointMediaServer.html#a36eae88aa73203569e54b03b85f994e9">ItemCallback</a>&#160;</td>
-          <td class="paramname"><em>itemCallback</em>, </td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1ControlPointMediaServer.html#a235d9cbe1ba015e8d64622fe41df17c5">XMLCallback</a>&#160;</td>
+          <td class="paramname"><em>XMLCallback</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -421,12 +424,12 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Browse the given object_id and invoke callback for each returned item. </p>
+<p>Browse the given object_id and invoke callback for each returned xml element. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">startingIndex</td><td>Starting index for the browse request </td></tr>
     <tr><td class="paramname">requestedCount</td><td>Number of items requested </td></tr>
-    <tr><td class="paramname">itemCallback</td><td>Callback invoked per <a class="el" href="structtiny__dlna_1_1MediaItem.html" title="Media item description used to build DIDL-Lite entries.">MediaItem</a> result (may be nullptr) </td></tr>
+    <tr><td class="paramname">XMLCallback</td><td>Callback invoked per <a class="el" href="structtiny__dlna_1_1MediaItem.html" title="Media item description used to build DIDL-Lite entries.">MediaItem</a> result (may be nullptr) </td></tr>
     <tr><td class="paramname">numberReturned</td><td>Output: number of items returned by server </td></tr>
     <tr><td class="paramname">totalMatches</td><td>Output: total matches available on server </td></tr>
     <tr><td class="paramname">updateID</td><td>Output: server UpdateID </td></tr>
@@ -486,6 +489,68 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Build a Browse <a class="el" href="classtiny__dlna_1_1ActionRequest.html" title="Represents a request to invoke a remote DLNA service action.">ActionRequest</a>. </p>
+
+</div>
+</div>
+<a id="a71e8c9a136403015d1e3145053e659ca" name="a71e8c9a136403015d1e3145053e659ca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a71e8c9a136403015d1e3145053e659ca">&#9670;&#160;</a></span>createSearchAction()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp; tiny_dlna::ControlPointMediaServer::createSearchAction </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html">DLNAServiceInfo</a> &amp;&#160;</td>
+          <td class="paramname"><em>svc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>searchCriteria</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>filter</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>startingIndex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>requestedCount</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>sortCriteria</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Build a Search <a class="el" href="classtiny__dlna_1_1ActionRequest.html" title="Represents a request to invoke a remote DLNA service action.">ActionRequest</a>. </p>
 
 </div>
 </div>
@@ -821,8 +886,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ae7a0ad1098012de3463434cd3ece316f" name="ae7a0ad1098012de3463434cd3ece316f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae7a0ad1098012de3463434cd3ece316f">&#9670;&#160;</a></span>processResult()</h2>
+<a id="af5804084b3bd4e7e5973a64c435089fb" name="af5804084b3bd4e7e5973a64c435089fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af5804084b3bd4e7e5973a64c435089fb">&#9670;&#160;</a></span>search()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -831,16 +896,58 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void tiny_dlna::ControlPointMediaServer::processResult </td>
+          <td class="memname">bool tiny_dlna::ControlPointMediaServer::search </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>resultXml</em>, </td>
+          <td class="paramname"><em>searchCriteria</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1ControlPointMediaServer.html#a36eae88aa73203569e54b03b85f994e9">ItemCallback</a>&#160;</td>
-          <td class="paramname"><em>itemCallback</em>&#160;</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>startingIndex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>requestedCount</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1ControlPointMediaServer.html#a235d9cbe1ba015e8d64622fe41df17c5">XMLCallback</a>&#160;</td>
+          <td class="paramname"><em>XMLCallback</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int &amp;&#160;</td>
+          <td class="paramname"><em>numberReturned</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int &amp;&#160;</td>
+          <td class="paramname"><em>totalMatches</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int &amp;&#160;</td>
+          <td class="paramname"><em>updateID</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>filter</em> = <code>&quot;&quot;</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>sortCriteria</em> = <code>&quot;&quot;</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -850,12 +957,27 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Parse DIDL-Lite Result and invoke callback for each item. </p>
+<p>Search the ContentDirectory using SearchCriteria and invoke callback for each returned xml element. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">searchCriteria</td><td>Search criteria string as defined by ContentDirectory </td></tr>
+    <tr><td class="paramname">startingIndex</td><td>Starting index for the search request </td></tr>
+    <tr><td class="paramname">requestedCount</td><td>Number of items requested </td></tr>
+    <tr><td class="paramname">XMLCallback</td><td>Callback invoked per <a class="el" href="structtiny__dlna_1_1MediaItem.html" title="Media item description used to build DIDL-Lite entries.">MediaItem</a> result (may be nullptr) </td></tr>
+    <tr><td class="paramname">numberReturned</td><td>Output: number of items returned by server </td></tr>
+    <tr><td class="paramname">totalMatches</td><td>Output: total matches available on server </td></tr>
+    <tr><td class="paramname">updateID</td><td>Output: server UpdateID </td></tr>
+    <tr><td class="paramname">filter</td><td>Optional Filter argument (defaults to empty string) </td></tr>
+    <tr><td class="paramname">sortCriteria</td><td>Optional SortCriteria (defaults to empty string) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true on success, false on error </dd></dl>
 
 </div>
 </div>

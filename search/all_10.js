@@ -43,11 +43,12 @@ var searchData=
   ['resize_5finternal_40',['resize_internal',['../classtiny__dlna_1_1Vector.html#a0df8f9e7a4b2e79bb787dabb563ae10f',1,'tiny_dlna::Vector']]],
   ['resolverewrite_41',['resolveRewrite',['../classtiny__dlna_1_1HttpServer.html#aecc1eae11fb9a8a8bc765cb03e048bd6',1,'tiny_dlna::HttpServer']]],
   ['restricted_42',['restricted',['../structtiny__dlna_1_1MediaItem.html#a5daaa997d5d5af02e0af630174f7f50c',1,'tiny_dlna::MediaItem']]],
-  ['result_5fcount_43',['result_count',['../classtiny__dlna_1_1ActionRequest.html#a7e55f9b4b0ec5e86478d30aae5f5dd94',1,'tiny_dlna::ActionRequest']]],
-  ['reverse_44',['reverse',['../classtiny__dlna_1_1StrView.html#abd4430a5e5ec4f9220fbb52261e660b7',1,'tiny_dlna::StrView']]],
-  ['rewrite_45',['rewrite',['../classtiny__dlna_1_1HttpServer.html#ac31fcdd40df8ab8d64ae60efc96b6f55',1,'tiny_dlna::HttpServer']]],
-  ['rewrite_5fcollection_46',['rewrite_collection',['../classtiny__dlna_1_1HttpServer.html#a207ba896655c9c92ea1df450a5eb97a7',1,'tiny_dlna::HttpServer']]],
-  ['ringbuffer_47',['RingBuffer',['../classtiny__dlna_1_1RingBuffer.html#a1d5b85e6e7051598879c2b70961cd434',1,'tiny_dlna::RingBuffer::RingBuffer()'],['../classtiny__dlna_1_1RingBuffer.html',1,'tiny_dlna::RingBuffer']]],
-  ['ringbuffer_2eh_48',['RingBuffer.h',['../RingBuffer_8h.html',1,'']]],
-  ['rtrim_49',['rtrim',['../classtiny__dlna_1_1StrView.html#ae5ebc511810bb75b46647670292e33e6',1,'tiny_dlna::StrView']]]
+  ['result_5fcallback_43',['result_callback',['../classtiny__dlna_1_1DLNAControlPoint.html#aad13d3f06512b8a66acf0043b0c5be18',1,'tiny_dlna::DLNAControlPoint']]],
+  ['result_5fcount_44',['result_count',['../classtiny__dlna_1_1ActionRequest.html#a7e55f9b4b0ec5e86478d30aae5f5dd94',1,'tiny_dlna::ActionRequest']]],
+  ['reverse_45',['reverse',['../classtiny__dlna_1_1StrView.html#abd4430a5e5ec4f9220fbb52261e660b7',1,'tiny_dlna::StrView']]],
+  ['rewrite_46',['rewrite',['../classtiny__dlna_1_1HttpServer.html#ac31fcdd40df8ab8d64ae60efc96b6f55',1,'tiny_dlna::HttpServer']]],
+  ['rewrite_5fcollection_47',['rewrite_collection',['../classtiny__dlna_1_1HttpServer.html#a207ba896655c9c92ea1df450a5eb97a7',1,'tiny_dlna::HttpServer']]],
+  ['ringbuffer_48',['RingBuffer',['../classtiny__dlna_1_1RingBuffer.html#a1d5b85e6e7051598879c2b70961cd434',1,'tiny_dlna::RingBuffer::RingBuffer()'],['../classtiny__dlna_1_1RingBuffer.html',1,'tiny_dlna::RingBuffer']]],
+  ['ringbuffer_2eh_49',['RingBuffer.h',['../RingBuffer_8h.html',1,'']]],
+  ['rtrim_50',['rtrim',['../classtiny__dlna_1_1StrView.html#ae5ebc511810bb75b46647670292e33e6',1,'tiny_dlna::StrView']]]
 ];

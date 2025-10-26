@@ -27,7 +27,7 @@ var searchData=
   ['toint_24',['toInt',['../classtiny__dlna_1_1StrView.html#a5d0106fca19f46ae400a0e1c57f5ccf4',1,'tiny_dlna::StrView']]],
   ['tolong_25',['toLong',['../classtiny__dlna_1_1StrView.html#a1f9b02a605f1c7d62842d5c5ae5b03f8',1,'tiny_dlna::StrView']]],
   ['tolowercase_26',['toLowerCase',['../classtiny__dlna_1_1StrView.html#aaf82fe261dd3bf9f1a6464c3ef7bd5f4',1,'tiny_dlna::StrView']]],
-  ['tostr_27',['toStr',['../classtiny__dlna_1_1DLNAControlPoint.html#a1acaefef6a1dfbff0d3ae1f0c638215f',1,'tiny_dlna::DLNAControlPoint::toStr(Str &amp;str)'],['../classtiny__dlna_1_1DLNAControlPoint.html#a3d3585cb6c9742101a964e73a77a05ef',1,'tiny_dlna::DLNAControlPoint::toStr(const char *str)']]],
+  ['tostr_27',['toStr',['../classtiny__dlna_1_1DLNAControlPoint.html#ad7e3d3330c28ab99bdec49fb5511f395',1,'tiny_dlna::DLNAControlPoint::toStr(Str &amp;str, const char *empty=&quot;(null)&quot;)'],['../classtiny__dlna_1_1DLNAControlPoint.html#a385e8e719df4cfb663779b2d1761c6f5',1,'tiny_dlna::DLNAControlPoint::toStr(const char *str, const char *empty=&quot;(null)&quot;)']]],
   ['tostring_28',['toString',['../structtiny__dlna_1_1IPAddressAndPort.html#a03dafeafa067fa880a6a1d05d8c748e1',1,'tiny_dlna::IPAddressAndPort']]],
   ['touppercase_29',['toUpperCase',['../classtiny__dlna_1_1StrView.html#afddb2b1aff609ff143a4d4bd99d38c9d',1,'tiny_dlna::StrView']]],
   ['transfer_5fencoding_30',['TRANSFER_ENCODING',['../namespacetiny__dlna.html#a9e5bb9ed1bd94ec887fded9c383b60ca',1,'tiny_dlna']]],

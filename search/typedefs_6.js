@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['preparedatacallback_0',['PrepareDataCallback',['../classtiny__dlna_1_1MediaServer.html#a3cb63e00013e8e61b9d4c71655a0a7c2',1,'tiny_dlna::MediaServer']]]
+  ['web_5fcallback_5ffn_0',['web_callback_fn',['../namespacetiny__dlna.html#a575a263fd75f2731f40accf7fa73dafe',1,'tiny_dlna']]]
 ];

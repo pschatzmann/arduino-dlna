@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['itemcallback_0',['ItemCallback',['../classtiny__dlna_1_1ControlPointMediaServer.html#a36eae88aa73203569e54b03b85f994e9',1,'tiny_dlna::ControlPointMediaServer']]]
+  ['mediaeventhandler_0',['MediaEventHandler',['../classtiny__dlna_1_1MediaRenderer.html#a294fa123b0e637a58c5a28693c301ddc',1,'tiny_dlna::MediaRenderer']]]
 ];

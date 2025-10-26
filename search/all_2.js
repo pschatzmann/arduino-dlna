@@ -51,10 +51,11 @@ var searchData=
   ['createarray_48',['createArray',['../classtiny__dlna_1_1Allocator.html#adb33f1e134011c74aa522015a698aaee',1,'tiny_dlna::Allocator']]],
   ['createbrowseaction_49',['createBrowseAction',['../classtiny__dlna_1_1ControlPointMediaServer.html#a07f831b7c0d9dabf220f6dea0ff48b54',1,'tiny_dlna::ControlPointMediaServer']]],
   ['createnode_50',['createNode',['../classtiny__dlna_1_1List.html#a2fbf0414b947fbbd3e0e090b61255731',1,'tiny_dlna::List']]],
-  ['createxml_51',['createXML',['../classtiny__dlna_1_1DLNAControlPoint.html#a264865ba29d1d52b546bac2ed3c6d392',1,'tiny_dlna::DLNAControlPoint']]],
-  ['crlf_52',['crlf',['../classtiny__dlna_1_1HttpHeader.html#a60f18f92f996799ea4b6cc6b642bac84',1,'tiny_dlna::HttpHeader::crlf()'],['../classtiny__dlna_1_1HttpServer.html#ab54de9871805f143d7637ccdc2ed27b7',1,'tiny_dlna::HttpServer::crlf()']]],
-  ['crlf_53',['CRLF',['../classtiny__dlna_1_1HttpHeader.html#a3abc5c74c6a9c503c58b8cdfe00e657e',1,'tiny_dlna::HttpHeader']]],
-  ['current_5fmime_54',['current_mime',['../classtiny__dlna_1_1MediaRenderer.html#a1588cd23cb751e64ce2904177ac463f8',1,'tiny_dlna::MediaRenderer']]],
-  ['current_5furi_55',['current_uri',['../classtiny__dlna_1_1MediaRenderer.html#a1dc47b4c835b1bb6fd9368ced2b87f4b',1,'tiny_dlna::MediaRenderer']]],
-  ['current_5fvolume_56',['current_volume',['../classtiny__dlna_1_1MediaRenderer.html#a973c4d0e814332c99d3537c8890e2b7d',1,'tiny_dlna::MediaRenderer']]]
+  ['createsearchaction_51',['createSearchAction',['../classtiny__dlna_1_1ControlPointMediaServer.html#a71e8c9a136403015d1e3145053e659ca',1,'tiny_dlna::ControlPointMediaServer']]],
+  ['createxml_52',['createXML',['../classtiny__dlna_1_1DLNAControlPoint.html#a264865ba29d1d52b546bac2ed3c6d392',1,'tiny_dlna::DLNAControlPoint']]],
+  ['crlf_53',['crlf',['../classtiny__dlna_1_1HttpHeader.html#a60f18f92f996799ea4b6cc6b642bac84',1,'tiny_dlna::HttpHeader::crlf()'],['../classtiny__dlna_1_1HttpServer.html#ab54de9871805f143d7637ccdc2ed27b7',1,'tiny_dlna::HttpServer::crlf()']]],
+  ['crlf_54',['CRLF',['../classtiny__dlna_1_1HttpHeader.html#a3abc5c74c6a9c503c58b8cdfe00e657e',1,'tiny_dlna::HttpHeader']]],
+  ['current_5fmime_55',['current_mime',['../classtiny__dlna_1_1MediaRenderer.html#a1588cd23cb751e64ce2904177ac463f8',1,'tiny_dlna::MediaRenderer']]],
+  ['current_5furi_56',['current_uri',['../classtiny__dlna_1_1MediaRenderer.html#a1dc47b4c835b1bb6fd9368ced2b87f4b',1,'tiny_dlna::MediaRenderer']]],
+  ['current_5fvolume_57',['current_volume',['../classtiny__dlna_1_1MediaRenderer.html#a973c4d0e814332c99d3537c8890e2b7d',1,'tiny_dlna::MediaRenderer']]]
 ];
