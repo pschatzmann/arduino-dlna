@@ -132,47 +132,41 @@ static void mr_control_xml_printer(Print& out) {
 
   xml.printNodeBeginNl("actionList");
 
-  auto arg = [&](const char* n, const char* dir, const char* rel) {
-    xml.printNodeBeginNl("argument");
-    xml.printNode("name", n);
-    xml.printNode("direction", dir);
-    xml.printNode("relatedStateVariable", rel);
-    xml.printNodeEnd("argument");
-  };
+  // use xml.printArgument(name, direction, relatedStateVariable)
 
   xml.printNodeBeginNl("action");
   xml.printNode("name", "GetVolume");
   xml.printNodeBeginNl("argumentList");
-  arg("InstanceID", "in", "A_ARG_TYPE_InstanceID");
-  arg("Channel", "in", "A_ARG_TYPE_Channel");
-  arg("CurrentVolume", "out", "Volume");
+  xml.printArgument("InstanceID", "in", "A_ARG_TYPE_InstanceID");
+  xml.printArgument("Channel", "in", "A_ARG_TYPE_Channel");
+  xml.printArgument("CurrentVolume", "out", "Volume");
   xml.printNodeEnd("argumentList");
   xml.printNodeEnd("action");
 
   xml.printNodeBeginNl("action");
   xml.printNode("name", "SetVolume");
   xml.printNodeBeginNl("argumentList");
-  arg("InstanceID", "in", "A_ARG_TYPE_InstanceID");
-  arg("Channel", "in", "A_ARG_TYPE_Channel");
-  arg("DesiredVolume", "in", "Volume");
+  xml.printArgument("InstanceID", "in", "A_ARG_TYPE_InstanceID");
+  xml.printArgument("Channel", "in", "A_ARG_TYPE_Channel");
+  xml.printArgument("DesiredVolume", "in", "Volume");
   xml.printNodeEnd("argumentList");
   xml.printNodeEnd("action");
 
   xml.printNodeBeginNl("action");
   xml.printNode("name", "GetMute");
   xml.printNodeBeginNl("argumentList");
-  arg("InstanceID", "in", "A_ARG_TYPE_InstanceID");
-  arg("Channel", "in", "A_ARG_TYPE_Channel");
-  arg("CurrentMute", "out", "Mute");
+  xml.printArgument("InstanceID", "in", "A_ARG_TYPE_InstanceID");
+  xml.printArgument("Channel", "in", "A_ARG_TYPE_Channel");
+  xml.printArgument("CurrentMute", "out", "Mute");
   xml.printNodeEnd("argumentList");
   xml.printNodeEnd("action");
 
   xml.printNodeBeginNl("action");
   xml.printNode("name", "SetMute");
   xml.printNodeBeginNl("argumentList");
-  arg("InstanceID", "in", "A_ARG_TYPE_InstanceID");
-  arg("Channel", "in", "A_ARG_TYPE_Channel");
-  arg("DesiredMute", "in", "Mute");
+  xml.printArgument("InstanceID", "in", "A_ARG_TYPE_InstanceID");
+  xml.printArgument("Channel", "in", "A_ARG_TYPE_Channel");
+  xml.printArgument("DesiredMute", "in", "Mute");
   xml.printNodeEnd("argumentList");
   xml.printNodeEnd("action");
 

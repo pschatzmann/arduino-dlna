@@ -146,52 +146,46 @@ static void mr_transport_xml_printer(Print& out) {
 
   xml.printNodeBeginNl("actionList");
 
-  auto arg = [&](const char* n, const char* dir, const char* rel) {
-    xml.printNodeBeginNl("argument");
-    xml.printNode("name", n);
-    xml.printNode("direction", dir);
-    xml.printNode("relatedStateVariable", rel);
-    xml.printNodeEnd("argument");
-  };
+  // use xml.printArgument(name, direction, relatedStateVariable)
 
   xml.printNodeBeginNl("action");
   xml.printNode("name", "SetAVTransportURI");
   xml.printNodeBeginNl("argumentList");
-  arg("InstanceID", "in", "A_ARG_TYPE_InstanceID");
-  arg("CurrentURI", "in", "AVTransportURI");
-  arg("CurrentURIMetaData", "in", "AVTransportURIMetaData");
+  xml.printArgument("InstanceID", "in", "A_ARG_TYPE_InstanceID");
+  xml.printArgument("CurrentURI", "in", "AVTransportURI");
+  xml.printArgument("CurrentURIMetaData", "in", "AVTransportURIMetaData");
   xml.printNodeEnd("argumentList");
   xml.printNodeEnd("action");
 
   xml.printNodeBeginNl("action");
   xml.printNode("name", "Play");
   xml.printNodeBeginNl("argumentList");
-  arg("InstanceID", "in", "A_ARG_TYPE_InstanceID");
-  arg("Speed", "in", "TransportPlaySpeed");
+  xml.printArgument("InstanceID", "in", "A_ARG_TYPE_InstanceID");
+  xml.printArgument("Speed", "in", "TransportPlaySpeed");
   xml.printNodeEnd("argumentList");
   xml.printNodeEnd("action");
 
   xml.printNodeBeginNl("action");
   xml.printNode("name", "Pause");
   xml.printNodeBeginNl("argumentList");
-  arg("InstanceID", "in", "A_ARG_TYPE_InstanceID");
+  xml.printArgument("InstanceID", "in", "A_ARG_TYPE_InstanceID");
   xml.printNodeEnd("argumentList");
   xml.printNodeEnd("action");
 
   xml.printNodeBeginNl("action");
   xml.printNode("name", "Stop");
   xml.printNodeBeginNl("argumentList");
-  arg("InstanceID", "in", "A_ARG_TYPE_InstanceID");
+  xml.printArgument("InstanceID", "in", "A_ARG_TYPE_InstanceID");
   xml.printNodeEnd("argumentList");
   xml.printNodeEnd("action");
 
   xml.printNodeBeginNl("action");
   xml.printNode("name", "GetTransportInfo");
   xml.printNodeBeginNl("argumentList");
-  arg("InstanceID", "in", "A_ARG_TYPE_InstanceID");
-  arg("CurrentTransportState", "out", "TransportState");
-  arg("CurrentTransportStatus", "out", "TransportStatus");
-  arg("CurrentSpeed", "out", "TransportPlaySpeed");
+  xml.printArgument("InstanceID", "in", "A_ARG_TYPE_InstanceID");
+  xml.printArgument("CurrentTransportState", "out", "TransportState");
+  xml.printArgument("CurrentTransportStatus", "out", "TransportStatus");
+  xml.printArgument("CurrentSpeed", "out", "TransportPlaySpeed");
   xml.printNodeEnd("argumentList");
   xml.printNodeEnd("action");
 

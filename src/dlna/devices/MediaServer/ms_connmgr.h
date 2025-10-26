@@ -189,71 +189,52 @@ static void ms_connmgr_xml_printer(Print& out) {
   xml.printNodeEnd("specVersion");
 
   xml.printNodeBeginNl("actionList");
-
-  xml.printNodeBeginNl("action");
-  xml.printNode("name", "GetCurrentConnectionIDs");
-  xml.printNodeBeginNl("argumentList");
-  xml.printNodeBeginNl("argument");
-  xml.printNode("name", "ConnectionIDs");
-  xml.printNode("direction", "out");
-  xml.printNode("relatedStateVariable", "CurrentConnectionIDs");
-  xml.printNodeEnd("argument");
-  xml.printNodeEnd("argumentList");
-  xml.printNodeEnd("action");
-
-  xml.printNodeBeginNl("action");
-  xml.printNode("name", "GetCurrentConnectionInfo");
-  xml.printNodeBeginNl("argumentList");
-  auto argInOut = [&](const char* n, const char* dir, const char* rel) {
-    xml.printNodeBeginNl("argument");
-    xml.printNode("name", n);
-    xml.printNode("direction", dir);
-    xml.printNode("relatedStateVariable", rel);
-    xml.printNodeEnd("argument");
-  };
-  argInOut("ConnectionID", "in", "A_ARG_TYPE_ConnectionID");
-  argInOut("RcsID", "out", "A_ARG_TYPE_RcsID");
-  argInOut("AVTransportID", "out", "A_ARG_TYPE_AVTransportID");
-  argInOut("ProtocolInfo", "out", "A_ARG_TYPE_ProtocolInfo");
-  argInOut("PeerConnectionManager", "out", "A_ARG_TYPE_ConnectionManager");
-  argInOut("PeerConnectionID", "out", "A_ARG_TYPE_ConnectionID");
-  argInOut("Direction", "out", "A_ARG_TYPE_Direction");
-  argInOut("Status", "out", "A_ARG_TYPE_ConnectionStatus");
-  xml.printNodeEnd("argumentList");
-  xml.printNodeEnd("action");
-
+  /* GetProtocolInfo */
   xml.printNodeBeginNl("action");
   xml.printNode("name", "GetProtocolInfo");
   xml.printNodeBeginNl("argumentList");
-  argInOut("Source", "out", "SourceProtocolInfo");
-  argInOut("Sink", "out", "SinkProtocolInfo");
+  xml.printArgument("Source", "out", "SourceProtocolInfo");
+  xml.printArgument("Sink", "out", "SinkProtocolInfo");
   xml.printNodeEnd("argumentList");
   xml.printNodeEnd("action");
 
+  /* GetCurrentConnectionIDs */
   xml.printNodeBeginNl("action");
-  xml.printNode("name", "PrepareForConnection");
+  xml.printNode("name", "GetCurrentConnectionIDs");
   xml.printNodeBeginNl("argumentList");
-  argInOut("RemoteProtocolInfo", "in", "A_ARG_TYPE_ProtocolInfo");
-  argInOut("PeerConnectionManager", "in", "A_ARG_TYPE_ConnectionManager");
-  argInOut("PeerConnectionID", "in", "A_ARG_TYPE_ConnectionID");
-  argInOut("Direction", "in", "A_ARG_TYPE_Direction");
-  argInOut("ConnectionID", "out", "A_ARG_TYPE_ConnectionID");
-  argInOut("AVTransportID", "out", "A_ARG_TYPE_AVTransportID");
-  argInOut("RcsID", "out", "A_ARG_TYPE_RcsID");
+  xml.printArgument("ConnectionIDs", "out", "CurrentConnectionIDs");
   xml.printNodeEnd("argumentList");
   xml.printNodeEnd("action");
 
+  /* GetCurrentConnectionInfo */
+  xml.printNodeBeginNl("action");
+  xml.printNode("name", "GetCurrentConnectionInfo");
+  xml.printNodeBeginNl("argumentList");
+  xml.printArgument("ConnectionID", "in", "A_ARG_TYPE_ConnectionID");
+  xml.printArgument("RcsID", "out", "A_ARG_TYPE_RcsID");
+  xml.printArgument("AVTransportID", "out", "A_ARG_TYPE_AVTransportID");
+  xml.printArgument("ProtocolInfo", "out", "A_ARG_TYPE_ProtocolInfo");
+  xml.printArgument("PeerConnectionManager", "out", "A_ARG_TYPE_ConnectionManager");
+  xml.printArgument("PeerConnectionID", "out", "A_ARG_TYPE_ConnectionID");
+  xml.printArgument("Direction", "out", "A_ARG_TYPE_Direction");
+  xml.printArgument("Status", "out", "A_ARG_TYPE_ConnectionStatus");
+  xml.printNodeEnd("argumentList");
+  xml.printNodeEnd("action");
   xml.printNodeEnd("actionList");
-
   xml.printNodeBeginNl("serviceStateTable");
 
-  xml.printNodeBeginNl("stateVariable", "sendEvents=\"no\"");
-  xml.printNode("name", "A_ARG_TYPE_ConnectionManager");
+  xml.printNodeBeginNl("stateVariable", "sendEvents=\"yes\"");
+  xml.printNode("name", "SourceProtocolInfo");
   xml.printNode("dataType", "string");
   xml.printNodeEnd("stateVariable");
 
   xml.printNodeBeginNl("stateVariable", "sendEvents=\"yes\"");
   xml.printNode("name", "SinkProtocolInfo");
+  xml.printNode("dataType", "string");
+  xml.printNodeEnd("stateVariable");
+
+  xml.printNodeBeginNl("stateVariable", "sendEvents=\"yes\"");
+  xml.printNode("name", "CurrentConnectionIDs");
   xml.printNode("dataType", "string");
   xml.printNodeEnd("stateVariable");
 
@@ -270,8 +251,8 @@ static void ms_connmgr_xml_printer(Print& out) {
   xml.printNodeEnd("stateVariable");
 
   xml.printNodeBeginNl("stateVariable", "sendEvents=\"no\"");
-  xml.printNode("name", "A_ARG_TYPE_AVTransportID");
-  xml.printNode("dataType", "i4");
+  xml.printNode("name", "A_ARG_TYPE_ConnectionManager");
+  xml.printNode("dataType", "string");
   xml.printNodeEnd("stateVariable");
 
   xml.printNodeBeginNl("stateVariable", "sendEvents=\"no\"");
@@ -284,11 +265,6 @@ static void ms_connmgr_xml_printer(Print& out) {
   xml.printNodeEnd("stateVariable");
 
   xml.printNodeBeginNl("stateVariable", "sendEvents=\"no\"");
-  xml.printNode("name", "A_ARG_TYPE_RcsID");
-  xml.printNode("dataType", "i4");
-  xml.printNodeEnd("stateVariable");
-
-  xml.printNodeBeginNl("stateVariable", "sendEvents=\"no\"");
   xml.printNode("name", "A_ARG_TYPE_ProtocolInfo");
   xml.printNode("dataType", "string");
   xml.printNodeEnd("stateVariable");
@@ -298,14 +274,14 @@ static void ms_connmgr_xml_printer(Print& out) {
   xml.printNode("dataType", "i4");
   xml.printNodeEnd("stateVariable");
 
-  xml.printNodeBeginNl("stateVariable", "sendEvents=\"yes\"");
-  xml.printNode("name", "SourceProtocolInfo");
-  xml.printNode("dataType", "string");
+  xml.printNodeBeginNl("stateVariable", "sendEvents=\"no\"");
+  xml.printNode("name", "A_ARG_TYPE_AVTransportID");
+  xml.printNode("dataType", "i4");
   xml.printNodeEnd("stateVariable");
 
-  xml.printNodeBeginNl("stateVariable", "sendEvents=\"yes\"");
-  xml.printNode("name", "CurrentConnectionIDs");
-  xml.printNode("dataType", "string");
+  xml.printNodeBeginNl("stateVariable", "sendEvents=\"no\"");
+  xml.printNode("name", "A_ARG_TYPE_RcsID");
+  xml.printNode("dataType", "i4");
   xml.printNodeEnd("stateVariable");
 
   xml.printNodeEnd("serviceStateTable");

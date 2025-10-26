@@ -1,6 +1,6 @@
 #pragma once
 
-/** 
+/**
 "<?xml version="1.0" encoding="utf-8"?>
 <scpd xmlns="urn:schemas-upnp-org:service-1-0">
   <specVersion>
@@ -141,8 +141,7 @@ static void mr_connmgr_xml_printer(Print& out) {
   using tiny_dlna::XMLPrinter;
   XMLPrinter xml(out);
   xml.printXMLHeader();
-  xml.printNodeBeginNl(
-      "scpd", "xmlns=\"urn:schemas-upnp-org:service-1-0\"");
+  xml.printNodeBeginNl("scpd", "xmlns=\"urn:schemas-upnp-org:service-1-0\"");
 
   xml.printNodeBeginNl("specVersion");
   xml.printNode("major", 1);
@@ -155,16 +154,8 @@ static void mr_connmgr_xml_printer(Print& out) {
   xml.printNodeBeginNl("action");
   xml.printNode("name", "GetProtocolInfo");
   xml.printNodeBeginNl("argumentList");
-  xml.printNodeBeginNl("argument");
-  xml.printNode("name", "Source");
-  xml.printNode("direction", "out");
-  xml.printNode("relatedStateVariable", "SourceProtocolInfo");
-  xml.printNodeEnd("argument");
-  xml.printNodeBeginNl("argument");
-  xml.printNode("name", "Sink");
-  xml.printNode("direction", "out");
-  xml.printNode("relatedStateVariable", "SinkProtocolInfo");
-  xml.printNodeEnd("argument");
+  xml.printArgument("Source", "out", "SourceProtocolInfo");
+  xml.printArgument("Sink", "out", "SinkProtocolInfo");
   xml.printNodeEnd("argumentList");
   xml.printNodeEnd("action");
 
@@ -182,21 +173,15 @@ static void mr_connmgr_xml_printer(Print& out) {
   xml.printNodeBeginNl("action");
   xml.printNode("name", "GetCurrentConnectionInfo");
   xml.printNodeBeginNl("argumentList");
-  auto arg = [&](const char* n, const char* d, const char* r) {
-    xml.printNodeBeginNl("argument");
-    xml.printNode("name", n);
-    xml.printNode("direction", d);
-    xml.printNode("relatedStateVariable", r);
-    xml.printNodeEnd("argument");
-  };
-  arg("ConnectionID", "in", "A_ARG_TYPE_ConnectionID");
-  arg("RcsID", "out", "A_ARG_TYPE_RcsID");
-  arg("AVTransportID", "out", "A_ARG_TYPE_AVTransportID");
-  arg("ProtocolInfo", "out", "A_ARG_TYPE_ProtocolInfo");
-  arg("PeerConnectionManager", "out", "A_ARG_TYPE_ConnectionManager");
-  arg("PeerConnectionID", "out", "A_ARG_TYPE_ConnectionID");
-  arg("Direction", "out", "A_ARG_TYPE_Direction");
-  arg("Status", "out", "A_ARG_TYPE_ConnectionStatus");
+  xml.printArgument("ConnectionID", "in", "A_ARG_TYPE_ConnectionID");
+  xml.printArgument("RcsID", "out", "A_ARG_TYPE_RcsID");
+  xml.printArgument("AVTransportID", "out", "A_ARG_TYPE_AVTransportID");
+  xml.printArgument("ProtocolInfo", "out", "A_ARG_TYPE_ProtocolInfo");
+  xml.printArgument("PeerConnectionManager", "out",
+                    "A_ARG_TYPE_ConnectionManager");
+  xml.printArgument("PeerConnectionID", "out", "A_ARG_TYPE_ConnectionID");
+  xml.printArgument("Direction", "out", "A_ARG_TYPE_Direction");
+  xml.printArgument("Status", "out", "A_ARG_TYPE_ConnectionStatus");
   xml.printNodeEnd("argumentList");
   xml.printNodeEnd("action");
 
@@ -205,25 +190,10 @@ static void mr_connmgr_xml_printer(Print& out) {
   // serviceStateTable
   xml.printNodeBeginNl("serviceStateTable");
 
-  auto stateVar = [&](const char* name, const char* type,
-                      bool sendEvents = false,
-                      std::function<void()> extra = nullptr) {
-    char attrBuf[32];
-    if (sendEvents)
-      strcpy(attrBuf, "sendEvents=\"yes\"");
-    else
-      strcpy(attrBuf, "sendEvents=\"no\"");
-    xml.printNodeBeginNl("stateVariable", attrBuf);
-    xml.printNode("name", name);
-    xml.printNode("dataType", type);
-    if (extra) extra();
-    xml.printNodeEnd("stateVariable");
-  };
-
-  stateVar("SourceProtocolInfo", "string");
-  stateVar("SinkProtocolInfo", "string");
-  stateVar("CurrentConnectionIDs", "string");
-  stateVar("A_ARG_TYPE_ConnectionStatus", "string", false, [&]() {
+  xml.printStateVariable("SourceProtocolInfo", "string", false);
+  xml.printStateVariable("SinkProtocolInfo", "string", false);
+  xml.printStateVariable("CurrentConnectionIDs", "string", false);
+  xml.printStateVariable("A_ARG_TYPE_ConnectionStatus", "string", false, [&]() {
     xml.printNodeBeginNl("allowedValueList");
     xml.printNode("allowedValue", "OK");
     xml.printNode("allowedValue", "ContentFormatMismatch");
@@ -232,17 +202,17 @@ static void mr_connmgr_xml_printer(Print& out) {
     xml.printNode("allowedValue", "Unknown");
     xml.printNodeEnd("allowedValueList");
   });
-  stateVar("A_ARG_TYPE_ConnectionManager", "string");
-  stateVar("A_ARG_TYPE_Direction", "string", false, [&]() {
+  xml.printStateVariable("A_ARG_TYPE_ConnectionManager", "string", false);
+  xml.printStateVariable("A_ARG_TYPE_Direction", "string", false, [&]() {
     xml.printNodeBeginNl("allowedValueList");
     xml.printNode("allowedValue", "Input");
     xml.printNode("allowedValue", "Output");
     xml.printNodeEnd("allowedValueList");
   });
-  stateVar("A_ARG_TYPE_ProtocolInfo", "string");
-  stateVar("A_ARG_TYPE_ConnectionID", "i4");
-  stateVar("A_ARG_TYPE_AVTransportID", "i4");
-  stateVar("A_ARG_TYPE_RcsID", "i4");
+  xml.printStateVariable("A_ARG_TYPE_ProtocolInfo", "string", false);
+  xml.printStateVariable("A_ARG_TYPE_ConnectionID", "i4", false);
+  xml.printStateVariable("A_ARG_TYPE_AVTransportID", "i4", false);
+  xml.printStateVariable("A_ARG_TYPE_RcsID", "i4", false);
 
   xml.printNodeEnd("serviceStateTable");
 
