@@ -2,7 +2,7 @@
 
 #include "IUDPService.h"
 #include "Scheduler.h"
-#include "DLNAControlPointMgr.h"
+#include "DLNAControlPoint.h"
 
 namespace tiny_dlna {
 

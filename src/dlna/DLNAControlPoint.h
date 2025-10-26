@@ -16,8 +16,8 @@
 
 namespace tiny_dlna {
 
-class DLNAControlPointMgr;
-DLNAControlPointMgr* selfDLNAControlPoint = nullptr;
+class DLNAControlPoint;
+DLNAControlPoint* selfDLNAControlPoint = nullptr;
 
 /**
  * @brief Lightweight DLNA control point manager
@@ -55,14 +55,14 @@ DLNAControlPointMgr* selfDLNAControlPoint = nullptr;
  *
  * @author Phil Schatzmann
  */
-class DLNAControlPointMgr {
+class DLNAControlPoint {
  public:
   /// Default constructor w/o Notifications
-  DLNAControlPointMgr() { selfDLNAControlPoint = this; }
+  DLNAControlPoint() { selfDLNAControlPoint = this; }
 
   /// Constructor supporting Notifications
-  DLNAControlPointMgr(HttpServer& server, int port = 80)
-      : DLNAControlPointMgr() {
+  DLNAControlPoint(HttpServer& server, int port = 80)
+      : DLNAControlPoint() {
     setHttpServer(server, port);
   }
   /// Requests the parsing of the device information
@@ -462,9 +462,9 @@ class DLNAControlPointMgr {
     auto notifyHandler = [](HttpServer* server, const char* requestPath,
                             HttpRequestHandlerLine* hl) {
       // The DLNAControlPointMgr instance is passed as context[0]
-      DLNAControlPointMgr* cp = nullptr;
+      DLNAControlPoint* cp = nullptr;
       if (hl->contextCount > 0)
-        cp = static_cast<DLNAControlPointMgr*>(hl->context[0]);
+        cp = static_cast<DLNAControlPoint*>(hl->context[0]);
       if (!cp) {
         server->replyNotFound();
         return;
@@ -593,7 +593,7 @@ class DLNAControlPointMgr {
     if (xmlBuf == nullptr || *xmlBuf == '\0') return;
 
     struct CBRef {
-      DLNAControlPointMgr* self;
+      DLNAControlPoint* self;
       NotifyReplyCP* data;
     } ref;
     ref.self = this;

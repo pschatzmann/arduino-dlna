@@ -5,7 +5,7 @@
 
 const char* ssid = "SSID";
 const char* password = "PASSWORD";
-DLNAControlPointMgr cp;
+DLNAControlPoint cp;
 WiFiClient client;
 DLNAHttpRequest http(client);
 UDPAsyncService udp;

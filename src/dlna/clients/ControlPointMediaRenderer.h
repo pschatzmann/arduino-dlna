@@ -1,7 +1,7 @@
 // Header-only control point helper for MediaRenderer devices
 #pragma once
 
-#include "dlna/DLNAControlPointMgr.h"
+#include "dlna/DLNAControlPoint.h"
 #include "dlna/service/Action.h"
 #include <functional>
 
@@ -22,7 +22,7 @@ class ControlPointMediaRenderer {
    * @param mgr Reference to the underlying DLNAControlPointMgr used to send
    *            actions and manage discovery/subscriptions
    */
-  ControlPointMediaRenderer(DLNAControlPointMgr& mgr) : mgr(mgr) {}
+  ControlPointMediaRenderer(DLNAControlPoint& mgr) : mgr(mgr) {}
 
   /**
    * @brief Restrict this helper to devices of the given device type
@@ -400,7 +400,7 @@ class ControlPointMediaRenderer {
   void onActiveChanged(std::function<void(bool, void*)> cb) { activeChangedCallback = cb; }
 
  protected:
-  DLNAControlPointMgr& mgr;
+  DLNAControlPoint& mgr;
   bool is_active = false;
   std::function<void(bool, void*)> activeChangedCallback = nullptr;
   int device_index = 0;

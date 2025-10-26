@@ -9,7 +9,7 @@ const char* password = "YOUR_PASSWORD";
 WiFiClient client;
 DLNAHttpRequest http(client);
 UDPAsyncService udp;
-DLNAControlPointMgr cp; // no notifications needed
+DLNAControlPoint cp; // no notifications needed
 ControlPointMediaServer cpms(cp);
 
 // Simple callback that prints item metadata

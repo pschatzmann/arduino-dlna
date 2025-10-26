@@ -19,14 +19,14 @@ namespace tiny_dlna {
  * document, but we provide a dynamic generation of the service xml which should
  * be more memory efficient.
  * Strings are represented as char*, so you can assign values that are stored in
- * ProgMem to mimimize the RAM useage. If you need to keep the values on the
+ * ProgMem to minimize the RAM usage. If you need to keep the values on the
  * heap you can use addString() method.
  * @author Phil Schatzmann
  */
 
 class DLNADeviceInfo {
   friend class XMLDeviceParser;
-  friend class DLNAControlPointMgr;
+  friend class DLNAControlPoint;
   friend class DLNADevice;
 
  public:
@@ -36,7 +36,7 @@ class DLNADeviceInfo {
   /// Override to initialize the device
   virtual bool begin() { return true; } 
 
-  /// renderes the device xml
+  /// renders the device xml
   void print(Print& out) {
     xml.setOutput(out);
     xml.printXMLHeader();
@@ -130,10 +130,11 @@ class DLNADeviceInfo {
   const char* getModelNumber() { return model_number; }
   void setSerialNumber(const char* sn) { serial_number = sn; }
   const char* getSerialNumber() { return serial_number; }
-  void setUniveralProductCode(const char* upc) { universal_product_code = upc; }
-  const char* getUniveralProductCode() { return universal_product_code; }
+  void setUniversalProductCode(const char* upc) { universal_product_code = upc; }
+  const char* getUniversalProductCode() { return universal_product_code; }
 
-  /// Adds a service defintion
+
+  /// Adds a service definition
   void addService(DLNAServiceInfo s) { services.push_back(s); }
 
   /// Finds a service definition by name
