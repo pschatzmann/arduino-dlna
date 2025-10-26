@@ -82,6 +82,7 @@ class ControlPointMediaServer {
    */
   bool subscribeNotifications(int timeoutSeconds = 60,
                               NotificationCallback cb = nullptr) {
+    DlnaLogger.log(DlnaLogLevel::Debug, "ControlPointMediaServer::subscribeNotifications");
     mgr.setReference(this);
     // register provided callback or fallback to the default processNotification
     if (cb)
@@ -126,8 +127,9 @@ class ControlPointMediaServer {
               int& numberReturned, int& totalMatches, int& updateID,
               const char* browseFlag = nullptr) {
 
-    // Register item callback            
-    this->mgr.onResultNode(XMLCallback);            
+    DlnaLogger.log(DlnaLogLevel::Debug, "ControlPointMediaServer::browse");
+    // Register item callback
+    this->mgr.onResultNode(XMLCallback);
     // Build and post browse action
     DLNAServiceInfo& svc =
         selectService("urn:upnp-org:serviceId:ContentDirectory");
@@ -163,6 +165,7 @@ class ControlPointMediaServer {
               int& updateID, const char* searchCriteria = "",const char* filter = "",
               const char* sortCriteria = "") {
 
+    DlnaLogger.log(DlnaLogLevel::Debug, "ControlPointMediaServer::search");
     // Register item callback
     this->mgr.onResultNode(XMLCallback);
 
@@ -185,6 +188,7 @@ class ControlPointMediaServer {
    * @return numeric SystemUpdateID, or -1 on error
    */
   int getSystemUpdateID() {
+    DlnaLogger.log(DlnaLogLevel::Debug, "ControlPointMediaServer::getSystemUpdateID");
     DLNAServiceInfo& svc =
         selectService("urn:upnp-org:serviceId:ContentDirectory");
     if (!svc) return -1;
@@ -202,6 +206,7 @@ class ControlPointMediaServer {
    * @return pointer to capability string owned by reply, or nullptr on error
    */
   const char* getSearchCapabilities() {
+    DlnaLogger.log(DlnaLogLevel::Debug, "ControlPointMediaServer::getSearchCapabilities");
     DLNAServiceInfo& svc =
         selectService("urn:upnp-org:serviceId:ContentDirectory");
     if (!svc) return nullptr;
@@ -217,6 +222,7 @@ class ControlPointMediaServer {
    * @return pointer to sort capabilities, or nullptr on error
    */
   const char* getSortCapabilities() {
+    DlnaLogger.log(DlnaLogLevel::Debug, "ControlPointMediaServer::getSortCapabilities");
     DLNAServiceInfo& svc =
         selectService("urn:upnp-org:serviceId:ContentDirectory");
     if (!svc) return nullptr;
@@ -232,6 +238,7 @@ class ControlPointMediaServer {
    * @return pointer to protocol info string (Source), or nullptr on error
    */
   const char* getProtocolInfo() {
+    DlnaLogger.log(DlnaLogLevel::Debug, "ControlPointMediaServer::getProtocolInfo");
     DLNAServiceInfo& svc =
         selectService("urn:upnp-org:serviceId:ConnectionManager");
     if (!svc) return nullptr;
@@ -277,6 +284,7 @@ class ControlPointMediaServer {
 
   /// Select service by id
   DLNAServiceInfo& selectService(const char* id) {
+    DlnaLogger.log(DlnaLogLevel::Debug, "ControlPointMediaServer::selectService: id='%s'", id);
     // Build list of devices matching the optional filter
     Vector<DLNADeviceInfo>& all = mgr.getDevices();
     int idx = 0;
@@ -308,6 +316,7 @@ class ControlPointMediaServer {
   /// Build a Browse ActionRequest
   ActionRequest &createBrowseAction(DLNAServiceInfo& svc, const char* browseFlag,
                                    int startingIndex, int requestedCount) {
+    DlnaLogger.log(DlnaLogLevel::Debug, "ControlPointMediaServer::createBrowseAction");
     static ActionRequest act(svc, "Browse");
     // Use the canonical argument name expected by ContentDirectory: "ObjectID"
     act.addArgument("ObjectID", object_id);
@@ -327,6 +336,7 @@ class ControlPointMediaServer {
   ActionRequest &createSearchAction(DLNAServiceInfo& svc, const char* searchCriteria,
                                     const char* filter, int startingIndex,
                                     int requestedCount, const char* sortCriteria) {
+    DlnaLogger.log(DlnaLogLevel::Debug, "ControlPointMediaServer::createSearchAction");
     static ActionRequest act(svc, "Search");
     act.addArgument("ContainerID", object_id);
     act.addArgument("SearchCriteria", searchCriteria ? searchCriteria : "");
@@ -343,6 +353,7 @@ class ControlPointMediaServer {
   /// Parse numeric result fields from an ActionReply
   void parseNumericFields(ActionReply& reply, int& numberReturned,
                           int& totalMatches, int& updateID) {
+    DlnaLogger.log(DlnaLogLevel::Debug, "ControlPointMediaServer::parseNumericFields");
     const char* nret = findArgument(reply, "NumberReturned");
     const char* tmatch = findArgument(reply, "TotalMatches");
     const char* uid = findArgument(reply, "UpdateID");

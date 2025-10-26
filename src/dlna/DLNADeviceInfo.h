@@ -34,7 +34,7 @@ class DLNADeviceInfo {
   ~DLNADeviceInfo() { DlnaLogger.log(DlnaLogLevel::Debug, "~DLNADevice()"); }
 
   /// Override to initialize the device
-  virtual bool begin() { return true; } 
+  virtual bool begin() { return true; }
 
   /// renders the device xml
   void print(Print& out) {
@@ -56,9 +56,13 @@ class DLNADeviceInfo {
   const char* getUDN() { return udn; }
 
   /// Defines the base url
-  void setBaseURL(const char* url) { base_url = url; }
+  void setBaseURL(const char* url) {
+    DlnaLogger.log(DlnaLogLevel::Info, "Base URL: %s", url);
+    base_url = url;
+  }
+
   /// Defines the base URL
-  void setBaseURL(IPAddress ip, int port, const char* path="") { 
+  void setBaseURL(IPAddress ip, int port, const char* path = nullptr) {
     localhost = ip;
     static Str str = "http://";
     str += ip[0];
@@ -70,12 +74,12 @@ class DLNADeviceInfo {
     str += ip[3];
     str += ":";
     str += port;
-    if (!StrView(path).startsWith("/")){
+    if (path != nullptr && !StrView(path).startsWith("/")) {
       str += "/";
     }
     str += path;
     setBaseURL(str.c_str());
-   }
+  }
 
   /// Provides the base url
   const char* getBaseURL() {
@@ -84,7 +88,7 @@ class DLNADeviceInfo {
       url_str = base_url;
       url_str.replace("localhost", getIPStr());
       base_url = url_str.c_str();
-     }
+    }
     return base_url;
   }
 
@@ -130,9 +134,10 @@ class DLNADeviceInfo {
   const char* getModelNumber() { return model_number; }
   void setSerialNumber(const char* sn) { serial_number = sn; }
   const char* getSerialNumber() { return serial_number; }
-  void setUniversalProductCode(const char* upc) { universal_product_code = upc; }
+  void setUniversalProductCode(const char* upc) {
+    universal_product_code = upc;
+  }
   const char* getUniversalProductCode() { return universal_product_code; }
-
 
   /// Adds a service definition
   void addService(DLNAServiceInfo s) { services.push_back(s); }
@@ -148,8 +153,10 @@ class DLNADeviceInfo {
     return result;
   }
 
+  /// Provides all service definitions
   Vector<DLNAServiceInfo>& getServices() { return services; }
 
+  /// Clears all device information
   void clear() {
     services.clear();
     udn = nullptr;
@@ -167,15 +174,18 @@ class DLNADeviceInfo {
 
   /// Overwrite the default icon
   void clearIcons() { icons.clear(); }
+
+  /// adds an icon
   void addIcon(Icon icon) { icons.push_back(icon); }
-  Icon getIcon(int idx = 0) { 
-    if (icons.size()==0){
+
+  /// Provides the item at indix
+  Icon getIcon(int idx = 0) {
+    if (icons.size() == 0) {
       Icon empty;
       return empty;
     }
-    return icons[idx]; }
-
-  operator bool() { return is_active; }
+    return icons[idx];
+  }
 
   /// Update the timestamp
   void updateTimestamp() { timestamp = millis(); }
@@ -183,11 +193,14 @@ class DLNADeviceInfo {
   /// Returns the time when this object has been updated
   uint32_t getTimestamp() { return timestamp; }
 
+  /// Sets the server to inactive
   void setActive(bool flag) { is_active = flag; }
 
-  virtual void loop(){
-    delay(1);
-  }
+  /// return true if active
+  operator bool() { return is_active; }
+
+  /// loop processing
+  virtual void loop() { delay(1); }
 
  protected:
   uint64_t timestamp = 0;
@@ -213,11 +226,11 @@ class DLNADeviceInfo {
   Icon icon;
   Vector<DLNAServiceInfo> services;
   Vector<Icon> icons;
-  Str url_str; 
+  Str url_str;
 
   /// to be implemented by subclasses
-  virtual void setupServices(HttpServer& server, IUDPService& udp){}
- 
+  virtual void setupServices(HttpServer& server, IUDPService& udp) {}
+
   size_t printRoot() {
     size_t result = 0;
     auto printSpecVersionB = std::bind(&DLNADeviceInfo::printSpecVersion, this);
@@ -243,7 +256,8 @@ class DLNADeviceInfo {
     result += xml.printNode("UPC", universal_product_code);
     auto printIconListCb = std::bind(&DLNADeviceInfo::printIconList, this);
     result += xml.printNode("iconList", printIconListCb);
-    auto printServiceListCb = std::bind(&DLNADeviceInfo::printServiceList, this);
+    auto printServiceListCb =
+        std::bind(&DLNADeviceInfo::printServiceList, this);
     result += xml.printNode("serviceList", printServiceListCb);
     return result;
   }
@@ -272,12 +286,12 @@ class DLNADeviceInfo {
     DLNAServiceInfo* service = (DLNAServiceInfo*)srv;
     result += xml.printNode("serviceType", service->service_type);
     result += xml.printNode("serviceId", service->service_id);
-    result += xml.printNode("SCPDURL",
-                            url.buildPath(base_url, service->scpd_url));
-    result += xml.printNode(
-        "controlURL", url.buildPath(base_url, service->control_url));
-    result += xml.printNode(
-        "eventSubURL", url.buildPath(base_url, service->event_sub_url));
+    result +=
+        xml.printNode("SCPDURL", url.buildPath(base_url, service->scpd_url));
+    result += xml.printNode("controlURL",
+                            url.buildPath(base_url, service->control_url));
+    result += xml.printNode("eventSubURL",
+                            url.buildPath(base_url, service->event_sub_url));
     return result;
   }
 
@@ -307,8 +321,7 @@ class DLNADeviceInfo {
       result += xml.printNode("width", icon.width);
       result += xml.printNode("height", icon.height);
       result += xml.printNode("depth", icon.depth);
-      result +=
-          xml.printNode("url", url.buildPath(base_url, icon.icon_url));
+      result += xml.printNode("url", url.buildPath(base_url, icon.icon_url));
     }
     return result;
   }

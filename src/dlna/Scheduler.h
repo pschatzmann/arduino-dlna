@@ -69,8 +69,10 @@ class Scheduler {
   Vector<Schedule *> queue;
 
   void cleanup() {
+    DlnaLogger.log(DlnaLogLevel::Debug, "Scheduler::cleanup: for %d items", queue.size());
     for (auto it = queue.begin(); it != queue.end(); ++it) {
       auto p_rule = *it;
+      if (p_rule == nullptr) continue;
       if (!(p_rule)->active) {
         DlnaLogger.log(DlnaLogLevel::Debug, "Scheduler::cleanup queue: %s", p_rule->name());
         // remove schedule from collection

@@ -742,6 +742,7 @@ class DLNAControlPoint {
 
   /// Build the SOAP XML request body for the action into `out`
   void buildActionBody(ActionRequest& action, StrPrint& out) {
+    DlnaLogger.log(DlnaLogLevel::Debug, "DLNAControlPointMgr::buildActionBody");
     xml.setOutput(out);
     createXML(action);
   }
@@ -759,6 +760,7 @@ class DLNAControlPoint {
   /// the HTTP rc.
   ActionReply& processActionHttpPost(Url& post_url, StrPrint& requestBody,
                                      const char* soapAction) {
+    DlnaLogger.log(DlnaLogLevel::Debug, "DLNAControlPointMgr::processActionHttpPost");
     XMLParserPrint xml_parser;
     uint8_t buffer[200];
     Str outNodeName;

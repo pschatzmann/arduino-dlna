@@ -291,7 +291,7 @@ class HttpHeader {
   bool is_written = false;
   bool is_chunked = false;
   bool create_new_lines = true;
-  TinyMethodID method_id;
+  TinyMethodID method_id = T_GET;
   // we store the values on the heap. this is acceptable because we just have
   // one instance for the requests and one for the replys: which needs about
   // 2*100 bytes

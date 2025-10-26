@@ -1,8 +1,9 @@
 // Example for creating a Media Renderer
 #include "DLNA.h"
 
-const char* ssid = "";
-const char* password = "";
+const char* ssid = "YOUR_SSID";
+const char* password = "YOUR_PASSWORD";
+
 MediaRenderer media_renderer;
 DLNADevice device;         // basic device API
 WiFiServer wifi;
@@ -32,6 +33,7 @@ void setup() {
 
   // setup media renderer (use event callbacks to handle audio at app level)
   media_renderer.setBaseURL(WiFi.localIP(), 9999);
+
   media_renderer.setMediaEventHandler(
     [](MediaEvent ev, MediaRenderer& mr) {
       switch (ev) {

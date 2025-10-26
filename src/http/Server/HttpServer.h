@@ -238,16 +238,18 @@ class HttpServer {
     bool result = false;
     // check in registered handlers
     StrView pathStr = StrView(path);
+    pathStr.replace("//", "/"); // TODO investiage why we get //
     for (auto handler_line_ptr : handler_collection) {
-      DlnaLogger.log(DlnaLogLevel::Info, "onRequest: %s vs: %s %s %s",
+      DlnaLogger.log(DlnaLogLevel::Info, "onRequest: %s %s vs: %s %s %s",
                      path,
+                     methods[request_header.method()],
                      nullstr(handler_line_ptr->path.c_str()),
                      methods[handler_line_ptr->method],
                      nullstr(handler_line_ptr->mime));
 
       if (pathStr.matches(handler_line_ptr->path.c_str()) &&
           request_header.method() == handler_line_ptr->method &&
-          matchesMime(handler_line_ptr->mime, request_header.accept())) {
+          matchesMime(nullstr(handler_line_ptr->mime), nullstr(request_header.accept()))) {
         // call registed handler function
         DlnaLogger.log(DlnaLogLevel::Info, "onRequest %s", "->found",
                        nullstr(handler_line_ptr->path.c_str()));
@@ -506,7 +508,9 @@ class HttpServer {
   /// compares mime of handler with mime of request: provides true if they match
   /// of one is null (=any value)
   bool matchesMime(const char* handler_mime, const char* request_mime) {
-    if (handler_mime == nullptr || request_mime == nullptr) {
+    DlnaLogger.log(DlnaLogLevel::Debug, "matchesMime: %s vs %s", handler_mime,
+                   request_mime);
+    if (StrView(handler_mime).isEmpty() || StrView(request_mime).isEmpty()) {
       return true;
     }
     bool result = StrView(request_mime).contains(handler_mime);
