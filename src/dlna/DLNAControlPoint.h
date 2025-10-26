@@ -61,8 +61,7 @@ class DLNAControlPoint {
   DLNAControlPoint() { selfDLNAControlPoint = this; }
 
   /// Constructor supporting Notifications
-  DLNAControlPoint(HttpServer& server, int port = 80)
-      : DLNAControlPoint() {
+  DLNAControlPoint(HttpServer& server, int port = 80) : DLNAControlPoint() {
     setHttpServer(server, port);
   }
   /// Requests the parsing of the device information
@@ -174,14 +173,15 @@ class DLNAControlPoint {
     DlnaLogger.log(DlnaLogLevel::Info, "Collected reply arguments: %d",
                    (int)reply.arguments.size());
     for (auto& a : reply.arguments) {
-      DlnaLogger.log(DlnaLogLevel::Info, "  -> %s = %s",
-                     toStr(a.name), toStr(a.value));
+      DlnaLogger.log(DlnaLogLevel::Info, "  -> %s = %s", nullStr(a.name),
+                     nullStr(a.value));
     }
     return reply;
   }
 
   /// Subscribe to changes for all device services
-  bool subscribeNotifications(DLNADeviceInfo& device, int timeoutSeconds = 60) {
+  bool subscribeNotifications(DLNADeviceInfo& device,
+                              int timeoutSeconds = 1800) {
     DlnaLogger.log(DlnaLogLevel::Debug,
                    "DLNAControlPointMgr::subscribeNotifications");
     if (p_http_server == nullptr) {
@@ -215,7 +215,7 @@ class DLNAControlPoint {
 
   /// Subscribe to changes for defined device service
   bool subscribeNotifications(DLNAServiceInfo& service,
-                              int timoutSeconds = 60) {
+                              int timoutSeconds = 1800) {
     if (p_http_server == nullptr) {
       DlnaLogger.log(
           DlnaLogLevel::Error,
@@ -233,6 +233,7 @@ class DLNAControlPoint {
     p_http->request().put("NT", "upnp:event");
     p_http->request().put("TIMEOUT", seconds_txt);
     p_http->request().put("CALLBACK", local_url.url());
+    // post subscribe
     int rc = p_http->subscribe(url);
     DlnaLogger.log(DlnaLogLevel::Info, "Http rc: %s", rc);
     return rc == 200;
@@ -247,11 +248,11 @@ class DLNAControlPoint {
   }
 
   /// Register a callback that will be invoked when parsing SOAP/Action results
-  /// Signature: void(const char* nodeName, const char* text, const char* attributes)
-  void onResultNode(
-      std::function<void(const char* nodeName, const char* text,
-                         const char* attributes)>
-          cb) {
+  /// Signature: void(const char* nodeName, const char* text, const char*
+  /// attributes)
+  void onResultNode(std::function<void(const char* nodeName, const char* text,
+                                       const char* attributes)>
+                        cb) {
     result_callback = cb;
   }
 
@@ -370,7 +371,7 @@ class DLNAControlPoint {
 
   /// Adds the device from the device xml url if it does not already exist
   bool addDevice(Url url) {
-    if (!allow_localhost && StrView(url.host()).equals("127.0.0.1")){
+    if (!allow_localhost && StrView(url.host()).equals("127.0.0.1")) {
       DlnaLogger.log(DlnaLogLevel::Info, "Ignoring localhost device");
       return false;
     }
@@ -429,7 +430,7 @@ class DLNAControlPoint {
   bool isActive() { return is_active; }
 
   /// Defines if localhost devices should be allowed
-  void setAllowLocalhost(bool flag) { allow_localhost = flag; } 
+  void setAllowLocalhost(bool flag) { allow_localhost = flag; }
 
  protected:
   Scheduler scheduler;
@@ -450,12 +451,13 @@ class DLNAControlPoint {
   HttpServer* p_http_server = nullptr;
   int http_server_port = 0;
   void* reference = nullptr;
-  std::function<void(const char* nodeName, const char* text, const char* attributes)>
+  std::function<void(const char* nodeName, const char* text,
+                     const char* attributes)>
       result_callback;
   std::function<void(void* reference, const char* sid, const char* varName,
                      const char* newValue)>
       event_callback;
-  
+
 
   /// Attach an HttpServer so the control point can receive HTTP NOTIFY event
   /// messages. This registers a handler at the configured local URL path
@@ -470,38 +472,62 @@ class DLNAControlPoint {
     const char* path =
         StrView(local_url.url()).isEmpty() ? "/dlna/events" : local_url.path();
 
-    // handler lambda: reads SID and body, forwards to parseAndDispatchEvent
-    auto notifyHandler = [](HttpServer* server, const char* requestPath,
-                            HttpRequestHandlerLine* hl) {
-      // The DLNAControlPointMgr instance is passed as context[0]
-      DLNAControlPoint* cp = nullptr;
-      if (hl->contextCount > 0)
-        cp = static_cast<DLNAControlPoint*>(hl->context[0]);
-      if (!cp) {
-        server->replyNotFound();
-        return;
-      }
-
-      // read headers
-      HttpRequestHeader& req = server->requestHeader();
-      const char* sid = req.get("SID");
-
-      // read body
-      Str body = server->contentStr();
-
-      // build temporary NotifyReplyCP and forward
-      NotifyReplyCP tmp;
-      if (sid) tmp.subscription_id = sid;
-      tmp.xml = body.c_str();
-
-      cp->parseAndDispatchEvent(tmp);
-
-      server->replyOK();
-    };
-
     void* ctx[1];
     ctx[0] = this;
-    server.on(path, T_POST, notifyHandler, ctx, 1);
+    server.on(path, T_NOTIFY, notifyHandler, ctx, 1);
+  }
+
+  /// Static HTTP handler for incoming NOTIFY event callbacks. The HttpServer
+  /// will pass the control point instance as context[0] so we can retrieve
+  /// the instance and forward the event to parseAndDispatchEvent().
+  static void notifyHandler(HttpServer* server, const char* requestPath,
+                            HttpRequestHandlerLine* hl) {
+    // The DLNAControlPoint instance is passed as context[0]
+    DLNAControlPoint* cp = nullptr;
+    if (hl && hl->contextCount > 0) {
+      cp = static_cast<DLNAControlPoint*>(hl->context[0]);
+    }
+
+    if (!cp) {
+      DlnaLogger.log(DlnaLogLevel::Error, "No control point found");
+      server->replyNotFound();
+      return;
+    }
+
+    // read headers
+    HttpRequestHeader& req = server->requestHeader();
+    uint8_t buffer[200];
+    XMLParserPrint xml_parser;
+    Str node;
+    Str text;
+    Str attr;
+    Vector<Str> path;
+    bool active = false;
+    const char* sid = req.get("SID");
+
+    /// Parse body
+    Client& client = server->client();
+    while (client.available()) {
+      int len = client.readBytes(buffer, sizeof(buffer));
+      xml_parser.write((const uint8_t*)buffer, len);
+      while (xml_parser.parse(node, path, text, attr)) {
+        // execute callback
+        if (active && !text.isEmpty()) {
+          DlnaLogger.log(DlnaLogLevel::Info, "Event: %s = %s", node.c_str(),
+                         text.c_str());
+          // event callback
+          if (cp->event_callback != nullptr ) {
+            cp->event_callback(cp->reference, sid, node.c_str(), text.c_str());
+          }
+        }
+        /// Activate callback
+        if (node.equals("e:property")) {
+          active = true;
+        }
+      }
+    }
+    // reply OK
+    server->replyOK();
   }
 
   /// Processes a NotifyReplyCP message
@@ -595,41 +621,6 @@ class DLNAControlPoint {
     return true;
   }
 
-  /// Parse the xml content of a NotifyReplyCP and dispatch each property
-  void parseAndDispatchEvent(NotifyReplyCP& data) {
-    DlnaLogger.log(DlnaLogLevel::Debug,
-                   "DLNAControlPointMgr::parseAndDispatchEvent");
-    // data.xml contains the <e:propertyset ...>...</e:propertyset> as a
-    // string
-    const char* xmlBuf = data.xml.c_str();
-    if (xmlBuf == nullptr || *xmlBuf == '\0') return;
-
-    struct CBRef {
-      DLNAControlPoint* self;
-      NotifyReplyCP* data;
-    } ref;
-    ref.self = this;
-    ref.data = &data;
-
-    // Simple callback: whenever the parser reports a text node (non-empty
-    // `text`), treat `nodeName` as the variable name and `text` as its value.
-    auto cb = [](Str& nodeName, Vector<Str>& /*path*/, Str& text,
-                 Str& /*attributes*/, int /*start*/, int /*len*/, void* vref) {
-      CBRef* r = static_cast<CBRef*>(vref);
-      if (text.length() > 0 && r->self && r->self->event_callback) {
-        const char* sid = r->data->subscription_id.c_str();
-        // store stable copies in the control point's string registry
-        const char* namePtr = r->self->strings.add((char*)nodeName.c_str());
-        const char* valPtr = r->self->strings.add((char*)text.c_str());
-        // pass stored opaque reference as first parameter
-        r->self->event_callback(r->self->reference, sid, namePtr, valPtr);
-      }
-    };
-
-    XMLParser parser(xmlBuf, cb);
-    parser.setReference(&ref);
-    parser.parse();
-  }
 
   /// checks if the usn contains the search target
   bool matches(const char* usn) {
@@ -713,7 +704,7 @@ class DLNAControlPoint {
 
   ActionReply& postAction(ActionRequest& action) {
     DlnaLogger.log(DlnaLogLevel::Debug, "DLNAControlPointMgr::postAction: %s",
-                   action.action!=nullptr ? action.action : "(null)");
+                   action.action != nullptr ? action.action : "(null)");
     reply.clear();
     DLNAServiceInfo& service = *action.p_service;
     DLNADeviceInfo& device = getDevice(service);
@@ -746,14 +737,14 @@ class DLNAControlPoint {
     createXML(action);
   }
 
-  const char* toStr(const char* str, const char* empty="(null)") {
-    return str==nullptr ? empty : str;
+  const char* nullStr(const char* str, const char* empty = "(null)") {
+    return str == nullptr ? empty : str;
   }
 
-  const char* toStr(Str& str, const char* empty="(null)") {
+  const char* nullStr(Str& str, const char* empty = "(null)") {
     return str.isEmpty() ? empty : str.c_str();
   }
-  
+
   // Send an HTTP POST for the given URL and request body. On success the
   /// response body is written into `responseOut` (an XMLParserPrint). Returns
   /// the HTTP rc.
@@ -796,9 +787,11 @@ class DLNAControlPoint {
             if (!(outText.isEmpty() && outAttributes.isEmpty())) {
               reply.addArgument(arg);
               DlnaLogger.log(DlnaLogLevel::Info, "ActionReplay '%s': %s (%s)",
-                             toStr(outNodeName), toStr(outText), toStr(outAttributes));
+                             nullStr(outNodeName), nullStr(outText),
+                             nullStr(outAttributes));
               if (result_callback) {
-                result_callback(toStr(arg.name,""), toStr(outText,""), toStr(outAttributes,""));
+                result_callback(nullStr(arg.name, ""), nullStr(outText, ""),
+                                nullStr(outAttributes, ""));
               }
             }
           }
