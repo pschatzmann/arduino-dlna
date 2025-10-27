@@ -14,8 +14,13 @@ namespace tiny_dlna {
  * @author Phil Schatzmann
  */
 
+/// @brief Parses DLNA device XML and fills DLNADeviceInfo structure
 class XMLDeviceParser {
  public:
+  /// @brief Parse DLNA device XML string and fill DLNADeviceInfo
+  /// @param result DLNADeviceInfo to fill
+  /// @param strings StringRegistry for string deduplication
+  /// @param xmlStr XML string to parse
   void parse(DLNADeviceInfo& result, StringRegistry& strings, const char* xmlStr) {
     p_strings = &strings;
     StrView tmp(xmlStr);
@@ -30,11 +35,18 @@ class XMLDeviceParser {
   }
 
  protected:
+  /// @brief XML string view
   StrView str;
+  /// @brief Pointer to device info being filled
   DLNADeviceInfo* p_device = nullptr;
+  /// @brief Pointer to string registry
   StringRegistry* p_strings = nullptr;
 
-  /// extract string, add to string repository and return repository string
+  /// @brief Extract string, add to string repository and return repository string
+  /// @param in Input string
+  /// @param pos Start position
+  /// @param end End position
+  /// @return Pointer to string in repository
   const char* substrView(char* in, int pos, int end) {
     const int len = end - pos + 1;
     char tmp[len];
@@ -43,11 +55,15 @@ class XMLDeviceParser {
     return p_strings->add((char*)tmp_str.c_str());
   }
 
+  /// @brief Parse version info from XML
+  /// @param result DLNADeviceInfo to fill
   void parseVersion(DLNADeviceInfo& result) {
     parseInt(0, "<major>", result.version_major);
     parseInt(0, "<minor>", result.version_minor);
   }
 
+  /// @brief Parse device info from XML
+  /// @param result DLNADeviceInfo to fill
   void parseDevice(DLNADeviceInfo& result) {
     parseStr("<deviceType>", result.device_type);
     parseStr("<friendlyName>", result.friendly_name);
@@ -61,10 +77,19 @@ class XMLDeviceParser {
     parseServices();
   };
 
+  /// @brief Parse string value from XML
+  /// @param name XML tag name
+  /// @param result Output string pointer
+  /// @return End position in XML
   int parseStr(const char* name, const char*& result) {
     return parseStr(0, name, result);
   }
 
+  /// @brief Parse integer value from XML
+  /// @param pos Start position
+  /// @param name XML tag name
+  /// @param result Output integer
+  /// @return End position in XML
   int parseInt(int pos, const char* name, int& result) {
     char temp[50] = {0};
     StrView temp_view(temp, 50);
@@ -83,6 +108,11 @@ class XMLDeviceParser {
     return end_pos;
   }
 
+  /// @brief Parse string value from XML at position
+  /// @param pos Start position
+  /// @param name XML tag name
+  /// @param result Output string pointer
+  /// @return End position in XML
   int parseStr(int pos, const char* name, const char*& result) {
     int start_pos = str.indexOf(name, pos);
     int end = -1;
@@ -99,6 +129,8 @@ class XMLDeviceParser {
     return end;
   }
 
+  /// @brief Parse icon list from XML
+  /// @param device DLNADeviceInfo to fill
   void parseIcons(DLNADeviceInfo& device) {
     int pos = 0;
     do {
@@ -106,6 +138,10 @@ class XMLDeviceParser {
     } while (pos > 0);
   }
 
+  /// @brief Parse a single icon from XML
+  /// @param device DLNADeviceInfo to fill
+  /// @param pos Start position
+  /// @return End position in XML
   int parseIcon(DLNADeviceInfo& device, int pos) {
     Icon icon;
     int result = -1;
@@ -122,6 +158,7 @@ class XMLDeviceParser {
     return result;
   }
 
+  /// @brief Parse service list from XML
   void parseServices() {
     int pos = 0;
     do {
@@ -129,6 +166,9 @@ class XMLDeviceParser {
     } while (pos > 0);
   }
 
+  /// @brief Parse a single service from XML
+  /// @param pos Start position
+  /// @return End position in XML
   int parseService(int pos) {
     DLNAServiceInfo service;
     int result = -1;

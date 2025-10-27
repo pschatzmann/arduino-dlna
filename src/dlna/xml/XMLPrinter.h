@@ -14,10 +14,30 @@ namespace tiny_dlna {
  * @author Phil Schatzmann
  */
 struct XMLNode {
+  /**
+   * @brief Name of the XML node
+   */
   const char* node = nullptr;
+  /**
+   * @brief Attributes of the XML node
+   */
   const char* attributes = nullptr;
+  /**
+   * @brief Content of the XML node
+   */
   const char* content = nullptr;
+
+  /**
+   * @brief Default constructor
+   */
   XMLNode() = default;
+
+  /**
+   * @brief Constructor with node name, content, and optional attributes
+   * @param node Name of the node
+   * @param content Content of the node
+   * @param attr Optional attributes
+   */
   XMLNode(const char* node, const char* content, const char* attr = nullptr) {
     this->node = node;
     this->attributes = attr;
@@ -32,21 +52,49 @@ struct XMLNode {
  */
 
 struct XMLPrinter {
+
+  /**
+   * @brief Default constructor
+   */
   XMLPrinter() = default;
+
+  /**
+   * @brief Constructor with output
+   * @param output Reference to Print object for output
+   */
   XMLPrinter(Print& output) { setOutput(output); }
 
-  /// Defines the output
+  /**
+   * @brief Defines the output Print object
+   * @param output Reference to Print object
+   */
   void setOutput(Print& output) { p_out = &output; }
 
+  /**
+   * @brief Prints the XML header
+   * @return Number of bytes written
+   */
   size_t printXMLHeader() {
     assert(p_out != nullptr);
     return p_out->println("<?xml version=\"1.0\"?>");
   }
 
+  /**
+   * @brief Prints an XML node from XMLNode struct
+   * @param node XMLNode struct
+   * @return Number of bytes written
+   */
   size_t printNode(XMLNode node) {
     return printNode(node.node, node.content, node.attributes);
   }
 
+  /**
+   * @brief Prints an XML node with a single child
+   * @param node Name of the node
+   * @param child Child XMLNode
+   * @param attributes Optional attributes
+   * @return Number of bytes written
+   */
   size_t printNode(const char* node, XMLNode child,
                    const char* attributes = nullptr) {
     Vector<XMLNode> children;
@@ -54,6 +102,13 @@ struct XMLPrinter {
     return printNode(node, children, attributes);
   }
 
+  /**
+   * @brief Prints an XML node with multiple children
+   * @param node Name of the node
+   * @param children Vector of child XMLNodes
+   * @param attributes Optional attributes
+   * @return Number of bytes written
+   */
   size_t printNode(const char* node, Vector<XMLNode> children,
                    const char* attributes = nullptr) {
     assert(p_out != nullptr);
@@ -63,6 +118,13 @@ struct XMLPrinter {
     return result;
   }
 
+  /**
+   * @brief Prints an XML node with text content
+   * @param node Name of the node
+   * @param txt Text content
+   * @param attributes Optional attributes
+   * @return Number of bytes written
+   */
   size_t printNode(const char* node, const char* txt = nullptr,
                    const char* attributes = nullptr) {
     assert(p_out != nullptr);
@@ -79,6 +141,13 @@ struct XMLPrinter {
     return result;
   }
 
+  /**
+   * @brief Prints an XML node with integer content
+   * @param node Name of the node
+   * @param txt Integer value
+   * @param attributes Optional attributes
+   * @return Number of bytes written
+   */
   size_t printNode(const char* node, int txt,
                    const char* attributes = nullptr) {
     assert(p_out != nullptr);
@@ -88,6 +157,13 @@ struct XMLPrinter {
     return result;
   }
 
+  /**
+   * @brief Prints an XML node using a callback for content
+   * @param node Name of the node
+   * @param callback Function to generate content
+   * @param attributes Optional attributes
+   * @return Number of bytes written
+   */
   size_t printNode(const char* node, std::function<size_t(void)> callback,
                    const char* attributes = nullptr) {
     assert(p_out != nullptr);
@@ -98,8 +174,10 @@ struct XMLPrinter {
   }
 
   /**
-   * printf-style helper that formats into an internal buffer and writes to the
-   * configured Print output.
+   * @brief printf-style helper that formats into an internal buffer and writes to the configured Print output.
+   * @param fmt Format string
+   * @param ... Variable arguments
+   * @return Number of bytes written
    */
   size_t printf(const char* fmt, ...) {
     assert(p_out != nullptr);
@@ -114,8 +192,11 @@ struct XMLPrinter {
   }
 
   /**
-   * Helper to print a UPnP <argument> element with name, direction and optional
-   * relatedStateVariable.
+   * @brief Helper to print a UPnP <argument> element with name, direction and optional relatedStateVariable.
+   * @param name Argument name
+   * @param direction Argument direction
+   * @param relatedStateVariable Optional related state variable
+   * @return Number of bytes written
    */
   size_t printArgument(const char* name, const char* direction,
                        const char* relatedStateVariable = nullptr) {
@@ -132,8 +213,12 @@ struct XMLPrinter {
   }
 
   /**
-   * Helper to print a UPnP <stateVariable> element with name, dataType and
-   * optional sendEvents attribute and inner content callback.
+   * @brief Helper to print a UPnP <stateVariable> element with name, dataType and optional sendEvents attribute and inner content callback.
+   * @param name State variable name
+   * @param dataType State variable data type
+   * @param sendEvents Whether to send events
+   * @param extra Optional callback for extra content
+   * @return Number of bytes written
    */
   size_t printStateVariable(const char* name, const char* dataType,
                             bool sendEvents = false,
@@ -153,6 +238,13 @@ struct XMLPrinter {
     return result;
   }
 
+  /**
+   * @brief Prints the beginning of an XML node
+   * @param node Name of the node
+   * @param attributes Optional attributes
+   * @param ns Optional namespace
+   * @return Number of bytes written
+   */
   size_t printNodeBegin(const char* node, const char* attributes = nullptr,
                         const char* ns = nullptr) {
     assert(p_out != nullptr);
@@ -171,6 +263,13 @@ struct XMLPrinter {
     return result;
   }
 
+  /**
+   * @brief Prints the beginning of an XML node and a newline
+   * @param node Name of the node
+   * @param attributes Optional attributes
+   * @param ns Optional namespace
+   * @return Number of bytes written
+   */
   size_t printNodeBeginNl(const char* node, const char* attributes = nullptr,
                           const char* ns = nullptr) {
     size_t result = printNodeBegin(node, attributes, ns);
@@ -178,6 +277,12 @@ struct XMLPrinter {
     return result;
   }
 
+  /**
+   * @brief Prints the end of an XML node
+   * @param node Name of the node
+   * @param ns Optional namespace
+   * @return Number of bytes written
+   */
   size_t printNodeEnd(const char* node, const char* ns = nullptr) {
     size_t result = p_out->print("</");
     if (ns != nullptr) {
@@ -197,7 +302,6 @@ struct XMLPrinter {
     return p_out->println(txt);
   }
 
- protected:
   size_t printChildren(Vector<XMLNode>& children) {
     size_t result = 0;
     for (auto& node : children) {
