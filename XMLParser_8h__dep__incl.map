@@ -1,12 +1,12 @@
 <map id="src/dlna/xml/XMLParser.h" name="src/dlna/xml/XMLParser.h">
-<area shape="rect" id="node1" title=" " alt="" coords="294,5,479,31"/>
-<area shape="rect" id="node2" href="$DLNAControlPoint_8h.html" title=" " alt="" coords="284,152,489,177"/>
-<area shape="rect" id="node10" href="$XMLParserPrint_8h.html" title=" " alt="" coords="352,79,568,104"/>
-<area shape="rect" id="node3" href="$DLNA_8h.html" title=" " alt="" coords="239,577,332,603"/>
-<area shape="rect" id="node4" href="$DLNADeviceRequestParser_8h.html" title=" " alt="" coords="139,225,349,265"/>
-<area shape="rect" id="node8" href="$ControlPointMediaServer_8h.html" title=" " alt="" coords="400,489,571,529"/>
-<area shape="rect" id="node9" href="$ControlPointMediaRenderer_8h.html" title=" " alt="" coords="523,313,693,353"/>
-<area shape="rect" id="node5" href="$DLNADevice_8h.html" title=" " alt="" coords="159,321,329,346"/>
-<area shape="rect" id="node6" href="$MediaRenderer_8h.html" title=" " alt="" coords="94,489,325,529"/>
-<area shape="rect" id="node7" href="$MediaServer_8h.html" title=" " alt="" coords="235,401,448,441"/>
+<area shape="rect" id="node1" title=" " alt="" coords="190,5,375,31"/>
+<area shape="rect" id="node2" href="$DLNAControlPoint_8h.html" title=" " alt="" coords="324,152,529,177"/>
+<area shape="rect" id="node10" href="$XMLParserPrint_8h.html" title=" " alt="" coords="103,79,319,104"/>
+<area shape="rect" id="node3" href="$DLNA_8h.html" title=" " alt="" coords="351,577,444,603"/>
+<area shape="rect" id="node4" href="$DLNADeviceRequestParser_8h.html" title=" " alt="" coords="179,225,389,265"/>
+<area shape="rect" id="node8" href="$ControlPointMediaServer_8h.html" title=" " alt="" coords="373,489,544,529"/>
+<area shape="rect" id="node9" href="$ControlPointMediaRenderer_8h.html" title=" " alt="" coords="496,313,667,353"/>
+<area shape="rect" id="node5" href="$DLNADevice_8h.html" title=" " alt="" coords="5,321,176,346"/>
+<area shape="rect" id="node6" href="$MediaRenderer_8h.html" title=" " alt="" coords="67,489,298,529"/>
+<area shape="rect" id="node7" href="$MediaServer_8h.html" title=" " alt="" coords="192,401,405,441"/>
 </map>

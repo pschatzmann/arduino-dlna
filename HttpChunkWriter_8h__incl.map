@@ -1,9 +1,14 @@
 <map id="src/http/Server/HttpChunkWriter.h" name="src/http/Server/HttpChunkWriter.h">
-<area shape="rect" id="node1" title=" " alt="" coords="30,5,221,45"/>
-<area shape="rect" id="node2" title=" " alt="" coords="31,93,103,119"/>
-<area shape="rect" id="node3" href="$Logger_8h.html" title=" " alt="" coords="127,93,241,119"/>
-<area shape="rect" id="node4" title=" " alt="" coords="5,167,80,192"/>
-<area shape="rect" id="node5" title=" " alt="" coords="104,167,171,192"/>
-<area shape="rect" id="node6" title=" " alt="" coords="195,167,266,192"/>
-<area shape="rect" id="node7" title=" " alt="" coords="290,167,374,192"/>
+<area shape="rect" id="node1" title=" " alt="" coords="269,5,459,45"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,93,69,119"/>
+<area shape="rect" id="node3" title=" " alt="" coords="93,93,165,119"/>
+<area shape="rect" id="node4" href="$Logger_8h.html" title=" " alt="" coords="189,93,304,119"/>
+<area shape="rect" id="node9" title=" " alt="" coords="329,93,399,119"/>
+<area shape="rect" id="node10" title=" " alt="" coords="424,93,485,119"/>
+<area shape="rect" id="node11" title=" " alt="" coords="509,93,576,119"/>
+<area shape="rect" id="node12" title=" " alt="" coords="600,93,667,119"/>
+<area shape="rect" id="node5" title=" " alt="" coords="68,167,143,192"/>
+<area shape="rect" id="node6" title=" " alt="" coords="167,167,233,192"/>
+<area shape="rect" id="node7" title=" " alt="" coords="258,167,329,192"/>
+<area shape="rect" id="node8" title=" " alt="" coords="353,167,437,192"/>
 </map>

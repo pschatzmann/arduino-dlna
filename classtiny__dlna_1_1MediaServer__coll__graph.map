@@ -1,5 +1,5 @@
 <map id="tiny_dlna::MediaServer" name="tiny_dlna::MediaServer">
-<area shape="rect" id="node1" title="Minimal Digital Media Server implementation." alt="" coords="2884,443,3056,469"/>
+<area shape="rect" id="node1" title="Minimal Digital Media Server implementation." alt="" coords="2952,443,3124,469"/>
 <area shape="rect" id="node2" href="$classtiny__dlna_1_1DLNADeviceInfo.html" title="Device Attributes and generation of XML using urn:schemas&#45;upnp&#45;org:device&#45;1&#45;0. We could just return a..." alt="" coords="2556,183,2752,209"/>
 <area shape="rect" id="node3" href="$structtiny__dlna_1_1XMLPrinter.html" title="Functions to efficiently output XML. XML data contains a lot of redundancy so it is more memory effic..." alt="" coords="2259,70,2421,95"/>
 <area shape="rect" id="node4" href="$classtiny__dlna_1_1Url.html" title="URL parser which breaks a full url string up into its individual parts." alt="" coords="1132,263,1241,289"/>
