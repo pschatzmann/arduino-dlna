@@ -18,7 +18,7 @@ var searchData=
   ['nts_15',['nts',['../classtiny__dlna_1_1NotifyReplyCP.html#af6d4a28af16fe48612e2f8f2de246cbd',1,'tiny_dlna::NotifyReplyCP']]],
   ['nullprint_16',['NullPrint',['../classtiny__dlna_1_1NullPrint.html',1,'tiny_dlna']]],
   ['nullprint_2eh_17',['NullPrint.h',['../NullPrint_8h.html',1,'']]],
-  ['nullstr_18',['nullStr',['../classtiny__dlna_1_1DLNAControlPoint.html#ab013ca8dbcf5e61b37681bf9729172b2',1,'tiny_dlna::DLNAControlPoint::nullStr(const char *str, const char *empty=&quot;(null)&quot;)'],['../classtiny__dlna_1_1DLNAControlPoint.html#a0dc7dd2de4c8bae0c37a4011b18b9f24',1,'tiny_dlna::DLNAControlPoint::nullStr(Str &amp;str, const char *empty=&quot;(null)&quot;)']]],
-  ['nullstr_19',['nullstr',['../classtiny__dlna_1_1HttpServer.html#a591ab7508102cf1a7a1cebb9755e3ba6',1,'tiny_dlna::HttpServer']]],
+  ['nullstr_18',['nullstr',['../classtiny__dlna_1_1HttpServer.html#a591ab7508102cf1a7a1cebb9755e3ba6',1,'tiny_dlna::HttpServer']]],
+  ['nullstr_19',['nullStr',['../classtiny__dlna_1_1DLNAControlPoint.html#ab013ca8dbcf5e61b37681bf9729172b2',1,'tiny_dlna::DLNAControlPoint::nullStr(const char *str, const char *empty=&quot;(null)&quot;)'],['../classtiny__dlna_1_1DLNAControlPoint.html#a0dc7dd2de4c8bae0c37a4011b18b9f24',1,'tiny_dlna::DLNAControlPoint::nullStr(Str &amp;str, const char *empty=&quot;(null)&quot;)']]],
   ['numberofdecimals_20',['numberOfDecimals',['../classtiny__dlna_1_1StrView.html#a5c0c4b151d66444d0c8296e648400cb9',1,'tiny_dlna::StrView']]]
 ];

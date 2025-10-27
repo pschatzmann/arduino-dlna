@@ -164,6 +164,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a4d3fe2459d3ef819cce00e9c3641d4cf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaServer.html#a4d3fe2459d3ef819cce00e9c3641d4cf">getHttpServer</a> ()</td></tr>
 <tr class="memdesc:a4d3fe2459d3ef819cce00e9c3641d4cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides access to the http server.  <br /></td></tr>
 <tr class="separator:a4d3fe2459d3ef819cce00e9c3641d4cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af9b53c141f0001d514710dadc28eca50"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaServer.html#af9b53c141f0001d514710dadc28eca50">getSystemUpdateID</a> ()</td></tr>
+<tr class="memdesc:af9b53c141f0001d514710dadc28eca50"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides access to the system update ID.  <br /></td></tr>
+<tr class="separator:af9b53c141f0001d514710dadc28eca50"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace794f70fc1a77b99c870bd889540004"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaServer.html#ace794f70fc1a77b99c870bd889540004">incrementSystemUpdateID</a> ()</td></tr>
+<tr class="memdesc:ace794f70fc1a77b99c870bd889540004"><td class="mdescLeft">&#160;</td><td class="mdescRight">Increments and returns the SystemUpdateID.  <br /></td></tr>
+<tr class="separator:ace794f70fc1a77b99c870bd889540004"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classtiny__dlna_1_1DLNADeviceInfo"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classtiny__dlna_1_1DLNADeviceInfo')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html">tiny_dlna::DLNADeviceInfo</a></td></tr>
 <tr class="memitem:ac9a74b9751b1558d9b335f702df5a6b9 inherit pub_methods_classtiny__dlna_1_1DLNADeviceInfo"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#ac9a74b9751b1558d9b335f702df5a6b9">DLNADeviceInfo</a> (bool ok=true)</td></tr>
 <tr class="separator:ac9a74b9751b1558d9b335f702df5a6b9 inherit pub_methods_classtiny__dlna_1_1DLNADeviceInfo"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -359,7 +365,7 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a8d761ac2c798c6783d79dff1fc723146"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ace5c72746ef67dce91cc650d1bbac190"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaServer.html#ace5c72746ef67dce91cc650d1bbac190">g_search_capabiities</a></td></tr>
 <tr class="separator:ace5c72746ef67dce91cc650d1bbac190"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a441aacb1ebd2773ad1f334746f05d114"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaServer.html#a441aacb1ebd2773ad1f334746f05d114">g_sort_capabilities</a> = &quot;&quot;</td></tr>
+<tr class="memitem:a441aacb1ebd2773ad1f334746f05d114"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaServer.html#a441aacb1ebd2773ad1f334746f05d114">g_sort_capabilities</a> = &quot;dc:title&quot;</td></tr>
 <tr class="separator:a441aacb1ebd2773ad1f334746f05d114"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classtiny__dlna_1_1DLNADeviceInfo"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classtiny__dlna_1_1DLNADeviceInfo')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html">tiny_dlna::DLNADeviceInfo</a></td></tr>
 <tr class="memitem:af83b1b3e3a439bc6ff049b43adaa7512 inherit pro_attribs_classtiny__dlna_1_1DLNADeviceInfo"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#af83b1b3e3a439bc6ff049b43adaa7512">timestamp</a> = 0</td></tr>
@@ -689,6 +695,60 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="af9b53c141f0001d514710dadc28eca50" name="af9b53c141f0001d514710dadc28eca50"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af9b53c141f0001d514710dadc28eca50">&#9670;&#160;</a></span>getSystemUpdateID()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int tiny_dlna::MediaServer::getSystemUpdateID </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Provides access to the system update ID. </p>
+
+</div>
+</div>
+<a id="ace794f70fc1a77b99c870bd889540004" name="ace794f70fc1a77b99c870bd889540004"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace794f70fc1a77b99c870bd889540004">&#9670;&#160;</a></span>incrementSystemUpdateID()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int tiny_dlna::MediaServer::incrementSystemUpdateID </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Increments and returns the SystemUpdateID. </p>
+
+</div>
+</div>
 <a id="ac47d8f17ad4a352c03e5b442c5f1a194" name="ac47d8f17ad4a352c03e5b442c5f1a194"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac47d8f17ad4a352c03e5b442c5f1a194">&#9670;&#160;</a></span>processAction()</h2>
 
@@ -929,7 +989,7 @@ Static Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>generic SOAP reply template with placeholders: %1 = ActionResponse, %2 = ServiceName, %3 = inner payload </p>
+<p>generic SOAP reply template with placeholders: %1 = ActionResponse, %2 = payload tag, %3 = inner payload </p>
 
 </div>
 </div>
@@ -1315,7 +1375,7 @@ Static Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const char* tiny_dlna::MediaServer::g_sort_capabilities = &quot;&quot;</td>
+          <td class="memname">const char* tiny_dlna::MediaServer::g_sort_capabilities = &quot;dc:title&quot;</td>
         </tr>
       </table>
   </td>
