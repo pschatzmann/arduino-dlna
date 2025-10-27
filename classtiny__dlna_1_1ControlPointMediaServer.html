@@ -154,11 +154,11 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ada90b9cdcdbeba870bf21e4ac96398b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the <a class="el" href="classtiny__dlna_1_1ActionReply.html" title="Represents the result of invoking a DLNA service Action.">ActionReply</a> from the last synchronous request.  <br /></td></tr>
 <tr class="separator:ada90b9cdcdbeba870bf21e4ac96398b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a509e41c95783131e3d5e87a8063a8c56"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1ControlPointMediaServer.html#a509e41c95783131e3d5e87a8063a8c56">setDeviceIndex</a> (int idx)</td></tr>
-<tr class="memdesc:a509e41c95783131e3d5e87a8063a8c56"><td class="mdescLeft">&#160;</td><td class="mdescRight">Select a device by index (0-based) for subsequent actions.  <br /></td></tr>
+<tr class="memdesc:a509e41c95783131e3d5e87a8063a8c56"><td class="mdescLeft">&#160;</td><td class="mdescRight">Select a device by index (0-based) for subsequent actions. By default 0 is used.  <br /></td></tr>
 <tr class="separator:a509e41c95783131e3d5e87a8063a8c56"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a88c701eeff77abf9489b49816bc04cbe"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1ControlPointMediaServer.html#a88c701eeff77abf9489b49816bc04cbe">subscribeNotifications</a> (int timeoutSeconds=60, <a class="el" href="classtiny__dlna_1_1ControlPointMediaServer.html#a4876165c84594e64b7b5cb37d9575a3c">NotificationCallback</a> cb=nullptr)</td></tr>
-<tr class="memdesc:a88c701eeff77abf9489b49816bc04cbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subscribe to event notifications for the selected server/device.  <br /></td></tr>
-<tr class="separator:a88c701eeff77abf9489b49816bc04cbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2dc32a7bde5dfcea7cc98fdadc71cfe9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1ControlPointMediaServer.html#a2dc32a7bde5dfcea7cc98fdadc71cfe9">subscribeNotifications</a> (<a class="el" href="classtiny__dlna_1_1ControlPointMediaServer.html#a4876165c84594e64b7b5cb37d9575a3c">NotificationCallback</a> cb=nullptr, int timeoutSeconds=3600)</td></tr>
+<tr class="memdesc:a2dc32a7bde5dfcea7cc98fdadc71cfe9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subscribe to event notifications for the selected server/device.  <br /></td></tr>
+<tr class="separator:a2dc32a7bde5dfcea7cc98fdadc71cfe9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a30ddc4533768e104869787a722f003aa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1ControlPointMediaServer.html#a30ddc4533768e104869787a722f003aa">setDeviceTypeFilter</a> (const char *filter)</td></tr>
 <tr class="memdesc:a30ddc4533768e104869787a722f003aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Restrict this helper to devices of the given device type.  <br /></td></tr>
 <tr class="separator:a30ddc4533768e104869787a722f003aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -217,8 +217,6 @@ Static Protected Member Functions</h2></td></tr>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:ad9612937de394001ce27b3885309a20d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html">DLNAControlPoint</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1ControlPointMediaServer.html#ad9612937de394001ce27b3885309a20d">mgr</a></td></tr>
 <tr class="separator:ad9612937de394001ce27b3885309a20d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a91d8e801845bc2902c8e69465930b25e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1ControlPointMediaServer.html#a91d8e801845bc2902c8e69465930b25e">device_index</a> = 0</td></tr>
-<tr class="separator:a91d8e801845bc2902c8e69465930b25e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8822b6e68c5cde6d5fb5a2a01c97ca85"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1ControlPointMediaServer.html#a8822b6e68c5cde6d5fb5a2a01c97ca85">device_type_filter_default</a></td></tr>
 <tr class="separator:a8822b6e68c5cde6d5fb5a2a01c97ca85"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abc4ffd9abdaa4c5cd4466f6595e769e2"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1ControlPointMediaServer.html#abc4ffd9abdaa4c5cd4466f6595e769e2">device_type_filter</a> = <a class="el" href="classtiny__dlna_1_1ControlPointMediaServer.html#a8822b6e68c5cde6d5fb5a2a01c97ca85">device_type_filter_default</a></td></tr>
@@ -1033,7 +1031,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Select a device by index (0-based) for subsequent actions. </p>
+<p>Select a device by index (0-based) for subsequent actions. By default 0 is used. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">idx</td><td>Device index </td></tr>
@@ -1145,8 +1143,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a88c701eeff77abf9489b49816bc04cbe" name="a88c701eeff77abf9489b49816bc04cbe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a88c701eeff77abf9489b49816bc04cbe">&#9670;&#160;</a></span>subscribeNotifications()</h2>
+<a id="a2dc32a7bde5dfcea7cc98fdadc71cfe9" name="a2dc32a7bde5dfcea7cc98fdadc71cfe9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2dc32a7bde5dfcea7cc98fdadc71cfe9">&#9670;&#160;</a></span>subscribeNotifications()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1157,14 +1155,14 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">bool tiny_dlna::ControlPointMediaServer::subscribeNotifications </td>
           <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>timeoutSeconds</em> = <code>60</code>, </td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1ControlPointMediaServer.html#a4876165c84594e64b7b5cb37d9575a3c">NotificationCallback</a>&#160;</td>
+          <td class="paramname"><em>cb</em> = <code>nullptr</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1ControlPointMediaServer.html#a4876165c84594e64b7b5cb37d9575a3c">NotificationCallback</a>&#160;</td>
-          <td class="paramname"><em>cb</em> = <code>nullptr</code>&#160;</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>timeoutSeconds</em> = <code>3600</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1192,28 +1190,6 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="a91d8e801845bc2902c8e69465930b25e" name="a91d8e801845bc2902c8e69465930b25e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a91d8e801845bc2902c8e69465930b25e">&#9670;&#160;</a></span>device_index</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">int tiny_dlna::ControlPointMediaServer::device_index = 0</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="abc4ffd9abdaa4c5cd4466f6595e769e2" name="abc4ffd9abdaa4c5cd4466f6595e769e2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abc4ffd9abdaa4c5cd4466f6595e769e2">&#9670;&#160;</a></span>device_type_filter</h2>
 
