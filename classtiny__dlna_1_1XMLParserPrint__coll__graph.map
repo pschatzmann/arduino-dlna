@@ -1,11 +1,11 @@
 <map id="tiny_dlna::XMLParserPrint" name="tiny_dlna::XMLParserPrint">
-<area shape="rect" id="node1" title="Helper that implements a Print interface to accumulate XML data and then parse it using XMLParser." alt="" coords="1383,121,1571,147"/>
+<area shape="rect" id="node1" title="Helper class that implements a Print interface to accumulate XML data and then parse it using XMLPars..." alt="" coords="1383,121,1571,147"/>
 <area shape="rect" id="node2" title=" " alt="" coords="905,5,957,31"/>
 <area shape="rect" id="node3" href="$classtiny__dlna_1_1StrPrint.html" title="Print to a dynamic string." alt="" coords="1129,64,1267,89"/>
 <area shape="rect" id="node4" href="$classtiny__dlna_1_1Str.html" title="String implementation which keeps the data on the heap. We grow the allocated memory only if the copy..." alt="" coords="612,275,720,300"/>
 <area shape="rect" id="node8" href="$classtiny__dlna_1_1XMLParser.html" title="Lightweight streaming XML parser." alt="" coords="1119,345,1277,371"/>
 <area shape="rect" id="node9" href="$classtiny__dlna_1_1Vector.html" title=" " alt="" coords="860,338,1003,378"/>
-<area shape="rect" id="node11" href="$structtiny__dlna_1_1XMLParserPrint_1_1CBRef.html" title=" " alt="" coords="1104,149,1292,189"/>
+<area shape="rect" id="node11" href="$structtiny__dlna_1_1XMLParserPrint_1_1CBRef.html" title="Internal callback reference used to capture the callback data from XMLParser and forward it to the ca..." alt="" coords="1104,149,1292,189"/>
 <area shape="rect" id="node5" href="$classtiny__dlna_1_1StrView.html" title="A simple wrapper to provide string functions on char*. If the underlying char* is a const we do not a..." alt="" coords="280,404,420,429"/>
 <area shape="rect" id="node6" href="$classtiny__dlna_1_1Vector.html" title=" " alt="" coords="279,278,421,318"/>
 <area shape="rect" id="node7" href="$classtiny__dlna_1_1Allocator.html" title="Memory allocateator which uses malloc." alt="" coords="5,353,153,379"/>

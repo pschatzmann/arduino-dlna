@@ -83,7 +83,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Helper that implements a Print interface to accumulate XML data and then parse it using <a class="el" href="classtiny__dlna_1_1XMLParser.html" title="Lightweight streaming XML parser.">XMLParser</a>.  
+<p>Helper class that implements a Print interface to accumulate XML data and then parse it using <a class="el" href="classtiny__dlna_1_1XMLParser.html" title="Lightweight streaming XML parser.">XMLParser</a>.  
  <a href="classtiny__dlna_1_1XMLParserPrint.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="XMLParserPrint_8h_source.html">XMLParserPrint.h</a>&gt;</code></p>
@@ -92,7 +92,7 @@ Inheritance diagram for tiny_dlna::XMLParserPrint:</div>
 <div class="dyncontent">
 <div class="center"><img src="classtiny__dlna_1_1XMLParserPrint__inherit__graph.png" border="0" usemap="#atiny__dlna_1_1XMLParserPrint_inherit__map" alt="Inheritance graph"/></div>
 <map name="atiny__dlna_1_1XMLParserPrint_inherit__map" id="atiny__dlna_1_1XMLParserPrint_inherit__map">
-<area shape="rect" title="Helper that implements a Print interface to accumulate XML data and then parse it using XMLParser." alt="" coords="5,79,193,104"/>
+<area shape="rect" title="Helper class that implements a Print interface to accumulate XML data and then parse it using XMLPars..." alt="" coords="5,79,193,104"/>
 <area shape="rect" title=" " alt="" coords="73,5,125,31"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
@@ -101,13 +101,13 @@ Collaboration diagram for tiny_dlna::XMLParserPrint:</div>
 <div class="dyncontent">
 <div class="center"><img src="classtiny__dlna_1_1XMLParserPrint__coll__graph.png" border="0" usemap="#atiny__dlna_1_1XMLParserPrint_coll__map" alt="Collaboration graph"/></div>
 <map name="atiny__dlna_1_1XMLParserPrint_coll__map" id="atiny__dlna_1_1XMLParserPrint_coll__map">
-<area shape="rect" title="Helper that implements a Print interface to accumulate XML data and then parse it using XMLParser." alt="" coords="1383,121,1571,147"/>
+<area shape="rect" title="Helper class that implements a Print interface to accumulate XML data and then parse it using XMLPars..." alt="" coords="1383,121,1571,147"/>
 <area shape="rect" title=" " alt="" coords="905,5,957,31"/>
 <area shape="rect" href="classtiny__dlna_1_1StrPrint.html" title="Print to a dynamic string." alt="" coords="1129,64,1267,89"/>
 <area shape="rect" href="classtiny__dlna_1_1Str.html" title="String implementation which keeps the data on the heap. We grow the allocated memory only if the copy..." alt="" coords="612,275,720,300"/>
 <area shape="rect" href="classtiny__dlna_1_1XMLParser.html" title="Lightweight streaming XML parser." alt="" coords="1119,345,1277,371"/>
 <area shape="rect" href="classtiny__dlna_1_1Vector.html" title=" " alt="" coords="860,338,1003,378"/>
-<area shape="rect" href="structtiny__dlna_1_1XMLParserPrint_1_1CBRef.html" title=" " alt="" coords="1104,149,1292,189"/>
+<area shape="rect" href="structtiny__dlna_1_1XMLParserPrint_1_1CBRef.html" title="Internal callback reference used to capture the callback data from XMLParser and forward it to the ca..." alt="" coords="1104,149,1292,189"/>
 <area shape="rect" href="classtiny__dlna_1_1StrView.html" title="A simple wrapper to provide string functions on char*. If the underlying char* is a const we do not a..." alt="" coords="280,404,420,429"/>
 <area shape="rect" href="classtiny__dlna_1_1Vector.html" title=" " alt="" coords="279,278,421,318"/>
 <area shape="rect" href="classtiny__dlna_1_1Allocator.html" title="Memory allocateator which uses malloc." alt="" coords="5,353,153,379"/>
@@ -118,44 +118,56 @@ Collaboration diagram for tiny_dlna::XMLParserPrint:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1XMLParserPrint_1_1CBRef.html">CBRef</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal callback reference used to capture the callback data from <a class="el" href="classtiny__dlna_1_1XMLParser.html" title="Lightweight streaming XML parser.">XMLParser</a> and forward it to the caller.  <a href="structtiny__dlna_1_1XMLParserPrint_1_1CBRef.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ac0b0711607cb77e0f5c066f5a0e1e496"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1XMLParserPrint.html#ac0b0711607cb77e0f5c066f5a0e1e496">XMLParserPrint</a> (int reserve=80)</td></tr>
+<tr class="memdesc:ac0b0711607cb77e0f5c066f5a0e1e496"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <br /></td></tr>
 <tr class="separator:ac0b0711607cb77e0f5c066f5a0e1e496"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a829f6bdd805a19b93fe69fceb8b9e970"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1XMLParserPrint.html#a829f6bdd805a19b93fe69fceb8b9e970">write</a> (uint8_t ch) override</td></tr>
+<tr class="memdesc:a829f6bdd805a19b93fe69fceb8b9e970"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes a single byte to the buffer (Print interface)  <br /></td></tr>
 <tr class="separator:a829f6bdd805a19b93fe69fceb8b9e970"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acd028666859f3af7e01c17aff5262c3b"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1XMLParserPrint.html#acd028666859f3af7e01c17aff5262c3b">write</a> (const uint8_t *data, size_t size) override</td></tr>
+<tr class="memdesc:acd028666859f3af7e01c17aff5262c3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes a block of data to the buffer (Print interface)  <br /></td></tr>
 <tr class="separator:acd028666859f3af7e01c17aff5262c3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8947ff1d4083fb1c595302179b7b0500"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1XMLParserPrint.html#a8947ff1d4083fb1c595302179b7b0500">setExpandEncoded</a> (bool flag)</td></tr>
-<tr class="memdesc:a8947ff1d4083fb1c595302179b7b0500"><td class="mdescLeft">&#160;</td><td class="mdescRight">Forward expand-entities setting to the underlying <a class="el" href="classtiny__dlna_1_1XMLParser.html" title="Lightweight streaming XML parser.">XMLParser</a>.  <br /></td></tr>
+<tr class="memdesc:a8947ff1d4083fb1c595302179b7b0500"><td class="mdescLeft">&#160;</td><td class="mdescRight">Forwards expand-entities setting to the underlying <a class="el" href="classtiny__dlna_1_1XMLParser.html" title="Lightweight streaming XML parser.">XMLParser</a>.  <br /></td></tr>
 <tr class="separator:a8947ff1d4083fb1c595302179b7b0500"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af55be317e0225a43ad108af16d5194b2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1XMLParserPrint.html#af55be317e0225a43ad108af16d5194b2">parse</a> (<a class="el" href="classtiny__dlna_1_1Str.html">Str</a> &amp;outNodeName, <a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt; <a class="el" href="classtiny__dlna_1_1Str.html">Str</a> &gt; &amp;outPath, <a class="el" href="classtiny__dlna_1_1Str.html">Str</a> &amp;outText, <a class="el" href="classtiny__dlna_1_1Str.html">Str</a> &amp;outAttributes)</td></tr>
+<tr class="memdesc:af55be317e0225a43ad108af16d5194b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parses the accumulated XML data and returns results via output parameters.  <br /></td></tr>
 <tr class="separator:af55be317e0225a43ad108af16d5194b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a779b0fb687fba53cce4bb3fc0291e287"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1XMLParserPrint.html#a779b0fb687fba53cce4bb3fc0291e287">reset</a> ()</td></tr>
+<tr class="memdesc:a779b0fb687fba53cce4bb3fc0291e287"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets the internal buffer.  <br /></td></tr>
 <tr class="separator:a779b0fb687fba53cce4bb3fc0291e287"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5b48f476bfe223e3f50776987b8176ed"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1XMLParserPrint.html#a5b48f476bfe223e3f50776987b8176ed">c_str</a> ()</td></tr>
+<tr class="memdesc:a5b48f476bfe223e3f50776987b8176ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the internal buffer as a C string.  <br /></td></tr>
 <tr class="separator:a5b48f476bfe223e3f50776987b8176ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aba8b33ffea924534625de27e7c778911"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1XMLParserPrint.html#aba8b33ffea924534625de27e7c778911">length</a> ()</td></tr>
+<tr class="memdesc:aba8b33ffea924534625de27e7c778911"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the length of the internal buffer.  <br /></td></tr>
 <tr class="separator:aba8b33ffea924534625de27e7c778911"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
 Static Protected Member Functions</h2></td></tr>
 <tr class="memitem:a8d926b890c87bdaf5f3efb1225f80d59"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1XMLParserPrint.html#a8d926b890c87bdaf5f3efb1225f80d59">wrapperCallback</a> (<a class="el" href="classtiny__dlna_1_1Str.html">Str</a> &amp;nodeName, <a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt; <a class="el" href="classtiny__dlna_1_1Str.html">Str</a> &gt; &amp;path, <a class="el" href="classtiny__dlna_1_1Str.html">Str</a> &amp;text, <a class="el" href="classtiny__dlna_1_1Str.html">Str</a> &amp;attributes, int start, int len, void *ref)</td></tr>
+<tr class="memdesc:a8d926b890c87bdaf5f3efb1225f80d59"><td class="mdescLeft">&#160;</td><td class="mdescRight">Static wrapper used as <a class="el" href="classtiny__dlna_1_1XMLParser.html" title="Lightweight streaming XML parser.">XMLParser</a> callback. Copies the first invocation's data into the <a class="el" href="structtiny__dlna_1_1XMLParserPrint_1_1CBRef.html" title="Internal callback reference used to capture the callback data from XMLParser and forward it to the ca...">CBRef</a> and forwards the event to the user-provided callback if present.  <br /></td></tr>
 <tr class="separator:a8d926b890c87bdaf5f3efb1225f80d59"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a4355fabd2189cee55d1682cb42adb582"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1StrPrint.html">StrPrint</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1XMLParserPrint.html#a4355fabd2189cee55d1682cb42adb582">buffer</a></td></tr>
+<tr class="memdesc:a4355fabd2189cee55d1682cb42adb582"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal buffer for accumulating XML data.  <br /></td></tr>
 <tr class="separator:a4355fabd2189cee55d1682cb42adb582"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adc6b5345720642b4cd2f82d144ea8c1c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1XMLParser.html">XMLParser</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1XMLParserPrint.html#adc6b5345720642b4cd2f82d144ea8c1c">p</a></td></tr>
+<tr class="memdesc:adc6b5345720642b4cd2f82d144ea8c1c"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classtiny__dlna_1_1XMLParser.html" title="Lightweight streaming XML parser.">XMLParser</a> instance used for parsing.  <br /></td></tr>
 <tr class="separator:adc6b5345720642b4cd2f82d144ea8c1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a318f78edb1e78215ac4a9e52373676df"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structtiny__dlna_1_1XMLParserPrint_1_1CBRef.html">tiny_dlna::XMLParserPrint::CBRef</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1XMLParserPrint.html#a318f78edb1e78215ac4a9e52373676df">cbref</a></td></tr>
 <tr class="separator:a318f78edb1e78215ac4a9e52373676df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Helper that implements a Print interface to accumulate XML data and then parse it using <a class="el" href="classtiny__dlna_1_1XMLParser.html" title="Lightweight streaming XML parser.">XMLParser</a>. </p>
+<div class="textblock"><p>Helper class that implements a Print interface to accumulate XML data and then parse it using <a class="el" href="classtiny__dlna_1_1XMLParser.html" title="Lightweight streaming XML parser.">XMLParser</a>. </p>
+<p>This class allows you to write XML data using the Print interface, accumulate it in an internal buffer, and then parse the buffer using an <a class="el" href="classtiny__dlna_1_1XMLParser.html" title="Lightweight streaming XML parser.">XMLParser</a>. The parsing result is returned via output parameters. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ac0b0711607cb77e0f5c066f5a0e1e496" name="ac0b0711607cb77e0f5c066f5a0e1e496"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac0b0711607cb77e0f5c066f5a0e1e496">&#9670;&#160;</a></span>XMLParserPrint()</h2>
@@ -180,6 +192,14 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Constructor. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">reserve</td><td>Initial buffer size to reserve </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -207,6 +227,9 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Returns the internal buffer as a C string. </p>
+<dl class="section return"><dt>Returns</dt><dd>Pointer to buffer data </dd></dl>
+
 </div>
 </div>
 <a id="aba8b33ffea924534625de27e7c778911" name="aba8b33ffea924534625de27e7c778911"></a>
@@ -231,6 +254,9 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Returns the length of the internal buffer. </p>
+<dl class="section return"><dt>Returns</dt><dd>Buffer length </dd></dl>
 
 </div>
 </div>
@@ -280,6 +306,18 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Parses the accumulated XML data and returns results via output parameters. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">outNodeName</td><td>Output: node name </td></tr>
+    <tr><td class="paramname">outPath</td><td>Output: path vector </td></tr>
+    <tr><td class="paramname">outText</td><td>Output: text content </td></tr>
+    <tr><td class="paramname">outAttributes</td><td>Output: attributes string </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if parsing was successful, false otherwise </dd></dl>
+
 </div>
 </div>
 <a id="a779b0fb687fba53cce4bb3fc0291e287" name="a779b0fb687fba53cce4bb3fc0291e287"></a>
@@ -304,6 +342,8 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Resets the internal buffer. </p>
 
 </div>
 </div>
@@ -331,7 +371,13 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Forward expand-entities setting to the underlying <a class="el" href="classtiny__dlna_1_1XMLParser.html" title="Lightweight streaming XML parser.">XMLParser</a>. </p>
+<p>Forwards expand-entities setting to the underlying <a class="el" href="classtiny__dlna_1_1XMLParser.html" title="Lightweight streaming XML parser.">XMLParser</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">flag</td><td>If true, expand encoded entities </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -399,6 +445,20 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Static wrapper used as <a class="el" href="classtiny__dlna_1_1XMLParser.html" title="Lightweight streaming XML parser.">XMLParser</a> callback. Copies the first invocation's data into the <a class="el" href="structtiny__dlna_1_1XMLParserPrint_1_1CBRef.html" title="Internal callback reference used to capture the callback data from XMLParser and forward it to the ca...">CBRef</a> and forwards the event to the user-provided callback if present. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">nodeName</td><td>Name of the node </td></tr>
+    <tr><td class="paramname">path</td><td>Path vector </td></tr>
+    <tr><td class="paramname">text</td><td>Text content </td></tr>
+    <tr><td class="paramname">attributes</td><td>Attributes string </td></tr>
+    <tr><td class="paramname">start</td><td>Start position </td></tr>
+    <tr><td class="paramname">len</td><td>Length </td></tr>
+    <tr><td class="paramname">ref</td><td>Reference to <a class="el" href="structtiny__dlna_1_1XMLParserPrint_1_1CBRef.html" title="Internal callback reference used to capture the callback data from XMLParser and forward it to the ca...">CBRef</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="acd028666859f3af7e01c17aff5262c3b" name="acd028666859f3af7e01c17aff5262c3b"></a>
@@ -435,6 +495,16 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Writes a block of data to the buffer (Print interface) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>Pointer to data </td></tr>
+    <tr><td class="paramname">size</td><td>Number of bytes to write </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Number of bytes written </dd></dl>
+
 </div>
 </div>
 <a id="a829f6bdd805a19b93fe69fceb8b9e970" name="a829f6bdd805a19b93fe69fceb8b9e970"></a>
@@ -461,6 +531,15 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Writes a single byte to the buffer (Print interface) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ch</td><td>Byte to write </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Number of bytes written </dd></dl>
+
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
@@ -483,6 +562,8 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Internal buffer for accumulating XML data. </p>
 
 </div>
 </div>
@@ -527,6 +608,8 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p><a class="el" href="classtiny__dlna_1_1XMLParser.html" title="Lightweight streaming XML parser.">XMLParser</a> instance used for parsing. </p>
 
 </div>
 </div>

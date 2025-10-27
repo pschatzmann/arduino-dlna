@@ -80,13 +80,16 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>Internal callback reference used to capture the callback data from <a class="el" href="classtiny__dlna_1_1XMLParser.html" title="Lightweight streaming XML parser.">XMLParser</a> and forward it to the caller.  
+ <a href="structtiny__dlna_1_1XMLParserPrint_1_1CBRef.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="XMLParserPrint_8h_source.html">XMLParserPrint.h</a>&gt;</code></p>
 <div class="dynheader">
 Collaboration diagram for tiny_dlna::XMLParserPrint::CBRef:</div>
 <div class="dyncontent">
 <div class="center"><img src="structtiny__dlna_1_1XMLParserPrint_1_1CBRef__coll__graph.png" border="0" usemap="#atiny__dlna_1_1XMLParserPrint_1_1CBRef_coll__map" alt="Collaboration graph"/></div>
 <map name="atiny__dlna_1_1XMLParserPrint_1_1CBRef_coll__map" id="atiny__dlna_1_1XMLParserPrint_1_1CBRef_coll__map">
-<area shape="rect" title=" " alt="" coords="124,391,312,431"/>
+<area shape="rect" title="Internal callback reference used to capture the callback data from XMLParser and forward it to the ca..." alt="" coords="124,391,312,431"/>
 <area shape="rect" href="classtiny__dlna_1_1Str.html" title="String implementation which keeps the data on the heap. We grow the allocated memory only if the copy..." alt="" coords="165,196,273,221"/>
 <area shape="rect" href="classtiny__dlna_1_1Vector.html" title=" " alt="" coords="279,286,421,326"/>
 <area shape="rect" href="classtiny__dlna_1_1StrView.html" title="A simple wrapper to provide string functions on char*. If the underlying char* is a const we do not a..." alt="" coords="172,101,312,126"/>
@@ -98,19 +101,27 @@ Collaboration diagram for tiny_dlna::XMLParserPrint::CBRef:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a1858660cf0f27650e1dd4965fc826994"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1XMLParserPrint_1_1CBRef.html#a1858660cf0f27650e1dd4965fc826994">start</a> = 0</td></tr>
+<tr class="memdesc:a1858660cf0f27650e1dd4965fc826994"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start position of parsed data.  <br /></td></tr>
 <tr class="separator:a1858660cf0f27650e1dd4965fc826994"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0d9526b4399cf64825e2b0d12240a261"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1XMLParserPrint_1_1CBRef.html#a0d9526b4399cf64825e2b0d12240a261">len</a> = 0</td></tr>
+<tr class="memdesc:a0d9526b4399cf64825e2b0d12240a261"><td class="mdescLeft">&#160;</td><td class="mdescRight">Length of parsed data.  <br /></td></tr>
 <tr class="separator:a0d9526b4399cf64825e2b0d12240a261"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a214ad27b0017082953aa1358de288879"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Str.html">Str</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1XMLParserPrint_1_1CBRef.html#a214ad27b0017082953aa1358de288879">outNode</a> = nullptr</td></tr>
+<tr class="memdesc:a214ad27b0017082953aa1358de288879"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output node name pointer.  <br /></td></tr>
 <tr class="separator:a214ad27b0017082953aa1358de288879"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af3fd9f94f7cb89ba0114b48dfd9e3fa1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt; <a class="el" href="classtiny__dlna_1_1Str.html">Str</a> &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1XMLParserPrint_1_1CBRef.html#af3fd9f94f7cb89ba0114b48dfd9e3fa1">outPath</a> = nullptr</td></tr>
+<tr class="memdesc:af3fd9f94f7cb89ba0114b48dfd9e3fa1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output path vector pointer.  <br /></td></tr>
 <tr class="separator:af3fd9f94f7cb89ba0114b48dfd9e3fa1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2bc465144589a203393b3e0a35b28421"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Str.html">Str</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1XMLParserPrint_1_1CBRef.html#a2bc465144589a203393b3e0a35b28421">outText</a> = nullptr</td></tr>
+<tr class="memdesc:a2bc465144589a203393b3e0a35b28421"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output text pointer.  <br /></td></tr>
 <tr class="separator:a2bc465144589a203393b3e0a35b28421"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acc1fd54f2a6022632909217c677ed73a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Str.html">Str</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1XMLParserPrint_1_1CBRef.html#acc1fd54f2a6022632909217c677ed73a">outAttrs</a> = nullptr</td></tr>
+<tr class="memdesc:acc1fd54f2a6022632909217c677ed73a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output attributes pointer.  <br /></td></tr>
 <tr class="separator:acc1fd54f2a6022632909217c677ed73a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Data Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Internal callback reference used to capture the callback data from <a class="el" href="classtiny__dlna_1_1XMLParser.html" title="Lightweight streaming XML parser.">XMLParser</a> and forward it to the caller. </p>
+</div><h2 class="groupheader">Member Data Documentation</h2>
 <a id="a0d9526b4399cf64825e2b0d12240a261" name="a0d9526b4399cf64825e2b0d12240a261"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0d9526b4399cf64825e2b0d12240a261">&#9670;&#160;</a></span>len</h2>
 
@@ -122,6 +133,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Length of parsed data. </p>
 
 </div>
 </div>
@@ -137,6 +150,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Output attributes pointer. </p>
+
 </div>
 </div>
 <a id="a214ad27b0017082953aa1358de288879" name="a214ad27b0017082953aa1358de288879"></a>
@@ -150,6 +165,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Output node name pointer. </p>
 
 </div>
 </div>
@@ -165,6 +182,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Output path vector pointer. </p>
+
 </div>
 </div>
 <a id="a2bc465144589a203393b3e0a35b28421" name="a2bc465144589a203393b3e0a35b28421"></a>
@@ -179,6 +198,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Output text pointer. </p>
+
 </div>
 </div>
 <a id="a1858660cf0f27650e1dd4965fc826994" name="a1858660cf0f27650e1dd4965fc826994"></a>
@@ -192,6 +213,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Start position of parsed data. </p>
 
 </div>
 </div>
