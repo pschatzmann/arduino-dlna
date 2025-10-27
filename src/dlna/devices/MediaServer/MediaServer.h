@@ -96,6 +96,12 @@ class MediaServer : public DLNADeviceInfo {
   /// Provides access to the http server
   HttpServer* getHttpServer() { return p_server; }
 
+  /// Provides access to the system update ID
+  int getSystemUpdateID() { return g_stream_updateID; }
+  
+  /// Increments and returns the SystemUpdateID
+  int incrementSystemUpdateID() { return ++g_stream_updateID; }
+
  protected:
   static inline MediaServer* p_media_server = nullptr;
   const char* st = "urn:schemas-upnp-org:device:MediaServer:1";
@@ -114,7 +120,7 @@ class MediaServer : public DLNADeviceInfo {
   const char* g_search_capabiities =
       "dc:title,dc:creator,upnp:class,upnp:genre,"
       "upnp:album,upnp:artist,upnp:albumArtURI";
-  const char* g_sort_capabilities = "";
+  const char* g_sort_capabilities = "dc:title";
 
   void setupServicesImpl(HttpServer* server) {
     DlnaLogger.log(DlnaLogLevel::Info, "MediaServer::setupServices");
@@ -153,15 +159,20 @@ class MediaServer : public DLNADeviceInfo {
   bool processAction(ActionRequest& action, HttpServer& server) {
     DlnaLogger.log(DlnaLogLevel::Info, "processAction");
     StrView action_str(action.action);
-    if (StrView(action.action).equals("Browse")) {
+    if (action_str.isEmpty()){
+      DlnaLogger.log(DlnaLogLevel::Error, "Empty action received");
+      server.replyNotFound();
+      return false;
+    }
+    if (action_str.endsWith("Browse")) {
       return processActionBrowse(action, server);
-    } else if (action_str.equals("Search")) {
+    } else if (action_str.endsWith("Search")) {
       return processActionSearch(action, server);
-    } else if (action_str.equals("GetSearchCapabilities")) {
+    } else if (action_str.endsWith("GetSearchCapabilities")) {
       return processActionGetSearchCapabilities(action, server);
-    } else if (action_str.equals("GetSortCapabilities")) {
+    } else if (action_str.endsWith("GetSortCapabilities")) {
       return processActionGetSortCapabilities(action, server);
-    } else if (action_str.equals("GetSystemUpdateID")) {
+    } else if (action_str.endsWith("GetSystemUpdateID")) {
       return processActionGetSystemUpdateID(action, server);
     } else {
       DlnaLogger.log(DlnaLogLevel::Error, "Unsupported action: %s",
@@ -231,36 +242,37 @@ class MediaServer : public DLNADeviceInfo {
 
   bool processActionGetSearchCapabilities(ActionRequest& action,
                                           HttpServer& server) {
-    DlnaLogger.log(DlnaLogLevel::Info, "processActionGetSearchCapabilities");
     Str reply_str{replyTemplate()};
-    reply_str.replaceAll("%2", "ContentDirectory");
-    reply_str.replaceAll("%1", "ActionResponse");
+    reply_str.replaceAll("%1", "GetSearchCapabilitiesResponse");
+    reply_str.replaceAll("%2", "SearchCaps");
     reply_str.replaceAll("%3", g_search_capabiities);
     server.reply("text/xml", reply_str.c_str());
+    DlnaLogger.log(DlnaLogLevel::Info, "processActionGetSearchCapabilities: %s", reply_str.c_str());
     return true;
   }
 
   bool processActionGetSortCapabilities(ActionRequest& action,
                                         HttpServer& server) {
-    DlnaLogger.log(DlnaLogLevel::Info, "processActionGetSortCapabilities");
     Str reply_str{replyTemplate()};
-    reply_str.replaceAll("%2", "ContentDirectory");
-    reply_str.replaceAll("%1", "ActionResponse");
+    reply_str.replaceAll("%2", "SortCaps");
+    reply_str.replaceAll("%1", "GetSortCapabilitiesResponse");
     reply_str.replaceAll("%3", g_sort_capabilities);
     server.reply("text/xml", reply_str.c_str());
+
+    DlnaLogger.log(DlnaLogLevel::Info, "processActionGetSortCapabilities: %s", reply_str.c_str());
     return true;
   }
 
   bool processActionGetSystemUpdateID(ActionRequest& action,
                                       HttpServer& server) {
-    DlnaLogger.log(DlnaLogLevel::Info, "processActionGetSystemUpdateID");
     Str reply_str{replyTemplate()};
     char update_id_str[80];
     sprintf(update_id_str, "%d", g_stream_updateID);
-    reply_str.replaceAll("%2", "ContentDirectory");
-    reply_str.replaceAll("%1", "ActionResponse");
+    reply_str.replaceAll("%2", "Id");
+    reply_str.replaceAll("%1", "GetSystemUpdateIDResponse");
     reply_str.replaceAll("%3", update_id_str);
     server.reply("text/xml", reply_str.c_str());
+    DlnaLogger.log(DlnaLogLevel::Info, "processActionGetSystemUpdateID: %s", reply_str.c_str());
     return true;
   }
 
@@ -357,13 +369,13 @@ class MediaServer : public DLNADeviceInfo {
   }
 
   /// generic SOAP reply template with placeholders: %1 = ActionResponse, %2 =
-  /// ServiceName, %3 = inner payload
+  /// payload tag, %3 = inner payload
   static const char* replyTemplate() {
     static const char* tpl =
         "<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\""
         " s:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\">"
         "<s:Body><u:%1 "
-        "xmlns:u=\"urn:schemas-upnp-org:service:%2:1\">%3</u:%1></s:Body></"
+        "xmlns:u=\"urn:schemas-upnp-org:service:ContentDirectory:1\"><%2>%3</%2></u:%1></s:Body></"
         "s:Envelope>";
     return tpl;
   }
@@ -436,7 +448,6 @@ class MediaServer : public DLNADeviceInfo {
     xml.printNodeEnd(responseName, "u");
     xml.printNodeEnd("Body", "s");
     xml.printNodeEnd("Envelope", "s");
-    p_media_server->g_stream_updateID++;
   }
 
   // helper: stream DIDL-Lite (escaped) for the provided items to the Print

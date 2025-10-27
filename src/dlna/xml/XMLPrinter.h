@@ -3,6 +3,8 @@
 #include "Print.h"
 #include "assert.h"
 #include <cstring>
+#include <cstdarg>
+#include <cstdio>
 #include "basic/StrView.h"
 #include "basic/Vector.h"
 
@@ -93,6 +95,22 @@ struct XMLPrinter {
     result += callback();
     result += printNodeEnd(node);
     return result;
+  }
+
+  /**
+   * printf-style helper that formats into an internal buffer and writes to the
+   * configured Print output.
+   */
+  size_t printf(const char* fmt, ...) {
+    assert(p_out != nullptr);
+    char buf[512];
+    va_list ap;
+    va_start(ap, fmt);
+    int n = ::vsnprintf(buf, sizeof(buf), fmt, ap);
+    va_end(ap);
+    if (n <= 0) return 0;
+    if (n >= (int)sizeof(buf)) n = (int)sizeof(buf) - 1;
+    return p_out->print(buf);
   }
 
   /**

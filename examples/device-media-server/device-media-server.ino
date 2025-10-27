@@ -95,7 +95,7 @@ void setup() {
   setupWifi();
 
   // define local base URL based on assigned IP address
-  mediaServer.setFriendlyName("Arduino Media Server");
+  mediaServer.setFriendlyName("ArduinoMediaServer");
   mediaServer.setBaseURL(WiFi.localIP(), 44757);
   mediaServer.setReference(nullptr); // not needed for this example
   mediaServer.setPrepareDataCallback(myPrepareData);

@@ -152,6 +152,7 @@ class DLNADevice {
   static void eventSubscriptionHandler(HttpServer* server,
                                        const char* requestPath,
                                        HttpRequestHandlerLine* hl) {
+    DlnaLogger.log(DlnaLogLevel::Debug, "eventSubscriptionHandler");
     // context[0] contains DLNADeviceInfo*
     DLNADeviceInfo* device = (DLNADeviceInfo*)(hl->context[0]);
     if (!device) {
@@ -212,42 +213,44 @@ class DLNADevice {
                                  ActionRequest& action) {
     DlnaLogger.log(DlnaLogLevel::Info, "parseActionRequest");
 
-    // Read full request body available on the server and parse it
-    Str soap = server->contentStr();
-    if (soap.isEmpty()) return;
-
     XMLParserPrint xp;
     xp.setExpandEncoded(true);
-    xp.write((const uint8_t*)soap.c_str(), soap.length());
 
     Str outNodeName;
     Vector<Str> outPath;
     Str outText;
     Str outAttributes;
-
-    bool seenAction = false;
+    bool is_attribute = false;
+    bool is_action = false;
     Str actionName;
+    char buffer[256];
+    Client &client = server->client();
 
-    while (xp.parse(outNodeName, outPath, outText, outAttributes)) {
-      // skip SOAP envelope wrappers
-      if (outNodeName.equals("Envelope") || outNodeName.equals("Body")) {
-        continue;
-      }
+    while (client.available() > 0) {
+      size_t len = client.readBytes(buffer, sizeof(buffer));
+      xp.write((const uint8_t*)buffer, len);
 
-      if (!seenAction) {
-        // first meaningful node is the action name
-        actionName = outNodeName;
-        // store action name in registry to keep pointer stable
-        action.action = registry.add((char*)actionName.c_str());
-        seenAction = true;
-        continue;
-      }
-
-      // subsequent nodes are action arguments: add to ActionRequest
-      if (!outNodeName.isEmpty()) {
-        // use registry for argument name to have stable pointer
-        const char* argName = registry.add((char*)outNodeName.c_str());
-        action.addArgument(argName, outText.c_str());
+      while (xp.parse(outNodeName, outPath, outText, outAttributes)) {
+        if (is_attribute) {
+          const char* argName = registry.add((char*)outNodeName.c_str());
+          action.addArgument(argName, outText.c_str());
+          
+          continue;
+        }
+        if (is_action) {
+          is_action = false;
+          is_attribute = true;
+          action.action = registry.add((char*)outNodeName.c_str());
+          DlnaLogger.log(DlnaLogLevel::Info, "action: %s", action.action);
+          continue;
+        }
+        // skip SOAP envelope wrappers
+        if (outNodeName.equals("s:Envelope") || outNodeName.equals("Body")) {
+          continue;
+        }
+        if (outNodeName.equals("s:Body")) {
+          is_action = true;
+        }
       }
     }
   }
@@ -270,6 +273,7 @@ class DLNADevice {
   /// MSearch requests reply to upnp:rootdevice and the device type defined
   /// in the device
   bool setupParser() {
+    DlnaLogger.log(DlnaLogLevel::Debug, "setupParser");
     parser.addMSearchST("upnp:rootdevice");
     parser.addMSearchST("ssdp:all");
     parser.addMSearchST(p_device->getUDN());
@@ -279,6 +283,7 @@ class DLNADevice {
 
   /// Schedule PostAlive messages
   bool setupScheduler() {
+    DlnaLogger.log(DlnaLogLevel::Debug, "setupScheduler");
     // schedule post alive messages: Usually repeated 2 times (because UDP
     // messages might be lost)
     PostAliveSchedule* postAlive =
@@ -293,6 +298,7 @@ class DLNADevice {
 
   /// set up Web Server to handle Service Addresses
   virtual bool setupDLNAServer(HttpServer& srv) {
+    DlnaLogger.log(DlnaLogLevel::Debug, "setupDLNAServer");
     char buffer[DLNA_MAX_URL_LEN] = {0};
     StrView url(buffer, DLNA_MAX_URL_LEN);
 
@@ -338,6 +344,8 @@ class DLNADevice {
   /// callback to provide device XML
   static void deviceXMLCallback(HttpServer* server, const char* requestPath,
                                 HttpRequestHandlerLine* hl) {
+    DlnaLogger.log(DlnaLogLevel::Debug, "deviceXMLCallback");
+
     DLNADeviceInfo* device_xml = (DLNADeviceInfo*)(hl->context[0]);
     assert(device_xml != nullptr);
     if (device_xml != nullptr) {

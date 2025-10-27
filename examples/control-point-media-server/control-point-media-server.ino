@@ -50,7 +50,6 @@ void setup() {
   DlnaLogger.begin(Serial, DlnaLogLevel::Info);
 
   setupWifi();
-  cpms.set
 
   // Start control point and wait to find relevant devices: 10 min
   if (!cpms.begin(http, udp, 1000, 10 * 60 * 1000)) {
