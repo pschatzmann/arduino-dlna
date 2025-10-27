@@ -7,6 +7,8 @@
 #include "basic/StrPrint.h"
 #include "dlna/DLNADevice.h"
 #include "dlna/devices/MediaServer/MediaItem.h"
+#include "dlna/service/Action.h"
+#include "dlna/xml/XMLParserPrint.h"
 #include "dlna/xml/XMLPrinter.h"
 #include "http/HttpServer.h"
 #include "ms_connmgr.h"
@@ -66,12 +68,18 @@ class MediaServer : public DLNADeviceInfo {
     setModelNumber("1.0");
     setBaseURL("http://localhost:44757");
   }
-
   ~MediaServer() { end(); }
 
   void end() { /* nothing special */ }
 
+  /// Define the search capabilities: use csv
+  void setSearchCapabilities(const char* caps) { g_search_capabiities = caps; }
+
+  /// Define the sort capabilities: use csv
+  void setSortCapabilities(const char* caps) { g_sort_capabilities = caps; }
+
   void setupServices(HttpServer& server, IUDPService& udp) {
+    p_media_server = this;
     setupServicesImpl(&server);
     p_server = &server;
   }
@@ -89,21 +97,24 @@ class MediaServer : public DLNADeviceInfo {
   HttpServer* getHttpServer() { return p_server; }
 
  protected:
+  static inline MediaServer* p_media_server = nullptr;
   const char* st = "urn:schemas-upnp-org:device:MediaServer:1";
   const char* usn = "uuid:media-server-0000-0000-0000-000000000001";
   // stored callbacks
   PrepareDataCallback prepare_data_cb = nullptr;
   GetDataCallback get_data_cb = nullptr;
+
   HttpServer* p_server = nullptr;
   void* reference_ = nullptr;
-  // Globals used by the streaming callback. These are set immediately
-  // before calling server->reply(...) and cleared afterwards. This is
-  // safe in the single-threaded server model.
-  static inline GetDataCallback g_stream_get_data_cb = nullptr;
-  static inline int g_stream_numberReturned = 0;
-  static inline int g_stream_totalMatches = 0;
-  static inline int g_stream_updateID = 0;
-  static inline void* g_stream_reference = nullptr;
+  GetDataCallback g_stream_get_data_cb = nullptr;
+  int g_stream_numberReturned = 0;
+  int g_stream_totalMatches = 0;
+  int g_stream_updateID = 0;
+  void* g_stream_reference = nullptr;
+  const char* g_search_capabiities =
+      "dc:title,dc:creator,upnp:class,upnp:genre,"
+      "upnp:album,upnp:artist,upnp:albumArtURI";
+  const char* g_sort_capabilities = "";
 
   void setupServicesImpl(HttpServer* server) {
     DlnaLogger.log(DlnaLogLevel::Info, "MediaServer::setupServices");
@@ -138,6 +149,213 @@ class MediaServer : public DLNADeviceInfo {
     addService(cm);
   }
 
+  /// Process action requests
+  bool processAction(ActionRequest& action, HttpServer& server) {
+    DlnaLogger.log(DlnaLogLevel::Info, "processAction");
+    StrView action_str(action.action);
+    if (StrView(action.action).equals("Browse")) {
+      return processActionBrowse(action, server);
+    } else if (action_str.equals("Search")) {
+      return processActionSearch(action, server);
+    } else if (action_str.equals("GetSearchCapabilities")) {
+      return processActionGetSearchCapabilities(action, server);
+    } else if (action_str.equals("GetSortCapabilities")) {
+      return processActionGetSortCapabilities(action, server);
+    } else if (action_str.equals("GetSystemUpdateID")) {
+      return processActionGetSystemUpdateID(action, server);
+    } else {
+      DlnaLogger.log(DlnaLogLevel::Error, "Unsupported action: %s",
+                     action.action);
+      return false;
+      server.replyNotFound();
+    }
+  }
+
+  // --- Stub handlers for ContentDirectory actions ---
+  // These are minimal implementations that currently reply with an empty
+  // ActionResponse and return true. They exist as placeholders until
+  // full implementations are added.
+  bool processActionBrowse(ActionRequest& action, HttpServer& server) {
+    DlnaLogger.log(DlnaLogLevel::Info, "processActionBrowse");
+    int numberReturned = 0;
+    int totalMatches = 0;
+    int updateID = g_stream_updateID;
+
+    // extract paging args
+    int startingIndex = action.getArgumentIntValue("StartingIndex");
+    int requestedCount = action.getArgumentIntValue("RequestedCount");
+
+    // query for data
+    if (prepare_data_cb) {
+      prepare_data_cb(action.getArgumentValue("ObjectID"),
+                      action.getArgumentValue("BrowseFlag"),
+                      action.getArgumentValue("Filter"), startingIndex,
+                      requestedCount, action.getArgumentValue("SortCriteria"),
+                      numberReturned, totalMatches, updateID, reference_);
+    }
+
+    // provide result
+    return streamActionItems("BrowseResponse",
+                             action.getArgumentValue("ObjectID"),
+                             action.getArgumentValue("BrowseFlag"),
+                             action.getArgumentValue("Filter"), startingIndex,
+                             requestedCount, server);
+  }
+
+  bool processActionSearch(ActionRequest& action, HttpServer& server) {
+    DlnaLogger.log(DlnaLogLevel::Info, "processActionSearch");
+
+    int numberReturned = 0;
+    int totalMatches = 0;
+    int updateID = g_stream_updateID;
+
+    // extract paging args
+    int startingIndex = action.getArgumentIntValue("StartingIndex");
+    int requestedCount = action.getArgumentIntValue("RequestedCount");
+
+    // query for data
+    if (prepare_data_cb) {
+      prepare_data_cb(action.getArgumentValue("ObjectID"),
+                      action.getArgumentValue("BrowseFlag"),
+                      action.getArgumentValue("Filter"), startingIndex,
+                      requestedCount, action.getArgumentValue("SortCriteria"),
+                      numberReturned, totalMatches, updateID, reference_);
+    }
+
+    // provide result
+    return streamActionItems("SearchResponse",
+                             action.getArgumentValue("ContainerID"), "Search",
+                             action.getArgumentValue("SearchCriteria"),
+                             startingIndex, requestedCount, server);
+  }
+
+  bool processActionGetSearchCapabilities(ActionRequest& action,
+                                          HttpServer& server) {
+    DlnaLogger.log(DlnaLogLevel::Info, "processActionGetSearchCapabilities");
+    Str reply_str{replyTemplate()};
+    reply_str.replaceAll("%2", "ContentDirectory");
+    reply_str.replaceAll("%1", "ActionResponse");
+    reply_str.replaceAll("%3", g_search_capabiities);
+    server.reply("text/xml", reply_str.c_str());
+    return true;
+  }
+
+  bool processActionGetSortCapabilities(ActionRequest& action,
+                                        HttpServer& server) {
+    DlnaLogger.log(DlnaLogLevel::Info, "processActionGetSortCapabilities");
+    Str reply_str{replyTemplate()};
+    reply_str.replaceAll("%2", "ContentDirectory");
+    reply_str.replaceAll("%1", "ActionResponse");
+    reply_str.replaceAll("%3", g_sort_capabilities);
+    server.reply("text/xml", reply_str.c_str());
+    return true;
+  }
+
+  bool processActionGetSystemUpdateID(ActionRequest& action,
+                                      HttpServer& server) {
+    DlnaLogger.log(DlnaLogLevel::Info, "processActionGetSystemUpdateID");
+    Str reply_str{replyTemplate()};
+    char update_id_str[80];
+    sprintf(update_id_str, "%d", g_stream_updateID);
+    reply_str.replaceAll("%2", "ContentDirectory");
+    reply_str.replaceAll("%1", "ActionResponse");
+    reply_str.replaceAll("%3", update_id_str);
+    server.reply("text/xml", reply_str.c_str());
+    return true;
+  }
+
+  /// Common helper to stream a ContentDirectory response (Browse or Search)
+  bool streamActionItems(const char* responseName, const char* objectID,
+                         const char* browseFlag, const char* filter,
+                         int startingIndex, int requestedCount,
+                         HttpServer& server) {
+    int numberReturned = 0;
+    int totalMatches = 0;
+    int updateID = g_stream_updateID;
+
+    // allow caller to prepare counts/updateID
+    if (prepare_data_cb) {
+      prepare_data_cb(objectID, browseFlag, filter, startingIndex,
+                      requestedCount, nullptr, numberReturned, totalMatches,
+                      updateID, reference_);
+    }
+
+    ChunkPrint chunk_writer{server.client()};
+    server.replyChunked("text/xml");
+
+    // SOAP envelope start
+    chunk_writer.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+    chunk_writer.println(
+        "<s:Envelope "
+        "xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n");
+    chunk_writer.println("<s:Body>");
+    // responseName is assumed to be e.g. "BrowseResponse" or "SearchResponse"
+    chunk_writer.printf(
+        "<u:%s "
+        "xmlns:u=\"urn:schemas-upnp-org:service:ContentDirectory:1\">\r\n",
+        responseName);
+
+    // Result -> DIDL-Lite
+    chunk_writer.println("<Result>");
+    // DIDL root with namespaces
+    chunk_writer.print(
+        "<DIDL-Lite xmlns:dc=\"http://purl.org/dc/elements/1.1/\" ");
+    chunk_writer.println(
+        "xmlns:upnp=\"urn:schemas-upnp-org:metadata-1-0/upnp/\" "
+        "xmlns=\"urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/\">\r\n");
+
+    if (get_data_cb) {
+      for (int i = 0; i < requestedCount; ++i) {
+        MediaItem item;
+        int idx = startingIndex + i;
+        if (!get_data_cb(idx, item, reference_)) break;
+        numberReturned++;
+
+        char tmp[400];
+        snprintf(tmp, sizeof(tmp),
+                 "<item id=\"%s\" parentID=\"%s\" restricted=\"%d\">",
+                 item.id ? item.id : "", item.parentID ? item.parentID : "0",
+                 item.restricted ? 1 : 0);
+        chunk_writer.println(tmp);
+
+        // title
+        chunk_writer.print("<dc:title>");
+        chunk_writer.printEscaped(item.title ? item.title : "");
+        chunk_writer.println("</dc:title>");
+
+        // res with optional protocolInfo attribute
+        if (item.mimeType) {
+          snprintf(tmp, sizeof(tmp), "<res protocolInfo=\"%s\">",
+                   item.mimeType);
+          chunk_writer.println(tmp);
+          chunk_writer.printEscaped(item.res ? item.res : "");
+          chunk_writer.println("</res>");
+        } else {
+          chunk_writer.print("<res>");
+          chunk_writer.printEscaped(item.res ? item.res : "");
+          chunk_writer.println("</res>");
+        }
+
+        chunk_writer.println("</item>");
+      }
+    }
+
+    chunk_writer.println("</DIDL-Lite>");
+    chunk_writer.println("</Result>");
+
+    // numeric fields
+    chunk_writer.printf("<NumberReturned>%d</NumberReturned>\r\n",
+                        numberReturned);
+    chunk_writer.printf("<TotalMatches>%d</TotalMatches>\r\n", totalMatches);
+    chunk_writer.printf("<UpdateID>%d</UpdateID>\r\n", updateID);
+
+    chunk_writer.printf("</u:%s>\r\n", responseName);
+    chunk_writer.println("</s:Body>");
+    chunk_writer.println("</s:Envelope>");
+    chunk_writer.end();
+    return true;
+  }
+
   /// generic SOAP reply template with placeholders: %1 = ActionResponse, %2 =
   /// ServiceName, %3 = inner payload
   static const char* replyTemplate() {
@@ -154,77 +372,22 @@ class MediaServer : public DLNADeviceInfo {
   static void contentDirectoryControlCB(HttpServer* server,
                                         const char* requestPath,
                                         HttpRequestHandlerLine* hl) {
-    Str soap = server->contentStr();
-    DlnaLogger.log(DlnaLogLevel::Info, "ContentDirectory Control: %s",
-                   soap.c_str());
-    Str reply_str{replyTemplate()};
-    reply_str.replaceAll("%2", "ContentDirectory");
+    ActionRequest action;
+    DLNADevice::parseActionRequest(server, requestPath, hl, action);
 
-    // Handle only Browse for now
-    if (soap.indexOf("Browse") < 0) {
-      reply_str.replaceAll("%1", "ActionResponse");
-      reply_str.replaceAll("%3", "");
-      server->reply("text/xml", reply_str.c_str());
-      return;
-    }
-
-    // Extract common arguments
-    auto extractArg = [&](const char* tag) -> Str {
-      Str result;
-      int pos = soap.indexOf(tag);
-      if (pos >= 0) {
-        int start = soap.indexOf('>', pos);
-        if (start >= 0) {
-          start += 1;
-          int end = soap.indexOf("</", start);
-          if (end > start) result = soap.substring(start, end);
-        }
-      }
-      return result;
-    };
-
-    Str obj = extractArg("ObjectID");
-    Str flag = extractArg("BrowseFlag");
-    Str filter = extractArg("Filter");
-    Str startIdx = extractArg("StartingIndex");
-    Str reqCount = extractArg("RequestedCount");
-    Str sort = extractArg("SortCriteria");
-
-    int startingIndex = startIdx.isEmpty() ? 0 : startIdx.toInt();
-    int requestedCount = reqCount.isEmpty() ? 0 : reqCount.toInt();
-
-    // collect results using callback or default
+    // If a user-provided callback is registered, hand over the parsed
+    // ActionRequest for custom handling. The callback is responsible for
+    // writing the HTTP reply if it handles the action.
     MediaServer* ms = nullptr;
     if (hl && hl->context[0]) ms = (MediaServer*)hl->context[0];
 
-    int numberReturned = 0;
-    int totalMatches = 0;
-    int updateID = 1;
-    if (ms && ms->prepare_data_cb) {
-      ms->prepare_data_cb(obj.c_str(), flag.c_str(), filter.c_str(),
-                          startingIndex, requestedCount, sort.c_str(),
-                          numberReturned, totalMatches, updateID,
-                          ms->reference_);
-    } else {
-      numberReturned = 0;
-      totalMatches = 0;
-      updateID = 0;
+    // process the requested action using instance method if available
+    if (ms) {
+      ms->processAction(action, *server);
+      return;
     }
 
-    // Stream response via Print-callback and generate DIDL on-the-fly.
-    // Set globals that the callback will read while running synchronously.
-    g_stream_numberReturned = numberReturned;
-    g_stream_totalMatches = totalMatches;
-    g_stream_updateID = updateID;
-    g_stream_get_data_cb = ms ? ms->get_data_cb : nullptr;
-    g_stream_reference = ms ? ms->reference_ : nullptr;
-    server->reply("text/xml", streamReplyCallback);
-    // clear globals after reply returns
-    g_stream_numberReturned = 0;
-    g_stream_totalMatches = 0;
-    g_stream_updateID = 0;
-    g_stream_get_data_cb = nullptr;
-    g_stream_reference = nullptr;
+    server->replyNotFound();
   }
 
   // helper to write text content with minimal XML-escaping for &, < and >
@@ -244,7 +407,7 @@ class MediaServer : public DLNADeviceInfo {
 
   // streaming reply callback: writes the full SOAP envelope and escapes
   // DIDL tags while streaming the items from g_stream_items.
-  static void streamReplyCallback(Print& out) {
+  static void streamReplyCallback(Print& out, const char* responseName) {
     XMLPrinter xml(out);
     // Envelope start with namespace and encoding attribute
     const char* envAttrs =
@@ -256,22 +419,24 @@ class MediaServer : public DLNADeviceInfo {
     // BrowseResponse with its namespace declaration
     const char* brAttrs =
         "xmlns:u=\"urn:schemas-upnp-org:service:ContentDirectory:1\"";
-    xml.printNodeBeginNl("BrowseResponse", brAttrs, "u");
+    xml.printNodeBeginNl(responseName, brAttrs, "u");
 
     // Result node: use callback to stream escaped DIDL
     xml.printNode("Result", [&]() -> size_t {
-      buildEscapedDIDL(out, g_stream_get_data_cb, g_stream_numberReturned);
+      buildEscapedDIDL(out, p_media_server->g_stream_get_data_cb,
+                       p_media_server->g_stream_numberReturned);
       return 0;
     });
 
     // numeric fields
-    xml.printNode("NumberReturned", g_stream_numberReturned);
-    xml.printNode("TotalMatches", g_stream_totalMatches);
-    xml.printNode("UpdateID", g_stream_updateID);
+    xml.printNode("NumberReturned", p_media_server->g_stream_numberReturned);
+    xml.printNode("TotalMatches", p_media_server->g_stream_totalMatches);
+    xml.printNode("UpdateID", p_media_server->g_stream_updateID);
 
-    xml.printNodeEnd("BrowseResponse", "u");
+    xml.printNodeEnd(responseName, "u");
     xml.printNodeEnd("Body", "s");
     xml.printNodeEnd("Envelope", "s");
+    p_media_server->g_stream_updateID++;
   }
 
   // helper: stream DIDL-Lite (escaped) for the provided items to the Print
@@ -289,7 +454,7 @@ class MediaServer : public DLNADeviceInfo {
     if (get_data_cb) {
       for (int i = 0; i < count; ++i) {
         MediaItem item;
-        if (!get_data_cb(i, item, g_stream_reference)) break;
+        if (!get_data_cb(i, item, p_media_server->g_stream_reference)) break;
         char itemAttr[256];
         snprintf(itemAttr, sizeof(itemAttr),
                  "id=\"%s\" parentID=\"%s\" restricted=\"%d\"",

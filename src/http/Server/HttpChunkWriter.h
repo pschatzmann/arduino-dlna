@@ -1,13 +1,17 @@
 #pragma once
 
+#include "Print.h"
 #include "Client.h"
 #include "basic/Logger.h"
+#include <cstdarg>
+#include <cstdio>
+#include <cstring>
+#include <cstdint>
 
 namespace tiny_dlna {
 
 /**
  * @brief Writes the data chunked to the actual client
- *
  */
 class HttpChunkWriter {
  public:
@@ -15,9 +19,9 @@ class HttpChunkWriter {
                  const char* str1 = nullptr, int len1 = 0) {
     DlnaLogger.log(DlnaLogLevel::Debug, "HttpChunkWriter", "writeChunk");
     client.println(len + len1, HEX);
-    int result = client.write((uint8_t*)str, len);
+    int result = client.write((const uint8_t*)str, len);
     if (str1 != nullptr) {
-      result += client.write((uint8_t*)str1, len1);
+      result += client.write((const uint8_t*)str1, len1);
     }
     client.println();
     return result;
@@ -29,6 +33,77 @@ class HttpChunkWriter {
   }
 
   void writeEnd(Client& client) { writeChunk(client, "", 0); }
+};
+
+class ChunkPrint : public Print {
+ public:
+  ChunkPrint(Client& client) : client_ptr(&client) {}
+
+  size_t write(uint8_t ch) override {
+    char c = (char)ch;
+    chunk_writer.writeChunk(*client_ptr, &c, 1);
+    return 1;
+  }
+
+  size_t write(const uint8_t* buffer, size_t size) override {
+    if (size == 0) return 0;
+    chunk_writer.writeChunk(*client_ptr, (const char*)buffer, (int)size);
+    return size;
+  }
+
+  size_t print(const char* str) {
+    if (!str) return 0;
+    int len = strlen(str);
+    chunk_writer.writeChunk(*client_ptr, str, len);
+    return len;
+  }
+
+  size_t printEscaped(const char* str){
+    int len = strlen(str);
+    int max_len = 1.5 * len;
+    char buffer[max_len];
+    strcpy(buffer, str);
+    StrView str_view{buffer, max_len, len };
+    str_view.replaceAll("&", "&amp;");
+    str_view.replaceAll("<", "&lt;");
+    str_view.replaceAll(">", "&gt;");
+    int new_len = str_view.length();
+    chunk_writer.writeChunk(*client_ptr, str_view.c_str(), new_len);
+    return len;
+  }
+
+  size_t println(const char* str) {
+    if (!str) {
+      chunk_writer.writeChunk(*client_ptr, "\r\n", 2);
+      return 2;
+    }
+    int len = strlen(str);
+    chunk_writer.writeChunk(*client_ptr, str, len, "\r\n", 2);
+    return len + 2;
+  }
+
+  size_t println() {
+    chunk_writer.writeChunk(*client_ptr, "\r\n", 2);
+    return 2;
+  }
+
+  size_t printf(const char* fmt, ...) {
+    char buf[512];
+    va_list ap;
+    va_start(ap, fmt);
+    int n = vsnprintf(buf, sizeof(buf), fmt, ap);
+    va_end(ap);
+    if (n <= 0) return 0;
+    if (n >= (int)sizeof(buf)) n = (int)sizeof(buf) - 1;
+    chunk_writer.writeChunk(*client_ptr, buf, n);
+    return (size_t)n;
+  }
+
+  void end() { chunk_writer.writeEnd(*client_ptr); }
+
+ protected:
+  Client* client_ptr;
+  HttpChunkWriter chunk_writer;
 };
 
 }  // namespace tiny_dlna

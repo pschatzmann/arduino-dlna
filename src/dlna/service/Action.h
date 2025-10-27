@@ -91,6 +91,20 @@ class ActionRequest {
     addArgument(arg);
   }
 
+  const char* getArgumentValue(const char* name) {
+    for (auto& a : arguments) {
+      if (a.name != nullptr) {
+        StrView nm(a.name);
+        if (nm == name) return a.value.c_str();
+      }
+    }
+    return "";
+  }
+
+  int getArgumentIntValue(const char* name) {
+    return StrView(getArgumentValue(name)).toInt();
+  }
+
   DLNAServiceInfo* p_service = nullptr;
   const char* action = nullptr;
   Vector<Argument> arguments{10};

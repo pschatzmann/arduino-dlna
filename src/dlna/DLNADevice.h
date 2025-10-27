@@ -1,12 +1,13 @@
 #pragma once
 
-#include "DLNADeviceInfo.h"
 #include "DLNADevice.h"
+#include "DLNADeviceInfo.h"
 #include "DLNADeviceRequestParser.h"
 #include "Schedule.h"
 #include "SubscriptionMgr.h"
 #include "basic/Url.h"
 #include "http/HttpServer.h"
+#include "xml/XMLParserPrint.h"
 
 namespace tiny_dlna {
 
@@ -19,7 +20,7 @@ namespace tiny_dlna {
  * - We handle the Http request with the help of the TinyHttp Server
  * - The XML service descriptions can be stored as char arrays in progmem or
  * generated dynamically with the help of the XMLPrinter class.
- * 
+ *
  * @author Phil Schatzmann
  */
 class DLNADevice {
@@ -27,7 +28,6 @@ class DLNADevice {
   /// start the
   bool begin(DLNADeviceInfo& device, IUDPService& udp, HttpServer& server) {
     DlnaLogger.log(DlnaLogLevel::Info, "DLNADevice::begin");
-
     instance = this;
     p_server = &server;
     p_udp = &udp;
@@ -78,61 +78,6 @@ class DLNADevice {
     DlnaLogger.log(DlnaLogLevel::Info, "Device successfully started");
     // expose singleton for subscription publishing
     return true;
-  }
-
-  /// Static handler for SUBSCRIBE/UNSUBSCRIBE requests on service event URLs
-  static void eventSubscriptionHandler(HttpServer* server, const char* requestPath,
-                                       HttpRequestHandlerLine* hl) {
-    // context[0] contains DLNADeviceInfo*
-    DLNADeviceInfo* device = (DLNADeviceInfo*)(hl->context[0]);
-    if (!device) {
-      server->replyNotFound();
-      return;
-    }
-    // header parsing
-    HttpRequestHeader& req = server->requestHeader();
-    // SUBSCRIBE handling
-    if (req.method() == T_SUBSCRIBE) {
-      const char* cb = req.get("CALLBACK");
-      const char* timeout = req.get("TIMEOUT");
-      Str cbStr;
-      if (cb) {
-        cbStr = cb;
-        cbStr.replace("<", "");
-        cbStr.replace(">", "");
-      }
-      uint32_t tsec = 1800;
-      if (timeout && StrView(timeout).startsWith("Second-")) {
-        tsec = atoi(timeout + 7);
-      }
-      // Use the service event path as key for subscriptions
-      const char* svcKey = requestPath;
-      if (DLNADevice::instance) {
-        Str sid = DLNADevice::instance->subscriptionMgr.subscribe(svcKey, cbStr.c_str(), tsec);
-        server->replyHeader().setValues(200, "OK");
-        server->replyHeader().put("SID", sid.c_str());
-        server->replyHeader().put("TIMEOUT", "Second-1800");
-        server->replyHeader().write(server->client());
-        server->endClient();
-        return;
-      }
-      server->replyNotFound();
-      return;
-    }
-    // UNSUBSCRIBE: handle via SID header
-    if (req.method() == T_POST) {
-      // Some stacks use POST for unsubscribe; try to handle SID
-      const char* sid = req.get("SID");
-      if (sid && DLNADevice::instance) {
-        bool ok = DLNADevice::instance->subscriptionMgr.unsubscribe(requestPath, sid);
-        if (ok) {
-          server->replyOK();
-          return;
-        }
-      }
-    }
-    // default reply OK
-    server->replyOK();
   }
 
   static SubscriptionMgr* getSubscriptionMgr() {
@@ -203,6 +148,110 @@ class DLNADevice {
   /// before calling begin!
   void setPostAliveRepeatMs(uint32_t ms) { post_alive_repeat_ms = ms; }
 
+  /// Static handler for SUBSCRIBE/UNSUBSCRIBE requests on service event URLs
+  static void eventSubscriptionHandler(HttpServer* server,
+                                       const char* requestPath,
+                                       HttpRequestHandlerLine* hl) {
+    // context[0] contains DLNADeviceInfo*
+    DLNADeviceInfo* device = (DLNADeviceInfo*)(hl->context[0]);
+    if (!device) {
+      server->replyNotFound();
+      return;
+    }
+    // header parsing
+    HttpRequestHeader& req = server->requestHeader();
+    // SUBSCRIBE handling
+    if (req.method() == T_SUBSCRIBE) {
+      const char* cb = req.get("CALLBACK");
+      const char* timeout = req.get("TIMEOUT");
+      Str cbStr;
+      if (cb) {
+        cbStr = cb;
+        cbStr.replace("<", "");
+        cbStr.replace(">", "");
+      }
+      uint32_t tsec = 1800;
+      if (timeout && StrView(timeout).startsWith("Second-")) {
+        tsec = atoi(timeout + 7);
+      }
+      // Use the service event path as key for subscriptions
+      const char* svcKey = requestPath;
+      if (DLNADevice::instance) {
+        Str sid = DLNADevice::instance->subscriptionMgr.subscribe(
+            svcKey, cbStr.c_str(), tsec);
+        server->replyHeader().setValues(200, "OK");
+        server->replyHeader().put("SID", sid.c_str());
+        server->replyHeader().put("TIMEOUT", "Second-1800");
+        server->replyHeader().write(server->client());
+        server->endClient();
+        return;
+      }
+      server->replyNotFound();
+      return;
+    }
+    // UNSUBSCRIBE: handle via SID header
+    if (req.method() == T_POST) {
+      // Some stacks use POST for unsubscribe; try to handle SID
+      const char* sid = req.get("SID");
+      if (sid && DLNADevice::instance) {
+        bool ok =
+            DLNADevice::instance->subscriptionMgr.unsubscribe(requestPath, sid);
+        if (ok) {
+          server->replyOK();
+          return;
+        }
+      }
+    }
+    // default reply OK
+    server->replyOK();
+  }
+
+  /// Parses the SOAP content of a DLNA action request
+  static void parseActionRequest(HttpServer* server, const char* requestPath,
+                                 HttpRequestHandlerLine* hl,
+                                 ActionRequest& action) {
+    DlnaLogger.log(DlnaLogLevel::Info, "parseActionRequest");
+
+    // Read full request body available on the server and parse it
+    Str soap = server->contentStr();
+    if (soap.isEmpty()) return;
+
+    XMLParserPrint xp;
+    xp.setExpandEncoded(true);
+    xp.write((const uint8_t*)soap.c_str(), soap.length());
+
+    Str outNodeName;
+    Vector<Str> outPath;
+    Str outText;
+    Str outAttributes;
+
+    bool seenAction = false;
+    Str actionName;
+
+    while (xp.parse(outNodeName, outPath, outText, outAttributes)) {
+      // skip SOAP envelope wrappers
+      if (outNodeName.equals("Envelope") || outNodeName.equals("Body")) {
+        continue;
+      }
+
+      if (!seenAction) {
+        // first meaningful node is the action name
+        actionName = outNodeName;
+        // store action name in registry to keep pointer stable
+        action.action = registry.add((char*)actionName.c_str());
+        seenAction = true;
+        continue;
+      }
+
+      // subsequent nodes are action arguments: add to ActionRequest
+      if (!outNodeName.isEmpty()) {
+        // use registry for argument name to have stable pointer
+        const char* argName = registry.add((char*)outNodeName.c_str());
+        action.addArgument(argName, outText.c_str());
+      }
+    }
+  }
+
  protected:
   Scheduler scheduler;
   DLNADeviceRequestParser parser;
@@ -213,12 +262,13 @@ class DLNADevice {
   bool is_active = false;
   bool scheduler_active = true;
   uint32_t post_alive_repeat_ms = 0;
+  inline static StringRegistry registry;
   inline static DLNADevice* instance = nullptr;
 
   void setDevice(DLNADeviceInfo& device) { p_device = &device; }
 
-  /// MSearch requests reply to upnp:rootdevice and the device type defined in
-  /// the device
+  /// MSearch requests reply to upnp:rootdevice and the device type defined
+  /// in the device
   bool setupParser() {
     parser.addMSearchST("upnp:rootdevice");
     parser.addMSearchST("ssdp:all");
@@ -278,7 +328,8 @@ class DLNADevice {
       p_server->on(service.control_url, T_POST, service.control_cb, ref, 1);
       // register event subscription handler - wrappers for
       // SUBSCRIBE/UNSUBSCRIBE
-      p_server->on(service.event_sub_url, T_SUBSCRIBE, eventSubscriptionHandler, ref, 1);
+      p_server->on(service.event_sub_url, T_SUBSCRIBE, eventSubscriptionHandler,
+                   ref, 1);
     }
 
     return true;

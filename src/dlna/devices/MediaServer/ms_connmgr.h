@@ -1,5 +1,5 @@
 #pragma once
-
+#include <dlna/xml/XMLPrinter.h>
 /*
 <?xml version=\"1.0\"?>
 <scpd xmlns=\"urn:schemas-upnp-org:service-1-0\">
