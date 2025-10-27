@@ -17,7 +17,8 @@ namespace tiny_dlna {
  */
 class ControlPointMediaServer {
  public:
-  typedef void (*XMLCallback)(const char* name, const char* test, const char* attributes);
+  typedef void (*XMLCallback)(const char* name, const char* test,
+                              const char* attributes);
   typedef void (*NotificationCallback)(void* reference, const char* sid,
                                        const char* varName,
                                        const char* newValue);
@@ -68,10 +69,11 @@ class ControlPointMediaServer {
   const ActionReply& getLastReply() const { return last_reply; }
 
   /**
-   * @brief Select a device by index (0-based) for subsequent actions
+   * @brief Select a device by index (0-based) for subsequent actions.
+   * By default 0 is used.
    * @param idx Device index
    */
-  void setDeviceIndex(int idx) { device_index = idx; }
+  void setDeviceIndex(int idx) { mgr.setDeviceIndex(idx); }
 
   /**
    * @brief Subscribe to event notifications for the selected server/device
@@ -80,17 +82,14 @@ class ControlPointMediaServer {
    *           `processNotification` will be used
    * @return true on successful SUBSCRIBE, false otherwise
    */
-  bool subscribeNotifications(int timeoutSeconds = 60,
-                              NotificationCallback cb = nullptr) {
+  bool subscribeNotifications(NotificationCallback cb = nullptr,
+                              int timeoutSeconds = 3600) {
     DlnaLogger.log(DlnaLogLevel::Debug, "ControlPointMediaServer::subscribeNotifications");
     mgr.setReference(this);
+    mgr.setSubscribeInterval(timeoutSeconds);
     // register provided callback or fallback to the default processNotification
-    if (cb)
-      mgr.onNotification(cb);
-    else
-      mgr.onNotification(processNotification);
-    auto& device = mgr.getDevice(device_index);
-    return mgr.subscribeNotifications(device, timeoutSeconds);
+    mgr.onNotification(cb != nullptr ? cb : processNotification);
+    return mgr.subscribeNotifications();
   }
 
   /**
@@ -127,14 +126,13 @@ class ControlPointMediaServer {
               int& numberReturned, int& totalMatches, int& updateID,
               const char* browseFlag = nullptr) {
 
-    DlnaLogger.log(DlnaLogLevel::Debug, "ControlPointMediaServer::browse");
-    // Register item callback
-    this->mgr.onResultNode(XMLCallback);
+    // Register item callback            
+    this->mgr.onResultNode(XMLCallback);            
     // Build and post browse action
     DLNAServiceInfo& svc =
         selectService("urn:upnp-org:serviceId:ContentDirectory");
     if (!svc) return false;
-    ActionRequest &act =
+    ActionRequest& act =
         createBrowseAction(svc, browseFlag, startingIndex, requestedCount);
     mgr.addAction(act);
     last_reply = mgr.executeActions();
@@ -160,21 +158,21 @@ class ControlPointMediaServer {
    * @param sortCriteria Optional SortCriteria (defaults to empty string)
    * @return true on success, false on error
    */
-  bool search(int startingIndex, int requestedCount,
-              XMLCallback XMLCallback, int& numberReturned, int& totalMatches,
-              int& updateID, const char* searchCriteria = "",const char* filter = "",
+  bool search(int startingIndex, int requestedCount, XMLCallback XMLCallback,
+              int& numberReturned, int& totalMatches, int& updateID,
+              const char* searchCriteria = "", const char* filter = "",
               const char* sortCriteria = "") {
 
-    DlnaLogger.log(DlnaLogLevel::Debug, "ControlPointMediaServer::search");
     // Register item callback
     this->mgr.onResultNode(XMLCallback);
 
-    DLNAServiceInfo& svc = selectService("urn:upnp-org:serviceId:ContentDirectory");
+    DLNAServiceInfo& svc =
+        selectService("urn:upnp-org:serviceId:ContentDirectory");
     if (!svc) return false;
 
-    ActionRequest &act = createSearchAction(svc, searchCriteria, filter,
-                                            startingIndex, requestedCount,
-                                            sortCriteria);
+    ActionRequest& act =
+        createSearchAction(svc, searchCriteria, filter, startingIndex,
+                           requestedCount, sortCriteria);
     mgr.addAction(act);
     last_reply = mgr.executeActions();
     if (!last_reply) return false;
@@ -263,7 +261,6 @@ class ControlPointMediaServer {
 
  protected:
   DLNAControlPoint& mgr;
-  int device_index = 0;
   const char* device_type_filter_default =
       "urn:schemas-upnp-org:device:MediaServer:1";
   const char* device_type_filter = device_type_filter_default;
@@ -286,22 +283,13 @@ class ControlPointMediaServer {
   DLNAServiceInfo& selectService(const char* id) {
     DlnaLogger.log(DlnaLogLevel::Debug, "ControlPointMediaServer::selectService: id='%s'", id);
     // Build list of devices matching the optional filter
-    Vector<DLNADeviceInfo>& all = mgr.getDevices();
-    int idx = 0;
-    for (auto& d : all) {
-      const char* dt = d.getDeviceType();
-      if (device_type_filter && !StrView(dt).contains(device_type_filter))
-        continue;
-      if (idx == device_index) {
-        DLNAServiceInfo& s = d.getService(id);
-        if (s) return s;
-      }
-      idx++;
-    }
+    DLNAServiceInfo& s = mgr.getDevice().getService(id);
+    if (s) return s;
 
     // fallback: global search
     return mgr.getService(id);
   }
+
 
   const char* findArgument(ActionReply& r, const char* name) {
     for (auto& a : r.arguments) {
@@ -316,7 +304,6 @@ class ControlPointMediaServer {
   /// Build a Browse ActionRequest
   ActionRequest &createBrowseAction(DLNAServiceInfo& svc, const char* browseFlag,
                                    int startingIndex, int requestedCount) {
-    DlnaLogger.log(DlnaLogLevel::Debug, "ControlPointMediaServer::createBrowseAction");
     static ActionRequest act(svc, "Browse");
     // Use the canonical argument name expected by ContentDirectory: "ObjectID"
     act.addArgument("ObjectID", object_id);
@@ -333,10 +320,10 @@ class ControlPointMediaServer {
   }
 
   /// Build a Search ActionRequest
-  ActionRequest &createSearchAction(DLNAServiceInfo& svc, const char* searchCriteria,
+  ActionRequest& createSearchAction(DLNAServiceInfo& svc,
+                                    const char* searchCriteria,
                                     const char* filter, int startingIndex,
                                     int requestedCount, const char* sortCriteria) {
-    DlnaLogger.log(DlnaLogLevel::Debug, "ControlPointMediaServer::createSearchAction");
     static ActionRequest act(svc, "Search");
     act.addArgument("ContainerID", object_id);
     act.addArgument("SearchCriteria", searchCriteria ? searchCriteria : "");

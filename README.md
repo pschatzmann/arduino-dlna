@@ -5,7 +5,7 @@
 
 This library provides the functionality to implement a UPnP/DLNA [device](https://pschatzmann.github.io/arduino-dlna/classtiny__dlna_1_1DLNADeviceMgr.html) and a [control point](https://pschatzmann.github.io/arduino-dlna/classtiny__dlna_1_1DLNAControlPointMgr.html) for Arduino.
 
-The Digital Living Network Alliance (DLNA) aimed to establish interoperability among PCs, consumer appliances, and mobile devices across wired and wireless networks. The goal was to provide a common solution for sharing digital media and content services. Though this technology can be considered obsolete, it is still quite useful for some use cases.
+The Digital Living Network Alliance (DLNA) aimed to establish interoperability among PCs, consumer appliances, and mobile devices across wired and wireless networks. The goal was to provide a common solution for sharing digital media and content services. Though this technology can be considered obsolete, it is still quite useful for some use cases: For Audio and Videao the successor protocols are Chromecast and AirPlay. Chromecast is close sourced and uses secure channels to Google, do you can't implement your own devices and Airplay is Apple specific and is not available on Android. 
 
 ## The Standard
 
@@ -18,8 +18,7 @@ https://embeddedinn.wordpress.com/tutorials/upnp-device-architecture/)
 - [UPnP Device Architecture 2.0](https://openconnectivity.org/upnp-specs/UPnP-arch-DeviceArchitecture-v2.0-20200417.pdf)
 
 
-I struggled to choose the right approach to implement this on Arduino.
-On the desktop, similar functionality can be provided with the following projects:
+I struggled quite a bit to choose the right approach to implement this on Arduino. On the desktop, similar functionality can be provided with the following projects:
 
 - [pupnp](https://github.com/pupnp/pupnp) A Portable SDK for UPnP* Devices
 - [gmrender-resurrect](https://github.com/hzeller/gmrender-resurrect): A headless UPnP/DLNA media renderer based on pupnp

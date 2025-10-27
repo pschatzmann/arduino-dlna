@@ -1,9 +1,10 @@
 // Header-only control point helper for MediaRenderer devices
 #pragma once
 
+#include <functional>
+
 #include "dlna/DLNAControlPoint.h"
 #include "dlna/service/Action.h"
-#include <functional>
 
 namespace tiny_dlna {
 
@@ -26,8 +27,9 @@ class ControlPointMediaRenderer {
 
   /**
    * @brief Restrict this helper to devices of the given device type
-   * @param filter Device type filter, e.g. "urn:schemas-upnp-org:device:MediaRenderer:1".
-   *               Pass nullptr to use the default MediaRenderer filter.
+   * @param filter Device type filter, e.g.
+   * "urn:schemas-upnp-org:device:MediaRenderer:1". Pass nullptr to use the
+   * default MediaRenderer filter.
    */
   void setDeviceTypeFilter(const char* filter) {
     device_type_filter = filter ? filter : device_type_filter_default;
@@ -41,8 +43,8 @@ class ControlPointMediaRenderer {
    * @param maxWaitMs Maximum time in milliseconds to wait for discovery
    * @return true on success, false on error
    */
-  bool begin(DLNAHttpRequest& http, IUDPService& udp,
-             uint32_t minWaitMs = 3000, uint32_t maxWaitMs = 60000) {
+  bool begin(DLNAHttpRequest& http, IUDPService& udp, uint32_t minWaitMs = 3000,
+             uint32_t maxWaitMs = 60000) {
     DlnaLogger.log(DlnaLogLevel::Info,
                    "ControlPointMediaServer::begin device_type_filter='%s'",
                    device_type_filter ? device_type_filter : "(null)");
@@ -75,21 +77,18 @@ class ControlPointMediaRenderer {
 
   /**
    * @brief Subscribe to event notifications for the selected renderer
-   * @param timeoutSeconds Subscription timeout in seconds (suggested default: 60)
+   * @param timeoutSeconds Subscription timeout in seconds (suggested default:
+   * 60)
    * @param cb Optional callback to invoke for incoming notifications. If
    *           nullptr the helper's default `processNotification` will be used.
-   * @return true on successful SUBSCRIBE, false otherwise
    */
-  bool subscribeNotifications(int timeoutSeconds = 60,
-                              NotificationCallback cb = nullptr) {
+  bool subscribeNotifications(NotificationCallback cb = nullptr,
+                              int timeoutSeconds = 3600) {
     mgr.setReference(this);
+    mgr.setSubscribeInterval(timeoutSeconds);
     // register provided callback or fallback to the default processNotification
-    if (cb)
-      mgr.onNotification(cb);
-    else
-      mgr.onNotification(processNotification);
-    auto& device = mgr.getDevice(device_index);
-    return mgr.subscribeNotifications(device, timeoutSeconds);
+    mgr.onNotification(cb != nullptr ? cb : processNotification);
+    return mgr.subscribeNotifications();
   }
 
   /**
@@ -397,7 +396,9 @@ class ControlPointMediaRenderer {
    * @param cb Function taking (bool active, void* reference). 'reference' is
    *           the pointer set via setReference().
    */
-  void onActiveChanged(std::function<void(bool, void*)> cb) { activeChangedCallback = cb; }
+  void onActiveChanged(std::function<void(bool, void*)> cb) {
+    activeChangedCallback = cb;
+  }
 
  protected:
   DLNAControlPoint& mgr;
@@ -409,13 +410,14 @@ class ControlPointMediaRenderer {
       "urn:schemas-upnp-org:device:MediaRenderer:1";
   const char* device_type_filter = device_type_filter_default;
   ActionReply last_reply;
-  void *reference = nullptr;
+  void* reference = nullptr;
 
   // Helper to update is_active and notify callback only on change
   void setActiveState(bool s) {
     if (is_active == s) return;
     is_active = s;
-    DlnaLogger.log(DlnaLogLevel::Info, "ControlPointMediaRenderer active=%s", is_active ? "true" : "false");
+    DlnaLogger.log(DlnaLogLevel::Info, "ControlPointMediaRenderer active=%s",
+                   is_active ? "true" : "false");
     if (activeChangedCallback) activeChangedCallback(is_active, reference);
   }
 
@@ -480,20 +482,13 @@ class ControlPointMediaRenderer {
     return total * 1000UL;
   }
 
-  // Select service on a device filtered by device_type_filter
+  /// Select service by id
   DLNAServiceInfo& selectService(const char* id) {
-    Vector<DLNADeviceInfo>& all = mgr.getDevices();
-    int idx = 0;
-    for (auto& d : all) {
-      const char* dt = d.getDeviceType();
-      if (device_type_filter && !StrView(dt).contains(device_type_filter))
-        continue;
-      if (idx == device_index) {
-        DLNAServiceInfo& s = d.getService(id);
-        if (s) return s;
-      }
-      idx++;
-    }
+    // use selected device
+    DLNAServiceInfo& s = mgr.getDevice().getService(id);
+    if (s) return s;
+
+    // fallback: global search
     return mgr.getService(id);
   }
 };
