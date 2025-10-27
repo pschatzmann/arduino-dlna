@@ -21,12 +21,13 @@ var searchData=
   ['event_5fkey_18',['event_key',['../classtiny__dlna_1_1NotifyReplyCP.html#a871f2c344fea14af3afae67d98498692',1,'tiny_dlna::NotifyReplyCP']]],
   ['event_5fsub_5fcb_19',['event_sub_cb',['../classtiny__dlna_1_1DLNAServiceInfo.html#aad09297e371a3c4db2c7e6b782cc3319',1,'tiny_dlna::DLNAServiceInfo']]],
   ['event_5fsub_5furl_20',['event_sub_url',['../classtiny__dlna_1_1DLNAServiceInfo.html#af49ffe27509241a816128acb00a9deae',1,'tiny_dlna::DLNAServiceInfo']]],
-  ['execute_21',['execute',['../classtiny__dlna_1_1Scheduler.html#adb5c137561c391272d7f2dd21cd7391c',1,'tiny_dlna::Scheduler']]],
-  ['executeactions_22',['executeActions',['../classtiny__dlna_1_1DLNAControlPoint.html#a84bb0f5aad9d9b9653a2f49f51010257',1,'tiny_dlna::DLNAControlPoint']]],
-  ['expand_5fencoded_23',['expand_encoded',['../classtiny__dlna_1_1StrPrint.html#a745d1dd40855d6978db02325953b9c32',1,'tiny_dlna::StrPrint']]],
-  ['expires_5fat_24',['expires_at',['../structtiny__dlna_1_1Subscription.html#a5a7c850b8b1068c2c5423670712563d0',1,'tiny_dlna::Subscription']]],
-  ['extension_25',['extension',['../structtiny__dlna_1_1MimeExtension.html#a68f40254e86ae693175f7d49333b5523',1,'tiny_dlna::MimeExtension']]],
-  ['extractattribute_26',['extractAttribute',['../classtiny__dlna_1_1XMLAttributeParser.html#af1a77b7f4086ba1b85e4b50e228f703f',1,'tiny_dlna::XMLAttributeParser::extractAttribute(const char *xml, const char *tagName, const char *attrName, char *outBuf, size_t bufSize)'],['../classtiny__dlna_1_1XMLAttributeParser.html#a2f7ac680991aa20ef6061c1b305f088c',1,'tiny_dlna::XMLAttributeParser::extractAttribute(const char *attrs, const char *attrName, char *outBuf, size_t bufSize)']]],
-  ['extractattributetoken_27',['extractAttributeToken',['../classtiny__dlna_1_1XMLAttributeParser.html#a514354afaf92cebb01516565b6e26e36',1,'tiny_dlna::XMLAttributeParser']]],
-  ['extractquotedvalue_28',['extractQuotedValue',['../classtiny__dlna_1_1XMLAttributeParser.html#a134eda66fe773e3ebeacef7036f591ba',1,'tiny_dlna::XMLAttributeParser']]]
+  ['eventsubscriptionhandler_21',['eventSubscriptionHandler',['../classtiny__dlna_1_1DLNADevice.html#a6e693f736e5642abe962e7fa23287453',1,'tiny_dlna::DLNADevice']]],
+  ['execute_22',['execute',['../classtiny__dlna_1_1Scheduler.html#adb5c137561c391272d7f2dd21cd7391c',1,'tiny_dlna::Scheduler']]],
+  ['executeactions_23',['executeActions',['../classtiny__dlna_1_1DLNAControlPoint.html#a84bb0f5aad9d9b9653a2f49f51010257',1,'tiny_dlna::DLNAControlPoint']]],
+  ['expand_5fencoded_24',['expand_encoded',['../classtiny__dlna_1_1StrPrint.html#a745d1dd40855d6978db02325953b9c32',1,'tiny_dlna::StrPrint']]],
+  ['expires_5fat_25',['expires_at',['../structtiny__dlna_1_1Subscription.html#a5a7c850b8b1068c2c5423670712563d0',1,'tiny_dlna::Subscription']]],
+  ['extension_26',['extension',['../structtiny__dlna_1_1MimeExtension.html#a68f40254e86ae693175f7d49333b5523',1,'tiny_dlna::MimeExtension']]],
+  ['extractattribute_27',['extractAttribute',['../classtiny__dlna_1_1XMLAttributeParser.html#af1a77b7f4086ba1b85e4b50e228f703f',1,'tiny_dlna::XMLAttributeParser::extractAttribute(const char *xml, const char *tagName, const char *attrName, char *outBuf, size_t bufSize)'],['../classtiny__dlna_1_1XMLAttributeParser.html#a2f7ac680991aa20ef6061c1b305f088c',1,'tiny_dlna::XMLAttributeParser::extractAttribute(const char *attrs, const char *attrName, char *outBuf, size_t bufSize)']]],
+  ['extractattributetoken_28',['extractAttributeToken',['../classtiny__dlna_1_1XMLAttributeParser.html#a514354afaf92cebb01516565b6e26e36',1,'tiny_dlna::XMLAttributeParser']]],
+  ['extractquotedvalue_29',['extractQuotedValue',['../classtiny__dlna_1_1XMLAttributeParser.html#a134eda66fe773e3ebeacef7036f591ba',1,'tiny_dlna::XMLAttributeParser']]]
 ];
