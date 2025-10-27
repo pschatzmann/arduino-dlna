@@ -1,9 +1,0 @@
-<map id="tiny_dlna::NotifyReplyCP" name="tiny_dlna::NotifyReplyCP">
-<area shape="rect" id="node1" title="Represents a notification/notify reply scheduled for control&#45;point processing." alt="" coords="87,465,270,491"/>
-<area shape="rect" id="node2" href="$classtiny__dlna_1_1MSearchReplyCP.html" title="Processing at control point to handle a MSearchReply from the device." alt="" coords="5,352,205,377"/>
-<area shape="rect" id="node3" href="$structtiny__dlna_1_1Schedule.html" title="An individual Schedule (to send out UDP messages)" alt="" coords="25,196,175,221"/>
-<area shape="rect" id="node4" href="$classtiny__dlna_1_1Str.html" title="String implementation which keeps the data on the heap. We grow the allocated memory only if the copy..." alt="" coords="199,196,307,221"/>
-<area shape="rect" id="node5" href="$classtiny__dlna_1_1StrView.html" title="A simple wrapper to provide string functions on char*. If the underlying char* is a const we do not a..." alt="" coords="131,101,271,126"/>
-<area shape="rect" id="node6" href="$classtiny__dlna_1_1Vector.html" title=" " alt="" coords="295,93,438,133"/>
-<area shape="rect" id="node7" href="$classtiny__dlna_1_1Allocator.html" title="Memory allocateator which uses malloc." alt="" coords="293,5,441,31"/>
-</map>

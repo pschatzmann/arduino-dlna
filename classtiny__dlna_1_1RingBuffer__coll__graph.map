@@ -1,5 +1,0 @@
-<map id="tiny_dlna::RingBuffer" name="tiny_dlna::RingBuffer">
-<area shape="rect" id="node1" title="Implementation of a Simple Circular Buffer. Instead of comparing the position of the read and write p..." alt="" coords="5,196,164,221"/>
-<area shape="rect" id="node2" href="$classtiny__dlna_1_1Vector.html" title=" " alt="" coords="13,93,156,133"/>
-<area shape="rect" id="node3" href="$classtiny__dlna_1_1Allocator.html" title="Memory allocateator which uses malloc." alt="" coords="11,5,159,31"/>
-</map>

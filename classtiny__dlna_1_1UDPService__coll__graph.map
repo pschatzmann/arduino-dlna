@@ -1,5 +1,0 @@
-<map id="tiny_dlna::UDPService&lt; UDPType &gt;" name="tiny_dlna::UDPService&lt; UDPType &gt;">
-<area shape="rect" id="node1" title="Access to UDP functionality: sending and receiving of data." alt="" coords="113,93,279,133"/>
-<area shape="rect" id="node2" href="$classtiny__dlna_1_1IUDPService.html" title="Abstract Interface for UDP API." alt="" coords="5,5,176,31"/>
-<area shape="rect" id="node3" href="$structtiny__dlna_1_1IPAddressAndPort.html" title="IP Adress including Port information." alt="" coords="201,5,405,31"/>
-</map>
