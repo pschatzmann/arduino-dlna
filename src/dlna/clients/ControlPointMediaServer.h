@@ -290,7 +290,7 @@ class ControlPointMediaServer {
     return mgr.getService(id);
   }
 
-
+  /// Find argument value by name in ActionReply
   const char* findArgument(ActionReply& r, const char* name) {
     for (auto& a : r.arguments) {
       if (a.name != nullptr) {
