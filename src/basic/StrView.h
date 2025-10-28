@@ -1,12 +1,11 @@
 #pragma once
 
-#include <stdio.h>
-#include <string.h>
 #include <IPAddress.h>
 #include <assert.h>
+#include <stdio.h>
+#include <string.h>
 
 namespace tiny_dlna {
-
 
 /**
  * @brief A simple  wrapper to provide string functions on char*.
@@ -129,7 +128,7 @@ class StrView {
   virtual void add(int value) {
     if (!this->isConst()) {
       grow(len + 11);
-      snprintf((char*)c_str()+len, 11, "%d", value);
+      snprintf((char*)c_str() + len, 11, "%d", value);
       len = strlen(chars);
     }
   }
@@ -158,8 +157,8 @@ class StrView {
     if (!isConst() && append != nullptr) {
       int append_len = len;
       int old_len = length();
-      grow(old_len + append_len );
-      memcpy(chars+old_len, append, len);
+      grow(old_len + append_len);
+      memcpy(chars + old_len, append, len);
     }
   }
 
@@ -358,7 +357,8 @@ class StrView {
 
   /// checks if the indicated string is equal to the current string
   virtual bool operator==(const char* alt) const {
-    if (alt == nullptr) return len == 0;;
+    if (alt == nullptr) return len == 0;
+    ;
     return strncmp(this->chars, alt, this->len) == 0;
   }
 
@@ -405,13 +405,14 @@ class StrView {
   }
 
   /// Replaces the first instance of toReplace with  replaced
-  virtual bool replace(const char* toReplace, const char* replaced) {
+  virtual bool replace(const char* toReplace, const char* replaced,
+                       int startPos = 0) {
     bool result = false;
     if (toReplace == nullptr || replaced == nullptr) {
       return result;
     }
     if (!isConst()) {
-      int pos = indexOf(toReplace);
+      int pos = indexOf(toReplace, startPos);
       int old_len = length();
       int insert_len = 0;
       if (pos >= 0) {
@@ -437,11 +438,19 @@ class StrView {
     if (isEmpty()) {
       return false;
     }
-    if (indexOf(toReplace) == -1) {
-      return false;
+    int found = 0;
+    int pos = 0;
+    while (true) {
+      pos = indexOf(toReplace, pos);
+      if (pos >= 0) {
+        found++;
+      } else {
+        return found;
+      }
+      replace(toReplace, replaced, pos);
+      // search from next pos
+      pos++;
     }
-    while (replace(toReplace, replaced));
-    return true;
   }
 
   /// removes the indicated substring from the string
@@ -559,10 +568,9 @@ class StrView {
     len = 0;
   }
 
-  virtual void clearAll(){
+  virtual void clearAll() {
     if (chars != nullptr && !isConst()) {
-      for (int j=0;j<maxlen;j++)
-        chars[j] = 0;
+      for (int j = 0; j < maxlen; j++) chars[j] = 0;
     }
     len = 0;
   }
@@ -746,12 +754,11 @@ class StrView {
     return result;
   }
 
-  const char* buildPath(const char* start, const char* p1=nullptr, const char* p2=nullptr) {
+  const char* buildPath(const char* start, const char* p1 = nullptr,
+                        const char* p2 = nullptr) {
     set(start);
-    if (p1 != nullptr)
-      add(p1);
-    if (p2 != nullptr)
-      add(p2);
+    if (p1 != nullptr) add(p1);
+    if (p2 != nullptr) add(p2);
     return chars;
   }
 

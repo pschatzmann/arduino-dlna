@@ -594,9 +594,11 @@ class MediaServer : public DLNADeviceInfo {
         if (!get_data_cb(idx, item, reference_)) break;
 
         const char* mediaItemClassStr = toStr(item.itemClass);
+        const char* nodeName =
+            (item.itemClass == MediaItemClass::Folder) ? "container" : "item";
 
         chunk_writer.printf(
-            "&lt;item id=\"%s\" parentID=\"%s\" restricted=\"%d\"&gt;",
+            "&lt;%s id=\"%s\" parentID=\"%s\" restricted=\"%d\"&gt;", nodeName,
             item.id ? item.id : "", item.parentID ? item.parentID : "0",
             item.restricted ? 1 : 0);
 
@@ -612,10 +614,9 @@ class MediaServer : public DLNADeviceInfo {
         // res with optional protocolInfo attribute
         url.set(item.resourceURL);
         if (!url.isEmpty()) {
-          // Serial.println(url.c_str());
-          // url.replaceAll("&", "&amp;");
+          url.replaceAll("&", "&amp;");
           if (!StrView(item.mimeType).isEmpty()) {
-            chunk_writer.printf("&lt;res protocolInfo=\"http-get:*:%s\"&gt;",
+            chunk_writer.printf("&lt;res protocolInfo=\"http-get:*:%s:*\"&gt;",
                                 item.mimeType);
             chunk_writer.print(nullStr(url.c_str()));
             chunk_writer.print("&lt;/res&gt;\r\n");
@@ -626,7 +627,7 @@ class MediaServer : public DLNADeviceInfo {
           }
         }
 
-        chunk_writer.print("&lt;/item&gt;\r\n");
+        chunk_writer.printf("&lt;/%s&gt;\r\n", nodeName);
       }
     }
 
