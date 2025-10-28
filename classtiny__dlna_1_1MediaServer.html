@@ -277,6 +277,8 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
+<tr class="memitem:a9ebf1980b89164862d41a9da31c4dc08"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaServer.html#a9ebf1980b89164862d41a9da31c4dc08">nullStr</a> (const char *str)</td></tr>
+<tr class="separator:a9ebf1980b89164862d41a9da31c4dc08"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae3cdc5960448abb41cd22d7304714741"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaServer.html#ae3cdc5960448abb41cd22d7304714741">setupServicesImpl</a> (<a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> *server)</td></tr>
 <tr class="separator:ae3cdc5960448abb41cd22d7304714741"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac47d8f17ad4a352c03e5b442c5f1a194"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaServer.html#ac47d8f17ad4a352c03e5b442c5f1a194">processAction</a> (<a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;action, <a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;server)</td></tr>
@@ -293,14 +295,26 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a75b93f2f4194a030cbe287f2a138fb9d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaServer.html#a75b93f2f4194a030cbe287f2a138fb9d">processActionGetSystemUpdateID</a> (<a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;action, <a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;server)</td></tr>
 <tr class="separator:a75b93f2f4194a030cbe287f2a138fb9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7941e92fcb1d41bb03d4bb8667dc1abe"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaServer.html#a7941e92fcb1d41bb03d4bb8667dc1abe">processActionGetProtocolInfo</a> (<a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;action, <a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;server)</td></tr>
+<tr class="memdesc:a7941e92fcb1d41bb03d4bb8667dc1abe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Replies with Source and Sink protocol lists (CSV protocolInfo strings)  <br /></td></tr>
 <tr class="separator:a7941e92fcb1d41bb03d4bb8667dc1abe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5ebf55d135b14125778ae0129c3cc563"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaServer.html#a5ebf55d135b14125778ae0129c3cc563">processActionGetCurrentConnectionIDs</a> (<a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;action, <a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;server)</td></tr>
 <tr class="separator:a5ebf55d135b14125778ae0129c3cc563"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0aa6a0282812c6663dab7e25b721dc6c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaServer.html#a0aa6a0282812c6663dab7e25b721dc6c">processActionGetCurrentConnectionInfo</a> (<a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;action, <a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;server)</td></tr>
 <tr class="separator:a0aa6a0282812c6663dab7e25b721dc6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4fb070798c5a71d1c73c241cd82e656"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaServer.html#ac4fb070798c5a71d1c73c241cd82e656">soapEnvelopeStart</a> (<a class="el" href="classtiny__dlna_1_1ChunkPrint.html">ChunkPrint</a> &amp;chunk)</td></tr>
+<tr class="memdesc:ac4fb070798c5a71d1c73c241cd82e656"><td class="mdescLeft">&#160;</td><td class="mdescRight">Common helper to stream a ContentDirectory response (Browse or Search)  <br /></td></tr>
+<tr class="separator:ac4fb070798c5a71d1c73c241cd82e656"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a225e81700ce909375dc2d8debb77e8a2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaServer.html#a225e81700ce909375dc2d8debb77e8a2">soapEnvelopeEnd</a> (<a class="el" href="classtiny__dlna_1_1ChunkPrint.html">ChunkPrint</a> &amp;chunk)</td></tr>
+<tr class="separator:a225e81700ce909375dc2d8debb77e8a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3771606f1dee280d32d61d567d0a4a6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaServer.html#ab3771606f1dee280d32d61d567d0a4a6">actionResponseStart</a> (<a class="el" href="classtiny__dlna_1_1ChunkPrint.html">ChunkPrint</a> &amp;chunk, const char *responseName, const char *serviceNS)</td></tr>
+<tr class="separator:ab3771606f1dee280d32d61d567d0a4a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6ca54ad68fa5f5710e83e4aea87c0bd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaServer.html#ad6ca54ad68fa5f5710e83e4aea87c0bd">actionResponseEnd</a> (<a class="el" href="classtiny__dlna_1_1ChunkPrint.html">ChunkPrint</a> &amp;chunk, const char *responseName)</td></tr>
+<tr class="separator:ad6ca54ad68fa5f5710e83e4aea87c0bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad98da306419b97cfb4b38f8c73310f0a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaServer.html#ad98da306419b97cfb4b38f8c73310f0a">streamActionItems</a> (const char *responseName, const char *objectID, const char *browseFlag, const char *filter, int startingIndex, int requestedCount, <a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;server)</td></tr>
-<tr class="memdesc:ad98da306419b97cfb4b38f8c73310f0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Common helper to stream a ContentDirectory response (Browse or Search)  <br /></td></tr>
 <tr class="separator:ad98da306419b97cfb4b38f8c73310f0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ac97c2cbadea9f56754bf85d17b5870"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaServer.html#a6ac97c2cbadea9f56754bf85d17b5870">streamDIDL</a> (<a class="el" href="classtiny__dlna_1_1ChunkPrint.html">ChunkPrint</a> &amp;chunk_writer, int numberReturned, int startingIndex)</td></tr>
+<tr class="memdesc:a6ac97c2cbadea9f56754bf85d17b5870"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stream DIDL-Lite payload for a Browse/Search result.  <br /></td></tr>
+<tr class="separator:a6ac97c2cbadea9f56754bf85d17b5870"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3e7fe6432cf2513d18931c938c0653d2"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#a3e7fe6432cf2513d18931c938c0653d2">printRoot</a> ()</td></tr>
 <tr class="separator:a3e7fe6432cf2513d18931c938c0653d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa6c8f108406a2ea81374fc57c8e0de34"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#aa6c8f108406a2ea81374fc57c8e0de34">printDevice</a> ()</td></tr>
@@ -318,8 +332,6 @@ Protected Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
 Static Protected Member Functions</h2></td></tr>
-<tr class="memitem:a72517c6d38069354df15844e6a527c0b"><td class="memItemLeft" align="right" valign="top">static const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaServer.html#a72517c6d38069354df15844e6a527c0b">replyTemplate</a> ()</td></tr>
-<tr class="separator:a72517c6d38069354df15844e6a527c0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a87be17bbe5b21605d23c582343b35648"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaServer.html#a87be17bbe5b21605d23c582343b35648">contentDirectoryControlCB</a> (<a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> *server, const char *requestPath, <a class="el" href="classtiny__dlna_1_1HttpRequestHandlerLine.html">HttpRequestHandlerLine</a> *hl)</td></tr>
 <tr class="separator:a87be17bbe5b21605d23c582343b35648"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abbb756d4fa856ebf27de87022dafe988"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaServer.html#abbb756d4fa856ebf27de87022dafe988">connmgrControlCB</a> (<a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> *server, const char *requestPath, <a class="el" href="classtiny__dlna_1_1HttpRequestHandlerLine.html">HttpRequestHandlerLine</a> *hl)</td></tr>
@@ -510,6 +522,84 @@ Static Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="ad6ca54ad68fa5f5710e83e4aea87c0bd" name="ad6ca54ad68fa5f5710e83e4aea87c0bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad6ca54ad68fa5f5710e83e4aea87c0bd">&#9670;&#160;</a></span>actionResponseEnd()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tiny_dlna::MediaServer::actionResponseEnd </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1ChunkPrint.html">ChunkPrint</a> &amp;&#160;</td>
+          <td class="paramname"><em>chunk</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>responseName</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab3771606f1dee280d32d61d567d0a4a6" name="ab3771606f1dee280d32d61d567d0a4a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab3771606f1dee280d32d61d567d0a4a6">&#9670;&#160;</a></span>actionResponseStart()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tiny_dlna::MediaServer::actionResponseStart </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1ChunkPrint.html">ChunkPrint</a> &amp;&#160;</td>
+          <td class="paramname"><em>chunk</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>responseName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>serviceNS</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a481ad2e5cf2b0b8576fbb465a2e3b5ab" name="a481ad2e5cf2b0b8576fbb465a2e3b5ab"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a481ad2e5cf2b0b8576fbb465a2e3b5ab">&#9670;&#160;</a></span>addIcon()</h2>
 
@@ -1494,6 +1584,32 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a9ebf1980b89164862d41a9da31c4dc08" name="a9ebf1980b89164862d41a9da31c4dc08"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ebf1980b89164862d41a9da31c4dc08">&#9670;&#160;</a></span>nullStr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char * tiny_dlna::MediaServer::nullStr </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>str</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a714c374025464075d8cf073381f91d07" name="a714c374025464075d8cf073381f91d07"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a714c374025464075d8cf073381f91d07">&#9670;&#160;</a></span>operator bool()</h2>
 
@@ -1907,7 +2023,8 @@ Static Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Handle ConnectionManager:GetProtocolInfo action Replies with Source and Sink protocol lists (CSV protocolInfo strings) </p>
+
+<p>Replies with Source and Sink protocol lists (CSV protocolInfo strings) </p>
 
 </div>
 </div>
@@ -2052,32 +2169,6 @@ Static Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-</div>
-</div>
-<a id="a72517c6d38069354df15844e6a527c0b" name="a72517c6d38069354df15844e6a527c0b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a72517c6d38069354df15844e6a527c0b">&#9670;&#160;</a></span>replyTemplate()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static const char * tiny_dlna::MediaServer::replyTemplate </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>generic SOAP reply template with placeholders: %1 = ActionResponse, %2 = payload tag, %3 = inner payload </p>
 
 </div>
 </div>
@@ -2787,6 +2878,60 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a225e81700ce909375dc2d8debb77e8a2" name="a225e81700ce909375dc2d8debb77e8a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a225e81700ce909375dc2d8debb77e8a2">&#9670;&#160;</a></span>soapEnvelopeEnd()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tiny_dlna::MediaServer::soapEnvelopeEnd </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1ChunkPrint.html">ChunkPrint</a> &amp;&#160;</td>
+          <td class="paramname"><em>chunk</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac4fb070798c5a71d1c73c241cd82e656" name="ac4fb070798c5a71d1c73c241cd82e656"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac4fb070798c5a71d1c73c241cd82e656">&#9670;&#160;</a></span>soapEnvelopeStart()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tiny_dlna::MediaServer::soapEnvelopeStart </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1ChunkPrint.html">ChunkPrint</a> &amp;&#160;</td>
+          <td class="paramname"><em>chunk</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Common helper to stream a ContentDirectory response (Browse or Search) </p>
+
+</div>
+</div>
 <a id="ad98da306419b97cfb4b38f8c73310f0a" name="ad98da306419b97cfb4b38f8c73310f0a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad98da306419b97cfb4b38f8c73310f0a">&#9670;&#160;</a></span>streamActionItems()</h2>
 
@@ -2851,7 +2996,49 @@ Static Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Common helper to stream a ContentDirectory response (Browse or Search) </p>
+</div>
+</div>
+<a id="a6ac97c2cbadea9f56754bf85d17b5870" name="a6ac97c2cbadea9f56754bf85d17b5870"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ac97c2cbadea9f56754bf85d17b5870">&#9670;&#160;</a></span>streamDIDL()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tiny_dlna::MediaServer::streamDIDL </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1ChunkPrint.html">ChunkPrint</a> &amp;&#160;</td>
+          <td class="paramname"><em>chunk_writer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>numberReturned</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>startingIndex</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Stream DIDL-Lite payload for a Browse/Search result. </p>
 
 </div>
 </div>

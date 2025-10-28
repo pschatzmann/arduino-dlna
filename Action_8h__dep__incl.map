@@ -1,5 +1,5 @@
-<map id="src/dlna/service/Action.h" name="src/dlna/service/Action.h">
-<area shape="rect" id="node1" title=" " alt="" coords="709,5,891,31"/>
+<map id="src/dlna/Action.h" name="src/dlna/Action.h">
+<area shape="rect" id="node1" title=" " alt="" coords="735,5,865,31"/>
 <area shape="rect" id="node2" href="$DLNADeviceInfo_8h.html" title=" " alt="" coords="384,79,579,104"/>
 <area shape="rect" id="node8" href="$MediaServer_8h.html" title=" " alt="" coords="727,621,940,661"/>
 <area shape="rect" id="node9" href="$ControlPointMediaServer_8h.html" title=" " alt="" coords="625,709,796,749"/>
