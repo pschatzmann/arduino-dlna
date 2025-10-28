@@ -1,14 +1,14 @@
 <map id="src/basic/Str.h" name="src/basic/Str.h">
-<area shape="rect" id="node1" title=" " alt="" coords="173,5,285,31"/>
-<area shape="rect" id="node2" href="$StrView_8h.html" title=" " alt="" coords="239,79,322,104"/>
-<area shape="rect" id="node7" href="$Vector_8h.html" title=" " alt="" coords="141,79,215,104"/>
-<area shape="rect" id="node3" title=" " alt="" coords="213,299,279,324"/>
-<area shape="rect" id="node4" title=" " alt="" coords="304,299,375,324"/>
-<area shape="rect" id="node5" title=" " alt="" coords="356,152,453,177"/>
-<area shape="rect" id="node6" title=" " alt="" coords="155,152,230,177"/>
-<area shape="rect" id="node8" href="$Allocator_8h.html" title=" " alt="" coords="41,152,131,177"/>
-<area shape="rect" id="node9" title=" " alt="" coords="9,225,80,251"/>
-<area shape="rect" id="node10" href="$Logger_8h.html" title=" " alt="" coords="105,225,219,251"/>
+<area shape="rect" id="node1" title=" " alt="" coords="166,5,278,31"/>
+<area shape="rect" id="node2" href="$StrView_8h.html" title=" " alt="" coords="237,79,319,104"/>
+<area shape="rect" id="node7" href="$Vector_8h.html" title=" " alt="" coords="130,79,205,104"/>
+<area shape="rect" id="node3" title=" " alt="" coords="229,152,327,177"/>
+<area shape="rect" id="node4" title=" " alt="" coords="130,152,205,177"/>
+<area shape="rect" id="node5" title=" " alt="" coords="257,299,323,324"/>
+<area shape="rect" id="node6" title=" " alt="" coords="369,299,440,324"/>
+<area shape="rect" id="node8" href="$Allocator_8h.html" title=" " alt="" coords="15,152,106,177"/>
+<area shape="rect" id="node9" title=" " alt="" coords="155,225,225,251"/>
+<area shape="rect" id="node10" href="$Logger_8h.html" title=" " alt="" coords="15,225,130,251"/>
 <area shape="rect" id="node11" title=" " alt="" coords="114,299,189,324"/>
 <area shape="rect" id="node12" title=" " alt="" coords="5,299,89,324"/>
 </map>
