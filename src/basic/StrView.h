@@ -56,7 +56,7 @@ class StrView {
       } else {
         if (this->len > 0) {
           /// if the StrView is an external buffer we need to copy
-          strncpy(this->chars, alt, this->maxlen);
+          strncpy(this->chars, alt, len);
           this->chars[len] = 0;
         }
       }
@@ -434,6 +434,9 @@ class StrView {
 
   /// Replaces all instances of toReplace with  replaced
   virtual bool replaceAll(const char* toReplace, const char* replaced) {
+    if (isEmpty()) {
+      return false;
+    }
     if (indexOf(toReplace) == -1) {
       return false;
     }

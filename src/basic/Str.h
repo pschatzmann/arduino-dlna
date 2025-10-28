@@ -231,7 +231,7 @@ class Str : public StrView {
 
   bool grow(int newMaxLen) override {
     bool grown = false;
-    assert(newMaxLen < 1024 * 10);
+    //assert(newMaxLen < 1024 * 10);
     if (newMaxLen < 0) return false;
     if (newMaxLen == 0 && chars == nullptr) return false;
 

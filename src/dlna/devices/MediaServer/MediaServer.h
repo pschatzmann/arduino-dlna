@@ -582,42 +582,72 @@ class MediaServer : public DLNADeviceInfo {
                   int startingIndex) {
     // Stream DIDL-Lite Result payload using helper
     chunk_writer.print(
-        "<DIDL-Lite xmlns:dc=\"http://purl.org/dc/elements/1.1/\" "
+        "&lt;DIDL-Lite xmlns:dc=\"http://purl.org/dc/elements/1.1/\" "
         "xmlns:upnp=\"urn:schemas-upnp-org:metadata-1-0/upnp/\" "
-        "xmlns=\"urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/\">\r\n");
+        "xmlns=\"urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/\"&gt;\r\n");
 
     if (get_data_cb) {
+      Str url{160};
       for (int i = 0; i < numberReturned; ++i) {
         MediaItem item;
         int idx = startingIndex + i;
         if (!get_data_cb(idx, item, reference_)) break;
 
+        const char* mediaItemClassStr = toStr(item.itemClass);
+
         chunk_writer.printf(
-            "<item id=\"%s\" parentID=\"%s\" restricted=\"%d\">",
+            "&lt;item id=\"%s\" parentID=\"%s\" restricted=\"%d\"&gt;",
             item.id ? item.id : "", item.parentID ? item.parentID : "0",
             item.restricted ? 1 : 0);
 
         // title
-        chunk_writer.print("<dc:title>");
+        chunk_writer.print("&lt;dc:title&gt;");
         chunk_writer.print(nullStr(item.title));
-        chunk_writer.print("</dc:title>\r\n");
-
-        // res with optional protocolInfo attribute
-        if (item.mimeType) {
-          chunk_writer.printf("<res protocolInfo=\"%s\">", item.mimeType);
-          chunk_writer.print(nullStr(item.res));
-          chunk_writer.print("</res>\r\n");
-        } else {
-          chunk_writer.print("<res>");
-          chunk_writer.print(nullStr(item.res));
-          chunk_writer.print("</res>\r\n");
+        chunk_writer.print("&lt;/dc:title&gt;\r\n");
+        if (mediaItemClassStr != nullptr) {
+          chunk_writer.printf("&lt;upnp:class&gt;%s&lt;/upnp:class&gt;\r\n",
+                              mediaItemClassStr);
         }
 
-        chunk_writer.print("</item>\r\n");
+        // res with optional protocolInfo attribute
+        url.set(item.resourceURL);
+        if (!url.isEmpty()) {
+          // Serial.println(url.c_str());
+          // url.replaceAll("&", "&amp;");
+          if (!StrView(item.mimeType).isEmpty()) {
+            chunk_writer.printf("&lt;res protocolInfo=\"http-get:*:%s\"&gt;",
+                                item.mimeType);
+            chunk_writer.print(nullStr(url.c_str()));
+            chunk_writer.print("&lt;/res&gt;\r\n");
+          } else {
+            chunk_writer.print("&lt;res&gt;");
+            chunk_writer.print(nullStr(url.c_str()));
+            chunk_writer.print("&lt;/res&gt;\r\n");
+          }
+        }
+
+        chunk_writer.print("&lt;/item&gt;\r\n");
       }
     }
 
-    chunk_writer.print("</DIDL-Lite>\r\n");
+    chunk_writer.print("&lt;/DIDL-Lite&gt;\r\n");
+  }
+
+  const char* toStr(MediaItemClass itemClass) {
+    switch (itemClass) {
+      case MediaItemClass::Music:
+        return "object.item.audioItem.musicTrack";
+      case MediaItemClass::Radio:
+        return "object.item.audioItem.audioBroadcast";
+      case MediaItemClass::Video:
+        return "object.item.videoItem.movie";
+      case MediaItemClass::Photo:
+        return "object.item.imageItem.photo";
+      case MediaItemClass::Folder:
+        return "object.container";
+      default:
+        return nullptr;
+    }
   }
 
   // Control handler for ContentDirectory service
@@ -670,21 +700,6 @@ class MediaServer : public DLNADeviceInfo {
 
     // Unhandled actions: reply NotFound
     server->replyNotFound();
-  }
-
-  // helper to write text content with minimal XML-escaping for &, < and >
-  static void writeEscapedText(Print& out, const char* s) {
-    if (!s) return;
-    for (const char* p = s; *p; ++p) {
-      if (*p == '&')
-        out.print("&amp;");
-      else if (*p == '<')
-        out.print("&lt;");
-      else if (*p == '>')
-        out.print("&gt;");
-      else
-        out.write((const uint8_t)*p);
-    }
   }
 };
 
