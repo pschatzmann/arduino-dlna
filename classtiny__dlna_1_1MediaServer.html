@@ -315,6 +315,8 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a6ac97c2cbadea9f56754bf85d17b5870"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaServer.html#a6ac97c2cbadea9f56754bf85d17b5870">streamDIDL</a> (<a class="el" href="classtiny__dlna_1_1ChunkPrint.html">ChunkPrint</a> &amp;chunk_writer, int numberReturned, int startingIndex)</td></tr>
 <tr class="memdesc:a6ac97c2cbadea9f56754bf85d17b5870"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stream DIDL-Lite payload for a Browse/Search result.  <br /></td></tr>
 <tr class="separator:a6ac97c2cbadea9f56754bf85d17b5870"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87326e92d5946828c168e59007e0f47b"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaServer.html#a87326e92d5946828c168e59007e0f47b">toStr</a> (<a class="el" href="namespacetiny__dlna.html#a85d3f686372782f654ff23302800aac9">MediaItemClass</a> itemClass)</td></tr>
+<tr class="separator:a87326e92d5946828c168e59007e0f47b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3e7fe6432cf2513d18931c938c0653d2"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#a3e7fe6432cf2513d18931c938c0653d2">printRoot</a> ()</td></tr>
 <tr class="separator:a3e7fe6432cf2513d18931c938c0653d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa6c8f108406a2ea81374fc57c8e0de34"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#aa6c8f108406a2ea81374fc57c8e0de34">printDevice</a> ()</td></tr>
@@ -336,8 +338,6 @@ Static Protected Member Functions</h2></td></tr>
 <tr class="separator:a87be17bbe5b21605d23c582343b35648"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abbb756d4fa856ebf27de87022dafe988"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaServer.html#abbb756d4fa856ebf27de87022dafe988">connmgrControlCB</a> (<a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> *server, const char *requestPath, <a class="el" href="classtiny__dlna_1_1HttpRequestHandlerLine.html">HttpRequestHandlerLine</a> *hl)</td></tr>
 <tr class="separator:abbb756d4fa856ebf27de87022dafe988"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adfbbe5d87bc487c1762933368bfd20b9"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaServer.html#adfbbe5d87bc487c1762933368bfd20b9">writeEscapedText</a> (Print &amp;out, const char *s)</td></tr>
-<tr class="separator:adfbbe5d87bc487c1762933368bfd20b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -3042,6 +3042,32 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a87326e92d5946828c168e59007e0f47b" name="a87326e92d5946828c168e59007e0f47b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a87326e92d5946828c168e59007e0f47b">&#9670;&#160;</a></span>toStr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char * tiny_dlna::MediaServer::toStr </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacetiny__dlna.html#a85d3f686372782f654ff23302800aac9">MediaItemClass</a>&#160;</td>
+          <td class="paramname"><em>itemClass</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a387ab3e1fce34f8add7fa402309340f4" name="a387ab3e1fce34f8add7fa402309340f4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a387ab3e1fce34f8add7fa402309340f4">&#9670;&#160;</a></span>updateTimestamp()</h2>
 
@@ -3066,42 +3092,6 @@ Static Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Update the timestamp. </p>
-
-</div>
-</div>
-<a id="adfbbe5d87bc487c1762933368bfd20b9" name="adfbbe5d87bc487c1762933368bfd20b9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adfbbe5d87bc487c1762933368bfd20b9">&#9670;&#160;</a></span>writeEscapedText()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static void tiny_dlna::MediaServer::writeEscapedText </td>
-          <td>(</td>
-          <td class="paramtype">Print &amp;&#160;</td>
-          <td class="paramname"><em>out</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>s</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
 
 </div>
 </div>

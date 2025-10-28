@@ -23,5 +23,6 @@ var searchData=
   ['vector_3c_20tiny_5fdlna_3a_3astr_20_3e_20',['Vector&lt; tiny_dlna::Str &gt;',['../classtiny__dlna_1_1Vector.html',1,'tiny_dlna']]],
   ['vector_3c_20tiny_5fdlna_3a_3avector_3c_20tiny_5fdlna_3a_3asubscription_20_3e_20_3e_21',['Vector&lt; tiny_dlna::Vector&lt; tiny_dlna::Subscription &gt; &gt;',['../classtiny__dlna_1_1Vector.html',1,'tiny_dlna']]],
   ['version_5fmajor_22',['version_major',['../classtiny__dlna_1_1DLNADeviceInfo.html#afbff5dd10a6365239df791aa1a11640f',1,'tiny_dlna::DLNADeviceInfo']]],
-  ['version_5fminor_23',['version_minor',['../classtiny__dlna_1_1DLNADeviceInfo.html#a198cbf900571dafc34e50c26adc6365f',1,'tiny_dlna::DLNADeviceInfo']]]
+  ['version_5fminor_23',['version_minor',['../classtiny__dlna_1_1DLNADeviceInfo.html#a198cbf900571dafc34e50c26adc6365f',1,'tiny_dlna::DLNADeviceInfo']]],
+  ['video_24',['Video',['../namespacetiny__dlna.html#a85d3f686372782f654ff23302800aac9a34e2d1989a1dbf75cd631596133ee5ee',1,'tiny_dlna']]]
 ];

@@ -28,11 +28,12 @@ var searchData=
   ['toint_25',['toInt',['../classtiny__dlna_1_1StrView.html#a5d0106fca19f46ae400a0e1c57f5ccf4',1,'tiny_dlna::StrView']]],
   ['tolong_26',['toLong',['../classtiny__dlna_1_1StrView.html#a1f9b02a605f1c7d62842d5c5ae5b03f8',1,'tiny_dlna::StrView']]],
   ['tolowercase_27',['toLowerCase',['../classtiny__dlna_1_1StrView.html#aaf82fe261dd3bf9f1a6464c3ef7bd5f4',1,'tiny_dlna::StrView']]],
-  ['tostring_28',['toString',['../structtiny__dlna_1_1IPAddressAndPort.html#a03dafeafa067fa880a6a1d05d8c748e1',1,'tiny_dlna::IPAddressAndPort']]],
-  ['touppercase_29',['toUpperCase',['../classtiny__dlna_1_1StrView.html#afddb2b1aff609ff143a4d4bd99d38c9d',1,'tiny_dlna::StrView']]],
-  ['transfer_5fencoding_30',['TRANSFER_ENCODING',['../namespacetiny__dlna.html#a9e5bb9ed1bd94ec887fded9c383b60ca',1,'tiny_dlna']]],
-  ['transport_5fstate_31',['transport_state',['../classtiny__dlna_1_1MediaRenderer.html#a561952bf221db07300dc477cc224a0ea',1,'tiny_dlna::MediaRenderer']]],
-  ['transportcontrolcb_32',['transportControlCB',['../classtiny__dlna_1_1MediaRenderer.html#a424b5fd52529241b220c7e9052710c3b',1,'tiny_dlna::MediaRenderer']]],
-  ['trim_33',['trim',['../classtiny__dlna_1_1StrView.html#a8ece7148c765b8a590ec997715335c04',1,'tiny_dlna::StrView']]],
-  ['txt_34',['txt',['../classtiny__dlna_1_1XMLParser.html#a35158248ce1bad49921922f86302ea03',1,'tiny_dlna::XMLParser']]]
+  ['tostr_28',['toStr',['../classtiny__dlna_1_1MediaServer.html#a87326e92d5946828c168e59007e0f47b',1,'tiny_dlna::MediaServer']]],
+  ['tostring_29',['toString',['../structtiny__dlna_1_1IPAddressAndPort.html#a03dafeafa067fa880a6a1d05d8c748e1',1,'tiny_dlna::IPAddressAndPort']]],
+  ['touppercase_30',['toUpperCase',['../classtiny__dlna_1_1StrView.html#afddb2b1aff609ff143a4d4bd99d38c9d',1,'tiny_dlna::StrView']]],
+  ['transfer_5fencoding_31',['TRANSFER_ENCODING',['../namespacetiny__dlna.html#a9e5bb9ed1bd94ec887fded9c383b60ca',1,'tiny_dlna']]],
+  ['transport_5fstate_32',['transport_state',['../classtiny__dlna_1_1MediaRenderer.html#a561952bf221db07300dc477cc224a0ea',1,'tiny_dlna::MediaRenderer']]],
+  ['transportcontrolcb_33',['transportControlCB',['../classtiny__dlna_1_1MediaRenderer.html#a424b5fd52529241b220c7e9052710c3b',1,'tiny_dlna::MediaRenderer']]],
+  ['trim_34',['trim',['../classtiny__dlna_1_1StrView.html#a8ece7148c765b8a590ec997715335c04',1,'tiny_dlna::StrView']]],
+  ['txt_35',['txt',['../classtiny__dlna_1_1XMLParser.html#a35158248ce1bad49921922f86302ea03',1,'tiny_dlna::XMLParser']]]
 ];

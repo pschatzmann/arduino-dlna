@@ -22,5 +22,6 @@ var searchData=
   ['is_5fopen_19',['is_open',['../classtiny__dlna_1_1HttpStreamCopy.html#a843b559f8316bfb226ced6083a26029c',1,'tiny_dlna::HttpStreamCopy']]],
   ['is_5fparse_5fdevice_20',['is_parse_device',['../classtiny__dlna_1_1DLNAControlPoint.html#a343f33243cd45c151368c3843d484a98',1,'tiny_dlna::DLNAControlPoint']]],
   ['is_5fvalid_21',['is_valid',['../classtiny__dlna_1_1ActionReply.html#abe1df4cc1a81298cbf5e1acaa3fd2bdd',1,'tiny_dlna::ActionReply']]],
-  ['is_5fwritten_22',['is_written',['../classtiny__dlna_1_1HttpHeader.html#a9374c18382ecf8ad330d13907e7fb3eb',1,'tiny_dlna::HttpHeader']]]
+  ['is_5fwritten_22',['is_written',['../classtiny__dlna_1_1HttpHeader.html#a9374c18382ecf8ad330d13907e7fb3eb',1,'tiny_dlna::HttpHeader']]],
+  ['itemclass_23',['itemClass',['../structtiny__dlna_1_1MediaItem.html#a37376175e2bfb28530add3b3d3ea28a7',1,'tiny_dlna::MediaItem']]]
 ];

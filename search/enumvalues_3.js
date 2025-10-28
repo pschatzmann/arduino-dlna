@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['pause_0',['PAUSE',['../namespacetiny__dlna.html#a1457542c46840a965692cd26a81994b2a291554596c183e837f0a6bec3767c891',1,'tiny_dlna']]],
-  ['play_1',['PLAY',['../namespacetiny__dlna.html#a1457542c46840a965692cd26a81994b2a6a216efc529825c60a4a4c0bc99ad77f',1,'tiny_dlna']]]
+  ['info_0',['Info',['../namespacetiny__dlna.html#a5eabb92538a2ba1397f67b903cb9d35ea4059b0251f66a18cb56f544728796875',1,'tiny_dlna']]]
 ];
