@@ -7,7 +7,7 @@
 #include "StringRegistry.h"
 #include "basic/Icon.h"
 #include "basic/Vector.h"
-#include "service/Action.h"
+#include "dlna/Action.h"
 #include "vector"
 #include "xml/XMLPrinter.h"
 

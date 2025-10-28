@@ -119,8 +119,8 @@ def test_connmgr_get_protocol_info(base_url):
         "SOAPACTION": '"urn:schemas-upnp-org:service:ConnectionManager:1#GetProtocolInfo"'
     }
     r = _do_post(base_url, "/CM/control", body.encode("utf-8"), headers, timeout=5)
-    # Log and persist the reply XML for debugging/inspection
-    logger.info(r.text)
+    # Log and persist the reply XML for debugging/inspection (start on new line)
+    logger.info("\n%s", r.text)
     _save_response("connmgr_getprotocolinfo", r.text)
     assert r.status_code == 200, f"Unexpected status {r.status_code}: {r.text}"
 
@@ -147,8 +147,8 @@ def test_connmgr_get_current_connection_ids(base_url):
         "SOAPACTION": '"urn:schemas-upnp-org:service:ConnectionManager:1#GetCurrentConnectionIDs"'
     }
     r = _do_post(base_url, "/CM/control", body.encode("utf-8"), headers, timeout=5)
-    # Log and persist the reply XML for debugging/inspection
-    logger.info(r.text)
+    # Log and persist the reply XML for debugging/inspection (start on new line)
+    logger.info("\n%s", r.text)
     _save_response("connmgr_getcurrentconnectionids", r.text)
     assert r.status_code == 200
 
@@ -175,8 +175,8 @@ def test_connmgr_get_current_connection_info(base_url):
         "SOAPACTION": '"urn:schemas-upnp-org:service:ConnectionManager:1#GetCurrentConnectionInfo"'
     }
     r = _do_post(base_url, "/CM/control", body.encode("utf-8"), headers, timeout=5)
-    # Log and persist the reply XML for debugging/inspection
-    logger.info(r.text)
+    # Log and persist the reply XML for debugging/inspection (start on new line)
+    logger.info("\n%s", r.text)
     _save_response("connmgr_getcurrentconnectioninfo", r.text)
     assert r.status_code == 200
 
@@ -194,6 +194,81 @@ def test_connmgr_get_current_connection_info(base_url):
     assert direction in ("Input", "Output")
     assert status != ""
 
+
+def test_get_search_capabilities(base_url):
+    """Request GetSearchCapabilities and ensure SearchCaps element is present."""
+    body = (
+        '<?xml version="1.0" encoding="utf-8"?>'
+        '<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">'
+        '<s:Body>'
+        '<u:GetSearchCapabilities xmlns:u="urn:schemas-upnp-org:service:ContentDirectory:1"/>'
+        '</s:Body></s:Envelope>'
+    )
+    headers = {
+        "Content-Type": 'text/xml; charset="utf-8"',
+        "SOAPACTION": '"urn:schemas-upnp-org:service:ContentDirectory:1#GetSearchCapabilities"'
+    }
+    r = _do_post(base_url, "/CD/control", body.encode("utf-8"), headers, timeout=5)
+    logger.info("\n%s", r.text)
+    _save_response("contentdirectory_getsearchcapabilities", r.text)
+    assert r.status_code == 200
+
+    root = ET.fromstring(r.text)
+    resp = _find_in_response(root, "GetSearchCapabilitiesResponse")
+    assert resp is not None
+    caps = _get_text(_find_in_response(resp, "SearchCaps"))
+    # caps may be empty, but element must exist
+    assert caps is not None
+
+
+def test_get_sort_capabilities(base_url):
+    """Request GetSortCapabilities and ensure SortCaps element is present."""
+    body = (
+        '<?xml version="1.0" encoding="utf-8"?>'
+        '<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">'
+        '<s:Body>'
+        '<u:GetSortCapabilities xmlns:u="urn:schemas-upnp-org:service:ContentDirectory:1"/>'
+        '</s:Body></s:Envelope>'
+    )
+    headers = {
+        "Content-Type": 'text/xml; charset="utf-8"',
+        "SOAPACTION": '"urn:schemas-upnp-org:service:ContentDirectory:1#GetSortCapabilities"'
+    }
+    r = _do_post(base_url, "/CD/control", body.encode("utf-8"), headers, timeout=5)
+    logger.info("\n%s", r.text)
+    _save_response("contentdirectory_getsortcapabilities", r.text)
+    assert r.status_code == 200
+
+    root = ET.fromstring(r.text)
+    resp = _find_in_response(root, "GetSortCapabilitiesResponse")
+    assert resp is not None
+    caps = _get_text(_find_in_response(resp, "SortCaps"))
+    assert caps is not None
+
+
+def test_get_system_update_id(base_url):
+    """Request GetSystemUpdateID and ensure Id element contains a number."""
+    body = (
+        '<?xml version="1.0" encoding="utf-8"?>'
+        '<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">'
+        '<s:Body>'
+        '<u:GetSystemUpdateID xmlns:u="urn:schemas-upnp-org:service:ContentDirectory:1"/>'
+        '</s:Body></s:Envelope>'
+    )
+    headers = {
+        "Content-Type": 'text/xml; charset="utf-8"',
+        "SOAPACTION": '"urn:schemas-upnp-org:service:ContentDirectory:1#GetSystemUpdateID"'
+    }
+    r = _do_post(base_url, "/CD/control", body.encode("utf-8"), headers, timeout=5)
+    logger.info("\n%s", r.text)
+    _save_response("contentdirectory_getsystemupdateid", r.text)
+    assert r.status_code == 200
+
+    root = ET.fromstring(r.text)
+    resp = _find_in_response(root, "GetSystemUpdateIDResponse")
+    assert resp is not None
+    id_str = _get_text(_find_in_response(resp, "Id"))
+    assert id_str.isdigit()
 
 def test_contentdirectory_browse_root(base_url):
     # Browse Direct Children of root container (ObjectID 0)
@@ -216,8 +291,8 @@ def test_contentdirectory_browse_root(base_url):
         "SOAPACTION": '"urn:schemas-upnp-org:service:ContentDirectory:1#Browse"'
     }
     r = _do_post(base_url, "/CD/control", body.encode("utf-8"), headers, timeout=5)
-    # Log and persist the reply XML for debugging/inspection
-    logger.info(r.text)
+    # Log and persist the reply XML for debugging/inspection (start on new line)
+    logger.info("\n%s", r.text)
     _save_response("contentdirectory_browse_root", r.text)
     assert r.status_code == 200, f"status {r.status_code} text: {r.text[:200]}"
 

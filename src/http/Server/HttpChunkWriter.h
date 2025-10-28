@@ -54,16 +54,23 @@ class ChunkPrint : public Print {
   size_t print(const char* str) {
     if (!str) return 0;
     int len = strlen(str);
+    // avoid emitting a zero-length chunk mid-response (which would signal
+    // the end of the chunked stream). If the string is empty, do nothing.
+    if (len == 0) return 0;
     chunk_writer.writeChunk(*client_ptr, str, len);
     return len;
   }
 
   size_t printEscaped(const char* str){
+    if (!str) return 0;
     int len = strlen(str);
-    int max_len = 1.5 * len;
+    if (len == 0) return 0;
+    int max_len = len * 3 + 1; // worst-case expansion when replacing to &amp;
     char buffer[max_len];
-    strcpy(buffer, str);
-    StrView str_view{buffer, max_len, len };
+    // copy and perform replacements using StrView helper
+    strncpy(buffer, str, max_len - 1);
+    buffer[max_len - 1] = '\0';
+    StrView str_view{buffer, max_len, (int)strlen(buffer)};
     str_view.replaceAll("&", "&amp;");
     str_view.replaceAll("<", "&lt;");
     str_view.replaceAll(">", "&gt;");
@@ -73,12 +80,11 @@ class ChunkPrint : public Print {
   }
 
   size_t println(const char* str) {
-    if (!str) {
-      chunk_writer.writeChunk(*client_ptr, "\r\n", 2);
-      return 2;
-    }
     int len = strlen(str);
-    chunk_writer.writeChunk(*client_ptr, str, len, "\r\n", 2);
+    char tmp[ len + 3];
+    strcpy(tmp, str);
+    strcat(tmp, "\r\n");
+    chunk_writer.writeChunk(*client_ptr, tmp, len + 2);
     return len + 2;
   }
 

@@ -3,7 +3,7 @@
 
 #include "dlna/DLNAControlPoint.h"
 #include "dlna/devices/MediaServer/MediaServer.h"
-#include "dlna/service/Action.h"
+#include "dlna/Action.h"
 
 namespace tiny_dlna {
 

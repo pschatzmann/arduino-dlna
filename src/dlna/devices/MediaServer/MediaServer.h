@@ -5,9 +5,9 @@
 #include "basic/EscapingPrint.h"
 #include "basic/Str.h"
 #include "basic/StrPrint.h"
+#include "dlna/Action.h"
 #include "dlna/DLNADevice.h"
 #include "dlna/devices/MediaServer/MediaItem.h"
-#include "dlna/service/Action.h"
 #include "dlna/xml/XMLParserPrint.h"
 #include "dlna/xml/XMLPrinter.h"
 #include "http/HttpServer.h"
@@ -237,6 +237,8 @@ class MediaServer : public DLNADeviceInfo {
   const char* sinkProto = "";
   const char* connectionID = "0";
 
+  const char* nullStr(const char* str) { return str == nullptr ? "" : str; }
+
   void setupServicesImpl(HttpServer* server) {
     DlnaLogger.log(DlnaLogLevel::Info, "MediaServer::setupServices");
 
@@ -357,61 +359,89 @@ class MediaServer : public DLNADeviceInfo {
 
   bool processActionGetSearchCapabilities(ActionRequest& action,
                                           HttpServer& server) {
-    Str reply_str{replyTemplate()};
-    reply_str.replaceAll("%1", "GetSearchCapabilitiesResponse");
-    reply_str.replaceAll("%2", "SearchCaps");
-    reply_str.replaceAll("%3", g_search_capabiities);
-    server.reply("text/xml", reply_str.c_str());
-    DlnaLogger.log(DlnaLogLevel::Info, "processActionGetSearchCapabilities: %s",
-                   reply_str.c_str());
+    ChunkPrint chunk{server.client()};
+    server.replyChunked("text/xml");
+
+    soapEnvelopeStart(chunk);
+    actionResponseStart(chunk, "GetSearchCapabilitiesResponse",
+                        "urn:schemas-upnp-org:service:ContentDirectory:1");
+
+    chunk.print("<SearchCaps>");
+    chunk.print(nullStr(g_search_capabiities));
+    chunk.println("</SearchCaps>");
+
+    actionResponseEnd(chunk, "GetSearchCapabilitiesResponse");
+    soapEnvelopeEnd(chunk);
+    chunk.end();
+    DlnaLogger.log(DlnaLogLevel::Info,
+                   "processActionGetSearchCapabilities (streamed)");
     return true;
   }
 
   bool processActionGetSortCapabilities(ActionRequest& action,
                                         HttpServer& server) {
-    Str reply_str{replyTemplate()};
-    reply_str.replaceAll("%2", "SortCaps");
-    reply_str.replaceAll("%1", "GetSortCapabilitiesResponse");
-    reply_str.replaceAll("%3", g_sort_capabilities);
-    server.reply("text/xml", reply_str.c_str());
+    ChunkPrint chunk{server.client()};
+    server.replyChunked("text/xml");
 
-    DlnaLogger.log(DlnaLogLevel::Info, "processActionGetSortCapabilities: %s",
-                   reply_str.c_str());
+    soapEnvelopeStart(chunk);
+    actionResponseStart(chunk, "GetSortCapabilitiesResponse",
+                        "urn:schemas-upnp-org:service:ContentDirectory:1");
+
+    chunk.print("<SortCaps>");
+    chunk.print(nullStr(g_sort_capabilities));
+    chunk.println("</SortCaps>");
+
+    actionResponseEnd(chunk, "GetSortCapabilitiesResponse");
+    soapEnvelopeEnd(chunk);
+    chunk.end();
+    DlnaLogger.log(DlnaLogLevel::Info,
+                   "processActionGetSortCapabilities (streamed)");
     return true;
   }
 
   bool processActionGetSystemUpdateID(ActionRequest& action,
                                       HttpServer& server) {
-    Str reply_str{replyTemplate()};
-    char update_id_str[80];
-    sprintf(update_id_str, "%d", g_stream_updateID);
-    reply_str.replaceAll("%2", "Id");
-    reply_str.replaceAll("%1", "GetSystemUpdateIDResponse");
-    reply_str.replaceAll("%3", update_id_str);
-    server.reply("text/xml", reply_str.c_str());
-    DlnaLogger.log(DlnaLogLevel::Info, "processActionGetSystemUpdateID: %s",
-                   reply_str.c_str());
+    ChunkPrint chunk{server.client()};
+    server.replyChunked("text/xml");
+
+    soapEnvelopeStart(chunk);
+    actionResponseStart(chunk, "GetSystemUpdateIDResponse",
+                        "urn:schemas-upnp-org:service:ContentDirectory:1");
+
+    chunk.printf("<Id>%d</Id>\r\n", g_stream_updateID);
+
+    actionResponseEnd(chunk, "GetSystemUpdateIDResponse");
+    soapEnvelopeEnd(chunk);
+    chunk.end();
+    DlnaLogger.log(DlnaLogLevel::Info,
+                   "processActionGetSystemUpdateID (streamed): %d",
+                   g_stream_updateID);
     return true;
   }
 
-  // ConnectionManager action handlers (instance methods)
-  /// Handle ConnectionManager:GetProtocolInfo action
   /// Replies with Source and Sink protocol lists (CSV protocolInfo strings)
   bool processActionGetProtocolInfo(ActionRequest& action, HttpServer& server) {
-    Str reply = "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
-    reply +=
-        "<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\" ";
-    reply += "s:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\">";
-    reply += "<s:Body>";
-    reply +=
-        "<u:GetProtocolInfoResponse "
-        "xmlns:u=\"urn:schemas-upnp-org:service:ConnectionManager:1\">";
-    reply += "<Source>";
-    reply += sourceProto;
-    reply += "</Source><Sink>";
-    reply += sinkProto;
-    reply += "</Sink></u:GetProtocolInfoResponse></s:Body></s:Envelope>";
-    server.reply("text/xml", reply.c_str());
+    // Stream the GetProtocolInfo response using chunked encoding to avoid
+    // building large in-memory strings and to keep behavior consistent with
+    // other actions (e.g. Browse/Search).
+    ChunkPrint chunk{server.client()};
+    server.replyChunked("text/xml");
+
+    soapEnvelopeStart(chunk);
+    actionResponseStart(chunk, "GetProtocolInfoResponse",
+                        "urn:schemas-upnp-org:service:ConnectionManager:1");
+
+    chunk.print("<Source>");
+    chunk.print(nullStr(sourceProto));
+    chunk.println("</Source>");
+
+    chunk.print("<Sink>");
+    chunk.print(nullStr(sinkProto));
+    chunk.println("</Sink>");
+
+    actionResponseEnd(chunk, "GetProtocolInfoResponse");
+    soapEnvelopeEnd(chunk);
+    chunk.end();
     return true;
   }
 
@@ -419,22 +449,24 @@ class MediaServer : public DLNADeviceInfo {
   /// Replies with a comma-separated list of active ConnectionIDs
   bool processActionGetCurrentConnectionIDs(ActionRequest& action,
                                             HttpServer& server) {
-    // return empty list
-    Str reply = "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
-    reply +=
-        "<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\" ";
-    reply += "s:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\">";
-    reply += "<s:Body>";
-    reply +=
-        "<u:GetCurrentConnectionIDsResponse "
-        "xmlns:u=\"urn:schemas-upnp-org:service:ConnectionManager:1\">";
-    reply +=
-        "<ConnectionIDs></ConnectionIDs></u:GetCurrentConnectionIDsResponse></"
-        "s:Body></s:Envelope>";
-    server.reply("text/xml", reply.c_str());
+    // Stream the empty ConnectionIDs response using chunked encoding to avoid
+    // allocating the full response in memory and keep consistent streaming
+    // behavior with other services.
+    ChunkPrint chunk{server.client()};
+    server.replyChunked("text/xml");
+
+    soapEnvelopeStart(chunk);
+    actionResponseStart(chunk, "GetCurrentConnectionIDsResponse",
+                        "urn:schemas-upnp-org:service:ConnectionManager:1");
+
+    // Empty list for now
+    chunk.println("<ConnectionIDs>01</ConnectionIDs>");
+
+    actionResponseEnd(chunk, "GetCurrentConnectionIDsResponse");
+    soapEnvelopeEnd(chunk);
+    chunk.end();
     return true;
   }
-
   /// Handle ConnectionManager:GetCurrentConnectionInfo action
   /// Replies with information about the requested ConnectionID (RcsID,
   /// AVTransportID, ProtocolInfo, PeerConnectionManager/ID, Direction, Status)
@@ -442,31 +474,67 @@ class MediaServer : public DLNADeviceInfo {
                                              HttpServer& server) {
     // Read requested ConnectionID (not used in this simple implementation)
     int connId = action.getArgumentIntValue("ConnectionID");
-    // Provide default info: no peer, protocol empty, status OK
-    Str reply = "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
-    reply +=
-        "<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\" ";
-    reply += "s:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\">";
-    reply += "<s:Body>";
-    reply +=
-        "<u:GetCurrentConnectionInfoResponse "
-        "xmlns:u=\"urn:schemas-upnp-org:service:ConnectionManager:1\">";
-    // RcsID, AVTransportID
-    reply += "<RcsID>0</RcsID><AVTransportID>0</AVTransportID>";
-    // ProtocolInfo
-    reply += "<ProtocolInfo></ProtocolInfo>";
+
+    // Stream the GetCurrentConnectionInfo response using chunked encoding
+    // to avoid building the full response in memory and to remain
+    // consistent with other handlers.
+    ChunkPrint chunk{server.client()};
+    server.replyChunked("text/xml");
+
+    soapEnvelopeStart(chunk);
+    actionResponseStart(chunk, "GetCurrentConnectionInfoResponse",
+                        "urn:schemas-upnp-org:service:ConnectionManager:1");
+
+    // RcsID and AVTransportID
+    chunk.println("<RcsID>0</RcsID>");
+    chunk.println("<AVTransportID>0</AVTransportID>");
+
+    // ProtocolInfo (empty by default)
+    chunk.print("<ProtocolInfo>");
+    chunk.print(nullStr(sourceProto));
+    chunk.println("</ProtocolInfo>");
+
     // PeerConnectionManager and PeerConnectionID
-    reply +=
-        "<PeerConnectionManager></PeerConnectionManager><PeerConnectionID>0</"
-        "PeerConnectionID>";
+    chunk.print("<PeerConnectionManager>");
+    chunk.println("</PeerConnectionManager>");
+    chunk.println("<PeerConnectionID>0</PeerConnectionID>");
+
     // Direction and Status
-    reply += "<Direction>Output</Direction><Status>OK</Status>";
-    reply += "</u:GetCurrentConnectionInfoResponse></s:Body></s:Envelope>";
-    server.reply("text/xml", reply.c_str());
+    chunk.println("<Direction>Output</Direction><Status>OK</Status>");
+
+    actionResponseEnd(chunk, "GetCurrentConnectionInfoResponse");
+    soapEnvelopeEnd(chunk);
+    chunk.end();
     return true;
   }
 
   /// Common helper to stream a ContentDirectory response (Browse or Search)
+  // --- SOAP/response streaming helpers to avoid duplication ---
+  void soapEnvelopeStart(ChunkPrint& chunk) {
+    chunk.print("<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n");
+    chunk.print(
+        "<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\" "
+        "\r\n");
+    chunk.print(
+        "s:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\">\r\n");
+    chunk.print("<s:Body>\r\n");
+  }
+
+  void soapEnvelopeEnd(ChunkPrint& chunk) {
+    chunk.print("</s:Body>\r\n");
+    chunk.print("</s:Envelope>\r\n");
+  }
+
+  void actionResponseStart(ChunkPrint& chunk, const char* responseName,
+                           const char* serviceNS) {
+    // writes: <u:ResponseName xmlns:u="serviceNS">
+    chunk.printf("<u:%s xmlns:u=\"%s\">\r\n", responseName, serviceNS);
+  }
+
+  void actionResponseEnd(ChunkPrint& chunk, const char* responseName) {
+    chunk.printf("</u:%s>\r\n", responseName);
+  }
+
   bool streamActionItems(const char* responseName, const char* objectID,
                          const char* browseFlag, const char* filter,
                          int startingIndex, int requestedCount,
@@ -485,65 +553,17 @@ class MediaServer : public DLNADeviceInfo {
     ChunkPrint chunk_writer{server.client()};
     server.replyChunked("text/xml");
 
-    // SOAP envelope start
-    chunk_writer.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-    chunk_writer.println(
-        "<s:Envelope "
-        "xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n");
-    chunk_writer.println("<s:Body>");
+    // SOAP envelope start and response wrapper
+    soapEnvelopeStart(chunk_writer);
     // responseName is assumed to be e.g. "BrowseResponse" or "SearchResponse"
-    chunk_writer.printf(
-        "<u:%s "
-        "xmlns:u=\"urn:schemas-upnp-org:service:ContentDirectory:1\">\r\n",
-        responseName);
+    actionResponseStart(chunk_writer, responseName,
+                        "urn:schemas-upnp-org:service:ContentDirectory:1");
 
     // Result -> DIDL-Lite
     chunk_writer.println("<Result>");
     // DIDL root with namespaces
-    chunk_writer.print(
-        "<DIDL-Lite xmlns:dc=\"http://purl.org/dc/elements/1.1/\" ");
-    chunk_writer.println(
-        "xmlns:upnp=\"urn:schemas-upnp-org:metadata-1-0/upnp/\" "
-        "xmlns=\"urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/\">\r\n");
-
-    if (get_data_cb) {
-      for (int i = 0; i < requestedCount; ++i) {
-        MediaItem item;
-        int idx = startingIndex + i;
-        if (!get_data_cb(idx, item, reference_)) break;
-        numberReturned++;
-
-        char tmp[400];
-        snprintf(tmp, sizeof(tmp),
-                 "<item id=\"%s\" parentID=\"%s\" restricted=\"%d\">",
-                 item.id ? item.id : "", item.parentID ? item.parentID : "0",
-                 item.restricted ? 1 : 0);
-        chunk_writer.println(tmp);
-
-        // title
-        chunk_writer.print("<dc:title>");
-        chunk_writer.printEscaped(item.title ? item.title : "");
-        chunk_writer.println("</dc:title>");
-
-        // res with optional protocolInfo attribute
-        if (item.mimeType) {
-          snprintf(tmp, sizeof(tmp), "<res protocolInfo=\"%s\">",
-                   item.mimeType);
-          chunk_writer.println(tmp);
-          chunk_writer.printEscaped(item.res ? item.res : "");
-          chunk_writer.println("</res>");
-        } else {
-          chunk_writer.print("<res>");
-          chunk_writer.printEscaped(item.res ? item.res : "");
-          chunk_writer.println("</res>");
-        }
-
-        chunk_writer.println("</item>");
-      }
-    }
-
-    chunk_writer.println("</DIDL-Lite>");
-    chunk_writer.println("</Result>");
+    streamDIDL(chunk_writer, numberReturned, startingIndex);
+    chunk_writer.print("</Result>\r\n");
 
     // numeric fields
     chunk_writer.printf("<NumberReturned>%d</NumberReturned>\r\n",
@@ -551,24 +571,53 @@ class MediaServer : public DLNADeviceInfo {
     chunk_writer.printf("<TotalMatches>%d</TotalMatches>\r\n", totalMatches);
     chunk_writer.printf("<UpdateID>%d</UpdateID>\r\n", updateID);
 
-    chunk_writer.printf("</u:%s>\r\n", responseName);
-    chunk_writer.println("</s:Body>");
-    chunk_writer.println("</s:Envelope>");
+    actionResponseEnd(chunk_writer, responseName);
+    soapEnvelopeEnd(chunk_writer);
     chunk_writer.end();
     return true;
   }
 
-  /// generic SOAP reply template with placeholders: %1 = ActionResponse, %2 =
-  /// payload tag, %3 = inner payload
-  static const char* replyTemplate() {
-    static const char* tpl =
-        "\n<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\""
-        " s:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\">\n"
-        "<s:Body>\n<u:%1 "
-        "xmlns:u=\"urn:schemas-upnp-org:service:ContentDirectory:1\"><%2>%3</"
-        "%2>\n</u:%1>\n</s:Body>\n</"
-        "s:Envelope>\n";
-    return tpl;
+  /// Stream DIDL-Lite payload for a Browse/Search result
+  void streamDIDL(ChunkPrint& chunk_writer, int numberReturned,
+                  int startingIndex) {
+    // Stream DIDL-Lite Result payload using helper
+    chunk_writer.print(
+        "<DIDL-Lite xmlns:dc=\"http://purl.org/dc/elements/1.1/\" "
+        "xmlns:upnp=\"urn:schemas-upnp-org:metadata-1-0/upnp/\" "
+        "xmlns=\"urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/\">\r\n");
+
+    if (get_data_cb) {
+      for (int i = 0; i < numberReturned; ++i) {
+        MediaItem item;
+        int idx = startingIndex + i;
+        if (!get_data_cb(idx, item, reference_)) break;
+
+        chunk_writer.printf(
+            "<item id=\"%s\" parentID=\"%s\" restricted=\"%d\">",
+            item.id ? item.id : "", item.parentID ? item.parentID : "0",
+            item.restricted ? 1 : 0);
+
+        // title
+        chunk_writer.print("<dc:title>");
+        chunk_writer.print(nullStr(item.title));
+        chunk_writer.print("</dc:title>\r\n");
+
+        // res with optional protocolInfo attribute
+        if (item.mimeType) {
+          chunk_writer.printf("<res protocolInfo=\"%s\">", item.mimeType);
+          chunk_writer.print(nullStr(item.res));
+          chunk_writer.print("</res>\r\n");
+        } else {
+          chunk_writer.print("<res>");
+          chunk_writer.print(nullStr(item.res));
+          chunk_writer.print("</res>\r\n");
+        }
+
+        chunk_writer.print("</item>\r\n");
+      }
+    }
+
+    chunk_writer.print("</DIDL-Lite>\r\n");
   }
 
   // Control handler for ContentDirectory service

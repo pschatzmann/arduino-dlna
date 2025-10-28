@@ -1,3 +1,6 @@
 bak/
 .vscode/
 build/
+*.xml
+__pycache__/
+*.pyc

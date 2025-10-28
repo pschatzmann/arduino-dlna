@@ -4,7 +4,7 @@
 #include <functional>
 
 #include "dlna/DLNAControlPoint.h"
-#include "dlna/service/Action.h"
+#include "dlna/Action.h"
 
 namespace tiny_dlna {
 
