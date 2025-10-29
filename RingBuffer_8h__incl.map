@@ -1,14 +1,15 @@
 <map id="src/basic/RingBuffer.h" name="src/basic/RingBuffer.h">
-<area shape="rect" id="node1" title=" " alt="" coords="113,5,276,31"/>
-<area shape="rect" id="node2" href="$Vector_8h.html" title=" " alt="" coords="59,79,133,104"/>
-<area shape="rect" id="node11" title=" " alt="" coords="157,79,232,104"/>
-<area shape="rect" id="node12" title=" " alt="" coords="257,79,327,104"/>
-<area shape="rect" id="node3" title=" " alt="" coords="5,152,80,177"/>
-<area shape="rect" id="node4" href="$Allocator_8h.html" title=" " alt="" coords="104,152,195,177"/>
-<area shape="rect" id="node5" title=" " alt="" coords="55,225,126,251"/>
-<area shape="rect" id="node6" href="$Logger_8h.html" title=" " alt="" coords="151,225,265,251"/>
-<area shape="rect" id="node7" title=" " alt="" coords="29,299,104,324"/>
-<area shape="rect" id="node8" title=" " alt="" coords="128,299,195,324"/>
-<area shape="rect" id="node9" title=" " alt="" coords="219,299,290,324"/>
-<area shape="rect" id="node10" title=" " alt="" coords="314,299,398,324"/>
+<area shape="rect" id="node1" title=" " alt="" coords="193,5,355,31"/>
+<area shape="rect" id="node2" href="$Vector_8h.html" title=" " alt="" coords="138,79,213,104"/>
+<area shape="rect" id="node12" title=" " alt="" coords="237,79,311,104"/>
+<area shape="rect" id="node13" title=" " alt="" coords="336,79,407,104"/>
+<area shape="rect" id="node3" href="$dlna__config_8h.html" title=" " alt="" coords="5,152,113,177"/>
+<area shape="rect" id="node4" title=" " alt="" coords="138,152,213,177"/>
+<area shape="rect" id="node5" href="$Allocator_8h.html" title=" " alt="" coords="237,152,327,177"/>
+<area shape="rect" id="node6" title=" " alt="" coords="188,225,259,251"/>
+<area shape="rect" id="node7" href="$Logger_8h.html" title=" " alt="" coords="283,225,398,251"/>
+<area shape="rect" id="node8" title=" " alt="" coords="162,299,237,324"/>
+<area shape="rect" id="node9" title=" " alt="" coords="261,299,327,324"/>
+<area shape="rect" id="node10" title=" " alt="" coords="352,299,423,324"/>
+<area shape="rect" id="node11" title=" " alt="" coords="447,299,531,324"/>
 </map>

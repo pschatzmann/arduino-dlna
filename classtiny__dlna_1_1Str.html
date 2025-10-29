@@ -170,6 +170,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a1c3d4429817ad81058ff54350425e633"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a734f0cd4da970f50f6ae1d2b9de9af20"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#a734f0cd4da970f50f6ae1d2b9de9af20">reset</a> ()</td></tr>
 <tr class="separator:a734f0cd4da970f50f6ae1d2b9de9af20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad64f32b39412410d3bde5aa9eb75173c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#ad64f32b39412410d3bde5aa9eb75173c">release</a> ()</td></tr>
+<tr class="separator:ad64f32b39412410d3bde5aa9eb75173c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3d82412d8ccb0adedc1189b4bf592354"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Str.html">Str</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#a3d82412d8ccb0adedc1189b4bf592354">substring</a> (int start, int end)</td></tr>
 <tr class="memdesc:a3d82412d8ccb0adedc1189b4bf592354"><td class="mdescLeft">&#160;</td><td class="mdescRight">copies a substring into the current string  <br /></td></tr>
 <tr class="separator:a3d82412d8ccb0adedc1189b4bf592354"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2216,6 +2218,32 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad64f32b39412410d3bde5aa9eb75173c" name="ad64f32b39412410d3bde5aa9eb75173c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad64f32b39412410d3bde5aa9eb75173c">&#9670;&#160;</a></span>release()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tiny_dlna::Str::release </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Release the internal heap buffer immediately. This frees the underlying vector storage and resets the string to an empty state. Useful for explicitly freeing large buffers before long idle periods. </p>
 
 </div>
 </div>
