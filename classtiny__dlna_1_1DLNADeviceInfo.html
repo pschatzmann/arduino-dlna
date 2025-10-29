@@ -210,9 +210,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a714c374025464075d8cf073381f91d07"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#a714c374025464075d8cf073381f91d07">operator bool</a> ()</td></tr>
 <tr class="memdesc:a714c374025464075d8cf073381f91d07"><td class="mdescLeft">&#160;</td><td class="mdescRight">return true if active  <br /></td></tr>
 <tr class="separator:a714c374025464075d8cf073381f91d07"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1318397e562e532ad344e9d029ed876b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#a1318397e562e532ad344e9d029ed876b">loop</a> ()</td></tr>
-<tr class="memdesc:a1318397e562e532ad344e9d029ed876b"><td class="mdescLeft">&#160;</td><td class="mdescRight">loop processing  <br /></td></tr>
-<tr class="separator:a1318397e562e532ad344e9d029ed876b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad157d9cd7b457189424ec6caa4a98f75"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#ad157d9cd7b457189424ec6caa4a98f75">loop</a> ()</td></tr>
+<tr class="memdesc:ad157d9cd7b457189424ec6caa4a98f75"><td class="mdescLeft">&#160;</td><td class="mdescRight">loop processing  <br /></td></tr>
+<tr class="separator:ad157d9cd7b457189424ec6caa4a98f75"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -430,6 +430,8 @@ Friends</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Override to initialize the device. </p>
+
+<p>Reimplemented in <a class="el" href="classtiny__dlna_1_1MediaRenderer.html#aaf57b8e31603bc5fadc0201fa52974ce">tiny_dlna::MediaRenderer</a>, and <a class="el" href="classtiny__dlna_1_1MediaServer.html#a6ff2b7348693490d116ab95bf818c45c">tiny_dlna::MediaServer</a>.</p>
 
 </div>
 </div>
@@ -982,8 +984,8 @@ Friends</h2></td></tr>
 
 </div>
 </div>
-<a id="a1318397e562e532ad344e9d029ed876b" name="a1318397e562e532ad344e9d029ed876b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1318397e562e532ad344e9d029ed876b">&#9670;&#160;</a></span>loop()</h2>
+<a id="ad157d9cd7b457189424ec6caa4a98f75" name="ad157d9cd7b457189424ec6caa4a98f75"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad157d9cd7b457189424ec6caa4a98f75">&#9670;&#160;</a></span>loop()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -992,7 +994,7 @@ Friends</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void tiny_dlna::DLNADeviceInfo::loop </td>
+          <td class="memname">virtual bool tiny_dlna::DLNADeviceInfo::loop </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1006,6 +1008,8 @@ Friends</h2></td></tr>
 </div><div class="memdoc">
 
 <p>loop processing </p>
+
+<p>Reimplemented in <a class="el" href="classtiny__dlna_1_1MediaRenderer.html#aab849d62000efd3c5737eb89e9da4819">tiny_dlna::MediaRenderer</a>, and <a class="el" href="classtiny__dlna_1_1MediaServer.html#a2ea8044f3e2ccdae2ec2e064142647c3">tiny_dlna::MediaServer</a>.</p>
 
 </div>
 </div>
@@ -1692,8 +1696,6 @@ Friends</h2></td></tr>
 </div><div class="memdoc">
 
 <p>to be implemented by subclasses </p>
-
-<p>Reimplemented in <a class="el" href="classtiny__dlna_1_1MediaRenderer.html#aad74e9ebf8fe530adfd266b3ed73ebd1">tiny_dlna::MediaRenderer</a>, and <a class="el" href="classtiny__dlna_1_1MediaServer.html#aa17658369edcc1654448edc9f833fc24">tiny_dlna::MediaServer</a>.</p>
 
 </div>
 </div>

@@ -5,12 +5,13 @@ var searchData=
   ['deletearray_2',['deleteArray',['../classtiny__dlna_1_1Vector.html#ad54de0e9d4d7990ed493297cc1a17fd3',1,'tiny_dlna::Vector']]],
   ['deletenode_3',['deleteNode',['../classtiny__dlna_1_1List.html#a805b2a9870aa20fd3e375e49fef27676',1,'tiny_dlna::List']]],
   ['dequeue_4',['dequeue',['../classtiny__dlna_1_1QueueLockFree.html#a2104af47878f3295cf63ae768226882c',1,'tiny_dlna::QueueLockFree::dequeue(const T &amp;&amp;data)'],['../classtiny__dlna_1_1QueueLockFree.html#ac4c1cd465798cbf610971b31856c1f42',1,'tiny_dlna::QueueLockFree::dequeue(T &amp;result)']]],
-  ['devicexmlcallback_5',['deviceXMLCallback',['../classtiny__dlna_1_1DLNADevice.html#a8dd243b964f5a19924a388a2e0f27968',1,'tiny_dlna::DLNADevice']]],
-  ['dlnacontrolpoint_6',['DLNAControlPoint',['../classtiny__dlna_1_1DLNAControlPoint.html#a828c3639df1722fbbfa3aa19da6ecb19',1,'tiny_dlna::DLNAControlPoint::DLNAControlPoint(HttpServer &amp;server, int port=80)'],['../classtiny__dlna_1_1DLNAControlPoint.html#ae6ccf08f93ce155cec8964b07b466cbd',1,'tiny_dlna::DLNAControlPoint::DLNAControlPoint()']]],
-  ['dlnadeviceinfo_7',['DLNADeviceInfo',['../classtiny__dlna_1_1DLNADeviceInfo.html#ac9a74b9751b1558d9b335f702df5a6b9',1,'tiny_dlna::DLNADeviceInfo']]],
-  ['dlnaserviceinfo_8',['DLNAServiceInfo',['../classtiny__dlna_1_1DLNAServiceInfo.html#a94dd33503dd2ab0979a3441fae237873',1,'tiny_dlna::DLNAServiceInfo']]],
-  ['do_5fallocate_9',['do_allocate',['../classtiny__dlna_1_1Allocator.html#ac06b356163fdaebccf953b46da04fd2e',1,'tiny_dlna::Allocator']]],
-  ['do_5fparse_10',['do_parse',['../classtiny__dlna_1_1XMLParser.html#a1a084d2109d619cc919b8cab91bd283e',1,'tiny_dlna::XMLParser']]],
-  ['do_5fparse_5fsingle_11',['do_parse_single',['../classtiny__dlna_1_1XMLParser.html#aaadb7d812e35f842178efbfd6992a3f3',1,'tiny_dlna::XMLParser']]],
-  ['doloop_12',['doLoop',['../classtiny__dlna_1_1HttpServer.html#a10f0f3ba0d56a18e354b260b28e46821',1,'tiny_dlna::HttpServer::doLoop()'],['../classtiny__dlna_1_1HttpStreamCopy.html#ac3727b22ab5c8d40374c39c53449376a',1,'tiny_dlna::HttpStreamCopy::doLoop()'],['../classtiny__dlna_1_1HttpStreamedOutput.html#a9d9b32a32acdb054ff14848337a42339',1,'tiny_dlna::HttpStreamedOutput::doLoop()']]]
+  ['device_5',['device',['../classtiny__dlna_1_1MediaRenderer.html#a58310fd8b4d3f1b9378dbce0284c16d3',1,'tiny_dlna::MediaRenderer::device()'],['../classtiny__dlna_1_1MediaServer.html#a65d272c398120465cbd7cecdb62ed416',1,'tiny_dlna::MediaServer::device()']]],
+  ['devicexmlcallback_6',['deviceXMLCallback',['../classtiny__dlna_1_1DLNADevice.html#a8dd243b964f5a19924a388a2e0f27968',1,'tiny_dlna::DLNADevice']]],
+  ['dlnacontrolpoint_7',['DLNAControlPoint',['../classtiny__dlna_1_1DLNAControlPoint.html#ae6ccf08f93ce155cec8964b07b466cbd',1,'tiny_dlna::DLNAControlPoint::DLNAControlPoint()'],['../classtiny__dlna_1_1DLNAControlPoint.html#a828c3639df1722fbbfa3aa19da6ecb19',1,'tiny_dlna::DLNAControlPoint::DLNAControlPoint(HttpServer &amp;server, int port=80)']]],
+  ['dlnadeviceinfo_8',['DLNADeviceInfo',['../classtiny__dlna_1_1DLNADeviceInfo.html#ac9a74b9751b1558d9b335f702df5a6b9',1,'tiny_dlna::DLNADeviceInfo']]],
+  ['dlnaserviceinfo_9',['DLNAServiceInfo',['../classtiny__dlna_1_1DLNAServiceInfo.html#a94dd33503dd2ab0979a3441fae237873',1,'tiny_dlna::DLNAServiceInfo']]],
+  ['do_5fallocate_10',['do_allocate',['../classtiny__dlna_1_1Allocator.html#ac06b356163fdaebccf953b46da04fd2e',1,'tiny_dlna::Allocator']]],
+  ['do_5fparse_11',['do_parse',['../classtiny__dlna_1_1XMLParser.html#a1a084d2109d619cc919b8cab91bd283e',1,'tiny_dlna::XMLParser']]],
+  ['do_5fparse_5fsingle_12',['do_parse_single',['../classtiny__dlna_1_1XMLParser.html#aaadb7d812e35f842178efbfd6992a3f3',1,'tiny_dlna::XMLParser']]],
+  ['doloop_13',['doLoop',['../classtiny__dlna_1_1HttpServer.html#a10f0f3ba0d56a18e354b260b28e46821',1,'tiny_dlna::HttpServer::doLoop()'],['../classtiny__dlna_1_1HttpStreamCopy.html#ac3727b22ab5c8d40374c39c53449376a',1,'tiny_dlna::HttpStreamCopy::doLoop()'],['../classtiny__dlna_1_1HttpStreamedOutput.html#a9d9b32a32acdb054ff14848337a42339',1,'tiny_dlna::HttpStreamedOutput::doLoop()']]]
 ];

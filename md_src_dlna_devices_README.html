@@ -118,7 +118,7 @@ Creating a new DLNA device</h2>
 <div class="line">  <span class="comment">// renderer.setDecoder(myDecoder);</span></div>
 <div class="line"> </div>
 <div class="line">  <span class="comment">// Start device (initialises pipeline, registers services)</span></div>
-<div class="line">  renderer.<a class="code hl_function" href="classtiny__dlna_1_1DLNADeviceInfo.html#a94db5b6be4e38324789d7529140faa5b">begin</a>();</div>
+<div class="line">  renderer.<a class="code hl_function" href="classtiny__dlna_1_1MediaRenderer.html#aaf57b8e31603bc5fadc0201fa52974ce">begin</a>();</div>
 <div class="line"> </div>
 <div class="line">  <span class="comment">// Register device with manager (assumes a global manager exists)</span></div>
 <div class="line">  DLNADeviceMgr::instance().addDevice(renderer);</div>
@@ -130,8 +130,8 @@ Creating a new DLNA device</h2>
 <div class="line">  DLNADeviceMgr::instance().loop();</div>
 <div class="line">}</div>
 <div class="ttc" id="aMediaRenderer_8h_html"><div class="ttname"><a href="MediaRenderer_8h.html">MediaRenderer.h</a></div></div>
-<div class="ttc" id="aclasstiny__dlna_1_1DLNADeviceInfo_html_a94db5b6be4e38324789d7529140faa5b"><div class="ttname"><a href="classtiny__dlna_1_1DLNADeviceInfo.html#a94db5b6be4e38324789d7529140faa5b">tiny_dlna::DLNADeviceInfo::begin</a></div><div class="ttdeci">virtual bool begin()</div><div class="ttdoc">Override to initialize the device.</div><div class="ttdef"><b>Definition:</b> DLNADeviceInfo.h:37</div></div>
 <div class="ttc" id="aclasstiny__dlna_1_1MediaRenderer_html"><div class="ttname"><a href="classtiny__dlna_1_1MediaRenderer.html">tiny_dlna::MediaRenderer</a></div><div class="ttdoc">MediaRenderer DLNA Device.</div><div class="ttdef"><b>Definition:</b> MediaRenderer.h:62</div></div>
+<div class="ttc" id="aclasstiny__dlna_1_1MediaRenderer_html_aaf57b8e31603bc5fadc0201fa52974ce"><div class="ttname"><a href="classtiny__dlna_1_1MediaRenderer.html#aaf57b8e31603bc5fadc0201fa52974ce">tiny_dlna::MediaRenderer::begin</a></div><div class="ttdeci">bool begin()</div><div class="ttdoc">Override to initialize the device.</div><div class="ttdef"><b>Definition:</b> MediaRenderer.h:96</div></div>
 <div class="ttc" id="anamespacetiny__dlna_html"><div class="ttname"><a href="namespacetiny__dlna.html">tiny_dlna</a></div><div class="ttdef"><b>Definition:</b> Allocator.h:6</div></div>
 </div><!-- fragment --><ol type="1">
 <li>Test with a control point. You can use standard UPnP control point applications (e.g., VLC, BubbleUPnP on Android) to discover and control the device. Use the control point to send <code>SetAVTransportURI</code> then <code>Play</code> and verify audio plays through the configured output.</li>

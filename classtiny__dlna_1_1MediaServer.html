@@ -110,10 +110,26 @@ Public Types</h2></td></tr>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a84c60e28593b7493d84803a8c3837ced"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaServer.html#a84c60e28593b7493d84803a8c3837ced">MediaServer</a> ()</td></tr>
 <tr class="separator:a84c60e28593b7493d84803a8c3837ced"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c3675e1e39ec1c72292bdfe3390a588"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaServer.html#a4c3675e1e39ec1c72292bdfe3390a588">MediaServer</a> (<a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;server, <a class="el" href="classtiny__dlna_1_1IUDPService.html">IUDPService</a> &amp;udp)</td></tr>
+<tr class="memdesc:a4c3675e1e39ec1c72292bdfe3390a588"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a <a class="el" href="classtiny__dlna_1_1MediaServer.html" title="Minimal Digital Media Server implementation.">MediaServer</a> with associated HTTP server and UDP service This constructor stores the provided server/udp references so <a class="el" href="classtiny__dlna_1_1MediaServer.html#a6ff2b7348693490d116ab95bf818c45c" title="Override to initialize the device.">begin()</a> can be called without parameters.  <br /></td></tr>
+<tr class="separator:a4c3675e1e39ec1c72292bdfe3390a588"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a620b25cca911879d143b914a0ba55ddf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaServer.html#a620b25cca911879d143b914a0ba55ddf">~MediaServer</a> ()</td></tr>
 <tr class="separator:a620b25cca911879d143b914a0ba55ddf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0625b1bba5fe0667e18c3e2349a7636e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaServer.html#a0625b1bba5fe0667e18c3e2349a7636e">setHttpServer</a> (<a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;server)</td></tr>
+<tr class="memdesc:a0625b1bba5fe0667e18c3e2349a7636e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the http server instance the <a class="el" href="classtiny__dlna_1_1MediaServer.html" title="Minimal Digital Media Server implementation.">MediaServer</a> should use.  <br /></td></tr>
+<tr class="separator:a0625b1bba5fe0667e18c3e2349a7636e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3a409a7788480bc6bb351d0620b5c16"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaServer.html#ae3a409a7788480bc6bb351d0620b5c16">setUdpService</a> (<a class="el" href="classtiny__dlna_1_1IUDPService.html">IUDPService</a> &amp;udp)</td></tr>
+<tr class="memdesc:ae3a409a7788480bc6bb351d0620b5c16"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the UDP service instance the <a class="el" href="classtiny__dlna_1_1MediaServer.html" title="Minimal Digital Media Server implementation.">MediaServer</a> should use.  <br /></td></tr>
+<tr class="separator:ae3a409a7788480bc6bb351d0620b5c16"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ff2b7348693490d116ab95bf818c45c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaServer.html#a6ff2b7348693490d116ab95bf818c45c">begin</a> ()</td></tr>
+<tr class="memdesc:a6ff2b7348693490d116ab95bf818c45c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Override to initialize the device.  <br /></td></tr>
+<tr class="separator:a6ff2b7348693490d116ab95bf818c45c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6a75759d7e673d77260f1fc2aaf68a49"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaServer.html#a6a75759d7e673d77260f1fc2aaf68a49">end</a> ()</td></tr>
+<tr class="memdesc:a6a75759d7e673d77260f1fc2aaf68a49"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stops the processing and releases the resources.  <br /></td></tr>
 <tr class="separator:a6a75759d7e673d77260f1fc2aaf68a49"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ea8044f3e2ccdae2ec2e064142647c3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaServer.html#a2ea8044f3e2ccdae2ec2e064142647c3">loop</a> ()</td></tr>
+<tr class="memdesc:a2ea8044f3e2ccdae2ec2e064142647c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">call this method in the Arduino loop as often as possible  <br /></td></tr>
+<tr class="separator:a2ea8044f3e2ccdae2ec2e064142647c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9ecf0ad4c43d569193bb3fb3b7f44e24"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaServer.html#a9ecf0ad4c43d569193bb3fb3b7f44e24">setSearchCapabilities</a> (const char *caps)</td></tr>
 <tr class="memdesc:a9ecf0ad4c43d569193bb3fb3b7f44e24"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define the search capabilities: use csv.  <br /></td></tr>
 <tr class="separator:a9ecf0ad4c43d569193bb3fb3b7f44e24"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -144,9 +160,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a1f25a29ba3ff39e18ec6dfefc4518b62"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaServer.html#a1f25a29ba3ff39e18ec6dfefc4518b62">getSinkProtocols</a> ()</td></tr>
 <tr class="memdesc:a1f25a29ba3ff39e18ec6dfefc4518b62"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current sink <code>ProtocolInfo</code> string.  <br /></td></tr>
 <tr class="separator:a1f25a29ba3ff39e18ec6dfefc4518b62"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa17658369edcc1654448edc9f833fc24"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaServer.html#aa17658369edcc1654448edc9f833fc24">setupServices</a> (<a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;server, <a class="el" href="classtiny__dlna_1_1IUDPService.html">IUDPService</a> &amp;udp)</td></tr>
-<tr class="memdesc:aa17658369edcc1654448edc9f833fc24"><td class="mdescLeft">&#160;</td><td class="mdescRight">initialization called by <a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#a94db5b6be4e38324789d7529140faa5b" title="Override to initialize the device.">begin()</a>  <br /></td></tr>
-<tr class="separator:aa17658369edcc1654448edc9f833fc24"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a47728ae11ac3616cdbac058048c2ba49"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaServer.html#a47728ae11ac3616cdbac058048c2ba49">setPrepareDataCallback</a> (<a class="el" href="classtiny__dlna_1_1MediaServer.html#ac90a8ca05c645584ca1677f33db07f9c">PrepareDataCallback</a> cb)</td></tr>
 <tr class="memdesc:a47728ae11ac3616cdbac058048c2ba49"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the PrepareData callback.  <br /></td></tr>
 <tr class="separator:a47728ae11ac3616cdbac058048c2ba49"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -165,9 +178,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ace794f70fc1a77b99c870bd889540004"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaServer.html#ace794f70fc1a77b99c870bd889540004">incrementSystemUpdateID</a> ()</td></tr>
 <tr class="memdesc:ace794f70fc1a77b99c870bd889540004"><td class="mdescLeft">&#160;</td><td class="mdescRight">Increments and returns the SystemUpdateID.  <br /></td></tr>
 <tr class="separator:ace794f70fc1a77b99c870bd889540004"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a94db5b6be4e38324789d7529140faa5b"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#a94db5b6be4e38324789d7529140faa5b">begin</a> ()</td></tr>
-<tr class="memdesc:a94db5b6be4e38324789d7529140faa5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Override to initialize the device.  <br /></td></tr>
-<tr class="separator:a94db5b6be4e38324789d7529140faa5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65d272c398120465cbd7cecdb62ed416"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1DLNADevice.html">DLNADevice</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaServer.html#a65d272c398120465cbd7cecdb62ed416">device</a> ()</td></tr>
+<tr class="memdesc:a65d272c398120465cbd7cecdb62ed416"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides access to the internal DLNA device instance.  <br /></td></tr>
+<tr class="separator:a65d272c398120465cbd7cecdb62ed416"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a367895351ae485ae432fb25d236d1559"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#a367895351ae485ae432fb25d236d1559">print</a> (Print &amp;out)</td></tr>
 <tr class="memdesc:a367895351ae485ae432fb25d236d1559"><td class="mdescLeft">&#160;</td><td class="mdescRight">renders the device xml  <br /></td></tr>
 <tr class="separator:a367895351ae485ae432fb25d236d1559"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -271,9 +284,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a714c374025464075d8cf073381f91d07"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#a714c374025464075d8cf073381f91d07">operator bool</a> ()</td></tr>
 <tr class="memdesc:a714c374025464075d8cf073381f91d07"><td class="mdescLeft">&#160;</td><td class="mdescRight">return true if active  <br /></td></tr>
 <tr class="separator:a714c374025464075d8cf073381f91d07"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1318397e562e532ad344e9d029ed876b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#a1318397e562e532ad344e9d029ed876b">loop</a> ()</td></tr>
-<tr class="memdesc:a1318397e562e532ad344e9d029ed876b"><td class="mdescLeft">&#160;</td><td class="mdescRight">loop processing  <br /></td></tr>
-<tr class="separator:a1318397e562e532ad344e9d029ed876b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -319,6 +329,9 @@ Protected Member Functions</h2></td></tr>
 <tr class="separator:a6ac97c2cbadea9f56754bf85d17b5870"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a87326e92d5946828c168e59007e0f47b"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaServer.html#a87326e92d5946828c168e59007e0f47b">toStr</a> (<a class="el" href="namespacetiny__dlna.html#a85d3f686372782f654ff23302800aac9">MediaItemClass</a> itemClass)</td></tr>
 <tr class="separator:a87326e92d5946828c168e59007e0f47b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74bb1fb1a59df2476d5c2faa6c98cc2a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#a74bb1fb1a59df2476d5c2faa6c98cc2a">setupServices</a> (<a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;server, <a class="el" href="classtiny__dlna_1_1IUDPService.html">IUDPService</a> &amp;udp)</td></tr>
+<tr class="memdesc:a74bb1fb1a59df2476d5c2faa6c98cc2a"><td class="mdescLeft">&#160;</td><td class="mdescRight">to be implemented by subclasses  <br /></td></tr>
+<tr class="separator:a74bb1fb1a59df2476d5c2faa6c98cc2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3e7fe6432cf2513d18931c938c0653d2"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#a3e7fe6432cf2513d18931c938c0653d2">printRoot</a> ()</td></tr>
 <tr class="separator:a3e7fe6432cf2513d18931c938c0653d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa6c8f108406a2ea81374fc57c8e0de34"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#aa6c8f108406a2ea81374fc57c8e0de34">printDevice</a> ()</td></tr>
@@ -343,6 +356,8 @@ Static Protected Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
+<tr class="memitem:abb46743083452032aaa9cea21babce9a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1DLNADevice.html">DLNADevice</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaServer.html#abb46743083452032aaa9cea21babce9a">dlna_device</a></td></tr>
+<tr class="separator:abb46743083452032aaa9cea21babce9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab55a8d9b3bc171c044efb7452caa94bf"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaServer.html#ab55a8d9b3bc171c044efb7452caa94bf">st</a> = &quot;urn:schemas-upnp-org:device:MediaServer:1&quot;</td></tr>
 <tr class="separator:ab55a8d9b3bc171c044efb7452caa94bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5200c43c38935c6a8ee1bbd0896d2069"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaServer.html#a5200c43c38935c6a8ee1bbd0896d2069">usn</a> = &quot;uuid:media-server-0000-0000-0000-000000000001&quot;</td></tr>
@@ -353,6 +368,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:af16881af5380a736093b46d8d75b2241"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a75fbbbecbb605e4e347149b7d8824c23"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaServer.html#a75fbbbecbb605e4e347149b7d8824c23">p_server</a> = nullptr</td></tr>
 <tr class="separator:a75fbbbecbb605e4e347149b7d8824c23"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afbd10875bcbb8560ce441512a43df794"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1IUDPService.html">IUDPService</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaServer.html#afbd10875bcbb8560ce441512a43df794">p_udp_member</a> = nullptr</td></tr>
+<tr class="separator:afbd10875bcbb8560ce441512a43df794"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aded7fad1e17c8782b990b427f8621dbb"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaServer.html#aded7fad1e17c8782b990b427f8621dbb">reference_</a> = nullptr</td></tr>
 <tr class="separator:aded7fad1e17c8782b990b427f8621dbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3854943cf4a9efdceeb6dcc1f25f74b2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1MediaServer.html#a478af591abf2f43c14c075f7fbe09fbf">GetDataCallback</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaServer.html#a3854943cf4a9efdceeb6dcc1f25f74b2">g_stream_get_data_cb</a> = nullptr</td></tr>
@@ -474,7 +491,7 @@ Static Protected Attributes</h2></td></tr>
 </div>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a84c60e28593b7493d84803a8c3837ced" name="a84c60e28593b7493d84803a8c3837ced"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a84c60e28593b7493d84803a8c3837ced">&#9670;&#160;</a></span>MediaServer()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a84c60e28593b7493d84803a8c3837ced">&#9670;&#160;</a></span>MediaServer() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -495,6 +512,44 @@ Static Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4c3675e1e39ec1c72292bdfe3390a588" name="a4c3675e1e39ec1c72292bdfe3390a588"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c3675e1e39ec1c72292bdfe3390a588">&#9670;&#160;</a></span>MediaServer() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">tiny_dlna::MediaServer::MediaServer </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1IUDPService.html">IUDPService</a> &amp;&#160;</td>
+          <td class="paramname"><em>udp</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Construct a <a class="el" href="classtiny__dlna_1_1MediaServer.html" title="Minimal Digital Media Server implementation.">MediaServer</a> with associated HTTP server and UDP service This constructor stores the provided server/udp references so <a class="el" href="classtiny__dlna_1_1MediaServer.html#a6ff2b7348693490d116ab95bf818c45c" title="Override to initialize the device.">begin()</a> can be called without parameters. </p>
 
 </div>
 </div>
@@ -658,8 +713,8 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a94db5b6be4e38324789d7529140faa5b" name="a94db5b6be4e38324789d7529140faa5b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a94db5b6be4e38324789d7529140faa5b">&#9670;&#160;</a></span>begin()</h2>
+<a id="a6ff2b7348693490d116ab95bf818c45c" name="a6ff2b7348693490d116ab95bf818c45c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ff2b7348693490d116ab95bf818c45c">&#9670;&#160;</a></span>begin()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -668,7 +723,7 @@ Static Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual bool tiny_dlna::DLNADeviceInfo::begin </td>
+          <td class="memname">bool tiny_dlna::MediaServer::begin </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -676,12 +731,14 @@ Static Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Override to initialize the device. </p>
+
+<p>Reimplemented from <a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#a94db5b6be4e38324789d7529140faa5b">tiny_dlna::DLNADeviceInfo</a>.</p>
 
 </div>
 </div>
@@ -823,6 +880,33 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a65d272c398120465cbd7cecdb62ed416" name="a65d272c398120465cbd7cecdb62ed416"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a65d272c398120465cbd7cecdb62ed416">&#9670;&#160;</a></span>device()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1DLNADevice.html">DLNADevice</a> &amp; tiny_dlna::MediaServer::device </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Provides access to the internal DLNA device instance. </p>
+
+</div>
+</div>
 <a id="a6a75759d7e673d77260f1fc2aaf68a49" name="a6a75759d7e673d77260f1fc2aaf68a49"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6a75759d7e673d77260f1fc2aaf68a49">&#9670;&#160;</a></span>end()</h2>
 
@@ -845,6 +929,8 @@ Static Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Stops the processing and releases the resources. </p>
 
 </div>
 </div>
@@ -1559,8 +1645,8 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a1318397e562e532ad344e9d029ed876b" name="a1318397e562e532ad344e9d029ed876b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1318397e562e532ad344e9d029ed876b">&#9670;&#160;</a></span>loop()</h2>
+<a id="a2ea8044f3e2ccdae2ec2e064142647c3" name="a2ea8044f3e2ccdae2ec2e064142647c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ea8044f3e2ccdae2ec2e064142647c3">&#9670;&#160;</a></span>loop()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1569,7 +1655,7 @@ Static Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void tiny_dlna::DLNADeviceInfo::loop </td>
+          <td class="memname">bool tiny_dlna::MediaServer::loop </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1577,12 +1663,14 @@ Static Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>loop processing </p>
+<p>call this method in the Arduino loop as often as possible </p>
+
+<p>Reimplemented from <a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#ad157d9cd7b457189424ec6caa4a98f75">tiny_dlna::DLNADeviceInfo</a>.</p>
 
 </div>
 </div>
@@ -2410,6 +2498,34 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a0625b1bba5fe0667e18c3e2349a7636e" name="a0625b1bba5fe0667e18c3e2349a7636e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0625b1bba5fe0667e18c3e2349a7636e">&#9670;&#160;</a></span>setHttpServer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tiny_dlna::MediaServer::setHttpServer </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;&#160;</td>
+          <td class="paramname"><em>server</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set the http server instance the <a class="el" href="classtiny__dlna_1_1MediaServer.html" title="Minimal Digital Media Server implementation.">MediaServer</a> should use. </p>
+
+</div>
+</div>
 <a id="acf3495d97f2b78feeef7a1454e49de93" name="acf3495d97f2b78feeef7a1454e49de93"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#acf3495d97f2b78feeef7a1454e49de93">&#9670;&#160;</a></span>setIPAddress()</h2>
 
@@ -2816,6 +2932,34 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="ae3a409a7788480bc6bb351d0620b5c16" name="ae3a409a7788480bc6bb351d0620b5c16"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae3a409a7788480bc6bb351d0620b5c16">&#9670;&#160;</a></span>setUdpService()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tiny_dlna::MediaServer::setUdpService </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1IUDPService.html">IUDPService</a> &amp;&#160;</td>
+          <td class="paramname"><em>udp</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set the UDP service instance the <a class="el" href="classtiny__dlna_1_1MediaServer.html" title="Minimal Digital Media Server implementation.">MediaServer</a> should use. </p>
+
+</div>
+</div>
 <a id="afb9094b0571fd7c96074d22095b8803a" name="afb9094b0571fd7c96074d22095b8803a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afb9094b0571fd7c96074d22095b8803a">&#9670;&#160;</a></span>setUniversalProductCode()</h2>
 
@@ -2842,8 +2986,8 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="aa17658369edcc1654448edc9f833fc24" name="aa17658369edcc1654448edc9f833fc24"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa17658369edcc1654448edc9f833fc24">&#9670;&#160;</a></span>setupServices()</h2>
+<a id="a74bb1fb1a59df2476d5c2faa6c98cc2a" name="a74bb1fb1a59df2476d5c2faa6c98cc2a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74bb1fb1a59df2476d5c2faa6c98cc2a">&#9670;&#160;</a></span>setupServices()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2852,7 +2996,7 @@ Static Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void tiny_dlna::MediaServer::setupServices </td>
+          <td class="memname">virtual void tiny_dlna::DLNADeviceInfo::setupServices </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;&#160;</td>
           <td class="paramname"><em>server</em>, </td>
@@ -2871,14 +3015,12 @@ Static Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>initialization called by <a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#a94db5b6be4e38324789d7529140faa5b" title="Override to initialize the device.">begin()</a> </p>
-
-<p>Reimplemented from <a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#a74bb1fb1a59df2476d5c2faa6c98cc2a">tiny_dlna::DLNADeviceInfo</a>.</p>
+<p>to be implemented by subclasses </p>
 
 </div>
 </div>
@@ -3206,6 +3348,28 @@ Static Protected Attributes</h2></td></tr>
   </td>
   <td class="mlabels-right">
 <span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abb46743083452032aaa9cea21babce9a" name="abb46743083452032aaa9cea21babce9a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb46743083452032aaa9cea21babce9a">&#9670;&#160;</a></span>dlna_device</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1DLNADevice.html">DLNADevice</a> tiny_dlna::MediaServer::dlna_device</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -3691,6 +3855,28 @@ Static Protected Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a>* tiny_dlna::MediaServer::p_server = nullptr</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afbd10875bcbb8560ce441512a43df794" name="afbd10875bcbb8560ce441512a43df794"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afbd10875bcbb8560ce441512a43df794">&#9670;&#160;</a></span>p_udp_member</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1IUDPService.html">IUDPService</a>* tiny_dlna::MediaServer::p_udp_member = nullptr</td>
         </tr>
       </table>
   </td>
