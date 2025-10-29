@@ -1,6 +1,6 @@
 
 #pragma once
-#include "icons/icon.h"
+#include "icons/icon48x48.h"
 
 namespace tiny_dlna {
 /**
@@ -10,8 +10,8 @@ namespace tiny_dlna {
 class Icon {
  public:
   const char* mime = "image/png";
-  int width = 512;
-  int height = 512;
+  int width = 48;
+  int height = 48;
   int depth = 8;
   const char* icon_url = "/icon.png";
   uint8_t* icon_data = (uint8_t*) icon_png;
