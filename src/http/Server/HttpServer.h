@@ -240,7 +240,7 @@ class HttpServer {
     StrView pathStr = StrView(path);
     pathStr.replace("//", "/"); // TODO investiage why we get //
     for (auto handler_line_ptr : handler_collection) {
-      DlnaLogger.log(DlnaLogLevel::Info, "onRequest: %s %s vs: %s %s %s",
+      DlnaLogger.log(DlnaLogLevel::Debug, "onRequest: %s %s vs: %s %s %s",
                      path,
                      methods[request_header.method()],
                      nullstr(handler_line_ptr->path.c_str()),
@@ -251,7 +251,7 @@ class HttpServer {
           request_header.method() == handler_line_ptr->method &&
           matchesMime(nullstr(handler_line_ptr->mime), nullstr(request_header.accept()))) {
         // call registed handler function
-        DlnaLogger.log(DlnaLogLevel::Info, "onRequest %s", "->found",
+        DlnaLogger.log(DlnaLogLevel::Debug, "onRequest %s", "->found",
                        nullstr(handler_line_ptr->path.c_str()));
         handler_line_ptr->fn(this, path, handler_line_ptr);
         result = true;

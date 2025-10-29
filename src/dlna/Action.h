@@ -4,6 +4,9 @@
 
 namespace tiny_dlna {
 
+/// Search or Browse
+enum class ContentQueryType { Search, BrowseMetadata, BrowseChildren };
+
 /**
  * @brief DLNA Service: Action Argument
  * @author Phil Schatzmann
@@ -53,7 +56,7 @@ class ActionReply {
     }
   }
   void clear() { arguments.clear(); }
-  void addArgument(Argument arg){
+  void addArgument(Argument arg) {
     for (auto& a : arguments) {
       if (StrView(a.name).equals(arg.name)) {
         a.value = arg.value;
@@ -62,7 +65,6 @@ class ActionReply {
     }
     arguments.push_back(arg);
   }
-
 
  protected:
   bool is_valid = true;
@@ -86,18 +88,38 @@ class ActionRequest {
   }
 
   void addArgument(Argument arg) { arguments.push_back(arg); }
+
   void addArgument(const char* name, const char* value) {
-    Argument arg{name, value};
-    addArgument(arg);
+    if (!StrView(value).isEmpty()) {
+      for (auto& a : arguments) {
+        if (StrView(a.name).equals(name)) {
+          a.value = value;
+          return;
+        }
+      }
+      Argument arg{name, value};
+      addArgument(arg);
+    }
   }
 
   const char* getArgumentValue(const char* name) {
     for (auto& a : arguments) {
       if (a.name != nullptr) {
         StrView nm(a.name);
-        if (nm == name) return a.value.c_str();
+        if (nm.endsWithIgnoreCase(name)) {
+          return nullStr(a.value.c_str());
+        }
       }
     }
+
+    Str list{80};
+    for (auto& a : arguments) {
+      list.add(a.name);
+      list.add(" ");
+    }
+
+    DlnaLogger.log(DlnaLogLevel::Info, "Argument '%s' not found in (%s)", name,
+                   list.c_str());
     return "";
   }
 
@@ -109,9 +131,14 @@ class ActionRequest {
   const char* action = nullptr;
   Vector<Argument> arguments{10};
   int result_count = 0;
-  operator bool() { return p_service != nullptr && action != nullptr && p_service->service_type!=nullptr; }
+  operator bool() {
+    return p_service != nullptr && action != nullptr &&
+           p_service->service_type != nullptr;
+  }
   const char* getServiceType() { return p_service->service_type; }
-
+  const char* nullStr(const char* str, const char* alt = "") {
+    return str != nullptr ? str : alt;
+  }
 };
 
 }  // namespace tiny_dlna

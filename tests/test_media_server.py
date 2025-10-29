@@ -5,7 +5,6 @@ from urllib.parse import urlparse
 import sys
 import logging
 import xml.etree.ElementTree as ET
-import html
 
 logger = logging.getLogger("dlna.tests")
 from pathlib import Path

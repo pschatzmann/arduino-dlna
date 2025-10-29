@@ -43,12 +43,12 @@ namespace tiny_dlna {
 class MediaServer : public DLNADeviceInfo {
  public:
   // PrepareData callback signature:
-  // objectID, browseFlag, filter, startingIndex, requestedCount, sortCriteria,
-  // numberReturned (out), totalMatches (out), updateID (out), reference
+  // objectID, ContentQueryType, filter, startingIndex, requestedCount,
+  // sortCriteria, numberReturned (out), totalMatches (out), updateID (out), reference
   typedef void (*PrepareDataCallback)(
-      const char* objectID, const char* browseFlag, const char* filter,
-      int startingIndex, int requestedCount, const char* sortCriteria,
-      int& numberReturned, int& totalMatches, int& updateID, void* reference);
+    const char* objectID, ContentQueryType queryType, const char* filter,
+    int startingIndex, int requestedCount, const char* sortCriteria,
+    int& numberReturned, int& totalMatches, int& updateID, void* reference);
 
   // GetData callback signature:
   // index, MediaItem (out), reference
@@ -313,21 +313,22 @@ class MediaServer : public DLNADeviceInfo {
     int startingIndex = action.getArgumentIntValue("StartingIndex");
     int requestedCount = action.getArgumentIntValue("RequestedCount");
 
+    // determine query type (BrowseDirectChildren / BrowseMetadata / Search)
+    ContentQueryType qtype = parseContentQueryType(action.getArgumentValue("BrowseFlag"));
     // query for data
     if (prepare_data_cb) {
-      prepare_data_cb(action.getArgumentValue("ObjectID"),
-                      action.getArgumentValue("BrowseFlag"),
+      prepare_data_cb(action.getArgumentValue("ObjectID"), qtype,
                       action.getArgumentValue("Filter"), startingIndex,
                       requestedCount, action.getArgumentValue("SortCriteria"),
                       numberReturned, totalMatches, updateID, reference_);
     }
 
-    // provide result
-    return streamActionItems("BrowseResponse",
-                             action.getArgumentValue("ObjectID"),
-                             action.getArgumentValue("BrowseFlag"),
-                             action.getArgumentValue("Filter"), startingIndex,
-                             requestedCount, server);
+  // provide result
+  return streamActionItems("BrowseResponse",
+               action.getArgumentValue("ObjectID"),
+               qtype,
+               action.getArgumentValue("Filter"), startingIndex,
+               requestedCount, server);
   }
 
   bool processActionSearch(ActionRequest& action, HttpServer& server) {
@@ -341,10 +342,12 @@ class MediaServer : public DLNADeviceInfo {
     int startingIndex = action.getArgumentIntValue("StartingIndex");
     int requestedCount = action.getArgumentIntValue("RequestedCount");
 
+  // For Search actions we always use the Search query type regardless of
+  // any provided BrowseFlag; this ensures Search semantics are preserved.
+  ContentQueryType qtype = ContentQueryType::Search;
     // query for data
     if (prepare_data_cb) {
-      prepare_data_cb(action.getArgumentValue("ObjectID"),
-                      action.getArgumentValue("BrowseFlag"),
+      prepare_data_cb(action.getArgumentValue("ContainerID"), qtype,
                       action.getArgumentValue("Filter"), startingIndex,
                       requestedCount, action.getArgumentValue("SortCriteria"),
                       numberReturned, totalMatches, updateID, reference_);
@@ -352,7 +355,7 @@ class MediaServer : public DLNADeviceInfo {
 
     // provide result
     return streamActionItems("SearchResponse",
-                             action.getArgumentValue("ContainerID"), "Search",
+                             action.getArgumentValue("ContainerID"), qtype,
                              action.getArgumentValue("SearchCriteria"),
                              startingIndex, requestedCount, server);
   }
@@ -510,6 +513,13 @@ class MediaServer : public DLNADeviceInfo {
 
   /// Common helper to stream a ContentDirectory response (Browse or Search)
   // --- SOAP/response streaming helpers to avoid duplication ---
+  ContentQueryType parseContentQueryType(const char* flag) {
+    StrView fv(flag);
+    if (fv.equals("BrowseDirectChildren")) return ContentQueryType::BrowseChildren;
+    if (fv.equals("BrowseMetadata")) return ContentQueryType::BrowseMetadata;
+    // fallback
+    return ContentQueryType::BrowseMetadata;
+  }
   void soapEnvelopeStart(ChunkPrint& chunk) {
     chunk.print("<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n");
     chunk.print(
@@ -536,7 +546,7 @@ class MediaServer : public DLNADeviceInfo {
   }
 
   bool streamActionItems(const char* responseName, const char* objectID,
-                         const char* browseFlag, const char* filter,
+                         ContentQueryType queryType, const char* filter,
                          int startingIndex, int requestedCount,
                          HttpServer& server) {
     int numberReturned = 0;
@@ -545,7 +555,7 @@ class MediaServer : public DLNADeviceInfo {
 
     // allow caller to prepare counts/updateID
     if (prepare_data_cb) {
-      prepare_data_cb(objectID, browseFlag, filter, startingIndex,
+      prepare_data_cb(objectID, queryType, filter, startingIndex,
                       requestedCount, nullptr, numberReturned, totalMatches,
                       updateID, reference_);
     }
