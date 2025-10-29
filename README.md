@@ -5,7 +5,9 @@
 
 This library provides the functionality to implement a UPnP/DLNA [device](https://pschatzmann.github.io/arduino-dlna/classtiny__dlna_1_1DLNADeviceMgr.html) and a [control point](https://pschatzmann.github.io/arduino-dlna/classtiny__dlna_1_1DLNAControlPointMgr.html) for Arduino.
 
-The Digital Living Network Alliance (DLNA) aimed to establish interoperability among PCs, consumer appliances, and mobile devices across wired and wireless networks. The goal was to provide a common solution for sharing digital media and content services. Though this technology can be considered obsolete, it is still quite useful for some use cases: For Audio and Videao the successor protocols are Chromecast and AirPlay. Chromecast is close sourced and uses secure channels to Google, do you can't implement your own devices and Airplay is Apple specific and is not available on Android. 
+The Digital Living Network Alliance (DLNA) aimed to establish __interoperability__ among PCs, consumer appliances, and mobile devices across wired and wireless networks. The goal was to provide a common solution for __sharing digital media and content__ services. 
+
+Though this technology can be considered obsolete, it is still quite useful for some use cases: For Audio and Video the successor protocols are __Chromecast and AirPlay__. Chromecast is close sourced and uses secure channels to Google, so you can't implement your own devices. On the other hand, Airplay is Apple specific and is not available on Android. This leaves __DLNA as the only open and flexible Standard__ for accessing and sharing digital media (audio, video, images...)!
 
 ## The Standard
 
@@ -24,6 +26,8 @@ I struggled quite a bit to choose the right approach to implement this on Arduin
 - [gmrender-resurrect](https://github.com/hzeller/gmrender-resurrect): A headless UPnP/DLNA media renderer based on pupnp
 - [ushare](https://github.com/yitsunweng/ushare) A UPnP/DLNA media server
 
+This can be quite useful for testing the functionality.
+
 This library provides memory-efficient classes to implement DLNA devices and clients (control points).
 
 ## Device Types and Control Points
@@ -31,19 +35,19 @@ This library provides memory-efficient classes to implement DLNA devices and cli
 In addition to the core functionality, this project includes some easy-to-use classes:
 
 - Devices
-  - DLNADevice (Generic Device API)
-  - MediaRenderer
-  - MediaServer
+  - [DLNADevice](https://pschatzmann.github.io/arduino-dlna/classtiny__dlna_1_1DLNADevice.html) (Generic Device API)
+  - [MediaRenderer](https://pschatzmann.github.io/arduino-dlna/classtiny__dlna_1_1MediaRenderer.html)
+  - [MediaServer](https://pschatzmann.github.io/arduino-dlna/classtiny__dlna_1_1MediaServer.html)
 
 - Control Points
-  - DLNAControlPoint (Generic Control Point API)
-  - ControlPointMediaRenderer
-  - ControlPointMediaServer
+  - [DLNAControlPoint](https://pschatzmann.github.io/arduino-dlna/classtiny__dlna_1_1DLNAControlPoint.html) (Generic Control Point API)
+  - [ControlPointMediaRenderer](https://pschatzmann.github.io/arduino-dlna/classtiny__dlna_1_1ControlPointMediaRenderer.html)
+  - [ControlPointMediaServer](https://pschatzmann.github.io/arduino-dlna/classtiny__dlna_1_1ControlPointMediaServer.html)
 
 
 ## Implementation Approach
 
-A DLNA device uses UDP, HTTP, XML and SOAP to discover and manage services, which adds complexity.
+A DLNA device uses UDP, HTTP, XML and SOAP to discover and manage services, which adds quite some complexity.
 
 I implemented the functionality from scratch using the basic Arduino network API and avoided external dependencies.
 
