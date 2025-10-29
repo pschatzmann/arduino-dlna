@@ -28,11 +28,10 @@ I struggled quite a bit to choose the right approach to implement this on Arduin
 
 This can be quite useful for testing the functionality.
 
-This library provides memory-efficient classes to implement DLNA devices and clients (control points).
 
 ## Device Types and Control Points
 
-In addition to the core functionality, this project includes some easy-to-use classes:
+This library provides memory-efficient classes to implement DLNA devices and clients (control points). In addition to the core functionality, this project includes some easy-to-use classes:
 
 - Devices
   - [DLNADevice](https://pschatzmann.github.io/arduino-dlna/classtiny__dlna_1_1DLNADevice.html) (Generic Device API)
