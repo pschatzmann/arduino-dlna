@@ -10,11 +10,15 @@ class StringRegistry {
  public:
   /// adds a string
   const char* add(char* in) {
+    if (in == nullptr) {
+      return nullptr;
+    }
     for (auto& str : strings) {
       if (str.equals(in)) {
         return str.c_str();
       }
     }
+    DlnaLogger.log(DlnaLogLevel::Info, "StringRegistry::add: %s", in);
     strings.push_back(in);
     return strings[strings.size() - 1].c_str();
   }

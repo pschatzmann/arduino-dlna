@@ -82,7 +82,7 @@ class MediaServer : public DLNADeviceInfo {
   /// Set the http server instance the MediaServer should use
   void setHttpServer(HttpServer& server) {
     // ensure instance pointer is available for callbacks
-    p_media_server = this;
+    self = this;
     p_server = &server;
     // register service endpoints on the provided server
     setupServicesImpl(&server);
@@ -162,7 +162,7 @@ class MediaServer : public DLNADeviceInfo {
   DLNADevice& device() { return dlna_device; }
   
  protected:
-  static inline MediaServer* p_media_server = nullptr;
+  static inline MediaServer* self = nullptr;
   // internal DLNA device instance owned by this MediaServer
   DLNADevice dlna_device;
   const char* st = "urn:schemas-upnp-org:device:MediaServer:1";

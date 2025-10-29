@@ -1,5 +1,7 @@
 #pragma once
+#include "dlna_config.h"
 #include <assert.h>
+#include <utility>
 #include <stddef.h>
 #include "Allocator.h"
 
@@ -117,7 +119,9 @@ class List {
     return true;
   }
 
-  bool push_back(T data) {
+  // lvalue overload - copy into node (non-const reference allowing types
+  // with non-const copy/assignment semantics)
+  bool push_back(T& data) {
     Node* node = createNode();
     if (node == nullptr) return false;
     node->data = data;
@@ -134,7 +138,25 @@ class List {
     return true;
   }
 
-  bool push_front(T data) {
+  // rvalue overload - move into node to avoid expensive copies
+  bool push_back(T&& data) {
+    Node* node = createNode();
+    if (node == nullptr) return false;
+    node->data = std::move(data);
+    // update links
+    Node* old_last_prior = last.prior;
+    node->next = &last;
+    node->prior = old_last_prior;
+    old_last_prior->next = node;
+    last.prior = node;
+
+    record_count++;
+    validate();
+    return true;
+  }
+
+  // lvalue overload - copy into node (non-const reference)
+  bool push_front(T& data) {
     Node* node = createNode();
     if (node == nullptr) return false;
     node->data = data;
@@ -151,10 +173,48 @@ class List {
     return true;
   }
 
-  bool insert(Iterator it, const T& data) {
+  // rvalue overload - move into node
+  bool push_front(T&& data) {
+    Node* node = createNode();
+    if (node == nullptr) return false;
+    node->data = std::move(data);
+
+    // update links
+    Node* old_begin_next = first.next;
+    node->prior = &first;
+    node->next = old_begin_next;
+    old_begin_next->prior = node;
+    first.next = node;
+
+    record_count++;
+    validate();
+    return true;
+  }
+
+  bool insert(Iterator it, T& data) {
     Node* node = createNode();
     if (node == nullptr) return false;
     node->data = data;
+
+    // update links
+    Node* current_node = it.get_node();
+    Node* prior = current_node->prior;
+
+    prior->next = node;
+    current_node->prior = node;
+    node->prior = prior;
+    node->next = current_node;
+
+    record_count++;
+    validate();
+    return true;
+  }
+
+  // rvalue overload - move into node
+  bool insert(Iterator it, T&& data) {
+    Node* node = createNode();
+    if (node == nullptr) return false;
+    node->data = std::move(data);
 
     // update links
     Node* current_node = it.get_node();
@@ -296,8 +356,9 @@ class List {
   Allocator* p_allocator = &DefaultAllocator;
 
   Node* createNode() {
-#if USE_ALLOCATOR
-    Node* node = (Node*)p_allocator->allocate(sizeof(Node));  // new Node();
+#if DLNA_USE_ALLOCATOR
+    // Use allocator->create to run constructors for Node and its contained T
+    Node* node = p_allocator->create<Node>();
 #else
     Node* node = new Node();
 #endif
@@ -305,8 +366,9 @@ class List {
   }
 
   void deleteNode(Node* p_delete) {
-#if USE_ALLOCATOR
-    p_allocator->free(p_delete);  // delete p_delete;
+#if DLNA_USE_ALLOCATOR
+    // Use allocator->remove to call destructor then free memory
+    p_allocator->remove(p_delete);
 #else
     delete p_delete;
 #endif

@@ -1,9 +1,7 @@
-#pragma once
-#ifdef USE_INITIALIZER_LIST
-#include "InitializerList.h"
-#endif
-#include <assert.h>
+#include "dlna_config.h"
 
+#pragma once
+#include <assert.h>
 #include "Allocator.h"
 
 namespace tiny_dlna {
@@ -82,19 +80,6 @@ class Vector {
     size_t pos() { return pos_; }
     size_t operator-(Iterator it) { return (ptr - it.getPtr()); }
   };
-
-#ifdef USE_INITIALIZER_LIST
-
-  /// support for initializer_list
-  Vector(std::initializer_list<T> iniList) {
-    resize(iniList.size());
-    int pos = 0;
-    for (auto &obj : iniList) {
-      p_data[pos++] = obj;
-    }
-  }
-
-#endif
 
   /// Default constructor: size 0 with DefaultAllocator
   Vector(size_t len = 0, Allocator &allocator = DefaultAllocator) {
@@ -308,26 +293,23 @@ class Vector {
 
   bool contains(T obj) { return indexOf(obj) >= 0; }
 
-  void swap(T &other) {
-    // save values
-    int temp_blen = max_capacity;
-    int temp_len = len;
-    T *temp_data = p_data;
-    // swap from other
-    max_capacity = other.bufferLen;
-    len = other.len;
-    p_data = other.p_data;
-    // set other
-    other.bufferLen = temp_blen;
-    other.len = temp_len;
-    other.p_data = temp_data;
-  }
+  // Note: swapping with an object of type T (the element type) is not
+  // supported here. Use swap(Vector<T>&) above to swap two vectors.
 
   void reset() {
+    // Ensure all elements are destroyed and the underlying buffer is freed.
+    // Previously this called deleteArray(p_data, size()) which used the
+    // current logical length (`len`) instead of the allocated buffer
+    // capacity (`max_capacity`). That caused the allocated buffer to
+    // remain unfreed when len was 0 (leading to a memory leak).
     clear();
-    shrink_to_fit();
-    deleteArray(p_data, size());  // delete [] this->p_data;
-    p_data = nullptr;
+    if (p_data != nullptr) {
+      // free the full allocated buffer
+      deleteArray(p_data, max_capacity);
+      p_data = nullptr;
+      max_capacity = 0;
+      len = 0;
+    }
   }
 
  protected:
@@ -346,10 +328,13 @@ class Vector {
       this->max_capacity = newSize;
       if (oldData != nullptr) {
         if (copy && this->len > 0) {
-          // save existing data
-          memmove((void *)p_data, (void *)oldData, len * sizeof(T));
-          // clear to prevent double release
-          memset((void *)oldData, 0, len * sizeof(T));
+          // Element-wise copy using assignment/constructors. Using memmove
+          // here is unsafe for non-trivial types (it copies internal
+          // pointers/ownership and can lead to double-free). Do a proper
+          // element-wise copy so constructors/assignments run.
+          for (int j = 0; j < len; j++) {
+            p_data[j] = oldData[j];
+          }
         }
         if (shrink) {
           cleanup(oldData, newSize, oldBufferLen);
@@ -361,7 +346,7 @@ class Vector {
 
   T *newArray(int newSize) {
     T *data;
-#if USE_ALLOCATOR
+#if DLNA_USE_ALLOCATOR
     data = p_allocator->createArray<T>(newSize);  // new T[newSize+1];
 #else
     data = new T[newSize];
@@ -371,7 +356,7 @@ class Vector {
 
   void deleteArray(T *oldData, int oldBufferLen) {
     if (oldData == nullptr) return;
-#if USE_ALLOCATOR
+#if DLNA_USE_ALLOCATOR
     p_allocator->removeArray(oldData, oldBufferLen);  // delete [] oldData;
 #else
     delete[] oldData;

@@ -15,7 +15,11 @@ class Queue {
  public:
   Queue() = default;
 
+  // enqueue by non-const lvalue reference (matches existing copy ctor semantics)
   bool enqueue(T& data) { return l.push_front(data); }
+
+  // enqueue by move - avoids copying/memory allocation when possible
+  bool enqueue(T&& data) { return l.push_front(std::move(data)); }
 
   bool peek(T& data) {
     if (l.end()->prior == nullptr) return false;
