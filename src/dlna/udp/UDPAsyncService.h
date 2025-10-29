@@ -4,8 +4,8 @@
 #include <WiFi.h>
 
 #include "assert.h"
-#include "basic/QueueLockFree.h"
 #include "basic/Queue.h"
+#include "basic/QueueLockFree.h"
 #include "dlna/IUDPService.h"
 
 namespace tiny_dlna {
@@ -95,8 +95,10 @@ class UDPAsyncService : public IUDPService {
  protected:
   AsyncUDP udp;
   IPAddressAndPort peer;
-  // use lock-free queue for single-producer/single-consumer async safety
-  QueueLockFree<RequestData> queue{50};
+  // keep the lock-free variant available but commented out for now
+  // QueueLockFree<RequestData> queue{50};
+  // use simple FIFO queue (backed by List)
+  Queue<RequestData> queue;
 };
 
 }  // namespace tiny_dlna
