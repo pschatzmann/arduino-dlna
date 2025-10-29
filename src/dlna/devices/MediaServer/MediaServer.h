@@ -17,15 +17,15 @@
 namespace tiny_dlna {
 
 /**
- * @brief Minimal Digital Media Server implementation
+ * @brief Digital Media Server implementation
  *
  * This class implements a lightweight DLNA MediaServer device with a
- * ContentDirectory service (Browse) and a ConnectionManager service.
+ * ContentDirectory service (Browse and Search) and a ConnectionManager service.
  *
  * The API is designed for embedding custom content lists and streaming logic.
- * Instead of a single browse callback, the API now uses two callbacks:
+ * The API uses two callbacks to retrieve the content data:
  *   - PrepareDataCallback: Called to determine the number of items, total
- * matches, and update ID for a Browse request.
+ * matches, and update ID for a Browse or Search request.
  *   - GetDataCallback: Called for each item to retrieve its metadata
  * (MediaItem) by index.
  *
@@ -42,18 +42,37 @@ namespace tiny_dlna {
  */
 class MediaServer : public DLNADeviceInfo {
  public:
-  // PrepareData callback signature:
-  // objectID, ContentQueryType, filter, startingIndex, requestedCount,
-  // sortCriteria, numberReturned (out), totalMatches (out), updateID (out), reference
+  /**
+   * @brief Callback signature for preparing data for Browse or Search requests.
+   * @param objectID Object ID to browse/search
+   * @param queryType Content query type (Browse/Metadata/Search)
+   * @param filter Filter string
+   * @param startingIndex Starting index for paging
+   * @param requestedCount Number of items requested
+   * @param sortCriteria Sort criteria string
+   * @param numberReturned [out] Number of items returned
+   * @param totalMatches [out] Total number of matches
+   * @param updateID [out] System update ID
+   * @param reference User reference pointer
+   */
   typedef void (*PrepareDataCallback)(
     const char* objectID, ContentQueryType queryType, const char* filter,
     int startingIndex, int requestedCount, const char* sortCriteria,
     int& numberReturned, int& totalMatches, int& updateID, void* reference);
 
-  // GetData callback signature:
-  // index, MediaItem (out), reference
+  /**
+   * @brief Callback signature for retrieving a MediaItem by index.
+   * @param index Item index
+   * @param item [out] MediaItem metadata
+   * @param reference User reference pointer
+   * @return true if item is valid, false otherwise
+   */
   typedef bool (*GetDataCallback)(int index, MediaItem& item, void* reference);
 
+  /**
+   * @brief Default constructor for MediaServer.
+   * Initializes device information and default properties.
+   */
   MediaServer() {
     DlnaLogger.log(DlnaLogLevel::Info, "MediaServer::MediaServer");
     setSerialNumber(usn);
@@ -91,8 +110,8 @@ class MediaServer : public DLNADeviceInfo {
   /// Set the UDP service instance the MediaServer should use
   void setUdpService(IUDPService& udp) { p_udp_member = &udp; }
 
-  // Start the underlying DLNA device using previously provided UDP and HTTP
-  // server. Call this after constructing MediaServer(HttpServer&, IUDPService&)
+  /// Start the underlying DLNA device using previously provided UDP and HTTP
+  /// server. Call this after constructing MediaServer(HttpServer&, IUDPService&)
   bool begin() { 
     DlnaLogger.log(DlnaLogLevel::Info, "MediaServer::begin");
     return dlna_device.begin(*this, *p_udp_member, *p_server); }
@@ -140,10 +159,10 @@ class MediaServer : public DLNADeviceInfo {
   /// Get the current sink `ProtocolInfo` string
   const char* getSinkProtocols() { return sinkProto; }
 
-  /// Sets the PrepareData callback
+  /// Sets the callback that prepares the data for the Browse and Search
   void setPrepareDataCallback(PrepareDataCallback cb) { prepare_data_cb = cb; }
 
-  /// Sets the GetData callback
+  /// Sets the callback that provides a MediaItem by index
   void setGetDataCallback(GetDataCallback cb) { get_data_cb = cb; }
 
   /// Sets a user reference pointer, available in callbacks
@@ -165,8 +184,6 @@ class MediaServer : public DLNADeviceInfo {
   static inline MediaServer* self = nullptr;
   // internal DLNA device instance owned by this MediaServer
   DLNADevice dlna_device;
-  const char* st = "urn:schemas-upnp-org:device:MediaServer:1";
-  const char* usn = "uuid:media-server-0000-0000-0000-000000000001";
   // stored callbacks
   PrepareDataCallback prepare_data_cb = nullptr;
   GetDataCallback get_data_cb = nullptr;
@@ -179,6 +196,8 @@ class MediaServer : public DLNADeviceInfo {
   int g_stream_totalMatches = 0;
   int g_stream_updateID = 0;
   void* g_stream_reference = nullptr;
+  const char* st = "urn:schemas-upnp-org:device:MediaServer:1";
+  const char* usn = "uuid:media-server-0000-0000-0000-000000000001";
   const char* g_search_capabiities =
       "dc:title,dc:creator,upnp:class,upnp:genre,"
       "upnp:album,upnp:artist,upnp:albumArtURI";
@@ -274,8 +293,10 @@ class MediaServer : public DLNADeviceInfo {
   const char* sinkProto = "";
   const char* connectionID = "0";
 
+  /// Prevent npe caused by null strings
   const char* nullStr(const char* str) { return str == nullptr ? "" : str; }
 
+  /// Setup the service endpoints
   void setupServicesImpl(HttpServer* server) {
     DlnaLogger.log(DlnaLogLevel::Info, "MediaServer::setupServices");
 
