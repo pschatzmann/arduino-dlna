@@ -1,14 +1,13 @@
 #pragma once
 
 #include "basic/Str.h"
-#include "basic/Vector.h"
 #include "basic/StrPrint.h"
 #include "basic/Url.h"
+#include "basic/Vector.h"
 #include "http/HttpServer.h"
 #include "http/Server/HttpRequest.h"
 
 namespace tiny_dlna {
-
 
 /**
  * @struct Subscription
@@ -21,7 +20,7 @@ namespace tiny_dlna {
  */
 struct Subscription {
   Str sid;
-  Str callback_url; // as provided in CALLBACK header
+  Str callback_url;  // as provided in CALLBACK header
   uint32_t timeout_sec = 1800;
   uint32_t seq = 0;
   uint64_t expires_at = 0;
@@ -46,10 +45,13 @@ class SubscriptionMgr {
  public:
   SubscriptionMgr() {}
 
-  // Add or renew subscription. callbackUrl is formatted like "<http://host:port/path>"
-  // Returns SID (generated if new)
-  Str subscribe(const char* serviceId, const char* callbackUrl, uint32_t timeoutSec = 1800) {
+  // Add or renew subscription. callbackUrl is formatted like
+  // "<http://host:port/path>" Returns SID (generated if new)
+  Str subscribe(const char* serviceId, const char* callbackUrl,
+                uint32_t timeoutSec = 1800) {
     // simple SID generation
+    DlnaLogger.log(DlnaLogLevel::Info, "subscribe: %s %s", nullStr(serviceId, "(null)"),
+                   nullStr(callbackUrl, "(null)"));
     char buffer[64];
     snprintf(buffer, sizeof(buffer), "uuid:%lu", millis());
     Str sid = buffer;
@@ -66,7 +68,7 @@ class SubscriptionMgr {
   }
 
   bool unsubscribe(const char* serviceId, const char* sid) {
-    auto &list = getList(serviceId);
+    auto& list = getList(serviceId);
     for (size_t i = 0; i < list.size(); ++i) {
       if (StrView(list[i].sid).equals(sid)) {
         list.erase(i);
@@ -77,10 +79,11 @@ class SubscriptionMgr {
   }
 
   // Publish a single state variable change to all subscribers of the service
-  void publishProperty(const char* serviceId, const char* varName, const char* value) {
-    auto &list = getList(serviceId);
+  void publishProperty(const char* serviceId, const char* varName,
+                       const char* value) {
+    auto& list = getList(serviceId);
     for (int i = 0; i < list.size(); ++i) {
-      Subscription &sub = list[i];
+      Subscription& sub = list[i];
       // increment seq
       sub.seq++;
       // build body
@@ -122,6 +125,10 @@ class SubscriptionMgr {
   Vector<Str> service_names;
   Vector<Vector<Subscription>> service_lists;
 
+  const char* nullStr(const char* str, const char* defaultStr="") {
+    return str != nullptr ? str : defaultStr;
+  }
+
   Vector<Subscription>& getList(const char* serviceId) {
     for (int i = 0; i < service_names.size(); ++i) {
       if (StrView(service_names[i]).equals(serviceId)) return service_lists[i];
@@ -135,4 +142,4 @@ class SubscriptionMgr {
   }
 };
 
-} // namespace tiny_dlna
+}  // namespace tiny_dlna

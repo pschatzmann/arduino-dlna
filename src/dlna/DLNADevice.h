@@ -184,6 +184,7 @@ class DLNADevice {
         server->replyHeader().put("SID", sid.c_str());
         server->replyHeader().put("TIMEOUT", "Second-1800");
         server->replyHeader().write(server->client());
+        server->replyOK();
         server->endClient();
         return;
       }

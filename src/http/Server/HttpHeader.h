@@ -257,10 +257,11 @@ class HttpHeader {
         if (lineStr.isEmpty() || lineStr.isNewLine()) {
           break;
         }
-        if (isValidStatus() || isRedirectStatus()) {
+          // Always add header lines for requests and replies. Previously this
+          // only added lines for valid/redirect reply statuses which caused
+          // request headers (e.g. CALLBACK for SUBSCRIBE) to be ignored.
           lineStr.ltrim();
           put(line);
-        }
       }
     }
   }
