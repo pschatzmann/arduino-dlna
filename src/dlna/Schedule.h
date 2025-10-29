@@ -85,7 +85,7 @@ class MSearchReplySchedule : public Schedule {
 
   bool process(IUDPService &udp) override {
     // we keep the data on the stack
-    DlnaLogger.log(DlnaLogLevel::Debug, "Sending %s for %s to %s", name(),
+    DlnaLogger.log(DlnaLogLevel::Info, "Sending %s for %s to %s", name(),
                    search_target.c_str(), address.toString());
 
     DLNADeviceInfo &device = *p_device;
@@ -287,7 +287,7 @@ class PostByeSchedule : public Schedule {
   }
 
  protected:
-  int max_age = 120;
+  int max_age = 1800;
   DLNADeviceInfo *p_device;
 };
 
@@ -325,7 +325,7 @@ class PostSubscribe : public Schedule {
  protected:
   IPAddressAndPort address;
   const char *path;
-  int durationSec;
+  int durationSec = 0;
 
   void setDestination(IPAddressAndPort address, const char *path) {
     this->address = address;

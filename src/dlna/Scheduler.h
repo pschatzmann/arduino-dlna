@@ -65,8 +65,22 @@ class Scheduler {
     return false;
   }
 
+  /// Number of queued schedules
+  int size() {
+    return queue.size();
+  }
+
+  void setActive(bool flag) {
+    is_active = flag;
+  }
+
+  bool isActive() {
+    return is_active;
+  }
+
  protected:
   Vector<Schedule *> queue;
+  bool is_active = true;
 
   void cleanup() {
     DlnaLogger.log(DlnaLogLevel::Debug, "Scheduler::cleanup: for %d items", queue.size());

@@ -75,6 +75,7 @@ class MediaServer : public DLNADeviceInfo {
     setUdpService(udp);
   }
 
+  /// Destructor
   ~MediaServer() { end(); }
 
 

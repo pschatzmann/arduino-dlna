@@ -65,6 +65,7 @@ class DLNADevice {
       return false;
     }
 
+    // setup scheduler
     if (!setupScheduler()) {
       DlnaLogger.log(DlnaLogLevel::Error, "Scheduler failed");
       return false;
@@ -82,6 +83,7 @@ class DLNADevice {
 
   /// Stops the processing and releases the resources
   void end() {
+    DlnaLogger.log(DlnaLogLevel::Info, "DLNADevice::end");
     p_server->end();
 
     // send 3 bye messages
@@ -101,23 +103,17 @@ class DLNADevice {
   /// call this method in the Arduino loop as often as possible
   bool loop() {
     if (!is_active) return false;
+    // Platform-specific periodic diagnostics (e.g. ESP32 memory logging)
+    logMemoryIfNeeded();
 
     // handle server requests
     bool rc = p_server->doLoop();
     DlnaLogger.log(DlnaLogLevel::Debug, "server %s", rc ? "true" : "false");
 
     if (isSchedulerActive()) {
-      // process UDP requests
-      RequestData req = p_udp->receive();
-      if (req) {
-        Schedule* schedule = parser.parse(*p_device, req);
-        if (schedule != nullptr) {
-          scheduler.add(schedule);
-        }
-      }
-
-      // execute scheduled udp replys
-      scheduler.execute(*p_udp);
+      processUdpAndScheduler();
+    } else {
+      DlnaLogger.log(DlnaLogLevel::Warning, "scheduler inactive");
     }
 
     // be nice, if we have other tasks
@@ -135,10 +131,10 @@ class DLNADevice {
   DLNADeviceInfo& getDevice() { return *p_device; }
 
   /// We can activate/deactivate the scheduler
-  void setSchedulerActive(bool flag) { scheduler_active = flag; }
+  void setSchedulerActive(bool flag) { scheduler.setActive(flag); }
 
   /// Checks if the scheduler is active
-  bool isSchedulerActive() { return scheduler_active; }
+  bool isSchedulerActive() { return scheduler.isActive(); }
 
   /// Repeat the post-alive messages (default: 0 = no repeat). Call this method
   /// before calling begin!
@@ -221,7 +217,7 @@ class DLNADevice {
     bool is_action = false;
     Str actionName;
     char buffer[256];
-    Client &client = server->client();
+    Client& client = server->client();
 
     while (client.available() > 0) {
       size_t len = client.readBytes(buffer, sizeof(buffer));
@@ -231,7 +227,7 @@ class DLNADevice {
         if (is_attribute) {
           const char* argName = registry.add((char*)outNodeName.c_str());
           action.addArgument(argName, outText.c_str());
-          
+
           continue;
         }
         if (is_action) {
@@ -253,19 +249,53 @@ class DLNADevice {
   }
 
  protected:
+  bool is_active = false;
+  uint32_t post_alive_repeat_ms = 0;
   Scheduler scheduler;
   DLNADeviceRequestParser parser;
-  IUDPService* p_udp = nullptr;
   DLNADeviceInfo* p_device = nullptr;
   SubscriptionMgr subscriptionMgr;
+  IUDPService* p_udp = nullptr;
   HttpServer* p_server = nullptr;
-  bool is_active = false;
-  bool scheduler_active = true;
-  uint32_t post_alive_repeat_ms = 0;
   inline static StringRegistry registry;
   inline static DLNADevice* instance = nullptr;
 
   void setDevice(DLNADeviceInfo& device) { p_device = &device; }
+
+  /// Periodic platform-specific diagnostics. Kept as a separate method so
+  /// it can be tested or stubbed easily. Currently logs ESP32 heap/psram
+  /// every 10s.
+  void logMemoryIfNeeded() {
+#ifdef ESP32
+    static uint32_t last_mem_log = 0;
+    const uint32_t MEM_LOG_INTERVAL_MS = 10000;
+    uint32_t now = millis();
+    if ((uint32_t)(now - last_mem_log) >= MEM_LOG_INTERVAL_MS) {
+      last_mem_log = now;
+      DlnaLogger.log(DlnaLogLevel::Info, "Mem: freeHeap=%u freePsram=%u  Scheduler: size=%d active=%s",
+                     (unsigned)ESP.getFreeHeap(), (unsigned)ESP.getFreePsram(), scheduler.size(), isSchedulerActive() ? "true" : "false" );
+    }
+#endif
+  }
+
+  /// Process incoming UDP and execute scheduled replies. The method will
+  /// respect `scheduler_active` when calling `Scheduler::execute` so
+  /// periodic schedules can be silenced while still allowing on-demand
+  /// replies (e.g. MSearchReply) to be handled.
+  void processUdpAndScheduler() {
+    // process UDP requests
+    DlnaLogger.log(DlnaLogLevel::Debug, "processUdpAndScheduler");
+    RequestData req = p_udp->receive();
+    if (req) {
+      Schedule* schedule = parser.parse(*p_device, req);
+      if (schedule != nullptr) {
+        scheduler.add(schedule);
+      }
+    }
+
+    // execute scheduled udp replys
+    scheduler.execute(*p_udp);
+  }
 
   /// MSearch requests reply to upnp:rootdevice and the device type defined
   /// in the device

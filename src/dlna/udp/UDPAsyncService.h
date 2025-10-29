@@ -54,6 +54,8 @@ class UDPAsyncService : public IUDPService {
 
         // queue.push_back(result);
         queue.enqueue(result);
+        DlnaLogger.log(DlnaLogLevel::Info, "UDPAsyncService::receive: received %d bytes", packet.length());
+
       });
     }
     return true;
@@ -72,10 +74,6 @@ class UDPAsyncService : public IUDPService {
 
   RequestData receive() {
     RequestData result;
-    // if (queue.size()){
-    //   result = queue.back();
-    //   queue.pop_back();
-    // }
     queue.dequeue(result);
     return result;
   }

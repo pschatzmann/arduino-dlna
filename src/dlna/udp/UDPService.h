@@ -66,6 +66,7 @@ class UDPService : public IUDPService {
       DlnaLogger.log(DlnaLogLevel::Debug, "(%s [%d])->: %s", result.peer.toString(),
                      packetSize, tmp);
     }
+    DlnaLogger.log(DlnaLogLevel::Info, "UDPService::receive: received %d bytes", packetSize);
     return result;
   }
 
