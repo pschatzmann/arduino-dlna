@@ -4,11 +4,10 @@
 const char* ssid = "YOUR_SSID";
 const char* password = "YOUR_PASSWORD";
 
-MediaRenderer media_renderer;
-DLNADevice device;         // basic device API
 WiFiServer wifi;
 HttpServer server(wifi);
 UDPAsyncService udp;
+MediaRenderer media_renderer(server, udp);
 // Use Serial as a simple output when no audio stack is present
 Print& out = Serial;
 
@@ -61,8 +60,10 @@ void setup() {
       }
     });
 
-  // setup device: set IPAddress or BaseURL and other optional information
-  device.begin(media_renderer, udp, server);
+  // start device
+  if (!media_renderer.begin()) {
+    Serial.println("MediaRenderer failed to start");
+  }
 }
 
-void loop() { device.loop(); }
+void loop() { media_renderer.loop(); }

@@ -200,7 +200,7 @@ class DLNADeviceInfo {
   operator bool() { return is_active; }
 
   /// loop processing
-  virtual void loop() { delay(1); }
+  virtual bool loop() { delay(1); return true; }
 
  protected:
   uint64_t timestamp = 0;

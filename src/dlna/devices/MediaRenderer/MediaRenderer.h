@@ -83,6 +83,36 @@ class MediaRenderer : public DLNADeviceInfo {
     setBaseURL("http://localhost:44757");
   }
 
+  /**
+   * Construct a MediaRenderer bound to an HttpServer and IUDPService.
+   * The provided references are stored and used when calling begin().
+   */
+  MediaRenderer(HttpServer& server, IUDPService& udp) : MediaRenderer() {
+    setHttpServer(server);
+    setUdpService(udp);
+  }
+
+  // Start the underlying DLNA device using the stored server/udp
+  bool begin() { return dlna_device.begin(*this, *p_udp_member, *p_server); }
+
+  /// Stops processing and releases resources
+  void end() { dlna_device.end(); }
+
+  /// Call this from Arduino loop()
+  bool loop() { return dlna_device.loop(); }
+
+  /// Set the http server instance the MediaRenderer should use
+  void setHttpServer(HttpServer& server) {
+    // ensure instance pointer is available for callbacks
+    p_media_renderer = this;
+    p_server = &server;
+    // register service endpoints on the provided server
+    setupServicesImpl(&server);
+  }
+
+  /// Set the UDP service instance the MediaRenderer should use
+  void setUdpService(IUDPService& udp) { p_udp_member = &udp; }
+
   /// Register a media event handler callback
   void setMediaEventHandler(MediaEventHandler cb) { event_cb = cb; }
 
@@ -139,6 +169,9 @@ class MediaRenderer : public DLNADeviceInfo {
   /// Get textual transport state
   const char* getTransportState() { return transport_state.c_str(); }
 
+  /// Provides access to the internal DLNA device instance
+  DLNADevice& device() { return dlna_device; }
+
  protected:
   tiny_dlna::Str current_uri;
   tiny_dlna::Str current_mime;
@@ -152,10 +185,11 @@ class MediaRenderer : public DLNADeviceInfo {
   const char* st = "urn:schemas-upnp-org:device:MediaRenderer:1";
   const char* usn = "uuid:09349455-2941-4cf7-9847-1dd5ab210e97";
 
-  /// Setup the HTTP and UDP services
-  void setupServices(HttpServer& server, IUDPService& udp) {
-    setupServicesImpl(&server);
-  }
+  // internal DLNA device instance owned by this MediaRenderer
+  DLNADevice dlna_device;
+  HttpServer* p_server = nullptr;
+  IUDPService* p_udp_member = nullptr;
+  static inline MediaRenderer* p_media_renderer = nullptr;
 
   /// Start playback of a network resource (returns true on success)
   bool play(const char* urlStr) {

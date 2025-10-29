@@ -66,7 +66,8 @@ class ChunkPrint : public Print {
     int len = strlen(str);
     if (len == 0) return 0;
     int max_len = len * 3 + 1; // worst-case expansion when replacing to &amp;
-    char buffer[max_len];
+    // allocate on heap to avoid large stack usage
+    char* buffer = new char[max_len];
     // copy and perform replacements using StrView helper
     strncpy(buffer, str, max_len - 1);
     buffer[max_len - 1] = '\0';
@@ -76,15 +77,18 @@ class ChunkPrint : public Print {
     str_view.replaceAll(">", "&gt;");
     int new_len = str_view.length();
     chunk_writer.writeChunk(*client_ptr, str_view.c_str(), new_len);
+    delete[] buffer;
     return len;
   }
 
   size_t println(const char* str) {
     int len = strlen(str);
-    char tmp[ len + 3];
+    // allocate on heap to avoid large VLA on stack
+    char* tmp = new char[len + 3];
     strcpy(tmp, str);
     strcat(tmp, "\r\n");
     chunk_writer.writeChunk(*client_ptr, tmp, len + 2);
+    delete[] tmp;
     return len + 2;
   }
 

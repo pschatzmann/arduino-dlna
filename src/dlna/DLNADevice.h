@@ -45,10 +45,6 @@ class DLNADevice {
 
     // setup device
     device.setupServices(server, udp);
-    if (!device.begin()) {
-      DlnaLogger.log(DlnaLogLevel::Error, "Device begin failed");
-      return false;
-    }
 
     // setup web server
     if (!setupDLNAServer(server)) {
@@ -125,7 +121,7 @@ class DLNADevice {
     }
 
     // be nice, if we have other tasks
-    p_device->loop();
+    delay(8);
 
     return true;
   }

@@ -64,9 +64,46 @@ class MediaServer : public DLNADeviceInfo {
     setModelNumber("1.0");
     setBaseURL("http://localhost:44757");
   }
+  /**
+   * @brief Construct a MediaServer with associated HTTP server and UDP service
+   * This constructor stores the provided server/udp references so begin() can
+   * be called without parameters.
+   */
+  MediaServer(HttpServer& server, IUDPService& udp) : MediaServer() {
+    // use setters so derived classes or overrides get a consistent path
+    setHttpServer(server);
+    setUdpService(udp);
+  }
+
   ~MediaServer() { end(); }
 
-  void end() { /* nothing special */ }
+
+  /// Set the http server instance the MediaServer should use
+  void setHttpServer(HttpServer& server) {
+    // ensure instance pointer is available for callbacks
+    p_media_server = this;
+    p_server = &server;
+    // register service endpoints on the provided server
+    setupServicesImpl(&server);
+  }
+
+  /// Set the UDP service instance the MediaServer should use
+  void setUdpService(IUDPService& udp) { p_udp_member = &udp; }
+
+  // Start the underlying DLNA device using previously provided UDP and HTTP
+  // server. Call this after constructing MediaServer(HttpServer&, IUDPService&)
+  bool begin() { 
+    DlnaLogger.log(DlnaLogLevel::Info, "MediaServer::begin");
+    return dlna_device.begin(*this, *p_udp_member, *p_server); }
+
+  /// Stops the processing and releases the resources
+  void end() { 
+    DlnaLogger.log(DlnaLogLevel::Info, "MediaServer::end");
+    dlna_device.end(); 
+  }
+
+  /// call this method in the Arduino loop as often as possible
+  bool loop() { return dlna_device.loop(); }
 
   /// Define the search capabilities: use csv
   void setSearchCapabilities(const char* caps) { g_search_capabiities = caps; }
@@ -102,13 +139,6 @@ class MediaServer : public DLNADeviceInfo {
   /// Get the current sink `ProtocolInfo` string
   const char* getSinkProtocols() { return sinkProto; }
 
-  /// initialization called by begin()
-  void setupServices(HttpServer& server, IUDPService& udp) {
-    p_media_server = this;
-    setupServicesImpl(&server);
-    p_server = &server;
-  }
-
   /// Sets the PrepareData callback
   void setPrepareDataCallback(PrepareDataCallback cb) { prepare_data_cb = cb; }
 
@@ -127,8 +157,13 @@ class MediaServer : public DLNADeviceInfo {
   /// Increments and returns the SystemUpdateID
   int incrementSystemUpdateID() { return ++g_stream_updateID; }
 
+  /// Provides access to the internal DLNA device instance
+  DLNADevice& device() { return dlna_device; }
+  
  protected:
   static inline MediaServer* p_media_server = nullptr;
+  // internal DLNA device instance owned by this MediaServer
+  DLNADevice dlna_device;
   const char* st = "urn:schemas-upnp-org:device:MediaServer:1";
   const char* usn = "uuid:media-server-0000-0000-0000-000000000001";
   // stored callbacks
@@ -136,6 +171,7 @@ class MediaServer : public DLNADeviceInfo {
   GetDataCallback get_data_cb = nullptr;
 
   HttpServer* p_server = nullptr;
+  IUDPService* p_udp_member = nullptr;
   void* reference_ = nullptr;
   GetDataCallback g_stream_get_data_cb = nullptr;
   int g_stream_numberReturned = 0;
