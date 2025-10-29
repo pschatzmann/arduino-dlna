@@ -101,8 +101,8 @@ Inheritance diagram for tiny_dlna::MediaServer:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a3cb63e00013e8e61b9d4c71655a0a7c2"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaServer.html#a3cb63e00013e8e61b9d4c71655a0a7c2">PrepareDataCallback</a>) (const char *objectID, const char *browseFlag, const char *filter, int startingIndex, int requestedCount, const char *sortCriteria, int &amp;numberReturned, int &amp;totalMatches, int &amp;updateID, void *reference)</td></tr>
-<tr class="separator:a3cb63e00013e8e61b9d4c71655a0a7c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac90a8ca05c645584ca1677f33db07f9c"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaServer.html#ac90a8ca05c645584ca1677f33db07f9c">PrepareDataCallback</a>) (const char *objectID, <a class="el" href="namespacetiny__dlna.html#a7ecfa08a6b938018e48a3a309e895aa9">ContentQueryType</a> queryType, const char *filter, int startingIndex, int requestedCount, const char *sortCriteria, int &amp;numberReturned, int &amp;totalMatches, int &amp;updateID, void *reference)</td></tr>
+<tr class="separator:ac90a8ca05c645584ca1677f33db07f9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a478af591abf2f43c14c075f7fbe09fbf"><td class="memItemLeft" align="right" valign="top">typedef bool(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaServer.html#a478af591abf2f43c14c075f7fbe09fbf">GetDataCallback</a>) (int index, <a class="el" href="structtiny__dlna_1_1MediaItem.html">MediaItem</a> &amp;item, void *reference)</td></tr>
 <tr class="separator:a478af591abf2f43c14c075f7fbe09fbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -147,7 +147,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa17658369edcc1654448edc9f833fc24"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaServer.html#aa17658369edcc1654448edc9f833fc24">setupServices</a> (<a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;server, <a class="el" href="classtiny__dlna_1_1IUDPService.html">IUDPService</a> &amp;udp)</td></tr>
 <tr class="memdesc:aa17658369edcc1654448edc9f833fc24"><td class="mdescLeft">&#160;</td><td class="mdescRight">initialization called by <a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#a94db5b6be4e38324789d7529140faa5b" title="Override to initialize the device.">begin()</a>  <br /></td></tr>
 <tr class="separator:aa17658369edcc1654448edc9f833fc24"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a47728ae11ac3616cdbac058048c2ba49"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaServer.html#a47728ae11ac3616cdbac058048c2ba49">setPrepareDataCallback</a> (<a class="el" href="classtiny__dlna_1_1MediaServer.html#a3cb63e00013e8e61b9d4c71655a0a7c2">PrepareDataCallback</a> cb)</td></tr>
+<tr class="memitem:a47728ae11ac3616cdbac058048c2ba49"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaServer.html#a47728ae11ac3616cdbac058048c2ba49">setPrepareDataCallback</a> (<a class="el" href="classtiny__dlna_1_1MediaServer.html#ac90a8ca05c645584ca1677f33db07f9c">PrepareDataCallback</a> cb)</td></tr>
 <tr class="memdesc:a47728ae11ac3616cdbac058048c2ba49"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the PrepareData callback.  <br /></td></tr>
 <tr class="separator:a47728ae11ac3616cdbac058048c2ba49"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa1beaaed7198bbf30655cdb72612bf5f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaServer.html#aa1beaaed7198bbf30655cdb72612bf5f">setGetDataCallback</a> (<a class="el" href="classtiny__dlna_1_1MediaServer.html#a478af591abf2f43c14c075f7fbe09fbf">GetDataCallback</a> cb)</td></tr>
@@ -301,8 +301,10 @@ Protected Member Functions</h2></td></tr>
 <tr class="separator:a5ebf55d135b14125778ae0129c3cc563"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0aa6a0282812c6663dab7e25b721dc6c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaServer.html#a0aa6a0282812c6663dab7e25b721dc6c">processActionGetCurrentConnectionInfo</a> (<a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;action, <a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;server)</td></tr>
 <tr class="separator:a0aa6a0282812c6663dab7e25b721dc6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad1cad888abd324da011e650bee115053"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacetiny__dlna.html#a7ecfa08a6b938018e48a3a309e895aa9">ContentQueryType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaServer.html#ad1cad888abd324da011e650bee115053">parseContentQueryType</a> (const char *flag)</td></tr>
+<tr class="memdesc:ad1cad888abd324da011e650bee115053"><td class="mdescLeft">&#160;</td><td class="mdescRight">Common helper to stream a ContentDirectory response (Browse or Search)  <br /></td></tr>
+<tr class="separator:ad1cad888abd324da011e650bee115053"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac4fb070798c5a71d1c73c241cd82e656"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaServer.html#ac4fb070798c5a71d1c73c241cd82e656">soapEnvelopeStart</a> (<a class="el" href="classtiny__dlna_1_1ChunkPrint.html">ChunkPrint</a> &amp;chunk)</td></tr>
-<tr class="memdesc:ac4fb070798c5a71d1c73c241cd82e656"><td class="mdescLeft">&#160;</td><td class="mdescRight">Common helper to stream a ContentDirectory response (Browse or Search)  <br /></td></tr>
 <tr class="separator:ac4fb070798c5a71d1c73c241cd82e656"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a225e81700ce909375dc2d8debb77e8a2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaServer.html#a225e81700ce909375dc2d8debb77e8a2">soapEnvelopeEnd</a> (<a class="el" href="classtiny__dlna_1_1ChunkPrint.html">ChunkPrint</a> &amp;chunk)</td></tr>
 <tr class="separator:a225e81700ce909375dc2d8debb77e8a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -310,8 +312,8 @@ Protected Member Functions</h2></td></tr>
 <tr class="separator:ab3771606f1dee280d32d61d567d0a4a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad6ca54ad68fa5f5710e83e4aea87c0bd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaServer.html#ad6ca54ad68fa5f5710e83e4aea87c0bd">actionResponseEnd</a> (<a class="el" href="classtiny__dlna_1_1ChunkPrint.html">ChunkPrint</a> &amp;chunk, const char *responseName)</td></tr>
 <tr class="separator:ad6ca54ad68fa5f5710e83e4aea87c0bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad98da306419b97cfb4b38f8c73310f0a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaServer.html#ad98da306419b97cfb4b38f8c73310f0a">streamActionItems</a> (const char *responseName, const char *objectID, const char *browseFlag, const char *filter, int startingIndex, int requestedCount, <a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;server)</td></tr>
-<tr class="separator:ad98da306419b97cfb4b38f8c73310f0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae77a8af2278c3a22b5749c1fdd0fb7f1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaServer.html#ae77a8af2278c3a22b5749c1fdd0fb7f1">streamActionItems</a> (const char *responseName, const char *objectID, <a class="el" href="namespacetiny__dlna.html#a7ecfa08a6b938018e48a3a309e895aa9">ContentQueryType</a> queryType, const char *filter, int startingIndex, int requestedCount, <a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;server)</td></tr>
+<tr class="separator:ae77a8af2278c3a22b5749c1fdd0fb7f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6ac97c2cbadea9f56754bf85d17b5870"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaServer.html#a6ac97c2cbadea9f56754bf85d17b5870">streamDIDL</a> (<a class="el" href="classtiny__dlna_1_1ChunkPrint.html">ChunkPrint</a> &amp;chunk_writer, int numberReturned, int startingIndex)</td></tr>
 <tr class="memdesc:a6ac97c2cbadea9f56754bf85d17b5870"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stream DIDL-Lite payload for a Browse/Search result.  <br /></td></tr>
 <tr class="separator:a6ac97c2cbadea9f56754bf85d17b5870"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -345,7 +347,7 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:ab55a8d9b3bc171c044efb7452caa94bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5200c43c38935c6a8ee1bbd0896d2069"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaServer.html#a5200c43c38935c6a8ee1bbd0896d2069">usn</a> = &quot;uuid:media-server-0000-0000-0000-000000000001&quot;</td></tr>
 <tr class="separator:a5200c43c38935c6a8ee1bbd0896d2069"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5d6736864a822456b0ffa2edb6d5f430"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1MediaServer.html#a3cb63e00013e8e61b9d4c71655a0a7c2">PrepareDataCallback</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaServer.html#a5d6736864a822456b0ffa2edb6d5f430">prepare_data_cb</a> = nullptr</td></tr>
+<tr class="memitem:a5d6736864a822456b0ffa2edb6d5f430"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1MediaServer.html#ac90a8ca05c645584ca1677f33db07f9c">PrepareDataCallback</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaServer.html#a5d6736864a822456b0ffa2edb6d5f430">prepare_data_cb</a> = nullptr</td></tr>
 <tr class="separator:a5d6736864a822456b0ffa2edb6d5f430"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af16881af5380a736093b46d8d75b2241"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1MediaServer.html#a478af591abf2f43c14c075f7fbe09fbf">GetDataCallback</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MediaServer.html#af16881af5380a736093b46d8d75b2241">get_data_cb</a> = nullptr</td></tr>
 <tr class="separator:af16881af5380a736093b46d8d75b2241"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -456,14 +458,14 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a3cb63e00013e8e61b9d4c71655a0a7c2" name="a3cb63e00013e8e61b9d4c71655a0a7c2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3cb63e00013e8e61b9d4c71655a0a7c2">&#9670;&#160;</a></span>PrepareDataCallback</h2>
+<a id="ac90a8ca05c645584ca1677f33db07f9c" name="ac90a8ca05c645584ca1677f33db07f9c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac90a8ca05c645584ca1677f33db07f9c">&#9670;&#160;</a></span>PrepareDataCallback</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef void(* tiny_dlna::MediaServer::PrepareDataCallback) (const char *objectID, const char *browseFlag, const char *filter, int startingIndex, int requestedCount, const char *sortCriteria, int &amp;numberReturned, int &amp;totalMatches, int &amp;updateID, void *reference)</td>
+          <td class="memname">typedef void(* tiny_dlna::MediaServer::PrepareDataCallback) (const char *objectID, <a class="el" href="namespacetiny__dlna.html#a7ecfa08a6b938018e48a3a309e895aa9">ContentQueryType</a> queryType, const char *filter, int startingIndex, int requestedCount, const char *sortCriteria, int &amp;numberReturned, int &amp;totalMatches, int &amp;updateID, void *reference)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1637,6 +1639,34 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="ad1cad888abd324da011e650bee115053" name="ad1cad888abd324da011e650bee115053"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad1cad888abd324da011e650bee115053">&#9670;&#160;</a></span>parseContentQueryType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacetiny__dlna.html#a7ecfa08a6b938018e48a3a309e895aa9">ContentQueryType</a> tiny_dlna::MediaServer::parseContentQueryType </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>flag</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Common helper to stream a ContentDirectory response (Browse or Search) </p>
+
+</div>
+</div>
 <a id="a367895351ae485ae432fb25d236d1559" name="a367895351ae485ae432fb25d236d1559"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a367895351ae485ae432fb25d236d1559">&#9670;&#160;</a></span>print()</h2>
 
@@ -2576,7 +2606,7 @@ Static Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">void tiny_dlna::MediaServer::setPrepareDataCallback </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1MediaServer.html#a3cb63e00013e8e61b9d4c71655a0a7c2">PrepareDataCallback</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1MediaServer.html#ac90a8ca05c645584ca1677f33db07f9c">PrepareDataCallback</a>&#160;</td>
           <td class="paramname"><em>cb</em></td><td>)</td>
           <td></td>
         </tr>
@@ -2928,12 +2958,10 @@ Static Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Common helper to stream a ContentDirectory response (Browse or Search) </p>
-
 </div>
 </div>
-<a id="ad98da306419b97cfb4b38f8c73310f0a" name="ad98da306419b97cfb4b38f8c73310f0a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad98da306419b97cfb4b38f8c73310f0a">&#9670;&#160;</a></span>streamActionItems()</h2>
+<a id="ae77a8af2278c3a22b5749c1fdd0fb7f1" name="ae77a8af2278c3a22b5749c1fdd0fb7f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae77a8af2278c3a22b5749c1fdd0fb7f1">&#9670;&#160;</a></span>streamActionItems()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2956,8 +2984,8 @@ Static Protected Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>browseFlag</em>, </td>
+          <td class="paramtype"><a class="el" href="namespacetiny__dlna.html#a7ecfa08a6b938018e48a3a309e895aa9">ContentQueryType</a>&#160;</td>
+          <td class="paramname"><em>queryType</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -3684,7 +3712,7 @@ Static Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtiny__dlna_1_1MediaServer.html#a3cb63e00013e8e61b9d4c71655a0a7c2">PrepareDataCallback</a> tiny_dlna::MediaServer::prepare_data_cb = nullptr</td>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1MediaServer.html#ac90a8ca05c645584ca1677f33db07f9c">PrepareDataCallback</a> tiny_dlna::MediaServer::prepare_data_cb = nullptr</td>
         </tr>
       </table>
   </td>

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['dlnaloglevel_0',['DlnaLogLevel',['../namespacetiny__dlna.html#a5eabb92538a2ba1397f67b903cb9d35e',1,'tiny_dlna']]]
+  ['contentquerytype_0',['ContentQueryType',['../namespacetiny__dlna.html#a7ecfa08a6b938018e48a3a309e895aa9',1,'tiny_dlna']]]
 ];

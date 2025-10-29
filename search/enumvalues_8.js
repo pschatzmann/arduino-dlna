@@ -1,15 +1,8 @@
 var searchData=
 [
-  ['t_5fconnect_0',['T_CONNECT',['../namespacetiny__dlna.html#a8b30900e538135f563c83e48319e5247a2cdcc24012398a6731aae7ecc14c60fc',1,'tiny_dlna']]],
-  ['t_5fdelete_1',['T_DELETE',['../namespacetiny__dlna.html#a8b30900e538135f563c83e48319e5247a2c2f34b372dafc24218c63d87a4162bb',1,'tiny_dlna']]],
-  ['t_5fget_2',['T_GET',['../namespacetiny__dlna.html#a8b30900e538135f563c83e48319e5247a97fc3ce47a74a4e9ed375738b0b77c17',1,'tiny_dlna']]],
-  ['t_5fhead_3',['T_HEAD',['../namespacetiny__dlna.html#a8b30900e538135f563c83e48319e5247a8855246fa66f6be3476cf1cbfa203a27',1,'tiny_dlna']]],
-  ['t_5fnotify_4',['T_NOTIFY',['../namespacetiny__dlna.html#a8b30900e538135f563c83e48319e5247ad90b59c95e2a57ad2969a295ee3bcff2',1,'tiny_dlna']]],
-  ['t_5foptions_5',['T_OPTIONS',['../namespacetiny__dlna.html#a8b30900e538135f563c83e48319e5247a439b85af4776b7be46ca12db98031c03',1,'tiny_dlna']]],
-  ['t_5fpatch_6',['T_PATCH',['../namespacetiny__dlna.html#a8b30900e538135f563c83e48319e5247acaf97fba9939f1bea8cd1141de6b7666',1,'tiny_dlna']]],
-  ['t_5fpost_7',['T_POST',['../namespacetiny__dlna.html#a8b30900e538135f563c83e48319e5247ac156bd726a28ae5da1401917117bea4a',1,'tiny_dlna']]],
-  ['t_5fput_8',['T_PUT',['../namespacetiny__dlna.html#a8b30900e538135f563c83e48319e5247a9945be3cffff88bf64699d564df76128',1,'tiny_dlna']]],
-  ['t_5fsubscribe_9',['T_SUBSCRIBE',['../namespacetiny__dlna.html#a8b30900e538135f563c83e48319e5247a78d7f90932c20309de58ac2111387323',1,'tiny_dlna']]],
-  ['t_5ftrace_10',['T_TRACE',['../namespacetiny__dlna.html#a8b30900e538135f563c83e48319e5247a26535a2ef4d0916cd3b9e0d0716183a6',1,'tiny_dlna']]],
-  ['t_5fundefined_11',['T_UNDEFINED',['../namespacetiny__dlna.html#a8b30900e538135f563c83e48319e5247a38bf86d84d310d359e8de997cf53b32f',1,'tiny_dlna']]]
+  ['search_0',['Search',['../namespacetiny__dlna.html#a7ecfa08a6b938018e48a3a309e895aa9a13348442cc6a27032d2b4aa28b75a5d3',1,'tiny_dlna']]],
+  ['set_5fmute_1',['SET_MUTE',['../namespacetiny__dlna.html#a1457542c46840a965692cd26a81994b2ab243ecd279e16ae7bd331aa787b6543d',1,'tiny_dlna']]],
+  ['set_5furi_2',['SET_URI',['../namespacetiny__dlna.html#a1457542c46840a965692cd26a81994b2ab2f241d3971c480aea101816aee7beba',1,'tiny_dlna']]],
+  ['set_5fvolume_3',['SET_VOLUME',['../namespacetiny__dlna.html#a1457542c46840a965692cd26a81994b2a38ebb8e25710b9f8a396f33f4c7a4f9f',1,'tiny_dlna']]],
+  ['stop_4',['STOP',['../namespacetiny__dlna.html#a1457542c46840a965692cd26a81994b2a615a46af313786fc4e349f34118be111',1,'tiny_dlna']]]
 ];
