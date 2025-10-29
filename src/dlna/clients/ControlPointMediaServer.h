@@ -122,9 +122,8 @@ class ControlPointMediaServer {
    * @note The raw DIDL-Lite XML result is available via getLastReply() ->
    * "Result"
    */
-  bool browse(int startingIndex, int requestedCount, XMLCallback XMLCallback,
-              int& numberReturned, int& totalMatches, int& updateID,
-              const char* browseFlag = nullptr) {
+  bool browse(int startingIndex, int requestedCount, ContentQueryType queryType, XMLCallback XMLCallback,
+              int& numberReturned, int& totalMatches, int& updateID) {
 
     // Register item callback            
     this->mgr.onResultNode(XMLCallback);            
@@ -133,7 +132,7 @@ class ControlPointMediaServer {
         selectService("urn:upnp-org:serviceId:ContentDirectory");
     if (!svc) return false;
     ActionRequest& act =
-        createBrowseAction(svc, browseFlag, startingIndex, requestedCount);
+        createBrowseAction(svc, queryType, startingIndex, requestedCount);
     mgr.addAction(act);
     last_reply = mgr.executeActions();
     if (!last_reply) return false;
@@ -302,13 +301,15 @@ class ControlPointMediaServer {
   }
 
   /// Build a Browse ActionRequest
-  ActionRequest &createBrowseAction(DLNAServiceInfo& svc, const char* browseFlag,
+  ActionRequest &createBrowseAction(DLNAServiceInfo& svc, ContentQueryType queryType,
                                    int startingIndex, int requestedCount) {
+    const char* browseFlag = (queryType == ContentQueryType::BrowseMetadata)
+                                ? "BrowseMetadata"
+                                : "BrowseDirectChildren";                                
     static ActionRequest act(svc, "Browse");
     // Use the canonical argument name expected by ContentDirectory: "ObjectID"
     act.addArgument("ObjectID", object_id);
-    act.addArgument("BrowseFlag",
-                    browseFlag ? browseFlag : "BrowseDirectChildren");
+    act.addArgument("BrowseFlag", browseFlag );
     act.addArgument("Filter", "");
     char buf[32];
     snprintf(buf, sizeof(buf), "%d", startingIndex);

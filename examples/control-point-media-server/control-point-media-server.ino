@@ -70,7 +70,7 @@ void setup() {
   // Browse root on first matching MediaServer
   int numberReturned = 0, totalMatches = 0, updateID = 0;
   Serial.println("Sending Browse action (ObjectID=0)...");
-  bool ok = cpms.browse(0, 10, printItemCallback, numberReturned, totalMatches,
+  bool ok = cpms.browse(0, 10, ContentQueryType::BrowseChildren, printItemCallback, numberReturned, totalMatches,
                         updateID);
   Serial.println("Browse action completed (executeActions returned)");
   Serial.print("Browse ok: ");
