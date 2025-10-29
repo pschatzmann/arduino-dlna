@@ -4,6 +4,7 @@
 
 #include <atomic>
 #include <cstddef>
+#include <utility>
 
 namespace tiny_dlna {
 
@@ -19,26 +20,30 @@ class QueueLockFree {
   }
 
   ~QueueLockFree() {
-    for (size_t i = head_pos; i != tail_pos; ++i)
+    // destroy any remaining constructed elements between head and tail
+    size_t head = head_pos.load(std::memory_order_relaxed);
+    size_t tail = tail_pos.load(std::memory_order_relaxed);
+    for (size_t i = head; i != tail; ++i)
       (&p_node[i & capacity_mask].data)->~T();
-
-    delete[] (char*)p_node;
   }
 
   void setAllocator(Allocator& allocator) { vector.setAllocator(allocator); }
 
   void resize(size_t capacity) {
+    // round up to next power-of-two and compute mask/value
     capacity_mask = capacity - 1;
     for (size_t i = 1; i <= sizeof(void*) * 4; i <<= 1)
       capacity_mask |= capacity_mask >> i;
     capacity_value = capacity_mask + 1;
 
-    vector.resize(capacity);
+    // allocate vector with the power-of-two capacity_value
+    vector.resize(capacity_value);
     p_node = vector.data();
 
-    for (size_t i = 0; i < capacity; ++i) {
+    // initialize nodes for the full allocated capacity
+    for (size_t i = 0; i < capacity_value; ++i) {
       p_node[i].tail.store(i, std::memory_order_relaxed);
-      p_node[i].head.store(-1, std::memory_order_relaxed);
+      p_node[i].head.store((size_t)-1, std::memory_order_relaxed);
     }
 
     tail_pos.store(0, std::memory_order_relaxed);
@@ -53,7 +58,20 @@ class QueueLockFree {
   }
 
   bool enqueue( T&& data) {
-    return enqueue(data);
+    Node* node;
+    size_t tail = tail_pos.load(std::memory_order_relaxed);
+    for (;;) {
+      node = &p_node[tail & capacity_mask];
+      if (node->tail.load(std::memory_order_relaxed) != tail) return false;
+      if ((tail_pos.compare_exchange_weak(tail, tail + 1,
+                                          std::memory_order_relaxed)))
+        break;
+    }
+    // move-construct into the node to avoid an extra copy (important in
+    // async/interrupt contexts where the source may have already allocated)
+    new (&node->data) T(std::move(data));
+    node->head.store(tail, std::memory_order_release);
+    return true;
   }
 
   bool enqueue( T& data) {
@@ -85,7 +103,8 @@ class QueueLockFree {
                                          std::memory_order_relaxed))
         break;
     }
-    result = node->data;
+    // move-assign to avoid an extra copy when possible
+    result = std::move(node->data);
     (&node->data)->~T();
     node->tail.store(head + capacity_value, std::memory_order_release);
     return true;

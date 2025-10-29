@@ -5,9 +5,13 @@
 
 #include "assert.h"
 #include "basic/QueueLockFree.h"
+#include "basic/Queue.h"
 #include "dlna/IUDPService.h"
 
 namespace tiny_dlna {
+
+// forward-declare RequestData so we can use Queue<RequestData> in this header
+struct RequestData;
 
 /**
  * @brief Access to UDP functionality: sending and receiving of data
@@ -37,7 +41,12 @@ class UDPAsyncService : public IUDPService {
         result.data.copyFrom((const char*)packet.data(), packet.length());
 
         // queue.push_back(result);
-        queue.enqueue(result);
+        bool ok = queue.enqueue(result);
+        if (!ok) {
+          DlnaLogger.log(DlnaLogLevel::Warning,
+                         "UDPAsyncService::enqueue failed: queue full, packet %d bytes, queueSize=%d",
+                         packet.length(), (int)queue.size());
+        }
       });
     }
 
@@ -53,7 +62,12 @@ class UDPAsyncService : public IUDPService {
         result.data.copyFrom((const char*)packet.data(), packet.length());
 
         // queue.push_back(result);
-        queue.enqueue(result);
+        bool ok = queue.enqueue(result);
+        if (!ok) {
+          DlnaLogger.log(DlnaLogLevel::Warning,
+                         "UDPAsyncService::enqueue failed: multicast queue full, packet %d bytes, queueSize=%d",
+                         packet.length(), (int)queue.size());
+        }
         DlnaLogger.log(DlnaLogLevel::Info, "UDPAsyncService::receive: received %d bytes", packet.length());
 
       });
@@ -81,7 +95,7 @@ class UDPAsyncService : public IUDPService {
  protected:
   AsyncUDP udp;
   IPAddressAndPort peer;
-  //  Vector<RequestData> queue{50};
+  // use lock-free queue for single-producer/single-consumer async safety
   QueueLockFree<RequestData> queue{50};
 };
 

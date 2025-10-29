@@ -1,9 +1,6 @@
 #pragma once
-#ifdef USE_INITIALIZER_LIST
-#include "InitializerList.h"
-#endif
-#include <stddef.h>
 #include <assert.h>
+#include <stddef.h>
 #include "Allocator.h"
 
 namespace tiny_dlna {
@@ -20,15 +17,15 @@ class List {
  public:
   /// List Node
   struct Node {
-    Node *next = nullptr;
-    Node *prior = nullptr;
+    Node* next = nullptr;
+    Node* prior = nullptr;
     T data;
   };
 
   /// List Iterator
   class Iterator {
    public:
-    Iterator(Node *node) { this->node = node; }
+    Iterator(Node* node) { this->node = node; }
     inline Iterator operator++() {
       if (node->next != nullptr) {
         node = node->next;
@@ -55,17 +52,17 @@ class List {
     }
     inline bool operator==(Iterator it) { return node == it.get_node(); }
     inline bool operator!=(Iterator it) { return node != it.get_node(); }
-    inline T &operator*() { return node->data; }
-    inline T *operator->() { return &(node->data); }
-    inline Node *get_node() { return node; }
+    inline T& operator*() { return node->data; }
+    inline T* operator->() { return &(node->data); }
+    inline Node* get_node() { return node; }
     inline operator bool() { return is_eof; }
 
    protected:
-    Node *node = nullptr;
+    Node* node = nullptr;
     bool is_eof = false;
 
     Iterator getIteratorAtOffset(int offset) {
-      Node *tmp = node;
+      Node* tmp = node;
       if (offset > 0) {
         for (int j = 0; j < offset; j++) {
           if (tmp->next == nullptr) {
@@ -87,16 +84,16 @@ class List {
   };
 
   /// Default constructor
-  List(Allocator &allocator = DefaultAllocator) {
+  List(Allocator& allocator = DefaultAllocator) {
     p_allocator = &allocator;
     link();
   };
   /// copy constructor
-  List(List &ref) = default;
+  List(List& ref) = default;
 
   /// Constructor using array
   template <size_t N>
-  List(const T (&a)[N], Allocator &allocator = DefaultAllocator) {
+  List(const T (&a)[N], Allocator& allocator = DefaultAllocator) {
     p_allocator = &allocator;
     link();
     for (int i = 0; i < N; ++i) push_back(a[i]);
@@ -104,14 +101,7 @@ class List {
 
   ~List() { clear(); }
 
-#ifdef USE_INITIALIZER_LIST
-
-  List(std::initializer_list<T> iniList) {
-    link();
-    for (auto &obj : iniList) push_back(obj);
-  }
-#endif
-  bool swap(List<T> &ref) {
+  bool swap(List<T>& ref) {
     List<T> tmp(*this);
     validate();
 
@@ -128,12 +118,12 @@ class List {
   }
 
   bool push_back(T data) {
-    Node *node = createNode();
+    Node* node = createNode();
     if (node == nullptr) return false;
     node->data = data;
 
     // update links
-    Node *old_last_prior = last.prior;
+    Node* old_last_prior = last.prior;
     node->next = &last;
     node->prior = old_last_prior;
     old_last_prior->next = node;
@@ -145,12 +135,12 @@ class List {
   }
 
   bool push_front(T data) {
-    Node *node = createNode();
+    Node* node = createNode();
     if (node == nullptr) return false;
     node->data = data;
 
     // update links
-    Node *old_begin_next = first.next;
+    Node* old_begin_next = first.next;
     node->prior = &first;
     node->next = old_begin_next;
     old_begin_next->prior = node;
@@ -161,14 +151,14 @@ class List {
     return true;
   }
 
-  bool insert(Iterator it, const T &data) {
-    Node *node = createNode();
+  bool insert(Iterator it, const T& data) {
+    Node* node = createNode();
     if (node == nullptr) return false;
     node->data = data;
 
     // update links
-    Node *current_node = it.get_node();
-    Node *prior = current_node->prior;
+    Node* current_node = it.get_node();
+    Node* prior = current_node->prior;
 
     prior->next = node;
     current_node->prior = node;
@@ -190,12 +180,12 @@ class List {
     return pop_back(tmp);
   }
 
-  bool pop_front(T &data) {
+  bool pop_front(T& data) {
     if (record_count == 0) return false;
     // get data
-    Node *p_delete = firstDataNode();
-    Node *p_prior = p_delete->prior;
-    Node *p_next = p_delete->next;
+    Node* p_delete = firstDataNode();
+    Node* p_prior = p_delete->prior;
+    Node* p_next = p_delete->next;
 
     data = p_delete->data;
 
@@ -211,11 +201,11 @@ class List {
     return true;
   }
 
-  bool pop_back(T &data) {
+  bool pop_back(T& data) {
     if (record_count == 0) return false;
-    Node *p_delete = lastDataNode();
-    Node *p_prior = p_delete->prior;
-    Node *p_next = p_delete->next;
+    Node* p_delete = lastDataNode();
+    Node* p_prior = p_delete->prior;
+    Node* p_next = p_delete->next;
 
     // get data
     data = p_delete->data;
@@ -233,13 +223,13 @@ class List {
   }
 
   bool erase(Iterator it) {
-    Node *p_delete = it.get_node();
+    Node* p_delete = it.get_node();
     // check for valid iterator
     if (empty() || p_delete == &first || p_delete == &last) {
       return false;
     }
-    Node *p_prior = p_delete->prior;
-    Node *p_next = p_delete->next;
+    Node* p_prior = p_delete->prior;
+    Node* p_next = p_delete->next;
 
     // remove last node
     p_prior->next = p_next;
@@ -281,8 +271,8 @@ class List {
     return true;
   }
 
-  inline T &operator[](int index) {
-    Node *n = firstDataNode();
+  inline T& operator[](int index) {
+    Node* n = firstDataNode();
     for (int j = 0; j < index; j++) {
       n = n->next;
       if (n == nullptr) {
@@ -292,10 +282,10 @@ class List {
     return n->data;
   }
 
-  void setAllocator(Allocator &allocator) { p_allocator = &allocator; }
+  void setAllocator(Allocator& allocator) { p_allocator = &allocator; }
 
   /// Provides the last element
-  T &back() { return *rbegin(); }
+  T& back() { return *rbegin(); }
 
  protected:
   Node first;  // empty dummy first node which which is always before the first
@@ -303,18 +293,18 @@ class List {
   Node last;  // empty dummy last node which which is always after the last data
               // node
   size_t record_count = 0;
-  Allocator *p_allocator = &DefaultAllocator;
+  Allocator* p_allocator = &DefaultAllocator;
 
-  Node *createNode() {
+  Node* createNode() {
 #if USE_ALLOCATOR
-    Node *node = (Node *)p_allocator->allocate(sizeof(Node));  // new Node();
+    Node* node = (Node*)p_allocator->allocate(sizeof(Node));  // new Node();
 #else
-    Node *node = new Node();
+    Node* node = new Node();
 #endif
     return node;
   }
 
-  void deleteNode(Node *p_delete) {
+  void deleteNode(Node* p_delete) {
 #if USE_ALLOCATOR
     p_allocator->free(p_delete);  // delete p_delete;
 #else
@@ -327,8 +317,8 @@ class List {
     last.prior = &first;
   }
 
-  Node *lastDataNode() { return last.prior; }
-  Node *firstDataNode() { return first.next; }
+  Node* lastDataNode() { return last.prior; }
+  Node* firstDataNode() { return first.next; }
 
   void validate() {
     assert(first.next != nullptr);
