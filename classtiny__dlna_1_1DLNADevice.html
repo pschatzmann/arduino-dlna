@@ -131,6 +131,10 @@ Static Public Member Functions</h2></td></tr>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:aeb95ac967ac9b1401ac50d12380820a9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#aeb95ac967ac9b1401ac50d12380820a9">setDevice</a> (<a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html">DLNADeviceInfo</a> &amp;device)</td></tr>
 <tr class="separator:aeb95ac967ac9b1401ac50d12380820a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32d01e2f48053056be903c75a4337f8f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a32d01e2f48053056be903c75a4337f8f">logMemoryIfNeeded</a> ()</td></tr>
+<tr class="separator:a32d01e2f48053056be903c75a4337f8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad5e3fde9eca75a585614f662128a761"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#aad5e3fde9eca75a585614f662128a761">processUdpAndScheduler</a> ()</td></tr>
+<tr class="separator:aad5e3fde9eca75a585614f662128a761"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aee2a4ffa7f7db826d76a7a0ff196a029"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#aee2a4ffa7f7db826d76a7a0ff196a029">setupParser</a> ()</td></tr>
 <tr class="separator:aee2a4ffa7f7db826d76a7a0ff196a029"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a346b6289f31030672d56f678c4ce56ee"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a346b6289f31030672d56f678c4ce56ee">setupScheduler</a> ()</td></tr>
@@ -148,24 +152,22 @@ Static Protected Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
+<tr class="memitem:a3dc4fb6e238eedf0a5d5626ab4857fb2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a3dc4fb6e238eedf0a5d5626ab4857fb2">is_active</a> = false</td></tr>
+<tr class="separator:a3dc4fb6e238eedf0a5d5626ab4857fb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9cf185cdeddb8685e333fa508993d2f0"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a9cf185cdeddb8685e333fa508993d2f0">post_alive_repeat_ms</a> = 0</td></tr>
+<tr class="separator:a9cf185cdeddb8685e333fa508993d2f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5fb3bb1fc28dbc81fbfaa144167e60e7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Scheduler.html">Scheduler</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a5fb3bb1fc28dbc81fbfaa144167e60e7">scheduler</a></td></tr>
 <tr class="separator:a5fb3bb1fc28dbc81fbfaa144167e60e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a81e7a0fd171b83f5703eed6e73509e94"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1DLNADeviceRequestParser.html">DLNADeviceRequestParser</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a81e7a0fd171b83f5703eed6e73509e94">parser</a></td></tr>
 <tr class="separator:a81e7a0fd171b83f5703eed6e73509e94"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a58231d53bc1b50d2c171d1c809e857ef"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1IUDPService.html">IUDPService</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a58231d53bc1b50d2c171d1c809e857ef">p_udp</a> = nullptr</td></tr>
-<tr class="separator:a58231d53bc1b50d2c171d1c809e857ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aab4c69f9ca58e7f12ff15956e3657643"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html">DLNADeviceInfo</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#aab4c69f9ca58e7f12ff15956e3657643">p_device</a> = nullptr</td></tr>
 <tr class="separator:aab4c69f9ca58e7f12ff15956e3657643"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abc7ffe1f0fed01e9784afd6a4f261808"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1SubscriptionMgr.html">SubscriptionMgr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#abc7ffe1f0fed01e9784afd6a4f261808">subscriptionMgr</a></td></tr>
 <tr class="separator:abc7ffe1f0fed01e9784afd6a4f261808"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58231d53bc1b50d2c171d1c809e857ef"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1IUDPService.html">IUDPService</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a58231d53bc1b50d2c171d1c809e857ef">p_udp</a> = nullptr</td></tr>
+<tr class="separator:a58231d53bc1b50d2c171d1c809e857ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa6a6dd349a8eda3d93f31ab9e2bcf125"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#aa6a6dd349a8eda3d93f31ab9e2bcf125">p_server</a> = nullptr</td></tr>
 <tr class="separator:aa6a6dd349a8eda3d93f31ab9e2bcf125"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3dc4fb6e238eedf0a5d5626ab4857fb2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a3dc4fb6e238eedf0a5d5626ab4857fb2">is_active</a> = false</td></tr>
-<tr class="separator:a3dc4fb6e238eedf0a5d5626ab4857fb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a51ea0d65f49a67ad11ff4519ca022927"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a51ea0d65f49a67ad11ff4519ca022927">scheduler_active</a> = true</td></tr>
-<tr class="separator:a51ea0d65f49a67ad11ff4519ca022927"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9cf185cdeddb8685e333fa508993d2f0"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a9cf185cdeddb8685e333fa508993d2f0">post_alive_repeat_ms</a> = 0</td></tr>
-<tr class="separator:a9cf185cdeddb8685e333fa508993d2f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-attribs" name="pro-static-attribs"></a>
 Static Protected Attributes</h2></td></tr>
@@ -449,6 +451,32 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a32d01e2f48053056be903c75a4337f8f" name="a32d01e2f48053056be903c75a4337f8f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a32d01e2f48053056be903c75a4337f8f">&#9670;&#160;</a></span>logMemoryIfNeeded()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tiny_dlna::DLNADevice::logMemoryIfNeeded </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Periodic platform-specific diagnostics. Kept as a separate method so it can be tested or stubbed easily. Currently logs ESP32 heap/psram every 10s. </p>
+
+</div>
+</div>
 <a id="afe6f1b0d2a28c4f276fa5359419d6b7e" name="afe6f1b0d2a28c4f276fa5359419d6b7e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afe6f1b0d2a28c4f276fa5359419d6b7e">&#9670;&#160;</a></span>loop()</h2>
 
@@ -523,6 +551,32 @@ Static Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Parses the SOAP content of a DLNA action request. </p>
+
+</div>
+</div>
+<a id="aad5e3fde9eca75a585614f662128a761" name="aad5e3fde9eca75a585614f662128a761"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad5e3fde9eca75a585614f662128a761">&#9670;&#160;</a></span>processUdpAndScheduler()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tiny_dlna::DLNADevice::processUdpAndScheduler </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Process incoming UDP and execute scheduled replies. The method will respect <code>scheduler_active</code> when calling <code><a class="el" href="classtiny__dlna_1_1Scheduler.html#adb5c137561c391272d7f2dd21cd7391c" title="Execute all due schedules.">Scheduler::execute</a></code> so periodic schedules can be silenced while still allowing on-demand replies (e.g. MSearchReply) to be handled. </p>
 
 </div>
 </div>
@@ -876,28 +930,6 @@ Static Protected Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classtiny__dlna_1_1Scheduler.html">Scheduler</a> tiny_dlna::DLNADevice::scheduler</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a51ea0d65f49a67ad11ff4519ca022927" name="a51ea0d65f49a67ad11ff4519ca022927"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a51ea0d65f49a67ad11ff4519ca022927">&#9670;&#160;</a></span>scheduler_active</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool tiny_dlna::DLNADevice::scheduler_active = true</td>
         </tr>
       </table>
   </td>

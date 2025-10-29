@@ -98,6 +98,13 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa361b639ca217b922e9d760bc9d348cb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Scheduler.html#aa361b639ca217b922e9d760bc9d348cb">isMSearchActive</a> ()</td></tr>
 <tr class="memdesc:aa361b639ca217b922e9d760bc9d348cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if there is any active schedule with name "MSearch".  <br /></td></tr>
 <tr class="separator:aa361b639ca217b922e9d760bc9d348cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9bc45d5d78072fe976acf6bfba7206e9"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Scheduler.html#a9bc45d5d78072fe976acf6bfba7206e9">size</a> ()</td></tr>
+<tr class="memdesc:a9bc45d5d78072fe976acf6bfba7206e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of queued schedules.  <br /></td></tr>
+<tr class="separator:a9bc45d5d78072fe976acf6bfba7206e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a899f50e08f1950700fb7ab5afa188f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Scheduler.html#a6a899f50e08f1950700fb7ab5afa188f">setActive</a> (bool flag)</td></tr>
+<tr class="separator:a6a899f50e08f1950700fb7ab5afa188f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a806090006f9c928537a2938894cf7e65"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Scheduler.html#a806090006f9c928537a2938894cf7e65">isActive</a> ()</td></tr>
+<tr class="separator:a806090006f9c928537a2938894cf7e65"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -108,6 +115,8 @@ Protected Member Functions</h2></td></tr>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a6a739e86c90ac7fbf6f7b11d292f3f2c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt; <a class="el" href="structtiny__dlna_1_1Schedule.html">Schedule</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Scheduler.html#a6a739e86c90ac7fbf6f7b11d292f3f2c">queue</a></td></tr>
 <tr class="separator:a6a739e86c90ac7fbf6f7b11d292f3f2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0cd17afce85230e75f1f146135d01b50"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Scheduler.html#a0cd17afce85230e75f1f146135d01b50">is_active</a> = true</td></tr>
+<tr class="separator:a0cd17afce85230e75f1f146135d01b50"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="classtiny__dlna_1_1Scheduler.html" title="Scheduler which processes all due Schedules (to send out UDP replies)">Scheduler</a> which processes all due Schedules (to send out UDP replies) </p>
@@ -194,6 +203,31 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a806090006f9c928537a2938894cf7e65" name="a806090006f9c928537a2938894cf7e65"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a806090006f9c928537a2938894cf7e65">&#9670;&#160;</a></span>isActive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool tiny_dlna::Scheduler::isActive </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="aa361b639ca217b922e9d760bc9d348cb" name="aa361b639ca217b922e9d760bc9d348cb"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa361b639ca217b922e9d760bc9d348cb">&#9670;&#160;</a></span>isMSearchActive()</h2>
 
@@ -221,7 +255,82 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a6a899f50e08f1950700fb7ab5afa188f" name="a6a899f50e08f1950700fb7ab5afa188f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a899f50e08f1950700fb7ab5afa188f">&#9670;&#160;</a></span>setActive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tiny_dlna::Scheduler::setActive </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>flag</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9bc45d5d78072fe976acf6bfba7206e9" name="a9bc45d5d78072fe976acf6bfba7206e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9bc45d5d78072fe976acf6bfba7206e9">&#9670;&#160;</a></span>size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int tiny_dlna::Scheduler::size </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of queued schedules. </p>
+
+</div>
+</div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="a0cd17afce85230e75f1f146135d01b50" name="a0cd17afce85230e75f1f146135d01b50"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0cd17afce85230e75f1f146135d01b50">&#9670;&#160;</a></span>is_active</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool tiny_dlna::Scheduler::is_active = true</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a6a739e86c90ac7fbf6f7b11d292f3f2c" name="a6a739e86c90ac7fbf6f7b11d292f3f2c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6a739e86c90ac7fbf6f7b11d292f3f2c">&#9670;&#160;</a></span>queue</h2>
 
