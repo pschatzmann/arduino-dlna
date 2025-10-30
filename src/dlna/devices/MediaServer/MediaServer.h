@@ -77,8 +77,9 @@ class MediaServer : public DLNADeviceInfo {
     DlnaLogger.log(DlnaLogLevel::Info, "MediaServer::MediaServer");
     setSerialNumber(usn);
     setDeviceType(st);
-    setFriendlyName("MediaServer");
+    setFriendlyName("ArduinoMediaServer");
     setManufacturer("TinyDLNA");
+    setManufacturerURL("https://github.com/pschatzmann/arduino-dlna");
     setModelName("TinyDLNA MediaServer");
     setModelNumber("1.0");
     setBaseURL("http://localhost:44757");
