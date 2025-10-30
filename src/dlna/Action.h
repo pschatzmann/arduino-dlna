@@ -45,8 +45,6 @@ class Argument {
 class ActionReply {
  public:
   ActionReply(bool valid = true) { is_valid = valid; }
-  Vector<Argument> arguments;
-  operator bool() { return is_valid; }
   bool isValid() const { return is_valid; }
   void setValid(bool flag) { is_valid = flag; }
   void add(ActionReply alt) {
@@ -55,7 +53,6 @@ class ActionReply {
       arguments.push_back(arg);
     }
   }
-  void clear() { arguments.clear(); }
   void addArgument(Argument arg) {
     for (auto& a : arguments) {
       if (StrView(a.name).equals(arg.name)) {
@@ -66,8 +63,36 @@ class ActionReply {
     arguments.push_back(arg);
   }
 
+  // Helper: find argument by name in ActionReply (returns nullptr if not found)
+  const char* findArgument(const char* name) {
+    for (auto& a : arguments) {
+      if (a.name != nullptr) {
+        StrView nm(a.name);
+        if (nm == name) return a.value.c_str();
+      }
+    }
+    return nullptr;
+  }
+
+  operator bool() { return is_valid; }
+
+  int size() { return arguments.size(); }
+
+  void clear() { arguments.clear(); }
+
+  void logArguments(){
+    for (auto& a : arguments) {
+      DlnaLogger.log(DlnaLogLevel::Info, "  -> %s = %s", nullStr(a.name),
+                     nullStr(a.value.c_str()));
+    }
+  }
+
  protected:
+  Vector<Argument> arguments;
   bool is_valid = true;
+  const char* nullStr(const char* str, const char* alt = "") {
+    return str != nullptr ? str : alt;
+  }
 };
 
 /**

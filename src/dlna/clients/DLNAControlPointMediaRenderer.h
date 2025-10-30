@@ -270,7 +270,7 @@ class DLNAControlPointMediaRenderer {
     last_reply = p_mgr->executeActions();
     last_reply = p_mgr->executeActions();
     if (!last_reply) return -1;
-    const char* v = findArgument(last_reply, "CurrentVolume");
+    const char* v = last_reply.findArgument("CurrentVolume");
     if (!v) return -1;
     return atoi(v);
   }
@@ -289,7 +289,7 @@ class DLNAControlPointMediaRenderer {
     p_mgr->addAction(act);
     last_reply = p_mgr->executeActions();
     if (!last_reply) return -1;
-    const char* m = findArgument(last_reply, "CurrentMute");
+    const char* m = last_reply.findArgument( "CurrentMute");
     if (!m) return -1;
     return atoi(m);
   }
@@ -306,7 +306,7 @@ class DLNAControlPointMediaRenderer {
     p_mgr->addAction(act);
     last_reply = p_mgr->executeActions();
     if (!last_reply) return 0;
-    const char* rel = findArgument(last_reply, "RelTime");
+    const char* rel = last_reply.findArgument("RelTime");
     if (!rel) return 0;
     return parseTimeToMs(rel);
   }
@@ -324,7 +324,7 @@ class DLNAControlPointMediaRenderer {
     p_mgr->addAction(act);
     last_reply = p_mgr->executeActions();
     if (!last_reply) return nullptr;
-    return findArgument(last_reply, "CurrentTransportState");
+    return last_reply.findArgument("CurrentTransportState");
   }
 
   /**
@@ -339,7 +339,7 @@ class DLNAControlPointMediaRenderer {
     p_mgr->addAction(act);
     last_reply = p_mgr->executeActions();
     if (!last_reply) return nullptr;
-    return findArgument(last_reply, "CurrentURI");
+    return last_reply.findArgument("CurrentURI");
   }
 
   /**
@@ -354,7 +354,7 @@ class DLNAControlPointMediaRenderer {
     p_mgr->addAction(act);
     last_reply = p_mgr->executeActions();
     if (!last_reply) return -1;
-    const char* n = findArgument(last_reply, "NrTracks");
+    const char* n = last_reply.findArgument("NrTracks");
     if (!n) return -1;
     return atoi(n);
   }
@@ -372,7 +372,7 @@ class DLNAControlPointMediaRenderer {
     p_mgr->addAction(act);
     last_reply = p_mgr->executeActions();
     if (!last_reply) return 0;
-    const char* d = findArgument(last_reply, "MediaDuration");
+    const char* d = last_reply.findArgument("MediaDuration");
     if (!d) return 0;
     return parseTimeToMs(d);
   }
@@ -390,7 +390,7 @@ class DLNAControlPointMediaRenderer {
     p_mgr->addAction(act);
     last_reply = p_mgr->executeActions();
     if (!last_reply) return -1;
-    const char* tr = findArgument(last_reply, "Track");
+    const char* tr = last_reply.findArgument("Track");
     if (!tr) return -1;
     return atoi(tr);
   }
@@ -408,7 +408,7 @@ class DLNAControlPointMediaRenderer {
     p_mgr->addAction(act);
     last_reply = p_mgr->executeActions();
     if (!last_reply) return 0;
-    const char* td = findArgument(last_reply, "TrackDuration");
+    const char* td = last_reply.findArgument("TrackDuration");
     if (!td) return 0;
     return parseTimeToMs(td);
   }
@@ -485,17 +485,6 @@ class DLNAControlPointMediaRenderer {
         }
       }
     }
-  }
-
-  // Helper: find argument by name in ActionReply (returns nullptr if not found)
-  const char* findArgument(ActionReply& r, const char* name) {
-    for (auto& a : r.arguments) {
-      if (a.name != nullptr) {
-        StrView nm(a.name);
-        if (nm == name) return a.value.c_str();
-      }
-    }
-    return nullptr;
   }
 
   // Helper: parse DLNA time string (HH:MM:SS, MM:SS) to milliseconds

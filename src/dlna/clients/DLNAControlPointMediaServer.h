@@ -48,8 +48,10 @@ class DLNAControlPointMediaServer {
    * @return true on success, false on error
    */
   bool begin(uint32_t minWaitMs = 3000, uint32_t maxWaitMs = 60000) {
-    DlnaLogger.log(DlnaLogLevel::Info, "DLNAControlPointMediaServer::begin: device_type_filter='%s'",
-                   device_type_filter ? device_type_filter : "(null)");
+    DlnaLogger.log(
+        DlnaLogLevel::Info,
+        "DLNAControlPointMediaServer::begin: device_type_filter='%s'",
+        device_type_filter ? device_type_filter : "(null)");
     if (!p_mgr) {
       DlnaLogger.log(DlnaLogLevel::Error, "mgr instance not set");
       return false;
@@ -219,8 +221,8 @@ class DLNAControlPointMediaServer {
     p_mgr->addAction(act);
     last_reply = p_mgr->executeActions();
     if (!last_reply) return -1;
-    const char* v = findArgument(last_reply, "Id");
-    if (!v) v = findArgument(last_reply, "Id");
+    const char* v = last_reply.findArgument("Id");
+    if (!v) v = last_reply.findArgument("Id");
     return v ? atoi(v) : -1;
   }
 
@@ -238,7 +240,7 @@ class DLNAControlPointMediaServer {
     p_mgr->addAction(act);
     last_reply = p_mgr->executeActions();
     if (!last_reply) return nullptr;
-    return findArgument(last_reply, "SearchCaps");
+    return last_reply.findArgument("SearchCaps");
   }
 
   /**
@@ -255,7 +257,7 @@ class DLNAControlPointMediaServer {
     p_mgr->addAction(act);
     last_reply = p_mgr->executeActions();
     if (!last_reply) return nullptr;
-    return findArgument(last_reply, "SortCaps");
+    return last_reply.findArgument("SortCaps");
   }
 
   /**
@@ -272,7 +274,7 @@ class DLNAControlPointMediaServer {
     p_mgr->addAction(act);
     last_reply = p_mgr->executeActions();
     if (!last_reply) return nullptr;
-    return findArgument(last_reply, "Source");
+    return last_reply.findArgument("Source");
   }
 
   /**
@@ -322,17 +324,6 @@ class DLNAControlPointMediaServer {
     return p_mgr->getService(id);
   }
 
-  /// Find argument value by name in ActionReply
-  const char* findArgument(ActionReply& r, const char* name) {
-    for (auto& a : r.arguments) {
-      if (a.name != nullptr) {
-        StrView nm(a.name);
-        if (nm == name) return a.value.c_str();
-      }
-    }
-    return nullptr;
-  }
-
   /// Build a Browse ActionRequest
   ActionRequest& createBrowseAction(DLNAServiceInfo& svc,
                                     ContentQueryType queryType,
@@ -378,9 +369,9 @@ class DLNAControlPointMediaServer {
                           int& totalMatches, int& updateID) {
     DlnaLogger.log(DlnaLogLevel::Debug,
                    "ControlPointMediaServer::parseNumericFields");
-    const char* nret = findArgument(reply, "NumberReturned");
-    const char* tmatch = findArgument(reply, "TotalMatches");
-    const char* uid = findArgument(reply, "UpdateID");
+    const char* nret = reply.findArgument("NumberReturned");
+    const char* tmatch = reply.findArgument("TotalMatches");
+    const char* uid = reply.findArgument("UpdateID");
     numberReturned = nret ? atoi(nret) : 0;
     totalMatches = tmatch ? atoi(tmatch) : 0;
     updateID = uid ? atoi(uid) : 0;

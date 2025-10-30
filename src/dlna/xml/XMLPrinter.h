@@ -294,6 +294,10 @@ struct XMLPrinter {
     return result;
   }
 
+  void clear() {
+    p_out = &Serial;
+  }
+
  protected:
   Print* p_out = &Serial;
 

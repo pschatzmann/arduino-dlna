@@ -21,11 +21,7 @@ class Url {
   Url() = default;
 
   ~Url() {
-    pathStr.clear();
-    hostStr.clear();
-    protocolStr.clear();
-    urlRootStr.clear();
-    urlStr.clear();
+    clear();
   }
 
   // setup url with string
@@ -62,6 +58,15 @@ class Url {
   }
   bool operator !=(Url& other) {
     return !(*this == other);
+  }
+
+  void clear() {
+    pathStr.clear();
+    hostStr.clear();
+    protocolStr.clear();
+    urlRootStr.clear();
+    urlStr.clear();
+    portInt = -1;
   }
 
  protected:

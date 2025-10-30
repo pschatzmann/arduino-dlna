@@ -201,12 +201,48 @@ class DLNAControlPoint {
   /// Stops the processing and releases the resources
   void end() {
     DlnaLogger.log(DlnaLogLevel::Debug, "DLNAControlPointMgr::end");
-    // p_server->end();
-    for (auto& device : devices) device.clear();
+    // stop active processing
     is_active = false;
+
+    // drain scheduler (delete schedules). Execute will call cleanup which
+    // deletes inactive schedules — run it until queue is empty. Only run if
+    // we have a udp instance to avoid calling execute with a null reference.
+    scheduler.setActive(false);
+    if (p_udp) {
+      while (scheduler.size() > 0) {
+        scheduler.execute(*p_udp);
+      }
+    }
+    // p_server->end();
+    // clear device contents and drop containers
+    for (auto& device : devices) device.clear();
+    devices.clear();
+
+    // clear pending actions
+    actions.clear();
+
+    // stop http server if attached
     if (p_http_server) {
       p_http_server->end();
+      p_http_server = nullptr;
     }
+
+    // reset xml printer state
+    xml_printer.clear();
+
+    // clear string registry (frees owned strings)
+    registry.clear();
+
+    // clear last reply
+    reply.clear();
+    local_url.clear();
+
+    // reset transport/client refs
+    p_http = nullptr;
+    p_udp = nullptr;
+
+    // reset indices and references
+    default_device_idx = 0;
   }
 
   /// Registers a method that will be called
@@ -223,11 +259,8 @@ class DLNAControlPoint {
     postAllActions();
     // Debug: dump collected reply arguments for verification
     DlnaLogger.log(DlnaLogLevel::Info, "Collected reply arguments: %d",
-                   (int)reply.arguments.size());
-    for (auto& a : reply.arguments) {
-      DlnaLogger.log(DlnaLogLevel::Info, "  -> %s = %s", nullStr(a.name),
-                     nullStr(a.value));
-    }
+                   (int)reply.size());
+    reply.logArguments();
     return reply;
   }
 
@@ -376,7 +409,7 @@ class DLNAControlPoint {
     DLNADeviceInfo new_device;
     new_device.base_url = nullptr;
 
-    XMLDeviceParser parser{new_device, strings};
+    XMLDeviceParser parser{new_device, registry};
     uint8_t buffer[XML_PARSER_BUFFER_SIZE];
 
     // Read and incrementally parse into new_device
@@ -420,22 +453,22 @@ class DLNAControlPoint {
   ActionReply& getLastReply() { return reply; }
 
  protected:
+  DLNADeviceInfo NO_DEVICE{false};
   Scheduler scheduler;
   DLNAHttpRequest* p_http = nullptr;
   IUDPService* p_udp = nullptr;
   Vector<DLNADeviceInfo> devices;
   Vector<ActionRequest> actions;
   ActionReply reply;
-  XMLPrinter xml;
+  XMLPrinter xml_printer;
+  StringRegistry registry;
   int default_device_idx = 0;
   int msearch_repeat_ms = 10000;
   uint64_t subscribe_timeout = 0;
   int subscribe_repeat_sec = 3600;
   bool is_active = false;
   bool is_parse_device = false;
-  DLNADeviceInfo NO_DEVICE{false};
   const char* search_target;
-  StringRegistry strings;
   Url local_url;
   bool allow_localhost = false;
   HttpServer* p_http_server = nullptr;
@@ -653,14 +686,14 @@ class DLNAControlPoint {
   */
   size_t createXML(ActionRequest& action) {
     DlnaLogger.log(DlnaLogLevel::Debug, "DLNAControlPointMgr::createXML");
-    size_t result = xml.printXMLHeader();
+    size_t result = xml_printer.printXMLHeader();
 
-    result += xml.printNodeBegin(
+    result += xml_printer.printNodeBegin(
         "Envelope",
         "xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\" "
         "s:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"",
         "s");
-    result += xml.printNodeBegin("Body", nullptr, "s");
+    result += xml_printer.printNodeBegin("Body", nullptr, "s");
 
     char ns[200];
     StrView namespace_str(ns, 200);
@@ -669,14 +702,15 @@ class DLNAControlPoint {
     DlnaLogger.log(DlnaLogLevel::Debug, "ns = '%s'", namespace_str.c_str());
 
     // assert(ok);
-    result += xml.printNodeBegin(action.action, namespace_str.c_str(), "u");
+    result +=
+        xml_printer.printNodeBegin(action.action, namespace_str.c_str(), "u");
     for (auto arg : action.arguments) {
-      result += xml.printNode(arg.name, arg.value.c_str());
+      result += xml_printer.printNode(arg.name, arg.value.c_str());
     }
-    result += xml.printNodeEnd(action.action, "u");
+    result += xml_printer.printNodeEnd(action.action, "u");
 
-    result += xml.printNodeEnd("Body", "s");
-    result += xml.printNodeEnd("Envelope", "s");
+    result += xml_printer.printNodeEnd("Body", "s");
+    result += xml_printer.printNodeEnd("Envelope", "s");
     return result;
   }
 
@@ -721,7 +755,7 @@ class DLNAControlPoint {
   /// Build the SOAP XML request body for the action into `out`
   void buildActionBody(ActionRequest& action, StrPrint& out) {
     DlnaLogger.log(DlnaLogLevel::Debug, "DLNAControlPointMgr::buildActionBody");
-    xml.setOutput(out);
+    xml_printer.setOutput(out);
     createXML(action);
   }
 
@@ -762,7 +796,7 @@ class DLNAControlPoint {
     }
 
     reply.setValid(true);
-    reply.arguments.clear();
+    reply.clear();
     // parse response
     while (p_http->client()->available()) {
       int len = p_http->client()->read(buffer, 200);
@@ -772,7 +806,7 @@ class DLNAControlPoint {
         while (xml_parser.parse(outNodeName, outPath, outText, outAttributes)) {
           Argument arg;
           // persist the argument name in the control point's string registry
-          arg.name = strings.add((char*)outNodeName.c_str());
+          arg.name = registry.add((char*)outNodeName.c_str());
           arg.value = outText;
           // For most nodes we only add arguments when they contain text or
           // attributes. The special "Result" node contains the DIDL-Lite
