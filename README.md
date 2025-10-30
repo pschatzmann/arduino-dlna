@@ -20,11 +20,11 @@ https://embeddedinn.wordpress.com/tutorials/upnp-device-architecture/)
 - [UPnP Device Architecture 2.0](https://openconnectivity.org/upnp-specs/UPnP-arch-DeviceArchitecture-v2.0-20200417.pdf)
 
 
-I struggled quite a bit to choose the right approach to implement this on Arduino. On the desktop, similar functionality can be provided with the following projects:
+I struggled quite a bit to choose the right approach to implement this on Arduino. On the desktop, similar functionality can be provided e.g. with the following projects:
 
 - [pupnp](https://github.com/pupnp/pupnp) A Portable SDK for UPnP* Devices
-- [gmrender-resurrect](https://github.com/hzeller/gmrender-resurrect): A headless UPnP/DLNA media renderer based on pupnp
-- [ushare](https://github.com/yitsunweng/ushare) A UPnP/DLNA media server
+- [GMediaRender](https://gmrender.nongnu.org/): A headless UPnP/DLNA media renderer 
+- [minidlna](https://wiki.debian.org/minidlna) A minimal UPnP/DLNA media server
 
 This can be quite useful for testing the functionality.
 
