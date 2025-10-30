@@ -1,8 +1,8 @@
 <map id="src/http/Server/HttpChunkWriter.h" name="src/http/Server/HttpChunkWriter.h">
 <area shape="rect" id="node1" title=" " alt="" coords="943,5,1133,45"/>
-<area shape="rect" id="node2" href="$Server_2HttpServer_8h.html" title=" " alt="" coords="825,101,1027,126"/>
+<area shape="rect" id="node2" href="$HttpServer_8h.html" title=" " alt="" coords="825,101,1027,126"/>
 <area shape="rect" id="node20" href="$HttpStreamCopy_8h.html" title=" " alt="" coords="1052,93,1248,133"/>
-<area shape="rect" id="node3" href="$HttpServer_8h.html" title=" " alt="" coords="848,181,1004,207"/>
+<area shape="rect" id="node3" href="$Http_8h.html" title=" " alt="" coords="869,181,983,207"/>
 <area shape="rect" id="node4" href="$DLNAControlPoint_8h.html" title=" " alt="" coords="378,709,583,735"/>
 <area shape="rect" id="node7" href="$DLNADevice_8h.html" title=" " alt="" coords="731,871,902,896"/>
 <area shape="rect" id="node9" href="$DLNAMediaServer_8h.html" title=" " alt="" coords="943,944,1157,984"/>

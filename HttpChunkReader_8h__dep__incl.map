@@ -2,7 +2,7 @@
 <area shape="rect" id="node1" title=" " alt="" coords="758,5,949,45"/>
 <area shape="rect" id="node2" href="$HttpRequest_8h.html" title=" " alt="" coords="746,93,961,119"/>
 <area shape="rect" id="node3" href="$SubscriptionMgr_8h.html" title=" " alt="" coords="690,387,883,412"/>
-<area shape="rect" id="node12" href="$HttpServer_8h.html" title=" " alt="" coords="775,313,931,339"/>
+<area shape="rect" id="node12" href="$Http_8h.html" title=" " alt="" coords="796,313,911,339"/>
 <area shape="rect" id="node20" href="$HttpTunnel_8h.html" title=" " alt="" coords="752,167,955,192"/>
 <area shape="rect" id="node4" href="$DLNADevice_8h.html" title=" " alt="" coords="756,680,927,705"/>
 <area shape="rect" id="node5" href="$DLNA_8h.html" title=" " alt="" coords="677,1017,771,1043"/>
@@ -19,5 +19,5 @@
 <area shape="rect" id="node18" href="$Scheduler_8h.html" title=" " alt="" coords="428,680,580,705"/>
 <area shape="rect" id="node19" href="$XMLDeviceParser_8h.html" title=" " alt="" coords="43,607,274,632"/>
 <area shape="rect" id="node17" href="$DLNAControlPointRequestParser_8h.html" title=" " alt="" coords="335,753,529,793"/>
-<area shape="rect" id="node21" href="$Server_2HttpServer_8h.html" title=" " alt="" coords="752,240,955,265"/>
+<area shape="rect" id="node21" href="$HttpServer_8h.html" title=" " alt="" coords="752,240,955,265"/>
 </map>

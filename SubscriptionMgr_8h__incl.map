@@ -4,7 +4,7 @@
 <area shape="rect" id="node8" href="$Vector_8h.html" title=" " alt="" coords="1301,665,1375,691"/>
 <area shape="rect" id="node15" href="$StrPrint_8h.html" title=" " alt="" coords="1367,225,1487,251"/>
 <area shape="rect" id="node17" href="$Url_8h.html" title=" " alt="" coords="862,519,953,544"/>
-<area shape="rect" id="node18" href="$HttpServer_8h.html" title=" " alt="" coords="963,79,1097,104"/>
+<area shape="rect" id="node18" href="$Http_8h.html" title=" " alt="" coords="995,79,1087,104"/>
 <area shape="rect" id="node36" href="$HttpRequest_8h.html" title=" " alt="" coords="255,299,370,324"/>
 <area shape="rect" id="node3" href="$StrView_8h.html" title=" " alt="" coords="1494,665,1577,691"/>
 <area shape="rect" id="node4" title=" " alt="" coords="1545,739,1643,764"/>
@@ -18,7 +18,7 @@
 <area shape="rect" id="node13" title=" " alt="" coords="890,885,965,911"/>
 <area shape="rect" id="node14" title=" " alt="" coords="781,885,865,911"/>
 <area shape="rect" id="node16" title=" " alt="" coords="1225,299,1289,324"/>
-<area shape="rect" id="node19" href="$Server_2HttpServer_8h.html" title=" " alt="" coords="761,152,910,177"/>
+<area shape="rect" id="node19" href="$HttpServer_8h.html" title=" " alt="" coords="761,152,910,177"/>
 <area shape="rect" id="node40" href="$HttpParameters_8h.html" title=" " alt="" coords="1585,519,1768,544"/>
 <area shape="rect" id="node20" title=" " alt="" coords="353,372,416,397"/>
 <area shape="rect" id="node21" title=" " alt="" coords="663,299,735,324"/>

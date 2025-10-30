@@ -1,7 +1,7 @@
 <map id="src/http/Server/HttpRequestRewrite.h" name="src/http/Server/HttpRequestRewrite.h">
 <area shape="rect" id="node1" title=" " alt="" coords="825,5,1027,45"/>
-<area shape="rect" id="node2" href="$Server_2HttpServer_8h.html" title=" " alt="" coords="825,93,1027,119"/>
-<area shape="rect" id="node3" href="$HttpServer_8h.html" title=" " alt="" coords="848,167,1004,192"/>
+<area shape="rect" id="node2" href="$HttpServer_8h.html" title=" " alt="" coords="825,93,1027,119"/>
+<area shape="rect" id="node3" href="$Http_8h.html" title=" " alt="" coords="869,167,983,192"/>
 <area shape="rect" id="node4" href="$DLNAControlPoint_8h.html" title=" " alt="" coords="378,695,583,720"/>
 <area shape="rect" id="node7" href="$DLNADevice_8h.html" title=" " alt="" coords="731,856,902,881"/>
 <area shape="rect" id="node9" href="$DLNAMediaServer_8h.html" title=" " alt="" coords="943,929,1157,969"/>

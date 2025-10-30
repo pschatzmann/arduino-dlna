@@ -1,11 +1,11 @@
 <map id="src/http/Server/HttpLineReader.h" name="src/http/Server/HttpLineReader.h">
-<area shape="rect" id="node1" title=" " alt="" coords="772,5,948,45"/>
-<area shape="rect" id="node2" href="$HttpChunkReader_8h.html" title=" " alt="" coords="694,167,885,207"/>
-<area shape="rect" id="node23" href="$HttpHeader_8h.html" title=" " alt="" coords="827,93,1034,119"/>
-<area shape="rect" id="node3" href="$HttpRequest_8h.html" title=" " alt="" coords="671,262,886,287"/>
+<area shape="rect" id="node1" title=" " alt="" coords="783,5,959,45"/>
+<area shape="rect" id="node2" href="$HttpChunkReader_8h.html" title=" " alt="" coords="705,167,895,207"/>
+<area shape="rect" id="node23" href="$HttpHeader_8h.html" title=" " alt="" coords="838,93,1045,119"/>
+<area shape="rect" id="node3" href="$HttpRequest_8h.html" title=" " alt="" coords="682,262,897,287"/>
 <area shape="rect" id="node4" href="$SubscriptionMgr_8h.html" title=" " alt="" coords="690,563,883,588"/>
-<area shape="rect" id="node13" href="$HttpServer_8h.html" title=" " alt="" coords="766,489,922,515"/>
-<area shape="rect" id="node21" href="$HttpTunnel_8h.html" title=" " alt="" coords="816,343,1019,368"/>
+<area shape="rect" id="node13" href="$Http_8h.html" title=" " alt="" coords="776,489,891,515"/>
+<area shape="rect" id="node21" href="$HttpTunnel_8h.html" title=" " alt="" coords="827,343,1029,368"/>
 <area shape="rect" id="node5" href="$DLNADevice_8h.html" title=" " alt="" coords="756,856,927,881"/>
 <area shape="rect" id="node6" href="$DLNA_8h.html" title=" " alt="" coords="677,1193,771,1219"/>
 <area shape="rect" id="node7" href="$DLNAControlPoint_8h.html" title=" " alt="" coords="203,1025,408,1050"/>
@@ -21,6 +21,6 @@
 <area shape="rect" id="node19" href="$Scheduler_8h.html" title=" " alt="" coords="428,856,580,881"/>
 <area shape="rect" id="node20" href="$XMLDeviceParser_8h.html" title=" " alt="" coords="43,783,274,808"/>
 <area shape="rect" id="node18" href="$DLNAControlPointRequestParser_8h.html" title=" " alt="" coords="335,929,529,969"/>
-<area shape="rect" id="node22" href="$Server_2HttpServer_8h.html" title=" " alt="" coords="885,416,1088,441"/>
-<area shape="rect" id="node24" href="$HttpRequestHandlerLine_8h.html" title=" " alt="" coords="911,255,1113,295"/>
+<area shape="rect" id="node22" href="$HttpServer_8h.html" title=" " alt="" coords="896,416,1099,441"/>
+<area shape="rect" id="node24" href="$HttpRequestHandlerLine_8h.html" title=" " alt="" coords="921,255,1124,295"/>
 </map>

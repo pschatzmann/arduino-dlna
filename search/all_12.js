@@ -18,7 +18,7 @@ var searchData=
   ['timeout_5fsec_15',['timeout_sec',['../structtiny__dlna_1_1Subscription.html#a0d366e2dc051ef97873bd6a3292ea27d',1,'tiny_dlna::Subscription']]],
   ['timestamp_16',['timestamp',['../classtiny__dlna_1_1DLNADeviceInfo.html#af83b1b3e3a439bc6ff049b43adaa7512',1,'tiny_dlna::DLNADeviceInfo']]],
   ['tiny_5fdlna_17',['tiny_dlna',['../namespacetiny__dlna.html',1,'']]],
-  ['tiny_5fhttp_5fserver_18',['TINY_HTTP_SERVER',['../HttpServer_8h.html#aeb7dce6a7c74b8f319cad2eb4c6da80d',1,'HttpServer.h']]],
+  ['tiny_5fhttp_5fserver_18',['TINY_HTTP_SERVER',['../Http_8h.html#aeb7dce6a7c74b8f319cad2eb4c6da80d',1,'Http.h']]],
   ['tinymethodid_19',['TinyMethodID',['../namespacetiny__dlna.html#a8b30900e538135f563c83e48319e5247',1,'tiny_dlna']]],
   ['title_20',['title',['../structtiny__dlna_1_1MediaItem.html#a644a3a603f9472869cf5dacb49752b99',1,'tiny_dlna::MediaItem']]],
   ['to_21',['to',['../classtiny__dlna_1_1HttpRequestRewrite.html#ae78cf41cc5350f63aa6d1f046a16cfe9',1,'tiny_dlna::HttpRequestRewrite']]],
