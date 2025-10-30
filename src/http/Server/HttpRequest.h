@@ -5,6 +5,8 @@
 #include "HttpHeader.h"
 // #include "Platform/AltClient.h"
 #include "HttpChunkReader.h"
+#include "HttpChunkWriter.h"
+#include <functional>
 #include "WiFiClient.h"
 
 namespace tiny_dlna {
@@ -61,6 +63,67 @@ class HttpRequest {
   virtual int post(Url &url, const char *mime, const char *data, int len = -1) {
     DlnaLogger.log(DlnaLogLevel::Info, "post %s", url.url());
     return process(T_POST, url, mime, data, len);
+  }
+
+  /**
+   * Post using chunked transfer encoding where the caller provides a writer
+   * lambda that receives a ChunkPrint and writes the body in pieces. This
+   * avoids buffering the entire request body in memory.
+   *
+   * Example:
+   *   req.postChunked(url, [&](ChunkPrint &cp){
+   *     cp.print("<s:Envelope...>");
+   *     cp.print(...);
+   *   });
+   */
+  virtual int postChunked(Url &url, std::function<void(ChunkPrint&)> writer,
+                          const char *mime = nullptr) {
+    DlnaLogger.log(DlnaLogLevel::Info, "postChunked %s", url.url());
+
+    if (!connected()) {
+      DlnaLogger.log(DlnaLogLevel::Info, "HttpRequest::postChunked - connecting to host %s port %d", url.host(), url.port());
+      connect(url.host(), url.port());
+    }
+
+    if (!connected()) {
+      DlnaLogger.log(DlnaLogLevel::Info, "Connected: %s", connected() ? "true" : "false");
+      return -1;
+    }
+
+    if (host_name.isEmpty()) {
+      host_name = url.host();
+      host_name.add(":");
+      host_name.add(url.port());
+    }
+
+    // prepare request header
+    request_header.setValues(T_POST, url.path());
+    // set chunked transfer for upload
+    request_header.put(TRANSFER_ENCODING, CHUNKED);
+    if (!host_name.isEmpty()) {
+      request_header.put(HOST_C, host_name.c_str());
+    }
+    if (agent != nullptr) request_header.put(USER_AGENT, agent);
+    if (accept_encoding != nullptr) request_header.put(ACCEPT_ENCODING, accept_encoding);
+    if (mime != nullptr) request_header.put(CONTENT_TYPE, mime);
+    request_header.put(CONNECTION, connection);
+    request_header.put(ACCEPT, accept);
+
+    // write request header to client
+    request_header.write(*client_ptr);
+
+    // stream body via ChunkPrint which emits proper chunk frames
+    ChunkPrint cp(*client_ptr);
+    if (writer) writer(cp);
+    cp.end();
+
+    // read reply header and prepare chunk reader if needed
+    reply_header.read(*client_ptr);
+    if (reply_header.isChunked()) {
+      chunk_reader.open(*client_ptr);
+    }
+
+    return reply_header.statusCode();
   }
 
   virtual int put(Url &url, const char *mime, const char *data, int len = -1) {

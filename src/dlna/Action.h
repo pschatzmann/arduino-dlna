@@ -4,6 +4,10 @@
 
 namespace tiny_dlna {
 
+  /// Role to indicate whether a protocolInfo entry is a Source or a Sink
+enum class ProtocolRole { IsSource = 0, IsSink = 1 };
+
+
 /// Search or Browse
 enum class ContentQueryType { Search, BrowseMetadata, BrowseChildren };
 

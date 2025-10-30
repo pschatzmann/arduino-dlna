@@ -368,6 +368,17 @@ class DLNAControlPoint {
 
   Vector<DLNADeviceInfo>& getDevices() { return devices; }
 
+  /**
+   * Public wrapper to build a fully-qualified URL for a device + suffix.
+   * This calls the protected getUrl() helper so external helpers can reuse
+   * the control point's URL normalization logic without exposing the
+   * internal protected method directly.
+   */
+  const char* getUrl(DLNADeviceInfo& device, const char* suffix,
+                       char* buffer, int len) {
+    return getUrlImpl(device, suffix, buffer, len);
+  }
+
   /// Adds a new device
   bool addDevice(DLNADeviceInfo dev) {
     DlnaLogger.log(DlnaLogLevel::Debug, "DLNAControlPointMgr::addDevice");
@@ -840,7 +851,7 @@ class DLNAControlPoint {
     return reply;
   }
 
-  const char* getUrl(DLNADeviceInfo& device, const char* suffix,
+  const char* getUrlImpl(DLNADeviceInfo& device, const char* suffix,
                      const char* buffer, int len) {
     DlnaLogger.log(DlnaLogLevel::Debug, "DLNAControlPointMgr::getUrl");
     StrView url_str{(char*)buffer, len};

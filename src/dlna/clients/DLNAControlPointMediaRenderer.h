@@ -5,6 +5,8 @@
 
 #include "dlna/Action.h"
 #include "dlna/DLNAControlPoint.h"
+#include "dlna/xml/XMLProtocolInfoParser.h"
+#include "http/Server/HttpChunkWriter.h"
 
 namespace tiny_dlna {
 
@@ -443,6 +445,78 @@ class DLNAControlPointMediaRenderer {
     activeChangedCallback = cb;
   }
 
+  /**
+   * @brief Query the AVTransport service for the current transport actions
+   *        and return the raw Actions list into `out`.
+   * @param out Str reference that will receive the Actions text on success
+   * @return true on success (and out filled), false on error
+   */
+  bool getCurrentTransportActions(Str& out) {
+    DLNAServiceInfo& svc = selectService("urn:upnp-org:serviceId:AVTransport");
+    if (!svc) {
+      DlnaLogger.log(DlnaLogLevel::Error, "No AVTransport service found");
+      return false;
+    }
+    ActionRequest act(svc, "GetCurrentTransportActions");
+    act.addArgument("InstanceID", instance_id);
+    p_mgr->addAction(act);
+    last_reply = p_mgr->executeActions();
+    if (!last_reply) return false;
+    const char* actions = last_reply.findArgument("Actions");
+    if (!actions) return false;
+    out = actions;
+    return true;
+  }
+
+  /**
+   * @brief Fetch protocol-info via SOAP GetProtocolInfo on the
+   *        ConnectionManager service and invoke cb for each entry.
+   * @param cb callback invoked for each parsed entry with role
+   * (IsSource/IsSink)
+   * @return true on success (reply received), false on error
+   */
+  bool getProtocalInfo(
+      std::function<void(const char* entry, ProtocolRole role)> cb) {
+    // Custom streaming implementation because the returned CSV can be very
+    // large and must not be buffered fully in memory.
+    if (!cb) return false;
+
+    DLNAServiceInfo& svc =
+        p_mgr->getService("urn:upnp-org:serviceId:ConnectionManager");
+    if (!svc) {
+      DlnaLogger.log(DlnaLogLevel::Error, "No ConnectionManager service found");
+      return false;
+    }
+
+    // Build POST URL using control point helper which normalizes slashes
+    DLNADeviceInfo& device = p_mgr->getDevice();
+    char url_buffer[256] = {0};
+    const char* suffix = nullStr(svc.control_url);
+    Url post_url{
+        p_mgr->getUrl(device, suffix, url_buffer, (int)sizeof(url_buffer))};
+
+    // Send request using chunked upload to avoid buffering the SOAP body
+    p_http->stop();
+    char soapaction[200];
+    snprintf(soapaction, sizeof(soapaction), "\"%s#GetProtocolInfo\"",
+             svc.service_type);
+    p_http->request().put("SOAPACTION", soapaction);
+
+    int rc = p_http->postChunked(
+        post_url, DLNAControlPointMediaRenderer::writeGetProtocolInfoBody,
+        "text/xml");
+    if (rc != 200) {
+      DlnaLogger.log(DlnaLogLevel::Error,
+                     "GetProtocolInfo POST failed with rc %d", rc);
+      return false;
+    }
+
+    // Stream-parse response using centralized parser (low-memory)
+    Client* cli = p_http->client();
+    if (!cli) return false;
+    return XMLProtocolInfoParser::parseFromClient(cli, cb);
+  }
+
  protected:
   DLNAControlPoint* p_mgr = nullptr;
   bool is_active = false;
@@ -458,6 +532,10 @@ class DLNAControlPointMediaRenderer {
   DLNAHttpRequest* p_http = nullptr;
   IUDPService* p_udp = nullptr;
 
+  const char* nullStr(const char* str) {
+    return str ? str : "";
+  }
+
   // Helper to update is_active and notify callback only on change
   void setActiveState(bool s) {
     if (is_active == s) return;
@@ -465,6 +543,22 @@ class DLNAControlPointMediaRenderer {
     DlnaLogger.log(DlnaLogLevel::Info, "ControlPointMediaRenderer active=%s",
                    is_active ? "true" : "false");
     if (activeChangedCallback) activeChangedCallback(is_active, reference);
+  }
+
+  // Helper: write SOAP GetProtocolInfo body using ChunkPrint (no buffering)
+  static void writeGetProtocolInfoBody(ChunkPrint& cp) {
+    cp.print("<?xml version=\"1.0\"?>\r\n");
+    cp.print(
+        "<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\" ");
+    cp.print(
+        "s:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\">\r\n");
+    cp.print("<s:Body>\r\n");
+    cp.print(
+        "<u:GetProtocolInfo "
+        "xmlns:u=\"urn:schemas-upnp-org:service:ConnectionManager:1\">\r\n");
+    cp.print("</u:GetProtocolInfo>\r\n");
+    cp.print("</s:Body>\r\n");
+    cp.print("</s:Envelope>\r\n");
   }
 
   /// Notification callback
