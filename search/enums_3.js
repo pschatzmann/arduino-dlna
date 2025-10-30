@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['tinymethodid_0',['TinyMethodID',['../namespacetiny__dlna.html#a8b30900e538135f563c83e48319e5247',1,'tiny_dlna']]]
+  ['protocolrole_0',['ProtocolRole',['../namespacetiny__dlna.html#a504b776a2804411b65b3b1cd864d8d92',1,'tiny_dlna']]]
 ];

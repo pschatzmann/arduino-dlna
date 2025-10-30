@@ -189,9 +189,17 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab2518d510c51a6b734bb2523a49ac64d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMediaRenderer.html#ab2518d510c51a6b734bb2523a49ac64d">onActiveChanged</a> (std::function&lt; void(bool, void *)&gt; cb)</td></tr>
 <tr class="memdesc:ab2518d510c51a6b734bb2523a49ac64d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a callback invoked when the active (playing) state changes.  <br /></td></tr>
 <tr class="separator:ab2518d510c51a6b734bb2523a49ac64d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d37386126e9a0da8966a5bab28b4aff"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMediaRenderer.html#a9d37386126e9a0da8966a5bab28b4aff">getCurrentTransportActions</a> (<a class="el" href="classtiny__dlna_1_1Str.html">Str</a> &amp;out)</td></tr>
+<tr class="memdesc:a9d37386126e9a0da8966a5bab28b4aff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Query the AVTransport service for the current transport actions and return the raw Actions list into <code>out</code>.  <br /></td></tr>
+<tr class="separator:a9d37386126e9a0da8966a5bab28b4aff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba468ece815191f0b174aaec0de42753"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMediaRenderer.html#aba468ece815191f0b174aaec0de42753">getProtocalInfo</a> (std::function&lt; void(const char *entry, <a class="el" href="namespacetiny__dlna.html#a504b776a2804411b65b3b1cd864d8d92">ProtocolRole</a> role)&gt; cb)</td></tr>
+<tr class="memdesc:aba468ece815191f0b174aaec0de42753"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fetch protocol-info via SOAP GetProtocolInfo on the ConnectionManager service and invoke cb for each entry.  <br /></td></tr>
+<tr class="separator:aba468ece815191f0b174aaec0de42753"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
+<tr class="memitem:ae58a09f87098cc3d50819439fa63b08e"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMediaRenderer.html#ae58a09f87098cc3d50819439fa63b08e">nullStr</a> (const char *str)</td></tr>
+<tr class="separator:ae58a09f87098cc3d50819439fa63b08e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab7b48eb0e44204c82657ddcc49b975da"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMediaRenderer.html#ab7b48eb0e44204c82657ddcc49b975da">setActiveState</a> (bool s)</td></tr>
 <tr class="separator:ab7b48eb0e44204c82657ddcc49b975da"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a71fe3fbd219536a7b63cd64c278ce468"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html">DLNAServiceInfo</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMediaRenderer.html#a71fe3fbd219536a7b63cd64c278ce468">selectService</a> (const char *id)</td></tr>
@@ -200,6 +208,8 @@ Protected Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
 Static Protected Member Functions</h2></td></tr>
+<tr class="memitem:a87ff8b266ffdf7a7e4346857d6faaba0"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMediaRenderer.html#a87ff8b266ffdf7a7e4346857d6faaba0">writeGetProtocolInfoBody</a> (<a class="el" href="classtiny__dlna_1_1ChunkPrint.html">ChunkPrint</a> &amp;cp)</td></tr>
+<tr class="separator:a87ff8b266ffdf7a7e4346857d6faaba0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7ae580383823ff6c21ab742df2572eed"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMediaRenderer.html#a7ae580383823ff6c21ab742df2572eed">processNotification</a> (void *<a class="el" href="classtiny__dlna_1_1DLNAControlPointMediaRenderer.html#a862f2a7a0000de917827d22d101995b4">reference</a>, const char *sid, const char *varName, const char *newValue)</td></tr>
 <tr class="memdesc:a7ae580383823ff6c21ab742df2572eed"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classtiny__dlna_1_1Notification.html" title="DLNA notification.">Notification</a> callback.  <br /></td></tr>
 <tr class="separator:a7ae580383823ff6c21ab742df2572eed"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -376,6 +386,41 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true on success, false on error </dd></dl>
+
+</div>
+</div>
+<a id="a9d37386126e9a0da8966a5bab28b4aff" name="a9d37386126e9a0da8966a5bab28b4aff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d37386126e9a0da8966a5bab28b4aff">&#9670;&#160;</a></span>getCurrentTransportActions()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool tiny_dlna::DLNAControlPointMediaRenderer::getCurrentTransportActions </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1Str.html">Str</a> &amp;&#160;</td>
+          <td class="paramname"><em>out</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Query the AVTransport service for the current transport actions and return the raw Actions list into <code>out</code>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">out</td><td><a class="el" href="classtiny__dlna_1_1Str.html" title="String implementation which keeps the data on the heap. We grow the allocated memory only if the copy...">Str</a> reference that will receive the Actions text on success </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true on success (and out filled), false on error </dd></dl>
 
 </div>
 </div>
@@ -575,6 +620,41 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="aba468ece815191f0b174aaec0de42753" name="aba468ece815191f0b174aaec0de42753"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba468ece815191f0b174aaec0de42753">&#9670;&#160;</a></span>getProtocalInfo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool tiny_dlna::DLNAControlPointMediaRenderer::getProtocalInfo </td>
+          <td>(</td>
+          <td class="paramtype">std::function&lt; void(const char *entry, <a class="el" href="namespacetiny__dlna.html#a504b776a2804411b65b3b1cd864d8d92">ProtocolRole</a> role)&gt;&#160;</td>
+          <td class="paramname"><em>cb</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Fetch protocol-info via SOAP GetProtocolInfo on the ConnectionManager service and invoke cb for each entry. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cb</td><td>callback invoked for each parsed entry with role (IsSource/IsSink) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true on success (reply received), false on error </dd></dl>
+
+</div>
+</div>
 <a id="a5f07b497b70ad04f6adf2bc3a0fb9d36" name="a5f07b497b70ad04f6adf2bc3a0fb9d36"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5f07b497b70ad04f6adf2bc3a0fb9d36">&#9670;&#160;</a></span>getTrackDurationMs()</h2>
 
@@ -712,6 +792,32 @@ Protected Attributes</h2></td></tr>
 
 <p>Query if the helper considers the renderer to be actively playing. </p>
 <dl class="section return"><dt>Returns</dt><dd>true if playing, false otherwise </dd></dl>
+
+</div>
+</div>
+<a id="ae58a09f87098cc3d50819439fa63b08e" name="ae58a09f87098cc3d50819439fa63b08e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae58a09f87098cc3d50819439fa63b08e">&#9670;&#160;</a></span>nullStr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char * tiny_dlna::DLNAControlPointMediaRenderer::nullStr </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>str</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -1365,6 +1471,32 @@ Protected Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="a87ff8b266ffdf7a7e4346857d6faaba0" name="a87ff8b266ffdf7a7e4346857d6faaba0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a87ff8b266ffdf7a7e4346857d6faaba0">&#9670;&#160;</a></span>writeGetProtocolInfoBody()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void tiny_dlna::DLNAControlPointMediaRenderer::writeGetProtocolInfoBody </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1ChunkPrint.html">ChunkPrint</a> &amp;&#160;</td>
+          <td class="paramname"><em>cp</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>

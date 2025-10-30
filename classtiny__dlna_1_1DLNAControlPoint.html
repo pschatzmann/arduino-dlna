@@ -156,6 +156,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a3f5cf94e188c38f81416469c4f20a1fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6c9d98e4ef86f63b854d95ffa255472c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt; <a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html">DLNADeviceInfo</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a6c9d98e4ef86f63b854d95ffa255472c">getDevices</a> ()</td></tr>
 <tr class="separator:a6c9d98e4ef86f63b854d95ffa255472c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6d35b34e67082569c09755b8c59de7a"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#ab6d35b34e67082569c09755b8c59de7a">getUrl</a> (<a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html">DLNADeviceInfo</a> &amp;device, const char *suffix, char *buffer, int len)</td></tr>
+<tr class="separator:ab6d35b34e67082569c09755b8c59de7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a345fa8515342215e09facfda9f898e04"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a345fa8515342215e09facfda9f898e04">addDevice</a> (<a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html">DLNADeviceInfo</a> dev)</td></tr>
 <tr class="memdesc:a345fa8515342215e09facfda9f898e04"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a new device.  <br /></td></tr>
 <tr class="separator:a345fa8515342215e09facfda9f898e04"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -200,8 +202,8 @@ Protected Member Functions</h2></td></tr>
 <tr class="separator:a0dc7dd2de4c8bae0c37a4011b18b9f24"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9c83abf56c73291476a5a50b71a77e00"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1ActionReply.html">ActionReply</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a9c83abf56c73291476a5a50b71a77e00">processActionHttpPost</a> (<a class="el" href="classtiny__dlna_1_1Url.html">Url</a> &amp;post_url, <a class="el" href="classtiny__dlna_1_1StrPrint.html">StrPrint</a> &amp;requestBody, const char *soapAction)</td></tr>
 <tr class="separator:a9c83abf56c73291476a5a50b71a77e00"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a21e62d75a0be44526ee65255a19b34f2"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a21e62d75a0be44526ee65255a19b34f2">getUrl</a> (<a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html">DLNADeviceInfo</a> &amp;device, const char *suffix, const char *buffer, int len)</td></tr>
-<tr class="separator:a21e62d75a0be44526ee65255a19b34f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a372dcf6373fbebe771a38d69e3dc987f"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a372dcf6373fbebe771a38d69e3dc987f">getUrlImpl</a> (<a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html">DLNADeviceInfo</a> &amp;device, const char *suffix, const char *buffer, int len)</td></tr>
+<tr class="separator:a372dcf6373fbebe771a38d69e3dc987f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a27cb0e646f820cbc118f806104ba7c44"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a27cb0e646f820cbc118f806104ba7c44">subscribeNotifications</a> (<a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html">DLNADeviceInfo</a> &amp;device, int timeoutSeconds=1800)</td></tr>
 <tr class="memdesc:a27cb0e646f820cbc118f806104ba7c44"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subscribe to changes for all device services.  <br /></td></tr>
 <tr class="separator:a27cb0e646f820cbc118f806104ba7c44"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -837,8 +839,8 @@ xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n" "s:encodingStyle=\"ht
 
 </div>
 </div>
-<a id="a21e62d75a0be44526ee65255a19b34f2" name="a21e62d75a0be44526ee65255a19b34f2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a21e62d75a0be44526ee65255a19b34f2">&#9670;&#160;</a></span>getUrl()</h2>
+<a id="ab6d35b34e67082569c09755b8c59de7a" name="ab6d35b34e67082569c09755b8c59de7a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab6d35b34e67082569c09755b8c59de7a">&#9670;&#160;</a></span>getUrl()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -848,6 +850,55 @@ xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n" "s:encodingStyle=\"ht
       <table class="memname">
         <tr>
           <td class="memname">const char * tiny_dlna::DLNAControlPoint::getUrl </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html">DLNADeviceInfo</a> &amp;&#160;</td>
+          <td class="paramname"><em>device</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>suffix</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>len</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Public wrapper to build a fully-qualified URL for a device + suffix. This calls the protected <a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#ab6d35b34e67082569c09755b8c59de7a">getUrl()</a> helper so external helpers can reuse the control point's URL normalization logic without exposing the internal protected method directly. </p>
+
+</div>
+</div>
+<a id="a372dcf6373fbebe771a38d69e3dc987f" name="a372dcf6373fbebe771a38d69e3dc987f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a372dcf6373fbebe771a38d69e3dc987f">&#9670;&#160;</a></span>getUrlImpl()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char * tiny_dlna::DLNAControlPoint::getUrlImpl </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html">DLNADeviceInfo</a> &amp;&#160;</td>
           <td class="paramname"><em>device</em>, </td>
