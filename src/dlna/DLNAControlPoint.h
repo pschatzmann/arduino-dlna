@@ -132,6 +132,9 @@ class DLNAControlPoint {
     p_udp = &udp;
     p_http = &http;
 
+    // set timeout for http requests
+    http.setTimeout(DLNA_HTTP_REQUEST_TIMEOUT_MS);
+
     if (p_http_server && http_server_port > 0 && event_callback != nullptr) {
       // handle server requests
       if (!p_http_server->begin(http_server_port)) {
@@ -805,17 +808,19 @@ class DLNAControlPoint {
         xml_parser.write(buffer, len);
         while (xml_parser.parse(outNodeName, outPath, outText, outAttributes)) {
           Argument arg;
-          // persist the argument name in the control point's string registry
-          arg.name = registry.add((char*)outNodeName.c_str());
-          arg.value = outText;
           // For most nodes we only add arguments when they contain text or
           // attributes. The special "Result" node contains the DIDL-Lite
           // payload (raw XML) and must be preserved so callers (e.g. the
           // MediaServer helper) can parse returned media items.
           if (!(outText.isEmpty() && outAttributes.isEmpty()) ||
               outNodeName.equals("Result")) {
-            reply.addArgument(arg);
-            DlnaLogger.log(DlnaLogLevel::Info, "ActionReply '%s': %s (%s)",
+            if (!outText.isEmpty()) {
+              arg.name = registry.add((char*)outNodeName.c_str());
+              arg.value = outText;
+              reply.addArgument(arg);
+            }
+
+            DlnaLogger.log(DlnaLogLevel::Info, "callback: '%s': %s (%s)",
                            nullStr(outNodeName), nullStr(outText),
                            nullStr(outAttributes));
             if (result_callback) {
