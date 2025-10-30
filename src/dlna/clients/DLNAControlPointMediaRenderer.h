@@ -147,7 +147,10 @@ class DLNAControlPointMediaRenderer {
     ActionRequest act(svc, "SetAVTransportURI");
     act.addArgument("InstanceID", instance_id);
     act.addArgument("CurrentURI", uri);
-    act.addArgument("CurrentURIMetaData", "");
+    // Some renderers require the CurrentURIMetaData argument to be present
+    // even when empty. Use the Argument constructor to force adding an empty
+    // value (the addArgument(name,value) helper skips empty values).
+    act.addArgument(Argument("CurrentURIMetaData", ""));
     p_mgr->addAction(act);
     last_reply = p_mgr->executeActions();
     return (bool)last_reply;
@@ -289,7 +292,7 @@ class DLNAControlPointMediaRenderer {
     p_mgr->addAction(act);
     last_reply = p_mgr->executeActions();
     if (!last_reply) return -1;
-    const char* m = last_reply.findArgument( "CurrentMute");
+    const char* m = last_reply.findArgument("CurrentMute");
     if (!m) return -1;
     return atoi(m);
   }

@@ -264,6 +264,7 @@ class List {
   bool pop_back(T& data) {
     if (record_count == 0) return false;
     Node* p_delete = lastDataNode();
+    if (p_delete == nullptr) return false;
     Node* p_prior = p_delete->prior;
     Node* p_next = p_delete->next;
 

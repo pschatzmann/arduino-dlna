@@ -438,6 +438,8 @@ class HttpServer {
   /// Provides true if the server has been started
   operator bool() { return is_active; }
 
+  bool isActive() { return is_active; }
+
   /// Determines the local ip address
   const char* localHost() {
     if (local_host == nullptr) {

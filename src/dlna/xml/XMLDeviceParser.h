@@ -52,15 +52,20 @@ class XMLDeviceParser {
           cur_service = DLNAServiceInfo();
         }
         if (node.equals("serviceType")) {
-          cur_service.service_type = p_registry->add(text.c_str());
+          const char* t = text.c_str();
+          if (t && *t) cur_service.service_type = p_registry->add(t);
         } else if (node.equals("serviceId")) {
-          cur_service.service_id = p_registry->add(text.c_str());
+          const char* t = text.c_str();
+          if (t && *t) cur_service.service_id = p_registry->add(t);
         } else if (node.equals("SCPDURL")) {
-          cur_service.scpd_url = p_registry->add(text.c_str());
+          const char* t = text.c_str();
+          if (t && *t) cur_service.scpd_url = p_registry->add(t);
         } else if (node.equals("controlURL")) {
-          cur_service.control_url = p_registry->add(text.c_str());
+          const char* t = text.c_str();
+          if (t && *t) cur_service.control_url = p_registry->add(t);
         } else if (node.equals("eventSubURL")) {
-          cur_service.event_sub_url = p_registry->add(text.c_str());
+          const char* t = text.c_str();
+          if (t && *t) cur_service.event_sub_url = p_registry->add(t);
         }
       } else if (path_has_icon) {
         if (!in_icon) {
@@ -68,42 +73,59 @@ class XMLDeviceParser {
           cur_icon = Icon();
         }
         if (node.equals("mimetype")) {
-          cur_icon.mime = p_registry->add(text.c_str());
+          const char* t = text.c_str();
+          if (t && *t) cur_icon.mime = p_registry->add(t);
         } else if (node.equals("width")) {
-          cur_icon.width = atoi(text.c_str());
+          const char* t = text.c_str();
+          cur_icon.width = t ? atoi(t) : 0;
         } else if (node.equals("height")) {
-          cur_icon.height = atoi(text.c_str());
+          const char* t = text.c_str();
+          cur_icon.height = t ? atoi(t) : 0;
         } else if (node.equals("depth")) {
-          cur_icon.depth = atoi(text.c_str());
+          const char* t = text.c_str();
+          cur_icon.depth = t ? atoi(t) : 0;
         } else if (node.equals("url")) {
-          cur_icon.icon_url = p_registry->add(text.c_str());
+          const char* t = text.c_str();
+          if (t && *t) cur_icon.icon_url = p_registry->add(t);
         }
       } else {
         // device-level
         if (node.equals("deviceType")) {
-          result.device_type = p_registry->add(text.c_str());
+          const char* t = text.c_str();
+          if (t && *t) result.device_type = p_registry->add(t);
         } else if (node.equals("friendlyName")) {
-          result.friendly_name = p_registry->add(text.c_str());
+          const char* t = text.c_str();
+          if (t && *t) result.friendly_name = p_registry->add(t);
         } else if (node.equals("manufacturer")) {
-          result.manufacturer = p_registry->add(text.c_str());
+          const char* t = text.c_str();
+          if (t && *t) result.manufacturer = p_registry->add(t);
         } else if (node.equals("manufacturerURL")) {
-          result.manufacturer_url = p_registry->add(text.c_str());
+          const char* t = text.c_str();
+          if (t && *t) result.manufacturer_url = p_registry->add(t);
         } else if (node.equals("modelDescription")) {
-          result.model_description = p_registry->add(text.c_str());
+          const char* t = text.c_str();
+          if (t && *t) result.model_description = p_registry->add(t);
         } else if (node.equals("modelName")) {
-          result.model_name = p_registry->add(text.c_str());
+          const char* t = text.c_str();
+          if (t && *t) result.model_name = p_registry->add(t);
         } else if (node.equals("modelNumber")) {
-          result.model_number = p_registry->add(text.c_str());
+          const char* t = text.c_str();
+          if (t && *t) result.model_number = p_registry->add(t);
         } else if (node.equals("modelURL")) {
-          result.model_url = p_registry->add(text.c_str());
+          const char* t = text.c_str();
+          if (t && *t) result.model_url = p_registry->add(t);
         } else if (node.equals("serialNumber")) {
-          result.serial_number = p_registry->add(text.c_str());
+          const char* t = text.c_str();
+          if (t && *t) result.serial_number = p_registry->add(t);
         } else if (node.equals("UPC")) {
-          result.universal_product_code = p_registry->add(text.c_str());
+          const char* t = text.c_str();
+          if (t && *t) result.universal_product_code = p_registry->add(t);
         } else if (node.equals("UDN")) {
-          result.udn = p_registry->add(text.c_str());
+          const char* t = text.c_str();
+          if (t && *t) result.udn = p_registry->add(t);
         } else if (node.equals("URLBase")) {
-          result.base_url = p_registry->add(text.c_str());
+          const char* t = text.c_str();
+          if (t && *t) result.base_url = p_registry->add(t);
         }
       }
 

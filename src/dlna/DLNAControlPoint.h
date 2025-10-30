@@ -298,7 +298,7 @@ class DLNAControlPoint {
     // execute scheduled udp replys
     scheduler.execute(*p_udp);
 
-    if (p_http_server) {
+    if (p_http_server && p_http_server->isActive()) {
       // handle server requests
       bool rc = p_http_server->doLoop();
 
@@ -728,7 +728,7 @@ class DLNAControlPoint {
 
   ActionReply& postAction(ActionRequest& action) {
     DlnaLogger.log(DlnaLogLevel::Debug, "DLNAControlPointMgr::postAction: %s",
-                   action.action != nullptr ? action.action : "(null)");
+                   nullStr(action.action, "(null)"));
     reply.clear();
     DLNAServiceInfo& service = *action.p_service;
     DLNADeviceInfo& device = getDevice(service);
@@ -748,7 +748,12 @@ class DLNAControlPoint {
 
     // crate control url
     char url_buffer[200] = {0};
+    // Log service and base to help debug malformed control URLs
+    DlnaLogger.log(DlnaLogLevel::Info,
+                   "Service control_url: %s, device base: %s",
+                   nullStr(service.control_url), nullStr(device.getBaseURL()));
     Url post_url{getUrl(device, service.control_url, url_buffer, 200)};
+    DlnaLogger.log(DlnaLogLevel::Info, "POST URL computed: %s", post_url.url());
 
     // send HTTP POST and collect response into an XMLParserPrint so we can
     // parse incrementally
@@ -839,15 +844,37 @@ class DLNAControlPoint {
                      const char* buffer, int len) {
     DlnaLogger.log(DlnaLogLevel::Debug, "DLNAControlPointMgr::getUrl");
     StrView url_str{(char*)buffer, len};
-    url_str = device.getBaseURL();
-    if (url_str == nullptr) {
+    // start with base url if available, otherwise construct from device URL
+    const char* base = device.getBaseURL();
+    if (base != nullptr && *base != '\0') {
+      url_str = base;
+    } else {
       url_str.add(device.getDeviceURL().protocol());
       url_str.add("://");
       url_str.add(device.getDeviceURL().host());
       url_str.add(":");
       url_str.add(device.getDeviceURL().port());
     }
-    url_str.add(suffix);
+
+    // Normalize slashes when appending suffix to avoid double '//'
+    if (suffix != nullptr && suffix[0] != '\0') {
+      int base_len = url_str.length();
+      const char* tmpc = url_str.c_str();
+      bool base_ends_slash =
+          tmpc != nullptr && base_len > 0 && tmpc[base_len - 1] == '/';
+      bool suf_starts_slash = suffix[0] == '/';
+      if (base_ends_slash && suf_starts_slash) {
+        // skip leading slash of suffix
+        url_str.add(suffix + 1);
+      } else if (!base_ends_slash && !suf_starts_slash) {
+        // ensure single slash between base and suffix
+        url_str.add('/');
+        url_str.add(suffix);
+      } else {
+        // exactly one slash present
+        url_str.add(suffix);
+      }
+    }
     return buffer;
   }
 

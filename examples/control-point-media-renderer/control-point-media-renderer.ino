@@ -50,7 +50,7 @@ void setup() {
 
   // Starting playback
   Serial.println("Starting playback...");
-  if (!renderer.play("http://192.168.1.2/media/sample.mp3")) {
+  if (!renderer.play("http://stream.srg-ssr.ch/m/rsj/mp3_128")) {
     Serial.println("Play failed");
   } else {
     Serial.println("Play command sent");
@@ -66,6 +66,16 @@ void setup() {
   const char* state = renderer.getTransportState();
   Serial.print("Transport state: ");
   Serial.println(state ? state : "(unknown)");
+
+  delay(20000);
+  Serial.println("Pause playback");
+  if (!renderer.pause()) {
+    Serial.println("Pause failed");
+  } else {
+    Serial.println("Pause command sent");
+  }
+  delay(10000);
+
 }
 
 void loop() { cp.loop(); }
