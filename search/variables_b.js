@@ -10,7 +10,7 @@ var searchData=
   ['method_7',['method',['../classtiny__dlna_1_1HttpRequestHandlerLine.html#a81b0ab27f4e60481c5f9275fff16f1c8',1,'tiny_dlna::HttpRequestHandlerLine']]],
   ['method_5fid_8',['method_id',['../classtiny__dlna_1_1HttpHeader.html#a4a9c1ca5d6e3ccc784fca5f6e3f50a19',1,'tiny_dlna::HttpHeader']]],
   ['methods_9',['methods',['../namespacetiny__dlna.html#a676cf5a0a4c1f7a8fe5653e1ccff1eb6',1,'tiny_dlna']]],
-  ['mgr_10',['mgr',['../classtiny__dlna_1_1ControlPointMediaRenderer.html#ad82178a7de9407f28fbea6b0097a3a01',1,'tiny_dlna::ControlPointMediaRenderer::mgr()'],['../classtiny__dlna_1_1ControlPointMediaServer.html#ad9612937de394001ce27b3885309a20d',1,'tiny_dlna::ControlPointMediaServer::mgr()']]],
+  ['mgr_10',['mgr',['../classtiny__dlna_1_1DLNAControlPointMediaRenderer.html#aa78911f65235f946f6920953e25865f0',1,'tiny_dlna::DLNAControlPointMediaRenderer::mgr()'],['../classtiny__dlna_1_1DLNAControlPointMediaServer.html#aa2b6a685332b34c259d90b0ff688f9ca',1,'tiny_dlna::DLNAControlPointMediaServer::mgr()']]],
   ['mime_11',['mime',['../classtiny__dlna_1_1Icon.html#a9459e0995a8747931eb3e73d382917b8',1,'tiny_dlna::Icon::mime()'],['../classtiny__dlna_1_1HttpRequestHandlerLine.html#aab195241dbead06fe75f8765011f1aa0',1,'tiny_dlna::HttpRequestHandlerLine::mime()'],['../structtiny__dlna_1_1MimeExtension.html#a22ad66dbd1aeebc9db3fb1d8b9ef6edb',1,'tiny_dlna::MimeExtension::mime()']]],
   ['mimetable_12',['mimeTable',['../namespacetiny__dlna.html#a782f756c20c2950e76b5d377df3f3e86',1,'tiny_dlna']]],
   ['mimetype_13',['mimeType',['../structtiny__dlna_1_1MediaItem.html#a1bad5bddca826789d229d41f7077776f',1,'tiny_dlna::MediaItem']]],

@@ -106,11 +106,11 @@ Creating a new DLNA device</h2>
 <li>Add your device to the <code>DLNADeviceMgr</code> in your application code and start the manager. Example (Arduino sketch):</li>
 </ol>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;DLNADeviceMgr.h&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="MediaRenderer_8h.html">MediaRenderer/MediaRenderer.h</a>&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;MediaRenderer/MediaRenderer.h&quot;</span></div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespacetiny__dlna.html">tiny_dlna</a>;</div>
 <div class="line"> </div>
-<div class="line"><a class="code hl_class" href="classtiny__dlna_1_1MediaRenderer.html">MediaRenderer</a> renderer;</div>
+<div class="line">MediaRenderer renderer;</div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">void</span> setup() {</div>
 <div class="line">  <span class="comment">// Configure audio output/decoder as required by your platform</span></div>
@@ -118,7 +118,7 @@ Creating a new DLNA device</h2>
 <div class="line">  <span class="comment">// renderer.setDecoder(myDecoder);</span></div>
 <div class="line"> </div>
 <div class="line">  <span class="comment">// Start device (initialises pipeline, registers services)</span></div>
-<div class="line">  renderer.<a class="code hl_function" href="classtiny__dlna_1_1MediaRenderer.html#aaf57b8e31603bc5fadc0201fa52974ce">begin</a>();</div>
+<div class="line">  renderer.begin();</div>
 <div class="line"> </div>
 <div class="line">  <span class="comment">// Register device with manager (assumes a global manager exists)</span></div>
 <div class="line">  DLNADeviceMgr::instance().addDevice(renderer);</div>
@@ -129,9 +129,6 @@ Creating a new DLNA device</h2>
 <div class="line">  <span class="comment">// Regularly call the device manager loop which in turn calls device loops</span></div>
 <div class="line">  DLNADeviceMgr::instance().loop();</div>
 <div class="line">}</div>
-<div class="ttc" id="aMediaRenderer_8h_html"><div class="ttname"><a href="MediaRenderer_8h.html">MediaRenderer.h</a></div></div>
-<div class="ttc" id="aclasstiny__dlna_1_1MediaRenderer_html"><div class="ttname"><a href="classtiny__dlna_1_1MediaRenderer.html">tiny_dlna::MediaRenderer</a></div><div class="ttdoc">MediaRenderer DLNA Device.</div><div class="ttdef"><b>Definition:</b> MediaRenderer.h:62</div></div>
-<div class="ttc" id="aclasstiny__dlna_1_1MediaRenderer_html_aaf57b8e31603bc5fadc0201fa52974ce"><div class="ttname"><a href="classtiny__dlna_1_1MediaRenderer.html#aaf57b8e31603bc5fadc0201fa52974ce">tiny_dlna::MediaRenderer::begin</a></div><div class="ttdeci">bool begin()</div><div class="ttdoc">Override to initialize the device.</div><div class="ttdef"><b>Definition:</b> MediaRenderer.h:96</div></div>
 <div class="ttc" id="anamespacetiny__dlna_html"><div class="ttname"><a href="namespacetiny__dlna.html">tiny_dlna</a></div><div class="ttdef"><b>Definition:</b> Allocator.h:6</div></div>
 </div><!-- fragment --><ol type="1">
 <li>Test with a control point. You can use standard UPnP control point applications (e.g., VLC, BubbleUPnP on Android) to discover and control the device. Use the control point to send <code>SetAVTransportURI</code> then <code>Play</code> and verify audio plays through the configured output.</li>

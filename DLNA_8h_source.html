@@ -79,27 +79,26 @@ $(function() {
 <a href="DLNA_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#include &quot;<a class="code" href="DLNAControlPoint_8h.html">dlna/DLNAControlPoint.h</a>&quot;</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;<a class="code" href="DLNADevice_8h.html">dlna/DLNADevice.h</a>&quot;</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="MediaRenderer_8h.html">dlna/devices/MediaRenderer/MediaRenderer.h</a>&quot;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="UDPService_8h.html">dlna/udp/UDPService.h</a>&quot;</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="ControlPointMediaRenderer_8h.html">dlna/clients/ControlPointMediaRenderer.h</a>&quot;</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;<a class="code" href="ControlPointMediaServer_8h.html">dlna/clients/ControlPointMediaServer.h</a>&quot;</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;<a class="code" href="MediaServer_8h.html">dlna/devices/MediaServer/MediaServer.h</a>&quot;</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;<a class="code" href="MediaRenderer_8h.html">dlna/devices/MediaRenderer/MediaRenderer.h</a>&quot;</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#ifndef IS_DESKTOP</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#  include &quot;<a class="code" href="UDPAsyncService_8h.html">dlna/udp/UDPAsyncService.h</a>&quot;</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespacetiny__dlna.html">tiny_dlna</a>;</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#ifdef IS_DESKTOP</span></div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">using </span><a class="code hl_class" href="classtiny__dlna_1_1UDPAsyncService.html">UDPAsyncService</a> = <a class="code hl_class" href="classtiny__dlna_1_1UDPService.html">UDPService&lt;WiFiUDP&gt;</a>;</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aControlPointMediaRenderer_8h_html"><div class="ttname"><a href="ControlPointMediaRenderer_8h.html">ControlPointMediaRenderer.h</a></div></div>
-<div class="ttc" id="aControlPointMediaServer_8h_html"><div class="ttname"><a href="ControlPointMediaServer_8h.html">ControlPointMediaServer.h</a></div></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="UDPService_8h.html">dlna/udp/UDPService.h</a>&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="DLNAControlPointMediaRenderer_8h.html">dlna/clients/DLNAControlPointMediaRenderer.h</a>&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="DLNAControlPointMediaServer_8h.html">dlna/clients/DLNAControlPointMediaServer.h</a>&quot;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;<a class="code" href="DLNAMediaServer_8h.html">dlna/devices/MediaServer/DLNAMediaServer.h</a>&quot;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;<a class="code" href="DLNAMediaRenderer_8h.html">dlna/devices/MediaRenderer/DLNAMediaRenderer.h</a>&quot;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#ifndef IS_DESKTOP</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#  include &quot;<a class="code" href="UDPAsyncService_8h.html">dlna/udp/UDPAsyncService.h</a>&quot;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespacetiny__dlna.html">tiny_dlna</a>;</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#ifdef IS_DESKTOP</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keyword">using </span><a class="code hl_class" href="classtiny__dlna_1_1UDPAsyncService.html">UDPAsyncService</a> = <a class="code hl_class" href="classtiny__dlna_1_1UDPService.html">UDPService&lt;WiFiUDP&gt;</a>;</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aDLNAControlPointMediaRenderer_8h_html"><div class="ttname"><a href="DLNAControlPointMediaRenderer_8h.html">DLNAControlPointMediaRenderer.h</a></div></div>
+<div class="ttc" id="aDLNAControlPointMediaServer_8h_html"><div class="ttname"><a href="DLNAControlPointMediaServer_8h.html">DLNAControlPointMediaServer.h</a></div></div>
 <div class="ttc" id="aDLNAControlPoint_8h_html"><div class="ttname"><a href="DLNAControlPoint_8h.html">DLNAControlPoint.h</a></div></div>
 <div class="ttc" id="aDLNADevice_8h_html"><div class="ttname"><a href="DLNADevice_8h.html">DLNADevice.h</a></div></div>
-<div class="ttc" id="aMediaRenderer_8h_html"><div class="ttname"><a href="MediaRenderer_8h.html">MediaRenderer.h</a></div></div>
-<div class="ttc" id="aMediaServer_8h_html"><div class="ttname"><a href="MediaServer_8h.html">MediaServer.h</a></div></div>
+<div class="ttc" id="aDLNAMediaRenderer_8h_html"><div class="ttname"><a href="DLNAMediaRenderer_8h.html">DLNAMediaRenderer.h</a></div></div>
+<div class="ttc" id="aDLNAMediaServer_8h_html"><div class="ttname"><a href="DLNAMediaServer_8h.html">DLNAMediaServer.h</a></div></div>
 <div class="ttc" id="aUDPAsyncService_8h_html"><div class="ttname"><a href="UDPAsyncService_8h.html">UDPAsyncService.h</a></div></div>
 <div class="ttc" id="aUDPService_8h_html"><div class="ttname"><a href="UDPService_8h.html">UDPService.h</a></div></div>
 <div class="ttc" id="aclasstiny__dlna_1_1UDPAsyncService_html"><div class="ttname"><a href="classtiny__dlna_1_1UDPAsyncService.html">tiny_dlna::UDPAsyncService</a></div><div class="ttdoc">Access to UDP functionality: sending and receiving of data using the Async API of the ESP32.</div><div class="ttdef"><b>Definition:</b> UDPAsyncService.h:22</div></div>

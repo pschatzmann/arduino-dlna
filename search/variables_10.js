@@ -2,8 +2,8 @@ var searchData=
 [
   ['reader_0',['reader',['../classtiny__dlna_1_1HttpHeader.html#ab937756e833084bb4137b4f0fa2fe939',1,'tiny_dlna::HttpHeader']]],
   ['record_5fcount_1',['record_count',['../classtiny__dlna_1_1List.html#a6e619c64800aff86a581e2acc1629b73',1,'tiny_dlna::List']]],
-  ['reference_2',['reference',['../classtiny__dlna_1_1ControlPointMediaRenderer.html#acafa872d51f2ca33e6313764b3def4a8',1,'tiny_dlna::ControlPointMediaRenderer::reference()'],['../classtiny__dlna_1_1ControlPointMediaServer.html#a7bf9c2dd8e8648f787c24b217ec56a8e',1,'tiny_dlna::ControlPointMediaServer::reference()'],['../classtiny__dlna_1_1DLNAControlPoint.html#a058a06da3022d8fd6835b13d9a6c3f4e',1,'tiny_dlna::DLNAControlPoint::reference()'],['../classtiny__dlna_1_1XMLParser.html#a65e06071b5111895276189d98a5e42c3',1,'tiny_dlna::XMLParser::reference()']]],
-  ['reference_5f_3',['reference_',['../classtiny__dlna_1_1MediaServer.html#aded7fad1e17c8782b990b427f8621dbb',1,'tiny_dlna::MediaServer']]],
+  ['reference_2',['reference',['../classtiny__dlna_1_1DLNAControlPointMediaRenderer.html#a862f2a7a0000de917827d22d101995b4',1,'tiny_dlna::DLNAControlPointMediaRenderer::reference()'],['../classtiny__dlna_1_1DLNAControlPointMediaServer.html#a179f40a462e269865aa27bbc014c50b1',1,'tiny_dlna::DLNAControlPointMediaServer::reference()'],['../classtiny__dlna_1_1DLNAControlPoint.html#a058a06da3022d8fd6835b13d9a6c3f4e',1,'tiny_dlna::DLNAControlPoint::reference()'],['../classtiny__dlna_1_1XMLParser.html#a65e06071b5111895276189d98a5e42c3',1,'tiny_dlna::XMLParser::reference()']]],
+  ['reference_5f_3',['reference_',['../classtiny__dlna_1_1DLNAMediaServer.html#a452538cbcfd6db9be1b1a089f5df5739',1,'tiny_dlna::DLNAMediaServer']]],
   ['registry_4',['registry',['../classtiny__dlna_1_1DLNADevice.html#ac4849f2b7abaacb37002f15d1a71087b',1,'tiny_dlna::DLNADevice']]],
   ['repeat_5fms_5',['repeat_ms',['../structtiny__dlna_1_1Schedule.html#ae72839e74ad1799cb4320195bdb98622',1,'tiny_dlna::Schedule']]],
   ['reply_6',['reply',['../classtiny__dlna_1_1DLNAControlPoint.html#ab8127d3df0cfc772bc06b29e0523f4ac',1,'tiny_dlna::DLNAControlPoint']]],

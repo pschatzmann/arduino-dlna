@@ -14,7 +14,7 @@ var searchData=
   ['con_5fkeep_5falive_11',['CON_KEEP_ALIVE',['../namespacetiny__dlna.html#a1deb512ed86b03c63e92b0c0e4142971',1,'tiny_dlna']]],
   ['connection_12',['connection',['../classtiny__dlna_1_1HttpRequest.html#ac939fa1d54b109536dbf199afd84d9a2',1,'tiny_dlna::HttpRequest']]],
   ['connection_13',['CONNECTION',['../namespacetiny__dlna.html#af0ab8a1627546f33b4f62786597c670a',1,'tiny_dlna']]],
-  ['connectionid_14',['connectionID',['../classtiny__dlna_1_1MediaServer.html#ad3b3cc7d8a355c03c56a44e672ff214a',1,'tiny_dlna::MediaServer']]],
+  ['connectionid_14',['connectionID',['../classtiny__dlna_1_1DLNAMediaServer.html#a71a4eff938153a0de2e1894a561f693b',1,'tiny_dlna::DLNAMediaServer']]],
   ['content_15',['content',['../structtiny__dlna_1_1XMLNode.html#a739c1eedef4266fdf67449be4b2e6165',1,'tiny_dlna::XMLNode']]],
   ['content_5flength_16',['CONTENT_LENGTH',['../namespacetiny__dlna.html#a6cffdc8395ba16d570d7616fd9983874',1,'tiny_dlna']]],
   ['content_5ftype_17',['CONTENT_TYPE',['../namespacetiny__dlna.html#a0ca61d30704c41525d4a768462717279',1,'tiny_dlna']]],
@@ -25,7 +25,7 @@ var searchData=
   ['control_5furl_22',['control_url',['../classtiny__dlna_1_1DLNAServiceInfo.html#a9cfe567968620bc03629b0e120153b6d',1,'tiny_dlna::DLNAServiceInfo']]],
   ['create_5fnew_5flines_23',['create_new_lines',['../classtiny__dlna_1_1HttpHeader.html#ae65ce804cc67d1e029084535ccd5dfd2',1,'tiny_dlna::HttpHeader']]],
   ['crlf_24',['CRLF',['../classtiny__dlna_1_1HttpHeader.html#a3abc5c74c6a9c503c58b8cdfe00e657e',1,'tiny_dlna::HttpHeader']]],
-  ['current_5fmime_25',['current_mime',['../classtiny__dlna_1_1MediaRenderer.html#a1588cd23cb751e64ce2904177ac463f8',1,'tiny_dlna::MediaRenderer']]],
-  ['current_5furi_26',['current_uri',['../classtiny__dlna_1_1MediaRenderer.html#a1dc47b4c835b1bb6fd9368ced2b87f4b',1,'tiny_dlna::MediaRenderer']]],
-  ['current_5fvolume_27',['current_volume',['../classtiny__dlna_1_1MediaRenderer.html#a973c4d0e814332c99d3537c8890e2b7d',1,'tiny_dlna::MediaRenderer']]]
+  ['current_5fmime_25',['current_mime',['../classtiny__dlna_1_1DLNAMediaRenderer.html#a781051e302045eaf198e2ded4a85493f',1,'tiny_dlna::DLNAMediaRenderer']]],
+  ['current_5furi_26',['current_uri',['../classtiny__dlna_1_1DLNAMediaRenderer.html#a74aca621d309e9f24b0494b897fdd1be',1,'tiny_dlna::DLNAMediaRenderer']]],
+  ['current_5fvolume_27',['current_volume',['../classtiny__dlna_1_1DLNAMediaRenderer.html#abefe59fccd65b4cec5622b04c0908e98',1,'tiny_dlna::DLNAMediaRenderer']]]
 ];

@@ -1,6 +1,5 @@
 <map id="src/basic/EscapingPrint.h" name="src/basic/EscapingPrint.h">
 <area shape="rect" id="node1" title=" " alt="" coords="21,5,203,31"/>
-<area shape="rect" id="node2" href="$MediaServer_8h.html" title=" " alt="" coords="5,79,219,119"/>
-<area shape="rect" id="node3" href="$DLNA_8h.html" title=" " alt="" coords="65,255,159,280"/>
-<area shape="rect" id="node4" href="$ControlPointMediaServer_8h.html" title=" " alt="" coords="88,167,259,207"/>
+<area shape="rect" id="node2" href="$DLNAMediaServer_8h.html" title=" " alt="" coords="5,79,219,119"/>
+<area shape="rect" id="node3" href="$DLNA_8h.html" title=" " alt="" coords="65,167,159,192"/>
 </map>

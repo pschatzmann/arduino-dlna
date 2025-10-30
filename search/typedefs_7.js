@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['xmlcallback_0',['XMLCallback',['../classtiny__dlna_1_1ControlPointMediaServer.html#a235d9cbe1ba015e8d64622fe41df17c5',1,'tiny_dlna::ControlPointMediaServer']]]
+  ['xmlcallback_0',['XMLCallback',['../classtiny__dlna_1_1DLNAControlPointMediaServer.html#afecd658052168fa63ff13d4ebb9919e1',1,'tiny_dlna::DLNAControlPointMediaServer']]]
 ];

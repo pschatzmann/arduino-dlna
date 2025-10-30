@@ -8,6 +8,6 @@ var searchData=
   ['title_5',['title',['../structtiny__dlna_1_1MediaItem.html#a644a3a603f9472869cf5dacb49752b99',1,'tiny_dlna::MediaItem']]],
   ['to_6',['to',['../classtiny__dlna_1_1HttpRequestRewrite.html#ae78cf41cc5350f63aa6d1f046a16cfe9',1,'tiny_dlna::HttpRequestRewrite']]],
   ['transfer_5fencoding_7',['TRANSFER_ENCODING',['../namespacetiny__dlna.html#a9e5bb9ed1bd94ec887fded9c383b60ca',1,'tiny_dlna']]],
-  ['transport_5fstate_8',['transport_state',['../classtiny__dlna_1_1MediaRenderer.html#a561952bf221db07300dc477cc224a0ea',1,'tiny_dlna::MediaRenderer']]],
+  ['transport_5fstate_8',['transport_state',['../classtiny__dlna_1_1DLNAMediaRenderer.html#a69c4a6762f09e25a3b054467aded5dc4',1,'tiny_dlna::DLNAMediaRenderer']]],
   ['txt_9',['txt',['../classtiny__dlna_1_1XMLParser.html#a35158248ce1bad49921922f86302ea03',1,'tiny_dlna::XMLParser']]]
 ];

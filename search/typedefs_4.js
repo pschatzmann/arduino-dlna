@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['notificationcallback_0',['NotificationCallback',['../classtiny__dlna_1_1ControlPointMediaRenderer.html#ae8213b6b3c5fe03a40ba23eb4d6e0526',1,'tiny_dlna::ControlPointMediaRenderer::NotificationCallback()'],['../classtiny__dlna_1_1ControlPointMediaServer.html#a4876165c84594e64b7b5cb37d9575a3c',1,'tiny_dlna::ControlPointMediaServer::NotificationCallback()']]]
+  ['notificationcallback_0',['NotificationCallback',['../classtiny__dlna_1_1DLNAControlPointMediaRenderer.html#a3120f67002c464497e2134d7da2869f0',1,'tiny_dlna::DLNAControlPointMediaRenderer::NotificationCallback()'],['../classtiny__dlna_1_1DLNAControlPointMediaServer.html#a5748d533f468c2e1f233421f437b3876',1,'tiny_dlna::DLNAControlPointMediaServer::NotificationCallback()']]]
 ];
