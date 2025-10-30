@@ -14,7 +14,7 @@ DLNAControlPoint cp(server); // with Notifications
 WiFiClient client;
 DLNAHttpRequest http(client);
 UDPAsyncService udp;
-ControlPointMediaRenderer renderer(cp);
+DLNAControlPointMediaRenderer renderer(cp);
 
 void setupWifi() {
   WiFi.begin(ssid, password);

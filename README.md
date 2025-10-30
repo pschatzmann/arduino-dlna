@@ -35,13 +35,13 @@ This library provides memory-efficient classes to implement __DLNA devices__ and
 
 - Devices
   - [DLNADevice](https://pschatzmann.github.io/arduino-dlna/classtiny__dlna_1_1DLNADevice.html) (Generic Device API)
-  - [MediaRenderer](https://pschatzmann.github.io/arduino-dlna/classtiny__dlna_1_1MediaRenderer.html)
-  - [MediaServer](https://pschatzmann.github.io/arduino-dlna/classtiny__dlna_1_1MediaServer.html)
+  - [DLNAMediaRenderer](https://pschatzmann.github.io/arduino-dlna/classtiny__dlna_1_1DLNAMediaRenderer.html)
+  - [DLNAMediaServer](https://pschatzmann.github.io/arduino-dlna/classtiny__dlna_1_1DLNAMediaServer.html)
 
 - Control Points
   - [DLNAControlPoint](https://pschatzmann.github.io/arduino-dlna/classtiny__dlna_1_1DLNAControlPoint.html) (Generic Control Point API)
-  - [ControlPointMediaRenderer](https://pschatzmann.github.io/arduino-dlna/classtiny__dlna_1_1ControlPointMediaRenderer.html)
-  - [ControlPointMediaServer](https://pschatzmann.github.io/arduino-dlna/classtiny__dlna_1_1ControlPointMediaServer.html)
+  - [DLNAControlPointMediaRenderer](https://pschatzmann.github.io/arduino-dlna/classtiny__dlna_1_1DLNAControlPointMediaRenderer.html)
+  - [DLNAControlPointMediaServer](https://pschatzmann.github.io/arduino-dlna/classtiny__dlna_1_1DLNAControlPointMediaServer.html)
 
 
 ## Implementation Approach

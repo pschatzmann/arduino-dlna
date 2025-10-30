@@ -7,7 +7,7 @@ const char* password = "YOUR_PASSWORD";
 WiFiServer wifi;
 HttpServer server(wifi);
 UDPAsyncService udp;
-MediaRenderer media_renderer(server, udp);
+DLNAMediaRenderer media_renderer(server, udp);
 // Use Serial as a simple output when no audio stack is present
 Print& out = Serial;
 
@@ -34,7 +34,7 @@ void setup() {
   media_renderer.setBaseURL(WiFi.localIP(), 9999);
 
   media_renderer.setMediaEventHandler(
-    [](MediaEvent ev, MediaRenderer& mr) {
+    [](MediaEvent ev, DLNAMediaRenderer& mr) {
       switch (ev) {
         case MediaEvent::SET_URI:
           Serial.print("Event: SET_URI ");

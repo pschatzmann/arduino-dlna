@@ -16,14 +16,14 @@ namespace tiny_dlna {
  * service discovered. It is intentionally minimal and returns boolean
  * success/failure for each operation.
  */
-class ControlPointMediaRenderer {
+class DLNAControlPointMediaRenderer {
  public:
   /**
    * @brief Construct the helper with a reference to the control point mgr
    * @param mgr Reference to the underlying DLNAControlPointMgr used to send
    *            actions and manage discovery/subscriptions
    */
-  ControlPointMediaRenderer(DLNAControlPoint& mgr) : mgr(mgr) {}
+  DLNAControlPointMediaRenderer(DLNAControlPoint& mgr) : mgr(mgr) {}
 
   /**
    * @brief Restrict this helper to devices of the given device type
@@ -430,8 +430,8 @@ class ControlPointMediaRenderer {
                    sid ? sid : "(null)", varName ? varName : "(null)",
                    newValue ? newValue : "(null)");
 
-    ControlPointMediaRenderer* renderer =
-        static_cast<ControlPointMediaRenderer*>(reference);
+    DLNAControlPointMediaRenderer* renderer =
+        static_cast<DLNAControlPointMediaRenderer*>(reference);
     if (renderer) {
       // Handle the notification (e.g., update internal state, call callbacks)
       if (StrView(varName) == "TransportState") {

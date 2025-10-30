@@ -10,7 +10,7 @@ WiFiClient client;
 DLNAHttpRequest http(client);
 UDPAsyncService udp;
 DLNAControlPoint cp;  // no notifications needed
-ControlPointMediaServer cpms(cp);
+DLNAControlPointMediaServer cpms(cp);
 
 /// Simple callback that extracts and prints the item metadata
 void printItemCallback(const char* name, const char* text,

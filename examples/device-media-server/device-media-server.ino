@@ -16,7 +16,7 @@ HttpServer server(wifi);
 // WiFiClient client;
 // DLNAHttpRequest http(client);
 UDPAsyncService udp;
-MediaServer mediaServer(server, udp);
+DLNAMediaServer mediaServer(server, udp);
 
 // Store items as a global const array (for PROGMEM/flash storage)
 // Populated from provided station list (first 30 entries). For this

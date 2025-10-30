@@ -2,7 +2,6 @@
 #pragma once
 
 #include "dlna/DLNAControlPoint.h"
-#include "dlna/devices/MediaServer/MediaServer.h"
 #include "dlna/Action.h"
 
 namespace tiny_dlna {
@@ -15,7 +14,7 @@ namespace tiny_dlna {
  * GetProtocolInfo). Methods are synchronous and return boolean success or
  * populate output parameters.
  */
-class ControlPointMediaServer {
+class DLNAControlPointMediaServer {
  public:
   typedef void (*XMLCallback)(const char* name, const char* test,
                               const char* attributes);
@@ -28,7 +27,7 @@ class ControlPointMediaServer {
    * @param mgr Reference to DLNAControlPointMgr used to send actions and
    *            manage discovery/subscriptions
    */
-  ControlPointMediaServer(DLNAControlPoint& mgr) : mgr(mgr) {}
+  DLNAControlPointMediaServer(DLNAControlPoint& mgr) : mgr(mgr) {}
 
   /**
    * @brief Begin discovery and processing (forwards to underlying control

@@ -40,7 +40,7 @@ namespace tiny_dlna {
  * The implementation is intentionally compact and suitable as a starting
  * point for embedded or test DLNA servers.
  */
-class MediaServer : public DLNADeviceInfo {
+class DLNAMediaServer : public DLNADeviceInfo {
  public:
   /**
    * @brief Callback signature for preparing data for Browse or Search requests.
@@ -73,8 +73,7 @@ class MediaServer : public DLNADeviceInfo {
    * @brief Default constructor for MediaServer.
    * Initializes device information and default properties.
    */
-  MediaServer() {
-    DlnaLogger.log(DlnaLogLevel::Info, "MediaServer::MediaServer");
+  DLNAMediaServer() {
     setSerialNumber(usn);
     setDeviceType(st);
     setFriendlyName("ArduinoMediaServer");
@@ -89,14 +88,14 @@ class MediaServer : public DLNADeviceInfo {
    * This constructor stores the provided server/udp references so begin() can
    * be called without parameters.
    */
-  MediaServer(HttpServer& server, IUDPService& udp) : MediaServer() {
+  DLNAMediaServer(HttpServer& server, IUDPService& udp) : DLNAMediaServer() {
     // use setters so derived classes or overrides get a consistent path
     setHttpServer(server);
     setUdpService(udp);
   }
 
   /// Destructor
-  ~MediaServer() { end(); }
+  ~DLNAMediaServer() { end(); }
 
 
   /// Set the http server instance the MediaServer should use
@@ -182,7 +181,7 @@ class MediaServer : public DLNADeviceInfo {
   DLNADevice& device() { return dlna_device; }
   
  protected:
-  static inline MediaServer* self = nullptr;
+  static inline DLNAMediaServer* self = nullptr;
   // internal DLNA device instance owned by this MediaServer
   DLNADevice dlna_device;
   // stored callbacks
@@ -730,8 +729,8 @@ class MediaServer : public DLNADeviceInfo {
     // If a user-provided callback is registered, hand over the parsed
     // ActionRequest for custom handling. The callback is responsible for
     // writing the HTTP reply if it handles the action.
-    MediaServer* ms = nullptr;
-    if (hl && hl->context[0]) ms = (MediaServer*)hl->context[0];
+    DLNAMediaServer* ms = nullptr;
+    if (hl && hl->context[0]) ms = (DLNAMediaServer*)hl->context[0];
 
     // process the requested action using instance method if available
     if (ms) {
@@ -748,8 +747,8 @@ class MediaServer : public DLNADeviceInfo {
     ActionRequest action;
     DLNADevice::parseActionRequest(server, requestPath, hl, action);
 
-    MediaServer* ms = nullptr;
-    if (hl && hl->context[0]) ms = (MediaServer*)hl->context[0];
+    DLNAMediaServer* ms = nullptr;
+    if (hl && hl->context[0]) ms = (DLNAMediaServer*)hl->context[0];
 
     if (!ms) {
       server->replyNotFound();

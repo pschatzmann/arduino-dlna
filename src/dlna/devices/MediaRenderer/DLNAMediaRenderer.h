@@ -59,10 +59,10 @@ enum class MediaEvent { SET_URI, PLAY, PAUSE, STOP, SET_VOLUME, SET_MUTE };
  *
  * Author: Phil Schatzmann
  */
-class MediaRenderer : public DLNADeviceInfo {
+class DLNAMediaRenderer : public DLNADeviceInfo {
  public:
   // event handler: (event, reference to MediaRenderer)
-  typedef void (*MediaEventHandler)(MediaEvent event, MediaRenderer& renderer);
+  typedef void (*MediaEventHandler)(MediaEvent event, DLNAMediaRenderer& renderer);
 
   /**
    * @brief Default constructor
@@ -71,7 +71,7 @@ class MediaRenderer : public DLNADeviceInfo {
    * sets default base URL and identifiers. It does not configure any audio
    * pipeline components; use setOutput() and setDecoder() for that.
    */
-  MediaRenderer() {
+  DLNAMediaRenderer() {
     // Constructor
     DlnaLogger.log(DlnaLogLevel::Info, "MediaRenderer::MediaRenderer");
     setSerialNumber(usn);
@@ -87,7 +87,7 @@ class MediaRenderer : public DLNADeviceInfo {
    * Construct a MediaRenderer bound to an HttpServer and IUDPService.
    * The provided references are stored and used when calling begin().
    */
-  MediaRenderer(HttpServer& server, IUDPService& udp) : MediaRenderer() {
+  DLNAMediaRenderer(HttpServer& server, IUDPService& udp) : DLNAMediaRenderer() {
     setHttpServer(server);
     setUdpService(udp);
   }
@@ -189,7 +189,7 @@ class MediaRenderer : public DLNADeviceInfo {
   DLNADevice dlna_device;
   HttpServer* p_server = nullptr;
   IUDPService* p_udp_member = nullptr;
-  static inline MediaRenderer* p_media_renderer = nullptr;
+  static inline DLNAMediaRenderer* p_media_renderer = nullptr;
 
   /// Start playback of a network resource (returns true on success)
   bool play(const char* urlStr) {
@@ -267,7 +267,7 @@ class MediaRenderer : public DLNADeviceInfo {
     // Parse SOAP request and extract action
     Str soap = server->contentStr();
     DlnaLogger.log(DlnaLogLevel::Info, "Transport Control: %s", soap.c_str());
-    MediaRenderer& media_renderer = *((MediaRenderer*)hl->context[0]);
+    DLNAMediaRenderer& media_renderer = *((DLNAMediaRenderer*)hl->context[0]);
 
     Str reply_str{reply()};
     reply_str.replaceAll("%2", "AVTransport");
@@ -308,7 +308,7 @@ class MediaRenderer : public DLNADeviceInfo {
   static void renderingControlCB(HttpServer* server, const char* requestPath,
                                  HttpRequestHandlerLine* hl) {
     // Parse SOAP request and extract action
-    MediaRenderer& media_renderer = *((MediaRenderer*)hl->context[0]);
+    DLNAMediaRenderer& media_renderer = *((DLNAMediaRenderer*)hl->context[0]);
     Str soap = server->contentStr();
     DlnaLogger.log(DlnaLogLevel::Info, "Rendering Control: %s", soap.c_str());
     Str reply_str{reply()};
