@@ -133,7 +133,8 @@ class Str : public StrView {
     // save result
     grow(new_size);
     strcpy(chars, result);
-    this->len = strlen(temp);
+    // set the length to the actual encoded length
+    this->len = strlen(chars);
   }
 
   /// decodes a url encoded string
@@ -190,6 +191,20 @@ class Str : public StrView {
   void reset() {
     memset(vector.data(),0, len);
     len = 0;
+  }
+
+  /// Release the internal heap buffer immediately.
+  /// This frees the underlying vector storage and resets the string
+  /// to an empty state. Useful for explicitly freeing large buffers
+  /// before long idle periods.
+  void release() {
+    // free the vector buffer (Vector::reset() frees the allocated array)
+    vector.reset();
+    // reset Str state
+    chars = nullptr;
+    len = 0;
+    maxlen = 0;
+    is_const = false;
   }
   /// copies a substring into the current string
   Str substring(int start, int end) {

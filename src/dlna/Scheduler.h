@@ -52,7 +52,7 @@ class Scheduler {
       }
     }
 
-    if (is_cleanup) cleanup();
+    cleanup();
   }
 
   /// Returns true if there is any active schedule with name "MSearch"
