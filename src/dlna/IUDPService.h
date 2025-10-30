@@ -3,16 +3,15 @@
 
 #include <WiFi.h>
 #include <WiFiUdp.h>
-
+#include "dlna_config.h"
 #include "basic/IPAddressAndPort.h"
 #include "basic/Str.h"
 #include "assert.h"
 
 namespace tiny_dlna {
 
-// multicast address for SSDP
 static IPAddressAndPort DLNABroadcastAddress{IPAddress(239, 255, 255, 250),
-                                             1900};
+                                             DLNA_SSDP_PORT};
 
 /**
  * @brief Provides information of the received UDP which consists of the (xml)

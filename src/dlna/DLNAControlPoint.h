@@ -510,6 +510,7 @@ class DLNAControlPoint {
         }
       }
     }
+    xml_parser.end();
     // reply OK
     server->replyOK();
   }
@@ -781,6 +782,7 @@ class DLNAControlPoint {
         }
       }
     }
+    xml_parser.end();
     return reply;
   }
 

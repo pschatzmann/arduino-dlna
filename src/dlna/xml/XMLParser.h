@@ -115,13 +115,13 @@ class XMLParser {
    * so the parser's internal stacks do not retain state from the previous
    * buffer view.
    */
-  void resetParser() {
+  void end() {
     parsePos = 0;
-    path.resize(0);
-    contentStarts.resize(0);
-    last_attributes.set("");
-    node_name.set("");
-    txt.set("");
+    path.reset();
+    contentStarts.reset();
+    last_attributes.release();
+    node_name.release();
+    txt.release();
   }
 
   /// report only nodes with text
@@ -152,6 +152,7 @@ class XMLParser {
                               // content (after the start tag)
   // user-provided opaque pointer for convenience
   void* reference = nullptr;
+
   // Resume position for incremental parseSingle() calls.
   // (declared above in protected members)
   // Helper methods used by the parser loop (kept protected for

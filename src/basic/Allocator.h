@@ -1,7 +1,7 @@
 #pragma once
 #include <stdlib.h>
-
 #include "basic/Logger.h"
+#include "dlna_config.h"
 
 namespace tiny_dlna {
 
@@ -134,6 +134,7 @@ class AllocatorPSRAM : public Allocator {
 
 #endif
 
-static AllocatorExt DefaultAllocator;
+// Default allocator instance
+static DLNA_DEFAULT_ALLOCATOR DefaultAllocator;
 
 }  // namespace tiny_dlna

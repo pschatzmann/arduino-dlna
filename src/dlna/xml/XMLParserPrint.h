@@ -6,19 +6,19 @@
 namespace tiny_dlna {
 
 /**
- * @brief Helper class that implements a Print interface to accumulate XML data and
- * then parse it using XMLParser.
+ * @brief Helper class that implements a Print interface to accumulate XML data
+ * and then parse it using XMLParser.
  *
- * This class allows you to write XML data using the Print interface, accumulate it in an internal buffer,
- * and then parse the buffer using an XMLParser. The parsing result is returned via output parameters.
+ * This class allows you to write XML data using the Print interface, accumulate
+ * it in an internal buffer, and then parse the buffer using an XMLParser. The
+ * parsing result is returned via output parameters.
  */
 class XMLParserPrint : public Print {
  public:
   /**
    * @brief Constructor
-   * @param reserve Initial buffer size to reserve
    */
-  XMLParserPrint(int reserve = 80) : buffer(reserve) {
+  XMLParserPrint() {
     p.setCallback(&XMLParserPrint::wrapperCallback);
     p.setReference(&cbref);
     p.setReportTextOnly(false);
@@ -48,7 +48,8 @@ class XMLParserPrint : public Print {
   void setExpandEncoded(bool flag) { buffer.setExpandEncoded(flag); }
 
   /**
-   * @brief Parses the accumulated XML data and returns results via output parameters
+   * @brief Parses the accumulated XML data and returns results via output
+   * parameters
    * @param outNodeName Output: node name
    * @param outPath Output: path vector
    * @param outText Output: text content
@@ -65,10 +66,15 @@ class XMLParserPrint : public Print {
     cbref.outPath = &outPath;
     cbref.outText = &outText;
     cbref.outAttrs = &outAttributes;
+    // clear previous outputs so callers get an empty result on failure
+    if (cbref.outNode) cbref.outNode->clear();
+    if (cbref.outPath) cbref.outPath->resize(0);
+    if (cbref.outText) cbref.outText->clear();
+    if (cbref.outAttrs) cbref.outAttrs->clear();
 
     p.setXml(data);
-    // clear any previous cbref values
-    cbref.start = 0;
+    // mark as not-yet-found
+    cbref.start = -1;
     cbref.len = 0;
     bool parsed = p.parseSingle();
     buffer.consume(p.getParsePos());
@@ -78,7 +84,14 @@ class XMLParserPrint : public Print {
   /**
    * @brief Resets the internal buffer
    */
-  void reset() { buffer.reset(); }
+  void end() {
+    p.end();
+    buffer.reset();
+    if (cbref.outNode) cbref.outNode->clear();
+    if (cbref.outPath) cbref.outPath->resize(0);
+    if (cbref.outText) cbref.outText->clear();
+    if (cbref.outAttrs) cbref.outAttrs->clear();
+  }
 
   /**
    * @brief Returns the internal buffer as a C string
@@ -104,7 +117,8 @@ class XMLParserPrint : public Print {
   XMLParser p;
 
   /**
-   * @brief Internal callback reference used to capture the callback data from XMLParser and forward it to the caller.
+   * @brief Internal callback reference used to capture the callback data from
+   * XMLParser and forward it to the caller.
    */
   struct CBRef {
     /** @brief Start position of parsed data */
@@ -122,7 +136,9 @@ class XMLParserPrint : public Print {
   } cbref;
 
   /**
-   * @brief Static wrapper used as XMLParser callback. Copies the first invocation's data into the CBRef and forwards the event to the user-provided callback if present.
+   * @brief Static wrapper used as XMLParser callback. Copies the first
+   * invocation's data into the CBRef and forwards the event to the
+   * user-provided callback if present.
    * @param nodeName Name of the node
    * @param path Path vector
    * @param text Text content
@@ -137,18 +153,18 @@ class XMLParserPrint : public Print {
     if (!r) return;
     r->start = start;
     r->len = len;
-    if (r->outNode) *(r->outNode) = nodeName.c_str();
-    if (r->outText) *(r->outText) = text.c_str();
+    if (r->outNode) *(r->outNode) = nodeName;
+    if (r->outText) *(r->outText) = text;
     if (r->outAttrs) {
       if (attributes.isEmpty())
         r->outAttrs->reset();
       else
-        *(r->outAttrs) = attributes.c_str();
+        *(r->outAttrs) = attributes;
     }
     if (r->outPath) {
       r->outPath->resize(0);
       for (int i = 0; i < path.size(); ++i) {
-        r->outPath->push_back(Str(path[i].c_str()));
+        r->outPath->push_back(path[i]);
       }
     }
   }

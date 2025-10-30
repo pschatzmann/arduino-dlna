@@ -1,6 +1,7 @@
 #pragma once
 #include "Print.h"
 #include "Str.h"
+#include "dlna_config.h"
 
 namespace tiny_dlna {
 
@@ -11,7 +12,7 @@ namespace tiny_dlna {
  */
 class StrPrint : public Print {
  public:
-  StrPrint(int incSize = 200) { inc_size = incSize; }
+  StrPrint(int incSize = STR_PRINT_INC_SIZE) { inc_size = incSize; }
   size_t write(uint8_t ch) override {
     if (str.length() >= str.capacity() - 1) {
       str.setCapacity(str.length() + inc_size);
@@ -46,7 +47,7 @@ class StrPrint : public Print {
   void setExpandEncoded(bool flag) { expand_encoded = flag; }
 
  protected:
-  Str str{200};
+  Str str{STR_PRINT_INITIAL_SIZE};
   int inc_size;
   bool expand_encoded = false;
 };

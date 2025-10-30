@@ -28,7 +28,7 @@ class DLNADevice {
   /// start the
   bool begin(DLNADeviceInfo& device, IUDPService& udp, HttpServer& server) {
     DlnaLogger.log(DlnaLogLevel::Info, "DLNADevice::begin");
-    instance = this;
+    self = this;
     p_server = &server;
     p_udp = &udp;
     setDevice(device);
@@ -78,7 +78,7 @@ class DLNADevice {
   }
 
   static SubscriptionMgr* getSubscriptionMgr() {
-    return instance ? &instance->subscriptionMgr : nullptr;
+    return self ? &self->subscription_mgr : nullptr;
   }
 
   /// Stops the processing and releases the resources
@@ -117,7 +117,7 @@ class DLNADevice {
     }
 
     // be nice, if we have other tasks
-    delay(8);
+    delay(DLNA_LOOP_DELAY_MS);
 
     return true;
   }
@@ -169,8 +169,8 @@ class DLNADevice {
       }
       // Use the service event path as key for subscriptions
       const char* svcKey = requestPath;
-      if (DLNADevice::instance) {
-        Str sid = DLNADevice::instance->subscriptionMgr.subscribe(
+      if (DLNADevice::self) {
+        Str sid = DLNADevice::self->subscription_mgr.subscribe(
             svcKey, cbStr.c_str(), tsec);
         server->replyHeader().setValues(200, "OK");
         server->replyHeader().put("SID", sid.c_str());
@@ -186,9 +186,9 @@ class DLNADevice {
     if (req.method() == T_POST) {
       // Some stacks use POST for unsubscribe; try to handle SID
       const char* sid = req.get("SID");
-      if (sid && DLNADevice::instance) {
+      if (sid && DLNADevice::self) {
         bool ok =
-            DLNADevice::instance->subscriptionMgr.unsubscribe(requestPath, sid);
+            DLNADevice::self->subscription_mgr.unsubscribe(requestPath, sid);
         if (ok) {
           server->replyOK();
           return;
@@ -215,7 +215,7 @@ class DLNADevice {
     bool is_attribute = false;
     bool is_action = false;
     Str actionName;
-    char buffer[256];
+    char buffer[XML_PARSER_BUFFER_SIZE];
     Client& client = server->client();
 
     while (client.available() > 0) {
@@ -245,19 +245,22 @@ class DLNADevice {
         }
       }
     }
+    xp.end();
   }
+
+  StringRegistry& getStringRegistry() { return registry; }
 
  protected:
   bool is_active = false;
   uint32_t post_alive_repeat_ms = 0;
   Scheduler scheduler;
+  SubscriptionMgr subscription_mgr;
   DLNADeviceRequestParser parser;
   DLNADeviceInfo* p_device = nullptr;
-  SubscriptionMgr subscriptionMgr;
   IUDPService* p_udp = nullptr;
   HttpServer* p_server = nullptr;
   inline static StringRegistry registry;
-  inline static DLNADevice* instance = nullptr;
+  inline static DLNADevice* self = nullptr;
 
   void setDevice(DLNADeviceInfo& device) { p_device = &device; }
 
@@ -271,8 +274,9 @@ class DLNADevice {
     uint32_t now = millis();
     if ((uint32_t)(now - last_mem_log) >= MEM_LOG_INTERVAL_MS) {
       last_mem_log = now;
-      DlnaLogger.log(DlnaLogLevel::Info, "Mem: freeHeap=%u freePsram=%u  Scheduler: size=%d active=%s",
-                     (unsigned)ESP.getFreeHeap(), (unsigned)ESP.getFreePsram(), scheduler.size(), isSchedulerActive() ? "true" : "false" );
+      DlnaLogger.log(DlnaLogLevel::Info, "Mem: freeHeap=%u freePsram=%u  / Scheduler: size=%d active=%s / StrRegistry: count=%d size=%d",
+                     (unsigned)ESP.getFreeHeap(), (unsigned)ESP.getFreePsram(), scheduler.size(), isSchedulerActive() ? "true" : "false",
+                     registry.count(), registry.size());
     }
 #endif
   }
