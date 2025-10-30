@@ -78,8 +78,8 @@ $(function() {
 <div class="contents">
 <a href="Allocator_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#include &lt;stdlib.h&gt;</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="Logger_8h.html">basic/Logger.h</a>&quot;</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;<a class="code" href="Logger_8h.html">basic/Logger.h</a>&quot;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="dlna__config_8h.html">dlna_config.h</a>&quot;</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno"><a class="line" href="namespacetiny__dlna.html">    6</a></span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacetiny__dlna.html">tiny_dlna</a> {</div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
@@ -181,9 +181,10 @@ $(function() {
 <div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span> </div>
 <div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span> </div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span><span class="keyword">static</span> AllocatorExt DefaultAllocator;</div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span> </div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>}  <span class="comment">// namespace tiny_dlna</span></div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span><span class="comment">// Default allocator instance</span></div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span><span class="keyword">static</span> <a class="code hl_define" href="dlna__config_8h.html#a31e0be4fc079727aa8f2acebf7a1d080">DLNA_DEFAULT_ALLOCATOR</a> DefaultAllocator;</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span> </div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>}  <span class="comment">// namespace tiny_dlna</span></div>
 <div class="ttc" id="aLogger_8h_html"><div class="ttname"><a href="Logger_8h.html">Logger.h</a></div></div>
 <div class="ttc" id="aclasstiny__dlna_1_1AllocatorExt_html"><div class="ttname"><a href="classtiny__dlna_1_1AllocatorExt.html">tiny_dlna::AllocatorExt</a></div><div class="ttdoc">Memory allocateator which uses ps_malloc (on the ESP32) and if this fails it resorts to malloc.</div><div class="ttdef"><b>Definition:</b> Allocator.h:94</div></div>
 <div class="ttc" id="aclasstiny__dlna_1_1Allocator_html"><div class="ttname"><a href="classtiny__dlna_1_1Allocator.html">tiny_dlna::Allocator</a></div><div class="ttdoc">Memory allocateator which uses malloc.</div><div class="ttdef"><b>Definition:</b> Allocator.h:21</div></div>
@@ -196,6 +197,8 @@ $(function() {
 <div class="ttc" id="aclasstiny__dlna_1_1Allocator_html_adb33f1e134011c74aa522015a698aaee"><div class="ttname"><a href="classtiny__dlna_1_1Allocator.html#adb33f1e134011c74aa522015a698aaee">tiny_dlna::Allocator::createArray</a></div><div class="ttdeci">T * createArray(int len)</div><div class="ttdef"><b>Definition:</b> Allocator.h:42</div></div>
 <div class="ttc" id="aclasstiny__dlna_1_1Allocator_html_af3e92a21c1dbf85563d29425ba2be543"><div class="ttname"><a href="classtiny__dlna_1_1Allocator.html#af3e92a21c1dbf85563d29425ba2be543">tiny_dlna::Allocator::stop</a></div><div class="ttdeci">void stop()</div><div class="ttdef"><b>Definition:</b> Allocator.h:72</div></div>
 <div class="ttc" id="aclasstiny__dlna_1_1LoggerClass_html_ab7ac4f166531a8d27e919b3f47fe8388"><div class="ttname"><a href="classtiny__dlna_1_1LoggerClass.html#ab7ac4f166531a8d27e919b3f47fe8388">tiny_dlna::LoggerClass::log</a></div><div class="ttdeci">void log(DlnaLogLevel current_level, const char *fmt...)</div><div class="ttdoc">Print log message.</div><div class="ttdef"><b>Definition:</b> Logger.h:40</div></div>
+<div class="ttc" id="adlna__config_8h_html"><div class="ttname"><a href="dlna__config_8h.html">dlna_config.h</a></div></div>
+<div class="ttc" id="adlna__config_8h_html_a31e0be4fc079727aa8f2acebf7a1d080"><div class="ttname"><a href="dlna__config_8h.html#a31e0be4fc079727aa8f2acebf7a1d080">DLNA_DEFAULT_ALLOCATOR</a></div><div class="ttdeci">#define DLNA_DEFAULT_ALLOCATOR</div><div class="ttdef"><b>Definition:</b> dlna_config.h:10</div></div>
 <div class="ttc" id="anamespacetiny__dlna_html"><div class="ttname"><a href="namespacetiny__dlna.html">tiny_dlna</a></div><div class="ttdef"><b>Definition:</b> Allocator.h:6</div></div>
 <div class="ttc" id="anamespacetiny__dlna_html_a5eabb92538a2ba1397f67b903cb9d35ea902b0d55fddef6f8d651fe1035b7d4bd"><div class="ttname"><a href="namespacetiny__dlna.html#a5eabb92538a2ba1397f67b903cb9d35ea902b0d55fddef6f8d651fe1035b7d4bd">tiny_dlna::DlnaLogLevel::Error</a></div><div class="ttdeci">@ Error</div></div>
 <div class="ttc" id="anamespacetiny__dlna_html_a5eabb92538a2ba1397f67b903cb9d35eaa603905470e2a5b8c13e96b579ef0dba"><div class="ttname"><a href="namespacetiny__dlna.html#a5eabb92538a2ba1397f67b903cb9d35eaa603905470e2a5b8c13e96b579ef0dba">tiny_dlna::DlnaLogLevel::Debug</a></div><div class="ttdeci">@ Debug</div></div>

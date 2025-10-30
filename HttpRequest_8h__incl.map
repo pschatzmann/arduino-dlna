@@ -1,25 +1,25 @@
 <map id="src/http/Server/HttpRequest.h" name="src/http/Server/HttpRequest.h">
-<area shape="rect" id="node1" title=" " alt="" coords="685,5,899,31"/>
-<area shape="rect" id="node2" title=" " alt="" coords="635,79,698,104"/>
-<area shape="rect" id="node3" href="$HttpHeader_8h.html" title=" " alt="" coords="682,152,790,177"/>
-<area shape="rect" id="node22" href="$HttpChunkReader_8h.html" title=" " alt="" coords="774,79,922,104"/>
-<area shape="rect" id="node23" title=" " alt="" coords="946,79,1046,104"/>
-<area shape="rect" id="node4" href="$HttpLineReader_8h.html" title=" " alt="" coords="781,225,915,251"/>
-<area shape="rect" id="node5" href="$Logger_8h.html" title=" " alt="" coords="688,519,803,544"/>
-<area shape="rect" id="node10" href="$Url_8h.html" title=" " alt="" coords="564,225,655,251"/>
-<area shape="rect" id="node11" href="$Str_8h.html" title=" " alt="" coords="413,299,502,324"/>
-<area shape="rect" id="node19" href="$List_8h.html" title=" " alt="" coords="481,372,575,397"/>
-<area shape="rect" id="node6" title=" " alt="" coords="656,592,731,617"/>
-<area shape="rect" id="node7" title=" " alt="" coords="125,592,192,617"/>
-<area shape="rect" id="node8" title=" " alt="" coords="446,592,517,617"/>
-<area shape="rect" id="node9" title=" " alt="" coords="755,592,839,617"/>
-<area shape="rect" id="node12" href="$StrView_8h.html" title=" " alt="" coords="87,372,169,397"/>
-<area shape="rect" id="node15" href="$Vector_8h.html" title=" " alt="" coords="331,372,405,397"/>
-<area shape="rect" id="node13" title=" " alt="" coords="79,445,177,471"/>
-<area shape="rect" id="node14" title=" " alt="" coords="201,445,276,471"/>
-<area shape="rect" id="node16" href="$dlna__config_8h.html" title=" " alt="" coords="415,445,523,471"/>
-<area shape="rect" id="node17" href="$Allocator_8h.html" title=" " alt="" coords="300,445,391,471"/>
-<area shape="rect" id="node18" title=" " alt="" coords="310,519,381,544"/>
-<area shape="rect" id="node20" title=" " alt="" coords="647,445,707,471"/>
-<area shape="rect" id="node21" title=" " alt="" coords="548,445,623,471"/>
+<area shape="rect" id="node1" title=" " alt="" coords="115,5,329,31"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,79,68,104"/>
+<area shape="rect" id="node3" href="$HttpHeader_8h.html" title=" " alt="" coords="224,152,332,177"/>
+<area shape="rect" id="node22" href="$HttpChunkReader_8h.html" title=" " alt="" coords="92,79,240,104"/>
+<area shape="rect" id="node23" title=" " alt="" coords="316,79,416,104"/>
+<area shape="rect" id="node4" href="$HttpLineReader_8h.html" title=" " alt="" coords="99,225,233,251"/>
+<area shape="rect" id="node5" href="$Logger_8h.html" title=" " alt="" coords="213,519,327,544"/>
+<area shape="rect" id="node10" href="$Url_8h.html" title=" " alt="" coords="359,225,450,251"/>
+<area shape="rect" id="node11" href="$Str_8h.html" title=" " alt="" coords="571,299,660,324"/>
+<area shape="rect" id="node19" href="$List_8h.html" title=" " alt="" coords="437,372,532,397"/>
+<area shape="rect" id="node6" title=" " alt="" coords="181,592,255,617"/>
+<area shape="rect" id="node7" title=" " alt="" coords="627,592,694,617"/>
+<area shape="rect" id="node8" title=" " alt="" coords="837,592,908,617"/>
+<area shape="rect" id="node9" title=" " alt="" coords="280,592,364,617"/>
+<area shape="rect" id="node12" href="$StrView_8h.html" title=" " alt="" coords="814,372,897,397"/>
+<area shape="rect" id="node15" href="$Vector_8h.html" title=" " alt="" coords="605,372,679,397"/>
+<area shape="rect" id="node13" title=" " alt="" coords="807,445,904,471"/>
+<area shape="rect" id="node14" title=" " alt="" coords="657,445,731,471"/>
+<area shape="rect" id="node16" href="$dlna__config_8h.html" title=" " alt="" coords="580,519,688,544"/>
+<area shape="rect" id="node17" href="$Allocator_8h.html" title=" " alt="" coords="491,445,582,471"/>
+<area shape="rect" id="node18" title=" " alt="" coords="485,519,556,544"/>
+<area shape="rect" id="node20" title=" " alt="" coords="407,445,467,471"/>
+<area shape="rect" id="node21" title=" " alt="" coords="307,445,382,471"/>
 </map>

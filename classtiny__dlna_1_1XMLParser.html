@@ -112,9 +112,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac3fa593fd9968ebed81c285240073239"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1XMLParser.html#ac3fa593fd9968ebed81c285240073239">resetParse</a> ()</td></tr>
 <tr class="memdesc:ac3fa593fd9968ebed81c285240073239"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset the internal parse position so subsequent <a class="el" href="classtiny__dlna_1_1XMLParser.html#ac6e04a3d8c8e4c765a56ead97a6dd8d3" title="Parse a single fragment (one callback invocation) from the previously set XML buffer.">parseSingle()</a> calls start from the beginning of the buffer.  <br /></td></tr>
 <tr class="separator:ac3fa593fd9968ebed81c285240073239"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a63aef71996b9fcc3a08408f3664e0287"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1XMLParser.html#a63aef71996b9fcc3a08408f3664e0287">resetParser</a> ()</td></tr>
-<tr class="memdesc:a63aef71996b9fcc3a08408f3664e0287"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fully reset parser state (parse position, path stack and content starts). Use this when the underlying buffer has been trimmed/changed so the parser's internal stacks do not retain state from the previous buffer view.  <br /></td></tr>
-<tr class="separator:a63aef71996b9fcc3a08408f3664e0287"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab04ce3da7fa672800ff578f863da6469"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1XMLParser.html#ab04ce3da7fa672800ff578f863da6469">end</a> ()</td></tr>
+<tr class="memdesc:ab04ce3da7fa672800ff578f863da6469"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fully reset parser state (parse position, path stack and content starts). Use this when the underlying buffer has been trimmed/changed so the parser's internal stacks do not retain state from the previous buffer view.  <br /></td></tr>
+<tr class="separator:ab04ce3da7fa672800ff578f863da6469"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a37ecf7a9d47e7b119fa670592c7c53ca"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1XMLParser.html#a37ecf7a9d47e7b119fa670592c7c53ca">setReportTextOnly</a> (bool flag)</td></tr>
 <tr class="memdesc:a37ecf7a9d47e7b119fa670592c7c53ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">report only nodes with text  <br /></td></tr>
 <tr class="separator:a37ecf7a9d47e7b119fa670592c7c53ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -395,6 +395,33 @@ text, int start, int len, void* ref)</a><ul>
   </tr>
 </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab04ce3da7fa672800ff578f863da6469" name="ab04ce3da7fa672800ff578f863da6469"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab04ce3da7fa672800ff578f863da6469">&#9670;&#160;</a></span>end()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tiny_dlna::XMLParser::end </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Fully reset parser state (parse position, path stack and content starts). Use this when the underlying buffer has been trimmed/changed so the parser's internal stacks do not retain state from the previous buffer view. </p>
 
 </div>
 </div>
@@ -734,33 +761,6 @@ text, int start, int len, void* ref)</a><ul>
 </div><div class="memdoc">
 
 <p>Reset the internal parse position so subsequent <a class="el" href="classtiny__dlna_1_1XMLParser.html#ac6e04a3d8c8e4c765a56ead97a6dd8d3" title="Parse a single fragment (one callback invocation) from the previously set XML buffer.">parseSingle()</a> calls start from the beginning of the buffer. </p>
-
-</div>
-</div>
-<a id="a63aef71996b9fcc3a08408f3664e0287" name="a63aef71996b9fcc3a08408f3664e0287"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a63aef71996b9fcc3a08408f3664e0287">&#9670;&#160;</a></span>resetParser()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void tiny_dlna::XMLParser::resetParser </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Fully reset parser state (parse position, path stack and content starts). Use this when the underlying buffer has been trimmed/changed so the parser's internal stacks do not retain state from the previous buffer view. </p>
 
 </div>
 </div>

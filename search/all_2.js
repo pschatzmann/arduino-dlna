@@ -53,8 +53,8 @@ var searchData=
   ['createnode_50',['createNode',['../classtiny__dlna_1_1List.html#a2fbf0414b947fbbd3e0e090b61255731',1,'tiny_dlna::List']]],
   ['createsearchaction_51',['createSearchAction',['../classtiny__dlna_1_1DLNAControlPointMediaServer.html#a1200b21cb3d88e9e319d546396c405c1',1,'tiny_dlna::DLNAControlPointMediaServer']]],
   ['createxml_52',['createXML',['../classtiny__dlna_1_1DLNAControlPoint.html#a264865ba29d1d52b546bac2ed3c6d392',1,'tiny_dlna::DLNAControlPoint']]],
-  ['crlf_53',['CRLF',['../classtiny__dlna_1_1HttpHeader.html#a3abc5c74c6a9c503c58b8cdfe00e657e',1,'tiny_dlna::HttpHeader']]],
-  ['crlf_54',['crlf',['../classtiny__dlna_1_1HttpHeader.html#a60f18f92f996799ea4b6cc6b642bac84',1,'tiny_dlna::HttpHeader::crlf()'],['../classtiny__dlna_1_1HttpServer.html#ab54de9871805f143d7637ccdc2ed27b7',1,'tiny_dlna::HttpServer::crlf()']]],
+  ['crlf_53',['crlf',['../classtiny__dlna_1_1HttpHeader.html#a60f18f92f996799ea4b6cc6b642bac84',1,'tiny_dlna::HttpHeader::crlf()'],['../classtiny__dlna_1_1HttpServer.html#ab54de9871805f143d7637ccdc2ed27b7',1,'tiny_dlna::HttpServer::crlf()']]],
+  ['crlf_54',['CRLF',['../classtiny__dlna_1_1HttpHeader.html#a3abc5c74c6a9c503c58b8cdfe00e657e',1,'tiny_dlna::HttpHeader']]],
   ['current_5fmime_55',['current_mime',['../classtiny__dlna_1_1DLNAMediaRenderer.html#a781051e302045eaf198e2ded4a85493f',1,'tiny_dlna::DLNAMediaRenderer']]],
   ['current_5furi_56',['current_uri',['../classtiny__dlna_1_1DLNAMediaRenderer.html#a74aca621d309e9f24b0494b897fdd1be',1,'tiny_dlna::DLNAMediaRenderer']]],
   ['current_5fvolume_57',['current_volume',['../classtiny__dlna_1_1DLNAMediaRenderer.html#abefe59fccd65b4cec5622b04c0908e98',1,'tiny_dlna::DLNAMediaRenderer']]]
