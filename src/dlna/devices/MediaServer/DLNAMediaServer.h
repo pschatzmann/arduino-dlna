@@ -10,7 +10,7 @@
 #include "dlna/devices/MediaServer/MediaItem.h"
 #include "dlna/xml/XMLParserPrint.h"
 #include "dlna/xml/XMLPrinter.h"
-#include "http/HttpServer.h"
+#include "http/Http.h"
 #include "ms_connmgr.h"
 #include "ms_content_dir.h"
 

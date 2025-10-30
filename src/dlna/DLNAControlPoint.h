@@ -9,7 +9,7 @@
 #include "Scheduler.h"
 #include "basic/StrPrint.h"
 #include "basic/Url.h"
-#include "http/HttpServer.h"
+#include "http/Http.h"
 #include "xml/XMLDeviceParser.h"
 #include "xml/XMLParser.h"
 #include "xml/XMLParserPrint.h"

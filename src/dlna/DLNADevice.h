@@ -6,7 +6,7 @@
 #include "Schedule.h"
 #include "SubscriptionMgr.h"
 #include "basic/Url.h"
-#include "http/HttpServer.h"
+#include "http/Http.h"
 #include "xml/XMLParserPrint.h"
 
 namespace tiny_dlna {

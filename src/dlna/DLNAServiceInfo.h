@@ -1,6 +1,6 @@
 #pragma once
 
-#include "http/HttpServer.h"
+#include "http/Http.h"
 
 #define DLNA_MAX_URL_LEN 120
 

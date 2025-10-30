@@ -4,7 +4,7 @@
 #include "basic/StrPrint.h"
 #include "basic/Url.h"
 #include "basic/Vector.h"
-#include "http/HttpServer.h"
+#include "http/Http.h"
 #include "http/Server/HttpRequest.h"
 
 namespace tiny_dlna {
