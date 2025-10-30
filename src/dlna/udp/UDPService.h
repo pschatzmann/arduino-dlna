@@ -63,10 +63,9 @@ class UDPService : public IUDPService {
       char tmp[packetSize + 1] = {0};
       int len = udp.readBytes(tmp, packetSize);
       result.data = tmp;
-      DlnaLogger.log(DlnaLogLevel::Debug, "(%s [%d])->: %s", result.peer.toString(),
+      DlnaLogger.log(DlnaLogLevel::Info, "(%s [%d])->: %s", result.peer.toString(),
                      packetSize, tmp);
     }
-    DlnaLogger.log(DlnaLogLevel::Info, "UDPService::receive: received %d bytes", packetSize);
     return result;
   }
 

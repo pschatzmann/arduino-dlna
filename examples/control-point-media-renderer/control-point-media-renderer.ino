@@ -14,7 +14,7 @@ DLNAControlPoint cp(server); // with Notifications
 WiFiClient client;
 DLNAHttpRequest http(client);
 UDPAsyncService udp;
-DLNAControlPointMediaRenderer renderer(cp);
+DLNAControlPointMediaRenderer renderer(cp, http, udp);
 
 void setupWifi() {
   WiFi.begin(ssid, password);
@@ -34,7 +34,7 @@ void setup() {
   setupWifi();
 
   // Start control point to discover devices: 10 min
-  if (!renderer.begin(http, udp, 1000, 10 * 60 * 1000)) {
+  if (!renderer.begin(1000, 10 * 60 * 1000)) {
     Serial.println("No devices found");
     return;
   }

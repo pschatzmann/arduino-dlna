@@ -3,8 +3,8 @@
 
 #include <functional>
 
-#include "dlna/DLNAControlPoint.h"
 #include "dlna/Action.h"
+#include "dlna/DLNAControlPoint.h"
 
 namespace tiny_dlna {
 
@@ -18,12 +18,30 @@ namespace tiny_dlna {
  */
 class DLNAControlPointMediaRenderer {
  public:
+  /// Default constructor
+  DLNAControlPointMediaRenderer() = default;
+
   /**
-   * @brief Construct the helper with a reference to the control point mgr
-   * @param mgr Reference to the underlying DLNAControlPointMgr used to send
-   *            actions and manage discovery/subscriptions
+   * @brief Construct helper with references to control point manager and
+   *        transport instances.
+   *
+   * This convenience constructor binds the underlying `DLNAControlPoint`
+   * manager as well as the HTTP wrapper (used for subscription callbacks)
+   * and the UDP service (used for SSDP discovery). It is equivalent to
+   * default-constructing the helper and then calling `setDLNAControlPoint()`,
+   * `setHttp()` and `setUdp()`, but more concise for callers that already
+   * have the instances available.
+   *
+   * @param m Reference to the `DLNAControlPoint` manager
+   * @param http Reference to an HTTP request wrapper used for subscriptions
+   * @param udp Reference to a UDP service used for SSDP discovery
    */
-  DLNAControlPointMediaRenderer(DLNAControlPoint& mgr) : mgr(mgr) {}
+  DLNAControlPointMediaRenderer(DLNAControlPoint& m, DLNAHttpRequest& http,
+                                IUDPService& udp)
+      : p_mgr(&m), p_http(&http), p_udp(&udp) {}
+
+  /// Set the control point manager instance (required before using helper)
+  void setDLNAControlPoint(DLNAControlPoint& m) { p_mgr = &m; }
 
   /**
    * @brief Restrict this helper to devices of the given device type
@@ -43,12 +61,24 @@ class DLNAControlPointMediaRenderer {
    * @param maxWaitMs Maximum time in milliseconds to wait for discovery
    * @return true on success, false on error
    */
-  bool begin(DLNAHttpRequest& http, IUDPService& udp, uint32_t minWaitMs = 3000,
-             uint32_t maxWaitMs = 60000) {
+  bool begin(uint32_t minWaitMs = 3000, uint32_t maxWaitMs = 60000) {
     DlnaLogger.log(DlnaLogLevel::Info,
-                   "ControlPointMediaServer::begin device_type_filter='%s'",
+                   "ControlPointMediaRenderer::begin - device_type_filter='%s'",
                    device_type_filter ? device_type_filter : "(null)");
-    return mgr.begin(http, udp, device_type_filter, minWaitMs, maxWaitMs);
+    if (!p_mgr) {
+      DlnaLogger.log(DlnaLogLevel::Error, "mgr instance not set");
+      return false;
+    }
+    if (!p_http) {
+      DlnaLogger.log(DlnaLogLevel::Error, "http instance not set");
+      return false;
+    }
+    if (!p_udp) {
+      DlnaLogger.log(DlnaLogLevel::Error, "udp instance not set");
+      return false;
+    }
+    return p_mgr->begin(*p_http, *p_udp, device_type_filter, minWaitMs,
+                        maxWaitMs);
   }
 
   /**
@@ -57,7 +87,7 @@ class DLNAControlPointMediaRenderer {
    */
   int getDeviceCount() {
     int count = 0;
-    for (auto& d : mgr.getDevices()) {
+    for (auto& d : p_mgr->getDevices()) {
       const char* dt = d.getDeviceType();
       if (!device_type_filter || StrView(dt).contains(device_type_filter))
         count++;
@@ -70,6 +100,12 @@ class DLNAControlPointMediaRenderer {
    * @param idx Index of the device to select; defaults to 0
    */
   void setDeviceIndex(int idx) { device_index = idx; }
+
+  /// Setter for the HTTP wrapper used for subscriptions and callbacks
+  void setHttp(DLNAHttpRequest& http) { p_http = &http; }
+
+  /// Setter for UDP service used for discovery (SSDP)
+  void setUdp(IUDPService& udp) { p_udp = &udp; }
 
   typedef void (*NotificationCallback)(void* reference, const char* sid,
                                        const char* varName,
@@ -84,11 +120,11 @@ class DLNAControlPointMediaRenderer {
    */
   bool subscribeNotifications(NotificationCallback cb = nullptr,
                               int timeoutSeconds = 3600) {
-    mgr.setReference(this);
-    mgr.setSubscribeInterval(timeoutSeconds);
+    p_mgr->setReference(this);
+    p_mgr->setSubscribeInterval(timeoutSeconds);
     // register provided callback or fallback to the default processNotification
-    mgr.onNotification(cb != nullptr ? cb : processNotification);
-    return mgr.subscribeNotifications();
+    p_mgr->onNotification(cb != nullptr ? cb : processNotification);
+    return p_mgr->subscribeNotifications();
   }
 
   /**
@@ -112,8 +148,8 @@ class DLNAControlPointMediaRenderer {
     act.addArgument("InstanceID", instance_id);
     act.addArgument("CurrentURI", uri);
     act.addArgument("CurrentURIMetaData", "");
-    mgr.addAction(act);
-    last_reply = mgr.executeActions();
+    p_mgr->addAction(act);
+    last_reply = p_mgr->executeActions();
     return (bool)last_reply;
   }
 
@@ -130,8 +166,8 @@ class DLNAControlPointMediaRenderer {
     ActionRequest act(svc, "Play");
     act.addArgument("InstanceID", instance_id);
     act.addArgument("Speed", "1");
-    mgr.addAction(act);
-    last_reply = mgr.executeActions();
+    p_mgr->addAction(act);
+    last_reply = p_mgr->executeActions();
     if (last_reply) setActiveState(true);
     return (bool)last_reply;
   }
@@ -155,8 +191,8 @@ class DLNAControlPointMediaRenderer {
     if (!svc) return false;
     ActionRequest act(svc, "Pause");
     act.addArgument("InstanceID", instance_id);
-    mgr.addAction(act);
-    last_reply = mgr.executeActions();
+    p_mgr->addAction(act);
+    last_reply = p_mgr->executeActions();
     if (last_reply) setActiveState(false);
     return (bool)last_reply;
   }
@@ -170,8 +206,8 @@ class DLNAControlPointMediaRenderer {
     if (!svc) return false;
     ActionRequest act(svc, "Stop");
     act.addArgument("InstanceID", instance_id);
-    mgr.addAction(act);
-    last_reply = mgr.executeActions();
+    p_mgr->addAction(act);
+    last_reply = p_mgr->executeActions();
     if (last_reply) setActiveState(false);
     return (bool)last_reply;
   }
@@ -196,8 +232,8 @@ class DLNAControlPointMediaRenderer {
     act.addArgument("InstanceID", "0");
     act.addArgument("Channel", "Master");
     act.addArgument("DesiredVolume", volBuf);
-    mgr.addAction(act);
-    last_reply = mgr.executeActions();
+    p_mgr->addAction(act);
+    last_reply = p_mgr->executeActions();
     return (bool)last_reply;
   }
 
@@ -214,8 +250,8 @@ class DLNAControlPointMediaRenderer {
     act.addArgument("InstanceID", "0");
     act.addArgument("Channel", "Master");
     act.addArgument("DesiredMute", mute ? "1" : "0");
-    mgr.addAction(act);
-    ActionReply r = mgr.executeActions();
+    p_mgr->addAction(act);
+    ActionReply r = p_mgr->executeActions();
     return (bool)r;
   }
 
@@ -226,12 +262,13 @@ class DLNAControlPointMediaRenderer {
   int getVolume() {
     DLNAServiceInfo& svc =
         selectService("urn:upnp-org:serviceId:RenderingControl");
+    selectService("urn:upnp-org:serviceId:RenderingControl");
     if (!svc) return -1;
     ActionRequest act(svc, "GetVolume");
     act.addArgument("InstanceID", instance_id);
-    act.addArgument("Channel", "Master");
-    mgr.addAction(act);
-    last_reply = mgr.executeActions();
+    p_mgr->addAction(act);
+    last_reply = p_mgr->executeActions();
+    last_reply = p_mgr->executeActions();
     if (!last_reply) return -1;
     const char* v = findArgument(last_reply, "CurrentVolume");
     if (!v) return -1;
@@ -249,8 +286,8 @@ class DLNAControlPointMediaRenderer {
     ActionRequest act(svc, "GetMute");
     act.addArgument("InstanceID", instance_id);
     act.addArgument("Channel", "Master");
-    mgr.addAction(act);
-    last_reply = mgr.executeActions();
+    p_mgr->addAction(act);
+    last_reply = p_mgr->executeActions();
     if (!last_reply) return -1;
     const char* m = findArgument(last_reply, "CurrentMute");
     if (!m) return -1;
@@ -266,8 +303,8 @@ class DLNAControlPointMediaRenderer {
     if (!svc) return 0;
     ActionRequest act(svc, "GetPositionInfo");
     act.addArgument("InstanceID", instance_id);
-    mgr.addAction(act);
-    last_reply = mgr.executeActions();
+    p_mgr->addAction(act);
+    last_reply = p_mgr->executeActions();
     if (!last_reply) return 0;
     const char* rel = findArgument(last_reply, "RelTime");
     if (!rel) return 0;
@@ -284,8 +321,8 @@ class DLNAControlPointMediaRenderer {
     if (!svc) return nullptr;
     ActionRequest act(svc, "GetTransportInfo");
     act.addArgument("InstanceID", instance_id);
-    mgr.addAction(act);
-    last_reply = mgr.executeActions();
+    p_mgr->addAction(act);
+    last_reply = p_mgr->executeActions();
     if (!last_reply) return nullptr;
     return findArgument(last_reply, "CurrentTransportState");
   }
@@ -299,8 +336,8 @@ class DLNAControlPointMediaRenderer {
     if (!svc) return nullptr;
     ActionRequest act(svc, "GetMediaInfo");
     act.addArgument("InstanceID", instance_id);
-    mgr.addAction(act);
-    last_reply = mgr.executeActions();
+    p_mgr->addAction(act);
+    last_reply = p_mgr->executeActions();
     if (!last_reply) return nullptr;
     return findArgument(last_reply, "CurrentURI");
   }
@@ -314,8 +351,8 @@ class DLNAControlPointMediaRenderer {
     if (!svc) return -1;
     ActionRequest act(svc, "GetMediaInfo");
     act.addArgument("InstanceID", instance_id);
-    mgr.addAction(act);
-    last_reply = mgr.executeActions();
+    p_mgr->addAction(act);
+    last_reply = p_mgr->executeActions();
     if (!last_reply) return -1;
     const char* n = findArgument(last_reply, "NrTracks");
     if (!n) return -1;
@@ -327,12 +364,13 @@ class DLNAControlPointMediaRenderer {
    * @return milliseconds or 0 on error/unknown
    */
   unsigned long getMediaDurationMs() {
-    DLNAServiceInfo& svc = mgr.getService("urn:upnp-org:serviceId:AVTransport");
+    DLNAServiceInfo& svc =
+        p_mgr->getService("urn:upnp-org:serviceId:AVTransport");
     if (!svc) return 0;
     ActionRequest act(svc, "GetMediaInfo");
     act.addArgument("InstanceID", instance_id);
-    mgr.addAction(act);
-    last_reply = mgr.executeActions();
+    p_mgr->addAction(act);
+    last_reply = p_mgr->executeActions();
     if (!last_reply) return 0;
     const char* d = findArgument(last_reply, "MediaDuration");
     if (!d) return 0;
@@ -344,12 +382,13 @@ class DLNAControlPointMediaRenderer {
    * @return track index (numeric) or -1 on error
    */
   int getTrackIndex() {
-    DLNAServiceInfo& svc = mgr.getService("urn:upnp-org:serviceId:AVTransport");
+    DLNAServiceInfo& svc =
+        p_mgr->getService("urn:upnp-org:serviceId:AVTransport");
     if (!svc) return -1;
     ActionRequest act(svc, "GetPositionInfo");
     act.addArgument("InstanceID", instance_id);
-    mgr.addAction(act);
-    last_reply = mgr.executeActions();
+    p_mgr->addAction(act);
+    last_reply = p_mgr->executeActions();
     if (!last_reply) return -1;
     const char* tr = findArgument(last_reply, "Track");
     if (!tr) return -1;
@@ -361,12 +400,13 @@ class DLNAControlPointMediaRenderer {
    * @return milliseconds or 0 on error
    */
   unsigned long getTrackDurationMs() {
-    DLNAServiceInfo& svc = mgr.getService("urn:upnp-org:serviceId:AVTransport");
+    DLNAServiceInfo& svc =
+        p_mgr->getService("urn:upnp-org:serviceId:AVTransport");
     if (!svc) return 0;
     ActionRequest act(svc, "GetPositionInfo");
     act.addArgument("InstanceID", instance_id);
-    mgr.addAction(act);
-    last_reply = mgr.executeActions();
+    p_mgr->addAction(act);
+    last_reply = p_mgr->executeActions();
     if (!last_reply) return 0;
     const char* td = findArgument(last_reply, "TrackDuration");
     if (!td) return 0;
@@ -401,7 +441,7 @@ class DLNAControlPointMediaRenderer {
   }
 
  protected:
-  DLNAControlPoint& mgr;
+  DLNAControlPoint* p_mgr = nullptr;
   bool is_active = false;
   std::function<void(bool, void*)> activeChangedCallback = nullptr;
   int device_index = 0;
@@ -411,6 +451,9 @@ class DLNAControlPointMediaRenderer {
   const char* device_type_filter = device_type_filter_default;
   ActionReply last_reply;
   void* reference = nullptr;
+  // Optional transport references (must be set before calling begin())
+  DLNAHttpRequest* p_http = nullptr;
+  IUDPService* p_udp = nullptr;
 
   // Helper to update is_active and notify callback only on change
   void setActiveState(bool s) {
@@ -485,11 +528,11 @@ class DLNAControlPointMediaRenderer {
   /// Select service by id
   DLNAServiceInfo& selectService(const char* id) {
     // use selected device
-    DLNAServiceInfo& s = mgr.getDevice().getService(id);
+    DLNAServiceInfo& s = p_mgr->getDevice().getService(id);
     if (s) return s;
 
     // fallback: global search
-    return mgr.getService(id);
+    return p_mgr->getService(id);
   }
 };
 

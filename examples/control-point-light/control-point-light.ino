@@ -55,8 +55,8 @@ void switchLight() {
       ActionRequest action(service, "SetTarget");
       action.addArgument("newTargetValue", current_status ? "1" : "0");
       cp.addAction(action);
+      auto reply = cp.executeActions();
     }
-    auto reply = cp.executeActions();
 
     timeout = millis() + 1000;
   }

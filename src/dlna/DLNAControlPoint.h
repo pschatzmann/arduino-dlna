@@ -9,6 +9,7 @@
 #include "Scheduler.h"
 #include "basic/StrPrint.h"
 #include "basic/Url.h"
+#include "dlna_config.h"
 #include "http/Http.h"
 #include "xml/XMLDeviceParser.h"
 #include "xml/XMLParser.h"
@@ -125,6 +126,7 @@ class DLNAControlPoint {
              const char* searchTarget = "ssdp:all", uint32_t minWaitMs = 3000,
              uint32_t maxWaitMs = 60000) {
     DlnaLogger.log(DlnaLogLevel::Info, "DLNADevice::begin");
+    http.setTimeout(DLNA_HTTP_REQUEST_TIMEOUT_MS);
     search_target = searchTarget;
     is_active = true;
     p_udp = &udp;
@@ -219,7 +221,6 @@ class DLNAControlPoint {
     DlnaLogger.log(DlnaLogLevel::Debug, "DLNAControlPointMgr::executeActions");
     reply.clear();
     postAllActions();
-    actions.clear();
     // Debug: dump collected reply arguments for verification
     DlnaLogger.log(DlnaLogLevel::Info, "Collected reply arguments: %d",
                    (int)reply.arguments.size());
@@ -361,8 +362,8 @@ class DLNAControlPoint {
       device.setActive(true);
       return true;
     }
-    // http get
-    StrPrint xml;
+    // http get - incremental parse using XMLParserPrint so we don't hold
+    // the whole device.xml in memory
     DLNAHttpRequest req;
     int rc = req.get(url, "text/xml");
 
@@ -371,18 +372,22 @@ class DLNAControlPoint {
                      url.url(), rc);
       return false;
     }
-    // get xml
-    uint8_t buffer[512];
+
+    DLNADeviceInfo new_device;
+    new_device.base_url = nullptr;
+
+    XMLDeviceParser parser{new_device, strings};
+    uint8_t buffer[XML_PARSER_BUFFER_SIZE];
+
+    // Read and incrementally parse into new_device
     while (true) {
-      int len = req.read(buffer, 512);
-      if (len == 0) break;
-      xml.write(buffer, len);
+      int len = req.read(buffer, sizeof(buffer));
+      if (len <= 0) break;
+      parser.parse(buffer, len);
     }
 
-    // parse xml
-    DLNADeviceInfo new_device;
-    XMLDeviceParser parser;
-    parser.parse(new_device, strings, xml.c_str());
+    parser.finalize(new_device);
+
     new_device.device_url = url;
     // Avoid adding the same device multiple times: check UDN uniqueness
     for (auto& existing_device : devices) {
@@ -480,7 +485,7 @@ class DLNAControlPoint {
 
     // read headers
     HttpRequestHeader& req = server->requestHeader();
-    uint8_t buffer[200];
+    uint8_t buffer[XML_PARSER_BUFFER_SIZE];
     XMLParserPrint xml_parser;
     Str node;
     Str text;
@@ -733,9 +738,10 @@ class DLNAControlPoint {
   /// the HTTP rc.
   ActionReply& processActionHttpPost(Url& post_url, StrPrint& requestBody,
                                      const char* soapAction) {
-    DlnaLogger.log(DlnaLogLevel::Debug, "DLNAControlPointMgr::processActionHttpPost");
+    DlnaLogger.log(DlnaLogLevel::Debug,
+                   "DLNAControlPointMgr::processActionHttpPost");
     XMLParserPrint xml_parser;
-    uint8_t buffer[200];
+    uint8_t buffer[XML_PARSER_BUFFER_SIZE];
     Str outNodeName;
     Vector<Str> outPath;
     Str outText;
@@ -750,6 +756,8 @@ class DLNAControlPoint {
     if (rc != 200) {
       p_http->stop();
       reply.setValid(false);
+      DlnaLogger.log(DlnaLogLevel::Error, "Action '%s' failed with HTTP rc %d",
+                     nullStr(soapAction), rc);
       return reply;
     }
 
@@ -762,21 +770,23 @@ class DLNAControlPoint {
         // Serial.write(buffer, len);
         xml_parser.write(buffer, len);
         while (xml_parser.parse(outNodeName, outPath, outText, outAttributes)) {
-          // skip didl
-          if (!outNodeName.equals("Result")) {
-            Argument arg;
-            // persist the argument name in the control point's string registry
-            arg.name = strings.add((char*)outNodeName.c_str());
-            arg.value = outText;
-            if (!(outText.isEmpty() && outAttributes.isEmpty())) {
-              reply.addArgument(arg);
-              DlnaLogger.log(DlnaLogLevel::Info, "ActionReplay '%s': %s (%s)",
-                             nullStr(outNodeName), nullStr(outText),
-                             nullStr(outAttributes));
-              if (result_callback) {
-                result_callback(nullStr(arg.name, ""), nullStr(outText, ""),
-                                nullStr(outAttributes, ""));
-              }
+          Argument arg;
+          // persist the argument name in the control point's string registry
+          arg.name = strings.add((char*)outNodeName.c_str());
+          arg.value = outText;
+          // For most nodes we only add arguments when they contain text or
+          // attributes. The special "Result" node contains the DIDL-Lite
+          // payload (raw XML) and must be preserved so callers (e.g. the
+          // MediaServer helper) can parse returned media items.
+          if (!(outText.isEmpty() && outAttributes.isEmpty()) ||
+              outNodeName.equals("Result")) {
+            reply.addArgument(arg);
+            DlnaLogger.log(DlnaLogLevel::Info, "ActionReply '%s': %s (%s)",
+                           nullStr(outNodeName), nullStr(outText),
+                           nullStr(outAttributes));
+            if (result_callback) {
+              result_callback(nullStr(arg.name, ""), nullStr(outText, ""),
+                              nullStr(outAttributes, ""));
             }
           }
         }

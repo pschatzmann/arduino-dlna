@@ -10,7 +10,7 @@ WiFiClient client;
 DLNAHttpRequest http(client);
 UDPAsyncService udp;
 DLNAControlPoint cp;  // no notifications needed
-DLNAControlPointMediaServer cpms(cp);
+DLNAControlPointMediaServer cpms(cp, http, udp);
 
 /// Simple callback that extracts and prints the item metadata
 void printItemCallback(const char* name, const char* text,
@@ -52,7 +52,7 @@ void setup() {
   setupWifi();
 
   // Start control point and wait to find relevant devices: 10 min
-  if (!cpms.begin(http, udp, 1000, 10 * 60 * 1000)) {
+  if (!cpms.begin(1000, 10 * 60 * 1000)) {
     Serial.println("No devices found");
     while (true) delay(1000);
   }

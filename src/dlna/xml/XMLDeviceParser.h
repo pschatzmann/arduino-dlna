@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Print.h"
+#include "XMLParserPrint.h"
 #include "assert.h"
 #include "basic/Icon.h"
 #include "basic/StrView.h"
@@ -9,180 +10,157 @@
 namespace tiny_dlna {
 
 /**
- * @brief Parses an DLNA device xml string to fill the DLNADevice data
- * structure
- * @author Phil Schatzmann
+ * @brief Incremental XML device parser using XMLParserPrint
+ *
+ * This parser consumes parse events from an XMLParserPrint instance and
+ * fills a DLNADeviceInfo structure incrementally. It keeps internal state
+ * across multiple calls so callers can feed XML data in chunks.
  */
-
-/// @brief Parses DLNA device XML and fills DLNADeviceInfo structure
 class XMLDeviceParser {
  public:
-  /// @brief Parse DLNA device XML string and fill DLNADeviceInfo
-  /// @param result DLNADeviceInfo to fill
-  /// @param strings StringRegistry for string deduplication
-  /// @param xmlStr XML string to parse
-  void parse(DLNADeviceInfo& result, StringRegistry& strings, const char* xmlStr) {
-    p_strings = &strings;
-    StrView tmp(xmlStr);
-    str.swap(tmp);
-    Url empty_url;
-    result.base_url = nullptr;
-    result.device_url = empty_url;
+  XMLDeviceParser(DLNADeviceInfo& result, StringRegistry& strings) {
+    resetState();
+    p_registry = &strings;
     p_device = &result;
-    parseVersion(result);
-    parseIcons(result);
-    parseDevice(result);
+  }
+
+  /// Parse available nodes from xml_parser and populate `result`.
+  /// Caller may call this repeatedly as more data is written into xml_parser.
+  void parse(const uint8_t* buffer, size_t len) {
+    // Feed the buffer to the XML parser
+
+    DLNADeviceInfo& result = *p_device;
+    Str node;
+    Str text;
+    Str attr;
+    Vector<Str> path;
+
+    xml_parser.write(buffer, len);
+
+    // consume all parsed nodes available so far
+    while (xml_parser.parse(node, path, text, attr)) {
+      bool path_has_service = false;
+      bool path_has_icon = false;
+      for (int i = 0; i < path.size(); ++i) {
+        if (path[i] == "service") path_has_service = true;
+        if (path[i] == "icon") path_has_icon = true;
+      }
+
+      if (path_has_service) {
+        if (!in_service) {
+          in_service = true;
+          cur_service = DLNAServiceInfo();
+        }
+        if (node.equals("serviceType")) {
+          cur_service.service_type = p_registry->add(text.c_str());
+        } else if (node.equals("serviceId")) {
+          cur_service.service_id = p_registry->add(text.c_str());
+        } else if (node.equals("SCPDURL")) {
+          cur_service.scpd_url = p_registry->add(text.c_str());
+        } else if (node.equals("controlURL")) {
+          cur_service.control_url = p_registry->add(text.c_str());
+        } else if (node.equals("eventSubURL")) {
+          cur_service.event_sub_url = p_registry->add(text.c_str());
+        }
+      } else if (path_has_icon) {
+        if (!in_icon) {
+          in_icon = true;
+          cur_icon = Icon();
+        }
+        if (node.equals("mimetype")) {
+          cur_icon.mime = p_registry->add(text.c_str());
+        } else if (node.equals("width")) {
+          cur_icon.width = atoi(text.c_str());
+        } else if (node.equals("height")) {
+          cur_icon.height = atoi(text.c_str());
+        } else if (node.equals("depth")) {
+          cur_icon.depth = atoi(text.c_str());
+        } else if (node.equals("url")) {
+          cur_icon.icon_url = p_registry->add(text.c_str());
+        }
+      } else {
+        // device-level
+        if (node.equals("deviceType")) {
+          result.device_type = p_registry->add(text.c_str());
+        } else if (node.equals("friendlyName")) {
+          result.friendly_name = p_registry->add(text.c_str());
+        } else if (node.equals("manufacturer")) {
+          result.manufacturer = p_registry->add(text.c_str());
+        } else if (node.equals("manufacturerURL")) {
+          result.manufacturer_url = p_registry->add(text.c_str());
+        } else if (node.equals("modelDescription")) {
+          result.model_description = p_registry->add(text.c_str());
+        } else if (node.equals("modelName")) {
+          result.model_name = p_registry->add(text.c_str());
+        } else if (node.equals("modelNumber")) {
+          result.model_number = p_registry->add(text.c_str());
+        } else if (node.equals("modelURL")) {
+          result.model_url = p_registry->add(text.c_str());
+        } else if (node.equals("serialNumber")) {
+          result.serial_number = p_registry->add(text.c_str());
+        } else if (node.equals("UPC")) {
+          result.universal_product_code = p_registry->add(text.c_str());
+        } else if (node.equals("UDN")) {
+          result.udn = p_registry->add(text.c_str());
+        } else if (node.equals("URLBase")) {
+          result.base_url = p_registry->add(text.c_str());
+        }
+      }
+
+      // Detect leaving a service/icon block: xml_parser.parse returns nodes in
+      // document order; when the current node is outside service/icon but we
+      // had an open service/icon, the next non-service/icon node indicates
+      // the service/icon ended.
+      if (!path_has_service && in_service) {
+        // flush service
+        if (cur_service.service_id != nullptr ||
+            cur_service.service_type != nullptr) {
+          result.addService(cur_service);
+        }
+        cur_service = DLNAServiceInfo();
+        in_service = false;
+      }
+      if (!path_has_icon && in_icon) {
+        result.addIcon(cur_icon);
+        cur_icon = Icon();
+        in_icon = false;
+      }
+    }
+  }
+
+  /// Finalize parser state and flush any pending objects
+  void finalize(DLNADeviceInfo& result) {
+    if (in_service) {
+      if (cur_service.service_id != nullptr ||
+          cur_service.service_type != nullptr) {
+        result.addService(cur_service);
+      }
+      in_service = false;
+      cur_service = DLNAServiceInfo();
+    }
+    if (in_icon) {
+      result.addIcon(cur_icon);
+      in_icon = false;
+      cur_icon = Icon();
+    }
   }
 
  protected:
-  /// @brief XML string view
-  StrView str;
-  /// @brief Pointer to device info being filled
+  DLNAServiceInfo cur_service;
   DLNADeviceInfo* p_device = nullptr;
-  /// @brief Pointer to string registry
-  StringRegistry* p_strings = nullptr;
+  StringRegistry* p_registry = nullptr;
+  XMLParserPrint xml_parser;
+  bool in_service = false;
+  bool in_icon = false;
+  Icon cur_icon;
 
-  /// @brief Extract string, add to string repository and return repository string
-  /// @param in Input string
-  /// @param pos Start position
-  /// @param end End position
-  /// @return Pointer to string in repository
-  const char* substrView(char* in, int pos, int end) {
-    const int len = end - pos + 1;
-    char tmp[len];
-    StrView tmp_str(tmp, len);
-    tmp_str.substrView(in, pos, end);
-    return p_strings->add((char*)tmp_str.c_str());
-  }
-
-  /// @brief Parse version info from XML
-  /// @param result DLNADeviceInfo to fill
-  void parseVersion(DLNADeviceInfo& result) {
-    parseInt(0, "<major>", result.version_major);
-    parseInt(0, "<minor>", result.version_minor);
-  }
-
-  /// @brief Parse device info from XML
-  /// @param result DLNADeviceInfo to fill
-  void parseDevice(DLNADeviceInfo& result) {
-    parseStr("<deviceType>", result.device_type);
-    parseStr("<friendlyName>", result.friendly_name);
-    parseStr("<manufacturer>", result.manufacturer);
-    parseStr("<manufacturerURL>", result.manufacturer_url);
-    parseStr("<modelDescription>", result.model_description);
-    parseStr("<modelName>", result.model_name);
-    parseStr("<modelNumber>", result.model_number);
-    parseStr("<modelURL>", result.model_url);
-    parseStr("<URLBase>", result.base_url);
-    parseServices();
-  };
-
-  /// @brief Parse string value from XML
-  /// @param name XML tag name
-  /// @param result Output string pointer
-  /// @return End position in XML
-  int parseStr(const char* name, const char*& result) {
-    return parseStr(0, name, result);
-  }
-
-  /// @brief Parse integer value from XML
-  /// @param pos Start position
-  /// @param name XML tag name
-  /// @param result Output integer
-  /// @return End position in XML
-  int parseInt(int pos, const char* name, int& result) {
-    char temp[50] = {0};
-    StrView temp_view(temp, 50);
-    int start_pos = str.indexOf(name, pos);
-    int end_pos = -1;
-    if (start_pos > 0) {
-      StrView tag(name);
-      start_pos += tag.length();
-      end_pos = str.indexOf("</", start_pos);
-      temp_view.substrView((char*)str.c_str(), start_pos, end_pos);
-      result = temp_view.toInt();
-      DlnaLogger.log(DlnaLogLevel::Debug, "device xml %s : %s / %d", name, temp_view.c_str(), result);
-
-      end_pos = str.indexOf(">", end_pos);
-    }
-    return end_pos;
-  }
-
-  /// @brief Parse string value from XML at position
-  /// @param pos Start position
-  /// @param name XML tag name
-  /// @param result Output string pointer
-  /// @return End position in XML
-  int parseStr(int pos, const char* name, const char*& result) {
-    int start_pos = str.indexOf(name, pos);
-    int end = -1;
-    if (start_pos > 0) {
-      StrView tag(name);
-      start_pos += tag.length();
-      int end_str = str.indexOf("</", start_pos);
-      result = substrView((char*)str.c_str(), start_pos, end_str);
-      DlnaLogger.log(DlnaLogLevel::Debug, "device xml %s : %s", name, result);
-      end = str.indexOf(">", end_str);
-    } else {
-      result = nullptr;
-    }
-    return end;
-  }
-
-  /// @brief Parse icon list from XML
-  /// @param device DLNADeviceInfo to fill
-  void parseIcons(DLNADeviceInfo& device) {
-    int pos = 0;
-    do {
-      pos = parseIcon(device, pos);
-    } while (pos > 0);
-  }
-
-  /// @brief Parse a single icon from XML
-  /// @param device DLNADeviceInfo to fill
-  /// @param pos Start position
-  /// @return End position in XML
-  int parseIcon(DLNADeviceInfo& device, int pos) {
-    Icon icon;
-    int result = -1;
-    int iconPos = str.indexOf("<icon>", pos);
-    if (iconPos > 0) {
-      parseStr(iconPos, "<mimetype>", icon.mime);
-      parseInt(iconPos, "<width>", icon.width);
-      parseInt(iconPos, "<height>", icon.height);
-      parseInt(iconPos, "<depth>", icon.depth);
-      parseStr(iconPos, "<url>", icon.icon_url);
-      device.addIcon(icon);
-      result = str.indexOf("</icon>", pos) + 7;
-    }
-    return result;
-  }
-
-  /// @brief Parse service list from XML
-  void parseServices() {
-    int pos = 0;
-    do {
-      pos = parseService(pos);
-    } while (pos > 0);
-  }
-
-  /// @brief Parse a single service from XML
-  /// @param pos Start position
-  /// @return End position in XML
-  int parseService(int pos) {
-    DLNAServiceInfo service;
-    int result = -1;
-    int servicePos = str.indexOf("<service>", pos);
-    if (servicePos > 0) {
-      parseStr(servicePos, "<serviceType>", service.service_type);
-      parseStr(servicePos, "<serviceId>", service.service_id);
-      parseStr(servicePos, "<SCPDURL>", service.scpd_url);
-      parseStr(servicePos, "<controlURL>", service.control_url);
-      parseStr(servicePos, "<eventSubURL>", service.event_sub_url);
-      p_device->addService(service);
-      result = str.indexOf("</service>", pos) + 10;
-    }
-    return result;
+  void resetState() {
+    p_device = nullptr;
+    p_registry = nullptr;
+    in_service = false;
+    cur_service = DLNAServiceInfo();
+    in_icon = false;
+    cur_icon = Icon();
   }
 };
 
