@@ -88,9 +88,9 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ab8de4d4bf6ecc3de05b0af0b89500fd8"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1StringRegistry.html#ab8de4d4bf6ecc3de05b0af0b89500fd8">add</a> (char *in)</td></tr>
-<tr class="memdesc:ab8de4d4bf6ecc3de05b0af0b89500fd8"><td class="mdescLeft">&#160;</td><td class="mdescRight">adds a string  <br /></td></tr>
-<tr class="separator:ab8de4d4bf6ecc3de05b0af0b89500fd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a291b73b763e6d3d78107b0d27561c969"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1StringRegistry.html#a291b73b763e6d3d78107b0d27561c969">add</a> (const char *in)</td></tr>
+<tr class="memdesc:a291b73b763e6d3d78107b0d27561c969"><td class="mdescLeft">&#160;</td><td class="mdescRight">adds a string (returns pointer to stable, owned C-string)  <br /></td></tr>
+<tr class="separator:a291b73b763e6d3d78107b0d27561c969"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a17fe7a177709b5449603e2b9cdc6867b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1StringRegistry.html#a17fe7a177709b5449603e2b9cdc6867b">clear</a> ()</td></tr>
 <tr class="separator:a17fe7a177709b5449603e2b9cdc6867b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8e17e3e5ef6e10cf888b0981a3ad6f92"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1StringRegistry.html#a8e17e3e5ef6e10cf888b0981a3ad6f92">count</a> ()</td></tr>
@@ -102,15 +102,15 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a64656d6ae7dedf29b80e0cba4b4a5137"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt; <a class="el" href="classtiny__dlna_1_1Str.html">Str</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1StringRegistry.html#a64656d6ae7dedf29b80e0cba4b4a5137">strings</a></td></tr>
-<tr class="separator:a64656d6ae7dedf29b80e0cba4b4a5137"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aace6440c287357b576d8c111ff162a72"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt; char * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1StringRegistry.html#aace6440c287357b576d8c111ff162a72">strings</a></td></tr>
+<tr class="separator:aace6440c287357b576d8c111ff162a72"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Make sure that a string is stored only once. </p>
-<dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
+<p>Strings are stored as heap-allocated C strings (char*) so the returned pointer remains valid even if the internal container reallocates. This avoids dangling pointers caused by moving objects that own their buffers. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="ab8de4d4bf6ecc3de05b0af0b89500fd8" name="ab8de4d4bf6ecc3de05b0af0b89500fd8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab8de4d4bf6ecc3de05b0af0b89500fd8">&#9670;&#160;</a></span>add()</h2>
+<a id="a291b73b763e6d3d78107b0d27561c969" name="a291b73b763e6d3d78107b0d27561c969"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a291b73b763e6d3d78107b0d27561c969">&#9670;&#160;</a></span>add()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -121,7 +121,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">const char * tiny_dlna::StringRegistry::add </td>
           <td>(</td>
-          <td class="paramtype">char *&#160;</td>
+          <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>in</em></td><td>)</td>
           <td></td>
         </tr>
@@ -133,7 +133,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>adds a string </p>
+<p>adds a string (returns pointer to stable, owned C-string) </p>
 
 </div>
 </div>
@@ -217,8 +217,8 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="a64656d6ae7dedf29b80e0cba4b4a5137" name="a64656d6ae7dedf29b80e0cba4b4a5137"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a64656d6ae7dedf29b80e0cba4b4a5137">&#9670;&#160;</a></span>strings</h2>
+<a id="aace6440c287357b576d8c111ff162a72" name="aace6440c287357b576d8c111ff162a72"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aace6440c287357b576d8c111ff162a72">&#9670;&#160;</a></span>strings</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -227,7 +227,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt;<a class="el" href="classtiny__dlna_1_1Str.html">Str</a>&gt; tiny_dlna::StringRegistry::strings</td>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt;char*&gt; tiny_dlna::StringRegistry::strings</td>
         </tr>
       </table>
   </td>

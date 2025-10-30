@@ -1,11 +1,12 @@
 <map id="src/dlna/xml/XMLParserPrint.h" name="src/dlna/xml/XMLParserPrint.h">
-<area shape="rect" id="node1" title=" " alt="" coords="581,5,797,31"/>
-<area shape="rect" id="node2" href="$DLNAControlPoint_8h.html" title=" " alt="" coords="275,79,481,104"/>
-<area shape="rect" id="node5" href="$DLNADevice_8h.html" title=" " alt="" coords="463,247,634,273"/>
-<area shape="rect" id="node7" href="$DLNAMediaServer_8h.html" title=" " alt="" coords="693,328,906,368"/>
-<area shape="rect" id="node3" href="$DLNA_8h.html" title=" " alt="" coords="327,416,421,441"/>
-<area shape="rect" id="node4" href="$DLNADeviceRequestParser_8h.html" title=" " alt="" coords="441,152,651,192"/>
-<area shape="rect" id="node8" href="$DLNAControlPointMediaRenderer_8h.html" title=" " alt="" coords="5,240,212,280"/>
-<area shape="rect" id="node9" href="$DLNAControlPointMediaServer_8h.html" title=" " alt="" coords="108,152,315,192"/>
-<area shape="rect" id="node6" href="$DLNAMediaRenderer_8h.html" title=" " alt="" coords="437,328,668,368"/>
+<area shape="rect" id="node1" title=" " alt="" coords="503,5,719,31"/>
+<area shape="rect" id="node2" href="$DLNAControlPoint_8h.html" title=" " alt="" coords="279,152,485,177"/>
+<area shape="rect" id="node5" href="$DLNADevice_8h.html" title=" " alt="" coords="462,321,633,346"/>
+<area shape="rect" id="node7" href="$DLNAMediaServer_8h.html" title=" " alt="" coords="690,401,903,441"/>
+<area shape="rect" id="node10" href="$XMLDeviceParser_8h.html" title=" " alt="" coords="420,79,651,104"/>
+<area shape="rect" id="node3" href="$DLNA_8h.html" title=" " alt="" coords="325,489,418,515"/>
+<area shape="rect" id="node4" href="$DLNADeviceRequestParser_8h.html" title=" " alt="" coords="441,225,651,265"/>
+<area shape="rect" id="node8" href="$DLNAControlPointMediaRenderer_8h.html" title=" " alt="" coords="5,313,212,353"/>
+<area shape="rect" id="node9" href="$DLNAControlPointMediaServer_8h.html" title=" " alt="" coords="108,225,315,265"/>
+<area shape="rect" id="node6" href="$DLNAMediaRenderer_8h.html" title=" " alt="" coords="435,401,665,441"/>
 </map>
