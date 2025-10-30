@@ -3,11 +3,11 @@
 
 ## Brief
 
-This library provides the functionality to implement a UPnP/DLNA [device](https://pschatzmann.github.io/arduino-dlna/classtiny__dlna_1_1DLNADeviceMgr.html) and a [control point](https://pschatzmann.github.io/arduino-dlna/classtiny__dlna_1_1DLNAControlPointMgr.html) for Arduino.
+This library provides the functionality to implement UPnP/DLNA [devices](https://pschatzmann.github.io/arduino-dlna/classtiny__dlna_1_1DLNADeviceMgr.html) and [control points](https://pschatzmann.github.io/arduino-dlna/classtiny__dlna_1_1DLNAControlPointMgr.html) for Arduino.
 
 The Digital Living Network Alliance (DLNA) aimed to establish __interoperability__ among PCs, consumer appliances, and mobile devices across wired and wireless networks. The goal was to provide a common solution for __sharing digital media and content__ services. 
 
-Though this technology can be considered obsolete, it is still quite useful for some use cases: For Audio and Video the successor protocols are __Chromecast and AirPlay__. Chromecast is close sourced and uses secure channels to Google, so you can't implement your own devices. On the other hand, Airplay is Apple specific and is not available on Android. This leaves __DLNA as the only open and flexible Standard__ for accessing and sharing digital media (audio, video, images...)!
+Though this technology is now more then 20 years old and can be considered obsolete, it is still quite useful for some use cases: For Audio and Video the successor protocols are __Chromecast and AirPlay__. Chromecast is close sourced and uses secure channels to Google, so you can't implement your own devices. On the other hand, Airplay is Apple specific and is not available on Android. This leaves __DLNA as the only open and flexible Standard__ for accessing and sharing digital media (audio, video, images...)!
 
 ## The Standard
 
@@ -31,7 +31,7 @@ This can be quite useful for testing the functionality.
 
 ## Device Types and Control Points
 
-This library provides memory-efficient classes to implement DLNA devices and clients (control points). In addition to the core functionality, this project includes some easy-to-use classes:
+This library provides memory-efficient classes to implement __DLNA devices__ and __control points__ (=clients). In addition to the core functionality, this project includes some easy-to-use classes:
 
 - Devices
   - [DLNADevice](https://pschatzmann.github.io/arduino-dlna/classtiny__dlna_1_1DLNADevice.html) (Generic Device API)
@@ -46,9 +46,9 @@ This library provides memory-efficient classes to implement DLNA devices and cli
 
 ## Implementation Approach
 
-A DLNA device uses UDP, HTTP, XML and SOAP to discover and manage services, which adds quite some complexity.
+A DLNA device uses __UDP, HTTP, XML and SOAP__ to discover and manage services, which adds quite some complexity.
 
-I implemented the functionality from scratch using the basic Arduino network API and avoided external dependencies.
+I implemented the functionality from scratch using the __standart Arduino Network API__ and avoided external dependencies.
 
 The [DLNAControlPoint](https://pschatzmann.github.io/arduino-dlna/classtiny__dlna_1_1DLNAControlPoint.html) sets up a control point and lets you execute actions.
 The [DLNADevice](https://pschatzmann.github.io/arduino-dlna/classtiny__dlna_1_1DLNADevice.html) class provides the setup for a basic DLNA device service. Devices are represented by the [DLNADeviceInfo](https://pschatzmann.github.io/arduino-dlna/classtiny__dlna_1_1DLNADeviceInfo.html) class. A device registers itself on the network and answers UDP DLNA queries and requests:
@@ -56,8 +56,9 @@ The [DLNADevice](https://pschatzmann.github.io/arduino-dlna/classtiny__dlna_1_1D
 - UDP communication is handled via a [Scheduler](https://pschatzmann.github.io/arduino-dlna/classtiny__dlna_1_1Scheduler.html) and a [Device Request Parser](https://pschatzmann.github.io/arduino-dlna/classtiny__dlna_1_1DLNADeviceRequestParser.html).
 - HTTP requests are handled with the bundled [TinyHttp Server](https://pschatzmann.github.io/arduino-dlna/classtiny__dlna_1_1HttpServer.html).
 - XML service descriptions can be stored as char arrays in PROGMEM or generated dynamically using the [XMLPrinter](https://pschatzmann.github.io/arduino-dlna/structtiny__dlna_1_1XMLPrinter.html) class.
+- XML Parsing can be done using the [XMLParser](https://pschatzmann.github.io/arduino-dlna/classtiny__dlna_1_1XMLParser.html), [XMLParserPrint](https://pschatzmann.github.io/arduino-dlna/classtiny__dlna_1_1XMLParserPrint.html) and [XMLAttributeParser](https://pschatzmann.github.io/arduino-dlna/classtiny__dlna_1_1XMLAttributeParser.html)
 
-Developing and debugging on a microcontroller is tedious; therefore this project can also be compiled and run on a __Linux desktop__.
+Developing and debugging on a microcontroller is tedious; therefore this project can also be compiled and run on a __Linux os OS X desktop__.
 
 ## Project Documentation
 
