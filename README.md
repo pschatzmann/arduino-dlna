@@ -7,7 +7,7 @@ This library provides the functionality to implement __UPnP/DLNA devices and con
 
 The Digital Living Network Alliance (DLNA) aimed to establish __interoperability__ among PCs, consumer appliances, and mobile devices across wired and wireless networks. The goal was to provide a common solution for __sharing digital media and content__ services. 
 
-Though this technology is now more then 20 years old and can be considered obsolete, it is still quite useful for some use cases: For Audio and Video the successor protocols are __Chromecast and AirPlay__. Chromecast is close sourced and uses secure channels to Google, so you can't implement your own devices. On the other hand, Airplay is Apple specific and is not available on Android. This leaves __DLNA as the only open and flexible Standard__ for accessing and sharing digital media (audio, video, images...)!
+Though this technology is now more then 20 years old and can be considered obsolete, it is still quite useful for some use cases: For Audio and Video the successor protocols are __Chromecast and AirPlay__. Chromecast is close sourced and uses secure channels to Google, so you can't implement your own devices. On the other hand, Airplay is Apple specific and is not available on other platforms (e.g. Android). This leaves __DLNA as the only open and flexible Standard__ for accessing and sharing digital media (audio, video, images...)!
 
 ## The Standard
 
