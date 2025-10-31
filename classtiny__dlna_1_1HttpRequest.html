@@ -121,6 +121,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a87557981cdf4f4f707c4c8867420432e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a39318d2923779bc9d753a8ca7febb6b5"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpRequest.html#a39318d2923779bc9d753a8ca7febb6b5">subscribe</a> (<a class="el" href="classtiny__dlna_1_1Url.html">Url</a> &amp;<a class="el" href="classtiny__dlna_1_1HttpRequest.html#a19af9228538c3291902a6df9815883c8">url</a>)</td></tr>
 <tr class="separator:a39318d2923779bc9d753a8ca7febb6b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7b7999678056e30a7a059efe65b1236"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpRequest.html#aa7b7999678056e30a7a059efe65b1236">unsubscribe</a> (<a class="el" href="classtiny__dlna_1_1Url.html">Url</a> &amp;<a class="el" href="classtiny__dlna_1_1HttpRequest.html#a19af9228538c3291902a6df9815883c8">url</a>, const char *sid)</td></tr>
+<tr class="separator:aa7b7999678056e30a7a059efe65b1236"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af23a6777463a4d9b5b968eaff4603fc6"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpRequest.html#af23a6777463a4d9b5b968eaff4603fc6">read</a> (uint8_t *<a class="el" href="classtiny__dlna_1_1HttpRequest.html#ace693be2b0bc00f52808785422c7911e">str</a>, int len)</td></tr>
 <tr class="separator:af23a6777463a4d9b5b968eaff4603fc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa5af7f5360d0a7a997afec34950a9987"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpRequest.html#aa5af7f5360d0a7a997afec34950a9987">readln</a> (uint8_t *<a class="el" href="classtiny__dlna_1_1HttpRequest.html#ace693be2b0bc00f52808785422c7911e">str</a>, int len, bool incl_nl=true)</td></tr>
@@ -1083,6 +1085,42 @@ Protected Attributes</h2></td></tr>
           <td class="paramtype"><a class="el" href="classtiny__dlna_1_1Url.html">Url</a> &amp;&#160;</td>
           <td class="paramname"><em>url</em></td><td>)</td>
           <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa7b7999678056e30a7a059efe65b1236" name="aa7b7999678056e30a7a059efe65b1236"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7b7999678056e30a7a059efe65b1236">&#9670;&#160;</a></span>unsubscribe()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual int tiny_dlna::HttpRequest::unsubscribe </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1Url.html">Url</a> &amp;&#160;</td>
+          <td class="paramname"><em>url</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>sid</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>

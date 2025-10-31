@@ -111,12 +111,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aae82e1755be6c10f66153d3313634e07"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#aae82e1755be6c10f66153d3313634e07">setDeviceIndex</a> (int idx)</td></tr>
 <tr class="memdesc:aae82e1755be6c10f66153d3313634e07"><td class="mdescLeft">&#160;</td><td class="mdescRight">Selects the default device by index.  <br /></td></tr>
 <tr class="separator:aae82e1755be6c10f66153d3313634e07"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeea9980120a0c20fb60471714a190067"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#aeea9980120a0c20fb60471714a190067">setSubscribeInterval</a> (int repeatSec=3600)</td></tr>
-<tr class="memdesc:aeea9980120a0c20fb60471714a190067"><td class="mdescLeft">&#160;</td><td class="mdescRight">Activates event notification subscription with repeat interval in seconds.  <br /></td></tr>
-<tr class="separator:aeea9980120a0c20fb60471714a190067"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac2c0bcf61eb407a9018f1990d9dcd9aa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#ac2c0bcf61eb407a9018f1990d9dcd9aa">onNotification</a> (std::function&lt; void(void *<a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a058a06da3022d8fd6835b13d9a6c3f4e">reference</a>, const char *sid, const char *varName, const char *newValue)&gt; cb)</td></tr>
-<tr class="memdesc:ac2c0bcf61eb407a9018f1990d9dcd9aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a callback that will be invoked for incoming event notification.  <br /></td></tr>
-<tr class="separator:ac2c0bcf61eb407a9018f1990d9dcd9aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50ec468adb246028acd00c6aa9ec820a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a50ec468adb246028acd00c6aa9ec820a">setEventSubscriptionCallback</a> (std::function&lt; void(const char *sid, const char *varName, const char *newValue, void *<a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a058a06da3022d8fd6835b13d9a6c3f4e">reference</a>)&gt; cb, void *ref=nullptr)</td></tr>
+<tr class="memdesc:a50ec468adb246028acd00c6aa9ec820a"><td class="mdescLeft">&#160;</td><td class="mdescRight">(<a class="el" href="structtiny__dlna_1_1Subscription.html" title="Represents a single event subscription for a service.">Subscription</a> management has been moved to <a class="el" href="classtiny__dlna_1_1SubscriptionMgrControlPoint.html" title="Standalone manager for UPnP/DLNA event subscriptions used by control points and devices.">SubscriptionMgrControlPoint</a>)  <br /></td></tr>
+<tr class="separator:a50ec468adb246028acd00c6aa9ec820a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:addc5598ec5e8deb8cbd5ccaebd837b5d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#addc5598ec5e8deb8cbd5ccaebd837b5d">setHttpServer</a> (<a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;server, int port=80)</td></tr>
 <tr class="memdesc:addc5598ec5e8deb8cbd5ccaebd837b5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set <a class="el" href="classtiny__dlna_1_1HttpServer.html" title="A Simple Header only implementation of Http Server that allows the registration of callback functions...">HttpServer</a> instance and register the notify handler.  <br /></td></tr>
 <tr class="separator:addc5598ec5e8deb8cbd5ccaebd837b5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -125,9 +122,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a7fb8fea7974808ed3aaf0d234b87b605"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a7fb8fea7974808ed3aaf0d234b87b605">begin</a> (<a class="el" href="namespacetiny__dlna.html#ad910622e470286a7c1774b545d469d00">DLNAHttpRequest</a> &amp;http, <a class="el" href="classtiny__dlna_1_1IUDPService.html">IUDPService</a> &amp;udp, const char *searchTarget=&quot;ssdp:all&quot;, uint32_t minWaitMs=3000, uint32_t maxWaitMs=60000)</td></tr>
 <tr class="memdesc:a7fb8fea7974808ed3aaf0d234b87b605"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start discovery by sending M-SEARCH requests and process replies.  <br /></td></tr>
 <tr class="separator:a7fb8fea7974808ed3aaf0d234b87b605"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6cbe2757c93331a4d8e0cfa7854b8830"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a6cbe2757c93331a4d8e0cfa7854b8830">subscribeNotifications</a> ()</td></tr>
-<tr class="memdesc:a6cbe2757c93331a4d8e0cfa7854b8830"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subscribes to event notifications for the selected device.  <br /></td></tr>
-<tr class="separator:a6cbe2757c93331a4d8e0cfa7854b8830"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a523a66f23b4fabdce5117e906acb7e69"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a523a66f23b4fabdce5117e906acb7e69">end</a> ()</td></tr>
 <tr class="memdesc:a523a66f23b4fabdce5117e906acb7e69"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stops the processing and releases the resources.  <br /></td></tr>
 <tr class="separator:a523a66f23b4fabdce5117e906acb7e69"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -176,11 +170,18 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab7f27c7c5fb53a16fd976cd66d2b09cd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1ActionReply.html">ActionReply</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#ab7f27c7c5fb53a16fd976cd66d2b09cd">getLastReply</a> ()</td></tr>
 <tr class="memdesc:ab7f27c7c5fb53a16fd976cd66d2b09cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the last reply.  <br /></td></tr>
 <tr class="separator:ab7f27c7c5fb53a16fd976cd66d2b09cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4995ffde532083a2e69b4dfa1631a859"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1SubscriptionMgrControlPoint.html">SubscriptionMgrControlPoint</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a4995ffde532083a2e69b4dfa1631a859">getSubscriptionMgr</a> ()</td></tr>
+<tr class="memdesc:a4995ffde532083a2e69b4dfa1631a859"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the subscription manager.  <br /></td></tr>
+<tr class="separator:a4995ffde532083a2e69b4dfa1631a859"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad93aa73e6f21cab75354399ffd565606"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#ad93aa73e6f21cab75354399ffd565606">setSubscribeNotificationsActive</a> (bool flag)</td></tr>
+<tr class="memdesc:ad93aa73e6f21cab75354399ffd565606"><td class="mdescLeft">&#160;</td><td class="mdescRight">Activate/deactivate subscription notifications.  <br /></td></tr>
+<tr class="separator:ad93aa73e6f21cab75354399ffd565606"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9015984a2912a7110e12381c2d019114"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a9015984a2912a7110e12381c2d019114">registerString</a> (const char *s)</td></tr>
+<tr class="memdesc:a9015984a2912a7110e12381c2d019114"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a string in the shared registry and return the stored pointer.  <br /></td></tr>
+<tr class="separator:a9015984a2912a7110e12381c2d019114"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a2b3201e3acf5076d9e7749f0a93b9b6e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a2b3201e3acf5076d9e7749f0a93b9b6e">attachHttpServer</a> (<a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;server)</td></tr>
-<tr class="separator:a2b3201e3acf5076d9e7749f0a93b9b6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a21c77981aa7035fc939e66a12683d066"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a21c77981aa7035fc939e66a12683d066">matches</a> (const char *usn)</td></tr>
 <tr class="memdesc:a21c77981aa7035fc939e66a12683d066"><td class="mdescLeft">&#160;</td><td class="mdescRight">checks if the usn contains the search target  <br /></td></tr>
 <tr class="separator:a21c77981aa7035fc939e66a12683d066"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -204,17 +205,9 @@ Protected Member Functions</h2></td></tr>
 <tr class="separator:adc894516579999e3cc0c4e08ad00f676"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a372dcf6373fbebe771a38d69e3dc987f"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a372dcf6373fbebe771a38d69e3dc987f">getUrlImpl</a> (<a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html">DLNADeviceInfo</a> &amp;device, const char *suffix, const char *buffer, int len)</td></tr>
 <tr class="separator:a372dcf6373fbebe771a38d69e3dc987f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a27cb0e646f820cbc118f806104ba7c44"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a27cb0e646f820cbc118f806104ba7c44">subscribeNotifications</a> (<a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html">DLNADeviceInfo</a> &amp;device, int timeoutSeconds=1800)</td></tr>
-<tr class="memdesc:a27cb0e646f820cbc118f806104ba7c44"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subscribe to changes for all device services.  <br /></td></tr>
-<tr class="separator:a27cb0e646f820cbc118f806104ba7c44"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aea7b42e380e37a38518b1395da5776d7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#aea7b42e380e37a38518b1395da5776d7">subscribeNotifications</a> (<a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html">DLNAServiceInfo</a> &amp;service, int timoutSeconds=1800)</td></tr>
-<tr class="memdesc:aea7b42e380e37a38518b1395da5776d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subscribe to changes for defined device service.  <br /></td></tr>
-<tr class="separator:aea7b42e380e37a38518b1395da5776d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
 Static Protected Member Functions</h2></td></tr>
-<tr class="memitem:a184421d123fed36f9b5fe95bd7e562da"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a184421d123fed36f9b5fe95bd7e562da">notifyHandler</a> (<a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> *server, const char *requestPath, <a class="el" href="classtiny__dlna_1_1HttpRequestHandlerLine.html">HttpRequestHandlerLine</a> *hl)</td></tr>
-<tr class="separator:a184421d123fed36f9b5fe95bd7e562da"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a02247cc25ee4ba7953b4dd09dc88a4a6"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a02247cc25ee4ba7953b4dd09dc88a4a6">handleNotifyByebye</a> (<a class="el" href="classtiny__dlna_1_1Str.html">Str</a> &amp;usn)</td></tr>
 <tr class="separator:a02247cc25ee4ba7953b4dd09dc88a4a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a98e7d35683a1d18017f1aabaca41c433"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a98e7d35683a1d18017f1aabaca41c433">isUdnKnown</a> (const char *usn_c, <a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html">DLNADeviceInfo</a> *&amp;outDev)</td></tr>
@@ -237,6 +230,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a8ed2a92be9d85cdff9343a69af7609c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afe3c93ab302b64020399e8fe7258ba5c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1IUDPService.html">IUDPService</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#afe3c93ab302b64020399e8fe7258ba5c">p_udp</a> = nullptr</td></tr>
 <tr class="separator:afe3c93ab302b64020399e8fe7258ba5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeff2caca178edaec70a6143ce382414d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1SubscriptionMgrControlPoint.html">SubscriptionMgrControlPoint</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#aeff2caca178edaec70a6143ce382414d">subscription_mgr</a></td></tr>
+<tr class="separator:aeff2caca178edaec70a6143ce382414d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a34d238dc5a4e126f3b865623a4e5b1f9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt; <a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html">DLNADeviceInfo</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a34d238dc5a4e126f3b865623a4e5b1f9">devices</a></td></tr>
 <tr class="separator:a34d238dc5a4e126f3b865623a4e5b1f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a96a777e0f8e443ff4e974bcf7e02dc76"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt; <a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a96a777e0f8e443ff4e974bcf7e02dc76">actions</a></td></tr>
@@ -251,10 +246,6 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a2bca690ad464e68e814ae2586a64138a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8461f84e97dbea74ef5353773dc5dcf6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a8461f84e97dbea74ef5353773dc5dcf6">msearch_repeat_ms</a> = 10000</td></tr>
 <tr class="separator:a8461f84e97dbea74ef5353773dc5dcf6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab55e6486831f1ccf20f89bfe14a93bc1"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#ab55e6486831f1ccf20f89bfe14a93bc1">subscribe_timeout</a> = 0</td></tr>
-<tr class="separator:ab55e6486831f1ccf20f89bfe14a93bc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afb1a6c26c666eeff4ddd750c8129540c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#afb1a6c26c666eeff4ddd750c8129540c">subscribe_repeat_sec</a> = 3600</td></tr>
-<tr class="separator:afb1a6c26c666eeff4ddd750c8129540c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a65b7ebc8c96b4a40d7353805be5c1ca5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a65b7ebc8c96b4a40d7353805be5c1ca5">is_active</a> = false</td></tr>
 <tr class="separator:a65b7ebc8c96b4a40d7353805be5c1ca5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a343f33243cd45c151368c3843d484a98"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a343f33243cd45c151368c3843d484a98">is_parse_device</a> = false</td></tr>
@@ -273,8 +264,6 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a058a06da3022d8fd6835b13d9a6c3f4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aad13d3f06512b8a66acf0043b0c5be18"><td class="memItemLeft" align="right" valign="top">std::function&lt; void(const char *nodeName, const char *text, const char *attributes)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#aad13d3f06512b8a66acf0043b0c5be18">result_callback</a></td></tr>
 <tr class="separator:aad13d3f06512b8a66acf0043b0c5be18"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1219368ae6a817e002656a3247e77adc"><td class="memItemLeft" align="right" valign="top">std::function&lt; void(void *<a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a058a06da3022d8fd6835b13d9a6c3f4e">reference</a>, const char *sid, const char *varName, const char *newValue)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a1219368ae6a817e002656a3247e77adc">event_callback</a></td></tr>
-<tr class="separator:a1219368ae6a817e002656a3247e77adc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Lightweight DLNA control point manager. </p>
@@ -288,7 +277,7 @@ Protected Attributes</h2></td></tr>
 </ul>
 <p>Notes and usage:</p><ul>
 <li>To receive HTTP-based event notifications register an <code><a class="el" href="classtiny__dlna_1_1HttpServer.html" title="A Simple Header only implementation of Http Server that allows the registration of callback functions...">HttpServer</a></code> with <code><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#addc5598ec5e8deb8cbd5ccaebd837b5d" title="Set HttpServer instance and register the notify handler.">setHttpServer()</a></code> (or construct with a server). The server's request handler will forward NOTIFY bodies to this manager.</li>
-<li>Register an application callback with <code><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#ac2c0bcf61eb407a9018f1990d9dcd9aa" title="Register a callback that will be invoked for incoming event notification.">onNotification()</a></code> to receive parsed property updates. An opaque reference pointer may be stored with <code><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#aa4558527b6cdae1703b0ff62c227463a" title="Attach an opaque reference pointer (optional, for caller context)">setReference()</a></code> and will be passed back with the callback.</li>
+<li>Register an application callback with <code>onNotification()</code> to receive parsed property updates. An opaque reference pointer may be stored with <code><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#aa4558527b6cdae1703b0ff62c227463a" title="Attach an opaque reference pointer (optional, for caller context)">setReference()</a></code> and will be passed back with the callback.</li>
 <li>Call <code><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a7fb8fea7974808ed3aaf0d234b87b605" title="Start discovery by sending M-SEARCH requests and process replies.">begin()</a></code> to start discovery and <code><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a59e2688e61b8179a0423129dfaa9fcd4">loop()</a></code> frequently (e.g. from the device main loop) to process incoming network events and scheduled tasks.</li>
 </ul>
 <p>The class is intentionally small and avoids dynamic STL-heavy constructs so it can run in constrained environments. It is not a full-featured UPnP stack but provides the common features required by many DLNA control point use cases.</p>
@@ -441,33 +430,6 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Adds the device from the device xml url if it does not already exist. </p>
-
-</div>
-</div>
-<a id="a2b3201e3acf5076d9e7749f0a93b9b6e" name="a2b3201e3acf5076d9e7749f0a93b9b6e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2b3201e3acf5076d9e7749f0a93b9b6e">&#9670;&#160;</a></span>attachHttpServer()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void tiny_dlna::DLNAControlPoint::attachHttpServer </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;&#160;</td>
-          <td class="paramname"><em>server</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Attach an <a class="el" href="classtiny__dlna_1_1HttpServer.html" title="A Simple Header only implementation of Http Server that allows the registration of callback functions...">HttpServer</a> so the control point can receive HTTP NOTIFY event messages. This registers a handler at the configured local URL path (see <code>local_url</code>) which will extract the SID header and body and call parseAndDispatchEvent() to dispatch property changes. </p>
 
 </div>
 </div>
@@ -846,6 +808,33 @@ xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n" "s:encodingStyle=\"ht
 
 </div>
 </div>
+<a id="a4995ffde532083a2e69b4dfa1631a859" name="a4995ffde532083a2e69b4dfa1631a859"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4995ffde532083a2e69b4dfa1631a859">&#9670;&#160;</a></span>getSubscriptionMgr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1SubscriptionMgrControlPoint.html">SubscriptionMgrControlPoint</a> * tiny_dlna::DLNAControlPoint::getSubscriptionMgr </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Provides the subscription manager. </p>
+
+</div>
+</div>
 <a id="ab6d35b34e67082569c09755b8c59de7a" name="ab6d35b34e67082569c09755b8c59de7a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab6d35b34e67082569c09755b8c59de7a">&#9670;&#160;</a></span>getUrl()</h2>
 
@@ -1114,51 +1103,6 @@ xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n" "s:encodingStyle=\"ht
 
 </div>
 </div>
-<a id="a184421d123fed36f9b5fe95bd7e562da" name="a184421d123fed36f9b5fe95bd7e562da"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a184421d123fed36f9b5fe95bd7e562da">&#9670;&#160;</a></span>notifyHandler()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static void tiny_dlna::DLNAControlPoint::notifyHandler </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> *&#160;</td>
-          <td class="paramname"><em>server</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>requestPath</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1HttpRequestHandlerLine.html">HttpRequestHandlerLine</a> *&#160;</td>
-          <td class="paramname"><em>hl</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Static HTTP handler for incoming NOTIFY event callbacks. The <a class="el" href="classtiny__dlna_1_1HttpServer.html" title="A Simple Header only implementation of Http Server that allows the registration of callback functions...">HttpServer</a> will pass the control point instance as context[0] so we can retrieve the instance and forward the event to parseAndDispatchEvent(). </p>
-<p>Parse body</p>
-<p>Activate callback</p>
-
-</div>
-</div>
 <a id="ab013ca8dbcf5e61b37681bf9729172b2" name="ab013ca8dbcf5e61b37681bf9729172b2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab013ca8dbcf5e61b37681bf9729172b2">&#9670;&#160;</a></span>nullStr() <span class="overload">[1/2]</span></h2>
 
@@ -1228,34 +1172,6 @@ xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n" "s:encodingStyle=\"ht
   </tr>
 </table>
 </div><div class="memdoc">
-
-</div>
-</div>
-<a id="ac2c0bcf61eb407a9018f1990d9dcd9aa" name="ac2c0bcf61eb407a9018f1990d9dcd9aa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac2c0bcf61eb407a9018f1990d9dcd9aa">&#9670;&#160;</a></span>onNotification()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void tiny_dlna::DLNAControlPoint::onNotification </td>
-          <td>(</td>
-          <td class="paramtype">std::function&lt; void(void *<a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a058a06da3022d8fd6835b13d9a6c3f4e">reference</a>, const char *sid, const char *varName, const char *newValue)&gt;&#160;</td>
-          <td class="paramname"><em>cb</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Register a callback that will be invoked for incoming event notification. </p>
 
 </div>
 </div>
@@ -1480,6 +1396,34 @@ attributes) </p>
 
 </div>
 </div>
+<a id="a9015984a2912a7110e12381c2d019114" name="a9015984a2912a7110e12381c2d019114"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9015984a2912a7110e12381c2d019114">&#9670;&#160;</a></span>registerString()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char * tiny_dlna::DLNAControlPoint::registerString </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>s</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Register a string in the shared registry and return the stored pointer. </p>
+
+</div>
+</div>
 <a id="afa8dc43da6dd4779fbe6b6fcb6efca42" name="afa8dc43da6dd4779fbe6b6fcb6efca42"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afa8dc43da6dd4779fbe6b6fcb6efca42">&#9670;&#160;</a></span>setActive()</h2>
 
@@ -1561,6 +1505,45 @@ attributes) </p>
 </div><div class="memdoc">
 
 <p>Selects the default device by index. </p>
+
+</div>
+</div>
+<a id="a50ec468adb246028acd00c6aa9ec820a" name="a50ec468adb246028acd00c6aa9ec820a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a50ec468adb246028acd00c6aa9ec820a">&#9670;&#160;</a></span>setEventSubscriptionCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tiny_dlna::DLNAControlPoint::setEventSubscriptionCallback </td>
+          <td>(</td>
+          <td class="paramtype">std::function&lt; void(const char *sid, const char *varName, const char *newValue, void *<a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a058a06da3022d8fd6835b13d9a6c3f4e">reference</a>)&gt;&#160;</td>
+          <td class="paramname"><em>cb</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>ref</em> = <code>nullptr</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>(<a class="el" href="structtiny__dlna_1_1Subscription.html" title="Represents a single event subscription for a service.">Subscription</a> management has been moved to <a class="el" href="classtiny__dlna_1_1SubscriptionMgrControlPoint.html" title="Standalone manager for UPnP/DLNA event subscriptions used by control points and devices.">SubscriptionMgrControlPoint</a>) </p>
+<p>Register a callback that will be invoked for incoming event notification </p>
 
 </div>
 </div>
@@ -1714,8 +1697,8 @@ attributes) </p>
 
 </div>
 </div>
-<a id="aeea9980120a0c20fb60471714a190067" name="aeea9980120a0c20fb60471714a190067"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aeea9980120a0c20fb60471714a190067">&#9670;&#160;</a></span>setSubscribeInterval()</h2>
+<a id="ad93aa73e6f21cab75354399ffd565606" name="ad93aa73e6f21cab75354399ffd565606"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad93aa73e6f21cab75354399ffd565606">&#9670;&#160;</a></span>setSubscribeNotificationsActive()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1724,10 +1707,10 @@ attributes) </p>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void tiny_dlna::DLNAControlPoint::setSubscribeInterval </td>
+          <td class="memname">void tiny_dlna::DLNAControlPoint::setSubscribeNotificationsActive </td>
           <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>repeatSec</em> = <code>3600</code></td><td>)</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>flag</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1738,110 +1721,7 @@ attributes) </p>
 </table>
 </div><div class="memdoc">
 
-<p>Activates event notification subscription with repeat interval in seconds. </p>
-
-</div>
-</div>
-<a id="a6cbe2757c93331a4d8e0cfa7854b8830" name="a6cbe2757c93331a4d8e0cfa7854b8830"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6cbe2757c93331a4d8e0cfa7854b8830">&#9670;&#160;</a></span>subscribeNotifications() <span class="overload">[1/3]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool tiny_dlna::DLNAControlPoint::subscribeNotifications </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Subscribes to event notifications for the selected device. </p>
-
-</div>
-</div>
-<a id="a27cb0e646f820cbc118f806104ba7c44" name="a27cb0e646f820cbc118f806104ba7c44"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a27cb0e646f820cbc118f806104ba7c44">&#9670;&#160;</a></span>subscribeNotifications() <span class="overload">[2/3]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool tiny_dlna::DLNAControlPoint::subscribeNotifications </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html">DLNADeviceInfo</a> &amp;&#160;</td>
-          <td class="paramname"><em>device</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>timeoutSeconds</em> = <code>1800</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Subscribe to changes for all device services. </p>
-
-</div>
-</div>
-<a id="aea7b42e380e37a38518b1395da5776d7" name="aea7b42e380e37a38518b1395da5776d7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aea7b42e380e37a38518b1395da5776d7">&#9670;&#160;</a></span>subscribeNotifications() <span class="overload">[3/3]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool tiny_dlna::DLNAControlPoint::subscribeNotifications </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html">DLNAServiceInfo</a> &amp;&#160;</td>
-          <td class="paramname"><em>service</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>timoutSeconds</em> = <code>1800</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Subscribe to changes for defined device service. </p>
+<p>Activate/deactivate subscription notifications. </p>
 
 </div>
 </div>
@@ -1923,28 +1803,6 @@ attributes) </p>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt;<a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html">DLNADeviceInfo</a>&gt; tiny_dlna::DLNAControlPoint::devices</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a1219368ae6a817e002656a3247e77adc" name="a1219368ae6a817e002656a3247e77adc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1219368ae6a817e002656a3247e77adc">&#9670;&#160;</a></span>event_callback</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::function&lt;void(void* <a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a058a06da3022d8fd6835b13d9a6c3f4e">reference</a>, const char* sid, const char* varName, const char* newValue)&gt; tiny_dlna::DLNAControlPoint::event_callback</td>
         </tr>
       </table>
   </td>
@@ -2286,8 +2144,8 @@ attributes) </p>
 
 </div>
 </div>
-<a id="afb1a6c26c666eeff4ddd750c8129540c" name="afb1a6c26c666eeff4ddd750c8129540c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afb1a6c26c666eeff4ddd750c8129540c">&#9670;&#160;</a></span>subscribe_repeat_sec</h2>
+<a id="aeff2caca178edaec70a6143ce382414d" name="aeff2caca178edaec70a6143ce382414d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeff2caca178edaec70a6143ce382414d">&#9670;&#160;</a></span>subscription_mgr</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2296,29 +2154,7 @@ attributes) </p>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int tiny_dlna::DLNAControlPoint::subscribe_repeat_sec = 3600</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ab55e6486831f1ccf20f89bfe14a93bc1" name="ab55e6486831f1ccf20f89bfe14a93bc1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab55e6486831f1ccf20f89bfe14a93bc1">&#9670;&#160;</a></span>subscribe_timeout</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint64_t tiny_dlna::DLNAControlPoint::subscribe_timeout = 0</td>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1SubscriptionMgrControlPoint.html">SubscriptionMgrControlPoint</a> tiny_dlna::DLNAControlPoint::subscription_mgr</td>
         </tr>
       </table>
   </td>

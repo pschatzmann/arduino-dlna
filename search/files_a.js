@@ -6,5 +6,6 @@ var searchData=
   ['stringregistry_2eh_3',['StringRegistry.h',['../StringRegistry_8h.html',1,'']]],
   ['strprint_2eh_4',['StrPrint.h',['../StrPrint_8h.html',1,'']]],
   ['strview_2eh_5',['StrView.h',['../StrView_8h.html',1,'']]],
-  ['subscriptionmgr_2eh_6',['SubscriptionMgr.h',['../SubscriptionMgr_8h.html',1,'']]]
+  ['subscriptionmgrcontrolpoint_2eh_6',['SubscriptionMgrControlPoint.h',['../SubscriptionMgrControlPoint_8h.html',1,'']]],
+  ['subscriptionmgrdevice_2eh_7',['SubscriptionMgrDevice.h',['../SubscriptionMgrDevice_8h.html',1,'']]]
 ];

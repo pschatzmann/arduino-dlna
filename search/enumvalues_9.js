@@ -11,5 +11,6 @@ var searchData=
   ['t_5fput_8',['T_PUT',['../namespacetiny__dlna.html#a8b30900e538135f563c83e48319e5247a9945be3cffff88bf64699d564df76128',1,'tiny_dlna']]],
   ['t_5fsubscribe_9',['T_SUBSCRIBE',['../namespacetiny__dlna.html#a8b30900e538135f563c83e48319e5247a78d7f90932c20309de58ac2111387323',1,'tiny_dlna']]],
   ['t_5ftrace_10',['T_TRACE',['../namespacetiny__dlna.html#a8b30900e538135f563c83e48319e5247a26535a2ef4d0916cd3b9e0d0716183a6',1,'tiny_dlna']]],
-  ['t_5fundefined_11',['T_UNDEFINED',['../namespacetiny__dlna.html#a8b30900e538135f563c83e48319e5247a38bf86d84d310d359e8de997cf53b32f',1,'tiny_dlna']]]
+  ['t_5fundefined_11',['T_UNDEFINED',['../namespacetiny__dlna.html#a8b30900e538135f563c83e48319e5247a38bf86d84d310d359e8de997cf53b32f',1,'tiny_dlna']]],
+  ['t_5funsubscribe_12',['T_UNSUBSCRIBE',['../namespacetiny__dlna.html#a8b30900e538135f563c83e48319e5247a3827e778ed715b13c68990efb75ec250',1,'tiny_dlna']]]
 ];

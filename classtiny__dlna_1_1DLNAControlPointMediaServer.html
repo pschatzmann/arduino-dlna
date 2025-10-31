@@ -125,9 +125,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:abfc6e0dc8142e16d0b14a6b8eb8d8866"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMediaServer.html#abfc6e0dc8142e16d0b14a6b8eb8d8866">setDeviceIndex</a> (int idx)</td></tr>
 <tr class="memdesc:abfc6e0dc8142e16d0b14a6b8eb8d8866"><td class="mdescLeft">&#160;</td><td class="mdescRight">Select a device by index (0-based) for subsequent actions. By default 0 is used.  <br /></td></tr>
 <tr class="separator:abfc6e0dc8142e16d0b14a6b8eb8d8866"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5669ccaac5278af572963d3835c4e412"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMediaServer.html#a5669ccaac5278af572963d3835c4e412">subscribeNotifications</a> (<a class="el" href="classtiny__dlna_1_1DLNAControlPointMediaServer.html#a5748d533f468c2e1f233421f437b3876">NotificationCallback</a> cb=nullptr, int timeoutSeconds=3600)</td></tr>
-<tr class="memdesc:a5669ccaac5278af572963d3835c4e412"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subscribe to event notifications for the selected server/device.  <br /></td></tr>
-<tr class="separator:a5669ccaac5278af572963d3835c4e412"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a620c6ff20c8eae187fe26d3c126c5c91"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMediaServer.html#a620c6ff20c8eae187fe26d3c126c5c91">setSubscribeNotificationsActive</a> (bool flag)</td></tr>
+<tr class="memdesc:a620c6ff20c8eae187fe26d3c126c5c91"><td class="mdescLeft">&#160;</td><td class="mdescRight">Activate/deactivate subscription notifications.  <br /></td></tr>
+<tr class="separator:a620c6ff20c8eae187fe26d3c126c5c91"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaac515211de6f1b5d6b3c946fa04fab0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMediaServer.html#aaac515211de6f1b5d6b3c946fa04fab0">setDeviceTypeFilter</a> (const char *filter)</td></tr>
 <tr class="memdesc:aaac515211de6f1b5d6b3c946fa04fab0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Restrict this helper to devices of the given device type.  <br /></td></tr>
 <tr class="separator:aaac515211de6f1b5d6b3c946fa04fab0"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1165,6 +1165,34 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a620c6ff20c8eae187fe26d3c126c5c91" name="a620c6ff20c8eae187fe26d3c126c5c91"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a620c6ff20c8eae187fe26d3c126c5c91">&#9670;&#160;</a></span>setSubscribeNotificationsActive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tiny_dlna::DLNAControlPointMediaServer::setSubscribeNotificationsActive </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>flag</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Activate/deactivate subscription notifications. </p>
+
+</div>
+</div>
 <a id="a6a271bccff02977e5302a2f198c7b209" name="a6a271bccff02977e5302a2f198c7b209"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6a271bccff02977e5302a2f198c7b209">&#9670;&#160;</a></span>setUdp()</h2>
 
@@ -1190,52 +1218,6 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Setter for UDP service used for discovery (SSDP) </p>
-
-</div>
-</div>
-<a id="a5669ccaac5278af572963d3835c4e412" name="a5669ccaac5278af572963d3835c4e412"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5669ccaac5278af572963d3835c4e412">&#9670;&#160;</a></span>subscribeNotifications()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool tiny_dlna::DLNAControlPointMediaServer::subscribeNotifications </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMediaServer.html#a5748d533f468c2e1f233421f437b3876">NotificationCallback</a>&#160;</td>
-          <td class="paramname"><em>cb</em> = <code>nullptr</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>timeoutSeconds</em> = <code>3600</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Subscribe to event notifications for the selected server/device. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">timeoutSeconds</td><td><a class="el" href="structtiny__dlna_1_1Subscription.html" title="Represents a single event subscription for a service.">Subscription</a> timeout in seconds (default: 60) </td></tr>
-    <tr><td class="paramname">cb</td><td>Optional notification callback; if nullptr the default <code>processNotification</code> will be used </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>true on successful SUBSCRIBE, false otherwise </dd></dl>
 
 </div>
 </div>

@@ -256,8 +256,10 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1Subscription.html">Subscription</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a single event subscription for a service.  <a href="structtiny__dlna_1_1Subscription.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgr.html">SubscriptionMgr</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Manages event subscriptions and notification delivery.  <a href="classtiny__dlna_1_1SubscriptionMgr.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgrControlPoint.html">SubscriptionMgrControlPoint</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Standalone manager for UPnP/DLNA event subscriptions used by control points and devices.  <a href="classtiny__dlna_1_1SubscriptionMgrControlPoint.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgrDevice.html">SubscriptionMgrDevice</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1UDPAsyncService.html">UDPAsyncService</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to UDP functionality: sending and receiving of data using the Async API of the ESP32.  <a href="classtiny__dlna_1_1UDPAsyncService.html#details">More...</a><br /></td></tr>
@@ -313,6 +315,13 @@ Enumerations</h2></td></tr>
  }</td></tr>
 <tr class="memdesc:a5eabb92538a2ba1397f67b903cb9d35e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Supported log levels.  <a href="namespacetiny__dlna.html#a5eabb92538a2ba1397f67b903cb9d35e">More...</a><br /></td></tr>
 <tr class="separator:a5eabb92538a2ba1397f67b903cb9d35e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaeb449bfe04e5561476e1371856fa0cf"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetiny__dlna.html#aaeb449bfe04e5561476e1371856fa0cf">SubscriptionState</a> { <a class="el" href="namespacetiny__dlna.html#aaeb449bfe04e5561476e1371856fa0cfafdc7aa92ecb714c25019e988c09aeffa">Unsubscribed</a>
+, <a class="el" href="namespacetiny__dlna.html#aaeb449bfe04e5561476e1371856fa0cfaae54f8374e019ce8a7d61c839bd307b8">Subscribing</a>
+, <a class="el" href="namespacetiny__dlna.html#aaeb449bfe04e5561476e1371856fa0cfa808c7457c768423c5651cbf676d9f6d7">Subscribed</a>
+, <a class="el" href="namespacetiny__dlna.html#aaeb449bfe04e5561476e1371856fa0cfadd7dd6fc394076deae158ff90ead2776">Unsubscribing</a>
+ }</td></tr>
+<tr class="memdesc:aaeb449bfe04e5561476e1371856fa0cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subscription State.  <a href="namespacetiny__dlna.html#aaeb449bfe04e5561476e1371856fa0cf">More...</a><br /></td></tr>
+<tr class="separator:aaeb449bfe04e5561476e1371856fa0cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a504b776a2804411b65b3b1cd864d8d92"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetiny__dlna.html#a504b776a2804411b65b3b1cd864d8d92">ProtocolRole</a> { <a class="el" href="namespacetiny__dlna.html#a504b776a2804411b65b3b1cd864d8d92a69e59c2c0791225115a2a78deed062cf">IsSource</a> = 0
 , <a class="el" href="namespacetiny__dlna.html#a504b776a2804411b65b3b1cd864d8d92a4af7b7766fbfc7921a237d15c3d99309">IsSink</a> = 1
  }</td></tr>
@@ -360,8 +369,10 @@ Enumerations</h2></td></tr>
 , <br />
 &#160;&#160;<a class="el" href="namespacetiny__dlna.html#a8b30900e538135f563c83e48319e5247a2cdcc24012398a6731aae7ecc14c60fc">T_CONNECT</a>
 , <a class="el" href="namespacetiny__dlna.html#a8b30900e538135f563c83e48319e5247acaf97fba9939f1bea8cd1141de6b7666">T_PATCH</a>
+, <a class="el" href="namespacetiny__dlna.html#a8b30900e538135f563c83e48319e5247a3827e778ed715b13c68990efb75ec250">T_UNSUBSCRIBE</a>
 , <a class="el" href="namespacetiny__dlna.html#a8b30900e538135f563c83e48319e5247a78d7f90932c20309de58ac2111387323">T_SUBSCRIBE</a>
-, <a class="el" href="namespacetiny__dlna.html#a8b30900e538135f563c83e48319e5247ad90b59c95e2a57ad2969a295ee3bcff2">T_NOTIFY</a>
+, <br />
+&#160;&#160;<a class="el" href="namespacetiny__dlna.html#a8b30900e538135f563c83e48319e5247ad90b59c95e2a57ad2969a295ee3bcff2">T_NOTIFY</a>
 <br />
  }</td></tr>
 <tr class="separator:a8b30900e538135f563c83e48319e5247"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -629,6 +640,36 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="aaeb449bfe04e5561476e1371856fa0cf" name="aaeb449bfe04e5561476e1371856fa0cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaeb449bfe04e5561476e1371856fa0cf">&#9670;&#160;</a></span>SubscriptionState</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="namespacetiny__dlna.html#aaeb449bfe04e5561476e1371856fa0cf">tiny_dlna::SubscriptionState</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p><a class="el" href="structtiny__dlna_1_1Subscription.html" title="Represents a single event subscription for a service.">Subscription</a> State. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="aaeb449bfe04e5561476e1371856fa0cfafdc7aa92ecb714c25019e988c09aeffa" name="aaeb449bfe04e5561476e1371856fa0cfafdc7aa92ecb714c25019e988c09aeffa"></a>Unsubscribed&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aaeb449bfe04e5561476e1371856fa0cfaae54f8374e019ce8a7d61c839bd307b8" name="aaeb449bfe04e5561476e1371856fa0cfaae54f8374e019ce8a7d61c839bd307b8"></a>Subscribing&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aaeb449bfe04e5561476e1371856fa0cfa808c7457c768423c5651cbf676d9f6d7" name="aaeb449bfe04e5561476e1371856fa0cfa808c7457c768423c5651cbf676d9f6d7"></a>Subscribed&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aaeb449bfe04e5561476e1371856fa0cfadd7dd6fc394076deae158ff90ead2776" name="aaeb449bfe04e5561476e1371856fa0cfadd7dd6fc394076deae158ff90ead2776"></a>Unsubscribing&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
 <a id="a8b30900e538135f563c83e48319e5247" name="a8b30900e538135f563c83e48319e5247"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8b30900e538135f563c83e48319e5247">&#9670;&#160;</a></span>TinyMethodID</h2>
 
@@ -651,6 +692,7 @@ Variables</h2></td></tr>
 <tr><td class="fieldname"><a id="a8b30900e538135f563c83e48319e5247a439b85af4776b7be46ca12db98031c03" name="a8b30900e538135f563c83e48319e5247a439b85af4776b7be46ca12db98031c03"></a>T_OPTIONS&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a8b30900e538135f563c83e48319e5247a2cdcc24012398a6731aae7ecc14c60fc" name="a8b30900e538135f563c83e48319e5247a2cdcc24012398a6731aae7ecc14c60fc"></a>T_CONNECT&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a8b30900e538135f563c83e48319e5247acaf97fba9939f1bea8cd1141de6b7666" name="a8b30900e538135f563c83e48319e5247acaf97fba9939f1bea8cd1141de6b7666"></a>T_PATCH&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a8b30900e538135f563c83e48319e5247a3827e778ed715b13c68990efb75ec250" name="a8b30900e538135f563c83e48319e5247a3827e778ed715b13c68990efb75ec250"></a>T_UNSUBSCRIBE&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a8b30900e538135f563c83e48319e5247a78d7f90932c20309de58ac2111387323" name="a8b30900e538135f563c83e48319e5247a78d7f90932c20309de58ac2111387323"></a>T_SUBSCRIBE&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a8b30900e538135f563c83e48319e5247ad90b59c95e2a57ad2969a295ee3bcff2" name="a8b30900e538135f563c83e48319e5247ad90b59c95e2a57ad2969a295ee3bcff2"></a>T_NOTIFY&#160;</td><td class="fielddoc"></td></tr>
 </table>
@@ -912,7 +954,7 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">= {<span class="stringliteral">&quot;?&quot;</span>,       <span class="stringliteral">&quot;GET&quot;</span>,    <span class="stringliteral">&quot;HEAD&quot;</span>,  <span class="stringliteral">&quot;POST&quot;</span>,</div>
 <div class="line">                         <span class="stringliteral">&quot;PUT&quot;</span>,     <span class="stringliteral">&quot;DELETE&quot;</span>, <span class="stringliteral">&quot;TRACE&quot;</span>, <span class="stringliteral">&quot;OPTIONS&quot;</span>,</div>
-<div class="line">                         <span class="stringliteral">&quot;CONNECT&quot;</span>, <span class="stringliteral">&quot;PATCH&quot;</span>, <span class="stringliteral">&quot;SUBSCRIBE&quot;</span>, <span class="stringliteral">&quot;NOTIFY&quot;</span>, <span class="keyword">nullptr</span>}</div>
+<div class="line">                         <span class="stringliteral">&quot;CONNECT&quot;</span>, <span class="stringliteral">&quot;PATCH&quot;</span>, <span class="stringliteral">&quot;UNSUBSCRIBE&quot;</span>, <span class="stringliteral">&quot;SUBSCRIBE&quot;</span>, <span class="stringliteral">&quot;NOTIFY&quot;</span>, <span class="keyword">nullptr</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>

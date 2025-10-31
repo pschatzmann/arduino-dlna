@@ -10,5 +10,5 @@ var searchData=
   ['host_5fname_7',['host_name',['../classtiny__dlna_1_1HttpRequest.html#a53002a65ce482b0006800151d7d498fb',1,'tiny_dlna::HttpRequest']]],
   ['hoststr_8',['hostStr',['../classtiny__dlna_1_1Url.html#a55fb0c785eb5aa4a446bfc8d1e8ff2d6',1,'tiny_dlna::Url']]],
   ['http_5fheaer_5fptr_9',['http_heaer_ptr',['../classtiny__dlna_1_1HttpChunkReader.html#ab0b51601546adada90bc900639e372e7',1,'tiny_dlna::HttpChunkReader']]],
-  ['http_5fserver_5fport_10',['http_server_port',['../classtiny__dlna_1_1DLNAControlPoint.html#a53b3fcff053a8073328506847a1d6f05',1,'tiny_dlna::DLNAControlPoint']]]
+  ['http_5fserver_5fport_10',['http_server_port',['../classtiny__dlna_1_1DLNAControlPoint.html#a53b3fcff053a8073328506847a1d6f05',1,'tiny_dlna::DLNAControlPoint::http_server_port()'],['../classtiny__dlna_1_1SubscriptionMgrControlPoint.html#a476ecba41d7ed811cae31ffac18cbcef',1,'tiny_dlna::SubscriptionMgrControlPoint::http_server_port()']]]
 ];

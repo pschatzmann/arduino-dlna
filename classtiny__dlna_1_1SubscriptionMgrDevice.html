@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Arduino DLNA Server: tiny_dlna::SubscriptionMgr Class Reference</title>
+<title>Arduino DLNA Server: tiny_dlna::SubscriptionMgrDevice Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,7 +69,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="namespacetiny__dlna.html">tiny_dlna</a></li><li class="navelem"><a class="el" href="classtiny__dlna_1_1SubscriptionMgr.html">SubscriptionMgr</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespacetiny__dlna.html">tiny_dlna</a></li><li class="navelem"><a class="el" href="classtiny__dlna_1_1SubscriptionMgrDevice.html">SubscriptionMgrDevice</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -77,51 +77,41 @@ $(function() {
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
-<a href="classtiny__dlna_1_1SubscriptionMgr-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">tiny_dlna::SubscriptionMgr Class Reference</div></div>
+<a href="classtiny__dlna_1_1SubscriptionMgrDevice-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">tiny_dlna::SubscriptionMgrDevice Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Manages event subscriptions and notification delivery.  
- <a href="classtiny__dlna_1_1SubscriptionMgr.html#details">More...</a></p>
-
-<p><code>#include &lt;<a class="el" href="SubscriptionMgr_8h_source.html">SubscriptionMgr.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="SubscriptionMgrDevice_8h_source.html">SubscriptionMgrDevice.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ae140cecc68067f4526a700081200f2dc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgr.html#ae140cecc68067f4526a700081200f2dc">SubscriptionMgr</a> ()</td></tr>
-<tr class="separator:ae140cecc68067f4526a700081200f2dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af63ee3e1713171da1fc6c3ca182da7bb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Str.html">Str</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgr.html#af63ee3e1713171da1fc6c3ca182da7bb">subscribe</a> (const char *serviceId, const char *callbackUrl, uint32_t timeoutSec=1800)</td></tr>
-<tr class="separator:af63ee3e1713171da1fc6c3ca182da7bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0b4780117914bb94b69ecf1ceb4cefea"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgr.html#a0b4780117914bb94b69ecf1ceb4cefea">unsubscribe</a> (const char *serviceId, const char *sid)</td></tr>
-<tr class="separator:a0b4780117914bb94b69ecf1ceb4cefea"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7241b8d2d58e2b0b73855cf21f06bf66"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgr.html#a7241b8d2d58e2b0b73855cf21f06bf66">publishProperty</a> (const char *serviceId, const char *varName, const char *value)</td></tr>
-<tr class="separator:a7241b8d2d58e2b0b73855cf21f06bf66"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b9407c1c3ca3e4bc9534254c8612a55"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgrDevice.html#a6b9407c1c3ca3e4bc9534254c8612a55">SubscriptionMgrDevice</a> ()</td></tr>
+<tr class="separator:a6b9407c1c3ca3e4bc9534254c8612a55"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6fa4ba46246d70450242a08a47fa096b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Str.html">Str</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgrDevice.html#a6fa4ba46246d70450242a08a47fa096b">subscribe</a> (const char *serviceId, const char *callbackUrl, uint32_t timeoutSec=1800)</td></tr>
+<tr class="separator:a6fa4ba46246d70450242a08a47fa096b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a68d847cf4bf393d599184deb369d1e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgrDevice.html#a0a68d847cf4bf393d599184deb369d1e">unsubscribe</a> (const char *serviceId, const char *sid)</td></tr>
+<tr class="separator:a0a68d847cf4bf393d599184deb369d1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84584ac44c1710520959e7c485bfe56d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgrDevice.html#a84584ac44c1710520959e7c485bfe56d">publishProperty</a> (const char *serviceId, const char *varName, const char *value)</td></tr>
+<tr class="separator:a84584ac44c1710520959e7c485bfe56d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a125ced1ec191f3eb9e1dca8561d37dd4"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgr.html#a125ced1ec191f3eb9e1dca8561d37dd4">nullStr</a> (const char *str, const char *defaultStr=&quot;&quot;)</td></tr>
-<tr class="separator:a125ced1ec191f3eb9e1dca8561d37dd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a89ef2d2004488c6ac5a79ce1ea10bffa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt; <a class="el" href="structtiny__dlna_1_1Subscription.html">Subscription</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgr.html#a89ef2d2004488c6ac5a79ce1ea10bffa">getList</a> (const char *serviceId)</td></tr>
-<tr class="separator:a89ef2d2004488c6ac5a79ce1ea10bffa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7788f6a9b667b902fd064f3cd757dc43"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgrDevice.html#a7788f6a9b667b902fd064f3cd757dc43">nullStr</a> (const char *str, const char *defaultStr=&quot;&quot;)</td></tr>
+<tr class="separator:a7788f6a9b667b902fd064f3cd757dc43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac333c6dc0b4eb736ff25178de597aebd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt; <a class="el" href="structtiny__dlna_1_1Subscription.html">Subscription</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgrDevice.html#ac333c6dc0b4eb736ff25178de597aebd">getList</a> (const char *serviceId)</td></tr>
+<tr class="separator:ac333c6dc0b4eb736ff25178de597aebd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a93b36088506113eea1064f43e44d9a54"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt; <a class="el" href="classtiny__dlna_1_1Str.html">Str</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgr.html#a93b36088506113eea1064f43e44d9a54">service_names</a></td></tr>
-<tr class="separator:a93b36088506113eea1064f43e44d9a54"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afd57d61aa601316058f8a0f327b064fa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt; <a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt; <a class="el" href="structtiny__dlna_1_1Subscription.html">Subscription</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgr.html#afd57d61aa601316058f8a0f327b064fa">service_lists</a></td></tr>
-<tr class="separator:afd57d61aa601316058f8a0f327b064fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c98a409e5af48d140f8fb95d92fb887"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt; <a class="el" href="classtiny__dlna_1_1Str.html">Str</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgrDevice.html#a7c98a409e5af48d140f8fb95d92fb887">service_names</a></td></tr>
+<tr class="separator:a7c98a409e5af48d140f8fb95d92fb887"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a576ba131b4e2f3f9ddd9db458ad69a2d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt; <a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt; <a class="el" href="structtiny__dlna_1_1Subscription.html">Subscription</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgrDevice.html#a576ba131b4e2f3f9ddd9db458ad69a2d">service_lists</a></td></tr>
+<tr class="separator:a576ba131b4e2f3f9ddd9db458ad69a2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Manages event subscriptions and notification delivery. </p>
-<p>The manager maintains per-service lists of <code><a class="el" href="structtiny__dlna_1_1Subscription.html" title="Represents a single event subscription for a service.">Subscription</a></code> entries. It provides methods to subscribe/unsubscribe clients and to publish state variable changes (which will be delivered as UPnP event NOTIFY requests to each subscriber's callback URL).</p>
-<p>Notes:</p><ul>
-<li>Subscriptions are tracked in simple parallel vectors (service names and lists) rather than a hash map for minimal embedded footprint.</li>
-<li><code><a class="el" href="classtiny__dlna_1_1SubscriptionMgr.html#af63ee3e1713171da1fc6c3ca182da7bb">subscribe()</a></code> returns the assigned SID (generated when creating a new subscription). <code><a class="el" href="classtiny__dlna_1_1SubscriptionMgr.html#a0b4780117914bb94b69ecf1ceb4cefea">unsubscribe()</a></code> removes a subscription by SID. </li>
-</ul>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="ae140cecc68067f4526a700081200f2dc" name="ae140cecc68067f4526a700081200f2dc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae140cecc68067f4526a700081200f2dc">&#9670;&#160;</a></span>SubscriptionMgr()</h2>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a6b9407c1c3ca3e4bc9534254c8612a55" name="a6b9407c1c3ca3e4bc9534254c8612a55"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b9407c1c3ca3e4bc9534254c8612a55">&#9670;&#160;</a></span>SubscriptionMgrDevice()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -130,7 +120,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">tiny_dlna::SubscriptionMgr::SubscriptionMgr </td>
+          <td class="memname">tiny_dlna::SubscriptionMgrDevice::SubscriptionMgrDevice </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -146,8 +136,8 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a89ef2d2004488c6ac5a79ce1ea10bffa" name="a89ef2d2004488c6ac5a79ce1ea10bffa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a89ef2d2004488c6ac5a79ce1ea10bffa">&#9670;&#160;</a></span>getList()</h2>
+<a id="ac333c6dc0b4eb736ff25178de597aebd" name="ac333c6dc0b4eb736ff25178de597aebd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac333c6dc0b4eb736ff25178de597aebd">&#9670;&#160;</a></span>getList()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -156,7 +146,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt; <a class="el" href="structtiny__dlna_1_1Subscription.html">Subscription</a> &gt; &amp; tiny_dlna::SubscriptionMgr::getList </td>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt; <a class="el" href="structtiny__dlna_1_1Subscription.html">Subscription</a> &gt; &amp; tiny_dlna::SubscriptionMgrDevice::getList </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>serviceId</em></td><td>)</td>
@@ -172,8 +162,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a125ced1ec191f3eb9e1dca8561d37dd4" name="a125ced1ec191f3eb9e1dca8561d37dd4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a125ced1ec191f3eb9e1dca8561d37dd4">&#9670;&#160;</a></span>nullStr()</h2>
+<a id="a7788f6a9b667b902fd064f3cd757dc43" name="a7788f6a9b667b902fd064f3cd757dc43"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7788f6a9b667b902fd064f3cd757dc43">&#9670;&#160;</a></span>nullStr()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -182,7 +172,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const char * tiny_dlna::SubscriptionMgr::nullStr </td>
+          <td class="memname">const char * tiny_dlna::SubscriptionMgrDevice::nullStr </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>str</em>, </td>
@@ -208,8 +198,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a7241b8d2d58e2b0b73855cf21f06bf66" name="a7241b8d2d58e2b0b73855cf21f06bf66"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7241b8d2d58e2b0b73855cf21f06bf66">&#9670;&#160;</a></span>publishProperty()</h2>
+<a id="a84584ac44c1710520959e7c485bfe56d" name="a84584ac44c1710520959e7c485bfe56d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a84584ac44c1710520959e7c485bfe56d">&#9670;&#160;</a></span>publishProperty()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -218,7 +208,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void tiny_dlna::SubscriptionMgr::publishProperty </td>
+          <td class="memname">void tiny_dlna::SubscriptionMgrDevice::publishProperty </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>serviceId</em>, </td>
@@ -250,8 +240,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="af63ee3e1713171da1fc6c3ca182da7bb" name="af63ee3e1713171da1fc6c3ca182da7bb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af63ee3e1713171da1fc6c3ca182da7bb">&#9670;&#160;</a></span>subscribe()</h2>
+<a id="a6fa4ba46246d70450242a08a47fa096b" name="a6fa4ba46246d70450242a08a47fa096b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6fa4ba46246d70450242a08a47fa096b">&#9670;&#160;</a></span>subscribe()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -260,7 +250,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtiny__dlna_1_1Str.html">Str</a> tiny_dlna::SubscriptionMgr::subscribe </td>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1Str.html">Str</a> tiny_dlna::SubscriptionMgrDevice::subscribe </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>serviceId</em>, </td>
@@ -292,8 +282,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a0b4780117914bb94b69ecf1ceb4cefea" name="a0b4780117914bb94b69ecf1ceb4cefea"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0b4780117914bb94b69ecf1ceb4cefea">&#9670;&#160;</a></span>unsubscribe()</h2>
+<a id="a0a68d847cf4bf393d599184deb369d1e" name="a0a68d847cf4bf393d599184deb369d1e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a68d847cf4bf393d599184deb369d1e">&#9670;&#160;</a></span>unsubscribe()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -302,7 +292,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool tiny_dlna::SubscriptionMgr::unsubscribe </td>
+          <td class="memname">bool tiny_dlna::SubscriptionMgrDevice::unsubscribe </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>serviceId</em>, </td>
@@ -329,8 +319,8 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="afd57d61aa601316058f8a0f327b064fa" name="afd57d61aa601316058f8a0f327b064fa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afd57d61aa601316058f8a0f327b064fa">&#9670;&#160;</a></span>service_lists</h2>
+<a id="a576ba131b4e2f3f9ddd9db458ad69a2d" name="a576ba131b4e2f3f9ddd9db458ad69a2d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a576ba131b4e2f3f9ddd9db458ad69a2d">&#9670;&#160;</a></span>service_lists</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -339,7 +329,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt;<a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt;<a class="el" href="structtiny__dlna_1_1Subscription.html">Subscription</a>&gt; &gt; tiny_dlna::SubscriptionMgr::service_lists</td>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt;<a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt;<a class="el" href="structtiny__dlna_1_1Subscription.html">Subscription</a>&gt; &gt; tiny_dlna::SubscriptionMgrDevice::service_lists</td>
         </tr>
       </table>
   </td>
@@ -351,8 +341,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a93b36088506113eea1064f43e44d9a54" name="a93b36088506113eea1064f43e44d9a54"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a93b36088506113eea1064f43e44d9a54">&#9670;&#160;</a></span>service_names</h2>
+<a id="a7c98a409e5af48d140f8fb95d92fb887" name="a7c98a409e5af48d140f8fb95d92fb887"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c98a409e5af48d140f8fb95d92fb887">&#9670;&#160;</a></span>service_names</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -361,7 +351,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt;<a class="el" href="classtiny__dlna_1_1Str.html">Str</a>&gt; tiny_dlna::SubscriptionMgr::service_names</td>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt;<a class="el" href="classtiny__dlna_1_1Str.html">Str</a>&gt; tiny_dlna::SubscriptionMgrDevice::service_names</td>
         </tr>
       </table>
   </td>
@@ -374,7 +364,7 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/dlna/<a class="el" href="SubscriptionMgr_8h_source.html">SubscriptionMgr.h</a></li>
+<li>src/dlna/<a class="el" href="SubscriptionMgrDevice_8h_source.html">SubscriptionMgrDevice.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

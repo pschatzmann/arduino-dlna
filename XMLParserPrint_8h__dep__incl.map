@@ -1,12 +1,13 @@
 <map id="src/dlna/xml/XMLParserPrint.h" name="src/dlna/xml/XMLParserPrint.h">
-<area shape="rect" id="node1" title=" " alt="" coords="503,5,719,31"/>
-<area shape="rect" id="node2" href="$DLNAControlPoint_8h.html" title=" " alt="" coords="279,152,485,177"/>
-<area shape="rect" id="node5" href="$DLNADevice_8h.html" title=" " alt="" coords="462,321,633,346"/>
-<area shape="rect" id="node7" href="$DLNAMediaServer_8h.html" title=" " alt="" coords="690,401,903,441"/>
-<area shape="rect" id="node10" href="$XMLDeviceParser_8h.html" title=" " alt="" coords="420,79,651,104"/>
-<area shape="rect" id="node3" href="$DLNA_8h.html" title=" " alt="" coords="325,489,418,515"/>
-<area shape="rect" id="node4" href="$DLNADeviceRequestParser_8h.html" title=" " alt="" coords="441,225,651,265"/>
-<area shape="rect" id="node8" href="$DLNAControlPointMediaRenderer_8h.html" title=" " alt="" coords="5,313,212,353"/>
-<area shape="rect" id="node9" href="$DLNAControlPointMediaServer_8h.html" title=" " alt="" coords="108,225,315,265"/>
-<area shape="rect" id="node6" href="$DLNAMediaRenderer_8h.html" title=" " alt="" coords="435,401,665,441"/>
+<area shape="rect" id="node1" title=" " alt="" coords="633,5,849,31"/>
+<area shape="rect" id="node2" href="$DLNAControlPoint_8h.html" title=" " alt="" coords="310,167,515,192"/>
+<area shape="rect" id="node5" href="$DLNADevice_8h.html" title=" " alt="" coords="589,335,759,361"/>
+<area shape="rect" id="node6" href="$DLNAMediaRenderer_8h.html" title=" " alt="" coords="541,416,772,456"/>
+<area shape="rect" id="node7" href="$DLNAMediaServer_8h.html" title=" " alt="" coords="797,416,1010,456"/>
+<area shape="rect" id="node10" href="$SubscriptionMgrControlPoint_8h.html" title=" " alt="" coords="343,79,525,119"/>
+<area shape="rect" id="node11" href="$XMLDeviceParser_8h.html" title=" " alt="" coords="549,86,780,111"/>
+<area shape="rect" id="node3" href="$DLNA_8h.html" title=" " alt="" coords="417,504,510,529"/>
+<area shape="rect" id="node4" href="$DLNADeviceRequestParser_8h.html" title=" " alt="" coords="570,240,781,280"/>
+<area shape="rect" id="node8" href="$DLNAControlPointMediaRenderer_8h.html" title=" " alt="" coords="5,328,212,368"/>
+<area shape="rect" id="node9" href="$DLNAControlPointMediaServer_8h.html" title=" " alt="" coords="288,240,495,280"/>
 </map>
