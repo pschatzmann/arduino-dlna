@@ -477,8 +477,6 @@ class DLNAControlPointMediaRenderer {
    */
   bool getProtocalInfo(
       std::function<void(const char* entry, ProtocolRole role)> cb) {
-    // Custom streaming implementation because the returned CSV can be very
-    // large and must not be buffered fully in memory.
     if (!cb) return false;
 
     DLNAServiceInfo& svc =
@@ -488,33 +486,22 @@ class DLNAControlPointMediaRenderer {
       return false;
     }
 
-    // Build POST URL using control point helper which normalizes slashes
-    DLNADeviceInfo& device = p_mgr->getDevice();
-    char url_buffer[256] = {0};
-    const char* suffix = nullStr(svc.control_url);
-    Url post_url{
-        p_mgr->getUrl(device, suffix, url_buffer, (int)sizeof(url_buffer))};
+    // build action and enqueue
+    ActionRequest act(svc, "GetProtocolInfo");
+    p_mgr->addAction(act);
+    bool ok = false;
 
-    // Send request using chunked upload to avoid buffering the SOAP body
-    p_http->stop();
-    char soapaction[200];
-    snprintf(soapaction, sizeof(soapaction), "\"%s#GetProtocolInfo\"",
-             svc.service_type);
-    p_http->request().put("SOAPACTION", soapaction);
+    // processor will be invoked with the live Client and the ActionReply so
+    // callers can handle the response stream themselves. We simply stream-
+    // parse and forward each parsed entry to the provided callback.
+    XMLCallback processor =
+        [&cb, &ok](Client& client, ActionReply& /*reply*/) {
+          ok = XMLProtocolInfoParser::parse(client, cb);
+        };
 
-    int rc = p_http->postChunked(
-        post_url, DLNAControlPointMediaRenderer::writeGetProtocolInfoBody,
-        "text/xml");
-    if (rc != 200) {
-      DlnaLogger.log(DlnaLogLevel::Error,
-                     "GetProtocolInfo POST failed with rc %d", rc);
-      return false;
-    }
-
-    // Stream-parse response using centralized parser (low-memory)
-    Client* cli = p_http->client();
-    if (!cli) return false;
-    return XMLProtocolInfoParser::parseFromClient(cli, cb);
+    // execute the queued action and use our processor to handle the reply
+    p_mgr->executeActions(processor);
+    return ok;
   }
 
  protected:
@@ -532,9 +519,7 @@ class DLNAControlPointMediaRenderer {
   DLNAHttpRequest* p_http = nullptr;
   IUDPService* p_udp = nullptr;
 
-  const char* nullStr(const char* str) {
-    return str ? str : "";
-  }
+  const char* nullStr(const char* str) { return str ? str : ""; }
 
   // Helper to update is_active and notify callback only on change
   void setActiveState(bool s) {
@@ -543,22 +528,6 @@ class DLNAControlPointMediaRenderer {
     DlnaLogger.log(DlnaLogLevel::Info, "ControlPointMediaRenderer active=%s",
                    is_active ? "true" : "false");
     if (activeChangedCallback) activeChangedCallback(is_active, reference);
-  }
-
-  // Helper: write SOAP GetProtocolInfo body using ChunkPrint (no buffering)
-  static void writeGetProtocolInfoBody(ChunkPrint& cp) {
-    cp.print("<?xml version=\"1.0\"?>\r\n");
-    cp.print(
-        "<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\" ");
-    cp.print(
-        "s:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\">\r\n");
-    cp.print("<s:Body>\r\n");
-    cp.print(
-        "<u:GetProtocolInfo "
-        "xmlns:u=\"urn:schemas-upnp-org:service:ConnectionManager:1\">\r\n");
-    cp.print("</u:GetProtocolInfo>\r\n");
-    cp.print("</s:Body>\r\n");
-    cp.print("</s:Envelope>\r\n");
   }
 
   /// Notification callback

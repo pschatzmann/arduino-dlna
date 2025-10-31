@@ -2,14 +2,14 @@
 #pragma once
 
 #include <functional>
+
 #include "basic/Str.h"
-#include "http/Server/HttpRequest.h"
 #include "dlna/Action.h"
+#include "http/Server/HttpRequest.h"
 // Client from Arduino core
 #include <Client.h>
 
 namespace tiny_dlna {
-
 
 /**
  * @brief Streaming parser for ConnectionManager::GetProtocolInfo results
@@ -38,44 +38,10 @@ class XMLProtocolInfoParser {
    * @return true if parsing completed or at least one entry was parsed,
    *         false on error (e.g., cli == nullptr)
    */
-  static bool parseFromClient(
-      Client* cli,
+  static bool parse(
+      Stream& in,
       std::function<void(const char* entry, ProtocolRole role)> cb) {
-    if (!cli || !cb) return false;
-
-    // Adapter reader for Client
-    auto reader = [cli](uint8_t* buf, int maxLen) -> int {
-      if (!cli->connected() || cli->available() == 0) return 0;
-      return cli->read(buf, maxLen);
-    };
-    return parseWithReader(reader, cb);
-  }
-
-  /**
-   * Parse a streamed GetProtocolInfo result using the chunk-aware
-   * HttpRequest API (handles Transfer-Encoding: chunked internally).
-   */
-  static bool parseFromHttpRequest(
-      tiny_dlna::HttpRequest* req,
-      std::function<void(const char* entry, ProtocolRole role)> cb) {
-    if (!req || !cb) return false;
-
-    // Adapter reader for HttpRequest
-    auto reader = [req](uint8_t* buf, int maxLen) -> int {
-      if (!req->connected() || req->available() == 0) return 0;
-      return req->read(buf, maxLen);
-    };
-    return parseWithReader(reader, cb);
-  }
-
- protected:
-  // Shared implementation used by both client-based and request-based
-  // parsers. The reader lambda should return number of bytes read into
-  // buf or 0 when no more data is available.
-  static bool parseWithReader(
-      std::function<int(uint8_t* buf, int maxLen)> reader,
-      std::function<void(const char* entry, ProtocolRole role)> cb) {
-    if (!reader || !cb) return false;
+    if ( !cb) return false;
 
     enum CollectState { LOOKING, IN_SOURCE, IN_SINK } state = LOOKING;
     Str token(128);
@@ -85,7 +51,7 @@ class XMLProtocolInfoParser {
 
     uint8_t buf[200];
     while (true) {
-      int len = reader(buf, sizeof(buf));
+      int len = in.readBytes(buf, sizeof(buf));
       if (len <= 0) break;
       for (int i = 0; i < len; ++i) {
         char c = (char)buf[i];

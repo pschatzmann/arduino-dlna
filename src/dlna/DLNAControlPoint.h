@@ -2,6 +2,7 @@
 
 #include <functional>
 
+#include "Client.h"
 #include "DLNAControlPointRequestParser.h"
 #include "DLNADevice.h"
 #include "DLNADeviceInfo.h"
@@ -17,6 +18,7 @@
 
 namespace tiny_dlna {
 
+using XMLCallback = std::function<void(Client& client, ActionReply& reply)>;
 class DLNAControlPoint;
 DLNAControlPoint* selfDLNAControlPoint = nullptr;
 
@@ -255,12 +257,13 @@ class DLNAControlPoint {
     return actions[actions.size() - 1];
   }
 
-  /// Executes all registered methods
-  ActionReply& executeActions() {
+
+  ActionReply& executeActions(XMLCallback xmlProcessor = nullptr) {
     DlnaLogger.log(DlnaLogLevel::Debug, "DLNAControlPointMgr::executeActions");
     reply.clear();
-    postAllActions();
-    // Debug: dump collected reply arguments for verification
+    postAllActions(xmlProcessor);
+
+    // Default behaviour: log and dump collected reply arguments
     DlnaLogger.log(DlnaLogLevel::Info, "Collected reply arguments: %d",
                    (int)reply.size());
     reply.logArguments();
@@ -374,8 +377,8 @@ class DLNAControlPoint {
    * the control point's URL normalization logic without exposing the
    * internal protected method directly.
    */
-  const char* getUrl(DLNADeviceInfo& device, const char* suffix,
-                       char* buffer, int len) {
+  const char* getUrl(DLNADeviceInfo& device, const char* suffix, char* buffer,
+                     int len) {
     return getUrlImpl(device, suffix, buffer, len);
   }
 
@@ -728,16 +731,17 @@ class DLNAControlPoint {
     return result;
   }
 
-  ActionReply& postAllActions() {
+  ActionReply& postAllActions(XMLCallback xmlProcessor = nullptr) {
     reply.clear();
     DlnaLogger.log(DlnaLogLevel::Debug, "DLNAControlPointMgr::postAllActions");
     for (auto& action : actions) {
-      if (action) postAction(action);
+      if (action) postAction(action, xmlProcessor);
     }
     return reply;
   }
 
-  ActionReply& postAction(ActionRequest& action) {
+  ActionReply& postAction(ActionRequest& action,
+                          XMLCallback xmlProcessor = nullptr) {
     DlnaLogger.log(DlnaLogLevel::Debug, "DLNAControlPointMgr::postAction: %s",
                    nullStr(action.action, "(null)"));
     reply.clear();
@@ -766,9 +770,11 @@ class DLNAControlPoint {
     Url post_url{getUrl(device, service.control_url, url_buffer, 200)};
     DlnaLogger.log(DlnaLogLevel::Info, "POST URL computed: %s", post_url.url());
 
-    // send HTTP POST and collect response into an XMLParserPrint so we can
-    // parse incrementally
-    return processActionHttpPost(post_url, requestBody, action_str.c_str());
+    // send HTTP POST and collect/handle response. If the caller provided an
+    // httpProcessor we forward it so they can process the raw HTTP reply
+    // (and avoid the library's default XML parsing) before consumption.
+    return processActionHttpPost(post_url, requestBody, action_str.c_str(),
+                                 xmlProcessor);
   }
 
   /// Build the SOAP XML request body for the action into `out`
@@ -788,9 +794,13 @@ class DLNAControlPoint {
 
   // Send an HTTP POST for the given URL and request body. On success the
   /// response body is written into `responseOut` (an XMLParserPrint). Returns
-  /// the HTTP rc.
+  /// the HTTP rc. If `httpProcessor` is provided it will be invoked with the
+  /// live `DLNAHttpRequest` instance so callers can implement custom
+  /// processing (for example to stream/parse the XML themselves). When an
+  /// httpProcessor is supplied the library's default XML parsing is skipped.
   ActionReply& processActionHttpPost(Url& post_url, StrPrint& requestBody,
-                                     const char* soapAction) {
+                                     const char* soapAction,
+                                     XMLCallback xmlProcessor = nullptr) {
     DlnaLogger.log(DlnaLogLevel::Debug,
                    "DLNAControlPointMgr::processActionHttpPost");
     XMLParserPrint xml_parser;
@@ -816,7 +826,17 @@ class DLNAControlPoint {
 
     reply.setValid(true);
     reply.clear();
-    // parse response
+
+    // If caller provided a custom XML processor, let it handle the live
+    // client/response. This allows callers to avoid the default XML parsing
+    // which would otherwise consume the response stream.
+    if (xmlProcessor) {
+      Client* c = p_http->client();
+      if (c) xmlProcessor(*c, reply);
+      return reply;
+    }
+
+    // Default: parse response incrementally and populate reply arguments
     while (p_http->client()->available()) {
       int len = p_http->client()->read(buffer, 200);
       if (len > 0) {
@@ -852,7 +872,7 @@ class DLNAControlPoint {
   }
 
   const char* getUrlImpl(DLNADeviceInfo& device, const char* suffix,
-                     const char* buffer, int len) {
+                         const char* buffer, int len) {
     DlnaLogger.log(DlnaLogLevel::Debug, "DLNAControlPointMgr::getUrl");
     StrView url_str{(char*)buffer, len};
     // start with base url if available, otherwise construct from device URL
@@ -953,6 +973,6 @@ class DLNAControlPoint {
 
     return false;
   }
-};
+  };
 
-}  // namespace tiny_dlna
+  }  // namespace tiny_dlna

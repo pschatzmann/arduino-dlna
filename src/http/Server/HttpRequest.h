@@ -65,18 +65,7 @@ class HttpRequest {
     return process(T_POST, url, mime, data, len);
   }
 
-  /**
-   * Post using chunked transfer encoding where the caller provides a writer
-   * lambda that receives a ChunkPrint and writes the body in pieces. This
-   * avoids buffering the entire request body in memory.
-   *
-   * Example:
-   *   req.postChunked(url, [&](ChunkPrint &cp){
-   *     cp.print("<s:Envelope...>");
-   *     cp.print(...);
-   *   });
-   */
-  virtual int postChunked(Url &url, std::function<void(ChunkPrint&)> writer,
+  virtual int post(Url &url, size_t len, std::function<void(Print&)> writer,
                           const char *mime = nullptr) {
     DlnaLogger.log(DlnaLogLevel::Info, "postChunked %s", url.url());
 
@@ -98,8 +87,6 @@ class HttpRequest {
 
     // prepare request header
     request_header.setValues(T_POST, url.path());
-    // set chunked transfer for upload
-    request_header.put(TRANSFER_ENCODING, CHUNKED);
     if (!host_name.isEmpty()) {
       request_header.put(HOST_C, host_name.c_str());
     }
@@ -113,9 +100,7 @@ class HttpRequest {
     request_header.write(*client_ptr);
 
     // stream body via ChunkPrint which emits proper chunk frames
-    ChunkPrint cp(*client_ptr);
-    if (writer) writer(cp);
-    cp.end();
+    if (writer) writer(*client_ptr);
 
     // read reply header and prepare chunk reader if needed
     reply_header.read(*client_ptr);
