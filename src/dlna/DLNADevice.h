@@ -4,7 +4,7 @@
 #include "DLNADeviceInfo.h"
 #include "DLNADeviceRequestParser.h"
 #include "Schedule.h"
-#include "SubscriptionMgr.h"
+#include "SubscriptionMgrDevice.h"
 #include "basic/Url.h"
 #include "http/Http.h"
 #include "xml/XMLParserPrint.h"
@@ -77,7 +77,7 @@ class DLNADevice {
     return true;
   }
 
-  static SubscriptionMgr* getSubscriptionMgr() {
+  static SubscriptionMgrDevice* getSubscriptionMgr() {
     return self ? &self->subscription_mgr : nullptr;
   }
 
@@ -254,7 +254,7 @@ class DLNADevice {
   bool is_active = false;
   uint32_t post_alive_repeat_ms = 0;
   Scheduler scheduler;
-  SubscriptionMgr subscription_mgr;
+  SubscriptionMgrDevice subscription_mgr;
   DLNADeviceRequestParser parser;
   DLNADeviceInfo* p_device = nullptr;
   IUDPService* p_udp = nullptr;

@@ -8,6 +8,7 @@
 #include "DLNADeviceInfo.h"
 #include "Schedule.h"
 #include "Scheduler.h"
+#include "SubscriptionMgrControlPoint.h"
 #include "basic/StrPrint.h"
 #include "basic/Url.h"
 #include "dlna_config.h"
@@ -82,17 +83,13 @@ class DLNAControlPoint {
   /// Selects the default device by index
   void setDeviceIndex(int idx) { default_device_idx = 0; }
 
-  /// Activates event notification subscription with repeat interval in seconds
-  void setSubscribeInterval(int repeatSec = 3600) {
-    subscribe_repeat_sec = repeatSec;
-  }
+  /// (Subscription management has been moved to SubscriptionMgrControlPoint)
 
   /// Register a callback that will be invoked for incoming event notification
-  void onNotification(
-      std::function<void(void* reference, const char* sid, const char* varName,
-                         const char* newValue)>
-          cb) {
-    event_callback = cb;
+  void setEventSubscriptionCallback(std::function<void(const char* sid, const char* varName,
+                                         const char* newValue, void* reference)>
+                          cb, void* ref = nullptr) {
+    subscription_mgr.setEventSubscriptionCallback(cb, ref);
   }
 
   /// Set HttpServer instance and register the notify handler
@@ -100,7 +97,7 @@ class DLNAControlPoint {
     DlnaLogger.log(DlnaLogLevel::Debug, "DLNAControlPointMgr::setHttpServer");
     p_http_server = &server;
     http_server_port = port;
-    attachHttpServer(server);
+    subscription_mgr.setHttpServer(server, port);
   }
 
   /// Register a callback that will be invoked when parsing SOAP/Action results
@@ -134,10 +131,13 @@ class DLNAControlPoint {
     p_udp = &udp;
     p_http = &http;
 
+    // instantiate subscription manager
+    subscription_mgr.setup(http, udp, local_url, registry, getDevice());
+
     // set timeout for http requests
     http.setTimeout(DLNA_HTTP_REQUEST_TIMEOUT_MS);
 
-    if (p_http_server && http_server_port > 0 && event_callback != nullptr) {
+    if (p_http_server && http_server_port > 0) {
       // handle server requests
       if (!p_http_server->begin(http_server_port)) {
         DlnaLogger.log(DlnaLogLevel::Error, "HttpServer begin failed");
@@ -187,20 +187,6 @@ class DLNAControlPoint {
                    devices.size());
 
     return devices.size() > 0;
-  }
-
-  /// Subscribes to event notifications for the selected device
-  bool subscribeNotifications() {
-    // activate subscriptions
-    if (event_callback != nullptr) {
-      if (!subscribeNotifications(getDevice(), subscribe_repeat_sec)) {
-        DlnaLogger.log(DlnaLogLevel::Error,
-                       "Failed to subscribe to device notifications");
-        return false;
-      }
-      return true;
-    }
-    return false;
   }
 
   /// Stops the processing and releases the resources
@@ -283,6 +269,9 @@ class DLNAControlPoint {
     if (!is_active) return false;
     DLNAControlPointRequestParser parser;
 
+    // process subscriptions
+    subscription_mgr.loop();
+
     // process UDP requests
     RequestData req = p_udp->receive();
     if (req && scheduler.isMSearchActive()) {
@@ -311,12 +300,6 @@ class DLNAControlPoint {
     if (p_http_server && p_http_server->isActive()) {
       // handle server requests
       bool rc = p_http_server->doLoop();
-
-      // re-subscribe after timeout
-      if (event_callback != nullptr && subscribe_timeout > 0 &&
-          millis() >= subscribe_timeout) {
-        subscribeNotifications(getDevice(), subscribe_repeat_sec);
-      }
     }
 
     // be nice, if we have other tasks
@@ -476,11 +459,25 @@ class DLNAControlPoint {
   /// Provides the last reply
   ActionReply& getLastReply() { return reply; }
 
+  /// Provides the subscription manager
+  SubscriptionMgrControlPoint* getSubscriptionMgr() {
+    return &subscription_mgr;
+  }
+
+  /// Activate/deactivate subscription notifications
+  void setSubscribeNotificationsActive(bool flag) {
+    subscription_mgr.setEventSubscriptionActive(flag);
+  }
+
+  /// Register a string in the shared registry and return the stored pointer
+  const char* registerString(const char* s) { return registry.add((char*)s); }
+
  protected:
   DLNADeviceInfo NO_DEVICE{false};
   Scheduler scheduler;
   DLNAHttpRequest* p_http = nullptr;
   IUDPService* p_udp = nullptr;
+  SubscriptionMgrControlPoint subscription_mgr;
   Vector<DLNADeviceInfo> devices;
   Vector<ActionRequest> actions;
   ActionReply reply;
@@ -488,8 +485,6 @@ class DLNAControlPoint {
   StringRegistry registry;
   int default_device_idx = 0;
   int msearch_repeat_ms = 10000;
-  uint64_t subscribe_timeout = 0;
-  int subscribe_repeat_sec = 3600;
   bool is_active = false;
   bool is_parse_device = false;
   const char* search_target;
@@ -501,81 +496,6 @@ class DLNAControlPoint {
   std::function<void(const char* nodeName, const char* text,
                      const char* attributes)>
       result_callback;
-  std::function<void(void* reference, const char* sid, const char* varName,
-                     const char* newValue)>
-      event_callback;
-
-  /// Attach an HttpServer so the control point can receive HTTP NOTIFY event
-  /// messages. This registers a handler at the configured local URL path
-  /// (see `local_url`) which will extract the SID header and body and call
-  /// parseAndDispatchEvent() to dispatch property changes.
-  void attachHttpServer(HttpServer& server) {
-    DlnaLogger.log(DlnaLogLevel::Debug,
-                   "DLNAControlPointMgr::attachHttpServer");
-    p_http_server = &server;
-    // register handler at the local path. If local_url is not set we use
-    // a default path "/dlna/events"
-    const char* path =
-        StrView(local_url.url()).isEmpty() ? "/dlna/events" : local_url.path();
-
-    void* ctx[1];
-    ctx[0] = this;
-    server.on(path, T_NOTIFY, notifyHandler, ctx, 1);
-  }
-
-  /// Static HTTP handler for incoming NOTIFY event callbacks. The HttpServer
-  /// will pass the control point instance as context[0] so we can retrieve
-  /// the instance and forward the event to parseAndDispatchEvent().
-  static void notifyHandler(HttpServer* server, const char* requestPath,
-                            HttpRequestHandlerLine* hl) {
-    // The DLNAControlPoint instance is passed as context[0]
-    DLNAControlPoint* cp = nullptr;
-    if (hl && hl->contextCount > 0) {
-      cp = static_cast<DLNAControlPoint*>(hl->context[0]);
-    }
-
-    if (!cp) {
-      DlnaLogger.log(DlnaLogLevel::Error, "No control point found");
-      server->replyNotFound();
-      return;
-    }
-
-    // read headers
-    HttpRequestHeader& req = server->requestHeader();
-    uint8_t buffer[XML_PARSER_BUFFER_SIZE];
-    XMLParserPrint xml_parser;
-    Str node;
-    Str text;
-    Str attr;
-    Vector<Str> path;
-    bool active = false;
-    const char* sid = req.get("SID");
-
-    /// Parse body
-    Client& client = server->client();
-    while (client.available()) {
-      int len = client.readBytes(buffer, sizeof(buffer));
-      xml_parser.write((const uint8_t*)buffer, len);
-      while (xml_parser.parse(node, path, text, attr)) {
-        // execute callback
-        if (active && !text.isEmpty()) {
-          DlnaLogger.log(DlnaLogLevel::Info, "Event: %s = %s", node.c_str(),
-                         text.c_str());
-          // event callback
-          if (cp->event_callback != nullptr) {
-            cp->event_callback(cp->reference, sid, node.c_str(), text.c_str());
-          }
-        }
-        /// Activate callback
-        if (node.equals("e:property")) {
-          active = true;
-        }
-      }
-    }
-    xml_parser.end();
-    // reply OK
-    server->replyOK();
-  }
 
   /// Processes a NotifyReplyCP message
   /// Note: split into smaller helpers for clarity and testability.
@@ -722,7 +642,7 @@ class DLNAControlPoint {
     char ns[200];
     StrView namespace_str(ns, 200);
     namespace_str = "xmlns:u=\"%1\"";
-    bool ok = namespace_str.replace("%1", action.getServiceType());
+    bool ok = namespace_str.replace("%1", action.p_service->service_type);
     DlnaLogger.log(DlnaLogLevel::Debug, "ns = '%s'", namespace_str.c_str());
 
     // assert(ok);
@@ -752,7 +672,7 @@ class DLNAControlPoint {
     DlnaLogger.log(DlnaLogLevel::Debug, "DLNAControlPointMgr::postAction: %s",
                    nullStr(action.action, "(null)"));
     reply.clear();
-    DLNAServiceInfo& service = *action.p_service;
+    DLNAServiceInfo& service = *(action.p_service);
     DLNADeviceInfo& device = getDevice(service);
 
     // Build request body
@@ -763,7 +683,7 @@ class DLNAControlPoint {
     char act[200];
     StrView action_str{act, 200};
     action_str = "\"";
-    action_str.add(action.getServiceType());
+    action_str.add(action.p_service->service_type);
     action_str.add("#");
     action_str.add(action.action);
     action_str.add("\"");
@@ -916,70 +836,8 @@ class DLNAControlPoint {
     return buffer;
   }
 
-  /// Subscribe to changes for all device services
-  bool subscribeNotifications(DLNADeviceInfo& device,
-                              int timeoutSeconds = 1800) {
-    DlnaLogger.log(DlnaLogLevel::Debug,
-                   "DLNAControlPointMgr::subscribeNotifications");
-    if (p_http_server == nullptr) {
-      DlnaLogger.log(
-          DlnaLogLevel::Error,
-          "HttpServer not defined - cannot subscribe to notifications");
-      return false;
-    }
-    if (StrView(local_url.url()).isEmpty()) {
-      DlnaLogger.log(DlnaLogLevel::Error, "Local URL not defined");
-      return false;
-    }
-    for (auto& service : device.getServices()) {
-      if (StrView(service.event_sub_url).isEmpty()) {
-        DlnaLogger.log(DlnaLogLevel::Warning,
-                       "Service %s has no eventSubURL defined",
-                       service.service_id);
-        continue;
-      }
-      if (!subscribeNotifications(service, timeoutSeconds)) {
-        DlnaLogger.log(DlnaLogLevel::Error, "Subscription to service %s failed",
-                       service.service_id);
-        return false;
-      }
-      DlnaLogger.log(DlnaLogLevel::Info,
-                     "Subscribed to service %s successfully",
-                     service.service_id);
-    }
-    return true;
-  }
-
-  /// Subscribe to changes for defined device service
-  bool subscribeNotifications(DLNAServiceInfo& service,
-                              int timoutSeconds = 1800) {
-    if (p_http_server == nullptr) {
-      DlnaLogger.log(
-          DlnaLogLevel::Error,
-          "HttpServer not defined - cannot subscribe to notifications");
-      return false;
-    }
-    DlnaLogger.log(DlnaLogLevel::Debug,
-                   "DLNAControlPointMgr::subscribeNotifications");
-    DLNADeviceInfo& device = getDevice(service);
-
-    char url_buffer[200] = {0};
-    char seconds_txt[80] = {0};
-    Url url{getUrl(device, service.event_sub_url, url_buffer, 200)};
-    snprintf(seconds_txt, 80, "Second-%d", timoutSeconds);
-    p_http->request().put("NT", "upnp:event");
-    p_http->request().put("TIMEOUT", seconds_txt);
-    p_http->request().put("CALLBACK", local_url.url());
-    // post subscribe
-    int rc = p_http->subscribe(url);
-    DlnaLogger.log(DlnaLogLevel::Info, "Http rc: %s", rc);
-    if (rc == 200) {
-      subscribe_timeout = millis() + (timoutSeconds * 1000);
-      return true;
-    }
-
-    return false;
-  }
+  // Subscription helper methods have been moved to
+  // `SubscriptionMgrControlPoint`. See that class for subscription APIs.
 };
 
 }  // namespace tiny_dlna

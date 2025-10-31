@@ -1,6 +1,8 @@
 #pragma once
 
 #include "http/Http.h"
+#include "dlna/Action.h"
+#include "basic/Str.h"
 
 namespace tiny_dlna {
 
@@ -33,11 +35,22 @@ class DLNAServiceInfo {
   const char* scpd_url = nullptr;
   const char* control_url = nullptr;
   const char* event_sub_url = nullptr;
+  const char* event_sub_sid = nullptr; /**< SID assigned by remote service (if subscribed) */
   http_callback scp_cb = nullptr;
   http_callback control_cb = nullptr;
   http_callback event_sub_cb = nullptr;
+  
+  /// for subscriptions
+  Str subscription_id;
+  SubscriptionState subscription_state = SubscriptionState::Unsubscribed;
+  uint64_t time_subscription_started = 0;  ///< timestamp when subscription started
+  uint64_t time_subscription_confirmed = 0;  ///< timestamp when subscription was confirmed
+  uint64_t time_subscription_expires = 0;  ///< timestamp when subscription expires
+
+  // active/inactive
   bool is_active = true;
   operator bool() { return is_active; }
+
 };
 
 }  // namespace tiny_dlna

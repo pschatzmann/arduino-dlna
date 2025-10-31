@@ -102,22 +102,9 @@ class DLNAControlPointMediaServer {
    */
   void setDeviceIndex(int idx) { p_mgr->setDeviceIndex(idx); }
 
-  /**
-   * @brief Subscribe to event notifications for the selected server/device
-   * @param timeoutSeconds Subscription timeout in seconds (default: 60)
-   * @param cb Optional notification callback; if nullptr the default
-   *           `processNotification` will be used
-   * @return true on successful SUBSCRIBE, false otherwise
-   */
-  bool subscribeNotifications(NotificationCallback cb = nullptr,
-                              int timeoutSeconds = 3600) {
-    DlnaLogger.log(DlnaLogLevel::Debug,
-                   "ControlPointMediaServer::subscribeNotifications");
-    p_mgr->setReference(this);
-    p_mgr->setSubscribeInterval(timeoutSeconds);
-    // register provided callback or fallback to the default processNotification
-    p_mgr->onNotification(cb != nullptr ? cb : processNotification);
-    return p_mgr->subscribeNotifications();
+  /// Activate/deactivate subscription notifications
+  void setSubscribeNotificationsActive(bool flag) {
+    p_mgr->setSubscribeNotificationsActive(flag);
   }
 
   /**
@@ -217,7 +204,7 @@ class DLNAControlPointMediaServer {
     DLNAServiceInfo& svc =
         selectService("urn:upnp-org:serviceId:ContentDirectory");
     if (!svc) return -1;
-    ActionRequest act(svc, "GetSystemUpdateID");
+    ActionRequest act{svc, "GetSystemUpdateID"};
     p_mgr->addAction(act);
     last_reply = p_mgr->executeActions();
     if (!last_reply) return -1;
@@ -236,7 +223,7 @@ class DLNAControlPointMediaServer {
     DLNAServiceInfo& svc =
         selectService("urn:upnp-org:serviceId:ContentDirectory");
     if (!svc) return nullptr;
-    ActionRequest act(svc, "GetSearchCapabilities");
+    ActionRequest act{svc, "GetSearchCapabilities"};
     p_mgr->addAction(act);
     last_reply = p_mgr->executeActions();
     if (!last_reply) return nullptr;
@@ -253,7 +240,7 @@ class DLNAControlPointMediaServer {
     DLNAServiceInfo& svc =
         selectService("urn:upnp-org:serviceId:ContentDirectory");
     if (!svc) return nullptr;
-    ActionRequest act(svc, "GetSortCapabilities");
+    ActionRequest act{svc, "GetSortCapabilities"};
     p_mgr->addAction(act);
     last_reply = p_mgr->executeActions();
     if (!last_reply) return nullptr;
@@ -270,7 +257,7 @@ class DLNAControlPointMediaServer {
     DLNAServiceInfo& svc =
         selectService("urn:upnp-org:serviceId:ConnectionManager");
     if (!svc) return nullptr;
-    ActionRequest act(svc, "GetProtocolInfo");
+    ActionRequest act{svc, "GetProtocolInfo"};
     p_mgr->addAction(act);
     last_reply = p_mgr->executeActions();
     if (!last_reply) return nullptr;
@@ -331,7 +318,7 @@ class DLNAControlPointMediaServer {
     const char* browseFlag = (queryType == ContentQueryType::BrowseMetadata)
                                  ? "BrowseMetadata"
                                  : "BrowseDirectChildren";
-    static ActionRequest act(svc, "Browse");
+    static ActionRequest act{svc, "Browse"};
     // Use the canonical argument name expected by ContentDirectory: "ObjectID"
     act.addArgument("ObjectID", object_id);
     act.addArgument("BrowseFlag", browseFlag);
@@ -351,7 +338,7 @@ class DLNAControlPointMediaServer {
                                     const char* filter, int startingIndex,
                                     int requestedCount,
                                     const char* sortCriteria) {
-    static ActionRequest act(svc, "Search");
+    static ActionRequest act{svc, "Search"};
     act.addArgument("ContainerID", object_id);
     act.addArgument("SearchCriteria", searchCriteria ? searchCriteria : "");
     act.addArgument("Filter", filter ? filter : "");

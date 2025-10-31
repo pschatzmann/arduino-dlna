@@ -141,6 +141,14 @@ class HttpRequest {
     return process(T_SUBSCRIBE, url, nullptr, nullptr, 0);
   }
 
+  virtual int unsubscribe(Url &url, const char *sid) {
+    DlnaLogger.log(DlnaLogLevel::Info, "unsubscribe %s (SID=%s)", url.url(), sid);
+    if (sid != nullptr) {
+      request_header.put("SID", sid);
+    }
+    return process(T_UNSUBSCRIBE, url, nullptr, nullptr, 0);
+  }
+
   // reads the reply data
   virtual int read(uint8_t *str, int len) {
     if (reply_header.isChunked()) {

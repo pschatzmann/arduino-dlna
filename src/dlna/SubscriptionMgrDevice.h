@@ -41,9 +41,9 @@ struct Subscription {
  * - `subscribe()` returns the assigned SID (generated when creating a new
  *   subscription). `unsubscribe()` removes a subscription by SID.
  */
-class SubscriptionMgr {
+class SubscriptionMgrDevice {
  public:
-  SubscriptionMgr() {}
+  SubscriptionMgrDevice() {}
 
   // Add or renew subscription. callbackUrl is formatted like
   // "<http://host:port/path>" Returns SID (generated if new)

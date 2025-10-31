@@ -113,20 +113,9 @@ class DLNAControlPointMediaRenderer {
                                        const char* varName,
                                        const char* newValue);
 
-  /**
-   * @brief Subscribe to event notifications for the selected renderer
-   * @param timeoutSeconds Subscription timeout in seconds (suggested default:
-   * 60)
-   * @param cb Optional callback to invoke for incoming notifications. If
-   *           nullptr the helper's default `processNotification` will be used.
-   */
-  bool subscribeNotifications(NotificationCallback cb = nullptr,
-                              int timeoutSeconds = 3600) {
-    p_mgr->setReference(this);
-    p_mgr->setSubscribeInterval(timeoutSeconds);
-    // register provided callback or fallback to the default processNotification
-    p_mgr->onNotification(cb != nullptr ? cb : processNotification);
-    return p_mgr->subscribeNotifications();
+  /// Activate/deactivate subscription notifications
+  void setSubscribeNotificationsActive(bool flag) {
+    p_mgr->setSubscribeNotificationsActive(flag);
   }
 
   /**

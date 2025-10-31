@@ -1,12 +1,22 @@
+
 #pragma once
-#include "dlna/DLNAServiceInfo.h"
+//#include "dlna/DLNAServiceInfo.h"
 #include "dlna/xml/XMLPrinter.h"
 
 namespace tiny_dlna {
 
-  /// Role to indicate whether a protocolInfo entry is a Source or a Sink
-enum class ProtocolRole { IsSource = 0, IsSink = 1 };
+class DLNAServiceInfo;
 
+/// Subscription State
+enum class SubscriptionState {
+  Unsubscribed,
+  Subscribing,
+  Subscribed,
+  Unsubscribing
+};
+
+/// Role to indicate whether a protocolInfo entry is a Source or a Sink
+enum class ProtocolRole { IsSource = 0, IsSink = 1 };
 
 /// Search or Browse
 enum class ContentQueryType { Search, BrowseMetadata, BrowseChildren };
@@ -84,7 +94,7 @@ class ActionReply {
 
   void clear() { arguments.clear(); }
 
-  void logArguments(){
+  void logArguments() {
     for (auto& a : arguments) {
       DlnaLogger.log(DlnaLogLevel::Info, "  -> %s = %s", nullStr(a.name),
                      nullStr(a.value.c_str()));
@@ -161,10 +171,9 @@ class ActionRequest {
   Vector<Argument> arguments{10};
   int result_count = 0;
   operator bool() {
-    return p_service != nullptr && action != nullptr &&
-           p_service->service_type != nullptr;
+    return p_service != nullptr && action != nullptr;
   }
-  const char* getServiceType() { return p_service->service_type; }
+  //const char* getServiceType() { return p_service->service_type; }
   const char* nullStr(const char* str, const char* alt = "") {
     return str != nullptr ? str : alt;
   }

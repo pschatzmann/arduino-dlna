@@ -5,6 +5,7 @@
 #include "basic/Str.h"
 #include "dlna/DLNADevice.h"
 #include "dlna/xml/XMLAttributeParser.h"
+#include "dlna/xml/XMLParserPrint.h"
 #include "mr_conmgr.h"
 #include "mr_control.h"
 #include "mr_transport.h"
@@ -231,7 +232,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     // notify application handler about the stop
     if (event_cb) event_cb(MediaEvent::STOP, *this);
     // publish UPnP event to subscribers (if subscription manager available)
-    SubscriptionMgr* mgr = tiny_dlna::DLNADevice::getSubscriptionMgr();
+    SubscriptionMgrDevice* mgr = tiny_dlna::DLNADevice::getSubscriptionMgr();
     if (mgr) {
       mgr->publishProperty("/AVT/event", "TransportState", "STOPPED");
     }
@@ -264,33 +265,63 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
   // Transport control handler
   static void transportControlCB(HttpServer* server, const char* requestPath,
                                  HttpRequestHandlerLine* hl) {
-    // Parse SOAP request and extract action
-    Str soap = server->contentStr();
-    DlnaLogger.log(DlnaLogLevel::Info, "Transport Control: %s", soap.c_str());
+    // Incremental SOAP parsing using XMLParserPrint to avoid buffering the
+    // entire body in RAM. We detect the invoked action name and extract
+    // parameters like CurrentURI.
     DLNAMediaRenderer& media_renderer = *((DLNAMediaRenderer*)hl->context[0]);
+
+    XMLParserPrint xp;
+    xp.setExpandEncoded(true);
+    Str nodeName;
+    Vector<Str> path{6};
+    Str text;
+    Str attrs;
+
+    Str actionName;
+    Str currentUri;
+
+    Client& client = server->client();
+    uint8_t buf[XML_PARSER_BUFFER_SIZE];
+    while (client.available()) {
+      int r = client.read(buf, XML_PARSER_BUFFER_SIZE);
+      if (r <= 0) break;
+      xp.write(buf, r);
+      while (xp.parse(nodeName, path, text, attrs)) {
+        // capture action name (Play, Pause, Stop, SetAVTransportURI etc.)
+        if (actionName.isEmpty()) {
+          if (strcmp(nodeName.c_str(), "Play") == 0 ||
+              strcmp(nodeName.c_str(), "Pause") == 0 ||
+              strcmp(nodeName.c_str(), "Stop") == 0 ||
+              strcmp(nodeName.c_str(), "SetAVTransportURI") == 0) {
+            actionName = nodeName;
+          }
+        }
+
+        // capture CurrentURI value
+        if (strcmp(nodeName.c_str(), "CurrentURI") == 0 && !text.isEmpty()) {
+          currentUri = text;
+        }
+      }
+    }
 
     Str reply_str{reply()};
     reply_str.replaceAll("%2", "AVTransport");
-    if (soap.indexOf("Play") >= 0) {
+
+    if (actionName == "Play") {
       media_renderer.setActive(true);
       reply_str.replaceAll("%1", "PlayResponse");
       server->reply("text/xml", reply_str.c_str());
-    } else if (soap.indexOf("Pause") >= 0) {
+    } else if (actionName == "Pause") {
       media_renderer.setActive(false);
       reply_str.replaceAll("%1", "PauseResponse");
       server->reply("text/xml", reply_str.c_str());
-    } else if (soap.indexOf("Stop") >= 0) {
+    } else if (actionName == "Stop") {
       media_renderer.setActive(false);
       reply_str.replaceAll("%1", "StopResponse");
       server->reply("text/xml", reply_str.c_str());
-    } else if (soap.indexOf("SetAVTransportURI") >= 0) {
-      // Extract URL from SOAP request safely
-      int urlTagStart = soap.indexOf("<CurrentURI>");
-      int urlTagEnd = soap.indexOf("</CurrentURI>");
-      if (urlTagStart >= 0 && urlTagEnd > urlTagStart) {
-        int urlStart = urlTagStart + (int)strlen("<CurrentURI>");
-        Str url = soap.substring(urlStart, urlTagEnd);
-        media_renderer.play(url.c_str());
+    } else if (actionName == "SetAVTransportURI") {
+      if (!currentUri.isEmpty()) {
+        media_renderer.play(currentUri.c_str());
       } else {
         DlnaLogger.log(DlnaLogLevel::Warning,
                        "SetAVTransportURI called with invalid SOAP payload");
@@ -307,43 +338,58 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
   // Rendering control handler
   static void renderingControlCB(HttpServer* server, const char* requestPath,
                                  HttpRequestHandlerLine* hl) {
-    // Parse SOAP request and extract action
+    // Incremental SOAP parsing: detect SetVolume/SetMute and extract values
     DLNAMediaRenderer& media_renderer = *((DLNAMediaRenderer*)hl->context[0]);
-    Str soap = server->contentStr();
-    DlnaLogger.log(DlnaLogLevel::Info, "Rendering Control: %s", soap.c_str());
+
+    XMLParserPrint xp;
+    xp.setExpandEncoded(true);
+    Str nodeName;
+    Vector<Str> path{6};
+    Str text;
+    Str attrs;
+
+    Str actionName;
+    int desiredVolume = -1;
+    bool desiredMute = false;
+    bool haveVolume = false;
+    bool haveMute = false;
+
+    Client& client = server->client();
+    uint8_t buf[XML_PARSER_BUFFER_SIZE];
+    while (client.available()) {
+      int r = client.read(buf, XML_PARSER_BUFFER_SIZE);
+      if (r <= 0) break;
+      xp.write(buf, r);
+      while (xp.parse(nodeName, path, text, attrs)) {
+        if (actionName.isEmpty()) {
+          if (strcmp(nodeName.c_str(), "SetVolume") == 0 ||
+              strcmp(nodeName.c_str(), "SetMute") == 0) {
+            actionName = nodeName;
+          }
+        }
+        if (strcmp(nodeName.c_str(), "DesiredVolume") == 0 && !text.isEmpty()) {
+          desiredVolume = text.toInt();
+          haveVolume = true;
+        }
+        if (strcmp(nodeName.c_str(), "DesiredMute") == 0 && !text.isEmpty()) {
+          desiredMute = (text == "1");
+          haveMute = true;
+        }
+      }
+    }
+
     Str reply_str{reply()};
     reply_str.replaceAll("%2", "RenderingControl");
 
-    if (soap.indexOf("SetVolume") >= 0) {
-      // Extract volume from SOAP request safely
-      int volTagStart = soap.indexOf("<DesiredVolume>");
-      int volTagEnd = soap.indexOf("</DesiredVolume>");
-      if (volTagStart >= 0 && volTagEnd > volTagStart) {
-        int volStart = volTagStart + (int)strlen("<DesiredVolume>");
-        int volume = soap.substring(volStart, volTagEnd).toInt();
-        media_renderer.setVolume(volume);
-      } else {
-        DlnaLogger.log(DlnaLogLevel::Warning,
-                       "SetVolume called with invalid SOAP payload");
-      }
+    if (actionName == "SetVolume" && haveVolume) {
+      media_renderer.setVolume((uint8_t)desiredVolume);
       reply_str.replaceAll("%1", "SetVolumeResponse");
       server->reply("text/xml", reply_str.c_str());
-    } else if (soap.indexOf("SetMute") >= 0) {
-      // Extract mute state from SOAP request safely
-      int muteTagStart = soap.indexOf("<DesiredMute>");
-      int muteTagEnd = soap.indexOf("</DesiredMute>");
-      if (muteTagStart >= 0 && muteTagEnd > muteTagStart) {
-        int muteStart = muteTagStart + (int)strlen("<DesiredMute>");
-        bool mute = (soap.substring(muteStart, muteTagEnd) == "1");
-        media_renderer.setMute(mute);
-      } else {
-        DlnaLogger.log(DlnaLogLevel::Warning,
-                       "SetMute called with invalid SOAP payload");
-      }
+    } else if (actionName == "SetMute" && haveMute) {
+      media_renderer.setMute(desiredMute);
       reply_str.replaceAll("%1", "SetMuteResponse");
       server->reply("text/xml", reply_str.c_str());
     } else {
-      // Handle other rendering controls
       reply_str.replaceAll("%1", "RenderingControl");
       server->reply("text/xml", reply_str.c_str());
     }
