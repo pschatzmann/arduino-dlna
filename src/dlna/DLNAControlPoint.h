@@ -131,8 +131,6 @@ class DLNAControlPoint {
     p_udp = &udp;
     p_http = &http;
 
-    // instantiate subscription manager
-    subscription_mgr.setup(http, udp, local_url, registry, getDevice());
 
     // set timeout for http requests
     http.setTimeout(DLNA_HTTP_REQUEST_TIMEOUT_MS);
@@ -150,7 +148,7 @@ class DLNAControlPoint {
       DlnaLogger.log(DlnaLogLevel::Error, "UDP begin failed");
       return false;
     }
-
+  
     // Send MSearch request via UDP. Use maxWaitMs as the emission window.
     MSearchSchedule* search =
         new MSearchSchedule(DLNABroadcastAddress, searchTarget);
@@ -175,6 +173,10 @@ class DLNAControlPoint {
       if (devices.size() > 0 && millis() >= minEnd) break;
       loop();
     }
+
+    // instantiate subscription manager
+    subscription_mgr.setup(http, udp, local_url, registry, getDevice());
+
     // If we exited early because a device was found, deactivate the MSearch
     // schedule so it will stop repeating. The scheduler will clean up
     // inactive schedules on its next pass.
@@ -765,7 +767,7 @@ class DLNAControlPoint {
 
     // Default: parse response incrementally and populate reply arguments
     while (p_http->client()->available()) {
-      int len = p_http->client()->read(buffer, 200);
+      int len = p_http->client()->read(buffer, XML_PARSER_BUFFER_SIZE);
       if (len > 0) {
         // Serial.write(buffer, len);
         xml_parser.write(buffer, len);
@@ -777,6 +779,11 @@ class DLNAControlPoint {
           // MediaServer helper) can parse returned media items.
           if (!(outText.isEmpty() && outAttributes.isEmpty()) ||
               outNodeName.equals("Result")) {
+
+                /// xml might be escaped  
+            unEscapeStr(outAttributes);
+            unEscapeStr(outText);
+
             if (!outText.isEmpty()) {
               arg.name = registry.add((char*)outNodeName.c_str());
               arg.value = outText;
@@ -787,7 +794,7 @@ class DLNAControlPoint {
                            nullStr(outNodeName), nullStr(outText),
                            nullStr(outAttributes));
             if (result_callback) {
-              result_callback(nullStr(arg.name, ""), nullStr(outText, ""),
+              result_callback(nullStr(outNodeName,""), nullStr(outText, ""),
                               nullStr(outAttributes, ""));
             }
           }
@@ -796,6 +803,12 @@ class DLNAControlPoint {
     }
     xml_parser.end();
     return reply;
+  }
+
+  void unEscapeStr(Str& str){
+    str.replaceAll("&quot;", "\"");
+    str.replaceAll("&amp;", "&");
+    str.replaceAll("&apos;", "'");
   }
 
   const char* getUrlImpl(DLNADeviceInfo& device, const char* suffix,

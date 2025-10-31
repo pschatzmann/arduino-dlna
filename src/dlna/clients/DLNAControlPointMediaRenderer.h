@@ -11,13 +11,15 @@
 namespace tiny_dlna {
 
 /**
- * @brief Helper class to control a MediaRenderer device from a control point
+ * @brief Class to control a MediaRenderer device from a control point
  *
- * This lightweight helper uses the DLNAControlPointMgr action API to send
- * common AVTransport and RenderingControl actions to the first MediaRenderer
- * service discovered. It is intentionally minimal and returns boolean
- * success/failure for each operation.
+ * This lightweight implementation uses the DLNAControlPointMgr action API to
+ * send common AVTransport and RenderingControl actions to the first
+ * MediaRenderer service discovered. It is intentionally minimal and returns
+ * boolean success/failure for each operation. Some getters can be configured to
+ * provide the cached value quickly or by using a query to the MediaRenderer.
  */
+
 class DLNAControlPointMediaRenderer {
  public:
   /// Default constructor
@@ -144,6 +146,9 @@ class DLNAControlPointMediaRenderer {
     act.addArgument(Argument("CurrentURIMetaData", ""));
     p_mgr->addAction(act);
     last_reply = p_mgr->executeActions();
+    if (last_reply) {
+      local_url = uri;
+    }
     return (bool)last_reply;
   }
 
@@ -162,7 +167,10 @@ class DLNAControlPointMediaRenderer {
     act.addArgument("Speed", "1");
     p_mgr->addAction(act);
     last_reply = p_mgr->executeActions();
-    if (last_reply) setActiveState(true);
+    if (last_reply) {
+      setActiveState(true);
+      local_transport_state = "PLAYING";
+    }
     return (bool)last_reply;
   }
 
@@ -187,7 +195,10 @@ class DLNAControlPointMediaRenderer {
     act.addArgument("InstanceID", instance_id);
     p_mgr->addAction(act);
     last_reply = p_mgr->executeActions();
-    if (last_reply) setActiveState(false);
+    if (last_reply) {
+      setActiveState(false);
+      local_transport_state = "PAUSED_PLAYBACK";
+    }
     return (bool)last_reply;
   }
 
@@ -202,7 +213,10 @@ class DLNAControlPointMediaRenderer {
     act.addArgument("InstanceID", instance_id);
     p_mgr->addAction(act);
     last_reply = p_mgr->executeActions();
-    if (last_reply) setActiveState(false);
+    if (last_reply) {
+      setActiveState(false);
+      local_transport_state = "STOPPED";
+    }
     return (bool)last_reply;
   }
 
@@ -228,6 +242,10 @@ class DLNAControlPointMediaRenderer {
     act.addArgument("DesiredVolume", volBuf);
     p_mgr->addAction(act);
     last_reply = p_mgr->executeActions();
+    if (last_reply) {
+      local_volume = volumePercent;
+    }
+
     return (bool)last_reply;
   }
 
@@ -246,14 +264,25 @@ class DLNAControlPointMediaRenderer {
     act.addArgument("DesiredMute", mute ? "1" : "0");
     p_mgr->addAction(act);
     ActionReply r = p_mgr->executeActions();
+    if (r) {
+      local_mute = mute;
+    }
     return (bool)r;
   }
 
   /**
-   * @brief Query the current volume from the renderer
+   * @brief Query the current volume from the renderer.
+   *
+   * @param fromRemote If true (default) the helper will perform an RPC
+   *                   query against the remote renderer to obtain the
+   *                   current volume. If false, the method returns the
+   *                   locally cached value maintained by the helper.
    * @return current volume 0..100, or -1 on error
    */
-  int getVolume() {
+  int getVolume(bool fromRemote = true) {
+    if (!fromRemote) {
+      return local_volume;
+    }
     DLNAServiceInfo& svc =
         selectService("urn:upnp-org:serviceId:RenderingControl");
     selectService("urn:upnp-org:serviceId:RenderingControl");
@@ -270,10 +299,17 @@ class DLNAControlPointMediaRenderer {
   }
 
   /**
-   * @brief Query mute state
+   * @brief Query mute state.
+   *
+   * @param fromRemote If true (default) query the renderer for the
+   *                   current mute state; if false, return the locally
+   *                   cached mute value maintained by the helper.
    * @return 0 = unmuted, 1 = muted, -1 = error/unknown
    */
-  int getMute() {
+  int getMute(bool fromRemote = true) {
+    if (!fromRemote) {
+      return local_mute;
+    }
     DLNAServiceInfo& svc =
         selectService("urn:upnp-org:serviceId:RenderingControl");
     if (!svc) return -1;
@@ -306,11 +342,18 @@ class DLNAControlPointMediaRenderer {
   }
 
   /**
-   * @brief Query transport state (e.g. STOPPED, PLAYING, PAUSED_PLAYBACK)
+   * @brief Query transport state (e.g. STOPPED, PLAYING, PAUSED_PLAYBACK).
+   *
+   * @param fromRemote If true (default) the helper will query the remote
+   *                   renderer for its current transport state. If false,
+   *                   the cached local transport state is returned.
    * @return pointer to a string owned by the helper's registry, or nullptr
    *         on error
    */
-  const char* getTransportState() {
+  const char* getTransportState(bool fromRemote = true) {
+    if (!fromRemote) {
+      return local_transport_state;
+    }
     DLNAServiceInfo& svc = selectService("urn:upnp-org:serviceId:AVTransport");
     if (!svc) return nullptr;
     ActionRequest act(svc, "GetTransportInfo");
@@ -322,10 +365,17 @@ class DLNAControlPointMediaRenderer {
   }
 
   /**
-   * @brief Get the current media URI from the renderer
+   * @brief Get the current media URI from the renderer.
+   *
+   * @param fromRemote If true (default) query the renderer remotely for the
+   *                   current URI. If false, return the locally cached
+   *                   URI previously set by this helper.
    * @return pointer to URI string (owned by reply registry) or nullptr
    */
-  const char* getCurrentURI() {
+  const char* getCurrentURI(bool fromRemote = true) {
+    if (!fromRemote) {
+      return local_url.c_str();
+    }
     DLNAServiceInfo& svc = selectService("urn:upnp-org:serviceId:AVTransport");
     if (!svc) return nullptr;
     ActionRequest act(svc, "GetMediaInfo");
@@ -483,12 +533,11 @@ class DLNAControlPointMediaRenderer {
     // processor will be invoked with the live Client and the ActionReply so
     // callers can handle the response stream themselves. We simply stream-
     // parse and forward each parsed entry to the provided callback.
-    XMLCallback processor =
-        [&cb, &ok](Client& client, ActionReply& reply) {
-          ok = XMLProtocolInfoParser::parse(client, cb);
-          reply.clear();
-          reply.setValid(true);
-        };
+    XMLCallback processor = [&cb, &ok](Client& client, ActionReply& reply) {
+      ok = XMLProtocolInfoParser::parse(client, cb);
+      reply.clear();
+      reply.setValid(true);
+    };
 
     // execute the queued action and use our processor to handle the reply
     p_mgr->executeActions(processor);
@@ -509,6 +558,10 @@ class DLNAControlPointMediaRenderer {
   // Optional transport references (must be set before calling begin())
   DLNAHttpRequest* p_http = nullptr;
   IUDPService* p_udp = nullptr;
+  int local_volume = 0;
+  int local_mute = false;
+  Str local_url;
+  const char* local_transport_state = "STOPPED";
 
   const char* nullStr(const char* str) { return str ? str : ""; }
 

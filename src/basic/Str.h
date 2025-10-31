@@ -21,14 +21,13 @@ namespace tiny_dlna {
 
 class Str : public StrView {
  public:
-
-  Str(int initialAllocatedLength = 0)  {
+  Str(int initialAllocatedLength = 0) {
     maxlen = initialAllocatedLength;
     is_const = false;
     grow(maxlen);
   }
 
-  Str(const char *str) : Str() {
+  Str(const char* str) : Str() {
     if (str != nullptr) {
       len = strlen(str);
       maxlen = len;
@@ -40,13 +39,13 @@ class Str : public StrView {
   }
 
   /// Convert StrView to Str
-  Str(StrView &source) : Str() { set(source); }
+  Str(StrView& source) : Str() { set(source); }
 
   /// Copy constructor
-  Str(Str &source) : Str() { set(source); }
+  Str(Str& source) : Str() { set(source); }
 
   /// Move constructor
-  Str(Str &&obj) { move(obj); }
+  Str(Str&& obj) { move(obj); }
 
   /// Destructor
   ~Str() {
@@ -55,13 +54,11 @@ class Str : public StrView {
   }
 
   /// Move assignment
-  Str &operator=(Str &&obj) {
-    return move(obj);
-  }
+  Str& operator=(Str&& obj) { return move(obj); }
 
   /// Copy assingment
-  Str &operator=(Str &obj) {
-    //assert(&obj!=nullptr);
+  Str& operator=(Str& obj) {
+    // assert(&obj!=nullptr);
     set(obj.c_str());
     return *this;
   };
@@ -70,9 +67,9 @@ class Str : public StrView {
 
   bool isConst() override { return false; }
 
-  void operator=(const char *str) override { set(str); }
+  void operator=(const char* str) override { set(str); }
 
-  void operator=(char *str) override { set(str); }
+  void operator=(char* str) override { set(str); }
 
   void operator=(int v) override { set(v); }
 
@@ -90,7 +87,7 @@ class Str : public StrView {
   }
 
   /// assigns a memory buffer
-  void copyFrom(const char *source, int len, int maxlen = 0) {
+  void copyFrom(const char* source, int len, int maxlen = 0) {
     this->maxlen = maxlen == 0 ? len : maxlen;
     resize(this->maxlen);
     if (this->chars != nullptr) {
@@ -125,7 +122,7 @@ class Str : public StrView {
     }
     // build new string
     char result[new_size + 1];
-    memset(result,0, new_size+1);
+    memset(result, 0, new_size + 1);
     for (size_t i = 0; i < len; i++) {
       urlEncodeChar(chars[i], temp, 4);
       strcat(result, temp);
@@ -169,13 +166,13 @@ class Str : public StrView {
   }
 
   void resize(int size) {
-    vector.resize(size+1);
+    vector.resize(size + 1);
     maxlen = size;
     len = size;
     chars = vector.data();
   }
 
-  void swap(Str &other){
+  void swap(Str& other) {
     int tmp_len = len;
     int tmp_maxlen = maxlen;
     len = other.len;
@@ -185,11 +182,14 @@ class Str : public StrView {
     other.chars = other.vector.data();
   }
 
-  const char* c_str() { return vector.data(); }
+  const char* c_str() {
+    const char* result = vector.data();
+    return result == nullptr ? "" : result;
+  }
 
   // just sets the len to 0
   void reset() {
-    memset(vector.data(),0, len);
+    memset(vector.data(), 0, len);
     len = 0;
   }
 
@@ -213,7 +213,7 @@ class Str : public StrView {
       int len = end - start;
       result.grow(len);
       len = len < this->maxlen ? len : this->maxlen;
-      char* target = (char*) result.c_str();
+      char* target = (char*)result.c_str();
       strncpy(target, this->c_str() + start, len);
       target[len] = 0;
     }
@@ -234,11 +234,10 @@ class Str : public StrView {
     }
   }
 
-
  protected:
   Vector<char> vector{0};
 
-  Str& move(Str &other) {
+  Str& move(Str& other) {
     swap(other);
     other.clear();
     return *this;
@@ -246,7 +245,7 @@ class Str : public StrView {
 
   bool grow(int newMaxLen) override {
     bool grown = false;
-    //assert(newMaxLen < 1024 * 10);
+    // assert(newMaxLen < 1024 * 10);
     if (newMaxLen < 0) return false;
     if (newMaxLen == 0 && chars == nullptr) return false;
 
@@ -261,7 +260,7 @@ class Str : public StrView {
     return grown;
   }
 
-  void urlEncodeChar(char c, char *result, int maxLen) {
+  void urlEncodeChar(char c, char* result, int maxLen) {
     if (isalnum(c)) {
       snprintf(result, maxLen, "%c", c);
     } else if (isspace(c)) {
@@ -284,7 +283,7 @@ class Str : public StrView {
     return -1;
   }
 
-  char strToBin(char *pString) {
+  char strToBin(char* pString) {
     char szBuffer[2];
     char ch;
     szBuffer[0] = charToInt(pString[0]);    // make the B to 11 -- 00001011

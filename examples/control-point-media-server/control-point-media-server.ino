@@ -12,19 +12,26 @@ UDPAsyncService udp;
 DLNAControlPoint cp;  // no notifications needed
 DLNAControlPointMediaServer cpms(cp, http, udp);
 
+
 /// Simple callback that extracts and prints the item metadata
 void printItemCallback(const char* name, const char* text,
                        const char* attributes) {
   const int buffer_size = 200;
   char buffer[buffer_size];
-  static Str id;
-  static Str parentID;
-  if (StrView(name) == "container") {
+  StrView buffer_view(buffer, buffer_size);
+  buffer_view.replaceAll("&quot;", "\"");
+  buffer_view.replaceAll("&amp;", "&");
+
+  static Str id="";
+  static Str parentID="";
+  StrView name_view(name);
+
+  if (name_view == "container" || name_view == "item") {
     XMLAttributeParser::extractAttribute(attributes, "id=", buffer, buffer_size);
     id.set(buffer);
     XMLAttributeParser::extractAttribute(attributes, "parentID=", buffer, buffer_size);
     parentID.set(buffer);
-  } else if (StrView(name) == "dc:title") {
+  } else if (name_view == "dc:title") {
     Serial.print("Item: ID=");
     Serial.print(id.c_str());
     Serial.print(" ParentID=");
@@ -47,7 +54,7 @@ void setupWifi() {
 
 void setup() {
   Serial.begin(115200);
-  DlnaLogger.begin(Serial, DlnaLogLevel::Info);
+  DlnaLogger.begin(Serial, DlnaLogLevel::Warning);
 
   setupWifi();
 

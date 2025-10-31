@@ -10,7 +10,7 @@ const char* password = "YOUR_PASSWORD";
 
 WiFiServer wifi;
 HttpServer server(wifi);
-DLNAControlPoint cp(server); // with Notifications
+DLNAControlPoint cp(server, 9000); // with Notifications
 WiFiClient client;
 DLNAHttpRequest http(client);
 UDPAsyncService udp;
