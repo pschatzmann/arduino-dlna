@@ -135,6 +135,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a181752a027f01ad4ea834da3b0141259"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers a method that will be called.  <br /></td></tr>
 <tr class="separator:a181752a027f01ad4ea834da3b0141259"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae573445d102263c90420f70a6b6c56dd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1ActionReply.html">ActionReply</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#ae573445d102263c90420f70a6b6c56dd">executeActions</a> (<a class="el" href="namespacetiny__dlna.html#af5e7d998a1158b5b3b2627df5ec61a80">XMLCallback</a> xmlProcessor=nullptr)</td></tr>
+<tr class="memdesc:ae573445d102263c90420f70a6b6c56dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes action and parses the reply xml to collect the reply entries. If an XML processor is provided it will be used to process the reply XML instead of the standard processing: This can be useful for large replies where we do not want to store the big data chunks.  <br /></td></tr>
 <tr class="separator:ae573445d102263c90420f70a6b6c56dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a59e2688e61b8179a0423129dfaa9fcd4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a59e2688e61b8179a0423129dfaa9fcd4">loop</a> ()</td></tr>
 <tr class="separator:a59e2688e61b8179a0423129dfaa9fcd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -643,6 +644,14 @@ xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n" "s:encodingStyle=\"ht
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Executes action and parses the reply xml to collect the reply entries. If an XML processor is provided it will be used to process the reply XML instead of the standard processing: This can be useful for large replies where we do not want to store the big data chunks. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">xmlProcessor</td><td>Optional XML processor callback </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
