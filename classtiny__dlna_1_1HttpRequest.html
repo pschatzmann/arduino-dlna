@@ -109,8 +109,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ae5e6e7c493ffcaf7096e9f494e454bc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa0a64fffb8036f11c56c0098ab5ab65d"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpRequest.html#aa0a64fffb8036f11c56c0098ab5ab65d">post</a> (<a class="el" href="classtiny__dlna_1_1Url.html">Url</a> &amp;<a class="el" href="classtiny__dlna_1_1HttpRequest.html#a19af9228538c3291902a6df9815883c8">url</a>, const char *mime, const char *data, int len=-1)</td></tr>
 <tr class="separator:aa0a64fffb8036f11c56c0098ab5ab65d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4e3413ac7eeabfdf1b05d6a20d99c1ec"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpRequest.html#a4e3413ac7eeabfdf1b05d6a20d99c1ec">postChunked</a> (<a class="el" href="classtiny__dlna_1_1Url.html">Url</a> &amp;<a class="el" href="classtiny__dlna_1_1HttpRequest.html#a19af9228538c3291902a6df9815883c8">url</a>, std::function&lt; void(<a class="el" href="classtiny__dlna_1_1ChunkPrint.html">ChunkPrint</a> &amp;)&gt; writer, const char *mime=nullptr)</td></tr>
-<tr class="separator:a4e3413ac7eeabfdf1b05d6a20d99c1ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa81b3b28687f4b48ad3ad265b901ea6f"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpRequest.html#aa81b3b28687f4b48ad3ad265b901ea6f">post</a> (<a class="el" href="classtiny__dlna_1_1Url.html">Url</a> &amp;<a class="el" href="classtiny__dlna_1_1HttpRequest.html#a19af9228538c3291902a6df9815883c8">url</a>, size_t len, std::function&lt; void(Print &amp;)&gt; writer, const char *mime=nullptr)</td></tr>
+<tr class="separator:aa81b3b28687f4b48ad3ad265b901ea6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e5a45adff85dc2b21e98607510bb45f"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpRequest.html#a5e5a45adff85dc2b21e98607510bb45f">put</a> (<a class="el" href="classtiny__dlna_1_1Url.html">Url</a> &amp;<a class="el" href="classtiny__dlna_1_1HttpRequest.html#a19af9228538c3291902a6df9815883c8">url</a>, const char *mime, const char *data, int len=-1)</td></tr>
 <tr class="separator:a5e5a45adff85dc2b21e98607510bb45f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ada1e54a9f19dc1f689b939eb7b0f81aa"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpRequest.html#ada1e54a9f19dc1f689b939eb7b0f81aa">del</a> (<a class="el" href="classtiny__dlna_1_1Url.html">Url</a> &amp;<a class="el" href="classtiny__dlna_1_1HttpRequest.html#a19af9228538c3291902a6df9815883c8">url</a>, const char *mime=nullptr, const char *data=nullptr, int len=-1)</td></tr>
@@ -536,7 +536,7 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <a id="aa0a64fffb8036f11c56c0098ab5ab65d" name="aa0a64fffb8036f11c56c0098ab5ab65d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa0a64fffb8036f11c56c0098ab5ab65d">&#9670;&#160;</a></span>post()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0a64fffb8036f11c56c0098ab5ab65d">&#9670;&#160;</a></span>post() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -583,8 +583,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a4e3413ac7eeabfdf1b05d6a20d99c1ec" name="a4e3413ac7eeabfdf1b05d6a20d99c1ec"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4e3413ac7eeabfdf1b05d6a20d99c1ec">&#9670;&#160;</a></span>postChunked()</h2>
+<a id="aa81b3b28687f4b48ad3ad265b901ea6f" name="aa81b3b28687f4b48ad3ad265b901ea6f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa81b3b28687f4b48ad3ad265b901ea6f">&#9670;&#160;</a></span>post() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -593,7 +593,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual int tiny_dlna::HttpRequest::postChunked </td>
+          <td class="memname">virtual int tiny_dlna::HttpRequest::post </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classtiny__dlna_1_1Url.html">Url</a> &amp;&#160;</td>
           <td class="paramname"><em>url</em>, </td>
@@ -601,7 +601,13 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::function&lt; void(<a class="el" href="classtiny__dlna_1_1ChunkPrint.html">ChunkPrint</a> &amp;)&gt;&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>len</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::function&lt; void(Print &amp;)&gt;&#160;</td>
           <td class="paramname"><em>writer</em>, </td>
         </tr>
         <tr>
@@ -622,8 +628,6 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Post using chunked transfer encoding where the caller provides a writer lambda that receives a <a class="el" href="classtiny__dlna_1_1ChunkPrint.html">ChunkPrint</a> and writes the body in pieces. This avoids buffering the entire request body in memory.</p>
-<p>Example: req.postChunked(url, [&amp;](<a class="el" href="classtiny__dlna_1_1ChunkPrint.html">ChunkPrint</a> &amp;cp){ cp.print("&lt;s:Envelope...&gt;"); cp.print(...); }); </p>
 
 </div>
 </div>

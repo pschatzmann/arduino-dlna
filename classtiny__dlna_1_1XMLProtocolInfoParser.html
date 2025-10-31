@@ -75,7 +75,6 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
-<a href="#pro-static-methods">Static Protected Member Functions</a> &#124;
 <a href="classtiny__dlna_1_1XMLProtocolInfoParser-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">tiny_dlna::XMLProtocolInfoParser Class Reference</div></div>
 </div><!--header-->
@@ -88,15 +87,8 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:af12d056872daa8331c4b6c41b19b1799"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1XMLProtocolInfoParser.html#af12d056872daa8331c4b6c41b19b1799">parseFromClient</a> (Client *cli, std::function&lt; void(const char *entry, <a class="el" href="namespacetiny__dlna.html#a504b776a2804411b65b3b1cd864d8d92">ProtocolRole</a> role)&gt; cb)</td></tr>
-<tr class="separator:af12d056872daa8331c4b6c41b19b1799"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae9eb0ebae4edec7b7316a710a03116a2"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1XMLProtocolInfoParser.html#ae9eb0ebae4edec7b7316a710a03116a2">parseFromHttpRequest</a> (<a class="el" href="classtiny__dlna_1_1HttpRequest.html">tiny_dlna::HttpRequest</a> *req, std::function&lt; void(const char *entry, <a class="el" href="namespacetiny__dlna.html#a504b776a2804411b65b3b1cd864d8d92">ProtocolRole</a> role)&gt; cb)</td></tr>
-<tr class="separator:ae9eb0ebae4edec7b7316a710a03116a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
-Static Protected Member Functions</h2></td></tr>
-<tr class="memitem:a2882f0444154342ff149887320e8dbce"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1XMLProtocolInfoParser.html#a2882f0444154342ff149887320e8dbce">parseWithReader</a> (std::function&lt; int(uint8_t *buf, int maxLen)&gt; reader, std::function&lt; void(const char *entry, <a class="el" href="namespacetiny__dlna.html#a504b776a2804411b65b3b1cd864d8d92">ProtocolRole</a> role)&gt; cb)</td></tr>
-<tr class="separator:a2882f0444154342ff149887320e8dbce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a565f992bb159147f4580bc84157dc312"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1XMLProtocolInfoParser.html#a565f992bb159147f4580bc84157dc312">parse</a> (Stream &amp;in, std::function&lt; void(const char *entry, <a class="el" href="namespacetiny__dlna.html#a504b776a2804411b65b3b1cd864d8d92">ProtocolRole</a> role)&gt; cb)</td></tr>
+<tr class="separator:a565f992bb159147f4580bc84157dc312"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Streaming parser for ConnectionManager::GetProtocolInfo results. </p>
@@ -106,8 +98,8 @@ Static Protected Member Functions</h2></td></tr>
 </ul>
 <p>The callback receives each protocol-info entry as a C-string and a ProtocolRole indicating whether it came from Source or Sink. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="af12d056872daa8331c4b6c41b19b1799" name="af12d056872daa8331c4b6c41b19b1799"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af12d056872daa8331c4b6c41b19b1799">&#9670;&#160;</a></span>parseFromClient()</h2>
+<a id="a565f992bb159147f4580bc84157dc312" name="a565f992bb159147f4580bc84157dc312"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a565f992bb159147f4580bc84157dc312">&#9670;&#160;</a></span>parse()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -116,10 +108,10 @@ Static Protected Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static bool tiny_dlna::XMLProtocolInfoParser::parseFromClient </td>
+          <td class="memname">static bool tiny_dlna::XMLProtocolInfoParser::parse </td>
           <td>(</td>
-          <td class="paramtype">Client *&#160;</td>
-          <td class="paramname"><em>cli</em>, </td>
+          <td class="paramtype">Stream &amp;&#160;</td>
+          <td class="paramname"><em>in</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -148,79 +140,6 @@ Static Protected Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if parsing completed or at least one entry was parsed, false on error (e.g., cli == nullptr) </dd></dl>
-
-</div>
-</div>
-<a id="ae9eb0ebae4edec7b7316a710a03116a2" name="ae9eb0ebae4edec7b7316a710a03116a2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae9eb0ebae4edec7b7316a710a03116a2">&#9670;&#160;</a></span>parseFromHttpRequest()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static bool tiny_dlna::XMLProtocolInfoParser::parseFromHttpRequest </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1HttpRequest.html">tiny_dlna::HttpRequest</a> *&#160;</td>
-          <td class="paramname"><em>req</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::function&lt; void(const char *entry, <a class="el" href="namespacetiny__dlna.html#a504b776a2804411b65b3b1cd864d8d92">ProtocolRole</a> role)&gt;&#160;</td>
-          <td class="paramname"><em>cb</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Parse a streamed GetProtocolInfo result using the chunk-aware <a class="el" href="classtiny__dlna_1_1HttpRequest.html" title="Simple API to process get, put, post, del http requests I tried to use Arduino HttpClient,...">HttpRequest</a> API (handles Transfer-Encoding: chunked internally). </p>
-
-</div>
-</div>
-<a id="a2882f0444154342ff149887320e8dbce" name="a2882f0444154342ff149887320e8dbce"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2882f0444154342ff149887320e8dbce">&#9670;&#160;</a></span>parseWithReader()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static bool tiny_dlna::XMLProtocolInfoParser::parseWithReader </td>
-          <td>(</td>
-          <td class="paramtype">std::function&lt; int(uint8_t *buf, int maxLen)&gt;&#160;</td>
-          <td class="paramname"><em>reader</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::function&lt; void(const char *entry, <a class="el" href="namespacetiny__dlna.html#a504b776a2804411b65b3b1cd864d8d92">ProtocolRole</a> role)&gt;&#160;</td>
-          <td class="paramname"><em>cb</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
 
 </div>
 </div>
