@@ -495,8 +495,10 @@ class DLNAControlPointMediaRenderer {
     // callers can handle the response stream themselves. We simply stream-
     // parse and forward each parsed entry to the provided callback.
     XMLCallback processor =
-        [&cb, &ok](Client& client, ActionReply& /*reply*/) {
+        [&cb, &ok](Client& client, ActionReply& reply) {
           ok = XMLProtocolInfoParser::parse(client, cb);
+          reply.clear();
+          reply.setValid(true);
         };
 
     // execute the queued action and use our processor to handle the reply

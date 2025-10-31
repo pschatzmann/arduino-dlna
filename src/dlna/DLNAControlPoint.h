@@ -257,7 +257,14 @@ class DLNAControlPoint {
     return actions[actions.size() - 1];
   }
 
-
+  /**
+   * @brief Executes action and parses the reply xml to collect the reply
+   * entries. If an XML processor is provided it will be used to process the
+   * reply XML instead of the standard processing: This can be useful for large
+   * replies where we do not want to store the big data chunks.
+   * @param xmlProcessor Optional XML processor callback
+   *
+   */
   ActionReply& executeActions(XMLCallback xmlProcessor = nullptr) {
     DlnaLogger.log(DlnaLogLevel::Debug, "DLNAControlPointMgr::executeActions");
     reply.clear();
@@ -973,6 +980,6 @@ class DLNAControlPoint {
 
     return false;
   }
-  };
+};
 
-  }  // namespace tiny_dlna
+}  // namespace tiny_dlna
