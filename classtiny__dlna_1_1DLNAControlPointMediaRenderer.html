@@ -84,7 +84,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Helper class to control a MediaRenderer device from a control point.  
+<p>Class to control a MediaRenderer device from a control point.  
  <a href="classtiny__dlna_1_1DLNAControlPointMediaRenderer.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="DLNAControlPointMediaRenderer_8h_source.html">DLNAControlPointMediaRenderer.h</a>&gt;</code></p>
@@ -150,21 +150,21 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a03dc0ec028d0ef063b59283d47535bbb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMediaRenderer.html#a03dc0ec028d0ef063b59283d47535bbb">setMute</a> (bool mute)</td></tr>
 <tr class="memdesc:a03dc0ec028d0ef063b59283d47535bbb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set mute state on the renderer.  <br /></td></tr>
 <tr class="separator:a03dc0ec028d0ef063b59283d47535bbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a934587f9ff6bf366c4247f1493141c4b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMediaRenderer.html#a934587f9ff6bf366c4247f1493141c4b">getVolume</a> ()</td></tr>
-<tr class="memdesc:a934587f9ff6bf366c4247f1493141c4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Query the current volume from the renderer.  <br /></td></tr>
-<tr class="separator:a934587f9ff6bf366c4247f1493141c4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa7015ba7cd5753deaf5a1954de4ad399"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMediaRenderer.html#aa7015ba7cd5753deaf5a1954de4ad399">getMute</a> ()</td></tr>
-<tr class="memdesc:aa7015ba7cd5753deaf5a1954de4ad399"><td class="mdescLeft">&#160;</td><td class="mdescRight">Query mute state.  <br /></td></tr>
-<tr class="separator:aa7015ba7cd5753deaf5a1954de4ad399"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f5edca639344cc0cd993f9214044bdb"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMediaRenderer.html#a7f5edca639344cc0cd993f9214044bdb">getVolume</a> (bool fromRemote=true)</td></tr>
+<tr class="memdesc:a7f5edca639344cc0cd993f9214044bdb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Query the current volume from the renderer.  <br /></td></tr>
+<tr class="separator:a7f5edca639344cc0cd993f9214044bdb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f1c8ba6d768c7915f49fd0570f2e724"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMediaRenderer.html#a0f1c8ba6d768c7915f49fd0570f2e724">getMute</a> (bool fromRemote=true)</td></tr>
+<tr class="memdesc:a0f1c8ba6d768c7915f49fd0570f2e724"><td class="mdescLeft">&#160;</td><td class="mdescRight">Query mute state.  <br /></td></tr>
+<tr class="separator:a0f1c8ba6d768c7915f49fd0570f2e724"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3e915fe3527f4a8c34d6930dc122e4e6"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMediaRenderer.html#a3e915fe3527f4a8c34d6930dc122e4e6">getPositionMs</a> ()</td></tr>
 <tr class="memdesc:a3e915fe3527f4a8c34d6930dc122e4e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Query current playback position (RelTime)  <br /></td></tr>
 <tr class="separator:a3e915fe3527f4a8c34d6930dc122e4e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad9d9c36eb73dc4a00387c65a4e14a015"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMediaRenderer.html#ad9d9c36eb73dc4a00387c65a4e14a015">getTransportState</a> ()</td></tr>
-<tr class="memdesc:ad9d9c36eb73dc4a00387c65a4e14a015"><td class="mdescLeft">&#160;</td><td class="mdescRight">Query transport state (e.g. STOPPED, PLAYING, PAUSED_PLAYBACK)  <br /></td></tr>
-<tr class="separator:ad9d9c36eb73dc4a00387c65a4e14a015"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3b4283ad70bbda51c6fa4ae22080c1bf"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMediaRenderer.html#a3b4283ad70bbda51c6fa4ae22080c1bf">getCurrentURI</a> ()</td></tr>
-<tr class="memdesc:a3b4283ad70bbda51c6fa4ae22080c1bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current media URI from the renderer.  <br /></td></tr>
-<tr class="separator:a3b4283ad70bbda51c6fa4ae22080c1bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d9af0498c118045a38b4c66ae35c8cd"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMediaRenderer.html#a5d9af0498c118045a38b4c66ae35c8cd">getTransportState</a> (bool fromRemote=true)</td></tr>
+<tr class="memdesc:a5d9af0498c118045a38b4c66ae35c8cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Query transport state (e.g. STOPPED, PLAYING, PAUSED_PLAYBACK).  <br /></td></tr>
+<tr class="separator:a5d9af0498c118045a38b4c66ae35c8cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b43561b7866e1fc18418335660c1367"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMediaRenderer.html#a0b43561b7866e1fc18418335660c1367">getCurrentURI</a> (bool fromRemote=true)</td></tr>
+<tr class="memdesc:a0b43561b7866e1fc18418335660c1367"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current media URI from the renderer.  <br /></td></tr>
+<tr class="separator:a0b43561b7866e1fc18418335660c1367"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad5d28a3d4dc230e2ee6c0e363c61f360"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMediaRenderer.html#ad5d28a3d4dc230e2ee6c0e363c61f360">getNrTracks</a> ()</td></tr>
 <tr class="memdesc:ad5d28a3d4dc230e2ee6c0e363c61f360"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get number of tracks in the current media.  <br /></td></tr>
 <tr class="separator:ad5d28a3d4dc230e2ee6c0e363c61f360"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -238,10 +238,18 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a289d590289143109218d818be45be119"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2a0191d5faf8068c24c011c5a19d7de0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1IUDPService.html">IUDPService</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMediaRenderer.html#a2a0191d5faf8068c24c011c5a19d7de0">p_udp</a> = nullptr</td></tr>
 <tr class="separator:a2a0191d5faf8068c24c011c5a19d7de0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2be36580cbd51a2e7e39bf795c853c90"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMediaRenderer.html#a2be36580cbd51a2e7e39bf795c853c90">local_volume</a> = 0</td></tr>
+<tr class="separator:a2be36580cbd51a2e7e39bf795c853c90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1bad194a60906ce811e962e15f8e01c2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMediaRenderer.html#a1bad194a60906ce811e962e15f8e01c2">local_mute</a> = false</td></tr>
+<tr class="separator:a1bad194a60906ce811e962e15f8e01c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a831b7a95f5ba360d8d3b39348851291f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Str.html">Str</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMediaRenderer.html#a831b7a95f5ba360d8d3b39348851291f">local_url</a></td></tr>
+<tr class="separator:a831b7a95f5ba360d8d3b39348851291f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a100cc3f9b4874e8aa5595608d2214a3c"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMediaRenderer.html#a100cc3f9b4874e8aa5595608d2214a3c">local_transport_state</a> = &quot;STOPPED&quot;</td></tr>
+<tr class="separator:a100cc3f9b4874e8aa5595608d2214a3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Helper class to control a MediaRenderer device from a control point. </p>
-<p>This lightweight helper uses the DLNAControlPointMgr action API to send common AVTransport and RenderingControl actions to the first MediaRenderer service discovered. It is intentionally minimal and returns boolean success/failure for each operation. </p>
+<div class="textblock"><p>Class to control a MediaRenderer device from a control point. </p>
+<p>This lightweight implementation uses the DLNAControlPointMgr action API to send common AVTransport and RenderingControl actions to the first MediaRenderer service discovered. It is intentionally minimal and returns boolean success/failure for each operation. Some getters can be configured to provide the cached value quickly or by using a query to the MediaRenderer. </p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="a3120f67002c464497e2134d7da2869f0" name="a3120f67002c464497e2134d7da2869f0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3120f67002c464497e2134d7da2869f0">&#9670;&#160;</a></span>NotificationCallback</h2>
@@ -422,8 +430,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a3b4283ad70bbda51c6fa4ae22080c1bf" name="a3b4283ad70bbda51c6fa4ae22080c1bf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3b4283ad70bbda51c6fa4ae22080c1bf">&#9670;&#160;</a></span>getCurrentURI()</h2>
+<a id="a0b43561b7866e1fc18418335660c1367" name="a0b43561b7866e1fc18418335660c1367"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b43561b7866e1fc18418335660c1367">&#9670;&#160;</a></span>getCurrentURI()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -434,7 +442,8 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">const char * tiny_dlna::DLNAControlPointMediaRenderer::getCurrentURI </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>fromRemote</em> = <code>true</code></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -446,6 +455,12 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Get the current media URI from the renderer. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fromRemote</td><td>If true (default) query the renderer remotely for the current URI. If false, return the locally cached URI previously set by this helper. </td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="section return"><dt>Returns</dt><dd>pointer to URI string (owned by reply registry) or nullptr </dd></dl>
 
 </div>
@@ -534,8 +549,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="aa7015ba7cd5753deaf5a1954de4ad399" name="aa7015ba7cd5753deaf5a1954de4ad399"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa7015ba7cd5753deaf5a1954de4ad399">&#9670;&#160;</a></span>getMute()</h2>
+<a id="a0f1c8ba6d768c7915f49fd0570f2e724" name="a0f1c8ba6d768c7915f49fd0570f2e724"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f1c8ba6d768c7915f49fd0570f2e724">&#9670;&#160;</a></span>getMute()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -546,7 +561,8 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">int tiny_dlna::DLNAControlPointMediaRenderer::getMute </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>fromRemote</em> = <code>true</code></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -558,6 +574,12 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Query mute state. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fromRemote</td><td>If true (default) query the renderer for the current mute state; if false, return the locally cached mute value maintained by the helper. </td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="section return"><dt>Returns</dt><dd>0 = unmuted, 1 = muted, -1 = error/unknown </dd></dl>
 
 </div>
@@ -709,8 +731,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ad9d9c36eb73dc4a00387c65a4e14a015" name="ad9d9c36eb73dc4a00387c65a4e14a015"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad9d9c36eb73dc4a00387c65a4e14a015">&#9670;&#160;</a></span>getTransportState()</h2>
+<a id="a5d9af0498c118045a38b4c66ae35c8cd" name="a5d9af0498c118045a38b4c66ae35c8cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d9af0498c118045a38b4c66ae35c8cd">&#9670;&#160;</a></span>getTransportState()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -721,7 +743,8 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">const char * tiny_dlna::DLNAControlPointMediaRenderer::getTransportState </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>fromRemote</em> = <code>true</code></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -732,13 +755,19 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Query transport state (e.g. STOPPED, PLAYING, PAUSED_PLAYBACK) </p>
+<p>Query transport state (e.g. STOPPED, PLAYING, PAUSED_PLAYBACK). </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fromRemote</td><td>If true (default) the helper will query the remote renderer for its current transport state. If false, the cached local transport state is returned. </td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="section return"><dt>Returns</dt><dd>pointer to a string owned by the helper's registry, or nullptr on error </dd></dl>
 
 </div>
 </div>
-<a id="a934587f9ff6bf366c4247f1493141c4b" name="a934587f9ff6bf366c4247f1493141c4b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a934587f9ff6bf366c4247f1493141c4b">&#9670;&#160;</a></span>getVolume()</h2>
+<a id="a7f5edca639344cc0cd993f9214044bdb" name="a7f5edca639344cc0cd993f9214044bdb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f5edca639344cc0cd993f9214044bdb">&#9670;&#160;</a></span>getVolume()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -749,7 +778,8 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">int tiny_dlna::DLNAControlPointMediaRenderer::getVolume </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>fromRemote</em> = <code>true</code></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -761,6 +791,12 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Query the current volume from the renderer. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fromRemote</td><td>If true (default) the helper will perform an RPC query against the remote renderer to obtain the current volume. If false, the method returns the locally cached value maintained by the helper. </td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="section return"><dt>Returns</dt><dd>current volume 0..100, or -1 on error </dd></dl>
 
 </div>
@@ -1601,6 +1637,94 @@ Protected Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classtiny__dlna_1_1ActionReply.html">ActionReply</a> tiny_dlna::DLNAControlPointMediaRenderer::last_reply</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1bad194a60906ce811e962e15f8e01c2" name="a1bad194a60906ce811e962e15f8e01c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1bad194a60906ce811e962e15f8e01c2">&#9670;&#160;</a></span>local_mute</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int tiny_dlna::DLNAControlPointMediaRenderer::local_mute = false</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a100cc3f9b4874e8aa5595608d2214a3c" name="a100cc3f9b4874e8aa5595608d2214a3c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a100cc3f9b4874e8aa5595608d2214a3c">&#9670;&#160;</a></span>local_transport_state</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* tiny_dlna::DLNAControlPointMediaRenderer::local_transport_state = &quot;STOPPED&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a831b7a95f5ba360d8d3b39348851291f" name="a831b7a95f5ba360d8d3b39348851291f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a831b7a95f5ba360d8d3b39348851291f">&#9670;&#160;</a></span>local_url</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1Str.html">Str</a> tiny_dlna::DLNAControlPointMediaRenderer::local_url</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2be36580cbd51a2e7e39bf795c853c90" name="a2be36580cbd51a2e7e39bf795c853c90"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2be36580cbd51a2e7e39bf795c853c90">&#9670;&#160;</a></span>local_volume</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int tiny_dlna::DLNAControlPointMediaRenderer::local_volume = 0</td>
         </tr>
       </table>
   </td>
