@@ -104,8 +104,6 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
 
   /// Set the http server instance the MediaRenderer should use
   void setHttpServer(HttpServer& server) {
-    // ensure instance pointer is available for callbacks
-    p_media_renderer = this;
     p_server = &server;
     // register service endpoints on the provided server
     setupServicesImpl(&server);
@@ -188,7 +186,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     if (urlStr == nullptr) return false;
     DlnaLogger.log(DlnaLogLevel::Info, "play URL: %s", urlStr);
     // store URI
-    current_uri = Str(urlStr);
+    current_uri.set(urlStr);
     // notify handler about the new URI and play
     if (event_cb) {
       event_cb(MediaEvent::SET_URI, *this);
@@ -294,7 +292,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
   DLNADevice dlna_device;
   HttpServer* p_server = nullptr;
   IUDPService* p_udp_member = nullptr;
-  static inline DLNAMediaRenderer* p_media_renderer = nullptr;
+  // Removed global instance pointer
 
   /// serviceAbbrev: AVT, RCS, CMS
   void publishProperty(const char* serviceAbbrev, const char* changeTag) {
@@ -355,16 +353,16 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
       while (xp.parse(nodeName, path, text, attrs)) {
         // capture action name (Play, Pause, Stop, SetAVTransportURI etc.)
         if (actionName.isEmpty()) {
-          if (strcmp(nodeName.c_str(), "Play") == 0 ||
-              strcmp(nodeName.c_str(), "Pause") == 0 ||
-              strcmp(nodeName.c_str(), "Stop") == 0 ||
-              strcmp(nodeName.c_str(), "SetAVTransportURI") == 0) {
+          if (nodeName.equals("Play") ||
+              nodeName.equals("Pause") ||
+              nodeName.equals("Stop") ||
+              nodeName.equals("SetAVTransportURI")) {
             actionName = nodeName;
           }
         }
 
         // capture CurrentURI value
-        if (strcmp(nodeName.c_str(), "CurrentURI") == 0 && !text.isEmpty()) {
+        if (nodeName.equals("CurrentURI") && !text.isEmpty()) {
           currentUri = text;
         }
       }
@@ -376,21 +374,21 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     if (actionName == "Play") {
       media_renderer.setActive(true);
       server->reply("text/xml", [](Print& out) {
-        p_media_renderer->printReplyXML(out, "PlayResponse", "AVTransport");
+        DLNAMediaRenderer::printReplyXML(out, "PlayResponse", "AVTransport");
       });
       return;
     }
     if (actionName == "Pause") {
       media_renderer.setActive(false);
       server->reply("text/xml", [](Print& out) {
-        p_media_renderer->printReplyXML(out, "PauseResponse", "AVTransport");
+        DLNAMediaRenderer::printReplyXML(out, "PauseResponse", "AVTransport");
       });
       return;
     }
     if (actionName == "Stop") {
       media_renderer.setActive(false);
       server->reply("text/xml", [](Print& out) {
-        p_media_renderer->printReplyXML(out, "StopResponse", "AVTransport");
+        DLNAMediaRenderer::printReplyXML(out, "StopResponse", "AVTransport");
       });
       return;
     }
@@ -398,8 +396,8 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
       if (!currentUri.isEmpty()) {
         media_renderer.setPlaybackURL(currentUri.c_str());
         server->reply("text/xml", [](Print& out) {
-          p_media_renderer->printReplyXML(out, "SetAVTransportURIResponse",
-                                          "AVTransport");
+          DLNAMediaRenderer::printReplyXML(out, "SetAVTransportURIResponse",
+                                           "AVTransport");
         });
         return;
       } else {
@@ -437,16 +435,16 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
       xp.write(buf, r);
       while (xp.parse(nodeName, path, text, attrs)) {
         if (actionName.isEmpty()) {
-          if (strcmp(nodeName.c_str(), "SetVolume") == 0 ||
-              strcmp(nodeName.c_str(), "SetMute") == 0) {
+          if (nodeName.equals("SetVolume") ||
+              nodeName.equals("SetMute")) {
             actionName = nodeName;
           }
         }
-        if (strcmp(nodeName.c_str(), "DesiredVolume") == 0 && !text.isEmpty()) {
+        if (nodeName.equals("DesiredVolume") && !text.isEmpty()) {
           desiredVolume = text.toInt();
           haveVolume = true;
         }
-        if (strcmp(nodeName.c_str(), "DesiredMute") == 0 && !text.isEmpty()) {
+        if (nodeName.equals("DesiredMute") && !text.isEmpty()) {
           desiredMute = (text == "1");
           haveMute = true;
         }
@@ -459,16 +457,16 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     if (actionName == "SetVolume" && haveVolume) {
       media_renderer.setVolume((uint8_t)desiredVolume);
       server->reply("text/xml", [](Print& out) {
-        p_media_renderer->printReplyXML(out, "SetVolumeResponse",
-                                        "RenderingControl");
+        DLNAMediaRenderer::printReplyXML(out, "SetVolumeResponse",
+                                         "RenderingControl");
       });
       return;
     }
     if (actionName == "SetMute" && haveMute) {
       media_renderer.setMute(desiredMute);
       server->reply("text/xml", [](Print& out) {
-        p_media_renderer->printReplyXML(out, "SetMuteResponse",
-                                        "RenderingControl");
+        DLNAMediaRenderer::printReplyXML(out, "SetMuteResponse",
+                                         "RenderingControl");
       });
       return;
     }
@@ -536,7 +534,8 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
   }
 
   /// Builds a standard SOAP reply envelope
-  int printReplyXML(Print& out, const char* replyName, const char* serviceId) {
+  static int printReplyXML(Print& out, const char* replyName,
+                           const char* serviceId) {
     XMLPrinter xp(out);
     size_t result = 0;
     result += xp.printNodeBegin(
