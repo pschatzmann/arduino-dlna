@@ -167,7 +167,6 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     publishProperty("AVT", cmd.c_str());
   }
 
-
   /// Provides the mime from the DIDL or nullptr
   const char* getMime() {
     // Prefer explicit MIME from DIDL if available
@@ -300,7 +299,8 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
   /// serviceAbbrev: AVT, RCS, CMS
   void publishProperty(const char* serviceAbbrev, const char* changeTag) {
     SubscriptionMgrDevice* mgr = tiny_dlna::DLNADevice::getSubscriptionMgr();
-    DLNAServiceInfo &serviceInfo = dlna_device.getServiceByAbbrev(serviceAbbrev);
+    DLNAServiceInfo& serviceInfo =
+        dlna_device.getServiceByAbbrev(serviceAbbrev);
     if (mgr && serviceInfo) {
       mgr->publishProperty(serviceInfo, changeTag);
     }
@@ -328,17 +328,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     }
   }
 
-  static const char* reply() {
-    static const char* result =
-        "<s:Envelope "
-        "xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/"
-        "\"><s:Body><u:%1 "
-        "xmlns:u=\"urn:schemas-upnp-org:service:%2:"
-        "1\"></u:%1></s:Body></s:Envelope>";
-    return result;
-  }
-
-  // Transport control handler
+  /// Transport control handler
   static void transportControlCB(HttpServer* server, const char* requestPath,
                                  HttpRequestHandlerLine* hl) {
     // Incremental SOAP parsing using XMLParserPrint to avoid buffering the
@@ -380,32 +370,37 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
       }
     }
 
-    Str reply_str{reply()};
-    reply_str.replaceAll("%2", "AVTransport");
-
+    // Use printReplyXML via a non-capturing callback so the HttpServer can
+    // call a function pointer. The instance is accessed through
+    // p_media_renderer which is set in setHttpServer().
     if (actionName == "Play") {
       media_renderer.setActive(true);
-      reply_str.replaceAll("%1", "PlayResponse");
-      server->reply("text/xml", reply_str.c_str());
+      server->reply("text/xml", [](Print& out) {
+        p_media_renderer->printReplyXML(out, "PlayResponse", "AVTransport");
+      });
       return;
     }
     if (actionName == "Pause") {
       media_renderer.setActive(false);
-      reply_str.replaceAll("%1", "PauseResponse");
-      server->reply("text/xml", reply_str.c_str());
+      server->reply("text/xml", [](Print& out) {
+        p_media_renderer->printReplyXML(out, "PauseResponse", "AVTransport");
+      });
       return;
     }
     if (actionName == "Stop") {
       media_renderer.setActive(false);
-      reply_str.replaceAll("%1", "StopResponse");
-      server->reply("text/xml", reply_str.c_str());
+      server->reply("text/xml", [](Print& out) {
+        p_media_renderer->printReplyXML(out, "StopResponse", "AVTransport");
+      });
       return;
     }
     if (actionName == "SetAVTransportURI") {
       if (!currentUri.isEmpty()) {
         media_renderer.setPlaybackURL(currentUri.c_str());
-        reply_str.replaceAll("%1", "SetAVTransportURIResponse");
-        server->reply("text/xml", reply_str.c_str());
+        server->reply("text/xml", [](Print& out) {
+          p_media_renderer->printReplyXML(out, "SetAVTransportURIResponse",
+                                          "AVTransport");
+        });
         return;
       } else {
         DlnaLogger.log(DlnaLogLevel::Warning,
@@ -415,7 +410,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     server->replyError(400, "Invalid Action");
   }
 
-  // Rendering control handler
+  /// Rendering control handler
   static void renderingControlCB(HttpServer* server, const char* requestPath,
                                  HttpRequestHandlerLine* hl) {
     // Incremental SOAP parsing: detect SetVolume/SetMute and extract values
@@ -458,24 +453,29 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
       }
     }
 
-    Str reply_str{reply()};
-    reply_str.replaceAll("%2", "RenderingControl");
-
+    // Reply using printReplyXML via a non-capturing callback so the
+    // HttpServer can use a plain function pointer. The instance is
+    // accessed through p_media_renderer.
     if (actionName == "SetVolume" && haveVolume) {
       media_renderer.setVolume((uint8_t)desiredVolume);
-      reply_str.replaceAll("%1", "SetVolumeResponse");
-      server->reply("text/xml", reply_str.c_str());
+      server->reply("text/xml", [](Print& out) {
+        p_media_renderer->printReplyXML(out, "SetVolumeResponse",
+                                        "RenderingControl");
+      });
       return;
     }
     if (actionName == "SetMute" && haveMute) {
       media_renderer.setMute(desiredMute);
-      reply_str.replaceAll("%1", "SetMuteResponse");
-      server->reply("text/xml", reply_str.c_str());
+      server->reply("text/xml", [](Print& out) {
+        p_media_renderer->printReplyXML(out, "SetMuteResponse",
+                                        "RenderingControl");
+      });
       return;
     }
     server->replyError(400, "Invalid Action");
   };
 
+  /// Setup service descriptors and control/event endpoints
   void setupServicesImpl(HttpServer* server) {
     DlnaLogger.log(DlnaLogLevel::Info, "MediaRenderer::setupServices");
 
@@ -533,6 +533,21 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     addService(rc);
     addService(cm);
     addService(avt);
+  }
+
+  /// Builds a standard SOAP reply envelope
+  int printReplyXML(Print& out, const char* replyName, const char* serviceId) {
+    XMLPrinter xp(out);
+    size_t result = 0;
+    result += xp.printNodeBegin(
+        "s:Envelope", "xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\"");
+    result += xp.printNodeBegin("s:Body");
+    result += xp.printf("<u:%s xmlns:u=\"urn:schemas-upnp-org:service:%s:1\">",
+                        replyName, serviceId);
+    result += xp.printf("</u:%s>", replyName);
+    result += xp.printNodeEnd("s:Body");
+    result += xp.printNodeEnd("s:Envelope");
+    return result;
   }
 };
 
