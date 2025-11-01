@@ -399,10 +399,6 @@ Variables</h2></td></tr>
 <tr class="separator:ad1a9a726ef5546aa12b5f58a2af3db3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acc6e7eb7763b852f949101cb5450dd0f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html">DLNAControlPoint</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetiny__dlna.html#acc6e7eb7763b852f949101cb5450dd0f">selfDLNAControlPoint</a> = nullptr</td></tr>
 <tr class="separator:acc6e7eb7763b852f949101cb5450dd0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a340729a42649b279fdfa96185a9cc3cd"><td class="memItemLeft" align="right" valign="top">constexpr const <a class="el" href="structtiny__dlna_1_1MimeExtension.html">MimeExtension</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetiny__dlna.html#a340729a42649b279fdfa96185a9cc3cd">defaultMimeTable</a> []</td></tr>
-<tr class="separator:a340729a42649b279fdfa96185a9cc3cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a782f756c20c2950e76b5d377df3f3e86"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structtiny__dlna_1_1MimeExtension.html">MimeExtension</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetiny__dlna.html#a782f756c20c2950e76b5d377df3f3e86">mimeTable</a></td></tr>
-<tr class="separator:a782f756c20c2950e76b5d377df3f3e86"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a286262803e800d8b73d9e3d50ec6df99"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetiny__dlna.html#a286262803e800d8b73d9e3d50ec6df99">MaxHeaderLineLength</a> = 200</td></tr>
 <tr class="separator:a286262803e800d8b73d9e3d50ec6df99"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ca61d30704c41525d4a768462717279"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetiny__dlna.html#a0ca61d30704c41525d4a768462717279">CONTENT_TYPE</a> = &quot;Content-Type&quot;</td></tr>
@@ -870,35 +866,6 @@ Variables</h2></td></tr>
 </div><!-- fragment -->
 </div>
 </div>
-<a id="a340729a42649b279fdfa96185a9cc3cd" name="a340729a42649b279fdfa96185a9cc3cd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a340729a42649b279fdfa96185a9cc3cd">&#9670;&#160;</a></span>defaultMimeTable</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="structtiny__dlna_1_1MimeExtension.html">MimeExtension</a> tiny_dlna::defaultMimeTable</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
-<div class="line">    {<span class="stringliteral">&quot;.htm&quot;</span>, <span class="stringliteral">&quot;text/html&quot;</span>},       {<span class="stringliteral">&quot;.css&quot;</span>, <span class="stringliteral">&quot;text/css&quot;</span>},</div>
-<div class="line">    {<span class="stringliteral">&quot;.xml&quot;</span>, <span class="stringliteral">&quot;text/xml&quot;</span>},        {<span class="stringliteral">&quot;.js&quot;</span>, <span class="stringliteral">&quot;application/javascript&quot;</span>},</div>
-<div class="line">    {<span class="stringliteral">&quot;.png&quot;</span>, <span class="stringliteral">&quot;image/png&quot;</span>},       {<span class="stringliteral">&quot;.gif&quot;</span>, <span class="stringliteral">&quot;image/gif&quot;</span>},</div>
-<div class="line">    {<span class="stringliteral">&quot;.jpeg&quot;</span>, <span class="stringliteral">&quot;image/jpeg&quot;</span>},     {<span class="stringliteral">&quot;.ico&quot;</span>, <span class="stringliteral">&quot;image/x-icon&quot;</span>},</div>
-<div class="line">    {<span class="stringliteral">&quot;.pdf&quot;</span>, <span class="stringliteral">&quot;application/pdf&quot;</span>}, {<span class="stringliteral">&quot;.zip&quot;</span>, <span class="stringliteral">&quot;application/zip&quot;</span>},</div>
-<div class="line">    {<span class="keyword">nullptr</span>, <span class="keyword">nullptr</span>}}</div>
-</div><!-- fragment -->
-</div>
-</div>
 <a id="ad1a9a726ef5546aa12b5f58a2af3db3c" name="ad1a9a726ef5546aa12b5f58a2af3db3c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad1a9a726ef5546aa12b5f58a2af3db3c">&#9670;&#160;</a></span>DlnaLogger</h2>
 
@@ -984,20 +951,6 @@ Variables</h2></td></tr>
 <div class="line">                         <span class="stringliteral">&quot;PUT&quot;</span>,     <span class="stringliteral">&quot;DELETE&quot;</span>, <span class="stringliteral">&quot;TRACE&quot;</span>, <span class="stringliteral">&quot;OPTIONS&quot;</span>,</div>
 <div class="line">                         <span class="stringliteral">&quot;CONNECT&quot;</span>, <span class="stringliteral">&quot;PATCH&quot;</span>, <span class="stringliteral">&quot;UNSUBSCRIBE&quot;</span>, <span class="stringliteral">&quot;SUBSCRIBE&quot;</span>, <span class="stringliteral">&quot;NOTIFY&quot;</span>, <span class="keyword">nullptr</span>}</div>
 </div><!-- fragment -->
-</div>
-</div>
-<a id="a782f756c20c2950e76b5d377df3f3e86" name="a782f756c20c2950e76b5d377df3f3e86"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a782f756c20c2950e76b5d377df3f3e86">&#9670;&#160;</a></span>mimeTable</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="structtiny__dlna_1_1MimeExtension.html">MimeExtension</a> * tiny_dlna::mimeTable</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
 </div>
 </div>
 <a id="acc6e7eb7763b852f949101cb5450dd0f" name="acc6e7eb7763b852f949101cb5450dd0f"></a>
