@@ -37,6 +37,21 @@ class HttpChunkWriter {
   void writeEnd(Client& client) { writeChunk(client, "", 0); }
 };
 
+/**
+ * @brief Print implementation for HTTP chunked transfer encoding
+ *
+ * This class wraps a Client and uses HttpChunkWriter to send data using
+ * HTTP chunked transfer encoding. All writes are sent as individual chunks.
+ * Provides print, println, printf, and printEscaped utilities for chunked output.
+ *
+ * Usage:
+ *   ChunkPrint cp(client);
+ *   cp.print("Hello");
+ *   cp.println("World");
+ *   cp.end(); // signals end of chunked stream
+ *
+ * Used internally for streaming large HTTP responses without buffering.
+ */
 class ChunkPrint : public Print {
  public:
   ChunkPrint(Client& client) : client_ptr(&client) {}
