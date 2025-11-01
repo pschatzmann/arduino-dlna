@@ -75,6 +75,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classtiny__dlna_1_1StringRegistry-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">tiny_dlna::StringRegistry Class Reference</div></div>
@@ -99,6 +100,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a94545968e2e9808a879596f0d24a886f"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1StringRegistry.html#a94545968e2e9808a879596f0d24a886f">size</a> ()</td></tr>
 <tr class="memdesc:a94545968e2e9808a879596f0d24a886f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reports the total size of all allocated strings.  <br /></td></tr>
 <tr class="separator:a94545968e2e9808a879596f0d24a886f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a52ab87efebb43e982ca887094f12b7a5"><td class="memItemLeft" align="right" valign="top">static const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1StringRegistry.html#a52ab87efebb43e982ca887094f12b7a5">nullStr</a> (const char *str, const char *alt=&quot;&quot;)</td></tr>
+<tr class="memdesc:a52ab87efebb43e982ca887094f12b7a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return str if not null, alt otherwise.  <br /></td></tr>
+<tr class="separator:a52ab87efebb43e982ca887094f12b7a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ff4828db4c8e6a6d67e7e504dfe0ef7"><td class="memItemLeft" align="right" valign="top">static const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1StringRegistry.html#a8ff4828db4c8e6a6d67e7e504dfe0ef7">nullStr</a> (<a class="el" href="classtiny__dlna_1_1Str.html">Str</a> &amp;str, const char *empty=&quot;(null)&quot;)</td></tr>
+<tr class="memdesc:a8ff4828db4c8e6a6d67e7e504dfe0ef7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return str if not null, alt otherwise.  <br /></td></tr>
+<tr class="separator:a8ff4828db4c8e6a6d67e7e504dfe0ef7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -186,6 +196,82 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Reports the number of strings. </p>
+
+</div>
+</div>
+<a id="a52ab87efebb43e982ca887094f12b7a5" name="a52ab87efebb43e982ca887094f12b7a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a52ab87efebb43e982ca887094f12b7a5">&#9670;&#160;</a></span>nullStr() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static const char * tiny_dlna::StringRegistry::nullStr </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>str</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>alt</em> = <code>&quot;&quot;</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return str if not null, alt otherwise. </p>
+
+</div>
+</div>
+<a id="a8ff4828db4c8e6a6d67e7e504dfe0ef7" name="a8ff4828db4c8e6a6d67e7e504dfe0ef7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ff4828db4c8e6a6d67e7e504dfe0ef7">&#9670;&#160;</a></span>nullStr() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static const char * tiny_dlna::StringRegistry::nullStr </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1Str.html">Str</a> &amp;&#160;</td>
+          <td class="paramname"><em>str</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>empty</em> = <code>&quot;(null)&quot;</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return str if not null, alt otherwise. </p>
 
 </div>
 </div>
