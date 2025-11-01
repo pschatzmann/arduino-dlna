@@ -7,10 +7,13 @@ var searchData=
   ['dlnacontrolpointmediarenderer_2eh_4',['DLNAControlPointMediaRenderer.h',['../DLNAControlPointMediaRenderer_8h.html',1,'']]],
   ['dlnacontrolpointmediaserver_2eh_5',['DLNAControlPointMediaServer.h',['../DLNAControlPointMediaServer_8h.html',1,'']]],
   ['dlnacontrolpointrequestparser_2eh_6',['DLNAControlPointRequestParser.h',['../DLNAControlPointRequestParser_8h.html',1,'']]],
-  ['dlnadevice_2eh_7',['DLNADevice.h',['../DLNADevice_8h.html',1,'']]],
-  ['dlnadeviceinfo_2eh_8',['DLNADeviceInfo.h',['../DLNADeviceInfo_8h.html',1,'']]],
-  ['dlnadevicerequestparser_2eh_9',['DLNADeviceRequestParser.h',['../DLNADeviceRequestParser_8h.html',1,'']]],
-  ['dlnamediarenderer_2eh_10',['DLNAMediaRenderer.h',['../DLNAMediaRenderer_8h.html',1,'']]],
-  ['dlnamediaserver_2eh_11',['DLNAMediaServer.h',['../DLNAMediaServer_8h.html',1,'']]],
-  ['dlnaserviceinfo_2eh_12',['DLNAServiceInfo.h',['../DLNAServiceInfo_8h.html',1,'']]]
+  ['dlnadescr_2eh_7',['DLNADescr.h',['../DLNADescr_8h.html',1,'']]],
+  ['dlnadevice_2eh_8',['DLNADevice.h',['../DLNADevice_8h.html',1,'']]],
+  ['dlnadeviceinfo_2eh_9',['DLNADeviceInfo.h',['../DLNADeviceInfo_8h.html',1,'']]],
+  ['dlnadevicerequestparser_2eh_10',['DLNADeviceRequestParser.h',['../DLNADeviceRequestParser_8h.html',1,'']]],
+  ['dlnamediarenderer_2eh_11',['DLNAMediaRenderer.h',['../DLNAMediaRenderer_8h.html',1,'']]],
+  ['dlnamediarendererdescr_2eh_12',['DLNAMediaRendererDescr.h',['../DLNAMediaRendererDescr_8h.html',1,'']]],
+  ['dlnamediaserver_2eh_13',['DLNAMediaServer.h',['../DLNAMediaServer_8h.html',1,'']]],
+  ['dlnamediaserverdescr_2eh_14',['DLNAMediaServerDescr.h',['../DLNAMediaServerDescr_8h.html',1,'']]],
+  ['dlnaserviceinfo_2eh_15',['DLNAServiceInfo.h',['../DLNAServiceInfo_8h.html',1,'']]]
 ];

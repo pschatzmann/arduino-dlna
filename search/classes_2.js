@@ -4,10 +4,16 @@ var searchData=
   ['dlnacontrolpointmediarenderer_1',['DLNAControlPointMediaRenderer',['../classtiny__dlna_1_1DLNAControlPointMediaRenderer.html',1,'tiny_dlna']]],
   ['dlnacontrolpointmediaserver_2',['DLNAControlPointMediaServer',['../classtiny__dlna_1_1DLNAControlPointMediaServer.html',1,'tiny_dlna']]],
   ['dlnacontrolpointrequestparser_3',['DLNAControlPointRequestParser',['../classtiny__dlna_1_1DLNAControlPointRequestParser.html',1,'tiny_dlna']]],
-  ['dlnadevice_4',['DLNADevice',['../classtiny__dlna_1_1DLNADevice.html',1,'tiny_dlna']]],
-  ['dlnadeviceinfo_5',['DLNADeviceInfo',['../classtiny__dlna_1_1DLNADeviceInfo.html',1,'tiny_dlna']]],
-  ['dlnadevicerequestparser_6',['DLNADeviceRequestParser',['../classtiny__dlna_1_1DLNADeviceRequestParser.html',1,'tiny_dlna']]],
-  ['dlnamediarenderer_7',['DLNAMediaRenderer',['../classtiny__dlna_1_1DLNAMediaRenderer.html',1,'tiny_dlna']]],
-  ['dlnamediaserver_8',['DLNAMediaServer',['../classtiny__dlna_1_1DLNAMediaServer.html',1,'tiny_dlna']]],
-  ['dlnaserviceinfo_9',['DLNAServiceInfo',['../classtiny__dlna_1_1DLNAServiceInfo.html',1,'tiny_dlna']]]
+  ['dlnadescr_4',['DLNADescr',['../classtiny__dlna_1_1DLNADescr.html',1,'tiny_dlna']]],
+  ['dlnadevice_5',['DLNADevice',['../classtiny__dlna_1_1DLNADevice.html',1,'tiny_dlna']]],
+  ['dlnadeviceinfo_6',['DLNADeviceInfo',['../classtiny__dlna_1_1DLNADeviceInfo.html',1,'tiny_dlna']]],
+  ['dlnadevicerequestparser_7',['DLNADeviceRequestParser',['../classtiny__dlna_1_1DLNADeviceRequestParser.html',1,'tiny_dlna']]],
+  ['dlnamediarenderer_8',['DLNAMediaRenderer',['../classtiny__dlna_1_1DLNAMediaRenderer.html',1,'tiny_dlna']]],
+  ['dlnamediarendererconnectionmgrdescr_9',['DLNAMediaRendererConnectionMgrDescr',['../classtiny__dlna_1_1DLNAMediaRendererConnectionMgrDescr.html',1,'tiny_dlna']]],
+  ['dlnamediarenderercontroldescr_10',['DLNAMediaRendererControlDescr',['../classtiny__dlna_1_1DLNAMediaRendererControlDescr.html',1,'tiny_dlna']]],
+  ['dlnamediarenderertransportdescr_11',['DLNAMediaRendererTransportDescr',['../classtiny__dlna_1_1DLNAMediaRendererTransportDescr.html',1,'tiny_dlna']]],
+  ['dlnamediaserver_12',['DLNAMediaServer',['../classtiny__dlna_1_1DLNAMediaServer.html',1,'tiny_dlna']]],
+  ['dlnamediaserverconnectionmgrdescr_13',['DLNAMediaServerConnectionMgrDescr',['../classtiny__dlna_1_1DLNAMediaServerConnectionMgrDescr.html',1,'tiny_dlna']]],
+  ['dlnamediaservercontentdirectorydescr_14',['DLNAMediaServerContentDirectoryDescr',['../classtiny__dlna_1_1DLNAMediaServerContentDirectoryDescr.html',1,'tiny_dlna']]],
+  ['dlnaserviceinfo_15',['DLNAServiceInfo',['../classtiny__dlna_1_1DLNAServiceInfo.html',1,'tiny_dlna']]]
 ];
