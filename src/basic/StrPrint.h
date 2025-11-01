@@ -46,6 +46,19 @@ class StrPrint : public Print {
 
   void setExpandEncoded(bool flag) { expand_encoded = flag; }
 
+  size_t printf(const char* fmt, ...) {
+    char buf[256];
+    va_list args;
+    va_start(args, fmt);
+    int n = vsnprintf(buf, sizeof(buf), fmt, args);
+    va_end(args);
+    if (n > 0) {
+      write((const uint8_t*)buf, n);
+      return n;
+    }
+    return 0;
+  }
+
  protected:
   Str str{STR_PRINT_INITIAL_SIZE};
   int inc_size;

@@ -152,6 +152,16 @@ class DLNADeviceInfo {
     }
     return result;
   }
+  /// Finds a service definition by name
+  DLNAServiceInfo& getServiceByAbbrev(const char* abbrev) {
+    static DLNAServiceInfo result{false};
+    for (auto& service : services) {
+      if (StrView(service.subscription_namespace_abbrev).equals(abbrev)) {
+        return service;
+      }
+    }
+    return result;
+  }
 
   /// Provides all service definitions
   Vector<DLNAServiceInfo>& getServices() { return services; }

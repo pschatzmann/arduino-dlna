@@ -371,6 +371,11 @@ class HttpServer {
     reply(404, "Page Not Found");
   }
 
+  void replyError(int err, const char* msg = "Internal Server Error") {
+    DlnaLogger.log(DlnaLogLevel::Info, "reply %s", "error");
+    reply(err, msg);
+  }
+
   /// Writes the status and message to the reply
   void reply(int status, const char* msg) {
     DlnaLogger.log(DlnaLogLevel::Info, "reply %d", status);

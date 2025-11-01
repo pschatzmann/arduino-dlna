@@ -83,9 +83,9 @@ class SubscriptionMgrDevice {
   }
 
   // Publish a single state variable change to all subscribers of the service
-  void publishProperty(const char* serviceId, const char* varName,
-                       const char* value) {
-    auto& list = getList(serviceId);
+  void publishProperty(DLNAServiceInfo& service, const char* xmlTag) {
+    const char* serviceAbbrev = service.subscription_namespace_abbrev;
+    auto& list = getList(service.service_id);
     for (int i = 0; i < list.size(); ++i) {
       Subscription& sub = list[i];
       // increment seq
@@ -107,9 +107,9 @@ class SubscriptionMgrDevice {
       // post the notification using dynamic XML generation (streamed writer)
       // compute length by writing to NullPrint and then stream via lambda
       NullPrint np;
-      size_t xmlLen = createXML(np, varName, value);
-      auto printXML = [this, varName, value](Print& out) {
-        createXML(out, varName, value);
+      size_t xmlLen = createXML(np, serviceAbbrev, xmlTag);
+      auto printXML = [this, serviceAbbrev, xmlTag](Print& out) {
+        createXML(out, serviceAbbrev, xmlTag);
       };
       int rc = http.post(cbUrl, xmlLen, printXML, "text/xml");
       DlnaLogger.log(DlnaLogLevel::Info, "Notify %s -> %d", cbUrl.url(), rc);
@@ -139,21 +139,21 @@ class SubscriptionMgrDevice {
    *
    * Returns the number of bytes written.
    */
-  size_t createXML(Print& out, const char* varName, const char* value) {
+  size_t createXML(Print& out, const char*serviceAbbrev, const char* changeNode) {
     size_t written = 0;
     written += out.print("<?xml version=\"1.0\"?>\r\n");
     written += out.print(
         "<e:propertyset "
         "xmlns:e=\"urn:schemas-upnp-org:metadata-1-0/events\">\r\n");
-    written += out.print("  <e:property>\r\n");
-    written += out.print("    <");
-    written += out.print(varName);
-    written += out.print(">");
-    written += out.print(value);
-    written += out.print("</");
-    written += out.print(varName);
-    written += out.print(">\r\n");
-    written += out.print("  </e:property>\r\n");
+    written += out.print("<e:property>\r\n");
+    written += out.print("<LastChange>\r\n");
+    written += out.print("<Event xmlns=\"urn:schemas-upnp-org:metadata-1-0/");
+    written += out.print(serviceAbbrev);
+    written += out.print("/\">\r\n");
+    written += out.print(changeNode);
+    written += out.print("</Event>\r\n");
+    written += out.print("</LastChange>\r\n");
+    written += out.print("</e:property>\r\n");
     written += out.print("</e:propertyset>\r\n");
     return written;
   }

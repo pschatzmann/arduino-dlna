@@ -73,7 +73,6 @@ class DLNADevice {
 
     is_active = true;
     DlnaLogger.log(DlnaLogLevel::Info, "Device successfully started");
-    // expose singleton for subscription publishing
     return true;
   }
 
@@ -123,8 +122,13 @@ class DLNADevice {
   }
 
   /// Provide addess to the service information
-  DLNAServiceInfo getService(const char* id) {
+  DLNAServiceInfo& getService(const char* id) {
     return p_device->getService(id);
+  }
+
+  /// Get Service by subscription ns abbrev
+  DLNAServiceInfo& getServiceByAbbrev(const char* abbrev) {
+    return p_device->getServiceByAbbrev(abbrev);
   }
 
   /// Provides the device
@@ -183,7 +187,7 @@ class DLNADevice {
       return;
     }
     // UNSUBSCRIBE: handle via SID header
-    if (req.method() == T_POST) {
+    if (req.method() == T_UNSUBSCRIBE) {
       // Some stacks use POST for unsubscribe; try to handle SID
       const char* sid = req.get("SID");
       if (sid && DLNADevice::self) {

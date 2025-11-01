@@ -2,11 +2,11 @@
 #include <cctype>
 #include <cstring>
 
+#include "DLNAMediaRendererDescr.h"
 #include "basic/Str.h"
 #include "dlna/devices/DLNADevice.h"
 #include "dlna/xml/XMLAttributeParser.h"
 #include "dlna/xml/XMLParserPrint.h"
-#include "DLNAMediaRendererDescr.h"
 
 namespace tiny_dlna {
 /**
@@ -76,7 +76,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     DlnaLogger.log(DlnaLogLevel::Info, "MediaRenderer::MediaRenderer");
     setSerialNumber(usn);
     setDeviceType(st);
-    setFriendlyName("MediaRenderer");
+    setFriendlyName("ArduinoMediaRenderer");
     setManufacturer("TinyDLNA");
     setModelName("TinyDLNA");
     setModelNumber("1.0");
@@ -123,6 +123,9 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     DlnaLogger.log(DlnaLogLevel::Info, "Set volume: %d", volumePercent);
     current_volume = volumePercent;
     if (event_cb) event_cb(MediaEvent::SET_VOLUME, *this);
+    StrPrint cmd;
+    cmd.printf(" <Volume val=\"%d\" channel=\"Master\"/>", volumePercent);
+    publishProperty("RCS", cmd.c_str());
     return true;
   }
 
@@ -134,6 +137,9 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     is_muted = mute;
     DlnaLogger.log(DlnaLogLevel::Info, "Set mute: %s", mute ? "true" : "false");
     if (event_cb) event_cb(MediaEvent::SET_MUTE, *this);
+    StrPrint cmd;
+    cmd.printf("<Mute val=\"%d\" channel=\"Master\"/>", mute ? 1 : 0);
+    publishProperty("RCS", cmd.c_str());
     return true;
   }
 
@@ -148,14 +154,19 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     DlnaLogger.log(DlnaLogLevel::Info, "Set active: %s",
                    active ? "true" : "false");
     is_active = active;
+    if (active) {
+      start_time = millis();
+    } else {
+      // accumulate time
+      time_sum += millis() - start_time;
+      start_time = 0;
+    }
+    StrPrint cmd;
+    cmd.printf("<TransportState val=\"%s\"/>",
+               active ? "PLAYING" : "PAUSED_PLAYBACK");
+    publishProperty("AVT", cmd.c_str());
   }
 
-  /// Get estimated playback position (ms)
-  unsigned long getPosition() {
-    // Estimate position; return 0 if not active or start_time not set
-    if (!is_active || start_time == 0) return 0;
-    return millis() - start_time;
-  }
 
   /// Provides the mime from the DIDL or nullptr
   const char* getMime() {
@@ -173,26 +184,6 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
   /// Provides access to the internal DLNA device instance
   DLNADevice& device() { return dlna_device; }
 
- protected:
-  tiny_dlna::Str current_uri;
-  tiny_dlna::Str current_mime;
-  MediaEventHandler event_cb = nullptr;
-  uint8_t current_volume = 50;
-  bool is_muted = false;
-  bool is_active = false;
-  unsigned long start_time = 0;
-  // Current transport state string (e.g. "STOPPED", "PLAYING",
-  // "PAUSED_PLAYBACK")
-  tiny_dlna::Str transport_state = "NO_MEDIA_PRESENT";
-  const char* st = "urn:schemas-upnp-org:device:MediaRenderer:1";
-  const char* usn = "uuid:09349455-2941-4cf7-9847-1dd5ab210e97";
-
-  // internal DLNA device instance owned by this MediaRenderer
-  DLNADevice dlna_device;
-  HttpServer* p_server = nullptr;
-  IUDPService* p_udp_member = nullptr;
-  static inline DLNAMediaRenderer* p_media_renderer = nullptr;
-
   /// Start playback of a network resource (returns true on success)
   bool play(const char* urlStr) {
     if (urlStr == nullptr) return false;
@@ -206,15 +197,45 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     }
     is_active = true;
     start_time = millis();
+    time_sum = 0;
+
+    StrPrint cmd;
+    cmd.printf("<CurrentTrackURI val=\"%s\"/>\n", current_uri.c_str());
+    cmd.printf("<TransportState val=\"PLAYING\"/>");
+    publishProperty("AVT", cmd.c_str());
+
     return true;
   }
 
-  /// Set MIME explicitly (used when DIDL-Lite metadata provides protocolInfo)
-  void setMime(const char* mime) {
-    if (mime) {
-      current_mime = mime;
-      DlnaLogger.log(DlnaLogLevel::Info, "Set mime: %s", current_mime.c_str());
+  /// Defines the actual url to play
+  bool setPlaybackURL(const char* urlStr) {
+    if (urlStr == nullptr) return false;
+    DlnaLogger.log(DlnaLogLevel::Info, "setPlaybackURL URL: %s", urlStr);
+    // store URI
+    current_uri = Str(urlStr);
+    // notify handler about the new URI and play
+    if (event_cb) {
+      event_cb(MediaEvent::SET_URI, *this);
     }
+
+    StrPrint cmd;
+    cmd.printf("<CurrentTrackURI val=\"%s\"/>\n", current_uri.c_str());
+    publishProperty("AVT", cmd.c_str());
+
+    return true;
+  }
+
+  bool stop() {
+    DlnaLogger.log(DlnaLogLevel::Info, "Stop playback");
+    is_active = false;
+    start_time = 0;
+    time_sum = 0;
+    // notify handler about the stop
+    if (event_cb) event_cb(MediaEvent::STOP, *this);
+    StrPrint cmd;
+    cmd.printf("<TransportState val=\"STOPPED\"/>");
+    publishProperty("AVT", cmd.c_str());
+    return true;
   }
 
   /**
@@ -225,17 +246,71 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
    * notifies the application event handler with MediaEvent::STOP so the
    * application can perform cleanup (release resources, update UI, etc.).
    */
-  void playbackCompleted() {
+  void setPlaybackCompleted() {
     DlnaLogger.log(DlnaLogLevel::Info, "Playback completed");
     transport_state = "STOPPED";
     is_active = false;
     start_time = 0;
+    time_sum = 0;
     // notify application handler about the stop
     if (event_cb) event_cb(MediaEvent::STOP, *this);
     // publish UPnP event to subscribers (if subscription manager available)
+    StrPrint cmd;
+    cmd.printf("<TransportState val=\"STOPPED\"/>");
+    publishProperty("AVT", cmd.c_str());
+  }
+
+  /// Get estimated playback position (seconds)
+  size_t getRelativeTimePositionSec() {
+    unsigned long posMs = (millis() - start_time) + time_sum;
+    return static_cast<size_t>(posMs / 1000);
+  }
+
+  /// Publish the RelativeTimePosition property
+  void publishGetRelativeTimePositionSec() {
+    StrPrint cmd;
+    cmd.printf("<RelativeTimePosition val=\"%02d:%02d:%02d\"/>",
+               static_cast<int>(getRelativeTimePositionSec() / 3600),
+               static_cast<int>((getRelativeTimePositionSec() % 3600) / 60),
+               static_cast<int>(getRelativeTimePositionSec() % 60));
+    publishProperty("AVT", cmd.c_str());
+  }
+
+ protected:
+  tiny_dlna::Str current_uri;
+  tiny_dlna::Str current_mime;
+  MediaEventHandler event_cb = nullptr;
+  uint8_t current_volume = 50;
+  bool is_muted = false;
+  bool is_active = false;
+  unsigned long start_time = 0;
+  unsigned long time_sum = 0;
+  // Current transport state string (e.g. "STOPPED", "PLAYING",
+  // "PAUSED_PLAYBACK")
+  tiny_dlna::Str transport_state = "NO_MEDIA_PRESENT";
+  const char* st = "urn:schemas-upnp-org:device:MediaRenderer:1";
+  const char* usn = "uuid:09349455-2941-4cf7-9847-1dd5ab210e97";
+
+  // internal DLNA device instance owned by this MediaRenderer
+  DLNADevice dlna_device;
+  HttpServer* p_server = nullptr;
+  IUDPService* p_udp_member = nullptr;
+  static inline DLNAMediaRenderer* p_media_renderer = nullptr;
+
+  /// serviceAbbrev: AVT, RCS, CMS
+  void publishProperty(const char* serviceAbbrev, const char* changeTag) {
     SubscriptionMgrDevice* mgr = tiny_dlna::DLNADevice::getSubscriptionMgr();
-    if (mgr) {
-      mgr->publishProperty("/AVT/event", "TransportState", "STOPPED");
+    DLNAServiceInfo &serviceInfo = dlna_device.getServiceByAbbrev(serviceAbbrev);
+    if (mgr && serviceInfo) {
+      mgr->publishProperty(serviceInfo, changeTag);
+    }
+  }
+
+  /// Set MIME explicitly (used when DIDL-Lite metadata provides protocolInfo)
+  void setMime(const char* mime) {
+    if (mime) {
+      current_mime = mime;
+      DlnaLogger.log(DlnaLogLevel::Info, "Set mime: %s", current_mime.c_str());
     }
   }
 
@@ -312,28 +387,32 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
       media_renderer.setActive(true);
       reply_str.replaceAll("%1", "PlayResponse");
       server->reply("text/xml", reply_str.c_str());
-    } else if (actionName == "Pause") {
+      return;
+    }
+    if (actionName == "Pause") {
       media_renderer.setActive(false);
       reply_str.replaceAll("%1", "PauseResponse");
       server->reply("text/xml", reply_str.c_str());
-    } else if (actionName == "Stop") {
+      return;
+    }
+    if (actionName == "Stop") {
       media_renderer.setActive(false);
       reply_str.replaceAll("%1", "StopResponse");
       server->reply("text/xml", reply_str.c_str());
-    } else if (actionName == "SetAVTransportURI") {
+      return;
+    }
+    if (actionName == "SetAVTransportURI") {
       if (!currentUri.isEmpty()) {
-        media_renderer.play(currentUri.c_str());
+        media_renderer.setPlaybackURL(currentUri.c_str());
+        reply_str.replaceAll("%1", "SetAVTransportURIResponse");
+        server->reply("text/xml", reply_str.c_str());
+        return;
       } else {
         DlnaLogger.log(DlnaLogLevel::Warning,
                        "SetAVTransportURI called with invalid SOAP payload");
       }
-      reply_str.replaceAll("%1", "SetAVTransportURIResponse");
-      server->reply("text/xml", reply_str.c_str());
-    } else {
-      // Handle other transport controls
-      reply_str.replaceAll("%1", "ActionResponse");
-      server->reply("text/xml", reply_str.c_str());
     }
+    server->replyError(400, "Invalid Action");
   }
 
   // Rendering control handler
@@ -386,36 +465,43 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
       media_renderer.setVolume((uint8_t)desiredVolume);
       reply_str.replaceAll("%1", "SetVolumeResponse");
       server->reply("text/xml", reply_str.c_str());
-    } else if (actionName == "SetMute" && haveMute) {
+      return;
+    }
+    if (actionName == "SetMute" && haveMute) {
       media_renderer.setMute(desiredMute);
       reply_str.replaceAll("%1", "SetMuteResponse");
       server->reply("text/xml", reply_str.c_str());
-    } else {
-      reply_str.replaceAll("%1", "RenderingControl");
-      server->reply("text/xml", reply_str.c_str());
+      return;
     }
+    server->replyError(400, "Invalid Action");
   };
 
   void setupServicesImpl(HttpServer* server) {
     DlnaLogger.log(DlnaLogLevel::Info, "MediaRenderer::setupServices");
 
-  auto transportCB = [](HttpServer* server, const char* requestPath,
-              HttpRequestHandlerLine* hl) {
-    server->reply("text/xml",
-          [](Print& out) { DLNAMediaRendererTransportDescr d; d.printDescr(out); });
-  };
+    auto transportCB = [](HttpServer* server, const char* requestPath,
+                          HttpRequestHandlerLine* hl) {
+      server->reply("text/xml", [](Print& out) {
+        DLNAMediaRendererTransportDescr d;
+        d.printDescr(out);
+      });
+    };
 
-  auto connmgrCB = [](HttpServer* server, const char* requestPath,
-            HttpRequestHandlerLine* hl) {
-    server->reply("text/xml",
-          [](Print& out) { DLNAMediaRendererConnectionMgrDescr d; d.printDescr(out); });
-  };
+    auto connmgrCB = [](HttpServer* server, const char* requestPath,
+                        HttpRequestHandlerLine* hl) {
+      server->reply("text/xml", [](Print& out) {
+        DLNAMediaRendererConnectionMgrDescr d;
+        d.printDescr(out);
+      });
+    };
 
-  auto controlCB = [](HttpServer* server, const char* requestPath,
-            HttpRequestHandlerLine* hl) {
-    server->reply("text/xml",
-          [](Print& out) { DLNAMediaRendererControlDescr d; d.printDescr(out); });
-  };
+    auto controlCB = [](HttpServer* server, const char* requestPath,
+                        HttpRequestHandlerLine* hl) {
+      server->reply("text/xml", [](Print& out) {
+        DLNAMediaRendererControlDescr d;
+        d.printDescr(out);
+      });
+    };
 
     // define services
     DLNAServiceInfo rc, cm, avt;
@@ -424,6 +510,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
               transportCB, "/AVT/control", transportControlCB, "/AVT/event",
               [](HttpServer* server, const char* requestPath,
                  HttpRequestHandlerLine* hl) { server->replyOK(); });
+    avt.subscription_namespace_abbrev = "AVT";
 
     cm.setup(
         "urn:schemas-upnp-org:service:ConnectionManager:1",
@@ -434,18 +521,19 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
         "/CM/event",
         [](HttpServer* server, const char* requestPath,
            HttpRequestHandlerLine* hl) { server->replyOK(); });
+    cm.subscription_namespace_abbrev = "CMS";
 
     rc.setup("urn:schemas-upnp-org:service:RenderingControl:1",
              "urn:upnp-org:serviceId:RenderingControl", "/RC/service.xml",
              controlCB, "/RC/control", renderingControlCB, "/RC/event",
              [](HttpServer* server, const char* requestPath,
                 HttpRequestHandlerLine* hl) { server->replyOK(); });
+    rc.subscription_namespace_abbrev = "RCS";
 
     addService(rc);
     addService(cm);
     addService(avt);
   }
-
 };
 
 }  // namespace tiny_dlna
