@@ -16,7 +16,7 @@ var searchData=
   ['nts_13',['nts',['../classtiny__dlna_1_1NotifyReplyCP.html#af6d4a28af16fe48612e2f8f2de246cbd',1,'tiny_dlna::NotifyReplyCP']]],
   ['nullprint_14',['NullPrint',['../classtiny__dlna_1_1NullPrint.html',1,'tiny_dlna']]],
   ['nullprint_2eh_15',['NullPrint.h',['../NullPrint_8h.html',1,'']]],
-  ['nullstr_16',['nullstr',['../classtiny__dlna_1_1HttpServer.html#a591ab7508102cf1a7a1cebb9755e3ba6',1,'tiny_dlna::HttpServer']]],
-  ['nullstr_17',['nullStr',['../classtiny__dlna_1_1StringRegistry.html#a52ab87efebb43e982ca887094f12b7a5',1,'tiny_dlna::StringRegistry::nullStr(const char *str, const char *alt=&quot;&quot;)'],['../classtiny__dlna_1_1StringRegistry.html#a8ff4828db4c8e6a6d67e7e504dfe0ef7',1,'tiny_dlna::StringRegistry::nullStr(Str &amp;str, const char *empty=&quot;(null)&quot;)']]],
+  ['nullstr_16',['nullStr',['../classtiny__dlna_1_1StringRegistry.html#a52ab87efebb43e982ca887094f12b7a5',1,'tiny_dlna::StringRegistry::nullStr(const char *str, const char *alt=&quot;&quot;)'],['../classtiny__dlna_1_1StringRegistry.html#a8ff4828db4c8e6a6d67e7e504dfe0ef7',1,'tiny_dlna::StringRegistry::nullStr(Str &amp;str, const char *empty=&quot;(null)&quot;)']]],
+  ['nullstr_17',['nullstr',['../classtiny__dlna_1_1HttpServer.html#a591ab7508102cf1a7a1cebb9755e3ba6',1,'tiny_dlna::HttpServer']]],
   ['numberofdecimals_18',['numberOfDecimals',['../classtiny__dlna_1_1StrView.html#a5c0c4b151d66444d0c8296e648400cb9',1,'tiny_dlna::StrView']]]
 ];

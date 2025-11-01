@@ -101,9 +101,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:afe6f1b0d2a28c4f276fa5359419d6b7e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#afe6f1b0d2a28c4f276fa5359419d6b7e">loop</a> ()</td></tr>
 <tr class="memdesc:afe6f1b0d2a28c4f276fa5359419d6b7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">call this method in the Arduino loop as often as possible  <br /></td></tr>
 <tr class="separator:afe6f1b0d2a28c4f276fa5359419d6b7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afb74f258379c13c8dfa06eb76627ae14"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html">DLNAServiceInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#afb74f258379c13c8dfa06eb76627ae14">getService</a> (const char *id)</td></tr>
-<tr class="memdesc:afb74f258379c13c8dfa06eb76627ae14"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provide addess to the service information.  <br /></td></tr>
-<tr class="separator:afb74f258379c13c8dfa06eb76627ae14"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a131ecfa0c63cacc03e313459c98d4530"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html">DLNAServiceInfo</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a131ecfa0c63cacc03e313459c98d4530">getService</a> (const char *id)</td></tr>
+<tr class="memdesc:a131ecfa0c63cacc03e313459c98d4530"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provide addess to the service information.  <br /></td></tr>
+<tr class="separator:a131ecfa0c63cacc03e313459c98d4530"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4cd91c697ce1a616b639f6c59783e118"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html">DLNAServiceInfo</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a4cd91c697ce1a616b639f6c59783e118">getServiceByAbbrev</a> (const char *abbrev)</td></tr>
+<tr class="memdesc:a4cd91c697ce1a616b639f6c59783e118"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get Service by subscription ns abbrev.  <br /></td></tr>
+<tr class="separator:a4cd91c697ce1a616b639f6c59783e118"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a32962d63b5d46f2181c6b69c99409da2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html">DLNADeviceInfo</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a32962d63b5d46f2181c6b69c99409da2">getDevice</a> ()</td></tr>
 <tr class="memdesc:a32962d63b5d46f2181c6b69c99409da2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the device.  <br /></td></tr>
 <tr class="separator:a32962d63b5d46f2181c6b69c99409da2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -373,8 +376,8 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="afb74f258379c13c8dfa06eb76627ae14" name="afb74f258379c13c8dfa06eb76627ae14"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afb74f258379c13c8dfa06eb76627ae14">&#9670;&#160;</a></span>getService()</h2>
+<a id="a131ecfa0c63cacc03e313459c98d4530" name="a131ecfa0c63cacc03e313459c98d4530"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a131ecfa0c63cacc03e313459c98d4530">&#9670;&#160;</a></span>getService()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -383,7 +386,7 @@ Static Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html">DLNAServiceInfo</a> tiny_dlna::DLNADevice::getService </td>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html">DLNAServiceInfo</a> &amp; tiny_dlna::DLNADevice::getService </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>id</em></td><td>)</td>
@@ -398,6 +401,34 @@ Static Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Provide addess to the service information. </p>
+
+</div>
+</div>
+<a id="a4cd91c697ce1a616b639f6c59783e118" name="a4cd91c697ce1a616b639f6c59783e118"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4cd91c697ce1a616b639f6c59783e118">&#9670;&#160;</a></span>getServiceByAbbrev()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html">DLNAServiceInfo</a> &amp; tiny_dlna::DLNADevice::getServiceByAbbrev </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>abbrev</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get Service by subscription ns abbrev. </p>
 
 </div>
 </div>

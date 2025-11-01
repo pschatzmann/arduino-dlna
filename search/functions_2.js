@@ -27,6 +27,6 @@ var searchData=
   ['createnode_24',['createNode',['../classtiny__dlna_1_1List.html#a2fbf0414b947fbbd3e0e090b61255731',1,'tiny_dlna::List']]],
   ['createsearchaction_25',['createSearchAction',['../classtiny__dlna_1_1DLNAControlPointMediaServer.html#a1200b21cb3d88e9e319d546396c405c1',1,'tiny_dlna::DLNAControlPointMediaServer']]],
   ['createsoapxml_26',['createSoapXML',['../classtiny__dlna_1_1DLNAControlPoint.html#a1dcd48540902111e5be3f984196f758c',1,'tiny_dlna::DLNAControlPoint']]],
-  ['createxml_27',['createXML',['../classtiny__dlna_1_1DLNAControlPoint.html#a264865ba29d1d52b546bac2ed3c6d392',1,'tiny_dlna::DLNAControlPoint::createXML()'],['../classtiny__dlna_1_1SubscriptionMgrDevice.html#a615e89874d09c1b4198cac326d93d2d9',1,'tiny_dlna::SubscriptionMgrDevice::createXML()']]],
+  ['createxml_27',['createXML',['../classtiny__dlna_1_1DLNAControlPoint.html#a264865ba29d1d52b546bac2ed3c6d392',1,'tiny_dlna::DLNAControlPoint::createXML()'],['../classtiny__dlna_1_1SubscriptionMgrDevice.html#ab06da7aab5a7cb28bd85178ba53b790a',1,'tiny_dlna::SubscriptionMgrDevice::createXML()']]],
   ['crlf_28',['crlf',['../classtiny__dlna_1_1HttpHeader.html#a60f18f92f996799ea4b6cc6b642bac84',1,'tiny_dlna::HttpHeader::crlf()'],['../classtiny__dlna_1_1HttpServer.html#ab54de9871805f143d7637ccdc2ed27b7',1,'tiny_dlna::HttpServer::crlf()']]]
 ];
