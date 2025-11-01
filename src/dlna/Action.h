@@ -3,24 +3,11 @@
 //#include "dlna/DLNAServiceInfo.h"
 #include "dlna/xml/XMLPrinter.h"
 #include "dlna/StringRegistry.h"
+#include "dlna/DLNACommon.h"
 
 namespace tiny_dlna {
 
 class DLNAServiceInfo;
-
-/// Subscription State
-enum class SubscriptionState {
-  Unsubscribed,
-  Subscribing,
-  Subscribed,
-  Unsubscribing
-};
-
-/// Role to indicate whether a protocolInfo entry is a Source or a Sink
-enum class ProtocolRole { IsSource = 0, IsSink = 1 };
-
-/// Search or Browse
-enum class ContentQueryType { Search, BrowseMetadata, BrowseChildren };
 
 /**
  * @brief DLNA Service: Action Argument
