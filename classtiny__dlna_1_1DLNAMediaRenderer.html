@@ -79,7 +79,6 @@ $(function() {
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-static-methods">Static Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
-<a href="#pro-static-attribs">Static Protected Attributes</a> &#124;
 <a href="classtiny__dlna_1_1DLNAMediaRenderer-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">tiny_dlna::DLNAMediaRenderer Class Reference</div></div>
 </div><!--header-->
@@ -292,9 +291,6 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a72541f2733d1f5c9d5439e8132efdbdc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a72541f2733d1f5c9d5439e8132efdbdc">setupServicesImpl</a> (<a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> *server)</td></tr>
 <tr class="memdesc:a72541f2733d1f5c9d5439e8132efdbdc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup service descriptors and control/event endpoints.  <br /></td></tr>
 <tr class="separator:a72541f2733d1f5c9d5439e8132efdbdc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab1b206755061c96a2378cf016bff4a0a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#ab1b206755061c96a2378cf016bff4a0a">printReplyXML</a> (Print &amp;out, const char *replyName, const char *serviceId)</td></tr>
-<tr class="memdesc:ab1b206755061c96a2378cf016bff4a0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Builds a standard SOAP reply envelope.  <br /></td></tr>
-<tr class="separator:ab1b206755061c96a2378cf016bff4a0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a74bb1fb1a59df2476d5c2faa6c98cc2a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#a74bb1fb1a59df2476d5c2faa6c98cc2a">setupServices</a> (<a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;server, <a class="el" href="classtiny__dlna_1_1IUDPService.html">IUDPService</a> &amp;udp)</td></tr>
 <tr class="memdesc:a74bb1fb1a59df2476d5c2faa6c98cc2a"><td class="mdescLeft">&#160;</td><td class="mdescRight">to be implemented by subclasses  <br /></td></tr>
 <tr class="separator:a74bb1fb1a59df2476d5c2faa6c98cc2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -321,6 +317,9 @@ Static Protected Member Functions</h2></td></tr>
 <tr class="memitem:ab43c15bc99d0865f455b7eaea7439bac"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#ab43c15bc99d0865f455b7eaea7439bac">renderingControlCB</a> (<a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> *server, const char *requestPath, <a class="el" href="classtiny__dlna_1_1HttpRequestHandlerLine.html">HttpRequestHandlerLine</a> *hl)</td></tr>
 <tr class="memdesc:ab43c15bc99d0865f455b7eaea7439bac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rendering control handler.  <br /></td></tr>
 <tr class="separator:ab43c15bc99d0865f455b7eaea7439bac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af555b6ee25aa396138765196e2fb1857"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#af555b6ee25aa396138765196e2fb1857">printReplyXML</a> (Print &amp;out, const char *replyName, const char *serviceId)</td></tr>
+<tr class="memdesc:af555b6ee25aa396138765196e2fb1857"><td class="mdescLeft">&#160;</td><td class="mdescRight">Builds a standard SOAP reply envelope.  <br /></td></tr>
+<tr class="separator:af555b6ee25aa396138765196e2fb1857"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -398,11 +397,6 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:ae19cc05b9c59702f51b111968da655d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e63e76702b8cdf01d688339ccbf29d5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Str.html">Str</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#a5e63e76702b8cdf01d688339ccbf29d5">url_str</a></td></tr>
 <tr class="separator:a5e63e76702b8cdf01d688339ccbf29d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-attribs" name="pro-static-attribs"></a>
-Static Protected Attributes</h2></td></tr>
-<tr class="memitem:ac479f8aa3df2b4d894f5c31a8421e910"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html">DLNAMediaRenderer</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#ac479f8aa3df2b4d894f5c31a8421e910">p_media_renderer</a> = nullptr</td></tr>
-<tr class="separator:ac479f8aa3df2b4d894f5c31a8421e910"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>MediaRenderer DLNA Device. </p>
@@ -1587,8 +1581,8 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ab1b206755061c96a2378cf016bff4a0a" name="ab1b206755061c96a2378cf016bff4a0a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab1b206755061c96a2378cf016bff4a0a">&#9670;&#160;</a></span>printReplyXML()</h2>
+<a id="af555b6ee25aa396138765196e2fb1857" name="af555b6ee25aa396138765196e2fb1857"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af555b6ee25aa396138765196e2fb1857">&#9670;&#160;</a></span>printReplyXML()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1597,7 +1591,7 @@ Static Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int tiny_dlna::DLNAMediaRenderer::printReplyXML </td>
+          <td class="memname">static int tiny_dlna::DLNAMediaRenderer::printReplyXML </td>
           <td>(</td>
           <td class="paramtype">Print &amp;&#160;</td>
           <td class="paramname"><em>out</em>, </td>
@@ -1622,7 +1616,7 @@ Static Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -3127,28 +3121,6 @@ Static Protected Attributes</h2></td></tr>
   </td>
   <td class="mlabels-right">
 <span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ac479f8aa3df2b4d894f5c31a8421e910" name="ac479f8aa3df2b4d894f5c31a8421e910"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac479f8aa3df2b4d894f5c31a8421e910">&#9670;&#160;</a></span>p_media_renderer</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html">DLNAMediaRenderer</a>* tiny_dlna::DLNAMediaRenderer::p_media_renderer = nullptr</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
