@@ -6,7 +6,7 @@
 #include "basic/StrView.h"
 #include "basic/Url.h"
 #include "basic/Vector.h"
-#include "dlna/DLNAContext.h"
+#include "dlna/StringRegistry.h"
 #include "http/Http.h"
 #include "http/Server/HttpRequest.h"
 
@@ -54,8 +54,8 @@ class SubscriptionMgrDevice {
                 uint32_t timeoutSec = 1800) {
     // simple SID generation
     DlnaLogger.log(DlnaLogLevel::Info, "subscribe: %s %s",
-                   DLNAContext::nullStr(serviceId, "(null)"),
-                   DLNAContext::nullStr(callbackUrl, "(null)"));
+                   StringRegistry::nullStr(serviceId, "(null)"),
+                   StringRegistry::nullStr(callbackUrl, "(null)"));
     char buffer[64];
     snprintf(buffer, sizeof(buffer), "uuid:%lu", millis());
     Str sid = buffer;

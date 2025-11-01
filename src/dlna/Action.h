@@ -2,7 +2,7 @@
 #pragma once
 //#include "dlna/DLNAServiceInfo.h"
 #include "dlna/xml/XMLPrinter.h"
-#include "dlna/DLNAContext.h"
+#include "dlna/StringRegistry.h"
 
 namespace tiny_dlna {
 
@@ -97,8 +97,8 @@ class ActionReply {
 
   void logArguments() {
     for (auto& a : arguments) {
-      DlnaLogger.log(DlnaLogLevel::Info, "  -> %s = %s", DLNAContext::nullStr(a.name),
-                     DLNAContext::nullStr(a.value.c_str()));
+      DlnaLogger.log(DlnaLogLevel::Info, "  -> %s = %s", StringRegistry::nullStr(a.name),
+                     StringRegistry::nullStr(a.value.c_str()));
     }
   }
 
@@ -144,7 +144,7 @@ class ActionRequest {
       if (a.name != nullptr) {
         StrView nm(a.name);
         if (nm.endsWithIgnoreCase(name)) {
-          return DLNAContext::nullStr(a.value.c_str());
+          return StringRegistry::nullStr(a.value.c_str());
         }
       }
     }

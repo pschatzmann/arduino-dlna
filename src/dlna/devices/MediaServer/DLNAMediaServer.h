@@ -6,7 +6,7 @@
 #include "basic/Str.h"
 #include "basic/StrPrint.h"
 #include "dlna/Action.h"
-#include "dlna/DLNAContext.h"
+#include "dlna/StringRegistry.h"
 #include "dlna/devices/DLNADevice.h"
 #include "dlna/devices/MediaServer/MediaItem.h"
 #include "dlna/xml/XMLParserPrint.h"
@@ -427,7 +427,7 @@ class DLNAMediaServer : public DLNADeviceInfo {
                         "urn:schemas-upnp-org:service:ContentDirectory:1");
 
     chunk.print("<SearchCaps>");
-    chunk.print(DLNAContext::nullStr(g_search_capabiities));
+    chunk.print(StringRegistry::nullStr(g_search_capabiities));
     chunk.println("</SearchCaps>");
 
     actionResponseEnd(chunk, "GetSearchCapabilitiesResponse");
@@ -448,7 +448,7 @@ class DLNAMediaServer : public DLNADeviceInfo {
                         "urn:schemas-upnp-org:service:ContentDirectory:1");
 
     chunk.print("<SortCaps>");
-    chunk.print(DLNAContext::nullStr(g_sort_capabilities));
+    chunk.print(StringRegistry::nullStr(g_sort_capabilities));
     chunk.println("</SortCaps>");
 
     actionResponseEnd(chunk, "GetSortCapabilitiesResponse");
@@ -492,11 +492,11 @@ class DLNAMediaServer : public DLNADeviceInfo {
                         "urn:schemas-upnp-org:service:ConnectionManager:1");
 
     chunk.print("<Source>");
-    chunk.print(DLNAContext::nullStr(sourceProto));
+    chunk.print(StringRegistry::nullStr(sourceProto));
     chunk.println("</Source>");
 
     chunk.print("<Sink>");
-    chunk.print(DLNAContext::nullStr(sinkProto));
+    chunk.print(StringRegistry::nullStr(sinkProto));
     chunk.println("</Sink>");
 
     actionResponseEnd(chunk, "GetProtocolInfoResponse");
@@ -551,7 +551,7 @@ class DLNAMediaServer : public DLNADeviceInfo {
 
     // ProtocolInfo (empty by default)
     chunk.print("<ProtocolInfo>");
-    chunk.print(DLNAContext::nullStr(sourceProto));
+    chunk.print(StringRegistry::nullStr(sourceProto));
     chunk.println("</ProtocolInfo>");
 
     // PeerConnectionManager and PeerConnectionID
@@ -672,7 +672,7 @@ class DLNAMediaServer : public DLNADeviceInfo {
 
         // title
         chunk_writer.print("&lt;dc:title&gt;");
-        chunk_writer.print(DLNAContext::nullStr(item.title));
+        chunk_writer.print(StringRegistry::nullStr(item.title));
         chunk_writer.print("&lt;/dc:title&gt;\r\n");
         if (mediaItemClassStr != nullptr) {
           chunk_writer.printf("&lt;upnp:class&gt;%s&lt;/upnp:class&gt;\r\n",
@@ -686,11 +686,11 @@ class DLNAMediaServer : public DLNADeviceInfo {
           if (!StrView(item.mimeType).isEmpty()) {
             chunk_writer.printf("&lt;res protocolInfo=\"http-get:*:%s:*\"&gt;",
                                 item.mimeType);
-            chunk_writer.print(DLNAContext::nullStr(url.c_str()));
+            chunk_writer.print(StringRegistry::nullStr(url.c_str()));
             chunk_writer.print("&lt;/res&gt;\r\n");
           } else {
             chunk_writer.print("&lt;res&gt;");
-            chunk_writer.print(DLNAContext::nullStr(url.c_str()));
+            chunk_writer.print(StringRegistry::nullStr(url.c_str()));
             chunk_writer.print("&lt;/res&gt;\r\n");
           }
         }

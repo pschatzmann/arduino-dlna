@@ -6,10 +6,10 @@
 #include "DLNAControlPointRequestParser.h"
 #include "basic/StrPrint.h"
 #include "basic/Url.h"
-#include "dlna/DLNAContext.h"
 #include "dlna/DLNADeviceInfo.h"
 #include "dlna/Schedule.h"
 #include "dlna/Scheduler.h"
+#include "dlna/StringRegistry.h"
 #include "dlna/clients/SubscriptionMgrControlPoint.h"
 #include "dlna/devices/DLNADevice.h"
 #include "dlna/xml/XMLDeviceParser.h"
@@ -674,7 +674,7 @@ class DLNAControlPoint {
   ActionReply& postAction(ActionRequest& action,
                           XMLCallback xmlProcessor = nullptr) {
     DlnaLogger.log(DlnaLogLevel::Debug, "DLNAControlPointMgr::postAction: %s",
-                   DLNAContext::nullStr(action.action, "(null)"));
+                   StringRegistry::nullStr(action.action, "(null)"));
     reply.clear();
     DLNAServiceInfo& service = *(action.p_service);
     DLNADeviceInfo& device = getDevice(service);
@@ -697,8 +697,8 @@ class DLNAControlPoint {
     // Log service and base to help debug malformed control URLs
     DlnaLogger.log(DlnaLogLevel::Info,
                    "Service control_url: %s, device base: %s",
-                   DLNAContext::nullStr(service.control_url),
-                   DLNAContext::nullStr(device.getBaseURL()));
+                   StringRegistry::nullStr(service.control_url),
+                   StringRegistry::nullStr(device.getBaseURL()));
     Url post_url{getUrl(device, service.control_url, url_buffer, 200)};
     DlnaLogger.log(DlnaLogLevel::Info, "POST URL computed: %s", post_url.url());
 
@@ -744,7 +744,7 @@ class DLNAControlPoint {
       p_http->stop();
       reply.setValid(false);
       DlnaLogger.log(DlnaLogLevel::Error, "Action '%s' failed with HTTP rc %d",
-                     DLNAContext::nullStr(soapAction), rc);
+                     StringRegistry::nullStr(soapAction), rc);
       return reply;
     }
 
@@ -785,13 +785,13 @@ class DLNAControlPoint {
             }
 
             DlnaLogger.log(DlnaLogLevel::Info, "callback: '%s': %s (%s)",
-                           DLNAContext::nullStr(outNodeName),
-                           DLNAContext::nullStr(outText),
-                           DLNAContext::nullStr(outAttributes));
+                           StringRegistry::nullStr(outNodeName),
+                           StringRegistry::nullStr(outText),
+                           StringRegistry::nullStr(outAttributes));
             if (result_callback) {
-              result_callback(DLNAContext::nullStr(outNodeName, ""),
-                              DLNAContext::nullStr(outText, ""),
-                              DLNAContext::nullStr(outAttributes, ""));
+              result_callback(StringRegistry::nullStr(outNodeName, ""),
+                              StringRegistry::nullStr(outText, ""),
+                              StringRegistry::nullStr(outAttributes, ""));
             }
           }
         }
