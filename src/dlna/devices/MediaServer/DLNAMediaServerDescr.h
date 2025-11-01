@@ -17,18 +17,17 @@ namespace tiny_dlna {
  * The class is stateless and intended to be constructed on-demand by
  * request handlers.
  */
-class DLNAMediaServerConnectionMgrDescr {
+class DLNAMediaServerConnectionMgrDescr : public DLNADescr {
  public:
-    /**
-     * @brief Emit ConnectionManager SCPD XML
-     * @param out Print target to write XML to
-     * @return number of bytes written
-     *
-     * Use the returned size to set Content-Length when streaming the
-     * response without creating a temporary buffer.
-     */
-    size_t printDescr(Print& out) {
-    using tiny_dlna::XMLPrinter;
+  /**
+   * @brief Emit ConnectionManager SCPD XML
+   * @param out Print target to write XML to
+   * @return number of bytes written
+   *
+   * Use the returned size to set Content-Length when streaming the
+   * response without creating a temporary buffer.
+   */
+  size_t printDescr(Print& out) override {
     XMLPrinter xml(out);
     size_t result = 0;
     result += xml.printXMLHeader();
@@ -158,18 +157,17 @@ class DLNAMediaServerConnectionMgrDescr {
  *
  * The class does not store runtime state and is safe to create per-call.
  */
-class DLNAMediaServerContentDirectoryDescr {
+class DLNAMediaServerContentDirectoryDescr : public DLNADescr {
  public:
-    /**
-     * @brief Emit ContentDirectory SCPD XML
-     * @param out Print target to write XML to
-     * @return number of bytes written
-     *
-     * The returned byte count can be used to compute a Content-Length
-     * header before streaming the response.
-     */
-    size_t printDescr(Print& out) {
-    using tiny_dlna::XMLPrinter;
+  /**
+   * @brief Emit ContentDirectory SCPD XML
+   * @param out Print target to write XML to
+   * @return number of bytes written
+   *
+   * The returned byte count can be used to compute a Content-Length
+   * header before streaming the response.
+   */
+  size_t printDescr(Print& out) override {
     XMLPrinter xml(out);
     size_t result = 0;
     result += xml.printXMLHeader();
