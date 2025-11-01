@@ -679,10 +679,6 @@ class DLNAControlPoint {
     DLNAServiceInfo& service = *(action.p_service);
     DLNADeviceInfo& device = getDevice(service);
 
-    // Build request body
-    StrPrint requestBody;
-    buildActionBody(action, requestBody);
-
     // create SOAPACTION header value
     char act[200];
     StrView action_str{act, 200};
@@ -705,41 +701,35 @@ class DLNAControlPoint {
     // send HTTP POST and collect/handle response. If the caller provided an
     // httpProcessor we forward it so they can process the raw HTTP reply
     // (and avoid the library's default XML parsing) before consumption.
-    return processActionHttpPost(post_url, requestBody, action_str.c_str(),
+    return processActionHttpPost(action, post_url, action_str.c_str(),
                                  xmlProcessor);
   }
 
   /// Build the SOAP XML request body for the action into `out`
-  void buildActionBody(ActionRequest& action, StrPrint& out) {
-    DlnaLogger.log(DlnaLogLevel::Debug, "DLNAControlPointMgr::buildActionBody");
+  size_t createSoapXML(ActionRequest& action, Print& out) {
+    DlnaLogger.log(DlnaLogLevel::Debug, "DLNAControlPointMgr::createSoapXML");
     xml_printer.setOutput(out);
-    createXML(action);
+    return createXML(action);
   }
 
-  // Send an HTTP POST for the given URL and request body. On success the
-  /// response body is written into `responseOut` (an XMLParserPrint). Returns
-  /// the HTTP rc. If `httpProcessor` is provided it will be invoked with the
-  /// live `DLNAHttpRequest` instance so callers can implement custom
-  /// processing (for example to stream/parse the XML themselves). When an
-  /// httpProcessor is supplied the library's default XML parsing is skipped.
-  ActionReply& processActionHttpPost(Url& post_url, StrPrint& requestBody,
+  /// Processes an HTTP POST request for the given action and URL.
+  ActionReply& processActionHttpPost(ActionRequest& action, Url& post_url,
                                      const char* soapAction,
                                      XMLCallback xmlProcessor = nullptr) {
     DlnaLogger.log(DlnaLogLevel::Debug,
                    "DLNAControlPointMgr::processActionHttpPost");
-    XMLParserPrint xml_parser;
-    uint8_t buffer[XML_PARSER_BUFFER_SIZE];
-    Str outNodeName;
-    Vector<Str> outPath;
-    Str outText;
-    Str outAttributes;
-    xml_parser.setExpandEncoded(true);
 
-    // set header and post
+    NullPrint np;
+    size_t xmlLen = createSoapXML(action, np);
+    // dynamically create and write xml  
+    auto printXML = [this, &action, &xmlLen](Print& out) {
+      createSoapXML(action, out);
+    };
     p_http->stop();
     p_http->request().put("SOAPACTION", soapAction);
-    int rc = p_http->post(post_url, "text/xml", requestBody.c_str(),
-                          requestBody.length());
+    int rc = p_http->post(post_url, xmlLen, printXML, "text/xml");
+
+    // abort on HTTP error
     if (rc != 200) {
       p_http->stop();
       reply.setValid(false);
@@ -761,10 +751,28 @@ class DLNAControlPoint {
     }
 
     // Default: parse response incrementally and populate reply arguments
+    parseResult();
+    return reply;
+  }
+
+  /**
+   * @brief Parses the XML response from the HTTP client and populates reply
+   * arguments.
+   *
+   * @param xml_parser XMLParserPrint instance for parsing
+   * @param buffer Temporary buffer for reading client data
+   */
+  void parseResult() {
+    XMLParserPrint xml_parser;
+    xml_parser.setExpandEncoded(true);
+    Str outNodeName;
+    Vector<Str> outPath;
+    Str outText;
+    Str outAttributes;
+    uint8_t buffer[XML_PARSER_BUFFER_SIZE];
     while (p_http->client()->available()) {
       int len = p_http->client()->read(buffer, XML_PARSER_BUFFER_SIZE);
       if (len > 0) {
-        // Serial.write(buffer, len);
         xml_parser.write(buffer, len);
         while (xml_parser.parse(outNodeName, outPath, outText, outAttributes)) {
           Argument arg;
@@ -774,7 +782,6 @@ class DLNAControlPoint {
           // MediaServer helper) can parse returned media items.
           if (!(outText.isEmpty() && outAttributes.isEmpty()) ||
               outNodeName.equals("Result")) {
-            /// xml might be escaped
             unEscapeStr(outAttributes);
             unEscapeStr(outText);
 
@@ -798,7 +805,6 @@ class DLNAControlPoint {
       }
     }
     xml_parser.end();
-    return reply;
   }
 
   void unEscapeStr(Str& str) {
