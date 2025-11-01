@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['name_0',['name',['../classtiny__dlna_1_1PostSubscribe.html#a263ff31cdc9b02b8d00b0891045d7afa',1,'tiny_dlna::PostSubscribe::name()'],['../classtiny__dlna_1_1PostByeSchedule.html#aebf8dca009f1d9387379402f42c62c64',1,'tiny_dlna::PostByeSchedule::name()'],['../classtiny__dlna_1_1PostAliveSchedule.html#a7a0963d919fe5de31fce47d0310dc660',1,'tiny_dlna::PostAliveSchedule::name()'],['../classtiny__dlna_1_1NotifyReplyCP.html#aebe3d7a569626a84abc6caec9403f7ce',1,'tiny_dlna::NotifyReplyCP::name()'],['../classtiny__dlna_1_1MSearchReplyCP.html#a28cc56a3093854e23073ac6978671655',1,'tiny_dlna::MSearchReplyCP::name()'],['../classtiny__dlna_1_1Argument.html#ab0ef62d2267d3751731d3b43379f84ca',1,'tiny_dlna::Argument::name()'],['../structtiny__dlna_1_1Schedule.html#a59112af6f9007a24784fe3022b865608',1,'tiny_dlna::Schedule::name()'],['../classtiny__dlna_1_1MSearchSchedule.html#aa697dec451cb06b4d85360842e788fff',1,'tiny_dlna::MSearchSchedule::name()'],['../classtiny__dlna_1_1MSearchReplySchedule.html#aa7d5660f8966a0c25a4f33d0d4b610b7',1,'tiny_dlna::MSearchReplySchedule::name()']]],
+  ['name_0',['name',['../classtiny__dlna_1_1PostSubscribe.html#a263ff31cdc9b02b8d00b0891045d7afa',1,'tiny_dlna::PostSubscribe::name()'],['../classtiny__dlna_1_1Argument.html#ab0ef62d2267d3751731d3b43379f84ca',1,'tiny_dlna::Argument::name()'],['../structtiny__dlna_1_1Schedule.html#a59112af6f9007a24784fe3022b865608',1,'tiny_dlna::Schedule::name()'],['../classtiny__dlna_1_1MSearchSchedule.html#aa697dec451cb06b4d85360842e788fff',1,'tiny_dlna::MSearchSchedule::name()'],['../classtiny__dlna_1_1MSearchReplySchedule.html#aa7d5660f8966a0c25a4f33d0d4b610b7',1,'tiny_dlna::MSearchReplySchedule::name()'],['../classtiny__dlna_1_1MSearchReplyCP.html#a28cc56a3093854e23073ac6978671655',1,'tiny_dlna::MSearchReplyCP::name()'],['../classtiny__dlna_1_1NotifyReplyCP.html#aebe3d7a569626a84abc6caec9403f7ce',1,'tiny_dlna::NotifyReplyCP::name()'],['../classtiny__dlna_1_1PostAliveSchedule.html#a7a0963d919fe5de31fce47d0310dc660',1,'tiny_dlna::PostAliveSchedule::name()'],['../classtiny__dlna_1_1PostByeSchedule.html#aebf8dca009f1d9387379402f42c62c64',1,'tiny_dlna::PostByeSchedule::name()']]],
   ['newarray_1',['newArray',['../classtiny__dlna_1_1Vector.html#a5f5d3d4715f0bf3d496b7efcb14b8ea9',1,'tiny_dlna::Vector']]],
   ['next_2',['next',['../structtiny__dlna_1_1List_1_1Node.html#a60c74f6ed9b2fe029e6b03335b6705dc',1,'tiny_dlna::List::Node']]],
   ['no_5fconnect_5fdelay_3',['no_connect_delay',['../classtiny__dlna_1_1HttpServer.html#ad2e1c3274f2f2a70177c8506e1ab6752',1,'tiny_dlna::HttpServer']]],
@@ -9,17 +9,14 @@ var searchData=
   ['node_6',['node',['../classtiny__dlna_1_1List_1_1Iterator.html#a7fc691985dddc548f746fff028eb67e0',1,'tiny_dlna::List::Iterator::node()'],['../structtiny__dlna_1_1XMLNode.html#a642ef4a437ff8167f5848cedea8b19cd',1,'tiny_dlna::XMLNode::node()']]],
   ['node_7',['Node',['../structtiny__dlna_1_1List_1_1Node.html',1,'tiny_dlna::List&lt; T &gt;::Node'],['../structtiny__dlna_1_1QueueLockFree_1_1Node.html',1,'tiny_dlna::QueueLockFree&lt; T &gt;::Node']]],
   ['node_5fname_8',['node_name',['../classtiny__dlna_1_1XMLParser.html#a43ebbd2f48238f3edbf923a18c1f6952',1,'tiny_dlna::XMLParser']]],
-  ['notification_9',['Notification',['../classtiny__dlna_1_1Notification.html',1,'tiny_dlna']]],
-  ['notification_2eh_10',['Notification.h',['../Notification_8h.html',1,'']]],
-  ['notification_5furl_11',['notification_url',['../classtiny__dlna_1_1Notification.html#ae725934e9c1593e20ab2de8a25429bca',1,'tiny_dlna::Notification']]],
-  ['notificationcallback_12',['NotificationCallback',['../classtiny__dlna_1_1DLNAControlPointMediaRenderer.html#a3120f67002c464497e2134d7da2869f0',1,'tiny_dlna::DLNAControlPointMediaRenderer::NotificationCallback()'],['../classtiny__dlna_1_1DLNAControlPointMediaServer.html#a5748d533f468c2e1f233421f437b3876',1,'tiny_dlna::DLNAControlPointMediaServer::NotificationCallback()']]],
-  ['notifyhandler_13',['notifyHandler',['../classtiny__dlna_1_1SubscriptionMgrControlPoint.html#a7d0546fdc1e5234f5a51b3c7c42076ac',1,'tiny_dlna::SubscriptionMgrControlPoint']]],
-  ['notifyreplycp_14',['NotifyReplyCP',['../classtiny__dlna_1_1NotifyReplyCP.html',1,'tiny_dlna']]],
-  ['ns_15',['ns',['../classtiny__dlna_1_1DLNADeviceInfo.html#a852f7a7baf10ff4d8e2d1953a5783901',1,'tiny_dlna::DLNADeviceInfo']]],
-  ['nts_16',['nts',['../classtiny__dlna_1_1NotifyReplyCP.html#af6d4a28af16fe48612e2f8f2de246cbd',1,'tiny_dlna::NotifyReplyCP']]],
-  ['nullprint_17',['NullPrint',['../classtiny__dlna_1_1NullPrint.html',1,'tiny_dlna']]],
-  ['nullprint_2eh_18',['NullPrint.h',['../NullPrint_8h.html',1,'']]],
-  ['nullstr_19',['nullstr',['../classtiny__dlna_1_1HttpServer.html#a591ab7508102cf1a7a1cebb9755e3ba6',1,'tiny_dlna::HttpServer']]],
-  ['nullstr_20',['nullStr',['../classtiny__dlna_1_1DLNAContext.html#aaec90b80f9535fdd0cca63944a45c160',1,'tiny_dlna::DLNAContext::nullStr(const char *str, const char *alt=&quot;&quot;)'],['../classtiny__dlna_1_1DLNAContext.html#aa95e7ea3ece963f374c8cc5967450eaa',1,'tiny_dlna::DLNAContext::nullStr(Str &amp;str, const char *empty=&quot;(null)&quot;)']]],
-  ['numberofdecimals_21',['numberOfDecimals',['../classtiny__dlna_1_1StrView.html#a5c0c4b151d66444d0c8296e648400cb9',1,'tiny_dlna::StrView']]]
+  ['notificationcallback_9',['NotificationCallback',['../classtiny__dlna_1_1DLNAControlPointMediaRenderer.html#a3120f67002c464497e2134d7da2869f0',1,'tiny_dlna::DLNAControlPointMediaRenderer::NotificationCallback()'],['../classtiny__dlna_1_1DLNAControlPointMediaServer.html#a5748d533f468c2e1f233421f437b3876',1,'tiny_dlna::DLNAControlPointMediaServer::NotificationCallback()']]],
+  ['notifyhandler_10',['notifyHandler',['../classtiny__dlna_1_1SubscriptionMgrControlPoint.html#a7d0546fdc1e5234f5a51b3c7c42076ac',1,'tiny_dlna::SubscriptionMgrControlPoint']]],
+  ['notifyreplycp_11',['NotifyReplyCP',['../classtiny__dlna_1_1NotifyReplyCP.html',1,'tiny_dlna']]],
+  ['ns_12',['ns',['../classtiny__dlna_1_1DLNADeviceInfo.html#a852f7a7baf10ff4d8e2d1953a5783901',1,'tiny_dlna::DLNADeviceInfo']]],
+  ['nts_13',['nts',['../classtiny__dlna_1_1NotifyReplyCP.html#af6d4a28af16fe48612e2f8f2de246cbd',1,'tiny_dlna::NotifyReplyCP']]],
+  ['nullprint_14',['NullPrint',['../classtiny__dlna_1_1NullPrint.html',1,'tiny_dlna']]],
+  ['nullprint_2eh_15',['NullPrint.h',['../NullPrint_8h.html',1,'']]],
+  ['nullstr_16',['nullstr',['../classtiny__dlna_1_1HttpServer.html#a591ab7508102cf1a7a1cebb9755e3ba6',1,'tiny_dlna::HttpServer']]],
+  ['nullstr_17',['nullStr',['../classtiny__dlna_1_1DLNAContext.html#aaec90b80f9535fdd0cca63944a45c160',1,'tiny_dlna::DLNAContext::nullStr(const char *str, const char *alt=&quot;&quot;)'],['../classtiny__dlna_1_1DLNAContext.html#aa95e7ea3ece963f374c8cc5967450eaa',1,'tiny_dlna::DLNAContext::nullStr(Str &amp;str, const char *empty=&quot;(null)&quot;)']]],
+  ['numberofdecimals_18',['numberOfDecimals',['../classtiny__dlna_1_1StrView.html#a5c0c4b151d66444d0c8296e648400cb9',1,'tiny_dlna::StrView']]]
 ];

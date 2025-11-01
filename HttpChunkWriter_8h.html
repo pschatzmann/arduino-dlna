@@ -79,30 +79,34 @@ $(function() {
   <div class="headertitle"><div class="title">HttpChunkWriter.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;Print.h&quot;</code><br />
-<code>#include &quot;Client.h&quot;</code><br />
-<code>#include &quot;<a class="el" href="Logger_8h_source.html">basic/Logger.h</a>&quot;</code><br />
-<code>#include &lt;cstdarg&gt;</code><br />
+<div class="textblock"><code>#include &lt;cstdarg&gt;</code><br />
+<code>#include &lt;cstdint&gt;</code><br />
 <code>#include &lt;cstdio&gt;</code><br />
 <code>#include &lt;cstring&gt;</code><br />
-<code>#include &lt;cstdint&gt;</code><br />
+<code>#include &quot;Client.h&quot;</code><br />
+<code>#include &quot;Print.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="Logger_8h_source.html">basic/Logger.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="StrView_8h_source.html">basic/StrView.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for HttpChunkWriter.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="HttpChunkWriter_8h__incl.png" border="0" usemap="#asrc_2http_2Server_2HttpChunkWriter_8h" alt=""/></div>
 <map name="asrc_2http_2Server_2HttpChunkWriter_8h" id="asrc_2http_2Server_2HttpChunkWriter_8h">
-<area shape="rect" title=" " alt="" coords="269,5,459,45"/>
-<area shape="rect" title=" " alt="" coords="5,93,69,119"/>
-<area shape="rect" title=" " alt="" coords="93,93,165,119"/>
-<area shape="rect" href="Logger_8h.html" title=" " alt="" coords="189,93,304,119"/>
-<area shape="rect" title=" " alt="" coords="329,93,399,119"/>
-<area shape="rect" title=" " alt="" coords="424,93,485,119"/>
-<area shape="rect" title=" " alt="" coords="509,93,576,119"/>
-<area shape="rect" title=" " alt="" coords="600,93,667,119"/>
-<area shape="rect" title=" " alt="" coords="68,167,143,192"/>
-<area shape="rect" title=" " alt="" coords="167,167,233,192"/>
-<area shape="rect" title=" " alt="" coords="258,167,329,192"/>
-<area shape="rect" title=" " alt="" coords="353,167,437,192"/>
+<area shape="rect" title=" " alt="" coords="261,5,452,45"/>
+<area shape="rect" title=" " alt="" coords="5,93,76,119"/>
+<area shape="rect" title=" " alt="" coords="101,93,167,119"/>
+<area shape="rect" title=" " alt="" coords="191,93,253,119"/>
+<area shape="rect" title=" " alt="" coords="277,93,343,119"/>
+<area shape="rect" title=" " alt="" coords="367,93,439,119"/>
+<area shape="rect" title=" " alt="" coords="463,93,527,119"/>
+<area shape="rect" href="Logger_8h.html" title=" " alt="" coords="551,93,666,119"/>
+<area shape="rect" href="StrView_8h.html" title=" " alt="" coords="691,93,812,119"/>
+<area shape="rect" title=" " alt="" coords="391,167,466,192"/>
+<area shape="rect" title=" " alt="" coords="599,167,666,192"/>
+<area shape="rect" title=" " alt="" coords="691,167,761,192"/>
+<area shape="rect" title=" " alt="" coords="491,167,575,192"/>
+<area shape="rect" title=" " alt="" coords="785,167,883,192"/>
+<area shape="rect" title=" " alt="" coords="907,167,982,192"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -110,29 +114,29 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="HttpChunkWriter_8h__dep__incl.png" border="0" usemap="#asrc_2http_2Server_2HttpChunkWriter_8hdep" alt=""/></div>
 <map name="asrc_2http_2Server_2HttpChunkWriter_8hdep" id="asrc_2http_2Server_2HttpChunkWriter_8hdep">
-<area shape="rect" title=" " alt="" coords="1142,5,1333,45"/>
-<area shape="rect" href="DLNAControlPointMediaRenderer_8h.html" title=" " alt="" coords="1118,915,1325,955"/>
-<area shape="rect" href="HttpRequest_8h.html" title=" " alt="" coords="999,101,1214,126"/>
-<area shape="rect" href="HttpServer_8h.html" title=" " alt="" coords="816,262,1019,287"/>
-<area shape="rect" href="HttpStreamCopy_8h.html" title=" " alt="" coords="1406,93,1602,133"/>
-<area shape="rect" href="DLNA_8h.html" title=" " alt="" coords="543,1003,636,1028"/>
-<area shape="rect" href="SubscriptionMgrDevice_8h.html" title=" " alt="" coords="937,489,1119,529"/>
-<area shape="rect" href="XMLProtocolInfoParser_8h.html" title=" " alt="" coords="1144,255,1331,295"/>
-<area shape="rect" href="Http_8h.html" title=" " alt="" coords="907,343,1021,368"/>
-<area shape="rect" href="HttpTunnel_8h.html" title=" " alt="" coords="816,181,1019,207"/>
-<area shape="rect" href="DLNADevice_8h.html" title=" " alt="" coords="400,665,571,691"/>
-<area shape="rect" href="SubscriptionMgrControlPoint_8h.html" title=" " alt="" coords="1034,577,1217,617"/>
-<area shape="rect" href="DLNAControlPoint_8h.html" title=" " alt="" coords="801,834,1007,859"/>
-<area shape="rect" href="DLNAMediaRenderer_8h.html" title=" " alt="" coords="270,827,501,867"/>
-<area shape="rect" href="DLNAMediaServer_8h.html" title=" " alt="" coords="5,739,219,779"/>
-<area shape="rect" href="DLNADeviceRequestParser_8h.html" title=" " alt="" coords="484,915,695,955"/>
-<area shape="rect" href="DLNAControlPointMediaServer_8h.html" title=" " alt="" coords="791,915,998,955"/>
-<area shape="rect" href="DLNAServiceInfo_8h.html" title=" " alt="" coords="735,416,934,441"/>
-<area shape="rect" href="DLNADeviceInfo_8h.html" title=" " alt="" coords="717,497,912,522"/>
-<area shape="rect" href="Schedule_8h.html" title=" " alt="" coords="625,585,773,610"/>
-<area shape="rect" href="Scheduler_8h.html" title=" " alt="" coords="720,665,872,691"/>
-<area shape="rect" href="XMLDeviceParser_8h.html" title=" " alt="" coords="947,665,1178,691"/>
-<area shape="rect" href="DLNAControlPointRequestParser_8h.html" title=" " alt="" coords="675,739,869,779"/>
+<area shape="rect" title=" " alt="" coords="983,5,1174,45"/>
+<area shape="rect" href="DLNAControlPointMediaRenderer_8h.html" title=" " alt="" coords="57,915,263,955"/>
+<area shape="rect" href="HttpRequest_8h.html" title=" " alt="" coords="877,101,1091,126"/>
+<area shape="rect" href="HttpServer_8h.html" title=" " alt="" coords="883,262,1085,287"/>
+<area shape="rect" href="HttpStreamCopy_8h.html" title=" " alt="" coords="1211,93,1407,133"/>
+<area shape="rect" href="DLNA_8h.html" title=" " alt="" coords="556,1179,649,1204"/>
+<area shape="rect" href="SubscriptionMgrDevice_8h.html" title=" " alt="" coords="923,489,1133,529"/>
+<area shape="rect" href="XMLProtocolInfoParser_8h.html" title=" " alt="" coords="396,255,583,295"/>
+<area shape="rect" href="Http_8h.html" title=" " alt="" coords="808,343,923,368"/>
+<area shape="rect" href="HttpTunnel_8h.html" title=" " alt="" coords="883,181,1085,207"/>
+<area shape="rect" href="SubscriptionMgrControlPoint_8h.html" title=" " alt="" coords="779,577,983,617"/>
+<area shape="rect" href="DLNADevice_8h.html" title=" " alt="" coords="705,1010,929,1035"/>
+<area shape="rect" href="DLNAControlPoint_8h.html" title=" " alt="" coords="466,827,673,867"/>
+<area shape="rect" href="DLNAControlPointMediaServer_8h.html" title=" " alt="" coords="474,1003,681,1043"/>
+<area shape="rect" href="DLNADeviceRequestParser_8h.html" title=" " alt="" coords="442,915,654,955"/>
+<area shape="rect" href="DLNAMediaRenderer_8h.html" title=" " alt="" coords="666,1091,897,1131"/>
+<area shape="rect" href="DLNAMediaServer_8h.html" title=" " alt="" coords="921,1091,1135,1131"/>
+<area shape="rect" href="DLNAServiceInfo_8h.html" title=" " alt="" coords="506,416,705,441"/>
+<area shape="rect" href="DLNADeviceInfo_8h.html" title=" " alt="" coords="508,497,703,522"/>
+<area shape="rect" href="Schedule_8h.html" title=" " alt="" coords="454,585,602,610"/>
+<area shape="rect" href="Scheduler_8h.html" title=" " alt="" coords="349,665,501,691"/>
+<area shape="rect" href="XMLDeviceParser_8h.html" title=" " alt="" coords="94,665,325,691"/>
+<area shape="rect" href="DLNAControlPointRequestParser_8h.html" title=" " alt="" coords="345,739,551,779"/>
 </map>
 </div>
 </div>
