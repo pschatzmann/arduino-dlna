@@ -194,11 +194,15 @@ Protected Member Functions</h2></td></tr>
 <tr class="separator:ac8cfb03cf8c994c0ceefee2d498b4705"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab800ec2f135fa2206b4565078b0762f1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1ActionReply.html">ActionReply</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#ab800ec2f135fa2206b4565078b0762f1">postAction</a> (<a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;action, <a class="el" href="namespacetiny__dlna.html#af5e7d998a1158b5b3b2627df5ec61a80">XMLCallback</a> xmlProcessor=nullptr)</td></tr>
 <tr class="separator:ab800ec2f135fa2206b4565078b0762f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac30ba98e9b47c5330ce13c9683acb7d2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#ac30ba98e9b47c5330ce13c9683acb7d2">buildActionBody</a> (<a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;action, <a class="el" href="classtiny__dlna_1_1StrPrint.html">StrPrint</a> &amp;out)</td></tr>
-<tr class="memdesc:ac30ba98e9b47c5330ce13c9683acb7d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Build the SOAP XML request body for the action into <code>out</code>  <br /></td></tr>
-<tr class="separator:ac30ba98e9b47c5330ce13c9683acb7d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adc894516579999e3cc0c4e08ad00f676"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1ActionReply.html">ActionReply</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#adc894516579999e3cc0c4e08ad00f676">processActionHttpPost</a> (<a class="el" href="classtiny__dlna_1_1Url.html">Url</a> &amp;post_url, <a class="el" href="classtiny__dlna_1_1StrPrint.html">StrPrint</a> &amp;requestBody, const char *soapAction, <a class="el" href="namespacetiny__dlna.html#af5e7d998a1158b5b3b2627df5ec61a80">XMLCallback</a> xmlProcessor=nullptr)</td></tr>
-<tr class="separator:adc894516579999e3cc0c4e08ad00f676"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1dcd48540902111e5be3f984196f758c"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a1dcd48540902111e5be3f984196f758c">createSoapXML</a> (<a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;action, Print &amp;out)</td></tr>
+<tr class="memdesc:a1dcd48540902111e5be3f984196f758c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Build the SOAP XML request body for the action into <code>out</code>  <br /></td></tr>
+<tr class="separator:a1dcd48540902111e5be3f984196f758c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a881299a8b80774488af3efbbfa91dcc7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1ActionReply.html">ActionReply</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a881299a8b80774488af3efbbfa91dcc7">processActionHttpPost</a> (<a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;action, <a class="el" href="classtiny__dlna_1_1Url.html">Url</a> &amp;post_url, const char *soapAction, <a class="el" href="namespacetiny__dlna.html#af5e7d998a1158b5b3b2627df5ec61a80">XMLCallback</a> xmlProcessor=nullptr)</td></tr>
+<tr class="memdesc:a881299a8b80774488af3efbbfa91dcc7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Processes an HTTP POST request for the given action and URL.  <br /></td></tr>
+<tr class="separator:a881299a8b80774488af3efbbfa91dcc7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a712d867ff6d9c93deea5b7e05f725618"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a712d867ff6d9c93deea5b7e05f725618">parseResult</a> ()</td></tr>
+<tr class="memdesc:a712d867ff6d9c93deea5b7e05f725618"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parses the XML response from the HTTP client and populates reply arguments.  <br /></td></tr>
+<tr class="separator:a712d867ff6d9c93deea5b7e05f725618"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af275b4f7d722ca3731128128b52c96f6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#af275b4f7d722ca3731128128b52c96f6">unEscapeStr</a> (<a class="el" href="classtiny__dlna_1_1Str.html">Str</a> &amp;str)</td></tr>
 <tr class="separator:af275b4f7d722ca3731128128b52c96f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a372dcf6373fbebe771a38d69e3dc987f"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a372dcf6373fbebe771a38d69e3dc987f">getUrlImpl</a> (<a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html">DLNADeviceInfo</a> &amp;device, const char *suffix, const char *buffer, int len)</td></tr>
@@ -488,8 +492,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ac30ba98e9b47c5330ce13c9683acb7d2" name="ac30ba98e9b47c5330ce13c9683acb7d2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac30ba98e9b47c5330ce13c9683acb7d2">&#9670;&#160;</a></span>buildActionBody()</h2>
+<a id="a1dcd48540902111e5be3f984196f758c" name="a1dcd48540902111e5be3f984196f758c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1dcd48540902111e5be3f984196f758c">&#9670;&#160;</a></span>createSoapXML()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -498,7 +502,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void tiny_dlna::DLNAControlPoint::buildActionBody </td>
+          <td class="memname">size_t tiny_dlna::DLNAControlPoint::createSoapXML </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;&#160;</td>
           <td class="paramname"><em>action</em>, </td>
@@ -506,7 +510,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1StrPrint.html">StrPrint</a> &amp;&#160;</td>
+          <td class="paramtype">Print &amp;&#160;</td>
           <td class="paramname"><em>out</em>&#160;</td>
         </tr>
         <tr>
@@ -1129,6 +1133,40 @@ attributes) </p>
 
 </div>
 </div>
+<a id="a712d867ff6d9c93deea5b7e05f725618" name="a712d867ff6d9c93deea5b7e05f725618"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a712d867ff6d9c93deea5b7e05f725618">&#9670;&#160;</a></span>parseResult()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tiny_dlna::DLNAControlPoint::parseResult </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Parses the XML response from the HTTP client and populates reply arguments. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">xml_parser</td><td><a class="el" href="classtiny__dlna_1_1XMLParserPrint.html" title="Helper class that implements a Print interface to accumulate XML data and then parse it using XMLPars...">XMLParserPrint</a> instance for parsing </td></tr>
+    <tr><td class="paramname">buffer</td><td>Temporary buffer for reading client data </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="ab800ec2f135fa2206b4565078b0762f1" name="ab800ec2f135fa2206b4565078b0762f1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab800ec2f135fa2206b4565078b0762f1">&#9670;&#160;</a></span>postAction()</h2>
 
@@ -1191,8 +1229,8 @@ attributes) </p>
 
 </div>
 </div>
-<a id="adc894516579999e3cc0c4e08ad00f676" name="adc894516579999e3cc0c4e08ad00f676"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adc894516579999e3cc0c4e08ad00f676">&#9670;&#160;</a></span>processActionHttpPost()</h2>
+<a id="a881299a8b80774488af3efbbfa91dcc7" name="a881299a8b80774488af3efbbfa91dcc7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a881299a8b80774488af3efbbfa91dcc7">&#9670;&#160;</a></span>processActionHttpPost()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1203,14 +1241,14 @@ attributes) </p>
         <tr>
           <td class="memname"><a class="el" href="classtiny__dlna_1_1ActionReply.html">ActionReply</a> &amp; tiny_dlna::DLNAControlPoint::processActionHttpPost </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1Url.html">Url</a> &amp;&#160;</td>
-          <td class="paramname"><em>post_url</em>, </td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;&#160;</td>
+          <td class="paramname"><em>action</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1StrPrint.html">StrPrint</a> &amp;&#160;</td>
-          <td class="paramname"><em>requestBody</em>, </td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1Url.html">Url</a> &amp;&#160;</td>
+          <td class="paramname"><em>post_url</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -1236,8 +1274,8 @@ attributes) </p>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>response body is written into <code>responseOut</code> (an <a class="el" href="classtiny__dlna_1_1XMLParserPrint.html" title="Helper class that implements a Print interface to accumulate XML data and then parse it using XMLPars...">XMLParserPrint</a>). Returns the HTTP rc. If <code>httpProcessor</code> is provided it will be invoked with the live <code>DLNAHttpRequest</code> instance so callers can implement custom processing (for example to stream/parse the XML themselves). When an httpProcessor is supplied the library's default XML parsing is skipped. </p>
-<p>xml might be escaped</p>
+
+<p>Processes an HTTP POST request for the given action and URL. </p>
 
 </div>
 </div>
