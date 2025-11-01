@@ -6,9 +6,7 @@
 #include "dlna/devices/DLNADevice.h"
 #include "dlna/xml/XMLAttributeParser.h"
 #include "dlna/xml/XMLParserPrint.h"
-#include "mr_conmgr.h"
-#include "mr_control.h"
-#include "mr_transport.h"
+#include "DLNAMediaRendererDescr.h"
 
 namespace tiny_dlna {
 /**
@@ -401,23 +399,23 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
   void setupServicesImpl(HttpServer* server) {
     DlnaLogger.log(DlnaLogLevel::Info, "MediaRenderer::setupServices");
 
-    auto transportCB = [](HttpServer* server, const char* requestPath,
-                          HttpRequestHandlerLine* hl) {
-      server->reply("text/xml",
-                    [](Print& out) { mr_connmgr_xml_printer(out); });
-    };
+  auto transportCB = [](HttpServer* server, const char* requestPath,
+              HttpRequestHandlerLine* hl) {
+    server->reply("text/xml",
+          [](Print& out) { DLNAMediaRendererTransportDescr d; d.printDescr(out); });
+  };
 
-    auto connmgrCB = [](HttpServer* server, const char* requestPath,
-                        HttpRequestHandlerLine* hl) {
-      server->reply("text/xml",
-                    [](Print& out) { mr_connmgr_xml_printer(out); });
-    };
+  auto connmgrCB = [](HttpServer* server, const char* requestPath,
+            HttpRequestHandlerLine* hl) {
+    server->reply("text/xml",
+          [](Print& out) { DLNAMediaRendererConnectionMgrDescr d; d.printDescr(out); });
+  };
 
-    auto controlCB = [](HttpServer* server, const char* requestPath,
-                        HttpRequestHandlerLine* hl) {
-      server->reply("text/xml",
-                    [](Print& out) { mr_control_xml_printer(out); });
-    };
+  auto controlCB = [](HttpServer* server, const char* requestPath,
+            HttpRequestHandlerLine* hl) {
+    server->reply("text/xml",
+          [](Print& out) { DLNAMediaRendererControlDescr d; d.printDescr(out); });
+  };
 
     // define services
     DLNAServiceInfo rc, cm, avt;
@@ -447,6 +445,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     addService(cm);
     addService(avt);
   }
+
 };
 
 }  // namespace tiny_dlna

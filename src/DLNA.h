@@ -6,7 +6,7 @@
 #include "dlna/devices/MediaRenderer/DLNAMediaRenderer.h"
 #include "dlna/devices/MediaServer/DLNAMediaServer.h"
 #include "dlna/udp/UDPService.h"
-#ifndef IS_DESKTOP
+#if !defined(IS_DESKTOP) && defined(IS_ESP32)
 #include "dlna/udp/UDPAsyncService.h"
 #endif
 

@@ -11,8 +11,7 @@
 #include "dlna/xml/XMLParserPrint.h"
 #include "dlna/xml/XMLPrinter.h"
 #include "http/Http.h"
-#include "ms_connmgr.h"
-#include "ms_content_dir.h"
+#include "DLNAMediaServerDescr.h"
 
 namespace tiny_dlna {
 
@@ -301,12 +300,18 @@ class DLNAMediaServer : public DLNADeviceInfo {
     auto contentDescCB = [](HttpServer* server, const char* requestPath,
                             HttpRequestHandlerLine* hl) {
       server->reply("text/xml",
-                    [](Print& out) { ms_content_dir_xml_printer(out); });
+                    [](Print& out) {
+                      tiny_dlna::DLNAMediaServerContentDirectoryDescr descr;
+                      descr.printDescr(out);
+                    });
     };
     auto connDescCB = [](HttpServer* server, const char* requestPath,
                          HttpRequestHandlerLine* hl) {
       server->reply("text/xml",
-                    [](Print& out) { ms_connmgr_xml_printer(out); });
+                    [](Print& out) {
+                      tiny_dlna::DLNAMediaServerConnectionMgrDescr descr;
+                      descr.printDescr(out);
+                    });
     };
 
     DLNAServiceInfo cd;
