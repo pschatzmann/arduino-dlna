@@ -1,5 +1,6 @@
 // Ensure correct Print base class from ArduinoCore-API
 #include "Print.h"
+#include "basic/NullPrint.h"
 #pragma once
 
 namespace tiny_dlna {
@@ -36,12 +37,6 @@ enum class ContentQueryType {
   Search,         /**< Search for content */
   BrowseMetadata, /**< Browse metadata of a content item */
   BrowseChildren  /**< Browse children of a container */
-};
-
-class NullPrint : public Print {
- public:
-  size_t write(uint8_t) override { return 1; }
-  size_t write(const uint8_t*, size_t size) override { return size; }
 };
 
 }  // namespace tiny_dlna

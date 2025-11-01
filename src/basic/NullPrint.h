@@ -1,3 +1,4 @@
+#pragma once
 #include "Print.h"
 
 namespace tiny_dlna {

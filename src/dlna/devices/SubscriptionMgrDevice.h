@@ -1,6 +1,7 @@
 #pragma once
 
 #include "basic/Logger.h"
+#include "basic/NullPrint.h"
 #include "basic/Str.h"
 #include "basic/StrPrint.h"
 #include "basic/StrView.h"
@@ -90,21 +91,7 @@ class SubscriptionMgrDevice {
       Subscription& sub = list[i];
       // increment seq
       sub.seq++;
-      // build body
-      StrPrint body;
-      body.reset();
-      body.write((const uint8_t*)"<?xml version=\"1.0\"?>\r\n", 27);
-      body.write((const uint8_t*)"<e:propertyset xmlns:e=\"urn:schemas-upnp-org:metadata-1-0/events\">\r\n", 68);
-      body.write((const uint8_t*)"  <e:property>\r\n", 17);
-      body.write((const uint8_t*)"    <", 6);
-      body.write((const uint8_t*)varName, strlen(varName));
-      body.write((const uint8_t*)">", 1);
-      body.write((const uint8_t*)value, strlen(value));
-      body.write((const uint8_t*)"</", 2);
-      body.write((const uint8_t*)varName, strlen(varName));
-      body.write((const uint8_t*)">\r\n", 3);
-      body.write((const uint8_t*)"  </e:property>\r\n", 18);
-      body.write((const uint8_t*)"</e:propertyset>\r\n", 21);
+      // build and stream body via createXML
 
       // parse callback url
       Url cbUrl(sub.callback_url.c_str());
@@ -118,8 +105,14 @@ class SubscriptionMgrDevice {
       snprintf(seqBuf, sizeof(seqBuf), "%d", sub.seq);
       http.request().put("SEQ", seqBuf);
       http.request().put("SID", sub.sid.c_str());
-      // post the notification
-      int rc = http.post(cbUrl, "text/xml", body.c_str(), body.length());
+      // post the notification using dynamic XML generation (streamed writer)
+      // compute length by writing to NullPrint and then stream via lambda
+      NullPrint np;
+      size_t xmlLen = createXML(np, varName, value);
+      auto printXML = [this, varName, value](Print& out) {
+        createXML(out, varName, value);
+      };
+      int rc = http.post(cbUrl, xmlLen, printXML, "text/xml");
       DlnaLogger.log(DlnaLogLevel::Info, "Notify %s -> %d", cbUrl.url(), rc);
     }
   }
@@ -139,6 +132,31 @@ class SubscriptionMgrDevice {
     service_names.push_back(s);
     service_lists.push_back(list);
     return service_lists[service_lists.size() - 1];
+  }
+
+  /**
+   * @brief Generate the propertyset XML for a single variable and write it to
+   * the provided Print instance.
+   *
+   * Returns the number of bytes written.
+   */
+  size_t createXML(Print& out, const char* varName, const char* value) {
+    size_t written = 0;
+    written += out.print("<?xml version=\"1.0\"?>\r\n");
+    written += out.print(
+        "<e:propertyset "
+        "xmlns:e=\"urn:schemas-upnp-org:metadata-1-0/events\">\r\n");
+    written += out.print("  <e:property>\r\n");
+    written += out.print("    <");
+    written += out.print(varName);
+    written += out.print(">");
+    written += out.print(value);
+    written += out.print("</");
+    written += out.print(varName);
+    written += out.print(">\r\n");
+    written += out.print("  </e:property>\r\n");
+    written += out.print("</e:propertyset>\r\n");
+    return written;
   }
 };
 
