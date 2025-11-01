@@ -2,6 +2,7 @@
 #pragma once
 //#include "dlna/DLNAServiceInfo.h"
 #include "dlna/xml/XMLPrinter.h"
+#include "dlna/DLNAContext.h"
 
 namespace tiny_dlna {
 
@@ -96,17 +97,14 @@ class ActionReply {
 
   void logArguments() {
     for (auto& a : arguments) {
-      DlnaLogger.log(DlnaLogLevel::Info, "  -> %s = %s", nullStr(a.name),
-                     nullStr(a.value.c_str()));
+      DlnaLogger.log(DlnaLogLevel::Info, "  -> %s = %s", DLNAContext::nullStr(a.name),
+                     DLNAContext::nullStr(a.value.c_str()));
     }
   }
 
  protected:
   Vector<Argument> arguments;
   bool is_valid = true;
-  const char* nullStr(const char* str, const char* alt = "") {
-    return str != nullptr ? str : alt;
-  }
 };
 
 /**
@@ -146,7 +144,7 @@ class ActionRequest {
       if (a.name != nullptr) {
         StrView nm(a.name);
         if (nm.endsWithIgnoreCase(name)) {
-          return nullStr(a.value.c_str());
+          return DLNAContext::nullStr(a.value.c_str());
         }
       }
     }
@@ -172,10 +170,6 @@ class ActionRequest {
   int result_count = 0;
   operator bool() {
     return p_service != nullptr && action != nullptr;
-  }
-  //const char* getServiceType() { return p_service->service_type; }
-  const char* nullStr(const char* str, const char* alt = "") {
-    return str != nullptr ? str : alt;
   }
 };
 

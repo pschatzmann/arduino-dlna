@@ -4,6 +4,7 @@
 #include <functional>
 
 #include "dlna/Action.h"
+#include "dlna/DLNAContext.h"
 #include "dlna/DLNAControlPoint.h"
 #include "dlna/xml/XMLProtocolInfoParser.h"
 #include "http/Server/HttpChunkWriter.h"
@@ -562,8 +563,6 @@ class DLNAControlPointMediaRenderer {
   int local_mute = false;
   Str local_url;
   const char* local_transport_state = "STOPPED";
-
-  const char* nullStr(const char* str) { return str ? str : ""; }
 
   // Helper to update is_active and notify callback only on change
   void setActiveState(bool s) {

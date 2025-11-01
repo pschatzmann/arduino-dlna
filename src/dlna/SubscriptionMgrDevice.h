@@ -4,8 +4,10 @@
 #include "basic/StrPrint.h"
 #include "basic/Url.h"
 #include "basic/Vector.h"
+#include "basic/Logger.h"
 #include "http/Http.h"
 #include "http/Server/HttpRequest.h"
+#include "dlna/DLNAContext.h"
 
 namespace tiny_dlna {
 
@@ -50,8 +52,8 @@ class SubscriptionMgrDevice {
   Str subscribe(const char* serviceId, const char* callbackUrl,
                 uint32_t timeoutSec = 1800) {
     // simple SID generation
-    DlnaLogger.log(DlnaLogLevel::Info, "subscribe: %s %s", nullStr(serviceId, "(null)"),
-                   nullStr(callbackUrl, "(null)"));
+    DlnaLogger.log(DlnaLogLevel::Info, "subscribe: %s %s", DLNAContext::nullStr(serviceId, "(null)"),
+                   DLNAContext::nullStr(callbackUrl, "(null)"));
     char buffer[64];
     snprintf(buffer, sizeof(buffer), "uuid:%lu", millis());
     Str sid = buffer;
@@ -124,10 +126,6 @@ class SubscriptionMgrDevice {
   // naive per-service storage using parallel vectors
   Vector<Str> service_names;
   Vector<Vector<Subscription>> service_lists;
-
-  const char* nullStr(const char* str, const char* defaultStr="") {
-    return str != nullptr ? str : defaultStr;
-  }
 
   Vector<Subscription>& getList(const char* serviceId) {
     for (int i = 0; i < service_names.size(); ++i) {

@@ -12,6 +12,7 @@
 #include "basic/StrPrint.h"
 #include "basic/Url.h"
 #include "dlna_config.h"
+#include "dlna/DLNAContext.h"
 #include "http/Http.h"
 #include "xml/XMLDeviceParser.h"
 #include "xml/XMLParser.h"
@@ -672,7 +673,7 @@ class DLNAControlPoint {
   ActionReply& postAction(ActionRequest& action,
                           XMLCallback xmlProcessor = nullptr) {
     DlnaLogger.log(DlnaLogLevel::Debug, "DLNAControlPointMgr::postAction: %s",
-                   nullStr(action.action, "(null)"));
+                   DLNAContext::nullStr(action.action, "(null)"));
     reply.clear();
     DLNAServiceInfo& service = *(action.p_service);
     DLNADeviceInfo& device = getDevice(service);
@@ -695,7 +696,7 @@ class DLNAControlPoint {
     // Log service and base to help debug malformed control URLs
     DlnaLogger.log(DlnaLogLevel::Info,
                    "Service control_url: %s, device base: %s",
-                   nullStr(service.control_url), nullStr(device.getBaseURL()));
+                   DLNAContext::nullStr(service.control_url), DLNAContext::nullStr(device.getBaseURL()));
     Url post_url{getUrl(device, service.control_url, url_buffer, 200)};
     DlnaLogger.log(DlnaLogLevel::Info, "POST URL computed: %s", post_url.url());
 
@@ -713,13 +714,6 @@ class DLNAControlPoint {
     createXML(action);
   }
 
-  const char* nullStr(const char* str, const char* empty = "(null)") {
-    return str == nullptr ? empty : str;
-  }
-
-  const char* nullStr(Str& str, const char* empty = "(null)") {
-    return str.isEmpty() ? empty : str.c_str();
-  }
 
   // Send an HTTP POST for the given URL and request body. On success the
   /// response body is written into `responseOut` (an XMLParserPrint). Returns
@@ -749,7 +743,7 @@ class DLNAControlPoint {
       p_http->stop();
       reply.setValid(false);
       DlnaLogger.log(DlnaLogLevel::Error, "Action '%s' failed with HTTP rc %d",
-                     nullStr(soapAction), rc);
+                     DLNAContext::nullStr(soapAction), rc);
       return reply;
     }
 
@@ -791,11 +785,11 @@ class DLNAControlPoint {
             }
 
             DlnaLogger.log(DlnaLogLevel::Info, "callback: '%s': %s (%s)",
-                           nullStr(outNodeName), nullStr(outText),
-                           nullStr(outAttributes));
+                           DLNAContext::nullStr(outNodeName), DLNAContext::nullStr(outText),
+                           DLNAContext::nullStr(outAttributes));
             if (result_callback) {
-              result_callback(nullStr(outNodeName,""), nullStr(outText, ""),
-                              nullStr(outAttributes, ""));
+              result_callback(DLNAContext::nullStr(outNodeName,""), DLNAContext::nullStr(outText, ""),
+                              DLNAContext::nullStr(outAttributes, ""));
             }
           }
         }
