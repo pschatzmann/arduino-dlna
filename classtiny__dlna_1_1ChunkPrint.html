@@ -81,13 +81,16 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>Print implementation for HTTP chunked transfer encoding.  
+ <a href="classtiny__dlna_1_1ChunkPrint.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="HttpChunkWriter_8h_source.html">HttpChunkWriter.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for tiny_dlna::ChunkPrint:</div>
 <div class="dyncontent">
 <div class="center"><img src="classtiny__dlna_1_1ChunkPrint__inherit__graph.png" border="0" usemap="#atiny__dlna_1_1ChunkPrint_inherit__map" alt="Inheritance graph"/></div>
 <map name="atiny__dlna_1_1ChunkPrint_inherit__map" id="atiny__dlna_1_1ChunkPrint_inherit__map">
-<area shape="rect" title=" " alt="" coords="5,79,167,104"/>
+<area shape="rect" title="Print implementation for HTTP chunked transfer encoding." alt="" coords="5,79,167,104"/>
 <area shape="rect" title=" " alt="" coords="60,5,112,31"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
@@ -120,7 +123,12 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:a4c694e61320a84e33be4ae817e44ed4b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1HttpChunkWriter.html">HttpChunkWriter</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1ChunkPrint.html#a4c694e61320a84e33be4ae817e44ed4b">chunk_writer</a></td></tr>
 <tr class="separator:a4c694e61320a84e33be4ae817e44ed4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Print implementation for HTTP chunked transfer encoding. </p>
+<p>This class wraps a Client and uses <a class="el" href="classtiny__dlna_1_1HttpChunkWriter.html" title="Writes the data chunked to the actual client.">HttpChunkWriter</a> to send data using HTTP chunked transfer encoding. All writes are sent as individual chunks. Provides print, println, printf, and printEscaped utilities for chunked output.</p>
+<p>Usage: <a class="el" href="classtiny__dlna_1_1ChunkPrint.html" title="Print implementation for HTTP chunked transfer encoding.">ChunkPrint</a> cp(client); cp.print("Hello"); cp.println("World"); cp.end(); // signals end of chunked stream</p>
+<p>Used internally for streaming large HTTP responses without buffering. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a463c2eeb06fec5ec15f3235892fcef9a" name="a463c2eeb06fec5ec15f3235892fcef9a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a463c2eeb06fec5ec15f3235892fcef9a">&#9670;&#160;</a></span>ChunkPrint()</h2>
 
