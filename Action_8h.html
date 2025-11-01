@@ -75,21 +75,22 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a> &#124;
-<a href="#enum-members">Enumerations</a>  </div>
+<a href="#namespaces">Namespaces</a>  </div>
   <div class="headertitle"><div class="title">Action.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="XMLPrinter_8h_source.html">dlna/xml/XMLPrinter.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="StringRegistry_8h_source.html">dlna/StringRegistry.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="DLNACommon_8h_source.html">dlna/DLNACommon.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for Action.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="Action_8h__incl.png" border="0" usemap="#asrc_2dlna_2Action_8h" alt=""/></div>
 <map name="asrc_2dlna_2Action_8h" id="asrc_2dlna_2Action_8h">
-<area shape="rect" title=" " alt="" coords="295,5,425,31"/>
+<area shape="rect" title=" " alt="" coords="363,5,493,31"/>
 <area shape="rect" href="XMLPrinter_8h.html" title=" " alt="" coords="355,152,520,177"/>
 <area shape="rect" href="StringRegistry_8h.html" title=" " alt="" coords="225,79,381,104"/>
+<area shape="rect" href="DLNACommon_8h.html" title=" " alt="" coords="466,79,627,104"/>
 <area shape="rect" title=" " alt="" coords="492,225,556,251"/>
 <area shape="rect" title=" " alt="" coords="171,299,245,324"/>
 <area shape="rect" title=" " alt="" coords="580,225,647,251"/>
@@ -152,27 +153,6 @@ Classes</h2></td></tr>
 Namespaces</h2></td></tr>
 <tr class="memitem:namespacetiny__dlna"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetiny__dlna.html">tiny_dlna</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
-Enumerations</h2></td></tr>
-<tr class="memitem:aaeb449bfe04e5561476e1371856fa0cf"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetiny__dlna.html#aaeb449bfe04e5561476e1371856fa0cf">tiny_dlna::SubscriptionState</a> { <a class="el" href="namespacetiny__dlna.html#aaeb449bfe04e5561476e1371856fa0cfafdc7aa92ecb714c25019e988c09aeffa">tiny_dlna::Unsubscribed</a>
-, <a class="el" href="namespacetiny__dlna.html#aaeb449bfe04e5561476e1371856fa0cfaae54f8374e019ce8a7d61c839bd307b8">tiny_dlna::Subscribing</a>
-, <a class="el" href="namespacetiny__dlna.html#aaeb449bfe04e5561476e1371856fa0cfa808c7457c768423c5651cbf676d9f6d7">tiny_dlna::Subscribed</a>
-, <a class="el" href="namespacetiny__dlna.html#aaeb449bfe04e5561476e1371856fa0cfadd7dd6fc394076deae158ff90ead2776">tiny_dlna::Unsubscribing</a>
- }</td></tr>
-<tr class="memdesc:aaeb449bfe04e5561476e1371856fa0cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subscription State.  <a href="namespacetiny__dlna.html#aaeb449bfe04e5561476e1371856fa0cf">More...</a><br /></td></tr>
-<tr class="separator:aaeb449bfe04e5561476e1371856fa0cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a504b776a2804411b65b3b1cd864d8d92"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetiny__dlna.html#a504b776a2804411b65b3b1cd864d8d92">tiny_dlna::ProtocolRole</a> { <a class="el" href="namespacetiny__dlna.html#a504b776a2804411b65b3b1cd864d8d92a69e59c2c0791225115a2a78deed062cf">tiny_dlna::IsSource</a> = 0
-, <a class="el" href="namespacetiny__dlna.html#a504b776a2804411b65b3b1cd864d8d92a4af7b7766fbfc7921a237d15c3d99309">tiny_dlna::IsSink</a> = 1
- }</td></tr>
-<tr class="memdesc:a504b776a2804411b65b3b1cd864d8d92"><td class="mdescLeft">&#160;</td><td class="mdescRight">Role to indicate whether a protocolInfo entry is a Source or a Sink.  <a href="namespacetiny__dlna.html#a504b776a2804411b65b3b1cd864d8d92">More...</a><br /></td></tr>
-<tr class="separator:a504b776a2804411b65b3b1cd864d8d92"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7ecfa08a6b938018e48a3a309e895aa9"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetiny__dlna.html#a7ecfa08a6b938018e48a3a309e895aa9">tiny_dlna::ContentQueryType</a> { <a class="el" href="namespacetiny__dlna.html#a7ecfa08a6b938018e48a3a309e895aa9a13348442cc6a27032d2b4aa28b75a5d3">tiny_dlna::Search</a>
-, <a class="el" href="namespacetiny__dlna.html#a7ecfa08a6b938018e48a3a309e895aa9acf95a156ec0d73dc4d9fa743f0248b6f">tiny_dlna::BrowseMetadata</a>
-, <a class="el" href="namespacetiny__dlna.html#a7ecfa08a6b938018e48a3a309e895aa9a19bd5a29b763bd371a9e9b85df2ae672">tiny_dlna::BrowseChildren</a>
- }</td></tr>
-<tr class="memdesc:a7ecfa08a6b938018e48a3a309e895aa9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Search or Browse.  <a href="namespacetiny__dlna.html#a7ecfa08a6b938018e48a3a309e895aa9">More...</a><br /></td></tr>
-<tr class="separator:a7ecfa08a6b938018e48a3a309e895aa9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- start footer part -->
