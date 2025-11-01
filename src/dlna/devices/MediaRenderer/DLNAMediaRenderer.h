@@ -131,7 +131,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
   uint8_t getVolume() { return current_volume; }
 
   /// Enable or disable mute
-  bool setMute(bool mute) {
+  bool setMuted(bool mute) {
     is_muted = mute;
     DlnaLogger.log(DlnaLogLevel::Info, "Set mute: %s", mute ? "true" : "false");
     if (event_cb) event_cb(MediaEvent::SET_MUTE, *this);
@@ -222,6 +222,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     return true;
   }
 
+  /// Stop playback
   bool stop() {
     DlnaLogger.log(DlnaLogLevel::Info, "Stop playback");
     is_active = false;
@@ -254,6 +255,10 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     // publish UPnP event to subscribers (if subscription manager available)
     StrPrint cmd;
     cmd.printf("<TransportState val=\"STOPPED\"/>");
+    cmd.printf("<CurrentPlayMode val=\"NORMAL\"/>");
+    cmd.printf("<CurrentTrackURI val=\"\"/>");
+    cmd.printf("<RelativeTimePosition val=\"00:00:00\"/>");
+    cmd.printf("<CurrentTransportActions val=\"Play\"/>");
     publishProperty("AVT", cmd.c_str());
   }
 
@@ -271,6 +276,14 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
                static_cast<int>((getRelativeTimePositionSec() % 3600) / 60),
                static_cast<int>(getRelativeTimePositionSec() % 60));
     publishProperty("AVT", cmd.c_str());
+  }
+
+  const char* getCurrentTransportActions() {
+    if (is_active) {
+      return "Pause,Stop";
+    } else {
+      return "Play,Stop";
+    }
   }
 
  protected:
@@ -356,6 +369,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
           if (nodeName.equals("Play") ||
               nodeName.equals("Pause") ||
               nodeName.equals("Stop") ||
+              nodeName.equals("GetCurrentTransportActions") ||
               nodeName.equals("SetAVTransportURI")) {
             actionName = nodeName;
           }
@@ -390,6 +404,14 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
       server->reply("text/xml", [](Print& out) {
         DLNAMediaRenderer::printReplyXML(out, "StopResponse", "AVTransport");
       });
+      return;
+    }
+    if (actionName == "GetCurrentTransportActions") {
+      StrPrint returnValue;
+      returnValue.printf("<u:return>%s</u:return>", media_renderer.getCurrentTransportActions());
+      StrPrint xml;
+      DLNAMediaRenderer::printReplyXML(xml, "QueryStateVariableResponse", "AVTransport", returnValue.c_str());
+      server->reply("text/xml", xml.c_str(), xml.length());
       return;
     }
     if (actionName == "SetAVTransportURI") {
@@ -463,7 +485,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
       return;
     }
     if (actionName == "SetMute" && haveMute) {
-      media_renderer.setMute(desiredMute);
+      media_renderer.setMuted(desiredMute);
       server->reply("text/xml", [](Print& out) {
         DLNAMediaRenderer::printReplyXML(out, "SetMuteResponse",
                                          "RenderingControl");
@@ -535,7 +557,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
 
   /// Builds a standard SOAP reply envelope
   static int printReplyXML(Print& out, const char* replyName,
-                           const char* serviceId) {
+                           const char* serviceId, const char* values = nullptr) {
     XMLPrinter xp(out);
     size_t result = 0;
     result += xp.printNodeBegin(
@@ -543,6 +565,12 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     result += xp.printNodeBegin("s:Body");
     result += xp.printf("<u:%s xmlns:u=\"urn:schemas-upnp-org:service:%s:1\">",
                         replyName, serviceId);
+
+    // e.g.<u:return>Stop,Pause,Next,Seek</u:return> for QueryStateVariableResponse
+    if (values) {
+      result += xp.printf("%s",values);
+    }
+
     result += xp.printf("</u:%s>", replyName);
     result += xp.printNodeEnd("s:Body");
     result += xp.printNodeEnd("s:Envelope");
