@@ -689,13 +689,13 @@ class DLNAControlPoint {
     action_str.add("\"");
 
     // crate control url
-    char url_buffer[200] = {0};
+    char url_buffer[DLNA_MAX_URL_LEN] = {0};
     // Log service and base to help debug malformed control URLs
     DlnaLogger.log(DlnaLogLevel::Info,
                    "Service control_url: %s, device base: %s",
                    StringRegistry::nullStr(service.control_url),
                    StringRegistry::nullStr(device.getBaseURL()));
-    Url post_url{getUrl(device, service.control_url, url_buffer, 200)};
+    Url post_url{getUrl(device, service.control_url, url_buffer, DLNA_MAX_URL_LEN)};
     DlnaLogger.log(DlnaLogLevel::Info, "POST URL computed: %s", post_url.url());
 
     // send HTTP POST and collect/handle response. If the caller provided an
@@ -850,9 +850,6 @@ class DLNAControlPoint {
     }
     return buffer;
   }
-
-  // Subscription helper methods have been moved to
-  // `SubscriptionMgrControlPoint`. See that class for subscription APIs.
 };
 
 }  // namespace tiny_dlna
