@@ -1,13 +1,14 @@
 #pragma once
 
+#include "basic/Logger.h"
 #include "basic/Str.h"
 #include "basic/StrPrint.h"
+#include "basic/StrView.h"
 #include "basic/Url.h"
 #include "basic/Vector.h"
-#include "basic/Logger.h"
+#include "dlna/DLNAContext.h"
 #include "http/Http.h"
 #include "http/Server/HttpRequest.h"
-#include "dlna/DLNAContext.h"
 
 namespace tiny_dlna {
 
@@ -52,7 +53,8 @@ class SubscriptionMgrDevice {
   Str subscribe(const char* serviceId, const char* callbackUrl,
                 uint32_t timeoutSec = 1800) {
     // simple SID generation
-    DlnaLogger.log(DlnaLogLevel::Info, "subscribe: %s %s", DLNAContext::nullStr(serviceId, "(null)"),
+    DlnaLogger.log(DlnaLogLevel::Info, "subscribe: %s %s",
+                   DLNAContext::nullStr(serviceId, "(null)"),
                    DLNAContext::nullStr(callbackUrl, "(null)"));
     char buffer[64];
     snprintf(buffer, sizeof(buffer), "uuid:%lu", millis());

@@ -3,7 +3,7 @@
 #include <cstring>
 
 #include "basic/Str.h"
-#include "dlna/DLNADevice.h"
+#include "dlna/devices/DLNADevice.h"
 #include "dlna/xml/XMLAttributeParser.h"
 #include "dlna/xml/XMLParserPrint.h"
 #include "mr_conmgr.h"
@@ -63,7 +63,8 @@ enum class MediaEvent { SET_URI, PLAY, PAUSE, STOP, SET_VOLUME, SET_MUTE };
 class DLNAMediaRenderer : public DLNADeviceInfo {
  public:
   // event handler: (event, reference to MediaRenderer)
-  typedef void (*MediaEventHandler)(MediaEvent event, DLNAMediaRenderer& renderer);
+  typedef void (*MediaEventHandler)(MediaEvent event,
+                                    DLNAMediaRenderer& renderer);
 
   /**
    * @brief Default constructor
@@ -88,7 +89,8 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
    * Construct a MediaRenderer bound to an HttpServer and IUDPService.
    * The provided references are stored and used when calling begin().
    */
-  DLNAMediaRenderer(HttpServer& server, IUDPService& udp) : DLNAMediaRenderer() {
+  DLNAMediaRenderer(HttpServer& server, IUDPService& udp)
+      : DLNAMediaRenderer() {
     setHttpServer(server);
     setUdpService(udp);
   }
@@ -181,7 +183,8 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
   bool is_muted = false;
   bool is_active = false;
   unsigned long start_time = 0;
-  // Current transport state string (e.g. "STOPPED", "PLAYING", "PAUSED_PLAYBACK")
+  // Current transport state string (e.g. "STOPPED", "PLAYING",
+  // "PAUSED_PLAYBACK")
   tiny_dlna::Str transport_state = "NO_MEDIA_PRESENT";
   const char* st = "urn:schemas-upnp-org:device:MediaRenderer:1";
   const char* usn = "uuid:09349455-2941-4cf7-9847-1dd5ab210e97";
@@ -400,17 +403,20 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
 
     auto transportCB = [](HttpServer* server, const char* requestPath,
                           HttpRequestHandlerLine* hl) {
-            server->reply("text/xml", [](Print& out){ mr_connmgr_xml_printer(out); });
+      server->reply("text/xml",
+                    [](Print& out) { mr_connmgr_xml_printer(out); });
     };
 
     auto connmgrCB = [](HttpServer* server, const char* requestPath,
                         HttpRequestHandlerLine* hl) {
-      server->reply("text/xml", [](Print& out){ mr_connmgr_xml_printer(out); });
+      server->reply("text/xml",
+                    [](Print& out) { mr_connmgr_xml_printer(out); });
     };
 
     auto controlCB = [](HttpServer* server, const char* requestPath,
                         HttpRequestHandlerLine* hl) {
-      server->reply("text/xml", [](Print& out){ mr_control_xml_printer(out); });
+      server->reply("text/xml",
+                    [](Print& out) { mr_control_xml_printer(out); });
     };
 
     // define services

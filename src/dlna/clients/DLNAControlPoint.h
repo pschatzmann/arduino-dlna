@@ -4,19 +4,19 @@
 
 #include "Client.h"
 #include "DLNAControlPointRequestParser.h"
-#include "DLNADevice.h"
-#include "DLNADeviceInfo.h"
-#include "Schedule.h"
-#include "Scheduler.h"
-#include "SubscriptionMgrControlPoint.h"
 #include "basic/StrPrint.h"
 #include "basic/Url.h"
-#include "dlna_config.h"
 #include "dlna/DLNAContext.h"
+#include "dlna/DLNADeviceInfo.h"
+#include "dlna/Schedule.h"
+#include "dlna/Scheduler.h"
+#include "dlna/clients/SubscriptionMgrControlPoint.h"
+#include "dlna/devices/DLNADevice.h"
+#include "dlna/xml/XMLDeviceParser.h"
+#include "dlna/xml/XMLParser.h"
+#include "dlna/xml/XMLParserPrint.h"
+#include "dlna_config.h"
 #include "http/Http.h"
-#include "xml/XMLDeviceParser.h"
-#include "xml/XMLParser.h"
-#include "xml/XMLParserPrint.h"
 
 namespace tiny_dlna {
 
@@ -87,9 +87,11 @@ class DLNAControlPoint {
   /// (Subscription management has been moved to SubscriptionMgrControlPoint)
 
   /// Register a callback that will be invoked for incoming event notification
-  void setEventSubscriptionCallback(std::function<void(const char* sid, const char* varName,
-                                         const char* newValue, void* reference)>
-                          cb, void* ref = nullptr) {
+  void setEventSubscriptionCallback(
+      std::function<void(const char* sid, const char* varName,
+                         const char* newValue, void* reference)>
+          cb,
+      void* ref = nullptr) {
     subscription_mgr.setEventSubscriptionCallback(cb, ref);
   }
 
@@ -132,7 +134,6 @@ class DLNAControlPoint {
     p_udp = &udp;
     p_http = &http;
 
-
     // set timeout for http requests
     http.setTimeout(DLNA_HTTP_REQUEST_TIMEOUT_MS);
 
@@ -149,7 +150,7 @@ class DLNAControlPoint {
       DlnaLogger.log(DlnaLogLevel::Error, "UDP begin failed");
       return false;
     }
-  
+
     // Send MSearch request via UDP. Use maxWaitMs as the emission window.
     MSearchSchedule* search =
         new MSearchSchedule(DLNABroadcastAddress, searchTarget);
@@ -696,7 +697,8 @@ class DLNAControlPoint {
     // Log service and base to help debug malformed control URLs
     DlnaLogger.log(DlnaLogLevel::Info,
                    "Service control_url: %s, device base: %s",
-                   DLNAContext::nullStr(service.control_url), DLNAContext::nullStr(device.getBaseURL()));
+                   DLNAContext::nullStr(service.control_url),
+                   DLNAContext::nullStr(device.getBaseURL()));
     Url post_url{getUrl(device, service.control_url, url_buffer, 200)};
     DlnaLogger.log(DlnaLogLevel::Info, "POST URL computed: %s", post_url.url());
 
@@ -713,7 +715,6 @@ class DLNAControlPoint {
     xml_printer.setOutput(out);
     createXML(action);
   }
-
 
   // Send an HTTP POST for the given URL and request body. On success the
   /// response body is written into `responseOut` (an XMLParserPrint). Returns
@@ -773,8 +774,7 @@ class DLNAControlPoint {
           // MediaServer helper) can parse returned media items.
           if (!(outText.isEmpty() && outAttributes.isEmpty()) ||
               outNodeName.equals("Result")) {
-
-                /// xml might be escaped  
+            /// xml might be escaped
             unEscapeStr(outAttributes);
             unEscapeStr(outText);
 
@@ -785,10 +785,12 @@ class DLNAControlPoint {
             }
 
             DlnaLogger.log(DlnaLogLevel::Info, "callback: '%s': %s (%s)",
-                           DLNAContext::nullStr(outNodeName), DLNAContext::nullStr(outText),
+                           DLNAContext::nullStr(outNodeName),
+                           DLNAContext::nullStr(outText),
                            DLNAContext::nullStr(outAttributes));
             if (result_callback) {
-              result_callback(DLNAContext::nullStr(outNodeName,""), DLNAContext::nullStr(outText, ""),
+              result_callback(DLNAContext::nullStr(outNodeName, ""),
+                              DLNAContext::nullStr(outText, ""),
                               DLNAContext::nullStr(outAttributes, ""));
             }
           }
@@ -799,7 +801,7 @@ class DLNAControlPoint {
     return reply;
   }
 
-  void unEscapeStr(Str& str){
+  void unEscapeStr(Str& str) {
     str.replaceAll("&quot;", "\"");
     str.replaceAll("&amp;", "&");
     str.replaceAll("&apos;", "'");

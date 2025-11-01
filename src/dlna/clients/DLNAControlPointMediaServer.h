@@ -2,7 +2,7 @@
 #pragma once
 
 #include "dlna/Action.h"
-#include "dlna/DLNAControlPoint.h"
+#include "dlna/clients/DLNAControlPoint.h"
 
 namespace tiny_dlna {
 

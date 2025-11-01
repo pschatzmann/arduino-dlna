@@ -1,13 +1,13 @@
 #pragma once
 
-#include "DLNADevice.h"
-#include "DLNADeviceInfo.h"
-#include "DLNADeviceRequestParser.h"
-#include "Schedule.h"
-#include "SubscriptionMgrDevice.h"
 #include "basic/Url.h"
+#include "dlna/DLNADeviceInfo.h"
+#include "dlna/Schedule.h"
+#include "dlna/devices/DLNADevice.h"
+#include "dlna/devices/DLNADeviceRequestParser.h"
+#include "dlna/devices/SubscriptionMgrDevice.h"
+#include "dlna/xml/XMLParserPrint.h"
 #include "http/Http.h"
-#include "xml/XMLParserPrint.h"
 
 namespace tiny_dlna {
 
@@ -274,8 +274,11 @@ class DLNADevice {
     uint32_t now = millis();
     if ((uint32_t)(now - last_mem_log) >= MEM_LOG_INTERVAL_MS) {
       last_mem_log = now;
-      DlnaLogger.log(DlnaLogLevel::Info, "Mem: freeHeap=%u freePsram=%u  / Scheduler: size=%d active=%s / StrRegistry: count=%d size=%d",
-                     (unsigned)ESP.getFreeHeap(), (unsigned)ESP.getFreePsram(), scheduler.size(), isSchedulerActive() ? "true" : "false",
+      DlnaLogger.log(DlnaLogLevel::Info,
+                     "Mem: freeHeap=%u freePsram=%u  / Scheduler: size=%d "
+                     "active=%s / StrRegistry: count=%d size=%d",
+                     (unsigned)ESP.getFreeHeap(), (unsigned)ESP.getFreePsram(),
+                     scheduler.size(), isSchedulerActive() ? "true" : "false",
                      registry.count(), registry.size());
     }
 #endif

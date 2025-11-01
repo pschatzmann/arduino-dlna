@@ -6,11 +6,11 @@
 #include "basic/Str.h"
 #include "basic/StrPrint.h"
 #include "dlna/Action.h"
-#include "dlna/DLNADevice.h"
+#include "dlna/DLNAContext.h"
+#include "dlna/devices/DLNADevice.h"
 #include "dlna/devices/MediaServer/MediaItem.h"
 #include "dlna/xml/XMLParserPrint.h"
 #include "dlna/xml/XMLPrinter.h"
-#include "dlna/DLNAContext.h"
 #include "http/Http.h"
 #include "ms_connmgr.h"
 #include "ms_content_dir.h"
@@ -57,9 +57,9 @@ class DLNAMediaServer : public DLNADeviceInfo {
    * @param reference User reference pointer
    */
   typedef void (*PrepareDataCallback)(
-    const char* objectID, ContentQueryType queryType, const char* filter,
-    int startingIndex, int requestedCount, const char* sortCriteria,
-    int& numberReturned, int& totalMatches, int& updateID, void* reference);
+      const char* objectID, ContentQueryType queryType, const char* filter,
+      int startingIndex, int requestedCount, const char* sortCriteria,
+      int& numberReturned, int& totalMatches, int& updateID, void* reference);
 
   /**
    * @brief Callback signature for retrieving a MediaItem by index.
@@ -98,7 +98,6 @@ class DLNAMediaServer : public DLNADeviceInfo {
   /// Destructor
   ~DLNAMediaServer() { end(); }
 
-
   /// Set the http server instance the MediaServer should use
   void setHttpServer(HttpServer& server) {
     // ensure instance pointer is available for callbacks
@@ -112,15 +111,17 @@ class DLNAMediaServer : public DLNADeviceInfo {
   void setUdpService(IUDPService& udp) { p_udp_member = &udp; }
 
   /// Start the underlying DLNA device using previously provided UDP and HTTP
-  /// server. Call this after constructing MediaServer(HttpServer&, IUDPService&)
-  bool begin() { 
+  /// server. Call this after constructing MediaServer(HttpServer&,
+  /// IUDPService&)
+  bool begin() {
     DlnaLogger.log(DlnaLogLevel::Info, "MediaServer::begin");
-    return dlna_device.begin(*this, *p_udp_member, *p_server); }
+    return dlna_device.begin(*this, *p_udp_member, *p_server);
+  }
 
   /// Stops the processing and releases the resources
-  void end() { 
+  void end() {
     DlnaLogger.log(DlnaLogLevel::Info, "MediaServer::end");
-    dlna_device.end(); 
+    dlna_device.end();
   }
 
   /// call this method in the Arduino loop as often as possible
@@ -180,7 +181,7 @@ class DLNAMediaServer : public DLNADeviceInfo {
 
   /// Provides access to the internal DLNA device instance
   DLNADevice& device() { return dlna_device; }
-  
+
  protected:
   static inline DLNAMediaServer* self = nullptr;
   // internal DLNA device instance owned by this MediaServer
@@ -370,7 +371,8 @@ class DLNAMediaServer : public DLNADeviceInfo {
     int requestedCount = action.getArgumentIntValue("RequestedCount");
 
     // determine query type (BrowseDirectChildren / BrowseMetadata / Search)
-    ContentQueryType qtype = parseContentQueryType(action.getArgumentValue("BrowseFlag"));
+    ContentQueryType qtype =
+        parseContentQueryType(action.getArgumentValue("BrowseFlag"));
     // query for data
     if (prepare_data_cb) {
       prepare_data_cb(action.getArgumentValue("ObjectID"), qtype,
@@ -379,12 +381,11 @@ class DLNAMediaServer : public DLNADeviceInfo {
                       numberReturned, totalMatches, updateID, reference_);
     }
 
-  // provide result
-  return streamActionItems("BrowseResponse",
-               action.getArgumentValue("ObjectID"),
-               qtype,
-               action.getArgumentValue("Filter"), startingIndex,
-               requestedCount, server);
+    // provide result
+    return streamActionItems("BrowseResponse",
+                             action.getArgumentValue("ObjectID"), qtype,
+                             action.getArgumentValue("Filter"), startingIndex,
+                             requestedCount, server);
   }
 
   bool processActionSearch(ActionRequest& action, HttpServer& server) {
@@ -398,9 +399,9 @@ class DLNAMediaServer : public DLNADeviceInfo {
     int startingIndex = action.getArgumentIntValue("StartingIndex");
     int requestedCount = action.getArgumentIntValue("RequestedCount");
 
-  // For Search actions we always use the Search query type regardless of
-  // any provided BrowseFlag; this ensures Search semantics are preserved.
-  ContentQueryType qtype = ContentQueryType::Search;
+    // For Search actions we always use the Search query type regardless of
+    // any provided BrowseFlag; this ensures Search semantics are preserved.
+    ContentQueryType qtype = ContentQueryType::Search;
     // query for data
     if (prepare_data_cb) {
       prepare_data_cb(action.getArgumentValue("ContainerID"), qtype,
@@ -571,7 +572,8 @@ class DLNAMediaServer : public DLNADeviceInfo {
   // --- SOAP/response streaming helpers to avoid duplication ---
   ContentQueryType parseContentQueryType(const char* flag) {
     StrView fv(flag);
-    if (fv.equals("BrowseDirectChildren")) return ContentQueryType::BrowseChildren;
+    if (fv.equals("BrowseDirectChildren"))
+      return ContentQueryType::BrowseChildren;
     if (fv.equals("BrowseMetadata")) return ContentQueryType::BrowseMetadata;
     // fallback
     return ContentQueryType::BrowseMetadata;

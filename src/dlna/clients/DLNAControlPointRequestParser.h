@@ -1,8 +1,8 @@
 #pragma once
 
-#include "IUDPService.h"
-#include "Schedule.h"
-#include "Scheduler.h"
+#include "dlna/IUDPService.h"
+#include "dlna/Schedule.h"
+#include "dlna/Scheduler.h"
 
 namespace tiny_dlna {
 

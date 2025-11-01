@@ -1,12 +1,14 @@
 #pragma once
 
-#include "Print.h"
-#include "Client.h"
-#include "basic/Logger.h"
 #include <cstdarg>
+#include <cstdint>
 #include <cstdio>
 #include <cstring>
-#include <cstdint>
+
+#include "Client.h"
+#include "Print.h"
+#include "basic/Logger.h"
+#include "basic/StrView.h"
 
 namespace tiny_dlna {
 
@@ -61,11 +63,11 @@ class ChunkPrint : public Print {
     return len;
   }
 
-  size_t printEscaped(const char* str){
+  size_t printEscaped(const char* str) {
     if (!str) return 0;
     int len = strlen(str);
     if (len == 0) return 0;
-    int max_len = len * 3 + 1; // worst-case expansion when replacing to &amp;
+    int max_len = len * 3 + 1;  // worst-case expansion when replacing to &amp;
     // allocate on heap to avoid large stack usage
     char* buffer = new char[max_len];
     // copy and perform replacements using StrView helper

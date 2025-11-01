@@ -1,13 +1,13 @@
 #pragma once
-#include "dlna/DLNAControlPoint.h"
-#include "dlna/DLNADevice.h"
-#include "dlna/udp/UDPService.h"
+#include "dlna/clients/DLNAControlPoint.h"
 #include "dlna/clients/DLNAControlPointMediaRenderer.h"
 #include "dlna/clients/DLNAControlPointMediaServer.h"
-#include "dlna/devices/MediaServer/DLNAMediaServer.h"
+#include "dlna/devices/DLNADevice.h"
 #include "dlna/devices/MediaRenderer/DLNAMediaRenderer.h"
+#include "dlna/devices/MediaServer/DLNAMediaServer.h"
+#include "dlna/udp/UDPService.h"
 #ifndef IS_DESKTOP
-#  include "dlna/udp/UDPAsyncService.h"
+#include "dlna/udp/UDPAsyncService.h"
 #endif
 
 using namespace tiny_dlna;

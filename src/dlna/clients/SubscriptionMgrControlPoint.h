@@ -3,15 +3,15 @@
 
 #include <functional>
 
-#include "DLNADeviceInfo.h"
-#include "IUDPService.h"
-#include "StringRegistry.h"
-#include "SubscriptionMgrDevice.h"
 #include "basic/Url.h"
 #include "basic/Vector.h"
+#include "dlna/DLNADeviceInfo.h"
+#include "dlna/IUDPService.h"
+#include "dlna/StringRegistry.h"
+#include "dlna/devices/SubscriptionMgrDevice.h"
+#include "dlna/xml/XMLParserPrint.h"
 #include "dlna_config.h"
 #include "http/Http.h"
-#include "xml/XMLParserPrint.h"
 
 namespace tiny_dlna {
 /**

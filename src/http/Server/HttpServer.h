@@ -11,6 +11,7 @@
 #include "HttpRequestRewrite.h"
 #include "HttpTunnel.h"
 #include "Server.h"
+#include "basic/IPAddressAndPort.h"  // for toStr
 #include "basic/List.h"
 
 namespace tiny_dlna {
@@ -238,10 +239,9 @@ class HttpServer {
     bool result = false;
     // check in registered handlers
     StrView pathStr = StrView(path);
-    pathStr.replace("//", "/"); // TODO investiage why we get //
+    pathStr.replace("//", "/");  // TODO investiage why we get //
     for (auto handler_line_ptr : handler_collection) {
-      DlnaLogger.log(DlnaLogLevel::Debug, "onRequest: %s %s vs: %s %s %s",
-                     path,
+      DlnaLogger.log(DlnaLogLevel::Debug, "onRequest: %s %s vs: %s %s %s", path,
                      methods[request_header.method()],
                      nullstr(handler_line_ptr->path.c_str()),
                      methods[handler_line_ptr->method],
@@ -249,7 +249,8 @@ class HttpServer {
 
       if (pathStr.matches(handler_line_ptr->path.c_str()) &&
           request_header.method() == handler_line_ptr->method &&
-          matchesMime(nullstr(handler_line_ptr->mime), nullstr(request_header.accept()))) {
+          matchesMime(nullstr(handler_line_ptr->mime),
+                      nullstr(request_header.accept()))) {
         // call registed handler function
         DlnaLogger.log(DlnaLogLevel::Debug, "onRequest %s", "->found",
                        nullstr(handler_line_ptr->path.c_str()));
@@ -424,7 +425,8 @@ class HttpServer {
       } else {
         // give other tasks a chance
         delay(no_connect_delay);
-        // DlnaLogger.log(DlnaLogLevel::Debug, "HttpServer no client available");
+        // DlnaLogger.log(DlnaLogLevel::Debug, "HttpServer no client
+        // available");
       }
     } else {
       DlnaLogger.log(DlnaLogLevel::Warning, "HttpServer inactive");
@@ -454,7 +456,7 @@ class HttpServer {
   Str contentStr() {
     uint8_t buffer[1024];
     Str result;
-    while(client_ptr->available()) {
+    while (client_ptr->available()) {
       int len = client_ptr->readBytes(buffer, sizeof(buffer));
       result.add((const uint8_t*)buffer, len);
     }
@@ -490,7 +492,7 @@ class HttpServer {
     path = resolveRewrite(path);
     bool processed = onRequest(path);
     if (!processed) {
-        replyNotFound();
+      replyNotFound();
     }
   }
 

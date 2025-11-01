@@ -1,8 +1,8 @@
 #pragma once
 
-#include "IUDPService.h"
-#include "Scheduler.h"
-#include "DLNAControlPoint.h"
+#include "dlna/IUDPService.h"
+#include "dlna/Scheduler.h"
+#include "dlna/clients/DLNAControlPoint.h"
 
 namespace tiny_dlna {
 
@@ -27,15 +27,18 @@ class DLNADeviceRequestParser {
     // We ignore alive notifications
     if (req.data.contains("NOTIFY")) {
       if (req.data.contains("ssdp:alive")) {
-        DlnaLogger.log(DlnaLogLevel::Debug, "invalid request: %s", req.data.c_str());
+        DlnaLogger.log(DlnaLogLevel::Debug, "invalid request: %s",
+                       req.data.c_str());
       } else {
-        DlnaLogger.log(DlnaLogLevel::Warning, "invalid request: %s", req.data.c_str());
+        DlnaLogger.log(DlnaLogLevel::Warning, "invalid request: %s",
+                       req.data.c_str());
       }
       return nullptr;
     }
 
     // We currently
-    DlnaLogger.log(DlnaLogLevel::Warning, "invalid request: %s", req.data.c_str());
+    DlnaLogger.log(DlnaLogLevel::Warning, "invalid request: %s",
+                   req.data.c_str());
 
     return nullptr;
   }
@@ -91,8 +94,8 @@ class DLNADeviceRequestParser {
       if (end < 0) end = in.indexOf("\n", start);
       if (end >= 0) {
         result.substrView(in.c_str(), start, end);
-        DlnaLogger.log(DlnaLogLevel::Debug, "%s substrView (%d,%d)->%s", tag, start, end,
-                       result.c_str());
+        DlnaLogger.log(DlnaLogLevel::Debug, "%s substrView (%d,%d)->%s", tag,
+                       start, end, result.c_str());
 
         result.trim();
         return true;

@@ -8,7 +8,7 @@
 #include "basic/Icon.h"
 #include "basic/Vector.h"
 #include "dlna/Action.h"
-#include "vector"
+#include "dlna/IUDPService.h"  // Ensure IUDPService is declared
 #include "xml/XMLPrinter.h"
 
 namespace tiny_dlna {
@@ -200,7 +200,10 @@ class DLNADeviceInfo {
   operator bool() { return is_active; }
 
   /// loop processing
-  virtual bool loop() { delay(1); return true; }
+  virtual bool loop() {
+    delay(1);
+    return true;
+  }
 
  protected:
   uint64_t timestamp = 0;
