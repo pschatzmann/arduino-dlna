@@ -84,20 +84,29 @@ $(function() {
  <a href="classtiny__dlna_1_1DLNAMediaServerConnectionMgrDescr.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="DLNAMediaServerDescr_8h_source.html">DLNAMediaServerDescr.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for tiny_dlna::DLNAMediaServerConnectionMgrDescr:</div>
+<div class="dyncontent">
+<div class="center"><img src="classtiny__dlna_1_1DLNAMediaServerConnectionMgrDescr__inherit__graph.png" border="0" usemap="#atiny__dlna_1_1DLNAMediaServerConnectionMgrDescr_inherit__map" alt="Inheritance graph"/></div>
+<map name="atiny__dlna_1_1DLNAMediaServerConnectionMgrDescr_inherit__map" id="atiny__dlna_1_1DLNAMediaServerConnectionMgrDescr_inherit__map">
+<area shape="rect" title="ConnectionManager SCPD descriptor for MediaServer." alt="" coords="5,79,213,119"/>
+<area shape="rect" href="classtiny__dlna_1_1DLNADescr.html" title="Abstract DLNA Descriptor Generation." alt="" coords="28,5,191,31"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aaa6efecf923fc43503f747b9cdb1419c"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaServerConnectionMgrDescr.html#aaa6efecf923fc43503f747b9cdb1419c">printDescr</a> (Print &amp;out)</td></tr>
-<tr class="memdesc:aaa6efecf923fc43503f747b9cdb1419c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Emit ConnectionManager SCPD XML.  <br /></td></tr>
-<tr class="separator:aaa6efecf923fc43503f747b9cdb1419c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0afa18724213cbc09f4cf7c4e1d054dd"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaServerConnectionMgrDescr.html#a0afa18724213cbc09f4cf7c4e1d054dd">printDescr</a> (Print &amp;out) override</td></tr>
+<tr class="memdesc:a0afa18724213cbc09f4cf7c4e1d054dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Emit ConnectionManager SCPD XML.  <br /></td></tr>
+<tr class="separator:a0afa18724213cbc09f4cf7c4e1d054dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>ConnectionManager SCPD descriptor for MediaServer. </p>
 <p><a class="el" href="classtiny__dlna_1_1DLNAMediaServerConnectionMgrDescr.html" title="ConnectionManager SCPD descriptor for MediaServer.">DLNAMediaServerConnectionMgrDescr</a> generates the Service Control Protocol Description (SCPD) XML for the ConnectionManager service and writes it to any Arduino-style <code>Print</code> instance. The primary method is <code>printDescr(Print&amp; out)</code> which emits XML and returns the number of bytes written. That return value can be used to compute HTTP Content-Length before streaming the body.</p>
 <p>The class is stateless and intended to be constructed on-demand by request handlers. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="aaa6efecf923fc43503f747b9cdb1419c" name="aaa6efecf923fc43503f747b9cdb1419c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaa6efecf923fc43503f747b9cdb1419c">&#9670;&#160;</a></span>printDescr()</h2>
+<a id="a0afa18724213cbc09f4cf7c4e1d054dd" name="a0afa18724213cbc09f4cf7c4e1d054dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0afa18724213cbc09f4cf7c4e1d054dd">&#9670;&#160;</a></span>printDescr()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -115,7 +124,7 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -129,6 +138,8 @@ Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>number of bytes written</dd></dl>
 <p>Use the returned size to set Content-Length when streaming the response without creating a temporary buffer. </p>
+
+<p>Implements <a class="el" href="classtiny__dlna_1_1DLNADescr.html#a24f65ec5ba8963ac600a3d70167a80de">tiny_dlna::DLNADescr</a>.</p>
 
 </div>
 </div>
