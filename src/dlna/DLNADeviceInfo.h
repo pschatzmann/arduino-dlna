@@ -3,13 +3,13 @@
 
 #include <functional>  // std::bind
 
-#include "DLNAServiceInfo.h"
-#include "StringRegistry.h"
 #include "basic/Icon.h"
 #include "basic/Vector.h"
 #include "dlna/Action.h"
+#include "dlna/DLNAServiceInfo.h"
 #include "dlna/IUDPService.h"  // Ensure IUDPService is declared
-#include "xml/XMLPrinter.h"
+#include "dlna/StringRegistry.h"
+#include "dlna/xml/XMLPrinter.h"
 
 namespace tiny_dlna {
 

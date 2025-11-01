@@ -1,9 +1,9 @@
 #pragma once
 
 #include "Arduino.h"  // for millis
-#include "DLNADeviceInfo.h"
-#include "IUDPService.h"
-#include "Schedule.h"
+#include "dlna/DLNADeviceInfo.h"
+#include "dlna/IUDPService.h"
+#include "dlna/Schedule.h"
 
 namespace tiny_dlna {
 
