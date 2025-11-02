@@ -176,7 +176,11 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a56064856ab0e0e8a9371b668b1677203"><td class="mdescLeft">&#160;</td><td class="mdescRight">Publish the RelativeTimePosition property.  <br /></td></tr>
 <tr class="separator:a56064856ab0e0e8a9371b668b1677203"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a722682e4a14befbdf49df53728974af6"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a722682e4a14befbdf49df53728974af6">getCurrentTransportActions</a> ()</td></tr>
+<tr class="memdesc:a722682e4a14befbdf49df53728974af6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a csv of the valid actions.  <br /></td></tr>
 <tr class="separator:a722682e4a14befbdf49df53728974af6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c78367f7d9e209086082f3f62170eb8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a9c78367f7d9e209086082f3f62170eb8">setCustomActionRule</a> (const char *suffix, bool(*handler)(<a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html">DLNAMediaRenderer</a> *, <a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;, <a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;))</td></tr>
+<tr class="memdesc:a9c78367f7d9e209086082f3f62170eb8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines a custom action rule for the media renderer.  <br /></td></tr>
+<tr class="separator:a9c78367f7d9e209086082f3f62170eb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a367895351ae485ae432fb25d236d1559"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#a367895351ae485ae432fb25d236d1559">print</a> (Print &amp;out)</td></tr>
 <tr class="memdesc:a367895351ae485ae432fb25d236d1559"><td class="mdescLeft">&#160;</td><td class="mdescRight">renders the device xml  <br /></td></tr>
 <tr class="separator:a367895351ae485ae432fb25d236d1559"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -294,6 +298,11 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a72541f2733d1f5c9d5439e8132efdbdc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a72541f2733d1f5c9d5439e8132efdbdc">setupServicesImpl</a> (<a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> *server)</td></tr>
 <tr class="memdesc:a72541f2733d1f5c9d5439e8132efdbdc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup service descriptors and control/event endpoints.  <br /></td></tr>
 <tr class="separator:a72541f2733d1f5c9d5439e8132efdbdc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a767b4f9afe864f8b13779a6fcec04a4a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a767b4f9afe864f8b13779a6fcec04a4a">processAction</a> (<a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;action, <a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;server)</td></tr>
+<tr class="memdesc:a767b4f9afe864f8b13779a6fcec04a4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Process parsed SOAP <a class="el" href="classtiny__dlna_1_1ActionRequest.html" title="Represents a request to invoke a remote DLNA service action.">ActionRequest</a> and dispatch to appropriate handler.  <br /></td></tr>
+<tr class="separator:a767b4f9afe864f8b13779a6fcec04a4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e9d75c510fdad7afaa99000641874b8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a3e9d75c510fdad7afaa99000641874b8">setupRules</a> ()</td></tr>
+<tr class="separator:a3e9d75c510fdad7afaa99000641874b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a74bb1fb1a59df2476d5c2faa6c98cc2a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#a74bb1fb1a59df2476d5c2faa6c98cc2a">setupServices</a> (<a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;server, <a class="el" href="classtiny__dlna_1_1IUDPService.html">IUDPService</a> &amp;udp)</td></tr>
 <tr class="memdesc:a74bb1fb1a59df2476d5c2faa6c98cc2a"><td class="mdescLeft">&#160;</td><td class="mdescRight">to be implemented by subclasses  <br /></td></tr>
 <tr class="separator:a74bb1fb1a59df2476d5c2faa6c98cc2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -335,6 +344,20 @@ Static Protected Member Functions</h2></td></tr>
 <tr class="separator:a1ce738a32c561cf9cec6d86b03875d3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab67bcc7a257ae45280f2aac10bf55902"><td class="memItemLeft" align="right" valign="top">static size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#ab67bcc7a257ae45280f2aac10bf55902">replySetMute</a> (Print &amp;out)</td></tr>
 <tr class="separator:ab67bcc7a257ae45280f2aac10bf55902"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97de0368d56443771a81d181de5fcc67"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a97de0368d56443771a81d181de5fcc67">handlePlay</a> (<a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html">DLNAMediaRenderer</a> *self, <a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;, <a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;server)</td></tr>
+<tr class="separator:a97de0368d56443771a81d181de5fcc67"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac7cf313cf741fb79c930996d12f3dd77"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#ac7cf313cf741fb79c930996d12f3dd77">handlePause</a> (<a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html">DLNAMediaRenderer</a> *self, <a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;, <a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;server)</td></tr>
+<tr class="separator:ac7cf313cf741fb79c930996d12f3dd77"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba7d5e04607b0c96b2f32828a4435312"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#aba7d5e04607b0c96b2f32828a4435312">handleStop</a> (<a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html">DLNAMediaRenderer</a> *self, <a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;, <a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;server)</td></tr>
+<tr class="separator:aba7d5e04607b0c96b2f32828a4435312"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5944944d8b9144feed6f6a26edf76c50"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a5944944d8b9144feed6f6a26edf76c50">handleGetCurrentTransportActions</a> (<a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html">DLNAMediaRenderer</a> *self, <a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;, <a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;server)</td></tr>
+<tr class="separator:a5944944d8b9144feed6f6a26edf76c50"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a11aadbfc4aceb1886354dd9e898821b4"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a11aadbfc4aceb1886354dd9e898821b4">handleSetAVTransportURI</a> (<a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html">DLNAMediaRenderer</a> *self, <a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;action, <a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;server)</td></tr>
+<tr class="separator:a11aadbfc4aceb1886354dd9e898821b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3326c318632568441f63954946b6de0"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#ad3326c318632568441f63954946b6de0">handleSetVolume</a> (<a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html">DLNAMediaRenderer</a> *self, <a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;action, <a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;server)</td></tr>
+<tr class="separator:ad3326c318632568441f63954946b6de0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7dd41d7bc5ce6b6beee8876991fcbcf4"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a7dd41d7bc5ce6b6beee8876991fcbcf4">handleSetMute</a> (<a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html">DLNAMediaRenderer</a> *self, <a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;action, <a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;server)</td></tr>
+<tr class="separator:a7dd41d7bc5ce6b6beee8876991fcbcf4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -366,6 +389,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a7ab0476214991f4333a74cbeb3657733"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a10c783b8b3677877633b02c879ef188a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1IUDPService.html">IUDPService</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a10c783b8b3677877633b02c879ef188a">p_udp_member</a> = nullptr</td></tr>
 <tr class="separator:a10c783b8b3677877633b02c879ef188a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a1ec1d65312698e5e215d8e202ee071"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt; <a class="el" href="structtiny__dlna_1_1ActionRule.html">ActionRule</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a5a1ec1d65312698e5e215d8e202ee071">rules</a></td></tr>
+<tr class="separator:a5a1ec1d65312698e5e215d8e202ee071"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af83b1b3e3a439bc6ff049b43adaa7512"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#af83b1b3e3a439bc6ff049b43adaa7512">timestamp</a> = 0</td></tr>
 <tr class="separator:af83b1b3e3a439bc6ff049b43adaa7512"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa7460468c12c3e6a2300a5c6cc725492"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structtiny__dlna_1_1XMLPrinter.html">XMLPrinter</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#aa7460468c12c3e6a2300a5c6cc725492">xml</a></td></tr>
@@ -747,6 +772,8 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Get a csv of the valid actions. </p>
 
 </div>
 </div>
@@ -1379,6 +1406,300 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a5944944d8b9144feed6f6a26edf76c50" name="a5944944d8b9144feed6f6a26edf76c50"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5944944d8b9144feed6f6a26edf76c50">&#9670;&#160;</a></span>handleGetCurrentTransportActions()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool tiny_dlna::DLNAMediaRenderer::handleGetCurrentTransportActions </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html">DLNAMediaRenderer</a> *&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;&#160;</td>
+          <td class="paramname"><em>server</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac7cf313cf741fb79c930996d12f3dd77" name="ac7cf313cf741fb79c930996d12f3dd77"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac7cf313cf741fb79c930996d12f3dd77">&#9670;&#160;</a></span>handlePause()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool tiny_dlna::DLNAMediaRenderer::handlePause </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html">DLNAMediaRenderer</a> *&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;&#160;</td>
+          <td class="paramname"><em>server</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a97de0368d56443771a81d181de5fcc67" name="a97de0368d56443771a81d181de5fcc67"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a97de0368d56443771a81d181de5fcc67">&#9670;&#160;</a></span>handlePlay()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool tiny_dlna::DLNAMediaRenderer::handlePlay </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html">DLNAMediaRenderer</a> *&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;&#160;</td>
+          <td class="paramname"><em>server</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a11aadbfc4aceb1886354dd9e898821b4" name="a11aadbfc4aceb1886354dd9e898821b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a11aadbfc4aceb1886354dd9e898821b4">&#9670;&#160;</a></span>handleSetAVTransportURI()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool tiny_dlna::DLNAMediaRenderer::handleSetAVTransportURI </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html">DLNAMediaRenderer</a> *&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;&#160;</td>
+          <td class="paramname"><em>action</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;&#160;</td>
+          <td class="paramname"><em>server</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7dd41d7bc5ce6b6beee8876991fcbcf4" name="a7dd41d7bc5ce6b6beee8876991fcbcf4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7dd41d7bc5ce6b6beee8876991fcbcf4">&#9670;&#160;</a></span>handleSetMute()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool tiny_dlna::DLNAMediaRenderer::handleSetMute </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html">DLNAMediaRenderer</a> *&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;&#160;</td>
+          <td class="paramname"><em>action</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;&#160;</td>
+          <td class="paramname"><em>server</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad3326c318632568441f63954946b6de0" name="ad3326c318632568441f63954946b6de0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3326c318632568441f63954946b6de0">&#9670;&#160;</a></span>handleSetVolume()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool tiny_dlna::DLNAMediaRenderer::handleSetVolume </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html">DLNAMediaRenderer</a> *&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;&#160;</td>
+          <td class="paramname"><em>action</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;&#160;</td>
+          <td class="paramname"><em>server</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aba7d5e04607b0c96b2f32828a4435312" name="aba7d5e04607b0c96b2f32828a4435312"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba7d5e04607b0c96b2f32828a4435312">&#9670;&#160;</a></span>handleStop()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool tiny_dlna::DLNAMediaRenderer::handleStop </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html">DLNAMediaRenderer</a> *&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;&#160;</td>
+          <td class="paramname"><em>server</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a0ecae2db20b901e20c6fb8ea81ae85af" name="a0ecae2db20b901e20c6fb8ea81ae85af"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0ecae2db20b901e20c6fb8ea81ae85af">&#9670;&#160;</a></span>isActive()</h2>
 
@@ -1772,6 +2093,52 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a767b4f9afe864f8b13779a6fcec04a4a" name="a767b4f9afe864f8b13779a6fcec04a4a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a767b4f9afe864f8b13779a6fcec04a4a">&#9670;&#160;</a></span>processAction()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool tiny_dlna::DLNAMediaRenderer::processAction </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;&#160;</td>
+          <td class="paramname"><em>action</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;&#160;</td>
+          <td class="paramname"><em>server</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Process parsed SOAP <a class="el" href="classtiny__dlna_1_1ActionRequest.html" title="Represents a request to invoke a remote DLNA service action.">ActionRequest</a> and dispatch to appropriate handler. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">action</td><td>Parsed <a class="el" href="classtiny__dlna_1_1ActionRequest.html" title="Represents a request to invoke a remote DLNA service action.">ActionRequest</a> </td></tr>
+    <tr><td class="paramname">server</td><td><a class="el" href="classtiny__dlna_1_1HttpServer.html" title="A Simple Header only implementation of Http Server that allows the registration of callback functions...">HttpServer</a> for reply </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if action handled, false if not supported </dd></dl>
+
+</div>
+</div>
 <a id="a56064856ab0e0e8a9371b668b1677203" name="a56064856ab0e0e8a9371b668b1677203"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a56064856ab0e0e8a9371b668b1677203">&#9670;&#160;</a></span>publishGetRelativeTimePositionSec()</h2>
 
@@ -2134,6 +2501,44 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Defines the base URL. </p>
+
+</div>
+</div>
+<a id="a9c78367f7d9e209086082f3f62170eb8" name="a9c78367f7d9e209086082f3f62170eb8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c78367f7d9e209086082f3f62170eb8">&#9670;&#160;</a></span>setCustomActionRule()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tiny_dlna::DLNAMediaRenderer::setCustomActionRule </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>suffix</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool(*)(<a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html">DLNAMediaRenderer</a> *, <a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;, <a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;)&#160;</td>
+          <td class="paramname"><em>handler</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Defines a custom action rule for the media renderer. </p>
 
 </div>
 </div>
@@ -2670,6 +3075,31 @@ Protected Attributes</h2></td></tr>
   </td>
   <td class="mlabels-right">
 <span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3e9d75c510fdad7afaa99000641874b8" name="a3e9d75c510fdad7afaa99000641874b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e9d75c510fdad7afaa99000641874b8">&#9670;&#160;</a></span>setupRules()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tiny_dlna::DLNAMediaRenderer::setupRules </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -3364,6 +3794,28 @@ Protected Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classtiny__dlna_1_1IUDPService.html">IUDPService</a>* tiny_dlna::DLNAMediaRenderer::p_udp_member = nullptr</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5a1ec1d65312698e5e215d8e202ee071" name="a5a1ec1d65312698e5e215d8e202ee071"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a1ec1d65312698e5e215d8e202ee071">&#9670;&#160;</a></span>rules</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt;<a class="el" href="structtiny__dlna_1_1ActionRule.html">ActionRule</a>&gt; tiny_dlna::DLNAMediaRenderer::rules</td>
         </tr>
       </table>
   </td>
