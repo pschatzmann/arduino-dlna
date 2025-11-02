@@ -84,7 +84,8 @@ class DLNAMediaServer : public DLNADeviceInfo {
     setupRules();
   }
   /**
-   * @brief Construct a MediaServer with associated HTTP server and UDP service
+   * @brief Recommended constructor
+   * Construct a MediaServer with associated HTTP server and UDP service
    * This constructor stores the provided server/udp references so begin() can
    * be called without parameters.
    */
