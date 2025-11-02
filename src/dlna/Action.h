@@ -1,13 +1,16 @@
 
 #pragma once
-//#include "dlna/DLNAServiceInfo.h"
-#include "dlna/xml/XMLPrinter.h"
-#include "dlna/StringRegistry.h"
+// #include "dlna/DLNAServiceInfo.h"
 #include "dlna/DLNACommon.h"
+#include "dlna/StringRegistry.h"
+#include "dlna/xml/XMLPrinter.h"
 
 namespace tiny_dlna {
 
 class DLNAServiceInfo;
+class DLNAMediaRenderer;
+class ActionRequest;
+class HttpServer;
 
 /**
  * @brief DLNA Service: Action Argument
@@ -84,7 +87,8 @@ class ActionReply {
 
   void logArguments() {
     for (auto& a : arguments) {
-      DlnaLogger.log(DlnaLogLevel::Info, "  -> %s = %s", StringRegistry::nullStr(a.name),
+      DlnaLogger.log(DlnaLogLevel::Info, "  -> %s = %s",
+                     StringRegistry::nullStr(a.name),
                      StringRegistry::nullStr(a.value.c_str()));
     }
   }
@@ -155,9 +159,12 @@ class ActionRequest {
   const char* action = nullptr;
   Vector<Argument> arguments{10};
   int result_count = 0;
-  operator bool() {
-    return p_service != nullptr && action != nullptr;
-  }
+  operator bool() { return p_service != nullptr && action != nullptr; }
+};
+
+struct ActionRule {
+  const char* suffix;
+  bool (*handler)(DLNAMediaRenderer*, ActionRequest&, HttpServer&);
 };
 
 }  // namespace tiny_dlna
