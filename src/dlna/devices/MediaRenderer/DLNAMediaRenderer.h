@@ -356,6 +356,8 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
 
     Str actionName;
     Str currentUri;
+    NullPrint nop;
+
 
     Client& client = server->client();
     uint8_t buf[XML_PARSER_BUFFER_SIZE];
@@ -366,8 +368,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
       while (xp.parse(nodeName, path, text, attrs)) {
         // capture action name (Play, Pause, Stop, SetAVTransportURI etc.)
         if (actionName.isEmpty()) {
-          if (nodeName.equals("Play") ||
-              nodeName.equals("Pause") ||
+          if (nodeName.equals("Play") || nodeName.equals("Pause") ||
               nodeName.equals("Stop") ||
               nodeName.equals("GetCurrentTransportActions") ||
               nodeName.equals("SetAVTransportURI")) {
@@ -387,40 +388,33 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     // p_media_renderer which is set in setHttpServer().
     if (actionName == "Play") {
       media_renderer.setActive(true);
-      server->reply("text/xml", [](Print& out) {
-        DLNAMediaRenderer::printReplyXML(out, "PlayResponse", "AVTransport");
-      });
+      server->reply("text/xml", DLNAMediaRenderer::replyPlay(nop),&DLNAMediaRenderer::replyPlay);
       return;
     }
     if (actionName == "Pause") {
       media_renderer.setActive(false);
-      server->reply("text/xml", [](Print& out) {
-        DLNAMediaRenderer::printReplyXML(out, "PauseResponse", "AVTransport");
-      });
+      server->reply("text/xml", DLNAMediaRenderer::replyPause(nop), &DLNAMediaRenderer::replyPause);
       return;
     }
     if (actionName == "Stop") {
       media_renderer.setActive(false);
-      server->reply("text/xml", [](Print& out) {
-        DLNAMediaRenderer::printReplyXML(out, "StopResponse", "AVTransport");
-      });
+      server->reply("text/xml", DLNAMediaRenderer::replyStop(nop), &DLNAMediaRenderer::replyStop);
       return;
     }
     if (actionName == "GetCurrentTransportActions") {
       StrPrint returnValue;
-      returnValue.printf("<u:return>%s</u:return>", media_renderer.getCurrentTransportActions());
+      returnValue.printf("<u:return>%s</u:return>",
+                         media_renderer.getCurrentTransportActions());
       StrPrint xml;
-      DLNAMediaRenderer::printReplyXML(xml, "QueryStateVariableResponse", "AVTransport", returnValue.c_str());
+      DLNAMediaRenderer::printReplyXML(xml, "QueryStateVariableResponse",
+                                       "AVTransport", returnValue.c_str());
       server->reply("text/xml", xml.c_str(), xml.length());
       return;
     }
     if (actionName == "SetAVTransportURI") {
       if (!currentUri.isEmpty()) {
         media_renderer.setPlaybackURL(currentUri.c_str());
-        server->reply("text/xml", [](Print& out) {
-          DLNAMediaRenderer::printReplyXML(out, "SetAVTransportURIResponse",
-                                           "AVTransport");
-        });
+        server->reply("text/xml", DLNAMediaRenderer::replySetAVTransportURI(nop), &DLNAMediaRenderer::replySetAVTransportURI);
         return;
       } else {
         DlnaLogger.log(DlnaLogLevel::Warning,
@@ -442,6 +436,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     Vector<Str> path{6};
     Str text;
     Str attrs;
+    NullPrint nop;
 
     Str actionName;
     int desiredVolume = -1;
@@ -457,8 +452,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
       xp.write(buf, r);
       while (xp.parse(nodeName, path, text, attrs)) {
         if (actionName.isEmpty()) {
-          if (nodeName.equals("SetVolume") ||
-              nodeName.equals("SetMute")) {
+          if (nodeName.equals("SetVolume") || nodeName.equals("SetMute")) {
             actionName = nodeName;
           }
         }
@@ -478,18 +472,14 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     // accessed through p_media_renderer.
     if (actionName == "SetVolume" && haveVolume) {
       media_renderer.setVolume((uint8_t)desiredVolume);
-      server->reply("text/xml", [](Print& out) {
-        DLNAMediaRenderer::printReplyXML(out, "SetVolumeResponse",
-                                         "RenderingControl");
-      });
+      server->reply("text/xml", DLNAMediaRenderer::replySetVolume(nop),
+                    &DLNAMediaRenderer::replySetVolume);
       return;
     }
     if (actionName == "SetMute" && haveMute) {
       media_renderer.setMuted(desiredMute);
-      server->reply("text/xml", [](Print& out) {
-        DLNAMediaRenderer::printReplyXML(out, "SetMuteResponse",
-                                         "RenderingControl");
-      });
+      server->reply("text/xml", DLNAMediaRenderer::replySetMute(nop),
+                    &DLNAMediaRenderer::replySetMute);
       return;
     }
     server->replyError(400, "Invalid Action");
@@ -557,7 +547,8 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
 
   /// Builds a standard SOAP reply envelope
   static int printReplyXML(Print& out, const char* replyName,
-                           const char* serviceId, const char* values = nullptr) {
+                           const char* serviceId,
+                           const char* values = nullptr) {
     XMLPrinter xp(out);
     size_t result = 0;
     result += xp.printNodeBegin(
@@ -566,15 +557,40 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     result += xp.printf("<u:%s xmlns:u=\"urn:schemas-upnp-org:service:%s:1\">",
                         replyName, serviceId);
 
-    // e.g.<u:return>Stop,Pause,Next,Seek</u:return> for QueryStateVariableResponse
+    // e.g.<u:return>Stop,Pause,Next,Seek</u:return> for
+    // QueryStateVariableResponse
     if (values) {
-      result += xp.printf("%s",values);
+      result += xp.printf("%s", values);
     }
 
     result += xp.printf("</u:%s>", replyName);
     result += xp.printNodeEnd("s:Body");
     result += xp.printNodeEnd("s:Envelope");
     return result;
+  }
+
+  // Static reply helper methods for SOAP actions
+  static size_t replyPlay(Print& out) {
+    return DLNAMediaRenderer::printReplyXML(out, "PlayResponse", "AVTransport");
+  }
+  static size_t replyPause(Print& out) {
+    return DLNAMediaRenderer::printReplyXML(out, "PauseResponse",
+                                            "AVTransport");
+  }
+  static size_t replyStop(Print& out) {
+    return DLNAMediaRenderer::printReplyXML(out, "StopResponse", "AVTransport");
+  }
+  static size_t replySetAVTransportURI(Print& out) {
+    return DLNAMediaRenderer::printReplyXML(out, "SetAVTransportURIResponse",
+                                            "AVTransport");
+  }
+  static size_t replySetVolume(Print& out) {
+  return DLNAMediaRenderer::printReplyXML(out, "SetVolumeResponse",
+                      "RenderingControl");
+  }
+  static size_t replySetMute(Print& out) {
+    return DLNAMediaRenderer::printReplyXML(out, "SetMuteResponse",
+                                            "RenderingControl");
   }
 };
 

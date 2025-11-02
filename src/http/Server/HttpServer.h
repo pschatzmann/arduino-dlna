@@ -311,10 +311,23 @@ class HttpServer {
   }
 
   /// write reply - using callback that writes to stream
-  void reply(const char* contentType, void (*callback)(Stream& out),
+  void reply(const char* contentType, size_t (*callback)(Stream& out),
              int status = 200, const char* msg = SUCCESS) {
     DlnaLogger.log(DlnaLogLevel::Info, "reply %s", "callback");
     reply_header.setValues(status, msg);
+    reply_header.put(CONTENT_TYPE, contentType);
+    reply_header.put(CONNECTION, CON_KEEP_ALIVE);
+    reply_header.write(this->client());
+    callback(*client_ptr);
+    // inputStream.close();
+    endClient();
+  }
+  /// write reply - using callback that writes to stream
+  void reply(const char* contentType, size_t size, size_t (*callback)(Print& out),
+             int status = 200, const char* msg = SUCCESS) {
+    DlnaLogger.log(DlnaLogLevel::Info, "reply %s", "callback");
+    reply_header.setValues(status, msg);
+    reply_header.put(CONTENT_LENGTH, size);
     reply_header.put(CONTENT_TYPE, contentType);
     reply_header.put(CONNECTION, CON_KEEP_ALIVE);
     reply_header.write(this->client());
