@@ -499,6 +499,22 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     return DLNAMediaRenderer::printReplyXML(out, "SetMuteResponse",
                                             "RenderingControl");
   }
+  // Static reply helper for GetMute
+  static size_t replyGetMute(Print& out, bool isMuted) {
+    StrPrint values;
+    values.printf("<CurrentMute>%d</CurrentMute>", isMuted ? 1 : 0);
+    return DLNAMediaRenderer::printReplyXML(out, "GetMuteResponse",
+                                            "RenderingControl", values.c_str());
+  }
+
+  // Static reply helper for GetVolume
+  static size_t replyGetVolume(Print& out, uint8_t volume) {
+    StrPrint values;
+    values.printf("<CurrentVolume>%d</CurrentVolume>", volume);
+    return DLNAMediaRenderer::printReplyXML(out, "GetVolumeResponse",
+                                            "RenderingControl", values.c_str());
+  }
+
   /**
    * @brief Process parsed SOAP ActionRequest and dispatch to appropriate
    * handler
@@ -606,6 +622,23 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
            NullPrint nop;
            server.reply("text/xml", DLNAMediaRenderer::replySetMute(nop),
                         &DLNAMediaRenderer::replySetMute);
+           return true;
+         }});
+    // Add GetMute rule
+    rules.push_back({"GetMute", [](DLNAMediaRenderer* self,
+                                   ActionRequest& action, HttpServer& server) {
+                       StrPrint str;
+                       DLNAMediaRenderer::replyGetMute(str, self->isMuted());
+                       server.reply("text/xml", str.c_str());
+                       return true;
+                     }});
+    // Add GetVolume rule
+    rules.push_back(
+        {"GetVolume", [](DLNAMediaRenderer* self, ActionRequest& action,
+                         HttpServer& server) {
+           StrPrint str;
+           DLNAMediaRenderer::replyGetVolume(str, self->getVolume());
+           server.reply("text/xml", str.c_str());
            return true;
          }});
   }

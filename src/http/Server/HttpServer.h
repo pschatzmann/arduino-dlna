@@ -323,8 +323,9 @@ class HttpServer {
     endClient();
   }
   /// write reply - using callback that writes to stream
-  void reply(const char* contentType, size_t size, size_t (*callback)(Print& out),
-             int status = 200, const char* msg = SUCCESS) {
+  void reply(const char* contentType, size_t size,
+             size_t (*callback)(Print& out), int status = 200,
+             const char* msg = SUCCESS) {
     DlnaLogger.log(DlnaLogLevel::Info, "reply %s", "callback");
     reply_header.setValues(status, msg);
     reply_header.put(CONTENT_LENGTH, size);
@@ -427,28 +428,39 @@ class HttpServer {
   /// Call this method from your loop!
   bool copy() {
     bool result = false;
-    // get the actual client_ptr
-    if (is_active) {
-      WiFiClient client = server_ptr->accept();
-      if (client.connected()) {
-        DlnaLogger.log(DlnaLogLevel::Info, "doLoop->hasClient");
-        client_ptr = &client;
-
-        // process the new client with standard functionality
-        if (client.available() > 5) {
-          processRequest();
-        }
-
-        result = true;
-      } else {
-        // give other tasks a chance
-        delay(no_connect_delay);
-        // DlnaLogger.log(DlnaLogLevel::Debug, "HttpServer no client
-        // available");
-      }
-    } else {
-      DlnaLogger.log(DlnaLogLevel::Warning, "HttpServer inactive");
+    if (!is_active) {
+      delay(no_connect_delay);
+      return false;
     }
+
+    // Accept new client and add to list if connected
+    WiFiClient client = server_ptr->accept();
+    if (client.connected()) {
+      DlnaLogger.log(DlnaLogLevel::Info, "copy: accepted new client");
+      open_clients.push_back(client);
+    }
+
+    // Process one client per call
+    if (!open_clients.empty()) {
+      delay(no_connect_delay);
+      return false;
+    }
+
+    if (current_client_iterator == open_clients.end()) {
+      current_client_iterator = open_clients.begin();
+    }
+
+    client_ptr = &(*current_client_iterator);
+    if (!client_ptr->connected()) {
+      // Remove disconnected client if needed
+      DlnaLogger.log(DlnaLogLevel::Info, "copy: removing disconnected client");
+      open_clients.erase(current_client_iterator);
+      return false;
+    }
+    processRequest();
+    result = true;
+    ++current_client_iterator;
+
     return result;
   }
 
@@ -487,8 +499,9 @@ class HttpServer {
   HttpRequestHeader request_header;
   HttpReplyHeader reply_header;
   List<HttpRequestHandlerLine*> handler_collection;
-  // List<Extension*> extension_collection;
   List<HttpRequestRewrite*> rewrite_collection;
+  List<WiFiClient> open_clients;
+  List<WiFiClient>::Iterator current_client_iterator = open_clients.begin();
   Client* client_ptr = nullptr;
   WiFiServer* server_ptr = nullptr;
   bool is_active;
