@@ -74,6 +74,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
@@ -99,6 +100,11 @@ Inheritance diagram for tiny_dlna::DLNAMediaServer:</div>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1DLNAMediaServer_1_1ActionRule.html">ActionRule</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
 <tr class="memitem:ab0d3542582b25112c727cc1f527f2107"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaServer.html#ab0d3542582b25112c727cc1f527f2107">PrepareDataCallback</a>) (const char *objectID, <a class="el" href="namespacetiny__dlna.html#a7ecfa08a6b938018e48a3a309e895aa9">ContentQueryType</a> queryType, const char *filter, int startingIndex, int requestedCount, const char *sortCriteria, int &amp;numberReturned, int &amp;totalMatches, int &amp;updateID, void *reference)</td></tr>
@@ -293,11 +299,13 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
+<tr class="memitem:a0ea080f9e50f1d6e36aba828933b62b1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaServer.html#a0ea080f9e50f1d6e36aba828933b62b1">setCustomActionRule</a> (const char *suffix, bool(*handler)(<a class="el" href="classtiny__dlna_1_1DLNAMediaServer.html">DLNAMediaServer</a> *, <a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;, <a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;))</td></tr>
+<tr class="separator:a0ea080f9e50f1d6e36aba828933b62b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a874ca65828a822a90a4041b24d48e6c3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaServer.html#a874ca65828a822a90a4041b24d48e6c3">setupServicesImpl</a> (<a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> *server)</td></tr>
 <tr class="memdesc:a874ca65828a822a90a4041b24d48e6c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup the service endpoints.  <br /></td></tr>
 <tr class="separator:a874ca65828a822a90a4041b24d48e6c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad72ea75b0a9dfea1d525fd07037d4381"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaServer.html#ad72ea75b0a9dfea1d525fd07037d4381">processAction</a> (<a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;action, <a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;server)</td></tr>
-<tr class="memdesc:ad72ea75b0a9dfea1d525fd07037d4381"><td class="mdescLeft">&#160;</td><td class="mdescRight">Process action requests.  <br /></td></tr>
+<tr class="memdesc:ad72ea75b0a9dfea1d525fd07037d4381"><td class="mdescLeft">&#160;</td><td class="mdescRight">Process action requests using rules-based dispatch.  <br /></td></tr>
 <tr class="separator:ad72ea75b0a9dfea1d525fd07037d4381"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab9f87e8fa426deb78f13753e90c320dd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaServer.html#ab9f87e8fa426deb78f13753e90c320dd">processActionBrowse</a> (<a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;action, <a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;server)</td></tr>
 <tr class="separator:ab9f87e8fa426deb78f13753e90c320dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -334,6 +342,8 @@ Protected Member Functions</h2></td></tr>
 <tr class="separator:a1451c1b32dba32168f417d7095d3b37c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2f36c1edf3ec48614400d2f533439360"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaServer.html#a2f36c1edf3ec48614400d2f533439360">toStr</a> (<a class="el" href="namespacetiny__dlna.html#a85d3f686372782f654ff23302800aac9">MediaItemClass</a> itemClass)</td></tr>
 <tr class="separator:a2f36c1edf3ec48614400d2f533439360"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b998fdc41a396f9aa0e0aba6691dafe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaServer.html#a2b998fdc41a396f9aa0e0aba6691dafe">setupRules</a> ()</td></tr>
+<tr class="separator:a2b998fdc41a396f9aa0e0aba6691dafe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a74bb1fb1a59df2476d5c2faa6c98cc2a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#a74bb1fb1a59df2476d5c2faa6c98cc2a">setupServices</a> (<a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;server, <a class="el" href="classtiny__dlna_1_1IUDPService.html">IUDPService</a> &amp;udp)</td></tr>
 <tr class="memdesc:a74bb1fb1a59df2476d5c2faa6c98cc2a"><td class="mdescLeft">&#160;</td><td class="mdescRight">to be implemented by subclasses  <br /></td></tr>
 <tr class="separator:a74bb1fb1a59df2476d5c2faa6c98cc2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -397,6 +407,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:aaee5bdbbd2aee3253dedbecd70f165c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a71a4eff938153a0de2e1894a561f693b"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaServer.html#a71a4eff938153a0de2e1894a561f693b">connectionID</a> = &quot;0&quot;</td></tr>
 <tr class="separator:a71a4eff938153a0de2e1894a561f693b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba6101e1db7fe3f8c555a89912e10d61"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt; <a class="el" href="structtiny__dlna_1_1DLNAMediaServer_1_1ActionRule.html">ActionRule</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaServer.html#aba6101e1db7fe3f8c555a89912e10d61">rules</a></td></tr>
+<tr class="separator:aba6101e1db7fe3f8c555a89912e10d61"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af83b1b3e3a439bc6ff049b43adaa7512"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#af83b1b3e3a439bc6ff049b43adaa7512">timestamp</a> = 0</td></tr>
 <tr class="separator:af83b1b3e3a439bc6ff049b43adaa7512"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aecd5675fb5e240669f8bd04177f12582"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#aecd5675fb5e240669f8bd04177f12582">is_active</a> = true</td></tr>
@@ -2033,7 +2045,7 @@ IUDPService&amp;) </p>
 </table>
 </div><div class="memdoc">
 
-<p>Process action requests. </p>
+<p>Process action requests using rules-based dispatch. </p>
 
 </div>
 </div>
@@ -2454,6 +2466,42 @@ IUDPService&amp;) </p>
 </div><div class="memdoc">
 
 <p>Set the active ConnectionID for the connection manager. </p>
+
+</div>
+</div>
+<a id="a0ea080f9e50f1d6e36aba828933b62b1" name="a0ea080f9e50f1d6e36aba828933b62b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ea080f9e50f1d6e36aba828933b62b1">&#9670;&#160;</a></span>setCustomActionRule()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tiny_dlna::DLNAMediaServer::setCustomActionRule </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>suffix</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool(*)(<a class="el" href="classtiny__dlna_1_1DLNAMediaServer.html">DLNAMediaServer</a> *, <a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;, <a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;)&#160;</td>
+          <td class="paramname"><em>handler</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -3019,6 +3067,31 @@ IUDPService&amp;) </p>
   </td>
   <td class="mlabels-right">
 <span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2b998fdc41a396f9aa0e0aba6691dafe" name="a2b998fdc41a396f9aa0e0aba6691dafe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b998fdc41a396f9aa0e0aba6691dafe">&#9670;&#160;</a></span>setupRules()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tiny_dlna::DLNAMediaServer::setupRules </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -3940,6 +4013,28 @@ IUDPService&amp;) </p>
       <table class="memname">
         <tr>
           <td class="memname">void* tiny_dlna::DLNAMediaServer::reference_ = nullptr</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aba6101e1db7fe3f8c555a89912e10d61" name="aba6101e1db7fe3f8c555a89912e10d61"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba6101e1db7fe3f8c555a89912e10d61">&#9670;&#160;</a></span>rules</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt;<a class="el" href="structtiny__dlna_1_1DLNAMediaServer_1_1ActionRule.html">ActionRule</a>&gt; tiny_dlna::DLNAMediaServer::rules</td>
         </tr>
       </table>
   </td>

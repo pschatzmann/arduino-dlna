@@ -18,13 +18,14 @@ var searchData=
   ['vector_3c_20tiny_5fdlna_3a_3aactionrule_20_3e_15',['Vector&lt; tiny_dlna::ActionRule &gt;',['../classtiny__dlna_1_1Vector.html',1,'tiny_dlna']]],
   ['vector_3c_20tiny_5fdlna_3a_3aargument_20_3e_16',['Vector&lt; tiny_dlna::Argument &gt;',['../classtiny__dlna_1_1Vector.html',1,'tiny_dlna']]],
   ['vector_3c_20tiny_5fdlna_3a_3adlnadeviceinfo_20_3e_17',['Vector&lt; tiny_dlna::DLNADeviceInfo &gt;',['../classtiny__dlna_1_1Vector.html',1,'tiny_dlna']]],
-  ['vector_3c_20tiny_5fdlna_3a_3adlnaserviceinfo_20_3e_18',['Vector&lt; tiny_dlna::DLNAServiceInfo &gt;',['../classtiny__dlna_1_1Vector.html',1,'tiny_dlna']]],
-  ['vector_3c_20tiny_5fdlna_3a_3aicon_20_3e_19',['Vector&lt; tiny_dlna::Icon &gt;',['../classtiny__dlna_1_1Vector.html',1,'tiny_dlna']]],
-  ['vector_3c_20tiny_5fdlna_3a_3aqueuelockfree_3a_3anode_20_3e_20',['Vector&lt; tiny_dlna::QueueLockFree::Node &gt;',['../classtiny__dlna_1_1Vector.html',1,'tiny_dlna']]],
-  ['vector_3c_20tiny_5fdlna_3a_3aschedule_20_2a_20_3e_21',['Vector&lt; tiny_dlna::Schedule * &gt;',['../classtiny__dlna_1_1Vector.html',1,'tiny_dlna']]],
-  ['vector_3c_20tiny_5fdlna_3a_3astr_20_3e_22',['Vector&lt; tiny_dlna::Str &gt;',['../classtiny__dlna_1_1Vector.html',1,'tiny_dlna']]],
-  ['vector_3c_20tiny_5fdlna_3a_3avector_3c_20tiny_5fdlna_3a_3asubscription_20_3e_20_3e_23',['Vector&lt; tiny_dlna::Vector&lt; tiny_dlna::Subscription &gt; &gt;',['../classtiny__dlna_1_1Vector.html',1,'tiny_dlna']]],
-  ['version_5fmajor_24',['version_major',['../classtiny__dlna_1_1DLNADeviceInfo.html#afbff5dd10a6365239df791aa1a11640f',1,'tiny_dlna::DLNADeviceInfo']]],
-  ['version_5fminor_25',['version_minor',['../classtiny__dlna_1_1DLNADeviceInfo.html#a198cbf900571dafc34e50c26adc6365f',1,'tiny_dlna::DLNADeviceInfo']]],
-  ['video_26',['Video',['../namespacetiny__dlna.html#a85d3f686372782f654ff23302800aac9a34e2d1989a1dbf75cd631596133ee5ee',1,'tiny_dlna']]]
+  ['vector_3c_20tiny_5fdlna_3a_3adlnamediaserver_3a_3aactionrule_20_3e_18',['Vector&lt; tiny_dlna::DLNAMediaServer::ActionRule &gt;',['../classtiny__dlna_1_1Vector.html',1,'tiny_dlna']]],
+  ['vector_3c_20tiny_5fdlna_3a_3adlnaserviceinfo_20_3e_19',['Vector&lt; tiny_dlna::DLNAServiceInfo &gt;',['../classtiny__dlna_1_1Vector.html',1,'tiny_dlna']]],
+  ['vector_3c_20tiny_5fdlna_3a_3aicon_20_3e_20',['Vector&lt; tiny_dlna::Icon &gt;',['../classtiny__dlna_1_1Vector.html',1,'tiny_dlna']]],
+  ['vector_3c_20tiny_5fdlna_3a_3aqueuelockfree_3a_3anode_20_3e_21',['Vector&lt; tiny_dlna::QueueLockFree::Node &gt;',['../classtiny__dlna_1_1Vector.html',1,'tiny_dlna']]],
+  ['vector_3c_20tiny_5fdlna_3a_3aschedule_20_2a_20_3e_22',['Vector&lt; tiny_dlna::Schedule * &gt;',['../classtiny__dlna_1_1Vector.html',1,'tiny_dlna']]],
+  ['vector_3c_20tiny_5fdlna_3a_3astr_20_3e_23',['Vector&lt; tiny_dlna::Str &gt;',['../classtiny__dlna_1_1Vector.html',1,'tiny_dlna']]],
+  ['vector_3c_20tiny_5fdlna_3a_3avector_3c_20tiny_5fdlna_3a_3asubscription_20_3e_20_3e_24',['Vector&lt; tiny_dlna::Vector&lt; tiny_dlna::Subscription &gt; &gt;',['../classtiny__dlna_1_1Vector.html',1,'tiny_dlna']]],
+  ['version_5fmajor_25',['version_major',['../classtiny__dlna_1_1DLNADeviceInfo.html#afbff5dd10a6365239df791aa1a11640f',1,'tiny_dlna::DLNADeviceInfo']]],
+  ['version_5fminor_26',['version_minor',['../classtiny__dlna_1_1DLNADeviceInfo.html#a198cbf900571dafc34e50c26adc6365f',1,'tiny_dlna::DLNADeviceInfo']]],
+  ['video_27',['Video',['../namespacetiny__dlna.html#a85d3f686372782f654ff23302800aac9a34e2d1989a1dbf75cd631596133ee5ee',1,'tiny_dlna']]]
 ];

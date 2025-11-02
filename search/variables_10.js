@@ -15,5 +15,5 @@ var searchData=
   ['result_5fcallback_12',['result_callback',['../classtiny__dlna_1_1DLNAControlPoint.html#aad13d3f06512b8a66acf0043b0c5be18',1,'tiny_dlna::DLNAControlPoint']]],
   ['result_5fcount_13',['result_count',['../classtiny__dlna_1_1ActionRequest.html#a7e55f9b4b0ec5e86478d30aae5f5dd94',1,'tiny_dlna::ActionRequest']]],
   ['rewrite_5fcollection_14',['rewrite_collection',['../classtiny__dlna_1_1HttpServer.html#a207ba896655c9c92ea1df450a5eb97a7',1,'tiny_dlna::HttpServer']]],
-  ['rules_15',['rules',['../classtiny__dlna_1_1DLNAMediaRenderer.html#a5a1ec1d65312698e5e215d8e202ee071',1,'tiny_dlna::DLNAMediaRenderer']]]
+  ['rules_15',['rules',['../classtiny__dlna_1_1DLNAMediaRenderer.html#a5a1ec1d65312698e5e215d8e202ee071',1,'tiny_dlna::DLNAMediaRenderer::rules()'],['../classtiny__dlna_1_1DLNAMediaServer.html#aba6101e1db7fe3f8c555a89912e10d61',1,'tiny_dlna::DLNAMediaServer::rules()']]]
 ];
