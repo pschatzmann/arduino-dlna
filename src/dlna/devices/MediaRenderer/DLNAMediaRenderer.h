@@ -85,6 +85,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
   }
 
   /**
+   *  @brief Recommended constructor
    * Construct a MediaRenderer bound to an HttpServer and IUDPService.
    * The provided references are stored and used when calling begin().
    */
