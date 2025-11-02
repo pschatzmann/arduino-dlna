@@ -99,7 +99,10 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
   bool begin() { return dlna_device.begin(*this, *p_udp_member, *p_server); }
 
   /// Stops processing and releases resources
-  void end() { dlna_device.end(); }
+  void end() {
+    if (is_active) stop();
+    dlna_device.end();
+  }
 
   /// Call this from Arduino loop()
   bool loop() { return dlna_device.loop(); }
@@ -146,7 +149,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
   /// Query mute state
   bool isMuted() { return is_muted; }
 
-  /// Query whether renderer is active (playing or ready)
+  /// Query whether renderer is active (playing)
   bool isActive() { return is_active; }
 
   /// Set the active state (used by transport callbacks)
@@ -295,7 +298,9 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     }
   }
   /// Defines a custom action rule for the media renderer.
-  void setCustomActionRule(const char* suffix, bool (*handler)(DLNAMediaRenderer*, ActionRequest&, HttpServer&)) {
+  void setCustomActionRule(const char* suffix,
+                           bool (*handler)(DLNAMediaRenderer*, ActionRequest&,
+                                           HttpServer&)) {
     for (size_t i = 0; i < rules.size(); ++i) {
       if (StrView(rules[i].suffix).equals(suffix)) {
         rules[i].handler = handler;
@@ -524,59 +529,85 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
 
   /// Setup the action handling rules
   void setupRules() {
-    rules.push_back({"Play", [](DLNAMediaRenderer* self, ActionRequest& action, HttpServer& server) {
-      self->setActive(true);
-      NullPrint nop;
-      server.reply("text/xml", DLNAMediaRenderer::replyPlay(nop), &DLNAMediaRenderer::replyPlay);
-      return true;
-    }});
-    rules.push_back({"Pause", [](DLNAMediaRenderer* self, ActionRequest& action, HttpServer& server) {
-      self->setActive(false);
-      NullPrint nop;
-      server.reply("text/xml", DLNAMediaRenderer::replyPause(nop), &DLNAMediaRenderer::replyPause);
-      return true;
-    }});
-    rules.push_back({"Stop", [](DLNAMediaRenderer* self, ActionRequest& action, HttpServer& server) {
-      self->setActive(false);
-      NullPrint nop;
-      server.reply("text/xml", DLNAMediaRenderer::replyStop(nop), &DLNAMediaRenderer::replyStop);
-      return true;
-    }});
-    rules.push_back({"GetCurrentTransportActions", [](DLNAMediaRenderer* self, ActionRequest& action, HttpServer& server) {
-      StrPrint returnValue;
-      returnValue.printf("<u:return>%s</u:return>", self->getCurrentTransportActions());
-      StrPrint xml;
-      DLNAMediaRenderer::printReplyXML(xml, "QueryStateVariableResponse", "AVTransport", returnValue.c_str());
-      server.reply("text/xml", xml.c_str(), xml.length());
-      return true;
-    }});
-    rules.push_back({"SetAVTransportURI", [](DLNAMediaRenderer* self, ActionRequest& action, HttpServer& server) {
-      const char* uri = action.getArgumentValue("CurrentURI");
-      if (uri && *uri) {
-        self->setPlaybackURL(uri);
-        NullPrint nop;
-        server.reply("text/xml", DLNAMediaRenderer::replySetAVTransportURI(nop), &DLNAMediaRenderer::replySetAVTransportURI);
-        return true;
-      } else {
-        DlnaLogger.log(DlnaLogLevel::Warning, "SetAVTransportURI called with invalid SOAP payload");
-        server.replyError(400, "Invalid Action");
-        return false;
-      }
-    }});
-    rules.push_back({"SetVolume", [](DLNAMediaRenderer* self, ActionRequest& action, HttpServer& server) {
-      int desiredVolume = action.getArgumentIntValue("DesiredVolume");
-      self->setVolume((uint8_t)desiredVolume);
-      NullPrint nop;
-      server.reply("text/xml", DLNAMediaRenderer::replySetVolume(nop), &DLNAMediaRenderer::replySetVolume);
-      return true;
-    }});
-    rules.push_back({"SetMute", [](DLNAMediaRenderer* self, ActionRequest& action, HttpServer& server) {
-      bool desiredMute = action.getArgumentIntValue("DesiredMute") != 0;
-      self->setMuted(desiredMute);
-      NullPrint nop;
-      server.reply("text/xml", DLNAMediaRenderer::replySetMute(nop), &DLNAMediaRenderer::replySetMute);
-      return true;
-    }});
+    rules.push_back({"Play", [](DLNAMediaRenderer* self, ActionRequest& action,
+                                HttpServer& server) {
+                       self->setActive(true);
+                       NullPrint nop;
+                       server.reply("text/xml",
+                                    DLNAMediaRenderer::replyPlay(nop),
+                                    &DLNAMediaRenderer::replyPlay);
+                       return true;
+                     }});
+    rules.push_back({"Pause", [](DLNAMediaRenderer* self, ActionRequest& action,
+                                 HttpServer& server) {
+                       self->setActive(false);
+                       NullPrint nop;
+                       server.reply("text/xml",
+                                    DLNAMediaRenderer::replyPause(nop),
+                                    &DLNAMediaRenderer::replyPause);
+                       return true;
+                     }});
+    rules.push_back({"Stop", [](DLNAMediaRenderer* self, ActionRequest& action,
+                                HttpServer& server) {
+                       self->setActive(false);
+                       NullPrint nop;
+                       server.reply("text/xml",
+                                    DLNAMediaRenderer::replyStop(nop),
+                                    &DLNAMediaRenderer::replyStop);
+                       return true;
+                     }});
+    rules.push_back({"GetCurrentTransportActions",
+                     [](DLNAMediaRenderer* self, ActionRequest& action,
+                        HttpServer& server) {
+                       StrPrint returnValue;
+                       returnValue.printf("<u:return>%s</u:return>",
+                                          self->getCurrentTransportActions());
+                       StrPrint xml;
+                       DLNAMediaRenderer::printReplyXML(
+                           xml, "QueryStateVariableResponse", "AVTransport",
+                           returnValue.c_str());
+                       server.reply("text/xml", xml.c_str(), xml.length());
+                       return true;
+                     }});
+    rules.push_back(
+        {"SetAVTransportURI", [](DLNAMediaRenderer* self, ActionRequest& action,
+                                 HttpServer& server) {
+           const char* uri = action.getArgumentValue("CurrentURI");
+           if (uri && *uri) {
+             self->setPlaybackURL(uri);
+             NullPrint nop;
+             server.reply("text/xml",
+                          DLNAMediaRenderer::replySetAVTransportURI(nop),
+                          &DLNAMediaRenderer::replySetAVTransportURI);
+             return true;
+           } else {
+             DlnaLogger.log(
+                 DlnaLogLevel::Warning,
+                 "SetAVTransportURI called with invalid SOAP payload");
+             server.replyError(400, "Invalid Action");
+             return false;
+           }
+         }});
+    rules.push_back(
+        {"SetVolume", [](DLNAMediaRenderer* self, ActionRequest& action,
+                         HttpServer& server) {
+           int desiredVolume = action.getArgumentIntValue("DesiredVolume");
+           self->setVolume((uint8_t)desiredVolume);
+           NullPrint nop;
+           server.reply("text/xml", DLNAMediaRenderer::replySetVolume(nop),
+                        &DLNAMediaRenderer::replySetVolume);
+           return true;
+         }});
+    rules.push_back(
+        {"SetMute", [](DLNAMediaRenderer* self, ActionRequest& action,
+                       HttpServer& server) {
+           bool desiredMute = action.getArgumentIntValue("DesiredMute") != 0;
+           self->setMuted(desiredMute);
+           NullPrint nop;
+           server.reply("text/xml", DLNAMediaRenderer::replySetMute(nop),
+                        &DLNAMediaRenderer::replySetMute);
+           return true;
+         }});
   }
 };
 
