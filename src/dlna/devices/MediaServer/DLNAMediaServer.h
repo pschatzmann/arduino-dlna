@@ -1,6 +1,7 @@
 // Minimal header-only Digital Media Server (MediaServer) device
 #pragma once
 
+#include "DLNAMediaServerDescr.h"
 #include "MediaItem.h"
 #include "basic/EscapingPrint.h"
 #include "basic/Str.h"
@@ -11,7 +12,6 @@
 #include "dlna/xml/XMLParserPrint.h"
 #include "dlna/xml/XMLPrinter.h"
 #include "http/Http.h"
-#include "DLNAMediaServerDescr.h"
 
 namespace tiny_dlna {
 
@@ -81,6 +81,7 @@ class DLNAMediaServer : public DLNADeviceInfo {
     setModelName("TinyDLNA MediaServer");
     setModelNumber("1.0");
     setBaseURL("http://localhost:44757");
+    setupRules();
   }
   /**
    * @brief Construct a MediaServer with associated HTTP server and UDP service
@@ -181,6 +182,24 @@ class DLNAMediaServer : public DLNADeviceInfo {
   DLNADevice& device() { return dlna_device; }
 
  protected:
+  // Action rule struct for ContentDirectory
+  struct ActionRule {
+    const char* suffix;
+    bool (*handler)(DLNAMediaServer*, ActionRequest&, HttpServer&);
+  };
+
+  void setCustomActionRule(const char* suffix,
+                           bool (*handler)(DLNAMediaServer*, ActionRequest&,
+                                           HttpServer&)) {
+    for (size_t i = 0; i < rules.size(); ++i) {
+      if (StrView(rules[i].suffix).equals(suffix)) {
+        rules[i].handler = handler;
+        return;
+      }
+    }
+    rules.push_back({suffix, handler});
+  }
+
   static inline DLNAMediaServer* self = nullptr;
   // internal DLNA device instance owned by this MediaServer
   DLNADevice dlna_device;
@@ -292,6 +311,7 @@ class DLNAMediaServer : public DLNADeviceInfo {
       "vnd.rn-realmedia-vbr:*http-get:*:video/webm:*";
   const char* sinkProto = "";
   const char* connectionID = "0";
+  Vector<ActionRule> rules;
 
   /// Setup the service endpoints
   void setupServicesImpl(HttpServer* server) {
@@ -299,19 +319,17 @@ class DLNAMediaServer : public DLNADeviceInfo {
 
     auto contentDescCB = [](HttpServer* server, const char* requestPath,
                             HttpRequestHandlerLine* hl) {
-      server->reply("text/xml",
-                    [](Print& out) {
-                      tiny_dlna::DLNAMediaServerContentDirectoryDescr descr;
-                      descr.printDescr(out);
-                    });
+      server->reply("text/xml", [](Print& out) {
+        tiny_dlna::DLNAMediaServerContentDirectoryDescr descr;
+        descr.printDescr(out);
+      });
     };
     auto connDescCB = [](HttpServer* server, const char* requestPath,
                          HttpRequestHandlerLine* hl) {
-      server->reply("text/xml",
-                    [](Print& out) {
-                      tiny_dlna::DLNAMediaServerConnectionMgrDescr descr;
-                      descr.printDescr(out);
-                    });
+      server->reply("text/xml", [](Print& out) {
+        tiny_dlna::DLNAMediaServerConnectionMgrDescr descr;
+        descr.printDescr(out);
+      });
     };
 
     DLNAServiceInfo cd;
@@ -333,31 +351,25 @@ class DLNAMediaServer : public DLNADeviceInfo {
     addService(cm);
   }
 
-  /// Process action requests
+  /// Process action requests using rules-based dispatch
   bool processAction(ActionRequest& action, HttpServer& server) {
-    DlnaLogger.log(DlnaLogLevel::Info, "processAction");
+    DlnaLogger.log(DlnaLogLevel::Info, "DLNAMediaServer::processAction: %s",
+                   action.action);
     StrView action_str(action.action);
     if (action_str.isEmpty()) {
       DlnaLogger.log(DlnaLogLevel::Error, "Empty action received");
       server.replyNotFound();
       return false;
     }
-    if (action_str.endsWith("Browse")) {
-      return processActionBrowse(action, server);
-    } else if (action_str.endsWith("Search")) {
-      return processActionSearch(action, server);
-    } else if (action_str.endsWith("GetSearchCapabilities")) {
-      return processActionGetSearchCapabilities(action, server);
-    } else if (action_str.endsWith("GetSortCapabilities")) {
-      return processActionGetSortCapabilities(action, server);
-    } else if (action_str.endsWith("GetSystemUpdateID")) {
-      return processActionGetSystemUpdateID(action, server);
-    } else {
-      DlnaLogger.log(DlnaLogLevel::Error, "Unsupported action: %s",
-                     action.action);
-      return false;
-      server.replyNotFound();
+    for (const auto& rule : rules) {
+      if (action_str.endsWith(rule.suffix)) {
+        return rule.handler(this, action, server);
+      }
     }
+    DlnaLogger.log(DlnaLogLevel::Error, "Unsupported action: %s",
+                   action.action);
+    server.replyNotFound();
+    return false;
   }
 
   // --- Stub handlers for ContentDirectory actions ---
@@ -747,32 +759,73 @@ class DLNAMediaServer : public DLNADeviceInfo {
   // simple connection manager control that replies OK
   static void connmgrControlCB(HttpServer* server, const char* requestPath,
                                HttpRequestHandlerLine* hl) {
-    // Parse the incoming SOAP action
     ActionRequest action;
     DLNADevice::parseActionRequest(server, requestPath, hl, action);
 
     DLNAMediaServer* ms = nullptr;
     if (hl && hl->context[0]) ms = (DLNAMediaServer*)hl->context[0];
-
     if (!ms) {
       server->replyNotFound();
       return;
     }
 
-    // Dispatch to instance methods for clarity and to allow overrides
-    if (StrView(action.action).endsWith("GetProtocolInfo")) {
-      ms->processActionGetProtocolInfo(action, *server);
-      return;
-    } else if (StrView(action.action).endsWith("GetCurrentConnectionIDs")) {
-      ms->processActionGetCurrentConnectionIDs(action, *server);
-      return;
-    } else if (StrView(action.action).endsWith("GetCurrentConnectionInfo")) {
-      ms->processActionGetCurrentConnectionInfo(action, *server);
-      return;
-    }
-
-    // Unhandled actions: reply NotFound
+    // Use rules-based dispatch for ConnectionManager actions
+    if (ms->processAction(action, *server)) return;
     server->replyNotFound();
+  }
+
+  // Static handler functions for rules
+  static bool handleBrowse(DLNAMediaServer* self, ActionRequest& action,
+                           HttpServer& server) {
+    return self->processActionBrowse(action, server);
+  }
+  static bool handleSearch(DLNAMediaServer* self, ActionRequest& action,
+                           HttpServer& server) {
+    return self->processActionSearch(action, server);
+  }
+  static bool handleGetSearchCapabilities(DLNAMediaServer* self,
+                                          ActionRequest& action,
+                                          HttpServer& server) {
+    return self->processActionGetSearchCapabilities(action, server);
+  }
+  static bool handleGetSortCapabilities(DLNAMediaServer* self,
+                                        ActionRequest& action,
+                                        HttpServer& server) {
+    return self->processActionGetSortCapabilities(action, server);
+  }
+  static bool handleGetSystemUpdateID(DLNAMediaServer* self,
+                                      ActionRequest& action,
+                                      HttpServer& server) {
+    return self->processActionGetSystemUpdateID(action, server);
+  }
+  // ConnectionManager static handler functions
+  static bool handleGetProtocolInfo(DLNAMediaServer* self,
+                                    ActionRequest& action, HttpServer& server) {
+    return self->processActionGetProtocolInfo(action, server);
+  }
+  static bool handleGetCurrentConnectionIDs(DLNAMediaServer* self,
+                                            ActionRequest& action,
+                                            HttpServer& server) {
+    return self->processActionGetCurrentConnectionIDs(action, server);
+  }
+  static bool handleGetCurrentConnectionInfo(DLNAMediaServer* self,
+                                             ActionRequest& action,
+                                             HttpServer& server) {
+    return self->processActionGetCurrentConnectionInfo(action, server);
+  }
+
+  void setupRules() {
+    // ContentDirectory rules
+    rules.push_back({"Browse", handleBrowse});
+    rules.push_back({"Search", handleSearch});
+    rules.push_back({"GetSearchCapabilities", handleGetSearchCapabilities});
+    rules.push_back({"GetSortCapabilities", handleGetSortCapabilities});
+    rules.push_back({"GetSystemUpdateID", handleGetSystemUpdateID});
+    // ConnectionManager rules
+    rules.push_back({"GetProtocolInfo", handleGetProtocolInfo});
+    rules.push_back({"GetCurrentConnectionIDs", handleGetCurrentConnectionIDs});
+    rules.push_back(
+        {"GetCurrentConnectionInfo", handleGetCurrentConnectionInfo});
   }
 };
 
