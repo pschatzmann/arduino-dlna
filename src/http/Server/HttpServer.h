@@ -440,26 +440,34 @@ class HttpServer {
       open_clients.push_back(client);
     }
 
-    // Process one client per call
-    if (!open_clients.empty()) {
+    // Stop when nothing to process
+    if (open_clients.empty()) {
       delay(no_connect_delay);
       return false;
     }
 
     if (current_client_iterator == open_clients.end()) {
       current_client_iterator = open_clients.begin();
+      if (current_client_iterator == open_clients.end()) {
+        delay(no_connect_delay);
+        return false;
+      }
     }
 
     client_ptr = &(*current_client_iterator);
     if (!client_ptr->connected()) {
-      // Remove disconnected client if needed
       DlnaLogger.log(DlnaLogLevel::Info, "copy: removing disconnected client");
-      open_clients.erase(current_client_iterator);
+      current_client_iterator = open_clients.erase(current_client_iterator);
+      // Do not advance iterator here; erase returns the next valid iterator
       return false;
     }
+
     processRequest();
     result = true;
     ++current_client_iterator;
+    if (current_client_iterator == open_clients.end() && !open_clients.empty()) {
+      current_client_iterator = open_clients.begin();
+    }
 
     return result;
   }

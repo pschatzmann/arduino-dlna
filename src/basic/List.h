@@ -54,8 +54,14 @@ class List {
     }
     inline bool operator==(Iterator it) { return node == it.get_node(); }
     inline bool operator!=(Iterator it) { return node != it.get_node(); }
-    inline T& operator*() { return node->data; }
-    inline T* operator->() { return &(node->data); }
+    inline T& operator*() {
+      assert(node != nullptr);
+      return node->data;
+    }
+    inline T* operator->() {
+      assert(node != nullptr);
+      return &(node->data);
+    }
     inline Node* get_node() { return node; }
     inline operator bool() { return is_eof; }
 
@@ -283,11 +289,11 @@ class List {
     return true;
   }
 
-  bool erase(Iterator it) {
+  Iterator erase(Iterator it) {
     Node* p_delete = it.get_node();
     // check for valid iterator
     if (empty() || p_delete == &first || p_delete == &last) {
-      return false;
+      return end();
     }
     Node* p_prior = p_delete->prior;
     Node* p_next = p_delete->next;
@@ -299,7 +305,7 @@ class List {
     deleteNode(p_delete);
 
     record_count--;
-    return true;
+    return Iterator(p_next);
   }
 
   Iterator begin() {
@@ -335,10 +341,15 @@ class List {
   inline T& operator[](int index) {
     Node* n = firstDataNode();
     for (int j = 0; j < index; j++) {
-      n = n->next;
-      if (n == nullptr) {
-        return last.data;
+      if (n == &last || n == nullptr) {
+        assert(false && "List index out of bounds");
+        return last.data; // fallback, but will assert
       }
+      n = n->next;
+    }
+    if (n == &last || n == nullptr) {
+      assert(false && "List index out of bounds");
+      return last.data; // fallback, but will assert
     }
     return n->data;
   }
@@ -387,8 +398,8 @@ class List {
     assert(first.next != nullptr);
     assert(last.prior != nullptr);
     if (empty()) {
-      assert(first.next = &last);
-      assert(last.prior = &first);
+      assert(first.next == &last);
+      assert(last.prior == &first);
     }
   }
 };
