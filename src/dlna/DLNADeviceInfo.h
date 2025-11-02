@@ -197,11 +197,6 @@ class DLNADeviceInfo {
     return icons[idx];
   }
 
-  /// Update the timestamp
-  void updateTimestamp() { timestamp = millis(); }
-
-  /// Returns the time when this object has been updated
-  uint32_t getTimestamp() { return timestamp; }
 
   /// Sets the server to inactive
   void setActive(bool flag) { is_active = flag; }
@@ -215,8 +210,7 @@ class DLNADeviceInfo {
     return true;
   }
 
- protected:
-  uint64_t timestamp = 0;
+protected:
   bool is_active = true;
   XMLPrinter xml;
   Url device_url;

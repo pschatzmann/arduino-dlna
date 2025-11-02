@@ -378,7 +378,6 @@ class DLNAControlPoint {
   /// Adds a new device
   bool addDevice(DLNADeviceInfo dev) {
     DlnaLogger.log(DlnaLogLevel::Debug, "DLNAControlPointMgr::addDevice");
-    dev.updateTimestamp();
     for (auto& existing_device : devices) {
       if (dev.getUDN() == existing_device.getUDN()) {
         DlnaLogger.log(DlnaLogLevel::Debug, "Device '%s' already exists",
