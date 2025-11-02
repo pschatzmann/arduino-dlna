@@ -55,3 +55,8 @@
 #define DLNA_MAX_URL_LEN 256
 #endif
 
+// Max printf buffer size
+#ifndef MAX_PRINTF_SIZE
+#define MAX_PRINTF_SIZE 512
+#endif
+

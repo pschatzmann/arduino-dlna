@@ -7,6 +7,7 @@
 #include <cstdio>
 #include "basic/StrView.h"
 #include "basic/Vector.h"
+#include "dlna_config.h"
 
 namespace tiny_dlna {
 /**
@@ -181,7 +182,7 @@ struct XMLPrinter {
    */
   size_t printf(const char* fmt, ...) {
     assert(p_out != nullptr);
-    char buf[512];
+    char buf[MAX_PRINTF_SIZE];
     va_list ap;
     va_start(ap, fmt);
     int n = ::vsnprintf(buf, sizeof(buf), fmt, ap);

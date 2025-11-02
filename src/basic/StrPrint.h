@@ -47,7 +47,7 @@ class StrPrint : public Print {
   void setExpandEncoded(bool flag) { expand_encoded = flag; }
 
   size_t printf(const char* fmt, ...) {
-    char buf[256];
+    char buf[MAX_PRINTF_SIZE];
     va_list args;
     va_start(args, fmt);
     int n = vsnprintf(buf, sizeof(buf), fmt, args);

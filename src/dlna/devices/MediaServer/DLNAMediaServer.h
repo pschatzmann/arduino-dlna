@@ -774,58 +774,34 @@ class DLNAMediaServer : public DLNADeviceInfo {
     server->replyNotFound();
   }
 
-  // Static handler functions for rules
-  static bool handleBrowse(DLNAMediaServer* self, ActionRequest& action,
-                           HttpServer& server) {
-    return self->processActionBrowse(action, server);
-  }
-  static bool handleSearch(DLNAMediaServer* self, ActionRequest& action,
-                           HttpServer& server) {
-    return self->processActionSearch(action, server);
-  }
-  static bool handleGetSearchCapabilities(DLNAMediaServer* self,
-                                          ActionRequest& action,
-                                          HttpServer& server) {
-    return self->processActionGetSearchCapabilities(action, server);
-  }
-  static bool handleGetSortCapabilities(DLNAMediaServer* self,
-                                        ActionRequest& action,
-                                        HttpServer& server) {
-    return self->processActionGetSortCapabilities(action, server);
-  }
-  static bool handleGetSystemUpdateID(DLNAMediaServer* self,
-                                      ActionRequest& action,
-                                      HttpServer& server) {
-    return self->processActionGetSystemUpdateID(action, server);
-  }
-  // ConnectionManager static handler functions
-  static bool handleGetProtocolInfo(DLNAMediaServer* self,
-                                    ActionRequest& action, HttpServer& server) {
-    return self->processActionGetProtocolInfo(action, server);
-  }
-  static bool handleGetCurrentConnectionIDs(DLNAMediaServer* self,
-                                            ActionRequest& action,
-                                            HttpServer& server) {
-    return self->processActionGetCurrentConnectionIDs(action, server);
-  }
-  static bool handleGetCurrentConnectionInfo(DLNAMediaServer* self,
-                                             ActionRequest& action,
-                                             HttpServer& server) {
-    return self->processActionGetCurrentConnectionInfo(action, server);
-  }
 
   void setupRules() {
     // ContentDirectory rules
-    rules.push_back({"Browse", handleBrowse});
-    rules.push_back({"Search", handleSearch});
-    rules.push_back({"GetSearchCapabilities", handleGetSearchCapabilities});
-    rules.push_back({"GetSortCapabilities", handleGetSortCapabilities});
-    rules.push_back({"GetSystemUpdateID", handleGetSystemUpdateID});
+    rules.push_back({"Browse", [](DLNAMediaServer* self, ActionRequest& action, HttpServer& server) {
+      return self->processActionBrowse(action, server);
+    }});
+    rules.push_back({"Search", [](DLNAMediaServer* self, ActionRequest& action, HttpServer& server) {
+      return self->processActionSearch(action, server);
+    }});
+    rules.push_back({"GetSearchCapabilities", [](DLNAMediaServer* self, ActionRequest& action, HttpServer& server) {
+      return self->processActionGetSearchCapabilities(action, server);
+    }});
+    rules.push_back({"GetSortCapabilities", [](DLNAMediaServer* self, ActionRequest& action, HttpServer& server) {
+      return self->processActionGetSortCapabilities(action, server);
+    }});
+    rules.push_back({"GetSystemUpdateID", [](DLNAMediaServer* self, ActionRequest& action, HttpServer& server) {
+      return self->processActionGetSystemUpdateID(action, server);
+    }});
     // ConnectionManager rules
-    rules.push_back({"GetProtocolInfo", handleGetProtocolInfo});
-    rules.push_back({"GetCurrentConnectionIDs", handleGetCurrentConnectionIDs});
-    rules.push_back(
-        {"GetCurrentConnectionInfo", handleGetCurrentConnectionInfo});
+    rules.push_back({"GetProtocolInfo", [](DLNAMediaServer* self, ActionRequest& action, HttpServer& server) {
+      return self->processActionGetProtocolInfo(action, server);
+    }});
+    rules.push_back({"GetCurrentConnectionIDs", [](DLNAMediaServer* self, ActionRequest& action, HttpServer& server) {
+      return self->processActionGetCurrentConnectionIDs(action, server);
+    }});
+    rules.push_back({"GetCurrentConnectionInfo", [](DLNAMediaServer* self, ActionRequest& action, HttpServer& server) {
+      return self->processActionGetCurrentConnectionInfo(action, server);
+    }});
   }
 };
 

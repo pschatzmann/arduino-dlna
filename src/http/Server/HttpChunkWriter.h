@@ -7,6 +7,7 @@
 
 #include "Client.h"
 #include "Print.h"
+#include "dlna_config.h"
 #include "basic/Logger.h"
 #include "basic/StrView.h"
 
@@ -115,7 +116,7 @@ class ChunkPrint : public Print {
   }
 
   size_t printf(const char* fmt, ...) {
-    char buf[512];
+    char buf[MAX_PRINTF_SIZE];
     va_list ap;
     va_start(ap, fmt);
     int n = vsnprintf(buf, sizeof(buf), fmt, ap);
