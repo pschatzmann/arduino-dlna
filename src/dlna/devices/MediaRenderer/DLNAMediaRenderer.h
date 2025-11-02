@@ -182,6 +182,12 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
   /// Provides access to the internal DLNA device instance
   DLNADevice& device() { return dlna_device; }
 
+  /// Start playback: same as setActive(true)
+  bool play() {
+    setActive(true);
+    return true;
+  }
+
   /// Start playback of a network resource (returns true on success)
   bool play(const char* urlStr) {
     if (urlStr == nullptr) return false;
@@ -304,7 +310,6 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
   MediaEventHandler event_cb = nullptr;
   uint8_t current_volume = 50;
   bool is_muted = false;
-  bool is_active = false;
   unsigned long start_time = 0;
   unsigned long time_sum = 0;
   // Current transport state string (e.g. "STOPPED", "PLAYING",
@@ -515,6 +520,8 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     server.replyError(400, "Invalid Action");
     return false;
   }
+
+  /// Setup the action handling rules
   void setupRules() {
     rules.push_back({"Play", [](DLNAMediaRenderer* self, ActionRequest& action, HttpServer& server) {
       self->setActive(true);
