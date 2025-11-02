@@ -221,6 +221,10 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a3d3a2d77e4978b7171c73dcb054437d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a207ba896655c9c92ea1df450a5eb97a7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1List.html">List</a>&lt; <a class="el" href="classtiny__dlna_1_1HttpRequestRewrite.html">HttpRequestRewrite</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a207ba896655c9c92ea1df450a5eb97a7">rewrite_collection</a></td></tr>
 <tr class="separator:a207ba896655c9c92ea1df450a5eb97a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace105ebd0342bb3649775dccb210e4a8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1List.html">List</a>&lt; WiFiClient &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#ace105ebd0342bb3649775dccb210e4a8">open_clients</a></td></tr>
+<tr class="separator:ace105ebd0342bb3649775dccb210e4a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9df39d5e04972ac45b5521e400716785"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1List.html">List</a>&lt; WiFiClient &gt;::Iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a9df39d5e04972ac45b5521e400716785">current_client_iterator</a> = open_clients.begin()</td></tr>
+<tr class="separator:a9df39d5e04972ac45b5521e400716785"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0fe37ea1e8fbe4e74c25b3d69abe86fa"><td class="memItemLeft" align="right" valign="top">Client *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a0fe37ea1e8fbe4e74c25b3d69abe86fa">client_ptr</a> = nullptr</td></tr>
 <tr class="separator:a0fe37ea1e8fbe4e74c25b3d69abe86fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7074a493c7953ccb840e7bea72dc9041"><td class="memItemLeft" align="right" valign="top">WiFiServer *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a7074a493c7953ccb840e7bea72dc9041">server_ptr</a> = nullptr</td></tr>
@@ -1839,6 +1843,28 @@ password); </p>
 
 </div>
 </div>
+<a id="a9df39d5e04972ac45b5521e400716785" name="a9df39d5e04972ac45b5521e400716785"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9df39d5e04972ac45b5521e400716785">&#9670;&#160;</a></span>current_client_iterator</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1List.html">List</a>&lt;WiFiClient&gt;::Iterator tiny_dlna::HttpServer::current_client_iterator = open_clients.begin()</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a3d3a2d77e4978b7171c73dcb054437d5" name="a3d3a2d77e4978b7171c73dcb054437d5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3d3a2d77e4978b7171c73dcb054437d5">&#9670;&#160;</a></span>handler_collection</h2>
 
@@ -1916,6 +1942,28 @@ password); </p>
       <table class="memname">
         <tr>
           <td class="memname">int tiny_dlna::HttpServer::no_connect_delay = 5</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ace105ebd0342bb3649775dccb210e4a8" name="ace105ebd0342bb3649775dccb210e4a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace105ebd0342bb3649775dccb210e4a8">&#9670;&#160;</a></span>open_clients</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1List.html">List</a>&lt;WiFiClient&gt; tiny_dlna::HttpServer::open_clients</td>
         </tr>
       </table>
   </td>
