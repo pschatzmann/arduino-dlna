@@ -482,13 +482,6 @@ class DLNAMediaRendererControlDescr : public DLNADescr {
     result += xml.printNodeEnd("argumentList");
     result += xml.printNodeEnd("action");
 
-    result += xml.printNodeBeginNl("action");
-    result += xml.printNode("name", "SelectPreset");
-    result += xml.printNodeBeginNl("argumentList");
-    result += xml.printArgument("InstanceID", "in", "A_ARG_TYPE_InstanceID");
-    result += xml.printArgument("PresetName", "in", "A_ARG_TYPE_PresetName");
-    result += xml.printNodeEnd("argumentList");
-    result += xml.printNodeEnd("action");
 
     result += xml.printNodeBeginNl("action");
     result += xml.printNode("name", "SetVolume");
@@ -499,13 +492,6 @@ class DLNAMediaRendererControlDescr : public DLNADescr {
     result += xml.printNodeEnd("argumentList");
     result += xml.printNodeEnd("action");
 
-    result += xml.printNodeBeginNl("action");
-    result += xml.printNode("name", "ListPresets");
-    result += xml.printNodeBeginNl("argumentList");
-    result += xml.printArgument("InstanceID", "in", "A_ARG_TYPE_INSTANCEID");
-    result += xml.printArgument("CurrentPresetNameList", "out", "PresetNameList");
-    result += xml.printNodeEnd("argumentList");
-    result += xml.printNodeEnd("action");
 
     result += xml.printNodeBeginNl("action");
     result += xml.printNode("name", "SetMute");
