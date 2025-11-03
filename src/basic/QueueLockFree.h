@@ -14,7 +14,7 @@ namespace tiny_dlna {
 template <typename T>
 class QueueLockFree {
  public:
-  QueueLockFree(size_t capacity, Allocator& allocator = DefaultAllocator) {
+  QueueLockFree(size_t capacity, ALLOCATOR& allocator = DefaultAllocator) {
     setAllocator(allocator);
     resize(capacity);
   }
@@ -27,7 +27,7 @@ class QueueLockFree {
       (&p_node[i & capacity_mask].data)->~T();
   }
 
-  void setAllocator(Allocator& allocator) { vector.setAllocator(allocator); }
+  void setAllocator(ALLOCATOR& allocator) { vector.setAllocator(allocator); }
 
   void resize(size_t capacity) {
     // round up to next power-of-two and compute mask/value

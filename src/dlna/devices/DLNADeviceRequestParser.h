@@ -49,8 +49,11 @@ class DLNADeviceRequestParser {
 
   Schedule* processMSearch(RequestData& req) {
     assert(p_device != nullptr);
-    MSearchReplySchedule& result =
-        *new MSearchReplySchedule{*p_device, req.peer};
+    // allocate schedule on the heap; if not relevant we must delete it to avoid
+    // leaking the schedule and its internal buffers (e.g. Str)
+    MSearchReplySchedule* resultPtr =
+        new MSearchReplySchedule{*p_device, req.peer};
+    MSearchReplySchedule& result = *resultPtr;
     char tmp[200];
     StrView tmp_str(tmp, 200);
 
@@ -82,7 +85,13 @@ class DLNADeviceRequestParser {
       DlnaLogger.log(DlnaLogLevel::Error, "-> ST: not found");
     }
 
-    return result.active ? &result : nullptr;
+    if (result.active) {
+      return resultPtr;
+    } else {
+      // not relevant -> free allocated schedule
+      delete resultPtr;
+      return nullptr;
+    }
   }
 
   bool parse(Str& in, const char* tag, StrView& result) {

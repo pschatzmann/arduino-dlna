@@ -42,22 +42,22 @@ class Str : public StrView {
   Str(StrView& source) : Str() { set(source); }
 
   /// Copy constructor
-  Str(Str& source) : Str() { set(source); }
+  Str(const Str& source) : Str() { set(source); }
 
   /// Move constructor
   Str(Str&& obj) { move(obj); }
 
   /// Destructor
   ~Str() {
-    len = maxlen = 0;
-    chars = nullptr;
+    // ensure underlying buffer is freed
+    release();
   }
 
   /// Move assignment
   Str& operator=(Str&& obj) { return move(obj); }
 
   /// Copy assingment
-  Str& operator=(Str& obj) {
+  Str& operator=(const Str& obj) {
     // assert(&obj!=nullptr);
     set(obj.c_str());
     return *this;
@@ -161,7 +161,8 @@ class Str : public StrView {
   void clear() override {
     len = 0;
     maxlen = 0;
-    vector.resize(0);
+    // release the underlying buffer
+    vector.reset();
     chars = nullptr;
   }
 
@@ -182,7 +183,7 @@ class Str : public StrView {
     other.chars = other.vector.data();
   }
 
-  const char* c_str() {
+  const char* c_str() const {
     const char* result = vector.data();
     return result == nullptr ? "" : result;
   }

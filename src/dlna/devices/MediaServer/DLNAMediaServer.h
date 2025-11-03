@@ -157,11 +157,13 @@ class DLNAMediaServer : public DLNADeviceInfo {
     sinkProto = sink;
     // publish protocol info change to ConnectionManager subscribers
     StrPrint cmd;
-    cmd.printf("<SourceProtocolInfo> val=\"%s\"/>\n",
-               StringRegistry::nullStr(sourceProto));
-    cmd.printf("<SinkProtocolInfo> val=\"%s\"/>\n",
-               StringRegistry::nullStr(sinkProto));
-    publishProperty("CMS", cmd.c_str());
+    cmd.print("<SourceProtocolInfo>\n");
+    cmd.print(StringRegistry::nullStr(sourceProto));
+    cmd.print("</SourceProtocolInfo>\n");
+    cmd.print("<SinkProtocolInfo>\n");
+    cmd.print(StringRegistry::nullStr(sinkProto));
+    cmd.print("</SinkProtocolInfo>\n");
+    addChange("CMS", cmd.c_str());
   }
 
   /// Get the current source `ProtocolInfo` string
@@ -245,10 +247,10 @@ class DLNAMediaServer : public DLNADeviceInfo {
 
   /// serviceAbbrev: e.g. "AVT" or  or subscription namespace abbrev defined for
   /// the service
-  void publishProperty(const char* serviceAbbrev, const char* changeTag) {
+  void addChange(const char* serviceAbbrev, const char* changeTag) {
     // Delegate to the internal DLNADevice instance which manages
     // subscriptions and services.
-    dlna_device.publishProperty(serviceAbbrev, changeTag);
+    dlna_device.addChange(serviceAbbrev, changeTag);
   }
 
   /// Publish a ContentDirectory event (SystemUpdateID)
@@ -256,20 +258,22 @@ class DLNAMediaServer : public DLNADeviceInfo {
     DlnaLogger.log(DlnaLogLevel::Info, "MediaServer::publishAVT");
     StrPrint cmd;
     cmd.printf("<SystemUpdateID val=\"%d\"/>\n", g_stream_updateID);
-    publishProperty("AVT", cmd.c_str());
+    addChange("AVT", cmd.c_str());
   }
 
   /// Publish a ConnectionManager event (CurrentConnectionIDs)
   void publishCMS() {
     DlnaLogger.log(DlnaLogLevel::Info, "MediaServer::publishCMS");
     StrPrint cmd;
-    cmd.printf("<SourceProtocolInfo> val=\"%s\"/>\n",
-               StringRegistry::nullStr(sourceProto));
-    cmd.printf("<SinkProtocolInfo> val=\"%s\"/>\n",
-               StringRegistry::nullStr(sinkProto));
-    cmd.printf("<CurrentConnectionIDs/>%s</CurrentConnectionIDs>\n",
+    cmd.print("<SourceProtocolInfo>\n");
+    cmd.print(StringRegistry::nullStr(sourceProto));
+    cmd.print("</SourceProtocolInfo>\n");
+    cmd.print("<SinkProtocolInfo>\n");
+    cmd.print(StringRegistry::nullStr(sinkProto));
+    cmd.print("</SinkProtocolInfo>\n");
+    cmd.printf("<CurrentConnectionIDs>%s</CurrentConnectionIDs>\n",
                connectionID);
-    publishProperty("CMS", cmd.c_str());
+    addChange("CMS", cmd.c_str());
   }
 
   /// Setup the service endpoints

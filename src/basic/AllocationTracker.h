@@ -66,7 +66,7 @@ class AllocationTracker {
   }
 
   void reportClassCounts() {
-    if (class_alloc_count.empty()) return;
+  if (class_alloc_count.empty()) return;
     tiny_dlna::DlnaLogger.log(tiny_dlna::DlnaLogLevel::Info,
                               "=== CLASS ALLOCATION COUNTS ===");
     for (const auto& [name, count] : class_alloc_count) {
@@ -75,8 +75,8 @@ class AllocationTracker {
     }
   }
 
-  void reportLeaks() {
-    if (class_alloc_count.empty()) return;
+  bool reportLeaks() {
+    if (class_alloc_count.empty()) return false;
     bool any_leak = false;
     // Check for leaks after subtracting snapshot if available
     for (const auto& [name, count] : class_alloc_count) {
@@ -97,6 +97,7 @@ class AllocationTracker {
     } else {
       tiny_dlna::DlnaLogger.log(tiny_dlna::DlnaLogLevel::Warning,
                                 "=== MEMORY LEAK REPORT ===");
+      // Print detailed info: total count, snapshot (baseline), and leaked delta
       for (const auto& [name, count] : class_alloc_count) {
         int snapshot_count = 0;
         auto snap_it = snapshot_alloc_count.find(name);
@@ -105,12 +106,14 @@ class AllocationTracker {
         }
         int leak_count = count - snapshot_count;
         if (leak_count > 0) {
-          tiny_dlna::DlnaLogger.log(tiny_dlna::DlnaLogLevel::Warning,
-                                    "Leaked instances: %s: %d", name.c_str(),
-                                    leak_count);
+          tiny_dlna::DlnaLogger.log(
+              tiny_dlna::DlnaLogLevel::Warning,
+              "Leaked instances: %s: total=%d snapshot=%d leaked=%d",
+              name.c_str(), count, snapshot_count, leak_count);
         }
       }
     }
+    return any_leak;
   }
 
  protected:

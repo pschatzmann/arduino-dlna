@@ -1,8 +1,8 @@
 #pragma once
 #include <stdlib.h>
 
-#include "basic/Logger.h"
 #include "basic/AllocationTracker.h"
+#include "basic/Logger.h"
 #include "dlna_config.h"
 
 namespace tiny_dlna {
@@ -88,36 +88,38 @@ class Allocator {
 };
 
 /// Allocator which tracks allocations and deallocations
-class TrackedAllocator : public Allocator {
+class TrackedAllocator {
+ public:
   // creates an object
   template <class T>
   T* create() {
     tracker.trackAlloc<T>();
-    return Allocator::create<T>();
+    return alloc.create<T>();
   }
 
   /// deletes an object
   template <class T>
   void remove(T* obj) {
     tracker.trackFree<T>();
-    Allocator::remove<T>(obj);
+    alloc.remove<T>(obj);
   }
 
   // creates an array of objects
   template <class T>
   T* createArray(int len) {
     tracker.trackAlloc<T>();
-    return Allocator::createArray<T>(len);
+    return alloc.createArray<T>(len);
   }
 
   // deletes an array of objects
   template <class T>
   void removeArray(T* obj, int len) {
     tracker.trackFree<T>();
-    Allocator::removeArray<T>(obj, len);
+    alloc.removeArray<T>(obj, len);
   }
 
  protected:
+  Allocator alloc;
   AllocationTracker& tracker = AllocationTracker::getInstance();
 };
 

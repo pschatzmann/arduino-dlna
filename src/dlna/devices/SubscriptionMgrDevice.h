@@ -27,6 +27,20 @@ struct Subscription {
   uint32_t timeout_sec = 1800;
   uint32_t seq = 0;
   uint64_t expires_at = 0;
+  DLNAServiceInfo* service = nullptr;
+};
+
+/**
+ * Pending notification to be posted later by post()
+ */
+struct PendingNotification {
+  // Pointer to the original subscription entry at enqueue time. We keep
+  // a pointer only (no copy) to reduce memory overhead. Note: this may
+  // become invalid if the subscriptions vector is reallocated/modified,
+  // callers must handle null/dangling pointers conservatively.
+  Subscription* p_subscription = nullptr;
+  Str changeNode;
+  int error_count = 0;
 };
 
 /**
@@ -46,103 +60,203 @@ struct Subscription {
  */
 class SubscriptionMgrDevice {
  public:
-  SubscriptionMgrDevice() {}
+  SubscriptionMgrDevice() = default;
+  ~SubscriptionMgrDevice() {
+    // free any remaining heap-allocated subscriptions
+    for (int i = 0; i < subscriptions.size(); ++i) {
+      delete subscriptions[i];
+    }
+    subscriptions.clear();
+    // pending_list entries do not own subscription pointers
+    pending_list.clear();
+  }
 
   // Add or renew subscription. callbackUrl is formatted like
   // "<http://host:port/path>" Returns SID (generated if new)
-  Str subscribe(const char* serviceId, const char* callbackUrl,
+  Str subscribe(DLNAServiceInfo& service, const char* callbackUrl,
                 uint32_t timeoutSec = 1800) {
     // simple SID generation
     DlnaLogger.log(DlnaLogLevel::Info, "subscribe: %s %s",
-                   StringRegistry::nullStr(serviceId, "(null)"),
+                   StringRegistry::nullStr(service.service_id, "(null)"),
                    StringRegistry::nullStr(callbackUrl, "(null)"));
     char buffer[64];
     snprintf(buffer, sizeof(buffer), "uuid:%lu", millis());
     Str sid = buffer;
 
-    Subscription s;
-    s.sid = sid;
-    s.callback_url = callbackUrl;
-    s.timeout_sec = timeoutSec;
-    s.seq = 0;
-    s.expires_at = millis() + (uint64_t)timeoutSec * 1000ULL;
+    Subscription* s = new Subscription();
+    s->sid = sid;
+    s->callback_url = callbackUrl;
+    s->timeout_sec = timeoutSec;
+    s->seq = 0;
+    s->expires_at = millis() + (uint64_t)timeoutSec * 1000ULL;
+    s->service = &service;
 
-    getList(serviceId).push_back(s);
+    subscriptions.push_back(s);
     return sid;
   }
 
-  bool unsubscribe(const char* serviceId, const char* sid) {
-    auto& list = getList(serviceId);
-    for (size_t i = 0; i < list.size(); ++i) {
-      if (StrView(list[i].sid).equals(sid)) {
-        list.erase(i);
+  /// Remove the subscription
+  bool unsubscribe(DLNAServiceInfo& service, const char* sid) {
+    for (size_t i = 0; i < subscriptions.size(); ++i) {
+      Subscription* s = subscriptions[i];
+      if (s->service == &service && StrView(s->sid).equals(sid)) {
+        // remove pending notifications that reference this subscription
+        for (int j = 0; j < pending_list.size();) {
+          if (pending_list[j].p_subscription == s) {
+            pending_list.erase(j);
+          } else {
+            ++j;
+          }
+        }
+        delete s;
+        subscriptions.erase(i);
         return true;
       }
     }
     return false;
   }
 
-  // Publish a single state variable change to all subscribers of the service
-  void publishProperty(DLNAServiceInfo& service, const char* xmlTag) {
-    const char* serviceAbbrev = service.subscription_namespace_abbrev;
-    auto& list = getList(service.service_id);
-    if (list.empty()) {
-      DlnaLogger.log(DlnaLogLevel::Error, "service '%s' not found",
+  /// Publish a single state variable change to all subscribers of the service
+  void addChange(DLNAServiceInfo& service, const char* xmlTag) {
+    bool any = false;
+    if (StrView(xmlTag).isEmpty()) {
+      DlnaLogger.log(DlnaLogLevel::Warning, "empty xmlTag for service '%s'",
                      service.service_id);
       return;
     }
-    for (int i = 0; i < list.size(); ++i) {
-      Subscription& sub = list[i];
-      // increment seq
-      sub.seq++;
-      // build and stream body via createXML
+    // enqueue notifications to be posted later by post()
+    for (int i = 0; i < subscriptions.size(); ++i) {
+      Subscription* sub = subscriptions[i];
+      if (sub->service != &service) continue;
+      any = true;
+      // increment seq now (reserve sequence number)
+      sub->seq++;
+      PendingNotification pn;
+      // store pointer to the subscription entry (no snapshot)
+      pn.p_subscription = subscriptions[i];
+      pn.changeNode = xmlTag;
+      pending_list.push_back(pn);
+    }
+    if (!any) {
+      DlnaLogger.log(DlnaLogLevel::Error, "service '%s' not found",
+                     service.service_id);
+    }
+  }
 
-      // parse callback url
+  /// Publish all queued notifications. This will attempt to deliver each
+  /// pending notification and remove it from the queue.
+  void publish() {
+    // First remove expired subscriptions so we don't deliver to them.
+    removeExpired();
+    if (pending_list.empty()) return;
+    // Attempt to process each pending notification once. If processing
+    // fails (non-200), leave the entry in the queue for a later retry.
+    int processed = 0;
+    for (int i = 0; i < pending_list.size();) {
+      // copy entry to avoid referencing vector storage while potentially
+      // modifying the vector (erase)
+      PendingNotification pn = pending_list[i];
+
+      // Ensure the subscription pointer is valid; if not, drop the entry.
+      if (pn.p_subscription == nullptr) {
+        DlnaLogger.log(DlnaLogLevel::Warning,
+                       "pending notification dropped: missing subscription");
+        pending_list.erase(i);
+        continue;
+      }
+
+      Subscription& sub = *pn.p_subscription;
+
+      // Build and send HTTP notify as in previous implementation
       Url cbUrl(sub.callback_url.c_str());
       DLNAHttpRequest http;
       http.setHost(cbUrl.host());
       http.setAgent("tiny-dlna-notify");
       http.request().put("NT", "upnp:event");
       http.request().put("NTS", "upnp:propchange");
-      // SEQ header name in some stacks is "SEQ" or "SID"; use "SEQ" here
       char seqBuf[32];
       snprintf(seqBuf, sizeof(seqBuf), "%d", sub.seq);
       http.request().put("SEQ", seqBuf);
       http.request().put("SID", sub.sid.c_str());
-      // post the notification using dynamic XML generation (streamed writer)
-      // compute length by writing to NullPrint and then stream via lambda
+
+      // compute xml length
       NullPrint np;
       size_t xmlLen = 0;
-      if (is_log_xml) 
-         xmlLen = createXML(Serial, serviceAbbrev, xmlTag);
+      const char* serviceAbbrev =
+          sub.service ? sub.service->subscription_namespace_abbrev : "";
+      if (is_log_xml)
+        xmlLen = createXML(Serial, serviceAbbrev, pn.changeNode.c_str());
       else
-         xmlLen = createXML(np, serviceAbbrev, xmlTag);
+        xmlLen = createXML(np, serviceAbbrev, pn.changeNode.c_str());
 
-      auto printXML = [this, serviceAbbrev, xmlTag](Print& out) {
-        createXML(out, serviceAbbrev, xmlTag);
+      auto printXML = [this, serviceAbbrev, pn](Print& out) {
+        createXML(out, serviceAbbrev, pn.changeNode.c_str());
       };
+
+      // post the notification
       int rc = http.post(cbUrl, xmlLen, printXML, "text/xml");
       DlnaLogger.log(DlnaLogLevel::Info, "Notify %s -> %d", cbUrl.url(), rc);
+
+      // remove processed notification on success; otherwise keep it for retry
+      if (rc == 200) {
+        pending_list.erase(i);
+        processed++;
+        // do not increment i: elements shifted down into current index
+      } else {
+        // Increment error count on the stored entry (not the local copy)
+        // increment the stored entry's error count
+        pending_list[i].error_count++;
+        if (pending_list[i].error_count > MAX_SEND_ERRORS) {
+          // give up and drop the entry after too many failed attempts
+          DlnaLogger.log(DlnaLogLevel::Warning,
+                         "dropping notify to %s after %d errors", cbUrl.url(),
+                         pending_list[i].error_count);
+          pending_list.erase(i);
+        } else {
+          ++i;
+        }
+      }
+    }
+
+    DlnaLogger.log(
+        DlnaLogLevel::Info,
+        "Published: %d notifications, %d remaining (for %d subscriptions)",
+        processed, pendingCount(), subscriptionsCount());
+  }
+
+  /// Remove subscriptions that have expired (expires_at <= now).
+  /// Also removes any pending notifications that belonged to the removed
+  /// subscriptions so we don't attempt to deliver to unsubscribed callbacks.
+  void removeExpired() {
+    uint64_t now = millis();
+    for (int i = 0; i < subscriptions.size();) {
+      Subscription* s = subscriptions[i];
+      if (s->expires_at != 0 && s->expires_at <= now) {
+        DlnaLogger.log(DlnaLogLevel::Info, "removing expired subscription %s",
+                       s->sid.c_str());
+        // Use unsubscribe() which will remove pending notifications and
+        // free the subscription object. Do not increment `i` because the
+        // erase shifts the vector content down into the same index.
+        unsubscribe(*s->service, s->sid.c_str());
+      } else {
+        ++i;
+      }
     }
   }
+
+  int subscriptionsCount() { return subscriptions.size(); }
+
+  int pendingCount() { return pending_list.size(); }
 
  protected:
-  // naive per-service storage using parallel vectors
-  Vector<Str> service_names;
-  Vector<Vector<Subscription>> service_lists;
+  // store pointers to heap-allocated Subscription objects. This keeps
+  // references stable (we manage lifetimes explicitly) and avoids
+  // large copies when enqueuing notifications.
+  Vector<Subscription*> subscriptions;
+  Vector<PendingNotification> pending_list;
   bool is_log_xml = true;
-
-  Vector<Subscription>& getList(const char* serviceId) {
-    for (int i = 0; i < service_names.size(); ++i) {
-      if (StrView(service_names[i]).equals(serviceId)) return service_lists[i];
-    }
-    // not found: create
-    Str s = serviceId;
-    Vector<Subscription> list;
-    service_names.push_back(s);
-    service_lists.push_back(list);
-    return service_lists[service_lists.size() - 1];
-  }
+  // Maximum send attempts before dropping a pending notification
+  static constexpr int MAX_SEND_ERRORS = 3;
 
   /**
    * @brief Generate the propertyset XML for a single variable and write it to
@@ -150,7 +264,8 @@ class SubscriptionMgrDevice {
    *
    * Returns the number of bytes written.
    */
-  size_t createXML(Print& out, const char*serviceAbbrev, const char* changeNode) {
+  size_t createXML(Print& out, const char* serviceAbbrev,
+                   const char* changeNode) {
     size_t written = 0;
     written += out.print("<?xml version=\"1.0\"?>\r\n");
     written += out.print(

@@ -82,16 +82,16 @@ class Vector {
   };
 
   /// Default constructor: size 0 with DefaultAllocator
-  Vector(size_t len = 0, Allocator &allocator = DefaultAllocator) {
+  Vector(size_t len = 0, ALLOCATOR &allocator = DefaultAllocator) {
     setAllocator(allocator);
     resize_internal(len, false);
   }
 
   /// Constructor with only allocator
-  Vector(Allocator &allocator) { setAllocator(allocator); }
+  Vector(ALLOCATOR &allocator) { setAllocator(allocator); }
 
   /// Allocate size and initialize array
-  Vector(int size, T value, Allocator &allocator = DefaultAllocator) {
+  Vector(int size, T value, ALLOCATOR &allocator = DefaultAllocator) {
     setAllocator(allocator);
     resize(size);
     for (int j = 0; j < size; j++) {
@@ -133,7 +133,7 @@ class Vector {
   }
 
   /// legacy constructor with pointer range
-  Vector(T *from, T *to, Allocator &allocator = DefaultAllocator) {
+  Vector(T *from, T *to, ALLOCATOR &allocator = DefaultAllocator) {
     this->p_allocator = &allocator;
     this->len = to - from;
     resize_internal(this->len, false);
@@ -145,7 +145,7 @@ class Vector {
   /// Destructor
   virtual ~Vector() { reset(); }
 
-  void setAllocator(Allocator &allocator) { p_allocator = &allocator; }
+  void setAllocator(ALLOCATOR &allocator) { p_allocator = &allocator; }
 
   void clear() { len = 0; }
 
@@ -281,6 +281,8 @@ class Vector {
   }
 
   T *data() { return p_data; }
+  // const overload to allow read-only access from const contexts
+  T *data() const { return p_data; }
 
   operator bool() const { return p_data != nullptr; }
 
@@ -316,7 +318,7 @@ class Vector {
   int max_capacity = 0;
   int len = 0;
   T *p_data = nullptr;
-  Allocator *p_allocator = &DefaultAllocator;
+  ALLOCATOR *p_allocator = &DefaultAllocator;
 
   void resize_internal(int newSize, bool copy, bool shrink = false) {
     if (newSize <= 0) return;

@@ -1,15 +1,5 @@
 #pragma once
 
-// Define whether to use custom allocator (true) or standard new/delete (false)
-#ifndef DLNA_USE_ALLOCATOR
-#define DLNA_USE_ALLOCATOR true
-#endif
-
-// Define the default allocator class to use (e.g Allocator, TrackedAllocator, AllocatorExt, AllocatorPSRAM)
-#ifndef DLNA_DEFAULT_ALLOCATOR
-#define DLNA_DEFAULT_ALLOCATOR AllocatorExt
-#endif
-
 // Define delay in ms for main DLNA loop
 #ifndef DLNA_LOOP_DELAY_MS
 #define DLNA_LOOP_DELAY_MS 8
@@ -162,4 +152,25 @@
 /// Define the default protocols to use
 #ifndef DLNA_PROTOCOL
 #define DLNA_PROTOCOL DLNA_PROTOCOL_AUDIO
+#endif
+
+
+// Define whether to use custom allocator (true) or standard new/delete (false)
+#ifndef DLNA_USE_ALLOCATOR
+#define DLNA_USE_ALLOCATOR true
+#endif
+
+// Force use of Tracked Allocator
+//#define DLNA_DEFAULT_ALLOCATOR TrackedAllocator
+//#define ALLOCATOR TrackedAllocator
+
+// Define the default allocator class to use (e.g Allocator, TrackedAllocator, AllocatorExt, AllocatorPSRAM)
+#ifndef DLNA_DEFAULT_ALLOCATOR
+#define DLNA_DEFAULT_ALLOCATOR AllocatorExt
+#endif
+
+
+// Define the default allocator base class to use (e.g Allocator, TrackedAllocator)
+#ifndef ALLOCATOR
+#define ALLOCATOR Allocator
 #endif

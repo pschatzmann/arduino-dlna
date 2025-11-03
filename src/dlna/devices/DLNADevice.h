@@ -1,5 +1,6 @@
 #pragma once
 
+#include "basic/AllocationTracker.h"
 #include "basic/Url.h"
 #include "dlna/DLNADeviceInfo.h"
 #include "dlna/Schedule.h"
@@ -110,7 +111,9 @@ class DLNADevice {
     DlnaLogger.log(DlnaLogLevel::Debug, "server %s", rc ? "true" : "false");
 
     if (isSchedulerActive()) {
-      processUdpAndScheduler();
+  processUdpAndScheduler();
+  // deliver any queued subscription notifications
+  subscription_mgr.publish();
     } else {
       DlnaLogger.log(DlnaLogLevel::Warning, "scheduler inactive");
     }
@@ -134,20 +137,21 @@ class DLNADevice {
   /// Publish a property change to subscribers of the service identified by
   /// the subscription namespace abbreviation (e.g. "AVT", "RCS"). This
   /// forwards the request to the SubscriptionMgrDevice instance.
-  void publishProperty(const char* serviceAbbrev, const char* changeTag) {
+  void addChange(const char* serviceAbbrev, const char* changeTag) {
     SubscriptionMgrDevice* mgr = tiny_dlna::DLNADevice::getSubscriptionMgr();
     if (!mgr) {
       DlnaLogger.log(DlnaLogLevel::Warning,
-                     "publishProperty: No SubscriptionMgrDevice available");
+                     "addChange: No SubscriptionMgrDevice available");
       return;
     }
     DLNAServiceInfo& serviceInfo = getServiceByAbbrev(serviceAbbrev);
     if (!serviceInfo) {
       DlnaLogger.log(DlnaLogLevel::Warning,
-                     "publishProperty: No service info available for %s", serviceAbbrev);
+                     "addChange: No service info available for %s",
+                     serviceAbbrev);
       return;
     }
-    mgr->publishProperty(serviceInfo, changeTag);
+    mgr->addChange(serviceInfo, changeTag);
   }
 
   /// Provides the device
@@ -192,17 +196,25 @@ class DLNADevice {
       if (timeout && StrView(timeout).startsWith("Second-")) {
         tsec = atoi(timeout + 7);
       }
-      // Use the service event path as key for subscriptions
-      const char* svcKey = requestPath;
+      // Use the service event path as key for subscriptions: find the
+      // corresponding DLNAServiceInfo by matching the event_sub_url.
       if (DLNADevice::self) {
-        Str sid = DLNADevice::self->subscription_mgr.subscribe(
-            svcKey, cbStr.c_str(), tsec);
-        server->replyHeader().setValues(200, "OK");
-        server->replyHeader().put("SID", sid.c_str());
-        server->replyHeader().put("TIMEOUT", "Second-1800");
-        server->replyHeader().write(server->client());
-        server->replyOK();
-        return;
+        DLNAServiceInfo* svc = nullptr;
+        for (DLNAServiceInfo& s : DLNADevice::self->getDevice().getServices()) {
+          if (StrView(s.event_sub_url).equals(requestPath)) {
+            svc = &s;
+            break;
+          }
+        }
+        if (svc != nullptr) {
+          Str sid = DLNADevice::self->subscription_mgr.subscribe(*svc, cbStr.c_str(), tsec);
+          server->replyHeader().setValues(200, "OK");
+          server->replyHeader().put("SID", sid.c_str());
+          server->replyHeader().put("TIMEOUT", "Second-1800");
+          server->replyHeader().write(server->client());
+          server->replyOK();
+          return;
+        }
       }
       server->replyNotFound();
       return;
@@ -212,11 +224,19 @@ class DLNADevice {
       // Some stacks use POST for unsubscribe; try to handle SID
       const char* sid = req.get("SID");
       if (sid && DLNADevice::self) {
-        bool ok =
-            DLNADevice::self->subscription_mgr.unsubscribe(requestPath, sid);
-        if (ok) {
-          server->replyOK();
-          return;
+        DLNAServiceInfo* svc = nullptr;
+        for (DLNAServiceInfo& s : DLNADevice::self->getDevice().getServices()) {
+          if (StrView(s.event_sub_url).equals(requestPath)) {
+            svc = &s;
+            break;
+          }
+        }
+        if (svc != nullptr) {
+          bool ok = DLNADevice::self->subscription_mgr.unsubscribe(*svc, sid);
+          if (ok) {
+            server->replyOK();
+            return;
+          }
         }
       }
     }
@@ -293,21 +313,24 @@ class DLNADevice {
   /// it can be tested or stubbed easily. Currently logs ESP32 heap/psram
   /// every 10s.
   void logMemoryIfNeeded() {
+    static uint64_t last_mem_log = 0;
+    const uint64_t MEM_LOG_INTERVAL_MS = 10000;
+    uint64_t now = millis();
+    if ((uint64_t)(now - last_mem_log) >= MEM_LOG_INTERVAL_MS) {
+  // update timestamp for next interval on all platforms
+  last_mem_log = now;
 #ifdef ESP32
-    static uint32_t last_mem_log = 0;
-    const uint32_t MEM_LOG_INTERVAL_MS = 10000;
-    uint32_t now = millis();
-    if ((uint32_t)(now - last_mem_log) >= MEM_LOG_INTERVAL_MS) {
-      last_mem_log = now;
-      DlnaLogger.log(DlnaLogLevel::Info,
-                     "Mem: freeHeap=%u freePsram=%u  / Scheduler: size=%d "
-                     "active=%s / StrRegistry: count=%d size=%d",
-                     (unsigned)ESP.getFreeHeap(), (unsigned)ESP.getFreePsram(),
-                     scheduler.size(), isSchedulerActive() ? "true" : "false",
-                     registry.count(), registry.size());
-    }
+  DlnaLogger.log(DlnaLogLevel::Info,
+         "Mem: freeHeap=%u freePsram=%u  / Scheduler: size=%d "
+         "active=%s / StrRegistry: count=%d size=%d",
+         (unsigned)ESP.getFreeHeap(), (unsigned)ESP.getFreePsram(),
+         scheduler.size(), isSchedulerActive() ? "true" : "false",
+         registry.count(), registry.size());
 #endif
-    
+  AllocationTracker& tracker = AllocationTracker::getInstance();
+  tracker.reportLeaks();
+  tracker.createSnapshot();
+    }
   }
 
   /// Process incoming UDP and execute scheduled replies. The method will

@@ -92,7 +92,7 @@ class List {
   };
 
   /// Default constructor
-  List(Allocator& allocator = DefaultAllocator) {
+  List(ALLOCATOR& allocator = DefaultAllocator) {
     p_allocator = &allocator;
     link();
   };
@@ -101,7 +101,7 @@ class List {
 
   /// Constructor using array
   template <size_t N>
-  List(const T (&a)[N], Allocator& allocator = DefaultAllocator) {
+  List(const T (&a)[N], ALLOCATOR& allocator = DefaultAllocator) {
     p_allocator = &allocator;
     link();
     for (int i = 0; i < N; ++i) push_back(a[i]);
@@ -354,7 +354,7 @@ class List {
     return n->data;
   }
 
-  void setAllocator(Allocator& allocator) { p_allocator = &allocator; }
+  void setAllocator(ALLOCATOR& allocator) { p_allocator = &allocator; }
 
   /// Provides the last element
   T& back() { return *rbegin(); }
@@ -365,7 +365,7 @@ class List {
   Node last;  // empty dummy last node which which is always after the last data
               // node
   size_t record_count = 0;
-  Allocator* p_allocator = &DefaultAllocator;
+  ALLOCATOR* p_allocator = &DefaultAllocator;
 
   Node* createNode() {
 #if DLNA_USE_ALLOCATOR

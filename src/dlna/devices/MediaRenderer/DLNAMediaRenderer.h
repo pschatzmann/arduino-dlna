@@ -136,7 +136,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     StrPrint cmd;
     cmd.printf("<TransportState val=\"%s\"/>",
                active ? "PLAYING" : "PAUSED_PLAYBACK");
-    publishProperty("AVT", cmd.c_str());
+    addChange("AVT", cmd.c_str());
   }
 
   /// Provides the mime from the DIDL or nullptr
@@ -157,7 +157,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     current_volume = vol;
     StrPrint cmd;
     cmd.printf("<Volume val=\"%d\"/>", current_volume);
-    publishProperty("RCS", cmd.c_str());
+    addChange("RCS", cmd.c_str());
     if (event_cb) event_cb(MediaEvent::SET_VOLUME, *this);
   }
 
@@ -169,7 +169,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     is_muted = m;
     StrPrint cmd;
     cmd.printf("<Mute val=\"%d\"/>", is_muted ? 1 : 0);
-    publishProperty("RCS", cmd.c_str());
+    addChange("RCS", cmd.c_str());
     if (event_cb) event_cb(MediaEvent::SET_MUTE, *this);
   }
 
@@ -206,7 +206,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     StrPrint cmd;
     cmd.printf("<CurrentTrackURI val=\"%s\"/>\n", current_uri.c_str());
     cmd.printf("<TransportState val=\"PLAYING\"/>");
-    publishProperty("AVT", cmd.c_str());
+    addChange("AVT", cmd.c_str());
 
     return true;
   }
@@ -224,7 +224,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
 
     StrPrint cmd;
     cmd.printf("<CurrentTrackURI val=\"%s\"/>\n", current_uri.c_str());
-    publishProperty("AVT", cmd.c_str());
+    addChange("AVT", cmd.c_str());
 
     return true;
   }
@@ -239,7 +239,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     if (event_cb) event_cb(MediaEvent::STOP, *this);
     StrPrint cmd;
     cmd.printf("<TransportState val=\"STOPPED\"/>");
-    publishProperty("AVT", cmd.c_str());
+    addChange("AVT", cmd.c_str());
     return true;
   }
 
@@ -266,7 +266,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     cmd.printf("<CurrentTrackURI val=\"\"/>");
     cmd.printf("<RelativeTimePosition val=\"00:00:00\"/>");
     cmd.printf("<CurrentTransportActions val=\"Play\"/>");
-    publishProperty("AVT", cmd.c_str());
+    addChange("AVT", cmd.c_str());
   }
 
   /// Get estimated playback position (seconds)
@@ -282,7 +282,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
                static_cast<int>(getRelativeTimePositionSec() / 3600),
                static_cast<int>((getRelativeTimePositionSec() % 3600) / 60),
                static_cast<int>(getRelativeTimePositionSec() % 60));
-    publishProperty("AVT", cmd.c_str());
+    addChange("AVT", cmd.c_str());
   }
 
   /// Get a csv of the valid actions
@@ -329,10 +329,10 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
   Vector<ActionRule> rules;
 
   /// serviceAbbrev: AVT, RCS, CMS
-  void publishProperty(const char* serviceAbbrev, const char* changeTag) {
+  void addChange(const char* serviceAbbrev, const char* changeTag) {
     // Delegate to the internal DLNADevice instance which manages
     // subscriptions and services.
-    dlna_device.publishProperty(serviceAbbrev, changeTag);
+    dlna_device.addChange(serviceAbbrev, changeTag);
   }
 
   /// Publish the current AVTransport state (TransportState, CurrentTrackURI,
@@ -353,7 +353,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     // Current transport actions
     cmd.printf("<CurrentTransportActions val=\"%s\"/>",
                getCurrentTransportActions());
-    publishProperty("AVT", cmd.c_str());
+    addChange("AVT", cmd.c_str());
   }
 
   /// Publish the current RenderingControl state (Volume, Mute)
@@ -361,7 +361,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     StrPrint cmd;
     cmd.printf("<Volume val=\"%d\"/>", current_volume);
     cmd.printf("<Mute val=\"%d\"/>", is_muted ? 1 : 0);
-    publishProperty("RCS", cmd.c_str());
+    addChange("RCS", cmd.c_str());
   }
 
   /// Publish a minimal ConnectionManager state (CurrentConnectionIDs)
@@ -370,7 +370,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     // Minimal information: list of current connection IDs. Use "0" as default
     // when no active connection is present.
     cmd.printf("<CurrentConnectionIDs>0</CurrentConnectionIDs>");
-    publishProperty("CMS", cmd.c_str());
+    addChange("CMS", cmd.c_str());
   }
 
   /// Set MIME explicitly (used when DIDL-Lite metadata provides protocolInfo)
