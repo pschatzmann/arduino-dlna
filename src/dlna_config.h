@@ -5,7 +5,7 @@
 #define DLNA_USE_ALLOCATOR true
 #endif
 
-// Define the default allocator class to use (e.g Allocator, AllocatorExt, AllocatorPSRAM)
+// Define the default allocator class to use (e.g Allocator, TrackedAllocator, AllocatorExt, AllocatorPSRAM)
 #ifndef DLNA_DEFAULT_ALLOCATOR
 #define DLNA_DEFAULT_ALLOCATOR AllocatorExt
 #endif

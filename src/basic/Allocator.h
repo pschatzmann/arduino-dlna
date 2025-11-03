@@ -1,6 +1,8 @@
 #pragma once
 #include <stdlib.h>
+
 #include "basic/Logger.h"
+#include "basic/AllocationTracker.h"
 #include "dlna_config.h"
 
 namespace tiny_dlna {
@@ -61,7 +63,8 @@ class Allocator {
   virtual void* allocate(size_t size) {
     void* result = do_allocate(size);
     if (result == nullptr) {
-      DlnaLogger.log(DlnaLogLevel::Error, "Allocateation failed for %zu bytes", size);
+      DlnaLogger.log(DlnaLogLevel::Error, "Allocateation failed for %zu bytes",
+                     size);
       stop();
     } else {
       DlnaLogger.log(DlnaLogLevel::Debug, "Allocated %zu", size);
@@ -84,6 +87,40 @@ class Allocator {
   }
 };
 
+/// Allocator which tracks allocations and deallocations
+class TrackedAllocator : public Allocator {
+  // creates an object
+  template <class T>
+  T* create() {
+    tracker.trackAlloc<T>();
+    return Allocator::create<T>();
+  }
+
+  /// deletes an object
+  template <class T>
+  void remove(T* obj) {
+    tracker.trackFree<T>();
+    Allocator::remove<T>(obj);
+  }
+
+  // creates an array of objects
+  template <class T>
+  T* createArray(int len) {
+    tracker.trackAlloc<T>();
+    return Allocator::createArray<T>(len);
+  }
+
+  // deletes an array of objects
+  template <class T>
+  void removeArray(T* obj, int len) {
+    tracker.trackFree<T>();
+    Allocator::removeArray<T>(obj, len);
+  }
+
+ protected:
+  AllocationTracker& tracker = AllocationTracker::getInstance();
+};
+
 /**
  * @brief Memory allocateator which uses ps_malloc (on the ESP32) and if this
  * fails it resorts to malloc.
@@ -100,7 +137,8 @@ class AllocatorExt : public Allocator {
 #endif
     if (result == nullptr) result = malloc(size);
     if (result == nullptr) {
-      DlnaLogger.log(DlnaLogLevel::Error, "allocateation failed for %zu bytes", size);
+      DlnaLogger.log(DlnaLogLevel::Error, "allocateation failed for %zu bytes",
+                     size);
       stop();
     }
     // initialize object
@@ -125,7 +163,8 @@ class AllocatorPSRAM : public Allocator {
     void* result = nullptr;
     result = ps_calloc(1, size);
     if (result == nullptr) {
-      DlnaLogger.log(DlnaLogLevel::Error, "allocateation failed for %zu bytes", size);
+      DlnaLogger.log(DlnaLogLevel::Error, "allocateation failed for %zu bytes",
+                     size);
       stop();
     }
     return result;
