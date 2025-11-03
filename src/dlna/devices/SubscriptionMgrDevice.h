@@ -45,11 +45,9 @@ struct PendingNotification {
       nullptr;         /**< non-owning pointer to Subscription */
   std::function<size_t(Print&, void*)> writer; /**< writer callback that emits the
                                               notification XML */
-  void* refptr = nullptr;                     /**< opaque reference for writer */
+  void* ref = nullptr; /**< opaque reference for writer */
   int error_count = 0; /**< number of failed send attempts */
-  size_t xmlLen = 0;     /**< size of the generated XML */
 };
-
 
 
 /**
@@ -124,26 +122,16 @@ class SubscriptionMgrDevice {
                    StringRegistry::nullStr(callbackUrl, "(null)"));
     // If sid provided, attempt to renew existing subscription for service
     if (sid != nullptr && !StrView(sid).isEmpty()) {
-      for (int i = 0; i < subscriptions.size(); ++i) {
-        Subscription* ex = subscriptions[i];
-        if (ex->service == &service && StrView(ex->sid).equals(sid)) {
-          // renew: update timeout and expiry, do not change SID
-          ex->timeout_sec = timeoutSec;
-          ex->expires_at = millis() + (uint64_t)timeoutSec * 1000ULL;
-          // if a new callback URL was provided, update it
-          if (callbackUrl != nullptr && !StrView(callbackUrl).isEmpty()) {
-            ex->callback_url = callbackUrl;
-          }
-          DlnaLogger.log(DlnaLogLevel::Info, "renewed subscription %s",
-                         ex->sid.c_str());
-          return ex->sid;
-        }
-      }
+      Str renewed = renewSubscription(service, sid, callbackUrl, timeoutSec);
+      if (!renewed.isEmpty()) return renewed;
       // not found: fall through and create new subscription
     }
+
+    // generate uuid-based SID
     char buffer[64];
     snprintf(buffer, sizeof(buffer), "uuid:%lu", millis());
 
+    // fill subscription
     Subscription* s = new Subscription();
     s->sid = buffer;
     s->callback_url = callbackUrl;
@@ -152,8 +140,9 @@ class SubscriptionMgrDevice {
     s->expires_at = millis() + (uint64_t)timeoutSec * 1000ULL;
     s->service = &service;
 
+    // add subscription
     subscriptions.push_back(s);
-    return sid;
+    return s->sid;
   }
 
   /**
@@ -218,9 +207,8 @@ class SubscriptionMgrDevice {
       PendingNotification pn;
       // store pointer to the subscription entry (no snapshot)
       pn.p_subscription = subscriptions[i];
-      pn.refptr = ref;
+      pn.ref = ref;
       pn.writer = changeWriter;
-      pn.xmlLen = createXML(np, service.subscription_namespace_abbrev, changeWriter, ref);
       pending_list.push_back(pn);
     }
     if (!any) {
@@ -235,7 +223,7 @@ class SubscriptionMgrDevice {
    * Iterates the pending notification queue and attempts to deliver each
    * notification via HTTP NOTIFY. Successful deliveries are removed from
    * the queue. Failed attempts increment an error counter; entries that
-   * exceed MAX_SEND_ERRORS are dropped. Expired subscriptions are removed
+   * exceed MAX_NOTIFY_RETIES are dropped. Expired subscriptions are removed
    * prior to delivery.
    */
   void publish() {
@@ -262,6 +250,7 @@ class SubscriptionMgrDevice {
 
       // Build and send HTTP notify as in previous implementation
       Url cbUrl(sub.callback_url.c_str());
+      NullPrint np;
       DLNAHttpRequest http;
       http.setHost(cbUrl.host());
       http.setAgent("tiny-dlna-notify");
@@ -271,12 +260,13 @@ class SubscriptionMgrDevice {
       snprintf(seqBuf, sizeof(seqBuf), "%d", sub.seq);
       http.request().put("SEQ", seqBuf);
       http.request().put("SID", sub.sid.c_str());
-
-      // post the notification, propagate the ref to the HttpRequest so it
-      // forwards it back to the writer when streaming the body
       http.setTimeout(DLNA_HTTP_REQUEST_TIMEOUT_MS);
-      int rc = http.notify(cbUrl, pn.xmlLen, pn.writer, "text/xml", pn.refptr);
+      // pass the pending notification as reference
+      int len = createXML(np, &pn);
+      int rc = http.notify(cbUrl, len, createXML, "text/xml", &pn);
+
       DlnaLogger.log(DlnaLogLevel::Info, "Notify %s -> %d", cbUrl.url(), rc);
+      http.stop();
 
       // remove processed notification on success; otherwise keep it for retry
       if (rc == 200) {
@@ -286,7 +276,7 @@ class SubscriptionMgrDevice {
       } else {
         // Increment error count on the stored entry (not the local copy)
         pending_list[i].error_count++;
-        if (pending_list[i].error_count > MAX_SEND_ERRORS) {
+        if (pending_list[i].error_count > MAX_NOTIFY_RETIES) {
           // give up and drop the entry after too many failed attempts
           DlnaLogger.log(DlnaLogLevel::Warning,
                          "dropping notify to %s after %d errors with rc=%d %s", cbUrl.url(),
@@ -346,9 +336,34 @@ class SubscriptionMgrDevice {
   // large copies when enqueuing notifications.
   Vector<Subscription*> subscriptions;
   Vector<PendingNotification> pending_list;
-  bool is_log_xml = true;
-  // Maximum send attempts before dropping a pending notification
-  static constexpr int MAX_SEND_ERRORS = 3;
+
+  /**
+   * @brief Try to renew an existing subscription identified by SID for the
+   * given service. If successful the subscription's timeout/expiry (and
+   * optionally callback URL) are updated and the renewed SID is returned.
+   * If no matching subscription exists an empty Str is returned.
+   */
+  Str renewSubscription(DLNAServiceInfo& service, const char* sid,
+                         const char* callbackUrl, uint32_t timeoutSec) {
+    if (sid == nullptr || StrView(sid).isEmpty()) return Str();
+    for (int i = 0; i < subscriptions.size(); ++i) {
+      Subscription* ex = subscriptions[i];
+      if (ex->service == &service && StrView(ex->sid).equals(sid)) {
+        // renew: update timeout and expiry, do not change SID
+        ex->timeout_sec = timeoutSec;
+        ex->expires_at = millis() + (uint64_t)timeoutSec * 1000ULL;
+        // if a new callback URL was provided, update it
+        if (callbackUrl != nullptr && !StrView(callbackUrl).isEmpty()) {
+          ex->callback_url = callbackUrl;
+        }
+        DlnaLogger.log(DlnaLogLevel::Info, "renewed subscription %s",
+                       ex->sid.c_str());
+        return ex->sid;
+      }
+    }
+    return Str();
+  }
+
 
   /**
    * @brief Generate the propertyset XML for a single variable and write it to
@@ -360,8 +375,9 @@ class SubscriptionMgrDevice {
   *
   * Returns the number of bytes written.
    */
-  size_t createXML(Print& out, const char* serviceAbbrev,
-                   std::function<size_t(Print&, void*)> changeWriter, void* ref) {
+  static size_t createXML(Print& out, void* ref) {
+    PendingNotification& pn = *(PendingNotification*)ref;
+    const char* serviceAbbrev = pn.p_subscription->service->subscription_namespace_abbrev;
     size_t written = 0;
     written += out.print("<?xml version=\"1.0\"?>\r\n");
     written += out.print(
@@ -372,8 +388,8 @@ class SubscriptionMgrDevice {
     written += out.print("<Event xmlns=\"urn:schemas-upnp-org:metadata-1-0/");
     written += out.print(serviceAbbrev);
     written += out.print("/\">\r\n");
-    if (changeWriter) {
-      written += changeWriter(out, ref);
+    if (pn.writer) {
+      written += pn.writer(out, pn.ref);
     }
     written += out.print("</Event>\r\n");
     written += out.print("</LastChange>\r\n");

@@ -149,6 +149,11 @@
 	"http-get:*:audio/x-dsd:*"
 #endif
 
+/// Define maximum number of notify retries
+#ifndef MAX_NOTIFY_RETIES
+#define MAX_NOTIFY_RETIES 3
+#endif
+
 /// Define the default protocols to use
 #ifndef DLNA_PROTOCOL
 #define DLNA_PROTOCOL DLNA_PROTOCOL_AUDIO

@@ -248,7 +248,7 @@ class HttpRequest {
     DlnaLogger.log(DlnaLogLevel::Info, "%s %s", methods[method], url.url());
 
     if (!connected()) {
-      DlnaLogger.log(DlnaLogLevel::Info, "HttpRequest::%sChunked - connecting to host %s port %d", methods[method], url.host(), url.port());
+      DlnaLogger.log(DlnaLogLevel::Info, "HttpRequest::% - connecting to host %s port %d", methods[method], url.host(), url.port());
       connect(url.host(), url.port());
     }
 
@@ -279,7 +279,10 @@ class HttpRequest {
 
     // write callback (writer returns number of bytes written)
     if (writer) {
-      (void)writer(*client_ptr, ref);
+      size_t written = writer(*client_ptr, ref);
+      if (written != len) {
+        DlnaLogger.log(DlnaLogLevel::Error, "HttpRequest wrote %d bytes: expected %d", written, len);
+      }
     }
 
     // read reply header and prepare chunk reader if needed
