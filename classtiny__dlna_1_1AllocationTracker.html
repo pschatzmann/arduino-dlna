@@ -91,6 +91,8 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a60c8184778f4ec7e9bb527ef98d5e3ab"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1AllocationTracker.html#a60c8184778f4ec7e9bb527ef98d5e3ab">createSnapshot</a> ()</td></tr>
+<tr class="separator:a60c8184778f4ec7e9bb527ef98d5e3ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a87461a88b33c60975e0cbd87e7586731"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a87461a88b33c60975e0cbd87e7586731"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1AllocationTracker.html#a87461a88b33c60975e0cbd87e7586731">trackAlloc</a> ()</td></tr>
 <tr class="separator:a87461a88b33c60975e0cbd87e7586731"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -116,6 +118,8 @@ Protected Member Functions</h2></td></tr>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a5b60b8b158c8f4dfb3dd9cf57d0a15b8"><td class="memItemLeft" align="right" valign="top">std::map&lt; std::string, int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1AllocationTracker.html#a5b60b8b158c8f4dfb3dd9cf57d0a15b8">class_alloc_count</a></td></tr>
 <tr class="separator:a5b60b8b158c8f4dfb3dd9cf57d0a15b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71ddee7a51026f8c128daf242c4389b8"><td class="memItemLeft" align="right" valign="top">std::map&lt; std::string, int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1AllocationTracker.html#a71ddee7a51026f8c128daf242c4389b8">snapshot_alloc_count</a></td></tr>
+<tr class="separator:a71ddee7a51026f8c128daf242c4389b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-attribs" name="pro-static-attribs"></a>
 Static Protected Attributes</h2></td></tr>
@@ -159,6 +163,31 @@ Static Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a60c8184778f4ec7e9bb527ef98d5e3ab" name="a60c8184778f4ec7e9bb527ef98d5e3ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60c8184778f4ec7e9bb527ef98d5e3ab">&#9670;&#160;</a></span>createSnapshot()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tiny_dlna::AllocationTracker::createSnapshot </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a0591d8a6c70151d8df642f128f8d6ec8" name="a0591d8a6c70151d8df642f128f8d6ec8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0591d8a6c70151d8df642f128f8d6ec8">&#9670;&#160;</a></span>getInstance()</h2>
 
@@ -327,6 +356,28 @@ template&lt;typename T &gt; </div>
   </td>
   <td class="mlabels-right">
 <span class="mlabels"><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a71ddee7a51026f8c128daf242c4389b8" name="a71ddee7a51026f8c128daf242c4389b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a71ddee7a51026f8c128daf242c4389b8">&#9670;&#160;</a></span>snapshot_alloc_count</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::map&lt;std::string, int&gt; tiny_dlna::AllocationTracker::snapshot_alloc_count</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
