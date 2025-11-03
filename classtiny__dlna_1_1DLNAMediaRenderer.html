@@ -285,9 +285,9 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:ae879b212a54d9b3fa3b2c9631eb58c56"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#ae879b212a54d9b3fa3b2c9631eb58c56">publishProperty</a> (const char *serviceAbbrev, const char *changeTag)</td></tr>
-<tr class="memdesc:ae879b212a54d9b3fa3b2c9631eb58c56"><td class="mdescLeft">&#160;</td><td class="mdescRight">serviceAbbrev: AVT, RCS, CMS  <br /></td></tr>
-<tr class="separator:ae879b212a54d9b3fa3b2c9631eb58c56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6272cdf9c1ea587084bca9c4485b5320"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a6272cdf9c1ea587084bca9c4485b5320">addChange</a> (const char *serviceAbbrev, const char *changeTag)</td></tr>
+<tr class="memdesc:a6272cdf9c1ea587084bca9c4485b5320"><td class="mdescLeft">&#160;</td><td class="mdescRight">serviceAbbrev: AVT, RCS, CMS  <br /></td></tr>
+<tr class="separator:a6272cdf9c1ea587084bca9c4485b5320"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afcd3dd33e3e00b7c888c72f7a243edc1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#afcd3dd33e3e00b7c888c72f7a243edc1">publishAVT</a> ()</td></tr>
 <tr class="separator:afcd3dd33e3e00b7c888c72f7a243edc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a83b42d50f2bafadc7f44e8b67b2658d8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a83b42d50f2bafadc7f44e8b67b2658d8">publishRCS</a> ()</td></tr>
@@ -539,6 +539,44 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a6272cdf9c1ea587084bca9c4485b5320" name="a6272cdf9c1ea587084bca9c4485b5320"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6272cdf9c1ea587084bca9c4485b5320">&#9670;&#160;</a></span>addChange()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tiny_dlna::DLNAMediaRenderer::addChange </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>serviceAbbrev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>changeTag</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>serviceAbbrev: AVT, RCS, CMS </p>
+
+</div>
+</div>
 <a id="a481ad2e5cf2b0b8576fbb465a2e3b5ab" name="a481ad2e5cf2b0b8576fbb465a2e3b5ab"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a481ad2e5cf2b0b8576fbb465a2e3b5ab">&#9670;&#160;</a></span>addIcon()</h2>
 
@@ -2101,44 +2139,6 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Publish the RelativeTimePosition property. </p>
-
-</div>
-</div>
-<a id="ae879b212a54d9b3fa3b2c9631eb58c56" name="ae879b212a54d9b3fa3b2c9631eb58c56"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae879b212a54d9b3fa3b2c9631eb58c56">&#9670;&#160;</a></span>publishProperty()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void tiny_dlna::DLNAMediaRenderer::publishProperty </td>
-          <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>serviceAbbrev</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>changeTag</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>serviceAbbrev: AVT, RCS, CMS </p>
 
 </div>
 </div>

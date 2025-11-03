@@ -107,8 +107,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a4cd91c697ce1a616b639f6c59783e118"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html">DLNAServiceInfo</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a4cd91c697ce1a616b639f6c59783e118">getServiceByAbbrev</a> (const char *abbrev)</td></tr>
 <tr class="memdesc:a4cd91c697ce1a616b639f6c59783e118"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get Service by subscription ns abbrev.  <br /></td></tr>
 <tr class="separator:a4cd91c697ce1a616b639f6c59783e118"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a83a41aaef11b4e50c18c4d4b76ea6590"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a83a41aaef11b4e50c18c4d4b76ea6590">publishProperty</a> (const char *serviceAbbrev, const char *changeTag)</td></tr>
-<tr class="separator:a83a41aaef11b4e50c18c4d4b76ea6590"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d3189f0d9b1e472f7df2a4d4fbce46e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a5d3189f0d9b1e472f7df2a4d4fbce46e">addChange</a> (const char *serviceAbbrev, const char *changeTag)</td></tr>
+<tr class="separator:a5d3189f0d9b1e472f7df2a4d4fbce46e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a32962d63b5d46f2181c6b69c99409da2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html">DLNADeviceInfo</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a32962d63b5d46f2181c6b69c99409da2">getDevice</a> ()</td></tr>
 <tr class="memdesc:a32962d63b5d46f2181c6b69c99409da2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the device.  <br /></td></tr>
 <tr class="separator:a32962d63b5d46f2181c6b69c99409da2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -192,6 +192,43 @@ Static Protected Attributes</h2></td></tr>
 </ul>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a5d3189f0d9b1e472f7df2a4d4fbce46e" name="a5d3189f0d9b1e472f7df2a4d4fbce46e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d3189f0d9b1e472f7df2a4d4fbce46e">&#9670;&#160;</a></span>addChange()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tiny_dlna::DLNADevice::addChange </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>serviceAbbrev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>changeTag</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Publish a property change to subscribers of the service identified by the subscription namespace abbreviation (e.g. "AVT", "RCS"). This forwards the request to the <a class="el" href="classtiny__dlna_1_1SubscriptionMgrDevice.html">SubscriptionMgrDevice</a> instance. </p>
+
+</div>
+</div>
 <a id="a5988dd32cfc6dcc776a3214bec3687f0" name="a5988dd32cfc6dcc776a3214bec3687f0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5988dd32cfc6dcc776a3214bec3687f0">&#9670;&#160;</a></span>begin()</h2>
 
@@ -637,43 +674,6 @@ Static Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <p>Process incoming UDP and execute scheduled replies. The method will respect <code>scheduler_active</code> when calling <code><a class="el" href="classtiny__dlna_1_1Scheduler.html#adb5c137561c391272d7f2dd21cd7391c" title="Execute all due schedules.">Scheduler::execute</a></code> so periodic schedules can be silenced while still allowing on-demand replies (e.g. MSearchReply) to be handled. </p>
-
-</div>
-</div>
-<a id="a83a41aaef11b4e50c18c4d4b76ea6590" name="a83a41aaef11b4e50c18c4d4b76ea6590"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a83a41aaef11b4e50c18c4d4b76ea6590">&#9670;&#160;</a></span>publishProperty()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void tiny_dlna::DLNADevice::publishProperty </td>
-          <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>serviceAbbrev</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>changeTag</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Publish a property change to subscribers of the service identified by the subscription namespace abbreviation (e.g. "AVT", "RCS"). This forwards the request to the <a class="el" href="classtiny__dlna_1_1SubscriptionMgrDevice.html">SubscriptionMgrDevice</a> instance. </p>
 
 </div>
 </div>

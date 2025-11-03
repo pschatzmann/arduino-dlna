@@ -292,8 +292,8 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a0a463e979b6c76ac528f526bbf120281"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaServer.html#a0a463e979b6c76ac528f526bbf120281">publishProperty</a> (const char *serviceAbbrev, const char *changeTag)</td></tr>
-<tr class="separator:a0a463e979b6c76ac528f526bbf120281"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab07e10323ab72a96aa7d79bf10c43258"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaServer.html#ab07e10323ab72a96aa7d79bf10c43258">addChange</a> (const char *serviceAbbrev, const char *changeTag)</td></tr>
+<tr class="separator:ab07e10323ab72a96aa7d79bf10c43258"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af0118625f49433bbec52c208abceb1ca"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaServer.html#af0118625f49433bbec52c208abceb1ca">publishAVT</a> ()</td></tr>
 <tr class="memdesc:af0118625f49433bbec52c208abceb1ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Publish a ContentDirectory event (SystemUpdateID)  <br /></td></tr>
 <tr class="separator:af0118625f49433bbec52c208abceb1ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -728,6 +728,43 @@ Static Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab07e10323ab72a96aa7d79bf10c43258" name="ab07e10323ab72a96aa7d79bf10c43258"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab07e10323ab72a96aa7d79bf10c43258">&#9670;&#160;</a></span>addChange()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tiny_dlna::DLNAMediaServer::addChange </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>serviceAbbrev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>changeTag</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>serviceAbbrev: e.g. "AVT" or or subscription namespace abbrev defined for the service </p>
 
 </div>
 </div>
@@ -2537,43 +2574,6 @@ IUDPService&amp;) </p>
 </div><div class="memdoc">
 
 <p>Publish a ConnectionManager event (CurrentConnectionIDs) </p>
-
-</div>
-</div>
-<a id="a0a463e979b6c76ac528f526bbf120281" name="a0a463e979b6c76ac528f526bbf120281"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0a463e979b6c76ac528f526bbf120281">&#9670;&#160;</a></span>publishProperty()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void tiny_dlna::DLNAMediaServer::publishProperty </td>
-          <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>serviceAbbrev</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>changeTag</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>serviceAbbrev: e.g. "AVT" or or subscription namespace abbrev defined for the service </p>
 
 </div>
 </div>

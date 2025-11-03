@@ -9,7 +9,7 @@ var searchData=
   ['unescapestr_6',['unEscapeStr',['../classtiny__dlna_1_1DLNAControlPoint.html#af275b4f7d722ca3731128128b52c96f6',1,'tiny_dlna::DLNAControlPoint']]],
   ['universal_5fproduct_5fcode_7',['universal_product_code',['../classtiny__dlna_1_1DLNADeviceInfo.html#a26b5be8be5aae989e7697f5a9ebc95ce',1,'tiny_dlna::DLNADeviceInfo']]],
   ['unknown_8',['Unknown',['../namespacetiny__dlna.html#a85d3f686372782f654ff23302800aac9a88183b946cc5f0e8c96b2e66e1c74a7e',1,'tiny_dlna']]],
-  ['unsubscribe_9',['unsubscribe',['../classtiny__dlna_1_1SubscriptionMgrDevice.html#a0a68d847cf4bf393d599184deb369d1e',1,'tiny_dlna::SubscriptionMgrDevice::unsubscribe()'],['../classtiny__dlna_1_1HttpRequest.html#aa7b7999678056e30a7a059efe65b1236',1,'tiny_dlna::HttpRequest::unsubscribe()']]],
+  ['unsubscribe_9',['unsubscribe',['../classtiny__dlna_1_1SubscriptionMgrDevice.html#afe1929863f462c91abf8c226cc3903e8',1,'tiny_dlna::SubscriptionMgrDevice::unsubscribe()'],['../classtiny__dlna_1_1HttpRequest.html#aa7b7999678056e30a7a059efe65b1236',1,'tiny_dlna::HttpRequest::unsubscribe()']]],
   ['unsubscribed_10',['Unsubscribed',['../namespacetiny__dlna.html#aaeb449bfe04e5561476e1371856fa0cfafdc7aa92ecb714c25019e988c09aeffa',1,'tiny_dlna']]],
   ['unsubscribefromdevice_11',['unsubscribeFromDevice',['../classtiny__dlna_1_1SubscriptionMgrControlPoint.html#a7c1dcf62ba7e9de2bae2091dd1d43d53',1,'tiny_dlna::SubscriptionMgrControlPoint']]],
   ['unsubscribefromservice_12',['unsubscribeFromService',['../classtiny__dlna_1_1SubscriptionMgrControlPoint.html#aaf1ddfcd056032eb16082205d0e00ac4',1,'tiny_dlna::SubscriptionMgrControlPoint']]],

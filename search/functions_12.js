@@ -2,7 +2,7 @@ var searchData=
 [
   ['udpservice_0',['UDPService',['../classtiny__dlna_1_1UDPService.html#a056917b161e0f6c81133aa102e97f136',1,'tiny_dlna::UDPService']]],
   ['unescapestr_1',['unEscapeStr',['../classtiny__dlna_1_1DLNAControlPoint.html#af275b4f7d722ca3731128128b52c96f6',1,'tiny_dlna::DLNAControlPoint']]],
-  ['unsubscribe_2',['unsubscribe',['../classtiny__dlna_1_1SubscriptionMgrDevice.html#a0a68d847cf4bf393d599184deb369d1e',1,'tiny_dlna::SubscriptionMgrDevice::unsubscribe()'],['../classtiny__dlna_1_1HttpRequest.html#aa7b7999678056e30a7a059efe65b1236',1,'tiny_dlna::HttpRequest::unsubscribe()']]],
+  ['unsubscribe_2',['unsubscribe',['../classtiny__dlna_1_1SubscriptionMgrDevice.html#afe1929863f462c91abf8c226cc3903e8',1,'tiny_dlna::SubscriptionMgrDevice::unsubscribe()'],['../classtiny__dlna_1_1HttpRequest.html#aa7b7999678056e30a7a059efe65b1236',1,'tiny_dlna::HttpRequest::unsubscribe()']]],
   ['unsubscribefromdevice_3',['unsubscribeFromDevice',['../classtiny__dlna_1_1SubscriptionMgrControlPoint.html#a7c1dcf62ba7e9de2bae2091dd1d43d53',1,'tiny_dlna::SubscriptionMgrControlPoint']]],
   ['unsubscribefromservice_4',['unsubscribeFromService',['../classtiny__dlna_1_1SubscriptionMgrControlPoint.html#aaf1ddfcd056032eb16082205d0e00ac4',1,'tiny_dlna::SubscriptionMgrControlPoint']]],
   ['updatereceived_5',['updateReceived',['../classtiny__dlna_1_1SubscriptionMgrControlPoint.html#a0d42d3bc8b23f1fbd021a1ab8fcec672',1,'tiny_dlna::SubscriptionMgrControlPoint']]],

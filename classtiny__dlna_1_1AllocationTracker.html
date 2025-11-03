@@ -101,8 +101,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a6fd9cd30698fd5ce8dc6b8cc53e7de48"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a31db7be5cc90f65288b55a1678a78cee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1AllocationTracker.html#a31db7be5cc90f65288b55a1678a78cee">reportClassCounts</a> ()</td></tr>
 <tr class="separator:a31db7be5cc90f65288b55a1678a78cee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a99bbc09ebec5c616d43bf610adc30168"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1AllocationTracker.html#a99bbc09ebec5c616d43bf610adc30168">reportLeaks</a> ()</td></tr>
-<tr class="separator:a99bbc09ebec5c616d43bf610adc30168"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adeedfef5b1ce72f21ed16bb66e385ba9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1AllocationTracker.html#adeedfef5b1ce72f21ed16bb66e385ba9">reportLeaks</a> ()</td></tr>
+<tr class="separator:adeedfef5b1ce72f21ed16bb66e385ba9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -133,7 +133,7 @@ Static Protected Attributes</h2></td></tr>
 <li>Use <a class="el" href="classtiny__dlna_1_1AllocationTracker.html#a87461a88b33c60975e0cbd87e7586731">trackAlloc&lt;T&gt;()</a> when allocating an object of type T.</li>
 <li>Use <a class="el" href="classtiny__dlna_1_1AllocationTracker.html#a6fd9cd30698fd5ce8dc6b8cc53e7de48">trackFree&lt;T&gt;()</a> when freeing an object of type T.</li>
 <li>Call <a class="el" href="classtiny__dlna_1_1AllocationTracker.html#a31db7be5cc90f65288b55a1678a78cee">reportClassCounts()</a> to print the current allocation counts for all tracked classes.</li>
-<li>Call <a class="el" href="classtiny__dlna_1_1AllocationTracker.html#a99bbc09ebec5c616d43bf610adc30168">reportLeaks()</a> to print a summary of classes with nonzero allocation counts (potential leaks).</li>
+<li>Call <a class="el" href="classtiny__dlna_1_1AllocationTracker.html#adeedfef5b1ce72f21ed16bb66e385ba9">reportLeaks()</a> to print a summary of classes with nonzero allocation counts (potential leaks).</li>
 </ul>
 <p>Example: <a class="el" href="classtiny__dlna_1_1AllocationTracker.html#a0591d8a6c70151d8df642f128f8d6ec8">AllocationTracker::getInstance()</a>.<a class="el" href="classtiny__dlna_1_1AllocationTracker.html#a87461a88b33c60975e0cbd87e7586731">trackAlloc&lt;MyClass&gt;()</a>; <a class="el" href="classtiny__dlna_1_1AllocationTracker.html#a0591d8a6c70151d8df642f128f8d6ec8">AllocationTracker::getInstance()</a>.<a class="el" href="classtiny__dlna_1_1AllocationTracker.html#a6fd9cd30698fd5ce8dc6b8cc53e7de48">trackFree&lt;MyClass&gt;()</a>; </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -238,8 +238,8 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a99bbc09ebec5c616d43bf610adc30168" name="a99bbc09ebec5c616d43bf610adc30168"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a99bbc09ebec5c616d43bf610adc30168">&#9670;&#160;</a></span>reportLeaks()</h2>
+<a id="adeedfef5b1ce72f21ed16bb66e385ba9" name="adeedfef5b1ce72f21ed16bb66e385ba9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adeedfef5b1ce72f21ed16bb66e385ba9">&#9670;&#160;</a></span>reportLeaks()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -248,7 +248,7 @@ Static Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void tiny_dlna::AllocationTracker::reportLeaks </td>
+          <td class="memname">bool tiny_dlna::AllocationTracker::reportLeaks </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>

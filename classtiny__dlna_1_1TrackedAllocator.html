@@ -75,7 +75,6 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classtiny__dlna_1_1TrackedAllocator-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">tiny_dlna::TrackedAllocator Class Reference</div></div>
@@ -86,133 +85,46 @@ $(function() {
  <a href="classtiny__dlna_1_1TrackedAllocator.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="Allocator_8h_source.html">Allocator.h</a>&gt;</code></p>
-<div class="dynheader">
-Inheritance diagram for tiny_dlna::TrackedAllocator:</div>
-<div class="dyncontent">
-<div class="center"><img src="classtiny__dlna_1_1TrackedAllocator__inherit__graph.png" border="0" usemap="#atiny__dlna_1_1TrackedAllocator_inherit__map" alt="Inheritance graph"/></div>
-<map name="atiny__dlna_1_1TrackedAllocator_inherit__map" id="atiny__dlna_1_1TrackedAllocator_inherit__map">
-<area shape="rect" title="Allocator which tracks allocations and deallocations." alt="" coords="5,79,203,104"/>
-<area shape="rect" href="classtiny__dlna_1_1Allocator.html" title="Memory allocateator which uses malloc." alt="" coords="30,5,178,31"/>
-</map>
-<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a3d5946da0fae50a738b26d58adf2591f"><td class="memItemLeft" align="right" valign="top">virtual void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Allocator.html#a3d5946da0fae50a738b26d58adf2591f">allocate</a> (size_t size)</td></tr>
-<tr class="memdesc:a3d5946da0fae50a738b26d58adf2591f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocates memory.  <br /></td></tr>
-<tr class="separator:a3d5946da0fae50a738b26d58adf2591f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af3e92a21c1dbf85563d29425ba2be543"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Allocator.html#af3e92a21c1dbf85563d29425ba2be543">stop</a> ()</td></tr>
-<tr class="separator:af3e92a21c1dbf85563d29425ba2be543"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acf6e5fd371c7845fa558196a6e1b18c0"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Allocator.html#acf6e5fd371c7845fa558196a6e1b18c0">free</a> (void *memory)</td></tr>
-<tr class="memdesc:acf6e5fd371c7845fa558196a6e1b18c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">frees memory  <br /></td></tr>
-<tr class="separator:acf6e5fd371c7845fa558196a6e1b18c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
-Protected Member Functions</h2></td></tr>
-<tr class="memitem:ac06b356163fdaebccf953b46da04fd2e"><td class="memItemLeft" align="right" valign="top">virtual void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Allocator.html#ac06b356163fdaebccf953b46da04fd2e">do_allocate</a> (size_t size)</td></tr>
-<tr class="separator:ac06b356163fdaebccf953b46da04fd2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1212ff106ba0f5137a6705f089cc72af"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:a1212ff106ba0f5137a6705f089cc72af"><td class="memTemplItemLeft" align="right" valign="top">T *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1TrackedAllocator.html#a1212ff106ba0f5137a6705f089cc72af">create</a> ()</td></tr>
+<tr class="separator:a1212ff106ba0f5137a6705f089cc72af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a795ae5fe66d3c2c26cf68c41dd907c"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:a8a795ae5fe66d3c2c26cf68c41dd907c"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1TrackedAllocator.html#a8a795ae5fe66d3c2c26cf68c41dd907c">remove</a> (T *obj)</td></tr>
+<tr class="memdesc:a8a795ae5fe66d3c2c26cf68c41dd907c"><td class="mdescLeft">&#160;</td><td class="mdescRight">deletes an object  <br /></td></tr>
+<tr class="separator:a8a795ae5fe66d3c2c26cf68c41dd907c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19b2c63b40455a18d9223856de9c5a8b"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:a19b2c63b40455a18d9223856de9c5a8b"><td class="memTemplItemLeft" align="right" valign="top">T *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1TrackedAllocator.html#a19b2c63b40455a18d9223856de9c5a8b">createArray</a> (int len)</td></tr>
+<tr class="separator:a19b2c63b40455a18d9223856de9c5a8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaed7e2e83593ed6a54ca5b2b344e70bd"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:aaed7e2e83593ed6a54ca5b2b344e70bd"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1TrackedAllocator.html#aaed7e2e83593ed6a54ca5b2b344e70bd">removeArray</a> (T *obj, int len)</td></tr>
+<tr class="separator:aaed7e2e83593ed6a54ca5b2b344e70bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
+<tr class="memitem:a136b7b3154294c5e623f90c2b832cf40"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Allocator.html">Allocator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1TrackedAllocator.html#a136b7b3154294c5e623f90c2b832cf40">alloc</a></td></tr>
+<tr class="separator:a136b7b3154294c5e623f90c2b832cf40"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9662f895a5727c8acf4cc17d8453ac69"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1AllocationTracker.html">AllocationTracker</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1TrackedAllocator.html#a9662f895a5727c8acf4cc17d8453ac69">tracker</a> = <a class="el" href="classtiny__dlna_1_1AllocationTracker.html#a0591d8a6c70151d8df642f128f8d6ec8">AllocationTracker::getInstance</a>()</td></tr>
 <tr class="separator:a9662f895a5727c8acf4cc17d8453ac69"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="classtiny__dlna_1_1Allocator.html" title="Memory allocateator which uses malloc.">Allocator</a> which tracks allocations and deallocations. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a3d5946da0fae50a738b26d58adf2591f" name="a3d5946da0fae50a738b26d58adf2591f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3d5946da0fae50a738b26d58adf2591f">&#9670;&#160;</a></span>allocate()</h2>
+<a id="a1212ff106ba0f5137a6705f089cc72af" name="a1212ff106ba0f5137a6705f089cc72af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1212ff106ba0f5137a6705f089cc72af">&#9670;&#160;</a></span>create()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void * tiny_dlna::Allocator::allocate </td>
-          <td>(</td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>size</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Allocates memory. </p>
-
-</div>
-</div>
-<a id="ac06b356163fdaebccf953b46da04fd2e" name="ac06b356163fdaebccf953b46da04fd2e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac06b356163fdaebccf953b46da04fd2e">&#9670;&#160;</a></span>do_allocate()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual void * tiny_dlna::Allocator::do_allocate </td>
-          <td>(</td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>size</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="acf6e5fd371c7845fa558196a6e1b18c0" name="acf6e5fd371c7845fa558196a6e1b18c0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acf6e5fd371c7845fa558196a6e1b18c0">&#9670;&#160;</a></span>free()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual void tiny_dlna::Allocator::free </td>
-          <td>(</td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>memory</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>frees memory </p>
-
-</div>
-</div>
-<a id="af3e92a21c1dbf85563d29425ba2be543" name="af3e92a21c1dbf85563d29425ba2be543"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af3e92a21c1dbf85563d29425ba2be543">&#9670;&#160;</a></span>stop()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void tiny_dlna::Allocator::stop </td>
+          <td class="memname">T * tiny_dlna::TrackedAllocator::create </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -220,7 +132,103 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a19b2c63b40455a18d9223856de9c5a8b" name="a19b2c63b40455a18d9223856de9c5a8b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a19b2c63b40455a18d9223856de9c5a8b">&#9670;&#160;</a></span>createArray()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T * tiny_dlna::TrackedAllocator::createArray </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>len</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8a795ae5fe66d3c2c26cf68c41dd907c" name="a8a795ae5fe66d3c2c26cf68c41dd907c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a795ae5fe66d3c2c26cf68c41dd907c">&#9670;&#160;</a></span>remove()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tiny_dlna::TrackedAllocator::remove </td>
+          <td>(</td>
+          <td class="paramtype">T *&#160;</td>
+          <td class="paramname"><em>obj</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>deletes an object </p>
+
+</div>
+</div>
+<a id="aaed7e2e83593ed6a54ca5b2b344e70bd" name="aaed7e2e83593ed6a54ca5b2b344e70bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaed7e2e83593ed6a54ca5b2b344e70bd">&#9670;&#160;</a></span>removeArray()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tiny_dlna::TrackedAllocator::removeArray </td>
+          <td>(</td>
+          <td class="paramtype">T *&#160;</td>
+          <td class="paramname"><em>obj</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>len</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -228,6 +236,28 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="a136b7b3154294c5e623f90c2b832cf40" name="a136b7b3154294c5e623f90c2b832cf40"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a136b7b3154294c5e623f90c2b832cf40">&#9670;&#160;</a></span>alloc</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1Allocator.html">Allocator</a> tiny_dlna::TrackedAllocator::alloc</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a9662f895a5727c8acf4cc17d8453ac69" name="a9662f895a5727c8acf4cc17d8453ac69"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9662f895a5727c8acf4cc17d8453ac69">&#9670;&#160;</a></span>tracker</h2>
 

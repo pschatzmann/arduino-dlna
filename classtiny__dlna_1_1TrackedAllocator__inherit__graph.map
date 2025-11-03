@@ -1,4 +1,0 @@
-<map id="tiny_dlna::TrackedAllocator" name="tiny_dlna::TrackedAllocator">
-<area shape="rect" id="node1" title="Allocator which tracks allocations and deallocations." alt="" coords="5,79,203,104"/>
-<area shape="rect" id="node2" href="$classtiny__dlna_1_1Allocator.html" title="Memory allocateator which uses malloc." alt="" coords="30,5,178,31"/>
-</map>

@@ -14,7 +14,8 @@ var searchData=
   ['actual_5fwrite_5fpos_11',['actual_write_pos',['../classtiny__dlna_1_1RingBuffer.html#a6176a15411db9e9b679d64ba167d1288',1,'tiny_dlna::RingBuffer']]],
   ['address_12',['address',['../structtiny__dlna_1_1IPAddressAndPort.html#af4524b51e1febda48d794a510a17929f',1,'tiny_dlna::IPAddressAndPort::address()'],['../classtiny__dlna_1_1MSearchSchedule.html#a16bb4b4f7c2e4d16649fc1847f21d0c6',1,'tiny_dlna::MSearchSchedule::address()'],['../classtiny__dlna_1_1MSearchReplySchedule.html#a9496e188318e6a0d7396a6b2b0bf7f35',1,'tiny_dlna::MSearchReplySchedule::address()'],['../classtiny__dlna_1_1PostSubscribe.html#a68db2f5a6f9ec95fc76fa0459659e61e',1,'tiny_dlna::PostSubscribe::address()']]],
   ['agent_13',['agent',['../classtiny__dlna_1_1HttpRequest.html#a26fdc17696a6af0261b55be781d1c436',1,'tiny_dlna::HttpRequest']]],
-  ['allow_5flocalhost_14',['allow_localhost',['../classtiny__dlna_1_1DLNAControlPoint.html#a3c39a85a90f31184688fa1306a21c7b8',1,'tiny_dlna::DLNAControlPoint']]],
-  ['arguments_15',['arguments',['../classtiny__dlna_1_1ActionReply.html#a7e11b59d7803b3a76bc1286ac0f71abb',1,'tiny_dlna::ActionReply::arguments()'],['../classtiny__dlna_1_1ActionRequest.html#a6d07771a8b57b367ab248b3283c9008d',1,'tiny_dlna::ActionRequest::arguments()']]],
-  ['attributes_16',['attributes',['../structtiny__dlna_1_1XMLNode.html#adc4b88eabc13b3c54e0d52fbc78231bc',1,'tiny_dlna::XMLNode']]]
+  ['alloc_14',['alloc',['../classtiny__dlna_1_1TrackedAllocator.html#a136b7b3154294c5e623f90c2b832cf40',1,'tiny_dlna::TrackedAllocator']]],
+  ['allow_5flocalhost_15',['allow_localhost',['../classtiny__dlna_1_1DLNAControlPoint.html#a3c39a85a90f31184688fa1306a21c7b8',1,'tiny_dlna::DLNAControlPoint']]],
+  ['arguments_16',['arguments',['../classtiny__dlna_1_1ActionReply.html#a7e11b59d7803b3a76bc1286ac0f71abb',1,'tiny_dlna::ActionReply::arguments()'],['../classtiny__dlna_1_1ActionRequest.html#a6d07771a8b57b367ab248b3283c9008d',1,'tiny_dlna::ActionRequest::arguments()']]],
+  ['attributes_17',['attributes',['../structtiny__dlna_1_1XMLNode.html#adc4b88eabc13b3c54e0d52fbc78231bc',1,'tiny_dlna::XMLNode']]]
 ];
