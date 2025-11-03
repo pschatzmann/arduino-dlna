@@ -160,12 +160,12 @@ class DLNAMediaServer : public DLNADeviceInfo {
     auto writer = [](Print& out, void* ref) -> size_t {
       auto self = (DLNAMediaServer*)ref;
       size_t result = 0;
-      result += out.print("<SourceProtocolInfo>\n");
+      result += out.print("<SourceProtocolInfo val=\"");
       result += out.print(StringRegistry::nullStr(self->getSourceProtocols()));
-      result += out.print("</SourceProtocolInfo>\n");
-      result += out.print("<SinkProtocolInfo>\n");
+      result += out.print("\"/>\n");
+      result += out.print("<SinkProtocolInfo val=\"");
       result += out.print(StringRegistry::nullStr(self->getSinkProtocols()));
-      result += out.print("</SinkProtocolInfo>\n");
+      result += out.print("\"/>\n");
       return result;
     };
     addChange("CMS", writer);
@@ -234,7 +234,6 @@ class DLNAMediaServer : public DLNADeviceInfo {
   int g_stream_numberReturned = 0;
   int g_stream_totalMatches = 0;
   int g_stream_updateID = 1;
-  int g_instance_id = 1;
   void* g_stream_reference = nullptr;
   const char* st = "urn:schemas-upnp-org:device:MediaServer:1";
   const char* usn = "uuid:media-server-0000-0000-0000-000000000001";
@@ -280,15 +279,15 @@ class DLNAMediaServer : public DLNADeviceInfo {
     auto writer = [](Print& out, void* ref) -> size_t {
       auto self = (DLNAMediaServer*)ref;
       size_t result = 0;
-      result += out.print("<SourceProtocolInfo>\n");
-      result += out.print(StringRegistry::nullStr(self->sourceProto));
-      result += out.print("</SourceProtocolInfo>\n");
-      result += out.print("<SinkProtocolInfo>\n");
-      result += out.print(StringRegistry::nullStr(self->sinkProto));
-      result += out.print("</SinkProtocolInfo>\n");
-      result += out.print("<CurrentConnectionIDs>");
+      result += out.print("<SourceProtocolInfo val=\"");
+      result += out.print(StringRegistry::nullStr(self->getSourceProtocols()));
+      result += out.print("\"/>\n");
+      result += out.print("<SinkProtocolInfo val=\"");
+      result += out.print(StringRegistry::nullStr(self->getSinkProtocols()));
+      result += out.print("\"/>\n");
+      result += out.print("<CurrentConnectionIDs val=\"");
       result += out.print(StringRegistry::nullStr(self->connectionID));
-      result += out.print("</CurrentConnectionIDs>\n");
+      result += out.print("\"/>\n");
       return result;
     };
     addChange("CMS", writer);
@@ -638,6 +637,7 @@ class DLNAMediaServer : public DLNADeviceInfo {
     // fallback
     return ContentQueryType::BrowseMetadata;
   }
+
   void soapEnvelopeStart(ChunkPrint& chunk) {
     chunk.print("<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n");
     chunk.print(

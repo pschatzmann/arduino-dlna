@@ -321,7 +321,7 @@ class DLNADevice {
   }
 
   StringRegistry& getStringRegistry() { return registry; }
-
+  
  protected:
   bool is_active = false;
   uint32_t post_alive_repeat_ms = 0;

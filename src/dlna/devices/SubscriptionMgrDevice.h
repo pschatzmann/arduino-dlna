@@ -2,6 +2,7 @@
 
 #include "basic/Logger.h"
 #include "basic/NullPrint.h"
+#include "basic/EscapingPrint.h"
 #include "basic/Str.h"
 #include "basic/StrView.h"
 #include "basic/Url.h"
@@ -250,6 +251,7 @@ class SubscriptionMgrDevice {
 
       // Build and send HTTP notify as in previous implementation
       Url cbUrl(sub.callback_url.c_str());
+      //Url cbUrl("http://192.168.1.44:8000");
       NullPrint np;
       DLNAHttpRequest http;
       http.setHost(cbUrl.host());
@@ -262,6 +264,7 @@ class SubscriptionMgrDevice {
       http.request().put("SID", sub.sid.c_str());
       http.setTimeout(DLNA_HTTP_REQUEST_TIMEOUT_MS);
       // pass the pending notification as reference
+      //int len = createXML(Serial, &pn);
       int len = createXML(np, &pn);
       int rc = http.notify(cbUrl, len, createXML, "text/xml", &pn);
 
@@ -376,8 +379,12 @@ class SubscriptionMgrDevice {
   * Returns the number of bytes written.
    */
   static size_t createXML(Print& out, void* ref) {
+    EscapingPrint out_esc{out};
     PendingNotification& pn = *(PendingNotification*)ref;
-    const char* serviceAbbrev = pn.p_subscription->service->subscription_namespace_abbrev;
+    const char* service_abbrev = pn.p_subscription->service->subscription_namespace_abbrev;
+    int instance_id = pn.p_subscription->service->instance_id;
+
+
     size_t written = 0;
     written += out.print("<?xml version=\"1.0\"?>\r\n");
     written += out.print(
@@ -385,13 +392,19 @@ class SubscriptionMgrDevice {
         "xmlns:e=\"urn:schemas-upnp-org:metadata-1-0/events\">\r\n");
     written += out.print("<e:property>\r\n");
     written += out.print("<LastChange>\r\n");
-    written += out.print("<Event xmlns=\"urn:schemas-upnp-org:metadata-1-0/");
-    written += out.print(serviceAbbrev);
-    written += out.print("/\">\r\n");
+    // blow should be escaped
+    written += out_esc.print("<Event xmlns=\"urn:schemas-upnp-org:metadata-1-0/");
+    written += out_esc.print(service_abbrev);
+    written += out_esc.print("/\">\r\n");
+    written += out_esc.print("<InstanceID val=\"");
+    written += out_esc.print(instance_id);
+    written += out_esc.print("\">\r\n");
     if (pn.writer) {
-      written += pn.writer(out, pn.ref);
+      written += pn.writer(out_esc, pn.ref);
     }
-    written += out.print("</Event>\r\n");
+    written += out_esc.print("</InstanceID>\r\n");
+    written += out_esc.print("</Event>\r\n");
+    // end of escaped
     written += out.print("</LastChange>\r\n");
     written += out.print("</e:property>\r\n");
     written += out.print("</e:propertyset>\r\n");

@@ -48,6 +48,9 @@ class DLNAServiceInfo {
   uint64_t time_subscription_expires = 0;  ///< timestamp when subscription expires
   const char* subscription_namespace_abbrev = nullptr;
 
+  // instance id
+  int  instance_id = 0;
+ 
   // active/inactive
   bool is_active = true;
   operator bool() { return is_active; }
