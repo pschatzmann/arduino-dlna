@@ -156,14 +156,19 @@ class DLNAMediaServer : public DLNADeviceInfo {
     sourceProto = source;
     sinkProto = sink;
     // publish protocol info change to ConnectionManager subscribers
-    StrPrint cmd;
-    cmd.print("<SourceProtocolInfo>\n");
-    cmd.print(StringRegistry::nullStr(sourceProto));
-    cmd.print("</SourceProtocolInfo>\n");
-    cmd.print("<SinkProtocolInfo>\n");
-    cmd.print(StringRegistry::nullStr(sinkProto));
-    cmd.print("</SinkProtocolInfo>\n");
-    addChange("CMS", cmd.c_str());
+    // Build writer that will use live state from the device at publish time
+    auto writer = [](Print& out, void* ref) -> size_t {
+      auto self = (DLNAMediaServer*)ref;
+      size_t result = 0;
+      result += out.print("<SourceProtocolInfo>\n");
+      result += out.print(StringRegistry::nullStr(self->getSourceProtocols()));
+      result += out.print("</SourceProtocolInfo>\n");
+      result += out.print("<SinkProtocolInfo>\n");
+      result += out.print(StringRegistry::nullStr(self->getSinkProtocols()));
+      result += out.print("</SinkProtocolInfo>\n");
+      return result;
+    };
+    addChange("CMS", writer);
   }
 
   /// Get the current source `ProtocolInfo` string
@@ -245,35 +250,48 @@ class DLNAMediaServer : public DLNADeviceInfo {
   const char* connectionID = "0";
   Vector<ActionRule> rules;
 
-  /// serviceAbbrev: e.g. "AVT" or  or subscription namespace abbrev defined for
+  /// serviceAbbrev: e.g. "AVT" or subscription namespace abbrev defined for
   /// the service
-  void addChange(const char* serviceAbbrev, const char* changeTag) {
-    // Delegate to the internal DLNADevice instance which manages
-    // subscriptions and services.
-    dlna_device.addChange(serviceAbbrev, changeTag);
+  void addChange(const char* serviceAbbrev,
+                 std::function<size_t(Print&, void*)> changeWriter) {
+    dlna_device.addChange(serviceAbbrev, changeWriter, this);
   }
 
   /// Publish a ContentDirectory event (SystemUpdateID)
   void publishAVT() {
     DlnaLogger.log(DlnaLogLevel::Info, "MediaServer::publishAVT");
-    StrPrint cmd;
-    cmd.printf("<SystemUpdateID val=\"%d\"/>\n", g_stream_updateID);
-    addChange("AVT", cmd.c_str());
+    // Publish SystemUpdateID using a writer that reads the current value
+    auto writer = [](Print& out, void* ref) -> size_t {
+      auto self = (DLNAMediaServer*)ref;
+      size_t result = 0;
+      result += out.print("<SystemUpdateID val=\"");
+      result += out.print(self->g_stream_updateID);
+      result += out.print("\"/>\n");
+      return result;
+    };
+    addChange("AVT", writer);
   }
 
   /// Publish a ConnectionManager event (CurrentConnectionIDs)
   void publishCMS() {
     DlnaLogger.log(DlnaLogLevel::Info, "MediaServer::publishCMS");
-    StrPrint cmd;
-    cmd.print("<SourceProtocolInfo>\n");
-    cmd.print(StringRegistry::nullStr(sourceProto));
-    cmd.print("</SourceProtocolInfo>\n");
-    cmd.print("<SinkProtocolInfo>\n");
-    cmd.print(StringRegistry::nullStr(sinkProto));
-    cmd.print("</SinkProtocolInfo>\n");
-    cmd.printf("<CurrentConnectionIDs>%s</CurrentConnectionIDs>\n",
-               connectionID);
-    addChange("CMS", cmd.c_str());
+    // Publish current ConnectionManager properties using a writer that
+    // reads live state from the device
+    auto writer = [](Print& out, void* ref) -> size_t {
+      auto self = (DLNAMediaServer*)ref;
+      size_t result = 0;
+      result += out.print("<SourceProtocolInfo>\n");
+      result += out.print(StringRegistry::nullStr(self->sourceProto));
+      result += out.print("</SourceProtocolInfo>\n");
+      result += out.print("<SinkProtocolInfo>\n");
+      result += out.print(StringRegistry::nullStr(self->sinkProto));
+      result += out.print("</SinkProtocolInfo>\n");
+      result += out.print("<CurrentConnectionIDs>");
+      result += out.print(StringRegistry::nullStr(self->connectionID));
+      result += out.print("</CurrentConnectionIDs>\n");
+      return result;
+    };
+    addChange("CMS", writer);
   }
 
   /// Setup the service endpoints

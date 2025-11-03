@@ -720,8 +720,9 @@ class DLNAControlPoint {
     NullPrint np;
     size_t xmlLen = createSoapXML(action, np);
     // dynamically create and write xml  
-    auto printXML = [this, &action, &xmlLen](Print& out) {
-      createSoapXML(action, out);
+    auto printXML = [this, &action, &xmlLen](Print& out, void* ref) -> size_t {
+      (void)ref;
+      return createSoapXML(action, out);
     };
     p_http->stop();
     p_http->request().put("SOAPACTION", soapAction);

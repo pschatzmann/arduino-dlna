@@ -149,8 +149,13 @@ class DLNADevice {
 
   /// Publish a property change to subscribers of the service identified by
   /// the subscription namespace abbreviation (e.g. "AVT", "RCS"). This
-  /// forwards the request to the SubscriptionMgrDevice instance.
-  void addChange(const char* serviceAbbrev, const char* changeTag) {
+  /// forwards the request to the SubscriptionMgrDevice instance. Instead of
+  /// taking a raw XML fragment, callers provide a writer callback and an
+  /// opaque `ref` pointer which will be forwarded to the writer both when the
+  /// Content-Length is calculated and when the NOTIFY body is streamed.
+  void addChange(const char* serviceAbbrev,
+                 std::function<size_t(Print&, void*)> changeWriter,
+                 void* ref) {
     SubscriptionMgrDevice* mgr = tiny_dlna::DLNADevice::getSubscriptionMgr();
     if (!mgr) {
       DlnaLogger.log(DlnaLogLevel::Warning,
@@ -164,7 +169,7 @@ class DLNADevice {
                      serviceAbbrev);
       return;
     }
-    mgr->addChange(serviceInfo, changeTag);
+    mgr->addChange(serviceInfo, changeWriter, ref);
   }
 
   /// Provides the device

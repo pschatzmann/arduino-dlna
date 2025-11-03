@@ -65,16 +65,16 @@ class HttpRequest {
     return process(T_POST, url, mime, data, len);
   }
 
-  virtual int post(Url &url, size_t len, std::function<void(Print&)> writer,
-                          const char *mime = nullptr) {
-    return process(T_POST, url, len, writer, mime);
+  virtual int post(Url &url, size_t len, std::function<size_t(Print&, void*)> writer,
+                          const char *mime = nullptr, void* ref=nullptr) {
+    return process(T_POST, url, len, writer, mime, ref);
   }
 
   /// Send a NOTIFY request with a streaming body (chunked). This mirrors the
   /// chunked POST implementation but uses the NOTIFY method.
-  virtual int notify(Url &url, size_t len, std::function<void(Print&)> writer,
-                     const char *mime = nullptr) {
-    return process(T_NOTIFY, url, len, writer, mime);
+  virtual int notify(Url &url, size_t len, std::function<size_t(Print&, void*)> writer,
+                     const char *mime = nullptr, void* ref=nullptr) {
+    return process(T_NOTIFY, url, len, writer, mime, ref);
   }
 
   virtual int put(Url &url, const char *mime, const char *data, int len = -1) {
@@ -240,12 +240,12 @@ class HttpRequest {
     return reply_header.statusCode();
   }
 
-  /// Shared implementation for streaming (chunked) requests. Both POST and
+  /// Shared implementation for streaming requests. Both POST and
   /// NOTIFY (and potentially others) can use this to avoid code duplication.
   virtual int process(TinyMethodID method, Url &url, size_t len,
-                             std::function<void(Print&)> writer,
-                             const char *mime = nullptr) {
-    DlnaLogger.log(DlnaLogLevel::Info, "%sChunked %s", methods[method], url.url());
+                             std::function<size_t(Print&, void*)> writer,
+                             const char *mime = nullptr, void* ref=nullptr) {
+    DlnaLogger.log(DlnaLogLevel::Info, "%s %s", methods[method], url.url());
 
     if (!connected()) {
       DlnaLogger.log(DlnaLogLevel::Info, "HttpRequest::%sChunked - connecting to host %s port %d", methods[method], url.host(), url.port());
@@ -277,8 +277,10 @@ class HttpRequest {
     // write request header to client
     request_header.write(*client_ptr);
 
-    // stream body via ChunkPrint which emits proper chunk frames
-    if (writer) writer(*client_ptr);
+    // write callback (writer returns number of bytes written)
+    if (writer) {
+      (void)writer(*client_ptr, ref);
+    }
 
     // read reply header and prepare chunk reader if needed
     reply_header.read(*client_ptr);

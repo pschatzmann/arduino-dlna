@@ -9,6 +9,7 @@
 #include "dlna/StringRegistry.h"
 #include "http/Http.h"
 #include "http/Server/HttpRequest.h"
+#include <functional>
 
 namespace tiny_dlna {
 
@@ -42,8 +43,11 @@ struct Subscription {
 struct PendingNotification {
   Subscription* p_subscription =
       nullptr;         /**< non-owning pointer to Subscription */
-  Str changeNode;      /**< inner XML fragment to send */
+  std::function<size_t(Print&, void*)> writer; /**< writer callback that emits the
+                                              notification XML */
+  void* refptr = nullptr;                     /**< opaque reference for writer */
   int error_count = 0; /**< number of failed send attempts */
+  size_t xmlLen = 0;     /**< size of the generated XML */
 };
 
 
@@ -112,7 +116,7 @@ class SubscriptionMgrDevice {
    * @param timeoutSec Requested subscription timeout in seconds (default 1800)
    * @return Str Assigned or renewed SID for the subscription
    */
-  Str subscribe(DLNAServiceInfo& service, const char* callbackUrl,
+  Str subscribe(DLNAServiceInfo& service, const char* callbackUrl, 
                 const char* sid = nullptr, uint32_t timeoutSec = 1800) {
     // simple SID generation
     DlnaLogger.log(DlnaLogLevel::Info, "subscribe: %s %s",
@@ -187,21 +191,22 @@ class SubscriptionMgrDevice {
   /**
    * @brief Enqueue a state-variable change for delivery
    *
-   * Adds a pending notification for all subscribers of `service`. The
-   * provided `xmlTag` is the inner XML fragment representing the changed
-   * state (e.g. a LastChange Event fragment). Notifications are queued and
-   * delivered later by calling `publish()`.
-   *
-   * @param service The DLNA service whose subscribers should be notified
-   * @param xmlTag XML fragment describing the changed property
+  * Adds a pending notification for all subscribers of `service`.
+  * Instead of passing a raw XML fragment, callers provide a small
+  * writer callback that emits the inner XML fragment when invoked. The
+  * manager will call this callback to compute the Content-Length (using
+  * a `NullPrint`) and later again when streaming the NOTIFY body. The
+  * opaque `ref` pointer is forwarded to the writer both during length
+  * calculation and at publish time.
+  *
+  * @param service The DLNA service whose subscribers should be notified
+  * @param changeWriter Callback that writes the inner XML fragment. It
+  *        must match the signature `size_t(Print&, void*)` and return the
+  *        number of bytes written.
+  * @param ref Opaque pointer passed to `changeWriter` when it is invoked
    */
-  void addChange(DLNAServiceInfo& service, const char* xmlTag) {
+  void addChange(DLNAServiceInfo& service, std::function<size_t(Print&, void*)> changeWriter, void* ref) {
     bool any = false;
-    if (StrView(xmlTag).isEmpty()) {
-      DlnaLogger.log(DlnaLogLevel::Warning, "empty xmlTag for service '%s'",
-                     service.service_id);
-      return;
-    }
     // enqueue notifications to be posted later by post()
     for (int i = 0; i < subscriptions.size(); ++i) {
       Subscription* sub = subscriptions[i];
@@ -209,10 +214,13 @@ class SubscriptionMgrDevice {
       any = true;
       // increment seq now (reserve sequence number)
       sub->seq++;
+      NullPrint np;
       PendingNotification pn;
       // store pointer to the subscription entry (no snapshot)
       pn.p_subscription = subscriptions[i];
-      pn.changeNode = xmlTag;
+      pn.refptr = ref;
+      pn.writer = changeWriter;
+      pn.xmlLen = createXML(np, service.subscription_namespace_abbrev, changeWriter, ref);
       pending_list.push_back(pn);
     }
     if (!any) {
@@ -264,23 +272,10 @@ class SubscriptionMgrDevice {
       http.request().put("SEQ", seqBuf);
       http.request().put("SID", sub.sid.c_str());
 
-      // compute xml length
-      NullPrint np;
-      size_t xmlLen = 0;
-      const char* serviceAbbrev =
-          sub.service ? sub.service->subscription_namespace_abbrev : "";
-      if (is_log_xml)
-        xmlLen = createXML(Serial, serviceAbbrev, pn.changeNode.c_str());
-      else
-        xmlLen = createXML(np, serviceAbbrev, pn.changeNode.c_str());
-
-      auto printXML = [this, serviceAbbrev, pn](Print& out) {
-        createXML(out, serviceAbbrev, pn.changeNode.c_str());
-      };
-
-      // post the notification
+      // post the notification, propagate the ref to the HttpRequest so it
+      // forwards it back to the writer when streaming the body
       http.setTimeout(DLNA_HTTP_REQUEST_TIMEOUT_MS);
-      int rc = http.notify(cbUrl, xmlLen, printXML, "text/xml");
+      int rc = http.notify(cbUrl, pn.xmlLen, pn.writer, "text/xml", pn.refptr);
       DlnaLogger.log(DlnaLogLevel::Info, "Notify %s -> %d", cbUrl.url(), rc);
 
       // remove processed notification on success; otherwise keep it for retry
@@ -357,12 +352,16 @@ class SubscriptionMgrDevice {
 
   /**
    * @brief Generate the propertyset XML for a single variable and write it to
-   * the provided Print instance.
-   *
-   * Returns the number of bytes written.
+  * the provided Print instance. The inner event content is emitted via the
+  * provided `changeWriter` callback which must have signature
+  * `size_t(Print&, void*)`. The opaque `ref` pointer is passed through to
+  * the callback and may be used to access context (for example the
+  * `PendingNotification` that owns the fragment).
+  *
+  * Returns the number of bytes written.
    */
   size_t createXML(Print& out, const char* serviceAbbrev,
-                   const char* changeNode) {
+                   std::function<size_t(Print&, void*)> changeWriter, void* ref) {
     size_t written = 0;
     written += out.print("<?xml version=\"1.0\"?>\r\n");
     written += out.print(
@@ -373,7 +372,9 @@ class SubscriptionMgrDevice {
     written += out.print("<Event xmlns=\"urn:schemas-upnp-org:metadata-1-0/");
     written += out.print(serviceAbbrev);
     written += out.print("/\">\r\n");
-    written += out.print(changeNode);
+    if (changeWriter) {
+      written += changeWriter(out, ref);
+    }
     written += out.print("</Event>\r\n");
     written += out.print("</LastChange>\r\n");
     written += out.print("</e:property>\r\n");

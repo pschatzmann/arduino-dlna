@@ -133,10 +133,20 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
       time_sum += millis() - start_time;
       start_time = 0;
     }
-    StrPrint cmd;
-    cmd.printf("<TransportState val=\"%s\"/>",
-               active ? "PLAYING" : "PAUSED_PLAYBACK");
-    addChange("AVT", cmd.c_str());
+    // reflect state in transport_state so deferred writer can read it
+    transport_state = active ? "PLAYING" : "PAUSED_PLAYBACK";
+    (void)transport_state;  // value used by writer via ref
+    {
+      auto writer = [](Print& out, void* ref) -> size_t {
+        auto self = (DLNAMediaRenderer*)ref;
+        size_t written = 0;
+        written += out.print("<TransportState val=\"");
+        written += out.print(self->transport_state.c_str());
+        written += out.print("\"/>");
+        return written;
+      };
+      addChange("AVT", writer);
+    }
   }
 
   /// Provides the mime from the DIDL or nullptr
@@ -155,9 +165,18 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
   /// Set volume and publish event
   void setVolume(uint8_t vol) {
     current_volume = vol;
-    StrPrint cmd;
-    cmd.printf("<Volume val=\"%d\"/>", current_volume);
-    addChange("RCS", cmd.c_str());
+    (void)current_volume;  // value used by writer via ref
+    {
+      auto writer = [](Print& out, void* ref) -> size_t {
+        auto self = (DLNAMediaRenderer*)ref;
+        size_t written = 0;
+        written += out.print("<Volume val=\"");
+        written += out.print(self->current_volume);
+        written += out.print("\"/>");
+        return written;
+      };
+      addChange("RCS", writer);
+    }
     if (event_cb) event_cb(MediaEvent::SET_VOLUME, *this);
   }
 
@@ -167,9 +186,18 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
   /// Set mute state and publish event
   void setMuted(bool m) {
     is_muted = m;
-    StrPrint cmd;
-    cmd.printf("<Mute val=\"%d\"/>", is_muted ? 1 : 0);
-    addChange("RCS", cmd.c_str());
+    (void)is_muted;  // value used by writer via ref
+    {
+      auto writer = [](Print& out, void* ref) -> size_t {
+        auto self = (DLNAMediaRenderer*)ref;
+        size_t written = 0;
+        written += out.print("<Mute val=\"");
+        written += out.print(self->is_muted ? 1 : 0);
+        written += out.print("\"/>");
+        return written;
+      };
+      addChange("RCS", writer);
+    }
     if (event_cb) event_cb(MediaEvent::SET_MUTE, *this);
   }
 
@@ -203,10 +231,23 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     start_time = millis();
     time_sum = 0;
 
-    StrPrint cmd;
-    cmd.printf("<CurrentTrackURI val=\"%s\"/>\n", current_uri.c_str());
-    cmd.printf("<TransportState val=\"PLAYING\"/>");
-    addChange("AVT", cmd.c_str());
+    // ensure transport_state reflects playing for subscribers
+    transport_state = "PLAYING";
+    (void)current_uri;  // writer will fetch it from ref
+    {
+      auto writer = [](Print& out, void* ref) -> size_t {
+        auto self = (DLNAMediaRenderer*)ref;
+        size_t written = 0;
+        written += out.print("<CurrentTrackURI val=\"");
+        written += out.print(self->current_uri.c_str());
+        written += out.print("\"/>\n");
+        written += out.print("<TransportState val=\"");
+        written += out.print(self->transport_state.c_str());
+        written += out.print("\"/>");
+        return written;
+      };
+      addChange("AVT", writer);
+    }
 
     return true;
   }
@@ -222,9 +263,18 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
       event_cb(MediaEvent::SET_URI, *this);
     }
 
-    StrPrint cmd;
-    cmd.printf("<CurrentTrackURI val=\"%s\"/>\n", current_uri.c_str());
-    addChange("AVT", cmd.c_str());
+    (void)current_uri;  // writer will fetch it from ref
+    {
+      auto writer = [](Print& out, void* ref) -> size_t {
+        auto self = (DLNAMediaRenderer*)ref;
+        size_t written = 0;
+        written += out.print("<CurrentTrackURI val=\"");
+        written += out.print(self->current_uri.c_str());
+        written += out.print("\"/>\n");
+        return written;
+      };
+      addChange("AVT", writer);
+    }
 
     return true;
   }
@@ -237,9 +287,17 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     time_sum = 0;
     // notify handler about the stop
     if (event_cb) event_cb(MediaEvent::STOP, *this);
-    StrPrint cmd;
-    cmd.printf("<TransportState val=\"STOPPED\"/>");
-    addChange("AVT", cmd.c_str());
+    // reflect stopped state
+    transport_state = "STOPPED";
+    auto writer = [](Print& out, void* ref) -> size_t {
+      auto self = (DLNAMediaRenderer*)ref;
+      size_t written = 0;
+      written += out.print("<TransportState val=\"");
+      written += out.print(self->getTransportState());
+      written += out.print("\"/>");
+      return written;
+    };
+    addChange("AVT", writer);
     return true;
   }
 
@@ -259,14 +317,19 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     time_sum = 0;
     // notify application handler about the stop
     if (event_cb) event_cb(MediaEvent::STOP, *this);
-    // publish UPnP event to subscribers (if subscription manager available)
-    StrPrint cmd;
-    cmd.printf("<TransportState val=\"STOPPED\"/>");
-    cmd.printf("<CurrentPlayMode val=\"NORMAL\"/>");
-    cmd.printf("<CurrentTrackURI val=\"\"/>");
-    cmd.printf("<RelativeTimePosition val=\"00:00:00\"/>");
-    cmd.printf("<CurrentTransportActions val=\"Play\"/>");
-    addChange("AVT", cmd.c_str());
+    auto writer = [](Print& out, void* ref) -> size_t {
+      auto self = (DLNAMediaRenderer*)ref;
+      size_t written = 0;
+      written += out.print("<TransportState val=\"");
+      written += out.print(self->transport_state.c_str());
+      written += out.print("\"/>");
+      written += out.print("<CurrentPlayMode val=\"NORMAL\"/>");
+      written += out.print("<CurrentTrackURI val=\"\"/>");
+      written += out.print("<RelativeTimePosition val=\"00:00:00\"/>");
+      written += out.print("<CurrentTransportActions val=\"Play\"/>");
+      return written;
+    };
+    addChange("AVT", writer);
   }
 
   /// Get estimated playback position (seconds)
@@ -277,12 +340,28 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
 
   /// Publish the RelativeTimePosition property
   void publishGetRelativeTimePositionSec() {
-    StrPrint cmd;
-    cmd.printf("<RelativeTimePosition val=\"%02d:%02d:%02d\"/>",
-               static_cast<int>(getRelativeTimePositionSec() / 3600),
-               static_cast<int>((getRelativeTimePositionSec() % 3600) / 60),
-               static_cast<int>(getRelativeTimePositionSec() % 60));
-    addChange("AVT", cmd.c_str());
+    auto writer = [](Print& out, void* ref) -> size_t {
+      auto self = (DLNAMediaRenderer*)ref;
+      size_t written = 0;
+      // format hh:mm:ss by printing parts
+      int h = static_cast<int>(self->getRelativeTimePositionSec() / 3600);
+      int m =
+          static_cast<int>((self->getRelativeTimePositionSec() % 3600) / 60);
+      int s = static_cast<int>(self->getRelativeTimePositionSec() % 60);
+      written += out.print("<RelativeTimePosition val=\"");
+      // print two-digit hour
+      if (h < 10) written += out.print('0');
+      written += out.print(h);
+      written += out.print(':');
+      if (m < 10) written += out.print('0');
+      written += out.print(m);
+      written += out.print(':');
+      if (s < 10) written += out.print('0');
+      written += out.print(s);
+      written += out.print("\"/>");
+      return written;
+    };
+    addChange("AVT", writer);
   }
 
   /// Get a csv of the valid actions
@@ -329,48 +408,61 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
   Vector<ActionRule> rules;
 
   /// serviceAbbrev: AVT, RCS, CMS
-  void addChange(const char* serviceAbbrev, const char* changeTag) {
-    // Delegate to the internal DLNADevice instance which manages
-    // subscriptions and services.
-    dlna_device.addChange(serviceAbbrev, changeTag);
+  void addChange(const char* serviceAbbrev,
+                 std::function<size_t(Print&, void*)> changeWriter) {
+    dlna_device.addChange(serviceAbbrev, changeWriter, this);
   }
 
   /// Publish the current AVTransport state (TransportState, CurrentTrackURI,
   /// RelativeTimePosition, CurrentTransportActions)
   void publishAVT() {
-    StrPrint cmd;
-    // Transport state
-    cmd.printf("<TransportState val=\"%s\"/>", transport_state.c_str());
-    // Current track URI, if any
-    if (!current_uri.isEmpty()) {
-      cmd.printf("<CurrentTrackURI val=\"%s\"/>", current_uri.c_str());
+    // Transport state will be built by the writer from the instance (ref)
+    {
+      auto writer = [](Print& out, void* ref) -> size_t {
+        auto self = (DLNAMediaRenderer*)ref;
+        StrPrint tmp;
+        tmp.printf("<TransportState val=\"%s\"/>",
+                   self->transport_state.c_str());
+        if (!self->current_uri.isEmpty()) {
+          tmp.printf("<CurrentTrackURI val=\"%s\"/>",
+                     self->current_uri.c_str());
+        }
+        tmp.printf(
+            "<RelativeTimePosition val=\"%02d:%02d:%02d\"/>",
+            static_cast<int>(self->getRelativeTimePositionSec() / 3600),
+            static_cast<int>((self->getRelativeTimePositionSec() % 3600) / 60),
+            static_cast<int>(self->getRelativeTimePositionSec() % 60));
+        tmp.printf("<CurrentTransportActions val=\"%s\"/>",
+                   self->getCurrentTransportActions());
+        return out.print(tmp.c_str());
+      };
+      addChange("AVT", writer);
     }
-    // Relative time position
-    cmd.printf("<RelativeTimePosition val=\"%02d:%02d:%02d\"/>",
-               static_cast<int>(getRelativeTimePositionSec() / 3600),
-               static_cast<int>((getRelativeTimePositionSec() % 3600) / 60),
-               static_cast<int>(getRelativeTimePositionSec() % 60));
-    // Current transport actions
-    cmd.printf("<CurrentTransportActions val=\"%s\"/>",
-               getCurrentTransportActions());
-    addChange("AVT", cmd.c_str());
   }
 
   /// Publish the current RenderingControl state (Volume, Mute)
   void publishRCS() {
-    StrPrint cmd;
-    cmd.printf("<Volume val=\"%d\"/>", current_volume);
-    cmd.printf("<Mute val=\"%d\"/>", is_muted ? 1 : 0);
-    addChange("RCS", cmd.c_str());
+    auto writer = [](Print& out, void* ref) -> size_t {
+      auto self = (DLNAMediaRenderer*)ref;
+      StrPrint tmp;
+      tmp.printf("<Volume val=\"%d\"/>", self->current_volume);
+      tmp.printf("<Mute val=\"%d\"/>", self->is_muted ? 1 : 0);
+      return out.print(tmp.c_str());
+    };
+    addChange("RCS", writer);
   }
 
   /// Publish a minimal ConnectionManager state (CurrentConnectionIDs)
   void publishCMS() {
-    StrPrint cmd;
     // Minimal information: list of current connection IDs. Use "0" as default
     // when no active connection is present.
-    cmd.printf("<CurrentConnectionIDs>0</CurrentConnectionIDs>");
-    addChange("CMS", cmd.c_str());
+    {
+      auto writer = [](Print& out, void* ref) -> size_t {
+        (void)ref;
+        return out.print("<CurrentConnectionIDs>0</CurrentConnectionIDs>");
+      };
+      addChange("CMS", writer);
+    }
   }
 
   /// Set MIME explicitly (used when DIDL-Lite metadata provides protocolInfo)
@@ -436,7 +528,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     server->replyNotFound();
   }
 
-   /// After the subscription we publish all relevant properties
+  /// After the subscription we publish all relevant properties
   static void eventSubscriptionHandler(HttpServer* server,
                                        const char* requestPath,
                                        HttpRequestHandlerLine* hl) {
@@ -444,12 +536,15 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     DLNAMediaRenderer* device = (DLNAMediaRenderer*)(hl->context[0]);
     if (device) {
       StrView request_path_str(requestPath);
-      if (request_path_str.contains("/AVT/")) device->publishAVT();
-      else if (request_path_str.contains("/RC/")) device->publishRCS();
-      else if (request_path_str.contains("/CM/")) device->publishCMS();
+      if (request_path_str.contains("/AVT/"))
+        device->publishAVT();
+      else if (request_path_str.contains("/RC/"))
+        device->publishRCS();
+      else if (request_path_str.contains("/CM/"))
+        device->publishCMS();
     }
   }
- 
+
   // Setup and register individual services
   void setupTransportService(HttpServer* server) {
     DLNAServiceInfo avt;
@@ -490,8 +585,8 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
 
     server->on(cm.scpd_url, T_GET, cm.scp_cb, ref_ctx, 1);
     server->on(cm.control_url, T_POST, cm.control_cb, ref_ctx, 1);
-    server->on(cm.event_sub_url, T_SUBSCRIBE,
-               eventSubscriptionHandler, ref_ctx, 1);
+    server->on(cm.event_sub_url, T_SUBSCRIBE, eventSubscriptionHandler, ref_ctx,
+               1);
     server->on(cm.event_sub_url, T_UNSUBSCRIBE,
                tiny_dlna::DLNADevice::eventSubscriptionHandler, ref_ctx, 1);
     server->on(cm.event_sub_url, T_POST,
@@ -511,8 +606,8 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     rc.subscription_namespace_abbrev = "RCS";
     server->on(rc.scpd_url, T_GET, rc.scp_cb, ref_ctx, 1);
     server->on(rc.control_url, T_POST, rc.control_cb, ref_ctx, 1);
-    server->on(rc.event_sub_url, T_SUBSCRIBE,
-               eventSubscriptionHandler, ref_ctx, 1);
+    server->on(rc.event_sub_url, T_SUBSCRIBE, eventSubscriptionHandler, ref_ctx,
+               1);
     server->on(rc.event_sub_url, T_UNSUBSCRIBE,
                tiny_dlna::DLNADevice::eventSubscriptionHandler, ref_ctx, 1);
     server->on(rc.event_sub_url, T_POST,
