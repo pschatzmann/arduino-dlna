@@ -29,38 +29,63 @@ struct Subscription {
   uint64_t expires_at = 0;
   DLNAServiceInfo* service = nullptr;
 };
-
 /**
- * Pending notification to be posted later by post()
+ * @struct PendingNotification
+ * @brief Representation of a queued notification to be delivered later.
+ *
+ * Holds a pointer to the subscription to notify and the XML change node
+ * to send. `p_subscription` is a non-owning pointer into the `subscriptions`
+ * container; code must handle the case where it becomes null (or the
+ * subscription is removed via `unsubscribe`). `error_count` tracks delivery
+ * failures and is used to drop entries after repeated errors.
  */
 struct PendingNotification {
-  // Pointer to the original subscription entry at enqueue time. We keep
-  // a pointer only (no copy) to reduce memory overhead. Note: this may
-  // become invalid if the subscriptions vector is reallocated/modified,
-  // callers must handle null/dangling pointers conservatively.
-  Subscription* p_subscription = nullptr;
-  Str changeNode;
-  int error_count = 0;
+  Subscription* p_subscription =
+      nullptr;         /**< non-owning pointer to Subscription */
+  Str changeNode;      /**< inner XML fragment to send */
+  int error_count = 0; /**< number of failed send attempts */
 };
 
+
+
 /**
- * @class SubscriptionMgr
- * @brief Manages event subscriptions and notification delivery.
+ * @class SubscriptionMgrDevice
+ * @brief Manages UPnP event subscriptions and queued notifications for a
+ *        DLNA device.
  *
- * The manager maintains per-service lists of `Subscription` entries. It
- * provides methods to subscribe/unsubscribe clients and to publish state
- * variable changes (which will be delivered as UPnP event NOTIFY requests
- * to each subscriber's callback URL).
+ * The manager stores active subscriptions (allocated on the heap) and a
+ * queue of pending notifications that are delivered asynchronously via
+ * HTTP NOTIFY requests. Subscriptions are represented by `Subscription`
+ * objects; pending notifications reference subscriptions via a
+ * non-owning pointer (`PendingNotification::p_subscription`).
  *
- * Notes:
- * - Subscriptions are tracked in simple parallel vectors (service names and
- *   lists) rather than a hash map for minimal embedded footprint.
- * - `subscribe()` returns the assigned SID (generated when creating a new
- *   subscription). `unsubscribe()` removes a subscription by SID.
+ * Responsibilities:
+ * - create and remove subscriptions (SID generation)
+ * - enqueue state-change notifications for delivery (`addChange`)
+ * - deliver queued notifications (`publish`) with retry/drop policy
+ * - purge expired subscriptions (`removeExpired`)
+ *
+ * Note: `p_subscription` pointers may become invalid if a subscription is
+ * removed; removal routines attempt to clean up pending entries, but a
+ * stable UID approach is recommended for maximum robustness.
  */
 class SubscriptionMgrDevice {
  public:
+  /**
+   * @brief Construct a new Subscription Manager
+   *
+   * Initializes an empty manager. Subscriptions are owned by the manager
+   * (heap-allocated) and will be freed in the destructor.
+   */
   SubscriptionMgrDevice() = default;
+
+  /**
+   * @brief Destroy the Subscription Manager
+   *
+   * Frees any remaining heap-allocated subscriptions and clears internal
+   * pending lists. This ensures no memory is leaked when the manager is
+   * destroyed.
+   */
   ~SubscriptionMgrDevice() {
     // free any remaining heap-allocated subscriptions
     for (int i = 0; i < subscriptions.size(); ++i) {
@@ -71,20 +96,52 @@ class SubscriptionMgrDevice {
     pending_list.clear();
   }
 
-  // Add or renew subscription. callbackUrl is formatted like
-  // "<http://host:port/path>" Returns SID (generated if new)
+  /**
+   * @brief Add or renew a subscription for a service
+   *
+   * Creates a new subscription for the given service and callback URL, or
+   * renews an existing one if a non-empty `sid` is provided and a matching
+   * subscription exists for the service. When renewing, the existing SID is
+   * returned and the timeout/expiry is updated. This mirrors UPnP semantics
+   * where clients may SUBSCRIBE with an existing SID to renew.
+   *
+   * @param service Reference to the DLNA service to subscribe to
+   * @param callbackUrl The CALLBACK URL provided by the subscriber. May be
+   *        empty when renewing via SID.
+   * @param sid Optional SID to renew; pass nullptr or empty to create a new subscription
+   * @param timeoutSec Requested subscription timeout in seconds (default 1800)
+   * @return Str Assigned or renewed SID for the subscription
+   */
   Str subscribe(DLNAServiceInfo& service, const char* callbackUrl,
-                uint32_t timeoutSec = 1800) {
+                const char* sid = nullptr, uint32_t timeoutSec = 1800) {
     // simple SID generation
     DlnaLogger.log(DlnaLogLevel::Info, "subscribe: %s %s",
                    StringRegistry::nullStr(service.service_id, "(null)"),
                    StringRegistry::nullStr(callbackUrl, "(null)"));
+    // If sid provided, attempt to renew existing subscription for service
+    if (sid != nullptr && !StrView(sid).isEmpty()) {
+      for (int i = 0; i < subscriptions.size(); ++i) {
+        Subscription* ex = subscriptions[i];
+        if (ex->service == &service && StrView(ex->sid).equals(sid)) {
+          // renew: update timeout and expiry, do not change SID
+          ex->timeout_sec = timeoutSec;
+          ex->expires_at = millis() + (uint64_t)timeoutSec * 1000ULL;
+          // if a new callback URL was provided, update it
+          if (callbackUrl != nullptr && !StrView(callbackUrl).isEmpty()) {
+            ex->callback_url = callbackUrl;
+          }
+          DlnaLogger.log(DlnaLogLevel::Info, "renewed subscription %s",
+                         ex->sid.c_str());
+          return ex->sid;
+        }
+      }
+      // not found: fall through and create new subscription
+    }
     char buffer[64];
     snprintf(buffer, sizeof(buffer), "uuid:%lu", millis());
-    Str sid = buffer;
 
     Subscription* s = new Subscription();
-    s->sid = sid;
+    s->sid = buffer;
     s->callback_url = callbackUrl;
     s->timeout_sec = timeoutSec;
     s->seq = 0;
@@ -95,7 +152,18 @@ class SubscriptionMgrDevice {
     return sid;
   }
 
-  /// Remove the subscription
+  /**
+   * @brief Remove a subscription identified by SID
+   *
+   * Removes the subscription for the specified service and SID. Pending
+   * notifications targeting the subscription are also removed. The
+   * subscription object is deleted and the method returns true on success.
+   *
+   * @param service Reference to the DLNA service
+   * @param sid Subscription identifier to remove
+   * @return true if the subscription was found and removed
+   * @return false if no matching subscription exists
+   */
   bool unsubscribe(DLNAServiceInfo& service, const char* sid) {
     for (size_t i = 0; i < subscriptions.size(); ++i) {
       Subscription* s = subscriptions[i];
@@ -116,7 +184,17 @@ class SubscriptionMgrDevice {
     return false;
   }
 
-  /// Publish a single state variable change to all subscribers of the service
+  /**
+   * @brief Enqueue a state-variable change for delivery
+   *
+   * Adds a pending notification for all subscribers of `service`. The
+   * provided `xmlTag` is the inner XML fragment representing the changed
+   * state (e.g. a LastChange Event fragment). Notifications are queued and
+   * delivered later by calling `publish()`.
+   *
+   * @param service The DLNA service whose subscribers should be notified
+   * @param xmlTag XML fragment describing the changed property
+   */
   void addChange(DLNAServiceInfo& service, const char* xmlTag) {
     bool any = false;
     if (StrView(xmlTag).isEmpty()) {
@@ -143,8 +221,15 @@ class SubscriptionMgrDevice {
     }
   }
 
-  /// Publish all queued notifications. This will attempt to deliver each
-  /// pending notification and remove it from the queue.
+  /**
+   * @brief Deliver queued notifications
+   *
+   * Iterates the pending notification queue and attempts to deliver each
+   * notification via HTTP NOTIFY. Successful deliveries are removed from
+   * the queue. Failed attempts increment an error counter; entries that
+   * exceed MAX_SEND_ERRORS are dropped. Expired subscriptions are removed
+   * prior to delivery.
+   */
   void publish() {
     // First remove expired subscriptions so we don't deliver to them.
     removeExpired();
@@ -194,7 +279,8 @@ class SubscriptionMgrDevice {
       };
 
       // post the notification
-      int rc = http.post(cbUrl, xmlLen, printXML, "text/xml");
+      http.setTimeout(DLNA_HTTP_REQUEST_TIMEOUT_MS);
+      int rc = http.notify(cbUrl, xmlLen, printXML, "text/xml");
       DlnaLogger.log(DlnaLogLevel::Info, "Notify %s -> %d", cbUrl.url(), rc);
 
       // remove processed notification on success; otherwise keep it for retry
@@ -204,13 +290,12 @@ class SubscriptionMgrDevice {
         // do not increment i: elements shifted down into current index
       } else {
         // Increment error count on the stored entry (not the local copy)
-        // increment the stored entry's error count
         pending_list[i].error_count++;
         if (pending_list[i].error_count > MAX_SEND_ERRORS) {
           // give up and drop the entry after too many failed attempts
           DlnaLogger.log(DlnaLogLevel::Warning,
-                         "dropping notify to %s after %d errors", cbUrl.url(),
-                         pending_list[i].error_count);
+                         "dropping notify to %s after %d errors with rc=%d %s", cbUrl.url(),
+                         pending_list[i].error_count, rc, http.reply().statusMessage());
           pending_list.erase(i);
         } else {
           ++i;
@@ -224,9 +309,13 @@ class SubscriptionMgrDevice {
         processed, pendingCount(), subscriptionsCount());
   }
 
-  /// Remove subscriptions that have expired (expires_at <= now).
-  /// Also removes any pending notifications that belonged to the removed
-  /// subscriptions so we don't attempt to deliver to unsubscribed callbacks.
+  /**
+   * @brief Remove expired subscriptions
+   *
+   * Walks the subscription list and unsubscribes any entry whose
+   * `expires_at` timestamp has passed. This also removes pending
+   * notifications related to the unsubscribed entries.
+   */
   void removeExpired() {
     uint64_t now = millis();
     for (int i = 0; i < subscriptions.size();) {
@@ -244,8 +333,16 @@ class SubscriptionMgrDevice {
     }
   }
 
+  /**
+   * @brief Number of active subscriptions
+   * @return int count of subscriptions
+   */
   int subscriptionsCount() { return subscriptions.size(); }
 
+  /**
+   * @brief Number of queued pending notifications
+   * @return int count of pending notifications
+   */
   int pendingCount() { return pending_list.size(); }
 
  protected:

@@ -67,48 +67,14 @@ class HttpRequest {
 
   virtual int post(Url &url, size_t len, std::function<void(Print&)> writer,
                           const char *mime = nullptr) {
-    DlnaLogger.log(DlnaLogLevel::Info, "postChunked %s", url.url());
+    return process(T_POST, url, len, writer, mime);
+  }
 
-    if (!connected()) {
-      DlnaLogger.log(DlnaLogLevel::Info, "HttpRequest::postChunked - connecting to host %s port %d", url.host(), url.port());
-      connect(url.host(), url.port());
-    }
-
-    if (!connected()) {
-      DlnaLogger.log(DlnaLogLevel::Info, "Connected: %s", connected() ? "true" : "false");
-      return -1;
-    }
-
-    if (host_name.isEmpty()) {
-      host_name = url.host();
-      host_name.add(":");
-      host_name.add(url.port());
-    }
-
-    // prepare request header
-    request_header.setValues(T_POST, url.path());
-    if (!host_name.isEmpty()) {
-      request_header.put(HOST_C, host_name.c_str());
-    }
-    if (agent != nullptr) request_header.put(USER_AGENT, agent);
-    if (accept_encoding != nullptr) request_header.put(ACCEPT_ENCODING, accept_encoding);
-    if (mime != nullptr) request_header.put(CONTENT_TYPE, mime);
-    request_header.put(CONNECTION, connection);
-    request_header.put(ACCEPT, accept);
-
-    // write request header to client
-    request_header.write(*client_ptr);
-
-    // stream body via ChunkPrint which emits proper chunk frames
-    if (writer) writer(*client_ptr);
-
-    // read reply header and prepare chunk reader if needed
-    reply_header.read(*client_ptr);
-    if (reply_header.isChunked()) {
-      chunk_reader.open(*client_ptr);
-    }
-
-    return reply_header.statusCode();
+  /// Send a NOTIFY request with a streaming body (chunked). This mirrors the
+  /// chunked POST implementation but uses the NOTIFY method.
+  virtual int notify(Url &url, size_t len, std::function<void(Print&)> writer,
+                     const char *mime = nullptr) {
+    return process(T_NOTIFY, url, len, writer, mime);
   }
 
   virtual int put(Url &url, const char *mime, const char *data, int len = -1) {
@@ -270,6 +236,55 @@ class HttpRequest {
     if (reply_header.isChunked()) {
       chunk_reader.open(*client_ptr);
     };
+
+    return reply_header.statusCode();
+  }
+
+  /// Shared implementation for streaming (chunked) requests. Both POST and
+  /// NOTIFY (and potentially others) can use this to avoid code duplication.
+  virtual int process(TinyMethodID method, Url &url, size_t len,
+                             std::function<void(Print&)> writer,
+                             const char *mime = nullptr) {
+    DlnaLogger.log(DlnaLogLevel::Info, "%sChunked %s", methods[method], url.url());
+
+    if (!connected()) {
+      DlnaLogger.log(DlnaLogLevel::Info, "HttpRequest::%sChunked - connecting to host %s port %d", methods[method], url.host(), url.port());
+      connect(url.host(), url.port());
+    }
+
+    if (!connected()) {
+      DlnaLogger.log(DlnaLogLevel::Info, "Connected: %s", connected() ? "true" : "false");
+      return -1;
+    }
+
+    if (host_name.isEmpty()) {
+      host_name = url.host();
+      host_name.add(":");
+      host_name.add(url.port());
+    }
+
+    // prepare request header
+    request_header.setValues(method, url.path());
+    if (!host_name.isEmpty()) {
+      request_header.put(HOST_C, host_name.c_str());
+    }
+    if (agent != nullptr) request_header.put(USER_AGENT, agent);
+    if (accept_encoding != nullptr) request_header.put(ACCEPT_ENCODING, accept_encoding);
+    if (mime != nullptr) request_header.put(CONTENT_TYPE, mime);
+    request_header.put(CONNECTION, connection);
+    request_header.put(ACCEPT, accept);
+
+    // write request header to client
+    request_header.write(*client_ptr);
+
+    // stream body via ChunkPrint which emits proper chunk frames
+    if (writer) writer(*client_ptr);
+
+    // read reply header and prepare chunk reader if needed
+    reply_header.read(*client_ptr);
+    if (reply_header.isChunked()) {
+      chunk_reader.open(*client_ptr);
+    }
 
     return reply_header.statusCode();
   }
