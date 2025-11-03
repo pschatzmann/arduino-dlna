@@ -126,21 +126,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a6b424c68106c91b7392156d36c475cfc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a6b424c68106c91b7392156d36c475cfc">setUdpService</a> (<a class="el" href="classtiny__dlna_1_1IUDPService.html">IUDPService</a> &amp;udp)</td></tr>
 <tr class="memdesc:a6b424c68106c91b7392156d36c475cfc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the UDP service instance the MediaRenderer should use.  <br /></td></tr>
 <tr class="separator:a6b424c68106c91b7392156d36c475cfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a47e79b8a12e0d195134f2f1483429400"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a47e79b8a12e0d195134f2f1483429400">setMediaEventHandler</a> (<a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#ac862e98888d9ea4c3357b9d3ebb9d8b7">MediaEventHandler</a> cb)</td></tr>
-<tr class="memdesc:a47e79b8a12e0d195134f2f1483429400"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a media event handler callback.  <br /></td></tr>
-<tr class="separator:a47e79b8a12e0d195134f2f1483429400"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2d28a0cefb093fc080c3af549ed4b967"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a2d28a0cefb093fc080c3af549ed4b967">setVolume</a> (uint8_t volumePercent)</td></tr>
-<tr class="memdesc:a2d28a0cefb093fc080c3af549ed4b967"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the renderer volume (0..100 percent)  <br /></td></tr>
-<tr class="separator:a2d28a0cefb093fc080c3af549ed4b967"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad3775e88c4f2bf8ca40d1cb345c4817e"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#ad3775e88c4f2bf8ca40d1cb345c4817e">getVolume</a> ()</td></tr>
-<tr class="memdesc:ad3775e88c4f2bf8ca40d1cb345c4817e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get current volume (0..100 percent)  <br /></td></tr>
-<tr class="separator:ad3775e88c4f2bf8ca40d1cb345c4817e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5b385642ac3f7d59d94dbd33864bc54a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a5b385642ac3f7d59d94dbd33864bc54a">setMuted</a> (bool mute)</td></tr>
-<tr class="memdesc:a5b385642ac3f7d59d94dbd33864bc54a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable or disable mute.  <br /></td></tr>
-<tr class="separator:a5b385642ac3f7d59d94dbd33864bc54a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad4553ec6040430a68236d6a5ad6ca579"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#ad4553ec6040430a68236d6a5ad6ca579">isMuted</a> ()</td></tr>
-<tr class="memdesc:ad4553ec6040430a68236d6a5ad6ca579"><td class="mdescLeft">&#160;</td><td class="mdescRight">Query mute state.  <br /></td></tr>
-<tr class="separator:ad4553ec6040430a68236d6a5ad6ca579"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ecae2db20b901e20c6fb8ea81ae85af"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a0ecae2db20b901e20c6fb8ea81ae85af">isActive</a> ()</td></tr>
 <tr class="memdesc:a0ecae2db20b901e20c6fb8ea81ae85af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Query whether renderer is active (playing)  <br /></td></tr>
 <tr class="separator:a0ecae2db20b901e20c6fb8ea81ae85af"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -150,6 +135,21 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a503ee4a2f2a5768c42292fcd8cd5deae"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a503ee4a2f2a5768c42292fcd8cd5deae">getMime</a> ()</td></tr>
 <tr class="memdesc:a503ee4a2f2a5768c42292fcd8cd5deae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the mime from the DIDL or nullptr.  <br /></td></tr>
 <tr class="separator:a503ee4a2f2a5768c42292fcd8cd5deae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a47e79b8a12e0d195134f2f1483429400"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a47e79b8a12e0d195134f2f1483429400">setMediaEventHandler</a> (<a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#ac862e98888d9ea4c3357b9d3ebb9d8b7">MediaEventHandler</a> cb)</td></tr>
+<tr class="memdesc:a47e79b8a12e0d195134f2f1483429400"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register application event handler.  <br /></td></tr>
+<tr class="separator:a47e79b8a12e0d195134f2f1483429400"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3775e88c4f2bf8ca40d1cb345c4817e"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#ad3775e88c4f2bf8ca40d1cb345c4817e">getVolume</a> ()</td></tr>
+<tr class="memdesc:ad3775e88c4f2bf8ca40d1cb345c4817e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get current volume (0-255)  <br /></td></tr>
+<tr class="separator:ad3775e88c4f2bf8ca40d1cb345c4817e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8c61351f07f7c2f1b2641d6baa79b46"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#ad8c61351f07f7c2f1b2641d6baa79b46">setVolume</a> (uint8_t vol)</td></tr>
+<tr class="memdesc:ad8c61351f07f7c2f1b2641d6baa79b46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set volume and publish event.  <br /></td></tr>
+<tr class="separator:ad8c61351f07f7c2f1b2641d6baa79b46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4553ec6040430a68236d6a5ad6ca579"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#ad4553ec6040430a68236d6a5ad6ca579">isMuted</a> ()</td></tr>
+<tr class="memdesc:ad4553ec6040430a68236d6a5ad6ca579"><td class="mdescLeft">&#160;</td><td class="mdescRight">Query mute state.  <br /></td></tr>
+<tr class="separator:ad4553ec6040430a68236d6a5ad6ca579"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af001b1e10c9213c5bea3a7602a2aee83"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#af001b1e10c9213c5bea3a7602a2aee83">setMuted</a> (bool m)</td></tr>
+<tr class="memdesc:af001b1e10c9213c5bea3a7602a2aee83"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set mute state and publish event.  <br /></td></tr>
+<tr class="separator:af001b1e10c9213c5bea3a7602a2aee83"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a26c472b57813f218ec15dcbd515fae81"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a26c472b57813f218ec15dcbd515fae81">getCurrentUri</a> ()</td></tr>
 <tr class="separator:a26c472b57813f218ec15dcbd515fae81"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2a87c51f009dd9a9112414ff576d69f5"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a2a87c51f009dd9a9112414ff576d69f5">getTransportState</a> ()</td></tr>
@@ -288,13 +288,27 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:ae879b212a54d9b3fa3b2c9631eb58c56"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#ae879b212a54d9b3fa3b2c9631eb58c56">publishProperty</a> (const char *serviceAbbrev, const char *changeTag)</td></tr>
 <tr class="memdesc:ae879b212a54d9b3fa3b2c9631eb58c56"><td class="mdescLeft">&#160;</td><td class="mdescRight">serviceAbbrev: AVT, RCS, CMS  <br /></td></tr>
 <tr class="separator:ae879b212a54d9b3fa3b2c9631eb58c56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afcd3dd33e3e00b7c888c72f7a243edc1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#afcd3dd33e3e00b7c888c72f7a243edc1">publishAVT</a> ()</td></tr>
+<tr class="separator:afcd3dd33e3e00b7c888c72f7a243edc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a83b42d50f2bafadc7f44e8b67b2658d8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a83b42d50f2bafadc7f44e8b67b2658d8">publishRCS</a> ()</td></tr>
+<tr class="memdesc:a83b42d50f2bafadc7f44e8b67b2658d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Publish the current RenderingControl state (Volume, Mute)  <br /></td></tr>
+<tr class="separator:a83b42d50f2bafadc7f44e8b67b2658d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a237790b751e729fab40a1374ebd4cc52"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a237790b751e729fab40a1374ebd4cc52">publishCMS</a> ()</td></tr>
+<tr class="memdesc:a237790b751e729fab40a1374ebd4cc52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Publish a minimal ConnectionManager state (CurrentConnectionIDs)  <br /></td></tr>
+<tr class="separator:a237790b751e729fab40a1374ebd4cc52"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abe94719bc6e45c0e5542ce53f8973934"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#abe94719bc6e45c0e5542ce53f8973934">setMime</a> (const char *mime)</td></tr>
 <tr class="memdesc:abe94719bc6e45c0e5542ce53f8973934"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set MIME explicitly (used when DIDL-Lite metadata provides protocolInfo)  <br /></td></tr>
 <tr class="separator:abe94719bc6e45c0e5542ce53f8973934"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2a892f42b00566177a8cbbc4a99b694f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a2a892f42b00566177a8cbbc4a99b694f">setMimeFromDIDL</a> (const char *didl)</td></tr>
 <tr class="separator:a2a892f42b00566177a8cbbc4a99b694f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2180c1e338e254565ce841d1073afa7e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a2180c1e338e254565ce841d1073afa7e">setupTransportService</a> (<a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> *server)</td></tr>
+<tr class="separator:a2180c1e338e254565ce841d1073afa7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aabd8ad466d12df0ffba6f9bac9498234"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#aabd8ad466d12df0ffba6f9bac9498234">setupConnectionManagerService</a> (<a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> *server)</td></tr>
+<tr class="separator:aabd8ad466d12df0ffba6f9bac9498234"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6d720397bb728464196da4c30d58a53"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#ad6d720397bb728464196da4c30d58a53">setupRenderingControlService</a> (<a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> *server)</td></tr>
+<tr class="separator:ad6d720397bb728464196da4c30d58a53"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a72541f2733d1f5c9d5439e8132efdbdc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a72541f2733d1f5c9d5439e8132efdbdc">setupServicesImpl</a> (<a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> *server)</td></tr>
-<tr class="memdesc:a72541f2733d1f5c9d5439e8132efdbdc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup service descriptors and control/event endpoints.  <br /></td></tr>
+<tr class="memdesc:a72541f2733d1f5c9d5439e8132efdbdc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register all services (called when HTTP server is set)  <br /></td></tr>
 <tr class="separator:a72541f2733d1f5c9d5439e8132efdbdc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a767b4f9afe864f8b13779a6fcec04a4a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a767b4f9afe864f8b13779a6fcec04a4a">processAction</a> (<a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;action, <a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;server)</td></tr>
 <tr class="memdesc:a767b4f9afe864f8b13779a6fcec04a4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Process parsed SOAP <a class="el" href="classtiny__dlna_1_1ActionRequest.html" title="Represents a request to invoke a remote DLNA service action.">ActionRequest</a> and dispatch to appropriate handler.  <br /></td></tr>
@@ -322,12 +336,17 @@ Protected Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
 Static Protected Member Functions</h2></td></tr>
-<tr class="memitem:af4d8815cc3ce2819b099dcf304eece14"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#af4d8815cc3ce2819b099dcf304eece14">transportControlCB</a> (<a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> *server, const char *requestPath, <a class="el" href="classtiny__dlna_1_1HttpRequestHandlerLine.html">HttpRequestHandlerLine</a> *hl)</td></tr>
-<tr class="memdesc:af4d8815cc3ce2819b099dcf304eece14"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transport control handler.  <br /></td></tr>
-<tr class="separator:af4d8815cc3ce2819b099dcf304eece14"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab43c15bc99d0865f455b7eaea7439bac"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#ab43c15bc99d0865f455b7eaea7439bac">renderingControlCB</a> (<a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> *server, const char *requestPath, <a class="el" href="classtiny__dlna_1_1HttpRequestHandlerLine.html">HttpRequestHandlerLine</a> *hl)</td></tr>
-<tr class="memdesc:ab43c15bc99d0865f455b7eaea7439bac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rendering control handler.  <br /></td></tr>
-<tr class="separator:ab43c15bc99d0865f455b7eaea7439bac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91912bc8437799308d2b0f91db60ee68"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a91912bc8437799308d2b0f91db60ee68">transportDescrCB</a> (<a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> *server, const char *requestPath, <a class="el" href="classtiny__dlna_1_1HttpRequestHandlerLine.html">HttpRequestHandlerLine</a> *hl)</td></tr>
+<tr class="separator:a91912bc8437799308d2b0f91db60ee68"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3627da5b1227b3123d7afaf183f1521d"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a3627da5b1227b3123d7afaf183f1521d">connmgrDescrCB</a> (<a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> *server, const char *requestPath, <a class="el" href="classtiny__dlna_1_1HttpRequestHandlerLine.html">HttpRequestHandlerLine</a> *hl)</td></tr>
+<tr class="separator:a3627da5b1227b3123d7afaf183f1521d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ad2171af85a2ae934c1bf0ee140f347"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a3ad2171af85a2ae934c1bf0ee140f347">controlDescrCB</a> (<a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> *server, const char *requestPath, <a class="el" href="classtiny__dlna_1_1HttpRequestHandlerLine.html">HttpRequestHandlerLine</a> *hl)</td></tr>
+<tr class="separator:a3ad2171af85a2ae934c1bf0ee140f347"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9739086413c0e39a255d380d6de323bc"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a9739086413c0e39a255d380d6de323bc">controlCB</a> (<a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> *server, const char *requestPath, <a class="el" href="classtiny__dlna_1_1HttpRequestHandlerLine.html">HttpRequestHandlerLine</a> *hl)</td></tr>
+<tr class="separator:a9739086413c0e39a255d380d6de323bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a052f8f55c4d89f49aac3bc8fe5d07c1f"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a052f8f55c4d89f49aac3bc8fe5d07c1f">eventSubscriptionHandler</a> (<a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> *server, const char *requestPath, <a class="el" href="classtiny__dlna_1_1HttpRequestHandlerLine.html">HttpRequestHandlerLine</a> *hl)</td></tr>
+<tr class="memdesc:a052f8f55c4d89f49aac3bc8fe5d07c1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">After the subscription we publish all relevant properties.  <br /></td></tr>
+<tr class="separator:a052f8f55c4d89f49aac3bc8fe5d07c1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a690e4682440716d868e3e377c1e32c14"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a690e4682440716d868e3e377c1e32c14">printReplyXML</a> (Print &amp;out, const char *replyName, const char *serviceId, const char *values=nullptr)</td></tr>
 <tr class="memdesc:a690e4682440716d868e3e377c1e32c14"><td class="mdescLeft">&#160;</td><td class="mdescRight">Builds a standard SOAP reply envelope.  <br /></td></tr>
 <tr class="separator:a690e4682440716d868e3e377c1e32c14"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -376,6 +395,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a7ab0476214991f4333a74cbeb3657733"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a10c783b8b3677877633b02c879ef188a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1IUDPService.html">IUDPService</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a10c783b8b3677877633b02c879ef188a">p_udp_member</a> = nullptr</td></tr>
 <tr class="separator:a10c783b8b3677877633b02c879ef188a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a718a83050f5e958f4fa2a75ae4d9806a"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a718a83050f5e958f4fa2a75ae4d9806a">ref_ctx</a> [1] = {nullptr}</td></tr>
+<tr class="separator:a718a83050f5e958f4fa2a75ae4d9806a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5a1ec1d65312698e5e215d8e202ee071"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt; <a class="el" href="structtiny__dlna_1_1ActionRule.html">ActionRule</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a5a1ec1d65312698e5e215d8e202ee071">rules</a></td></tr>
 <tr class="separator:a5a1ec1d65312698e5e215d8e202ee071"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aecd5675fb5e240669f8bd04177f12582"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#aecd5675fb5e240669f8bd04177f12582">is_active</a> = true</td></tr>
@@ -427,10 +448,10 @@ Protected Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>MediaRenderer DLNA Device. </p>
-<p>MediaRenderer implements a simple UPnP/DLNA Media Renderer device. It receives stream URIs via UPnP AVTransport actions and delegates actual playback and rendering to the application through an event callback API. This removes any dependency on an internal audio stack: applications handle playback themselves by registering a handler with <a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a47e79b8a12e0d195134f2f1483429400" title="Register a media event handler callback.">setMediaEventHandler()</a>. The device still supports rendering controls (volume, mute) and transport controls (play/pause/stop) and provides helper accessors like <a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a26c472b57813f218ec15dcbd515fae81">getCurrentUri()</a> and <a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a503ee4a2f2a5768c42292fcd8cd5deae" title="Provides the mime from the DIDL or nullptr.">getMime()</a>.</p>
+<p>MediaRenderer implements a simple UPnP/DLNA Media Renderer device. It receives stream URIs via UPnP AVTransport actions and delegates actual playback and rendering to the application through an event callback API. This removes any dependency on an internal audio stack: applications handle playback themselves by registering a handler with <a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a47e79b8a12e0d195134f2f1483429400" title="Register application event handler.">setMediaEventHandler()</a>. The device still supports rendering controls (volume, mute) and transport controls (play/pause/stop) and provides helper accessors like <a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a26c472b57813f218ec15dcbd515fae81">getCurrentUri()</a> and <a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a503ee4a2f2a5768c42292fcd8cd5deae" title="Provides the mime from the DIDL or nullptr.">getMime()</a>.</p>
 <p>Usage summary:</p><ul>
-<li>Register an event handler with <a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a47e79b8a12e0d195134f2f1483429400" title="Register a media event handler callback.">setMediaEventHandler()</a> to receive MediaEvent notifications (SET_URI, PLAY, PAUSE, STOP, SET_VOLUME, SET_MUTE).</li>
-<li>In the handler query the renderer (<a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a26c472b57813f218ec15dcbd515fae81">getCurrentUri()</a>, <a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#ad3775e88c4f2bf8ca40d1cb345c4817e" title="Get current volume (0..100 percent)">getVolume()</a>, <a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#ad4553ec6040430a68236d6a5ad6ca579" title="Query mute state.">isMuted()</a>, <a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a503ee4a2f2a5768c42292fcd8cd5deae" title="Provides the mime from the DIDL or nullptr.">getMime()</a>) and implement platform-specific playback.</li>
+<li>Register an event handler with <a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a47e79b8a12e0d195134f2f1483429400" title="Register application event handler.">setMediaEventHandler()</a> to receive MediaEvent notifications (SET_URI, PLAY, PAUSE, STOP, SET_VOLUME, SET_MUTE).</li>
+<li>In the handler query the renderer (<a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a26c472b57813f218ec15dcbd515fae81">getCurrentUri()</a>, <a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#ad3775e88c4f2bf8ca40d1cb345c4817e" title="Get current volume (0-255)">getVolume()</a>, <a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#ad4553ec6040430a68236d6a5ad6ca579" title="Query mute state.">isMuted()</a>, <a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a503ee4a2f2a5768c42292fcd8cd5deae" title="Provides the mime from the DIDL or nullptr.">getMime()</a>) and implement platform-specific playback.</li>
 <li>Use play(url) to programmatically start playback; the handler will also be notified of SET_URI and PLAY when the device receives a SetAVTransportURI SOAP action.</li>
 </ul>
 <p>This class is intentionally small and Arduino-friendly: methods return bool for success/failure and avoid heavy dynamic memory allocations in the hot path.</p>
@@ -657,6 +678,132 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a3627da5b1227b3123d7afaf183f1521d" name="a3627da5b1227b3123d7afaf183f1521d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3627da5b1227b3123d7afaf183f1521d">&#9670;&#160;</a></span>connmgrDescrCB()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void tiny_dlna::DLNAMediaRenderer::connmgrDescrCB </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> *&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>requestPath</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1HttpRequestHandlerLine.html">HttpRequestHandlerLine</a> *&#160;</td>
+          <td class="paramname"><em>hl</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9739086413c0e39a255d380d6de323bc" name="a9739086413c0e39a255d380d6de323bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9739086413c0e39a255d380d6de323bc">&#9670;&#160;</a></span>controlCB()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void tiny_dlna::DLNAMediaRenderer::controlCB </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> *&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>requestPath</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1HttpRequestHandlerLine.html">HttpRequestHandlerLine</a> *&#160;</td>
+          <td class="paramname"><em>hl</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3ad2171af85a2ae934c1bf0ee140f347" name="a3ad2171af85a2ae934c1bf0ee140f347"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ad2171af85a2ae934c1bf0ee140f347">&#9670;&#160;</a></span>controlDescrCB()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void tiny_dlna::DLNAMediaRenderer::controlDescrCB </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> *&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>requestPath</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1HttpRequestHandlerLine.html">HttpRequestHandlerLine</a> *&#160;</td>
+          <td class="paramname"><em>hl</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a4ff3ce88ea4d7e2698c42918ff0e1eda" name="a4ff3ce88ea4d7e2698c42918ff0e1eda"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4ff3ce88ea4d7e2698c42918ff0e1eda">&#9670;&#160;</a></span>device()</h2>
 
@@ -708,6 +855,50 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Stops processing and releases resources. </p>
+
+</div>
+</div>
+<a id="a052f8f55c4d89f49aac3bc8fe5d07c1f" name="a052f8f55c4d89f49aac3bc8fe5d07c1f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a052f8f55c4d89f49aac3bc8fe5d07c1f">&#9670;&#160;</a></span>eventSubscriptionHandler()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void tiny_dlna::DLNAMediaRenderer::eventSubscriptionHandler </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> *&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>requestPath</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1HttpRequestHandlerLine.html">HttpRequestHandlerLine</a> *&#160;</td>
+          <td class="paramname"><em>hl</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>After the subscription we publish all relevant properties. </p>
 
 </div>
 </div>
@@ -1363,7 +1554,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Get current volume (0..100 percent) </p>
+<p>Get current volume (0-255) </p>
 
 </div>
 </div>
@@ -1833,6 +2024,59 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="afcd3dd33e3e00b7c888c72f7a243edc1" name="afcd3dd33e3e00b7c888c72f7a243edc1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afcd3dd33e3e00b7c888c72f7a243edc1">&#9670;&#160;</a></span>publishAVT()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tiny_dlna::DLNAMediaRenderer::publishAVT </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Publish the current AVTransport state (TransportState, CurrentTrackURI, RelativeTimePosition, CurrentTransportActions) </p>
+
+</div>
+</div>
+<a id="a237790b751e729fab40a1374ebd4cc52" name="a237790b751e729fab40a1374ebd4cc52"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a237790b751e729fab40a1374ebd4cc52">&#9670;&#160;</a></span>publishCMS()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tiny_dlna::DLNAMediaRenderer::publishCMS </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Publish a minimal ConnectionManager state (CurrentConnectionIDs) </p>
+
+</div>
+</div>
 <a id="a56064856ab0e0e8a9371b668b1677203" name="a56064856ab0e0e8a9371b668b1677203"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a56064856ab0e0e8a9371b668b1677203">&#9670;&#160;</a></span>publishGetRelativeTimePositionSec()</h2>
 
@@ -1898,8 +2142,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ab43c15bc99d0865f455b7eaea7439bac" name="ab43c15bc99d0865f455b7eaea7439bac"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab43c15bc99d0865f455b7eaea7439bac">&#9670;&#160;</a></span>renderingControlCB()</h2>
+<a id="a83b42d50f2bafadc7f44e8b67b2658d8" name="a83b42d50f2bafadc7f44e8b67b2658d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a83b42d50f2bafadc7f44e8b67b2658d8">&#9670;&#160;</a></span>publishRCS()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1908,37 +2152,20 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static void tiny_dlna::DLNAMediaRenderer::renderingControlCB </td>
+          <td class="memname">void tiny_dlna::DLNAMediaRenderer::publishRCS </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> *&#160;</td>
-          <td class="paramname"><em>server</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>requestPath</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1HttpRequestHandlerLine.html">HttpRequestHandlerLine</a> *&#160;</td>
-          <td class="paramname"><em>hl</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Rendering control handler. </p>
+<p>Publish the current RenderingControl state (Volume, Mute) </p>
 
 </div>
 </div>
@@ -2492,7 +2719,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Register a media event handler callback. </p>
+<p>Register application event handler. </p>
 
 </div>
 </div>
@@ -2629,8 +2856,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a5b385642ac3f7d59d94dbd33864bc54a" name="a5b385642ac3f7d59d94dbd33864bc54a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5b385642ac3f7d59d94dbd33864bc54a">&#9670;&#160;</a></span>setMuted()</h2>
+<a id="af001b1e10c9213c5bea3a7602a2aee83" name="af001b1e10c9213c5bea3a7602a2aee83"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af001b1e10c9213c5bea3a7602a2aee83">&#9670;&#160;</a></span>setMuted()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2639,10 +2866,10 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool tiny_dlna::DLNAMediaRenderer::setMuted </td>
+          <td class="memname">void tiny_dlna::DLNAMediaRenderer::setMuted </td>
           <td>(</td>
           <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>mute</em></td><td>)</td>
+          <td class="paramname"><em>m</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -2653,7 +2880,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Enable or disable mute. </p>
+<p>Set mute state and publish event. </p>
 
 </div>
 </div>
@@ -2847,6 +3074,58 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="aabd8ad466d12df0ffba6f9bac9498234" name="aabd8ad466d12df0ffba6f9bac9498234"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aabd8ad466d12df0ffba6f9bac9498234">&#9670;&#160;</a></span>setupConnectionManagerService()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tiny_dlna::DLNAMediaRenderer::setupConnectionManagerService </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> *&#160;</td>
+          <td class="paramname"><em>server</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad6d720397bb728464196da4c30d58a53" name="ad6d720397bb728464196da4c30d58a53"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad6d720397bb728464196da4c30d58a53">&#9670;&#160;</a></span>setupRenderingControlService()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tiny_dlna::DLNAMediaRenderer::setupRenderingControlService </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> *&#160;</td>
+          <td class="paramname"><em>server</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a3e9d75c510fdad7afaa99000641874b8" name="a3e9d75c510fdad7afaa99000641874b8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3e9d75c510fdad7afaa99000641874b8">&#9670;&#160;</a></span>setupRules()</h2>
 
@@ -2936,12 +3215,12 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Setup service descriptors and control/event endpoints. </p>
+<p>Register all services (called when HTTP server is set) </p>
 
 </div>
 </div>
-<a id="a2d28a0cefb093fc080c3af549ed4b967" name="a2d28a0cefb093fc080c3af549ed4b967"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2d28a0cefb093fc080c3af549ed4b967">&#9670;&#160;</a></span>setVolume()</h2>
+<a id="a2180c1e338e254565ce841d1073afa7e" name="a2180c1e338e254565ce841d1073afa7e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2180c1e338e254565ce841d1073afa7e">&#9670;&#160;</a></span>setupTransportService()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2950,10 +3229,36 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool tiny_dlna::DLNAMediaRenderer::setVolume </td>
+          <td class="memname">void tiny_dlna::DLNAMediaRenderer::setupTransportService </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> *&#160;</td>
+          <td class="paramname"><em>server</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad8c61351f07f7c2f1b2641d6baa79b46" name="ad8c61351f07f7c2f1b2641d6baa79b46"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad8c61351f07f7c2f1b2641d6baa79b46">&#9670;&#160;</a></span>setVolume()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tiny_dlna::DLNAMediaRenderer::setVolume </td>
           <td>(</td>
           <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>volumePercent</em></td><td>)</td>
+          <td class="paramname"><em>vol</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -2964,7 +3269,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Set the renderer volume (0..100 percent) </p>
+<p>Set volume and publish event. </p>
 
 </div>
 </div>
@@ -2995,8 +3300,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="af4d8815cc3ce2819b099dcf304eece14" name="af4d8815cc3ce2819b099dcf304eece14"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af4d8815cc3ce2819b099dcf304eece14">&#9670;&#160;</a></span>transportControlCB()</h2>
+<a id="a91912bc8437799308d2b0f91db60ee68" name="a91912bc8437799308d2b0f91db60ee68"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a91912bc8437799308d2b0f91db60ee68">&#9670;&#160;</a></span>transportDescrCB()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3005,7 +3310,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static void tiny_dlna::DLNAMediaRenderer::transportControlCB </td>
+          <td class="memname">static void tiny_dlna::DLNAMediaRenderer::transportDescrCB </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> *&#160;</td>
           <td class="paramname"><em>server</em>, </td>
@@ -3034,8 +3339,6 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Transport control handler. </p>
 
 </div>
 </div>
@@ -3535,6 +3838,28 @@ Protected Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classtiny__dlna_1_1IUDPService.html">IUDPService</a>* tiny_dlna::DLNAMediaRenderer::p_udp_member = nullptr</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a718a83050f5e958f4fa2a75ae4d9806a" name="a718a83050f5e958f4fa2a75ae4d9806a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a718a83050f5e958f4fa2a75ae4d9806a">&#9670;&#160;</a></span>ref_ctx</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void* tiny_dlna::DLNAMediaRenderer::ref_ctx[1] = {nullptr}</td>
         </tr>
       </table>
   </td>

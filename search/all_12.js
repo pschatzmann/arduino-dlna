@@ -41,7 +41,7 @@ var searchData=
   ['trackfree_38',['trackFree',['../classtiny__dlna_1_1AllocationTracker.html#a6fd9cd30698fd5ce8dc6b8cc53e7de48',1,'tiny_dlna::AllocationTracker']]],
   ['transfer_5fencoding_39',['TRANSFER_ENCODING',['../namespacetiny__dlna.html#a9e5bb9ed1bd94ec887fded9c383b60ca',1,'tiny_dlna']]],
   ['transport_5fstate_40',['transport_state',['../classtiny__dlna_1_1DLNAMediaRenderer.html#a69c4a6762f09e25a3b054467aded5dc4',1,'tiny_dlna::DLNAMediaRenderer']]],
-  ['transportcontrolcb_41',['transportControlCB',['../classtiny__dlna_1_1DLNAMediaRenderer.html#af4d8815cc3ce2819b099dcf304eece14',1,'tiny_dlna::DLNAMediaRenderer']]],
+  ['transportdescrcb_41',['transportDescrCB',['../classtiny__dlna_1_1DLNAMediaRenderer.html#a91912bc8437799308d2b0f91db60ee68',1,'tiny_dlna::DLNAMediaRenderer']]],
   ['trim_42',['trim',['../classtiny__dlna_1_1StrView.html#a8ece7148c765b8a590ec997715335c04',1,'tiny_dlna::StrView']]],
   ['txt_43',['txt',['../classtiny__dlna_1_1XMLParser.html#a35158248ce1bad49921922f86302ea03',1,'tiny_dlna::XMLParser']]]
 ];

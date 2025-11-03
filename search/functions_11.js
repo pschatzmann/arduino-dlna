@@ -11,6 +11,6 @@ var searchData=
   ['touppercase_8',['toUpperCase',['../classtiny__dlna_1_1StrView.html#afddb2b1aff609ff143a4d4bd99d38c9d',1,'tiny_dlna::StrView']]],
   ['trackalloc_9',['trackAlloc',['../classtiny__dlna_1_1AllocationTracker.html#a87461a88b33c60975e0cbd87e7586731',1,'tiny_dlna::AllocationTracker']]],
   ['trackfree_10',['trackFree',['../classtiny__dlna_1_1AllocationTracker.html#a6fd9cd30698fd5ce8dc6b8cc53e7de48',1,'tiny_dlna::AllocationTracker']]],
-  ['transportcontrolcb_11',['transportControlCB',['../classtiny__dlna_1_1DLNAMediaRenderer.html#af4d8815cc3ce2819b099dcf304eece14',1,'tiny_dlna::DLNAMediaRenderer']]],
+  ['transportdescrcb_11',['transportDescrCB',['../classtiny__dlna_1_1DLNAMediaRenderer.html#a91912bc8437799308d2b0f91db60ee68',1,'tiny_dlna::DLNAMediaRenderer']]],
   ['trim_12',['trim',['../classtiny__dlna_1_1StrView.html#a8ece7148c765b8a590ec997715335c04',1,'tiny_dlna::StrView']]]
 ];
