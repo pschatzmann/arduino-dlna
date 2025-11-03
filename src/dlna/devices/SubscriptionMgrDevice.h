@@ -86,6 +86,11 @@ class SubscriptionMgrDevice {
   void publishProperty(DLNAServiceInfo& service, const char* xmlTag) {
     const char* serviceAbbrev = service.subscription_namespace_abbrev;
     auto& list = getList(service.service_id);
+    if (list.empty()) {
+      DlnaLogger.log(DlnaLogLevel::Error, "service '%s' not found",
+                     service.service_id);
+      return;
+    }
     for (int i = 0; i < list.size(); ++i) {
       Subscription& sub = list[i];
       // increment seq
@@ -107,7 +112,12 @@ class SubscriptionMgrDevice {
       // post the notification using dynamic XML generation (streamed writer)
       // compute length by writing to NullPrint and then stream via lambda
       NullPrint np;
-      size_t xmlLen = createXML(np, serviceAbbrev, xmlTag);
+      size_t xmlLen = 0;
+      if (is_log_xml) 
+         xmlLen = createXML(Serial, serviceAbbrev, xmlTag);
+      else
+         xmlLen = createXML(np, serviceAbbrev, xmlTag);
+
       auto printXML = [this, serviceAbbrev, xmlTag](Print& out) {
         createXML(out, serviceAbbrev, xmlTag);
       };
@@ -120,6 +130,7 @@ class SubscriptionMgrDevice {
   // naive per-service storage using parallel vectors
   Vector<Str> service_names;
   Vector<Vector<Subscription>> service_lists;
+  bool is_log_xml = true;
 
   Vector<Subscription>& getList(const char* serviceId) {
     for (int i = 0; i < service_names.size(); ++i) {

@@ -103,7 +103,9 @@ class DLNAMediaServer : public DLNADeviceInfo {
     // ensure instance pointer is available for callbacks
     self = this;
     p_server = &server;
-    // register service endpoints on the provided server
+    // prepare handler context and register service endpoints on the provided
+    // server
+    ref_ctx[0] = this;
     setupServicesImpl(&server);
   }
 
@@ -150,13 +152,20 @@ class DLNAMediaServer : public DLNADeviceInfo {
    * Default is
    * http-get:*:image/jpeg:DLNA.ORG_PN=JPEG_TN,http-get:*:image/jpeg:DLNA.ORG_PN=JPEG_SM,http-get:*:image/jpeg:DLNA.ORG_PN=JPEG_MED,http-get:*:image/jpeg:DLNA.ORG_PN=JPEG_LRG,http-get:*:video/mpeg:DLNA.ORG_PN=AVC_TS_HD_50_AC3_ISO,http-get:*:video/mpeg:DLNA.ORG_PN=AVC_TS_HD_60_AC3_ISO,http-get:*:video/mpeg:DLNA.ORG_PN=AVC_TS_HP_HD_AC3_ISO,http-get:*:video/mpeg:DLNA.ORG_PN=AVC_TS_MP_HD_AAC_MULT5_ISO,http-get:*:video/mpeg:DLNA.ORG_PN=AVC_TS_MP_HD_AC3_ISO,http-get:*:video/mpeg:DLNA.ORG_PN=AVC_TS_MP_HD_MPEG1_L3_ISO,http-get:*:video/mpeg:DLNA.ORG_PN=AVC_TS_MP_SD_AAC_MULT5_ISO,http-get:*:video/mpeg:DLNA.ORG_PN=AVC_TS_MP_SD_AC3_ISO,http-get:*:video/mpeg:DLNA.ORG_PN=AVC_TS_MP_SD_MPEG1_L3_ISO,http-get:*:video/mpeg:DLNA.ORG_PN=MPEG_PS_NTSC,http-get:*:video/mpeg:DLNA.ORG_PN=MPEG_PS_PAL,http-get:*:video/mpeg:DLNA.ORG_PN=MPEG_TS_HD_NA_ISO,http-get:*:video/mpeg:DLNA.ORG_PN=MPEG_TS_SD_NA_ISO,http-get:*:video/mpeg:DLNA.ORG_PN=MPEG_TS_SD_EU_ISO,http-get:*:video/mpeg:DLNA.ORG_PN=MPEG1,http-get:*:video/mp4:DLNA.ORG_PN=AVC_MP4_MP_SD_AAC_MULT5,http-get:*:video/mp4:DLNA.ORG_PN=AVC_MP4_MP_SD_AC3,http-get:*:video/mp4:DLNA.ORG_PN=AVC_MP4_BL_CIF15_AAC_520,http-get:*:video/mp4:DLNA.ORG_PN=AVC_MP4_BL_CIF30_AAC_940,http-get:*:video/mp4:DLNA.ORG_PN=AVC_MP4_BL_L31_HD_AAC,http-get:*:video/mp4:DLNA.ORG_PN=AVC_MP4_BL_L32_HD_AAC,http-get:*:video/mp4:DLNA.ORG_PN=AVC_MP4_BL_L3L_SD_AAC,http-get:*:video/mp4:DLNA.ORG_PN=AVC_MP4_HP_HD_AAC,http-get:*:video/mp4:DLNA.ORG_PN=AVC_MP4_MP_HD_1080i_AAC,http-get:*:video/mp4:DLNA.ORG_PN=AVC_MP4_MP_HD_720p_AAC,http-get:*:video/mp4:DLNA.ORG_PN=MPEG4_P2_MP4_ASP_AAC,http-get:*:video/mp4:DLNA.ORG_PN=MPEG4_P2_MP4_SP_VGA_AAC,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_HD_50_AC3,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_HD_50_AC3_T,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_HD_60_AC3,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_HD_60_AC3_T,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_HP_HD_AC3_T,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_MP_HD_AAC_MULT5,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_MP_HD_AAC_MULT5_T,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_MP_HD_AC3,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_MP_HD_AC3_T,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_MP_HD_MPEG1_L3,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_MP_HD_MPEG1_L3_T,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_MP_SD_AAC_MULT5,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_MP_SD_AAC_MULT5_T,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_MP_SD_AC3,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_MP_SD_AC3_T,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_MP_SD_MPEG1_L3,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_MP_SD_MPEG1_L3_T,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=MPEG_TS_HD_NA,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=MPEG_TS_HD_NA_T,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=MPEG_TS_SD_EU,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=MPEG_TS_SD_EU_T,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=MPEG_TS_SD_NA,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=MPEG_TS_SD_NA_T,http-get:*:video/x-ms-wmv:DLNA.ORG_PN=WMVSPLL_BASE,http-get:*:video/x-ms-wmv:DLNA.ORG_PN=WMVSPML_BASE,http-get:*:video/x-ms-wmv:DLNA.ORG_PN=WMVSPML_MP3,http-get:*:video/x-ms-wmv:DLNA.ORG_PN=WMVMED_BASE,http-get:*:video/x-ms-wmv:DLNA.ORG_PN=WMVMED_FULL,http-get:*:video/x-ms-wmv:DLNA.ORG_PN=WMVMED_PRO,http-get:*:video/x-ms-wmv:DLNA.ORG_PN=WMVHIGH_FULL,http-get:*:video/x-ms-wmv:DLNA.ORG_PN=WMVHIGH_PRO,http-get:*:video/3gpp:DLNA.ORG_PN=MPEG4_P2_3GPP_SP_L0B_AAC,http-get:*:video/3gpp:DLNA.ORG_PN=MPEG4_P2_3GPP_SP_L0B_AMR,http-get:*:audio/mpeg:DLNA.ORG_PN=MP3,http-get:*:audio/x-ms-wma:DLNA.ORG_PN=WMABASE,http-get:*:audio/x-ms-wma:DLNA.ORG_PN=WMAFULL,http-get:*:audio/x-ms-wma:DLNA.ORG_PN=WMAPRO,http-get:*:audio/x-ms-wma:DLNA.ORG_PN=WMALSL,http-get:*:audio/x-ms-wma:DLNA.ORG_PN=WMALSL_MULT5,http-get:*:audio/mp4:DLNA.ORG_PN=AAC_ISO_320,http-get:*:audio/3gpp:DLNA.ORG_PN=AAC_ISO_320,http-get:*:audio/mp4:DLNA.ORG_PN=AAC_ISO,http-get:*:audio/mp4:DLNA.ORG_PN=AAC_MULT5_ISO,http-get:*:audio/L16;rate=44100;channels=2:DLNA.ORG_PN=LPCM,http-get:*:image/jpeg:*,http-get:*:video/avi:*,http-get:*:video/divx:*,http-get:*:video/x-matroska:*,http-get:*:video/mpeg:*,http-get:*:video/mp4:*,http-get:*:video/x-ms-wmv:*,http-get:*:video/x-msvideo:*,http-get:*:video/x-flv:*,http-get:*:video/x-tivo-mpeg:*,http-get:*:video/quicktime:*,http-get:*:audio/mp4:*,http-get:*:audio/x-wav:*,http-get:*:audio/x-flac:*,http-get:*:audio/x-dsd:*,http-get:*:application/ogg:*http-get:*:application/vnd.rn-realmedia:*http-get:*:application/vnd.rn-realmedia-vbr:*http-get:*:video/webm:*
    */
-  void setSourceProtocols(const char* protos) { sourceProto = protos; }
+  void setProtocols(const char* source, const char* sink = "") {
+    sourceProto = source;
+    sinkProto = sink;
+    // publish protocol info change to ConnectionManager subscribers
+    StrPrint cmd;
+    cmd.printf("<SourceProtocolInfo> val=\"%s\"/>\n",
+               StringRegistry::nullStr(sourceProto));
+    cmd.printf("<SinkProtocolInfo> val=\"%s\"/>\n",
+               StringRegistry::nullStr(sinkProto));
+    publishProperty("CMS", cmd.c_str());
+  }
 
   /// Get the current source `ProtocolInfo` string
   const char* getSourceProtocols() { return sourceProto; }
-
-  /// Defines the sink protocol info: use csv: default ""
-  void setSinkProtocols(const char* protos) { sinkProto = protos; }
 
   /// Get the current sink `ProtocolInfo` string
   const char* getSinkProtocols() { return sinkProto; }
@@ -176,19 +185,14 @@ class DLNAMediaServer : public DLNADeviceInfo {
   /// Provides access to the system update ID
   int getSystemUpdateID() { return g_stream_updateID; }
 
-  /// Increments and returns the SystemUpdateID
+  /// Call this method if content has changed : Increments and returns the
+  /// SystemUpdateID
   int incrementSystemUpdateID() { return ++g_stream_updateID; }
 
   /// Provides access to the internal DLNA device instance
   DLNADevice& device() { return dlna_device; }
 
- protected:
-  // Action rule struct for ContentDirectory
-  struct ActionRule {
-    const char* suffix;
-    bool (*handler)(DLNAMediaServer*, ActionRequest&, HttpServer&);
-  };
-
+  /// Define your own custom logic
   void setCustomActionRule(const char* suffix,
                            bool (*handler)(DLNAMediaServer*, ActionRequest&,
                                            HttpServer&)) {
@@ -201,6 +205,13 @@ class DLNAMediaServer : public DLNADeviceInfo {
     rules.push_back({suffix, handler});
   }
 
+ protected:
+  // Action rule struct for ContentDirectory
+  struct ActionRule {
+    const char* suffix;
+    bool (*handler)(DLNAMediaServer*, ActionRequest&, HttpServer&);
+  };
+
   static inline DLNAMediaServer* self = nullptr;
   // internal DLNA device instance owned by this MediaServer
   DLNADevice dlna_device;
@@ -210,11 +221,13 @@ class DLNAMediaServer : public DLNADeviceInfo {
 
   HttpServer* p_server = nullptr;
   IUDPService* p_udp_member = nullptr;
+  void* ref_ctx[1] = {nullptr};
   void* reference_ = nullptr;
   GetDataCallback g_stream_get_data_cb = nullptr;
   int g_stream_numberReturned = 0;
   int g_stream_totalMatches = 0;
-  int g_stream_updateID = 0;
+  int g_stream_updateID = 1;
+  int g_instance_id = 1;
   void* g_stream_reference = nullptr;
   const char* st = "urn:schemas-upnp-org:device:MediaServer:1";
   const char* usn = "uuid:media-server-0000-0000-0000-000000000001";
@@ -230,48 +243,143 @@ class DLNAMediaServer : public DLNADeviceInfo {
   const char* connectionID = "0";
   Vector<ActionRule> rules;
 
+  /// serviceAbbrev: e.g. "AVT" or  or subscription namespace abbrev defined for
+  /// the service
+  void publishProperty(const char* serviceAbbrev, const char* changeTag) {
+    // Delegate to the internal DLNADevice instance which manages
+    // subscriptions and services.
+    dlna_device.publishProperty(serviceAbbrev, changeTag);
+  }
+
+  /// Publish a ContentDirectory event (SystemUpdateID)
+  void publishAVT() {
+    DlnaLogger.log(DlnaLogLevel::Info, "MediaServer::publishAVT");
+    StrPrint cmd;
+    cmd.printf("<SystemUpdateID val=\"%d\"/>\n", g_stream_updateID);
+    publishProperty("AVT", cmd.c_str());
+  }
+
+  /// Publish a ConnectionManager event (CurrentConnectionIDs)
+  void publishCMS() {
+    DlnaLogger.log(DlnaLogLevel::Info, "MediaServer::publishCMS");
+    StrPrint cmd;
+    cmd.printf("<SourceProtocolInfo> val=\"%s\"/>\n",
+               StringRegistry::nullStr(sourceProto));
+    cmd.printf("<SinkProtocolInfo> val=\"%s\"/>\n",
+               StringRegistry::nullStr(sinkProto));
+    cmd.printf("<CurrentConnectionIDs/>%s</CurrentConnectionIDs>\n",
+               connectionID);
+    publishProperty("CMS", cmd.c_str());
+  }
+
   /// Setup the service endpoints
   void setupServicesImpl(HttpServer* server) {
     DlnaLogger.log(DlnaLogLevel::Info, "MediaServer::setupServices");
 
-    auto contentDescCB = [](HttpServer* server, const char* requestPath,
-                            HttpRequestHandlerLine* hl) {
-      server->reply("text/xml", [](Print& out) {
-        tiny_dlna::DLNAMediaServerContentDirectoryDescr descr;
-        descr.printDescr(out);
-      });
-    };
-    auto connDescCB = [](HttpServer* server, const char* requestPath,
-                         HttpRequestHandlerLine* hl) {
-      server->reply("text/xml", [](Print& out) {
-        tiny_dlna::DLNAMediaServerConnectionMgrDescr descr;
-        descr.printDescr(out);
-      });
-    };
+    // register the individual services via helpers
+    setupContentDirectoryService(server);
+    setupConnectionManagerService(server);
+  }
 
+  /// Static descriptor callback for ContentDirectory SCPD
+  static void contentDescCB(HttpServer* server, const char* requestPath,
+                            HttpRequestHandlerLine* hl) {
+    server->reply("text/xml", [](Print& out) {
+      tiny_dlna::DLNAMediaServerContentDirectoryDescr descr;
+      descr.printDescr(out);
+    });
+  }
+
+  /// Static descriptor callback for ConnectionManager SCPD
+  static void connDescCB(HttpServer* server, const char* requestPath,
+                         HttpRequestHandlerLine* hl) {
+    server->reply("text/xml", [](Print& out) {
+      tiny_dlna::DLNAMediaServerConnectionMgrDescr descr;
+      descr.printDescr(out);
+    });
+  }
+
+  /// After the subscription we publish all relevant properties
+  static void eventSubscriptionHandler(HttpServer* server,
+                                       const char* requestPath,
+                                       HttpRequestHandlerLine* hl) {
+    DLNADevice::eventSubscriptionHandler(server, requestPath, hl);
+    DLNAMediaServer* device = (DLNAMediaServer*)(hl->context[0]);
+    if (device) {
+      StrView request_path_str(requestPath);
+      if (request_path_str.contains("/CD/"))
+        device->publishAVT();
+      else if (request_path_str.contains("/CM/"))
+        device->publishCMS();
+      else
+        DlnaLogger.log(DlnaLogLevel::Warning,
+                       "eventSubscriptionHandler: Unknown request path: %s",
+                       requestPath);
+    }
+  }
+
+  /// Setup and register ContentDirectory service
+  void setupContentDirectoryService(HttpServer* server) {
     DLNAServiceInfo cd;
     cd.setup("urn:schemas-upnp-org:service:ContentDirectory:1",
              "urn:upnp-org:serviceId:ContentDirectory", "/CD/service.xml",
-             contentDescCB, "/CD/control", contentDirectoryControlCB,
-             "/CD/event",
+             &DLNAMediaServer::contentDescCB, "/CD/control",
+             &DLNAMediaServer::contentDirectoryControlCB, "/CD/event",
              [](HttpServer* server, const char* requestPath,
                 HttpRequestHandlerLine* hl) { server->replyOK(); });
 
+    // subscription namespace abbreviation used for event publishing
+    cd.subscription_namespace_abbrev = "AVT";
+
+    // register URLs on the provided server so SCPD, control and event
+    // subscription endpoints are available immediately
+    server->on(cd.scpd_url, T_GET, cd.scp_cb, ref_ctx, 1);
+    server->on(cd.control_url, T_POST, cd.control_cb, ref_ctx, 1);
+    // Register event subscription handlers for SUBSCRIBE, UNSUBSCRIBE and
+    // POST so the server accepts subscription requests and related POSTS on
+    // the same event URL.
+    server->on(cd.event_sub_url, T_SUBSCRIBE, eventSubscriptionHandler, ref_ctx,
+               1);
+    server->on(cd.event_sub_url, T_UNSUBSCRIBE,
+               tiny_dlna::DLNADevice::eventSubscriptionHandler, ref_ctx, 1);
+    server->on(cd.event_sub_url, T_POST,
+               tiny_dlna::DLNADevice::eventSubscriptionHandler, ref_ctx, 1);
+
+    addService(cd);
+  }
+
+  /// Setup and register ConnectionManager service
+  void setupConnectionManagerService(HttpServer* server) {
     DLNAServiceInfo cm;
     cm.setup("urn:schemas-upnp-org:service:ConnectionManager:1",
              "urn:upnp-org:serviceId:ConnectionManager", "/CM/service.xml",
-             connDescCB, "/CM/control", connmgrControlCB, "/CM/event",
+             &DLNAMediaServer::connDescCB, "/CM/control",
+             &DLNAMediaServer::connmgrControlCB, "/CM/event",
              [](HttpServer* server, const char* requestPath,
                 HttpRequestHandlerLine* hl) { server->replyOK(); });
 
-    addService(cd);
+    // subscription namespace abbreviation used for event publishing
+    cm.subscription_namespace_abbrev = "CMS";
+
+    server->on(cm.scpd_url, T_GET, cm.scp_cb, ref_ctx, 1);
+    server->on(cm.control_url, T_POST, cm.control_cb, ref_ctx, 1);
+    // Register event subscription handlers for SUBSCRIBE, UNSUBSCRIBE and
+    // POST so the server accepts subscription requests and related POSTS on
+    // the same event URL.
+    server->on(cm.event_sub_url, T_SUBSCRIBE, eventSubscriptionHandler, ref_ctx,
+               1);
+    server->on(cm.event_sub_url, T_UNSUBSCRIBE,
+               tiny_dlna::DLNADevice::eventSubscriptionHandler, ref_ctx, 1);
+    server->on(cm.event_sub_url, T_POST,
+               tiny_dlna::DLNADevice::eventSubscriptionHandler, ref_ctx, 1);
+
     addService(cm);
   }
 
   /// Process action requests using rules-based dispatch
   bool processAction(ActionRequest& action, HttpServer& server) {
     DlnaLogger.log(DlnaLogLevel::Info, "DLNAMediaServer::processAction: %s",
-                   action.action);
+                   StringRegistry::nullStr(action.action));
     StrView action_str(action.action);
     if (action_str.isEmpty()) {
       DlnaLogger.log(DlnaLogLevel::Error, "Empty action received");
@@ -289,10 +397,7 @@ class DLNAMediaServer : public DLNADeviceInfo {
     return false;
   }
 
-  // --- Stub handlers for ContentDirectory actions ---
-  // These are minimal implementations that currently reply with an empty
-  // ActionResponse and return true. They exist as placeholders until
-  // full implementations are added.
+  /// Handle ContentDirectory:Browse action
   bool processActionBrowse(ActionRequest& action, HttpServer& server) {
     DlnaLogger.log(DlnaLogLevel::Info, "processActionBrowse");
     int numberReturned = 0;
@@ -321,6 +426,7 @@ class DLNAMediaServer : public DLNADeviceInfo {
                              requestedCount, server);
   }
 
+  /// Handle ContentDirectory:Search action
   bool processActionSearch(ActionRequest& action, HttpServer& server) {
     DlnaLogger.log(DlnaLogLevel::Info, "processActionSearch");
 
@@ -350,6 +456,7 @@ class DLNAMediaServer : public DLNADeviceInfo {
                              startingIndex, requestedCount, server);
   }
 
+  /// Handle ContentDirectory:GetSearchCapabilities action
   bool processActionGetSearchCapabilities(ActionRequest& action,
                                           HttpServer& server) {
     ChunkPrint chunk{server.client()};
@@ -371,6 +478,7 @@ class DLNAMediaServer : public DLNADeviceInfo {
     return true;
   }
 
+  /// Handle ContentDirectory:GetSortCapabilities action
   bool processActionGetSortCapabilities(ActionRequest& action,
                                         HttpServer& server) {
     ChunkPrint chunk{server.client()};
@@ -392,6 +500,7 @@ class DLNAMediaServer : public DLNADeviceInfo {
     return true;
   }
 
+  /// Handle ContentDirectory:GetSystemUpdateID action
   bool processActionGetSystemUpdateID(ActionRequest& action,
                                       HttpServer& server) {
     ChunkPrint chunk{server.client()};
@@ -439,7 +548,6 @@ class DLNAMediaServer : public DLNADeviceInfo {
   }
 
   /// Handle ConnectionManager:GetCurrentConnectionIDs action
-  /// Replies with a comma-separated list of active ConnectionIDs
   bool processActionGetCurrentConnectionIDs(ActionRequest& action,
                                             HttpServer& server) {
     // Stream the empty ConnectionIDs response using chunked encoding to avoid
@@ -452,7 +560,7 @@ class DLNAMediaServer : public DLNADeviceInfo {
     actionResponseStart(chunk, "GetCurrentConnectionIDsResponse",
                         "urn:schemas-upnp-org:service:ConnectionManager:1");
 
-    // Empty list for now
+    // list with one default value now
     chunk.println("<ConnectionIDs>01</ConnectionIDs>");
 
     actionResponseEnd(chunk, "GetCurrentConnectionIDsResponse");
@@ -461,8 +569,6 @@ class DLNAMediaServer : public DLNADeviceInfo {
     return true;
   }
   /// Handle ConnectionManager:GetCurrentConnectionInfo action
-  /// Replies with information about the requested ConnectionID (RcsID,
-  /// AVTransportID, ProtocolInfo, PeerConnectionManager/ID, Direction, Status)
   bool processActionGetCurrentConnectionInfo(ActionRequest& action,
                                              HttpServer& server) {
     // Read requested ConnectionID (not used in this simple implementation)
@@ -502,7 +608,6 @@ class DLNAMediaServer : public DLNADeviceInfo {
   }
 
   /// Common helper to stream a ContentDirectory response (Browse or Search)
-  // --- SOAP/response streaming helpers to avoid duplication ---
   ContentQueryType parseContentQueryType(const char* flag) {
     StrView fv(flag);
     if (fv.equals("BrowseDirectChildren"))
@@ -652,7 +757,7 @@ class DLNAMediaServer : public DLNADeviceInfo {
     }
   }
 
-  // Control handler for ContentDirectory service
+  /// Control handler for ContentDirectory service
   static void contentDirectoryControlCB(HttpServer* server,
                                         const char* requestPath,
                                         HttpRequestHandlerLine* hl) {
@@ -673,7 +778,7 @@ class DLNAMediaServer : public DLNADeviceInfo {
     server->replyNotFound();
   }
 
-  // simple connection manager control that replies OK
+  /// simple connection manager control that replies OK
   static void connmgrControlCB(HttpServer* server, const char* requestPath,
                                HttpRequestHandlerLine* hl) {
     ActionRequest action;
@@ -691,34 +796,49 @@ class DLNAMediaServer : public DLNADeviceInfo {
     server->replyNotFound();
   }
 
-
+  /// Setup the action rules for supported ContentDirectory and
+  /// ConnectionManager commands
   void setupRules() {
     // ContentDirectory rules
-    rules.push_back({"Browse", [](DLNAMediaServer* self, ActionRequest& action, HttpServer& server) {
-      return self->processActionBrowse(action, server);
-    }});
-    rules.push_back({"Search", [](DLNAMediaServer* self, ActionRequest& action, HttpServer& server) {
-      return self->processActionSearch(action, server);
-    }});
-    rules.push_back({"GetSearchCapabilities", [](DLNAMediaServer* self, ActionRequest& action, HttpServer& server) {
-      return self->processActionGetSearchCapabilities(action, server);
-    }});
-    rules.push_back({"GetSortCapabilities", [](DLNAMediaServer* self, ActionRequest& action, HttpServer& server) {
-      return self->processActionGetSortCapabilities(action, server);
-    }});
-    rules.push_back({"GetSystemUpdateID", [](DLNAMediaServer* self, ActionRequest& action, HttpServer& server) {
-      return self->processActionGetSystemUpdateID(action, server);
-    }});
+    rules.push_back({"Browse", [](DLNAMediaServer* self, ActionRequest& action,
+                                  HttpServer& server) {
+                       return self->processActionBrowse(action, server);
+                     }});
+    rules.push_back({"Search", [](DLNAMediaServer* self, ActionRequest& action,
+                                  HttpServer& server) {
+                       return self->processActionSearch(action, server);
+                     }});
+    rules.push_back(
+        {"GetSearchCapabilities",
+         [](DLNAMediaServer* self, ActionRequest& action, HttpServer& server) {
+           return self->processActionGetSearchCapabilities(action, server);
+         }});
+    rules.push_back(
+        {"GetSortCapabilities",
+         [](DLNAMediaServer* self, ActionRequest& action, HttpServer& server) {
+           return self->processActionGetSortCapabilities(action, server);
+         }});
+    rules.push_back(
+        {"GetSystemUpdateID",
+         [](DLNAMediaServer* self, ActionRequest& action, HttpServer& server) {
+           return self->processActionGetSystemUpdateID(action, server);
+         }});
     // ConnectionManager rules
-    rules.push_back({"GetProtocolInfo", [](DLNAMediaServer* self, ActionRequest& action, HttpServer& server) {
-      return self->processActionGetProtocolInfo(action, server);
-    }});
-    rules.push_back({"GetCurrentConnectionIDs", [](DLNAMediaServer* self, ActionRequest& action, HttpServer& server) {
-      return self->processActionGetCurrentConnectionIDs(action, server);
-    }});
-    rules.push_back({"GetCurrentConnectionInfo", [](DLNAMediaServer* self, ActionRequest& action, HttpServer& server) {
-      return self->processActionGetCurrentConnectionInfo(action, server);
-    }});
+    rules.push_back(
+        {"GetProtocolInfo",
+         [](DLNAMediaServer* self, ActionRequest& action, HttpServer& server) {
+           return self->processActionGetProtocolInfo(action, server);
+         }});
+    rules.push_back(
+        {"GetCurrentConnectionIDs",
+         [](DLNAMediaServer* self, ActionRequest& action, HttpServer& server) {
+           return self->processActionGetCurrentConnectionIDs(action, server);
+         }});
+    rules.push_back(
+        {"GetCurrentConnectionInfo",
+         [](DLNAMediaServer* self, ActionRequest& action, HttpServer& server) {
+           return self->processActionGetCurrentConnectionInfo(action, server);
+         }});
   }
 };
 

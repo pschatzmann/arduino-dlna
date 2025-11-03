@@ -181,6 +181,43 @@ class DLNAMediaServerContentDirectoryDescr : public DLNADescr {
 
     result += xml.printNodeBeginNl("actionList");
 
+    // GetSearchCapabilities
+    result += xml.printNodeBeginNl("action");
+    result += xml.printNode("name", "GetSearchCapabilities");
+    result += xml.printNodeBeginNl("argumentList");
+    result += xml.printNodeBeginNl("argument");
+    result += xml.printNode("name", "SearchCaps");
+    result += xml.printNode("direction", "out");
+    result += xml.printNode("relatedStateVariable", "SearchCapabilities");
+    result += xml.printNodeEnd("argument");
+    result += xml.printNodeEnd("argumentList");
+    result += xml.printNodeEnd("action");
+
+    // GetSortCapabilities
+    result += xml.printNodeBeginNl("action");
+    result += xml.printNode("name", "GetSortCapabilities");
+    result += xml.printNodeBeginNl("argumentList");
+    result += xml.printNodeBeginNl("argument");
+    result += xml.printNode("name", "SortCaps");
+    result += xml.printNode("direction", "out");
+    result += xml.printNode("relatedStateVariable", "SortCapabilities");
+    result += xml.printNodeEnd("argument");
+    result += xml.printNodeEnd("argumentList");
+    result += xml.printNodeEnd("action");
+
+    // GetSystemUpdateID
+    result += xml.printNodeBeginNl("action");
+    result += xml.printNode("name", "GetSystemUpdateID");
+    result += xml.printNodeBeginNl("argumentList");
+    result += xml.printNodeBeginNl("argument");
+    result += xml.printNode("name", "Id");
+    result += xml.printNode("direction", "out");
+    result += xml.printNode("relatedStateVariable", "SystemUpdateID");
+    result += xml.printNodeEnd("argument");
+    result += xml.printNodeEnd("argumentList");
+    result += xml.printNodeEnd("action");
+
+    // Browse
     result += xml.printNodeBeginNl("action");
     result += xml.printNode("name", "Browse");
     result += xml.printNodeBeginNl("argumentList");
@@ -189,8 +226,7 @@ class DLNAMediaServerContentDirectoryDescr : public DLNADescr {
     result += xml.printArgument("Filter", "in", "A_ARG_TYPE_Filter");
     result += xml.printArgument("StartingIndex", "in", "A_ARG_TYPE_Index");
     result += xml.printArgument("RequestedCount", "in", "A_ARG_TYPE_Count");
-    result +=
-        xml.printArgument("SortCriteria", "in", "A_ARG_TYPE_SortCriteria");
+    result += xml.printArgument("SortCriteria", "in", "A_ARG_TYPE_SortCriteria");
     result += xml.printArgument("Result", "out", "A_ARG_TYPE_Result");
     result += xml.printArgument("NumberReturned", "out", "A_ARG_TYPE_Count");
     result += xml.printArgument("TotalMatches", "out", "A_ARG_TYPE_Count");
@@ -198,16 +234,31 @@ class DLNAMediaServerContentDirectoryDescr : public DLNADescr {
     result += xml.printNodeEnd("argumentList");
     result += xml.printNodeEnd("action");
 
+    // Search
     result += xml.printNodeBeginNl("action");
-    result += xml.printNode("name", "GetSearchCapabilities");
+    result += xml.printNode("name", "Search");
+    result += xml.printNodeBeginNl("argumentList");
+    result += xml.printArgument("ContainerID", "in", "A_ARG_TYPE_ObjectID");
+    result += xml.printArgument("SearchCriteria", "in", "A_ARG_TYPE_SearchCriteria");
+    result += xml.printArgument("Filter", "in", "A_ARG_TYPE_Filter");
+    result += xml.printArgument("StartingIndex", "in", "A_ARG_TYPE_Index");
+    result += xml.printArgument("RequestedCount", "in", "A_ARG_TYPE_Count");
+    result += xml.printArgument("SortCriteria", "in", "A_ARG_TYPE_SortCriteria");
+    result += xml.printArgument("Result", "out", "A_ARG_TYPE_Result");
+    result += xml.printArgument("NumberReturned", "out", "A_ARG_TYPE_Count");
+    result += xml.printArgument("TotalMatches", "out", "A_ARG_TYPE_Count");
+    result += xml.printArgument("UpdateID", "out", "A_ARG_TYPE_UpdateID");
+    result += xml.printNodeEnd("argumentList");
     result += xml.printNodeEnd("action");
 
+    // UpdateObject
     result += xml.printNodeBeginNl("action");
-    result += xml.printNode("name", "GetSortCapabilities");
-    result += xml.printNodeEnd("action");
-
-    result += xml.printNodeBeginNl("action");
-    result += xml.printNode("name", "GetSystemUpdateID");
+    result += xml.printNode("name", "UpdateObject");
+    result += xml.printNodeBeginNl("argumentList");
+    result += xml.printArgument("ObjectID", "in", "A_ARG_TYPE_ObjectID");
+    result += xml.printArgument("CurrentTagValue", "in", "A_ARG_TYPE_TagValueList");
+    result += xml.printArgument("NewTagValue", "in", "A_ARG_TYPE_TagValueList");
+    result += xml.printNodeEnd("argumentList");
     result += xml.printNodeEnd("action");
 
     result += xml.printNodeEnd("actionList");

@@ -40,11 +40,6 @@
 #define DLNA_SSDP_PORT 1900
 #endif
 
-// Default subscription timeout in seconds and header value
-#ifndef DLNA_SUBSCRIPTION_TIMEOUT_SEC
-#define DLNA_SUBSCRIPTION_TIMEOUT_SEC 1800
-#endif
-
 // app-wide max URL length
 #ifndef DLNA_MAX_URL_LEN
 #define DLNA_MAX_URL_LEN 256

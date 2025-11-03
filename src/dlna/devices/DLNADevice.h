@@ -131,6 +131,25 @@ class DLNADevice {
     return p_device->getServiceByAbbrev(abbrev);
   }
 
+  /// Publish a property change to subscribers of the service identified by
+  /// the subscription namespace abbreviation (e.g. "AVT", "RCS"). This
+  /// forwards the request to the SubscriptionMgrDevice instance.
+  void publishProperty(const char* serviceAbbrev, const char* changeTag) {
+    SubscriptionMgrDevice* mgr = tiny_dlna::DLNADevice::getSubscriptionMgr();
+    if (!mgr) {
+      DlnaLogger.log(DlnaLogLevel::Warning,
+                     "publishProperty: No SubscriptionMgrDevice available");
+      return;
+    }
+    DLNAServiceInfo& serviceInfo = getServiceByAbbrev(serviceAbbrev);
+    if (!serviceInfo) {
+      DlnaLogger.log(DlnaLogLevel::Warning,
+                     "publishProperty: No service info available for %s", serviceAbbrev);
+      return;
+    }
+    mgr->publishProperty(serviceInfo, changeTag);
+  }
+
   /// Provides the device
   DLNADeviceInfo& getDevice() { return *p_device; }
 
@@ -149,6 +168,7 @@ class DLNADevice {
                                        const char* requestPath,
                                        HttpRequestHandlerLine* hl) {
     DlnaLogger.log(DlnaLogLevel::Debug, "eventSubscriptionHandler");
+    bool is_subscribe = false;
     // context[0] contains DLNADeviceInfo*
     DLNADeviceInfo* device = (DLNADeviceInfo*)(hl->context[0]);
     if (!device) {
@@ -159,6 +179,7 @@ class DLNADevice {
     HttpRequestHeader& req = server->requestHeader();
     // SUBSCRIBE handling
     if (req.method() == T_SUBSCRIBE) {
+      is_subscribe = true;
       const char* cb = req.get("CALLBACK");
       const char* timeout = req.get("TIMEOUT");
       Str cbStr;
@@ -286,6 +307,7 @@ class DLNADevice {
                      registry.count(), registry.size());
     }
 #endif
+    
   }
 
   /// Process incoming UDP and execute scheduled replies. The method will

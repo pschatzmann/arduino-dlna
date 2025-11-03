@@ -110,44 +110,13 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
   /// Set the http server instance the MediaRenderer should use
   void setHttpServer(HttpServer& server) {
     p_server = &server;
-    // register service endpoints on the provided server
+    // prepare handler context and register each service via helpers
+    ref_ctx[0] = this;
     setupServicesImpl(&server);
   }
 
   /// Set the UDP service instance the MediaRenderer should use
   void setUdpService(IUDPService& udp) { p_udp_member = &udp; }
-
-  /// Register a media event handler callback
-  void setMediaEventHandler(MediaEventHandler cb) { event_cb = cb; }
-
-  /// Set the renderer volume (0..100 percent)
-  bool setVolume(uint8_t volumePercent) {
-    if (volumePercent > 100) volumePercent = 100;
-    DlnaLogger.log(DlnaLogLevel::Info, "Set volume: %d", volumePercent);
-    current_volume = volumePercent;
-    if (event_cb) event_cb(MediaEvent::SET_VOLUME, *this);
-    StrPrint cmd;
-    cmd.printf(" <Volume val=\"%d\" channel=\"Master\"/>", volumePercent);
-    publishProperty("RCS", cmd.c_str());
-    return true;
-  }
-
-  /// Get current volume (0..100 percent)
-  uint8_t getVolume() { return current_volume; }
-
-  /// Enable or disable mute
-  bool setMuted(bool mute) {
-    is_muted = mute;
-    DlnaLogger.log(DlnaLogLevel::Info, "Set mute: %s", mute ? "true" : "false");
-    if (event_cb) event_cb(MediaEvent::SET_MUTE, *this);
-    StrPrint cmd;
-    cmd.printf("<Mute val=\"%d\" channel=\"Master\"/>", mute ? 1 : 0);
-    publishProperty("RCS", cmd.c_str());
-    return true;
-  }
-
-  /// Query mute state
-  bool isMuted() { return is_muted; }
 
   /// Query whether renderer is active (playing)
   bool isActive() { return is_active; }
@@ -175,6 +144,33 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     // Prefer explicit MIME from DIDL if available
     if (!current_mime.isEmpty()) return current_mime.c_str();
     return nullptr;
+  }
+
+  /// Register application event handler
+  void setMediaEventHandler(MediaEventHandler cb) { event_cb = cb; }
+
+  /// Get current volume (0-255)
+  uint8_t getVolume() { return current_volume; }
+
+  /// Set volume and publish event
+  void setVolume(uint8_t vol) {
+    current_volume = vol;
+    StrPrint cmd;
+    cmd.printf("<Volume val=\"%d\"/>", current_volume);
+    publishProperty("RCS", cmd.c_str());
+    if (event_cb) event_cb(MediaEvent::SET_VOLUME, *this);
+  }
+
+  /// Query mute state
+  bool isMuted() { return is_muted; }
+
+  /// Set mute state and publish event
+  void setMuted(bool m) {
+    is_muted = m;
+    StrPrint cmd;
+    cmd.printf("<Mute val=\"%d\"/>", is_muted ? 1 : 0);
+    publishProperty("RCS", cmd.c_str());
+    if (event_cb) event_cb(MediaEvent::SET_MUTE, *this);
   }
 
   // Access current URI
@@ -328,16 +324,53 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
   DLNADevice dlna_device;
   HttpServer* p_server = nullptr;
   IUDPService* p_udp_member = nullptr;
+  // reusable context pointer array for HttpServer handlers (contains `this`)
+  void* ref_ctx[1] = {nullptr};
   Vector<ActionRule> rules;
 
   /// serviceAbbrev: AVT, RCS, CMS
   void publishProperty(const char* serviceAbbrev, const char* changeTag) {
-    SubscriptionMgrDevice* mgr = tiny_dlna::DLNADevice::getSubscriptionMgr();
-    DLNAServiceInfo& serviceInfo =
-        dlna_device.getServiceByAbbrev(serviceAbbrev);
-    if (mgr && serviceInfo) {
-      mgr->publishProperty(serviceInfo, changeTag);
+    // Delegate to the internal DLNADevice instance which manages
+    // subscriptions and services.
+    dlna_device.publishProperty(serviceAbbrev, changeTag);
+  }
+
+  /// Publish the current AVTransport state (TransportState, CurrentTrackURI,
+  /// RelativeTimePosition, CurrentTransportActions)
+  void publishAVT() {
+    StrPrint cmd;
+    // Transport state
+    cmd.printf("<TransportState val=\"%s\"/>", transport_state.c_str());
+    // Current track URI, if any
+    if (!current_uri.isEmpty()) {
+      cmd.printf("<CurrentTrackURI val=\"%s\"/>", current_uri.c_str());
     }
+    // Relative time position
+    cmd.printf("<RelativeTimePosition val=\"%02d:%02d:%02d\"/>",
+               static_cast<int>(getRelativeTimePositionSec() / 3600),
+               static_cast<int>((getRelativeTimePositionSec() % 3600) / 60),
+               static_cast<int>(getRelativeTimePositionSec() % 60));
+    // Current transport actions
+    cmd.printf("<CurrentTransportActions val=\"%s\"/>",
+               getCurrentTransportActions());
+    publishProperty("AVT", cmd.c_str());
+  }
+
+  /// Publish the current RenderingControl state (Volume, Mute)
+  void publishRCS() {
+    StrPrint cmd;
+    cmd.printf("<Volume val=\"%d\"/>", current_volume);
+    cmd.printf("<Mute val=\"%d\"/>", is_muted ? 1 : 0);
+    publishProperty("RCS", cmd.c_str());
+  }
+
+  /// Publish a minimal ConnectionManager state (CurrentConnectionIDs)
+  void publishCMS() {
+    StrPrint cmd;
+    // Minimal information: list of current connection IDs. Use "0" as default
+    // when no active connection is present.
+    cmd.printf("<CurrentConnectionIDs>0</CurrentConnectionIDs>");
+    publishProperty("CMS", cmd.c_str());
   }
 
   /// Set MIME explicitly (used when DIDL-Lite metadata provides protocolInfo)
@@ -362,77 +395,92 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     }
   }
 
-  /// Transport control handler
-  static void transportControlCB(HttpServer* server, const char* requestPath,
-                                 HttpRequestHandlerLine* hl) {
-    // Use DLNADevice::parseActionRequest for SOAP action parsing (like
-    // DLNAMediaServer)
+  // Static descriptor callbacks: print the SCPD XML for each service
+  static void transportDescrCB(HttpServer* server, const char* requestPath,
+                               HttpRequestHandlerLine* hl) {
+    server->reply("text/xml", [](Print& out) {
+      DLNAMediaRendererTransportDescr d;
+      d.printDescr(out);
+    });
+  }
+
+  static void connmgrDescrCB(HttpServer* server, const char* requestPath,
+                             HttpRequestHandlerLine* hl) {
+    server->reply("text/xml", [](Print& out) {
+      DLNAMediaRendererConnectionMgrDescr d;
+      d.printDescr(out);
+    });
+  }
+
+  static void controlDescrCB(HttpServer* server, const char* requestPath,
+                             HttpRequestHandlerLine* hl) {
+    server->reply("text/xml", [](Print& out) {
+      DLNAMediaRendererControlDescr d;
+      d.printDescr(out);
+    });
+  }
+
+  // Generic control callback: parse SOAP action and dispatch to instance
+  static void controlCB(HttpServer* server, const char* requestPath,
+                        HttpRequestHandlerLine* hl) {
     ActionRequest action;
     DLNADevice::parseActionRequest(server, requestPath, hl, action);
-    DLNAMediaRenderer* self = nullptr;
-    if (hl && hl->context[0]) self = (DLNAMediaRenderer*)hl->context[0];
-    if (self) {
-      if (self->processAction(action, *server)) return;
+
+    DLNAMediaRenderer* mr = nullptr;
+    if (hl && hl->context[0]) mr = (DLNAMediaRenderer*)hl->context[0];
+
+    if (mr) {
+      if (mr->processAction(action, *server)) return;
     }
+
     server->replyNotFound();
   }
 
-  /// Rendering control handler
-  static void renderingControlCB(HttpServer* server, const char* requestPath,
-                                 HttpRequestHandlerLine* hl) {
-    // Use DLNADevice::parseActionRequest for SOAP action parsing (like
-    // DLNAMediaServer)
-    ActionRequest action;
-    DLNADevice::parseActionRequest(server, requestPath, hl, action);
-    DLNAMediaRenderer* self = nullptr;
-    if (hl && hl->context[0]) self = (DLNAMediaRenderer*)hl->context[0];
-    if (self) {
-      if (self->processAction(action, *server)) return;
+   /// After the subscription we publish all relevant properties
+  static void eventSubscriptionHandler(HttpServer* server,
+                                       const char* requestPath,
+                                       HttpRequestHandlerLine* hl) {
+    DLNADevice::eventSubscriptionHandler(server, requestPath, hl);
+    DLNAMediaRenderer* device = (DLNAMediaRenderer*)(hl->context[0]);
+    if (device) {
+      StrView request_path_str(requestPath);
+      if (request_path_str.contains("/AVT/")) device->publishAVT();
+      else if (request_path_str.contains("/RC/")) device->publishRCS();
+      else if (request_path_str.contains("/CM/")) device->publishCMS();
     }
-    server->replyNotFound();
-  };
-
-  /// Setup service descriptors and control/event endpoints
-  void setupServicesImpl(HttpServer* server) {
-    DlnaLogger.log(DlnaLogLevel::Info, "MediaRenderer::setupServices");
-
-    auto transportCB = [](HttpServer* server, const char* requestPath,
-                          HttpRequestHandlerLine* hl) {
-      server->reply("text/xml", [](Print& out) {
-        DLNAMediaRendererTransportDescr d;
-        d.printDescr(out);
-      });
-    };
-
-    auto connmgrCB = [](HttpServer* server, const char* requestPath,
-                        HttpRequestHandlerLine* hl) {
-      server->reply("text/xml", [](Print& out) {
-        DLNAMediaRendererConnectionMgrDescr d;
-        d.printDescr(out);
-      });
-    };
-
-    auto controlCB = [](HttpServer* server, const char* requestPath,
-                        HttpRequestHandlerLine* hl) {
-      server->reply("text/xml", [](Print& out) {
-        DLNAMediaRendererControlDescr d;
-        d.printDescr(out);
-      });
-    };
-
-    // define services
-    DLNAServiceInfo rc, cm, avt;
+  }
+ 
+  // Setup and register individual services
+  void setupTransportService(HttpServer* server) {
+    DLNAServiceInfo avt;
+    // Use static descriptor callback and control handler
     avt.setup("urn:schemas-upnp-org:service:AVTransport:1",
               "urn:upnp-org:serviceId:AVTransport", "/AVT/service.xml",
-              transportCB, "/AVT/control", transportControlCB, "/AVT/event",
+              &DLNAMediaRenderer::transportDescrCB, "/AVT/control",
+              &DLNAMediaRenderer::controlCB, "/AVT/event",
               [](HttpServer* server, const char* requestPath,
                  HttpRequestHandlerLine* hl) { server->replyOK(); });
     avt.subscription_namespace_abbrev = "AVT";
+    // register URLs on the provided server so SCPD, control and event
+    // subscription endpoints are available immediately
+    server->on(avt.scpd_url, T_GET, avt.scp_cb, ref_ctx, 1);
+    server->on(avt.control_url, T_POST, avt.control_cb, ref_ctx, 1);
+    server->on(avt.event_sub_url, T_SUBSCRIBE, eventSubscriptionHandler,
+               ref_ctx, 1);
+    server->on(avt.event_sub_url, T_UNSUBSCRIBE,
+               tiny_dlna::DLNADevice::eventSubscriptionHandler, ref_ctx, 1);
+    server->on(avt.event_sub_url, T_POST,
+               tiny_dlna::DLNADevice::eventSubscriptionHandler, ref_ctx, 1);
 
+    addService(avt);
+  }
+
+  void setupConnectionManagerService(HttpServer* server) {
+    DLNAServiceInfo cm;
     cm.setup(
         "urn:schemas-upnp-org:service:ConnectionManager:1",
         "urn:upnp-org:serviceId:ConnectionManager", "/CM/service.xml",
-        connmgrCB, "/CM/control",
+        &DLNAMediaRenderer::connmgrDescrCB, "/CM/control",
         [](HttpServer* server, const char* requestPath,
            HttpRequestHandlerLine* hl) { server->replyOK(); },
         "/CM/event",
@@ -440,16 +488,47 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
            HttpRequestHandlerLine* hl) { server->replyOK(); });
     cm.subscription_namespace_abbrev = "CMS";
 
+    server->on(cm.scpd_url, T_GET, cm.scp_cb, ref_ctx, 1);
+    server->on(cm.control_url, T_POST, cm.control_cb, ref_ctx, 1);
+    server->on(cm.event_sub_url, T_SUBSCRIBE,
+               eventSubscriptionHandler, ref_ctx, 1);
+    server->on(cm.event_sub_url, T_UNSUBSCRIBE,
+               tiny_dlna::DLNADevice::eventSubscriptionHandler, ref_ctx, 1);
+    server->on(cm.event_sub_url, T_POST,
+               tiny_dlna::DLNADevice::eventSubscriptionHandler, ref_ctx, 1);
+
+    addService(cm);
+  }
+
+  void setupRenderingControlService(HttpServer* server) {
+    DLNAServiceInfo rc;
     rc.setup("urn:schemas-upnp-org:service:RenderingControl:1",
              "urn:upnp-org:serviceId:RenderingControl", "/RC/service.xml",
-             controlCB, "/RC/control", renderingControlCB, "/RC/event",
+             &DLNAMediaRenderer::controlDescrCB, "/RC/control",
+             &DLNAMediaRenderer::controlCB, "/RC/event",
              [](HttpServer* server, const char* requestPath,
                 HttpRequestHandlerLine* hl) { server->replyOK(); });
     rc.subscription_namespace_abbrev = "RCS";
+    server->on(rc.scpd_url, T_GET, rc.scp_cb, ref_ctx, 1);
+    server->on(rc.control_url, T_POST, rc.control_cb, ref_ctx, 1);
+    server->on(rc.event_sub_url, T_SUBSCRIBE,
+               eventSubscriptionHandler, ref_ctx, 1);
+    server->on(rc.event_sub_url, T_UNSUBSCRIBE,
+               tiny_dlna::DLNADevice::eventSubscriptionHandler, ref_ctx, 1);
+    server->on(rc.event_sub_url, T_POST,
+               tiny_dlna::DLNADevice::eventSubscriptionHandler, ref_ctx, 1);
 
     addService(rc);
-    addService(cm);
-    addService(avt);
+  }
+
+  /// Register all services (called when HTTP server is set)
+  void setupServicesImpl(HttpServer* server) {
+    DlnaLogger.log(DlnaLogLevel::Info, "MediaRenderer::setupServices");
+    // register the individual services and register their endpoints on the
+    // provided HttpServer
+    setupTransportService(server);
+    setupConnectionManagerService(server);
+    setupRenderingControlService(server);
   }
 
   /// Builds a standard SOAP reply envelope
