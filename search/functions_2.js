@@ -33,6 +33,6 @@ var searchData=
   ['createsearchaction_30',['createSearchAction',['../classtiny__dlna_1_1DLNAControlPointMediaServer.html#a1200b21cb3d88e9e319d546396c405c1',1,'tiny_dlna::DLNAControlPointMediaServer']]],
   ['createsnapshot_31',['createSnapshot',['../classtiny__dlna_1_1AllocationTracker.html#a60c8184778f4ec7e9bb527ef98d5e3ab',1,'tiny_dlna::AllocationTracker']]],
   ['createsoapxml_32',['createSoapXML',['../classtiny__dlna_1_1DLNAControlPoint.html#a1dcd48540902111e5be3f984196f758c',1,'tiny_dlna::DLNAControlPoint']]],
-  ['createxml_33',['createXML',['../classtiny__dlna_1_1DLNAControlPoint.html#a264865ba29d1d52b546bac2ed3c6d392',1,'tiny_dlna::DLNAControlPoint::createXML()'],['../classtiny__dlna_1_1SubscriptionMgrDevice.html#a1b30c24e9f8c5f763259c77dfc8b9411',1,'tiny_dlna::SubscriptionMgrDevice::createXML()']]],
+  ['createxml_33',['createXML',['../classtiny__dlna_1_1DLNAControlPoint.html#a264865ba29d1d52b546bac2ed3c6d392',1,'tiny_dlna::DLNAControlPoint::createXML()'],['../classtiny__dlna_1_1SubscriptionMgrDevice.html#afa5f46f49c187698c5b0642426742890',1,'tiny_dlna::SubscriptionMgrDevice::createXML()']]],
   ['crlf_34',['crlf',['../classtiny__dlna_1_1HttpHeader.html#a60f18f92f996799ea4b6cc6b642bac84',1,'tiny_dlna::HttpHeader::crlf()'],['../classtiny__dlna_1_1HttpServer.html#ab54de9871805f143d7637ccdc2ed27b7',1,'tiny_dlna::HttpServer::crlf()']]]
 ];
