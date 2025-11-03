@@ -9,16 +9,21 @@
 namespace tiny_dlna {
 
 /**
- * @brief Tracks dynamic memory allocations and deallocations by class type for debugging and leak detection.
+ * @brief Tracks dynamic memory allocations and deallocations by class type for
+ * debugging and leak detection.
  *
- * AllocationTracker provides a singleton interface to monitor object allocations and frees by class name.
- * It maintains a count of active allocations for each class type and can report leaks and allocation statistics.
+ * AllocationTracker provides a singleton interface to monitor object
+ * allocations and frees by class name. It maintains a count of active
+ * allocations for each class type and can report leaks and allocation
+ * statistics.
  *
  * Usage:
  *   - Use trackAlloc<T>() when allocating an object of type T.
  *   - Use trackFree<T>() when freeing an object of type T.
- *   - Call reportClassCounts() to print the current allocation counts for all tracked classes.
- *   - Call reportLeaks() to print a summary of classes with nonzero allocation counts (potential leaks).
+ *   - Call reportClassCounts() to print the current allocation counts for all
+ * tracked classes.
+ *   - Call reportLeaks() to print a summary of classes with nonzero allocation
+ * counts (potential leaks).
  *
  * Example:
  *   AllocationTracker::getInstance().trackAlloc<MyClass>();
@@ -30,6 +35,9 @@ class AllocationTracker {
     static AllocationTracker instance;
     return instance;
   }
+
+  // Creates a snapshot of the current allocation counts per class name
+  void createSnapshot() { snapshot_alloc_count = class_alloc_count; }
 
   template <typename T>
   void trackAlloc() {
@@ -49,9 +57,6 @@ class AllocationTracker {
       tiny_dlna::DlnaLogger.log(tiny_dlna::DlnaLogLevel::Info,
                                 "Freed instance of %s, count=%d", name.c_str(),
                                 it->second);
-      if (it->second == 0) {
-        class_alloc_count.erase(it);
-      }
     } else {
       tiny_dlna::DlnaLogger.log(
           tiny_dlna::DlnaLogLevel::Warning,
@@ -71,8 +76,15 @@ class AllocationTracker {
 
   void reportLeaks() {
     bool any_leak = false;
+    // Check for leaks after subtracting snapshot if available
     for (const auto& [name, count] : class_alloc_count) {
-      if (count > 0) {
+      int snapshot_count = 0;
+      auto snap_it = snapshot_alloc_count.find(name);
+      if (snap_it != snapshot_alloc_count.end()) {
+        snapshot_count = snap_it->second;
+      }
+      int leak_count = count - snapshot_count;
+      if (leak_count > 0) {
         any_leak = true;
         break;
       }
@@ -84,17 +96,26 @@ class AllocationTracker {
       tiny_dlna::DlnaLogger.log(tiny_dlna::DlnaLogLevel::Warning,
                                 "=== MEMORY LEAK REPORT ===");
       for (const auto& [name, count] : class_alloc_count) {
-        if (count > 0) {
+        int snapshot_count = 0;
+        auto snap_it = snapshot_alloc_count.find(name);
+        if (snap_it != snapshot_alloc_count.end()) {
+          snapshot_count = snap_it->second;
+        }
+        int leak_count = count - snapshot_count;
+        if (leak_count > 0) {
           tiny_dlna::DlnaLogger.log(tiny_dlna::DlnaLogLevel::Warning,
                                     "Leaked instances: %s: %d", name.c_str(),
-                                    count);
+                                    leak_count);
         }
       }
     }
   }
 
  protected:
+  // Stores the current allocation counts per class name
   std::map<std::string, int> class_alloc_count;
+  // Stores a snapshot of allocation counts per class name
+  std::map<std::string, int> snapshot_alloc_count;
   static AllocationTracker* instance;
 
   AllocationTracker() = default;
