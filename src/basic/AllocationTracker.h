@@ -66,6 +66,7 @@ class AllocationTracker {
   }
 
   void reportClassCounts() {
+    if (class_alloc_count.empty()) return;
     tiny_dlna::DlnaLogger.log(tiny_dlna::DlnaLogLevel::Info,
                               "=== CLASS ALLOCATION COUNTS ===");
     for (const auto& [name, count] : class_alloc_count) {
@@ -75,6 +76,7 @@ class AllocationTracker {
   }
 
   void reportLeaks() {
+    if (class_alloc_count.empty()) return;
     bool any_leak = false;
     // Check for leaks after subtracting snapshot if available
     for (const auto& [name, count] : class_alloc_count) {
