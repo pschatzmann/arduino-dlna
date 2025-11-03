@@ -1,3 +1,8 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classtiny__dlna_1_1DLNADevice.html" title="Setup of a Basic DLNA Device service. The device registers itself to the network and answers to the D..." alt="" coords="5,5,176,31"/>
+<area shape="rect" id="node1" href="$classtiny__dlna_1_1DLNADescr.html" title="Abstract DLNA Descriptor Generation." alt="" coords="5,141,168,166"/>
+<area shape="rect" id="node2" href="$classtiny__dlna_1_1DLNAMediaRendererConnectionMgrDescr.html" title="ConnectionManager service descriptor (SCPD) generator." alt="" coords="216,5,441,45"/>
+<area shape="rect" id="node3" href="$classtiny__dlna_1_1DLNAMediaRendererControlDescr.html" title="RenderingControl service descriptor (SCPD) generator." alt="" coords="216,69,441,109"/>
+<area shape="rect" id="node4" href="$classtiny__dlna_1_1DLNAMediaRendererTransportDescr.html" title="AVTransport service descriptor (SCPD) generator." alt="" coords="216,133,441,173"/>
+<area shape="rect" id="node5" href="$classtiny__dlna_1_1DLNAMediaServerConnectionMgrDescr.html" title="ConnectionManager SCPD descriptor for MediaServer." alt="" coords="225,197,433,237"/>
+<area shape="rect" id="node6" href="$classtiny__dlna_1_1DLNAMediaServerContentDirectoryDescr.html" title="ContentDirectory SCPD descriptor for MediaServer." alt="" coords="225,261,433,301"/>
 </map>

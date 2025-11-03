@@ -1,22 +1,27 @@
 <map id="src/http/Server/HttpChunkReader.h" name="src/http/Server/HttpChunkReader.h">
 <area shape="rect" id="node1" title=" " alt="" coords="83,5,273,45"/>
-<area shape="rect" id="node2" href="$HttpHeader_8h.html" title=" " alt="" coords="245,93,353,119"/>
+<area shape="rect" id="node2" href="$HttpHeader_8h.html" title=" " alt="" coords="252,93,360,119"/>
 <area shape="rect" id="node3" href="$HttpLineReader_8h.html" title=" " alt="" coords="5,167,140,192"/>
-<area shape="rect" id="node4" href="$Logger_8h.html" title=" " alt="" coords="222,460,337,485"/>
-<area shape="rect" id="node9" href="$Url_8h.html" title=" " alt="" coords="367,167,458,192"/>
-<area shape="rect" id="node10" href="$Str_8h.html" title=" " alt="" coords="580,240,669,265"/>
-<area shape="rect" id="node18" href="$List_8h.html" title=" " alt="" coords="447,313,541,339"/>
-<area shape="rect" id="node5" title=" " alt="" coords="190,533,265,559"/>
-<area shape="rect" id="node6" title=" " alt="" coords="637,533,703,559"/>
-<area shape="rect" id="node7" title=" " alt="" coords="847,533,917,559"/>
-<area shape="rect" id="node8" title=" " alt="" coords="289,533,373,559"/>
-<area shape="rect" id="node11" href="$StrView_8h.html" title=" " alt="" coords="823,313,906,339"/>
-<area shape="rect" id="node14" href="$Vector_8h.html" title=" " alt="" coords="614,313,689,339"/>
-<area shape="rect" id="node12" title=" " alt="" coords="816,387,913,412"/>
-<area shape="rect" id="node13" title=" " alt="" coords="666,387,741,412"/>
-<area shape="rect" id="node15" href="$dlna__config_8h.html" title=" " alt="" coords="589,460,697,485"/>
-<area shape="rect" id="node16" href="$Allocator_8h.html" title=" " alt="" coords="501,387,591,412"/>
-<area shape="rect" id="node17" title=" " alt="" coords="495,460,565,485"/>
-<area shape="rect" id="node19" title=" " alt="" coords="416,387,476,412"/>
-<area shape="rect" id="node20" title=" " alt="" coords="317,387,391,412"/>
+<area shape="rect" id="node4" href="$Logger_8h.html" title=" " alt="" coords="302,533,417,559"/>
+<area shape="rect" id="node9" href="$Url_8h.html" title=" " alt="" coords="215,167,306,192"/>
+<area shape="rect" id="node10" href="$Str_8h.html" title=" " alt="" coords="372,240,461,265"/>
+<area shape="rect" id="node23" href="$List_8h.html" title=" " alt="" coords="497,313,592,339"/>
+<area shape="rect" id="node5" title=" " alt="" coords="270,607,345,632"/>
+<area shape="rect" id="node6" title=" " alt="" coords="695,607,762,632"/>
+<area shape="rect" id="node7" title=" " alt="" coords="896,607,967,632"/>
+<area shape="rect" id="node8" title=" " alt="" coords="369,607,453,632"/>
+<area shape="rect" id="node11" href="$StrView_8h.html" title=" " alt="" coords="839,313,922,339"/>
+<area shape="rect" id="node14" href="$Vector_8h.html" title=" " alt="" coords="391,313,466,339"/>
+<area shape="rect" id="node12" title=" " alt="" coords="832,387,929,412"/>
+<area shape="rect" id="node13" title=" " alt="" coords="549,387,623,412"/>
+<area shape="rect" id="node15" href="$dlna__config_8h.html" title=" " alt="" coords="333,460,441,485"/>
+<area shape="rect" id="node16" href="$Allocator_8h.html" title=" " alt="" coords="434,387,525,412"/>
+<area shape="rect" id="node17" title=" " alt="" coords="724,460,795,485"/>
+<area shape="rect" id="node18" href="$AllocationTracker_8h.html" title=" " alt="" coords="517,460,700,485"/>
+<area shape="rect" id="node19" title=" " alt="" coords="619,533,684,559"/>
+<area shape="rect" id="node20" title=" " alt="" coords="709,533,789,559"/>
+<area shape="rect" id="node21" title=" " alt="" coords="461,533,511,559"/>
+<area shape="rect" id="node22" title=" " alt="" coords="535,533,594,559"/>
+<area shape="rect" id="node24" title=" " alt="" coords="648,387,708,412"/>
+<area shape="rect" id="node25" title=" " alt="" coords="733,387,807,412"/>
 </map>

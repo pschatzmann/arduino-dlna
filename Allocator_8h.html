@@ -81,20 +81,26 @@ $(function() {
 <div class="contents">
 <div class="textblock"><code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="Logger_8h_source.html">basic/Logger.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="AllocationTracker_8h_source.html">basic/AllocationTracker.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="dlna__config_8h_source.html">dlna_config.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for Allocator.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="Allocator_8h__incl.png" border="0" usemap="#asrc_2basic_2Allocator_8h" alt=""/></div>
 <map name="asrc_2basic_2Allocator_8h" id="asrc_2basic_2Allocator_8h">
-<area shape="rect" title=" " alt="" coords="108,5,260,31"/>
-<area shape="rect" title=" " alt="" coords="31,79,102,104"/>
-<area shape="rect" href="Logger_8h.html" title=" " alt="" coords="127,79,241,104"/>
-<area shape="rect" href="dlna__config_8h.html" title=" " alt="" coords="266,79,374,104"/>
-<area shape="rect" title=" " alt="" coords="5,152,80,177"/>
-<area shape="rect" title=" " alt="" coords="104,152,171,177"/>
-<area shape="rect" title=" " alt="" coords="195,152,266,177"/>
-<area shape="rect" title=" " alt="" coords="290,152,374,177"/>
+<area shape="rect" title=" " alt="" coords="213,5,365,31"/>
+<area shape="rect" title=" " alt="" coords="117,79,187,104"/>
+<area shape="rect" href="Logger_8h.html" title=" " alt="" coords="127,152,241,177"/>
+<area shape="rect" href="AllocationTracker_8h.html" title=" " alt="" coords="263,79,446,104"/>
+<area shape="rect" href="dlna__config_8h.html" title=" " alt="" coords="470,79,578,104"/>
+<area shape="rect" title=" " alt="" coords="5,225,80,251"/>
+<area shape="rect" title=" " alt="" coords="104,225,171,251"/>
+<area shape="rect" title=" " alt="" coords="195,225,266,251"/>
+<area shape="rect" title=" " alt="" coords="290,225,374,251"/>
+<area shape="rect" title=" " alt="" coords="266,152,331,177"/>
+<area shape="rect" title=" " alt="" coords="356,152,436,177"/>
+<area shape="rect" title=" " alt="" coords="460,152,511,177"/>
+<area shape="rect" title=" " alt="" coords="535,152,593,177"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -156,6 +162,9 @@ This graph shows which files directly or indirectly include this file:</div>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Allocator.html">tiny_dlna::Allocator</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Memory allocateator which uses malloc.  <a href="classtiny__dlna_1_1Allocator.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1TrackedAllocator.html">tiny_dlna::TrackedAllocator</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classtiny__dlna_1_1Allocator.html" title="Memory allocateator which uses malloc.">Allocator</a> which tracks allocations and deallocations.  <a href="classtiny__dlna_1_1TrackedAllocator.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1AllocatorExt.html">tiny_dlna::AllocatorExt</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Memory allocateator which uses ps_malloc (on the ESP32) and if this fails it resorts to malloc.  <a href="classtiny__dlna_1_1AllocatorExt.html#details">More...</a><br /></td></tr>

@@ -1,10 +1,15 @@
 <map id="src/basic/Allocator.h" name="src/basic/Allocator.h">
-<area shape="rect" id="node1" title=" " alt="" coords="108,5,260,31"/>
-<area shape="rect" id="node2" title=" " alt="" coords="31,79,102,104"/>
-<area shape="rect" id="node3" href="$Logger_8h.html" title=" " alt="" coords="127,79,241,104"/>
-<area shape="rect" id="node8" href="$dlna__config_8h.html" title=" " alt="" coords="266,79,374,104"/>
-<area shape="rect" id="node4" title=" " alt="" coords="5,152,80,177"/>
-<area shape="rect" id="node5" title=" " alt="" coords="104,152,171,177"/>
-<area shape="rect" id="node6" title=" " alt="" coords="195,152,266,177"/>
-<area shape="rect" id="node7" title=" " alt="" coords="290,152,374,177"/>
+<area shape="rect" id="node1" title=" " alt="" coords="213,5,365,31"/>
+<area shape="rect" id="node2" title=" " alt="" coords="117,79,187,104"/>
+<area shape="rect" id="node3" href="$Logger_8h.html" title=" " alt="" coords="127,152,241,177"/>
+<area shape="rect" id="node8" href="$AllocationTracker_8h.html" title=" " alt="" coords="263,79,446,104"/>
+<area shape="rect" id="node13" href="$dlna__config_8h.html" title=" " alt="" coords="470,79,578,104"/>
+<area shape="rect" id="node4" title=" " alt="" coords="5,225,80,251"/>
+<area shape="rect" id="node5" title=" " alt="" coords="104,225,171,251"/>
+<area shape="rect" id="node6" title=" " alt="" coords="195,225,266,251"/>
+<area shape="rect" id="node7" title=" " alt="" coords="290,225,374,251"/>
+<area shape="rect" id="node9" title=" " alt="" coords="266,152,331,177"/>
+<area shape="rect" id="node10" title=" " alt="" coords="356,152,436,177"/>
+<area shape="rect" id="node11" title=" " alt="" coords="460,152,511,177"/>
+<area shape="rect" id="node12" title=" " alt="" coords="535,152,593,177"/>
 </map>

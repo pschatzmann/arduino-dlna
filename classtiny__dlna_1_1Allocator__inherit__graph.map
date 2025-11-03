@@ -1,4 +1,5 @@
 <map id="tiny_dlna::Allocator" name="tiny_dlna::Allocator">
-<area shape="rect" id="node1" title="Memory allocateator which uses malloc." alt="" coords="16,5,164,31"/>
+<area shape="rect" id="node1" title="Memory allocateator which uses malloc." alt="" coords="120,5,268,31"/>
 <area shape="rect" id="node2" href="$classtiny__dlna_1_1AllocatorExt.html" title="Memory allocateator which uses ps_malloc (on the ESP32) and if this fails it resorts to malloc." alt="" coords="5,79,175,104"/>
+<area shape="rect" id="node3" href="$classtiny__dlna_1_1TrackedAllocator.html" title="Allocator which tracks allocations and deallocations." alt="" coords="199,79,397,104"/>
 </map>

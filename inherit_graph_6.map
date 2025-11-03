@@ -1,3 +1,5 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classtiny__dlna_1_1Argument.html" title="DLNA Service: Action Argument." alt="" coords="5,5,160,31"/>
+<area shape="rect" id="node1" href="$classtiny__dlna_1_1Allocator.html" title="Memory allocateator which uses malloc." alt="" coords="5,31,153,56"/>
+<area shape="rect" id="node2" href="$classtiny__dlna_1_1AllocatorExt.html" title="Memory allocateator which uses ps_malloc (on the ESP32) and if this fails it resorts to malloc." alt="" coords="215,5,385,31"/>
+<area shape="rect" id="node3" href="$classtiny__dlna_1_1TrackedAllocator.html" title="Allocator which tracks allocations and deallocations." alt="" coords="201,55,399,80"/>
 </map>

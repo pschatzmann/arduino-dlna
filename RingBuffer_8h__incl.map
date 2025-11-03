@@ -1,15 +1,20 @@
 <map id="src/basic/RingBuffer.h" name="src/basic/RingBuffer.h">
-<area shape="rect" id="node1" title=" " alt="" coords="118,5,281,31"/>
-<area shape="rect" id="node2" href="$Vector_8h.html" title=" " alt="" coords="63,79,138,104"/>
-<area shape="rect" id="node12" title=" " alt="" coords="162,79,237,104"/>
-<area shape="rect" id="node13" title=" " alt="" coords="261,79,332,104"/>
+<area shape="rect" id="node1" title=" " alt="" coords="151,5,314,31"/>
+<area shape="rect" id="node2" href="$Vector_8h.html" title=" " alt="" coords="97,79,171,104"/>
+<area shape="rect" id="node17" title=" " alt="" coords="195,79,270,104"/>
+<area shape="rect" id="node18" title=" " alt="" coords="295,79,365,104"/>
 <area shape="rect" id="node3" href="$dlna__config_8h.html" title=" " alt="" coords="5,225,113,251"/>
-<area shape="rect" id="node4" title=" " alt="" coords="63,152,138,177"/>
-<area shape="rect" id="node5" href="$Allocator_8h.html" title=" " alt="" coords="162,152,253,177"/>
-<area shape="rect" id="node6" title=" " alt="" coords="155,225,225,251"/>
-<area shape="rect" id="node7" href="$Logger_8h.html" title=" " alt="" coords="250,225,365,251"/>
-<area shape="rect" id="node8" title=" " alt="" coords="129,299,203,324"/>
-<area shape="rect" id="node9" title=" " alt="" coords="227,299,294,324"/>
-<area shape="rect" id="node10" title=" " alt="" coords="319,299,389,324"/>
-<area shape="rect" id="node11" title=" " alt="" coords="413,299,497,324"/>
+<area shape="rect" id="node4" title=" " alt="" coords="97,152,171,177"/>
+<area shape="rect" id="node5" href="$Allocator_8h.html" title=" " alt="" coords="195,152,286,177"/>
+<area shape="rect" id="node6" title=" " alt="" coords="137,225,208,251"/>
+<area shape="rect" id="node7" href="$Logger_8h.html" title=" " alt="" coords="167,299,282,324"/>
+<area shape="rect" id="node12" href="$AllocationTracker_8h.html" title=" " alt="" coords="325,225,508,251"/>
+<area shape="rect" id="node8" title=" " alt="" coords="46,372,121,397"/>
+<area shape="rect" id="node9" title=" " alt="" coords="145,372,211,397"/>
+<area shape="rect" id="node10" title=" " alt="" coords="236,372,307,397"/>
+<area shape="rect" id="node11" title=" " alt="" coords="331,372,415,397"/>
+<area shape="rect" id="node13" title=" " alt="" coords="307,299,372,324"/>
+<area shape="rect" id="node14" title=" " alt="" coords="397,299,477,324"/>
+<area shape="rect" id="node15" title=" " alt="" coords="501,299,551,324"/>
+<area shape="rect" id="node16" title=" " alt="" coords="575,299,634,324"/>
 </map>
