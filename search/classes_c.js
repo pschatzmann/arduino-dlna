@@ -7,7 +7,6 @@ var searchData=
   ['strprint_4',['StrPrint',['../classtiny__dlna_1_1StrPrint.html',1,'tiny_dlna']]],
   ['strview_5',['StrView',['../classtiny__dlna_1_1StrView.html',1,'tiny_dlna']]],
   ['subscription_6',['Subscription',['../structtiny__dlna_1_1Subscription.html',1,'tiny_dlna']]],
-  ['subscriptionmgr_7',['SubscriptionMgr',['../classSubscriptionMgr.html',1,'']]],
-  ['subscriptionmgrcontrolpoint_8',['SubscriptionMgrControlPoint',['../classtiny__dlna_1_1SubscriptionMgrControlPoint.html',1,'tiny_dlna']]],
-  ['subscriptionmgrdevice_9',['SubscriptionMgrDevice',['../classtiny__dlna_1_1SubscriptionMgrDevice.html',1,'tiny_dlna']]]
+  ['subscriptionmgrcontrolpoint_7',['SubscriptionMgrControlPoint',['../classtiny__dlna_1_1SubscriptionMgrControlPoint.html',1,'tiny_dlna']]],
+  ['subscriptionmgrdevice_8',['SubscriptionMgrDevice',['../classtiny__dlna_1_1SubscriptionMgrDevice.html',1,'tiny_dlna']]]
 ];

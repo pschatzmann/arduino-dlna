@@ -80,34 +80,28 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>Representation of a queued notification to be delivered later.  
+ <a href="structtiny__dlna_1_1PendingNotification.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="SubscriptionMgrDevice_8h_source.html">SubscriptionMgrDevice.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:aa7e5a904500a3b6fe7f1287cd9f5c728"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structtiny__dlna_1_1Subscription.html">Subscription</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1PendingNotification.html#aa7e5a904500a3b6fe7f1287cd9f5c728">p_subscription</a> = nullptr</td></tr>
+<tr class="memitem:aa7e5a904500a3b6fe7f1287cd9f5c728"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structtiny__dlna_1_1Subscription.html">Subscription</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1PendingNotification.html#aa7e5a904500a3b6fe7f1287cd9f5c728">p_subscription</a></td></tr>
 <tr class="separator:aa7e5a904500a3b6fe7f1287cd9f5c728"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4bc2dbcf602859fce1ff1b77179a815a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Str.html">Str</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1PendingNotification.html#a4bc2dbcf602859fce1ff1b77179a815a">changeNode</a></td></tr>
-<tr class="separator:a4bc2dbcf602859fce1ff1b77179a815a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae648982618e9cac25db12c6dd3561957"><td class="memItemLeft" align="right" valign="top">std::function&lt; size_t(Print &amp;, void *)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1PendingNotification.html#ae648982618e9cac25db12c6dd3561957">writer</a></td></tr>
+<tr class="separator:ae648982618e9cac25db12c6dd3561957"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1ff6b4447178ad2f8a98c682c672522"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1PendingNotification.html#ae1ff6b4447178ad2f8a98c682c672522">refptr</a> = nullptr</td></tr>
+<tr class="separator:ae1ff6b4447178ad2f8a98c682c672522"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a451b3c7b08305dd41469ca973c7650a5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1PendingNotification.html#a451b3c7b08305dd41469ca973c7650a5">error_count</a> = 0</td></tr>
 <tr class="separator:a451b3c7b08305dd41469ca973c7650a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1d34b4105f5438911d3dd99f417fee3"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1PendingNotification.html#aa1d34b4105f5438911d3dd99f417fee3">xmlLen</a> = 0</td></tr>
+<tr class="separator:aa1d34b4105f5438911d3dd99f417fee3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Pending notification to be posted later by post() </p>
+<div class="textblock"><p>Representation of a queued notification to be delivered later. </p>
+<p>Holds a pointer to the subscription to notify and the XML change node to send. <code>p_subscription</code> is a non-owning pointer into the <code>subscriptions</code> container; code must handle the case where it becomes null (or the subscription is removed via <code>unsubscribe</code>). <code>error_count</code> tracks delivery failures and is used to drop entries after repeated errors. </p>
 </div><h2 class="groupheader">Member Data Documentation</h2>
-<a id="a4bc2dbcf602859fce1ff1b77179a815a" name="a4bc2dbcf602859fce1ff1b77179a815a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4bc2dbcf602859fce1ff1b77179a815a">&#9670;&#160;</a></span>changeNode</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classtiny__dlna_1_1Str.html">Str</a> tiny_dlna::PendingNotification::changeNode</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="a451b3c7b08305dd41469ca973c7650a5" name="a451b3c7b08305dd41469ca973c7650a5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a451b3c7b08305dd41469ca973c7650a5">&#9670;&#160;</a></span>error_count</h2>
 
@@ -119,6 +113,7 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>number of failed send attempts </p>
 
 </div>
 </div>
@@ -129,10 +124,58 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structtiny__dlna_1_1Subscription.html">Subscription</a>* tiny_dlna::PendingNotification::p_subscription = nullptr</td>
+          <td class="memname"><a class="el" href="structtiny__dlna_1_1Subscription.html">Subscription</a>* tiny_dlna::PendingNotification::p_subscription</td>
         </tr>
       </table>
 </div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">=</div>
+<div class="line">      <span class="keyword">nullptr</span></div>
+</div><!-- fragment --><p>non-owning pointer to <a class="el" href="structtiny__dlna_1_1Subscription.html" title="Represents a single event subscription for a service.">Subscription</a> </p>
+
+</div>
+</div>
+<a id="ae1ff6b4447178ad2f8a98c682c672522" name="ae1ff6b4447178ad2f8a98c682c672522"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae1ff6b4447178ad2f8a98c682c672522">&#9670;&#160;</a></span>refptr</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void* tiny_dlna::PendingNotification::refptr = nullptr</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>opaque reference for writer </p>
+
+</div>
+</div>
+<a id="ae648982618e9cac25db12c6dd3561957" name="ae648982618e9cac25db12c6dd3561957"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae648982618e9cac25db12c6dd3561957">&#9670;&#160;</a></span>writer</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::function&lt;size_t(Print&amp;, void*)&gt; tiny_dlna::PendingNotification::writer</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>writer callback that emits the notification XML </p>
+
+</div>
+</div>
+<a id="aa1d34b4105f5438911d3dd99f417fee3" name="aa1d34b4105f5438911d3dd99f417fee3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1d34b4105f5438911d3dd99f417fee3">&#9670;&#160;</a></span>xmlLen</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t tiny_dlna::PendingNotification::xmlLen = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>size of the generated XML </p>
 
 </div>
 </div>

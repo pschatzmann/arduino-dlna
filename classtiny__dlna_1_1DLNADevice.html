@@ -107,8 +107,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a4cd91c697ce1a616b639f6c59783e118"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html">DLNAServiceInfo</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a4cd91c697ce1a616b639f6c59783e118">getServiceByAbbrev</a> (const char *abbrev)</td></tr>
 <tr class="memdesc:a4cd91c697ce1a616b639f6c59783e118"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get Service by subscription ns abbrev.  <br /></td></tr>
 <tr class="separator:a4cd91c697ce1a616b639f6c59783e118"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5d3189f0d9b1e472f7df2a4d4fbce46e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a5d3189f0d9b1e472f7df2a4d4fbce46e">addChange</a> (const char *serviceAbbrev, const char *changeTag)</td></tr>
-<tr class="separator:a5d3189f0d9b1e472f7df2a4d4fbce46e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd981a9a9fb92507f9a2440ceedf1e1e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html">DLNAServiceInfo</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#acd981a9a9fb92507f9a2440ceedf1e1e">getServiceByEventPath</a> (const char *requestPath)</td></tr>
+<tr class="separator:acd981a9a9fb92507f9a2440ceedf1e1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30ac27987d1d05c9fdad5de632efe107"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a30ac27987d1d05c9fdad5de632efe107">addChange</a> (const char *serviceAbbrev, std::function&lt; size_t(Print &amp;, void *)&gt; changeWriter, void *ref)</td></tr>
+<tr class="separator:a30ac27987d1d05c9fdad5de632efe107"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a32962d63b5d46f2181c6b69c99409da2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html">DLNADeviceInfo</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a32962d63b5d46f2181c6b69c99409da2">getDevice</a> ()</td></tr>
 <tr class="memdesc:a32962d63b5d46f2181c6b69c99409da2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the device.  <br /></td></tr>
 <tr class="separator:a32962d63b5d46f2181c6b69c99409da2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -130,6 +132,12 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a6e693f736e5642abe962e7fa23287453"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a6e693f736e5642abe962e7fa23287453">eventSubscriptionHandler</a> (<a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> *server, const char *requestPath, <a class="el" href="classtiny__dlna_1_1HttpRequestHandlerLine.html">HttpRequestHandlerLine</a> *hl)</td></tr>
 <tr class="memdesc:a6e693f736e5642abe962e7fa23287453"><td class="mdescLeft">&#160;</td><td class="mdescRight">Static handler for SUBSCRIBE/UNSUBSCRIBE requests on service event URLs.  <br /></td></tr>
 <tr class="separator:a6e693f736e5642abe962e7fa23287453"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa4a323c2a1eb2785974e30e5bd2a4ec"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#afa4a323c2a1eb2785974e30e5bd2a4ec">handleSubscribe</a> (<a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> *server, const char *requestPath, <a class="el" href="classtiny__dlna_1_1HttpRequestHandlerLine.html">HttpRequestHandlerLine</a> *hl)</td></tr>
+<tr class="memdesc:afa4a323c2a1eb2785974e30e5bd2a4ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle SUBSCRIBE requests (extracted from eventSubscriptionHandler)  <br /></td></tr>
+<tr class="separator:afa4a323c2a1eb2785974e30e5bd2a4ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41faf306a9f7b1851124e03be34731ac"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a41faf306a9f7b1851124e03be34731ac">handleUnsubscribe</a> (<a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> *server, const char *requestPath, <a class="el" href="classtiny__dlna_1_1HttpRequestHandlerLine.html">HttpRequestHandlerLine</a> *hl)</td></tr>
+<tr class="memdesc:a41faf306a9f7b1851124e03be34731ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle UNSUBSCRIBE requests (extracted from eventSubscriptionHandler)  <br /></td></tr>
+<tr class="separator:a41faf306a9f7b1851124e03be34731ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5eea7860396fdf64d2be2f25da74916a"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a5eea7860396fdf64d2be2f25da74916a">parseActionRequest</a> (<a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> *server, const char *requestPath, <a class="el" href="classtiny__dlna_1_1HttpRequestHandlerLine.html">HttpRequestHandlerLine</a> *hl, <a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;action)</td></tr>
 <tr class="memdesc:a5eea7860396fdf64d2be2f25da74916a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parses the SOAP content of a DLNA action request.  <br /></td></tr>
 <tr class="separator:a5eea7860396fdf64d2be2f25da74916a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -192,8 +200,8 @@ Static Protected Attributes</h2></td></tr>
 </ul>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a5d3189f0d9b1e472f7df2a4d4fbce46e" name="a5d3189f0d9b1e472f7df2a4d4fbce46e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5d3189f0d9b1e472f7df2a4d4fbce46e">&#9670;&#160;</a></span>addChange()</h2>
+<a id="a30ac27987d1d05c9fdad5de632efe107" name="a30ac27987d1d05c9fdad5de632efe107"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a30ac27987d1d05c9fdad5de632efe107">&#9670;&#160;</a></span>addChange()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -210,8 +218,14 @@ Static Protected Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>changeTag</em>&#160;</td>
+          <td class="paramtype">std::function&lt; size_t(Print &amp;, void *)&gt;&#160;</td>
+          <td class="paramname"><em>changeWriter</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>ref</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -225,7 +239,7 @@ Static Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Publish a property change to subscribers of the service identified by the subscription namespace abbreviation (e.g. "AVT", "RCS"). This forwards the request to the <a class="el" href="classtiny__dlna_1_1SubscriptionMgrDevice.html">SubscriptionMgrDevice</a> instance. </p>
+<p>Publish a property change to subscribers of the service identified by the subscription namespace abbreviation (e.g. "AVT", "RCS"). This forwards the request to the <a class="el" href="classtiny__dlna_1_1SubscriptionMgrDevice.html" title="Manages UPnP event subscriptions and queued notifications for a DLNA device.">SubscriptionMgrDevice</a> instance. Instead of taking a raw XML fragment, callers provide a writer callback and an opaque <code>ref</code> pointer which will be forwarded to the writer both when the Content-Length is calculated and when the NOTIFY body is streamed. </p>
 
 </div>
 </div>
@@ -471,6 +485,33 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="acd981a9a9fb92507f9a2440ceedf1e1e" name="acd981a9a9fb92507f9a2440ceedf1e1e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd981a9a9fb92507f9a2440ceedf1e1e">&#9670;&#160;</a></span>getServiceByEventPath()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html">DLNAServiceInfo</a> * tiny_dlna::DLNADevice::getServiceByEventPath </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>requestPath</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Find a service by its event subscription URL (returns nullptr if not found). This encapsulates the lookup that was previously done inline in the static subscription handler. </p>
+
+</div>
+</div>
 <a id="a8e3ff2f49318c02de0767b28fea4335e" name="a8e3ff2f49318c02de0767b28fea4335e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8e3ff2f49318c02de0767b28fea4335e">&#9670;&#160;</a></span>getStringRegistry()</h2>
 
@@ -518,6 +559,94 @@ Static Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="afa4a323c2a1eb2785974e30e5bd2a4ec" name="afa4a323c2a1eb2785974e30e5bd2a4ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa4a323c2a1eb2785974e30e5bd2a4ec">&#9670;&#160;</a></span>handleSubscribe()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void tiny_dlna::DLNADevice::handleSubscribe </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> *&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>requestPath</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1HttpRequestHandlerLine.html">HttpRequestHandlerLine</a> *&#160;</td>
+          <td class="paramname"><em>hl</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Handle SUBSCRIBE requests (extracted from eventSubscriptionHandler) </p>
+
+</div>
+</div>
+<a id="a41faf306a9f7b1851124e03be34731ac" name="a41faf306a9f7b1851124e03be34731ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a41faf306a9f7b1851124e03be34731ac">&#9670;&#160;</a></span>handleUnsubscribe()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void tiny_dlna::DLNADevice::handleUnsubscribe </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> *&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>requestPath</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1HttpRequestHandlerLine.html">HttpRequestHandlerLine</a> *&#160;</td>
+          <td class="paramname"><em>hl</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Handle UNSUBSCRIBE requests (extracted from eventSubscriptionHandler) </p>
 
 </div>
 </div>

@@ -83,36 +83,46 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>Manages UPnP event subscriptions and queued notifications for a DLNA device.  
+ <a href="classtiny__dlna_1_1SubscriptionMgrDevice.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="SubscriptionMgrDevice_8h_source.html">SubscriptionMgrDevice.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a22ecd6f0345bc985f88db38d37d99c1a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgrDevice.html#a22ecd6f0345bc985f88db38d37d99c1a">SubscriptionMgrDevice</a> ()=default</td></tr>
+<tr class="memdesc:a22ecd6f0345bc985f88db38d37d99c1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="structtiny__dlna_1_1Subscription.html" title="Represents a single event subscription for a service.">Subscription</a> Manager.  <br /></td></tr>
 <tr class="separator:a22ecd6f0345bc985f88db38d37d99c1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a48bf7527573ce27fd1cc5d82df73e277"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgrDevice.html#a48bf7527573ce27fd1cc5d82df73e277">~SubscriptionMgrDevice</a> ()</td></tr>
+<tr class="memdesc:a48bf7527573ce27fd1cc5d82df73e277"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy the <a class="el" href="structtiny__dlna_1_1Subscription.html" title="Represents a single event subscription for a service.">Subscription</a> Manager.  <br /></td></tr>
 <tr class="separator:a48bf7527573ce27fd1cc5d82df73e277"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a196add77207bd196d6584d5b765ae4c9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Str.html">Str</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgrDevice.html#a196add77207bd196d6584d5b765ae4c9">subscribe</a> (<a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html">DLNAServiceInfo</a> &amp;service, const char *callbackUrl, uint32_t timeoutSec=1800)</td></tr>
-<tr class="separator:a196add77207bd196d6584d5b765ae4c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f55bbdbc4aa6b27e1a098d8e1672092"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Str.html">Str</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgrDevice.html#a1f55bbdbc4aa6b27e1a098d8e1672092">subscribe</a> (<a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html">DLNAServiceInfo</a> &amp;service, const char *callbackUrl, const char *sid=nullptr, uint32_t timeoutSec=1800)</td></tr>
+<tr class="memdesc:a1f55bbdbc4aa6b27e1a098d8e1672092"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add or renew a subscription for a service.  <br /></td></tr>
+<tr class="separator:a1f55bbdbc4aa6b27e1a098d8e1672092"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afe1929863f462c91abf8c226cc3903e8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgrDevice.html#afe1929863f462c91abf8c226cc3903e8">unsubscribe</a> (<a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html">DLNAServiceInfo</a> &amp;service, const char *sid)</td></tr>
-<tr class="memdesc:afe1929863f462c91abf8c226cc3903e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove the subscription.  <br /></td></tr>
+<tr class="memdesc:afe1929863f462c91abf8c226cc3903e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove a subscription identified by SID.  <br /></td></tr>
 <tr class="separator:afe1929863f462c91abf8c226cc3903e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab6d2a6a548edd3279228bce992de4466"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgrDevice.html#ab6d2a6a548edd3279228bce992de4466">addChange</a> (<a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html">DLNAServiceInfo</a> &amp;service, const char *xmlTag)</td></tr>
-<tr class="memdesc:ab6d2a6a548edd3279228bce992de4466"><td class="mdescLeft">&#160;</td><td class="mdescRight">Publish a single state variable change to all subscribers of the service.  <br /></td></tr>
-<tr class="separator:ab6d2a6a548edd3279228bce992de4466"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a546a2a64549aa5e02eb069f6c0e9c9bc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgrDevice.html#a546a2a64549aa5e02eb069f6c0e9c9bc">addChange</a> (<a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html">DLNAServiceInfo</a> &amp;service, std::function&lt; size_t(Print &amp;, void *)&gt; changeWriter, void *ref)</td></tr>
+<tr class="memdesc:a546a2a64549aa5e02eb069f6c0e9c9bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueue a state-variable change for delivery.  <br /></td></tr>
+<tr class="separator:a546a2a64549aa5e02eb069f6c0e9c9bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad5fe96f21c73ef6613006cbd3044dfda"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgrDevice.html#ad5fe96f21c73ef6613006cbd3044dfda">publish</a> ()</td></tr>
+<tr class="memdesc:ad5fe96f21c73ef6613006cbd3044dfda"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deliver queued notifications.  <br /></td></tr>
 <tr class="separator:ad5fe96f21c73ef6613006cbd3044dfda"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abd4bf7eb43cce62c279ecbe1d7b2e516"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgrDevice.html#abd4bf7eb43cce62c279ecbe1d7b2e516">removeExpired</a> ()</td></tr>
+<tr class="memdesc:abd4bf7eb43cce62c279ecbe1d7b2e516"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove expired subscriptions.  <br /></td></tr>
 <tr class="separator:abd4bf7eb43cce62c279ecbe1d7b2e516"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a72bf606816d6c3d224fcace1d4d17157"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgrDevice.html#a72bf606816d6c3d224fcace1d4d17157">subscriptionsCount</a> ()</td></tr>
+<tr class="memdesc:a72bf606816d6c3d224fcace1d4d17157"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of active subscriptions.  <br /></td></tr>
 <tr class="separator:a72bf606816d6c3d224fcace1d4d17157"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4bc2d50328753eabb3c991ff3efea3db"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgrDevice.html#a4bc2d50328753eabb3c991ff3efea3db">pendingCount</a> ()</td></tr>
+<tr class="memdesc:a4bc2d50328753eabb3c991ff3efea3db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of queued pending notifications.  <br /></td></tr>
 <tr class="separator:a4bc2d50328753eabb3c991ff3efea3db"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:ab06da7aab5a7cb28bd85178ba53b790a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgrDevice.html#ab06da7aab5a7cb28bd85178ba53b790a">createXML</a> (Print &amp;out, const char *serviceAbbrev, const char *changeNode)</td></tr>
-<tr class="memdesc:ab06da7aab5a7cb28bd85178ba53b790a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate the propertyset XML for a single variable and write it to the provided Print instance.  <br /></td></tr>
-<tr class="separator:ab06da7aab5a7cb28bd85178ba53b790a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b30c24e9f8c5f763259c77dfc8b9411"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgrDevice.html#a1b30c24e9f8c5f763259c77dfc8b9411">createXML</a> (Print &amp;out, const char *serviceAbbrev, std::function&lt; size_t(Print &amp;, void *)&gt; changeWriter, void *ref)</td></tr>
+<tr class="memdesc:a1b30c24e9f8c5f763259c77dfc8b9411"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate the propertyset XML for a single variable and write it to the provided Print instance. The inner event content is emitted via the provided <code>changeWriter</code> callback which must have signature <code>size_t(Print&amp;, void*)</code>. The opaque <code>ref</code> pointer is passed through to the callback and may be used to access context (for example the <code><a class="el" href="structtiny__dlna_1_1PendingNotification.html" title="Representation of a queued notification to be delivered later.">PendingNotification</a></code> that owns the fragment).  <br /></td></tr>
+<tr class="separator:a1b30c24e9f8c5f763259c77dfc8b9411"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -128,7 +138,17 @@ Static Protected Attributes</h2></td></tr>
 <tr class="memitem:a381fbec6d750000c04b31d6fb646d71c"><td class="memItemLeft" align="right" valign="top">static constexpr int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgrDevice.html#a381fbec6d750000c04b31d6fb646d71c">MAX_SEND_ERRORS</a> = 3</td></tr>
 <tr class="separator:a381fbec6d750000c04b31d6fb646d71c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Manages UPnP event subscriptions and queued notifications for a DLNA device. </p>
+<p>The manager stores active subscriptions (allocated on the heap) and a queue of pending notifications that are delivered asynchronously via HTTP NOTIFY requests. Subscriptions are represented by <code><a class="el" href="structtiny__dlna_1_1Subscription.html" title="Represents a single event subscription for a service.">Subscription</a></code> objects; pending notifications reference subscriptions via a non-owning pointer (<code><a class="el" href="structtiny__dlna_1_1PendingNotification.html#aa7e5a904500a3b6fe7f1287cd9f5c728">PendingNotification::p_subscription</a></code>).</p>
+<p>Responsibilities:</p><ul>
+<li>create and remove subscriptions (SID generation)</li>
+<li>enqueue state-change notifications for delivery (<code>addChange</code>)</li>
+<li>deliver queued notifications (<code>publish</code>) with retry/drop policy</li>
+<li>purge expired subscriptions (<code>removeExpired</code>)</li>
+</ul>
+<p>Note: <code>p_subscription</code> pointers may become invalid if a subscription is removed; removal routines attempt to clean up pending entries, but a stable UID approach is recommended for maximum robustness. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a22ecd6f0345bc985f88db38d37d99c1a" name="a22ecd6f0345bc985f88db38d37d99c1a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a22ecd6f0345bc985f88db38d37d99c1a">&#9670;&#160;</a></span>SubscriptionMgrDevice()</h2>
 
@@ -151,6 +171,9 @@ Static Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Construct a new <a class="el" href="structtiny__dlna_1_1Subscription.html" title="Represents a single event subscription for a service.">Subscription</a> Manager. </p>
+<p>Initializes an empty manager. Subscriptions are owned by the manager (heap-allocated) and will be freed in the destructor. </p>
 
 </div>
 </div>
@@ -177,11 +200,14 @@ Static Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Destroy the <a class="el" href="structtiny__dlna_1_1Subscription.html" title="Represents a single event subscription for a service.">Subscription</a> Manager. </p>
+<p>Frees any remaining heap-allocated subscriptions and clears internal pending lists. This ensures no memory is leaked when the manager is destroyed. </p>
+
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ab6d2a6a548edd3279228bce992de4466" name="ab6d2a6a548edd3279228bce992de4466"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab6d2a6a548edd3279228bce992de4466">&#9670;&#160;</a></span>addChange()</h2>
+<a id="a546a2a64549aa5e02eb069f6c0e9c9bc" name="a546a2a64549aa5e02eb069f6c0e9c9bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a546a2a64549aa5e02eb069f6c0e9c9bc">&#9670;&#160;</a></span>addChange()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -198,8 +224,14 @@ Static Protected Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>xmlTag</em>&#160;</td>
+          <td class="paramtype">std::function&lt; size_t(Print &amp;, void *)&gt;&#160;</td>
+          <td class="paramname"><em>changeWriter</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>ref</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -214,12 +246,21 @@ Static Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Publish a single state variable change to all subscribers of the service. </p>
+<p>Enqueue a state-variable change for delivery. </p>
+<p>Adds a pending notification for all subscribers of <code>service</code>. Instead of passing a raw XML fragment, callers provide a small writer callback that emits the inner XML fragment when invoked. The manager will call this callback to compute the Content-Length (using a <code><a class="el" href="classtiny__dlna_1_1NullPrint.html" title="Class with does not do any output: it can be used to determine the length of the output.">NullPrint</a></code>) and later again when streaming the NOTIFY body. The opaque <code>ref</code> pointer is forwarded to the writer both during length calculation and at publish time.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">service</td><td>The DLNA service whose subscribers should be notified </td></tr>
+    <tr><td class="paramname">changeWriter</td><td>Callback that writes the inner XML fragment. It must match the signature <code>size_t(Print&amp;, void*)</code> and return the number of bytes written. </td></tr>
+    <tr><td class="paramname">ref</td><td>Opaque pointer passed to <code>changeWriter</code> when it is invoked </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
-<a id="ab06da7aab5a7cb28bd85178ba53b790a" name="ab06da7aab5a7cb28bd85178ba53b790a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab06da7aab5a7cb28bd85178ba53b790a">&#9670;&#160;</a></span>createXML()</h2>
+<a id="a1b30c24e9f8c5f763259c77dfc8b9411" name="a1b30c24e9f8c5f763259c77dfc8b9411"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b30c24e9f8c5f763259c77dfc8b9411">&#9670;&#160;</a></span>createXML()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -242,8 +283,14 @@ Static Protected Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>changeNode</em>&#160;</td>
+          <td class="paramtype">std::function&lt; size_t(Print &amp;, void *)&gt;&#160;</td>
+          <td class="paramname"><em>changeWriter</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>ref</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -258,7 +305,7 @@ Static Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Generate the propertyset XML for a single variable and write it to the provided Print instance. </p>
+<p>Generate the propertyset XML for a single variable and write it to the provided Print instance. The inner event content is emitted via the provided <code>changeWriter</code> callback which must have signature <code>size_t(Print&amp;, void*)</code>. The opaque <code>ref</code> pointer is passed through to the callback and may be used to access context (for example the <code><a class="el" href="structtiny__dlna_1_1PendingNotification.html" title="Representation of a queued notification to be delivered later.">PendingNotification</a></code> that owns the fragment). </p>
 <p>Returns the number of bytes written. </p>
 
 </div>
@@ -286,6 +333,9 @@ Static Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Number of queued pending notifications. </p>
+<dl class="section return"><dt>Returns</dt><dd>int count of pending notifications </dd></dl>
+
 </div>
 </div>
 <a id="ad5fe96f21c73ef6613006cbd3044dfda" name="ad5fe96f21c73ef6613006cbd3044dfda"></a>
@@ -310,7 +360,9 @@ Static Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Publish all queued notifications. This will attempt to deliver each pending notification and remove it from the queue. </p>
+
+<p>Deliver queued notifications. </p>
+<p>Iterates the pending notification queue and attempts to deliver each notification via HTTP NOTIFY. Successful deliveries are removed from the queue. Failed attempts increment an error counter; entries that exceed MAX_SEND_ERRORS are dropped. Expired subscriptions are removed prior to delivery. </p>
 
 </div>
 </div>
@@ -336,12 +388,14 @@ Static Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Remove subscriptions that have expired (expires_at &lt;= now). Also removes any pending notifications that belonged to the removed subscriptions so we don't attempt to deliver to unsubscribed callbacks. </p>
+
+<p>Remove expired subscriptions. </p>
+<p>Walks the subscription list and unsubscribes any entry whose <code>expires_at</code> timestamp has passed. This also removes pending notifications related to the unsubscribed entries. </p>
 
 </div>
 </div>
-<a id="a196add77207bd196d6584d5b765ae4c9" name="a196add77207bd196d6584d5b765ae4c9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a196add77207bd196d6584d5b765ae4c9">&#9670;&#160;</a></span>subscribe()</h2>
+<a id="a1f55bbdbc4aa6b27e1a098d8e1672092" name="a1f55bbdbc4aa6b27e1a098d8e1672092"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f55bbdbc4aa6b27e1a098d8e1672092">&#9670;&#160;</a></span>subscribe()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -364,6 +418,12 @@ Static Protected Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>sid</em> = <code>nullptr</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">uint32_t&#160;</td>
           <td class="paramname"><em>timeoutSec</em> = <code>1800</code>&#160;</td>
         </tr>
@@ -379,6 +439,19 @@ Static Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Add or renew a subscription for a service. </p>
+<p>Creates a new subscription for the given service and callback URL, or renews an existing one if a non-empty <code>sid</code> is provided and a matching subscription exists for the service. When renewing, the existing SID is returned and the timeout/expiry is updated. This mirrors UPnP semantics where clients may SUBSCRIBE with an existing SID to renew.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">service</td><td>Reference to the DLNA service to subscribe to </td></tr>
+    <tr><td class="paramname">callbackUrl</td><td>The CALLBACK URL provided by the subscriber. May be empty when renewing via SID. </td></tr>
+    <tr><td class="paramname">sid</td><td>Optional SID to renew; pass nullptr or empty to create a new subscription </td></tr>
+    <tr><td class="paramname">timeoutSec</td><td>Requested subscription timeout in seconds (default 1800) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classtiny__dlna_1_1Str.html" title="String implementation which keeps the data on the heap. We grow the allocated memory only if the copy...">Str</a> Assigned or renewed SID for the subscription </dd></dl>
 
 </div>
 </div>
@@ -404,6 +477,9 @@ Static Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Number of active subscriptions. </p>
+<dl class="section return"><dt>Returns</dt><dd>int count of subscriptions </dd></dl>
 
 </div>
 </div>
@@ -441,7 +517,18 @@ Static Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Remove the subscription. </p>
+<p>Remove a subscription identified by SID. </p>
+<p>Removes the subscription for the specified service and SID. Pending notifications targeting the subscription are also removed. The subscription object is deleted and the method returns true on success.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">service</td><td>Reference to the DLNA service </td></tr>
+    <tr><td class="paramname">sid</td><td><a class="el" href="structtiny__dlna_1_1Subscription.html" title="Represents a single event subscription for a service.">Subscription</a> identifier to remove </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if the subscription was found and removed </dd>
+<dd>
+false if no matching subscription exists </dd></dl>
 
 </div>
 </div>

@@ -88,61 +88,62 @@ $(function() {
 <code>#include &quot;<a class="el" href="StringRegistry_8h_source.html">dlna/StringRegistry.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="Http_8h_source.html">http/Http.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="HttpRequest_8h_source.html">http/Server/HttpRequest.h</a>&quot;</code><br />
+<code>#include &lt;functional&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for SubscriptionMgrDevice.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="SubscriptionMgrDevice_8h__incl.png" border="0" usemap="#asrc_2dlna_2devices_2SubscriptionMgrDevice_8h" alt=""/></div>
 <map name="asrc_2dlna_2devices_2SubscriptionMgrDevice_8h" id="asrc_2dlna_2devices_2SubscriptionMgrDevice_8h">
-<area shape="rect" title=" " alt="" coords="1377,5,1588,45"/>
-<area shape="rect" href="Logger_8h.html" title=" " alt="" coords="495,900,609,925"/>
-<area shape="rect" href="NullPrint_8h.html" title=" " alt="" coords="1419,167,1547,192"/>
-<area shape="rect" href="Str_8h.html" title=" " alt="" coords="1487,607,1577,632"/>
-<area shape="rect" href="StrView_8h.html" title=" " alt="" coords="1545,680,1628,705"/>
-<area shape="rect" href="Vector_8h.html" title=" " alt="" coords="1236,680,1311,705"/>
-<area shape="rect" href="Url_8h.html" title=" " alt="" coords="525,533,616,559"/>
-<area shape="rect" href="StringRegistry_8h.html" title=" " alt="" coords="1723,313,1879,339"/>
-<area shape="rect" href="Http_8h.html" title=" " alt="" coords="1138,93,1230,119"/>
-<area shape="rect" href="HttpRequest_8h.html" title=" " alt="" coords="485,313,600,339"/>
-<area shape="rect" title=" " alt="" coords="463,973,537,999"/>
-<area shape="rect" title=" " alt="" coords="1181,973,1248,999"/>
-<area shape="rect" title=" " alt="" coords="1725,973,1795,999"/>
-<area shape="rect" title=" " alt="" coords="562,973,646,999"/>
-<area shape="rect" title=" " alt="" coords="1352,460,1416,485"/>
-<area shape="rect" title=" " alt="" coords="1498,753,1595,779"/>
-<area shape="rect" title=" " alt="" coords="1308,753,1383,779"/>
-<area shape="rect" href="dlna__config_8h.html" title=" " alt="" coords="813,827,921,852"/>
-<area shape="rect" href="Allocator_8h.html" title=" " alt="" coords="1000,753,1091,779"/>
-<area shape="rect" title=" " alt="" coords="1163,827,1234,852"/>
-<area shape="rect" href="AllocationTracker_8h.html" title=" " alt="" coords="1435,827,1618,852"/>
-<area shape="rect" title=" " alt="" coords="1581,900,1646,925"/>
-<area shape="rect" title=" " alt="" coords="1319,900,1399,925"/>
-<area shape="rect" title=" " alt="" coords="1423,900,1473,925"/>
-<area shape="rect" title=" " alt="" coords="1497,900,1556,925"/>
-<area shape="rect" href="HttpServer_8h.html" title=" " alt="" coords="913,167,1063,192"/>
-<area shape="rect" href="HttpParameters_8h.html" title=" " alt="" coords="1697,533,1879,559"/>
-<area shape="rect" title=" " alt="" coords="603,387,666,412"/>
-<area shape="rect" title=" " alt="" coords="1205,460,1277,485"/>
-<area shape="rect" title=" " alt="" coords="921,240,1055,265"/>
-<area shape="rect" href="HttpChunkWriter_8h.html" title=" " alt="" coords="847,387,990,412"/>
-<area shape="rect" href="HttpHeader_8h.html" title=" " alt="" coords="277,460,385,485"/>
-<area shape="rect" href="List_8h.html" title=" " alt="" coords="623,680,718,705"/>
-<area shape="rect" href="HttpRequestHandlerLine_8h.html" title=" " alt="" coords="267,313,461,339"/>
-<area shape="rect" href="HttpRequestRewrite_8h.html" title=" " alt="" coords="1331,313,1496,339"/>
-<area shape="rect" href="HttpTunnel_8h.html" title=" " alt="" coords="691,240,795,265"/>
-<area shape="rect" title=" " alt="" coords="1080,240,1155,265"/>
-<area shape="rect" href="IPAddressAndPort_8h.html" title=" " alt="" coords="1335,680,1521,705"/>
-<area shape="rect" title=" " alt="" coords="883,460,954,485"/>
-<area shape="rect" title=" " alt="" coords="979,460,1045,485"/>
-<area shape="rect" title=" " alt="" coords="1069,460,1131,485"/>
-<area shape="rect" title=" " alt="" coords="792,460,859,485"/>
-<area shape="rect" href="HttpLineReader_8h.html" title=" " alt="" coords="214,533,349,559"/>
-<area shape="rect" title=" " alt="" coords="641,753,701,779"/>
-<area shape="rect" title=" " alt="" coords="725,753,800,779"/>
-<area shape="rect" href="HttpChunkReader_8h.html" title=" " alt="" coords="43,387,191,412"/>
-<area shape="rect" title=" " alt="" coords="369,387,455,412"/>
-<area shape="rect" title=" " alt="" coords="479,387,579,412"/>
-<area shape="rect" title=" " alt="" coords="1703,607,1774,632"/>
-<area shape="rect" title=" " alt="" coords="1798,607,1879,632"/>
+<area shape="rect" title=" " alt="" coords="484,5,695,45"/>
+<area shape="rect" href="Logger_8h.html" title=" " alt="" coords="1181,900,1296,925"/>
+<area shape="rect" href="NullPrint_8h.html" title=" " alt="" coords="445,167,573,192"/>
+<area shape="rect" href="Str_8h.html" title=" " alt="" coords="549,607,638,632"/>
+<area shape="rect" href="StrView_8h.html" title=" " alt="" coords="167,680,249,705"/>
+<area shape="rect" href="Vector_8h.html" title=" " alt="" coords="655,680,729,705"/>
+<area shape="rect" href="Url_8h.html" title=" " alt="" coords="1009,533,1100,559"/>
+<area shape="rect" href="StringRegistry_8h.html" title=" " alt="" coords="43,313,199,339"/>
+<area shape="rect" href="Http_8h.html" title=" " alt="" coords="761,93,853,119"/>
+<area shape="rect" href="HttpRequest_8h.html" title=" " alt="" coords="1456,313,1571,339"/>
+<area shape="rect" title=" " alt="" coords="1723,387,1810,412"/>
+<area shape="rect" title=" " alt="" coords="1149,973,1224,999"/>
+<area shape="rect" title=" " alt="" coords="817,973,884,999"/>
+<area shape="rect" title=" " alt="" coords="147,973,218,999"/>
+<area shape="rect" title=" " alt="" coords="1249,973,1333,999"/>
+<area shape="rect" title=" " alt="" coords="527,460,591,485"/>
+<area shape="rect" title=" " alt="" coords="246,753,343,779"/>
+<area shape="rect" title=" " alt="" coords="419,753,493,779"/>
+<area shape="rect" href="dlna__config_8h.html" title=" " alt="" coords="791,827,899,852"/>
+<area shape="rect" href="Allocator_8h.html" title=" " alt="" coords="663,753,753,779"/>
+<area shape="rect" title=" " alt="" coords="513,827,583,852"/>
+<area shape="rect" href="AllocationTracker_8h.html" title=" " alt="" coords="254,827,437,852"/>
+<area shape="rect" title=" " alt="" coords="507,900,573,925"/>
+<area shape="rect" title=" " alt="" coords="245,900,325,925"/>
+<area shape="rect" title=" " alt="" coords="349,900,400,925"/>
+<area shape="rect" title=" " alt="" coords="424,900,483,925"/>
+<area shape="rect" href="HttpServer_8h.html" title=" " alt="" coords="863,167,1012,192"/>
+<area shape="rect" href="HttpParameters_8h.html" title=" " alt="" coords="195,533,378,559"/>
+<area shape="rect" title=" " alt="" coords="1289,387,1351,412"/>
+<area shape="rect" title=" " alt="" coords="716,460,788,485"/>
+<area shape="rect" title=" " alt="" coords="870,240,1005,265"/>
+<area shape="rect" href="HttpChunkWriter_8h.html" title=" " alt="" coords="878,387,1021,412"/>
+<area shape="rect" href="HttpHeader_8h.html" title=" " alt="" coords="1429,460,1537,485"/>
+<area shape="rect" href="List_8h.html" title=" " alt="" coords="989,680,1083,705"/>
+<area shape="rect" href="HttpRequestHandlerLine_8h.html" title=" " alt="" coords="1185,313,1378,339"/>
+<area shape="rect" href="HttpRequestRewrite_8h.html" title=" " alt="" coords="477,313,643,339"/>
+<area shape="rect" href="HttpTunnel_8h.html" title=" " alt="" coords="1181,240,1285,265"/>
+<area shape="rect" title=" " alt="" coords="1309,240,1384,265"/>
+<area shape="rect" href="IPAddressAndPort_8h.html" title=" " alt="" coords="292,680,479,705"/>
+<area shape="rect" title=" " alt="" coords="914,460,985,485"/>
+<area shape="rect" title=" " alt="" coords="1009,460,1076,485"/>
+<area shape="rect" title=" " alt="" coords="1100,460,1161,485"/>
+<area shape="rect" title=" " alt="" coords="1185,460,1252,485"/>
+<area shape="rect" href="HttpLineReader_8h.html" title=" " alt="" coords="1415,533,1550,559"/>
+<area shape="rect" title=" " alt="" coords="914,753,974,779"/>
+<area shape="rect" title=" " alt="" coords="999,753,1073,779"/>
+<area shape="rect" href="HttpChunkReader_8h.html" title=" " alt="" coords="1551,387,1699,412"/>
+<area shape="rect" title=" " alt="" coords="1427,387,1527,412"/>
+<area shape="rect" title=" " alt="" coords="297,607,367,632"/>
+<area shape="rect" title=" " alt="" coords="391,607,473,632"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -171,8 +172,10 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a single event subscription for a service.  <a href="structtiny__dlna_1_1Subscription.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1PendingNotification.html">tiny_dlna::PendingNotification</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Representation of a queued notification to be delivered later.  <a href="structtiny__dlna_1_1PendingNotification.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgrDevice.html">tiny_dlna::SubscriptionMgrDevice</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Manages UPnP event subscriptions and queued notifications for a DLNA device.  <a href="classtiny__dlna_1_1SubscriptionMgrDevice.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>

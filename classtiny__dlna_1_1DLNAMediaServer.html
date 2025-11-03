@@ -292,8 +292,8 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:ab07e10323ab72a96aa7d79bf10c43258"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaServer.html#ab07e10323ab72a96aa7d79bf10c43258">addChange</a> (const char *serviceAbbrev, const char *changeTag)</td></tr>
-<tr class="separator:ab07e10323ab72a96aa7d79bf10c43258"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77a8aa910996ccbda96fa02e96059622"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaServer.html#a77a8aa910996ccbda96fa02e96059622">addChange</a> (const char *serviceAbbrev, std::function&lt; size_t(Print &amp;, void *)&gt; changeWriter)</td></tr>
+<tr class="separator:a77a8aa910996ccbda96fa02e96059622"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af0118625f49433bbec52c208abceb1ca"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaServer.html#af0118625f49433bbec52c208abceb1ca">publishAVT</a> ()</td></tr>
 <tr class="memdesc:af0118625f49433bbec52c208abceb1ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Publish a ContentDirectory event (SystemUpdateID)  <br /></td></tr>
 <tr class="separator:af0118625f49433bbec52c208abceb1ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -731,8 +731,8 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ab07e10323ab72a96aa7d79bf10c43258" name="ab07e10323ab72a96aa7d79bf10c43258"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab07e10323ab72a96aa7d79bf10c43258">&#9670;&#160;</a></span>addChange()</h2>
+<a id="a77a8aa910996ccbda96fa02e96059622" name="a77a8aa910996ccbda96fa02e96059622"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a77a8aa910996ccbda96fa02e96059622">&#9670;&#160;</a></span>addChange()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -749,8 +749,8 @@ Static Protected Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>changeTag</em>&#160;</td>
+          <td class="paramtype">std::function&lt; size_t(Print &amp;, void *)&gt;&#160;</td>
+          <td class="paramname"><em>changeWriter</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -764,7 +764,7 @@ Static Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>serviceAbbrev: e.g. "AVT" or or subscription namespace abbrev defined for the service </p>
+<p>serviceAbbrev: e.g. "AVT" or subscription namespace abbrev defined for the service </p>
 
 </div>
 </div>

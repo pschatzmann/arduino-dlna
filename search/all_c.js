@@ -10,13 +10,14 @@ var searchData=
   ['node_7',['Node',['../structtiny__dlna_1_1List_1_1Node.html',1,'tiny_dlna::List&lt; T &gt;::Node'],['../structtiny__dlna_1_1QueueLockFree_1_1Node.html',1,'tiny_dlna::QueueLockFree&lt; T &gt;::Node']]],
   ['node_5fname_8',['node_name',['../classtiny__dlna_1_1XMLParser.html#a43ebbd2f48238f3edbf923a18c1f6952',1,'tiny_dlna::XMLParser']]],
   ['notificationcallback_9',['NotificationCallback',['../classtiny__dlna_1_1DLNAControlPointMediaRenderer.html#a3120f67002c464497e2134d7da2869f0',1,'tiny_dlna::DLNAControlPointMediaRenderer::NotificationCallback()'],['../classtiny__dlna_1_1DLNAControlPointMediaServer.html#a5748d533f468c2e1f233421f437b3876',1,'tiny_dlna::DLNAControlPointMediaServer::NotificationCallback()']]],
-  ['notifyhandler_10',['notifyHandler',['../classtiny__dlna_1_1SubscriptionMgrControlPoint.html#a7d0546fdc1e5234f5a51b3c7c42076ac',1,'tiny_dlna::SubscriptionMgrControlPoint']]],
-  ['notifyreplycp_11',['NotifyReplyCP',['../classtiny__dlna_1_1NotifyReplyCP.html',1,'tiny_dlna']]],
-  ['ns_12',['ns',['../classtiny__dlna_1_1DLNADeviceInfo.html#a852f7a7baf10ff4d8e2d1953a5783901',1,'tiny_dlna::DLNADeviceInfo']]],
-  ['nts_13',['nts',['../classtiny__dlna_1_1NotifyReplyCP.html#af6d4a28af16fe48612e2f8f2de246cbd',1,'tiny_dlna::NotifyReplyCP']]],
-  ['nullprint_14',['NullPrint',['../classtiny__dlna_1_1NullPrint.html',1,'tiny_dlna']]],
-  ['nullprint_2eh_15',['NullPrint.h',['../NullPrint_8h.html',1,'']]],
-  ['nullstr_16',['nullStr',['../classtiny__dlna_1_1StringRegistry.html#a52ab87efebb43e982ca887094f12b7a5',1,'tiny_dlna::StringRegistry::nullStr(const char *str, const char *alt=&quot;&quot;)'],['../classtiny__dlna_1_1StringRegistry.html#a8ff4828db4c8e6a6d67e7e504dfe0ef7',1,'tiny_dlna::StringRegistry::nullStr(Str &amp;str, const char *empty=&quot;(null)&quot;)']]],
-  ['nullstr_17',['nullstr',['../classtiny__dlna_1_1HttpServer.html#a591ab7508102cf1a7a1cebb9755e3ba6',1,'tiny_dlna::HttpServer']]],
-  ['numberofdecimals_18',['numberOfDecimals',['../classtiny__dlna_1_1StrView.html#a5c0c4b151d66444d0c8296e648400cb9',1,'tiny_dlna::StrView']]]
+  ['notify_10',['notify',['../classtiny__dlna_1_1HttpRequest.html#a6779038e9908dfa109063bb394b2976b',1,'tiny_dlna::HttpRequest']]],
+  ['notifyhandler_11',['notifyHandler',['../classtiny__dlna_1_1SubscriptionMgrControlPoint.html#a7d0546fdc1e5234f5a51b3c7c42076ac',1,'tiny_dlna::SubscriptionMgrControlPoint']]],
+  ['notifyreplycp_12',['NotifyReplyCP',['../classtiny__dlna_1_1NotifyReplyCP.html',1,'tiny_dlna']]],
+  ['ns_13',['ns',['../classtiny__dlna_1_1DLNADeviceInfo.html#a852f7a7baf10ff4d8e2d1953a5783901',1,'tiny_dlna::DLNADeviceInfo']]],
+  ['nts_14',['nts',['../classtiny__dlna_1_1NotifyReplyCP.html#af6d4a28af16fe48612e2f8f2de246cbd',1,'tiny_dlna::NotifyReplyCP']]],
+  ['nullprint_15',['NullPrint',['../classtiny__dlna_1_1NullPrint.html',1,'tiny_dlna']]],
+  ['nullprint_2eh_16',['NullPrint.h',['../NullPrint_8h.html',1,'']]],
+  ['nullstr_17',['nullStr',['../classtiny__dlna_1_1StringRegistry.html#a52ab87efebb43e982ca887094f12b7a5',1,'tiny_dlna::StringRegistry::nullStr(const char *str, const char *alt=&quot;&quot;)'],['../classtiny__dlna_1_1StringRegistry.html#a8ff4828db4c8e6a6d67e7e504dfe0ef7',1,'tiny_dlna::StringRegistry::nullStr(Str &amp;str, const char *empty=&quot;(null)&quot;)']]],
+  ['nullstr_18',['nullstr',['../classtiny__dlna_1_1HttpServer.html#a591ab7508102cf1a7a1cebb9755e3ba6',1,'tiny_dlna::HttpServer']]],
+  ['numberofdecimals_19',['numberOfDecimals',['../classtiny__dlna_1_1StrView.html#a5c0c4b151d66444d0c8296e648400cb9',1,'tiny_dlna::StrView']]]
 ];
