@@ -139,17 +139,17 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a47e79b8a12e0d195134f2f1483429400"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register application event handler.  <br /></td></tr>
 <tr class="separator:a47e79b8a12e0d195134f2f1483429400"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad3775e88c4f2bf8ca40d1cb345c4817e"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#ad3775e88c4f2bf8ca40d1cb345c4817e">getVolume</a> ()</td></tr>
-<tr class="memdesc:ad3775e88c4f2bf8ca40d1cb345c4817e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get current volume (0-255)  <br /></td></tr>
+<tr class="memdesc:ad3775e88c4f2bf8ca40d1cb345c4817e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get current volume (0-100)  <br /></td></tr>
 <tr class="separator:ad3775e88c4f2bf8ca40d1cb345c4817e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad8c61351f07f7c2f1b2641d6baa79b46"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#ad8c61351f07f7c2f1b2641d6baa79b46">setVolume</a> (uint8_t vol)</td></tr>
-<tr class="memdesc:ad8c61351f07f7c2f1b2641d6baa79b46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set volume and publish event.  <br /></td></tr>
+<tr class="memdesc:ad8c61351f07f7c2f1b2641d6baa79b46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set volume and publish event (0-100)  <br /></td></tr>
 <tr class="separator:ad8c61351f07f7c2f1b2641d6baa79b46"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad4553ec6040430a68236d6a5ad6ca579"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#ad4553ec6040430a68236d6a5ad6ca579">isMuted</a> ()</td></tr>
 <tr class="memdesc:ad4553ec6040430a68236d6a5ad6ca579"><td class="mdescLeft">&#160;</td><td class="mdescRight">Query mute state.  <br /></td></tr>
 <tr class="separator:ad4553ec6040430a68236d6a5ad6ca579"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af001b1e10c9213c5bea3a7602a2aee83"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#af001b1e10c9213c5bea3a7602a2aee83">setMuted</a> (bool m)</td></tr>
-<tr class="memdesc:af001b1e10c9213c5bea3a7602a2aee83"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set mute state and publish event.  <br /></td></tr>
-<tr class="separator:af001b1e10c9213c5bea3a7602a2aee83"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca251449fd69b726525339b710c9d4a0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#aca251449fd69b726525339b710c9d4a0">setMuted</a> (bool mute)</td></tr>
+<tr class="memdesc:aca251449fd69b726525339b710c9d4a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set mute state and publish event.  <br /></td></tr>
+<tr class="separator:aca251449fd69b726525339b710c9d4a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a26c472b57813f218ec15dcbd515fae81"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a26c472b57813f218ec15dcbd515fae81">getCurrentUri</a> ()</td></tr>
 <tr class="separator:a26c472b57813f218ec15dcbd515fae81"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2a87c51f009dd9a9112414ff576d69f5"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a2a87c51f009dd9a9112414ff576d69f5">getTransportState</a> ()</td></tr>
@@ -191,6 +191,21 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a9c78367f7d9e209086082f3f62170eb8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a9c78367f7d9e209086082f3f62170eb8">setCustomActionRule</a> (const char *suffix, bool(*handler)(<a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html">DLNAMediaRenderer</a> *, <a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;, <a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;))</td></tr>
 <tr class="memdesc:a9c78367f7d9e209086082f3f62170eb8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines a custom action rule for the media renderer.  <br /></td></tr>
 <tr class="separator:a9c78367f7d9e209086082f3f62170eb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c420a5d2c1c611b3f7f6ecef883baf6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a1c420a5d2c1c611b3f7f6ecef883baf6">setConnectionID</a> (const char *id)</td></tr>
+<tr class="memdesc:a1c420a5d2c1c611b3f7f6ecef883baf6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the active ConnectionID for the connection manager.  <br /></td></tr>
+<tr class="separator:a1c420a5d2c1c611b3f7f6ecef883baf6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aecc3519dd1ff65f665828d2d23781311"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#aecc3519dd1ff65f665828d2d23781311">getConnectionID</a> ()</td></tr>
+<tr class="memdesc:aecc3519dd1ff65f665828d2d23781311"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the currently configured ConnectionID.  <br /></td></tr>
+<tr class="separator:aecc3519dd1ff65f665828d2d23781311"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9d9be7937d17b85b5d91b84cdfa3990"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#ad9d9be7937d17b85b5d91b84cdfa3990">setProtocols</a> (const char *source, const char *sink=&quot;&quot;)</td></tr>
+<tr class="memdesc:ad9d9be7937d17b85b5d91b84cdfa3990"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define the source protocol info: use csv Default is http-get:*:image/jpeg:DLNA.ORG_PN=JPEG_TN,http-get:*:image/jpeg:DLNA.ORG_PN=JPEG_SM,http-get:*:image/jpeg:DLNA.ORG_PN=JPEG_MED,http-get:*:image/jpeg:DLNA.ORG_PN=JPEG_LRG,http-get:*:video/mpeg:DLNA.ORG_PN=AVC_TS_HD_50_AC3_ISO,http-get:*:video/mpeg:DLNA.ORG_PN=AVC_TS_HD_60_AC3_ISO,http-get:*:video/mpeg:DLNA.ORG_PN=AVC_TS_HP_HD_AC3_ISO,http-get:*:video/mpeg:DLNA.ORG_PN=AVC_TS_MP_HD_AAC_MULT5_ISO,http-get:*:video/mpeg:DLNA.ORG_PN=AVC_TS_MP_HD_AC3_ISO,http-get:*:video/mpeg:DLNA.ORG_PN=AVC_TS_MP_HD_MPEG1_L3_ISO,http-get:*:video/mpeg:DLNA.ORG_PN=AVC_TS_MP_SD_AAC_MULT5_ISO,http-get:*:video/mpeg:DLNA.ORG_PN=AVC_TS_MP_SD_AC3_ISO,http-get:*:video/mpeg:DLNA.ORG_PN=AVC_TS_MP_SD_MPEG1_L3_ISO,http-get:*:video/mpeg:DLNA.ORG_PN=MPEG_PS_NTSC,http-get:*:video/mpeg:DLNA.ORG_PN=MPEG_PS_PAL,http-get:*:video/mpeg:DLNA.ORG_PN=MPEG_TS_HD_NA_ISO,http-get:*:video/mpeg:DLNA.ORG_PN=MPEG_TS_SD_NA_ISO,http-get:*:video/mpeg:DLNA.ORG_PN=MPEG_TS_SD_EU_ISO,http-get:*:video/mpeg:DLNA.ORG_PN=MPEG1,http-get:*:video/mp4:DLNA.ORG_PN=AVC_MP4_MP_SD_AAC_MULT5,http-get:*:video/mp4:DLNA.ORG_PN=AVC_MP4_MP_SD_AC3,http-get:*:video/mp4:DLNA.ORG_PN=AVC_MP4_BL_CIF15_AAC_520,http-get:*:video/mp4:DLNA.ORG_PN=AVC_MP4_BL_CIF30_AAC_940,http-get:*:video/mp4:DLNA.ORG_PN=AVC_MP4_BL_L31_HD_AAC,http-get:*:video/mp4:DLNA.ORG_PN=AVC_MP4_BL_L32_HD_AAC,http-get:*:video/mp4:DLNA.ORG_PN=AVC_MP4_BL_L3L_SD_AAC,http-get:*:video/mp4:DLNA.ORG_PN=AVC_MP4_HP_HD_AAC,http-get:*:video/mp4:DLNA.ORG_PN=AVC_MP4_MP_HD_1080i_AAC,http-get:*:video/mp4:DLNA.ORG_PN=AVC_MP4_MP_HD_720p_AAC,http-get:*:video/mp4:DLNA.ORG_PN=MPEG4_P2_MP4_ASP_AAC,http-get:*:video/mp4:DLNA.ORG_PN=MPEG4_P2_MP4_SP_VGA_AAC,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_HD_50_AC3,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_HD_50_AC3_T,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_HD_60_AC3,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_HD_60_AC3_T,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_HP_HD_AC3_T,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_MP_HD_AAC_MULT5,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_MP_HD_AAC_MULT5_T,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_MP_HD_AC3,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_MP_HD_AC3_T,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_MP_HD_MPEG1_L3,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_MP_HD_MPEG1_L3_T,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_MP_SD_AAC_MULT5,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_MP_SD_AAC_MULT5_T,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_MP_SD_AC3,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_MP_SD_AC3_T,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_MP_SD_MPEG1_L3,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_MP_SD_MPEG1_L3_T,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=MPEG_TS_HD_NA,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=MPEG_TS_HD_NA_T,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=MPEG_TS_SD_EU,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=MPEG_TS_SD_EU_T,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=MPEG_TS_SD_NA,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=MPEG_TS_SD_NA_T,http-get:*:video/x-ms-wmv:DLNA.ORG_PN=WMVSPLL_BASE,http-get:*:video/x-ms-wmv:DLNA.ORG_PN=WMVSPML_BASE,http-get:*:video/x-ms-wmv:DLNA.ORG_PN=WMVSPML_MP3,http-get:*:video/x-ms-wmv:DLNA.ORG_PN=WMVMED_BASE,http-get:*:video/x-ms-wmv:DLNA.ORG_PN=WMVMED_FULL,http-get:*:video/x-ms-wmv:DLNA.ORG_PN=WMVMED_PRO,http-get:*:video/x-ms-wmv:DLNA.ORG_PN=WMVHIGH_FULL,http-get:*:video/x-ms-wmv:DLNA.ORG_PN=WMVHIGH_PRO,http-get:*:video/3gpp:DLNA.ORG_PN=MPEG4_P2_3GPP_SP_L0B_AAC,http-get:*:video/3gpp:DLNA.ORG_PN=MPEG4_P2_3GPP_SP_L0B_AMR,http-get:*:audio/mpeg:DLNA.ORG_PN=MP3,http-get:*:audio/x-ms-wma:DLNA.ORG_PN=WMABASE,http-get:*:audio/x-ms-wma:DLNA.ORG_PN=WMAFULL,http-get:*:audio/x-ms-wma:DLNA.ORG_PN=WMAPRO,http-get:*:audio/x-ms-wma:DLNA.ORG_PN=WMALSL,http-get:*:audio/x-ms-wma:DLNA.ORG_PN=WMALSL_MULT5,http-get:*:audio/mp4:DLNA.ORG_PN=AAC_ISO_320,http-get:*:audio/3gpp:DLNA.ORG_PN=AAC_ISO_320,http-get:*:audio/mp4:DLNA.ORG_PN=AAC_ISO,http-get:*:audio/mp4:DLNA.ORG_PN=AAC_MULT5_ISO,http-get:*:audio/L16;rate=44100;channels=2:DLNA.ORG_PN=LPCM,http-get:*:image/jpeg:*,http-get:*:video/avi:*,http-get:*:video/divx:*,http-get:*:video/x-matroska:*,http-get:*:video/mpeg:*,http-get:*:video/mp4:*,http-get:*:video/x-ms-wmv:*,http-get:*:video/x-msvideo:*,http-get:*:video/x-flv:*,http-get:*:video/x-tivo-mpeg:*,http-get:*:video/quicktime:*,http-get:*:audio/mp4:*,http-get:*:audio/x-wav:*,http-get:*:audio/x-flac:*,http-get:*:audio/x-dsd:*,http-get:*:application/ogg:<em>http-get:</em>:application/vnd.rn-realmedia:<em>http-get:</em>:application/vnd.rn-realmedia-vbr:<em>http-get:</em>:video/webm:*.  <br /></td></tr>
+<tr class="separator:ad9d9be7937d17b85b5d91b84cdfa3990"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26af241576bc98b04c52a440baae22e9"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a26af241576bc98b04c52a440baae22e9">getSourceProtocols</a> ()</td></tr>
+<tr class="memdesc:a26af241576bc98b04c52a440baae22e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current source <code>ProtocolInfo</code> string.  <br /></td></tr>
+<tr class="separator:a26af241576bc98b04c52a440baae22e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95575f4e458a80b252d1d77c0aa6d8bb"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a95575f4e458a80b252d1d77c0aa6d8bb">getSinkProtocols</a> ()</td></tr>
+<tr class="memdesc:a95575f4e458a80b252d1d77c0aa6d8bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current sink <code>ProtocolInfo</code> string.  <br /></td></tr>
+<tr class="separator:a95575f4e458a80b252d1d77c0aa6d8bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a367895351ae485ae432fb25d236d1559"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#a367895351ae485ae432fb25d236d1559">print</a> (Print &amp;out)</td></tr>
 <tr class="memdesc:a367895351ae485ae432fb25d236d1559"><td class="mdescLeft">&#160;</td><td class="mdescRight">renders the device xml  <br /></td></tr>
 <tr class="separator:a367895351ae485ae432fb25d236d1559"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -319,6 +334,30 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a767b4f9afe864f8b13779a6fcec04a4a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a767b4f9afe864f8b13779a6fcec04a4a">processAction</a> (<a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;action, <a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;server)</td></tr>
 <tr class="memdesc:a767b4f9afe864f8b13779a6fcec04a4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Process parsed SOAP <a class="el" href="classtiny__dlna_1_1ActionRequest.html" title="Represents a request to invoke a remote DLNA service action.">ActionRequest</a> and dispatch to appropriate handler.  <br /></td></tr>
 <tr class="separator:a767b4f9afe864f8b13779a6fcec04a4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9baac62f12cc4209b4f331fd989b0456"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a9baac62f12cc4209b4f331fd989b0456">processActionPlay</a> (<a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;action, <a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;server)</td></tr>
+<tr class="separator:a9baac62f12cc4209b4f331fd989b0456"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a649e7e21642f58a997d7373fb38b6abb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a649e7e21642f58a997d7373fb38b6abb">processActionPause</a> (<a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;action, <a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;server)</td></tr>
+<tr class="separator:a649e7e21642f58a997d7373fb38b6abb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf2db75735aefff9feefdf48c1d572e0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#adf2db75735aefff9feefdf48c1d572e0">processActionStop</a> (<a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;action, <a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;server)</td></tr>
+<tr class="separator:adf2db75735aefff9feefdf48c1d572e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a14ee063a805ecb7830ed037a78fd9e82"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a14ee063a805ecb7830ed037a78fd9e82">processActionGetCurrentTransportActions</a> (<a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;action, <a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;server)</td></tr>
+<tr class="separator:a14ee063a805ecb7830ed037a78fd9e82"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89d12032d43ff89652732fc358db85b7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a89d12032d43ff89652732fc358db85b7">processActionGetProtocolInfo</a> (<a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;action, <a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;server)</td></tr>
+<tr class="separator:a89d12032d43ff89652732fc358db85b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad2f0576af2db75b966f1bb08c5c436b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#aad2f0576af2db75b966f1bb08c5c436b">processActionGetCurrentConnectionIDs</a> (<a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;action, <a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;server)</td></tr>
+<tr class="separator:aad2f0576af2db75b966f1bb08c5c436b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a564a5793c6876f9ab64cd9bba459661b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a564a5793c6876f9ab64cd9bba459661b">processActionGetCurrentConnectionInfo</a> (<a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;action, <a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;server)</td></tr>
+<tr class="separator:a564a5793c6876f9ab64cd9bba459661b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a56ac4a29e23bd4e6bdaf35160e5d77"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a2a56ac4a29e23bd4e6bdaf35160e5d77">processActionSetAVTransportURI</a> (<a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;action, <a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;server)</td></tr>
+<tr class="separator:a2a56ac4a29e23bd4e6bdaf35160e5d77"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad667ecb3a3350c33881b3041de3d0682"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#ad667ecb3a3350c33881b3041de3d0682">processActionSetVolume</a> (<a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;action, <a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;server)</td></tr>
+<tr class="separator:ad667ecb3a3350c33881b3041de3d0682"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae041427a8f23f48a556e099c632b8cd3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#ae041427a8f23f48a556e099c632b8cd3">processActionSetMute</a> (<a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;action, <a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;server)</td></tr>
+<tr class="separator:ae041427a8f23f48a556e099c632b8cd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af196048566777ea053141cef5b8d4bef"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#af196048566777ea053141cef5b8d4bef">processActionGetMute</a> (<a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;action, <a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;server)</td></tr>
+<tr class="separator:af196048566777ea053141cef5b8d4bef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ad9325c7a9f21b6931c6415685863a4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a2ad9325c7a9f21b6931c6415685863a4">processActionGetVolume</a> (<a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;action, <a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;server)</td></tr>
+<tr class="separator:a2ad9325c7a9f21b6931c6415685863a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3e9d75c510fdad7afaa99000641874b8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a3e9d75c510fdad7afaa99000641874b8">setupRules</a> ()</td></tr>
 <tr class="memdesc:a3e9d75c510fdad7afaa99000641874b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup the action handling rules.  <br /></td></tr>
 <tr class="separator:a3e9d75c510fdad7afaa99000641874b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -350,12 +389,12 @@ Static Protected Member Functions</h2></td></tr>
 <tr class="separator:a3ad2171af85a2ae934c1bf0ee140f347"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9739086413c0e39a255d380d6de323bc"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a9739086413c0e39a255d380d6de323bc">controlCB</a> (<a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> *server, const char *requestPath, <a class="el" href="classtiny__dlna_1_1HttpRequestHandlerLine.html">HttpRequestHandlerLine</a> *hl)</td></tr>
 <tr class="separator:a9739086413c0e39a255d380d6de323bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f3ef81f691f6ac7b67d26c72ef22d54"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html">DLNAMediaRenderer</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a3f3ef81f691f6ac7b67d26c72ef22d54">getRenderer</a> (<a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> *server)</td></tr>
+<tr class="memdesc:a3f3ef81f691f6ac7b67d26c72ef22d54"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determine the Renderer with the help of the server.  <br /></td></tr>
+<tr class="separator:a3f3ef81f691f6ac7b67d26c72ef22d54"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a052f8f55c4d89f49aac3bc8fe5d07c1f"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a052f8f55c4d89f49aac3bc8fe5d07c1f">eventSubscriptionHandler</a> (<a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> *server, const char *requestPath, <a class="el" href="classtiny__dlna_1_1HttpRequestHandlerLine.html">HttpRequestHandlerLine</a> *hl)</td></tr>
 <tr class="memdesc:a052f8f55c4d89f49aac3bc8fe5d07c1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">After the subscription we publish all relevant properties.  <br /></td></tr>
 <tr class="separator:a052f8f55c4d89f49aac3bc8fe5d07c1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a690e4682440716d868e3e377c1e32c14"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a690e4682440716d868e3e377c1e32c14">printReplyXML</a> (Print &amp;out, const char *replyName, const char *serviceId, const char *values=nullptr)</td></tr>
-<tr class="memdesc:a690e4682440716d868e3e377c1e32c14"><td class="mdescLeft">&#160;</td><td class="mdescRight">Builds a standard SOAP reply envelope.  <br /></td></tr>
-<tr class="separator:a690e4682440716d868e3e377c1e32c14"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2b1301690cf34c9998f8a98cd4ceb140"><td class="memItemLeft" align="right" valign="top">static size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a2b1301690cf34c9998f8a98cd4ceb140">replyPlay</a> (Print &amp;out)</td></tr>
 <tr class="separator:a2b1301690cf34c9998f8a98cd4ceb140"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5f8c1b32aefd0ff9f1c47283cf0f8078"><td class="memItemLeft" align="right" valign="top">static size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a5f8c1b32aefd0ff9f1c47283cf0f8078">replyPause</a> (Print &amp;out)</td></tr>
@@ -369,8 +408,10 @@ Static Protected Member Functions</h2></td></tr>
 <tr class="memitem:ab67bcc7a257ae45280f2aac10bf55902"><td class="memItemLeft" align="right" valign="top">static size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#ab67bcc7a257ae45280f2aac10bf55902">replySetMute</a> (Print &amp;out)</td></tr>
 <tr class="separator:ab67bcc7a257ae45280f2aac10bf55902"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a54fdf182a623b9b3a2decb5782482b74"><td class="memItemLeft" align="right" valign="top">static size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a54fdf182a623b9b3a2decb5782482b74">replyGetMute</a> (Print &amp;out, bool <a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#ad4553ec6040430a68236d6a5ad6ca579">isMuted</a>)</td></tr>
+<tr class="memdesc:a54fdf182a623b9b3a2decb5782482b74"><td class="mdescLeft">&#160;</td><td class="mdescRight">Static reply helper for GetMute.  <br /></td></tr>
 <tr class="separator:a54fdf182a623b9b3a2decb5782482b74"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0aa2e788a0f452ed05af70b886c4888a"><td class="memItemLeft" align="right" valign="top">static size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a0aa2e788a0f452ed05af70b886c4888a">replyGetVolume</a> (Print &amp;out, uint8_t volume)</td></tr>
+<tr class="memdesc:a0aa2e788a0f452ed05af70b886c4888a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Static reply helper for GetVolume.  <br /></td></tr>
 <tr class="separator:a0aa2e788a0f452ed05af70b886c4888a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
@@ -383,8 +424,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a19962a36618c87bfe51f3efb759ec526"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abefe59fccd65b4cec5622b04c0908e98"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#abefe59fccd65b4cec5622b04c0908e98">current_volume</a> = 50</td></tr>
 <tr class="separator:abefe59fccd65b4cec5622b04c0908e98"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9156b6fc95e5f65798dccab90cde13d3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a9156b6fc95e5f65798dccab90cde13d3">is_muted</a> = false</td></tr>
-<tr class="separator:a9156b6fc95e5f65798dccab90cde13d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ecb79fb7571a683493063af2c5f6f3c"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a0ecb79fb7571a683493063af2c5f6f3c">muted_volume</a> = 0</td></tr>
+<tr class="separator:a0ecb79fb7571a683493063af2c5f6f3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aae2619a737ec9f2c7f58ccbb36cac91d"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#aae2619a737ec9f2c7f58ccbb36cac91d">start_time</a> = 0</td></tr>
 <tr class="separator:aae2619a737ec9f2c7f58ccbb36cac91d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9e8f78a1392cdb0c3bfe6265bea4f140"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a9e8f78a1392cdb0c3bfe6265bea4f140">time_sum</a> = 0</td></tr>
@@ -401,10 +442,14 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a7ab0476214991f4333a74cbeb3657733"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a10c783b8b3677877633b02c879ef188a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1IUDPService.html">IUDPService</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a10c783b8b3677877633b02c879ef188a">p_udp_member</a> = nullptr</td></tr>
 <tr class="separator:a10c783b8b3677877633b02c879ef188a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a718a83050f5e958f4fa2a75ae4d9806a"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a718a83050f5e958f4fa2a75ae4d9806a">ref_ctx</a> [1] = {nullptr}</td></tr>
-<tr class="separator:a718a83050f5e958f4fa2a75ae4d9806a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5a1ec1d65312698e5e215d8e202ee071"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt; <a class="el" href="structtiny__dlna_1_1ActionRule.html">ActionRule</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a5a1ec1d65312698e5e215d8e202ee071">rules</a></td></tr>
 <tr class="separator:a5a1ec1d65312698e5e215d8e202ee071"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78f8c01c1b5a728594f9a12a79ad73d7"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a78f8c01c1b5a728594f9a12a79ad73d7">connectionID</a> = &quot;0&quot;</td></tr>
+<tr class="separator:a78f8c01c1b5a728594f9a12a79ad73d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab97a577ad06f4eb4c5b7d1efcb7ed51c"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#ab97a577ad06f4eb4c5b7d1efcb7ed51c">sourceProto</a> = &quot;&quot;</td></tr>
+<tr class="separator:ab97a577ad06f4eb4c5b7d1efcb7ed51c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada806b1b56da3636b57fcea4f3c29e08"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#ada806b1b56da3636b57fcea4f3c29e08">sinkProto</a> = <a class="el" href="dlna__config_8h.html#a27763beedb4243c957f40475655c40f3">DLNA_PROTOCOL_AUDIO</a></td></tr>
+<tr class="separator:ada806b1b56da3636b57fcea4f3c29e08"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aecd5675fb5e240669f8bd04177f12582"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#aecd5675fb5e240669f8bd04177f12582">is_active</a> = true</td></tr>
 <tr class="separator:aecd5675fb5e240669f8bd04177f12582"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa7460468c12c3e6a2300a5c6cc725492"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structtiny__dlna_1_1XMLPrinter.html">XMLPrinter</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#aa7460468c12c3e6a2300a5c6cc725492">xml</a></td></tr>
@@ -457,7 +502,7 @@ Protected Attributes</h2></td></tr>
 <p>MediaRenderer implements a simple UPnP/DLNA Media Renderer device. It receives stream URIs via UPnP AVTransport actions and delegates actual playback and rendering to the application through an event callback API. This removes any dependency on an internal audio stack: applications handle playback themselves by registering a handler with <a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a47e79b8a12e0d195134f2f1483429400" title="Register application event handler.">setMediaEventHandler()</a>. The device still supports rendering controls (volume, mute) and transport controls (play/pause/stop) and provides helper accessors like <a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a26c472b57813f218ec15dcbd515fae81">getCurrentUri()</a> and <a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a503ee4a2f2a5768c42292fcd8cd5deae" title="Provides the mime from the DIDL or nullptr.">getMime()</a>.</p>
 <p>Usage summary:</p><ul>
 <li>Register an event handler with <a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a47e79b8a12e0d195134f2f1483429400" title="Register application event handler.">setMediaEventHandler()</a> to receive MediaEvent notifications (SET_URI, PLAY, PAUSE, STOP, SET_VOLUME, SET_MUTE).</li>
-<li>In the handler query the renderer (<a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a26c472b57813f218ec15dcbd515fae81">getCurrentUri()</a>, <a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#ad3775e88c4f2bf8ca40d1cb345c4817e" title="Get current volume (0-255)">getVolume()</a>, <a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#ad4553ec6040430a68236d6a5ad6ca579" title="Query mute state.">isMuted()</a>, <a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a503ee4a2f2a5768c42292fcd8cd5deae" title="Provides the mime from the DIDL or nullptr.">getMime()</a>) and implement platform-specific playback.</li>
+<li>In the handler query the renderer (<a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a26c472b57813f218ec15dcbd515fae81">getCurrentUri()</a>, <a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#ad3775e88c4f2bf8ca40d1cb345c4817e" title="Get current volume (0-100)">getVolume()</a>, <a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#ad4553ec6040430a68236d6a5ad6ca579" title="Query mute state.">isMuted()</a>, <a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a503ee4a2f2a5768c42292fcd8cd5deae" title="Provides the mime from the DIDL or nullptr.">getMime()</a>) and implement platform-specific playback.</li>
 <li>Use play(url) to programmatically start playback; the handler will also be notified of SET_URI and PLAY when the device receives a SetAVTransportURI SOAP action.</li>
 </ul>
 <p>This class is intentionally small and Arduino-friendly: methods return bool for success/failure and avoid heavy dynamic memory allocations in the hot path.</p>
@@ -973,6 +1018,33 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="aecc3519dd1ff65f665828d2d23781311" name="aecc3519dd1ff65f665828d2d23781311"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aecc3519dd1ff65f665828d2d23781311">&#9670;&#160;</a></span>getConnectionID()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char * tiny_dlna::DLNAMediaRenderer::getConnectionID </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return the currently configured ConnectionID. </p>
+
+</div>
+</div>
 <a id="a722682e4a14befbdf49df53728974af6" name="a722682e4a14befbdf49df53728974af6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a722682e4a14befbdf49df53728974af6">&#9670;&#160;</a></span>getCurrentTransportActions()</h2>
 
@@ -1388,6 +1460,34 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a3f3ef81f691f6ac7b67d26c72ef22d54" name="a3f3ef81f691f6ac7b67d26c72ef22d54"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f3ef81f691f6ac7b67d26c72ef22d54">&#9670;&#160;</a></span>getRenderer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html">DLNAMediaRenderer</a> * tiny_dlna::DLNAMediaRenderer::getRenderer </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> *&#160;</td>
+          <td class="paramname"><em>server</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Determine the Renderer with the help of the server. </p>
+
+</div>
+</div>
 <a id="ad022e09cf0783fd00f40984cec5fe428" name="ad022e09cf0783fd00f40984cec5fe428"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad022e09cf0783fd00f40984cec5fe428">&#9670;&#160;</a></span>getSerialNumber()</h2>
 
@@ -1496,6 +1596,60 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a95575f4e458a80b252d1d77c0aa6d8bb" name="a95575f4e458a80b252d1d77c0aa6d8bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a95575f4e458a80b252d1d77c0aa6d8bb">&#9670;&#160;</a></span>getSinkProtocols()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char * tiny_dlna::DLNAMediaRenderer::getSinkProtocols </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the current sink <code>ProtocolInfo</code> string. </p>
+
+</div>
+</div>
+<a id="a26af241576bc98b04c52a440baae22e9" name="a26af241576bc98b04c52a440baae22e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26af241576bc98b04c52a440baae22e9">&#9670;&#160;</a></span>getSourceProtocols()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char * tiny_dlna::DLNAMediaRenderer::getSourceProtocols </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the current source <code>ProtocolInfo</code> string. </p>
+
+</div>
+</div>
 <a id="a2a87c51f009dd9a9112414ff576d69f5" name="a2a87c51f009dd9a9112414ff576d69f5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2a87c51f009dd9a9112414ff576d69f5">&#9670;&#160;</a></span>getTransportState()</h2>
 
@@ -1598,7 +1752,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Get current volume (0-255) </p>
+<p>Get current volume (0-100) </p>
 
 </div>
 </div>
@@ -1898,56 +2052,6 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a690e4682440716d868e3e377c1e32c14" name="a690e4682440716d868e3e377c1e32c14"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a690e4682440716d868e3e377c1e32c14">&#9670;&#160;</a></span>printReplyXML()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static int tiny_dlna::DLNAMediaRenderer::printReplyXML </td>
-          <td>(</td>
-          <td class="paramtype">Print &amp;&#160;</td>
-          <td class="paramname"><em>out</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>replyName</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>serviceId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>values</em> = <code>nullptr</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Builds a standard SOAP reply envelope. </p>
-
-</div>
-</div>
 <a id="a3e7fe6432cf2513d18931c938c0653d2" name="a3e7fe6432cf2513d18931c938c0653d2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3e7fe6432cf2513d18931c938c0653d2">&#9670;&#160;</a></span>printRoot()</h2>
 
@@ -2095,6 +2199,438 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="aad2f0576af2db75b966f1bb08c5c436b" name="aad2f0576af2db75b966f1bb08c5c436b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad2f0576af2db75b966f1bb08c5c436b">&#9670;&#160;</a></span>processActionGetCurrentConnectionIDs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool tiny_dlna::DLNAMediaRenderer::processActionGetCurrentConnectionIDs </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;&#160;</td>
+          <td class="paramname"><em>action</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;&#160;</td>
+          <td class="paramname"><em>server</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a564a5793c6876f9ab64cd9bba459661b" name="a564a5793c6876f9ab64cd9bba459661b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a564a5793c6876f9ab64cd9bba459661b">&#9670;&#160;</a></span>processActionGetCurrentConnectionInfo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool tiny_dlna::DLNAMediaRenderer::processActionGetCurrentConnectionInfo </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;&#160;</td>
+          <td class="paramname"><em>action</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;&#160;</td>
+          <td class="paramname"><em>server</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a14ee063a805ecb7830ed037a78fd9e82" name="a14ee063a805ecb7830ed037a78fd9e82"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a14ee063a805ecb7830ed037a78fd9e82">&#9670;&#160;</a></span>processActionGetCurrentTransportActions()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool tiny_dlna::DLNAMediaRenderer::processActionGetCurrentTransportActions </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;&#160;</td>
+          <td class="paramname"><em>action</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;&#160;</td>
+          <td class="paramname"><em>server</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af196048566777ea053141cef5b8d4bef" name="af196048566777ea053141cef5b8d4bef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af196048566777ea053141cef5b8d4bef">&#9670;&#160;</a></span>processActionGetMute()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool tiny_dlna::DLNAMediaRenderer::processActionGetMute </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;&#160;</td>
+          <td class="paramname"><em>action</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;&#160;</td>
+          <td class="paramname"><em>server</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a89d12032d43ff89652732fc358db85b7" name="a89d12032d43ff89652732fc358db85b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89d12032d43ff89652732fc358db85b7">&#9670;&#160;</a></span>processActionGetProtocolInfo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool tiny_dlna::DLNAMediaRenderer::processActionGetProtocolInfo </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;&#160;</td>
+          <td class="paramname"><em>action</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;&#160;</td>
+          <td class="paramname"><em>server</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2ad9325c7a9f21b6931c6415685863a4" name="a2ad9325c7a9f21b6931c6415685863a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ad9325c7a9f21b6931c6415685863a4">&#9670;&#160;</a></span>processActionGetVolume()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool tiny_dlna::DLNAMediaRenderer::processActionGetVolume </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;&#160;</td>
+          <td class="paramname"><em>action</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;&#160;</td>
+          <td class="paramname"><em>server</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a649e7e21642f58a997d7373fb38b6abb" name="a649e7e21642f58a997d7373fb38b6abb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a649e7e21642f58a997d7373fb38b6abb">&#9670;&#160;</a></span>processActionPause()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool tiny_dlna::DLNAMediaRenderer::processActionPause </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;&#160;</td>
+          <td class="paramname"><em>action</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;&#160;</td>
+          <td class="paramname"><em>server</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9baac62f12cc4209b4f331fd989b0456" name="a9baac62f12cc4209b4f331fd989b0456"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9baac62f12cc4209b4f331fd989b0456">&#9670;&#160;</a></span>processActionPlay()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool tiny_dlna::DLNAMediaRenderer::processActionPlay </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;&#160;</td>
+          <td class="paramname"><em>action</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;&#160;</td>
+          <td class="paramname"><em>server</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2a56ac4a29e23bd4e6bdaf35160e5d77" name="a2a56ac4a29e23bd4e6bdaf35160e5d77"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a56ac4a29e23bd4e6bdaf35160e5d77">&#9670;&#160;</a></span>processActionSetAVTransportURI()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool tiny_dlna::DLNAMediaRenderer::processActionSetAVTransportURI </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;&#160;</td>
+          <td class="paramname"><em>action</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;&#160;</td>
+          <td class="paramname"><em>server</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae041427a8f23f48a556e099c632b8cd3" name="ae041427a8f23f48a556e099c632b8cd3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae041427a8f23f48a556e099c632b8cd3">&#9670;&#160;</a></span>processActionSetMute()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool tiny_dlna::DLNAMediaRenderer::processActionSetMute </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;&#160;</td>
+          <td class="paramname"><em>action</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;&#160;</td>
+          <td class="paramname"><em>server</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad667ecb3a3350c33881b3041de3d0682" name="ad667ecb3a3350c33881b3041de3d0682"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad667ecb3a3350c33881b3041de3d0682">&#9670;&#160;</a></span>processActionSetVolume()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool tiny_dlna::DLNAMediaRenderer::processActionSetVolume </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;&#160;</td>
+          <td class="paramname"><em>action</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;&#160;</td>
+          <td class="paramname"><em>server</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adf2db75735aefff9feefdf48c1d572e0" name="adf2db75735aefff9feefdf48c1d572e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf2db75735aefff9feefdf48c1d572e0">&#9670;&#160;</a></span>processActionStop()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool tiny_dlna::DLNAMediaRenderer::processActionStop </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;&#160;</td>
+          <td class="paramname"><em>action</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;&#160;</td>
+          <td class="paramname"><em>server</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="afcd3dd33e3e00b7c888c72f7a243edc1" name="afcd3dd33e3e00b7c888c72f7a243edc1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afcd3dd33e3e00b7c888c72f7a243edc1">&#9670;&#160;</a></span>publishAVT()</h2>
 
@@ -2236,6 +2772,8 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Static reply helper for GetMute. </p>
+
 </div>
 </div>
 <a id="a0aa2e788a0f452ed05af70b886c4888a" name="a0aa2e788a0f452ed05af70b886c4888a"></a>
@@ -2271,6 +2809,8 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Static reply helper for GetVolume. </p>
 
 </div>
 </div>
@@ -2527,6 +3067,34 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Defines the base URL. </p>
+
+</div>
+</div>
+<a id="a1c420a5d2c1c611b3f7f6ecef883baf6" name="a1c420a5d2c1c611b3f7f6ecef883baf6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c420a5d2c1c611b3f7f6ecef883baf6">&#9670;&#160;</a></span>setConnectionID()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tiny_dlna::DLNAMediaRenderer::setConnectionID </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set the active ConnectionID for the connection manager. </p>
 
 </div>
 </div>
@@ -2889,8 +3457,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="af001b1e10c9213c5bea3a7602a2aee83" name="af001b1e10c9213c5bea3a7602a2aee83"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af001b1e10c9213c5bea3a7602a2aee83">&#9670;&#160;</a></span>setMuted()</h2>
+<a id="aca251449fd69b726525339b710c9d4a0" name="aca251449fd69b726525339b710c9d4a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca251449fd69b726525339b710c9d4a0">&#9670;&#160;</a></span>setMuted()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2902,7 +3470,7 @@ Protected Attributes</h2></td></tr>
           <td class="memname">void tiny_dlna::DLNAMediaRenderer::setMuted </td>
           <td>(</td>
           <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>m</em></td><td>)</td>
+          <td class="paramname"><em>mute</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -2996,6 +3564,44 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Defines the actual url to play. </p>
+
+</div>
+</div>
+<a id="ad9d9be7937d17b85b5d91b84cdfa3990" name="ad9d9be7937d17b85b5d91b84cdfa3990"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9d9be7937d17b85b5d91b84cdfa3990">&#9670;&#160;</a></span>setProtocols()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tiny_dlna::DLNAMediaRenderer::setProtocols </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>source</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>sink</em> = <code>&quot;&quot;</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Define the source protocol info: use csv Default is http-get:*:image/jpeg:DLNA.ORG_PN=JPEG_TN,http-get:*:image/jpeg:DLNA.ORG_PN=JPEG_SM,http-get:*:image/jpeg:DLNA.ORG_PN=JPEG_MED,http-get:*:image/jpeg:DLNA.ORG_PN=JPEG_LRG,http-get:*:video/mpeg:DLNA.ORG_PN=AVC_TS_HD_50_AC3_ISO,http-get:*:video/mpeg:DLNA.ORG_PN=AVC_TS_HD_60_AC3_ISO,http-get:*:video/mpeg:DLNA.ORG_PN=AVC_TS_HP_HD_AC3_ISO,http-get:*:video/mpeg:DLNA.ORG_PN=AVC_TS_MP_HD_AAC_MULT5_ISO,http-get:*:video/mpeg:DLNA.ORG_PN=AVC_TS_MP_HD_AC3_ISO,http-get:*:video/mpeg:DLNA.ORG_PN=AVC_TS_MP_HD_MPEG1_L3_ISO,http-get:*:video/mpeg:DLNA.ORG_PN=AVC_TS_MP_SD_AAC_MULT5_ISO,http-get:*:video/mpeg:DLNA.ORG_PN=AVC_TS_MP_SD_AC3_ISO,http-get:*:video/mpeg:DLNA.ORG_PN=AVC_TS_MP_SD_MPEG1_L3_ISO,http-get:*:video/mpeg:DLNA.ORG_PN=MPEG_PS_NTSC,http-get:*:video/mpeg:DLNA.ORG_PN=MPEG_PS_PAL,http-get:*:video/mpeg:DLNA.ORG_PN=MPEG_TS_HD_NA_ISO,http-get:*:video/mpeg:DLNA.ORG_PN=MPEG_TS_SD_NA_ISO,http-get:*:video/mpeg:DLNA.ORG_PN=MPEG_TS_SD_EU_ISO,http-get:*:video/mpeg:DLNA.ORG_PN=MPEG1,http-get:*:video/mp4:DLNA.ORG_PN=AVC_MP4_MP_SD_AAC_MULT5,http-get:*:video/mp4:DLNA.ORG_PN=AVC_MP4_MP_SD_AC3,http-get:*:video/mp4:DLNA.ORG_PN=AVC_MP4_BL_CIF15_AAC_520,http-get:*:video/mp4:DLNA.ORG_PN=AVC_MP4_BL_CIF30_AAC_940,http-get:*:video/mp4:DLNA.ORG_PN=AVC_MP4_BL_L31_HD_AAC,http-get:*:video/mp4:DLNA.ORG_PN=AVC_MP4_BL_L32_HD_AAC,http-get:*:video/mp4:DLNA.ORG_PN=AVC_MP4_BL_L3L_SD_AAC,http-get:*:video/mp4:DLNA.ORG_PN=AVC_MP4_HP_HD_AAC,http-get:*:video/mp4:DLNA.ORG_PN=AVC_MP4_MP_HD_1080i_AAC,http-get:*:video/mp4:DLNA.ORG_PN=AVC_MP4_MP_HD_720p_AAC,http-get:*:video/mp4:DLNA.ORG_PN=MPEG4_P2_MP4_ASP_AAC,http-get:*:video/mp4:DLNA.ORG_PN=MPEG4_P2_MP4_SP_VGA_AAC,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_HD_50_AC3,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_HD_50_AC3_T,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_HD_60_AC3,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_HD_60_AC3_T,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_HP_HD_AC3_T,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_MP_HD_AAC_MULT5,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_MP_HD_AAC_MULT5_T,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_MP_HD_AC3,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_MP_HD_AC3_T,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_MP_HD_MPEG1_L3,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_MP_HD_MPEG1_L3_T,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_MP_SD_AAC_MULT5,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_MP_SD_AAC_MULT5_T,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_MP_SD_AC3,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_MP_SD_AC3_T,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_MP_SD_MPEG1_L3,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_MP_SD_MPEG1_L3_T,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=MPEG_TS_HD_NA,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=MPEG_TS_HD_NA_T,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=MPEG_TS_SD_EU,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=MPEG_TS_SD_EU_T,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=MPEG_TS_SD_NA,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=MPEG_TS_SD_NA_T,http-get:*:video/x-ms-wmv:DLNA.ORG_PN=WMVSPLL_BASE,http-get:*:video/x-ms-wmv:DLNA.ORG_PN=WMVSPML_BASE,http-get:*:video/x-ms-wmv:DLNA.ORG_PN=WMVSPML_MP3,http-get:*:video/x-ms-wmv:DLNA.ORG_PN=WMVMED_BASE,http-get:*:video/x-ms-wmv:DLNA.ORG_PN=WMVMED_FULL,http-get:*:video/x-ms-wmv:DLNA.ORG_PN=WMVMED_PRO,http-get:*:video/x-ms-wmv:DLNA.ORG_PN=WMVHIGH_FULL,http-get:*:video/x-ms-wmv:DLNA.ORG_PN=WMVHIGH_PRO,http-get:*:video/3gpp:DLNA.ORG_PN=MPEG4_P2_3GPP_SP_L0B_AAC,http-get:*:video/3gpp:DLNA.ORG_PN=MPEG4_P2_3GPP_SP_L0B_AMR,http-get:*:audio/mpeg:DLNA.ORG_PN=MP3,http-get:*:audio/x-ms-wma:DLNA.ORG_PN=WMABASE,http-get:*:audio/x-ms-wma:DLNA.ORG_PN=WMAFULL,http-get:*:audio/x-ms-wma:DLNA.ORG_PN=WMAPRO,http-get:*:audio/x-ms-wma:DLNA.ORG_PN=WMALSL,http-get:*:audio/x-ms-wma:DLNA.ORG_PN=WMALSL_MULT5,http-get:*:audio/mp4:DLNA.ORG_PN=AAC_ISO_320,http-get:*:audio/3gpp:DLNA.ORG_PN=AAC_ISO_320,http-get:*:audio/mp4:DLNA.ORG_PN=AAC_ISO,http-get:*:audio/mp4:DLNA.ORG_PN=AAC_MULT5_ISO,http-get:*:audio/L16;rate=44100;channels=2:DLNA.ORG_PN=LPCM,http-get:*:image/jpeg:*,http-get:*:video/avi:*,http-get:*:video/divx:*,http-get:*:video/x-matroska:*,http-get:*:video/mpeg:*,http-get:*:video/mp4:*,http-get:*:video/x-ms-wmv:*,http-get:*:video/x-msvideo:*,http-get:*:video/x-flv:*,http-get:*:video/x-tivo-mpeg:*,http-get:*:video/quicktime:*,http-get:*:audio/mp4:*,http-get:*:audio/x-wav:*,http-get:*:audio/x-flac:*,http-get:*:audio/x-dsd:*,http-get:*:application/ogg:<em>http-get:</em>:application/vnd.rn-realmedia:<em>http-get:</em>:application/vnd.rn-realmedia-vbr:<em>http-get:</em>:video/webm:*. </p>
 
 </div>
 </div>
@@ -3330,7 +3936,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Set volume and publish event. </p>
+<p>Set volume and publish event (0-100) </p>
 
 </div>
 </div>
@@ -3420,6 +4026,28 @@ Protected Attributes</h2></td></tr>
   </td>
   <td class="mlabels-right">
 <span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a78f8c01c1b5a728594f9a12a79ad73d7" name="a78f8c01c1b5a728594f9a12a79ad73d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a78f8c01c1b5a728594f9a12a79ad73d7">&#9670;&#160;</a></span>connectionID</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* tiny_dlna::DLNAMediaRenderer::connectionID = &quot;0&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -3668,28 +4296,6 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a9156b6fc95e5f65798dccab90cde13d3" name="a9156b6fc95e5f65798dccab90cde13d3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9156b6fc95e5f65798dccab90cde13d3">&#9670;&#160;</a></span>is_muted</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool tiny_dlna::DLNAMediaRenderer::is_muted = false</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="a28d8ce438c8338faf5ad279f2f26d9b4" name="a28d8ce438c8338faf5ad279f2f26d9b4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a28d8ce438c8338faf5ad279f2f26d9b4">&#9670;&#160;</a></span>localhost</h2>
 
@@ -3844,6 +4450,28 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a0ecb79fb7571a683493063af2c5f6f3c" name="a0ecb79fb7571a683493063af2c5f6f3c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ecb79fb7571a683493063af2c5f6f3c">&#9670;&#160;</a></span>muted_volume</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t tiny_dlna::DLNAMediaRenderer::muted_volume = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a852f7a7baf10ff4d8e2d1953a5783901" name="a852f7a7baf10ff4d8e2d1953a5783901"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a852f7a7baf10ff4d8e2d1953a5783901">&#9670;&#160;</a></span>ns</h2>
 
@@ -3899,28 +4527,6 @@ Protected Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classtiny__dlna_1_1IUDPService.html">IUDPService</a>* tiny_dlna::DLNAMediaRenderer::p_udp_member = nullptr</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a718a83050f5e958f4fa2a75ae4d9806a" name="a718a83050f5e958f4fa2a75ae4d9806a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a718a83050f5e958f4fa2a75ae4d9806a">&#9670;&#160;</a></span>ref_ctx</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void* tiny_dlna::DLNAMediaRenderer::ref_ctx[1] = {nullptr}</td>
         </tr>
       </table>
   </td>
@@ -3992,6 +4598,50 @@ Protected Attributes</h2></td></tr>
   </td>
   <td class="mlabels-right">
 <span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ada806b1b56da3636b57fcea4f3c29e08" name="ada806b1b56da3636b57fcea4f3c29e08"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada806b1b56da3636b57fcea4f3c29e08">&#9670;&#160;</a></span>sinkProto</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* tiny_dlna::DLNAMediaRenderer::sinkProto = <a class="el" href="dlna__config_8h.html#a27763beedb4243c957f40475655c40f3">DLNA_PROTOCOL_AUDIO</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab97a577ad06f4eb4c5b7d1efcb7ed51c" name="ab97a577ad06f4eb4c5b7d1efcb7ed51c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab97a577ad06f4eb4c5b7d1efcb7ed51c">&#9670;&#160;</a></span>sourceProto</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* tiny_dlna::DLNAMediaRenderer::sourceProto = &quot;&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">

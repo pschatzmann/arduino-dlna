@@ -247,6 +247,9 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1PostSubscribe.html">PostSubscribe</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send SUBSCRIBE message via UDP unicast.  <a href="classtiny__dlna_1_1PostSubscribe.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Printf.html">Printf</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classtiny__dlna_1_1Printf.html" title="Printf support with output to Print. This class does not do any heap allocations!">Printf</a> support with output to Print. This class does not do any heap allocations!  <a href="classtiny__dlna_1_1Printf.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Queue.html">Queue</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">FIFO <a class="el" href="classtiny__dlna_1_1Queue.html" title="FIFO Queue which is based on a List.">Queue</a> which is based on a <a class="el" href="classtiny__dlna_1_1List.html" title="Double linked list.">List</a>.  <a href="classtiny__dlna_1_1Queue.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -353,7 +356,7 @@ Enumerations</h2></td></tr>
 , <a class="el" href="namespacetiny__dlna.html#a1457542c46840a965692cd26a81994b2ab243ecd279e16ae7bd331aa787b6543d">SET_MUTE</a>
 <br />
  }</td></tr>
-<tr class="memdesc:a1457542c46840a965692cd26a81994b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Events emitted by the MediaRenderer to notify the application about playback and rendering control changes.  <a href="namespacetiny__dlna.html#a1457542c46840a965692cd26a81994b2">More...</a><br /></td></tr>
+<tr class="memdesc:a1457542c46840a965692cd26a81994b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Events emitted by the MediaRenderer to notify the application will receive the event along with a reference to the emitting MediaRenderer instance. The handler should query the renderer (for example getCurrentUri(), getVolume(), getMime()) to determine the appropriate action for each event.  <a href="namespacetiny__dlna.html#a1457542c46840a965692cd26a81994b2">More...</a><br /></td></tr>
 <tr class="separator:a1457542c46840a965692cd26a81994b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a85d3f686372782f654ff23302800aac9"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetiny__dlna.html#a85d3f686372782f654ff23302800aac9">MediaItemClass</a> { <br />
 &#160;&#160;<a class="el" href="namespacetiny__dlna.html#a85d3f686372782f654ff23302800aac9a88183b946cc5f0e8c96b2e66e1c74a7e">Unknown</a>
@@ -589,8 +592,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Events emitted by the MediaRenderer to notify the application about playback and rendering control changes. </p>
-<p>The application registers a callback using setMediaEventHandler() and will receive the event along with a reference to the emitting MediaRenderer instance. The handler should query the renderer (for example getCurrentUri(), getVolume(), getMime()) to determine the appropriate action for each event.</p>
+<p>Events emitted by the MediaRenderer to notify the application will receive the event along with a reference to the emitting MediaRenderer instance. The handler should query the renderer (for example getCurrentUri(), getVolume(), getMime()) to determine the appropriate action for each event. </p>
 <p>Events:</p><ul>
 <li>SET_URI: The renderer received a new URI (use getCurrentUri()).</li>
 <li>PLAY: Start or resume playback of the current URI.</li>

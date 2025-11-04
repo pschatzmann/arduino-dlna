@@ -198,12 +198,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a5a8f23bf03bc3d5ccbbe4ed5d317b1b2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Str.html">Str</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a5a8f23bf03bc3d5ccbbe4ed5d317b1b2">contentStr</a> ()</td></tr>
 <tr class="memdesc:a5a8f23bf03bc3d5ccbbe4ed5d317b1b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">converts the client content to a string  <br /></td></tr>
 <tr class="separator:a5a8f23bf03bc3d5ccbbe4ed5d317b1b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8a20cbfc5bfd5f470969b1059ac026a1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a8a20cbfc5bfd5f470969b1059ac026a1">setReference</a> (void *<a class="el" href="classtiny__dlna_1_1HttpServer.html#a7aa9a6410d0d208060289703d7a05c70">reference</a>)</td></tr>
+<tr class="memitem:a8a20cbfc5bfd5f470969b1059ac026a1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a8a20cbfc5bfd5f470969b1059ac026a1">setReference</a> (void *reference)</td></tr>
 <tr class="memdesc:a8a20cbfc5bfd5f470969b1059ac026a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Definesa reference/context object.  <br /></td></tr>
 <tr class="separator:a8a20cbfc5bfd5f470969b1059ac026a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7aa9a6410d0d208060289703d7a05c70"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a7aa9a6410d0d208060289703d7a05c70">reference</a> ()</td></tr>
-<tr class="memdesc:a7aa9a6410d0d208060289703d7a05c70"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides access to a reference/context object.  <br /></td></tr>
-<tr class="separator:a7aa9a6410d0d208060289703d7a05c70"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f7c18cd601e0e4a4db9594effb3bc48"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a8f7c18cd601e0e4a4db9594effb3bc48">getReference</a> ()</td></tr>
+<tr class="memdesc:a8f7c18cd601e0e4a4db9594effb3bc48"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides access to a reference/context object.  <br /></td></tr>
+<tr class="separator:a8f7c18cd601e0e4a4db9594effb3bc48"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -597,6 +597,33 @@ password); </p>
 </div><div class="memdoc">
 
 <p>closes the connection to the current client_ptr </p>
+
+</div>
+</div>
+<a id="a8f7c18cd601e0e4a4db9594effb3bc48" name="a8f7c18cd601e0e4a4db9594effb3bc48"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f7c18cd601e0e4a4db9594effb3bc48">&#9670;&#160;</a></span>getReference()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void * tiny_dlna::HttpServer::getReference </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Provides access to a reference/context object. </p>
 
 </div>
 </div>
@@ -1120,33 +1147,6 @@ password); </p>
   </tr>
 </table>
 </div><div class="memdoc">
-
-</div>
-</div>
-<a id="a7aa9a6410d0d208060289703d7a05c70" name="a7aa9a6410d0d208060289703d7a05c70"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7aa9a6410d0d208060289703d7a05c70">&#9670;&#160;</a></span>reference()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void * tiny_dlna::HttpServer::reference </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Provides access to a reference/context object. </p>
 
 </div>
 </div>

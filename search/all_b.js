@@ -23,7 +23,7 @@ var searchData=
   ['method_20',['method',['../classtiny__dlna_1_1HttpRequestHandlerLine.html#a81b0ab27f4e60481c5f9275fff16f1c8',1,'tiny_dlna::HttpRequestHandlerLine::method()'],['../classtiny__dlna_1_1HttpHeader.html#a48f03d52611fc6f029da9f0f5abc5d33',1,'tiny_dlna::HttpHeader::method()']]],
   ['method_5fid_21',['method_id',['../classtiny__dlna_1_1HttpHeader.html#a4a9c1ca5d6e3ccc784fca5f6e3f50a19',1,'tiny_dlna::HttpHeader']]],
   ['methods_22',['methods',['../namespacetiny__dlna.html#a676cf5a0a4c1f7a8fe5653e1ccff1eb6',1,'tiny_dlna']]],
-  ['mime_23',['mime',['../structtiny__dlna_1_1MimeExtension.html#a22ad66dbd1aeebc9db3fb1d8b9ef6edb',1,'tiny_dlna::MimeExtension::mime()'],['../classtiny__dlna_1_1Icon.html#a9459e0995a8747931eb3e73d382917b8',1,'tiny_dlna::Icon::mime()'],['../classtiny__dlna_1_1HttpRequestHandlerLine.html#aab195241dbead06fe75f8765011f1aa0',1,'tiny_dlna::HttpRequestHandlerLine::mime()'],['../classtiny__dlna_1_1HttpStreamedOutput.html#aca7c6ca89921fc75a6c58f04a79b417b',1,'tiny_dlna::HttpStreamedOutput::mime()'],['../classtiny__dlna_1_1HttpTunnel.html#a7b1799416b9d320312f4c57cc036f176',1,'tiny_dlna::HttpTunnel::mime()']]],
+  ['mime_23',['mime',['../classtiny__dlna_1_1HttpRequestHandlerLine.html#aab195241dbead06fe75f8765011f1aa0',1,'tiny_dlna::HttpRequestHandlerLine::mime()'],['../classtiny__dlna_1_1Icon.html#a9459e0995a8747931eb3e73d382917b8',1,'tiny_dlna::Icon::mime()'],['../structtiny__dlna_1_1MimeExtension.html#a22ad66dbd1aeebc9db3fb1d8b9ef6edb',1,'tiny_dlna::MimeExtension::mime()'],['../classtiny__dlna_1_1HttpStreamedOutput.html#aca7c6ca89921fc75a6c58f04a79b417b',1,'tiny_dlna::HttpStreamedOutput::mime()'],['../classtiny__dlna_1_1HttpTunnel.html#a7b1799416b9d320312f4c57cc036f176',1,'tiny_dlna::HttpTunnel::mime()']]],
   ['mimeextension_24',['MimeExtension',['../structtiny__dlna_1_1MimeExtension.html',1,'tiny_dlna']]],
   ['mimetype_25',['mimeType',['../structtiny__dlna_1_1MediaItem.html#a1bad5bddca826789d229d41f7077776f',1,'tiny_dlna::MediaItem']]],
   ['model_5fdescription_26',['model_description',['../classtiny__dlna_1_1DLNADeviceInfo.html#a6a3630027fe42a74b87a4a4150fbc8c3',1,'tiny_dlna::DLNADeviceInfo']]],
@@ -36,6 +36,7 @@ var searchData=
   ['msearchreplyschedule_33',['MSearchReplySchedule',['../classtiny__dlna_1_1MSearchReplySchedule.html#a797d2fc636c7f13f9b1662863aa42650',1,'tiny_dlna::MSearchReplySchedule::MSearchReplySchedule()'],['../classtiny__dlna_1_1MSearchReplySchedule.html',1,'tiny_dlna::MSearchReplySchedule']]],
   ['msearchschedule_34',['MSearchSchedule',['../classtiny__dlna_1_1MSearchSchedule.html#ae29a86226fe9c3376436b07c2dfb0ed4',1,'tiny_dlna::MSearchSchedule::MSearchSchedule()'],['../classtiny__dlna_1_1MSearchSchedule.html',1,'tiny_dlna::MSearchSchedule']]],
   ['music_35',['Music',['../namespacetiny__dlna.html#a85d3f686372782f654ff23302800aac9a47dcbd834e669233d7eb8a51456ed217',1,'tiny_dlna']]],
-  ['mx_36',['mx',['../classtiny__dlna_1_1MSearchReplySchedule.html#a3f029ab2f4c2660456ac3111c203dd8a',1,'tiny_dlna::MSearchReplySchedule']]],
-  ['mx_5fvector_37',['mx_vector',['../classtiny__dlna_1_1DLNADeviceRequestParser.html#acc4399bb0142b826470158645795280a',1,'tiny_dlna::DLNADeviceRequestParser']]]
+  ['muted_5fvolume_36',['muted_volume',['../classtiny__dlna_1_1DLNAMediaRenderer.html#a0ecb79fb7571a683493063af2c5f6f3c',1,'tiny_dlna::DLNAMediaRenderer']]],
+  ['mx_37',['mx',['../classtiny__dlna_1_1MSearchReplySchedule.html#a3f029ab2f4c2660456ac3111c203dd8a',1,'tiny_dlna::MSearchReplySchedule']]],
+  ['mx_5fvector_38',['mx_vector',['../classtiny__dlna_1_1DLNADeviceRequestParser.html#acc4399bb0142b826470158645795280a',1,'tiny_dlna::DLNADeviceRequestParser']]]
 ];

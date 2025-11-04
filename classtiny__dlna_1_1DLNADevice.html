@@ -135,12 +135,27 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a24070c7cc3bc235582f757e9c795ccaa"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a24070c7cc3bc235582f757e9c795ccaa">isSubscriptionsActive</a> () const</td></tr>
 <tr class="memdesc:a24070c7cc3bc235582f757e9c795ccaa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if subscription notifications are active.  <br /></td></tr>
 <tr class="separator:a24070c7cc3bc235582f757e9c795ccaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3970524c035462edf38fabf282f0df90"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a3970524c035462edf38fabf282f0df90">setReference</a> (void *ref)</td></tr>
+<tr class="memdesc:a3970524c035462edf38fabf282f0df90"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets a reference pointer that can be used to associate application.  <br /></td></tr>
+<tr class="separator:a3970524c035462edf38fabf282f0df90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a552eb8ebf2d62757820e8ecc01628144"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a552eb8ebf2d62757820e8ecc01628144">getReference</a> ()</td></tr>
+<tr class="memdesc:a552eb8ebf2d62757820e8ecc01628144"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the reference pointer.  <br /></td></tr>
+<tr class="separator:a552eb8ebf2d62757820e8ecc01628144"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a5eea7860396fdf64d2be2f25da74916a"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a5eea7860396fdf64d2be2f25da74916a">parseActionRequest</a> (<a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> *server, const char *requestPath, <a class="el" href="classtiny__dlna_1_1HttpRequestHandlerLine.html">HttpRequestHandlerLine</a> *hl, <a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;action)</td></tr>
 <tr class="memdesc:a5eea7860396fdf64d2be2f25da74916a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parses the SOAP content of a DLNA action request.  <br /></td></tr>
 <tr class="separator:a5eea7860396fdf64d2be2f25da74916a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6f2506e3613a08d5c46073f98b1a084"><td class="memItemLeft" align="right" valign="top">static size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#ac6f2506e3613a08d5c46073f98b1a084">printReplyXML</a> (Print &amp;out, const char *replyName, const char *serviceId, std::function&lt; size_t(Print &amp;, void *)&gt; valuesWriter=nullptr, void *ref=nullptr)</td></tr>
+<tr class="memdesc:ac6f2506e3613a08d5c46073f98b1a084"><td class="mdescLeft">&#160;</td><td class="mdescRight">Builds a standard SOAP reply envelope.  <br /></td></tr>
+<tr class="separator:ac6f2506e3613a08d5c46073f98b1a084"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b80e4ca512f29aeffb47d147d642413"><td class="memItemLeft" align="right" valign="top">static size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a6b80e4ca512f29aeffb47d147d642413">replyGetProtocolInfo</a> (Print &amp;out, const char *source=&quot;&quot;, const char *sink=&quot;&quot;)</td></tr>
+<tr class="separator:a6b80e4ca512f29aeffb47d147d642413"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af472b53aea19085b497a985fed5572b0"><td class="memItemLeft" align="right" valign="top">static size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#af472b53aea19085b497a985fed5572b0">replyGetCurrentConnectionIDs</a> (Print &amp;out, const char *ids)</td></tr>
+<tr class="separator:af472b53aea19085b497a985fed5572b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a6f774f14b2c768b9ed257db59560f0"><td class="memItemLeft" align="right" valign="top">static size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a7a6f774f14b2c768b9ed257db59560f0">replyGetCurrentConnectionInfo</a> (Print &amp;out, const char *protocolInfo, const char *connectionID, const char *direction)</td></tr>
+<tr class="separator:a7a6f774f14b2c768b9ed257db59560f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6e693f736e5642abe962e7fa23287453"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a6e693f736e5642abe962e7fa23287453">eventSubscriptionHandler</a> (<a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> *server, const char *requestPath, <a class="el" href="classtiny__dlna_1_1HttpRequestHandlerLine.html">HttpRequestHandlerLine</a> *hl)</td></tr>
 <tr class="memdesc:a6e693f736e5642abe962e7fa23287453"><td class="mdescLeft">&#160;</td><td class="mdescRight">Static handler for SUBSCRIBE/UNSUBSCRIBE requests on service event URLs.  <br /></td></tr>
 <tr class="separator:a6e693f736e5642abe962e7fa23287453"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -195,6 +210,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a58231d53bc1b50d2c171d1c809e857ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa6a6dd349a8eda3d93f31ab9e2bcf125"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#aa6a6dd349a8eda3d93f31ab9e2bcf125">p_server</a> = nullptr</td></tr>
 <tr class="separator:aa6a6dd349a8eda3d93f31ab9e2bcf125"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3417120dbb8a605e74054001ff5ee6cd"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a3417120dbb8a605e74054001ff5ee6cd">reference</a> = nullptr</td></tr>
+<tr class="separator:a3417120dbb8a605e74054001ff5ee6cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-attribs" name="pro-static-attribs"></a>
 Static Protected Attributes</h2></td></tr>
@@ -463,6 +480,33 @@ Static Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Provides the device. </p>
+
+</div>
+</div>
+<a id="a552eb8ebf2d62757820e8ecc01628144" name="a552eb8ebf2d62757820e8ecc01628144"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a552eb8ebf2d62757820e8ecc01628144">&#9670;&#160;</a></span>getReference()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void * tiny_dlna::DLNADevice::getReference </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the reference pointer. </p>
 
 </div>
 </div>
@@ -844,6 +888,63 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="ac6f2506e3613a08d5c46073f98b1a084" name="ac6f2506e3613a08d5c46073f98b1a084"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac6f2506e3613a08d5c46073f98b1a084">&#9670;&#160;</a></span>printReplyXML()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static size_t tiny_dlna::DLNADevice::printReplyXML </td>
+          <td>(</td>
+          <td class="paramtype">Print &amp;&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>replyName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>serviceId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::function&lt; size_t(Print &amp;, void *)&gt;&#160;</td>
+          <td class="paramname"><em>valuesWriter</em> = <code>nullptr</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>ref</em> = <code>nullptr</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Builds a standard SOAP reply envelope. </p>
+<p>This helper prints a SOAP envelope and calls the provided valuesWriter to emit the inner XML fragment. The valuesWriter receives the output Print and a void* ref for caller-provided context and shall return the number of bytes written. </p>
+
+</div>
+</div>
 <a id="aad5e3fde9eca75a585614f662128a761" name="aad5e3fde9eca75a585614f662128a761"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aad5e3fde9eca75a585614f662128a761">&#9670;&#160;</a></span>processUdpAndScheduler()</h2>
 
@@ -868,6 +969,133 @@ Static Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Process incoming UDP and execute scheduled replies. </p>
+
+</div>
+</div>
+<a id="af472b53aea19085b497a985fed5572b0" name="af472b53aea19085b497a985fed5572b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af472b53aea19085b497a985fed5572b0">&#9670;&#160;</a></span>replyGetCurrentConnectionIDs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static size_t tiny_dlna::DLNADevice::replyGetCurrentConnectionIDs </td>
+          <td>(</td>
+          <td class="paramtype">Print &amp;&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>ids</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7a6f774f14b2c768b9ed257db59560f0" name="a7a6f774f14b2c768b9ed257db59560f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a6f774f14b2c768b9ed257db59560f0">&#9670;&#160;</a></span>replyGetCurrentConnectionInfo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static size_t tiny_dlna::DLNADevice::replyGetCurrentConnectionInfo </td>
+          <td>(</td>
+          <td class="paramtype">Print &amp;&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>protocolInfo</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>connectionID</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>direction</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6b80e4ca512f29aeffb47d147d642413" name="a6b80e4ca512f29aeffb47d147d642413"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b80e4ca512f29aeffb47d147d642413">&#9670;&#160;</a></span>replyGetProtocolInfo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static size_t tiny_dlna::DLNADevice::replyGetProtocolInfo </td>
+          <td>(</td>
+          <td class="paramtype">Print &amp;&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>source</em> = <code>&quot;&quot;</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>sink</em> = <code>&quot;&quot;</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Parameterized variants that allow callers to pass dynamic values from devices (e.g. source/sink protocol lists or current connection IDs). </p>
 
 </div>
 </div>
@@ -921,6 +1149,34 @@ Static Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <p>Repeat the post-alive messages (default: 0 = no repeat). Call this method before calling begin! </p>
+
+</div>
+</div>
+<a id="a3970524c035462edf38fabf282f0df90" name="a3970524c035462edf38fabf282f0df90"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3970524c035462edf38fabf282f0df90">&#9670;&#160;</a></span>setReference()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tiny_dlna::DLNADevice::setReference </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>ref</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sets a reference pointer that can be used to associate application. </p>
 
 </div>
 </div>
@@ -1205,6 +1461,28 @@ Static Protected Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">uint32_t tiny_dlna::DLNADevice::post_alive_repeat_ms = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3417120dbb8a605e74054001ff5ee6cd" name="a3417120dbb8a605e74054001ff5ee6cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3417120dbb8a605e74054001ff5ee6cd">&#9670;&#160;</a></span>reference</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void* tiny_dlna::DLNADevice::reference = nullptr</td>
         </tr>
       </table>
   </td>
