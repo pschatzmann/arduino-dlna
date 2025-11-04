@@ -3,6 +3,7 @@
 #include "http/Http.h"
 #include "dlna/Action.h"
 #include "basic/Str.h"
+#include "basic/StrView.h"
 
 namespace tiny_dlna {
 
@@ -16,6 +17,22 @@ typedef void (*http_callback)(HttpServer* server, const char* requestPath,
 class DLNAServiceInfo {
  public:
   DLNAServiceInfo(bool flag = true) { is_active = flag; }
+
+  /// Enable or disable subscriptions 
+  void setSubscriptionsActive(bool active) {
+    if (active) {
+      if (StrView(event_sub_url).isEmpty() && !StrView(event_sub_url_backup).isEmpty()) {
+        event_sub_url = event_sub_url_backup;
+      }
+    } else {
+      if (!StrView(event_sub_url).isEmpty()) {
+        event_sub_url_backup = event_sub_url;
+        event_sub_url = "";
+      }
+    }
+  }
+  
+  /// Setup all relevant values
   void setup(const char* type, const char* id, const char* scp,
              http_callback cbScp, const char* control, http_callback cbControl,
              const char* event, http_callback cbEvent) {
@@ -26,6 +43,9 @@ class DLNAServiceInfo {
     scpd_url = scp;
     control_url = control;
     event_sub_url = event;
+  // preserve the configured event URL as the canonical backup so
+  // disabling/enabling subscriptions can restore the original value.
+  event_sub_url_backup = event;
     scp_cb = cbScp;
     control_cb = cbControl;
     event_sub_cb = cbEvent;
@@ -35,11 +55,12 @@ class DLNAServiceInfo {
   const char* scpd_url = nullptr;
   const char* control_url = nullptr;
   const char* event_sub_url = nullptr;
+  const char* event_sub_url_backup = nullptr; /**< saved event_sub_url when subscriptions are disabled */
   const char* event_sub_sid = nullptr; /**< SID assigned by remote service (if subscribed) */
   http_callback scp_cb = nullptr;
   http_callback control_cb = nullptr;
   http_callback event_sub_cb = nullptr;
-  
+
   /// for subscriptions
   Str subscription_id;
   SubscriptionState subscription_state = SubscriptionState::Unsubscribed;

@@ -90,13 +90,7 @@ class SubscriptionMgrDevice {
    * destroyed.
    */
   ~SubscriptionMgrDevice() {
-    // free any remaining heap-allocated subscriptions
-    for (int i = 0; i < subscriptions.size(); ++i) {
-      delete subscriptions[i];
-    }
-    subscriptions.clear();
-    // pending_list entries do not own subscription pointers
-    pending_list.clear();
+    clear();
   }
 
   /**
@@ -197,6 +191,9 @@ class SubscriptionMgrDevice {
    */
   void addChange(DLNAServiceInfo& service, std::function<size_t(Print&, void*)> changeWriter, void* ref) {
     bool any = false;
+    // do not enqueue if subscriptions are inactive
+    if (!is_active) return;
+
     // enqueue notifications to be posted later by post()
     for (int i = 0; i < subscriptions.size(); ++i) {
       Subscription* sub = subscriptions[i];
@@ -333,12 +330,40 @@ class SubscriptionMgrDevice {
    */
   int pendingCount() { return pending_list.size(); }
 
+  /**
+   * @brief Enable or disable subscription delivery.
+   *
+   * When disabled the manager will not attempt to publish pending
+   * notifications. Disabling also clears the pending queue to avoid
+   * delivering stale notifications when re-enabled. Use
+   * `isSubscriptionsActive()` to query the current state.
+   */
+  void setSubscriptionsActive(bool flag) {
+    is_active = flag;
+    if (!is_active) {
+      // clear any queued notifications when subscriptions are turned off 
+      clear();
+    }
+  }
+
+  /// Convenience method to disable subscriptions at the end of the lifecycle
+  void end() {
+    setSubscriptionsActive(false);
+  }
+
+  /**
+   * @brief Query whether subscription delivery is active
+   * @return true if subscription delivery is enabled
+   */
+  bool isSubscriptionsActive() const { return is_active; }
+
  protected:
   // store pointers to heap-allocated Subscription objects. This keeps
   // references stable (we manage lifetimes explicitly) and avoids
   // large copies when enqueuing notifications.
   Vector<Subscription*> subscriptions;
   Vector<PendingNotification> pending_list;
+  bool is_active = true;
 
   /**
    * @brief Try to renew an existing subscription identified by SID for the
@@ -367,6 +392,17 @@ class SubscriptionMgrDevice {
     return Str();
   }
 
+  /// Clear all subscriptions and pending notifications
+  void clear(){
+    // free any remaining heap-allocated subscriptions
+    for (int i = 0; i < subscriptions.size(); ++i) {
+      delete subscriptions[i];
+    }
+    subscriptions.clear();
+    // pending_list entries do not own subscription pointers
+    pending_list.clear();
+
+  }
 
   /**
    * @brief Generate the propertyset XML for a single variable and write it to

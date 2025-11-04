@@ -199,6 +199,12 @@ class DLNAMediaServer : public DLNADeviceInfo {
   /// Provides access to the internal DLNA device instance
   DLNADevice& device() { return dlna_device; }
 
+  /// Enable/disable subscription notifications
+  void setSubscriptionsActive(bool flag) { dlna_device.setSubscriptionsActive(flag); }
+
+  /// Query whether subscription notifications are active
+  bool isSubscriptionsActive() { return dlna_device.isSubscriptionsActive(); }
+
   /// Define your own custom logic
   void setCustomActionRule(const char* suffix,
                            bool (*handler)(DLNAMediaServer*, ActionRequest&,

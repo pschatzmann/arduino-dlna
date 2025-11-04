@@ -502,6 +502,12 @@ class HttpServer {
     return result;
   }
 
+  /// Definesa reference/context object
+  void setReference(void* reference) { ref = reference; }
+
+  /// Provides access to a reference/context object
+  void* reference() { return ref; }
+
  protected:
   // data
   HttpRequestHeader request_header;
@@ -516,6 +522,7 @@ class HttpServer {
   Vector<char> buffer{0};
   const char* local_host = nullptr;
   int no_connect_delay = 5;
+  void* ref = nullptr;
 
   /// Converts null to an empty string
   const char* nullstr(const char* in) { return in == nullptr ? "" : in; }

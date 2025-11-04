@@ -210,6 +210,12 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
   /// Provides access to the internal DLNA device instance
   DLNADevice& device() { return dlna_device; }
 
+  /// Enable/disable subscription notifications
+  void setSubscriptionsActive(bool flag) { dlna_device.setSubscriptionsActive(flag); }
+
+  /// Query whether subscription notifications are active
+  bool isSubscriptionsActive() { return dlna_device.isSubscriptionsActive(); }
+
   /// Start playback: same as setActive(true)
   bool play() {
     setActive(true);
