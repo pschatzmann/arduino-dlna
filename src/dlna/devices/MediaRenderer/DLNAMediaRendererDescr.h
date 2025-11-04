@@ -521,7 +521,7 @@ class DLNAMediaRendererControlDescr : public DLNADescr {
     result += xml.printNode("dataType", "ui2");
     result += xml.printNodeBeginNl("allowedValueRange");
     result += xml.printNode("minimum", 0);
-    result += xml.printNode("maximum", 15);
+    result += xml.printNode("maximum", 100);
     result += xml.printNode("step", 1);
     result += xml.printNodeEnd("allowedValueRange");
     result += xml.printNodeEnd("stateVariable");

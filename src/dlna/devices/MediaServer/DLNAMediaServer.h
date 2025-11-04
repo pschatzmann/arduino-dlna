@@ -200,7 +200,9 @@ class DLNAMediaServer : public DLNADeviceInfo {
   DLNADevice& device() { return dlna_device; }
 
   /// Enable/disable subscription notifications
-  void setSubscriptionsActive(bool flag) { dlna_device.setSubscriptionsActive(flag); }
+  void setSubscriptionsActive(bool flag) {
+    dlna_device.setSubscriptionsActive(flag);
+  }
 
   /// Query whether subscription notifications are active
   bool isSubscriptionsActive() { return dlna_device.isSubscriptionsActive(); }
@@ -382,23 +384,17 @@ class DLNAMediaServer : public DLNADeviceInfo {
              "urn:upnp-org:serviceId:ConnectionManager", "/CM/service.xml",
              &DLNAMediaServer::connDescCB, "/CM/control",
              &DLNAMediaServer::connmgrControlCB, "/CM/event",
-             [](HttpServer* server, const char* requestPath,
-                HttpRequestHandlerLine* hl) { server->replyOK(); });
+             tiny_dlna::DLNADevice::eventSubscriptionHandler);
 
     // subscription namespace abbreviation used for event publishing
     cm.subscription_namespace_abbrev = "CMS";
 
     server->on(cm.scpd_url, T_GET, cm.scp_cb, ref_ctx, 1);
     server->on(cm.control_url, T_POST, cm.control_cb, ref_ctx, 1);
-    // Register event subscription handlers for SUBSCRIBE, UNSUBSCRIBE and
-    // POST so the server accepts subscription requests and related POSTS on
-    // the same event URL.
     server->on(cm.event_sub_url, T_SUBSCRIBE, eventSubscriptionHandler, ref_ctx,
                1);
-    server->on(cm.event_sub_url, T_UNSUBSCRIBE,
-               tiny_dlna::DLNADevice::eventSubscriptionHandler, ref_ctx, 1);
-    server->on(cm.event_sub_url, T_POST,
-               tiny_dlna::DLNADevice::eventSubscriptionHandler, ref_ctx, 1);
+    server->on(cm.event_sub_url, T_UNSUBSCRIBE, cm.event_sub_cb, ref_ctx, 1);
+    server->on(cm.event_sub_url, T_POST, cm.event_sub_cb, ref_ctx, 1);
 
     addService(cm);
   }
@@ -550,49 +546,20 @@ class DLNAMediaServer : public DLNADeviceInfo {
 
   /// Replies with Source and Sink protocol lists (CSV protocolInfo strings)
   bool processActionGetProtocolInfo(ActionRequest& action, HttpServer& server) {
-    // Stream the GetProtocolInfo response using chunked encoding to avoid
-    // building large in-memory strings and to keep behavior consistent with
-    // other actions (e.g. Browse/Search).
-    ChunkPrint chunk{server.client()};
-    server.replyChunked("text/xml");
-
-    soapEnvelopeStart(chunk);
-    actionResponseStart(chunk, "GetProtocolInfoResponse",
-                        "urn:schemas-upnp-org:service:ConnectionManager:1");
-
-    chunk.print("<Source>");
-    chunk.print(StringRegistry::nullStr(sourceProto));
-    chunk.println("</Source>");
-
-    chunk.print("<Sink>");
-    chunk.print(StringRegistry::nullStr(sinkProto));
-    chunk.println("</Sink>");
-
-    actionResponseEnd(chunk, "GetProtocolInfoResponse");
-    soapEnvelopeEnd(chunk);
-    chunk.end();
+    StrPrint resp;
+    // Use shared helper and pass device-specific protocol lists
+    DLNADevice::replyGetProtocolInfo(resp, sourceProto, sinkProto);
+    server.reply("text/xml", resp.c_str());
     return true;
   }
 
   /// Handle ConnectionManager:GetCurrentConnectionIDs action
   bool processActionGetCurrentConnectionIDs(ActionRequest& action,
                                             HttpServer& server) {
-    // Stream the empty ConnectionIDs response using chunked encoding to avoid
-    // allocating the full response in memory and keep consistent streaming
-    // behavior with other services.
-    ChunkPrint chunk{server.client()};
-    server.replyChunked("text/xml");
-
-    soapEnvelopeStart(chunk);
-    actionResponseStart(chunk, "GetCurrentConnectionIDsResponse",
-                        "urn:schemas-upnp-org:service:ConnectionManager:1");
-
-    // list with one default value now
-    chunk.println("<ConnectionIDs>01</ConnectionIDs>");
-
-    actionResponseEnd(chunk, "GetCurrentConnectionIDsResponse");
-    soapEnvelopeEnd(chunk);
-    chunk.end();
+    StrPrint resp;
+    // return the currently configured connection ID(s)
+    DLNADevice::replyGetCurrentConnectionIDs(resp, connectionID);
+    server.reply("text/xml", resp.c_str());
     return true;
   }
   /// Handle ConnectionManager:GetCurrentConnectionInfo action
@@ -604,33 +571,9 @@ class DLNAMediaServer : public DLNADeviceInfo {
     // Stream the GetCurrentConnectionInfo response using chunked encoding
     // to avoid building the full response in memory and to remain
     // consistent with other handlers.
-    ChunkPrint chunk{server.client()};
-    server.replyChunked("text/xml");
-
-    soapEnvelopeStart(chunk);
-    actionResponseStart(chunk, "GetCurrentConnectionInfoResponse",
-                        "urn:schemas-upnp-org:service:ConnectionManager:1");
-
-    // RcsID and AVTransportID
-    chunk.println("<RcsID>0</RcsID>");
-    chunk.println("<AVTransportID>0</AVTransportID>");
-
-    // ProtocolInfo (empty by default)
-    chunk.print("<ProtocolInfo>");
-    chunk.print(StringRegistry::nullStr(sourceProto));
-    chunk.println("</ProtocolInfo>");
-
-    // PeerConnectionManager and PeerConnectionID
-    chunk.print("<PeerConnectionManager>");
-    chunk.println("</PeerConnectionManager>");
-    chunk.println("<PeerConnectionID>0</PeerConnectionID>");
-
-    // Direction and Status
-    chunk.println("<Direction>Output</Direction><Status>OK</Status>");
-
-    actionResponseEnd(chunk, "GetCurrentConnectionInfoResponse");
-    soapEnvelopeEnd(chunk);
-    chunk.end();
+    StrPrint resp;
+    DLNADevice::replyGetCurrentConnectionInfo(resp, sourceProto, connectionID, "Output");
+    server.reply("text/xml", resp.c_str());
     return true;
   }
 

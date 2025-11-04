@@ -26,7 +26,7 @@ void setupWifi() {
 void setup() {
   // setup logger
   Serial.begin(115200);
-  DlnaLogger.begin(Serial, DlnaLogLevel::Info);
+  DlnaLogger.begin(Serial, DlnaLogLevel::Warning);
   // start Wifi
   setupWifi();
 

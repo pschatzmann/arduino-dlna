@@ -155,6 +155,7 @@ class DLNADeviceInfo {
   /// Finds a service definition by name
   DLNAServiceInfo& getServiceByAbbrev(const char* abbrev) {
     static DLNAServiceInfo result{false};
+    if (services.empty()) return result;
     for (auto& service : services) {
       if (StrView(service.subscription_namespace_abbrev).equals(abbrev)) {
         return service;

@@ -353,7 +353,7 @@ class HttpServer {
   /// write reply - string with header size
   void reply(const char* contentType, const char* str, int status = 200,
              const char* msg = SUCCESS) {
-    DlnaLogger.log(DlnaLogLevel::Info, "reply %s", "str");
+    DlnaLogger.log(DlnaLogLevel::Info, "reply %s", str);
     int len = strlen(str);
     reply_header.setValues(status, msg);
     reply_header.put(CONTENT_LENGTH, len);
@@ -362,11 +362,12 @@ class HttpServer {
     reply_header.write(this->client());
     client_ptr->write((const uint8_t*)str, len);
     endClient();
+    Serial.println(str);
   }
 
   void reply(const char* contentType, const uint8_t* str, int len,
              int status = 200, const char* msg = SUCCESS) {
-    DlnaLogger.log(DlnaLogLevel::Info, "reply %s", "str");
+    DlnaLogger.log(DlnaLogLevel::Info, "reply %s", str);
     reply_header.setValues(status, msg);
     reply_header.put(CONTENT_LENGTH, len);
     reply_header.put(CONTENT_TYPE, contentType);
@@ -506,7 +507,7 @@ class HttpServer {
   void setReference(void* reference) { ref = reference; }
 
   /// Provides access to a reference/context object
-  void* reference() { return ref; }
+  void* getReference() { return ref; }
 
  protected:
   // data

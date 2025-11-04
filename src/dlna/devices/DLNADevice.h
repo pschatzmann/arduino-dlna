@@ -1,7 +1,10 @@
 #pragma once
 
+#include <functional>
+
 #include "basic/AllocationTracker.h"
 #include "basic/Url.h"
+#include "basic/Printf.h"
 #include "dlna/DLNADeviceInfo.h"
 #include "dlna/Schedule.h"
 #include "dlna/devices/DLNADevice.h"
@@ -245,6 +248,98 @@ class DLNADevice {
     xp.end();
   }
 
+  /**
+   * @brief Builds a standard SOAP reply envelope
+   *
+   * This helper prints a SOAP envelope and calls the provided valuesWriter
+   * to emit the inner XML fragment. The valuesWriter receives the output
+   * Print and a void* ref for caller-provided context and shall return the
+   * number of bytes written.
+   */
+  static size_t printReplyXML(
+      Print& out, const char* replyName, const char* serviceId,
+      std::function<size_t(Print&, void*)> valuesWriter = nullptr,
+      void* ref = nullptr) {
+    XMLPrinter xp(out);
+    size_t result = 0;
+    result += xp.printNodeBegin(
+        "s:Envelope", "xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\"");
+    result += xp.printNodeBegin("s:Body");
+    result += xp.printf("<u:%s xmlns:u=\"urn:schemas-upnp-org:service:%s:1\">",
+                        replyName, serviceId);
+
+    // e.g.<u:return>Stop,Pause,Next,Seek</u:return> for
+    // QueryStateVariableResponse
+    if (valuesWriter) {
+      result += valuesWriter(out, ref);
+    }
+
+    result += xp.printf("</u:%s>", replyName);
+    result += xp.printNodeEnd("s:Body");
+    result += xp.printNodeEnd("s:Envelope");
+    return result;
+  }
+  /**
+   * Parameterized variants that allow callers to pass dynamic values from
+   * devices (e.g. source/sink protocol lists or current connection IDs).
+   */
+  static size_t replyGetProtocolInfo(Print& out, const char* source = "",
+                                     const char* sink = "") {
+    return printReplyXML(out, "GetProtocolInfoResponse", "ConnectionManager",
+                         [source, sink](Print& o, void* ref) -> size_t {
+                           (void)ref;
+                           size_t written = 0;
+                           written += o.print("<Source>");
+                           written += o.print(StringRegistry::nullStr(source));
+                           written += o.print("</Source>");
+                           written += o.print("<Sink>");
+                           written += o.print(StringRegistry::nullStr(sink));
+                           written += o.print("</Sink>");
+                           return written;
+                         });
+  }
+
+  static size_t replyGetCurrentConnectionIDs(Print& out, const char* ids) {
+    return printReplyXML(
+        out, "GetCurrentConnectionIDsResponse", "ConnectionManager",
+        [ids](Print& o, void* ref) -> size_t {
+          (void)ref;
+          size_t written = 0;
+          // UPnP spec uses "CurrentConnectionIDs" as the response element name
+          written += o.print("<CurrentConnectionIDs>");
+          written += o.print(StringRegistry::nullStr(ids, "0"));
+          written += o.print("</CurrentConnectionIDs>");
+          return written;
+        });
+  }
+
+  static size_t replyGetCurrentConnectionInfo(Print& out,
+                                              const char* protocolInfo,
+                                              const char* connectionID,
+                                              const char* direction) {
+    return printReplyXML(
+        out, "GetCurrentConnectionInfoResponse", "ConnectionManager",
+        [protocolInfo, connectionID, direction](Print& o, void* ref) -> size_t {
+          (void)ref;
+            size_t written = 0;
+            // Write directly to out to avoid using a fixed-size intermediate buffer.
+            written += o.print("<RcsID>0</RcsID>");
+            written += o.print("<AVTransportID>0</AVTransportID>");
+            written += o.print("<ProtocolInfo>");
+            written += o.print(StringRegistry::nullStr(protocolInfo));
+            written += o.print("</ProtocolInfo>");
+            written += o.print("<PeerConnectionManager></PeerConnectionManager>");
+            written += o.print("<PeerConnectionID>");
+            written += o.print(StringRegistry::nullStr(connectionID));
+            written += o.print("</PeerConnectionID>");
+            written += o.print("<Direction>");
+            written += o.print(StringRegistry::nullStr(direction));
+            written += o.print("</Direction>");
+            written += o.print("<Status>OK</Status>");
+            return written;
+        });
+  }
+
   /// Static handler for SUBSCRIBE/UNSUBSCRIBE requests on service event URLs
   static void eventSubscriptionHandler(HttpServer* server,
                                        const char* requestPath,
@@ -269,6 +364,12 @@ class DLNADevice {
     server->replyError(501, "Unsupported Method");
   }
 
+  /// Sets a reference pointer that can be used to associate application
+  void setReference(void* ref) { reference = ref; }
+
+  /// Gets the reference pointer
+  void* getReference() { return reference; }
+
  protected:
   bool is_active = false;
   bool is_subscriptions_active = false;
@@ -280,6 +381,7 @@ class DLNADevice {
   IUDPService* p_udp = nullptr;
   HttpServer* p_server = nullptr;
   inline static StringRegistry registry;
+  void* reference = nullptr;
 
   void setDevice(DLNADeviceInfo& device) { p_device_info = &device; }
 
@@ -423,7 +525,7 @@ class DLNADevice {
   static void handleSubscribe(HttpServer* server, const char* requestPath,
                               HttpRequestHandlerLine* hl) {
     DlnaLogger.log(DlnaLogLevel::Debug, "handleSubscribe");
-    DLNADevice* p_device = (DLNADevice*)server->reference();
+    DLNADevice* p_device = (DLNADevice*)server->getReference();
     // context[0] contains DLNADeviceInfo*
     DLNADeviceInfo* p_device_info = (DLNADeviceInfo*)(hl->context[0]);
     if (!p_device_info) {
@@ -448,7 +550,7 @@ class DLNADevice {
     DLNAServiceInfo* svc = p_device->getServiceByEventPath(requestPath);
     if (svc != nullptr) {
       Str sid = p_device->subscription_mgr.subscribe(*svc, cbStr.c_str(),
-                                                    req_sid.c_str(), tsec);
+                                                     req_sid.c_str(), tsec);
       server->replyHeader().setValues(200, "OK");
       server->replyHeader().put("SID", sid.c_str());
       server->replyHeader().put("TIMEOUT", "Second-1800");
@@ -464,7 +566,7 @@ class DLNADevice {
   static void handleUnsubscribe(HttpServer* server, const char* requestPath,
                                 HttpRequestHandlerLine* hl) {
     DlnaLogger.log(DlnaLogLevel::Debug, "handleUnsubscribe");
-    DLNADevice* p_device = (DLNADevice*)server->reference();
+    DLNADevice* p_device = (DLNADevice*)server->getReference();
 
     // context[0] contains DLNADeviceInfo*
     DLNADeviceInfo* p_device_info = (DLNADeviceInfo*)(hl->context[0]);

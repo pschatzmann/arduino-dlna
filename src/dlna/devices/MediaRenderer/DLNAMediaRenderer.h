@@ -1,8 +1,10 @@
 #pragma once
 #include <cctype>
 #include <cstring>
+#include <functional>
 
 #include "DLNAMediaRendererDescr.h"
+#include "basic/Printf.h"
 #include "basic/Str.h"
 #include "dlna/devices/DLNADevice.h"
 #include "dlna/xml/XMLAttributeParser.h"
@@ -12,9 +14,6 @@ namespace tiny_dlna {
 /**
  * @enum MediaEvent
  * @brief Events emitted by the MediaRenderer to notify the application
- *        about playback and rendering control changes.
- *
- * The application registers a callback using setMediaEventHandler() and
  * will receive the event along with a reference to the emitting
  * MediaRenderer instance. The handler should query the renderer (for
  * example getCurrentUri(), getVolume(), getMime()) to determine the
@@ -82,6 +81,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     setModelNumber("1.0");
     setBaseURL("http://localhost:44757");
     setupRules();
+    dlna_device.setReference(this);
   }
 
   /**
@@ -111,7 +111,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
   void setHttpServer(HttpServer& server) {
     p_server = &server;
     // prepare handler context and register each service via helpers
-    ref_ctx[0] = this;
+    server.setReference(this);
     setupServicesImpl(&server);
   }
 
@@ -136,17 +136,15 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     // reflect state in transport_state so deferred writer can read it
     transport_state = active ? "PLAYING" : "PAUSED_PLAYBACK";
     (void)transport_state;  // value used by writer via ref
-    {
-      auto writer = [](Print& out, void* ref) -> size_t {
-        auto self = (DLNAMediaRenderer*)ref;
-        size_t written = 0;
-        written += out.print("<TransportState val=\"");
-        written += out.print(self->transport_state.c_str());
-        written += out.print("\"/>");
-        return written;
-      };
-      addChange("AVT", writer);
-    }
+    auto writer = [](Print& out, void* ref) -> size_t {
+      auto self = (DLNAMediaRenderer*)ref;
+      size_t written = 0;
+      written += out.print("<TransportState val=\"");
+      written += out.print(self->transport_state.c_str());
+      written += out.print("\"/>");
+      return written;
+    };
+    addChange("AVT", writer);
   }
 
   /// Provides the mime from the DIDL or nullptr
@@ -159,45 +157,48 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
   /// Register application event handler
   void setMediaEventHandler(MediaEventHandler cb) { event_cb = cb; }
 
-  /// Get current volume (0-255)
+  /// Get current volume (0-100)
   uint8_t getVolume() { return current_volume; }
 
-  /// Set volume and publish event
+  /// Set volume and publish event (0-100)
   void setVolume(uint8_t vol) {
     current_volume = vol;
     (void)current_volume;  // value used by writer via ref
-    {
-      auto writer = [](Print& out, void* ref) -> size_t {
-        auto self = (DLNAMediaRenderer*)ref;
-        size_t written = 0;
-        written += out.print("<Volume val=\"");
-        written += out.print(self->current_volume);
-        written += out.print("\"/>");
-        return written;
-      };
-      addChange("RCS", writer);
-    }
+    auto writer = [](Print& out, void* ref) -> size_t {
+      auto self = (DLNAMediaRenderer*)ref;
+      size_t written = 0;
+      written += out.print("<Volume val=\"");
+      written += out.print(self->current_volume);
+      written += out.print("\"/>");
+      return written;
+    };
+    addChange("RCS", writer);
     if (event_cb) event_cb(MediaEvent::SET_VOLUME, *this);
   }
 
   /// Query mute state
-  bool isMuted() { return is_muted; }
+  bool isMuted() { return getVolume() == 0; }
 
   /// Set mute state and publish event
-  void setMuted(bool m) {
-    is_muted = m;
-    (void)is_muted;  // value used by writer via ref
-    {
-      auto writer = [](Print& out, void* ref) -> size_t {
-        auto self = (DLNAMediaRenderer*)ref;
-        size_t written = 0;
-        written += out.print("<Mute val=\"");
-        written += out.print(self->is_muted ? 1 : 0);
-        written += out.print("\"/>");
-        return written;
-      };
-      addChange("RCS", writer);
+  void setMuted(bool mute) {
+    if (mute) {
+      // store current volume and set to 0
+      muted_volume = current_volume;
+      current_volume = 0;
+    } else {
+      // restore previous volume
+      current_volume = muted_volume;
     }
+    auto writer = [](Print& out, void* ref) -> size_t {
+      auto self = (DLNAMediaRenderer*)ref;
+      size_t written = 0;
+      written += out.print("<Mute val=\"");
+      written += out.print(self->isMuted() ? 1 : 0);
+      written += out.print("\"/>");
+      return written;
+    };
+    addChange("RCS", writer);
+
     if (event_cb) event_cb(MediaEvent::SET_MUTE, *this);
   }
 
@@ -211,7 +212,9 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
   DLNADevice& device() { return dlna_device; }
 
   /// Enable/disable subscription notifications
-  void setSubscriptionsActive(bool flag) { dlna_device.setSubscriptionsActive(flag); }
+  void setSubscriptionsActive(bool flag) {
+    dlna_device.setSubscriptionsActive(flag);
+  }
 
   /// Query whether subscription notifications are active
   bool isSubscriptionsActive() { return dlna_device.isSubscriptionsActive(); }
@@ -391,12 +394,48 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     rules.push_back({suffix, handler});
   }
 
+  /// Set the active ConnectionID for the connection manager
+  void setConnectionID(const char* id) { connectionID = id; }
+
+  /// Return the currently configured ConnectionID
+  const char* getConnectionID() { return connectionID; }
+
+  /**
+   * @brief Define the source protocol info: use csv
+   * Default is
+   * http-get:*:image/jpeg:DLNA.ORG_PN=JPEG_TN,http-get:*:image/jpeg:DLNA.ORG_PN=JPEG_SM,http-get:*:image/jpeg:DLNA.ORG_PN=JPEG_MED,http-get:*:image/jpeg:DLNA.ORG_PN=JPEG_LRG,http-get:*:video/mpeg:DLNA.ORG_PN=AVC_TS_HD_50_AC3_ISO,http-get:*:video/mpeg:DLNA.ORG_PN=AVC_TS_HD_60_AC3_ISO,http-get:*:video/mpeg:DLNA.ORG_PN=AVC_TS_HP_HD_AC3_ISO,http-get:*:video/mpeg:DLNA.ORG_PN=AVC_TS_MP_HD_AAC_MULT5_ISO,http-get:*:video/mpeg:DLNA.ORG_PN=AVC_TS_MP_HD_AC3_ISO,http-get:*:video/mpeg:DLNA.ORG_PN=AVC_TS_MP_HD_MPEG1_L3_ISO,http-get:*:video/mpeg:DLNA.ORG_PN=AVC_TS_MP_SD_AAC_MULT5_ISO,http-get:*:video/mpeg:DLNA.ORG_PN=AVC_TS_MP_SD_AC3_ISO,http-get:*:video/mpeg:DLNA.ORG_PN=AVC_TS_MP_SD_MPEG1_L3_ISO,http-get:*:video/mpeg:DLNA.ORG_PN=MPEG_PS_NTSC,http-get:*:video/mpeg:DLNA.ORG_PN=MPEG_PS_PAL,http-get:*:video/mpeg:DLNA.ORG_PN=MPEG_TS_HD_NA_ISO,http-get:*:video/mpeg:DLNA.ORG_PN=MPEG_TS_SD_NA_ISO,http-get:*:video/mpeg:DLNA.ORG_PN=MPEG_TS_SD_EU_ISO,http-get:*:video/mpeg:DLNA.ORG_PN=MPEG1,http-get:*:video/mp4:DLNA.ORG_PN=AVC_MP4_MP_SD_AAC_MULT5,http-get:*:video/mp4:DLNA.ORG_PN=AVC_MP4_MP_SD_AC3,http-get:*:video/mp4:DLNA.ORG_PN=AVC_MP4_BL_CIF15_AAC_520,http-get:*:video/mp4:DLNA.ORG_PN=AVC_MP4_BL_CIF30_AAC_940,http-get:*:video/mp4:DLNA.ORG_PN=AVC_MP4_BL_L31_HD_AAC,http-get:*:video/mp4:DLNA.ORG_PN=AVC_MP4_BL_L32_HD_AAC,http-get:*:video/mp4:DLNA.ORG_PN=AVC_MP4_BL_L3L_SD_AAC,http-get:*:video/mp4:DLNA.ORG_PN=AVC_MP4_HP_HD_AAC,http-get:*:video/mp4:DLNA.ORG_PN=AVC_MP4_MP_HD_1080i_AAC,http-get:*:video/mp4:DLNA.ORG_PN=AVC_MP4_MP_HD_720p_AAC,http-get:*:video/mp4:DLNA.ORG_PN=MPEG4_P2_MP4_ASP_AAC,http-get:*:video/mp4:DLNA.ORG_PN=MPEG4_P2_MP4_SP_VGA_AAC,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_HD_50_AC3,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_HD_50_AC3_T,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_HD_60_AC3,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_HD_60_AC3_T,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_HP_HD_AC3_T,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_MP_HD_AAC_MULT5,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_MP_HD_AAC_MULT5_T,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_MP_HD_AC3,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_MP_HD_AC3_T,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_MP_HD_MPEG1_L3,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_MP_HD_MPEG1_L3_T,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_MP_SD_AAC_MULT5,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_MP_SD_AAC_MULT5_T,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_MP_SD_AC3,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_MP_SD_AC3_T,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_MP_SD_MPEG1_L3,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=AVC_TS_MP_SD_MPEG1_L3_T,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=MPEG_TS_HD_NA,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=MPEG_TS_HD_NA_T,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=MPEG_TS_SD_EU,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=MPEG_TS_SD_EU_T,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=MPEG_TS_SD_NA,http-get:*:video/vnd.dlna.mpeg-tts:DLNA.ORG_PN=MPEG_TS_SD_NA_T,http-get:*:video/x-ms-wmv:DLNA.ORG_PN=WMVSPLL_BASE,http-get:*:video/x-ms-wmv:DLNA.ORG_PN=WMVSPML_BASE,http-get:*:video/x-ms-wmv:DLNA.ORG_PN=WMVSPML_MP3,http-get:*:video/x-ms-wmv:DLNA.ORG_PN=WMVMED_BASE,http-get:*:video/x-ms-wmv:DLNA.ORG_PN=WMVMED_FULL,http-get:*:video/x-ms-wmv:DLNA.ORG_PN=WMVMED_PRO,http-get:*:video/x-ms-wmv:DLNA.ORG_PN=WMVHIGH_FULL,http-get:*:video/x-ms-wmv:DLNA.ORG_PN=WMVHIGH_PRO,http-get:*:video/3gpp:DLNA.ORG_PN=MPEG4_P2_3GPP_SP_L0B_AAC,http-get:*:video/3gpp:DLNA.ORG_PN=MPEG4_P2_3GPP_SP_L0B_AMR,http-get:*:audio/mpeg:DLNA.ORG_PN=MP3,http-get:*:audio/x-ms-wma:DLNA.ORG_PN=WMABASE,http-get:*:audio/x-ms-wma:DLNA.ORG_PN=WMAFULL,http-get:*:audio/x-ms-wma:DLNA.ORG_PN=WMAPRO,http-get:*:audio/x-ms-wma:DLNA.ORG_PN=WMALSL,http-get:*:audio/x-ms-wma:DLNA.ORG_PN=WMALSL_MULT5,http-get:*:audio/mp4:DLNA.ORG_PN=AAC_ISO_320,http-get:*:audio/3gpp:DLNA.ORG_PN=AAC_ISO_320,http-get:*:audio/mp4:DLNA.ORG_PN=AAC_ISO,http-get:*:audio/mp4:DLNA.ORG_PN=AAC_MULT5_ISO,http-get:*:audio/L16;rate=44100;channels=2:DLNA.ORG_PN=LPCM,http-get:*:image/jpeg:*,http-get:*:video/avi:*,http-get:*:video/divx:*,http-get:*:video/x-matroska:*,http-get:*:video/mpeg:*,http-get:*:video/mp4:*,http-get:*:video/x-ms-wmv:*,http-get:*:video/x-msvideo:*,http-get:*:video/x-flv:*,http-get:*:video/x-tivo-mpeg:*,http-get:*:video/quicktime:*,http-get:*:audio/mp4:*,http-get:*:audio/x-wav:*,http-get:*:audio/x-flac:*,http-get:*:audio/x-dsd:*,http-get:*:application/ogg:*http-get:*:application/vnd.rn-realmedia:*http-get:*:application/vnd.rn-realmedia-vbr:*http-get:*:video/webm:*
+   */
+  void setProtocols(const char* source, const char* sink = "") {
+    sourceProto = source;
+    sinkProto = sink;
+    // publish protocol info change to ConnectionManager subscribers
+    // Build writer that will use live state from the device at publish time
+    auto writer = [](Print& out, void* ref) -> size_t {
+      auto self = (DLNAMediaRenderer*)ref;
+      size_t result = 0;
+      result += out.print("<SourceProtocolInfo val=\"");
+      result += out.print(StringRegistry::nullStr(self->getSourceProtocols()));
+      result += out.print("\"/>\n");
+      result += out.print("<SinkProtocolInfo val=\"");
+      result += out.print(StringRegistry::nullStr(self->getSinkProtocols()));
+      result += out.print("\"/>\n");
+      return result;
+    };
+    addChange("CMS", writer);
+  }
+
+  /// Get the current source `ProtocolInfo` string
+  const char* getSourceProtocols() { return sourceProto; }
+
+  /// Get the current sink `ProtocolInfo` string
+  const char* getSinkProtocols() { return sinkProto; }
+
  protected:
   tiny_dlna::Str current_uri;
   tiny_dlna::Str current_mime;
   MediaEventHandler event_cb = nullptr;
   uint8_t current_volume = 50;
-  bool is_muted = false;
+  uint8_t muted_volume = 0;
   unsigned long start_time = 0;
   unsigned long time_sum = 0;
   // Current transport state string (e.g. "STOPPED", "PLAYING",
@@ -409,9 +448,10 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
   DLNADevice dlna_device;
   HttpServer* p_server = nullptr;
   IUDPService* p_udp_member = nullptr;
-  // reusable context pointer array for HttpServer handlers (contains `this`)
-  void* ref_ctx[1] = {nullptr};
   Vector<ActionRule> rules;
+  const char* connectionID = "0";
+  const char* sourceProto = "";
+  const char* sinkProto = DLNA_PROTOCOL_AUDIO;
 
   /// serviceAbbrev: AVT, RCS, CMS
   void addChange(const char* serviceAbbrev,
@@ -423,27 +463,28 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
   /// RelativeTimePosition, CurrentTransportActions)
   void publishAVT() {
     // Transport state will be built by the writer from the instance (ref)
-    {
-      auto writer = [](Print& out, void* ref) -> size_t {
-        auto self = (DLNAMediaRenderer*)ref;
-        StrPrint tmp;
-        tmp.printf("<TransportState val=\"%s\"/>",
-                   self->transport_state.c_str());
-        if (!self->current_uri.isEmpty()) {
-          tmp.printf("<CurrentTrackURI val=\"%s\"/>",
-                     self->current_uri.c_str());
-        }
-        tmp.printf(
-            "<RelativeTimePosition val=\"%02d:%02d:%02d\"/>",
-            static_cast<int>(self->getRelativeTimePositionSec() / 3600),
-            static_cast<int>((self->getRelativeTimePositionSec() % 3600) / 60),
-            static_cast<int>(self->getRelativeTimePositionSec() % 60));
-        tmp.printf("<CurrentTransportActions val=\"%s\"/>",
-                   self->getCurrentTransportActions());
-        return out.print(tmp.c_str());
-      };
-      addChange("AVT", writer);
-    }
+    auto writer = [](Print& out, void* ref) -> size_t {
+      auto self = (DLNAMediaRenderer*)ref;
+      StrPrint tmp;
+      size_t result = 0;
+      result += tmp.printf("<TransportState val=\"%s\"/>",
+                           self->transport_state.c_str());
+      if (!self->current_uri.isEmpty()) {
+        result += tmp.printf("<CurrentTrackURI val=\"%s\"/>",
+                             self->current_uri.c_str());
+      }
+      result += tmp.printf(
+          "<RelativeTimePosition val=\"%02d:%02d:%02d\"/>",
+          static_cast<int>(self->getRelativeTimePositionSec() / 3600),
+          static_cast<int>((self->getRelativeTimePositionSec() % 3600) / 60),
+          static_cast<int>(self->getRelativeTimePositionSec() % 60));
+      result += tmp.printf("<CurrentTransportActions val=\"%s\"/>",
+                           self->getCurrentTransportActions());
+      // write formatted content to provided Print
+      out.print(tmp.c_str());
+      return result;
+    };
+    addChange("AVT", writer);
   }
 
   /// Publish the current RenderingControl state (Volume, Mute)
@@ -451,24 +492,23 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     auto writer = [](Print& out, void* ref) -> size_t {
       auto self = (DLNAMediaRenderer*)ref;
       StrPrint tmp;
-      tmp.printf("<Volume val=\"%d\"/>", self->current_volume);
-      tmp.printf("<Mute val=\"%d\"/>", self->is_muted ? 1 : 0);
-      return out.print(tmp.c_str());
+      size_t written = 0;
+      written += tmp.printf("<Volume val=\"%d\"/>", self->current_volume);
+      written += tmp.printf("<Mute val=\"%d\"/>", self->isMuted() ? 1 : 0);
+      out.print(tmp.c_str());
+      return written;
     };
     addChange("RCS", writer);
   }
 
   /// Publish a minimal ConnectionManager state (CurrentConnectionIDs)
   void publishCMS() {
-    // Minimal information: list of current connection IDs. Use "0" as default
-    // when no active connection is present.
-    {
-      auto writer = [](Print& out, void* ref) -> size_t {
-        (void)ref;
-        return out.print("<CurrentConnectionIDs>0</CurrentConnectionIDs>");
-      };
-      addChange("CMS", writer);
-    }
+    auto writer = [](Print& out, void* ref) -> size_t {
+      DLNAMediaRenderer* self = (DLNAMediaRenderer*)ref;
+      Printf printer{out};
+      return printer.printf("<CurrentConnectionIDs>%s</CurrentConnectionIDs>");
+    };
+    addChange("CMS", writer);
   }
 
   /// Set MIME explicitly (used when DIDL-Lite metadata provides protocolInfo)
@@ -486,7 +526,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     // Convenience helper: extract protocolInfo attribute from a tag and
     // return the contentFormat (3rd token) portion, e.g. from
     // protocolInfo="http-get:*:audio/mpeg:*" -> "audio/mpeg".
-    char mimeBuf[64] = {0};
+    char mimeBuf[256] = {0};
     if (XMLAttributeParser::extractAttributeToken(
             didl, "<res", "protocolInfo=", 3, mimeBuf, sizeof(mimeBuf))) {
       setMime(mimeBuf);
@@ -524,14 +564,26 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     ActionRequest action;
     DLNADevice::parseActionRequest(server, requestPath, hl, action);
 
-    DLNAMediaRenderer* mr = nullptr;
-    if (hl && hl->context[0]) mr = (DLNAMediaRenderer*)hl->context[0];
+    DLNAMediaRenderer* self = getRenderer(server);
 
-    if (mr) {
-      if (mr->processAction(action, *server)) return;
+    // Log incoming SOAPAction header and parsed action for debugging
+    const char* soapHdr = server->requestHeader().get("SOAPACTION");
+    DlnaLogger.log(DlnaLogLevel::Debug, "controlCB: SOAPAction=%s, action=%s",
+                   StringRegistry::nullStr(soapHdr),
+                   StringRegistry::nullStr(action.action));
+
+    if (self) {
+      if (self->processAction(action, *server)) return;
     }
 
     server->replyNotFound();
+  }
+
+  /// Determine the Renderer with the help of the server
+  static DLNAMediaRenderer* getRenderer(HttpServer* server) {
+    DLNADevice* p_device = (DLNADevice*)server->getReference();
+    if (p_device == nullptr) return nullptr;
+    return (DLNAMediaRenderer*)p_device->getReference();
   }
 
   /// After the subscription we publish all relevant properties
@@ -539,15 +591,15 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
                                        const char* requestPath,
                                        HttpRequestHandlerLine* hl) {
     DLNADevice::eventSubscriptionHandler(server, requestPath, hl);
-    DLNAMediaRenderer* device = (DLNAMediaRenderer*)(hl->context[0]);
-    if (device) {
+    DLNAMediaRenderer* self = getRenderer(server);
+    if (self) {
       StrView request_path_str(requestPath);
       if (request_path_str.contains("/AVT/"))
-        device->publishAVT();
+        self->publishAVT();
       else if (request_path_str.contains("/RC/"))
-        device->publishRCS();
+        self->publishRCS();
       else if (request_path_str.contains("/CM/"))
-        device->publishCMS();
+        self->publishCMS();
     }
   }
 
@@ -564,39 +616,29 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     avt.subscription_namespace_abbrev = "AVT";
     // register URLs on the provided server so SCPD, control and event
     // subscription endpoints are available immediately
-    server->on(avt.scpd_url, T_GET, avt.scp_cb, ref_ctx, 1);
-    server->on(avt.control_url, T_POST, avt.control_cb, ref_ctx, 1);
-    server->on(avt.event_sub_url, T_SUBSCRIBE, eventSubscriptionHandler,
-               ref_ctx, 1);
-    server->on(avt.event_sub_url, T_UNSUBSCRIBE,
-               tiny_dlna::DLNADevice::eventSubscriptionHandler, ref_ctx, 1);
-    server->on(avt.event_sub_url, T_POST,
-               tiny_dlna::DLNADevice::eventSubscriptionHandler, ref_ctx, 1);
+    server->on(avt.scpd_url, T_GET, avt.scp_cb);
+    server->on(avt.control_url, T_POST, avt.control_cb);
+    server->on(avt.event_sub_url, T_SUBSCRIBE, eventSubscriptionHandler);
+    server->on(avt.event_sub_url, T_UNSUBSCRIBE, avt.event_sub_cb);
+    server->on(avt.event_sub_url, T_POST, avt.event_sub_cb);
 
     addService(avt);
   }
 
   void setupConnectionManagerService(HttpServer* server) {
     DLNAServiceInfo cm;
-    cm.setup(
-        "urn:schemas-upnp-org:service:ConnectionManager:1",
-        "urn:upnp-org:serviceId:ConnectionManager", "/CM/service.xml",
-        &DLNAMediaRenderer::connmgrDescrCB, "/CM/control",
-        [](HttpServer* server, const char* requestPath,
-           HttpRequestHandlerLine* hl) { server->replyOK(); },
-        "/CM/event",
-        [](HttpServer* server, const char* requestPath,
-           HttpRequestHandlerLine* hl) { server->replyOK(); });
+    cm.setup("urn:schemas-upnp-org:service:ConnectionManager:1",
+             "urn:upnp-org:serviceId:ConnectionManager", "/CM/service.xml",
+             &DLNAMediaRenderer::connmgrDescrCB, "/CM/control",
+             &DLNAMediaRenderer::controlCB, "/CM/event",
+             tiny_dlna::DLNADevice::eventSubscriptionHandler);
     cm.subscription_namespace_abbrev = "CMS";
 
-    server->on(cm.scpd_url, T_GET, cm.scp_cb, ref_ctx, 1);
-    server->on(cm.control_url, T_POST, cm.control_cb, ref_ctx, 1);
-    server->on(cm.event_sub_url, T_SUBSCRIBE, eventSubscriptionHandler, ref_ctx,
-               1);
-    server->on(cm.event_sub_url, T_UNSUBSCRIBE,
-               tiny_dlna::DLNADevice::eventSubscriptionHandler, ref_ctx, 1);
-    server->on(cm.event_sub_url, T_POST,
-               tiny_dlna::DLNADevice::eventSubscriptionHandler, ref_ctx, 1);
+    server->on(cm.scpd_url, T_GET, cm.scp_cb);
+    server->on(cm.control_url, T_POST, cm.control_cb);
+    server->on(cm.event_sub_url, T_SUBSCRIBE, cm.event_sub_cb);
+    server->on(cm.event_sub_url, T_UNSUBSCRIBE, cm.event_sub_cb);
+    server->on(cm.event_sub_url, T_POST, cm.event_sub_cb);
 
     addService(cm);
   }
@@ -610,14 +652,14 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
              [](HttpServer* server, const char* requestPath,
                 HttpRequestHandlerLine* hl) { server->replyOK(); });
     rc.subscription_namespace_abbrev = "RCS";
-    server->on(rc.scpd_url, T_GET, rc.scp_cb, ref_ctx, 1);
-    server->on(rc.control_url, T_POST, rc.control_cb, ref_ctx, 1);
-    server->on(rc.event_sub_url, T_SUBSCRIBE, eventSubscriptionHandler, ref_ctx,
-               1);
+    server->on(rc.scpd_url, T_GET, rc.scp_cb);
+    server->on(rc.control_url, T_POST, rc.control_cb);
+    server->on(rc.event_sub_url, T_SUBSCRIBE,
+               tiny_dlna::DLNADevice::eventSubscriptionHandler);
     server->on(rc.event_sub_url, T_UNSUBSCRIBE,
-               tiny_dlna::DLNADevice::eventSubscriptionHandler, ref_ctx, 1);
+               tiny_dlna::DLNADevice::eventSubscriptionHandler);
     server->on(rc.event_sub_url, T_POST,
-               tiny_dlna::DLNADevice::eventSubscriptionHandler, ref_ctx, 1);
+               tiny_dlna::DLNADevice::eventSubscriptionHandler);
 
     addService(rc);
   }
@@ -632,67 +674,59 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     setupRenderingControlService(server);
   }
 
-  /// Builds a standard SOAP reply envelope
-  static int printReplyXML(Print& out, const char* replyName,
-                           const char* serviceId,
-                           const char* values = nullptr) {
-    XMLPrinter xp(out);
-    size_t result = 0;
-    result += xp.printNodeBegin(
-        "s:Envelope", "xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\"");
-    result += xp.printNodeBegin("s:Body");
-    result += xp.printf("<u:%s xmlns:u=\"urn:schemas-upnp-org:service:%s:1\">",
-                        replyName, serviceId);
-
-    // e.g.<u:return>Stop,Pause,Next,Seek</u:return> for
-    // QueryStateVariableResponse
-    if (values) {
-      result += xp.printf("%s", values);
-    }
-
-    result += xp.printf("</u:%s>", replyName);
-    result += xp.printNodeEnd("s:Body");
-    result += xp.printNodeEnd("s:Envelope");
-    return result;
-  }
-
   // Static reply helper methods for SOAP actions
   static size_t replyPlay(Print& out) {
-    return DLNAMediaRenderer::printReplyXML(out, "PlayResponse", "AVTransport");
-  }
-  static size_t replyPause(Print& out) {
-    return DLNAMediaRenderer::printReplyXML(out, "PauseResponse",
-                                            "AVTransport");
-  }
-  static size_t replyStop(Print& out) {
-    return DLNAMediaRenderer::printReplyXML(out, "StopResponse", "AVTransport");
-  }
-  static size_t replySetAVTransportURI(Print& out) {
-    return DLNAMediaRenderer::printReplyXML(out, "SetAVTransportURIResponse",
-                                            "AVTransport");
-  }
-  static size_t replySetVolume(Print& out) {
-    return DLNAMediaRenderer::printReplyXML(out, "SetVolumeResponse",
-                                            "RenderingControl");
-  }
-  static size_t replySetMute(Print& out) {
-    return DLNAMediaRenderer::printReplyXML(out, "SetMuteResponse",
-                                            "RenderingControl");
-  }
-  // Static reply helper for GetMute
-  static size_t replyGetMute(Print& out, bool isMuted) {
-    StrPrint values;
-    values.printf("<CurrentMute>%d</CurrentMute>", isMuted ? 1 : 0);
-    return DLNAMediaRenderer::printReplyXML(out, "GetMuteResponse",
-                                            "RenderingControl", values.c_str());
+    return DLNADevice::printReplyXML(out, "PlayResponse", "AVTransport");
   }
 
-  // Static reply helper for GetVolume
+  static size_t replyPause(Print& out) {
+    return DLNADevice::printReplyXML(out, "PauseResponse", "AVTransport");
+  }
+
+  static size_t replyStop(Print& out) {
+    return DLNADevice::printReplyXML(out, "StopResponse", "AVTransport");
+  }
+
+  static size_t replySetAVTransportURI(Print& out) {
+    return DLNADevice::printReplyXML(out, "SetAVTransportURIResponse",
+                                     "AVTransport");
+  }
+
+  static size_t replySetVolume(Print& out) {
+    return DLNADevice::printReplyXML(out, "SetVolumeResponse",
+                                     "RenderingControl");
+  }
+
+  static size_t replySetMute(Print& out) {
+    return DLNADevice::printReplyXML(out, "SetMuteResponse",
+                                     "RenderingControl");
+  }
+
+  /// Static reply helper for GetMute
+  static size_t replyGetMute(Print& out, bool isMuted) {
+    return DLNADevice::printReplyXML(out, "GetMuteResponse", "RenderingControl",
+                                     [isMuted](Print& o, void* ref) -> size_t {
+                                       (void)ref;
+                                       size_t written = 0;
+                                       written += o.print("<CurrentMute>");
+                                       written += o.print(isMuted ? 1 : 0);
+                                       written += o.print("</CurrentMute>");
+                                       return written;
+                                     });
+  }
+
+  /// Static reply helper for GetVolume
   static size_t replyGetVolume(Print& out, uint8_t volume) {
-    StrPrint values;
-    values.printf("<CurrentVolume>%d</CurrentVolume>", volume);
-    return DLNAMediaRenderer::printReplyXML(out, "GetVolumeResponse",
-                                            "RenderingControl", values.c_str());
+    return DLNADevice::printReplyXML(out, "GetVolumeResponse",
+                                     "RenderingControl",
+                                     [volume](Print& o, void* ref) -> size_t {
+                                       (void)ref;
+                                       size_t written = 0;
+                                       written += o.print("<CurrentVolume>");
+                                       written += o.print((int)volume);
+                                       written += o.print("</CurrentVolume>");
+                                       return written;
+                                     });
   }
 
   /**
@@ -723,104 +757,210 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     return false;
   }
 
+  // Per-action handlers (match MediaServer pattern)
+  bool processActionPlay(ActionRequest& action, HttpServer& server) {
+    setActive(true);
+    NullPrint np;
+    size_t len = DLNADevice::printReplyXML(np, "PlayResponse", "AVTransport",
+                                           nullptr, this);
+    server.reply("text/xml", len, [](Print& out) -> size_t {
+      return DLNADevice::printReplyXML(out, "PlayResponse", "AVTransport");
+    });
+    return true;
+  }
+
+  bool processActionPause(ActionRequest& action, HttpServer& server) {
+    setActive(false);
+    NullPrint np;
+    size_t len = DLNADevice::printReplyXML(np, "PauseResponse", "AVTransport",
+                                           nullptr, this);
+    server.reply("text/xml", len, [](Print& out) -> size_t {
+      return DLNADevice::printReplyXML(out, "PauseResponse", "AVTransport");
+    });
+    return true;
+  }
+
+  bool processActionStop(ActionRequest& action, HttpServer& server) {
+    setActive(false);
+    NullPrint np;
+    size_t len = DLNADevice::printReplyXML(np, "StopResponse", "AVTransport",
+                                           nullptr, this);
+    server.reply("text/xml", len, [](Print& out) -> size_t {
+      return DLNADevice::printReplyXML(out, "StopResponse", "AVTransport");
+    });
+    return true;
+  }
+
+  bool processActionGetCurrentTransportActions(ActionRequest& action,
+                                               HttpServer& server) {
+    StrPrint resp;
+    DLNADevice::printReplyXML(
+        resp, "QueryStateVariableResponse", "AVTransport",
+        [](Print& o, void* ref) -> size_t {
+          size_t written = 0;
+          auto self = (DLNAMediaRenderer*)ref;
+          written += o.print("<u:return>");
+          written += o.print(self->getCurrentTransportActions());
+          written += o.print("</u:return>");
+          return written;
+        },
+        this);
+    server.reply("text/xml", resp.c_str());
+    return true;
+  }
+
+  // ConnectionManager: GetProtocolInfo
+  bool processActionGetProtocolInfo(ActionRequest& action, HttpServer& server) {
+    StrPrint resp;
+    DLNADevice::replyGetProtocolInfo(resp, this->getSourceProtocols(),
+                                     this->getSinkProtocols());
+    server.reply("text/xml", resp.c_str());
+    return true;
+  }
+
+  // ConnectionManager: GetCurrentConnectionIDs
+  bool processActionGetCurrentConnectionIDs(ActionRequest& action,
+                                            HttpServer& server) {
+    StrPrint resp;
+    // keep previous behavior of returning a single ID "1"
+    DLNADevice::replyGetCurrentConnectionIDs(resp, this->getConnectionID());
+    server.reply("text/xml", resp.c_str());
+    return true;
+  }
+
+  // ConnectionManager: GetCurrentConnectionInfo
+  bool processActionGetCurrentConnectionInfo(ActionRequest& action,
+                                             HttpServer& server) {
+    StrPrint resp;
+    DLNADevice::replyGetCurrentConnectionInfo(resp, this->getSinkProtocols(),
+                                              this->getConnectionID(), "Input");
+    server.reply("text/xml", resp.c_str());
+    return true;
+  }
+
+  bool processActionSetAVTransportURI(ActionRequest& action,
+                                      HttpServer& server) {
+    const char* uri = action.getArgumentValue("CurrentURI");
+    if (uri && *uri) {
+      setPlaybackURL(uri);
+      NullPrint np;
+      size_t len = DLNADevice::printReplyXML(np, "SetAVTransportURIResponse",
+                                             "AVTransport", nullptr, this);
+      server.reply("text/xml", len, [](Print& out) -> size_t {
+        return DLNADevice::printReplyXML(out, "SetAVTransportURIResponse",
+                                         "AVTransport");
+      });
+      return true;
+    } else {
+      DlnaLogger.log(DlnaLogLevel::Warning,
+                     "SetAVTransportURI called with invalid SOAP payload");
+      server.replyError(400, "Invalid Action");
+      return false;
+    }
+  }
+
+  bool processActionSetVolume(ActionRequest& action, HttpServer& server) {
+    int desiredVolume = action.getArgumentIntValue("DesiredVolume");
+    setVolume((uint8_t)desiredVolume);
+    NullPrint np;
+    size_t len = DLNADevice::printReplyXML(np, "SetVolumeResponse",
+                                           "RenderingControl", nullptr, this);
+    server.reply("text/xml", len, [](Print& out) -> size_t {
+      return DLNADevice::printReplyXML(out, "SetVolumeResponse",
+                                       "RenderingControl");
+    });
+    return true;
+  }
+
+  bool processActionSetMute(ActionRequest& action, HttpServer& server) {
+    bool desiredMute = action.getArgumentIntValue("DesiredMute") != 0;
+    setMuted(desiredMute);
+    NullPrint np;
+    size_t len = DLNADevice::printReplyXML(np, "SetMuteResponse",
+                                           "RenderingControl", nullptr, this);
+    server.reply("text/xml", len, [](Print& out) -> size_t {
+      return DLNADevice::printReplyXML(out, "SetMuteResponse",
+                                       "RenderingControl");
+    });
+    return true;
+  }
+
+  bool processActionGetMute(ActionRequest& action, HttpServer& server) {
+    StrPrint resp;
+    DLNAMediaRenderer::replyGetMute(resp, isMuted());
+    server.reply("text/xml", resp.c_str());
+    return true;
+  }
+
+  bool processActionGetVolume(ActionRequest& action, HttpServer& server) {
+    StrPrint resp;
+    DLNAMediaRenderer::replyGetVolume(resp, (uint8_t)getVolume());
+    DlnaLogger.log(DlnaLogLevel::Debug, "GetVolume: %d", getVolume());
+    server.reply("text/xml", resp.c_str());
+    return true;
+  }
+
   /// Setup the action handling rules
   void setupRules() {
     rules.push_back({"Play", [](DLNAMediaRenderer* self, ActionRequest& action,
                                 HttpServer& server) {
-                       self->setActive(true);
-                       NullPrint nop;
-                       server.reply("text/xml",
-                                    DLNAMediaRenderer::replyPlay(nop),
-                                    &DLNAMediaRenderer::replyPlay);
-                       return true;
+                       return self->processActionPlay(action, server);
                      }});
     rules.push_back({"Pause", [](DLNAMediaRenderer* self, ActionRequest& action,
                                  HttpServer& server) {
-                       self->setActive(false);
-                       NullPrint nop;
-                       server.reply("text/xml",
-                                    DLNAMediaRenderer::replyPause(nop),
-                                    &DLNAMediaRenderer::replyPause);
-                       return true;
+                       return self->processActionPause(action, server);
                      }});
     rules.push_back({"Stop", [](DLNAMediaRenderer* self, ActionRequest& action,
                                 HttpServer& server) {
-                       self->setActive(false);
-                       NullPrint nop;
-                       server.reply("text/xml",
-                                    DLNAMediaRenderer::replyStop(nop),
-                                    &DLNAMediaRenderer::replyStop);
-                       return true;
+                       return self->processActionStop(action, server);
                      }});
     rules.push_back({"GetCurrentTransportActions",
                      [](DLNAMediaRenderer* self, ActionRequest& action,
                         HttpServer& server) {
-                       StrPrint returnValue;
-                       returnValue.printf("<u:return>%s</u:return>",
-                                          self->getCurrentTransportActions());
-                       StrPrint xml;
-                       DLNAMediaRenderer::printReplyXML(
-                           xml, "QueryStateVariableResponse", "AVTransport",
-                           returnValue.c_str());
-                       server.reply("text/xml", xml.c_str(), xml.length());
-                       return true;
+                       return self->processActionGetCurrentTransportActions(
+                           action, server);
                      }});
     rules.push_back(
         {"SetAVTransportURI", [](DLNAMediaRenderer* self, ActionRequest& action,
                                  HttpServer& server) {
-           const char* uri = action.getArgumentValue("CurrentURI");
-           if (uri && *uri) {
-             self->setPlaybackURL(uri);
-             NullPrint nop;
-             server.reply("text/xml",
-                          DLNAMediaRenderer::replySetAVTransportURI(nop),
-                          &DLNAMediaRenderer::replySetAVTransportURI);
-             return true;
-           } else {
-             DlnaLogger.log(
-                 DlnaLogLevel::Warning,
-                 "SetAVTransportURI called with invalid SOAP payload");
-             server.replyError(400, "Invalid Action");
-             return false;
-           }
+           return self->processActionSetAVTransportURI(action, server);
          }});
     rules.push_back(
         {"SetVolume", [](DLNAMediaRenderer* self, ActionRequest& action,
                          HttpServer& server) {
-           int desiredVolume = action.getArgumentIntValue("DesiredVolume");
-           self->setVolume((uint8_t)desiredVolume);
-           NullPrint nop;
-           server.reply("text/xml", DLNAMediaRenderer::replySetVolume(nop),
-                        &DLNAMediaRenderer::replySetVolume);
-           return true;
+           return self->processActionSetVolume(action, server);
          }});
-    rules.push_back(
-        {"SetMute", [](DLNAMediaRenderer* self, ActionRequest& action,
-                       HttpServer& server) {
-           bool desiredMute = action.getArgumentIntValue("DesiredMute") != 0;
-           self->setMuted(desiredMute);
-           NullPrint nop;
-           server.reply("text/xml", DLNAMediaRenderer::replySetMute(nop),
-                        &DLNAMediaRenderer::replySetMute);
-           return true;
-         }});
-    // Add GetMute rule
+    rules.push_back({"SetMute", [](DLNAMediaRenderer* self,
+                                   ActionRequest& action, HttpServer& server) {
+                       return self->processActionSetMute(action, server);
+                     }});
     rules.push_back({"GetMute", [](DLNAMediaRenderer* self,
                                    ActionRequest& action, HttpServer& server) {
-                       StrPrint str;
-                       DLNAMediaRenderer::replyGetMute(str, self->isMuted());
-                       server.reply("text/xml", str.c_str());
-                       return true;
+                       return self->processActionGetMute(action, server);
                      }});
-    // Add GetVolume rule
     rules.push_back(
         {"GetVolume", [](DLNAMediaRenderer* self, ActionRequest& action,
                          HttpServer& server) {
-           StrPrint str;
-           DLNAMediaRenderer::replyGetVolume(str, self->getVolume());
-           server.reply("text/xml", str.c_str());
-           return true;
+           return self->processActionGetVolume(action, server);
          }});
+    // ConnectionManager rules
+    rules.push_back(
+        {"GetProtocolInfo", [](DLNAMediaRenderer* self, ActionRequest& action,
+                               HttpServer& server) {
+           return self->processActionGetProtocolInfo(action, server);
+         }});
+    rules.push_back({"GetCurrentConnectionIDs",
+                     [](DLNAMediaRenderer* self, ActionRequest& action,
+                        HttpServer& server) {
+                       return self->processActionGetCurrentConnectionIDs(
+                           action, server);
+                     }});
+    rules.push_back({"GetCurrentConnectionInfo",
+                     [](DLNAMediaRenderer* self, ActionRequest& action,
+                        HttpServer& server) {
+                       return self->processActionGetCurrentConnectionInfo(
+                           action, server);
+                     }});
   }
 };
 
