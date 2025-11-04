@@ -90,7 +90,11 @@ $(function() {
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a94dd33503dd2ab0979a3441fae237873"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html#a94dd33503dd2ab0979a3441fae237873">DLNAServiceInfo</a> (bool flag=true)</td></tr>
 <tr class="separator:a94dd33503dd2ab0979a3441fae237873"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9977b184e2572b7f5635fb6d35ae15ee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html#a9977b184e2572b7f5635fb6d35ae15ee">setSubscriptionsActive</a> (bool active)</td></tr>
+<tr class="memdesc:a9977b184e2572b7f5635fb6d35ae15ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable or disable subscriptions.  <br /></td></tr>
+<tr class="separator:a9977b184e2572b7f5635fb6d35ae15ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7f54faba8f7706ef57354200c3091d9b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html#a7f54faba8f7706ef57354200c3091d9b">setup</a> (const char *type, const char *id, const char *scp, <a class="el" href="namespacetiny__dlna.html#a1ac25cf2e9ceca6ae0e8fd2fd586470c">http_callback</a> cbScp, const char *control, <a class="el" href="namespacetiny__dlna.html#a1ac25cf2e9ceca6ae0e8fd2fd586470c">http_callback</a> cbControl, const char *event, <a class="el" href="namespacetiny__dlna.html#a1ac25cf2e9ceca6ae0e8fd2fd586470c">http_callback</a> cbEvent)</td></tr>
+<tr class="memdesc:a7f54faba8f7706ef57354200c3091d9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup all relevant values.  <br /></td></tr>
 <tr class="separator:a7f54faba8f7706ef57354200c3091d9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aad5962bc88d35b35ef29f49988a92782"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html#aad5962bc88d35b35ef29f49988a92782">operator bool</a> ()</td></tr>
 <tr class="separator:aad5962bc88d35b35ef29f49988a92782"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -107,6 +111,8 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a9cfe567968620bc03629b0e120153b6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af49ffe27509241a816128acb00a9deae"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html#af49ffe27509241a816128acb00a9deae">event_sub_url</a> = nullptr</td></tr>
 <tr class="separator:af49ffe27509241a816128acb00a9deae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4cdac902ec56ee5bd3a9cf216b6cf42"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html#ad4cdac902ec56ee5bd3a9cf216b6cf42">event_sub_url_backup</a> = nullptr</td></tr>
+<tr class="separator:ad4cdac902ec56ee5bd3a9cf216b6cf42"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6e0e681d505fe8bfd30a5bfa3c945f00"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html#a6e0e681d505fe8bfd30a5bfa3c945f00">event_sub_sid</a> = nullptr</td></tr>
 <tr class="separator:a6e0e681d505fe8bfd30a5bfa3c945f00"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4a3fe462de28ecd980fdb16a64a98372"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacetiny__dlna.html#a1ac25cf2e9ceca6ae0e8fd2fd586470c">http_callback</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html#a4a3fe462de28ecd980fdb16a64a98372">scp_cb</a> = nullptr</td></tr>
@@ -192,6 +198,34 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a9977b184e2572b7f5635fb6d35ae15ee" name="a9977b184e2572b7f5635fb6d35ae15ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9977b184e2572b7f5635fb6d35ae15ee">&#9670;&#160;</a></span>setSubscriptionsActive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tiny_dlna::DLNAServiceInfo::setSubscriptionsActive </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>active</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Enable or disable subscriptions. </p>
+
+</div>
+</div>
 <a id="a7f54faba8f7706ef57354200c3091d9b" name="a7f54faba8f7706ef57354200c3091d9b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7f54faba8f7706ef57354200c3091d9b">&#9670;&#160;</a></span>setup()</h2>
 
@@ -261,6 +295,8 @@ Public Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Setup all relevant values. </p>
 
 </div>
 </div>
@@ -333,6 +369,21 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad4cdac902ec56ee5bd3a9cf216b6cf42" name="ad4cdac902ec56ee5bd3a9cf216b6cf42"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4cdac902ec56ee5bd3a9cf216b6cf42">&#9670;&#160;</a></span>event_sub_url_backup</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* tiny_dlna::DLNAServiceInfo::event_sub_url_backup = nullptr</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>saved event_sub_url when subscriptions are disabled </p>
 
 </div>
 </div>

@@ -117,12 +117,24 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a4bc2d50328753eabb3c991ff3efea3db"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgrDevice.html#a4bc2d50328753eabb3c991ff3efea3db">pendingCount</a> ()</td></tr>
 <tr class="memdesc:a4bc2d50328753eabb3c991ff3efea3db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of queued pending notifications.  <br /></td></tr>
 <tr class="separator:a4bc2d50328753eabb3c991ff3efea3db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77811c77f165317e9d81244129ba687e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgrDevice.html#a77811c77f165317e9d81244129ba687e">setSubscriptionsActive</a> (bool flag)</td></tr>
+<tr class="memdesc:a77811c77f165317e9d81244129ba687e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable or disable subscription delivery.  <br /></td></tr>
+<tr class="separator:a77811c77f165317e9d81244129ba687e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84124f7f4e7c698cbf3663939a317484"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgrDevice.html#a84124f7f4e7c698cbf3663939a317484">end</a> ()</td></tr>
+<tr class="memdesc:a84124f7f4e7c698cbf3663939a317484"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience method to disable subscriptions at the end of the lifecycle.  <br /></td></tr>
+<tr class="separator:a84124f7f4e7c698cbf3663939a317484"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0fcb07f22b45ed11af4cf725841b69d7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgrDevice.html#a0fcb07f22b45ed11af4cf725841b69d7">isSubscriptionsActive</a> () const</td></tr>
+<tr class="memdesc:a0fcb07f22b45ed11af4cf725841b69d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Query whether subscription delivery is active.  <br /></td></tr>
+<tr class="separator:a0fcb07f22b45ed11af4cf725841b69d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:ac4b8a428a46a688b083e280e7f3c78db"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Str.html">Str</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgrDevice.html#ac4b8a428a46a688b083e280e7f3c78db">renewSubscription</a> (<a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html">DLNAServiceInfo</a> &amp;service, const char *sid, const char *callbackUrl, uint32_t timeoutSec)</td></tr>
 <tr class="memdesc:ac4b8a428a46a688b083e280e7f3c78db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Try to renew an existing subscription identified by SID for the given service. If successful the subscription's timeout/expiry (and optionally callback URL) are updated and the renewed SID is returned. If no matching subscription exists an empty <a class="el" href="classtiny__dlna_1_1Str.html" title="String implementation which keeps the data on the heap. We grow the allocated memory only if the copy...">Str</a> is returned.  <br /></td></tr>
 <tr class="separator:ac4b8a428a46a688b083e280e7f3c78db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af19f178c10b5a6d81e8700c963db7cbf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgrDevice.html#af19f178c10b5a6d81e8700c963db7cbf">clear</a> ()</td></tr>
+<tr class="memdesc:af19f178c10b5a6d81e8700c963db7cbf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear all subscriptions and pending notifications.  <br /></td></tr>
+<tr class="separator:af19f178c10b5a6d81e8700c963db7cbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
 Static Protected Member Functions</h2></td></tr>
@@ -136,6 +148,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a61b79fde43901584f8f1868a269641d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acb5af6f10d937ec042f0dc309eb522e8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt; <a class="el" href="structtiny__dlna_1_1PendingNotification.html">PendingNotification</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgrDevice.html#acb5af6f10d937ec042f0dc309eb522e8">pending_list</a></td></tr>
 <tr class="separator:acb5af6f10d937ec042f0dc309eb522e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b4347e03c8d7c71dfaf323d6abb8047"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgrDevice.html#a9b4347e03c8d7c71dfaf323d6abb8047">is_active</a> = true</td></tr>
+<tr class="separator:a9b4347e03c8d7c71dfaf323d6abb8047"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Manages UPnP event subscriptions and queued notifications for a DLNA device. </p>
@@ -258,6 +272,33 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="af19f178c10b5a6d81e8700c963db7cbf" name="af19f178c10b5a6d81e8700c963db7cbf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af19f178c10b5a6d81e8700c963db7cbf">&#9670;&#160;</a></span>clear()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tiny_dlna::SubscriptionMgrDevice::clear </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Clear all subscriptions and pending notifications. </p>
+
+</div>
+</div>
 <a id="afa5f46f49c187698c5b0642426742890" name="afa5f46f49c187698c5b0642426742890"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afa5f46f49c187698c5b0642426742890">&#9670;&#160;</a></span>createXML()</h2>
 
@@ -294,6 +335,61 @@ Protected Attributes</h2></td></tr>
 
 <p>Generate the propertyset XML for a single variable and write it to the provided Print instance. The inner event content is emitted via the provided <code>changeWriter</code> callback which must have signature <code>size_t(Print&amp;, void*)</code>. The opaque <code>ref</code> pointer is passed through to the callback and may be used to access context (for example the <code><a class="el" href="structtiny__dlna_1_1PendingNotification.html" title="Representation of a queued notification to be delivered later.">PendingNotification</a></code> that owns the fragment). </p>
 <p>Returns the number of bytes written. </p>
+
+</div>
+</div>
+<a id="a84124f7f4e7c698cbf3663939a317484" name="a84124f7f4e7c698cbf3663939a317484"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a84124f7f4e7c698cbf3663939a317484">&#9670;&#160;</a></span>end()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tiny_dlna::SubscriptionMgrDevice::end </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Convenience method to disable subscriptions at the end of the lifecycle. </p>
+
+</div>
+</div>
+<a id="a0fcb07f22b45ed11af4cf725841b69d7" name="a0fcb07f22b45ed11af4cf725841b69d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0fcb07f22b45ed11af4cf725841b69d7">&#9670;&#160;</a></span>isSubscriptionsActive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool tiny_dlna::SubscriptionMgrDevice::isSubscriptionsActive </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Query whether subscription delivery is active. </p>
+<dl class="section return"><dt>Returns</dt><dd>true if subscription delivery is enabled </dd></dl>
 
 </div>
 </div>
@@ -428,6 +524,35 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Try to renew an existing subscription identified by SID for the given service. If successful the subscription's timeout/expiry (and optionally callback URL) are updated and the renewed SID is returned. If no matching subscription exists an empty <a class="el" href="classtiny__dlna_1_1Str.html" title="String implementation which keeps the data on the heap. We grow the allocated memory only if the copy...">Str</a> is returned. </p>
+
+</div>
+</div>
+<a id="a77811c77f165317e9d81244129ba687e" name="a77811c77f165317e9d81244129ba687e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a77811c77f165317e9d81244129ba687e">&#9670;&#160;</a></span>setSubscriptionsActive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tiny_dlna::SubscriptionMgrDevice::setSubscriptionsActive </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>flag</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Enable or disable subscription delivery. </p>
+<p>When disabled the manager will not attempt to publish pending notifications. Disabling also clears the pending queue to avoid delivering stale notifications when re-enabled. Use <code><a class="el" href="classtiny__dlna_1_1SubscriptionMgrDevice.html#a0fcb07f22b45ed11af4cf725841b69d7" title="Query whether subscription delivery is active.">isSubscriptionsActive()</a></code> to query the current state. </p>
 
 </div>
 </div>
@@ -570,6 +695,28 @@ false if no matching subscription exists </dd></dl>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="a9b4347e03c8d7c71dfaf323d6abb8047" name="a9b4347e03c8d7c71dfaf323d6abb8047"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b4347e03c8d7c71dfaf323d6abb8047">&#9670;&#160;</a></span>is_active</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool tiny_dlna::SubscriptionMgrDevice::is_active = true</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="acb5af6f10d937ec042f0dc309eb522e8" name="acb5af6f10d937ec042f0dc309eb522e8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#acb5af6f10d937ec042f0dc309eb522e8">&#9670;&#160;</a></span>pending_list</h2>
 

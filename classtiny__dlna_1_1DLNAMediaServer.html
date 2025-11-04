@@ -186,6 +186,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:acf827856703347135f836acbd3c46bbd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1DLNADevice.html">DLNADevice</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaServer.html#acf827856703347135f836acbd3c46bbd">device</a> ()</td></tr>
 <tr class="memdesc:acf827856703347135f836acbd3c46bbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides access to the internal DLNA device instance.  <br /></td></tr>
 <tr class="separator:acf827856703347135f836acbd3c46bbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa760a69c62ec3140c9ee8b114b7a26be"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaServer.html#aa760a69c62ec3140c9ee8b114b7a26be">setSubscriptionsActive</a> (bool flag)</td></tr>
+<tr class="memdesc:aa760a69c62ec3140c9ee8b114b7a26be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable/disable subscription notifications.  <br /></td></tr>
+<tr class="separator:aa760a69c62ec3140c9ee8b114b7a26be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a669e8507fdcd4eeeb3816c7edcfc5f24"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaServer.html#a669e8507fdcd4eeeb3816c7edcfc5f24">isSubscriptionsActive</a> ()</td></tr>
+<tr class="memdesc:a669e8507fdcd4eeeb3816c7edcfc5f24"><td class="mdescLeft">&#160;</td><td class="mdescRight">Query whether subscription notifications are active.  <br /></td></tr>
+<tr class="separator:a669e8507fdcd4eeeb3816c7edcfc5f24"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ea080f9e50f1d6e36aba828933b62b1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaServer.html#a0ea080f9e50f1d6e36aba828933b62b1">setCustomActionRule</a> (const char *suffix, bool(*handler)(<a class="el" href="classtiny__dlna_1_1DLNAMediaServer.html">DLNAMediaServer</a> *, <a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;, <a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;))</td></tr>
 <tr class="memdesc:a0ea080f9e50f1d6e36aba828933b62b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define your own custom logic.  <br /></td></tr>
 <tr class="separator:a0ea080f9e50f1d6e36aba828933b62b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1890,6 +1896,33 @@ IUDPService&amp;) </p>
 
 </div>
 </div>
+<a id="a669e8507fdcd4eeeb3816c7edcfc5f24" name="a669e8507fdcd4eeeb3816c7edcfc5f24"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a669e8507fdcd4eeeb3816c7edcfc5f24">&#9670;&#160;</a></span>isSubscriptionsActive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool tiny_dlna::DLNAMediaServer::isSubscriptionsActive </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Query whether subscription notifications are active. </p>
+
+</div>
+</div>
 <a id="aa5f62e34e5488c6f58bf00a521ab6324" name="aa5f62e34e5488c6f58bf00a521ab6324"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa5f62e34e5488c6f58bf00a521ab6324">&#9670;&#160;</a></span>loop()</h2>
 
@@ -3206,6 +3239,34 @@ IUDPService&amp;) </p>
 </div><div class="memdoc">
 
 <p>Define the sort capabilities: use csv. </p>
+
+</div>
+</div>
+<a id="aa760a69c62ec3140c9ee8b114b7a26be" name="aa760a69c62ec3140c9ee8b114b7a26be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa760a69c62ec3140c9ee8b114b7a26be">&#9670;&#160;</a></span>setSubscriptionsActive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tiny_dlna::DLNAMediaServer::setSubscriptionsActive </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>flag</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Enable/disable subscription notifications. </p>
 
 </div>
 </div>
