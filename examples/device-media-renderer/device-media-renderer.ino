@@ -47,6 +47,9 @@ void setup() {
         case MediaEvent::STOP:
           Serial.println("Event: STOP");
           break;
+        case MediaEvent::PAUSE:
+          Serial.println("Event: PAUSE");
+          break;
         case MediaEvent::SET_VOLUME:
           Serial.print("Event: SET_VOLUME ");
           Serial.println(mr.getVolume());

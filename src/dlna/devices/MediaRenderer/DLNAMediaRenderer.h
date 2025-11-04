@@ -173,7 +173,6 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
       return written;
     };
     addChange("RCS", writer);
-    if (event_cb) event_cb(MediaEvent::SET_VOLUME, *this);
   }
 
   /// Query mute state
@@ -198,8 +197,6 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
       return written;
     };
     addChange("RCS", writer);
-
-    if (event_cb) event_cb(MediaEvent::SET_MUTE, *this);
   }
 
   // Access current URI
@@ -231,14 +228,10 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     DlnaLogger.log(DlnaLogLevel::Info, "play URL: %s", urlStr);
     // store URI
     current_uri.set(urlStr);
-    // notify handler about the new URI and play
-    if (event_cb) {
-      event_cb(MediaEvent::SET_URI, *this);
-      event_cb(MediaEvent::PLAY, *this);
-    }
-    is_active = true;
-    start_time = millis();
-    time_sum = 0;
+    // notify handler about the new URI; do not dispatch PLAY here — action
+    // handlers will dispatch media events explicitly.
+    (void)event_cb;
+    setActive(true);
 
     // ensure transport_state reflects playing for subscribers
     transport_state = "PLAYING";
@@ -267,10 +260,8 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     DlnaLogger.log(DlnaLogLevel::Info, "setPlaybackURL URL: %s", urlStr);
     // store URI
     current_uri = Str(urlStr);
-    // notify handler about the new URI and play
-    if (event_cb) {
-      event_cb(MediaEvent::SET_URI, *this);
-    }
+    // Do not notify application here; event notifications are emitted
+    // from the SOAP action handlers (processAction*).
 
     (void)current_uri;  // writer will fetch it from ref
     {
@@ -294,8 +285,6 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     is_active = false;
     start_time = 0;
     time_sum = 0;
-    // notify handler about the stop
-    if (event_cb) event_cb(MediaEvent::STOP, *this);
     // reflect stopped state
     transport_state = "STOPPED";
     auto writer = [](Print& out, void* ref) -> size_t {
@@ -324,8 +313,8 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     is_active = false;
     start_time = 0;
     time_sum = 0;
-    // notify application handler about the stop
-    if (event_cb) event_cb(MediaEvent::STOP, *this);
+    // Do not notify application here; event notifications are emitted
+    // from the SOAP action handlers (processAction*).
     auto writer = [](Print& out, void* ref) -> size_t {
       auto self = (DLNAMediaRenderer*)ref;
       size_t written = 0;
@@ -760,6 +749,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
   // Per-action handlers (match MediaServer pattern)
   bool processActionPlay(ActionRequest& action, HttpServer& server) {
     setActive(true);
+    if (event_cb) event_cb(MediaEvent::PLAY, *this);
     NullPrint np;
     size_t len = DLNADevice::printReplyXML(np, "PlayResponse", "AVTransport",
                                            nullptr, this);
@@ -771,6 +761,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
 
   bool processActionPause(ActionRequest& action, HttpServer& server) {
     setActive(false);
+    if (event_cb) event_cb(MediaEvent::PAUSE, *this);
     NullPrint np;
     size_t len = DLNADevice::printReplyXML(np, "PauseResponse", "AVTransport",
                                            nullptr, this);
@@ -781,7 +772,9 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
   }
 
   bool processActionStop(ActionRequest& action, HttpServer& server) {
-    setActive(false);
+    // use stop() to ensure state reset and application callback are invoked
+    stop();
+    if (event_cb) event_cb(MediaEvent::STOP, *this);
     NullPrint np;
     size_t len = DLNADevice::printReplyXML(np, "StopResponse", "AVTransport",
                                            nullptr, this);
@@ -843,6 +836,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     const char* uri = action.getArgumentValue("CurrentURI");
     if (uri && *uri) {
       setPlaybackURL(uri);
+      if (event_cb) event_cb(MediaEvent::SET_URI, *this);
       NullPrint np;
       size_t len = DLNADevice::printReplyXML(np, "SetAVTransportURIResponse",
                                              "AVTransport", nullptr, this);
@@ -862,6 +856,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
   bool processActionSetVolume(ActionRequest& action, HttpServer& server) {
     int desiredVolume = action.getArgumentIntValue("DesiredVolume");
     setVolume((uint8_t)desiredVolume);
+    if (event_cb) event_cb(MediaEvent::SET_VOLUME, *this);
     NullPrint np;
     size_t len = DLNADevice::printReplyXML(np, "SetVolumeResponse",
                                            "RenderingControl", nullptr, this);
@@ -875,6 +870,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
   bool processActionSetMute(ActionRequest& action, HttpServer& server) {
     bool desiredMute = action.getArgumentIntValue("DesiredMute") != 0;
     setMuted(desiredMute);
+    if (event_cb) event_cb(MediaEvent::SET_MUTE, *this);
     NullPrint np;
     size_t len = DLNADevice::printReplyXML(np, "SetMuteResponse",
                                            "RenderingControl", nullptr, this);
