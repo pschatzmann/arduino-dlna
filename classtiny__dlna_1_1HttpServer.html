@@ -136,15 +136,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a64e046b368260f3b39b31b74e75b65c4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a64e046b368260f3b39b31b74e75b65c4">reply</a> (const char *contentType, Stream &amp;inputStream, int size, int status=200, const char *msg=<a class="el" href="namespacetiny__dlna.html#aa203b0adbc2115c8cd956dd41ec09735">SUCCESS</a>)</td></tr>
 <tr class="memdesc:a64e046b368260f3b39b31b74e75b65c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">write reply - copies data from input stream with header size  <br /></td></tr>
 <tr class="separator:a64e046b368260f3b39b31b74e75b65c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab6834cbda25940f09be398183cf4a67c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#ab6834cbda25940f09be398183cf4a67c">reply</a> (const char *contentType, size_t(*callback)(Stream &amp;out), int status=200, const char *msg=<a class="el" href="namespacetiny__dlna.html#aa203b0adbc2115c8cd956dd41ec09735">SUCCESS</a>)</td></tr>
-<tr class="memdesc:ab6834cbda25940f09be398183cf4a67c"><td class="mdescLeft">&#160;</td><td class="mdescRight">write reply - using callback that writes to stream  <br /></td></tr>
-<tr class="separator:ab6834cbda25940f09be398183cf4a67c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ade23540106754503af6b63d653581e3a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#ade23540106754503af6b63d653581e3a">reply</a> (const char *contentType, size_t size, size_t(*callback)(Print &amp;out), int status=200, const char *msg=<a class="el" href="namespacetiny__dlna.html#aa203b0adbc2115c8cd956dd41ec09735">SUCCESS</a>)</td></tr>
-<tr class="memdesc:ade23540106754503af6b63d653581e3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">write reply - using callback that writes to stream  <br /></td></tr>
-<tr class="separator:ade23540106754503af6b63d653581e3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a62f827e98872c587ff2769c8214a1442"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a62f827e98872c587ff2769c8214a1442">reply</a> (const char *contentType, void(*callback)(Print &amp;out, void *<a class="el" href="classtiny__dlna_1_1HttpServer.html#af2f2f1f1526aa646e266fde6f72bb3f0">ref</a>), int status=200, const char *msg=<a class="el" href="namespacetiny__dlna.html#aa203b0adbc2115c8cd956dd41ec09735">SUCCESS</a>, void *<a class="el" href="classtiny__dlna_1_1HttpServer.html#af2f2f1f1526aa646e266fde6f72bb3f0">ref</a>=nullptr)</td></tr>
-<tr class="memdesc:a62f827e98872c587ff2769c8214a1442"><td class="mdescLeft">&#160;</td><td class="mdescRight">write reply - using callback that writes to stream  <br /></td></tr>
-<tr class="separator:a62f827e98872c587ff2769c8214a1442"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e62ab9be94dd0522aff196628a7e2bd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a9e62ab9be94dd0522aff196628a7e2bd">reply</a> (const char *contentType, size_t(*callback)(Print &amp;out, void *<a class="el" href="classtiny__dlna_1_1HttpServer.html#af2f2f1f1526aa646e266fde6f72bb3f0">ref</a>), int status=200, const char *msg=<a class="el" href="namespacetiny__dlna.html#aa203b0adbc2115c8cd956dd41ec09735">SUCCESS</a>, void *<a class="el" href="classtiny__dlna_1_1HttpServer.html#af2f2f1f1526aa646e266fde6f72bb3f0">ref</a>=nullptr)</td></tr>
+<tr class="memdesc:a9e62ab9be94dd0522aff196628a7e2bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">write reply - using callback that writes to stream  <br /></td></tr>
+<tr class="separator:a9e62ab9be94dd0522aff196628a7e2bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab94ebae60e1796dd80d267de4e97b387"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#ab94ebae60e1796dd80d267de4e97b387">reply</a> (const char *contentType, const char *str, int status=200, const char *msg=<a class="el" href="namespacetiny__dlna.html#aa203b0adbc2115c8cd956dd41ec09735">SUCCESS</a>)</td></tr>
 <tr class="memdesc:ab94ebae60e1796dd80d267de4e97b387"><td class="mdescLeft">&#160;</td><td class="mdescRight">write reply - string with header size  <br /></td></tr>
 <tr class="separator:ab94ebae60e1796dd80d267de4e97b387"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1151,7 +1145,7 @@ password); </p>
 </div>
 </div>
 <a id="ab94ebae60e1796dd80d267de4e97b387" name="ab94ebae60e1796dd80d267de4e97b387"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab94ebae60e1796dd80d267de4e97b387">&#9670;&#160;</a></span>reply() <span class="overload">[1/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ab94ebae60e1796dd80d267de4e97b387">&#9670;&#160;</a></span>reply() <span class="overload">[1/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1201,7 +1195,7 @@ password); </p>
 </div>
 </div>
 <a id="ae22224deb58942df014cfe294fad6b8d" name="ae22224deb58942df014cfe294fad6b8d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae22224deb58942df014cfe294fad6b8d">&#9670;&#160;</a></span>reply() <span class="overload">[2/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ae22224deb58942df014cfe294fad6b8d">&#9670;&#160;</a></span>reply() <span class="overload">[2/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1254,8 +1248,8 @@ password); </p>
 
 </div>
 </div>
-<a id="ade23540106754503af6b63d653581e3a" name="ade23540106754503af6b63d653581e3a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ade23540106754503af6b63d653581e3a">&#9670;&#160;</a></span>reply() <span class="overload">[3/7]</span></h2>
+<a id="a9e62ab9be94dd0522aff196628a7e2bd" name="a9e62ab9be94dd0522aff196628a7e2bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e62ab9be94dd0522aff196628a7e2bd">&#9670;&#160;</a></span>reply() <span class="overload">[3/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1272,13 +1266,7 @@ password); </p>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>size</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t(*)(Print &amp;out)&#160;</td>
+          <td class="paramtype">size_t(*)(Print &amp;out, void *<a class="el" href="classtiny__dlna_1_1HttpServer.html#af2f2f1f1526aa646e266fde6f72bb3f0">ref</a>)&#160;</td>
           <td class="paramname"><em>callback</em>, </td>
         </tr>
         <tr>
@@ -1291,57 +1279,13 @@ password); </p>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>msg</em> = <code><a class="el" href="namespacetiny__dlna.html#aa203b0adbc2115c8cd956dd41ec09735">SUCCESS</a></code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>write reply - using callback that writes to stream </p>
-
-</div>
-</div>
-<a id="ab6834cbda25940f09be398183cf4a67c" name="ab6834cbda25940f09be398183cf4a67c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab6834cbda25940f09be398183cf4a67c">&#9670;&#160;</a></span>reply() <span class="overload">[4/7]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void tiny_dlna::HttpServer::reply </td>
-          <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>contentType</em>, </td>
+          <td class="paramname"><em>msg</em> = <code><a class="el" href="namespacetiny__dlna.html#aa203b0adbc2115c8cd956dd41ec09735">SUCCESS</a></code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t(*)(Stream &amp;out)&#160;</td>
-          <td class="paramname"><em>callback</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>status</em> = <code>200</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>msg</em> = <code><a class="el" href="namespacetiny__dlna.html#aa203b0adbc2115c8cd956dd41ec09735">SUCCESS</a></code>&#160;</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>ref</em> = <code>nullptr</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1361,7 +1305,7 @@ password); </p>
 </div>
 </div>
 <a id="a64e046b368260f3b39b31b74e75b65c4" name="a64e046b368260f3b39b31b74e75b65c4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a64e046b368260f3b39b31b74e75b65c4">&#9670;&#160;</a></span>reply() <span class="overload">[5/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a64e046b368260f3b39b31b74e75b65c4">&#9670;&#160;</a></span>reply() <span class="overload">[4/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1416,64 +1360,8 @@ password); </p>
 
 </div>
 </div>
-<a id="a62f827e98872c587ff2769c8214a1442" name="a62f827e98872c587ff2769c8214a1442"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a62f827e98872c587ff2769c8214a1442">&#9670;&#160;</a></span>reply() <span class="overload">[6/7]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void tiny_dlna::HttpServer::reply </td>
-          <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>contentType</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void(*)(Print &amp;out, void *<a class="el" href="classtiny__dlna_1_1HttpServer.html#af2f2f1f1526aa646e266fde6f72bb3f0">ref</a>)&#160;</td>
-          <td class="paramname"><em>callback</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>status</em> = <code>200</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>msg</em> = <code><a class="el" href="namespacetiny__dlna.html#aa203b0adbc2115c8cd956dd41ec09735">SUCCESS</a></code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>ref</em> = <code>nullptr</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>write reply - using callback that writes to stream </p>
-
-</div>
-</div>
 <a id="a9cdef43d38d0f4dc8a0cbfb0d2f02008" name="a9cdef43d38d0f4dc8a0cbfb0d2f02008"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9cdef43d38d0f4dc8a0cbfb0d2f02008">&#9670;&#160;</a></span>reply() <span class="overload">[7/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a9cdef43d38d0f4dc8a0cbfb0d2f02008">&#9670;&#160;</a></span>reply() <span class="overload">[5/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
