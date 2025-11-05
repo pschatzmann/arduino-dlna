@@ -5,6 +5,16 @@
 #define DLNA_LOOP_DELAY_MS 8
 #endif
 
+// Define scheduler run interval in ms
+#ifndef DLNA_RUN_SCHEDULER_EVERY_MS
+#define DLNA_RUN_SCHEDULER_EVERY_MS 2000
+#endif
+
+// Define subscription publish interval in ms
+#ifndef DLNA_RUN_SUBSCRIPTIONS_EVERY_MS
+#define DLNA_RUN_SUBSCRIPTIONS_EVERY_MS 500
+#endif
+
 // Define the default http request timeout
 #ifndef DLNA_HTTP_REQUEST_TIMEOUT_MS
 #define DLNA_HTTP_REQUEST_TIMEOUT_MS 6000

@@ -563,11 +563,7 @@ class DLNAControlPoint {
                    "DLNAControlPointMgr::processMSearchReply");
     // data.location contains the device description URL
     if (data.location.isEmpty()) return false;
-    DlnaLogger.log(DlnaLogLevel::Info, "MSearchReply -> add device: %s",
-                   data.location.c_str());
-    // If the reply includes a USN we can avoid fetching multiple
-    // different LOCATION URLs for the same device (different network
-    // interfaces) by checking for the UDN part in known devices.
+
     const char* usn_c = data.usn.c_str();
     if (usn_c && *usn_c) {
       const char* sep = strstr(usn_c, "::");
@@ -790,7 +786,7 @@ class DLNAControlPoint {
               reply.addArgument(arg);
             }
 
-            DlnaLogger.log(DlnaLogLevel::Info, "callback: '%s': %s (%s)",
+            DlnaLogger.log(DlnaLogLevel::Info, "Callback: '%s': %s (%s)",
                            StringRegistry::nullStr(outNodeName),
                            StringRegistry::nullStr(outText),
                            StringRegistry::nullStr(outAttributes));

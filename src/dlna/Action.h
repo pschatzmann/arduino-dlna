@@ -87,7 +87,7 @@ class ActionReply {
 
   void logArguments() {
     for (auto& a : arguments) {
-      DlnaLogger.log(DlnaLogLevel::Info, "  -> %s = %s",
+      DlnaLogger.log(DlnaLogLevel::Debug, "  -> %s = %s",
                      StringRegistry::nullStr(a.name),
                      StringRegistry::nullStr(a.value.c_str()));
     }

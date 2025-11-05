@@ -57,7 +57,7 @@ class DLNADeviceRequestParser {
     char tmp[200];
     StrView tmp_str(tmp, 200);
 
-    DlnaLogger.log(DlnaLogLevel::Info, "Parsing MSSearch");
+    DlnaLogger.log(DlnaLogLevel::Debug, "Parsing MSSearch");
 
     // determine MX (seconds to delay response)
     if (parse(req.data, "\nMX:", tmp_str)) {
@@ -73,12 +73,12 @@ class DLNADeviceRequestParser {
       // determine ST if relevant for us
       for (auto mx : mx_vector) {
         if (result.search_target.equals(mx)) {
-          DlnaLogger.log(DlnaLogLevel::Info, "- MX: %s -> relevant", mx);
+          DlnaLogger.log(DlnaLogLevel::Debug, "- MX: %s -> relevant", mx);
           result.active = true;
         }
       }
       if (!result.active) {
-        DlnaLogger.log(DlnaLogLevel::Info, "-> MX: %s not relevant", tmp);
+        DlnaLogger.log(DlnaLogLevel::Debug, "-> MX: %s not relevant", tmp);
       }
 
     } else {

@@ -3,8 +3,8 @@
 #include <functional>
 
 #include "basic/AllocationTracker.h"
-#include "basic/Url.h"
 #include "basic/Printf.h"
+#include "basic/Url.h"
 #include "dlna/DLNADeviceInfo.h"
 #include "dlna/Schedule.h"
 #include "dlna/devices/DLNADevice.h"
@@ -78,6 +78,11 @@ class DLNADevice {
       DlnaLogger.log(DlnaLogLevel::Error, "Scheduler failed");
       return false;
     }
+  // initialize scheduling timers so the scheduled tasks run immediately
+  uint64_t now = millis();
+  // set next timeouts to now so the first loop triggers the tasks
+  next_scheduler_timeout_ms = now;
+  next_subscriptions_timeout_ms = now;
 
     is_active = true;
     DlnaLogger.log(DlnaLogLevel::Info, "Device successfully started");
@@ -115,21 +120,34 @@ class DLNADevice {
     logMemoryIfNeeded();
 
     // handle server requests
-    bool rc = p_server->doLoop();
-    DlnaLogger.log(DlnaLogLevel::Debug, "server %s", rc ? "true" : "false");
+    bool rc = loopServer();
 
-    if (isSchedulerActive()) {
+    // Use millisecond-based intervals for scheduling so callers can set
+    // real-time intervals instead of loop-counts.
+    uint64_t now = millis();
+    if (isSchedulerActive() && now >= next_scheduler_timeout_ms) {
       processUdpAndScheduler();
-      // deliver any queued subscription notifications (if enabled)
-      if (is_subscriptions_active) subscription_mgr.publish();
-    } else {
-      DlnaLogger.log(DlnaLogLevel::Warning, "scheduler inactive");
+      // schedule next run
+      next_scheduler_timeout_ms = now + scheduler_interval_ms;
+    }
+
+    // deliver any queued subscription notifications (if enabled)
+    if (isSubscriptionsActive() && now >= next_subscriptions_timeout_ms) {
+      subscription_mgr.publish();
+      // schedule next run
+      next_subscriptions_timeout_ms = now + subscriptions_interval_ms;
     }
 
     // be nice, if we have other tasks
     delay(DLNA_LOOP_DELAY_MS);
-
     return true;
+  }
+
+  bool loopServer() {
+    if (!is_active) return false;
+    bool rc = p_server->doLoop();
+    DlnaLogger.log(DlnaLogLevel::Debug, "server %s", rc ? "true" : "false");
+    return rc;
   }
 
   /// Provide addess to the service information
@@ -305,7 +323,8 @@ class DLNADevice {
         [ids](Print& o, void* ref) -> size_t {
           (void)ref;
           size_t written = 0;
-          // UPnP spec uses "CurrentConnectionIDs" as the response element name
+          // UPnP spec uses "CurrentConnectionIDs" as the
+          // response element name
           written += o.print("<CurrentConnectionIDs>");
           written += o.print(StringRegistry::nullStr(ids, "0"));
           written += o.print("</CurrentConnectionIDs>");
@@ -321,22 +340,23 @@ class DLNADevice {
         out, "GetCurrentConnectionInfoResponse", "ConnectionManager",
         [protocolInfo, connectionID, direction](Print& o, void* ref) -> size_t {
           (void)ref;
-            size_t written = 0;
-            // Write directly to out to avoid using a fixed-size intermediate buffer.
-            written += o.print("<RcsID>0</RcsID>");
-            written += o.print("<AVTransportID>0</AVTransportID>");
-            written += o.print("<ProtocolInfo>");
-            written += o.print(StringRegistry::nullStr(protocolInfo));
-            written += o.print("</ProtocolInfo>");
-            written += o.print("<PeerConnectionManager></PeerConnectionManager>");
-            written += o.print("<PeerConnectionID>");
-            written += o.print(StringRegistry::nullStr(connectionID));
-            written += o.print("</PeerConnectionID>");
-            written += o.print("<Direction>");
-            written += o.print(StringRegistry::nullStr(direction));
-            written += o.print("</Direction>");
-            written += o.print("<Status>OK</Status>");
-            return written;
+          size_t written = 0;
+          // Write directly to out to avoid using a fixed-size intermediate
+          // buffer.
+          written += o.print("<RcsID>0</RcsID>");
+          written += o.print("<AVTransportID>0</AVTransportID>");
+          written += o.print("<ProtocolInfo>");
+          written += o.print(StringRegistry::nullStr(protocolInfo));
+          written += o.print("</ProtocolInfo>");
+          written += o.print("<PeerConnectionManager></PeerConnectionManager>");
+          written += o.print("<PeerConnectionID>");
+          written += o.print(StringRegistry::nullStr(connectionID));
+          written += o.print("</PeerConnectionID>");
+          written += o.print("<Direction>");
+          written += o.print(StringRegistry::nullStr(direction));
+          written += o.print("</Direction>");
+          written += o.print("<Status>OK</Status>");
+          return written;
         });
   }
 
@@ -383,7 +403,25 @@ class DLNADevice {
   inline static StringRegistry registry;
   void* reference = nullptr;
 
+  // Millisecond-based scheduling (defaults derived from existing loop constants)
+  // Use millisecond-based defaults from configuration (macros ending with _MS)
+  uint64_t scheduler_interval_ms = (uint64_t)DLNA_RUN_SCHEDULER_EVERY_MS;
+  uint64_t subscriptions_interval_ms = (uint64_t)DLNA_RUN_SUBSCRIPTIONS_EVERY_MS;
+  // store the next absolute timeout (millis) when the task should run
+  uint64_t next_scheduler_timeout_ms = 0;
+  uint64_t next_subscriptions_timeout_ms = 0;
+
   void setDevice(DLNADeviceInfo& device) { p_device_info = &device; }
+
+  /// Set scheduler interval in milliseconds (default = DLNA_RUN_SCHEDULER_EVERY_MS * DLNA_LOOP_DELAY_MS)
+  /// Set scheduler interval in milliseconds (default = DLNA_RUN_SCHEDULER_EVERY_MS)
+  void setSchedulerIntervalMs(uint32_t ms) { scheduler_interval_ms = ms; }
+  uint32_t getSchedulerIntervalMs() const { return (uint32_t)scheduler_interval_ms; }
+
+  /// Set subscription publish interval in milliseconds (default = DLNA_RUN_SUBSCRIPTIONS_EVERY_MS * DLNA_LOOP_DELAY_MS)
+  /// Set subscription publish interval in milliseconds (default = DLNA_RUN_SUBSCRIPTIONS_EVERY_MS)
+  void setSubscriptionsIntervalMs(uint32_t ms) { subscriptions_interval_ms = ms; }
+  uint32_t getSubscriptionsIntervalMs() const { return (uint32_t)subscriptions_interval_ms; }
 
   /// Periodic platform-specific diagnostics. Kept as a separate method so
   /// it can be tested or stubbed easily. Currently logs ESP32 heap/psram

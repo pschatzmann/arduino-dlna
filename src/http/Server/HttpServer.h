@@ -362,7 +362,7 @@ class HttpServer {
     reply_header.write(this->client());
     client_ptr->write((const uint8_t*)str, len);
     endClient();
-    Serial.println(str);
+    //Serial.println(str);
   }
 
   void reply(const char* contentType, const uint8_t* str, int len,
@@ -457,7 +457,7 @@ class HttpServer {
 
     client_ptr = &(*current_client_iterator);
     if (!client_ptr->connected()) {
-      DlnaLogger.log(DlnaLogLevel::Info, "copy: removing disconnected client");
+      DlnaLogger.log(DlnaLogLevel::Debug, "copy: removing disconnected client");
       current_client_iterator = open_clients.erase(current_client_iterator);
       // Do not advance iterator here; erase returns the next valid iterator
       return false;

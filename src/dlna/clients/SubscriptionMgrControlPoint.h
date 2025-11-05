@@ -239,7 +239,7 @@ class SubscriptionMgrControlPoint {
       event_callback = [](const char* sid, const char* varName,
                           const char* newValue, void* reference) {
         // Default simple logger: print SID, variable name and new value.
-        DlnaLogger.log(DlnaLogLevel::Info,
+        DlnaLogger.log(DlnaLogLevel::Debug,
                        "- Event notification: SID='%s' var='%s' value='%s'",
                        sid ? sid : "", varName ? varName : "",
                        newValue ? newValue : "");
