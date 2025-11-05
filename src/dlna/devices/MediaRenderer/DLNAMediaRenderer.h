@@ -498,13 +498,10 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
   uint8_t muted_volume = 0;
   unsigned long start_time = 0;
   unsigned long time_sum = 0;
-  // Current state string (e.g. "STOPPED", "PLAYING",
-  // "PAUSED_PLAYBACK")
+  // Current state (e.g. "STOPPED", "PLAYING","PAUSED_PLAYBACK")
   tiny_dlna::Str transport_state = "NO_MEDIA_PRESENT";
   const char* st = "urn:schemas-upnp-org:device:MediaRenderer:1";
   const char* usn = "uuid:09349455-2941-4cf7-9847-1dd5ab210e97";
-
-  // internal DLNA device instance owned by this MediaRenderer
   DLNADevice dlna_device;
   HttpServer* p_server = nullptr;
   IUDPService* p_udp_member = nullptr;
