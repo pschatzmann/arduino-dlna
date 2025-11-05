@@ -70,12 +70,12 @@ class Url {
   }
 
  protected:
-  Str pathStr = Str(40);
-  Str hostStr = Str(20);
-  Str protocolStr = Str(6);
-  Str urlRootStr = Str(40);
-  Str urlStr = Str(40);
-  int portInt;
+  Str pathStr{40};
+  Str hostStr{20};
+  Str protocolStr{6};
+  Str urlRootStr{40};
+  Str urlStr{40};
+  int portInt = 0;
 
   void parse() {
     DlnaLogger.log(DlnaLogLevel::Debug, "Url::parse()");
