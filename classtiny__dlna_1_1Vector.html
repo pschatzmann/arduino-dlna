@@ -75,6 +75,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
+<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
@@ -83,16 +84,38 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="classtiny__dlna_1_1Vector.html" title="Vector implementation which provides the most important methods as defined by std::vector....">Vector</a> implementation which provides the most important methods as defined by std::vector. This class it is quite handy to have and most of the times quite better then dealing with raw c arrays.  
+<p>Custom <a class="el" href="classtiny__dlna_1_1Vector.html" title="Custom Vector implementation that provides std::vector-like API with support for custom allocators....">Vector</a> implementation that provides std::vector-like API with support for custom allocators. This implementation is used when DLNA_USE_STD_VECTOR is disabled, typically for embedded systems where std::vector is not available or custom memory management is required.  
  <a href="classtiny__dlna_1_1Vector.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="Vector_8h_source.html">Vector.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector_1_1Iterator.html">Iterator</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lightweight iterator for <code><a class="el" href="classtiny__dlna_1_1Vector.html" title="Vector implementation which provides the most important methods as defined by std::vector....">tiny_dlna::Vector</a>&lt;T&gt;</code>.  <a href="classtiny__dlna_1_1Vector_1_1Iterator.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector_1_1ConstIterator.html">ConstIterator</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Const iterator for Vector&lt;T&gt;  <a href="classtiny__dlna_1_1Vector_1_1ConstIterator.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector_1_1Iterator.html">Iterator</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lightweight iterator for <code><a class="el" href="classtiny__dlna_1_1Vector.html" title="Custom Vector implementation that provides std::vector-like API with support for custom allocators....">tiny_dlna::Vector</a>&lt;T&gt;</code>.  <a href="classtiny__dlna_1_1Vector_1_1Iterator.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a4ba83855d384c2c980feff93b025f10f"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a4ba83855d384c2c980feff93b025f10f">value_type</a> = T</td></tr>
+<tr class="separator:a4ba83855d384c2c980feff93b025f10f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d5f1b6e68a5a53c85bb06c7c081f9da"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a9d5f1b6e68a5a53c85bb06c7c081f9da">allocator_type</a> = <a class="el" href="classtiny__dlna_1_1Allocator.html">Allocator</a></td></tr>
+<tr class="separator:a9d5f1b6e68a5a53c85bb06c7c081f9da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10aecd29d601ac2e060fe1bce2553b72"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a10aecd29d601ac2e060fe1bce2553b72">size_type</a> = size_t</td></tr>
+<tr class="separator:a10aecd29d601ac2e060fe1bce2553b72"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24b2ee753d68a203aa756820cb2abb39"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a24b2ee753d68a203aa756820cb2abb39">difference_type</a> = ptrdiff_t</td></tr>
+<tr class="separator:a24b2ee753d68a203aa756820cb2abb39"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6360a0de42235e5ee6f5a12a347e1179"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a6360a0de42235e5ee6f5a12a347e1179">reference</a> = T &amp;</td></tr>
+<tr class="separator:a6360a0de42235e5ee6f5a12a347e1179"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10d2fe8ed8e31cfa2be25fd1878ea293"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a10d2fe8ed8e31cfa2be25fd1878ea293">const_reference</a> = const T &amp;</td></tr>
+<tr class="separator:a10d2fe8ed8e31cfa2be25fd1878ea293"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ade583fd804214fe0009a86735dcb36"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a8ade583fd804214fe0009a86735dcb36">pointer</a> = T *</td></tr>
+<tr class="separator:a8ade583fd804214fe0009a86735dcb36"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6716361bbda58ba06ec6c33ee38b854"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#ab6716361bbda58ba06ec6c33ee38b854">const_pointer</a> = const T *</td></tr>
+<tr class="separator:ab6716361bbda58ba06ec6c33ee38b854"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -103,117 +126,442 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a67ffe4bcc725dc8ba47748b37edcfb88"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor with only allocator.  <br /></td></tr>
 <tr class="separator:a67ffe4bcc725dc8ba47748b37edcfb88"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6b36dd4d4d5844e1e697f759108a6aa4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a6b36dd4d4d5844e1e697f759108a6aa4">Vector</a> (int <a class="el" href="classtiny__dlna_1_1Vector.html#a4daa0bf8a1ecc28beee8682e506c5b78">size</a>, T value, <a class="el" href="dlna__config_8h.html#afddba70f8ea3f9edae2d1dbc4fa07130">ALLOCATOR</a> &amp;allocator=DefaultAllocator)</td></tr>
-<tr class="memdesc:a6b36dd4d4d5844e1e697f759108a6aa4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocate size and initialize array.  <br /></td></tr>
+<tr class="memdesc:a6b36dd4d4d5844e1e697f759108a6aa4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocate size and initialize array with default values.  <br /></td></tr>
 <tr class="separator:a6b36dd4d4d5844e1e697f759108a6aa4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a37aef63a49af96ff0e148c826acfca6b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a37aef63a49af96ff0e148c826acfca6b">Vector</a> (<a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt; T &gt; &amp;&amp;moveFrom)</td></tr>
-<tr class="memdesc:a37aef63a49af96ff0e148c826acfca6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move constructor.  <br /></td></tr>
+<tr class="memdesc:a37aef63a49af96ff0e148c826acfca6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move constructor - transfers ownership of data.  <br /></td></tr>
 <tr class="separator:a37aef63a49af96ff0e148c826acfca6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaf38adff755723a75386dfad37150656"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#aaf38adff755723a75386dfad37150656">operator=</a> (<a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a> &amp;&amp;moveFrom)</td></tr>
-<tr class="memdesc:aaf38adff755723a75386dfad37150656"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move operator.  <br /></td></tr>
+<tr class="memdesc:aaf38adff755723a75386dfad37150656"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move assignment operator - transfers ownership of data.  <br /></td></tr>
 <tr class="separator:aaf38adff755723a75386dfad37150656"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:addc5a92799e8be135cf0b4427670e2bd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#addc5a92799e8be135cf0b4427670e2bd">Vector</a> (<a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt; T &gt; &amp;copyFrom)</td></tr>
-<tr class="memdesc:addc5a92799e8be135cf0b4427670e2bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">copy constructor  <br /></td></tr>
+<tr class="memdesc:addc5a92799e8be135cf0b4427670e2bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy constructor - creates a deep copy.  <br /></td></tr>
 <tr class="separator:addc5a92799e8be135cf0b4427670e2bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa832a04e1f9430413e4cca5605d61fef"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt; T &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#aa832a04e1f9430413e4cca5605d61fef">operator=</a> (<a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt; T &gt; &amp;copyFrom)</td></tr>
-<tr class="memdesc:aa832a04e1f9430413e4cca5605d61fef"><td class="mdescLeft">&#160;</td><td class="mdescRight">copy operator  <br /></td></tr>
+<tr class="memdesc:aa832a04e1f9430413e4cca5605d61fef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy assignment operator - creates a deep copy.  <br /></td></tr>
 <tr class="separator:aa832a04e1f9430413e4cca5605d61fef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5684b1e7b9df0c252486acfb289c4646"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a5684b1e7b9df0c252486acfb289c4646">Vector</a> (T *from, T *to, <a class="el" href="dlna__config_8h.html#afddba70f8ea3f9edae2d1dbc4fa07130">ALLOCATOR</a> &amp;allocator=DefaultAllocator)</td></tr>
-<tr class="memdesc:a5684b1e7b9df0c252486acfb289c4646"><td class="mdescLeft">&#160;</td><td class="mdescRight">legacy constructor with pointer range  <br /></td></tr>
+<tr class="memdesc:a5684b1e7b9df0c252486acfb289c4646"><td class="mdescLeft">&#160;</td><td class="mdescRight">Legacy constructor with pointer range.  <br /></td></tr>
 <tr class="separator:a5684b1e7b9df0c252486acfb289c4646"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a00e7ebb14d6500cd7a19298ebfc618d8"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a00e7ebb14d6500cd7a19298ebfc618d8">~Vector</a> ()</td></tr>
-<tr class="memdesc:a00e7ebb14d6500cd7a19298ebfc618d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <br /></td></tr>
+<tr class="memdesc:a00e7ebb14d6500cd7a19298ebfc618d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor - calls <a class="el" href="classtiny__dlna_1_1Vector.html#a46c6b9c2bca3e28af0cb6a3909109616" title="Reset the vector - destroy all elements and deallocate memory.">reset()</a> to clean up all resources.  <br /></td></tr>
 <tr class="separator:a00e7ebb14d6500cd7a19298ebfc618d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2791c581694b8736ed889251e3d95f27"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a2791c581694b8736ed889251e3d95f27">setAllocator</a> (<a class="el" href="dlna__config_8h.html#afddba70f8ea3f9edae2d1dbc4fa07130">ALLOCATOR</a> &amp;allocator)</td></tr>
+<tr class="memdesc:a2791c581694b8736ed889251e3d95f27"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the allocator (use with caution)  <br /></td></tr>
 <tr class="separator:a2791c581694b8736ed889251e3d95f27"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1a623d1c06470b858fea4bbb48405468"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a1a623d1c06470b858fea4bbb48405468">clear</a> ()</td></tr>
+<tr class="memdesc:a1a623d1c06470b858fea4bbb48405468"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear all elements, calling destructors but keeping capacity.  <br /></td></tr>
 <tr class="separator:a1a623d1c06470b858fea4bbb48405468"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4daa0bf8a1ecc28beee8682e506c5b78"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a4daa0bf8a1ecc28beee8682e506c5b78">size</a> ()</td></tr>
+<tr class="memdesc:a4daa0bf8a1ecc28beee8682e506c5b78"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the number of elements.  <br /></td></tr>
 <tr class="separator:a4daa0bf8a1ecc28beee8682e506c5b78"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a31a6b685655806a0b4737f844b118867"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a31a6b685655806a0b4737f844b118867">empty</a> ()</td></tr>
+<tr class="memdesc:a31a6b685655806a0b4737f844b118867"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the vector is empty.  <br /></td></tr>
 <tr class="separator:a31a6b685655806a0b4737f844b118867"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a59b9e97bfbbb7de5f802fca0ed621981"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a59b9e97bfbbb7de5f802fca0ed621981">push_back</a> (T &amp;&amp;value)</td></tr>
+<tr class="memdesc:a59b9e97bfbbb7de5f802fca0ed621981"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add element to the end (move semantics)  <br /></td></tr>
 <tr class="separator:a59b9e97bfbbb7de5f802fca0ed621981"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad9156bd9e73229317d83767cd5a85fe2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#ad9156bd9e73229317d83767cd5a85fe2">push_back</a> (T &amp;value)</td></tr>
+<tr class="memdesc:ad9156bd9e73229317d83767cd5a85fe2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add element to the end (copy semantics)  <br /></td></tr>
 <tr class="separator:ad9156bd9e73229317d83767cd5a85fe2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aae0e88fb836cdac747f8c4a1f5fe2324"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#aae0e88fb836cdac747f8c4a1f5fe2324">push_front</a> (T &amp;value)</td></tr>
+<tr class="memdesc:aae0e88fb836cdac747f8c4a1f5fe2324"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add element to the front (copy semantics)  <br /></td></tr>
 <tr class="separator:aae0e88fb836cdac747f8c4a1f5fe2324"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab1ea214bfc122278384098e50afe890b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#ab1ea214bfc122278384098e50afe890b">push_front</a> (T &amp;&amp;value)</td></tr>
+<tr class="memdesc:ab1ea214bfc122278384098e50afe890b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add element to the front (move semantics)  <br /></td></tr>
 <tr class="separator:ab1ea214bfc122278384098e50afe890b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adacfacc9de75534eeffdcc72178e9a43"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#adacfacc9de75534eeffdcc72178e9a43">pop_back</a> ()</td></tr>
+<tr class="memdesc:adacfacc9de75534eeffdcc72178e9a43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove the last element.  <br /></td></tr>
 <tr class="separator:adacfacc9de75534eeffdcc72178e9a43"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9ed1f0a8210b81847f4890ea594a2c8a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a9ed1f0a8210b81847f4890ea594a2c8a">pop_front</a> ()</td></tr>
+<tr class="memdesc:a9ed1f0a8210b81847f4890ea594a2c8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove the first element.  <br /></td></tr>
 <tr class="separator:a9ed1f0a8210b81847f4890ea594a2c8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6db568daacac699add05076e1375eb92"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a6db568daacac699add05076e1375eb92">assign</a> (<a class="el" href="classtiny__dlna_1_1Vector_1_1Iterator.html">Iterator</a> v1, <a class="el" href="classtiny__dlna_1_1Vector_1_1Iterator.html">Iterator</a> v2)</td></tr>
+<tr class="memdesc:a6db568daacac699add05076e1375eb92"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign from iterator range.  <br /></td></tr>
 <tr class="separator:a6db568daacac699add05076e1375eb92"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3525cd7584cb9e693e8627be863f50b0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a3525cd7584cb9e693e8627be863f50b0">assign</a> (size_t number, T value)</td></tr>
+<tr class="memdesc:a3525cd7584cb9e693e8627be863f50b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign multiple copies of a value.  <br /></td></tr>
 <tr class="separator:a3525cd7584cb9e693e8627be863f50b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9d2303d73af72fd30fa91b1006fbbcb0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a9d2303d73af72fd30fa91b1006fbbcb0">swap</a> (<a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt; T &gt; &amp;in)</td></tr>
+<tr class="memdesc:a9d2303d73af72fd30fa91b1006fbbcb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Swap contents with another vector.  <br /></td></tr>
 <tr class="separator:a9d2303d73af72fd30fa91b1006fbbcb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a622a040c970c99bbf84be6ce9e46e7fa"><td class="memItemLeft" align="right" valign="top">T &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a622a040c970c99bbf84be6ce9e46e7fa">operator[]</a> (int index)</td></tr>
+<tr class="memdesc:a622a040c970c99bbf84be6ce9e46e7fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access element by index (non-const)  <br /></td></tr>
 <tr class="separator:a622a040c970c99bbf84be6ce9e46e7fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9762ceb2449d04d6ee08f7ab6ded74be"><td class="memItemLeft" align="right" valign="top">T &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a9762ceb2449d04d6ee08f7ab6ded74be">operator[]</a> (const int index) const</td></tr>
+<tr class="memdesc:a9762ceb2449d04d6ee08f7ab6ded74be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access element by index (const)  <br /></td></tr>
 <tr class="separator:a9762ceb2449d04d6ee08f7ab6ded74be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2ca30f178aa10cd1d5d7126bc33727f0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a2ca30f178aa10cd1d5d7126bc33727f0">resize</a> (int newSize, T value)</td></tr>
+<tr class="memdesc:a2ca30f178aa10cd1d5d7126bc33727f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resize and fill with value.  <br /></td></tr>
 <tr class="separator:a2ca30f178aa10cd1d5d7126bc33727f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac162664118be261ff8d31719a341c02a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#ac162664118be261ff8d31719a341c02a">shrink_to_fit</a> ()</td></tr>
+<tr class="memdesc:ac162664118be261ff8d31719a341c02a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reduce capacity to match size.  <br /></td></tr>
 <tr class="separator:ac162664118be261ff8d31719a341c02a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af5f989de02a0c735a009e0adcc8ca876"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#af5f989de02a0c735a009e0adcc8ca876">capacity</a> ()</td></tr>
+<tr class="memdesc:af5f989de02a0c735a009e0adcc8ca876"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current capacity.  <br /></td></tr>
 <tr class="separator:af5f989de02a0c735a009e0adcc8ca876"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8db0341e0a464aff42c84c015128005c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a8db0341e0a464aff42c84c015128005c">resize</a> (int newSize)</td></tr>
+<tr class="memdesc:a8db0341e0a464aff42c84c015128005c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resize the vector to newSize elements.  <br /></td></tr>
 <tr class="separator:a8db0341e0a464aff42c84c015128005c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acff925db8a62b8c1e3d523a679918f08"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Vector_1_1Iterator.html">Iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#acff925db8a62b8c1e3d523a679918f08">begin</a> ()</td></tr>
+<tr class="memdesc:acff925db8a62b8c1e3d523a679918f08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get iterator to beginning.  <br /></td></tr>
 <tr class="separator:acff925db8a62b8c1e3d523a679918f08"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa3465a0737c2f68755168d3e87dc6ee6"><td class="memItemLeft" align="right" valign="top">T &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#aa3465a0737c2f68755168d3e87dc6ee6">back</a> ()</td></tr>
+<tr class="memdesc:aa3465a0737c2f68755168d3e87dc6ee6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get reference to last element.  <br /></td></tr>
 <tr class="separator:aa3465a0737c2f68755168d3e87dc6ee6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7648da147914d2cedf8a5e841f2a9ba6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Vector_1_1Iterator.html">Iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a7648da147914d2cedf8a5e841f2a9ba6">end</a> ()</td></tr>
+<tr class="memdesc:a7648da147914d2cedf8a5e841f2a9ba6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get iterator to end.  <br /></td></tr>
 <tr class="separator:a7648da147914d2cedf8a5e841f2a9ba6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa2b741f7b5a8ec3bfbc0655e354139a0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#aa2b741f7b5a8ec3bfbc0655e354139a0">erase</a> (<a class="el" href="classtiny__dlna_1_1Vector_1_1Iterator.html">Iterator</a> it)</td></tr>
+<tr class="memdesc:aa2b741f7b5a8ec3bfbc0655e354139a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove element at iterator position.  <br /></td></tr>
 <tr class="separator:aa2b741f7b5a8ec3bfbc0655e354139a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a07ff9c1dbe5ab6003917f181f5b17417"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a07ff9c1dbe5ab6003917f181f5b17417">erase</a> (int pos)</td></tr>
+<tr class="memdesc:a07ff9c1dbe5ab6003917f181f5b17417"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove element at index position.  <br /></td></tr>
 <tr class="separator:a07ff9c1dbe5ab6003917f181f5b17417"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad3899ea452a18680cce039578bf2cf0e"><td class="memItemLeft" align="right" valign="top">T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#ad3899ea452a18680cce039578bf2cf0e">data</a> ()</td></tr>
+<tr class="memdesc:ad3899ea452a18680cce039578bf2cf0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get pointer to underlying array.  <br /></td></tr>
 <tr class="separator:ad3899ea452a18680cce039578bf2cf0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab603e6b4a5062a22cee755245b2cf0e4"><td class="memItemLeft" align="right" valign="top">T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#ab603e6b4a5062a22cee755245b2cf0e4">data</a> () const</td></tr>
+<tr class="memdesc:ab603e6b4a5062a22cee755245b2cf0e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get pointer to underlying array (const)  <br /></td></tr>
 <tr class="separator:ab603e6b4a5062a22cee755245b2cf0e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1eba9c325d7c464bb1d16545d3154f79"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a1eba9c325d7c464bb1d16545d3154f79">operator bool</a> () const</td></tr>
+<tr class="memdesc:a1eba9c325d7c464bb1d16545d3154f79"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the vector is valid (has allocated data)  <br /></td></tr>
 <tr class="separator:a1eba9c325d7c464bb1d16545d3154f79"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aad7b2434e4389c3244a418a0530dcd7b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#aad7b2434e4389c3244a418a0530dcd7b">indexOf</a> (T obj)</td></tr>
+<tr class="memdesc:aad7b2434e4389c3244a418a0530dcd7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the index of an element (-1 if not found)  <br /></td></tr>
 <tr class="separator:aad7b2434e4389c3244a418a0530dcd7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a55440ef21b10c603fdd6a4c05f5c092b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a55440ef21b10c603fdd6a4c05f5c092b">contains</a> (T obj)</td></tr>
+<tr class="memdesc:a55440ef21b10c603fdd6a4c05f5c092b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if vector contains an element.  <br /></td></tr>
 <tr class="separator:a55440ef21b10c603fdd6a4c05f5c092b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a46c6b9c2bca3e28af0cb6a3909109616"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a46c6b9c2bca3e28af0cb6a3909109616">reset</a> ()</td></tr>
+<tr class="memdesc:a46c6b9c2bca3e28af0cb6a3909109616"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset the vector - destroy all elements and deallocate memory.  <br /></td></tr>
+<tr class="separator:a46c6b9c2bca3e28af0cb6a3909109616"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aead0c45132fd08a20e8671a07415bb20"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#aead0c45132fd08a20e8671a07415bb20">Vector</a> ()</td></tr>
+<tr class="memdesc:aead0c45132fd08a20e8671a07415bb20"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor.  <br /></td></tr>
+<tr class="separator:aead0c45132fd08a20e8671a07415bb20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5cc86909231b234ef56846abc4335ecd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a5cc86909231b234ef56846abc4335ecd">Vector</a> (<a class="el" href="classtiny__dlna_1_1Allocator.html">Allocator</a> &amp;alloc)</td></tr>
+<tr class="memdesc:a5cc86909231b234ef56846abc4335ecd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor with allocator.  <br /></td></tr>
+<tr class="separator:a5cc86909231b234ef56846abc4335ecd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a519528617f6528791dc4dc385d0a3523"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a519528617f6528791dc4dc385d0a3523">Vector</a> (<a class="el" href="classtiny__dlna_1_1Vector.html#a10aecd29d601ac2e060fe1bce2553b72">size_type</a> count, <a class="el" href="classtiny__dlna_1_1Allocator.html">Allocator</a> &amp;alloc=DefaultAllocator)</td></tr>
+<tr class="memdesc:a519528617f6528791dc4dc385d0a3523"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor with size.  <br /></td></tr>
+<tr class="separator:a519528617f6528791dc4dc385d0a3523"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b98c7c771c96c92fb3f717e4c39aaea"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a7b98c7c771c96c92fb3f717e4c39aaea">Vector</a> (<a class="el" href="classtiny__dlna_1_1Vector.html#a10aecd29d601ac2e060fe1bce2553b72">size_type</a> count, const T &amp;value, <a class="el" href="classtiny__dlna_1_1Allocator.html">Allocator</a> &amp;alloc=DefaultAllocator)</td></tr>
+<tr class="memdesc:a7b98c7c771c96c92fb3f717e4c39aaea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor with size and default value.  <br /></td></tr>
+<tr class="separator:a7b98c7c771c96c92fb3f717e4c39aaea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20eca6e3386582d8696359887c08c80c"><td class="memTemplParams" colspan="2">template&lt;typename InputIt &gt; </td></tr>
+<tr class="memitem:a20eca6e3386582d8696359887c08c80c"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a20eca6e3386582d8696359887c08c80c">Vector</a> (InputIt first, InputIt last, <a class="el" href="classtiny__dlna_1_1Allocator.html">Allocator</a> &amp;alloc=DefaultAllocator)</td></tr>
+<tr class="memdesc:a20eca6e3386582d8696359887c08c80c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor from iterator range.  <br /></td></tr>
+<tr class="separator:a20eca6e3386582d8696359887c08c80c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac14a15142ff2f6d71f064d72b228d76c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#ac14a15142ff2f6d71f064d72b228d76c">Vector</a> (const <a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a> &amp;other)</td></tr>
+<tr class="memdesc:ac14a15142ff2f6d71f064d72b228d76c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy constructor.  <br /></td></tr>
+<tr class="separator:ac14a15142ff2f6d71f064d72b228d76c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a14474f3d69b880b3df82a289e384d3a0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a14474f3d69b880b3df82a289e384d3a0">Vector</a> (<a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a> &amp;&amp;other) noexcept</td></tr>
+<tr class="memdesc:a14474f3d69b880b3df82a289e384d3a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move constructor.  <br /></td></tr>
+<tr class="separator:a14474f3d69b880b3df82a289e384d3a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb48623803ee027cfc7682e49414e793"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#afb48623803ee027cfc7682e49414e793">~Vector</a> ()</td></tr>
+<tr class="memdesc:afb48623803ee027cfc7682e49414e793"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <br /></td></tr>
+<tr class="separator:afb48623803ee027cfc7682e49414e793"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab40d1ad4f20111604c61411980013299"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#ab40d1ad4f20111604c61411980013299">operator=</a> (const <a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a> &amp;other)</td></tr>
+<tr class="memdesc:ab40d1ad4f20111604c61411980013299"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy assignment.  <br /></td></tr>
+<tr class="separator:ab40d1ad4f20111604c61411980013299"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24b9a1155aa463bae5dd96fbe2a4691d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a24b9a1155aa463bae5dd96fbe2a4691d">operator=</a> (<a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a> &amp;&amp;other) noexcept</td></tr>
+<tr class="memdesc:a24b9a1155aa463bae5dd96fbe2a4691d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move assignment.  <br /></td></tr>
+<tr class="separator:a24b9a1155aa463bae5dd96fbe2a4691d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71e15d7e0f72f27a7b65ff66d51d4b56"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Vector.html#a6360a0de42235e5ee6f5a12a347e1179">reference</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a71e15d7e0f72f27a7b65ff66d51d4b56">at</a> (<a class="el" href="classtiny__dlna_1_1Vector.html#a10aecd29d601ac2e060fe1bce2553b72">size_type</a> pos)</td></tr>
+<tr class="separator:a71e15d7e0f72f27a7b65ff66d51d4b56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ec91cb0d70ed0983c87c5b4eb80b70d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Vector.html#a10d2fe8ed8e31cfa2be25fd1878ea293">const_reference</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a2ec91cb0d70ed0983c87c5b4eb80b70d">at</a> (<a class="el" href="classtiny__dlna_1_1Vector.html#a10aecd29d601ac2e060fe1bce2553b72">size_type</a> pos) const</td></tr>
+<tr class="separator:a2ec91cb0d70ed0983c87c5b4eb80b70d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade4c122ec6f94cc5f18b5652d135f130"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Vector.html#a6360a0de42235e5ee6f5a12a347e1179">reference</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#ade4c122ec6f94cc5f18b5652d135f130">operator[]</a> (<a class="el" href="classtiny__dlna_1_1Vector.html#a10aecd29d601ac2e060fe1bce2553b72">size_type</a> pos)</td></tr>
+<tr class="separator:ade4c122ec6f94cc5f18b5652d135f130"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30531ad5f50b573161df95ee213d88a7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Vector.html#a10d2fe8ed8e31cfa2be25fd1878ea293">const_reference</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a30531ad5f50b573161df95ee213d88a7">operator[]</a> (<a class="el" href="classtiny__dlna_1_1Vector.html#a10aecd29d601ac2e060fe1bce2553b72">size_type</a> pos) const</td></tr>
+<tr class="separator:a30531ad5f50b573161df95ee213d88a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac34478e316f8416f1164aaf287019fba"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Vector.html#a6360a0de42235e5ee6f5a12a347e1179">reference</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#ac34478e316f8416f1164aaf287019fba">front</a> ()</td></tr>
+<tr class="separator:ac34478e316f8416f1164aaf287019fba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a722dd5f485c0a0e1c01a7d04a1f1644b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Vector.html#a10d2fe8ed8e31cfa2be25fd1878ea293">const_reference</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a722dd5f485c0a0e1c01a7d04a1f1644b">front</a> () const</td></tr>
+<tr class="separator:a722dd5f485c0a0e1c01a7d04a1f1644b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab5f9b1cf901a0f37868e828c661a18b0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Vector.html#a6360a0de42235e5ee6f5a12a347e1179">reference</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#ab5f9b1cf901a0f37868e828c661a18b0">back</a> ()</td></tr>
+<tr class="separator:ab5f9b1cf901a0f37868e828c661a18b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50975cbd610ce846f5ded180836c1082"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Vector.html#a10d2fe8ed8e31cfa2be25fd1878ea293">const_reference</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a50975cbd610ce846f5ded180836c1082">back</a> () const</td></tr>
+<tr class="separator:a50975cbd610ce846f5ded180836c1082"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20cab261b3f28195fce71f1f0dd41870"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Vector.html#a8ade583fd804214fe0009a86735dcb36">pointer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a20cab261b3f28195fce71f1f0dd41870">data</a> () noexcept</td></tr>
+<tr class="separator:a20cab261b3f28195fce71f1f0dd41870"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1ce8c8b9d3791a6da9a3313c96c1918"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Vector.html#ab6716361bbda58ba06ec6c33ee38b854">const_pointer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#ac1ce8c8b9d3791a6da9a3313c96c1918">data</a> () const noexcept</td></tr>
+<tr class="separator:ac1ce8c8b9d3791a6da9a3313c96c1918"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19271c22173bf495d7fb908cb269a0e1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Vector_1_1Iterator.html">Iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a19271c22173bf495d7fb908cb269a0e1">begin</a> () noexcept</td></tr>
+<tr class="separator:a19271c22173bf495d7fb908cb269a0e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c5780c789c3dfa70b7784edc25d2498"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Vector_1_1ConstIterator.html">ConstIterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a2c5780c789c3dfa70b7784edc25d2498">begin</a> () const noexcept</td></tr>
+<tr class="separator:a2c5780c789c3dfa70b7784edc25d2498"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ebfc46120d4c38d9a72fd43a0bf8046"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Vector_1_1ConstIterator.html">ConstIterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a1ebfc46120d4c38d9a72fd43a0bf8046">cbegin</a> () const noexcept</td></tr>
+<tr class="separator:a1ebfc46120d4c38d9a72fd43a0bf8046"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a018737fff479af68c5c6ce0ccf0a9a2c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Vector_1_1Iterator.html">Iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a018737fff479af68c5c6ce0ccf0a9a2c">end</a> () noexcept</td></tr>
+<tr class="separator:a018737fff479af68c5c6ce0ccf0a9a2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74f597ade8eed637f0f39ffea4379da1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Vector_1_1ConstIterator.html">ConstIterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a74f597ade8eed637f0f39ffea4379da1">end</a> () const noexcept</td></tr>
+<tr class="separator:a74f597ade8eed637f0f39ffea4379da1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61d0a42921cf601f702beee5a0240fd9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Vector_1_1ConstIterator.html">ConstIterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a61d0a42921cf601f702beee5a0240fd9">cend</a> () const noexcept</td></tr>
+<tr class="separator:a61d0a42921cf601f702beee5a0240fd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa98ea1026b6296cee5c617faaaef2f6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#aaa98ea1026b6296cee5c617faaaef2f6">empty</a> () const noexcept</td></tr>
+<tr class="separator:aaa98ea1026b6296cee5c617faaaef2f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7115fe34f4e15cd576c8f254b1a127a6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Vector.html#a10aecd29d601ac2e060fe1bce2553b72">size_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a7115fe34f4e15cd576c8f254b1a127a6">size</a> () const noexcept</td></tr>
+<tr class="separator:a7115fe34f4e15cd576c8f254b1a127a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8891c11e6eb1ccccddfc8331a3383f80"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Vector.html#a10aecd29d601ac2e060fe1bce2553b72">size_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a8891c11e6eb1ccccddfc8331a3383f80">capacity</a> () const noexcept</td></tr>
+<tr class="separator:a8891c11e6eb1ccccddfc8331a3383f80"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ac98e1118969c4168229533cfbd162b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a7ac98e1118969c4168229533cfbd162b">reserve</a> (<a class="el" href="classtiny__dlna_1_1Vector.html#a10aecd29d601ac2e060fe1bce2553b72">size_type</a> new_cap)</td></tr>
+<tr class="separator:a7ac98e1118969c4168229533cfbd162b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac162664118be261ff8d31719a341c02a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#ac162664118be261ff8d31719a341c02a">shrink_to_fit</a> ()</td></tr>
+<tr class="separator:ac162664118be261ff8d31719a341c02a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8fa51a2ddf2bc335784c14d83f9a44f6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a8fa51a2ddf2bc335784c14d83f9a44f6">clear</a> () noexcept</td></tr>
+<tr class="separator:a8fa51a2ddf2bc335784c14d83f9a44f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b172aa23afa79f70f06685def1c08e7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Vector_1_1Iterator.html">Iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a7b172aa23afa79f70f06685def1c08e7">insert</a> (<a class="el" href="classtiny__dlna_1_1Vector_1_1ConstIterator.html">ConstIterator</a> pos, const T &amp;value)</td></tr>
+<tr class="separator:a7b172aa23afa79f70f06685def1c08e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a065627aa1353c24c18c83612147a1eb2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Vector_1_1Iterator.html">Iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a065627aa1353c24c18c83612147a1eb2">insert</a> (<a class="el" href="classtiny__dlna_1_1Vector_1_1ConstIterator.html">ConstIterator</a> pos, T &amp;&amp;value)</td></tr>
+<tr class="separator:a065627aa1353c24c18c83612147a1eb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85ccf46aaaf217f09e1c3e89cd05715e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Vector_1_1Iterator.html">Iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a85ccf46aaaf217f09e1c3e89cd05715e">erase</a> (<a class="el" href="classtiny__dlna_1_1Vector_1_1ConstIterator.html">ConstIterator</a> pos)</td></tr>
+<tr class="separator:a85ccf46aaaf217f09e1c3e89cd05715e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ff10a23152a06f6414536f239436c1f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Vector_1_1Iterator.html">Iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a2ff10a23152a06f6414536f239436c1f">erase</a> (<a class="el" href="classtiny__dlna_1_1Vector.html#a10aecd29d601ac2e060fe1bce2553b72">size_type</a> index)</td></tr>
+<tr class="separator:a2ff10a23152a06f6414536f239436c1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15f909215ad8f134050f12ab51059ab9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Vector_1_1Iterator.html">Iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a15f909215ad8f134050f12ab51059ab9">erase</a> (<a class="el" href="classtiny__dlna_1_1Vector_1_1ConstIterator.html">ConstIterator</a> first, <a class="el" href="classtiny__dlna_1_1Vector_1_1ConstIterator.html">ConstIterator</a> last)</td></tr>
+<tr class="separator:a15f909215ad8f134050f12ab51059ab9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a603ab3d2889b24298c6bd6a7410d6029"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a603ab3d2889b24298c6bd6a7410d6029">push_back</a> (const T &amp;value)</td></tr>
+<tr class="separator:a603ab3d2889b24298c6bd6a7410d6029"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a59b9e97bfbbb7de5f802fca0ed621981"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a59b9e97bfbbb7de5f802fca0ed621981">push_back</a> (T &amp;&amp;value)</td></tr>
+<tr class="separator:a59b9e97bfbbb7de5f802fca0ed621981"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a283f24788adda6723cdd38caf68fe8fa"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
+<tr class="memitem:a283f24788adda6723cdd38caf68fe8fa"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Vector.html#a6360a0de42235e5ee6f5a12a347e1179">reference</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a283f24788adda6723cdd38caf68fe8fa">emplace_back</a> (Args &amp;&amp;... args)</td></tr>
+<tr class="separator:a283f24788adda6723cdd38caf68fe8fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adacfacc9de75534eeffdcc72178e9a43"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#adacfacc9de75534eeffdcc72178e9a43">pop_back</a> ()</td></tr>
+<tr class="separator:adacfacc9de75534eeffdcc72178e9a43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c575826e1a07f4e183aaa64be5c8e35"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a1c575826e1a07f4e183aaa64be5c8e35">resize</a> (<a class="el" href="classtiny__dlna_1_1Vector.html#a10aecd29d601ac2e060fe1bce2553b72">size_type</a> count)</td></tr>
+<tr class="separator:a1c575826e1a07f4e183aaa64be5c8e35"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab08d824f1f50e40acca00ab1393b7cd7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#ab08d824f1f50e40acca00ab1393b7cd7">resize</a> (<a class="el" href="classtiny__dlna_1_1Vector.html#a10aecd29d601ac2e060fe1bce2553b72">size_type</a> count, const T &amp;value)</td></tr>
+<tr class="separator:ab08d824f1f50e40acca00ab1393b7cd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff82a4b6edbd73e6637cc830a378ba4f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#aff82a4b6edbd73e6637cc830a378ba4f">swap</a> (<a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a> &amp;other) noexcept</td></tr>
+<tr class="separator:aff82a4b6edbd73e6637cc830a378ba4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89b2a1bf29c7deb1a1c4a61a1ea87fec"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a89b2a1bf29c7deb1a1c4a61a1ea87fec">assign</a> (<a class="el" href="classtiny__dlna_1_1Vector.html#a10aecd29d601ac2e060fe1bce2553b72">size_type</a> count, const T &amp;value)</td></tr>
+<tr class="separator:a89b2a1bf29c7deb1a1c4a61a1ea87fec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1268d74a5cf4f5c17857d730cbc364c"><td class="memTemplParams" colspan="2">template&lt;typename InputIt &gt; </td></tr>
+<tr class="memitem:ab1268d74a5cf4f5c17857d730cbc364c"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#ab1268d74a5cf4f5c17857d730cbc364c">assign</a> (InputIt first, InputIt last)</td></tr>
+<tr class="separator:ab1268d74a5cf4f5c17857d730cbc364c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad343e2015da76f12e8411623fbf85808"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Vector.html#a9d5f1b6e68a5a53c85bb06c7c081f9da">allocator_type</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#ad343e2015da76f12e8411623fbf85808">get_allocator</a> () const</td></tr>
+<tr class="memdesc:ad343e2015da76f12e8411623fbf85808"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the allocator.  <br /></td></tr>
+<tr class="separator:ad343e2015da76f12e8411623fbf85808"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0acfbe66ac349d171367861a1fdc0f7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#af0acfbe66ac349d171367861a1fdc0f7">set_allocator</a> (<a class="el" href="classtiny__dlna_1_1Allocator.html">Allocator</a> &amp;alloc)</td></tr>
+<tr class="memdesc:af0acfbe66ac349d171367861a1fdc0f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the allocator (use with caution, should only be called on empty vector)  <br /></td></tr>
+<tr class="separator:af0acfbe66ac349d171367861a1fdc0f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f8ee78a1f1719c6877e5ca2fb9232aa"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a9f8ee78a1f1719c6877e5ca2fb9232aa">contains</a> (const T &amp;value) const</td></tr>
+<tr class="memdesc:a9f8ee78a1f1719c6877e5ca2fb9232aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if vector contains a value.  <br /></td></tr>
+<tr class="separator:a9f8ee78a1f1719c6877e5ca2fb9232aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8f8134d234e2184de9806307c943095"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#aa8f8134d234e2184de9806307c943095">indexOf</a> (const T &amp;value) const</td></tr>
+<tr class="memdesc:aa8f8134d234e2184de9806307c943095"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find index of value, returns -1 if not found.  <br /></td></tr>
+<tr class="separator:aa8f8134d234e2184de9806307c943095"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1eba9c325d7c464bb1d16545d3154f79"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a1eba9c325d7c464bb1d16545d3154f79">operator bool</a> () const</td></tr>
+<tr class="memdesc:a1eba9c325d7c464bb1d16545d3154f79"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolean conversion.  <br /></td></tr>
+<tr class="separator:a1eba9c325d7c464bb1d16545d3154f79"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46c6b9c2bca3e28af0cb6a3909109616"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a46c6b9c2bca3e28af0cb6a3909109616">reset</a> ()</td></tr>
+<tr class="memdesc:a46c6b9c2bca3e28af0cb6a3909109616"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset the vector (clear and deallocate all memory)  <br /></td></tr>
 <tr class="separator:a46c6b9c2bca3e28af0cb6a3909109616"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:a0df8f9e7a4b2e79bb787dabb563ae10f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a0df8f9e7a4b2e79bb787dabb563ae10f">resize_internal</a> (int newSize, bool copy, bool shrink=false)</td></tr>
+<tr class="memdesc:a0df8f9e7a4b2e79bb787dabb563ae10f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal resize implementation with control over copying and shrinking.  <br /></td></tr>
 <tr class="separator:a0df8f9e7a4b2e79bb787dabb563ae10f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5f5d3d4715f0bf3d496b7efcb14b8ea9"><td class="memItemLeft" align="right" valign="top">T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a5f5d3d4715f0bf3d496b7efcb14b8ea9">newArray</a> (int newSize)</td></tr>
+<tr class="memdesc:a5f5d3d4715f0bf3d496b7efcb14b8ea9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocate a new array of elements using the allocator.  <br /></td></tr>
 <tr class="separator:a5f5d3d4715f0bf3d496b7efcb14b8ea9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad54de0e9d4d7990ed493297cc1a17fd3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#ad54de0e9d4d7990ed493297cc1a17fd3">deleteArray</a> (T *oldData, int oldBufferLen)</td></tr>
+<tr class="memdesc:ad54de0e9d4d7990ed493297cc1a17fd3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deallocate an array using the allocator.  <br /></td></tr>
 <tr class="separator:ad54de0e9d4d7990ed493297cc1a17fd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2c30290f6d66f8f3002a53c1b2280e34"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a2c30290f6d66f8f3002a53c1b2280e34">cleanup</a> (T *<a class="el" href="classtiny__dlna_1_1Vector.html#ad3899ea452a18680cce039578bf2cf0e">data</a>, int from, int to)</td></tr>
+<tr class="memdesc:a2c30290f6d66f8f3002a53c1b2280e34"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call destructors on a range of elements.  <br /></td></tr>
 <tr class="separator:a2c30290f6d66f8f3002a53c1b2280e34"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8b99643494bf463f87cb164c83cf5b0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#aa8b99643494bf463f87cb164c83cf5b0">reallocate</a> (<a class="el" href="classtiny__dlna_1_1Vector.html#a10aecd29d601ac2e060fe1bce2553b72">size_type</a> new_capacity)</td></tr>
+<tr class="memdesc:aa8b99643494bf463f87cb164c83cf5b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reallocate storage with proper element handling.  <br /></td></tr>
+<tr class="separator:aa8b99643494bf463f87cb164c83cf5b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea4c527c40cd4090745aef76703ba420"><td class="memItemLeft" align="right" valign="top">T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#aea4c527c40cd4090745aef76703ba420">allocate</a> (<a class="el" href="classtiny__dlna_1_1Vector.html#a10aecd29d601ac2e060fe1bce2553b72">size_type</a> n)</td></tr>
+<tr class="memdesc:aea4c527c40cd4090745aef76703ba420"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocate raw memory (does not construct elements)  <br /></td></tr>
+<tr class="separator:aea4c527c40cd4090745aef76703ba420"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab67966fccf6e576e44ef7ac509903c26"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#ab67966fccf6e576e44ef7ac509903c26">deallocate</a> (T *ptr, <a class="el" href="classtiny__dlna_1_1Vector.html#a10aecd29d601ac2e060fe1bce2553b72">size_type</a> n)</td></tr>
+<tr class="memdesc:ab67966fccf6e576e44ef7ac509903c26"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deallocate raw memory (does not destroy elements)  <br /></td></tr>
+<tr class="separator:ab67966fccf6e576e44ef7ac509903c26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f490918f8b2c778bd2b9628f2be7ad5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a2f490918f8b2c778bd2b9628f2be7ad5">destroy_and_deallocate</a> ()</td></tr>
+<tr class="memdesc:a2f490918f8b2c778bd2b9628f2be7ad5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy all elements and deallocate storage.  <br /></td></tr>
+<tr class="separator:a2f490918f8b2c778bd2b9628f2be7ad5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:aba8e3d964d1754de034595ae151e1686"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#aba8e3d964d1754de034595ae151e1686">max_capacity</a> = 0</td></tr>
+<tr class="memdesc:aba8e3d964d1754de034595ae151e1686"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum number of elements that can be stored without reallocation.  <br /></td></tr>
 <tr class="separator:aba8e3d964d1754de034595ae151e1686"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abc61d2836d97b5a611f49a17167402cb"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#abc61d2836d97b5a611f49a17167402cb">len</a> = 0</td></tr>
+<tr class="memdesc:abc61d2836d97b5a611f49a17167402cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current number of elements in the vector.  <br /></td></tr>
 <tr class="separator:abc61d2836d97b5a611f49a17167402cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aceb5f64cd7332966ea8c8d6d7c1c30ec"><td class="memItemLeft" align="right" valign="top">T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#aceb5f64cd7332966ea8c8d6d7c1c30ec">p_data</a> = nullptr</td></tr>
+<tr class="memdesc:aceb5f64cd7332966ea8c8d6d7c1c30ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the underlying data array.  <br /></td></tr>
 <tr class="separator:aceb5f64cd7332966ea8c8d6d7c1c30ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a567d30b4b01908a08d895123bbf2a42f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="dlna__config_8h.html#afddba70f8ea3f9edae2d1dbc4fa07130">ALLOCATOR</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a567d30b4b01908a08d895123bbf2a42f">p_allocator</a> = &amp;DefaultAllocator</td></tr>
+<tr class="memdesc:a567d30b4b01908a08d895123bbf2a42f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the allocator instance.  <br /></td></tr>
 <tr class="separator:a567d30b4b01908a08d895123bbf2a42f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2da74d6715f5a0796e41223a5ef427b6"><td class="memItemLeft" align="right" valign="top">T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a2da74d6715f5a0796e41223a5ef427b6">data_</a></td></tr>
+<tr class="separator:a2da74d6715f5a0796e41223a5ef427b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2619b0a9425e68e0c4aacb507c122765"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Vector.html#a10aecd29d601ac2e060fe1bce2553b72">size_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a2619b0a9425e68e0c4aacb507c122765">size_</a></td></tr>
+<tr class="separator:a2619b0a9425e68e0c4aacb507c122765"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9bc60d57d8fded8c8d593bfb63d76efd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Vector.html#a10aecd29d601ac2e060fe1bce2553b72">size_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a9bc60d57d8fded8c8d593bfb63d76efd">capacity_</a></td></tr>
+<tr class="separator:a9bc60d57d8fded8c8d593bfb63d76efd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d4da574fd9c9788191311b2462ef2c0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Allocator.html">Allocator</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a4d4da574fd9c9788191311b2462ef2c0">allocator_</a></td></tr>
+<tr class="separator:a4d4da574fd9c9788191311b2462ef2c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;class T&gt;<br />
-class tiny_dlna::Vector&lt; T &gt;</div><p><a class="el" href="classtiny__dlna_1_1Vector.html" title="Vector implementation which provides the most important methods as defined by std::vector....">Vector</a> implementation which provides the most important methods as defined by std::vector. This class it is quite handy to have and most of the times quite better then dealing with raw c arrays. </p>
+class tiny_dlna::Vector&lt; T &gt;</div><p>Custom <a class="el" href="classtiny__dlna_1_1Vector.html" title="Custom Vector implementation that provides std::vector-like API with support for custom allocators....">Vector</a> implementation that provides std::vector-like API with support for custom allocators. This implementation is used when DLNA_USE_STD_VECTOR is disabled, typically for embedded systems where std::vector is not available or custom memory management is required. </p>
+<p><a class="el" href="classtiny__dlna_1_1Vector.html" title="Custom Vector implementation that provides std::vector-like API with support for custom allocators....">Vector</a> implementation that provides std::vector-like API with proper RAII semantics and memory management. This implementation handles resource cleanup correctly through destructors and supports both trivial and non-trivial types. Supports custom allocators for flexible memory management.</p>
+<p>This class provides the most important methods as defined by std::vector and is more convenient than dealing with raw C arrays. It supports:</p><ul>
+<li>Custom allocators for flexible memory management</li>
+<li>RAII with proper constructor/destructor calls</li>
+<li>Move semantics to avoid unnecessary copies</li>
+<li><a class="el" href="classtiny__dlna_1_1Vector_1_1Iterator.html" title="Lightweight iterator for tiny_dlna::Vector&lt;T&gt;.">Iterator</a> support for range-based loops</li>
+</ul>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The type of elements stored in the vector </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
+<dl class="section copyright"><dt>Copyright</dt><dd>GPLv3</dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+</div><h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="a9d5f1b6e68a5a53c85bb06c7c081f9da" name="a9d5f1b6e68a5a53c85bb06c7c081f9da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d5f1b6e68a5a53c85bb06c7c081f9da">&#9670;&#160;</a></span>allocator_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::allocator_type =  <a class="el" href="classtiny__dlna_1_1Allocator.html">Allocator</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab6716361bbda58ba06ec6c33ee38b854" name="ab6716361bbda58ba06ec6c33ee38b854"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab6716361bbda58ba06ec6c33ee38b854">&#9670;&#160;</a></span>const_pointer</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::const_pointer =  const T*</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a10d2fe8ed8e31cfa2be25fd1878ea293" name="a10d2fe8ed8e31cfa2be25fd1878ea293"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a10d2fe8ed8e31cfa2be25fd1878ea293">&#9670;&#160;</a></span>const_reference</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::const_reference =  const T&amp;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a24b2ee753d68a203aa756820cb2abb39" name="a24b2ee753d68a203aa756820cb2abb39"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a24b2ee753d68a203aa756820cb2abb39">&#9670;&#160;</a></span>difference_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::difference_type =  ptrdiff_t</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8ade583fd804214fe0009a86735dcb36" name="a8ade583fd804214fe0009a86735dcb36"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ade583fd804214fe0009a86735dcb36">&#9670;&#160;</a></span>pointer</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::pointer =  T*</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6360a0de42235e5ee6f5a12a347e1179" name="a6360a0de42235e5ee6f5a12a347e1179"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6360a0de42235e5ee6f5a12a347e1179">&#9670;&#160;</a></span>reference</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::reference =  T&amp;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a10aecd29d601ac2e060fe1bce2553b72" name="a10aecd29d601ac2e060fe1bce2553b72"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a10aecd29d601ac2e060fe1bce2553b72">&#9670;&#160;</a></span>size_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::size_type =  size_t</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4ba83855d384c2c980feff93b025f10f" name="a4ba83855d384c2c980feff93b025f10f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ba83855d384c2c980feff93b025f10f">&#9670;&#160;</a></span>value_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::value_type =  T</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a55b9d20bb7260cd6ec81e669a1c1bc86" name="a55b9d20bb7260cd6ec81e669a1c1bc86"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a55b9d20bb7260cd6ec81e669a1c1bc86">&#9670;&#160;</a></span>Vector() <span class="overload">[1/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a55b9d20bb7260cd6ec81e669a1c1bc86">&#9670;&#160;</a></span>Vector() <span class="overload">[1/13]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -253,7 +601,7 @@ template&lt;class T &gt; </div>
 </div>
 </div>
 <a id="a67ffe4bcc725dc8ba47748b37edcfb88" name="a67ffe4bcc725dc8ba47748b37edcfb88"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a67ffe4bcc725dc8ba47748b37edcfb88">&#9670;&#160;</a></span>Vector() <span class="overload">[2/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a67ffe4bcc725dc8ba47748b37edcfb88">&#9670;&#160;</a></span>Vector() <span class="overload">[2/13]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -283,7 +631,7 @@ template&lt;class T &gt; </div>
 </div>
 </div>
 <a id="a6b36dd4d4d5844e1e697f759108a6aa4" name="a6b36dd4d4d5844e1e697f759108a6aa4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6b36dd4d4d5844e1e697f759108a6aa4">&#9670;&#160;</a></span>Vector() <span class="overload">[3/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b36dd4d4d5844e1e697f759108a6aa4">&#9670;&#160;</a></span>Vector() <span class="overload">[3/13]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -324,12 +672,12 @@ template&lt;class T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Allocate size and initialize array. </p>
+<p>Allocate size and initialize array with default values. </p>
 
 </div>
 </div>
 <a id="a37aef63a49af96ff0e148c826acfca6b" name="a37aef63a49af96ff0e148c826acfca6b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a37aef63a49af96ff0e148c826acfca6b">&#9670;&#160;</a></span>Vector() <span class="overload">[4/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a37aef63a49af96ff0e148c826acfca6b">&#9670;&#160;</a></span>Vector() <span class="overload">[4/13]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -354,12 +702,12 @@ template&lt;class T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Move constructor. </p>
+<p>Move constructor - transfers ownership of data. </p>
 
 </div>
 </div>
 <a id="addc5a92799e8be135cf0b4427670e2bd" name="addc5a92799e8be135cf0b4427670e2bd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#addc5a92799e8be135cf0b4427670e2bd">&#9670;&#160;</a></span>Vector() <span class="overload">[5/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#addc5a92799e8be135cf0b4427670e2bd">&#9670;&#160;</a></span>Vector() <span class="overload">[5/13]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -384,12 +732,12 @@ template&lt;class T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>copy constructor </p>
+<p>Copy constructor - creates a deep copy. </p>
 
 </div>
 </div>
 <a id="a5684b1e7b9df0c252486acfb289c4646" name="a5684b1e7b9df0c252486acfb289c4646"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5684b1e7b9df0c252486acfb289c4646">&#9670;&#160;</a></span>Vector() <span class="overload">[6/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a5684b1e7b9df0c252486acfb289c4646">&#9670;&#160;</a></span>Vector() <span class="overload">[6/13]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -430,12 +778,12 @@ template&lt;class T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>legacy constructor with pointer range </p>
+<p>Legacy constructor with pointer range. </p>
 
 </div>
 </div>
 <a id="a00e7ebb14d6500cd7a19298ebfc618d8" name="a00e7ebb14d6500cd7a19298ebfc618d8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a00e7ebb14d6500cd7a19298ebfc618d8">&#9670;&#160;</a></span>~Vector()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a00e7ebb14d6500cd7a19298ebfc618d8">&#9670;&#160;</a></span>~Vector() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -459,13 +807,365 @@ template&lt;class T &gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Destructor - calls <a class="el" href="classtiny__dlna_1_1Vector.html#a46c6b9c2bca3e28af0cb6a3909109616" title="Reset the vector - destroy all elements and deallocate memory.">reset()</a> to clean up all resources. </p>
+
+</div>
+</div>
+<a id="aead0c45132fd08a20e8671a07415bb20" name="aead0c45132fd08a20e8671a07415bb20"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aead0c45132fd08a20e8671a07415bb20">&#9670;&#160;</a></span>Vector() <span class="overload">[7/13]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::Vector </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Default constructor. </p>
+
+</div>
+</div>
+<a id="a5cc86909231b234ef56846abc4335ecd" name="a5cc86909231b234ef56846abc4335ecd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5cc86909231b234ef56846abc4335ecd">&#9670;&#160;</a></span>Vector() <span class="overload">[8/13]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::Vector </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1Allocator.html">Allocator</a> &amp;&#160;</td>
+          <td class="paramname"><em>alloc</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor with allocator. </p>
+
+</div>
+</div>
+<a id="a519528617f6528791dc4dc385d0a3523" name="a519528617f6528791dc4dc385d0a3523"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a519528617f6528791dc4dc385d0a3523">&#9670;&#160;</a></span>Vector() <span class="overload">[9/13]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::Vector </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1Vector.html#a10aecd29d601ac2e060fe1bce2553b72">size_type</a>&#160;</td>
+          <td class="paramname"><em>count</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1Allocator.html">Allocator</a> &amp;&#160;</td>
+          <td class="paramname"><em>alloc</em> = <code>DefaultAllocator</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor with size. </p>
+
+</div>
+</div>
+<a id="a7b98c7c771c96c92fb3f717e4c39aaea" name="a7b98c7c771c96c92fb3f717e4c39aaea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b98c7c771c96c92fb3f717e4c39aaea">&#9670;&#160;</a></span>Vector() <span class="overload">[10/13]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::Vector </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1Vector.html#a10aecd29d601ac2e060fe1bce2553b72">size_type</a>&#160;</td>
+          <td class="paramname"><em>count</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>value</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1Allocator.html">Allocator</a> &amp;&#160;</td>
+          <td class="paramname"><em>alloc</em> = <code>DefaultAllocator</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor with size and default value. </p>
+
+</div>
+</div>
+<a id="a20eca6e3386582d8696359887c08c80c" name="a20eca6e3386582d8696359887c08c80c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20eca6e3386582d8696359887c08c80c">&#9670;&#160;</a></span>Vector() <span class="overload">[11/13]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<div class="memtemplate">
+template&lt;typename InputIt &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::Vector </td>
+          <td>(</td>
+          <td class="paramtype">InputIt&#160;</td>
+          <td class="paramname"><em>first</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">InputIt&#160;</td>
+          <td class="paramname"><em>last</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1Allocator.html">Allocator</a> &amp;&#160;</td>
+          <td class="paramname"><em>alloc</em> = <code>DefaultAllocator</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor from iterator range. </p>
+
+</div>
+</div>
+<a id="ac14a15142ff2f6d71f064d72b228d76c" name="ac14a15142ff2f6d71f064d72b228d76c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac14a15142ff2f6d71f064d72b228d76c">&#9670;&#160;</a></span>Vector() <span class="overload">[12/13]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::Vector </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt; T &gt; &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Copy constructor. </p>
+
+</div>
+</div>
+<a id="a14474f3d69b880b3df82a289e384d3a0" name="a14474f3d69b880b3df82a289e384d3a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a14474f3d69b880b3df82a289e384d3a0">&#9670;&#160;</a></span>Vector() <span class="overload">[13/13]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::Vector </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt; T &gt; &amp;&amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Move constructor. </p>
+
+</div>
+</div>
+<a id="afb48623803ee027cfc7682e49414e793" name="afb48623803ee027cfc7682e49414e793"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb48623803ee027cfc7682e49414e793">&#9670;&#160;</a></span>~Vector() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::~<a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
 <p>Destructor. </p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="aea4c527c40cd4090745aef76703ba420" name="aea4c527c40cd4090745aef76703ba420"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aea4c527c40cd4090745aef76703ba420">&#9670;&#160;</a></span>allocate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T * <a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::allocate </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1Vector.html#a10aecd29d601ac2e060fe1bce2553b72">size_type</a>&#160;</td>
+          <td class="paramname"><em>n</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Allocate raw memory (does not construct elements) </p>
+
+</div>
+</div>
+<a id="ab1268d74a5cf4f5c17857d730cbc364c" name="ab1268d74a5cf4f5c17857d730cbc364c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab1268d74a5cf4f5c17857d730cbc364c">&#9670;&#160;</a></span>assign() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<div class="memtemplate">
+template&lt;typename InputIt &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::assign </td>
+          <td>(</td>
+          <td class="paramtype">InputIt&#160;</td>
+          <td class="paramname"><em>first</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">InputIt&#160;</td>
+          <td class="paramname"><em>last</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a6db568daacac699add05076e1375eb92" name="a6db568daacac699add05076e1375eb92"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6db568daacac699add05076e1375eb92">&#9670;&#160;</a></span>assign() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a6db568daacac699add05076e1375eb92">&#9670;&#160;</a></span>assign() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -500,10 +1200,12 @@ template&lt;class T &gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Assign from iterator range. </p>
+
 </div>
 </div>
 <a id="a3525cd7584cb9e693e8627be863f50b0" name="a3525cd7584cb9e693e8627be863f50b0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3525cd7584cb9e693e8627be863f50b0">&#9670;&#160;</a></span>assign() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a3525cd7584cb9e693e8627be863f50b0">&#9670;&#160;</a></span>assign() <span class="overload">[3/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -538,10 +1240,106 @@ template&lt;class T &gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Assign multiple copies of a value. </p>
+
+</div>
+</div>
+<a id="a89b2a1bf29c7deb1a1c4a61a1ea87fec" name="a89b2a1bf29c7deb1a1c4a61a1ea87fec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89b2a1bf29c7deb1a1c4a61a1ea87fec">&#9670;&#160;</a></span>assign() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::assign </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1Vector.html#a10aecd29d601ac2e060fe1bce2553b72">size_type</a>&#160;</td>
+          <td class="paramname"><em>count</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a71e15d7e0f72f27a7b65ff66d51d4b56" name="a71e15d7e0f72f27a7b65ff66d51d4b56"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a71e15d7e0f72f27a7b65ff66d51d4b56">&#9670;&#160;</a></span>at() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1Vector.html#a6360a0de42235e5ee6f5a12a347e1179">reference</a> <a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::at </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1Vector.html#a10aecd29d601ac2e060fe1bce2553b72">size_type</a>&#160;</td>
+          <td class="paramname"><em>pos</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2ec91cb0d70ed0983c87c5b4eb80b70d" name="a2ec91cb0d70ed0983c87c5b4eb80b70d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ec91cb0d70ed0983c87c5b4eb80b70d">&#9670;&#160;</a></span>at() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1Vector.html#a10d2fe8ed8e31cfa2be25fd1878ea293">const_reference</a> <a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::at </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1Vector.html#a10aecd29d601ac2e060fe1bce2553b72">size_type</a>&#160;</td>
+          <td class="paramname"><em>pos</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
 </div>
 </div>
 <a id="aa3465a0737c2f68755168d3e87dc6ee6" name="aa3465a0737c2f68755168d3e87dc6ee6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa3465a0737c2f68755168d3e87dc6ee6">&#9670;&#160;</a></span>back()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aa3465a0737c2f68755168d3e87dc6ee6">&#9670;&#160;</a></span>back() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -565,10 +1363,66 @@ template&lt;class T &gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Get reference to last element. </p>
+
+</div>
+</div>
+<a id="ab5f9b1cf901a0f37868e828c661a18b0" name="ab5f9b1cf901a0f37868e828c661a18b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab5f9b1cf901a0f37868e828c661a18b0">&#9670;&#160;</a></span>back() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1Vector.html#a6360a0de42235e5ee6f5a12a347e1179">reference</a> <a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::back </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a50975cbd610ce846f5ded180836c1082" name="a50975cbd610ce846f5ded180836c1082"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a50975cbd610ce846f5ded180836c1082">&#9670;&#160;</a></span>back() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1Vector.html#a10d2fe8ed8e31cfa2be25fd1878ea293">const_reference</a> <a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::back </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
 </div>
 </div>
 <a id="acff925db8a62b8c1e3d523a679918f08" name="acff925db8a62b8c1e3d523a679918f08"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acff925db8a62b8c1e3d523a679918f08">&#9670;&#160;</a></span>begin()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#acff925db8a62b8c1e3d523a679918f08">&#9670;&#160;</a></span>begin() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -592,10 +1446,66 @@ template&lt;class T &gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Get iterator to beginning. </p>
+
+</div>
+</div>
+<a id="a2c5780c789c3dfa70b7784edc25d2498" name="a2c5780c789c3dfa70b7784edc25d2498"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c5780c789c3dfa70b7784edc25d2498">&#9670;&#160;</a></span>begin() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1Vector_1_1ConstIterator.html">ConstIterator</a> <a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::begin </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a19271c22173bf495d7fb908cb269a0e1" name="a19271c22173bf495d7fb908cb269a0e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a19271c22173bf495d7fb908cb269a0e1">&#9670;&#160;</a></span>begin() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1Vector_1_1Iterator.html">Iterator</a> <a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::begin </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
 </div>
 </div>
 <a id="af5f989de02a0c735a009e0adcc8ca876" name="af5f989de02a0c735a009e0adcc8ca876"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af5f989de02a0c735a009e0adcc8ca876">&#9670;&#160;</a></span>capacity()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#af5f989de02a0c735a009e0adcc8ca876">&#9670;&#160;</a></span>capacity() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -615,6 +1525,89 @@ template&lt;class T &gt; </div>
   </td>
   <td class="mlabels-right">
 <span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the current capacity. </p>
+
+</div>
+</div>
+<a id="a8891c11e6eb1ccccddfc8331a3383f80" name="a8891c11e6eb1ccccddfc8331a3383f80"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8891c11e6eb1ccccddfc8331a3383f80">&#9670;&#160;</a></span>capacity() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1Vector.html#a10aecd29d601ac2e060fe1bce2553b72">size_type</a> <a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::capacity </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1ebfc46120d4c38d9a72fd43a0bf8046" name="a1ebfc46120d4c38d9a72fd43a0bf8046"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1ebfc46120d4c38d9a72fd43a0bf8046">&#9670;&#160;</a></span>cbegin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1Vector_1_1ConstIterator.html">ConstIterator</a> <a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::cbegin </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a61d0a42921cf601f702beee5a0240fd9" name="a61d0a42921cf601f702beee5a0240fd9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a61d0a42921cf601f702beee5a0240fd9">&#9670;&#160;</a></span>cend()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1Vector_1_1ConstIterator.html">ConstIterator</a> <a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::cend </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -663,10 +1656,20 @@ template&lt;class T &gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Call destructors on a range of elements. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>Pointer to the array </td></tr>
+    <tr><td class="paramname">from</td><td>Starting index (inclusive) </td></tr>
+    <tr><td class="paramname">to</td><td>Ending index (exclusive) </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="a1a623d1c06470b858fea4bbb48405468" name="a1a623d1c06470b858fea4bbb48405468"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1a623d1c06470b858fea4bbb48405468">&#9670;&#160;</a></span>clear()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a623d1c06470b858fea4bbb48405468">&#9670;&#160;</a></span>clear() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -690,10 +1693,69 @@ template&lt;class T &gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Clear all elements, calling destructors but keeping capacity. </p>
+
+</div>
+</div>
+<a id="a8fa51a2ddf2bc335784c14d83f9a44f6" name="a8fa51a2ddf2bc335784c14d83f9a44f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8fa51a2ddf2bc335784c14d83f9a44f6">&#9670;&#160;</a></span>clear() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::clear </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9f8ee78a1f1719c6877e5ca2fb9232aa" name="a9f8ee78a1f1719c6877e5ca2fb9232aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f8ee78a1f1719c6877e5ca2fb9232aa">&#9670;&#160;</a></span>contains() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::contains </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Check if vector contains a value. </p>
+
 </div>
 </div>
 <a id="a55440ef21b10c603fdd6a4c05f5c092b" name="a55440ef21b10c603fdd6a4c05f5c092b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a55440ef21b10c603fdd6a4c05f5c092b">&#9670;&#160;</a></span>contains()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a55440ef21b10c603fdd6a4c05f5c092b">&#9670;&#160;</a></span>contains() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -718,10 +1780,12 @@ template&lt;class T &gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Check if vector contains an element. </p>
+
 </div>
 </div>
 <a id="ad3899ea452a18680cce039578bf2cf0e" name="ad3899ea452a18680cce039578bf2cf0e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad3899ea452a18680cce039578bf2cf0e">&#9670;&#160;</a></span>data() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3899ea452a18680cce039578bf2cf0e">&#9670;&#160;</a></span>data() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -745,10 +1809,12 @@ template&lt;class T &gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Get pointer to underlying array. </p>
+
 </div>
 </div>
 <a id="ab603e6b4a5062a22cee755245b2cf0e4" name="ab603e6b4a5062a22cee755245b2cf0e4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab603e6b4a5062a22cee755245b2cf0e4">&#9670;&#160;</a></span>data() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ab603e6b4a5062a22cee755245b2cf0e4">&#9670;&#160;</a></span>data() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -771,6 +1837,102 @@ template&lt;class T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Get pointer to underlying array (const) </p>
+
+</div>
+</div>
+<a id="ac1ce8c8b9d3791a6da9a3313c96c1918" name="ac1ce8c8b9d3791a6da9a3313c96c1918"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac1ce8c8b9d3791a6da9a3313c96c1918">&#9670;&#160;</a></span>data() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1Vector.html#ab6716361bbda58ba06ec6c33ee38b854">const_pointer</a> <a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::data </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a20cab261b3f28195fce71f1f0dd41870" name="a20cab261b3f28195fce71f1f0dd41870"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20cab261b3f28195fce71f1f0dd41870">&#9670;&#160;</a></span>data() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1Vector.html#a8ade583fd804214fe0009a86735dcb36">pointer</a> <a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::data </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab67966fccf6e576e44ef7ac509903c26" name="ab67966fccf6e576e44ef7ac509903c26"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab67966fccf6e576e44ef7ac509903c26">&#9670;&#160;</a></span>deallocate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::deallocate </td>
+          <td>(</td>
+          <td class="paramtype">T *&#160;</td>
+          <td class="paramname"><em>ptr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1Vector.html#a10aecd29d601ac2e060fe1bce2553b72">size_type</a>&#160;</td>
+          <td class="paramname"><em>n</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Deallocate raw memory (does not destroy elements) </p>
 
 </div>
 </div>
@@ -810,10 +1972,78 @@ template&lt;class T &gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Deallocate an array using the allocator. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">oldData</td><td>Pointer to the array to deallocate </td></tr>
+    <tr><td class="paramname">oldBufferLen</td><td>Number of elements in the array </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a2f490918f8b2c778bd2b9628f2be7ad5" name="a2f490918f8b2c778bd2b9628f2be7ad5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f490918f8b2c778bd2b9628f2be7ad5">&#9670;&#160;</a></span>destroy_and_deallocate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::destroy_and_deallocate </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destroy all elements and deallocate storage. </p>
+
+</div>
+</div>
+<a id="a283f24788adda6723cdd38caf68fe8fa" name="a283f24788adda6723cdd38caf68fe8fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a283f24788adda6723cdd38caf68fe8fa">&#9670;&#160;</a></span>emplace_back()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<div class="memtemplate">
+template&lt;typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1Vector.html#a6360a0de42235e5ee6f5a12a347e1179">reference</a> <a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::emplace_back </td>
+          <td>(</td>
+          <td class="paramtype">Args &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>args</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
 </div>
 </div>
 <a id="a31a6b685655806a0b4737f844b118867" name="a31a6b685655806a0b4737f844b118867"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a31a6b685655806a0b4737f844b118867">&#9670;&#160;</a></span>empty()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a31a6b685655806a0b4737f844b118867">&#9670;&#160;</a></span>empty() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -837,10 +2067,39 @@ template&lt;class T &gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Check if the vector is empty. </p>
+
+</div>
+</div>
+<a id="aaa98ea1026b6296cee5c617faaaef2f6" name="aaa98ea1026b6296cee5c617faaaef2f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa98ea1026b6296cee5c617faaaef2f6">&#9670;&#160;</a></span>empty() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::empty </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
 </div>
 </div>
 <a id="a7648da147914d2cedf8a5e841f2a9ba6" name="a7648da147914d2cedf8a5e841f2a9ba6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7648da147914d2cedf8a5e841f2a9ba6">&#9670;&#160;</a></span>end()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a7648da147914d2cedf8a5e841f2a9ba6">&#9670;&#160;</a></span>end() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -864,10 +2123,132 @@ template&lt;class T &gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Get iterator to end. </p>
+
+</div>
+</div>
+<a id="a74f597ade8eed637f0f39ffea4379da1" name="a74f597ade8eed637f0f39ffea4379da1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74f597ade8eed637f0f39ffea4379da1">&#9670;&#160;</a></span>end() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1Vector_1_1ConstIterator.html">ConstIterator</a> <a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::end </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a018737fff479af68c5c6ce0ccf0a9a2c" name="a018737fff479af68c5c6ce0ccf0a9a2c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a018737fff479af68c5c6ce0ccf0a9a2c">&#9670;&#160;</a></span>end() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1Vector_1_1Iterator.html">Iterator</a> <a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::end </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a15f909215ad8f134050f12ab51059ab9" name="a15f909215ad8f134050f12ab51059ab9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a15f909215ad8f134050f12ab51059ab9">&#9670;&#160;</a></span>erase() <span class="overload">[1/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1Vector_1_1Iterator.html">Iterator</a> <a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::erase </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1Vector_1_1ConstIterator.html">ConstIterator</a>&#160;</td>
+          <td class="paramname"><em>first</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1Vector_1_1ConstIterator.html">ConstIterator</a>&#160;</td>
+          <td class="paramname"><em>last</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a85ccf46aaaf217f09e1c3e89cd05715e" name="a85ccf46aaaf217f09e1c3e89cd05715e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a85ccf46aaaf217f09e1c3e89cd05715e">&#9670;&#160;</a></span>erase() <span class="overload">[2/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1Vector_1_1Iterator.html">Iterator</a> <a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::erase </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1Vector_1_1ConstIterator.html">ConstIterator</a>&#160;</td>
+          <td class="paramname"><em>pos</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
 </div>
 </div>
 <a id="a07ff9c1dbe5ab6003917f181f5b17417" name="a07ff9c1dbe5ab6003917f181f5b17417"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a07ff9c1dbe5ab6003917f181f5b17417">&#9670;&#160;</a></span>erase() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a07ff9c1dbe5ab6003917f181f5b17417">&#9670;&#160;</a></span>erase() <span class="overload">[3/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -892,10 +2273,12 @@ template&lt;class T &gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Remove element at index position. </p>
+
 </div>
 </div>
 <a id="aa2b741f7b5a8ec3bfbc0655e354139a0" name="aa2b741f7b5a8ec3bfbc0655e354139a0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa2b741f7b5a8ec3bfbc0655e354139a0">&#9670;&#160;</a></span>erase() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2b741f7b5a8ec3bfbc0655e354139a0">&#9670;&#160;</a></span>erase() <span class="overload">[4/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -920,10 +2303,153 @@ template&lt;class T &gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Remove element at iterator position. </p>
+
+</div>
+</div>
+<a id="a2ff10a23152a06f6414536f239436c1f" name="a2ff10a23152a06f6414536f239436c1f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ff10a23152a06f6414536f239436c1f">&#9670;&#160;</a></span>erase() <span class="overload">[5/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1Vector_1_1Iterator.html">Iterator</a> <a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::erase </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1Vector.html#a10aecd29d601ac2e060fe1bce2553b72">size_type</a>&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac34478e316f8416f1164aaf287019fba" name="ac34478e316f8416f1164aaf287019fba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac34478e316f8416f1164aaf287019fba">&#9670;&#160;</a></span>front() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1Vector.html#a6360a0de42235e5ee6f5a12a347e1179">reference</a> <a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::front </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a722dd5f485c0a0e1c01a7d04a1f1644b" name="a722dd5f485c0a0e1c01a7d04a1f1644b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a722dd5f485c0a0e1c01a7d04a1f1644b">&#9670;&#160;</a></span>front() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1Vector.html#a10d2fe8ed8e31cfa2be25fd1878ea293">const_reference</a> <a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::front </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad343e2015da76f12e8411623fbf85808" name="ad343e2015da76f12e8411623fbf85808"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad343e2015da76f12e8411623fbf85808">&#9670;&#160;</a></span>get_allocator()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1Vector.html#a9d5f1b6e68a5a53c85bb06c7c081f9da">allocator_type</a> &amp; <a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::get_allocator </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the allocator. </p>
+
+</div>
+</div>
+<a id="aa8f8134d234e2184de9806307c943095" name="aa8f8134d234e2184de9806307c943095"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8f8134d234e2184de9806307c943095">&#9670;&#160;</a></span>indexOf() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::indexOf </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Find index of value, returns -1 if not found. </p>
+
 </div>
 </div>
 <a id="aad7b2434e4389c3244a418a0530dcd7b" name="aad7b2434e4389c3244a418a0530dcd7b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aad7b2434e4389c3244a418a0530dcd7b">&#9670;&#160;</a></span>indexOf()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aad7b2434e4389c3244a418a0530dcd7b">&#9670;&#160;</a></span>indexOf() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -939,6 +2465,84 @@ template&lt;class T &gt; </div>
           <td class="paramtype">T&#160;</td>
           <td class="paramname"><em>obj</em></td><td>)</td>
           <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Find the index of an element (-1 if not found) </p>
+
+</div>
+</div>
+<a id="a7b172aa23afa79f70f06685def1c08e7" name="a7b172aa23afa79f70f06685def1c08e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b172aa23afa79f70f06685def1c08e7">&#9670;&#160;</a></span>insert() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1Vector_1_1Iterator.html">Iterator</a> <a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::insert </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1Vector_1_1ConstIterator.html">ConstIterator</a>&#160;</td>
+          <td class="paramname"><em>pos</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a065627aa1353c24c18c83612147a1eb2" name="a065627aa1353c24c18c83612147a1eb2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a065627aa1353c24c18c83612147a1eb2">&#9670;&#160;</a></span>insert() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1Vector_1_1Iterator.html">Iterator</a> <a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::insert </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1Vector_1_1ConstIterator.html">ConstIterator</a>&#160;</td>
+          <td class="paramname"><em>pos</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T &amp;&amp;&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -976,10 +2580,19 @@ template&lt;class T &gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Allocate a new array of elements using the allocator. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">newSize</td><td>Number of elements to allocate </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Pointer to the allocated array </dd></dl>
+
 </div>
 </div>
 <a id="a1eba9c325d7c464bb1d16545d3154f79" name="a1eba9c325d7c464bb1d16545d3154f79"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1eba9c325d7c464bb1d16545d3154f79">&#9670;&#160;</a></span>operator bool()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a1eba9c325d7c464bb1d16545d3154f79">&#9670;&#160;</a></span>operator bool() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1003,10 +2616,71 @@ template&lt;class T &gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Check if the vector is valid (has allocated data) </p>
+
+</div>
+</div>
+<a id="a1eba9c325d7c464bb1d16545d3154f79" name="a1eba9c325d7c464bb1d16545d3154f79"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1eba9c325d7c464bb1d16545d3154f79">&#9670;&#160;</a></span>operator bool() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::operator bool </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Boolean conversion. </p>
+
+</div>
+</div>
+<a id="ab40d1ad4f20111604c61411980013299" name="ab40d1ad4f20111604c61411980013299"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab40d1ad4f20111604c61411980013299">&#9670;&#160;</a></span>operator=() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a> &amp; <a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt; T &gt; &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Copy assignment. </p>
+
 </div>
 </div>
 <a id="aaf38adff755723a75386dfad37150656" name="aaf38adff755723a75386dfad37150656"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaf38adff755723a75386dfad37150656">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf38adff755723a75386dfad37150656">&#9670;&#160;</a></span>operator=() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1031,12 +2705,42 @@ template&lt;class T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Move operator. </p>
+<p>Move assignment operator - transfers ownership of data. </p>
+
+</div>
+</div>
+<a id="a24b9a1155aa463bae5dd96fbe2a4691d" name="a24b9a1155aa463bae5dd96fbe2a4691d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a24b9a1155aa463bae5dd96fbe2a4691d">&#9670;&#160;</a></span>operator=() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a> &amp; <a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt; T &gt; &amp;&amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Move assignment. </p>
 
 </div>
 </div>
 <a id="aa832a04e1f9430413e4cca5605d61fef" name="aa832a04e1f9430413e4cca5605d61fef"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa832a04e1f9430413e4cca5605d61fef">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aa832a04e1f9430413e4cca5605d61fef">&#9670;&#160;</a></span>operator=() <span class="overload">[4/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1061,12 +2765,12 @@ template&lt;class T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>copy operator </p>
+<p>Copy assignment operator - creates a deep copy. </p>
 
 </div>
 </div>
 <a id="a9762ceb2449d04d6ee08f7ab6ded74be" name="a9762ceb2449d04d6ee08f7ab6ded74be"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9762ceb2449d04d6ee08f7ab6ded74be">&#9670;&#160;</a></span>operator[]() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a9762ceb2449d04d6ee08f7ab6ded74be">&#9670;&#160;</a></span>operator[]() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1091,10 +2795,12 @@ template&lt;class T &gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Access element by index (const) </p>
+
 </div>
 </div>
 <a id="a622a040c970c99bbf84be6ce9e46e7fa" name="a622a040c970c99bbf84be6ce9e46e7fa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a622a040c970c99bbf84be6ce9e46e7fa">&#9670;&#160;</a></span>operator[]() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a622a040c970c99bbf84be6ce9e46e7fa">&#9670;&#160;</a></span>operator[]() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1119,10 +2825,97 @@ template&lt;class T &gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Access element by index (non-const) </p>
+
+</div>
+</div>
+<a id="ade4c122ec6f94cc5f18b5652d135f130" name="ade4c122ec6f94cc5f18b5652d135f130"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade4c122ec6f94cc5f18b5652d135f130">&#9670;&#160;</a></span>operator[]() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1Vector.html#a6360a0de42235e5ee6f5a12a347e1179">reference</a> <a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::operator[] </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1Vector.html#a10aecd29d601ac2e060fe1bce2553b72">size_type</a>&#160;</td>
+          <td class="paramname"><em>pos</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a30531ad5f50b573161df95ee213d88a7" name="a30531ad5f50b573161df95ee213d88a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a30531ad5f50b573161df95ee213d88a7">&#9670;&#160;</a></span>operator[]() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1Vector.html#a10d2fe8ed8e31cfa2be25fd1878ea293">const_reference</a> <a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::operator[] </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1Vector.html#a10aecd29d601ac2e060fe1bce2553b72">size_type</a>&#160;</td>
+          <td class="paramname"><em>pos</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
 </div>
 </div>
 <a id="adacfacc9de75534eeffdcc72178e9a43" name="adacfacc9de75534eeffdcc72178e9a43"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adacfacc9de75534eeffdcc72178e9a43">&#9670;&#160;</a></span>pop_back()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#adacfacc9de75534eeffdcc72178e9a43">&#9670;&#160;</a></span>pop_back() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::pop_back </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Remove the last element. </p>
+
+</div>
+</div>
+<a id="adacfacc9de75534eeffdcc72178e9a43" name="adacfacc9de75534eeffdcc72178e9a43"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adacfacc9de75534eeffdcc72178e9a43">&#9670;&#160;</a></span>pop_back() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1173,10 +2966,70 @@ template&lt;class T &gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Remove the first element. </p>
+
+</div>
+</div>
+<a id="a603ab3d2889b24298c6bd6a7410d6029" name="a603ab3d2889b24298c6bd6a7410d6029"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a603ab3d2889b24298c6bd6a7410d6029">&#9670;&#160;</a></span>push_back() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::push_back </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
 </div>
 </div>
 <a id="a59b9e97bfbbb7de5f802fca0ed621981" name="a59b9e97bfbbb7de5f802fca0ed621981"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a59b9e97bfbbb7de5f802fca0ed621981">&#9670;&#160;</a></span>push_back() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a59b9e97bfbbb7de5f802fca0ed621981">&#9670;&#160;</a></span>push_back() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::push_back </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&amp;&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Add element to the end (move semantics) </p>
+
+</div>
+</div>
+<a id="a59b9e97bfbbb7de5f802fca0ed621981" name="a59b9e97bfbbb7de5f802fca0ed621981"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a59b9e97bfbbb7de5f802fca0ed621981">&#9670;&#160;</a></span>push_back() <span class="overload">[3/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1204,7 +3057,7 @@ template&lt;class T &gt; </div>
 </div>
 </div>
 <a id="ad9156bd9e73229317d83767cd5a85fe2" name="ad9156bd9e73229317d83767cd5a85fe2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad9156bd9e73229317d83767cd5a85fe2">&#9670;&#160;</a></span>push_back() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9156bd9e73229317d83767cd5a85fe2">&#9670;&#160;</a></span>push_back() <span class="overload">[4/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1228,6 +3081,8 @@ template&lt;class T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Add element to the end (copy semantics) </p>
 
 </div>
 </div>
@@ -1257,6 +3112,8 @@ template&lt;class T &gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Add element to the front (move semantics) </p>
+
 </div>
 </div>
 <a id="aae0e88fb836cdac747f8c4a1f5fe2324" name="aae0e88fb836cdac747f8c4a1f5fe2324"></a>
@@ -1285,10 +3142,70 @@ template&lt;class T &gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Add element to the front (copy semantics) </p>
+
+</div>
+</div>
+<a id="aa8b99643494bf463f87cb164c83cf5b0" name="aa8b99643494bf463f87cb164c83cf5b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8b99643494bf463f87cb164c83cf5b0">&#9670;&#160;</a></span>reallocate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::reallocate </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1Vector.html#a10aecd29d601ac2e060fe1bce2553b72">size_type</a>&#160;</td>
+          <td class="paramname"><em>new_capacity</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reallocate storage with proper element handling. </p>
+
+</div>
+</div>
+<a id="a7ac98e1118969c4168229533cfbd162b" name="a7ac98e1118969c4168229533cfbd162b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ac98e1118969c4168229533cfbd162b">&#9670;&#160;</a></span>reserve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::reserve </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1Vector.html#a10aecd29d601ac2e060fe1bce2553b72">size_type</a>&#160;</td>
+          <td class="paramname"><em>new_cap</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
 </div>
 </div>
 <a id="a46c6b9c2bca3e28af0cb6a3909109616" name="a46c6b9c2bca3e28af0cb6a3909109616"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a46c6b9c2bca3e28af0cb6a3909109616">&#9670;&#160;</a></span>reset()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a46c6b9c2bca3e28af0cb6a3909109616">&#9670;&#160;</a></span>reset() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1312,10 +3229,42 @@ template&lt;class T &gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Reset the vector - destroy all elements and deallocate memory. </p>
+<p>This method ensures all elements are destroyed by calling their destructors and then frees the underlying buffer. After <a class="el" href="classtiny__dlna_1_1Vector.html#a46c6b9c2bca3e28af0cb6a3909109616" title="Reset the vector - destroy all elements and deallocate memory.">reset()</a>, the vector will have size 0 and capacity 0. </p>
+
+</div>
+</div>
+<a id="a46c6b9c2bca3e28af0cb6a3909109616" name="a46c6b9c2bca3e28af0cb6a3909109616"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a46c6b9c2bca3e28af0cb6a3909109616">&#9670;&#160;</a></span>reset() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::reset </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reset the vector (clear and deallocate all memory) </p>
+
 </div>
 </div>
 <a id="a8db0341e0a464aff42c84c015128005c" name="a8db0341e0a464aff42c84c015128005c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8db0341e0a464aff42c84c015128005c">&#9670;&#160;</a></span>resize() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a8db0341e0a464aff42c84c015128005c">&#9670;&#160;</a></span>resize() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1340,10 +3289,12 @@ template&lt;class T &gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Resize the vector to newSize elements. </p>
+
 </div>
 </div>
 <a id="a2ca30f178aa10cd1d5d7126bc33727f0" name="a2ca30f178aa10cd1d5d7126bc33727f0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2ca30f178aa10cd1d5d7126bc33727f0">&#9670;&#160;</a></span>resize() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ca30f178aa10cd1d5d7126bc33727f0">&#9670;&#160;</a></span>resize() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1363,6 +3314,74 @@ template&lt;class T &gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Resize and fill with value. </p>
+
+</div>
+</div>
+<a id="a1c575826e1a07f4e183aaa64be5c8e35" name="a1c575826e1a07f4e183aaa64be5c8e35"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c575826e1a07f4e183aaa64be5c8e35">&#9670;&#160;</a></span>resize() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::resize </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1Vector.html#a10aecd29d601ac2e060fe1bce2553b72">size_type</a>&#160;</td>
+          <td class="paramname"><em>count</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab08d824f1f50e40acca00ab1393b7cd7" name="ab08d824f1f50e40acca00ab1393b7cd7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab08d824f1f50e40acca00ab1393b7cd7">&#9670;&#160;</a></span>resize() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::resize </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1Vector.html#a10aecd29d601ac2e060fe1bce2553b72">size_type</a>&#160;</td>
+          <td class="paramname"><em>count</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T &amp;&#160;</td>
           <td class="paramname"><em>value</em>&#160;</td>
         </tr>
         <tr>
@@ -1422,6 +3441,46 @@ template&lt;class T &gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Internal resize implementation with control over copying and shrinking. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">newSize</td><td>The new capacity to allocate </td></tr>
+    <tr><td class="paramname">copy</td><td>If true, copy existing elements to the new buffer </td></tr>
+    <tr><td class="paramname">shrink</td><td>If true, allow shrinking the capacity </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="af0acfbe66ac349d171367861a1fdc0f7" name="af0acfbe66ac349d171367861a1fdc0f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af0acfbe66ac349d171367861a1fdc0f7">&#9670;&#160;</a></span>set_allocator()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::set_allocator </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1Allocator.html">Allocator</a> &amp;&#160;</td>
+          <td class="paramname"><em>alloc</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set the allocator (use with caution, should only be called on empty vector) </p>
+
 </div>
 </div>
 <a id="a2791c581694b8736ed889251e3d95f27" name="a2791c581694b8736ed889251e3d95f27"></a>
@@ -1450,10 +3509,41 @@ template&lt;class T &gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Set the allocator (use with caution) </p>
+
 </div>
 </div>
 <a id="ac162664118be261ff8d31719a341c02a" name="ac162664118be261ff8d31719a341c02a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac162664118be261ff8d31719a341c02a">&#9670;&#160;</a></span>shrink_to_fit()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ac162664118be261ff8d31719a341c02a">&#9670;&#160;</a></span>shrink_to_fit() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::shrink_to_fit </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reduce capacity to match size. </p>
+
+</div>
+</div>
+<a id="ac162664118be261ff8d31719a341c02a" name="ac162664118be261ff8d31719a341c02a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac162664118be261ff8d31719a341c02a">&#9670;&#160;</a></span>shrink_to_fit() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1480,7 +3570,7 @@ template&lt;class T &gt; </div>
 </div>
 </div>
 <a id="a4daa0bf8a1ecc28beee8682e506c5b78" name="a4daa0bf8a1ecc28beee8682e506c5b78"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4daa0bf8a1ecc28beee8682e506c5b78">&#9670;&#160;</a></span>size()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a4daa0bf8a1ecc28beee8682e506c5b78">&#9670;&#160;</a></span>size() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1504,10 +3594,67 @@ template&lt;class T &gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Get the number of elements. </p>
+
+</div>
+</div>
+<a id="a7115fe34f4e15cd576c8f254b1a127a6" name="a7115fe34f4e15cd576c8f254b1a127a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7115fe34f4e15cd576c8f254b1a127a6">&#9670;&#160;</a></span>size() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1Vector.html#a10aecd29d601ac2e060fe1bce2553b72">size_type</a> <a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::size </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aff82a4b6edbd73e6637cc830a378ba4f" name="aff82a4b6edbd73e6637cc830a378ba4f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff82a4b6edbd73e6637cc830a378ba4f">&#9670;&#160;</a></span>swap() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::swap </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt; T &gt; &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
 </div>
 </div>
 <a id="a9d2303d73af72fd30fa91b1006fbbcb0" name="a9d2303d73af72fd30fa91b1006fbbcb0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9d2303d73af72fd30fa91b1006fbbcb0">&#9670;&#160;</a></span>swap()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d2303d73af72fd30fa91b1006fbbcb0">&#9670;&#160;</a></span>swap() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1532,9 +3679,83 @@ template&lt;class T &gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Swap contents with another vector. </p>
+
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="a4d4da574fd9c9788191311b2462ef2c0" name="a4d4da574fd9c9788191311b2462ef2c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d4da574fd9c9788191311b2462ef2c0">&#9670;&#160;</a></span>allocator_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1Allocator.html">Allocator</a>* <a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::allocator_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9bc60d57d8fded8c8d593bfb63d76efd" name="a9bc60d57d8fded8c8d593bfb63d76efd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9bc60d57d8fded8c8d593bfb63d76efd">&#9670;&#160;</a></span>capacity_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1Vector.html#a10aecd29d601ac2e060fe1bce2553b72">size_type</a> <a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::capacity_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2da74d6715f5a0796e41223a5ef427b6" name="a2da74d6715f5a0796e41223a5ef427b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2da74d6715f5a0796e41223a5ef427b6">&#9670;&#160;</a></span>data_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T* <a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::data_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="abc61d2836d97b5a611f49a17167402cb" name="abc61d2836d97b5a611f49a17167402cb"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abc61d2836d97b5a611f49a17167402cb">&#9670;&#160;</a></span>len</h2>
 
@@ -1556,6 +3777,8 @@ template&lt;class T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Current number of elements in the vector. </p>
 
 </div>
 </div>
@@ -1581,6 +3804,8 @@ template&lt;class T &gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Maximum number of elements that can be stored without reallocation. </p>
+
 </div>
 </div>
 <a id="a567d30b4b01908a08d895123bbf2a42f" name="a567d30b4b01908a08d895123bbf2a42f"></a>
@@ -1604,6 +3829,8 @@ template&lt;class T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Pointer to the allocator instance. </p>
 
 </div>
 </div>
@@ -1629,10 +3856,37 @@ template&lt;class T &gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Pointer to the underlying data array. </p>
+
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following file:<ul>
+<a id="a2619b0a9425e68e0c4aacb507c122765" name="a2619b0a9425e68e0c4aacb507c122765"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2619b0a9425e68e0c4aacb507c122765">&#9670;&#160;</a></span>size_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1Vector.html#a10aecd29d601ac2e060fe1bce2553b72">size_type</a> <a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T &gt;::size_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/basic/<a class="el" href="Vector_8h_source.html">Vector.h</a></li>
+<li>src/basic/<a class="el" href="VectorAlt_8h_source.html">VectorAlt.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

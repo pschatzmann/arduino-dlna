@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['mediaeventhandler_0',['MediaEventHandler',['../classtiny__dlna_1_1DLNAMediaRenderer.html#ac862e98888d9ea4c3357b9d3ebb9d8b7',1,'tiny_dlna::DLNAMediaRenderer']]]
+  ['getdatacallback_0',['GetDataCallback',['../classtiny__dlna_1_1DLNAMediaServer.html#a9395ff7a405c1eab08500f337c01b83c',1,'tiny_dlna::DLNAMediaServer']]]
 ];

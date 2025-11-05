@@ -10,5 +10,6 @@ var searchData=
   ['folder_7',['Folder',['../namespacetiny__dlna.html#a85d3f686372782f654ff23302800aac9ab0f2b97dc5d2b76b26e040408bb1d8af',1,'tiny_dlna']]],
   ['free_8',['free',['../classtiny__dlna_1_1Allocator.html#acf6e5fd371c7845fa558196a6e1b18c0',1,'tiny_dlna::Allocator']]],
   ['friendly_5fname_9',['friendly_name',['../classtiny__dlna_1_1DLNADeviceInfo.html#a18aa46c7ec8845cc305d28a3bef2ab03',1,'tiny_dlna::DLNADeviceInfo']]],
-  ['from_10',['from',['../classtiny__dlna_1_1HttpRequestRewrite.html#ab207c9b3cde4010ce6df5118cbee6bea',1,'tiny_dlna::HttpRequestRewrite']]]
+  ['from_10',['from',['../classtiny__dlna_1_1HttpRequestRewrite.html#ab207c9b3cde4010ce6df5118cbee6bea',1,'tiny_dlna::HttpRequestRewrite']]],
+  ['front_11',['front',['../classtiny__dlna_1_1Vector.html#ac34478e316f8416f1164aaf287019fba',1,'tiny_dlna::Vector::front()'],['../classtiny__dlna_1_1Vector.html#a722dd5f485c0a0e1c01a7d04a1f1644b',1,'tiny_dlna::Vector::front() const']]]
 ];

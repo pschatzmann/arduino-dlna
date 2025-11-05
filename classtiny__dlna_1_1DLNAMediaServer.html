@@ -405,6 +405,9 @@ Static Protected Member Functions</h2></td></tr>
 <tr class="memitem:aea3d8f0e6fe5d6b6c3e141a76851c019"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaServer.html#aea3d8f0e6fe5d6b6c3e141a76851c019">contentDirectoryControlCB</a> (<a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> *server, const char *requestPath, <a class="el" href="classtiny__dlna_1_1HttpRequestHandlerLine.html">HttpRequestHandlerLine</a> *hl)</td></tr>
 <tr class="memdesc:aea3d8f0e6fe5d6b6c3e141a76851c019"><td class="mdescLeft">&#160;</td><td class="mdescRight">Control handler for ContentDirectory service.  <br /></td></tr>
 <tr class="separator:aea3d8f0e6fe5d6b6c3e141a76851c019"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad355a0886e452f9d7f7dc764eedbddb8"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classtiny__dlna_1_1DLNAMediaServer.html">DLNAMediaServer</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaServer.html#ad355a0886e452f9d7f7dc764eedbddb8">getMediaServer</a> (<a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> *server)</td></tr>
+<tr class="memdesc:ad355a0886e452f9d7f7dc764eedbddb8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper to retrieve <a class="el" href="classtiny__dlna_1_1DLNAMediaServer.html">DLNAMediaServer</a> instance from <a class="el" href="classtiny__dlna_1_1HttpServer.html" title="A Simple Header only implementation of Http Server that allows the registration of callback functions...">HttpServer</a> reference chain.  <br /></td></tr>
+<tr class="separator:ad355a0886e452f9d7f7dc764eedbddb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab7309a08c5c31eb3f43ac0aaf7f2bbab"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaServer.html#ab7309a08c5c31eb3f43ac0aaf7f2bbab">connmgrControlCB</a> (<a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> *server, const char *requestPath, <a class="el" href="classtiny__dlna_1_1HttpRequestHandlerLine.html">HttpRequestHandlerLine</a> *hl)</td></tr>
 <tr class="memdesc:ab7309a08c5c31eb3f43ac0aaf7f2bbab"><td class="mdescLeft">&#160;</td><td class="mdescRight">simple connection manager control that replies OK  <br /></td></tr>
 <tr class="separator:ab7309a08c5c31eb3f43ac0aaf7f2bbab"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1504,6 +1507,42 @@ IUDPService&amp;) </p>
   </tr>
 </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad355a0886e452f9d7f7dc764eedbddb8" name="ad355a0886e452f9d7f7dc764eedbddb8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad355a0886e452f9d7f7dc764eedbddb8">&#9670;&#160;</a></span>getMediaServer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="classtiny__dlna_1_1DLNAMediaServer.html">DLNAMediaServer</a> * tiny_dlna::DLNAMediaServer::getMediaServer </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> *&#160;</td>
+          <td class="paramname"><em>server</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Helper to retrieve <a class="el" href="classtiny__dlna_1_1DLNAMediaServer.html">DLNAMediaServer</a> instance from <a class="el" href="classtiny__dlna_1_1HttpServer.html" title="A Simple Header only implementation of Http Server that allows the registration of callback functions...">HttpServer</a> reference chain. </p>
+<p>Navigates through the server's reference (<a class="el" href="classtiny__dlna_1_1DLNADevice.html" title="Setup of a Basic DLNA Device service. The device registers itself to the network and answers to the D...">DLNADevice</a>) to get the MediaServer instance.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">server</td><td>Pointer to the <a class="el" href="classtiny__dlna_1_1HttpServer.html" title="A Simple Header only implementation of Http Server that allows the registration of callback functions...">HttpServer</a> instance </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Pointer to the <a class="el" href="classtiny__dlna_1_1DLNAMediaServer.html">DLNAMediaServer</a> instance, or nullptr if not found </dd></dl>
 
 </div>
 </div>

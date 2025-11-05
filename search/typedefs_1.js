@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['getdatacallback_0',['GetDataCallback',['../classtiny__dlna_1_1DLNAMediaServer.html#a9395ff7a405c1eab08500f337c01b83c',1,'tiny_dlna::DLNAMediaServer']]]
+  ['const_5fpointer_0',['const_pointer',['../classtiny__dlna_1_1Vector.html#ab6716361bbda58ba06ec6c33ee38b854',1,'tiny_dlna::Vector']]],
+  ['const_5freference_1',['const_reference',['../classtiny__dlna_1_1Vector.html#a10d2fe8ed8e31cfa2be25fd1878ea293',1,'tiny_dlna::Vector']]]
 ];
