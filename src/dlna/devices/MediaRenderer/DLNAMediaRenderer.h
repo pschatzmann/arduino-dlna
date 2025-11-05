@@ -95,7 +95,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     setUdpService(udp);
   }
 
-  // Start the underlying DLNA device using the stored server/udp
+  /// Start the underlying DLNA device using the stored server/udp
   bool begin() { return dlna_device.begin(*this, *p_udp_member, *p_server); }
 
   /// Stops processing and releases resources
@@ -235,7 +235,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     addChange("RCS", writer);
   }
 
-  // Access current URI
+  /// Access current URI
   const char* getCurrentUri() { return current_uri.c_str(); }
 
   /// Get textual transport state
@@ -455,6 +455,36 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
   /// Get the current sink `ProtocolInfo` string
   const char* getSinkProtocols() { return sinkProto; }
 
+
+  /// Set the transport SCPD descriptor (non-owning reference).
+  void setTransportDescr(DLNADescr& d) {
+    p_transportDescr = &d;
+  }
+
+  /// Get the transport SCPD descriptor reference.
+  DLNADescr& getTransportDescr() {
+    return *p_transportDescr;
+  }
+  
+  /// Set the control SCPD descriptor (non-owning reference).
+  void setControlDescr(DLNADescr& d) {
+    p_controlDescr = &d;
+  }
+
+  /// Get the control SCPD descriptor reference.
+  DLNADescr& getControlDescr() { return *p_controlDescr; }
+
+
+  /// Set the ConnectionManager SCPD descriptor (non-owning reference).
+  void setConnectionMgrDescr(DLNADescr& d) {
+    p_connmgrDescr = &d;
+  }
+
+  /// Get the ConnectionManager SCPD descriptor reference.
+  DLNADescr& getConnectionMgrDescr() {
+    return *p_connmgrDescr;
+  }
+
  protected:
   struct ActionRule {
     const char* suffix;
@@ -486,6 +516,19 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
   const char* possibleRecordQualityModes = "NOT_IMPLEMENTED";
   const char* currentPlayMode = "NORMAL";
   Vector<ActionRule> rules;
+
+  // Descriptor instances so callers can customise the SCPD output per device
+  DLNAMediaRendererTransportDescr default_transport_desc;
+  DLNADescr* p_transportDescr = &default_transport_desc;
+  DLNAMediaRendererControlDescr default_control_desc;
+  DLNADescr* p_controlDescr= &default_control_desc;
+  DLNAMediaRendererConnectionMgrDescr default_connmgr_desc;
+  DLNADescr* p_connmgrDescr= &default_connmgr_desc;
+
+  // Note: descriptor printing is performed inline in the descriptor
+  // callbacks below using non-capturing lambdas passed to
+  // HttpServer::reply. That avoids heap buffering while keeping the
+  // callsites concise. The old static helper functions were removed.
 
   /// serviceAbbrev: AVT, RCS, CMS
   void addChange(const char* serviceAbbrev,
@@ -570,26 +613,63 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
   // Static descriptor callbacks: print the SCPD XML for each service
   static void transportDescrCB(HttpServer* server, const char* requestPath,
                                HttpRequestHandlerLine* hl) {
-    server->reply("text/xml", [](Print& out) {
-      DLNAMediaRendererTransportDescr d;
-      d.printDescr(out);
-    });
+    DLNAMediaRenderer* self = getRenderer(server);
+    if (self) {
+      // Use the Print+ref reply overload to stream directly into the
+      // client's Print without heap buffering. Pass `self` as ref so the
+      // callback can route to the correct instance. Use an inline
+      // non-capturing lambda so we don't need a separate static helper.
+      server->reply(
+          "text/xml",
+          [](Print& out, void* ref) {
+            auto self = static_cast<DLNAMediaRenderer*>(ref);
+            if (self) self->getTransportDescr().printDescr(out);
+          },
+          200, nullptr, self);
+    } else {
+      DlnaLogger.log(DlnaLogLevel::Error,
+                     "transportDescrCB: renderer instance not found for %s",
+                     requestPath);
+      server->replyNotFound();
+    }
   }
 
   static void connmgrDescrCB(HttpServer* server, const char* requestPath,
                              HttpRequestHandlerLine* hl) {
-    server->reply("text/xml", [](Print& out) {
-      DLNAMediaRendererConnectionMgrDescr d;
-      d.printDescr(out);
-    });
+    DLNAMediaRenderer* self = getRenderer(server);
+    if (self) {
+      server->reply(
+          "text/xml",
+          [](Print& out, void* ref) {
+            auto self = static_cast<DLNAMediaRenderer*>(ref);
+            if (self) self->getConnectionMgrDescr().printDescr(out);
+          },
+          200, nullptr, self);
+    } else {
+      DlnaLogger.log(DlnaLogLevel::Error,
+                     "connmgrDescrCB: renderer instance not found for %s",
+                     requestPath);
+      server->replyNotFound();
+    }
   }
 
   static void controlDescrCB(HttpServer* server, const char* requestPath,
                              HttpRequestHandlerLine* hl) {
-    server->reply("text/xml", [](Print& out) {
-      DLNAMediaRendererControlDescr d;
-      d.printDescr(out);
-    });
+    DLNAMediaRenderer* self = getRenderer(server);
+    if (self) {
+      server->reply(
+          "text/xml",
+          [](Print& out, void* ref) {
+            auto self = static_cast<DLNAMediaRenderer*>(ref);
+            if (self) self->getControlDescr().printDescr(out);
+          },
+          200, nullptr, self);
+    } else {
+      DlnaLogger.log(DlnaLogLevel::Error,
+                     "controlDescrCB: renderer instance not found for %s",
+                     requestPath);
+      server->replyNotFound();
+    }
   }
 
   // Generic control callback: parse SOAP action and dispatch to instance
@@ -995,7 +1075,7 @@ xmlns:u="urn:schemas-upnp-org:service:AVTransport:1">
           // NextURI and NextURIMetaData: not supported -> empty
           written += o.print("<NextURI>NOT_IMPLEMENTED</NextURI>");
           written +=
-          o.print("<NextURIMetaData>NOT_IMPLEMENTED</NextURIMetaData>");
+              o.print("<NextURIMetaData>NOT_IMPLEMENTED</NextURIMetaData>");
 
           // PlayMedium / RecordMedium / WriteStatus: use configured defaults
           written += o.print("<PlayMedium>");

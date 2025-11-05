@@ -198,7 +198,6 @@ class DLNADeviceInfo {
     return icons[idx];
   }
 
-
   /// Sets the server to inactive
   void setActive(bool flag) { is_active = flag; }
 
@@ -211,7 +210,11 @@ class DLNADeviceInfo {
     return true;
   }
 
-protected:
+  void setSubscriptionActive(bool flag) { is_subcription_active = flag; }
+
+  bool isSubscriptionActive() { return is_subcription_active; }
+
+ protected:
   bool is_active = true;
   XMLPrinter xml;
   Url device_url;
@@ -235,6 +238,7 @@ protected:
   Vector<DLNAServiceInfo> services;
   Vector<Icon> icons;
   Str url_str;
+  bool is_subcription_active = false;
 
   /// to be implemented by subclasses
   virtual void setupServices(HttpServer& server, IUDPService& udp) {}
@@ -298,8 +302,12 @@ protected:
         xml.printNode("SCPDURL", url.buildPath(base_url, service->scpd_url));
     result += xml.printNode("controlURL",
                             url.buildPath(base_url, service->control_url));
-    result += xml.printNode("eventSubURL",
-                            url.buildPath(base_url, service->event_sub_url));
+    if (is_subcription_active)
+      result += xml.printNode("eventSubURL",
+                              url.buildPath(base_url, service->event_sub_url));
+    else
+      result += xml.printf("<eventSubURL/>");
+
     return result;
   }
 

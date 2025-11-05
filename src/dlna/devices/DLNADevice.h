@@ -39,7 +39,7 @@ class DLNADevice {
     server.setReference(this);
     p_server = &server;
     p_udp = &udp;
-    setDevice(device);
+    setDeviceInfo(device);
     setupParser();
 
     // check base url
@@ -53,6 +53,10 @@ class DLNADevice {
 
     // setup device
     device.setupServices(server, udp);
+
+    // ensure services reflect the current subscriptions-active flag
+    // (some callers rely on subscriptions being disabled by default)
+    setSubscriptionsActive(isSubscriptionsActive());
 
     // setup web server
     if (!setupDLNAServer(server)) {
@@ -78,11 +82,11 @@ class DLNADevice {
       DlnaLogger.log(DlnaLogLevel::Error, "Scheduler failed");
       return false;
     }
-  // initialize scheduling timers so the scheduled tasks run immediately
-  uint64_t now = millis();
-  // set next timeouts to now so the first loop triggers the tasks
-  next_scheduler_timeout_ms = now;
-  next_subscriptions_timeout_ms = now;
+    // initialize scheduling timers so the scheduled tasks run immediately
+    uint64_t now = millis();
+    // set next timeouts to now so the first loop triggers the tasks
+    next_scheduler_timeout_ms = now;
+    next_subscriptions_timeout_ms = now;
 
     is_active = true;
     DlnaLogger.log(DlnaLogLevel::Info, "Device successfully started");
@@ -205,11 +209,8 @@ class DLNADevice {
   /// Enable or disable subscription notifications: call before begin
   void setSubscriptionsActive(bool flag) {
     is_subscriptions_active = flag;
-    // propagate to services so their event_sub_url is cleared/restored
     if (p_device_info != nullptr) {
-      for (DLNAServiceInfo& s : p_device_info->getServices()) {
-        s.setSubscriptionsActive(flag);
-      }
+      p_device_info->setSubscriptionActive(flag);
     }
     getSubscriptionMgr().setSubscriptionsActive(flag);
   }
@@ -403,25 +404,39 @@ class DLNADevice {
   inline static StringRegistry registry;
   void* reference = nullptr;
 
-  // Millisecond-based scheduling (defaults derived from existing loop constants)
-  // Use millisecond-based defaults from configuration (macros ending with _MS)
+  // Millisecond-based scheduling (defaults derived from existing loop
+  // constants) Use millisecond-based defaults from configuration (macros ending
+  // with _MS)
   uint64_t scheduler_interval_ms = (uint64_t)DLNA_RUN_SCHEDULER_EVERY_MS;
-  uint64_t subscriptions_interval_ms = (uint64_t)DLNA_RUN_SUBSCRIPTIONS_EVERY_MS;
+  uint64_t subscriptions_interval_ms =
+      (uint64_t)DLNA_RUN_SUBSCRIPTIONS_EVERY_MS;
   // store the next absolute timeout (millis) when the task should run
   uint64_t next_scheduler_timeout_ms = 0;
   uint64_t next_subscriptions_timeout_ms = 0;
 
-  void setDevice(DLNADeviceInfo& device) { p_device_info = &device; }
+  void setDeviceInfo(DLNADeviceInfo& device) {
+    p_device_info = &device;
+    device.setSubscriptionActive(isSubscriptionsActive());
+  }
 
-  /// Set scheduler interval in milliseconds (default = DLNA_RUN_SCHEDULER_EVERY_MS * DLNA_LOOP_DELAY_MS)
-  /// Set scheduler interval in milliseconds (default = DLNA_RUN_SCHEDULER_EVERY_MS)
+  /// Set scheduler interval in milliseconds (default =
+  /// DLNA_RUN_SCHEDULER_EVERY_MS * DLNA_LOOP_DELAY_MS) Set scheduler interval
+  /// in milliseconds (default = DLNA_RUN_SCHEDULER_EVERY_MS)
   void setSchedulerIntervalMs(uint32_t ms) { scheduler_interval_ms = ms; }
-  uint32_t getSchedulerIntervalMs() const { return (uint32_t)scheduler_interval_ms; }
+  uint32_t getSchedulerIntervalMs() const {
+    return (uint32_t)scheduler_interval_ms;
+  }
 
-  /// Set subscription publish interval in milliseconds (default = DLNA_RUN_SUBSCRIPTIONS_EVERY_MS * DLNA_LOOP_DELAY_MS)
-  /// Set subscription publish interval in milliseconds (default = DLNA_RUN_SUBSCRIPTIONS_EVERY_MS)
-  void setSubscriptionsIntervalMs(uint32_t ms) { subscriptions_interval_ms = ms; }
-  uint32_t getSubscriptionsIntervalMs() const { return (uint32_t)subscriptions_interval_ms; }
+  /// Set subscription publish interval in milliseconds (default =
+  /// DLNA_RUN_SUBSCRIPTIONS_EVERY_MS * DLNA_LOOP_DELAY_MS) Set subscription
+  /// publish interval in milliseconds (default =
+  /// DLNA_RUN_SUBSCRIPTIONS_EVERY_MS)
+  void setSubscriptionsIntervalMs(uint32_t ms) {
+    subscriptions_interval_ms = ms;
+  }
+  uint32_t getSubscriptionsIntervalMs() const {
+    return (uint32_t)subscriptions_interval_ms;
+  }
 
   /// Periodic platform-specific diagnostics. Kept as a separate method so
   /// it can be tested or stubbed easily. Currently logs ESP32 heap/psram
@@ -526,9 +541,11 @@ class DLNADevice {
       p_server->on(service.scpd_url, T_GET, service.scp_cb, ref, 1);
       p_server->on(service.control_url, T_POST, service.control_cb, ref, 1);
       // register event subscription handler - wrappers for
-      // SUBSCRIBE/UNSUBSCRIBE
-      p_server->on(service.event_sub_url, T_SUBSCRIBE, eventSubscriptionHandler,
-                   ref, 1);
+      // SUBSCRIBE/UNSUBSCRIBE - only register if an event URL is configured
+      if (!StrView(service.event_sub_url).isEmpty()) {
+        p_server->on(service.event_sub_url, T_SUBSCRIBE,
+                     eventSubscriptionHandler, ref, 1);
+      }
     }
 
     return true;

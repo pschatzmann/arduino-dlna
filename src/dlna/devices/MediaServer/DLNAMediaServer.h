@@ -15,63 +15,24 @@
 
 namespace tiny_dlna {
 
-/**
- * @brief Digital Media Server implementation
- *
- * This class implements a lightweight DLNA MediaServer device with a
- * ContentDirectory service (Browse and Search) and a ConnectionManager service.
- *
- * The API is designed for embedding custom content lists and streaming logic.
- * The API uses two callbacks to retrieve the content data:
- *   - PrepareDataCallback: Called to determine the number of items, total
- * matches, and update ID for a Browse or Search request.
- *   - GetDataCallback: Called for each item to retrieve its metadata
- * (MediaItem) by index.
- *
- * A user reference pointer can be set with setReference(void*), and is passed
- * to both callbacks for custom context or data.
- *
- * Example usage:
- *   - Implement PrepareDataCallback and GetDataCallback.
- *   - Register them with setPrepareDataCallback() and setGetDataCallback().
- *   - Optionally set a reference pointer with setReference().
- *
- * The implementation is intentionally compact and suitable as a starting
- * point for embedded or test DLNA servers.
- */
+/// Digital Media Server implementation
+///
+/// Lightweight DLNA MediaServer with ContentDirectory (Browse/Search)
+/// and ConnectionManager services. Register PrepareDataCallback and
+/// GetDataCallback and optionally setReference(void*) for custom context.
 class DLNAMediaServer : public DLNADeviceInfo {
  public:
-  /**
-   * @brief Callback signature for preparing data for Browse or Search requests.
-   * @param objectID Object ID to browse/search
-   * @param queryType Content query type (Browse/Metadata/Search)
-   * @param filter Filter string
-   * @param startingIndex Starting index for paging
-   * @param requestedCount Number of items requested
-   * @param sortCriteria Sort criteria string
-   * @param numberReturned [out] Number of items returned
-   * @param totalMatches [out] Total number of matches
-   * @param updateID [out] System update ID
-   * @param reference User reference pointer
-   */
+  /// Callback: prepare data for Browse/Search. Fills numberReturned,
+  /// totalMatches and updateID. Last parameter is user reference pointer.
   typedef void (*PrepareDataCallback)(
-      const char* objectID, ContentQueryType queryType, const char* filter,
-      int startingIndex, int requestedCount, const char* sortCriteria,
-      int& numberReturned, int& totalMatches, int& updateID, void* reference);
+    const char* objectID, ContentQueryType queryType, const char* filter,
+    int startingIndex, int requestedCount, const char* sortCriteria,
+    int& numberReturned, int& totalMatches, int& updateID, void* reference);
 
-  /**
-   * @brief Callback signature for retrieving a MediaItem by index.
-   * @param index Item index
-   * @param item [out] MediaItem metadata
-   * @param reference User reference pointer
-   * @return true if item is valid, false otherwise
-   */
+  /// Callback: retrieve MediaItem by index. Returns true if item is valid.
   typedef bool (*GetDataCallback)(int index, MediaItem& item, void* reference);
 
-  /**
-   * @brief Default constructor for MediaServer.
-   * Initializes device information and default properties.
-   */
+  /// Default constructor: initialize device info and defaults
   DLNAMediaServer() {
     setSerialNumber(usn);
     setDeviceType(st);
@@ -83,12 +44,7 @@ class DLNAMediaServer : public DLNADeviceInfo {
     setBaseURL("http://localhost:44757");
     setupRules();
   }
-  /**
-   * @brief Recommended constructor
-   * Construct a MediaServer with associated HTTP server and UDP service
-   * This constructor stores the provided server/udp references so begin() can
-   * be called without parameters.
-   */
+  /// Construct MediaServer with an HttpServer and IUDPService pre-set
   DLNAMediaServer(HttpServer& server, IUDPService& udp) : DLNAMediaServer() {
     // use setters so derived classes or overrides get a consistent path
     setHttpServer(server);
@@ -103,9 +59,7 @@ class DLNAMediaServer : public DLNADeviceInfo {
     // ensure instance pointer is available for callbacks
     self = this;
     p_server = &server;
-    // prepare handler context and register service endpoints on the provided
-    // server
-    ref_ctx[0] = this;
+    server.setReference(this);
     setupServicesImpl(&server);
   }
 
@@ -220,6 +174,29 @@ class DLNAMediaServer : public DLNADeviceInfo {
     rules.push_back({suffix, handler});
   }
 
+  /// Set a custom ContentDirectory SCPD descriptor (per-instance)
+  void setContentDirectoryDescr(
+      DLNADescr& d) {
+    p_contentDirectoryDescr = &d;
+  }
+
+  /// Get pointer to the per-instance ContentDirectory descriptor
+  DLNADescr& getContentDirectoryDescr() {
+    return *p_contentDirectoryDescr;
+  }
+
+  /// Set a custom ConnectionManager SCPD descriptor (per-instance)
+  void setConnectionMgrDescr(
+      DLNADescr& d) {
+    p_connmgrDescr = &d;
+  }
+
+  /// Get pointer to the per-instance ConnectionManager descriptor
+  DLNADescr& getConnectionMgrDescr() {
+    return *p_connmgrDescr;
+  }
+
+
  protected:
   // Action rule struct for ContentDirectory
   struct ActionRule {
@@ -236,7 +213,6 @@ class DLNAMediaServer : public DLNADeviceInfo {
 
   HttpServer* p_server = nullptr;
   IUDPService* p_udp_member = nullptr;
-  void* ref_ctx[1] = {nullptr};
   void* reference_ = nullptr;
   GetDataCallback g_stream_get_data_cb = nullptr;
   int g_stream_numberReturned = 0;
@@ -256,6 +232,12 @@ class DLNAMediaServer : public DLNADeviceInfo {
   const char* sinkProto = "";
   const char* connectionID = "0";
   Vector<ActionRule> rules;
+  // Per-instance descriptor objects (default-initialized). These allow callers
+  // to customize the SCPD delivered for this MediaServer instance.
+  DLNAMediaServerContentDirectoryDescr default_contentDirectoryDescr;
+  DLNADescr *p_contentDirectoryDescr = &default_contentDirectoryDescr;
+  DLNAMediaServerConnectionMgrDescr default_connectionMgrDescr;
+  DLNADescr *p_connmgrDescr = &default_connectionMgrDescr;
 
   /// serviceAbbrev: e.g. "AVT" or subscription namespace abbrev defined for
   /// the service
@@ -313,33 +295,62 @@ class DLNAMediaServer : public DLNADeviceInfo {
   /// Static descriptor callback for ContentDirectory SCPD
   static void contentDescCB(HttpServer* server, const char* requestPath,
                             HttpRequestHandlerLine* hl) {
-    server->reply("text/xml", [](Print& out) {
-      tiny_dlna::DLNAMediaServerContentDirectoryDescr descr;
-      descr.printDescr(out);
-    });
+    // Use the server reference as ref (set via setHttpServer()). Prefer
+    // the handler context when available, otherwise fall back to the
+    // server's stored reference.
+    void* ref = server->getReference();
+    assert(ref!=nullptr);
+    // Non-capturing lambda matches function-pointer signature and can be
+    // passed directly to reply (avoids extra static helpers).
+    server->reply(
+        "text/xml",
+        [](Print& out, void* ref) {
+          if (ref) {
+            auto self = (DLNAMediaServer*)ref;
+            self->getContentDirectoryDescr().printDescr(out);
+          } else {
+            tiny_dlna::DLNAMediaServerContentDirectoryDescr descr;
+            descr.printDescr(out);
+          }
+        },
+        200, nullptr, ref);
   }
 
   /// Static descriptor callback for ConnectionManager SCPD
   static void connDescCB(HttpServer* server, const char* requestPath,
                          HttpRequestHandlerLine* hl) {
-    server->reply("text/xml", [](Print& out) {
-      tiny_dlna::DLNAMediaServerConnectionMgrDescr descr;
-      descr.printDescr(out);
-    });
+    void* ref = server->getReference();
+    assert(ref!=nullptr);
+
+    server->reply(
+        "text/xml",
+        [](Print& out, void* ref) {
+          if (ref) {
+            auto self = (DLNAMediaServer*)ref;
+            self->getConnectionMgrDescr().printDescr(out);
+          } else {
+            tiny_dlna::DLNAMediaServerConnectionMgrDescr descr;
+            descr.printDescr(out);
+          }
+        },
+        200, nullptr, ref);
   }
+
+  // (Removed static helper functions — lambdas are used inline at callsite.)
 
   /// After the subscription we publish all relevant properties
   static void eventSubscriptionHandler(HttpServer* server,
                                        const char* requestPath,
                                        HttpRequestHandlerLine* hl) {
     DLNADevice::eventSubscriptionHandler(server, requestPath, hl);
-    DLNAMediaServer* device = (DLNAMediaServer*)(hl->context[0]);
-    if (device) {
+    DLNAMediaServer* self = (DLNAMediaServer*) server->getReference();
+    assert(self!=nullptr);
+    if (self) {
       StrView request_path_str(requestPath);
       if (request_path_str.contains("/CD/"))
-        device->publishAVT();
+        self->publishAVT();
       else if (request_path_str.contains("/CM/"))
-        device->publishCMS();
+        self->publishCMS();
       else
         DlnaLogger.log(DlnaLogLevel::Warning,
                        "eventSubscriptionHandler: Unknown request path: %s",
@@ -360,19 +371,17 @@ class DLNAMediaServer : public DLNADeviceInfo {
     // subscription namespace abbreviation used for event publishing
     cd.subscription_namespace_abbrev = "AVT";
 
-    // register URLs on the provided server so SCPD, control and event
-    // subscription endpoints are available immediately
-    server->on(cd.scpd_url, T_GET, cd.scp_cb, ref_ctx, 1);
-    server->on(cd.control_url, T_POST, cd.control_cb, ref_ctx, 1);
-    // Register event subscription handlers for SUBSCRIBE, UNSUBSCRIBE and
-    // POST so the server accepts subscription requests and related POSTS on
-    // the same event URL.
-    server->on(cd.event_sub_url, T_SUBSCRIBE, eventSubscriptionHandler, ref_ctx,
-               1);
-    server->on(cd.event_sub_url, T_UNSUBSCRIBE,
-               tiny_dlna::DLNADevice::eventSubscriptionHandler, ref_ctx, 1);
-    server->on(cd.event_sub_url, T_POST,
-               tiny_dlna::DLNADevice::eventSubscriptionHandler, ref_ctx, 1);
+  // register URLs on the provided server so SCPD, control and event
+  // subscription endpoints are available immediately. The server stores
+  // a reference to this MediaServer via setReference(), so we don't need
+  // to provide per-handler context arrays.
+  server->on(cd.scpd_url, T_GET, cd.scp_cb);
+  server->on(cd.control_url, T_POST, cd.control_cb);
+  server->on(cd.event_sub_url, T_SUBSCRIBE, eventSubscriptionHandler);
+  server->on(cd.event_sub_url, T_UNSUBSCRIBE,
+         tiny_dlna::DLNADevice::eventSubscriptionHandler);
+  server->on(cd.event_sub_url, T_POST,
+         tiny_dlna::DLNADevice::eventSubscriptionHandler);
 
     addService(cd);
   }
@@ -389,12 +398,11 @@ class DLNAMediaServer : public DLNADeviceInfo {
     // subscription namespace abbreviation used for event publishing
     cm.subscription_namespace_abbrev = "CMS";
 
-    server->on(cm.scpd_url, T_GET, cm.scp_cb, ref_ctx, 1);
-    server->on(cm.control_url, T_POST, cm.control_cb, ref_ctx, 1);
-    server->on(cm.event_sub_url, T_SUBSCRIBE, eventSubscriptionHandler, ref_ctx,
-               1);
-    server->on(cm.event_sub_url, T_UNSUBSCRIBE, cm.event_sub_cb, ref_ctx, 1);
-    server->on(cm.event_sub_url, T_POST, cm.event_sub_cb, ref_ctx, 1);
+  server->on(cm.scpd_url, T_GET, cm.scp_cb);
+  server->on(cm.control_url, T_POST, cm.control_cb);
+  server->on(cm.event_sub_url, T_SUBSCRIBE, eventSubscriptionHandler);
+  server->on(cm.event_sub_url, T_UNSUBSCRIBE, cm.event_sub_cb);
+  server->on(cm.event_sub_url, T_POST, cm.event_sub_cb);
 
     addService(cm);
   }
@@ -572,7 +580,8 @@ class DLNAMediaServer : public DLNADeviceInfo {
     // to avoid building the full response in memory and to remain
     // consistent with other handlers.
     StrPrint resp;
-    DLNADevice::replyGetCurrentConnectionInfo(resp, sourceProto, connectionID, "Output");
+    DLNADevice::replyGetCurrentConnectionInfo(resp, sourceProto, connectionID,
+                                              "Output");
     server.reply("text/xml", resp.c_str());
     return true;
   }
@@ -739,7 +748,10 @@ class DLNAMediaServer : public DLNADeviceInfo {
     // ActionRequest for custom handling. The callback is responsible for
     // writing the HTTP reply if it handles the action.
     DLNAMediaServer* ms = nullptr;
-    if (hl && hl->context[0]) ms = (DLNAMediaServer*)hl->context[0];
+    if (hl && hl->context[0])
+      ms = (DLNAMediaServer*)hl->context[0];
+    else
+      ms = (DLNAMediaServer*)server->getReference();
 
     // process the requested action using instance method if available
     if (ms) {
@@ -756,7 +768,10 @@ class DLNAMediaServer : public DLNADeviceInfo {
     DLNADevice::parseActionRequest(server, requestPath, hl, action);
 
     DLNAMediaServer* ms = nullptr;
-    if (hl && hl->context[0]) ms = (DLNAMediaServer*)hl->context[0];
+    if (hl && hl->context[0])
+      ms = (DLNAMediaServer*)hl->context[0];
+    else
+      ms = (DLNAMediaServer*)server->getReference();
     if (!ms) {
       server->replyNotFound();
       return;
