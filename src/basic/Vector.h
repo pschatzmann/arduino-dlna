@@ -147,7 +147,13 @@ class Vector {
 
   void setAllocator(ALLOCATOR &allocator) { p_allocator = &allocator; }
 
-  void clear() { len = 0; }
+  void clear() {
+    // Call destructors on all active elements before clearing
+    if (p_data != nullptr) {
+      cleanup(p_data, 0, len);
+    }
+    len = 0;
+  }
 
   int size() { return len; }
 
