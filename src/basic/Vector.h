@@ -304,8 +304,9 @@ class Vector {
     // current logical length (`len`) instead of the allocated buffer
     // capacity (`max_capacity`). That caused the allocated buffer to
     // remain unfreed when len was 0 (leading to a memory leak).
-    clear();
     if (p_data != nullptr) {
+      // Call destructors on all active elements to prevent memory leaks
+      cleanup(p_data, 0, len);
       // free the full allocated buffer
       deleteArray(p_data, max_capacity);
       p_data = nullptr;
