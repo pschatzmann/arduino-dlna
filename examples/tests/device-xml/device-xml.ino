@@ -16,17 +16,17 @@ void setupDevice() {
 
   auto transportCB = [](HttpServer* server, const char* requestPath,
                         HttpRequestHandlerLine* hl) {
-  server->reply("text/xml", [](Print& out, void*){ tiny_dlna::DLNAMediaRendererTransportDescr d; d.printDescr(out); });
+  server->reply("text/xml", [](Print& out, void*) -> size_t { tiny_dlna::DLNAMediaRendererTransportDescr d; return d.printDescr(out); });
   };
 
   auto connmgrCB = [](HttpServer* server, const char* requestPath,
                       HttpRequestHandlerLine* hl) {
-  server->reply("text/xml", [](Print& out, void*){ tiny_dlna::DLNAMediaRendererConnectionMgrDescr d; d.printDescr(out); });
+  server->reply("text/xml", [](Print& out, void*) -> size_t { tiny_dlna::DLNAMediaRendererConnectionMgrDescr d; return d.printDescr(out); });
   };
 
   auto controlCB = [](HttpServer* server, const char* requestPath,
                       HttpRequestHandlerLine* hl) {
-  server->reply("text/xml", [](Print& out, void*){ tiny_dlna::DLNAMediaRendererControlDescr d; d.printDescr(out); });
+  server->reply("text/xml", [](Print& out, void*) -> size_t { tiny_dlna::DLNAMediaRendererControlDescr d; return d.printDescr(out); });
   };
 
   // define services

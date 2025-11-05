@@ -287,14 +287,16 @@ class DLNAMediaServer : public DLNADeviceInfo {
     // passed directly to reply (avoids extra static helpers).
     server->reply(
         "text/xml",
-        [](Print& out, void* ref) {
+        [](Print& out, void* ref) -> size_t {
+          size_t result = 0;
           if (ref) {
             auto self = (DLNAMediaServer*)ref;
-            self->getContentDirectoryDescr().printDescr(out);
+            result += self->getContentDirectoryDescr().printDescr(out);
           } else {
             tiny_dlna::DLNAMediaServerContentDirectoryDescr descr;
-            descr.printDescr(out);
+            result += descr.printDescr(out);
           }
+          return result;
         },
         200, nullptr, ref);
   }
@@ -307,14 +309,16 @@ class DLNAMediaServer : public DLNADeviceInfo {
 
     server->reply(
         "text/xml",
-        [](Print& out, void* ref) {
+        [](Print& out, void* ref) -> size_t {
+          size_t result = 0;
           if (ref) {
             auto self = (DLNAMediaServer*)ref;
-            self->getConnectionMgrDescr().printDescr(out);
+            result += self->getConnectionMgrDescr().printDescr(out);
           } else {
             tiny_dlna::DLNAMediaServerConnectionMgrDescr descr;
-            descr.printDescr(out);
+            result += descr.printDescr(out);
           }
+          return result;
         },
         200, nullptr, ref);
   }

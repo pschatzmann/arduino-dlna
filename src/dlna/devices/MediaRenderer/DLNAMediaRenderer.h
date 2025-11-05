@@ -618,9 +618,11 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
       // non-capturing lambda so we don't need a separate static helper.
       server->reply(
           "text/xml",
-          [](Print& out, void* ref) {
+          [](Print& out, void* ref) -> size_t {
+            size_t result = 0;
             auto self = static_cast<DLNAMediaRenderer*>(ref);
-            if (self) self->getTransportDescr().printDescr(out);
+            if (self) result += self->getTransportDescr().printDescr(out);
+            return result;
           },
           200, nullptr, self);
     } else {
@@ -637,9 +639,11 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     if (self) {
       server->reply(
           "text/xml",
-          [](Print& out, void* ref) {
+          [](Print& out, void* ref) -> size_t {
+            size_t result = 0;
             auto self = static_cast<DLNAMediaRenderer*>(ref);
-            if (self) self->getConnectionMgrDescr().printDescr(out);
+            if (self) result += self->getConnectionMgrDescr().printDescr(out);
+            return result;
           },
           200, nullptr, self);
     } else {
@@ -656,9 +660,11 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     if (self) {
       server->reply(
           "text/xml",
-          [](Print& out, void* ref) {
+          [](Print& out, void* ref) -> size_t {
+            size_t result = 0;
             auto self = static_cast<DLNAMediaRenderer*>(ref);
-            if (self) self->getControlDescr().printDescr(out);
+            if (self) result += self->getControlDescr().printDescr(out);
+            return result;
           },
           200, nullptr, self);
     } else {
@@ -872,24 +878,26 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
   bool processActionPlay(ActionRequest& action, HttpServer& server) {
     setActive(true);
     if (event_cb) event_cb(MediaEvent::PLAY, *this);
-    NullPrint np;
-    size_t len = DLNADevice::printReplyXML(np, "PlayResponse", "AVTransport",
-                                           nullptr, this);
-    server.reply("text/xml", len, [](Print& out) -> size_t {
-      return DLNADevice::printReplyXML(out, "PlayResponse", "AVTransport");
-    });
+    server.reply(
+        "text/xml",
+        [](Print& out, void* ref) -> size_t {
+          (void)ref;
+          return DLNADevice::printReplyXML(out, "PlayResponse", "AVTransport");
+        },
+        200, nullptr, this);
     return true;
   }
 
   bool processActionPause(ActionRequest& action, HttpServer& server) {
     setActive(false);
     if (event_cb) event_cb(MediaEvent::PAUSE, *this);
-    NullPrint np;
-    size_t len = DLNADevice::printReplyXML(np, "PauseResponse", "AVTransport",
-                                           nullptr, this);
-    server.reply("text/xml", len, [](Print& out) -> size_t {
-      return DLNADevice::printReplyXML(out, "PauseResponse", "AVTransport");
-    });
+    server.reply(
+        "text/xml",
+        [](Print& out, void* ref) -> size_t {
+          (void)ref;
+          return DLNADevice::printReplyXML(out, "PauseResponse", "AVTransport");
+        },
+        200, nullptr, this);
     return true;
   }
 
@@ -897,12 +905,13 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     // use stop() to ensure state reset and application callback are invoked
     stop();
     if (event_cb) event_cb(MediaEvent::STOP, *this);
-    NullPrint np;
-    size_t len = DLNADevice::printReplyXML(np, "StopResponse", "AVTransport",
-                                           nullptr, this);
-    server.reply("text/xml", len, [](Print& out) -> size_t {
-      return DLNADevice::printReplyXML(out, "StopResponse", "AVTransport");
-    });
+    server.reply(
+        "text/xml",
+        [](Print& out, void* ref) -> size_t {
+          (void)ref;
+          return DLNADevice::printReplyXML(out, "StopResponse", "AVTransport");
+        },
+        200, nullptr, this);
     return true;
   }
 
@@ -1100,13 +1109,14 @@ xmlns:u="urn:schemas-upnp-org:service:AVTransport:1">
     if (uri && *uri) {
       setPlaybackURL(uri);
       if (event_cb) event_cb(MediaEvent::SET_URI, *this);
-      NullPrint np;
-      size_t len = DLNADevice::printReplyXML(np, "SetAVTransportURIResponse",
-                                             "AVTransport", nullptr, this);
-      server.reply("text/xml", len, [](Print& out) -> size_t {
-        return DLNADevice::printReplyXML(out, "SetAVTransportURIResponse",
-                                         "AVTransport");
-      });
+      server.reply(
+          "text/xml",
+          [](Print& out, void* ref) -> size_t {
+            (void)ref;
+            return DLNADevice::printReplyXML(out, "SetAVTransportURIResponse",
+                                             "AVTransport");
+          },
+          200, nullptr, this);
       return true;
     } else {
       DlnaLogger.log(DlnaLogLevel::Warning,
@@ -1120,13 +1130,14 @@ xmlns:u="urn:schemas-upnp-org:service:AVTransport:1">
     int desiredVolume = action.getArgumentIntValue("DesiredVolume");
     setVolume((uint8_t)desiredVolume);
     if (event_cb) event_cb(MediaEvent::SET_VOLUME, *this);
-    NullPrint np;
-    size_t len = DLNADevice::printReplyXML(np, "SetVolumeResponse",
-                                           "RenderingControl", nullptr, this);
-    server.reply("text/xml", len, [](Print& out) -> size_t {
-      return DLNADevice::printReplyXML(out, "SetVolumeResponse",
-                                       "RenderingControl");
-    });
+    server.reply(
+        "text/xml",
+        [](Print& out, void* ref) -> size_t {
+          (void)ref;
+          return DLNADevice::printReplyXML(out, "SetVolumeResponse",
+                                           "RenderingControl");
+        },
+        200, nullptr, this);
     return true;
   }
 
@@ -1134,13 +1145,14 @@ xmlns:u="urn:schemas-upnp-org:service:AVTransport:1">
     bool desiredMute = action.getArgumentIntValue("DesiredMute") != 0;
     setMuted(desiredMute);
     if (event_cb) event_cb(MediaEvent::SET_MUTE, *this);
-    NullPrint np;
-    size_t len = DLNADevice::printReplyXML(np, "SetMuteResponse",
-                                           "RenderingControl", nullptr, this);
-    server.reply("text/xml", len, [](Print& out) -> size_t {
-      return DLNADevice::printReplyXML(out, "SetMuteResponse",
-                                       "RenderingControl");
-    });
+    server.reply(
+        "text/xml",
+        [](Print& out, void* ref) -> size_t {
+          (void)ref;
+          return DLNADevice::printReplyXML(out, "SetMuteResponse",
+                                           "RenderingControl");
+        },
+        200, nullptr, this);
     return true;
   }
 

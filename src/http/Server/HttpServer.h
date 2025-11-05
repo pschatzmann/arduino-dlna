@@ -310,46 +310,23 @@ class HttpServer {
     endClient();
   }
 
-  /// write reply - using callback that writes to stream
-  void reply(const char* contentType, size_t (*callback)(Stream& out),
-             int status = 200, const char* msg = SUCCESS) {
-    DlnaLogger.log(DlnaLogLevel::Info, "reply %s", "callback");
-    reply_header.setValues(status, msg);
-    reply_header.put(CONTENT_TYPE, contentType);
-    reply_header.put(CONNECTION, CON_KEEP_ALIVE);
-    reply_header.write(this->client());
-    callback(*client_ptr);
-    // inputStream.close();
-    endClient();
-  }
-  /// write reply - using callback that writes to stream
-  void reply(const char* contentType, size_t size,
-             size_t (*callback)(Print& out), int status = 200,
-             const char* msg = SUCCESS) {
-    DlnaLogger.log(DlnaLogLevel::Info, "reply %s", "callback");
-    reply_header.setValues(status, msg);
-    reply_header.put(CONTENT_LENGTH, size);
-    reply_header.put(CONTENT_TYPE, contentType);
-    reply_header.put(CONNECTION, CON_KEEP_ALIVE);
-    reply_header.write(this->client());
-    callback(*client_ptr);
-    // inputStream.close();
-    endClient();
-  }
+  // callback-based reply variant implemented below uses Print& and void*
 
   /// write reply - using callback that writes to stream
-  void reply(const char* contentType, void (*callback)(Print& out, void*ref),
+  void reply(const char* contentType, size_t (*callback)(Print& out, void*ref),
              int status = 200, const char* msg = SUCCESS, void *ref = nullptr) {
     DlnaLogger.log(DlnaLogLevel::Info, "reply %s", "via callback");
+    NullPrint nop;
+    size_t size = callback(nop, ref);
     reply_header.setValues(status, msg);
     reply_header.put(CONTENT_TYPE, contentType);
+    reply_header.put(CONTENT_LENGTH, size);
     reply_header.put(CONNECTION, CON_KEEP_ALIVE);
     reply_header.write(this->client());
     callback(*client_ptr, ref);
     // inputStream.close();
     endClient();
   }
-
 
   /// write reply - string with header size
   void reply(const char* contentType, const char* str, int status = 200,
