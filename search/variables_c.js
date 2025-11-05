@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['name_0',['name',['../classtiny__dlna_1_1Argument.html#ab0ef62d2267d3751731d3b43379f84ca',1,'tiny_dlna::Argument']]],
+  ['name_0',['name',['../classtiny__dlna_1_1Argument.html#a9f1cfa83b57f270b98af969574c08bea',1,'tiny_dlna::Argument']]],
   ['next_1',['next',['../structtiny__dlna_1_1List_1_1Node.html#a60c74f6ed9b2fe029e6b03335b6705dc',1,'tiny_dlna::List::Node']]],
   ['next_5fscheduler_5ftimeout_5fms_2',['next_scheduler_timeout_ms',['../classtiny__dlna_1_1DLNADevice.html#a6bf8a0f74556fc46b0e3958899b84f58',1,'tiny_dlna::DLNADevice']]],
   ['next_5fsubscriptions_5ftimeout_5fms_3',['next_subscriptions_timeout_ms',['../classtiny__dlna_1_1DLNADevice.html#af4f81b3f83d7f483f74e979349ec92cd',1,'tiny_dlna::DLNADevice']]],
