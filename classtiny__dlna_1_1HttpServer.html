@@ -152,9 +152,6 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ab4c7c70acb4d3501d239385cda0622f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa5d0d9d72f09a4c905d50d5b98209bfc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#aa5d0d9d72f09a4c905d50d5b98209bfc">replyError</a> (int err, const char *msg=&quot;Internal Server Error&quot;)</td></tr>
 <tr class="separator:aa5d0d9d72f09a4c905d50d5b98209bfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9cdef43d38d0f4dc8a0cbfb0d2f02008"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a9cdef43d38d0f4dc8a0cbfb0d2f02008">reply</a> (int status, const char *msg)</td></tr>
-<tr class="memdesc:a9cdef43d38d0f4dc8a0cbfb0d2f02008"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes the status and message to the reply.  <br /></td></tr>
-<tr class="separator:a9cdef43d38d0f4dc8a0cbfb0d2f02008"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a83060e693944bb6b5feb6eea6f949297"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1HttpRequestHeader.html">HttpRequestHeader</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a83060e693944bb6b5feb6eea6f949297">requestHeader</a> ()</td></tr>
 <tr class="memdesc:a83060e693944bb6b5feb6eea6f949297"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides the request header  <br /></td></tr>
 <tr class="separator:a83060e693944bb6b5feb6eea6f949297"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -201,6 +198,9 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
+<tr class="memitem:a9cdef43d38d0f4dc8a0cbfb0d2f02008"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a9cdef43d38d0f4dc8a0cbfb0d2f02008">reply</a> (int status, const char *msg)</td></tr>
+<tr class="memdesc:a9cdef43d38d0f4dc8a0cbfb0d2f02008"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes the status and message to the reply.  <br /></td></tr>
+<tr class="separator:a9cdef43d38d0f4dc8a0cbfb0d2f02008"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a591ab7508102cf1a7a1cebb9755e3ba6"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a591ab7508102cf1a7a1cebb9755e3ba6">nullstr</a> (const char *in)</td></tr>
 <tr class="memdesc:a591ab7508102cf1a7a1cebb9755e3ba6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts null to an empty string.  <br /></td></tr>
 <tr class="separator:a591ab7508102cf1a7a1cebb9755e3ba6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1389,7 +1389,7 @@ password); </p>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
