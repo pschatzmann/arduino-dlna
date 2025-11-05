@@ -420,6 +420,11 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
   const char* getSinkProtocols() { return sinkProto; }
 
  protected:
+  struct ActionRule {
+    const char* suffix;
+    bool (*handler)(DLNAMediaRenderer*, ActionRequest&, HttpServer&);
+  };
+
   tiny_dlna::Str current_uri;
   tiny_dlna::Str current_mime;
   MediaEventHandler event_cb = nullptr;
@@ -427,7 +432,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
   uint8_t muted_volume = 0;
   unsigned long start_time = 0;
   unsigned long time_sum = 0;
-  // Current transport state string (e.g. "STOPPED", "PLAYING",
+  // Current state string (e.g. "STOPPED", "PLAYING",
   // "PAUSED_PLAYBACK")
   tiny_dlna::Str transport_state = "NO_MEDIA_PRESENT";
   const char* st = "urn:schemas-upnp-org:device:MediaRenderer:1";
@@ -437,10 +442,10 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
   DLNADevice dlna_device;
   HttpServer* p_server = nullptr;
   IUDPService* p_udp_member = nullptr;
-  Vector<ActionRule> rules;
   const char* connectionID = "0";
   const char* sourceProto = "";
   const char* sinkProto = DLNA_PROTOCOL_AUDIO;
+  Vector<ActionRule> rules;
 
   /// serviceAbbrev: AVT, RCS, CMS
   void addChange(const char* serviceAbbrev,

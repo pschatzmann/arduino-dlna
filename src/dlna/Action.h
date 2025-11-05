@@ -162,9 +162,5 @@ class ActionRequest {
   operator bool() { return p_service != nullptr && action != nullptr; }
 };
 
-struct ActionRule {
-  const char* suffix;
-  bool (*handler)(DLNAMediaRenderer*, ActionRequest&, HttpServer&);
-};
 
 }  // namespace tiny_dlna
