@@ -345,6 +345,11 @@ class Vector {
             p_data[j] = oldData[j];
           }
         }
+        // Clean up old elements before deallocating, but only those we didn't copy
+        if (!copy && len > 0) {
+          // If we're not copying, destroy all old elements
+          cleanup(oldData, 0, len);
+        }
         if (shrink) {
           cleanup(oldData, newSize, oldBufferLen);
         }
