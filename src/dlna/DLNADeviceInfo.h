@@ -31,6 +31,29 @@ class DLNADeviceInfo {
 
  public:
   DLNADeviceInfo(bool ok = true) { is_active = ok; }
+  
+  // Explicitly define copy constructor as const (needed for std::vector)
+  DLNADeviceInfo(const DLNADeviceInfo& other)
+      : is_active(other.is_active),
+        version_major(other.version_major),
+        version_minor(other.version_minor),
+        base_url(other.base_url),
+        udn(other.udn),
+        device_type(other.device_type),
+        friendly_name(other.friendly_name),
+        manufacturer(other.manufacturer),
+        manufacturer_url(other.manufacturer_url),
+        model_description(other.model_description),
+        model_name(other.model_name),
+        model_url(other.model_url),
+        model_number(other.model_number),
+        serial_number(other.serial_number),
+        universal_product_code(other.universal_product_code),
+        icon(other.icon),
+        services(other.services),
+        icons(other.icons),
+        is_subcription_active(other.is_subcription_active) {}
+  
   ~DLNADeviceInfo() { DlnaLogger.log(DlnaLogLevel::Debug, "~DLNADevice()"); }
 
   /// Override to initialize the device

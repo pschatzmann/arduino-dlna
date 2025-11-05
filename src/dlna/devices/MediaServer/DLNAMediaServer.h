@@ -49,6 +49,7 @@ class DLNAMediaServer : public DLNADeviceInfo {
     // use setters so derived classes or overrides get a consistent path
     setHttpServer(server);
     setUdpService(udp);
+    dlna_device.setReference(this);
   }
 
   /// Destructor
@@ -57,7 +58,6 @@ class DLNAMediaServer : public DLNADeviceInfo {
   /// Set the http server instance the MediaServer should use
   void setHttpServer(HttpServer& server) {
     p_server = &server;
-    server.setReference(this);
     setupServicesImpl(&server);
   }
 
@@ -278,11 +278,8 @@ class DLNAMediaServer : public DLNADeviceInfo {
   /// Static descriptor callback for ContentDirectory SCPD
   static void contentDescCB(HttpServer* server, const char* requestPath,
                             HttpRequestHandlerLine* hl) {
-    // Use the server reference as ref (set via setHttpServer()). Prefer
-    // the handler context when available, otherwise fall back to the
-    // server's stored reference.
-    void* ref = server->getReference();
-    assert(ref != nullptr);
+    DLNAMediaServer* self = getMediaServer(server);
+    assert(self != nullptr);
     // Non-capturing lambda matches function-pointer signature and can be
     // passed directly to reply (avoids extra static helpers).
     server->reply(
@@ -298,14 +295,13 @@ class DLNAMediaServer : public DLNADeviceInfo {
           }
           return result;
         },
-        200, nullptr, ref);
+        200, nullptr, self);
   }
 
   /// Static descriptor callback for ConnectionManager SCPD
   static void connDescCB(HttpServer* server, const char* requestPath,
                          HttpRequestHandlerLine* hl) {
-    void* ref = server->getReference();
-    assert(ref != nullptr);
+    DLNAMediaServer* self = getMediaServer(server);
 
     server->reply(
         "text/xml",
@@ -320,7 +316,7 @@ class DLNAMediaServer : public DLNADeviceInfo {
           }
           return result;
         },
-        200, nullptr, ref);
+        200, nullptr, self);
   }
 
   // (Removed static helper functions — lambdas are used inline at callsite.)
@@ -330,7 +326,7 @@ class DLNAMediaServer : public DLNADeviceInfo {
                                        const char* requestPath,
                                        HttpRequestHandlerLine* hl) {
     DLNADevice::eventSubscriptionHandler(server, requestPath, hl);
-    DLNAMediaServer* self = (DLNAMediaServer*)server->getReference();
+    DLNAMediaServer* self = getMediaServer(server);
     assert(self != nullptr);
     if (self) {
       StrView request_path_str(requestPath);
@@ -734,11 +730,7 @@ class DLNAMediaServer : public DLNADeviceInfo {
     // If a user-provided callback is registered, hand over the parsed
     // ActionRequest for custom handling. The callback is responsible for
     // writing the HTTP reply if it handles the action.
-    DLNAMediaServer* ms = nullptr;
-    if (hl && hl->context[0])
-      ms = (DLNAMediaServer*)hl->context[0];
-    else
-      ms = (DLNAMediaServer*)server->getReference();
+    DLNAMediaServer* ms = getMediaServer(server);
 
     // process the requested action using instance method if available
     if (ms) {
@@ -748,17 +740,28 @@ class DLNAMediaServer : public DLNADeviceInfo {
     server->replyNotFound();
   }
 
+  /**
+   * @brief Helper to retrieve DLNAMediaServer instance from HttpServer reference chain
+   * 
+   * Navigates through the server's reference (DLNADevice) to get the MediaServer instance.
+   * 
+   * @param server Pointer to the HttpServer instance
+   * @return Pointer to the DLNAMediaServer instance, or nullptr if not found
+   */
+  static DLNAMediaServer* getMediaServer(HttpServer* server) {
+    if (!server) return nullptr;
+    DLNADevice* dev = (DLNADevice*)server->getReference();
+    if (!dev) return nullptr;
+    return (DLNAMediaServer*)dev->getReference();
+  }
+
   /// simple connection manager control that replies OK
   static void connmgrControlCB(HttpServer* server, const char* requestPath,
                                HttpRequestHandlerLine* hl) {
     ActionRequest action;
     DLNADevice::parseActionRequest(server, requestPath, hl, action);
 
-    DLNAMediaServer* ms = nullptr;
-    if (hl && hl->context[0])
-      ms = (DLNAMediaServer*)hl->context[0];
-    else
-      ms = (DLNAMediaServer*)server->getReference();
+    DLNAMediaServer* ms = getMediaServer(server);
     if (!ms) {
       server->replyNotFound();
       return;
