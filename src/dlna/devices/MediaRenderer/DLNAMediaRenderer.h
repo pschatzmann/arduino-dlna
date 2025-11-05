@@ -687,7 +687,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     const char* soapHdr = server->requestHeader().get("SOAPACTION");
     DlnaLogger.log(DlnaLogLevel::Debug, "controlCB: SOAPAction=%s, action=%s",
                    StringRegistry::nullStr(soapHdr),
-                   StringRegistry::nullStr(action.action));
+                   StringRegistry::nullStr(action.getAction()));
 
     if (self) {
       if (self->processAction(action, *server)) return;
@@ -855,8 +855,8 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
    */
   bool processAction(ActionRequest& action, HttpServer& server) {
     DlnaLogger.log(DlnaLogLevel::Info, "DLNAMediaRenderer::processAction: %s",
-                   action.action);
-    StrView action_str(action.action);
+                   action.getAction());
+    StrView action_str(action.getAction());
     if (action_str.isEmpty()) {
       DlnaLogger.log(DlnaLogLevel::Error, "Empty action received");
       server.replyError(400, "Invalid Action");
@@ -869,7 +869,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
       }
     }
     DlnaLogger.log(DlnaLogLevel::Error, "Unsupported action: %s",
-                   action.action);
+                   action.getAction());
     server.replyError(400, "Invalid Action");
     return false;
   }

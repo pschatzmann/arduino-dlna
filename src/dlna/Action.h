@@ -23,8 +23,8 @@ class Argument {
     name = nme;
     value = val;
   }
-  const char* name = nullptr;
-  Str value = "";
+  Str name{20};
+  Str value{0};
 };
 
 /**
@@ -60,7 +60,7 @@ class ActionReply {
   }
   void addArgument(Argument arg) {
     for (auto& a : arguments) {
-      if (StrView(a.name).equals(arg.name)) {
+      if (StrView(a.name).equals(arg.name.c_str())) {
         a.value = arg.value;
         return;
       }
@@ -71,10 +71,7 @@ class ActionReply {
   // Helper: find argument by name in ActionReply (returns nullptr if not found)
   const char* findArgument(const char* name) {
     for (auto& a : arguments) {
-      if (a.name != nullptr) {
-        StrView nm(a.name);
-        if (nm == name) return a.value.c_str();
-      }
+      if (a.name.equals(name)) return a.value.c_str();
     }
     return nullptr;
   }
@@ -88,7 +85,7 @@ class ActionReply {
   void logArguments() {
     for (auto& a : arguments) {
       DlnaLogger.log(DlnaLogLevel::Debug, "  -> %s = %s",
-                     StringRegistry::nullStr(a.name),
+                     StringRegistry::nullStr(a.name.c_str()),
                      StringRegistry::nullStr(a.value.c_str()));
     }
   }
@@ -132,17 +129,14 @@ class ActionRequest {
 
   const char* getArgumentValue(const char* name) {
     for (auto& a : arguments) {
-      if (a.name != nullptr) {
-        StrView nm(a.name);
-        if (nm.endsWithIgnoreCase(name)) {
-          return StringRegistry::nullStr(a.value.c_str());
-        }
+      if (a.name.endsWithIgnoreCase(name)) {
+        return StringRegistry::nullStr(a.value.c_str());
       }
     }
 
     Str list{80};
     for (auto& a : arguments) {
-      list.add(a.name);
+      list.add(a.name.c_str());
       list.add(" ");
     }
 
@@ -157,14 +151,32 @@ class ActionRequest {
 
   void clear() {
     arguments.clear();
-    action = nullptr;
+    action.clear();
   }
 
+  void setAction(const char* act) { action = act; }
+
+  const char* getAction() { return action.c_str(); }
+
+  void setService(DLNAServiceInfo* srv) { p_service = srv; }
+
+  DLNAServiceInfo* getService() { return p_service; }
+
+  Vector<Argument>& getArguments() { return arguments; }
+
+  const Vector<Argument>& getArguments() const { return arguments; }
+
+  void setResultCount(int v) { result_count = v; }
+
+  int getResultCount() const { return result_count; }
+
+  operator bool() { return p_service != nullptr && !action.isEmpty(); }
+
+ protected:
   DLNAServiceInfo* p_service = nullptr;
-  const char* action = nullptr;
   Vector<Argument> arguments{10};
   int result_count = 0;
-  operator bool() { return p_service != nullptr && action != nullptr; }
+  Str action;
 };
 
 }  // namespace tiny_dlna

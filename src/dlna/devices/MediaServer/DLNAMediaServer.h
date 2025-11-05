@@ -397,8 +397,8 @@ class DLNAMediaServer : public DLNADeviceInfo {
   /// Process action requests using rules-based dispatch
   bool processAction(ActionRequest& action, HttpServer& server) {
     DlnaLogger.log(DlnaLogLevel::Info, "DLNAMediaServer::processAction: %s",
-                   StringRegistry::nullStr(action.action));
-    StrView action_str(action.action);
+                   action.getAction());
+    StrView action_str(action.getAction());
     if (action_str.isEmpty()) {
       DlnaLogger.log(DlnaLogLevel::Error, "Empty action received");
       server.replyNotFound();
@@ -410,7 +410,7 @@ class DLNAMediaServer : public DLNADeviceInfo {
       }
     }
     DlnaLogger.log(DlnaLogLevel::Error, "Unsupported action: %s",
-                   action.action);
+                   action.getAction());
     server.replyNotFound();
     return false;
   }

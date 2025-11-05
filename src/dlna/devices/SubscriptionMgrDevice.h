@@ -210,7 +210,7 @@ class SubscriptionMgrDevice {
       pending_list.push_back(pn);
     }
     if (!any) {
-      DlnaLogger.log(DlnaLogLevel::Error, "service '%s' not found",
+      DlnaLogger.log(DlnaLogLevel::Info, "service '%s' has no subscriptions",
                      service.service_id);
     }
   }

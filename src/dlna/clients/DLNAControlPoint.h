@@ -640,16 +640,16 @@ class DLNAControlPoint {
     char ns[200];
     StrView namespace_str(ns, 200);
     namespace_str = "xmlns:u=\"%1\"";
-    bool ok = namespace_str.replace("%1", action.p_service->service_type);
+  bool ok = namespace_str.replace("%1", action.getService()->service_type);
     DlnaLogger.log(DlnaLogLevel::Debug, "ns = '%s'", namespace_str.c_str());
 
     // assert(ok);
     result +=
-        xml_printer.printNodeBegin(action.action, namespace_str.c_str(), "u");
-    for (auto arg : action.arguments) {
-      result += xml_printer.printNode(arg.name, arg.value.c_str());
+        xml_printer.printNodeBegin(action.getAction(), namespace_str.c_str(), "u");
+    for (auto arg : action.getArguments()) {
+      result += xml_printer.printNode(arg.name.c_str(), arg.value.c_str());
     }
-    result += xml_printer.printNodeEnd(action.action, "u");
+    result += xml_printer.printNodeEnd(action.getAction(), "u");
 
     result += xml_printer.printNodeEnd("Body", "s");
     result += xml_printer.printNodeEnd("Envelope", "s");
@@ -668,18 +668,18 @@ class DLNAControlPoint {
   ActionReply& postAction(ActionRequest& action,
                           XMLCallback xmlProcessor = nullptr) {
     DlnaLogger.log(DlnaLogLevel::Debug, "DLNAControlPointMgr::postAction: %s",
-                   StringRegistry::nullStr(action.action, "(null)"));
+                   action.getAction());
     reply.clear();
-    DLNAServiceInfo& service = *(action.p_service);
+  DLNAServiceInfo& service = *(action.getService());
     DLNADeviceInfo& device = getDevice(service);
 
     // create SOAPACTION header value
     char act[200];
     StrView action_str{act, 200};
     action_str = "\"";
-    action_str.add(action.p_service->service_type);
+  action_str.add(action.getService()->service_type);
     action_str.add("#");
-    action_str.add(action.action);
+    action_str.add(action.getAction());
     action_str.add("\"");
 
     // crate control url
@@ -689,7 +689,8 @@ class DLNAControlPoint {
                    "Service control_url: %s, device base: %s",
                    StringRegistry::nullStr(service.control_url),
                    StringRegistry::nullStr(device.getBaseURL()));
-    Url post_url{getUrl(device, service.control_url, url_buffer, DLNA_MAX_URL_LEN)};
+    Url post_url{
+        getUrl(device, service.control_url, url_buffer, DLNA_MAX_URL_LEN)};
     DlnaLogger.log(DlnaLogLevel::Info, "POST URL computed: %s", post_url.url());
 
     // send HTTP POST and collect/handle response. If the caller provided an
@@ -715,7 +716,7 @@ class DLNAControlPoint {
 
     NullPrint np;
     size_t xmlLen = createSoapXML(action, np);
-    // dynamically create and write xml  
+    // dynamically create and write xml
     auto printXML = [this, &action, &xmlLen](Print& out, void* ref) -> size_t {
       (void)ref;
       return createSoapXML(action, out);

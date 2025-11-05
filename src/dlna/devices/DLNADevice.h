@@ -252,8 +252,8 @@ class DLNADevice {
         if (is_action) {
           is_action = false;
           is_attribute = true;
-          action.action = registry.add((char*)outNodeName.c_str());
-          DlnaLogger.log(DlnaLogLevel::Info, "action: %s", action.action);
+          action.setAction(outNodeName.c_str());
+          DlnaLogger.log(DlnaLogLevel::Info, "action: %s", action.getAction());
           continue;
         }
         // skip SOAP envelope wrappers
