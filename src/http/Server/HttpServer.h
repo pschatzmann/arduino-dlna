@@ -310,8 +310,6 @@ class HttpServer {
     endClient();
   }
 
-  // callback-based reply variant implemented below uses Print& and void*
-
   /// write reply - using callback that writes to stream
   void reply(const char* contentType, size_t (*callback)(Print& out, void*ref),
              int status = 200, const char* msg = SUCCESS, void *ref = nullptr) {
