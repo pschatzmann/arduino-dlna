@@ -94,7 +94,7 @@ Inheritance diagram for tiny_dlna::DLNADeviceInfo:</div>
 <map name="atiny__dlna_1_1DLNADeviceInfo_inherit__map" id="atiny__dlna_1_1DLNADeviceInfo_inherit__map">
 <area shape="rect" title="Device Attributes and generation of XML using urn:schemas&#45;upnp&#45;org:device&#45;1&#45;0. We could just return a..." alt="" coords="140,5,336,31"/>
 <area shape="rect" href="classtiny__dlna_1_1DLNAMediaRenderer.html" title="MediaRenderer DLNA Device." alt="" coords="5,79,231,104"/>
-<area shape="rect" href="classtiny__dlna_1_1DLNAMediaServer.html" title="Digital Media Server implementation." alt="" coords="255,79,463,104"/>
+<area shape="rect" href="classtiny__dlna_1_1DLNAMediaServer.html" title=" " alt="" coords="255,79,463,104"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -210,6 +210,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ad157d9cd7b457189424ec6caa4a98f75"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#ad157d9cd7b457189424ec6caa4a98f75">loop</a> ()</td></tr>
 <tr class="memdesc:ad157d9cd7b457189424ec6caa4a98f75"><td class="mdescLeft">&#160;</td><td class="mdescRight">loop processing  <br /></td></tr>
 <tr class="separator:ad157d9cd7b457189424ec6caa4a98f75"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72789ce2156fd567f8ab06456f21f876"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#a72789ce2156fd567f8ab06456f21f876">setSubscriptionActive</a> (bool flag)</td></tr>
+<tr class="separator:a72789ce2156fd567f8ab06456f21f876"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab30655c76819d36639f78bc02b4769c0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#ab30655c76819d36639f78bc02b4769c0">isSubscriptionActive</a> ()</td></tr>
+<tr class="separator:ab30655c76819d36639f78bc02b4769c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -279,6 +283,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:ae19cc05b9c59702f51b111968da655d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e63e76702b8cdf01d688339ccbf29d5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Str.html">Str</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#a5e63e76702b8cdf01d688339ccbf29d5">url_str</a></td></tr>
 <tr class="separator:a5e63e76702b8cdf01d688339ccbf29d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92a36990a2971b94778832eadc41f192"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#a92a36990a2971b94778832eadc41f192">is_subcription_active</a> = false</td></tr>
+<tr class="separator:a92a36990a2971b94778832eadc41f192"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
 Friends</h2></td></tr>
@@ -980,6 +986,31 @@ Friends</h2></td></tr>
 
 </div>
 </div>
+<a id="ab30655c76819d36639f78bc02b4769c0" name="ab30655c76819d36639f78bc02b4769c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab30655c76819d36639f78bc02b4769c0">&#9670;&#160;</a></span>isSubscriptionActive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool tiny_dlna::DLNADeviceInfo::isSubscriptionActive </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="ad157d9cd7b457189424ec6caa4a98f75" name="ad157d9cd7b457189424ec6caa4a98f75"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad157d9cd7b457189424ec6caa4a98f75">&#9670;&#160;</a></span>loop()</h2>
 
@@ -1603,6 +1634,32 @@ Friends</h2></td></tr>
 
 </div>
 </div>
+<a id="a72789ce2156fd567f8ab06456f21f876" name="a72789ce2156fd567f8ab06456f21f876"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72789ce2156fd567f8ab06456f21f876">&#9670;&#160;</a></span>setSubscriptionActive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tiny_dlna::DLNADeviceInfo::setSubscriptionActive </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>flag</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="aa21747b94417df4ee264f4f1d8708644" name="aa21747b94417df4ee264f4f1d8708644"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa21747b94417df4ee264f4f1d8708644">&#9670;&#160;</a></span>setUDN()</h2>
 
@@ -1906,6 +1963,28 @@ Friends</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">bool tiny_dlna::DLNADeviceInfo::is_active = true</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a92a36990a2971b94778832eadc41f192" name="a92a36990a2971b94778832eadc41f192"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92a36990a2971b94778832eadc41f192">&#9670;&#160;</a></span>is_subcription_active</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool tiny_dlna::DLNADeviceInfo::is_subcription_active = false</td>
         </tr>
       </table>
   </td>

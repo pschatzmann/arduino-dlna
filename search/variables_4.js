@@ -10,11 +10,10 @@ var searchData=
   ['event_5fsub_5fcb_7',['event_sub_cb',['../classtiny__dlna_1_1DLNAServiceInfo.html#aad09297e371a3c4db2c7e6b782cc3319',1,'tiny_dlna::DLNAServiceInfo']]],
   ['event_5fsub_5fsid_8',['event_sub_sid',['../classtiny__dlna_1_1DLNAServiceInfo.html#a6e0e681d505fe8bfd30a5bfa3c945f00',1,'tiny_dlna::DLNAServiceInfo']]],
   ['event_5fsub_5furl_9',['event_sub_url',['../classtiny__dlna_1_1DLNAServiceInfo.html#af49ffe27509241a816128acb00a9deae',1,'tiny_dlna::DLNAServiceInfo']]],
-  ['event_5fsub_5furl_5fbackup_10',['event_sub_url_backup',['../classtiny__dlna_1_1DLNAServiceInfo.html#ad4cdac902ec56ee5bd3a9cf216b6cf42',1,'tiny_dlna::DLNAServiceInfo']]],
-  ['event_5fsubscription_5factive_11',['event_subscription_active',['../classtiny__dlna_1_1SubscriptionMgrControlPoint.html#a06ea6425e8db14eb5b9d146bec413065',1,'tiny_dlna::SubscriptionMgrControlPoint']]],
-  ['event_5fsubscription_5fduration_5fsec_12',['event_subscription_duration_sec',['../classtiny__dlna_1_1SubscriptionMgrControlPoint.html#af0bbadafce560e3bc0030bfd244e4e16',1,'tiny_dlna::SubscriptionMgrControlPoint']]],
-  ['event_5fsubscription_5fretry_5fms_13',['event_subscription_retry_ms',['../classtiny__dlna_1_1SubscriptionMgrControlPoint.html#aef0aefefec0ab3ed16acf3ac3026c91b',1,'tiny_dlna::SubscriptionMgrControlPoint']]],
-  ['expand_5fencoded_14',['expand_encoded',['../classtiny__dlna_1_1StrPrint.html#a745d1dd40855d6978db02325953b9c32',1,'tiny_dlna::StrPrint']]],
-  ['expires_5fat_15',['expires_at',['../structtiny__dlna_1_1Subscription.html#a5a7c850b8b1068c2c5423670712563d0',1,'tiny_dlna::Subscription']]],
-  ['extension_16',['extension',['../structtiny__dlna_1_1MimeExtension.html#a68f40254e86ae693175f7d49333b5523',1,'tiny_dlna::MimeExtension']]]
+  ['event_5fsubscription_5factive_10',['event_subscription_active',['../classtiny__dlna_1_1SubscriptionMgrControlPoint.html#a06ea6425e8db14eb5b9d146bec413065',1,'tiny_dlna::SubscriptionMgrControlPoint']]],
+  ['event_5fsubscription_5fduration_5fsec_11',['event_subscription_duration_sec',['../classtiny__dlna_1_1SubscriptionMgrControlPoint.html#af0bbadafce560e3bc0030bfd244e4e16',1,'tiny_dlna::SubscriptionMgrControlPoint']]],
+  ['event_5fsubscription_5fretry_5fms_12',['event_subscription_retry_ms',['../classtiny__dlna_1_1SubscriptionMgrControlPoint.html#aef0aefefec0ab3ed16acf3ac3026c91b',1,'tiny_dlna::SubscriptionMgrControlPoint']]],
+  ['expand_5fencoded_13',['expand_encoded',['../classtiny__dlna_1_1StrPrint.html#a745d1dd40855d6978db02325953b9c32',1,'tiny_dlna::StrPrint']]],
+  ['expires_5fat_14',['expires_at',['../structtiny__dlna_1_1Subscription.html#a5a7c850b8b1068c2c5423670712563d0',1,'tiny_dlna::Subscription']]],
+  ['extension_15',['extension',['../structtiny__dlna_1_1MimeExtension.html#a68f40254e86ae693175f7d49333b5523',1,'tiny_dlna::MimeExtension']]]
 ];

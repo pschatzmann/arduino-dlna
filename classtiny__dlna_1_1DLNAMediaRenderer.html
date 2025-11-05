@@ -115,10 +115,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:aaeebb12a2ff804a660f7c3b1b5a237a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor.  <br /></td></tr>
 <tr class="separator:aaeebb12a2ff804a660f7c3b1b5a237a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0d1a82067dd7c383882c0c91a270de99"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a0d1a82067dd7c383882c0c91a270de99">DLNAMediaRenderer</a> (<a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;server, <a class="el" href="classtiny__dlna_1_1IUDPService.html">IUDPService</a> &amp;udp)</td></tr>
-<tr class="memdesc:a0d1a82067dd7c383882c0c91a270de99"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recommended constructor Construct a MediaRenderer bound to an <a class="el" href="classtiny__dlna_1_1HttpServer.html" title="A Simple Header only implementation of Http Server that allows the registration of callback functions...">HttpServer</a> and <a class="el" href="classtiny__dlna_1_1IUDPService.html" title="Abstract Interface for UDP API.">IUDPService</a>. The provided references are stored and used when calling <a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a22043fde2827aede81c08f11c6a176df" title="Override to initialize the device.">begin()</a>.  <br /></td></tr>
+<tr class="memdesc:a0d1a82067dd7c383882c0c91a270de99"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recommended constructor Construct a MediaRenderer bound to an <a class="el" href="classtiny__dlna_1_1HttpServer.html" title="A Simple Header only implementation of Http Server that allows the registration of callback functions...">HttpServer</a> and <a class="el" href="classtiny__dlna_1_1IUDPService.html" title="Abstract Interface for UDP API.">IUDPService</a>. The provided references are stored and used when calling <a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a22043fde2827aede81c08f11c6a176df" title="Start the underlying DLNA device using the stored server/udp.">begin()</a>.  <br /></td></tr>
 <tr class="separator:a0d1a82067dd7c383882c0c91a270de99"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a22043fde2827aede81c08f11c6a176df"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a22043fde2827aede81c08f11c6a176df">begin</a> ()</td></tr>
-<tr class="memdesc:a22043fde2827aede81c08f11c6a176df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Override to initialize the device.  <br /></td></tr>
+<tr class="memdesc:a22043fde2827aede81c08f11c6a176df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start the underlying DLNA device using the stored server/udp.  <br /></td></tr>
 <tr class="separator:a22043fde2827aede81c08f11c6a176df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af64efe97040a7ffc50922f537c99e559"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#af64efe97040a7ffc50922f537c99e559">end</a> ()</td></tr>
 <tr class="memdesc:af64efe97040a7ffc50922f537c99e559"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stops processing and releases resources.  <br /></td></tr>
@@ -181,6 +181,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:aca251449fd69b726525339b710c9d4a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set mute state and publish event.  <br /></td></tr>
 <tr class="separator:aca251449fd69b726525339b710c9d4a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a26c472b57813f218ec15dcbd515fae81"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a26c472b57813f218ec15dcbd515fae81">getCurrentUri</a> ()</td></tr>
+<tr class="memdesc:a26c472b57813f218ec15dcbd515fae81"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access current URI.  <br /></td></tr>
 <tr class="separator:a26c472b57813f218ec15dcbd515fae81"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2a87c51f009dd9a9112414ff576d69f5"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a2a87c51f009dd9a9112414ff576d69f5">getTransportState</a> ()</td></tr>
 <tr class="memdesc:a2a87c51f009dd9a9112414ff576d69f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get textual transport state.  <br /></td></tr>
@@ -236,6 +237,24 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a95575f4e458a80b252d1d77c0aa6d8bb"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a95575f4e458a80b252d1d77c0aa6d8bb">getSinkProtocols</a> ()</td></tr>
 <tr class="memdesc:a95575f4e458a80b252d1d77c0aa6d8bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current sink <code>ProtocolInfo</code> string.  <br /></td></tr>
 <tr class="separator:a95575f4e458a80b252d1d77c0aa6d8bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aebedb6fe83cc89791a406db75aaf576f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#aebedb6fe83cc89791a406db75aaf576f">setTransportDescr</a> (<a class="el" href="classtiny__dlna_1_1DLNADescr.html">DLNADescr</a> &amp;d)</td></tr>
+<tr class="memdesc:aebedb6fe83cc89791a406db75aaf576f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the transport SCPD descriptor (non-owning reference).  <br /></td></tr>
+<tr class="separator:aebedb6fe83cc89791a406db75aaf576f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab96e92555aae839085dc2546134883d9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1DLNADescr.html">DLNADescr</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#ab96e92555aae839085dc2546134883d9">getTransportDescr</a> ()</td></tr>
+<tr class="memdesc:ab96e92555aae839085dc2546134883d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the transport SCPD descriptor reference.  <br /></td></tr>
+<tr class="separator:ab96e92555aae839085dc2546134883d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f7a7bf1a511c588d4579eebcf5353c7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a3f7a7bf1a511c588d4579eebcf5353c7">setControlDescr</a> (<a class="el" href="classtiny__dlna_1_1DLNADescr.html">DLNADescr</a> &amp;d)</td></tr>
+<tr class="memdesc:a3f7a7bf1a511c588d4579eebcf5353c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the control SCPD descriptor (non-owning reference).  <br /></td></tr>
+<tr class="separator:a3f7a7bf1a511c588d4579eebcf5353c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad67bb96c7dea6c4fc189610e4c03f7f8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1DLNADescr.html">DLNADescr</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#ad67bb96c7dea6c4fc189610e4c03f7f8">getControlDescr</a> ()</td></tr>
+<tr class="memdesc:ad67bb96c7dea6c4fc189610e4c03f7f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the control SCPD descriptor reference.  <br /></td></tr>
+<tr class="separator:ad67bb96c7dea6c4fc189610e4c03f7f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab602777687460700981617e22573349c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#ab602777687460700981617e22573349c">setConnectionMgrDescr</a> (<a class="el" href="classtiny__dlna_1_1DLNADescr.html">DLNADescr</a> &amp;d)</td></tr>
+<tr class="memdesc:ab602777687460700981617e22573349c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the ConnectionManager SCPD descriptor (non-owning reference).  <br /></td></tr>
+<tr class="separator:ab602777687460700981617e22573349c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a467014d854c2da5bf9acfdf6b9adf169"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1DLNADescr.html">DLNADescr</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a467014d854c2da5bf9acfdf6b9adf169">getConnectionMgrDescr</a> ()</td></tr>
+<tr class="memdesc:a467014d854c2da5bf9acfdf6b9adf169"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the ConnectionManager SCPD descriptor reference.  <br /></td></tr>
+<tr class="separator:a467014d854c2da5bf9acfdf6b9adf169"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a367895351ae485ae432fb25d236d1559"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#a367895351ae485ae432fb25d236d1559">print</a> (Print &amp;out)</td></tr>
 <tr class="memdesc:a367895351ae485ae432fb25d236d1559"><td class="mdescLeft">&#160;</td><td class="mdescRight">renders the device xml  <br /></td></tr>
 <tr class="separator:a367895351ae485ae432fb25d236d1559"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -333,6 +352,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a714c374025464075d8cf073381f91d07"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#a714c374025464075d8cf073381f91d07">operator bool</a> ()</td></tr>
 <tr class="memdesc:a714c374025464075d8cf073381f91d07"><td class="mdescLeft">&#160;</td><td class="mdescRight">return true if active  <br /></td></tr>
 <tr class="separator:a714c374025464075d8cf073381f91d07"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72789ce2156fd567f8ab06456f21f876"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#a72789ce2156fd567f8ab06456f21f876">setSubscriptionActive</a> (bool flag)</td></tr>
+<tr class="separator:a72789ce2156fd567f8ab06456f21f876"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab30655c76819d36639f78bc02b4769c0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#ab30655c76819d36639f78bc02b4769c0">isSubscriptionActive</a> ()</td></tr>
+<tr class="separator:ab30655c76819d36639f78bc02b4769c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -496,6 +519,18 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a41652c05cdeb7fb9013ab29f24fd0d14"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5a1ec1d65312698e5e215d8e202ee071"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt; <a class="el" href="structtiny__dlna_1_1DLNAMediaRenderer_1_1ActionRule.html">ActionRule</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a5a1ec1d65312698e5e215d8e202ee071">rules</a></td></tr>
 <tr class="separator:a5a1ec1d65312698e5e215d8e202ee071"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5b044efcea704ee39d102afa978baf0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1DLNAMediaRendererTransportDescr.html">DLNAMediaRendererTransportDescr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#ac5b044efcea704ee39d102afa978baf0">default_transport_desc</a></td></tr>
+<tr class="separator:ac5b044efcea704ee39d102afa978baf0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a273bf75c5b26bd35f13e024174a923dc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1DLNADescr.html">DLNADescr</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a273bf75c5b26bd35f13e024174a923dc">p_transportDescr</a> = &amp;<a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#ac5b044efcea704ee39d102afa978baf0">default_transport_desc</a></td></tr>
+<tr class="separator:a273bf75c5b26bd35f13e024174a923dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a977bdd3bb17171df0ee097f01218aec9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1DLNAMediaRendererControlDescr.html">DLNAMediaRendererControlDescr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a977bdd3bb17171df0ee097f01218aec9">default_control_desc</a></td></tr>
+<tr class="separator:a977bdd3bb17171df0ee097f01218aec9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03f4ae4f6284866cb49abf4408f6a3eb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1DLNADescr.html">DLNADescr</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a03f4ae4f6284866cb49abf4408f6a3eb">p_controlDescr</a> = &amp;<a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a977bdd3bb17171df0ee097f01218aec9">default_control_desc</a></td></tr>
+<tr class="separator:a03f4ae4f6284866cb49abf4408f6a3eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad799745533f3ba1ed84a502eb444a59e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1DLNAMediaRendererConnectionMgrDescr.html">DLNAMediaRendererConnectionMgrDescr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#ad799745533f3ba1ed84a502eb444a59e">default_connmgr_desc</a></td></tr>
+<tr class="separator:ad799745533f3ba1ed84a502eb444a59e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c1f4f408526b4b50169a0f2e88e900a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1DLNADescr.html">DLNADescr</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a4c1f4f408526b4b50169a0f2e88e900a">p_connmgrDescr</a> = &amp;<a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#ad799745533f3ba1ed84a502eb444a59e">default_connmgr_desc</a></td></tr>
+<tr class="separator:a4c1f4f408526b4b50169a0f2e88e900a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aecd5675fb5e240669f8bd04177f12582"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#aecd5675fb5e240669f8bd04177f12582">is_active</a> = true</td></tr>
 <tr class="separator:aecd5675fb5e240669f8bd04177f12582"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa7460468c12c3e6a2300a5c6cc725492"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structtiny__dlna_1_1XMLPrinter.html">XMLPrinter</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#aa7460468c12c3e6a2300a5c6cc725492">xml</a></td></tr>
@@ -542,13 +577,15 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:ae19cc05b9c59702f51b111968da655d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e63e76702b8cdf01d688339ccbf29d5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Str.html">Str</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#a5e63e76702b8cdf01d688339ccbf29d5">url_str</a></td></tr>
 <tr class="separator:a5e63e76702b8cdf01d688339ccbf29d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92a36990a2971b94778832eadc41f192"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#a92a36990a2971b94778832eadc41f192">is_subcription_active</a> = false</td></tr>
+<tr class="separator:a92a36990a2971b94778832eadc41f192"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>MediaRenderer DLNA Device. </p>
-<p>MediaRenderer implements a simple UPnP/DLNA Media Renderer device. It receives stream URIs via UPnP AVTransport actions and delegates actual playback and rendering to the application through an event callback API. This removes any dependency on an internal audio stack: applications handle playback themselves by registering a handler with <a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a47e79b8a12e0d195134f2f1483429400" title="Register application event handler.">setMediaEventHandler()</a>. The device still supports rendering controls (volume, mute) and transport controls (play/pause/stop) and provides helper accessors like <a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a26c472b57813f218ec15dcbd515fae81">getCurrentUri()</a> and <a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a503ee4a2f2a5768c42292fcd8cd5deae" title="Provides the mime from the DIDL or nullptr.">getMime()</a>.</p>
+<p>MediaRenderer implements a simple UPnP/DLNA Media Renderer device. It receives stream URIs via UPnP AVTransport actions and delegates actual playback and rendering to the application through an event callback API. This removes any dependency on an internal audio stack: applications handle playback themselves by registering a handler with <a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a47e79b8a12e0d195134f2f1483429400" title="Register application event handler.">setMediaEventHandler()</a>. The device still supports rendering controls (volume, mute) and transport controls (play/pause/stop) and provides helper accessors like <a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a26c472b57813f218ec15dcbd515fae81" title="Access current URI.">getCurrentUri()</a> and <a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a503ee4a2f2a5768c42292fcd8cd5deae" title="Provides the mime from the DIDL or nullptr.">getMime()</a>.</p>
 <p>Usage summary:</p><ul>
 <li>Register an event handler with <a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a47e79b8a12e0d195134f2f1483429400" title="Register application event handler.">setMediaEventHandler()</a> to receive MediaEvent notifications (SET_URI, PLAY, PAUSE, STOP, SET_VOLUME, SET_MUTE).</li>
-<li>In the handler query the renderer (<a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a26c472b57813f218ec15dcbd515fae81">getCurrentUri()</a>, <a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#ad3775e88c4f2bf8ca40d1cb345c4817e" title="Get current volume (0-100)">getVolume()</a>, <a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#ad4553ec6040430a68236d6a5ad6ca579" title="Query mute state.">isMuted()</a>, <a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a503ee4a2f2a5768c42292fcd8cd5deae" title="Provides the mime from the DIDL or nullptr.">getMime()</a>) and implement platform-specific playback.</li>
+<li>In the handler query the renderer (<a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a26c472b57813f218ec15dcbd515fae81" title="Access current URI.">getCurrentUri()</a>, <a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#ad3775e88c4f2bf8ca40d1cb345c4817e" title="Get current volume (0-100)">getVolume()</a>, <a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#ad4553ec6040430a68236d6a5ad6ca579" title="Query mute state.">isMuted()</a>, <a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a503ee4a2f2a5768c42292fcd8cd5deae" title="Provides the mime from the DIDL or nullptr.">getMime()</a>) and implement platform-specific playback.</li>
 <li>Use play(url) to programmatically start playback; the handler will also be notified of SET_URI and PLAY when the device receives a SetAVTransportURI SOAP action.</li>
 </ul>
 <p>This class is intentionally small and Arduino-friendly: methods return bool for success/failure and avoid heavy dynamic memory allocations in the hot path.</p>
@@ -631,7 +668,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Recommended constructor Construct a MediaRenderer bound to an <a class="el" href="classtiny__dlna_1_1HttpServer.html" title="A Simple Header only implementation of Http Server that allows the registration of callback functions...">HttpServer</a> and <a class="el" href="classtiny__dlna_1_1IUDPService.html" title="Abstract Interface for UDP API.">IUDPService</a>. The provided references are stored and used when calling <a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a22043fde2827aede81c08f11c6a176df" title="Override to initialize the device.">begin()</a>. </p>
+<p>Recommended constructor Construct a MediaRenderer bound to an <a class="el" href="classtiny__dlna_1_1HttpServer.html" title="A Simple Header only implementation of Http Server that allows the registration of callback functions...">HttpServer</a> and <a class="el" href="classtiny__dlna_1_1IUDPService.html" title="Abstract Interface for UDP API.">IUDPService</a>. The provided references are stored and used when calling <a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a22043fde2827aede81c08f11c6a176df" title="Start the underlying DLNA device using the stored server/udp.">begin()</a>. </p>
 
 </div>
 </div>
@@ -753,7 +790,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Override to initialize the device. </p>
+<p>Start the underlying DLNA device using the stored server/udp. </p>
 
 <p>Reimplemented from <a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#a94db5b6be4e38324789d7529140faa5b">tiny_dlna::DLNADeviceInfo</a>.</p>
 
@@ -1091,6 +1128,60 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a467014d854c2da5bf9acfdf6b9adf169" name="a467014d854c2da5bf9acfdf6b9adf169"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a467014d854c2da5bf9acfdf6b9adf169">&#9670;&#160;</a></span>getConnectionMgrDescr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1DLNADescr.html">DLNADescr</a> &amp; tiny_dlna::DLNAMediaRenderer::getConnectionMgrDescr </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the ConnectionManager SCPD descriptor reference. </p>
+
+</div>
+</div>
+<a id="ad67bb96c7dea6c4fc189610e4c03f7f8" name="ad67bb96c7dea6c4fc189610e4c03f7f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad67bb96c7dea6c4fc189610e4c03f7f8">&#9670;&#160;</a></span>getControlDescr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1DLNADescr.html">DLNADescr</a> &amp; tiny_dlna::DLNAMediaRenderer::getControlDescr </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the control SCPD descriptor reference. </p>
+
+</div>
+</div>
 <a id="a722682e4a14befbdf49df53728974af6" name="a722682e4a14befbdf49df53728974af6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a722682e4a14befbdf49df53728974af6">&#9670;&#160;</a></span>getCurrentTransportActions()</h2>
 
@@ -1140,6 +1231,8 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Access current URI. </p>
 
 </div>
 </div>
@@ -1804,6 +1897,33 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="ab96e92555aae839085dc2546134883d9" name="ab96e92555aae839085dc2546134883d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab96e92555aae839085dc2546134883d9">&#9670;&#160;</a></span>getTransportDescr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1DLNADescr.html">DLNADescr</a> &amp; tiny_dlna::DLNAMediaRenderer::getTransportDescr </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the transport SCPD descriptor reference. </p>
+
+</div>
+</div>
 <a id="a2a87c51f009dd9a9112414ff576d69f5" name="a2a87c51f009dd9a9112414ff576d69f5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2a87c51f009dd9a9112414ff576d69f5">&#9670;&#160;</a></span>getTransportState()</h2>
 
@@ -1961,6 +2081,31 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Query mute state. </p>
+
+</div>
+</div>
+<a id="ab30655c76819d36639f78bc02b4769c0" name="ab30655c76819d36639f78bc02b4769c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab30655c76819d36639f78bc02b4769c0">&#9670;&#160;</a></span>isSubscriptionActive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool tiny_dlna::DLNADeviceInfo::isSubscriptionActive </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -3399,6 +3544,62 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="ab602777687460700981617e22573349c" name="ab602777687460700981617e22573349c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab602777687460700981617e22573349c">&#9670;&#160;</a></span>setConnectionMgrDescr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tiny_dlna::DLNAMediaRenderer::setConnectionMgrDescr </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1DLNADescr.html">DLNADescr</a> &amp;&#160;</td>
+          <td class="paramname"><em>d</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set the ConnectionManager SCPD descriptor (non-owning reference). </p>
+
+</div>
+</div>
+<a id="a3f7a7bf1a511c588d4579eebcf5353c7" name="a3f7a7bf1a511c588d4579eebcf5353c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f7a7bf1a511c588d4579eebcf5353c7">&#9670;&#160;</a></span>setControlDescr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tiny_dlna::DLNAMediaRenderer::setControlDescr </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1DLNADescr.html">DLNADescr</a> &amp;&#160;</td>
+          <td class="paramname"><em>d</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set the control SCPD descriptor (non-owning reference). </p>
+
+</div>
+</div>
 <a id="a9c78367f7d9e209086082f3f62170eb8" name="a9c78367f7d9e209086082f3f62170eb8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9c78367f7d9e209086082f3f62170eb8">&#9670;&#160;</a></span>setCustomActionRule()</h2>
 
@@ -4044,6 +4245,32 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a72789ce2156fd567f8ab06456f21f876" name="a72789ce2156fd567f8ab06456f21f876"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72789ce2156fd567f8ab06456f21f876">&#9670;&#160;</a></span>setSubscriptionActive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tiny_dlna::DLNADeviceInfo::setSubscriptionActive </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>flag</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a048df7bffa331f56ea1a7db909ba6eb5" name="a048df7bffa331f56ea1a7db909ba6eb5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a048df7bffa331f56ea1a7db909ba6eb5">&#9670;&#160;</a></span>setSubscriptionsActive()</h2>
 
@@ -4069,6 +4296,34 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Enable/disable subscription notifications. </p>
+
+</div>
+</div>
+<a id="aebedb6fe83cc89791a406db75aaf576f" name="aebedb6fe83cc89791a406db75aaf576f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aebedb6fe83cc89791a406db75aaf576f">&#9670;&#160;</a></span>setTransportDescr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tiny_dlna::DLNAMediaRenderer::setTransportDescr </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1DLNADescr.html">DLNADescr</a> &amp;&#160;</td>
+          <td class="paramname"><em>d</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set the transport SCPD descriptor (non-owning reference). </p>
 
 </div>
 </div>
@@ -4555,6 +4810,72 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="ad799745533f3ba1ed84a502eb444a59e" name="ad799745533f3ba1ed84a502eb444a59e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad799745533f3ba1ed84a502eb444a59e">&#9670;&#160;</a></span>default_connmgr_desc</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1DLNAMediaRendererConnectionMgrDescr.html">DLNAMediaRendererConnectionMgrDescr</a> tiny_dlna::DLNAMediaRenderer::default_connmgr_desc</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a977bdd3bb17171df0ee097f01218aec9" name="a977bdd3bb17171df0ee097f01218aec9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a977bdd3bb17171df0ee097f01218aec9">&#9670;&#160;</a></span>default_control_desc</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1DLNAMediaRendererControlDescr.html">DLNAMediaRendererControlDescr</a> tiny_dlna::DLNAMediaRenderer::default_control_desc</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac5b044efcea704ee39d102afa978baf0" name="ac5b044efcea704ee39d102afa978baf0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac5b044efcea704ee39d102afa978baf0">&#9670;&#160;</a></span>default_transport_desc</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1DLNAMediaRendererTransportDescr.html">DLNAMediaRendererTransportDescr</a> tiny_dlna::DLNAMediaRenderer::default_transport_desc</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="afdfeb8bfcadc3b17b28e331804373168" name="afdfeb8bfcadc3b17b28e331804373168"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afdfeb8bfcadc3b17b28e331804373168">&#9670;&#160;</a></span>device_type</h2>
 
@@ -4720,6 +5041,28 @@ Protected Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">bool tiny_dlna::DLNADeviceInfo::is_active = true</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a92a36990a2971b94778832eadc41f192" name="a92a36990a2971b94778832eadc41f192"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92a36990a2971b94778832eadc41f192">&#9670;&#160;</a></span>is_subcription_active</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool tiny_dlna::DLNADeviceInfo::is_subcription_active = false</td>
         </tr>
       </table>
   </td>
@@ -4929,6 +5272,50 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a4c1f4f408526b4b50169a0f2e88e900a" name="a4c1f4f408526b4b50169a0f2e88e900a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c1f4f408526b4b50169a0f2e88e900a">&#9670;&#160;</a></span>p_connmgrDescr</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1DLNADescr.html">DLNADescr</a>* tiny_dlna::DLNAMediaRenderer::p_connmgrDescr = &amp;<a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#ad799745533f3ba1ed84a502eb444a59e">default_connmgr_desc</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a03f4ae4f6284866cb49abf4408f6a3eb" name="a03f4ae4f6284866cb49abf4408f6a3eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a03f4ae4f6284866cb49abf4408f6a3eb">&#9670;&#160;</a></span>p_controlDescr</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1DLNADescr.html">DLNADescr</a>* tiny_dlna::DLNAMediaRenderer::p_controlDescr = &amp;<a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a977bdd3bb17171df0ee097f01218aec9">default_control_desc</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a7ab0476214991f4333a74cbeb3657733" name="a7ab0476214991f4333a74cbeb3657733"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7ab0476214991f4333a74cbeb3657733">&#9670;&#160;</a></span>p_server</h2>
 
@@ -4940,6 +5327,28 @@ Protected Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a>* tiny_dlna::DLNAMediaRenderer::p_server = nullptr</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a273bf75c5b26bd35f13e024174a923dc" name="a273bf75c5b26bd35f13e024174a923dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a273bf75c5b26bd35f13e024174a923dc">&#9670;&#160;</a></span>p_transportDescr</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1DLNADescr.html">DLNADescr</a>* tiny_dlna::DLNAMediaRenderer::p_transportDescr = &amp;<a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#ac5b044efcea704ee39d102afa978baf0">default_transport_desc</a></td>
         </tr>
       </table>
   </td>
