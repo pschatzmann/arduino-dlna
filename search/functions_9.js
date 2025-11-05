@@ -11,5 +11,6 @@ var searchData=
   ['logarguments_8',['logArguments',['../classtiny__dlna_1_1ActionReply.html#afcc2ee7ebc4560d65be719d2267929a0',1,'tiny_dlna::ActionReply']]],
   ['logmemoryifneeded_9',['logMemoryIfNeeded',['../classtiny__dlna_1_1DLNADevice.html#a32d01e2f48053056be903c75a4337f8f',1,'tiny_dlna::DLNADevice']]],
   ['loop_10',['loop',['../classtiny__dlna_1_1DLNAControlPoint.html#a59e2688e61b8179a0423129dfaa9fcd4',1,'tiny_dlna::DLNAControlPoint::loop()'],['../classtiny__dlna_1_1SubscriptionMgrControlPoint.html#a96c894297ecae9311b9105bf8cb2ed84',1,'tiny_dlna::SubscriptionMgrControlPoint::loop()'],['../classtiny__dlna_1_1DLNADevice.html#afe6f1b0d2a28c4f276fa5359419d6b7e',1,'tiny_dlna::DLNADevice::loop()'],['../classtiny__dlna_1_1DLNAMediaRenderer.html#ad4883c4abf37887ab5876434be5c1da7',1,'tiny_dlna::DLNAMediaRenderer::loop()'],['../classtiny__dlna_1_1DLNAMediaServer.html#aa5f62e34e5488c6f58bf00a521ab6324',1,'tiny_dlna::DLNAMediaServer::loop()'],['../classtiny__dlna_1_1DLNADeviceInfo.html#ad157d9cd7b457189424ec6caa4a98f75',1,'tiny_dlna::DLNADeviceInfo::loop()']]],
-  ['ltrim_11',['ltrim',['../classtiny__dlna_1_1StrView.html#ad3263bf622a96e970cfae7b6a0418272',1,'tiny_dlna::StrView']]]
+  ['loopserver_11',['loopServer',['../classtiny__dlna_1_1DLNADevice.html#a1629e6a9276c02701e016a5a4b35bb64',1,'tiny_dlna::DLNADevice']]],
+  ['ltrim_12',['ltrim',['../classtiny__dlna_1_1StrView.html#ad3263bf622a96e970cfae7b6a0418272',1,'tiny_dlna::StrView']]]
 ];

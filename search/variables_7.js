@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['handler_0',['handler',['../structtiny__dlna_1_1ActionRule.html#af351989b6c6388361e729ed8a9db4687',1,'tiny_dlna::ActionRule::handler()'],['../structtiny__dlna_1_1DLNAMediaServer_1_1ActionRule.html#a0dc6727abb6a9bcb9a8d6ffa8362f49e',1,'tiny_dlna::DLNAMediaServer::ActionRule::handler()']]],
+  ['handler_0',['handler',['../structtiny__dlna_1_1DLNAMediaRenderer_1_1ActionRule.html#a964f23ebe2b4ac390b76d3690a44ee60',1,'tiny_dlna::DLNAMediaRenderer::ActionRule::handler()'],['../structtiny__dlna_1_1DLNAMediaServer_1_1ActionRule.html#a0dc6727abb6a9bcb9a8d6ffa8362f49e',1,'tiny_dlna::DLNAMediaServer::ActionRule::handler()']]],
   ['handler_5fcollection_1',['handler_collection',['../classtiny__dlna_1_1HttpServer.html#a3d3a2d77e4978b7171c73dcb054437d5',1,'tiny_dlna::HttpServer']]],
   ['has_5fended_2',['has_ended',['../classtiny__dlna_1_1HttpChunkReader.html#aacc5f7da7a95c73d39c408ebd57d7b73',1,'tiny_dlna::HttpChunkReader']]],
   ['head_3',['head',['../structtiny__dlna_1_1QueueLockFree_1_1Node.html#a0ff922b8dfa7f2e9e2b94279bc93e875',1,'tiny_dlna::QueueLockFree::Node']]],

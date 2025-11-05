@@ -31,5 +31,6 @@ var searchData=
   ['current_5fclient_5fiterator_28',['current_client_iterator',['../classtiny__dlna_1_1HttpServer.html#a9df39d5e04972ac45b5521e400716785',1,'tiny_dlna::HttpServer']]],
   ['current_5fmime_29',['current_mime',['../classtiny__dlna_1_1DLNAMediaRenderer.html#a781051e302045eaf198e2ded4a85493f',1,'tiny_dlna::DLNAMediaRenderer']]],
   ['current_5furi_30',['current_uri',['../classtiny__dlna_1_1DLNAMediaRenderer.html#a74aca621d309e9f24b0494b897fdd1be',1,'tiny_dlna::DLNAMediaRenderer']]],
-  ['current_5fvolume_31',['current_volume',['../classtiny__dlna_1_1DLNAMediaRenderer.html#abefe59fccd65b4cec5622b04c0908e98',1,'tiny_dlna::DLNAMediaRenderer']]]
+  ['current_5fvolume_31',['current_volume',['../classtiny__dlna_1_1DLNAMediaRenderer.html#abefe59fccd65b4cec5622b04c0908e98',1,'tiny_dlna::DLNAMediaRenderer']]],
+  ['currentplaymode_32',['currentPlayMode',['../classtiny__dlna_1_1DLNAMediaRenderer.html#a41652c05cdeb7fb9013ab29f24fd0d14',1,'tiny_dlna::DLNAMediaRenderer']]]
 ];
