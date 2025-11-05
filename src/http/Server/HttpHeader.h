@@ -134,10 +134,6 @@ class HttpHeader {
     DlnaLogger.log(DlnaLogLevel::Debug, "HttpHeader::put %s %d", key, value);
     HttpHeaderLine* hl = headerLine(key);
 
-    if (value > 1024) {
-      DlnaLogger.log(DlnaLogLevel::Warning, "value %d is > 1024 for %s", value, key);
-    }
-
     // add value
     hl->value = value;
     hl->active = true;

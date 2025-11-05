@@ -373,7 +373,7 @@ class StrView {
   }
 
   /// provides the string value as const char*
-  virtual const char* c_str() { return chars; }
+  virtual const char* c_str() { return chars == nullptr ? "" : chars; }
 
   /// provides the current length (filled with characters) of the string -
   /// excluding the terminating 0

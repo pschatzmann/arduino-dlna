@@ -398,7 +398,7 @@ class DLNAMediaServer : public DLNADeviceInfo {
   bool processAction(ActionRequest& action, HttpServer& server) {
     DlnaLogger.log(DlnaLogLevel::Info, "DLNAMediaServer::processAction: %s",
                    action.getAction());
-    StrView action_str(action.getAction());
+    auto& action_str = action.getActionStr();
     if (action_str.isEmpty()) {
       DlnaLogger.log(DlnaLogLevel::Error, "Empty action received");
       server.replyNotFound();

@@ -455,35 +455,23 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
   /// Get the current sink `ProtocolInfo` string
   const char* getSinkProtocols() { return sinkProto; }
 
-
   /// Set the transport SCPD descriptor (non-owning reference).
-  void setTransportDescr(DLNADescr& d) {
-    p_transportDescr = &d;
-  }
+  void setTransportDescr(DLNADescr& d) { p_transportDescr = &d; }
 
   /// Get the transport SCPD descriptor reference.
-  DLNADescr& getTransportDescr() {
-    return *p_transportDescr;
-  }
-  
+  DLNADescr& getTransportDescr() { return *p_transportDescr; }
+
   /// Set the control SCPD descriptor (non-owning reference).
-  void setControlDescr(DLNADescr& d) {
-    p_controlDescr = &d;
-  }
+  void setControlDescr(DLNADescr& d) { p_controlDescr = &d; }
 
   /// Get the control SCPD descriptor reference.
   DLNADescr& getControlDescr() { return *p_controlDescr; }
 
-
   /// Set the ConnectionManager SCPD descriptor (non-owning reference).
-  void setConnectionMgrDescr(DLNADescr& d) {
-    p_connmgrDescr = &d;
-  }
+  void setConnectionMgrDescr(DLNADescr& d) { p_connmgrDescr = &d; }
 
   /// Get the ConnectionManager SCPD descriptor reference.
-  DLNADescr& getConnectionMgrDescr() {
-    return *p_connmgrDescr;
-  }
+  DLNADescr& getConnectionMgrDescr() { return *p_connmgrDescr; }
 
  protected:
   struct ActionRule {
@@ -518,9 +506,9 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
   DLNAMediaRendererTransportDescr default_transport_desc;
   DLNADescr* p_transportDescr = &default_transport_desc;
   DLNAMediaRendererControlDescr default_control_desc;
-  DLNADescr* p_controlDescr= &default_control_desc;
+  DLNADescr* p_controlDescr = &default_control_desc;
   DLNAMediaRendererConnectionMgrDescr default_connmgr_desc;
-  DLNADescr* p_connmgrDescr= &default_connmgr_desc;
+  DLNADescr* p_connmgrDescr = &default_connmgr_desc;
 
   // Note: descriptor printing is performed inline in the descriptor
   // callbacks below using non-capturing lambdas passed to
@@ -856,7 +844,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
   bool processAction(ActionRequest& action, HttpServer& server) {
     DlnaLogger.log(DlnaLogLevel::Info, "DLNAMediaRenderer::processAction: %s",
                    action.getAction());
-    StrView action_str(action.getAction());
+    auto& action_str = action.getActionStr();
     if (action_str.isEmpty()) {
       DlnaLogger.log(DlnaLogLevel::Error, "Empty action received");
       server.replyError(400, "Invalid Action");
@@ -915,191 +903,214 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     return true;
   }
 
-  /**
-   * Example:
-   * <s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/"
-s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"> <s:Body>
-    <u:GetCurrentTransportActionsResponse
-xmlns:u="urn:schemas-upnp-org:service:AVTransport:1">
-      <Actions>Play,Stop</Actions>
-    </u:GetCurrentTransportActionsResponse>
-  </s:Body>
-</s:Envelope>
-
-   */
   bool processActionGetCurrentTransportActions(ActionRequest& action,
                                                HttpServer& server) {
-    StrPrint resp;
-    DLNADevice::printReplyXML(
-        resp, "GetCurrentTransportActionsResponse", "AVTransport",
-        [](Print& o, void* ref) -> size_t {
-          size_t written = 0;
-          auto self = (DLNAMediaRenderer*)ref;
-          written += o.print("<Actions>");
-          written += o.print(self->getCurrentTransportActions());
-          written += o.print("</Actions>");
-          return written;
+    server.reply(
+        "text/xml",
+        [](Print& out, void* ref) -> size_t {
+          // Stream reply directly: delegate to printReplyXML which will
+          // write headers and invoke the inner writer with the same ref.
+          return DLNADevice::printReplyXML(
+              out, "GetCurrentTransportActionsResponse", "AVTransport",
+              [](Print& o, void* innerRef) -> size_t {
+                size_t written = 0;
+                auto self = (DLNAMediaRenderer*)innerRef;
+                written += o.print("<Actions>");
+                written += o.print(self->getCurrentTransportActions());
+                written += o.print("</Actions>");
+                return written;
+              },
+              ref);
         },
-        this);
-    server.reply("text/xml", resp.c_str());
+        200, nullptr, this);
     return true;
   }
 
   // ConnectionManager: GetProtocolInfo
   bool processActionGetProtocolInfo(ActionRequest& action, HttpServer& server) {
-    StrPrint resp;
-    DLNADevice::replyGetProtocolInfo(resp, this->getSourceProtocols(),
-                                     this->getSinkProtocols());
-    server.reply("text/xml", resp.c_str());
+    server.reply(
+        "text/xml",
+        [](Print& out, void* ref) -> size_t {
+          auto self = (DLNAMediaRenderer*)ref;
+          return DLNADevice::replyGetProtocolInfo(
+              out, self->getSourceProtocols(), self->getSinkProtocols());
+        },
+        200, nullptr, this);
     return true;
   }
 
   // ConnectionManager: GetCurrentConnectionIDs
   bool processActionGetCurrentConnectionIDs(ActionRequest& action,
                                             HttpServer& server) {
-    StrPrint resp;
-    // keep previous behavior of returning a single ID "1"
-    DLNADevice::replyGetCurrentConnectionIDs(resp, this->getConnectionID());
-    server.reply("text/xml", resp.c_str());
+    server.reply(
+        "text/xml",
+        [](Print& out, void* ref) -> size_t {
+          auto self = (DLNAMediaRenderer*)ref;
+          return DLNADevice::replyGetCurrentConnectionIDs(
+              out, self->getConnectionID());
+        },
+        200, nullptr, this);
     return true;
   }
 
   // ConnectionManager: GetCurrentConnectionInfo
   bool processActionGetCurrentConnectionInfo(ActionRequest& action,
                                              HttpServer& server) {
-    StrPrint resp;
-    DLNADevice::replyGetCurrentConnectionInfo(resp, this->getSinkProtocols(),
-                                              this->getConnectionID(), "Input");
-    server.reply("text/xml", resp.c_str());
+    server.reply(
+        "text/xml",
+        [](Print& out, void* ref) -> size_t {
+          auto self = (DLNAMediaRenderer*)ref;
+          return DLNADevice::replyGetCurrentConnectionInfo(
+              out, self->getSinkProtocols(), self->getConnectionID(), "Input");
+        },
+        200, nullptr, this);
     return true;
   }
 
   // AVTransport: GetDeviceCapabilities
   bool processActionGetDeviceCapabilities(ActionRequest& action,
                                           HttpServer& server) {
-    StrPrint resp;
-    DLNADevice::printReplyXML(
-        resp, "GetDeviceCapabilitiesResponse", "AVTransport",
-        [](Print& o, void* ref) -> size_t {
-          auto self = (DLNAMediaRenderer*)ref;
-          size_t written = 0;
-          written += o.print("<PlayMedia>");
-          written += o.print(
-              StringRegistry::nullStr(self->getPossiblePlaybackStorageMedia()));
-          written += o.print("</PlayMedia>");
-          written += o.print("<RecMedia>");
-          written += o.print(
-              StringRegistry::nullStr(self->getPossibleRecordStorageMedia()));
-          written += o.print("</RecMedia>");
-          written += o.print("<RecQualityModes>");
-          written += o.print(
-              StringRegistry::nullStr(self->getPossibleRecordQualityModes()));
-          written += o.print("</RecQualityModes>");
-          return written;
+    server.reply(
+        "text/xml",
+        [](Print& out, void* ref) -> size_t {
+          return DLNADevice::printReplyXML(
+              out, "GetDeviceCapabilitiesResponse", "AVTransport",
+              [](Print& o, void* innerRef) -> size_t {
+                auto self = (DLNAMediaRenderer*)innerRef;
+                size_t written = 0;
+                written += o.print("<PlayMedia>");
+                written += o.print(StringRegistry::nullStr(
+                    self->getPossiblePlaybackStorageMedia()));
+                written += o.print("</PlayMedia>");
+                written += o.print("<RecMedia>");
+                written += o.print(StringRegistry::nullStr(
+                    self->getPossibleRecordStorageMedia()));
+                written += o.print("</RecMedia>");
+                written += o.print("<RecQualityModes>");
+                written += o.print(StringRegistry::nullStr(
+                    self->getPossibleRecordQualityModes()));
+                written += o.print("</RecQualityModes>");
+                return written;
+              },
+              ref);
         },
-        this);
-    server.reply("text/xml", resp.c_str());
+        200, nullptr, this);
     return true;
   }
 
   // AVTransport: GetTransportInfo
   bool processActionGetTransportInfo(ActionRequest& action,
                                      HttpServer& server) {
-    StrPrint resp;
-    DLNADevice::printReplyXML(
-        resp, "GetTransportInfoResponse", "AVTransport",
-        [](Print& o, void* ref) -> size_t {
-          auto self = (DLNAMediaRenderer*)ref;
-          size_t written = 0;
-          // CurrentTransportState
-          written += o.print("<CurrentTransportState>");
-          written +=
-              o.print(StringRegistry::nullStr(self->getTransportState()));
-          written += o.print("</CurrentTransportState>");
+    server.reply(
+        "text/xml",
+        [](Print& out, void* ref) -> size_t {
+          return DLNADevice::printReplyXML(
+              out, "GetTransportInfoResponse", "AVTransport",
+              [](Print& o, void* innerRef) -> size_t {
+                auto self = (DLNAMediaRenderer*)innerRef;
+                size_t written = 0;
+                // CurrentTransportState
+                written += o.print("<CurrentTransportState>");
+                written +=
+                    o.print(StringRegistry::nullStr(self->getTransportState()));
+                written += o.print("</CurrentTransportState>");
 
-          // CurrentTransportStatus - return OK by default
-          written +=
-              o.print("<CurrentTransportStatus>OK</CurrentTransportStatus>");
+                // CurrentTransportStatus - return OK by default
+                written += o.print(
+                    "<CurrentTransportStatus>OK</CurrentTransportStatus>");
 
-          // CurrentSpeed - simple renderer: report "1"
-          written += o.print("<CurrentSpeed>1</CurrentSpeed>");
-          return written;
+                // CurrentSpeed - simple renderer: report "1"
+                written += o.print("<CurrentSpeed>1</CurrentSpeed>");
+                return written;
+              },
+              ref);
         },
-        this);
-    server.reply("text/xml", resp.c_str());
+        200, nullptr, this);
     return true;
   }
 
   // AVTransport: GetTransportSettings
   bool processActionGetTransportSettings(ActionRequest& action,
                                          HttpServer& server) {
-    StrPrint resp;
-    DLNADevice::printReplyXML(
-        resp, "GetTransportSettingsResponse", "AVTransport",
-        [](Print& o, void* ref) -> size_t {
-          auto self = (DLNAMediaRenderer*)ref;
-          size_t written = 0;
-          // PlayMode: report configured play mode
-          written += o.print("<PlayMode>");
-          written += o.print(StringRegistry::nullStr(self->getPlayMode()));
-          written += o.print("</PlayMode>");
+    server.reply(
+        "text/xml",
+        [](Print& out, void* ref) -> size_t {
+          return DLNADevice::printReplyXML(
+              out, "GetTransportSettingsResponse", "AVTransport",
+              [](Print& o, void* innerRef) -> size_t {
+                auto self = (DLNAMediaRenderer*)innerRef;
+                size_t written = 0;
+                // PlayMode: report configured play mode
+                written += o.print("<PlayMode>");
+                written +=
+                    o.print(StringRegistry::nullStr(self->getPlayMode()));
+                written += o.print("</PlayMode>");
 
-          // RecQualityMode: single value - report NOT_IMPLEMENTED by default
-          written += o.print("<RecQualityMode>");
-          written += o.print("NOT_IMPLEMENTED");
-          written += o.print("</RecQualityMode>");
-          return written;
+                // RecQualityMode: single value - report NOT_IMPLEMENTED by
+                // default
+                written += o.print("<RecQualityMode>");
+                written += o.print("NOT_IMPLEMENTED");
+                written += o.print("</RecQualityMode>");
+                return written;
+              },
+              ref);
         },
-        this);
-    server.reply("text/xml", resp.c_str());
+        200, nullptr, this);
     return true;
   }
 
   // AVTransport: GetMediaInfo
   bool processActionGetMediaInfo(ActionRequest& action, HttpServer& server) {
-    StrPrint resp;
-    DLNADevice::printReplyXML(
-        resp, "GetMediaInfoResponse", "AVTransport",
-        [](Print& o, void* ref) -> size_t {
-          auto self = (DLNAMediaRenderer*)ref;
-          size_t written = 0;
-          // NrTracks: simple heuristic - 1 if a URI is present, 0 otherwise
-          written += o.print("<NrTracks>");
-          written +=
-              o.print(self->getCurrentUri() && *self->getCurrentUri() ? 1 : 0);
-          written += o.print("</NrTracks>");
+    server.reply(
+        "text/xml",
+        [](Print& out, void* ref) -> size_t {
+          return DLNADevice::printReplyXML(
+              out, "GetMediaInfoResponse", "AVTransport",
+              [](Print& o, void* innerRef) -> size_t {
+                auto self = (DLNAMediaRenderer*)innerRef;
+                size_t written = 0;
+                // NrTracks: simple heuristic - 1 if a URI is present, 0
+                // otherwise
+                written += o.print("<NrTracks>");
+                written += o.print(
+                    self->getCurrentUri() && *self->getCurrentUri() ? 1 : 0);
+                written += o.print("</NrTracks>");
 
-          // MediaDuration: unknown here -> empty string
-          written += o.print("<MediaDuration></MediaDuration>");
+                // MediaDuration: unknown here -> empty string
+                written += o.print("<MediaDuration></MediaDuration>");
 
-          // CurrentURI and CurrentURIMetaData
-          written += o.print("<CurrentURI>");
-          written += o.print(StringRegistry::nullStr(self->getCurrentUri()));
-          written += o.print("</CurrentURI>");
-          written += o.print("<CurrentURIMetaData></CurrentURIMetaData>");
+                // CurrentURI and CurrentURIMetaData
+                written += o.print("<CurrentURI>");
+                written +=
+                    o.print(StringRegistry::nullStr(self->getCurrentUri()));
+                written += o.print("</CurrentURI>");
+                written += o.print("<CurrentURIMetaData></CurrentURIMetaData>");
 
-          // NextURI and NextURIMetaData: not supported -> empty
-          written += o.print("<NextURI>NOT_IMPLEMENTED</NextURI>");
-          written +=
-              o.print("<NextURIMetaData>NOT_IMPLEMENTED</NextURIMetaData>");
+                // NextURI and NextURIMetaData: not supported -> empty
+                written += o.print("<NextURI>NOT_IMPLEMENTED</NextURI>");
+                written += o.print(
+                    "<NextURIMetaData>NOT_IMPLEMENTED</NextURIMetaData>");
 
-          // PlayMedium / RecordMedium / WriteStatus: use configured defaults
-          written += o.print("<PlayMedium>");
-          written += o.print(
-              StringRegistry::nullStr(self->getPossiblePlaybackStorageMedia()));
-          written += o.print("</PlayMedium>");
+                // PlayMedium / RecordMedium / WriteStatus: use configured
+                // defaults
+                written += o.print("<PlayMedium>");
+                written += o.print(StringRegistry::nullStr(
+                    self->getPossiblePlaybackStorageMedia()));
+                written += o.print("</PlayMedium>");
 
-          written += o.print("<RecordMedium>");
-          written += o.print(
-              StringRegistry::nullStr(self->getPossibleRecordStorageMedia()));
-          written += o.print("</RecordMedium>");
+                written += o.print("<RecordMedium>");
+                written += o.print(StringRegistry::nullStr(
+                    self->getPossibleRecordStorageMedia()));
+                written += o.print("</RecordMedium>");
 
-          written += o.print("<WriteStatus>NOT_IMPLEMENTED</WriteStatus>");
+                written +=
+                    o.print("<WriteStatus>NOT_IMPLEMENTED</WriteStatus>");
 
-          return written;
+                return written;
+              },
+              ref);
         },
-        this);
-    server.reply("text/xml", resp.c_str());
+        200, nullptr, this);
     return true;
   }
 
@@ -1157,17 +1168,27 @@ xmlns:u="urn:schemas-upnp-org:service:AVTransport:1">
   }
 
   bool processActionGetMute(ActionRequest& action, HttpServer& server) {
-    StrPrint resp;
-    DLNAMediaRenderer::replyGetMute(resp, isMuted());
-    server.reply("text/xml", resp.c_str());
+    server.reply(
+        "text/xml",
+        [](Print& out, void* ref) -> size_t {
+          auto self = (DLNAMediaRenderer*)ref;
+          return DLNAMediaRenderer::replyGetMute(out, self->isMuted());
+        },
+        200, nullptr, this);
     return true;
   }
 
   bool processActionGetVolume(ActionRequest& action, HttpServer& server) {
-    StrPrint resp;
-    DLNAMediaRenderer::replyGetVolume(resp, (uint8_t)getVolume());
-    DlnaLogger.log(DlnaLogLevel::Debug, "GetVolume: %d", getVolume());
-    server.reply("text/xml", resp.c_str());
+    server.reply(
+        "text/xml",
+        [](Print& out, void* ref) -> size_t {
+          auto self = (DLNAMediaRenderer*)ref;
+          DlnaLogger.log(DlnaLogLevel::Debug, "GetVolume: %d",
+                         self->getVolume());
+          return DLNAMediaRenderer::replyGetVolume(out,
+                                                   (uint8_t)self->getVolume());
+        },
+        200, nullptr, this);
     return true;
   }
 

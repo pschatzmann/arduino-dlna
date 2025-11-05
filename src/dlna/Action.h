@@ -158,6 +158,8 @@ class ActionRequest {
 
   const char* getAction() { return action.c_str(); }
 
+  Str& getActionStr() { return action; }
+
   void setService(DLNAServiceInfo* srv) { p_service = srv; }
 
   DLNAServiceInfo* getService() { return p_service; }

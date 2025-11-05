@@ -343,7 +343,7 @@ class HttpServer {
 
   void reply(const char* contentType, const uint8_t* str, int len,
              int status = 200, const char* msg = SUCCESS) {
-    DlnaLogger.log(DlnaLogLevel::Info, "reply %s", str);
+    DlnaLogger.log(DlnaLogLevel::Info, "reply %s: %d bytes", contentType, len);
     reply_header.setValues(status, msg);
     reply_header.put(CONTENT_LENGTH, len);
     reply_header.put(CONTENT_TYPE, contentType);
@@ -367,13 +367,6 @@ class HttpServer {
     reply(err, msg);
   }
 
-  /// Writes the status and message to the reply
-  void reply(int status, const char* msg) {
-    DlnaLogger.log(DlnaLogLevel::Info, "reply %d", status);
-    reply_header.setValues(status, msg);
-    reply_header.write(this->client());
-    endClient();
-  }
 
   /// provides the request header
   HttpRequestHeader& requestHeader() { return request_header; }
@@ -501,6 +494,13 @@ class HttpServer {
   int no_connect_delay = 5;
   void* ref = nullptr;
 
+   /// Writes the status and message to the reply
+  void reply(int status, const char* msg) {
+    reply_header.setValues(status, msg);
+    reply_header.write(this->client());
+    endClient();
+  }
+ 
   /// Converts null to an empty string
   const char* nullstr(const char* in) { return in == nullptr ? "" : in; }
 
