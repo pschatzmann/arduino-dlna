@@ -223,7 +223,7 @@ class DLNADevice {
                                  HttpRequestHandlerLine* hl,
                                  ActionRequest& action) {
     DlnaLogger.log(DlnaLogLevel::Info, "parseActionRequest");
-
+    auto start = millis();                                
     XMLParserPrint xp;
     xp.setExpandEncoded(true);
 
@@ -237,15 +237,16 @@ class DLNADevice {
     char buffer[XML_PARSER_BUFFER_SIZE];
     Client& client = server->client();
 
-    while (client.available() > 0) {
+    client.setTimeout(20);
+    while (true) {
       size_t len = client.readBytes(buffer, sizeof(buffer));
+      if (len == 0) break;
       xp.write((const uint8_t*)buffer, len);
 
       while (xp.parse(outNodeName, outPath, outText, outAttributes)) {
         if (is_attribute) {
           const char* argName = registry.add((char*)outNodeName.c_str());
           action.addArgument(argName, outText.c_str());
-
           continue;
         }
         if (is_action) {
@@ -265,6 +266,7 @@ class DLNADevice {
       }
     }
     xp.end();
+    DlnaLogger.log(DlnaLogLevel::Info, "Parse took %d ms", millis() - start);
   }
 
   /**
@@ -393,7 +395,7 @@ class DLNADevice {
 
  protected:
   bool is_active = false;
-  bool is_subscriptions_active = false;
+  bool is_subscriptions_active = true;
   uint32_t post_alive_repeat_ms = 0;
   Scheduler scheduler;
   SubscriptionMgrDevice subscription_mgr;

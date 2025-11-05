@@ -155,12 +155,16 @@ class ActionRequest {
     return StrView(getArgumentValue(name)).toInt();
   }
 
+  void clear() {
+    arguments.clear();
+    action = nullptr;
+  }
+
   DLNAServiceInfo* p_service = nullptr;
   const char* action = nullptr;
   Vector<Argument> arguments{10};
   int result_count = 0;
   operator bool() { return p_service != nullptr && action != nullptr; }
 };
-
 
 }  // namespace tiny_dlna

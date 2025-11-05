@@ -22,7 +22,7 @@
 
 // Define XML parse buffer size
 #ifndef XML_PARSER_BUFFER_SIZE
-#define XML_PARSER_BUFFER_SIZE 256
+#define XML_PARSER_BUFFER_SIZE 512
 #endif
 
 // Define initial size for StrPrint
