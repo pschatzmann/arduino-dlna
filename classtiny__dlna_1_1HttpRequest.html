@@ -111,8 +111,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aa0a64fffb8036f11c56c0098ab5ab65d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a08ac75b222dad15093302ccbe57900d6"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpRequest.html#a08ac75b222dad15093302ccbe57900d6">post</a> (<a class="el" href="classtiny__dlna_1_1Url.html">Url</a> &amp;<a class="el" href="classtiny__dlna_1_1HttpRequest.html#a19af9228538c3291902a6df9815883c8">url</a>, size_t len, std::function&lt; size_t(Print &amp;, void *)&gt; writer, const char *mime=nullptr, void *ref=nullptr)</td></tr>
 <tr class="separator:a08ac75b222dad15093302ccbe57900d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6779038e9908dfa109063bb394b2976b"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpRequest.html#a6779038e9908dfa109063bb394b2976b">notify</a> (<a class="el" href="classtiny__dlna_1_1Url.html">Url</a> &amp;<a class="el" href="classtiny__dlna_1_1HttpRequest.html#a19af9228538c3291902a6df9815883c8">url</a>, size_t len, std::function&lt; size_t(Print &amp;, void *)&gt; writer, const char *mime=nullptr, void *ref=nullptr)</td></tr>
-<tr class="separator:a6779038e9908dfa109063bb394b2976b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b1f3f0222639dd27e1202fe688ec301"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpRequest.html#a7b1f3f0222639dd27e1202fe688ec301">notify</a> (<a class="el" href="classtiny__dlna_1_1Url.html">Url</a> &amp;<a class="el" href="classtiny__dlna_1_1HttpRequest.html#a19af9228538c3291902a6df9815883c8">url</a>, std::function&lt; size_t(Print &amp;, void *)&gt; writer, const char *mime=nullptr, void *ref=nullptr)</td></tr>
+<tr class="separator:a7b1f3f0222639dd27e1202fe688ec301"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e5a45adff85dc2b21e98607510bb45f"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpRequest.html#a5e5a45adff85dc2b21e98607510bb45f">put</a> (<a class="el" href="classtiny__dlna_1_1Url.html">Url</a> &amp;<a class="el" href="classtiny__dlna_1_1HttpRequest.html#a19af9228538c3291902a6df9815883c8">url</a>, const char *mime, const char *data, int len=-1)</td></tr>
 <tr class="separator:a5e5a45adff85dc2b21e98607510bb45f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ada1e54a9f19dc1f689b939eb7b0f81aa"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpRequest.html#ada1e54a9f19dc1f689b939eb7b0f81aa">del</a> (<a class="el" href="classtiny__dlna_1_1Url.html">Url</a> &amp;<a class="el" href="classtiny__dlna_1_1HttpRequest.html#a19af9228538c3291902a6df9815883c8">url</a>, const char *mime=nullptr, const char *data=nullptr, int len=-1)</td></tr>
@@ -516,8 +516,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a6779038e9908dfa109063bb394b2976b" name="a6779038e9908dfa109063bb394b2976b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6779038e9908dfa109063bb394b2976b">&#9670;&#160;</a></span>notify()</h2>
+<a id="a7b1f3f0222639dd27e1202fe688ec301" name="a7b1f3f0222639dd27e1202fe688ec301"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b1f3f0222639dd27e1202fe688ec301">&#9670;&#160;</a></span>notify()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -530,12 +530,6 @@ Protected Attributes</h2></td></tr>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classtiny__dlna_1_1Url.html">Url</a> &amp;&#160;</td>
           <td class="paramname"><em>url</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>len</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -567,7 +561,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Send a NOTIFY request with a streaming body (chunked). This mirrors the chunked POST implementation but uses the NOTIFY method. </p>
+<p>Send a NOTIFY request with a streaming body. This mirrors the chunked POST implementation but uses the NOTIFY method. </p>
 
 </div>
 </div>

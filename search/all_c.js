@@ -12,7 +12,7 @@ var searchData=
   ['node_9',['Node',['../structtiny__dlna_1_1List_1_1Node.html',1,'tiny_dlna::List&lt; T &gt;::Node'],['../structtiny__dlna_1_1QueueLockFree_1_1Node.html',1,'tiny_dlna::QueueLockFree&lt; T &gt;::Node']]],
   ['node_5fname_10',['node_name',['../classtiny__dlna_1_1XMLParser.html#a43ebbd2f48238f3edbf923a18c1f6952',1,'tiny_dlna::XMLParser']]],
   ['notificationcallback_11',['NotificationCallback',['../classtiny__dlna_1_1DLNAControlPointMediaRenderer.html#a3120f67002c464497e2134d7da2869f0',1,'tiny_dlna::DLNAControlPointMediaRenderer::NotificationCallback()'],['../classtiny__dlna_1_1DLNAControlPointMediaServer.html#a5748d533f468c2e1f233421f437b3876',1,'tiny_dlna::DLNAControlPointMediaServer::NotificationCallback()']]],
-  ['notify_12',['notify',['../classtiny__dlna_1_1HttpRequest.html#a6779038e9908dfa109063bb394b2976b',1,'tiny_dlna::HttpRequest']]],
+  ['notify_12',['notify',['../classtiny__dlna_1_1HttpRequest.html#a7b1f3f0222639dd27e1202fe688ec301',1,'tiny_dlna::HttpRequest']]],
   ['notifyhandler_13',['notifyHandler',['../classtiny__dlna_1_1SubscriptionMgrControlPoint.html#a7d0546fdc1e5234f5a51b3c7c42076ac',1,'tiny_dlna::SubscriptionMgrControlPoint']]],
   ['notifyreplycp_14',['NotifyReplyCP',['../classtiny__dlna_1_1NotifyReplyCP.html',1,'tiny_dlna']]],
   ['ns_15',['ns',['../classtiny__dlna_1_1DLNADeviceInfo.html#a852f7a7baf10ff4d8e2d1953a5783901',1,'tiny_dlna::DLNADeviceInfo']]],
