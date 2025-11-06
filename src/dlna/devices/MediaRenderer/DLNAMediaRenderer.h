@@ -695,9 +695,11 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
   static void eventSubscriptionHandler(HttpServer* server,
                                        const char* requestPath,
                                        HttpRequestHandlerLine* hl) {
-    DLNADevice::eventSubscriptionHandler(server, requestPath, hl);
-    DLNAMediaRenderer* self = getRenderer(server);
-    if (self) {
+    bool is_subscribe = false;
+    DLNADevice::handleSubscription(server, requestPath, hl, is_subscribe);
+    if (is_subscribe) {
+      DLNAMediaRenderer* self = getRenderer(server);
+      assert(self != nullptr);
       StrView request_path_str(requestPath);
       if (request_path_str.contains("/AVT/"))
         self->publishAVT();
@@ -716,16 +718,8 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
               "urn:upnp-org:serviceId:AVTransport", "/AVT/service.xml",
               &DLNAMediaRenderer::transportDescrCB, "/AVT/control",
               &DLNAMediaRenderer::controlCB, "/AVT/event",
-              [](HttpServer* server, const char* requestPath,
-                 HttpRequestHandlerLine* hl) { server->replyOK(); });
+              eventSubscriptionHandler);
     avt.subscription_namespace_abbrev = "AVT";
-    // register URLs on the provided server so SCPD, control and event
-    // subscription endpoints are available immediately
-    server->on(avt.scpd_url, T_GET, avt.scp_cb);
-    server->on(avt.control_url, T_POST, avt.control_cb);
-    server->on(avt.event_sub_url, T_SUBSCRIBE, eventSubscriptionHandler);
-    server->on(avt.event_sub_url, T_UNSUBSCRIBE, avt.event_sub_cb);
-    server->on(avt.event_sub_url, T_POST, avt.event_sub_cb);
 
     addService(avt);
   }
@@ -736,14 +730,8 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
              "urn:upnp-org:serviceId:ConnectionManager", "/CM/service.xml",
              &DLNAMediaRenderer::connmgrDescrCB, "/CM/control",
              &DLNAMediaRenderer::controlCB, "/CM/event",
-             tiny_dlna::DLNADevice::eventSubscriptionHandler);
+             &DLNAMediaRenderer::eventSubscriptionHandler);
     cm.subscription_namespace_abbrev = "CMS";
-
-    server->on(cm.scpd_url, T_GET, cm.scp_cb);
-    server->on(cm.control_url, T_POST, cm.control_cb);
-    server->on(cm.event_sub_url, T_SUBSCRIBE, cm.event_sub_cb);
-    server->on(cm.event_sub_url, T_UNSUBSCRIBE, cm.event_sub_cb);
-    server->on(cm.event_sub_url, T_POST, cm.event_sub_cb);
 
     addService(cm);
   }
@@ -754,17 +742,8 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
              "urn:upnp-org:serviceId:RenderingControl", "/RC/service.xml",
              &DLNAMediaRenderer::controlDescrCB, "/RC/control",
              &DLNAMediaRenderer::controlCB, "/RC/event",
-             [](HttpServer* server, const char* requestPath,
-                HttpRequestHandlerLine* hl) { server->replyOK(); });
+             &DLNAMediaRenderer::eventSubscriptionHandler);
     rc.subscription_namespace_abbrev = "RCS";
-    server->on(rc.scpd_url, T_GET, rc.scp_cb);
-    server->on(rc.control_url, T_POST, rc.control_cb);
-    server->on(rc.event_sub_url, T_SUBSCRIBE,
-               tiny_dlna::DLNADevice::eventSubscriptionHandler);
-    server->on(rc.event_sub_url, T_UNSUBSCRIBE,
-               tiny_dlna::DLNADevice::eventSubscriptionHandler);
-    server->on(rc.event_sub_url, T_POST,
-               tiny_dlna::DLNADevice::eventSubscriptionHandler);
 
     addService(rc);
   }
@@ -778,7 +757,6 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     setupConnectionManagerService(server);
     setupRenderingControlService(server);
   }
-
 
   /**
    * @brief Process parsed SOAP ActionRequest and dispatch to appropriate

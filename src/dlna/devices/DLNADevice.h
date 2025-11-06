@@ -192,7 +192,7 @@ class DLNADevice {
   }
 
   /// Provides the device
-  DLNADeviceInfo& getDevice() { return *p_device_info; }
+  DLNADeviceInfo& getDeviceInfo() { return *p_device_info; }
 
   /// We can activate/deactivate the scheduler
   void setSchedulerActive(bool flag) { scheduler.setActive(flag); }
@@ -223,7 +223,7 @@ class DLNADevice {
                                  HttpRequestHandlerLine* hl,
                                  ActionRequest& action) {
     DlnaLogger.log(DlnaLogLevel::Info, "parseActionRequest");
-    auto start = millis();                                
+    auto start = millis();
     XMLParserPrint xp;
     xp.setExpandEncoded(true);
 
@@ -364,27 +364,24 @@ class DLNADevice {
   }
 
   /// Static handler for SUBSCRIBE/UNSUBSCRIBE requests on service event URLs
-  static void eventSubscriptionHandler(HttpServer* server,
-                                       const char* requestPath,
-                                       HttpRequestHandlerLine* hl) {
+  static bool handleSubscription(HttpServer* server, const char* requestPath,
+                                 HttpRequestHandlerLine* hl,
+                                 bool& is_subscribe) {
     // Dispatch to dedicated handlers for subscribe/unsubscribe to keep the
     // logic separated and easier to test.
+    is_subscribe = false;
     HttpRequestHeader& req = server->requestHeader();
     if (req.method() == T_SUBSCRIBE) {
-      handleSubscribe(server, requestPath, hl);
-      // default reply OK for other methods
-      server->replyOK();
-      return;
+      is_subscribe = true;
+      return handleSubscribe(server, requestPath, hl);
     }
     if (req.method() == T_UNSUBSCRIBE) {
-      handleUnsubscribe(server, requestPath, hl);
-      // default reply OK for other methods
-      server->replyOK();
-      return;
+      return handleUnsubscribe(server, requestPath, hl);
     }
 
     // default reply OK for other methods
     server->replyError(501, "Unsupported Method");
+    return false;
   }
 
   /// Sets a reference pointer that can be used to associate application
@@ -539,16 +536,12 @@ class DLNADevice {
                    (const uint8_t*)icon.icon_data, icon.icon_size);
     }
 
-    // Register Service URLs
     for (DLNAServiceInfo& service : p_device_info->getServices()) {
-      p_server->on(service.scpd_url, T_GET, service.scp_cb, ref, 1);
-      p_server->on(service.control_url, T_POST, service.control_cb, ref, 1);
-      // register event subscription handler - wrappers for
-      // SUBSCRIBE/UNSUBSCRIBE - only register if an event URL is configured
-      if (!StrView(service.event_sub_url).isEmpty()) {
-        p_server->on(service.event_sub_url, T_SUBSCRIBE,
-                     eventSubscriptionHandler, ref, 1);
-      }
+      p_server->on(service.scpd_url, T_GET, service.scp_cb);
+      p_server->on(service.control_url, T_POST, service.control_cb);
+      p_server->on(service.event_sub_url, T_SUBSCRIBE, service.event_sub_cb);
+      p_server->on(service.event_sub_url, T_UNSUBSCRIBE, service.event_sub_cb);
+      p_server->on(service.event_sub_url, T_POST, service.event_sub_cb);
     }
 
     return true;
@@ -565,11 +558,12 @@ class DLNADevice {
       DlnaLogger.log(DlnaLogLevel::Info, "reply %s", "DeviceXML");
       // Use server->reply with a callback so the Content-Length is computed
       // and headers are written correctly before streaming the body.
-      server->reply("text/xml",
-                    [](Print& out, void* ref) -> size_t {
-                      return ((DLNADeviceInfo*)ref)->print(out, ref);
-                    },
-                    200, "SUCCESS", device_xml);
+      server->reply(
+          "text/xml",
+          [](Print& out, void* ref) -> size_t {
+            return ((DLNADeviceInfo*)ref)->print(out, ref);
+          },
+          200, "SUCCESS", device_xml);
     } else {
       DlnaLogger.log(DlnaLogLevel::Error, "DLNADevice is null");
       server->replyNotFound();
@@ -577,31 +571,37 @@ class DLNADevice {
   }
 
   /// Handle SUBSCRIBE requests (extracted from eventSubscriptionHandler)
-  static void handleSubscribe(HttpServer* server, const char* requestPath,
+  static bool handleSubscribe(HttpServer* server, const char* requestPath,
                               HttpRequestHandlerLine* hl) {
     DlnaLogger.log(DlnaLogLevel::Debug, "handleSubscribe");
     DLNADevice* p_device = (DLNADevice*)server->getReference();
     // context[0] contains DLNADeviceInfo*
-    DLNADeviceInfo* p_device_info = (DLNADeviceInfo*)(hl->context[0]);
-    if (!p_device_info) {
-      server->replyNotFound();
-      return;
-    }
+    DLNADeviceInfo& device_info = p_device->getDeviceInfo();
 
     const char* cb = server->requestHeader().get("CALLBACK");
     const char* timeout = server->requestHeader().get("TIMEOUT");
     Str req_sid = server->requestHeader().get("SID");
+
+    DlnaLogger.log(DlnaLogLevel::Info, "- SUBSCRIBE CALLBACK: %s",
+                   cb ? cb : "null");
+    DlnaLogger.log(DlnaLogLevel::Info, "- SUBSCRIBE TIMEOUT: %s",
+                   timeout ? timeout : "null");
+    DlnaLogger.log(DlnaLogLevel::Info, "- SUBSCRIBE SID: %s",
+                   req_sid.c_str());
+    // remove leading and traling <>
     Str cbStr;
     if (cb) {
       cbStr = cb;
       cbStr.replace("<", "");
       cbStr.replace(">", "");
     }
+    // extract seconds
     uint32_t tsec = 1800;
     if (timeout && StrView(timeout).startsWith("Second-")) {
       tsec = atoi(timeout + 7);
     }
 
+    // find service by event path
     DLNAServiceInfo* svc = p_device->getServiceByEventPath(requestPath);
     if (svc != nullptr) {
       Str sid = p_device->subscription_mgr.subscribe(*svc, cbStr.c_str(),
@@ -611,14 +611,18 @@ class DLNADevice {
       server->replyHeader().put("TIMEOUT", "Second-1800");
       server->replyHeader().write(server->client());
       server->replyOK();
-      return;
+      return true;
     }
 
+    DlnaLogger.log(DlnaLogLevel::Error,
+                   "handleSubscribe: Service not found for path %s",
+                   requestPath);  
     server->replyNotFound();
+    return false;
   }
 
   /// Handle UNSUBSCRIBE requests (extracted from eventSubscriptionHandler)
-  static void handleUnsubscribe(HttpServer* server, const char* requestPath,
+  static bool handleUnsubscribe(HttpServer* server, const char* requestPath,
                                 HttpRequestHandlerLine* hl) {
     DlnaLogger.log(DlnaLogLevel::Debug, "handleUnsubscribe");
     DLNADevice* p_device = (DLNADevice*)server->getReference();
@@ -627,7 +631,7 @@ class DLNADevice {
     DLNADeviceInfo* p_device_info = (DLNADeviceInfo*)(hl->context[0]);
     if (!p_device_info) {
       server->replyNotFound();
-      return;
+      return false;
     }
 
     const char* sid = server->requestHeader().get("SID");
@@ -637,12 +641,13 @@ class DLNADevice {
         bool ok = p_device->subscription_mgr.unsubscribe(*svc, sid);
         if (ok) {
           server->replyOK();
-          return;
+          return true;
         }
       }
     }
-    // fallthrough: reply OK by default
-    server->replyOK();
+    // fallthrough: reply error by default
+    server->replyNotFound();
+    return false;
   }
 };
 

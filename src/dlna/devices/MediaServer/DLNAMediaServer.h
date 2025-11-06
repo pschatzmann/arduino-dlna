@@ -327,10 +327,11 @@ class DLNAMediaServer : public DLNADeviceInfo {
   static void eventSubscriptionHandler(HttpServer* server,
                                        const char* requestPath,
                                        HttpRequestHandlerLine* hl) {
-    DLNADevice::eventSubscriptionHandler(server, requestPath, hl);
-    DLNAMediaServer* self = getMediaServer(server);
-    assert(self != nullptr);
-    if (self) {
+    bool is_subscribe = false;
+    DLNADevice::handleSubscription(server, requestPath, hl, is_subscribe);
+    if (is_subscribe) {
+      DLNAMediaServer* self = getMediaServer(server);
+      assert(self != nullptr);
       StrView request_path_str(requestPath);
       if (request_path_str.contains("/CD/"))
         self->publishAVT();
@@ -356,18 +357,6 @@ class DLNAMediaServer : public DLNADeviceInfo {
     // subscription namespace abbreviation used for event publishing
     cd.subscription_namespace_abbrev = "AVT";
 
-    // register URLs on the provided server so SCPD, control and event
-    // subscription endpoints are available immediately. The server stores
-    // a reference to this MediaServer via setReference(), so we don't need
-    // to provide per-handler context arrays.
-    server->on(cd.scpd_url, T_GET, cd.scp_cb);
-    server->on(cd.control_url, T_POST, cd.control_cb);
-    server->on(cd.event_sub_url, T_SUBSCRIBE, eventSubscriptionHandler);
-    server->on(cd.event_sub_url, T_UNSUBSCRIBE,
-               tiny_dlna::DLNADevice::eventSubscriptionHandler);
-    server->on(cd.event_sub_url, T_POST,
-               tiny_dlna::DLNADevice::eventSubscriptionHandler);
-
     addService(cd);
   }
 
@@ -378,16 +367,10 @@ class DLNAMediaServer : public DLNADeviceInfo {
              "urn:upnp-org:serviceId:ConnectionManager", "/CM/service.xml",
              &DLNAMediaServer::connDescCB, "/CM/control",
              &DLNAMediaServer::connmgrControlCB, "/CM/event",
-             tiny_dlna::DLNADevice::eventSubscriptionHandler);
+             &DLNAMediaServer::eventSubscriptionHandler);
 
     // subscription namespace abbreviation used for event publishing
     cm.subscription_namespace_abbrev = "CMS";
-
-    server->on(cm.scpd_url, T_GET, cm.scp_cb);
-    server->on(cm.control_url, T_POST, cm.control_cb);
-    server->on(cm.event_sub_url, T_SUBSCRIBE, eventSubscriptionHandler);
-    server->on(cm.event_sub_url, T_UNSUBSCRIBE, cm.event_sub_cb);
-    server->on(cm.event_sub_url, T_POST, cm.event_sub_cb);
 
     addService(cm);
   }
@@ -506,7 +489,8 @@ class DLNAMediaServer : public DLNADeviceInfo {
               "urn:schemas-upnp-org:service:ContentDirectory:1");
           size_t written = 0;
           written += out.print("<SearchCaps>");
-          written += out.print(StringRegistry::nullStr(self->g_search_capabiities));
+          written +=
+              out.print(StringRegistry::nullStr(self->g_search_capabiities));
           written += out.print("</SearchCaps>\r\n");
           self->actionResponseEnd(out, "GetSearchCapabilitiesResponse");
           self->soapEnvelopeEnd(out);
@@ -531,7 +515,8 @@ class DLNAMediaServer : public DLNADeviceInfo {
               "urn:schemas-upnp-org:service:ContentDirectory:1");
           size_t written = 0;
           written += out.print("<SortCaps>");
-          written += out.print(StringRegistry::nullStr(self->g_sort_capabilities));
+          written +=
+              out.print(StringRegistry::nullStr(self->g_sort_capabilities));
           written += out.print("</SortCaps>\r\n");
           self->actionResponseEnd(out, "GetSortCapabilitiesResponse");
           self->soapEnvelopeEnd(out);
@@ -697,10 +682,9 @@ class DLNAMediaServer : public DLNADeviceInfo {
             (item.itemClass == MediaItemClass::Folder) ? "container" : "item";
 
         Printf pr{out};
-        pr.printf(
-            "&lt;%s id=\"%s\" parentID=\"%s\" restricted=\"%d\"&gt;", nodeName,
-            item.id ? item.id : "", item.parentID ? item.parentID : "0",
-            item.restricted ? 1 : 0);
+        pr.printf("&lt;%s id=\"%s\" parentID=\"%s\" restricted=\"%d\"&gt;",
+                  nodeName, item.id ? item.id : "",
+                  item.parentID ? item.parentID : "0", item.restricted ? 1 : 0);
 
         // title
         out.print("&lt;dc:title&gt;");
@@ -772,10 +756,12 @@ class DLNAMediaServer : public DLNADeviceInfo {
   }
 
   /**
-   * @brief Helper to retrieve DLNAMediaServer instance from HttpServer reference chain
-   * 
-   * Navigates through the server's reference (DLNADevice) to get the MediaServer instance.
-   * 
+   * @brief Helper to retrieve DLNAMediaServer instance from HttpServer
+   * reference chain
+   *
+   * Navigates through the server's reference (DLNADevice) to get the
+   * MediaServer instance.
+   *
    * @param server Pointer to the HttpServer instance
    * @return Pointer to the DLNAMediaServer instance, or nullptr if not found
    */
