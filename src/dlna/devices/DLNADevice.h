@@ -506,7 +506,7 @@ class DLNADevice {
   /// Validates that all required service URLs and callbacks are defined
   bool validateServiceInfo(const DLNAServiceInfo& service) {
     bool has_error = false;
-    
+
     if (!service.scpd_url || !*service.scpd_url) {
       DlnaLogger.log(DlnaLogLevel::Error, "Service missing scpd_url");
       has_error = true;
@@ -534,12 +534,12 @@ class DLNADevice {
                      service.event_sub_url ? service.event_sub_url : "(null)");
       has_error = true;
     }
-    
+
     if (has_error) {
       DlnaLogger.log(DlnaLogLevel::Error,
                      "Service validation failed - missing URLs/callbacks");
     }
-    
+
     return !has_error;
   }
 
@@ -579,11 +579,12 @@ class DLNADevice {
     for (DLNAServiceInfo& service : p_device_info->getServices()) {
       // Validate service before registering
       if (!validateServiceInfo(service)) {
-        DlnaLogger.log(DlnaLogLevel::Error,
-                       "Skipping service registration due to validation failure");
+        DlnaLogger.log(
+            DlnaLogLevel::Error,
+            "Skipping service registration due to validation failure");
         continue;
       }
-      
+
       p_server->on(service.scpd_url, T_GET, service.scp_cb);
       p_server->on(service.control_url, T_POST, service.control_cb);
       p_server->on(service.event_sub_url, T_SUBSCRIBE, service.event_sub_cb);
@@ -633,8 +634,7 @@ class DLNADevice {
                    cb ? cb : "null");
     DlnaLogger.log(DlnaLogLevel::Info, "- SUBSCRIBE TIMEOUT: %s",
                    timeout ? timeout : "null");
-    DlnaLogger.log(DlnaLogLevel::Info, "- SUBSCRIBE SID: %s",
-                   req_sid.c_str());
+    DlnaLogger.log(DlnaLogLevel::Info, "- SUBSCRIBE SID: %s", req_sid.c_str());
     // remove leading and traling <>
     Str cbStr;
     if (cb) {
@@ -653,17 +653,20 @@ class DLNADevice {
     if (svc != nullptr) {
       Str sid = p_device->subscription_mgr.subscribe(*svc, cbStr.c_str(),
                                                      req_sid.c_str(), tsec);
+      DlnaLogger.log(DlnaLogLevel::Info, "- SID: %s", sid.c_str());
+
       server->replyHeader().setValues(200, "OK");
       server->replyHeader().put("SID", sid.c_str());
       server->replyHeader().put("TIMEOUT", "Second-1800");
+      server->replyHeader().put("Content-Length", 0);
       server->replyHeader().write(server->client());
-      server->replyOK();
+      server->endClient();
       return true;
     }
 
     DlnaLogger.log(DlnaLogLevel::Error,
                    "handleSubscribe: Service not found for path %s",
-                   requestPath);  
+                   requestPath);
     server->replyNotFound();
     return false;
   }

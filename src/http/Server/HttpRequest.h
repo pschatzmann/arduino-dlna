@@ -1,11 +1,12 @@
 #pragma once
 
-#include <functional>
 #include <WiFi.h>
-#include "HttpHeader.h"
+
+#include <functional>
 
 #include "HttpChunkReader.h"
 #include "HttpChunkWriter.h"
+#include "HttpHeader.h"
 #include "WiFiClient.h"
 
 namespace tiny_dlna {
@@ -70,12 +71,17 @@ class HttpRequest {
     return process(T_POST, url, len, writer, mime, ref);
   }
 
-  /// Send a NOTIFY request with a streaming body (chunked). This mirrors the
+  /// Send a NOTIFY request with a streaming body. This mirrors the
   /// chunked POST implementation but uses the NOTIFY method.
-  virtual int notify(Url& url, size_t len,
-                     std::function<size_t(Print&, void*)> writer,
+  virtual int notify(Url& url, std::function<size_t(Print&, void*)> writer,
                      const char* mime = nullptr, void* ref = nullptr) {
-    return process(T_NOTIFY, url, len, writer, mime, ref);
+#if DLNA_LOG_XML
+    auto& nop = Serial;
+#else
+    NullPrint nop;
+#endif
+    int len = writer(nop, ref);
+    return process(T_NOTIFY, url,len, writer, mime, ref);
   }
 
   virtual int put(Url& url, const char* mime, const char* data, int len = -1) {
@@ -253,8 +259,8 @@ class HttpRequest {
 
     if (!connected()) {
       DlnaLogger.log(DlnaLogLevel::Info,
-                     "HttpRequest::% - connecting to host %s port %d",
-                     methods[method], url.host(), url.port());
+                     "HttpRequest::connecting to host %s port %d", url.host(),
+                     url.port());
       connect(url.host(), url.port());
     }
 

@@ -29,6 +29,8 @@ struct Schedule {
 
   virtual const char *name() { return "n/a"; };
 
+  virtual bool isValid() { return true; }
+
   operator bool() { return active; }
 };
 
@@ -102,6 +104,24 @@ class MSearchReplySchedule : public Schedule {
     assert(n < MAX_TMP_SIZE);
     DlnaLogger.log(DlnaLogLevel::Debug, "sending: %s", buffer);
     udp.send(address, (uint8_t *)buffer, n);
+    return true;
+  }
+
+  bool isValid() override {
+    // Check if the requester's IP is on the same subnet as defined by DLNA_DISCOVERY_NETMASK
+    IPAddress netmask = DLNA_DISCOVERY_NETMASK;
+    IPAddress localIP = p_device->getIPAddress();
+    IPAddress peerIP = address.address;
+    
+    // Apply netmask to both local and peer IP addresses
+    for (int i = 0; i < 4; i++) {
+      if ((localIP[i] & netmask[i]) != (peerIP[i] & netmask[i])) {
+        DlnaLogger.log(DlnaLogLevel::Debug, 
+                       "Discovery request from %s filtered (not in same subnet as %s with mask %s)",
+                       address.toString(), localIP.toString(), netmask.toString());
+        return false;
+      }
+    }
     return true;
   }
 

@@ -48,6 +48,7 @@ struct PendingNotification {
                                               notification XML */
   void* ref = nullptr; /**< opaque reference for writer */
   int error_count = 0; /**< number of failed send attempts */
+  int seq = 0;
 };
 
 
@@ -116,7 +117,7 @@ class SubscriptionMgrDevice {
                    StringRegistry::nullStr(service.service_id, "(null)"),
                    StringRegistry::nullStr(callbackUrl, "(null)"));
     // If sid provided, attempt to renew existing subscription for service
-    if (sid != nullptr && !StrView(sid).isEmpty()) {
+    if (!StrView(sid).isEmpty()) {
       Str renewed = renewSubscription(service, sid, callbackUrl, timeoutSec);
       if (!renewed.isEmpty()) return renewed;
       // not found: fall through and create new subscription
@@ -124,7 +125,7 @@ class SubscriptionMgrDevice {
 
     // generate uuid-based SID
     char buffer[64];
-    snprintf(buffer, sizeof(buffer), "uuid:%lu", millis());
+    snprintf(buffer, sizeof(buffer), "<uuid:%lu>", millis());
 
     // fill subscription
     Subscription* s = new Subscription();
@@ -134,6 +135,22 @@ class SubscriptionMgrDevice {
     s->seq = 0;
     s->expires_at = millis() + (uint64_t)timeoutSec * 1000ULL;
     s->service = &service;
+
+    for (auto& existing_sub : subscriptions) {
+      if (existing_sub->service == &service &&
+          StrView(existing_sub->callback_url).equals(callbackUrl)) {
+        // Found existing subscription for same service and callback URL
+        DlnaLogger.log(DlnaLogLevel::Info,
+                       "subscribe: found existing subscription for service '%s' and callback '%s', renewing SID '%s'",
+                       StringRegistry::nullStr(service.service_id, "(null)"),
+                       StringRegistry::nullStr(callbackUrl, "(null)"),
+                       existing_sub->sid.c_str());
+        // Renew existing subscription
+        existing_sub->timeout_sec = timeoutSec;
+        existing_sub->expires_at = millis() + (uint64_t)timeoutSec * 1000ULL;
+        return existing_sub->sid;
+      }
+    }
 
     // add subscription
     subscriptions.push_back(s);
@@ -199,15 +216,16 @@ class SubscriptionMgrDevice {
       Subscription* sub = subscriptions[i];
       if (sub->service != &service) continue;
       any = true;
-      // increment seq now (reserve sequence number)
-      sub->seq++;
       NullPrint np;
       PendingNotification pn;
       // store pointer to the subscription entry (no snapshot)
       pn.p_subscription = subscriptions[i];
       pn.ref = ref;
       pn.writer = changeWriter;
+      pn.seq = sub->seq;
       pending_list.push_back(pn);
+      // increment seq AFTER queuing (so first notification uses SEQ=0)
+      sub->seq++;
     }
     if (!any) {
       DlnaLogger.log(DlnaLogLevel::Info, "service '%s' has no subscriptions",
@@ -256,17 +274,17 @@ class SubscriptionMgrDevice {
       http.request().put("NT", "upnp:event");
       http.request().put("NTS", "upnp:propchange");
       char seqBuf[32];
-      snprintf(seqBuf, sizeof(seqBuf), "%d", sub.seq);
+      snprintf(seqBuf, sizeof(seqBuf), "%d", pn.seq);
       http.request().put("SEQ", seqBuf);
       http.request().put("SID", sub.sid.c_str());
       http.setTimeout(DLNA_HTTP_REQUEST_TIMEOUT_MS);
       // pass the pending notification as reference
       //int len = createXML(Serial, &pn);
-      int len = createXML(np, &pn);
-      int rc = http.notify(cbUrl, len, createXML, "text/xml", &pn);
-
+      DlnaLogger.log(DlnaLogLevel::Info, "Notify %s", cbUrl.url());
+      DlnaLogger.log(DlnaLogLevel::Info, "- SEQ: %s", seqBuf);
+      DlnaLogger.log(DlnaLogLevel::Info, "- SID: %s", sub.sid.c_str());
+      int rc = http.notify(cbUrl, createXML, "text/xml", &pn);
       DlnaLogger.log(DlnaLogLevel::Info, "Notify %s -> %d", cbUrl.url(), rc);
-      http.stop();
 
       // remove processed notification on success; otherwise keep it for retry
       if (rc == 200) {

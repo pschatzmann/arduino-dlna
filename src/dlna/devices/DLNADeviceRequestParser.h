@@ -85,6 +85,11 @@ class DLNADeviceRequestParser {
       DlnaLogger.log(DlnaLogLevel::Error, "-> ST: not found");
     }
 
+    // Check if the schedule is valid (e.g., netmask filtering)
+    if (result.active && !result.isValid()) {
+      result.active = false;
+    }
+
     if (result.active) {
       return resultPtr;
     } else {
