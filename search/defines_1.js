@@ -13,5 +13,5 @@ var searchData=
   ['dlna_5frun_5fsubscriptions_5fevery_5fms_10',['DLNA_RUN_SUBSCRIPTIONS_EVERY_MS',['../dlna__config_8h.html#aaa87dfb5a8224047ab269dfc707d4baf',1,'dlna_config.h']]],
   ['dlna_5fssdp_5fport_11',['DLNA_SSDP_PORT',['../dlna__config_8h.html#ae919a6bbd251038afbea0cda0e3c1f8b',1,'dlna_config.h']]],
   ['dlna_5fuse_5fallocator_12',['DLNA_USE_ALLOCATOR',['../dlna__config_8h.html#a5d8942be1f72a406dc9a6cb42236775a',1,'dlna_config.h']]],
-  ['dlna_5fuse_5fstd_5fvector_13',['DLNA_USE_STD_VECTOR',['../dlna__config_8h.html#a3126c92b6c074ffa52477ecd1030c070',1,'dlna_config.h']]]
+  ['dlna_5fuse_5fstd_13',['DLNA_USE_STD',['../dlna__config_8h.html#a052b6af3f986d69efbbee65c8e32b84c',1,'dlna_config.h']]]
 ];

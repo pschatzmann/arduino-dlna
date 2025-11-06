@@ -158,6 +158,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a5fc09f908226045d08a72f8c2a7deea1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#a5fc09f908226045d08a72f8c2a7deea1">urlDecode</a> ()</td></tr>
 <tr class="memdesc:a5fc09f908226045d08a72f8c2a7deea1"><td class="mdescLeft">&#160;</td><td class="mdescRight">decodes a url encoded string  <br /></td></tr>
 <tr class="separator:a5fc09f908226045d08a72f8c2a7deea1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a734f0cd4da970f50f6ae1d2b9de9af20"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#a734f0cd4da970f50f6ae1d2b9de9af20">reset</a> ()</td></tr>
+<tr class="separator:a734f0cd4da970f50f6ae1d2b9de9af20"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3a6bb85880f0c222c8c772c01faf5b81"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#a3a6bb85880f0c222c8c772c01faf5b81">clear</a> () override</td></tr>
 <tr class="memdesc:a3a6bb85880f0c222c8c772c01faf5b81"><td class="mdescLeft">&#160;</td><td class="mdescRight">clears the string by setting the terminating 0 at the beginning  <br /></td></tr>
 <tr class="separator:a3a6bb85880f0c222c8c772c01faf5b81"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -167,9 +169,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a95ece663659680d7c6368050f6450fc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad71254871301b90d3117b99b46648b0e"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#ad71254871301b90d3117b99b46648b0e">c_str</a> () const</td></tr>
 <tr class="separator:ad71254871301b90d3117b99b46648b0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a734f0cd4da970f50f6ae1d2b9de9af20"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#a734f0cd4da970f50f6ae1d2b9de9af20">reset</a> ()</td></tr>
-<tr class="separator:a734f0cd4da970f50f6ae1d2b9de9af20"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad64f32b39412410d3bde5aa9eb75173c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#ad64f32b39412410d3bde5aa9eb75173c">release</a> ()</td></tr>
+<tr class="memdesc:ad64f32b39412410d3bde5aa9eb75173c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Release the internal heap buffer .  <br /></td></tr>
 <tr class="separator:ad64f32b39412410d3bde5aa9eb75173c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3d82412d8ccb0adedc1189b4bf592354"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Str.html">Str</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#a3d82412d8ccb0adedc1189b4bf592354">substring</a> (int start, int end)</td></tr>
 <tr class="memdesc:a3d82412d8ccb0adedc1189b4bf592354"><td class="mdescLeft">&#160;</td><td class="mdescRight">copies a substring into the current string  <br /></td></tr>
@@ -2268,7 +2269,8 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Release the internal heap buffer immediately. This frees the underlying vector storage and resets the string to an empty state. Useful for explicitly freeing large buffers before long idle periods. </p>
+
+<p>Release the internal heap buffer . </p>
 
 </div>
 </div>

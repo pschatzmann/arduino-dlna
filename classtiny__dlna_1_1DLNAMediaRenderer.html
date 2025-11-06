@@ -255,9 +255,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a467014d854c2da5bf9acfdf6b9adf169"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1DLNADescr.html">DLNADescr</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a467014d854c2da5bf9acfdf6b9adf169">getConnectionMgrDescr</a> ()</td></tr>
 <tr class="memdesc:a467014d854c2da5bf9acfdf6b9adf169"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the ConnectionManager SCPD descriptor reference.  <br /></td></tr>
 <tr class="separator:a467014d854c2da5bf9acfdf6b9adf169"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a367895351ae485ae432fb25d236d1559"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#a367895351ae485ae432fb25d236d1559">print</a> (Print &amp;out)</td></tr>
-<tr class="memdesc:a367895351ae485ae432fb25d236d1559"><td class="mdescLeft">&#160;</td><td class="mdescRight">renders the device xml  <br /></td></tr>
-<tr class="separator:a367895351ae485ae432fb25d236d1559"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62c277126b252d2329934d3c7344c703"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#a62c277126b252d2329934d3c7344c703">print</a> (Print &amp;out, void *ref=nullptr)</td></tr>
+<tr class="memdesc:a62c277126b252d2329934d3c7344c703"><td class="mdescLeft">&#160;</td><td class="mdescRight">renders the device xml into the provided Print output.  <br /></td></tr>
+<tr class="separator:a62c277126b252d2329934d3c7344c703"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2bf911c1f4b7e4a900b9e962b17d023d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#a2bf911c1f4b7e4a900b9e962b17d023d">setDeviceType</a> (const char *<a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a89a500d397e3b48b585aeb1c1c3b43df">st</a>)</td></tr>
 <tr class="separator:a2bf911c1f4b7e4a900b9e962b17d023d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afb848cb0bac392803742803d88721b84"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#afb848cb0bac392803742803d88721b84">getDeviceType</a> ()</td></tr>
@@ -425,20 +425,20 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a74bb1fb1a59df2476d5c2faa6c98cc2a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#a74bb1fb1a59df2476d5c2faa6c98cc2a">setupServices</a> (<a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;server, <a class="el" href="classtiny__dlna_1_1IUDPService.html">IUDPService</a> &amp;udp)</td></tr>
 <tr class="memdesc:a74bb1fb1a59df2476d5c2faa6c98cc2a"><td class="mdescLeft">&#160;</td><td class="mdescRight">to be implemented by subclasses  <br /></td></tr>
 <tr class="separator:a74bb1fb1a59df2476d5c2faa6c98cc2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3e7fe6432cf2513d18931c938c0653d2"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#a3e7fe6432cf2513d18931c938c0653d2">printRoot</a> ()</td></tr>
-<tr class="separator:a3e7fe6432cf2513d18931c938c0653d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa6c8f108406a2ea81374fc57c8e0de34"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#aa6c8f108406a2ea81374fc57c8e0de34">printDevice</a> ()</td></tr>
-<tr class="separator:aa6c8f108406a2ea81374fc57c8e0de34"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a354adddcf9df5f55b21b506a89fa26cf"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#a354adddcf9df5f55b21b506a89fa26cf">printSpecVersion</a> ()</td></tr>
-<tr class="separator:a354adddcf9df5f55b21b506a89fa26cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5dc7e915b4e7906437a78d32ff710b4d"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#a5dc7e915b4e7906437a78d32ff710b4d">printServiceList</a> ()</td></tr>
-<tr class="separator:a5dc7e915b4e7906437a78d32ff710b4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5d0c638d0a18961115056f3ad127b3f9"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#a5d0c638d0a18961115056f3ad127b3f9">printService</a> (void *srv)</td></tr>
-<tr class="separator:a5d0c638d0a18961115056f3ad127b3f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acd26d233b7905bbbc0d7fc9bc6480031"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#acd26d233b7905bbbc0d7fc9bc6480031">printIconList</a> ()</td></tr>
-<tr class="separator:acd26d233b7905bbbc0d7fc9bc6480031"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aee4bf88deb8e798c8355e7c74ed958b5"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#aee4bf88deb8e798c8355e7c74ed958b5">printIconDlnaInfo</a> (<a class="el" href="classtiny__dlna_1_1Icon.html">Icon</a> &amp;<a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#a2f60e0f9fd4451a40b0c0a6fc46a70f9">icon</a>)</td></tr>
-<tr class="separator:aee4bf88deb8e798c8355e7c74ed958b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a56dfd3a39bbbc161a034909b563c6c30"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#a56dfd3a39bbbc161a034909b563c6c30">printRoot</a> (Print &amp;out, void *ref)</td></tr>
+<tr class="separator:a56dfd3a39bbbc161a034909b563c6c30"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af28da85e9a4f1b9ca92b26e714c1f618"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#af28da85e9a4f1b9ca92b26e714c1f618">printDevice</a> (Print &amp;out, void *ref)</td></tr>
+<tr class="separator:af28da85e9a4f1b9ca92b26e714c1f618"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1874dfe53f17f04e58f5c60b0814bba7"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#a1874dfe53f17f04e58f5c60b0814bba7">printSpecVersion</a> (Print &amp;out, void *ref)</td></tr>
+<tr class="separator:a1874dfe53f17f04e58f5c60b0814bba7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae772b58469ae6240a08cf39cf4af1bbe"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#ae772b58469ae6240a08cf39cf4af1bbe">printServiceList</a> (Print &amp;out, void *ref)</td></tr>
+<tr class="separator:ae772b58469ae6240a08cf39cf4af1bbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6520d19bc9271b3864406f4b9adab6fc"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#a6520d19bc9271b3864406f4b9adab6fc">printService</a> (Print &amp;out, void *srv)</td></tr>
+<tr class="separator:a6520d19bc9271b3864406f4b9adab6fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab33fb4e6bd860d3f7114637dfab1413c"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#ab33fb4e6bd860d3f7114637dfab1413c">printIconList</a> (Print &amp;out, void *ref)</td></tr>
+<tr class="separator:ab33fb4e6bd860d3f7114637dfab1413c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afbc5dbd1b4381b47180705cb3a109c5d"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#afbc5dbd1b4381b47180705cb3a109c5d">printIconDlnaInfo</a> (Print &amp;out, <a class="el" href="classtiny__dlna_1_1Icon.html">Icon</a> *<a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#a2f60e0f9fd4451a40b0c0a6fc46a70f9">icon</a>)</td></tr>
+<tr class="separator:afbc5dbd1b4381b47180705cb3a109c5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
 Static Protected Member Functions</h2></td></tr>
@@ -515,8 +515,6 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a4c1f4f408526b4b50169a0f2e88e900a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aecd5675fb5e240669f8bd04177f12582"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#aecd5675fb5e240669f8bd04177f12582">is_active</a> = true</td></tr>
 <tr class="separator:aecd5675fb5e240669f8bd04177f12582"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa7460468c12c3e6a2300a5c6cc725492"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structtiny__dlna_1_1XMLPrinter.html">XMLPrinter</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#aa7460468c12c3e6a2300a5c6cc725492">xml</a></td></tr>
-<tr class="separator:aa7460468c12c3e6a2300a5c6cc725492"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0e471ff0296785d593b3560a00150388"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Url.html">Url</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#a0e471ff0296785d593b3560a00150388">device_url</a></td></tr>
 <tr class="separator:a0e471ff0296785d593b3560a00150388"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a28d8ce438c8338faf5ad279f2f26d9b4"><td class="memItemLeft" align="right" valign="top">IPAddress&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#a28d8ce438c8338faf5ad279f2f26d9b4">localhost</a></td></tr>
@@ -2229,8 +2227,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a367895351ae485ae432fb25d236d1559" name="a367895351ae485ae432fb25d236d1559"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a367895351ae485ae432fb25d236d1559">&#9670;&#160;</a></span>print()</h2>
+<a id="a62c277126b252d2329934d3c7344c703" name="a62c277126b252d2329934d3c7344c703"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62c277126b252d2329934d3c7344c703">&#9670;&#160;</a></span>print()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2239,11 +2237,21 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void tiny_dlna::DLNADeviceInfo::print </td>
+          <td class="memname">size_t tiny_dlna::DLNADeviceInfo::print </td>
           <td>(</td>
           <td class="paramtype">Print &amp;&#160;</td>
-          <td class="paramname"><em>out</em></td><td>)</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>ref</em> = <code>nullptr</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -2253,12 +2261,19 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>renders the device xml </p>
+<p>renders the device xml into the provided Print output. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">out</td><td>Print target </td></tr>
+    <tr><td class="paramname">ref</td><td>optional context pointer (passed through to callbacks) </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
-<a id="aa6c8f108406a2ea81374fc57c8e0de34" name="aa6c8f108406a2ea81374fc57c8e0de34"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa6c8f108406a2ea81374fc57c8e0de34">&#9670;&#160;</a></span>printDevice()</h2>
+<a id="af28da85e9a4f1b9ca92b26e714c1f618" name="af28da85e9a4f1b9ca92b26e714c1f618"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af28da85e9a4f1b9ca92b26e714c1f618">&#9670;&#160;</a></span>printDevice()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2269,8 +2284,19 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">size_t tiny_dlna::DLNADeviceInfo::printDevice </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">Print &amp;&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>ref</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -2282,8 +2308,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="aee4bf88deb8e798c8355e7c74ed958b5" name="aee4bf88deb8e798c8355e7c74ed958b5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aee4bf88deb8e798c8355e7c74ed958b5">&#9670;&#160;</a></span>printIconDlnaInfo()</h2>
+<a id="afbc5dbd1b4381b47180705cb3a109c5d" name="afbc5dbd1b4381b47180705cb3a109c5d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afbc5dbd1b4381b47180705cb3a109c5d">&#9670;&#160;</a></span>printIconDlnaInfo()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2294,9 +2320,19 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">size_t tiny_dlna::DLNADeviceInfo::printIconDlnaInfo </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1Icon.html">Icon</a> &amp;&#160;</td>
-          <td class="paramname"><em>icon</em></td><td>)</td>
+          <td class="paramtype">Print &amp;&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1Icon.html">Icon</a> *&#160;</td>
+          <td class="paramname"><em>icon</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -2308,8 +2344,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="acd26d233b7905bbbc0d7fc9bc6480031" name="acd26d233b7905bbbc0d7fc9bc6480031"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acd26d233b7905bbbc0d7fc9bc6480031">&#9670;&#160;</a></span>printIconList()</h2>
+<a id="ab33fb4e6bd860d3f7114637dfab1413c" name="ab33fb4e6bd860d3f7114637dfab1413c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab33fb4e6bd860d3f7114637dfab1413c">&#9670;&#160;</a></span>printIconList()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2320,8 +2356,19 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">size_t tiny_dlna::DLNADeviceInfo::printIconList </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">Print &amp;&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>ref</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -2333,8 +2380,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a3e7fe6432cf2513d18931c938c0653d2" name="a3e7fe6432cf2513d18931c938c0653d2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3e7fe6432cf2513d18931c938c0653d2">&#9670;&#160;</a></span>printRoot()</h2>
+<a id="a56dfd3a39bbbc161a034909b563c6c30" name="a56dfd3a39bbbc161a034909b563c6c30"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a56dfd3a39bbbc161a034909b563c6c30">&#9670;&#160;</a></span>printRoot()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2345,8 +2392,19 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">size_t tiny_dlna::DLNADeviceInfo::printRoot </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">Print &amp;&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>ref</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -2358,8 +2416,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a5d0c638d0a18961115056f3ad127b3f9" name="a5d0c638d0a18961115056f3ad127b3f9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5d0c638d0a18961115056f3ad127b3f9">&#9670;&#160;</a></span>printService()</h2>
+<a id="a6520d19bc9271b3864406f4b9adab6fc" name="a6520d19bc9271b3864406f4b9adab6fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6520d19bc9271b3864406f4b9adab6fc">&#9670;&#160;</a></span>printService()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2370,9 +2428,19 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">size_t tiny_dlna::DLNADeviceInfo::printService </td>
           <td>(</td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>srv</em></td><td>)</td>
+          <td class="paramtype">Print &amp;&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>srv</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -2384,8 +2452,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a5dc7e915b4e7906437a78d32ff710b4d" name="a5dc7e915b4e7906437a78d32ff710b4d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5dc7e915b4e7906437a78d32ff710b4d">&#9670;&#160;</a></span>printServiceList()</h2>
+<a id="ae772b58469ae6240a08cf39cf4af1bbe" name="ae772b58469ae6240a08cf39cf4af1bbe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae772b58469ae6240a08cf39cf4af1bbe">&#9670;&#160;</a></span>printServiceList()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2396,8 +2464,19 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">size_t tiny_dlna::DLNADeviceInfo::printServiceList </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">Print &amp;&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>ref</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -2409,8 +2488,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a354adddcf9df5f55b21b506a89fa26cf" name="a354adddcf9df5f55b21b506a89fa26cf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a354adddcf9df5f55b21b506a89fa26cf">&#9670;&#160;</a></span>printSpecVersion()</h2>
+<a id="a1874dfe53f17f04e58f5c60b0814bba7" name="a1874dfe53f17f04e58f5c60b0814bba7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1874dfe53f17f04e58f5c60b0814bba7">&#9670;&#160;</a></span>printSpecVersion()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2421,8 +2500,19 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">size_t tiny_dlna::DLNADeviceInfo::printSpecVersion </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">Print &amp;&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>ref</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -5514,28 +5604,6 @@ Protected Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">int tiny_dlna::DLNADeviceInfo::version_minor = 0</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="aa7460468c12c3e6a2300a5c6cc725492" name="aa7460468c12c3e6a2300a5c6cc725492"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa7460468c12c3e6a2300a5c6cc725492">&#9670;&#160;</a></span>xml</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structtiny__dlna_1_1XMLPrinter.html">XMLPrinter</a> tiny_dlna::DLNADeviceInfo::xml</td>
         </tr>
       </table>
   </td>

@@ -46,7 +46,7 @@ var searchData=
   ['dlna_5frun_5fsubscriptions_5fevery_5fms_43',['DLNA_RUN_SUBSCRIPTIONS_EVERY_MS',['../dlna__config_8h.html#aaa87dfb5a8224047ab269dfc707d4baf',1,'dlna_config.h']]],
   ['dlna_5fssdp_5fport_44',['DLNA_SSDP_PORT',['../dlna__config_8h.html#ae919a6bbd251038afbea0cda0e3c1f8b',1,'dlna_config.h']]],
   ['dlna_5fuse_5fallocator_45',['DLNA_USE_ALLOCATOR',['../dlna__config_8h.html#a5d8942be1f72a406dc9a6cb42236775a',1,'dlna_config.h']]],
-  ['dlna_5fuse_5fstd_5fvector_46',['DLNA_USE_STD_VECTOR',['../dlna__config_8h.html#a3126c92b6c074ffa52477ecd1030c070',1,'dlna_config.h']]],
+  ['dlna_5fuse_5fstd_46',['DLNA_USE_STD',['../dlna__config_8h.html#a052b6af3f986d69efbbee65c8e32b84c',1,'dlna_config.h']]],
   ['dlnacommon_2eh_47',['DLNACommon.h',['../DLNACommon_8h.html',1,'']]],
   ['dlnacontrolpoint_48',['DLNAControlPoint',['../classtiny__dlna_1_1DLNADeviceInfo.html#a5f83095908aa82cc27e512628c388d52',1,'tiny_dlna::DLNADeviceInfo::DLNAControlPoint()'],['../classtiny__dlna_1_1DLNAControlPoint.html#ae6ccf08f93ce155cec8964b07b466cbd',1,'tiny_dlna::DLNAControlPoint::DLNAControlPoint()'],['../classtiny__dlna_1_1DLNAControlPoint.html#a828c3639df1722fbbfa3aa19da6ecb19',1,'tiny_dlna::DLNAControlPoint::DLNAControlPoint(HttpServer &amp;server, int port=80)'],['../classtiny__dlna_1_1DLNAControlPoint.html',1,'tiny_dlna::DLNAControlPoint']]],
   ['dlnacontrolpoint_2eh_49',['DLNAControlPoint.h',['../DLNAControlPoint_8h.html',1,'']]],
