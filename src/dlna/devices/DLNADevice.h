@@ -245,7 +245,7 @@ class DLNADevice {
 
       while (xp.parse(outNodeName, outPath, outText, outAttributes)) {
         if (is_attribute) {
-          const char* argName = registry.add((char*)outNodeName.c_str());
+          const char* argName = outNodeName.c_str();
           action.addArgument(argName, outText.c_str());
           continue;
         }
@@ -395,7 +395,7 @@ class DLNADevice {
 
  protected:
   bool is_active = false;
-  bool is_subscriptions_active = true;
+  bool is_subscriptions_active = false;
   uint32_t post_alive_repeat_ms = 0;
   Scheduler scheduler;
   SubscriptionMgrDevice subscription_mgr;

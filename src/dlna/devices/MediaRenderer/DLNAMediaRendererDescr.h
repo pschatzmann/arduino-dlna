@@ -10,7 +10,7 @@ namespace tiny_dlna {
  *
  * This class implements the DLNA AVTransport service description printer.
  * It produces the service SCPD XML by writing into any Arduino-style
- * Print implementation (for example a ChunkPrint or a Null/Measure print).
+ * Print implementation.
  * The primary method is printDescr(Print& out) which emits the XML and
  * returns the number of bytes written. The implementation is stateless and
  * safe to construct on-demand where needed.

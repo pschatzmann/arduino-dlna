@@ -779,60 +779,6 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     setupRenderingControlService(server);
   }
 
-  // Static reply helper methods for SOAP actions
-  static size_t replyPlay(Print& out) {
-    return DLNADevice::printReplyXML(out, "PlayResponse", "AVTransport");
-  }
-
-  static size_t replyPause(Print& out) {
-    return DLNADevice::printReplyXML(out, "PauseResponse", "AVTransport");
-  }
-
-  static size_t replyStop(Print& out) {
-    return DLNADevice::printReplyXML(out, "StopResponse", "AVTransport");
-  }
-
-  static size_t replySetAVTransportURI(Print& out) {
-    return DLNADevice::printReplyXML(out, "SetAVTransportURIResponse",
-                                     "AVTransport");
-  }
-
-  static size_t replySetVolume(Print& out) {
-    return DLNADevice::printReplyXML(out, "SetVolumeResponse",
-                                     "RenderingControl");
-  }
-
-  static size_t replySetMute(Print& out) {
-    return DLNADevice::printReplyXML(out, "SetMuteResponse",
-                                     "RenderingControl");
-  }
-
-  /// Static reply helper for GetMute
-  static size_t replyGetMute(Print& out, bool isMuted) {
-    return DLNADevice::printReplyXML(out, "GetMuteResponse", "RenderingControl",
-                                     [isMuted](Print& o, void* ref) -> size_t {
-                                       (void)ref;
-                                       size_t written = 0;
-                                       written += o.print("<CurrentMute>");
-                                       written += o.print(isMuted ? 1 : 0);
-                                       written += o.print("</CurrentMute>");
-                                       return written;
-                                     });
-  }
-
-  /// Static reply helper for GetVolume
-  static size_t replyGetVolume(Print& out, uint8_t volume) {
-    return DLNADevice::printReplyXML(out, "GetVolumeResponse",
-                                     "RenderingControl",
-                                     [volume](Print& o, void* ref) -> size_t {
-                                       (void)ref;
-                                       size_t written = 0;
-                                       written += o.print("<CurrentVolume>");
-                                       written += o.print((int)volume);
-                                       written += o.print("</CurrentVolume>");
-                                       return written;
-                                     });
-  }
 
   /**
    * @brief Process parsed SOAP ActionRequest and dispatch to appropriate
@@ -1171,8 +1117,17 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     server.reply(
         "text/xml",
         [](Print& out, void* ref) -> size_t {
-          auto self = (DLNAMediaRenderer*)ref;
-          return DLNAMediaRenderer::replyGetMute(out, self->isMuted());
+          return DLNADevice::printReplyXML(
+              out, "GetMuteResponse", "RenderingControl",
+              [](Print& o, void* innerRef) -> size_t {
+                auto self = (DLNAMediaRenderer*)innerRef;
+                size_t written = 0;
+                written += o.print("<CurrentMute>");
+                written += o.print(self->isMuted() ? 1 : 0);
+                written += o.print("</CurrentMute>");
+                return written;
+              },
+              ref);
         },
         200, nullptr, this);
     return true;
@@ -1182,11 +1137,19 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     server.reply(
         "text/xml",
         [](Print& out, void* ref) -> size_t {
-          auto self = (DLNAMediaRenderer*)ref;
-          DlnaLogger.log(DlnaLogLevel::Debug, "GetVolume: %d",
-                         self->getVolume());
-          return DLNAMediaRenderer::replyGetVolume(out,
-                                                   (uint8_t)self->getVolume());
+          return DLNADevice::printReplyXML(
+              out, "GetVolumeResponse", "RenderingControl",
+              [](Print& o, void* innerRef) -> size_t {
+                auto self = (DLNAMediaRenderer*)innerRef;
+                DlnaLogger.log(DlnaLogLevel::Debug, "GetVolume: %d",
+                               self->getVolume());
+                size_t written = 0;
+                written += o.print("<CurrentVolume>");
+                written += o.print((int)self->getVolume());
+                written += o.print("</CurrentVolume>");
+                return written;
+              },
+              ref);
         },
         200, nullptr, this);
     return true;

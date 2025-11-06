@@ -176,8 +176,8 @@
 #endif
 
 // Force use of Tracked Allocator
-//#define DLNA_DEFAULT_ALLOCATOR TrackedAllocator
-//#define ALLOCATOR TrackedAllocator
+#define DLNA_DEFAULT_ALLOCATOR TrackedAllocator
+#define ALLOCATOR TrackedAllocator
 
 // Define the default allocator class to use (e.g Allocator, TrackedAllocator, AllocatorExt, AllocatorPSRAM)
 #ifndef DLNA_DEFAULT_ALLOCATOR
