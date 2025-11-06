@@ -172,7 +172,7 @@
 
 // Define whether to use custom allocator (true) or standard new/delete (false)
 #ifndef DLNA_USE_ALLOCATOR
-#define DLNA_USE_ALLOCATOR false
+#define DLNA_USE_ALLOCATOR true
 #endif
 
 // Force use of Tracked Allocator
@@ -190,12 +190,12 @@
 #endif
 
 // Define whether to use std::vector (true) or custom Vector class (false)
-#ifndef DLNA_USE_STD_VECTOR
-#define DLNA_USE_STD_VECTOR true
+#ifndef DLNA_USE_STD
+#define DLNA_USE_STD true
 #endif
 
 #ifndef DLNA_LOG_XML
-#define DLNA_LOG_XML true
+#define DLNA_LOG_XML false
 #endif
 
 

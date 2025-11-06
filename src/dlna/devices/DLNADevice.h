@@ -395,7 +395,7 @@ class DLNADevice {
 
  protected:
   bool is_active = false;
-  bool is_subscriptions_active = false;
+  bool is_subscriptions_active = true;
   uint32_t post_alive_repeat_ms = 0;
   Scheduler scheduler;
   SubscriptionMgrDevice subscription_mgr;
@@ -523,6 +523,7 @@ class DLNADevice {
     if (!StrView(device_path).isEmpty()) {
       p_server->rewrite("/", device_path);
       p_server->rewrite("/dlna/device.xml", device_path);
+      p_server->rewrite("/device.xml", device_path);
       p_server->rewrite("/index.html", device_path);
       p_server->on(device_path, T_GET, deviceXMLCallback, ref, 1);
     }
@@ -561,17 +562,14 @@ class DLNADevice {
     DLNADeviceInfo* device_xml = (DLNADeviceInfo*)(hl->context[0]);
     assert(device_xml != nullptr);
     if (device_xml != nullptr) {
-      Client& client = server->client();
-      assert(&client != nullptr);
       DlnaLogger.log(DlnaLogLevel::Info, "reply %s", "DeviceXML");
-      server->replyHeader().setValues(200, "SUCCESS");
-      server->replyHeader().put(CONTENT_TYPE, "text/xml");
-      server->replyHeader().put(CONNECTION, CON_KEEP_ALIVE);
-      server->replyHeader().write(client);
-
-      // print xml result
-      device_xml->print(client);
-      server->endClient();
+      // Use server->reply with a callback so the Content-Length is computed
+      // and headers are written correctly before streaming the body.
+      server->reply("text/xml",
+                    [](Print& out, void* ref) -> size_t {
+                      return ((DLNADeviceInfo*)ref)->print(out, ref);
+                    },
+                    200, "SUCCESS", device_xml);
     } else {
       DlnaLogger.log(DlnaLogLevel::Error, "DLNADevice is null");
       server->replyNotFound();

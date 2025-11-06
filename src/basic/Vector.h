@@ -6,7 +6,7 @@
 
 namespace tiny_dlna {
 
-#if DLNA_USE_STD_VECTOR
+#if DLNA_USE_STD
 
 /**
  * @brief Wrapper around std::vector that provides backward compatibility

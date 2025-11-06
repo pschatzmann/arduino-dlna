@@ -175,6 +175,70 @@ struct XMLPrinter {
   }
 
   /**
+   * @brief Prints an XML node using a callback that receives a context pointer.
+   * @param node Name of the node
+   * @param callback Function to generate content, takes a void* context
+   * @param ref Context pointer passed through to the callback
+   * @param attributes Optional attributes
+   * @return Number of bytes written
+   */
+  size_t printNode(const char* node, std::function<size_t(void*)> callback,
+                   void* ref, const char* attributes = nullptr) {
+    assert(p_out != nullptr);
+    size_t result = printNodeBeginNl(node, attributes);
+    result += callback(ref);
+    result += printNodeEnd(node);
+    return result;
+  }
+
+  /**
+   * @brief Prints an XML node using a plain function pointer that receives a context pointer.
+   * @param node Name of the node
+   * @param callback Function pointer to generate content, takes a void* context
+   * @param ref Context pointer passed through to the callback
+   * @param attributes Optional attributes
+   * @return Number of bytes written
+   */
+  size_t printNode(const char* node, size_t (*callback)(void*), void* ref,
+                   const char* attributes = nullptr) {
+    assert(p_out != nullptr);
+    size_t result = printNodeBeginNl(node, attributes);
+    result += callback(ref);
+    result += printNodeEnd(node);
+    return result;
+  }
+
+  /**
+   * @brief Prints an XML node using a callback that receives the Print& and a context pointer.
+   * @param node Name of the node
+   * @param callback Function to generate content, takes Print& and void* context
+   * @param ref Context pointer passed through to the callback
+   * @param attributes Optional attributes
+   * @return Number of bytes written
+   */
+  size_t printNode(const char* node,
+                   std::function<size_t(Print&, void*)> callback,
+                   void* ref, const char* attributes = nullptr) {
+    assert(p_out != nullptr);
+    size_t result = printNodeBeginNl(node, attributes);
+    result += callback(*p_out, ref);
+    result += printNodeEnd(node);
+    return result;
+  }
+
+  /**
+   * @brief Prints an XML node using a plain function pointer that receives Print& and a context pointer.
+   */
+  size_t printNode(const char* node, size_t (*callback)(Print&, void*),
+                   void* ref, const char* attributes = nullptr) {
+    assert(p_out != nullptr);
+    size_t result = printNodeBeginNl(node, attributes);
+    result += callback(*p_out, ref);
+    result += printNodeEnd(node);
+    return result;
+  }
+
+  /**
    * @brief printf-style helper that formats into an internal buffer and writes to the configured Print output.
    * @param fmt Format string
    * @param ... Variable arguments
@@ -274,7 +338,7 @@ struct XMLPrinter {
   size_t printNodeBeginNl(const char* node, const char* attributes = nullptr,
                           const char* ns = nullptr) {
     size_t result = printNodeBegin(node, attributes, ns);
-    result = +p_out->println();
+    result += p_out->println();
     return result;
   }
 

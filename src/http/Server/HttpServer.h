@@ -311,8 +311,8 @@ class HttpServer {
   }
 
   /// write reply - using callback that writes to stream
-  void reply(const char* contentType, size_t (*callback)(Print& out, void*ref),
-             int status = 200, const char* msg = SUCCESS, void *ref = nullptr) {
+  void reply(const char* contentType, size_t (*callback)(Print& out, void* ref),
+             int status = 200, const char* msg = SUCCESS, void* ref = nullptr) {
     DlnaLogger.log(DlnaLogLevel::Info, "reply %s", "via callback");
 #if DLNA_LOG_XML
     auto& nop = Serial;
@@ -342,7 +342,7 @@ class HttpServer {
     reply_header.write(this->client());
     client_ptr->write((const uint8_t*)str, len);
     endClient();
-    //Serial.println(str);
+    // Serial.println(str);
   }
 
   void reply(const char* contentType, const uint8_t* str, int len,
@@ -370,7 +370,6 @@ class HttpServer {
     DlnaLogger.log(DlnaLogLevel::Info, "reply %s", "error");
     reply(err, msg);
   }
-
 
   /// provides the request header
   HttpRequestHeader& requestHeader() { return request_header; }
@@ -439,9 +438,13 @@ class HttpServer {
     processRequest();
     result = true;
     ++current_client_iterator;
-    if (current_client_iterator == open_clients.end() && !open_clients.empty()) {
+    if (current_client_iterator == open_clients.end() &&
+        !open_clients.empty()) {
       current_client_iterator = open_clients.begin();
     }
+
+    // cleanup clients
+    removeClosedClients();
 
     return result;
   }
@@ -498,13 +501,35 @@ class HttpServer {
   int no_connect_delay = 5;
   void* ref = nullptr;
 
-   /// Writes the status and message to the reply
+  /* Remove all closed/disconnected clients from the open_clients list.
+   * This also keeps `current_client_iterator` valid by advancing it to
+   * the next element when the erased element equals the current iterator.
+   */
+  void removeClosedClients() {
+    auto it = open_clients.begin();
+    while (it != open_clients.end()) {
+      if ((!(*it).connected())) {
+        auto next = open_clients.erase(it);
+        if (current_client_iterator == it) {
+          current_client_iterator = next;
+        }
+        it = next;
+      } else {
+        ++it;
+      }
+    }
+    if (open_clients.empty()) {
+      current_client_iterator = open_clients.begin();
+    }
+  }
+
+  /// Writes the status and message to the reply
   void reply(int status, const char* msg) {
     reply_header.setValues(status, msg);
     reply_header.write(this->client());
     endClient();
   }
- 
+
   /// Converts null to an empty string
   const char* nullstr(const char* in) { return in == nullptr ? "" : in; }
 

@@ -52,7 +52,7 @@ void setup() {
 
   setupDevice();
   // render device XML
-  device_info.print(Serial);
+  device_info.print(Serial, nullptr);
 }
 
 void loop() {}
