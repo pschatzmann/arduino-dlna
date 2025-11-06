@@ -503,6 +503,46 @@ class DLNADevice {
     return true;
   }
 
+  /// Validates that all required service URLs and callbacks are defined
+  bool validateServiceInfo(const DLNAServiceInfo& service) {
+    bool has_error = false;
+    
+    if (!service.scpd_url || !*service.scpd_url) {
+      DlnaLogger.log(DlnaLogLevel::Error, "Service missing scpd_url");
+      has_error = true;
+    }
+    if (!service.control_url || !*service.control_url) {
+      DlnaLogger.log(DlnaLogLevel::Error, "Service missing control_url");
+      has_error = true;
+    }
+    if (!service.event_sub_url || !*service.event_sub_url) {
+      DlnaLogger.log(DlnaLogLevel::Error, "Service missing event_sub_url");
+      has_error = true;
+    }
+    if (!service.scp_cb) {
+      DlnaLogger.log(DlnaLogLevel::Error, "Service missing scp_cb for %s",
+                     service.scpd_url ? service.scpd_url : "(null)");
+      has_error = true;
+    }
+    if (!service.control_cb) {
+      DlnaLogger.log(DlnaLogLevel::Error, "Service missing control_cb for %s",
+                     service.control_url ? service.control_url : "(null)");
+      has_error = true;
+    }
+    if (!service.event_sub_cb) {
+      DlnaLogger.log(DlnaLogLevel::Error, "Service missing event_sub_cb for %s",
+                     service.event_sub_url ? service.event_sub_url : "(null)");
+      has_error = true;
+    }
+    
+    if (has_error) {
+      DlnaLogger.log(DlnaLogLevel::Error,
+                     "Service validation failed - missing URLs/callbacks");
+    }
+    
+    return !has_error;
+  }
+
   /// set up Web Server to handle Service Addresses
   virtual bool setupDLNAServer(HttpServer& srv) {
     DlnaLogger.log(DlnaLogLevel::Debug, "setupDLNAServer");
@@ -537,6 +577,13 @@ class DLNADevice {
     }
 
     for (DLNAServiceInfo& service : p_device_info->getServices()) {
+      // Validate service before registering
+      if (!validateServiceInfo(service)) {
+        DlnaLogger.log(DlnaLogLevel::Error,
+                       "Skipping service registration due to validation failure");
+        continue;
+      }
+      
       p_server->on(service.scpd_url, T_GET, service.scp_cb);
       p_server->on(service.control_url, T_POST, service.control_cb);
       p_server->on(service.event_sub_url, T_SUBSCRIBE, service.event_sub_cb);
