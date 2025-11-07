@@ -78,6 +78,7 @@ $(function() {
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-static-methods">Static Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="#friends">Friends</a> &#124;
 <a href="classtiny__dlna_1_1SubscriptionMgrDevice-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">tiny_dlna::SubscriptionMgrDevice Class Reference</div></div>
 </div><!--header-->
@@ -135,6 +136,12 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:af19f178c10b5a6d81e8700c963db7cbf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgrDevice.html#af19f178c10b5a6d81e8700c963db7cbf">clear</a> ()</td></tr>
 <tr class="memdesc:af19f178c10b5a6d81e8700c963db7cbf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear all subscriptions and pending notifications.  <br /></td></tr>
 <tr class="separator:af19f178c10b5a6d81e8700c963db7cbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5bff25d1563787f81a105d8c9ffac0ea"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgrDevice.html#a5bff25d1563787f81a105d8c9ffac0ea">processSubscribeRequest</a> (<a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;server, <a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html">DLNAServiceInfo</a> &amp;service)</td></tr>
+<tr class="memdesc:a5bff25d1563787f81a105d8c9ffac0ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle SUBSCRIBE request including HTTP response.  <br /></td></tr>
+<tr class="separator:a5bff25d1563787f81a105d8c9ffac0ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af16aef2ef1231d3722d8e76435cca4c0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgrDevice.html#af16aef2ef1231d3722d8e76435cca4c0">processUnsubscribeRequest</a> (<a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;server, <a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html">DLNAServiceInfo</a> &amp;service)</td></tr>
+<tr class="memdesc:af16aef2ef1231d3722d8e76435cca4c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle UNSUBSCRIBE request including HTTP response.  <br /></td></tr>
+<tr class="separator:af16aef2ef1231d3722d8e76435cca4c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
 Static Protected Member Functions</h2></td></tr>
@@ -150,6 +157,11 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:acb5af6f10d937ec042f0dc309eb522e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9b4347e03c8d7c71dfaf323d6abb8047"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgrDevice.html#a9b4347e03c8d7c71dfaf323d6abb8047">is_active</a> = true</td></tr>
 <tr class="separator:a9b4347e03c8d7c71dfaf323d6abb8047"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
+Friends</h2></td></tr>
+<tr class="memitem:ab3b12d07f1d959273932ffa0086f8e20"><td class="memItemLeft" align="right" valign="top">class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgrDevice.html#ab3b12d07f1d959273932ffa0086f8e20">DLNADevice</a></td></tr>
+<tr class="separator:ab3b12d07f1d959273932ffa0086f8e20"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Manages UPnP event subscriptions and queued notifications for a DLNA device. </p>
@@ -418,6 +430,100 @@ Protected Attributes</h2></td></tr>
 
 <p>Number of queued pending notifications. </p>
 <dl class="section return"><dt>Returns</dt><dd>int count of pending notifications </dd></dl>
+
+</div>
+</div>
+<a id="a5bff25d1563787f81a105d8c9ffac0ea" name="a5bff25d1563787f81a105d8c9ffac0ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5bff25d1563787f81a105d8c9ffac0ea">&#9670;&#160;</a></span>processSubscribeRequest()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool tiny_dlna::SubscriptionMgrDevice::processSubscribeRequest </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html">DLNAServiceInfo</a> &amp;&#160;</td>
+          <td class="paramname"><em>service</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Handle SUBSCRIBE request including HTTP response. </p>
+<p>Parses the CALLBACK, TIMEOUT, and SID headers from the HTTP request, processes the subscription, and sends the HTTP response back to the client. This method encapsulates all HTTP-specific logic for SUBSCRIBE requests.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">server</td><td>Reference to the HTTP server handling the request </td></tr>
+    <tr><td class="paramname">service</td><td>Reference to the DLNA service to subscribe to </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if subscription was successful and response sent </dd></dl>
+
+</div>
+</div>
+<a id="af16aef2ef1231d3722d8e76435cca4c0" name="af16aef2ef1231d3722d8e76435cca4c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af16aef2ef1231d3722d8e76435cca4c0">&#9670;&#160;</a></span>processUnsubscribeRequest()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool tiny_dlna::SubscriptionMgrDevice::processUnsubscribeRequest </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> &amp;&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html">DLNAServiceInfo</a> &amp;&#160;</td>
+          <td class="paramname"><em>service</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Handle UNSUBSCRIBE request including HTTP response. </p>
+<p>Parses the SID header from the HTTP request, removes the subscription, and sends the appropriate HTTP response back to the client. This method encapsulates all HTTP-specific logic for UNSUBSCRIBE requests.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">server</td><td>Reference to the HTTP server handling the request </td></tr>
+    <tr><td class="paramname">service</td><td>Reference to the DLNA service to unsubscribe from </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if unsubscribe was successful and response sent </dd></dl>
 
 </div>
 </div>
@@ -691,6 +797,29 @@ Protected Attributes</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>true if the subscription was found and removed </dd>
 <dd>
 false if no matching subscription exists </dd></dl>
+
+</div>
+</div>
+<h2 class="groupheader">Friends And Related Function Documentation</h2>
+<a id="ab3b12d07f1d959273932ffa0086f8e20" name="ab3b12d07f1d959273932ffa0086f8e20"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab3b12d07f1d959273932ffa0086f8e20">&#9670;&#160;</a></span>DLNADevice</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">friend class <a class="el" href="classtiny__dlna_1_1DLNADevice.html">DLNADevice</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
