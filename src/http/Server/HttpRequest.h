@@ -77,7 +77,7 @@ class HttpRequest {
                      const char* mime = nullptr, void* ref = nullptr) {
     NullPrint nop;
     int len = writer(nop, ref);
-    return process(T_NOTIFY, url,len, writer, mime, ref);
+    return process(T_NOTIFY, url, len, writer, mime, ref);
   }
 
   virtual int put(Url& url, const char* mime, const char* data, int len = -1) {
@@ -293,8 +293,7 @@ class HttpRequest {
     if (writer) {
       size_t written = writer(*client_ptr, ref);
 #if DLNA_LOG_XML
-      NullPrint nop;
-      writer(nop, ref);
+      writer(Serial, ref);
 #endif
       if (written != len) {
         DlnaLogger.log(DlnaLogLevel::Error,

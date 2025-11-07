@@ -428,9 +428,8 @@ class DLNAMediaServer : public DLNADeviceInfo {
         "text/xml",
         [](Print& out, void* ref) -> size_t {
           auto self = (DLNAMediaServer*)ref;
-          self->streamActionItems(out, "BrowseResponse",
-                                  self->g_stream_startingIndex);
-          return 0;  // length not tracked; Print returns sizes internally
+          return self->streamActionItems(out, "BrowseResponse",
+                                         self->g_stream_startingIndex);
         },
         200, nullptr, this);
     return true;
@@ -468,9 +467,8 @@ class DLNAMediaServer : public DLNADeviceInfo {
         "text/xml",
         [](Print& out, void* ref) -> size_t {
           auto self = (DLNAMediaServer*)ref;
-          self->streamActionItems(out, "SearchResponse",
-                                  self->g_stream_startingIndex);
-          return 0;
+          return self->streamActionItems(out, "SearchResponse",
+                                         self->g_stream_startingIndex);
         },
         200, nullptr, this);
     return true;
@@ -483,17 +481,18 @@ class DLNAMediaServer : public DLNADeviceInfo {
         "text/xml",
         [](Print& out, void* ref) -> size_t {
           auto self = (DLNAMediaServer*)ref;
-          self->soapEnvelopeStart(out);
-          self->actionResponseStart(
+          size_t written = 0;
+          written += self->soapEnvelopeStart(out);
+          written += self->actionResponseStart(
               out, "GetSearchCapabilitiesResponse",
               "urn:schemas-upnp-org:service:ContentDirectory:1");
-          size_t written = 0;
           written += out.print("<SearchCaps>");
           written +=
               out.print(StringRegistry::nullStr(self->g_search_capabiities));
           written += out.print("</SearchCaps>\r\n");
-          self->actionResponseEnd(out, "GetSearchCapabilitiesResponse");
-          self->soapEnvelopeEnd(out);
+          written +=
+              self->actionResponseEnd(out, "GetSearchCapabilitiesResponse");
+          written += self->soapEnvelopeEnd(out);
           return written;
         },
         200, nullptr, this);
@@ -509,17 +508,18 @@ class DLNAMediaServer : public DLNADeviceInfo {
         "text/xml",
         [](Print& out, void* ref) -> size_t {
           auto self = (DLNAMediaServer*)ref;
-          self->soapEnvelopeStart(out);
-          self->actionResponseStart(
+          size_t written = 0;
+          written += self->soapEnvelopeStart(out);
+          written += self->actionResponseStart(
               out, "GetSortCapabilitiesResponse",
               "urn:schemas-upnp-org:service:ContentDirectory:1");
-          size_t written = 0;
           written += out.print("<SortCaps>");
           written +=
               out.print(StringRegistry::nullStr(self->g_sort_capabilities));
           written += out.print("</SortCaps>\r\n");
-          self->actionResponseEnd(out, "GetSortCapabilitiesResponse");
-          self->soapEnvelopeEnd(out);
+          written +=
+              self->actionResponseEnd(out, "GetSortCapabilitiesResponse");
+          written += self->soapEnvelopeEnd(out);
           return written;
         },
         200, nullptr, this);
@@ -535,15 +535,16 @@ class DLNAMediaServer : public DLNADeviceInfo {
         "text/xml",
         [](Print& out, void* ref) -> size_t {
           auto self = (DLNAMediaServer*)ref;
-          self->soapEnvelopeStart(out);
-          self->actionResponseStart(
+          size_t written = 0;
+          written += self->soapEnvelopeStart(out);
+          written += self->actionResponseStart(
               out, "GetSystemUpdateIDResponse",
               "urn:schemas-upnp-org:service:ContentDirectory:1");
-          size_t written = 0;
           Printf pr{out};
-          written += pr.printf("<Id>%d</Id>\r\n", self->g_stream_updateID);
-          self->actionResponseEnd(out, "GetSystemUpdateIDResponse");
-          self->soapEnvelopeEnd(out);
+          written += static_cast<size_t>(
+              pr.printf("<Id>%d</Id>\r\n", self->g_stream_updateID));
+          written += self->actionResponseEnd(out, "GetSystemUpdateIDResponse");
+          written += self->soapEnvelopeEnd(out);
           return written;
         },
         200, nullptr, this);
@@ -611,61 +612,70 @@ class DLNAMediaServer : public DLNADeviceInfo {
     return ContentQueryType::BrowseMetadata;
   }
 
-  void soapEnvelopeStart(Print& out) {
-    out.print("<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n");
-    out.print(
-        "<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\" "
-        "\r\n");
-    out.print(
+  size_t soapEnvelopeStart(Print& out) {
+    size_t written = 0;
+    written += out.print("<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n");
+    written += out.print(
+        "<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\" ");
+    written += out.print(
         "s:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\">\r\n");
-    out.print("<s:Body>\r\n");
+    written += out.print("<s:Body>\r\n");
+    return written;
   }
 
-  void soapEnvelopeEnd(Print& out) {
-    out.print("</s:Body>\r\n");
-    out.print("</s:Envelope>\r\n");
+  size_t soapEnvelopeEnd(Print& out) {
+    size_t written = 0;
+    written += out.print("</s:Body>\r\n");
+    written += out.print("</s:Envelope>\r\n");
+    return written;
   }
 
-  void actionResponseStart(Print& out, const char* responseName,
-                           const char* serviceNS) {
+  size_t actionResponseStart(Print& out, const char* responseName,
+                             const char* serviceNS) {
     // writes: <u:ResponseName xmlns:u="serviceNS">
     Printf pr{out};
-    pr.printf("<u:%s xmlns:u=\"%s\">\r\n", responseName, serviceNS);
+    return static_cast<size_t>(
+        pr.printf("<u:%s xmlns:u=\"%s\">\r\n", responseName, serviceNS));
   }
 
-  void actionResponseEnd(Print& out, const char* responseName) {
+  size_t actionResponseEnd(Print& out, const char* responseName) {
     Printf pr{out};
-    pr.printf("</u:%s>\r\n", responseName);
+    return static_cast<size_t>(pr.printf("</u:%s>\r\n", responseName));
   }
 
-  void streamActionItems(Print& out, const char* responseName,
-                         int startingIndex) {
+  size_t streamActionItems(Print& out, const char* responseName,
+                           int startingIndex) {
     // SOAP envelope start and response wrapper
-    soapEnvelopeStart(out);
-    actionResponseStart(out, responseName,
-                        "urn:schemas-upnp-org:service:ContentDirectory:1");
+    size_t written = 0;
+    written += soapEnvelopeStart(out);
+    written += actionResponseStart(
+        out, responseName, "urn:schemas-upnp-org:service:ContentDirectory:1");
 
     // Result -> DIDL-Lite
-    out.println("<Result>");
+    written += out.println("<Result>");
     // DIDL root with namespaces
-    streamDIDL(out, g_stream_numberReturned, startingIndex);
-    out.print("</Result>\r\n");
+    written += streamDIDL(out, g_stream_numberReturned, startingIndex);
+    written += out.print("</Result>\r\n");
 
     // numeric fields
     Printf pr{out};
-    pr.printf("<NumberReturned>%d</NumberReturned>\r\n",
-              g_stream_numberReturned);
-    pr.printf("<TotalMatches>%d</TotalMatches>\r\n", g_stream_totalMatches);
-    pr.printf("<UpdateID>%d</UpdateID>\r\n", g_stream_updateID);
+    written += static_cast<size_t>(pr.printf(
+        "<NumberReturned>%d</NumberReturned>\r\n", g_stream_numberReturned));
+    written += static_cast<size_t>(pr.printf(
+        "<TotalMatches>%d</TotalMatches>\r\n", g_stream_totalMatches));
+    written += static_cast<size_t>(
+        pr.printf("<UpdateID>%d</UpdateID>\r\n", g_stream_updateID));
 
-    actionResponseEnd(out, responseName);
-    soapEnvelopeEnd(out);
+    written += actionResponseEnd(out, responseName);
+    written += soapEnvelopeEnd(out);
+    return written;
   }
 
   /// Stream DIDL-Lite payload for a Browse/Search result
-  void streamDIDL(Print& out, int numberReturned, int startingIndex) {
+  size_t streamDIDL(Print& out, int numberReturned, int startingIndex) {
+    size_t written = 0;
     // Stream DIDL-Lite Result payload using helper
-    out.print(
+    written += out.print(
         "&lt;DIDL-Lite xmlns:dc=\"http://purl.org/dc/elements/1.1/\" "
         "xmlns:upnp=\"urn:schemas-upnp-org:metadata-1-0/upnp/\" "
         "xmlns=\"urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/\"&gt;\r\n");
@@ -682,17 +692,19 @@ class DLNAMediaServer : public DLNADeviceInfo {
             (item.itemClass == MediaItemClass::Folder) ? "container" : "item";
 
         Printf pr{out};
-        pr.printf("&lt;%s id=\"%s\" parentID=\"%s\" restricted=\"%d\"&gt;",
-                  nodeName, item.id ? item.id : "",
-                  item.parentID ? item.parentID : "0", item.restricted ? 1 : 0);
+        written += static_cast<size_t>(pr.printf(
+            "&lt;%s id=\"%s\" parentID=\"%s\" restricted=\"%d\"&gt;", nodeName,
+            item.id ? item.id : "", item.parentID ? item.parentID : "0",
+            item.restricted ? 1 : 0));
 
         // title
-        out.print("&lt;dc:title&gt;");
-        out.print(StringRegistry::nullStr(item.title));
-        out.print("&lt;/dc:title&gt;\r\n");
+        written += out.print("&lt;dc:title&gt;");
+        written += out.print(StringRegistry::nullStr(item.title));
+        written += out.print("&lt;/dc:title&gt;\r\n");
         if (mediaItemClassStr != nullptr) {
-          pr.printf("&lt;upnp:class&gt;%s&lt;/upnp:class&gt;\r\n",
-                    mediaItemClassStr);
+          written += static_cast<size_t>(
+              pr.printf("&lt;upnp:class&gt;%s&lt;/upnp:class&gt;\r\n",
+                        mediaItemClassStr));
         }
 
         // res with optional protocolInfo attribute
@@ -700,22 +712,23 @@ class DLNAMediaServer : public DLNADeviceInfo {
         if (!url.isEmpty()) {
           url.replaceAll("&", "&amp;");
           if (!StrView(item.mimeType).isEmpty()) {
-            pr.printf("&lt;res protocolInfo=\"http-get:*:%s:*\"&gt;",
-                      item.mimeType);
-            out.print(StringRegistry::nullStr(url.c_str()));
-            out.print("&lt;/res&gt;\r\n");
+            written += static_cast<size_t>(pr.printf(
+                "&lt;res protocolInfo=\"http-get:*:%s:*\"&gt;", item.mimeType));
+            written += out.print(StringRegistry::nullStr(url.c_str()));
+            written += out.print("&lt;/res&gt;\r\n");
           } else {
-            out.print("&lt;res&gt;");
-            out.print(StringRegistry::nullStr(url.c_str()));
-            out.print("&lt;/res&gt;\r\n");
+            written += out.print("&lt;res&gt;");
+            written += out.print(StringRegistry::nullStr(url.c_str()));
+            written += out.print("&lt;/res&gt;\r\n");
           }
         }
 
-        pr.printf("&lt;/%s&gt;\r\n", nodeName);
+        written += static_cast<size_t>(pr.printf("&lt;/%s&gt;\r\n", nodeName));
       }
     }
 
-    out.print("&lt;/DIDL-Lite&gt;\r\n");
+    written += out.print("&lt;/DIDL-Lite&gt;\r\n");
+    return written;
   }
 
   const char* toStr(MediaItemClass itemClass) {

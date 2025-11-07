@@ -191,7 +191,7 @@
 
 // Define whether to use std::vector (true) or custom Vector class (false)
 #ifndef DLNA_USE_STD
-#define DLNA_USE_STD true
+#define DLNA_USE_STD false
 #endif
 
 #ifndef DLNA_LOG_XML

@@ -323,8 +323,7 @@ class HttpServer {
     reply_header.write(this->client());
     callback(*client_ptr, ref);
 #if DLNA_LOG_XML
-    NullPrint nop;
-    callback(nop, ref);
+    callback(Serial, ref);
 #endif
     endClient();
   }
@@ -341,7 +340,6 @@ class HttpServer {
     reply_header.write(this->client());
     client_ptr->write((const uint8_t*)str, len);
     endClient();
-    // Serial.println(str);
   }
 
   void reply(const char* contentType, const uint8_t* str, int len,
