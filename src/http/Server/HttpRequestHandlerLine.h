@@ -1,16 +1,12 @@
 #pragma once
 
 #include "HttpHeader.h"
+#include "IHttpServer.h"
 
 namespace tiny_dlna {
 
-// forward declarations for the callback
-class HttpServer;
+class IHttpServer;
 class HttpRequestHandlerLine;
-
-// Callback function which provides result
-typedef void (*web_callback_fn)(HttpServer* server, const char* requestPath,
-                                HttpRequestHandlerLine* handlerLine);
 
 /**
  * @brief Used to register and process callbacks

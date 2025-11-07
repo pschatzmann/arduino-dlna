@@ -5,9 +5,10 @@
 #include "basic/Vector.h"
 #include "dlna/Action.h"
 #include "dlna/DLNAServiceInfo.h"
-#include "dlna/IUDPService.h"  // Ensure IUDPService is declared
 #include "dlna/StringRegistry.h"
 #include "dlna/xml/XMLPrinter.h"
+#include "http/Server/IHttpServer.h"
+#include "udp/IUDPService.h"  // Ensure IUDPService is declared
 
 namespace tiny_dlna {
 
@@ -25,6 +26,7 @@ namespace tiny_dlna {
 class DLNADeviceInfo {
   friend class XMLDeviceParser;
   friend class DLNAControlPoint;
+  template <typename>
   friend class DLNADevice;
 
  public:
@@ -271,7 +273,7 @@ class DLNADeviceInfo {
   bool is_subcription_active = false;
 
   /// to be implemented by subclasses
-  virtual void setupServices(HttpServer& server, IUDPService& udp) {}
+  virtual void setupServices(IHttpServer& server, IUDPService& udp) {}
 
   size_t printRoot(Print& out, void* ref) {
     XMLPrinter xp(out);

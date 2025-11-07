@@ -12,11 +12,15 @@
 #include "dlna/StringRegistry.h"
 #include "http/Http.h"
 #include "http/Server/HttpRequest.h"
+#include "http/Server/IHttpServer.h"
+#include "dlna/devices/ISubscriptionMgrDevice.h"
 
 namespace tiny_dlna {
 
 // forward declaration for friend
 class DLNAService;
+template <typename ClientType>
+class DLNADevice;
 
 /**
  * @struct Subscription
@@ -75,9 +79,18 @@ struct PendingNotification {
  * Note: `p_subscription` pointers may become invalid if a subscription is
  * removed; removal routines attempt to clean up pending entries, but a
  * stable UID approach is recommended for maximum robustness.
+ *
+ * The template parameter defines the HTTP client type used when delivering
+ * notifications (e.g. WiFiClient); callers should pass the client that is
+ * compatible with their transport stack.
+ *
+ * @tparam ClientType Arduino `Client` implementation used for outgoing
+ *         NOTIFY/SUBSCRIBE HTTP calls (e.g. `WiFiClient`, `EthernetClient`).
  */
-class SubscriptionMgrDevice {
-  friend class DLNADevice;
+template <typename ClientType>
+class SubscriptionMgrDevice : public ISubscriptionMgrDevice {
+    template <typename>
+    friend class DLNADevice;
 
  public:
   /**
@@ -115,7 +128,8 @@ class SubscriptionMgrDevice {
    * @return Str Assigned or renewed SID for the subscription
    */
   Str subscribe(DLNAServiceInfo& service, const char* callbackUrl,
-                const char* sid = nullptr, uint32_t timeoutSec = 1800) {
+                const char* sid = nullptr,
+                uint32_t timeoutSec = 1800) override {
     // simple SID generation
     DlnaLogger.log(DlnaLogLevel::Info, "subscribe: %s %s",
                    StringRegistry::nullStr(service.service_id, "(null)"),
@@ -187,7 +201,7 @@ class SubscriptionMgrDevice {
    * @return true if the subscription was found and removed
    * @return false if no matching subscription exists
    */
-  bool unsubscribe(DLNAServiceInfo& service, const char* sid) {
+  bool unsubscribe(DLNAServiceInfo& service, const char* sid) override {
     for (size_t i = 0; i < subscriptions.size(); ++i) {
       Subscription* s = subscriptions[i];
       if (s->service == &service && StrView(s->sid).equals(sid)) {
@@ -225,7 +239,8 @@ class SubscriptionMgrDevice {
    * @param ref Opaque pointer passed to `changeWriter` when it is invoked
    */
   void addChange(DLNAServiceInfo& service,
-                 std::function<size_t(Print&, void*)> changeWriter, void* ref) {
+                 std::function<size_t(Print&, void*)> changeWriter,
+                 void* ref) override {
     bool any = false;
     // do not enqueue if subscriptions are inactive
     if (!is_active) return;
@@ -261,7 +276,7 @@ class SubscriptionMgrDevice {
    * exceed MAX_NOTIFY_RETIES are dropped. Expired subscriptions are removed
    * prior to delivery.
    */
-  void publish() {
+  void publish() override {
     // First remove expired subscriptions so we don't deliver to them.
     removeExpired();
     if (pending_list.empty()) return;
@@ -289,7 +304,7 @@ class SubscriptionMgrDevice {
 
       // Build and send HTTP notify as in previous implementation
       Url cbUrl(sub.callback_url.c_str());
-      DLNAHttpRequest http;
+      HttpRequest<ClientType> http;
       http.setHost(cbUrl.host());
       http.setAgent("tiny-dlna-notify");
       http.request().put("NT", "upnp:event");
@@ -339,7 +354,7 @@ class SubscriptionMgrDevice {
    * `expires_at` timestamp has passed. This also removes pending
    * notifications related to the unsubscribed entries.
    */
-  void removeExpired() {
+  void removeExpired() override {
     uint64_t now = millis();
     for (int i = 0; i < subscriptions.size();) {
       Subscription* s = subscriptions[i];
@@ -360,13 +375,13 @@ class SubscriptionMgrDevice {
    * @brief Number of active subscriptions
    * @return int count of subscriptions
    */
-  int subscriptionsCount() { return subscriptions.size(); }
+  int subscriptionsCount() override { return subscriptions.size(); }
 
   /**
    * @brief Number of queued pending notifications
    * @return int count of pending notifications
    */
-  int pendingCount() { return pending_list.size(); }
+  int pendingCount() override { return pending_list.size(); }
 
   /**
    * @brief Enable or disable subscription delivery.
@@ -376,7 +391,7 @@ class SubscriptionMgrDevice {
    * delivering stale notifications when re-enabled. Use
    * `isSubscriptionsActive()` to query the current state.
    */
-  void setSubscriptionsActive(bool flag) {
+  void setSubscriptionsActive(bool flag) override {
     is_active = flag;
     if (!is_active) {
       // clear any queued notifications when subscriptions are turned off
@@ -385,13 +400,13 @@ class SubscriptionMgrDevice {
   }
 
   /// Convenience method to disable subscriptions at the end of the lifecycle
-  void end() { setSubscriptionsActive(false); }
+  void end() override { setSubscriptionsActive(false); }
 
   /**
    * @brief Query whether subscription delivery is active
    * @return true if subscription delivery is enabled
    */
-  bool isSubscriptionsActive() const { return is_active; }
+  bool isSubscriptionsActive() const override { return is_active; }
 
  protected:
   // store pointers to heap-allocated Subscription objects. This keeps
@@ -494,7 +509,8 @@ class SubscriptionMgrDevice {
    * @param service Reference to the DLNA service to subscribe to
    * @return true if subscription was successful and response sent
    */
-  bool processSubscribeRequest(HttpServer& server, DLNAServiceInfo& service) {
+  bool processSubscribeRequest(IHttpServer& server,
+                               DLNAServiceInfo& service) override {
     // Get headers from request
     const char* callbackHeader = server.requestHeader().get("CALLBACK");
     const char* timeoutHeader = server.requestHeader().get("TIMEOUT");
@@ -570,7 +586,8 @@ class SubscriptionMgrDevice {
    * @param service Reference to the DLNA service to unsubscribe from
    * @return true if unsubscribe was successful and response sent
    */
-  bool processUnsubscribeRequest(HttpServer& server, DLNAServiceInfo& service) {
+  bool processUnsubscribeRequest(IHttpServer& server,
+                                 DLNAServiceInfo& service) override {
     const char* sid = server.requestHeader().get("SID");
 
     DlnaLogger.log(DlnaLogLevel::Info, "- UNSUBSCRIBE SID: %s",

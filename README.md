@@ -25,10 +25,26 @@ This library provides memory-efficient classes to implement __DLNA devices__ and
   - [DLNAControlPointMediaServer](https://pschatzmann.github.io/arduino-dlna/classtiny__dlna_1_1DLNAControlPointMediaServer.html)
 
 
+When instantiating the templated networking classes pick the client and server
+types that match your transport stack. The table below shows the recommended
+pairings for the common Arduino WiFi and Ethernet libraries.
+
+| Class | WiFi | Ethernet |
+| - | - | - |
+| `HttpRequest` | `tiny_dlna::HttpRequest<WiFiClient>` | `tiny_dlna::HttpRequest<EthernetClient>` |
+| `HttpServer` | `tiny_dlna::HttpServer<WiFiClient, WiFiServer>`  | `tiny_dlna::HttpServer<EthernetClient, EthernetServer>` |
+| `DLNADevice` | `tiny_dlna::DLNADevice<WiFiClient>` | `tiny_dlna::DLNADevice<EthernetClient>` |
+| `DLNAMediaRenderer` | `tiny_dlna::DLNAMediaRenderer<WiFiClient>` | `tiny_dlna::DLNAMediaRenderer<EthernetClient>` |
+| `DLNAMediaServer` | `tiny_dlna::DLNAMediaServer<WiFiClient>` | `tiny_dlna::DLNAMediaServer<EthernetClient>` |
+| `UDPService` | `tiny_dlna::UDPService<WiFiUDP>` | `tiny_dlna::UDPService<EthernetUDP>` |
+
+
+
 ## Project Documentation
 
 * [Wiki](https://github.com/pschatzmann/arduino-dlna/wiki)
 * [Class Documentation](https://pschatzmann.github.io/arduino-dlna/annotated.html)
+
 
 ## Installation in Arduino
 

@@ -1,13 +1,13 @@
 // Example to test the GUPnP Network Light Test Application - we do not do any discovery
 
+#include "WiFi.h"
 #include "DLNA.h"
 
 const char* ssid = "SSID";
 const char* password = "PASSWORD";
-DLNAControlPoint cp;
-WiFiClient client;
-DLNAHttpRequest http(client);
-UDPAsyncService udp;
+HttpRequest<WiFiClient> http;
+UDPService<WiFiUDP> udp;
+DLNAControlPoint cp(http, udp);
 uint32_t timeout = 0;
 bool current_status = false;
 const char* device_type = "urn:schemas-upnp-org:device:DimmableLight:1";
@@ -50,7 +50,7 @@ void setup() {
 
   setupWifi();
   setupDevice();
-  if (!cp.begin(http, udp, device_type, 20000, true)) {
+  if (!cp.begin( device_type, 20000, true)) {
     Serial.println("Dimmable Light not found");
     while (true);  // stop processing
   }

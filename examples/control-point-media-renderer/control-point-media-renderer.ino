@@ -2,6 +2,7 @@
 // Discovers MediaRenderer devices and demonstrates setting AVTransport URI,
 // starting playback, changing volume, and querying transport state.
 
+#include "WiFi.h"
 #include "DLNA.h"
 
 // Replace these with your WiFi credentials
@@ -9,11 +10,10 @@ const char* ssid = "YOUR_SSID";
 const char* password = "YOUR_PASSWORD";
 
 WiFiServer wifi;
-HttpServer server(wifi);
+HttpServer<WiFiClient, WiFiServer> server(wifi);
 DLNAControlPoint cp(server, 9000); // with Notifications
-WiFiClient client;
-DLNAHttpRequest http(client);
-UDPAsyncService udp;
+HttpRequest<WiFiClient> http;
+UDPService<WiFiUDP> udp;
 DLNAControlPointMediaRenderer renderer(cp, http, udp);
 
 void setupWifi() {

@@ -1,13 +1,14 @@
 #pragma once
 
 #include "http/Http.h"
+#include "http/Server/IHttpServer.h"
 #include "dlna/Action.h"
 #include "basic/Str.h"
 #include "basic/StrView.h"
 
 namespace tiny_dlna {
 
-typedef void (*http_callback)(HttpServer* server, const char* requestPath,
+typedef void (*http_callback)(IHttpServer* server, const char* requestPath,
                               HttpRequestHandlerLine* hl);
 
 /**

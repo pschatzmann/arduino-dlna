@@ -9,6 +9,8 @@
 #include "dlna/devices/DLNADevice.h"
 #include "dlna/xml/XMLAttributeParser.h"
 #include "dlna/xml/XMLParserPrint.h"
+#include "http/Server/IHttpServer.h"
+#include "udp/IUDPService.h"
 
 namespace tiny_dlna {
 /**
@@ -55,10 +57,20 @@ enum class MediaEvent { SET_URI, PLAY, PAUSE, STOP, SET_VOLUME, SET_MUTE };
  * bool for success/failure and avoid heavy dynamic memory allocations in
  * the hot path.
  *
+ * The template parameter declares the HTTP client type to use for outgoing
+ * control and subscription traffic. Supply the client that matches the
+ * networking stack in your sketch (for example WiFiClient).
+ *
+ * @tparam ClientType Arduino `Client` implementation used for outbound HTTP
+ *         control and event traffic (e.g. `WiFiClient`, `EthernetClient`).
+ *
  * Author: Phil Schatzmann
  */
+template <typename ClientType>
 class DLNAMediaRenderer : public DLNADeviceInfo {
  public:
+  using HttpClient = ClientType;
+  using DeviceType = DLNADevice<ClientType>;
   // event handler: (event, reference to MediaRenderer)
   typedef void (*MediaEventHandler)(MediaEvent event,
                                     DLNAMediaRenderer& renderer);
@@ -86,10 +98,10 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
 
   /**
    *  @brief Recommended constructor
-   * Construct a MediaRenderer bound to an HttpServer and IUDPService.
+  * Construct a MediaRenderer bound to an HTTP server and IUDPService.
    * The provided references are stored and used when calling begin().
    */
-  DLNAMediaRenderer(HttpServer& server, IUDPService& udp)
+  DLNAMediaRenderer(IHttpServer& server, IUDPService& udp)
       : DLNAMediaRenderer() {
     setHttpServer(server);
     setUdpService(udp);
@@ -108,7 +120,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
   bool loop() { return dlna_device.loop(); }
 
   /// Set the http server instance the MediaRenderer should use
-  void setHttpServer(HttpServer& server) {
+  void setHttpServer(IHttpServer& server) {
     p_server = &server;
     // prepare handler context and register each service via helpers
     server.setReference(this);
@@ -242,7 +254,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
   const char* getTransportState() { return transport_state.c_str(); }
 
   /// Provides access to the internal DLNA device instance
-  DLNADevice& device() { return dlna_device; }
+  IDevice& device() { return dlna_device; }
 
   /// Enable/disable subscription notifications
   void setSubscriptionsActive(bool flag) {
@@ -407,16 +419,16 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     }
   }
   /// Defines a custom action rule for the media renderer.
-  void setCustomActionRule(const char* suffix,
-                           bool (*handler)(DLNAMediaRenderer*, ActionRequest&,
-                                           HttpServer&)) {
+  void setCustomActionRule(
+    const char* suffix,
+    bool (*handler)(DLNAMediaRenderer*, ActionRequest&, IHttpServer&)) {
     for (size_t i = 0; i < rules.size(); ++i) {
       if (StrView(rules[i].suffix).equals(suffix)) {
         rules[i].handler = handler;
         return;
       }
     }
-    rules.push_back({suffix, handler});
+  rules.push_back({suffix, handler});
   }
 
   /// Set the active ConnectionID for the connection manager
@@ -476,7 +488,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
  protected:
   struct ActionRule {
     const char* suffix;
-    bool (*handler)(DLNAMediaRenderer*, ActionRequest&, HttpServer&);
+    bool (*handler)(DLNAMediaRenderer*, ActionRequest&, IHttpServer&);
   };
 
   tiny_dlna::Str current_uri;
@@ -490,8 +502,8 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
   tiny_dlna::Str transport_state = "NO_MEDIA_PRESENT";
   const char* st = "urn:schemas-upnp-org:device:MediaRenderer:1";
   const char* usn = "uuid:09349455-2941-4cf7-9847-1dd5ab210e97";
-  DLNADevice dlna_device;
-  HttpServer* p_server = nullptr;
+  DeviceType dlna_device;
+  IHttpServer* p_server = nullptr;
   IUDPService* p_udp_member = nullptr;
   const char* connectionID = "0";
   const char* sourceProto = "";
@@ -512,7 +524,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
 
   // Note: descriptor printing is performed inline in the descriptor
   // callbacks below using non-capturing lambdas passed to
-  // HttpServer::reply. That avoids heap buffering while keeping the
+  // IHttpServer::reply. That avoids heap buffering while keeping the
   // callsites concise. The old static helper functions were removed.
 
   /// serviceAbbrev: AVT, RCS, CMS
@@ -596,7 +608,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
   }
 
   // Static descriptor callbacks: print the SCPD XML for each service
-  static void transportDescrCB(HttpServer* server, const char* requestPath,
+  static void transportDescrCB(IHttpServer* server, const char* requestPath,
                                HttpRequestHandlerLine* hl) {
     DLNAMediaRenderer* self = getRenderer(server);
     if (self) {
@@ -621,7 +633,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     }
   }
 
-  static void connmgrDescrCB(HttpServer* server, const char* requestPath,
+  static void connmgrDescrCB(IHttpServer* server, const char* requestPath,
                              HttpRequestHandlerLine* hl) {
     DLNAMediaRenderer* self = getRenderer(server);
     if (self) {
@@ -642,7 +654,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     }
   }
 
-  static void controlDescrCB(HttpServer* server, const char* requestPath,
+  static void controlDescrCB(IHttpServer* server, const char* requestPath,
                              HttpRequestHandlerLine* hl) {
     DLNAMediaRenderer* self = getRenderer(server);
     if (self) {
@@ -664,10 +676,10 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
   }
 
   // Generic control callback: parse SOAP action and dispatch to instance
-  static void controlCB(HttpServer* server, const char* requestPath,
+  static void controlCB(IHttpServer* server, const char* requestPath,
                         HttpRequestHandlerLine* hl) {
     ActionRequest action;
-    DLNADevice::parseActionRequest(server, requestPath, hl, action);
+  DeviceType::parseActionRequest(server, requestPath, hl, action);
 
     DLNAMediaRenderer* self = getRenderer(server);
 
@@ -685,18 +697,19 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
   }
 
   /// Determine the Renderer with the help of the server
-  static DLNAMediaRenderer* getRenderer(HttpServer* server) {
-    DLNADevice* p_device = (DLNADevice*)server->getReference();
-    if (p_device == nullptr) return nullptr;
-    return (DLNAMediaRenderer*)p_device->getReference();
+  static DLNAMediaRenderer* getRenderer(IHttpServer* server) {
+  auto* p_device =
+  static_cast<IDevice*>(server->getReference());
+  if (p_device == nullptr) return nullptr;
+  return static_cast<DLNAMediaRenderer*>(p_device->getReference());
   }
 
   /// After the subscription we publish all relevant properties
-  static void eventSubscriptionHandler(HttpServer* server,
+  static void eventSubscriptionHandler(IHttpServer* server,
                                        const char* requestPath,
                                        HttpRequestHandlerLine* hl) {
     bool is_subscribe = false;
-    DLNADevice::handleSubscription(server, requestPath, hl, is_subscribe);
+  DeviceType::handleSubscription(server, requestPath, hl, is_subscribe);
     if (is_subscribe) {
       DLNAMediaRenderer* self = getRenderer(server);
       assert(self != nullptr);
@@ -711,7 +724,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
   }
 
   // Setup and register individual services
-  void setupTransportService(HttpServer* server) {
+  void setupTransportService(IHttpServer* server) {
     DLNAServiceInfo avt;
     // Use static descriptor callback and control handler
     avt.setup("urn:schemas-upnp-org:service:AVTransport:1",
@@ -724,7 +737,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     addService(avt);
   }
 
-  void setupConnectionManagerService(HttpServer* server) {
+  void setupConnectionManagerService(IHttpServer* server) {
     DLNAServiceInfo cm;
     cm.setup("urn:schemas-upnp-org:service:ConnectionManager:1",
              "urn:upnp-org:serviceId:ConnectionManager", "/CM/service.xml",
@@ -736,7 +749,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     addService(cm);
   }
 
-  void setupRenderingControlService(HttpServer* server) {
+  void setupRenderingControlService(IHttpServer* server) {
     DLNAServiceInfo rc;
     rc.setup("urn:schemas-upnp-org:service:RenderingControl:1",
              "urn:upnp-org:serviceId:RenderingControl", "/RC/service.xml",
@@ -749,10 +762,10 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
   }
 
   /// Register all services (called when HTTP server is set)
-  void setupServicesImpl(HttpServer* server) {
+  void setupServicesImpl(IHttpServer* server) {
     DlnaLogger.log(DlnaLogLevel::Info, "MediaRenderer::setupServices");
     // register the individual services and register their endpoints on the
-    // provided HttpServer
+  // provided HTTP server
     setupTransportService(server);
     setupConnectionManagerService(server);
     setupRenderingControlService(server);
@@ -762,10 +775,10 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
    * @brief Process parsed SOAP ActionRequest and dispatch to appropriate
    * handler
    * @param action Parsed ActionRequest
-   * @param server HttpServer for reply
+  * @param server IHttpServer for reply
    * @return true if action handled, false if not supported
    */
-  bool processAction(ActionRequest& action, HttpServer& server) {
+  bool processAction(ActionRequest& action, IHttpServer& server) {
     DlnaLogger.log(DlnaLogLevel::Info, "DLNAMediaRenderer::processAction: %s",
                    action.getAction());
     auto& action_str = action.getActionStr();
@@ -787,33 +800,33 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
   }
 
   // Per-action handlers (match MediaServer pattern)
-  bool processActionPlay(ActionRequest& action, HttpServer& server) {
+  bool processActionPlay(ActionRequest& action, IHttpServer& server) {
     setActive(true);
     if (event_cb) event_cb(MediaEvent::PLAY, *this);
     server.reply(
         "text/xml",
         [](Print& out, void* ref) -> size_t {
           (void)ref;
-          return DLNADevice::printReplyXML(out, "PlayResponse", "AVTransport");
+          return DeviceType::printReplyXML(out, "PlayResponse", "AVTransport");
         },
         200, nullptr, this);
     return true;
   }
 
-  bool processActionPause(ActionRequest& action, HttpServer& server) {
+  bool processActionPause(ActionRequest& action, IHttpServer& server) {
     setActive(false);
     if (event_cb) event_cb(MediaEvent::PAUSE, *this);
     server.reply(
         "text/xml",
         [](Print& out, void* ref) -> size_t {
           (void)ref;
-          return DLNADevice::printReplyXML(out, "PauseResponse", "AVTransport");
+          return DeviceType::printReplyXML(out, "PauseResponse", "AVTransport");
         },
         200, nullptr, this);
     return true;
   }
 
-  bool processActionStop(ActionRequest& action, HttpServer& server) {
+  bool processActionStop(ActionRequest& action, IHttpServer& server) {
     // use stop() to ensure state reset and application callback are invoked
     stop();
     if (event_cb) event_cb(MediaEvent::STOP, *this);
@@ -821,20 +834,20 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
         "text/xml",
         [](Print& out, void* ref) -> size_t {
           (void)ref;
-          return DLNADevice::printReplyXML(out, "StopResponse", "AVTransport");
+          return DeviceType::printReplyXML(out, "StopResponse", "AVTransport");
         },
         200, nullptr, this);
     return true;
   }
 
   bool processActionGetCurrentTransportActions(ActionRequest& action,
-                                               HttpServer& server) {
+                                               IHttpServer& server) {
     server.reply(
         "text/xml",
         [](Print& out, void* ref) -> size_t {
           // Stream reply directly: delegate to printReplyXML which will
           // write headers and invoke the inner writer with the same ref.
-          return DLNADevice::printReplyXML(
+          return DeviceType::printReplyXML(
               out, "GetCurrentTransportActionsResponse", "AVTransport",
               [](Print& o, void* innerRef) -> size_t {
                 size_t written = 0;
@@ -851,12 +864,13 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
   }
 
   // ConnectionManager: GetProtocolInfo
-  bool processActionGetProtocolInfo(ActionRequest& action, HttpServer& server) {
+  bool processActionGetProtocolInfo(ActionRequest& action,
+                                   IHttpServer& server) {
     server.reply(
         "text/xml",
         [](Print& out, void* ref) -> size_t {
           auto self = (DLNAMediaRenderer*)ref;
-          return DLNADevice::replyGetProtocolInfo(
+          return DeviceType::replyGetProtocolInfo(
               out, self->getSourceProtocols(), self->getSinkProtocols());
         },
         200, nullptr, this);
@@ -865,12 +879,12 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
 
   // ConnectionManager: GetCurrentConnectionIDs
   bool processActionGetCurrentConnectionIDs(ActionRequest& action,
-                                            HttpServer& server) {
+                                            IHttpServer& server) {
     server.reply(
         "text/xml",
         [](Print& out, void* ref) -> size_t {
           auto self = (DLNAMediaRenderer*)ref;
-          return DLNADevice::replyGetCurrentConnectionIDs(
+          return DeviceType::replyGetCurrentConnectionIDs(
               out, self->getConnectionID());
         },
         200, nullptr, this);
@@ -879,12 +893,12 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
 
   // ConnectionManager: GetCurrentConnectionInfo
   bool processActionGetCurrentConnectionInfo(ActionRequest& action,
-                                             HttpServer& server) {
+                                             IHttpServer& server) {
     server.reply(
         "text/xml",
         [](Print& out, void* ref) -> size_t {
           auto self = (DLNAMediaRenderer*)ref;
-          return DLNADevice::replyGetCurrentConnectionInfo(
+          return DeviceType::replyGetCurrentConnectionInfo(
               out, self->getSinkProtocols(), self->getConnectionID(), "Input");
         },
         200, nullptr, this);
@@ -893,11 +907,11 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
 
   // AVTransport: GetDeviceCapabilities
   bool processActionGetDeviceCapabilities(ActionRequest& action,
-                                          HttpServer& server) {
+                                          IHttpServer& server) {
     server.reply(
         "text/xml",
         [](Print& out, void* ref) -> size_t {
-          return DLNADevice::printReplyXML(
+          return DeviceType::printReplyXML(
               out, "GetDeviceCapabilitiesResponse", "AVTransport",
               [](Print& o, void* innerRef) -> size_t {
                 auto self = (DLNAMediaRenderer*)innerRef;
@@ -924,11 +938,11 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
 
   // AVTransport: GetTransportInfo
   bool processActionGetTransportInfo(ActionRequest& action,
-                                     HttpServer& server) {
+                                     IHttpServer& server) {
     server.reply(
         "text/xml",
         [](Print& out, void* ref) -> size_t {
-          return DLNADevice::printReplyXML(
+          return DeviceType::printReplyXML(
               out, "GetTransportInfoResponse", "AVTransport",
               [](Print& o, void* innerRef) -> size_t {
                 auto self = (DLNAMediaRenderer*)innerRef;
@@ -955,11 +969,11 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
 
   // AVTransport: GetTransportSettings
   bool processActionGetTransportSettings(ActionRequest& action,
-                                         HttpServer& server) {
+                                         IHttpServer& server) {
     server.reply(
         "text/xml",
         [](Print& out, void* ref) -> size_t {
-          return DLNADevice::printReplyXML(
+          return DeviceType::printReplyXML(
               out, "GetTransportSettingsResponse", "AVTransport",
               [](Print& o, void* innerRef) -> size_t {
                 auto self = (DLNAMediaRenderer*)innerRef;
@@ -984,11 +998,12 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
   }
 
   // AVTransport: GetMediaInfo
-  bool processActionGetMediaInfo(ActionRequest& action, HttpServer& server) {
+  bool processActionGetMediaInfo(ActionRequest& action,
+                                 IHttpServer& server) {
     server.reply(
         "text/xml",
         [](Print& out, void* ref) -> size_t {
-          return DLNADevice::printReplyXML(
+          return DeviceType::printReplyXML(
               out, "GetMediaInfoResponse", "AVTransport",
               [](Print& o, void* innerRef) -> size_t {
                 auto self = (DLNAMediaRenderer*)innerRef;
@@ -1039,7 +1054,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
   }
 
   bool processActionSetAVTransportURI(ActionRequest& action,
-                                      HttpServer& server) {
+                                      IHttpServer& server) {
     const char* uri = action.getArgumentValue("CurrentURI");
     if (uri && *uri) {
       setPlaybackURL(uri);
@@ -1048,7 +1063,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
           "text/xml",
           [](Print& out, void* ref) -> size_t {
             (void)ref;
-            return DLNADevice::printReplyXML(out, "SetAVTransportURIResponse",
+            return DeviceType::printReplyXML(out, "SetAVTransportURIResponse",
                                              "AVTransport");
           },
           200, nullptr, this);
@@ -1061,7 +1076,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     }
   }
 
-  bool processActionSetVolume(ActionRequest& action, HttpServer& server) {
+  bool processActionSetVolume(ActionRequest& action, IHttpServer& server) {
     int desiredVolume = action.getArgumentIntValue("DesiredVolume");
     setVolume((uint8_t)desiredVolume);
     if (event_cb) event_cb(MediaEvent::SET_VOLUME, *this);
@@ -1069,14 +1084,14 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
         "text/xml",
         [](Print& out, void* ref) -> size_t {
           (void)ref;
-          return DLNADevice::printReplyXML(out, "SetVolumeResponse",
+          return DeviceType::printReplyXML(out, "SetVolumeResponse",
                                            "RenderingControl");
         },
         200, nullptr, this);
     return true;
   }
 
-  bool processActionSetMute(ActionRequest& action, HttpServer& server) {
+  bool processActionSetMute(ActionRequest& action, IHttpServer& server) {
     bool desiredMute = action.getArgumentIntValue("DesiredMute") != 0;
     setMuted(desiredMute);
     if (event_cb) event_cb(MediaEvent::SET_MUTE, *this);
@@ -1084,18 +1099,18 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
         "text/xml",
         [](Print& out, void* ref) -> size_t {
           (void)ref;
-          return DLNADevice::printReplyXML(out, "SetMuteResponse",
+          return DeviceType::printReplyXML(out, "SetMuteResponse",
                                            "RenderingControl");
         },
         200, nullptr, this);
     return true;
   }
 
-  bool processActionGetMute(ActionRequest& action, HttpServer& server) {
+  bool processActionGetMute(ActionRequest& action, IHttpServer& server) {
     server.reply(
         "text/xml",
         [](Print& out, void* ref) -> size_t {
-          return DLNADevice::printReplyXML(
+          return DeviceType::printReplyXML(
               out, "GetMuteResponse", "RenderingControl",
               [](Print& o, void* innerRef) -> size_t {
                 auto self = (DLNAMediaRenderer*)innerRef;
@@ -1111,11 +1126,11 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     return true;
   }
 
-  bool processActionGetVolume(ActionRequest& action, HttpServer& server) {
+  bool processActionGetVolume(ActionRequest& action, IHttpServer& server) {
     server.reply(
         "text/xml",
         [](Print& out, void* ref) -> size_t {
-          return DLNADevice::printReplyXML(
+          return DeviceType::printReplyXML(
               out, "GetVolumeResponse", "RenderingControl",
               [](Print& o, void* innerRef) -> size_t {
                 auto self = (DLNAMediaRenderer*)innerRef;
@@ -1135,83 +1150,83 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
 
   /// Setup the action handling rules
   void setupRules() {
-    rules.push_back({"Play", [](DLNAMediaRenderer* self, ActionRequest& action,
-                                HttpServer& server) {
+  rules.push_back({"Play", [](DLNAMediaRenderer* self, ActionRequest& action,
+                IHttpServer& server) {
                        return self->processActionPlay(action, server);
                      }});
-    rules.push_back({"Pause", [](DLNAMediaRenderer* self, ActionRequest& action,
-                                 HttpServer& server) {
+  rules.push_back({"Pause", [](DLNAMediaRenderer* self, ActionRequest& action,
+                 IHttpServer& server) {
                        return self->processActionPause(action, server);
                      }});
-    rules.push_back({"Stop", [](DLNAMediaRenderer* self, ActionRequest& action,
-                                HttpServer& server) {
+  rules.push_back({"Stop", [](DLNAMediaRenderer* self, ActionRequest& action,
+                IHttpServer& server) {
                        return self->processActionStop(action, server);
                      }});
-    rules.push_back({"GetCurrentTransportActions",
-                     [](DLNAMediaRenderer* self, ActionRequest& action,
-                        HttpServer& server) {
+   rules.push_back({"GetCurrentTransportActions",
+              [](DLNAMediaRenderer* self, ActionRequest& action,
+                IHttpServer& server) {
                        return self->processActionGetCurrentTransportActions(
                            action, server);
                      }});
-    rules.push_back(
-        {"GetTransportInfo", [](DLNAMediaRenderer* self, ActionRequest& action,
-                                HttpServer& server) {
+  rules.push_back(
+    {"GetTransportInfo", [](DLNAMediaRenderer* self, ActionRequest& action,
+                IHttpServer& server) {
            return self->processActionGetTransportInfo(action, server);
          }});
-    rules.push_back(
-        {"GetTransportSettings", [](DLNAMediaRenderer* self,
-                                    ActionRequest& action, HttpServer& server) {
+  rules.push_back(
+    {"GetTransportSettings", [](DLNAMediaRenderer* self,
+                  ActionRequest& action, IHttpServer& server) {
            return self->processActionGetTransportSettings(action, server);
          }});
-    rules.push_back(
-        {"GetMediaInfo", [](DLNAMediaRenderer* self, ActionRequest& action,
-                            HttpServer& server) {
+  rules.push_back(
+    {"GetMediaInfo", [](DLNAMediaRenderer* self, ActionRequest& action,
+              IHttpServer& server) {
            return self->processActionGetMediaInfo(action, server);
          }});
-    rules.push_back({"GetDeviceCapabilities",
-                     [](DLNAMediaRenderer* self, ActionRequest& action,
-                        HttpServer& server) {
+   rules.push_back({"GetDeviceCapabilities",
+              [](DLNAMediaRenderer* self, ActionRequest& action,
+                IHttpServer& server) {
                        return self->processActionGetDeviceCapabilities(action,
                                                                        server);
                      }});
-    rules.push_back(
-        {"SetAVTransportURI", [](DLNAMediaRenderer* self, ActionRequest& action,
-                                 HttpServer& server) {
+  rules.push_back(
+    {"SetAVTransportURI", [](DLNAMediaRenderer* self, ActionRequest& action,
+                 IHttpServer& server) {
            return self->processActionSetAVTransportURI(action, server);
          }});
-    rules.push_back(
-        {"SetVolume", [](DLNAMediaRenderer* self, ActionRequest& action,
-                         HttpServer& server) {
+  rules.push_back(
+    {"SetVolume", [](DLNAMediaRenderer* self, ActionRequest& action,
+             IHttpServer& server) {
            return self->processActionSetVolume(action, server);
          }});
-    rules.push_back({"SetMute", [](DLNAMediaRenderer* self,
-                                   ActionRequest& action, HttpServer& server) {
+  rules.push_back({"SetMute", [](DLNAMediaRenderer* self,
+                   ActionRequest& action, IHttpServer& server) {
                        return self->processActionSetMute(action, server);
                      }});
-    rules.push_back({"GetMute", [](DLNAMediaRenderer* self,
-                                   ActionRequest& action, HttpServer& server) {
+  rules.push_back({"GetMute", [](DLNAMediaRenderer* self,
+                   ActionRequest& action, IHttpServer& server) {
                        return self->processActionGetMute(action, server);
                      }});
-    rules.push_back(
-        {"GetVolume", [](DLNAMediaRenderer* self, ActionRequest& action,
-                         HttpServer& server) {
+  rules.push_back(
+    {"GetVolume", [](DLNAMediaRenderer* self, ActionRequest& action,
+             IHttpServer& server) {
            return self->processActionGetVolume(action, server);
          }});
     // ConnectionManager rules
-    rules.push_back(
-        {"GetProtocolInfo", [](DLNAMediaRenderer* self, ActionRequest& action,
-                               HttpServer& server) {
+  rules.push_back(
+    {"GetProtocolInfo", [](DLNAMediaRenderer* self, ActionRequest& action,
+                 IHttpServer& server) {
            return self->processActionGetProtocolInfo(action, server);
          }});
-    rules.push_back({"GetCurrentConnectionIDs",
-                     [](DLNAMediaRenderer* self, ActionRequest& action,
-                        HttpServer& server) {
+   rules.push_back({"GetCurrentConnectionIDs",
+              [](DLNAMediaRenderer* self, ActionRequest& action,
+                IHttpServer& server) {
                        return self->processActionGetCurrentConnectionIDs(
                            action, server);
                      }});
-    rules.push_back({"GetCurrentConnectionInfo",
-                     [](DLNAMediaRenderer* self, ActionRequest& action,
-                        HttpServer& server) {
+   rules.push_back({"GetCurrentConnectionInfo",
+              [](DLNAMediaRenderer* self, ActionRequest& action,
+                IHttpServer& server) {
                        return self->processActionGetCurrentConnectionInfo(
                            action, server);
                      }});

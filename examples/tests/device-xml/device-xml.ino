@@ -8,23 +8,23 @@ void setupDevice() {
   device_info.setDeviceType("urn:schemas-upnp-org:device:MediaRenderer:1");
   device_info.setUDN("uuid:09349455-2941-4cf7-9847-0dd5ab210e97");
   
-  auto dummyCB = [](HttpServer* server, const char* requestPath,
+  auto dummyCB = [](IHttpServer* server, const char* requestPath,
                     HttpRequestHandlerLine* hl) {
     DlnaLogger.log(DlnaLogLevel::Error, "Unhandled request: %s", requestPath);
     server->reply("text/xml", "<test/>");
   };
 
-  auto transportCB = [](HttpServer* server, const char* requestPath,
+  auto transportCB = [](IHttpServer* server, const char* requestPath,
                         HttpRequestHandlerLine* hl) {
   server->reply("text/xml", [](Print& out, void*) -> size_t { tiny_dlna::DLNAMediaRendererTransportDescr d; return d.printDescr(out); });
   };
 
-  auto connmgrCB = [](HttpServer* server, const char* requestPath,
+  auto connmgrCB = [](IHttpServer* server, const char* requestPath,
                       HttpRequestHandlerLine* hl) {
   server->reply("text/xml", [](Print& out, void*) -> size_t { tiny_dlna::DLNAMediaRendererConnectionMgrDescr d; return d.printDescr(out); });
   };
 
-  auto controlCB = [](HttpServer* server, const char* requestPath,
+  auto controlCB = [](IHttpServer* server, const char* requestPath,
                       HttpRequestHandlerLine* hl) {
   server->reply("text/xml", [](Print& out, void*) -> size_t { tiny_dlna::DLNAMediaRendererControlDescr d; return d.printDescr(out); });
   };
