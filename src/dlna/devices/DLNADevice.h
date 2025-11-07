@@ -455,9 +455,11 @@ class DLNADevice {
                      scheduler.size(), isSchedulerActive() ? "true" : "false",
                      registry.count(), registry.size());
 #endif
+#ifdef IS_DESKTOP
       AllocationTracker& tracker = AllocationTracker::getInstance();
       tracker.reportLeaks();
       tracker.createSnapshot();
+#endif
     }
   }
 

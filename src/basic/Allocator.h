@@ -87,6 +87,8 @@ class Allocator {
   }
 };
 
+#ifdef IS_DESKTOP
+
 /// Allocator which tracks allocations and deallocations
 class TrackedAllocator {
  public:
@@ -122,6 +124,8 @@ class TrackedAllocator {
   Allocator alloc;
   AllocationTracker& tracker = AllocationTracker::getInstance();
 };
+
+#endif
 
 /**
  * @brief Memory allocateator which uses ps_malloc (on the ESP32) and if this

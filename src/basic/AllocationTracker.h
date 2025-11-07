@@ -6,6 +6,8 @@
 
 #include "basic/Logger.h"
 
+#ifdef IS_DESKTOP
+
 namespace tiny_dlna {
 
 /**
@@ -127,3 +129,5 @@ class AllocationTracker {
 };
 
 }  // namespace tiny_dlna
+
+#endif  // IS_DESKTOP
