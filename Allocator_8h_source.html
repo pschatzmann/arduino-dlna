@@ -83,7 +83,7 @@ $(function() {
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="Logger_8h.html">basic/Logger.h</a>&quot;</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="dlna__config_8h.html">dlna_config.h</a>&quot;</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacetiny__dlna.html">tiny_dlna</a> {</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno"><a class="line" href="namespacetiny__dlna.html">    8</a></span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacetiny__dlna.html">tiny_dlna</a> {</div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="classtiny__dlna_1_1Allocator.html">   23</a></span><span class="keyword">class </span><a class="code hl_class" href="classtiny__dlna_1_1Allocator.html">Allocator</a> {</div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> <span class="keyword">public</span>:</div>
@@ -149,88 +149,88 @@ $(function() {
 <div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>  }</div>
 <div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>};</div>
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno"><a class="line" href="classtiny__dlna_1_1TrackedAllocator.html">   91</a></span><span class="keyword">class </span><a class="code hl_class" href="classtiny__dlna_1_1TrackedAllocator.html">TrackedAllocator</a> {</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>  <span class="comment">// creates an object</span></div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>  <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno"><a class="line" href="classtiny__dlna_1_1TrackedAllocator.html#a1212ff106ba0f5137a6705f089cc72af">   95</a></span>  T* <a class="code hl_function" href="classtiny__dlna_1_1TrackedAllocator.html#a1212ff106ba0f5137a6705f089cc72af">create</a>() {</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    <a class="code hl_variable" href="classtiny__dlna_1_1TrackedAllocator.html#a9662f895a5727c8acf4cc17d8453ac69">tracker</a>.<a class="code hl_function" href="classtiny__dlna_1_1AllocationTracker.html#a87461a88b33c60975e0cbd87e7586731">trackAlloc</a>&lt;T&gt;();</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    <span class="keywordflow">return</span> <a class="code hl_variable" href="classtiny__dlna_1_1TrackedAllocator.html#a136b7b3154294c5e623f90c2b832cf40">alloc</a>.<a class="code hl_function" href="classtiny__dlna_1_1Allocator.html#a97b7e3ac5e95d83e13e12e30f9d8b21f">create</a>&lt;T&gt;();</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>  }</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>  <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno"><a class="line" href="classtiny__dlna_1_1TrackedAllocator.html#a8a795ae5fe66d3c2c26cf68c41dd907c">  102</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classtiny__dlna_1_1TrackedAllocator.html#a8a795ae5fe66d3c2c26cf68c41dd907c">remove</a>(T* obj) {</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    <a class="code hl_variable" href="classtiny__dlna_1_1TrackedAllocator.html#a9662f895a5727c8acf4cc17d8453ac69">tracker</a>.<a class="code hl_function" href="classtiny__dlna_1_1AllocationTracker.html#a6fd9cd30698fd5ce8dc6b8cc53e7de48">trackFree</a>&lt;T&gt;();</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    <a class="code hl_variable" href="classtiny__dlna_1_1TrackedAllocator.html#a136b7b3154294c5e623f90c2b832cf40">alloc</a>.<a class="code hl_function" href="classtiny__dlna_1_1Allocator.html#a016242083ffa9e88f1cd2dc9ab25e786">remove</a>&lt;T&gt;(obj);</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>  }</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span> </div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>  <span class="comment">// creates an array of objects</span></div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>  <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno"><a class="line" href="classtiny__dlna_1_1TrackedAllocator.html#a19b2c63b40455a18d9223856de9c5a8b">  109</a></span>  T* <a class="code hl_function" href="classtiny__dlna_1_1TrackedAllocator.html#a19b2c63b40455a18d9223856de9c5a8b">createArray</a>(<span class="keywordtype">int</span> len) {</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    <a class="code hl_variable" href="classtiny__dlna_1_1TrackedAllocator.html#a9662f895a5727c8acf4cc17d8453ac69">tracker</a>.<a class="code hl_function" href="classtiny__dlna_1_1AllocationTracker.html#a87461a88b33c60975e0cbd87e7586731">trackAlloc</a>&lt;T&gt;();</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    <span class="keywordflow">return</span> <a class="code hl_variable" href="classtiny__dlna_1_1TrackedAllocator.html#a136b7b3154294c5e623f90c2b832cf40">alloc</a>.<a class="code hl_function" href="classtiny__dlna_1_1Allocator.html#adb33f1e134011c74aa522015a698aaee">createArray</a>&lt;T&gt;(len);</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>  }</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span> </div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>  <span class="comment">// deletes an array of objects</span></div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>  <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno"><a class="line" href="classtiny__dlna_1_1TrackedAllocator.html#aaed7e2e83593ed6a54ca5b2b344e70bd">  116</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classtiny__dlna_1_1TrackedAllocator.html#aaed7e2e83593ed6a54ca5b2b344e70bd">removeArray</a>(T* obj, <span class="keywordtype">int</span> len) {</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    <a class="code hl_variable" href="classtiny__dlna_1_1TrackedAllocator.html#a9662f895a5727c8acf4cc17d8453ac69">tracker</a>.<a class="code hl_function" href="classtiny__dlna_1_1AllocationTracker.html#a6fd9cd30698fd5ce8dc6b8cc53e7de48">trackFree</a>&lt;T&gt;();</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    <a class="code hl_variable" href="classtiny__dlna_1_1TrackedAllocator.html#a136b7b3154294c5e623f90c2b832cf40">alloc</a>.<a class="code hl_function" href="classtiny__dlna_1_1Allocator.html#a1279a634ad2017c0073cd6c92e23bf87">removeArray</a>&lt;T&gt;(obj, len);</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>  }</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span> </div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span> <span class="keyword">protected</span>:</div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno"><a class="line" href="classtiny__dlna_1_1TrackedAllocator.html#a136b7b3154294c5e623f90c2b832cf40">  122</a></span>  <a class="code hl_class" href="classtiny__dlna_1_1Allocator.html">Allocator</a> <a class="code hl_variable" href="classtiny__dlna_1_1TrackedAllocator.html#a136b7b3154294c5e623f90c2b832cf40">alloc</a>;</div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno"><a class="line" href="classtiny__dlna_1_1TrackedAllocator.html#a9662f895a5727c8acf4cc17d8453ac69">  123</a></span>  <a class="code hl_class" href="classtiny__dlna_1_1AllocationTracker.html">AllocationTracker</a>&amp; <a class="code hl_variable" href="classtiny__dlna_1_1TrackedAllocator.html#a9662f895a5727c8acf4cc17d8453ac69">tracker</a> = <a class="code hl_function" href="classtiny__dlna_1_1AllocationTracker.html#a0591d8a6c70151d8df642f128f8d6ec8">AllocationTracker::getInstance</a>();</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>};</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span> </div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno"><a class="line" href="classtiny__dlna_1_1AllocatorExt.html">  133</a></span><span class="keyword">class </span><a class="code hl_class" href="classtiny__dlna_1_1AllocatorExt.html">AllocatorExt</a> : <span class="keyword">public</span> <a class="code hl_class" href="classtiny__dlna_1_1Allocator.html">Allocator</a> {</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>  <span class="keywordtype">void</span>* do_allocate(<span class="keywordtype">size_t</span> size) {</div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    <span class="keywordtype">void</span>* result = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    <span class="keywordflow">if</span> (size == 0) size = 1;</div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span><span class="preprocessor">#if defined(ESP32) &amp;&amp; defined(ARDUINO)</span></div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    result = ps_malloc(size);</div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>    <span class="keywordflow">if</span> (result == <span class="keyword">nullptr</span>) result = malloc(size);</div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    <span class="keywordflow">if</span> (result == <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>      <a class="code hl_variable" href="namespacetiny__dlna.html#ad1a9a726ef5546aa12b5f58a2af3db3c">DlnaLogger</a>.<a class="code hl_function" href="classtiny__dlna_1_1LoggerClass.html#ab7ac4f166531a8d27e919b3f47fe8388">log</a>(<a class="code hl_enumvalue" href="namespacetiny__dlna.html#a5eabb92538a2ba1397f67b903cb9d35ea902b0d55fddef6f8d651fe1035b7d4bd">DlnaLogLevel::Error</a>, <span class="stringliteral">&quot;allocateation failed for %zu bytes&quot;</span>,</div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>                     size);</div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>      <a class="code hl_function" href="classtiny__dlna_1_1Allocator.html#af3e92a21c1dbf85563d29425ba2be543">stop</a>();</div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>    }</div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    <span class="comment">// initialize object</span></div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>    memset(result, 0, size);</div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>    <span class="keywordflow">return</span> result;</div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>  }</div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>};</div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span> </div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span><span class="preprocessor">#if defined(ESP32) &amp;&amp; defined(ARDUINO)</span></div>
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span> </div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span><span class="keyword">class </span>AllocatorPSRAM : <span class="keyword">public</span> <a class="code hl_class" href="classtiny__dlna_1_1Allocator.html">Allocator</a> {</div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>  <span class="keywordtype">void</span>* do_allocate(<span class="keywordtype">size_t</span> size) {</div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>    <span class="keywordflow">if</span> (size == 0) size = 1;</div>
-<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>    <span class="keywordtype">void</span>* result = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>    result = ps_calloc(1, size);</div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>    <span class="keywordflow">if</span> (result == <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>      <a class="code hl_variable" href="namespacetiny__dlna.html#ad1a9a726ef5546aa12b5f58a2af3db3c">DlnaLogger</a>.<a class="code hl_function" href="classtiny__dlna_1_1LoggerClass.html#ab7ac4f166531a8d27e919b3f47fe8388">log</a>(DlnaLogLevel::Error, <span class="stringliteral">&quot;allocateation failed for %zu bytes&quot;</span>,</div>
-<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>                     size);</div>
-<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>      stop();</div>
-<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>    }</div>
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>    <span class="keywordflow">return</span> result;</div>
-<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>  }</div>
-<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>};</div>
-<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span> </div>
-<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span> </div>
-<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span><span class="comment">// Default allocator instance</span></div>
-<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span><span class="keyword">static</span> <a class="code hl_define" href="dlna__config_8h.html#a31e0be4fc079727aa8f2acebf7a1d080">DLNA_DEFAULT_ALLOCATOR</a> DefaultAllocator;</div>
-<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span> </div>
-<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>}  <span class="comment">// namespace tiny_dlna</span></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="preprocessor">#ifdef IS_DESKTOP</span></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="keyword">class </span>TrackedAllocator {</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>  <span class="comment">// creates an object</span></div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>  <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>  T* create() {</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    tracker.trackAlloc&lt;T&gt;();</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    <span class="keywordflow">return</span> alloc.create&lt;T&gt;();</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>  }</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>  <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>  <span class="keywordtype">void</span> remove(T* obj) {</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    tracker.trackFree&lt;T&gt;();</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    alloc.remove&lt;T&gt;(obj);</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>  }</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span> </div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>  <span class="comment">// creates an array of objects</span></div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>  <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>  T* createArray(<span class="keywordtype">int</span> len) {</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    tracker.trackAlloc&lt;T&gt;();</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    <span class="keywordflow">return</span> alloc.createArray&lt;T&gt;(len);</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>  }</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> </div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>  <span class="comment">// deletes an array of objects</span></div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>  <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>  <span class="keywordtype">void</span> removeArray(T* obj, <span class="keywordtype">int</span> len) {</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    tracker.trackFree&lt;T&gt;();</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    alloc.removeArray&lt;T&gt;(obj, len);</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>  }</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span> </div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span> <span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>  Allocator alloc;</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>  AllocationTracker&amp; tracker = AllocationTracker::getInstance();</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>};</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> </div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span> </div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno"><a class="line" href="classtiny__dlna_1_1AllocatorExt.html">  137</a></span><span class="keyword">class </span><a class="code hl_class" href="classtiny__dlna_1_1AllocatorExt.html">AllocatorExt</a> : <span class="keyword">public</span> <a class="code hl_class" href="classtiny__dlna_1_1Allocator.html">Allocator</a> {</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>  <span class="keywordtype">void</span>* do_allocate(<span class="keywordtype">size_t</span> size) {</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>    <span class="keywordtype">void</span>* result = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>    <span class="keywordflow">if</span> (size == 0) size = 1;</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span><span class="preprocessor">#if defined(ESP32) &amp;&amp; defined(ARDUINO)</span></div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>    result = ps_malloc(size);</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>    <span class="keywordflow">if</span> (result == <span class="keyword">nullptr</span>) result = malloc(size);</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>    <span class="keywordflow">if</span> (result == <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>      <a class="code hl_variable" href="namespacetiny__dlna.html#ad1a9a726ef5546aa12b5f58a2af3db3c">DlnaLogger</a>.<a class="code hl_function" href="classtiny__dlna_1_1LoggerClass.html#ab7ac4f166531a8d27e919b3f47fe8388">log</a>(<a class="code hl_enumvalue" href="namespacetiny__dlna.html#a5eabb92538a2ba1397f67b903cb9d35ea902b0d55fddef6f8d651fe1035b7d4bd">DlnaLogLevel::Error</a>, <span class="stringliteral">&quot;allocateation failed for %zu bytes&quot;</span>,</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>                     size);</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>      <a class="code hl_function" href="classtiny__dlna_1_1Allocator.html#af3e92a21c1dbf85563d29425ba2be543">stop</a>();</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>    }</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>    <span class="comment">// initialize object</span></div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    memset(result, 0, size);</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>    <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>  }</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>};</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span> </div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span><span class="preprocessor">#if defined(ESP32) &amp;&amp; defined(ARDUINO)</span></div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span> </div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span><span class="keyword">class </span>AllocatorPSRAM : <span class="keyword">public</span> <a class="code hl_class" href="classtiny__dlna_1_1Allocator.html">Allocator</a> {</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>  <span class="keywordtype">void</span>* do_allocate(<span class="keywordtype">size_t</span> size) {</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>    <span class="keywordflow">if</span> (size == 0) size = 1;</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>    <span class="keywordtype">void</span>* result = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>    result = ps_calloc(1, size);</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>    <span class="keywordflow">if</span> (result == <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>      <a class="code hl_variable" href="namespacetiny__dlna.html#ad1a9a726ef5546aa12b5f58a2af3db3c">DlnaLogger</a>.<a class="code hl_function" href="classtiny__dlna_1_1LoggerClass.html#ab7ac4f166531a8d27e919b3f47fe8388">log</a>(DlnaLogLevel::Error, <span class="stringliteral">&quot;allocateation failed for %zu bytes&quot;</span>,</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>                     size);</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>      stop();</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>    }</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>    <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>  }</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>};</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span> </div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span> </div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span><span class="comment">// Default allocator instance</span></div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span><span class="keyword">static</span> <a class="code hl_define" href="dlna__config_8h.html#a31e0be4fc079727aa8f2acebf7a1d080">DLNA_DEFAULT_ALLOCATOR</a> DefaultAllocator;</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span> </div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>}  <span class="comment">// namespace tiny_dlna</span></div>
 <div class="ttc" id="aAllocationTracker_8h_html"><div class="ttname"><a href="AllocationTracker_8h.html">AllocationTracker.h</a></div></div>
 <div class="ttc" id="aLogger_8h_html"><div class="ttname"><a href="Logger_8h.html">Logger.h</a></div></div>
-<div class="ttc" id="aclasstiny__dlna_1_1AllocationTracker_html"><div class="ttname"><a href="classtiny__dlna_1_1AllocationTracker.html">tiny_dlna::AllocationTracker</a></div><div class="ttdoc">Tracks dynamic memory allocations and deallocations by class type for debugging and leak detection.</div><div class="ttdef"><b>Definition:</b> AllocationTracker.h:32</div></div>
-<div class="ttc" id="aclasstiny__dlna_1_1AllocationTracker_html_a0591d8a6c70151d8df642f128f8d6ec8"><div class="ttname"><a href="classtiny__dlna_1_1AllocationTracker.html#a0591d8a6c70151d8df642f128f8d6ec8">tiny_dlna::AllocationTracker::getInstance</a></div><div class="ttdeci">static AllocationTracker &amp; getInstance()</div><div class="ttdef"><b>Definition:</b> AllocationTracker.h:34</div></div>
-<div class="ttc" id="aclasstiny__dlna_1_1AllocationTracker_html_a6fd9cd30698fd5ce8dc6b8cc53e7de48"><div class="ttname"><a href="classtiny__dlna_1_1AllocationTracker.html#a6fd9cd30698fd5ce8dc6b8cc53e7de48">tiny_dlna::AllocationTracker::trackFree</a></div><div class="ttdeci">void trackFree()</div><div class="ttdef"><b>Definition:</b> AllocationTracker.h:52</div></div>
-<div class="ttc" id="aclasstiny__dlna_1_1AllocationTracker_html_a87461a88b33c60975e0cbd87e7586731"><div class="ttname"><a href="classtiny__dlna_1_1AllocationTracker.html#a87461a88b33c60975e0cbd87e7586731">tiny_dlna::AllocationTracker::trackAlloc</a></div><div class="ttdeci">void trackAlloc()</div><div class="ttdef"><b>Definition:</b> AllocationTracker.h:43</div></div>
-<div class="ttc" id="aclasstiny__dlna_1_1AllocatorExt_html"><div class="ttname"><a href="classtiny__dlna_1_1AllocatorExt.html">tiny_dlna::AllocatorExt</a></div><div class="ttdoc">Memory allocateator which uses ps_malloc (on the ESP32) and if this fails it resorts to malloc.</div><div class="ttdef"><b>Definition:</b> Allocator.h:133</div></div>
+<div class="ttc" id="aclasstiny__dlna_1_1AllocatorExt_html"><div class="ttname"><a href="classtiny__dlna_1_1AllocatorExt.html">tiny_dlna::AllocatorExt</a></div><div class="ttdoc">Memory allocateator which uses ps_malloc (on the ESP32) and if this fails it resorts to malloc.</div><div class="ttdef"><b>Definition:</b> Allocator.h:137</div></div>
 <div class="ttc" id="aclasstiny__dlna_1_1Allocator_html"><div class="ttname"><a href="classtiny__dlna_1_1Allocator.html">tiny_dlna::Allocator</a></div><div class="ttdoc">Memory allocateator which uses malloc.</div><div class="ttdef"><b>Definition:</b> Allocator.h:23</div></div>
 <div class="ttc" id="aclasstiny__dlna_1_1Allocator_html_a016242083ffa9e88f1cd2dc9ab25e786"><div class="ttname"><a href="classtiny__dlna_1_1Allocator.html#a016242083ffa9e88f1cd2dc9ab25e786">tiny_dlna::Allocator::remove</a></div><div class="ttdeci">void remove(T *obj)</div><div class="ttdoc">deletes an object</div><div class="ttdef"><b>Definition:</b> Allocator.h:36</div></div>
 <div class="ttc" id="aclasstiny__dlna_1_1Allocator_html_a1279a634ad2017c0073cd6c92e23bf87"><div class="ttname"><a href="classtiny__dlna_1_1Allocator.html#a1279a634ad2017c0073cd6c92e23bf87">tiny_dlna::Allocator::removeArray</a></div><div class="ttdeci">void removeArray(T *obj, int len)</div><div class="ttdef"><b>Definition:</b> Allocator.h:54</div></div>
@@ -241,16 +241,9 @@ $(function() {
 <div class="ttc" id="aclasstiny__dlna_1_1Allocator_html_adb33f1e134011c74aa522015a698aaee"><div class="ttname"><a href="classtiny__dlna_1_1Allocator.html#adb33f1e134011c74aa522015a698aaee">tiny_dlna::Allocator::createArray</a></div><div class="ttdeci">T * createArray(int len)</div><div class="ttdef"><b>Definition:</b> Allocator.h:44</div></div>
 <div class="ttc" id="aclasstiny__dlna_1_1Allocator_html_af3e92a21c1dbf85563d29425ba2be543"><div class="ttname"><a href="classtiny__dlna_1_1Allocator.html#af3e92a21c1dbf85563d29425ba2be543">tiny_dlna::Allocator::stop</a></div><div class="ttdeci">void stop()</div><div class="ttdef"><b>Definition:</b> Allocator.h:75</div></div>
 <div class="ttc" id="aclasstiny__dlna_1_1LoggerClass_html_ab7ac4f166531a8d27e919b3f47fe8388"><div class="ttname"><a href="classtiny__dlna_1_1LoggerClass.html#ab7ac4f166531a8d27e919b3f47fe8388">tiny_dlna::LoggerClass::log</a></div><div class="ttdeci">void log(DlnaLogLevel current_level, const char *fmt...)</div><div class="ttdoc">Print log message.</div><div class="ttdef"><b>Definition:</b> Logger.h:40</div></div>
-<div class="ttc" id="aclasstiny__dlna_1_1TrackedAllocator_html"><div class="ttname"><a href="classtiny__dlna_1_1TrackedAllocator.html">tiny_dlna::TrackedAllocator</a></div><div class="ttdoc">Allocator which tracks allocations and deallocations.</div><div class="ttdef"><b>Definition:</b> Allocator.h:91</div></div>
-<div class="ttc" id="aclasstiny__dlna_1_1TrackedAllocator_html_a1212ff106ba0f5137a6705f089cc72af"><div class="ttname"><a href="classtiny__dlna_1_1TrackedAllocator.html#a1212ff106ba0f5137a6705f089cc72af">tiny_dlna::TrackedAllocator::create</a></div><div class="ttdeci">T * create()</div><div class="ttdef"><b>Definition:</b> Allocator.h:95</div></div>
-<div class="ttc" id="aclasstiny__dlna_1_1TrackedAllocator_html_a136b7b3154294c5e623f90c2b832cf40"><div class="ttname"><a href="classtiny__dlna_1_1TrackedAllocator.html#a136b7b3154294c5e623f90c2b832cf40">tiny_dlna::TrackedAllocator::alloc</a></div><div class="ttdeci">Allocator alloc</div><div class="ttdef"><b>Definition:</b> Allocator.h:122</div></div>
-<div class="ttc" id="aclasstiny__dlna_1_1TrackedAllocator_html_a19b2c63b40455a18d9223856de9c5a8b"><div class="ttname"><a href="classtiny__dlna_1_1TrackedAllocator.html#a19b2c63b40455a18d9223856de9c5a8b">tiny_dlna::TrackedAllocator::createArray</a></div><div class="ttdeci">T * createArray(int len)</div><div class="ttdef"><b>Definition:</b> Allocator.h:109</div></div>
-<div class="ttc" id="aclasstiny__dlna_1_1TrackedAllocator_html_a8a795ae5fe66d3c2c26cf68c41dd907c"><div class="ttname"><a href="classtiny__dlna_1_1TrackedAllocator.html#a8a795ae5fe66d3c2c26cf68c41dd907c">tiny_dlna::TrackedAllocator::remove</a></div><div class="ttdeci">void remove(T *obj)</div><div class="ttdoc">deletes an object</div><div class="ttdef"><b>Definition:</b> Allocator.h:102</div></div>
-<div class="ttc" id="aclasstiny__dlna_1_1TrackedAllocator_html_a9662f895a5727c8acf4cc17d8453ac69"><div class="ttname"><a href="classtiny__dlna_1_1TrackedAllocator.html#a9662f895a5727c8acf4cc17d8453ac69">tiny_dlna::TrackedAllocator::tracker</a></div><div class="ttdeci">AllocationTracker &amp; tracker</div><div class="ttdef"><b>Definition:</b> Allocator.h:123</div></div>
-<div class="ttc" id="aclasstiny__dlna_1_1TrackedAllocator_html_aaed7e2e83593ed6a54ca5b2b344e70bd"><div class="ttname"><a href="classtiny__dlna_1_1TrackedAllocator.html#aaed7e2e83593ed6a54ca5b2b344e70bd">tiny_dlna::TrackedAllocator::removeArray</a></div><div class="ttdeci">void removeArray(T *obj, int len)</div><div class="ttdef"><b>Definition:</b> Allocator.h:116</div></div>
 <div class="ttc" id="adlna__config_8h_html"><div class="ttname"><a href="dlna__config_8h.html">dlna_config.h</a></div></div>
 <div class="ttc" id="adlna__config_8h_html_a31e0be4fc079727aa8f2acebf7a1d080"><div class="ttname"><a href="dlna__config_8h.html#a31e0be4fc079727aa8f2acebf7a1d080">DLNA_DEFAULT_ALLOCATOR</a></div><div class="ttdeci">#define DLNA_DEFAULT_ALLOCATOR</div><div class="ttdef"><b>Definition:</b> dlna_config.h:184</div></div>
-<div class="ttc" id="anamespacetiny__dlna_html"><div class="ttname"><a href="namespacetiny__dlna.html">tiny_dlna</a></div><div class="ttdef"><b>Definition:</b> AllocationTracker.h:9</div></div>
+<div class="ttc" id="anamespacetiny__dlna_html"><div class="ttname"><a href="namespacetiny__dlna.html">tiny_dlna</a></div><div class="ttdef"><b>Definition:</b> Allocator.h:8</div></div>
 <div class="ttc" id="anamespacetiny__dlna_html_a5eabb92538a2ba1397f67b903cb9d35ea902b0d55fddef6f8d651fe1035b7d4bd"><div class="ttname"><a href="namespacetiny__dlna.html#a5eabb92538a2ba1397f67b903cb9d35ea902b0d55fddef6f8d651fe1035b7d4bd">tiny_dlna::DlnaLogLevel::Error</a></div><div class="ttdeci">@ Error</div></div>
 <div class="ttc" id="anamespacetiny__dlna_html_a5eabb92538a2ba1397f67b903cb9d35eaa603905470e2a5b8c13e96b579ef0dba"><div class="ttname"><a href="namespacetiny__dlna.html#a5eabb92538a2ba1397f67b903cb9d35eaa603905470e2a5b8c13e96b579ef0dba">tiny_dlna::DlnaLogLevel::Debug</a></div><div class="ttdeci">@ Debug</div></div>
 <div class="ttc" id="anamespacetiny__dlna_html_ad1a9a726ef5546aa12b5f58a2af3db3c"><div class="ttname"><a href="namespacetiny__dlna.html#ad1a9a726ef5546aa12b5f58a2af3db3c">tiny_dlna::DlnaLogger</a></div><div class="ttdeci">LoggerClass DlnaLogger</div><div class="ttdef"><b>Definition:</b> Logger.cpp:5</div></div>

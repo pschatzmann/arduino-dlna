@@ -35,13 +35,9 @@ var searchData=
   ['tostr_32',['toStr',['../classtiny__dlna_1_1DLNAMediaServer.html#a2f36c1edf3ec48614400d2f533439360',1,'tiny_dlna::DLNAMediaServer']]],
   ['tostring_33',['toString',['../structtiny__dlna_1_1IPAddressAndPort.html#a03dafeafa067fa880a6a1d05d8c748e1',1,'tiny_dlna::IPAddressAndPort']]],
   ['touppercase_34',['toUpperCase',['../classtiny__dlna_1_1StrView.html#afddb2b1aff609ff143a4d4bd99d38c9d',1,'tiny_dlna::StrView']]],
-  ['trackalloc_35',['trackAlloc',['../classtiny__dlna_1_1AllocationTracker.html#a87461a88b33c60975e0cbd87e7586731',1,'tiny_dlna::AllocationTracker']]],
-  ['trackedallocator_36',['TrackedAllocator',['../classtiny__dlna_1_1TrackedAllocator.html',1,'tiny_dlna']]],
-  ['tracker_37',['tracker',['../classtiny__dlna_1_1TrackedAllocator.html#a9662f895a5727c8acf4cc17d8453ac69',1,'tiny_dlna::TrackedAllocator']]],
-  ['trackfree_38',['trackFree',['../classtiny__dlna_1_1AllocationTracker.html#a6fd9cd30698fd5ce8dc6b8cc53e7de48',1,'tiny_dlna::AllocationTracker']]],
-  ['transfer_5fencoding_39',['TRANSFER_ENCODING',['../namespacetiny__dlna.html#a9e5bb9ed1bd94ec887fded9c383b60ca',1,'tiny_dlna']]],
-  ['transport_5fstate_40',['transport_state',['../classtiny__dlna_1_1DLNAMediaRenderer.html#a69c4a6762f09e25a3b054467aded5dc4',1,'tiny_dlna::DLNAMediaRenderer']]],
-  ['transportdescrcb_41',['transportDescrCB',['../classtiny__dlna_1_1DLNAMediaRenderer.html#a91912bc8437799308d2b0f91db60ee68',1,'tiny_dlna::DLNAMediaRenderer']]],
-  ['trim_42',['trim',['../classtiny__dlna_1_1StrView.html#a8ece7148c765b8a590ec997715335c04',1,'tiny_dlna::StrView']]],
-  ['txt_43',['txt',['../classtiny__dlna_1_1XMLParser.html#a35158248ce1bad49921922f86302ea03',1,'tiny_dlna::XMLParser']]]
+  ['transfer_5fencoding_35',['TRANSFER_ENCODING',['../namespacetiny__dlna.html#a9e5bb9ed1bd94ec887fded9c383b60ca',1,'tiny_dlna']]],
+  ['transport_5fstate_36',['transport_state',['../classtiny__dlna_1_1DLNAMediaRenderer.html#a69c4a6762f09e25a3b054467aded5dc4',1,'tiny_dlna::DLNAMediaRenderer']]],
+  ['transportdescrcb_37',['transportDescrCB',['../classtiny__dlna_1_1DLNAMediaRenderer.html#a91912bc8437799308d2b0f91db60ee68',1,'tiny_dlna::DLNAMediaRenderer']]],
+  ['trim_38',['trim',['../classtiny__dlna_1_1StrView.html#a8ece7148c765b8a590ec997715335c04',1,'tiny_dlna::StrView']]],
+  ['txt_39',['txt',['../classtiny__dlna_1_1XMLParser.html#a35158248ce1bad49921922f86302ea03',1,'tiny_dlna::XMLParser']]]
 ];
