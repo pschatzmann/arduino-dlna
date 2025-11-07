@@ -113,8 +113,6 @@ Public Member Functions</h2></td></tr>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a0612c690074fc74241b39f209b79ff84"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Str.html">Str</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MSearchReplySchedule.html#a0612c690074fc74241b39f209b79ff84">search_target</a></td></tr>
 <tr class="separator:a0612c690074fc74241b39f209b79ff84"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9496e188318e6a0d7396a6b2b0bf7f35"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structtiny__dlna_1_1IPAddressAndPort.html">IPAddressAndPort</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MSearchReplySchedule.html#a9496e188318e6a0d7396a6b2b0bf7f35">address</a></td></tr>
-<tr class="separator:a9496e188318e6a0d7396a6b2b0bf7f35"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa68ce94b02976c77ee45d89a02fb06dd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html">DLNADeviceInfo</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MSearchReplySchedule.html#aa68ce94b02976c77ee45d89a02fb06dd">p_device</a></td></tr>
 <tr class="separator:aa68ce94b02976c77ee45d89a02fb06dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3f029ab2f4c2660456ac3111c203dd8a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MSearchReplySchedule.html#a3f029ab2f4c2660456ac3111c203dd8a">mx</a> = 0</td></tr>
@@ -127,6 +125,10 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a0669dbd26f762e660768570bdc902c05"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2b21ee1493e6c9d19f9b0a0d07bffc41"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1Schedule.html#a2b21ee1493e6c9d19f9b0a0d07bffc41">active</a> = false</td></tr>
 <tr class="separator:a2b21ee1493e6c9d19f9b0a0d07bffc41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e95bf094b3e35f09c35d21bb30bb437"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structtiny__dlna_1_1IPAddressAndPort.html">IPAddressAndPort</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1Schedule.html#a1e95bf094b3e35f09c35d21bb30bb437">address</a></td></tr>
+<tr class="separator:a1e95bf094b3e35f09c35d21bb30bb437"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36ec0ab10cef70772d95d79d03fb750f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1Schedule.html#a36ec0ab10cef70772d95d79d03fb750f">report_ip</a> = false</td></tr>
+<tr class="separator:a36ec0ab10cef70772d95d79d03fb750f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -304,16 +306,24 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a9496e188318e6a0d7396a6b2b0bf7f35" name="a9496e188318e6a0d7396a6b2b0bf7f35"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9496e188318e6a0d7396a6b2b0bf7f35">&#9670;&#160;</a></span>address</h2>
+<a id="a1e95bf094b3e35f09c35d21bb30bb437" name="a1e95bf094b3e35f09c35d21bb30bb437"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e95bf094b3e35f09c35d21bb30bb437">&#9670;&#160;</a></span>address</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structtiny__dlna_1_1IPAddressAndPort.html">IPAddressAndPort</a> tiny_dlna::MSearchReplySchedule::address</td>
+          <td class="memname"><a class="el" href="structtiny__dlna_1_1IPAddressAndPort.html">IPAddressAndPort</a> tiny_dlna::Schedule::address</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 </div>
@@ -401,6 +411,28 @@ Protected Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">uint32_t tiny_dlna::Schedule::repeat_ms = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a36ec0ab10cef70772d95d79d03fb750f" name="a36ec0ab10cef70772d95d79d03fb750f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36ec0ab10cef70772d95d79d03fb750f">&#9670;&#160;</a></span>report_ip</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool tiny_dlna::Schedule::report_ip = false</td>
         </tr>
       </table>
   </td>
