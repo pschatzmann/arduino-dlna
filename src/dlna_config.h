@@ -195,7 +195,7 @@
 #endif
 
 #ifndef DLNA_LOG_XML
-#define DLNA_LOG_XML true
+#define DLNA_LOG_XML false
 #endif
 
 // Define the netmask for discovery filtering

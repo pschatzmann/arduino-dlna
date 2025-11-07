@@ -112,14 +112,16 @@ class MSearchReplySchedule : public Schedule {
     IPAddress netmask = DLNA_DISCOVERY_NETMASK;
     IPAddress localIP = p_device->getIPAddress();
     IPAddress peerIP = address.address;
-    
+    Str netmask_str = netmask.toString().c_str();
+    Str localIP_str = localIP.toString().c_str();
+
     // Apply netmask to both local and peer IP addresses
     for (int i = 0; i < 4; i++) {
       if ((localIP[i] & netmask[i]) != (peerIP[i] & netmask[i])) {
-        DlnaLogger.log(DlnaLogLevel::Debug, 
+        DlnaLogger.log(DlnaLogLevel::Info, 
                        "Discovery request from %s filtered (not in same subnet as %s with mask %s)",
-                       address.toString(), localIP.toString(), netmask.toString());
-        return false;
+                       address.toString(), localIP_str.c_str(), netmask_str.c_str());
+         return false;
       }
     }
     return true;

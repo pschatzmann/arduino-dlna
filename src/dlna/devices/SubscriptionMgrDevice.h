@@ -1,8 +1,10 @@
 #pragma once
 
+#include <functional>
+
+#include "basic/EscapingPrint.h"
 #include "basic/Logger.h"
 #include "basic/NullPrint.h"
-#include "basic/EscapingPrint.h"
 #include "basic/Str.h"
 #include "basic/StrView.h"
 #include "basic/Url.h"
@@ -10,9 +12,11 @@
 #include "dlna/StringRegistry.h"
 #include "http/Http.h"
 #include "http/Server/HttpRequest.h"
-#include <functional>
 
 namespace tiny_dlna {
+
+// forward declaration for friend 
+class DLNAService;
 
 /**
  * @struct Subscription
@@ -43,14 +47,13 @@ struct Subscription {
  */
 struct PendingNotification {
   Subscription* p_subscription =
-      nullptr;         /**< non-owning pointer to Subscription */
-  std::function<size_t(Print&, void*)> writer; /**< writer callback that emits the
-                                              notification XML */
+      nullptr; /**< non-owning pointer to Subscription */
+  std::function<size_t(Print&, void*)> writer; /**< writer callback that emits
+                                              the notification XML */
   void* ref = nullptr; /**< opaque reference for writer */
   int error_count = 0; /**< number of failed send attempts */
   int seq = 0;
 };
-
 
 /**
  * @class SubscriptionMgrDevice
@@ -74,6 +77,7 @@ struct PendingNotification {
  * stable UID approach is recommended for maximum robustness.
  */
 class SubscriptionMgrDevice {
+  friend class DLNADevice;
  public:
   /**
    * @brief Construct a new Subscription Manager
@@ -90,9 +94,7 @@ class SubscriptionMgrDevice {
    * pending lists. This ensures no memory is leaked when the manager is
    * destroyed.
    */
-  ~SubscriptionMgrDevice() {
-    clear();
-  }
+  ~SubscriptionMgrDevice() { clear(); }
 
   /**
    * @brief Add or renew a subscription for a service
@@ -106,11 +108,12 @@ class SubscriptionMgrDevice {
    * @param service Reference to the DLNA service to subscribe to
    * @param callbackUrl The CALLBACK URL provided by the subscriber. May be
    *        empty when renewing via SID.
-   * @param sid Optional SID to renew; pass nullptr or empty to create a new subscription
+   * @param sid Optional SID to renew; pass nullptr or empty to create a new
+   * subscription
    * @param timeoutSec Requested subscription timeout in seconds (default 1800)
    * @return Str Assigned or renewed SID for the subscription
    */
-  Str subscribe(DLNAServiceInfo& service, const char* callbackUrl, 
+  Str subscribe(DLNAServiceInfo& service, const char* callbackUrl,
                 const char* sid = nullptr, uint32_t timeoutSec = 1800) {
     // simple SID generation
     DlnaLogger.log(DlnaLogLevel::Info, "subscribe: %s %s",
@@ -141,7 +144,8 @@ class SubscriptionMgrDevice {
           StrView(existing_sub->callback_url).equals(callbackUrl)) {
         // Found existing subscription for same service and callback URL
         DlnaLogger.log(DlnaLogLevel::Info,
-                       "subscribe: found existing subscription for service '%s' and callback '%s', renewing SID '%s'",
+                       "subscribe: found existing subscription for service "
+                       "'%s' and callback '%s', renewing SID '%s'",
                        StringRegistry::nullStr(service.service_id, "(null)"),
                        StringRegistry::nullStr(callbackUrl, "(null)"),
                        existing_sub->sid.c_str());
@@ -192,21 +196,22 @@ class SubscriptionMgrDevice {
   /**
    * @brief Enqueue a state-variable change for delivery
    *
-  * Adds a pending notification for all subscribers of `service`.
-  * Instead of passing a raw XML fragment, callers provide a small
-  * writer callback that emits the inner XML fragment when invoked. The
-  * manager will call this callback to compute the Content-Length (using
-  * a `NullPrint`) and later again when streaming the NOTIFY body. The
-  * opaque `ref` pointer is forwarded to the writer both during length
-  * calculation and at publish time.
-  *
-  * @param service The DLNA service whose subscribers should be notified
-  * @param changeWriter Callback that writes the inner XML fragment. It
-  *        must match the signature `size_t(Print&, void*)` and return the
-  *        number of bytes written.
-  * @param ref Opaque pointer passed to `changeWriter` when it is invoked
+   * Adds a pending notification for all subscribers of `service`.
+   * Instead of passing a raw XML fragment, callers provide a small
+   * writer callback that emits the inner XML fragment when invoked. The
+   * manager will call this callback to compute the Content-Length (using
+   * a `NullPrint`) and later again when streaming the NOTIFY body. The
+   * opaque `ref` pointer is forwarded to the writer both during length
+   * calculation and at publish time.
+   *
+   * @param service The DLNA service whose subscribers should be notified
+   * @param changeWriter Callback that writes the inner XML fragment. It
+   *        must match the signature `size_t(Print&, void*)` and return the
+   *        number of bytes written.
+   * @param ref Opaque pointer passed to `changeWriter` when it is invoked
    */
-  void addChange(DLNAServiceInfo& service, std::function<size_t(Print&, void*)> changeWriter, void* ref) {
+  void addChange(DLNAServiceInfo& service,
+                 std::function<size_t(Print&, void*)> changeWriter, void* ref) {
     bool any = false;
     // do not enqueue if subscriptions are inactive
     if (!is_active) return;
@@ -261,29 +266,29 @@ class SubscriptionMgrDevice {
         pending_list.erase(i);
         continue;
       }
-
+      // determine subscription details
       Subscription& sub = *pn.p_subscription;
+
+      // convert the sequence number to string
+      char seqBuf[32];
+      snprintf(seqBuf, sizeof(seqBuf), "%d", pn.seq);
 
       // Build and send HTTP notify as in previous implementation
       Url cbUrl(sub.callback_url.c_str());
-      //Url cbUrl("http://192.168.1.44:8000");
-      NullPrint np;
       DLNAHttpRequest http;
       http.setHost(cbUrl.host());
       http.setAgent("tiny-dlna-notify");
       http.request().put("NT", "upnp:event");
       http.request().put("NTS", "upnp:propchange");
-      char seqBuf[32];
-      snprintf(seqBuf, sizeof(seqBuf), "%d", pn.seq);
       http.request().put("SEQ", seqBuf);
       http.request().put("SID", sub.sid.c_str());
       http.setTimeout(DLNA_HTTP_REQUEST_TIMEOUT_MS);
-      // pass the pending notification as reference
-      //int len = createXML(Serial, &pn);
       DlnaLogger.log(DlnaLogLevel::Info, "Notify %s", cbUrl.url());
       DlnaLogger.log(DlnaLogLevel::Info, "- SEQ: %s", seqBuf);
       DlnaLogger.log(DlnaLogLevel::Info, "- SID: %s", sub.sid.c_str());
       int rc = http.notify(cbUrl, createXML, "text/xml", &pn);
+
+      // log result
       DlnaLogger.log(DlnaLogLevel::Info, "Notify %s -> %d", cbUrl.url(), rc);
 
       // remove processed notification on success; otherwise keep it for retry
@@ -297,8 +302,9 @@ class SubscriptionMgrDevice {
         if (pending_list[i].error_count > MAX_NOTIFY_RETIES) {
           // give up and drop the entry after too many failed attempts
           DlnaLogger.log(DlnaLogLevel::Warning,
-                         "dropping notify to %s after %d errors with rc=%d %s", cbUrl.url(),
-                         pending_list[i].error_count, rc, http.reply().statusMessage());
+                         "dropping notify to %s after %d errors with rc=%d %s",
+                         cbUrl.url(), pending_list[i].error_count, rc,
+                         http.reply().statusMessage());
           pending_list.erase(i);
         } else {
           ++i;
@@ -359,15 +365,13 @@ class SubscriptionMgrDevice {
   void setSubscriptionsActive(bool flag) {
     is_active = flag;
     if (!is_active) {
-      // clear any queued notifications when subscriptions are turned off 
+      // clear any queued notifications when subscriptions are turned off
       clear();
     }
   }
 
   /// Convenience method to disable subscriptions at the end of the lifecycle
-  void end() {
-    setSubscriptionsActive(false);
-  }
+  void end() { setSubscriptionsActive(false); }
 
   /**
    * @brief Query whether subscription delivery is active
@@ -390,7 +394,7 @@ class SubscriptionMgrDevice {
    * If no matching subscription exists an empty Str is returned.
    */
   Str renewSubscription(DLNAServiceInfo& service, const char* sid,
-                         const char* callbackUrl, uint32_t timeoutSec) {
+                        const char* callbackUrl, uint32_t timeoutSec) {
     if (sid == nullptr || StrView(sid).isEmpty()) return Str();
     for (int i = 0; i < subscriptions.size(); ++i) {
       Subscription* ex = subscriptions[i];
@@ -411,7 +415,7 @@ class SubscriptionMgrDevice {
   }
 
   /// Clear all subscriptions and pending notifications
-  void clear(){
+  void clear() {
     // free any remaining heap-allocated subscriptions
     for (int i = 0; i < subscriptions.size(); ++i) {
       delete subscriptions[i];
@@ -419,25 +423,24 @@ class SubscriptionMgrDevice {
     subscriptions.clear();
     // pending_list entries do not own subscription pointers
     pending_list.clear();
-
   }
 
   /**
    * @brief Generate the propertyset XML for a single variable and write it to
-  * the provided Print instance. The inner event content is emitted via the
-  * provided `changeWriter` callback which must have signature
-  * `size_t(Print&, void*)`. The opaque `ref` pointer is passed through to
-  * the callback and may be used to access context (for example the
-  * `PendingNotification` that owns the fragment).
-  *
-  * Returns the number of bytes written.
+   * the provided Print instance. The inner event content is emitted via the
+   * provided `changeWriter` callback which must have signature
+   * `size_t(Print&, void*)`. The opaque `ref` pointer is passed through to
+   * the callback and may be used to access context (for example the
+   * `PendingNotification` that owns the fragment).
+   *
+   * Returns the number of bytes written.
    */
   static size_t createXML(Print& out, void* ref) {
     EscapingPrint out_esc{out};
     PendingNotification& pn = *(PendingNotification*)ref;
-    const char* service_abbrev = pn.p_subscription->service->subscription_namespace_abbrev;
+    const char* service_abbrev =
+        pn.p_subscription->service->subscription_namespace_abbrev;
     int instance_id = pn.p_subscription->service->instance_id;
-
 
     size_t written = 0;
     written += out.print("<?xml version=\"1.0\"?>\r\n");
@@ -447,7 +450,8 @@ class SubscriptionMgrDevice {
     written += out.print("<e:property>\r\n");
     written += out.print("<LastChange>\r\n");
     // blow should be escaped
-    written += out_esc.print("<Event xmlns=\"urn:schemas-upnp-org:metadata-1-0/");
+    written +=
+        out_esc.print("<Event xmlns=\"urn:schemas-upnp-org:metadata-1-0/");
     written += out_esc.print(service_abbrev);
     written += out_esc.print("/\">\r\n");
     written += out_esc.print("<InstanceID val=\"");
@@ -463,6 +467,94 @@ class SubscriptionMgrDevice {
     written += out.print("</e:property>\r\n");
     written += out.print("</e:propertyset>\r\n");
     return written;
+  }
+
+  /**
+   * @brief Handle SUBSCRIBE request including HTTP response
+   *
+   * Parses the CALLBACK, TIMEOUT, and SID headers from the HTTP request,
+   * processes the subscription, and sends the HTTP response back to the client.
+   * This method encapsulates all HTTP-specific logic for SUBSCRIBE requests.
+   *
+   * @param server Reference to the HTTP server handling the request
+   * @param service Reference to the DLNA service to subscribe to
+   * @return true if subscription was successful and response sent
+   */
+  bool processSubscribeRequest(HttpServer& server, DLNAServiceInfo& service) {
+    // Get headers from request
+    const char* callbackHeader = server.requestHeader().get("CALLBACK");
+    const char* timeoutHeader = server.requestHeader().get("TIMEOUT");
+    const char* sidHeader = server.requestHeader().get("SID");
+
+    // Log the incoming headers
+    DlnaLogger.log(DlnaLogLevel::Info, "- SUBSCRIBE CALLBACK: %s",
+                   callbackHeader ? callbackHeader : "null");
+    DlnaLogger.log(DlnaLogLevel::Info, "- SUBSCRIBE TIMEOUT: %s",
+                   timeoutHeader ? timeoutHeader : "null");
+    DlnaLogger.log(DlnaLogLevel::Info, "- SUBSCRIBE SID: %s",
+                   sidHeader ? sidHeader : "null");
+
+    // Parse and clean callback URL (remove angle brackets)
+    Str cbStr;
+    if (callbackHeader) {
+      cbStr = callbackHeader;
+      cbStr.replace("<", "");
+      cbStr.replace(">", "");
+    }
+
+    // Parse timeout (extract seconds from "Second-1800" format)
+    uint32_t tsec = 1800;
+    if (timeoutHeader && StrView(timeoutHeader).startsWith("Second-")) {
+      tsec = atoi(timeoutHeader + 7);
+    }
+
+    // Create or renew subscription
+    Str sid = subscribe(service, cbStr.c_str(), sidHeader, tsec);
+    DlnaLogger.log(DlnaLogLevel::Info, "- SID: %s", sid.c_str());
+
+    // Send SUBSCRIBE response
+    server.replyHeader().setValues(200, "OK");
+    server.replyHeader().put("SID", sid.c_str());
+    server.replyHeader().put("TIMEOUT", "Second-1800");
+    server.replyHeader().put("Content-Length", 0);
+    server.replyHeader().write(server.client());
+    server.endClient();
+
+    return true;
+  }
+
+  /**
+   * @brief Handle UNSUBSCRIBE request including HTTP response
+   *
+   * Parses the SID header from the HTTP request, removes the subscription,
+   * and sends the appropriate HTTP response back to the client.
+   * This method encapsulates all HTTP-specific logic for UNSUBSCRIBE requests.
+   *
+   * @param server Reference to the HTTP server handling the request
+   * @param service Reference to the DLNA service to unsubscribe from
+   * @return true if unsubscribe was successful and response sent
+   */
+  bool processUnsubscribeRequest(HttpServer& server, DLNAServiceInfo& service) {
+    const char* sid = server.requestHeader().get("SID");
+
+    DlnaLogger.log(DlnaLogLevel::Info, "- UNSUBSCRIBE SID: %s",
+                   sid ? sid : "null");
+
+    if (sid) {
+      bool ok = unsubscribe(service, sid);
+      if (ok) {
+        DlnaLogger.log(DlnaLogLevel::Info, "Unsubscribed: %s", sid);
+        server.replyOK();
+        return true;
+      }
+    }
+
+    // SID not found or invalid
+    DlnaLogger.log(DlnaLogLevel::Warning,
+                   "handleUnsubscribeRequest: failed for SID %s",
+                   sid ? sid : "(null)");
+    server.replyNotFound();
+    return false;
   }
 };
 
