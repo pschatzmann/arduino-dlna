@@ -120,8 +120,21 @@ class SubscriptionMgrDevice {
     DlnaLogger.log(DlnaLogLevel::Info, "subscribe: %s %s",
                    StringRegistry::nullStr(service.service_id, "(null)"),
                    StringRegistry::nullStr(callbackUrl, "(null)"));
+
+    bool hasSid = !StrView(sid).isEmpty();
+
+    // NEW subscription without a callback is invalid (GENA requirement)
+    if (!hasSid) {
+      if (StrView(callbackUrl).isEmpty()) {
+        DlnaLogger.log(
+            DlnaLogLevel::Warning,
+            "subscribe: missing CALLBACK header for new subscription");
+        return Str();
+      }
+    }
+
     // If sid provided, attempt to renew existing subscription for service
-    if (!StrView(sid).isEmpty()) {
+    if (hasSid) {
       Str renewed = renewSubscription(service, sid, callbackUrl, timeoutSec);
       if (!renewed.isEmpty()) return renewed;
       // not found: fall through and create new subscription
@@ -396,7 +409,7 @@ class SubscriptionMgrDevice {
    */
   Str renewSubscription(DLNAServiceInfo& service, const char* sid,
                         const char* callbackUrl, uint32_t timeoutSec) {
-    if (sid == nullptr || StrView(sid).isEmpty()) return Str();
+    if (StrView(sid).isEmpty()) return Str();
     for (int i = 0; i < subscriptions.size(); ++i) {
       Subscription* ex = subscriptions[i];
       if (ex->service == &service && StrView(ex->sid).equals(sid)) {
@@ -501,6 +514,16 @@ class SubscriptionMgrDevice {
       cbStr = callbackHeader;
       cbStr.replace("<", "");
       cbStr.replace(">", "");
+      cbStr.trim();
+    }
+
+    // Sanitize SID (remove optional angle brackets)
+    Str sidStr;
+    if (sidHeader) {
+      sidStr = sidHeader;
+      sidStr.replace("<", "");
+      sidStr.replace(">", "");
+      sidStr.trim();
     }
 
     // Parse timeout (extract seconds from "Second-1800" format)
@@ -510,7 +533,19 @@ class SubscriptionMgrDevice {
     }
 
     // Create or renew subscription
-    Str sid = subscribe(service, cbStr.c_str(), sidHeader, tsec);
+    const char* callbackPtr = cbStr.isEmpty() ? nullptr : cbStr.c_str();
+    const char* sidPtr = sidStr.isEmpty() ? nullptr : sidStr.c_str();
+
+    Str sid = subscribe(service, callbackPtr, sidPtr, tsec);
+    if (sid.isEmpty()) {
+      DlnaLogger.log(DlnaLogLevel::Warning,
+                     "subscribe request rejected (missing data)");
+      server.replyHeader().setValues(412, "Precondition Failed");
+      server.replyHeader().put("Content-Length", 0);
+      server.replyHeader().write(server.client());
+      server.endClient();
+      return false;
+    }
     DlnaLogger.log(DlnaLogLevel::Info, "- SID: %s", sid.c_str());
 
     // Send SUBSCRIBE response

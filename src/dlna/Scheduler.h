@@ -15,19 +15,24 @@ namespace tiny_dlna {
 class Scheduler {
  public:
   /// Add a schedule to the scheduler
-  void add(Schedule *schedule) {
+  void add(Schedule* schedule) {
     schedule->active = true;
-    DlnaLogger.log(DlnaLogLevel::Info, "Schedule %s", schedule->name());
+    if (schedule->report_ip) {
+      DlnaLogger.log(DlnaLogLevel::Info, "Schedule %s from %s",
+                     schedule->name(), schedule->address.toString());
+    } else {
+      DlnaLogger.log(DlnaLogLevel::Info, "Schedule %s", schedule->name());
+    }
     queue.push_back(schedule);
   }
 
   /// Execute all due schedules
-  void execute(IUDPService &udp) {
+  void execute(IUDPService& udp) {
     // DlnaLogger.log(DlnaLogLevel::Debug, "Scheduler::execute");
     bool is_cleanup = false;
-    for (auto &p_s : queue) {
+    for (auto& p_s : queue) {
       if (p_s == nullptr) continue;
-      Schedule &s = *p_s;
+      Schedule& s = *p_s;
       if (millis() >= s.time) {
         // handle end time: if expired set inactive
         if (s.end_time != 0ul && millis() > s.end_time) {
@@ -35,7 +40,8 @@ class Scheduler {
         }
         // process active schedules
         if (s.active) {
-          DlnaLogger.log(DlnaLogLevel::Debug, "Scheduler::execute %s: Executing", s.name());
+          DlnaLogger.log(DlnaLogLevel::Debug,
+                         "Scheduler::execute %s: Executing", s.name());
 
           s.process(udp);
           // reschedule if necessary
@@ -46,7 +52,8 @@ class Scheduler {
             is_cleanup = true;
           }
         } else {
-          DlnaLogger.log(DlnaLogLevel::Debug, "Scheduler::execute %s: Inactive", s.name());
+          DlnaLogger.log(DlnaLogLevel::Debug, "Scheduler::execute %s: Inactive",
+                         s.name());
           is_cleanup = true;
         }
       }
@@ -57,38 +64,34 @@ class Scheduler {
 
   /// Returns true if there is any active schedule with name "MSearch"
   bool isMSearchActive() {
-    for (auto &p_s : queue) {
+    for (auto& p_s : queue) {
       if (p_s == nullptr) continue;
-      Schedule &s = *p_s;
+      Schedule& s = *p_s;
       if (s.active && StrView(s.name()).equals("MSearch")) return true;
     }
     return false;
   }
 
   /// Number of queued schedules
-  int size() {
-    return queue.size();
-  }
+  int size() { return queue.size(); }
 
-  void setActive(bool flag) {
-    is_active = flag;
-  }
+  void setActive(bool flag) { is_active = flag; }
 
-  bool isActive() {
-    return is_active;
-  }
+  bool isActive() { return is_active; }
 
  protected:
-  Vector<Schedule *> queue;
+  Vector<Schedule*> queue;
   bool is_active = true;
 
   void cleanup() {
-    DlnaLogger.log(DlnaLogLevel::Debug, "Scheduler::cleanup: for %d items", queue.size());
+    DlnaLogger.log(DlnaLogLevel::Debug, "Scheduler::cleanup: for %d items",
+                   queue.size());
     for (auto it = queue.begin(); it != queue.end(); ++it) {
       auto p_rule = *it;
       if (p_rule == nullptr) continue;
       if (!(p_rule)->active) {
-        DlnaLogger.log(DlnaLogLevel::Debug, "Scheduler::cleanup queue: %s", p_rule->name());
+        DlnaLogger.log(DlnaLogLevel::Debug, "Scheduler::cleanup queue: %s",
+                       p_rule->name());
         // remove schedule from collection
         queue.erase(it);
         // delete schedule

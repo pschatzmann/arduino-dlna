@@ -1,5 +1,6 @@
 #pragma once
 
+#include "basic/IPAddressAndPort.h"
 #include "dlna/DLNADeviceInfo.h"
 #include "dlna/IUDPService.h"
 
@@ -24,6 +25,10 @@ struct Schedule {
   uint64_t end_time = 0;
   // schedle is active
   bool active = false;
+  // optional address associated with the schedule (e.g. requester)
+  IPAddressAndPort address;
+  // enables logging the address when the schedule is queued
+  bool report_ip = false;
 
   virtual bool process(IUDPService &udp) { return false; }
 
@@ -41,7 +46,7 @@ struct Schedule {
 class MSearchSchedule : public Schedule {
  public:
   MSearchSchedule(IPAddressAndPort addr, const char *searchTarget, int mx = 3) {
-    address = addr;
+    this->address = addr;
     search_target = searchTarget;
     max_age = mx;
   }
@@ -69,7 +74,6 @@ class MSearchSchedule : public Schedule {
 
  protected:
   int max_age = 3;
-  IPAddressAndPort address;
   const char *search_target = nullptr;
 };
 
@@ -80,7 +84,8 @@ class MSearchSchedule : public Schedule {
 class MSearchReplySchedule : public Schedule {
  public:
   MSearchReplySchedule(DLNADeviceInfo &device, IPAddressAndPort addr) {
-    address = addr;
+    this->address = addr;
+    this->report_ip = true;
     p_device = &device;
   }
   const char *name() override { return "MSearchReply"; }
@@ -128,7 +133,6 @@ class MSearchReplySchedule : public Schedule {
   }
 
   Str search_target;
-  IPAddressAndPort address;
   DLNADeviceInfo *p_device;
   int mx = 0;
 
@@ -319,15 +323,15 @@ class PostByeSchedule : public Schedule {
  */
 class PostSubscribe : public Schedule {
  public:
-  PostSubscribe(IPAddressAndPort address, const char *path, uint32_t sec) {
-    setDestination(address, path);
+  PostSubscribe(IPAddressAndPort addr, const char *path, uint32_t sec) {
+    setDestination(addr, path);
     setDuration(sec);
   }
   const char *name() override { return "Subscribe"; }
 
   bool process(IUDPService &udp) override {
     ///
-    DlnaLogger.log(DlnaLogLevel::Debug, "Sending Subscribe  to %s", address);
+    DlnaLogger.log(DlnaLogLevel::Debug, "Sending Subscribe  to %s", address.toString());
 
     char buffer[MAX_TMP_SIZE] = {0};
     const char *tmp =
@@ -345,12 +349,11 @@ class PostSubscribe : public Schedule {
   }
 
  protected:
-  IPAddressAndPort address;
   const char *path;
   int durationSec = 0;
 
-  void setDestination(IPAddressAndPort address, const char *path) {
-    this->address = address;
+  void setDestination(IPAddressAndPort addr, const char *path) {
+    this->address = addr;
     this->path = path;
   }
 
