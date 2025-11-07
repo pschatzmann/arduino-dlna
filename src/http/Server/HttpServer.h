@@ -314,11 +314,7 @@ class HttpServer {
   void reply(const char* contentType, size_t (*callback)(Print& out, void* ref),
              int status = 200, const char* msg = SUCCESS, void* ref = nullptr) {
     DlnaLogger.log(DlnaLogLevel::Info, "reply %s", "via callback");
-#if DLNA_LOG_XML
-    auto& nop = Serial;
-#else
     NullPrint nop;
-#endif
     size_t size = callback(nop, ref);
     reply_header.setValues(status, msg);
     reply_header.put(CONTENT_TYPE, contentType);
@@ -326,7 +322,10 @@ class HttpServer {
     reply_header.put(CONNECTION, CON_KEEP_ALIVE);
     reply_header.write(this->client());
     callback(*client_ptr, ref);
-    // inputStream.close();
+#if DLNA_LOG_XML
+    NullPrint nop;
+    callback(nop, ref);
+#endif
     endClient();
   }
 

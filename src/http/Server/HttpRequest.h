@@ -75,11 +75,7 @@ class HttpRequest {
   /// chunked POST implementation but uses the NOTIFY method.
   virtual int notify(Url& url, std::function<size_t(Print&, void*)> writer,
                      const char* mime = nullptr, void* ref = nullptr) {
-#if DLNA_LOG_XML
-    auto& nop = Serial;
-#else
     NullPrint nop;
-#endif
     int len = writer(nop, ref);
     return process(T_NOTIFY, url,len, writer, mime, ref);
   }
@@ -296,6 +292,10 @@ class HttpRequest {
     // write callback (writer returns number of bytes written)
     if (writer) {
       size_t written = writer(*client_ptr, ref);
+#if DLNA_LOG_XML
+      NullPrint nop;
+      writer(nop, ref);
+#endif
       if (written != len) {
         DlnaLogger.log(DlnaLogLevel::Error,
                        "HttpRequest wrote %d bytes: expected %d", written, len);

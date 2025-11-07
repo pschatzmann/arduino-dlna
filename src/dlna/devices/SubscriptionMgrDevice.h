@@ -15,7 +15,7 @@
 
 namespace tiny_dlna {
 
-// forward declaration for friend 
+// forward declaration for friend
 class DLNAService;
 
 /**
@@ -78,6 +78,7 @@ struct PendingNotification {
  */
 class SubscriptionMgrDevice {
   friend class DLNADevice;
+
  public:
   /**
    * @brief Construct a new Subscription Manager
@@ -128,7 +129,7 @@ class SubscriptionMgrDevice {
 
     // generate uuid-based SID
     char buffer[64];
-    snprintf(buffer, sizeof(buffer), "<uuid:%lu>", millis());
+    snprintf(buffer, sizeof(buffer), "uuid:%lu", millis());
 
     // fill subscription
     Subscription* s = new Subscription();
