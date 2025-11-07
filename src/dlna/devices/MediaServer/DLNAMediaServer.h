@@ -16,11 +16,26 @@
 
 namespace tiny_dlna {
 
-/// Digital Media Server implementation
-///
-/// Lightweight DLNA MediaServer with ContentDirectory (Browse/Search)
-/// and ConnectionManager services. Register PrepareDataCallback and
-/// GetDataCallback and optionally setReference(void*) for custom context.
+/**
+ * @class DLNAMediaServer
+ * @brief Digital Media Server implementation
+ *
+ * Lightweight DLNA MediaServer with ContentDirectory (Browse/Search)
+ * and ConnectionManager services. Register PrepareDataCallback and
+ * GetDataCallback and optionally setReference(void*) for custom context.
+ *
+ * This class provides a complete DLNA Digital Media Server (DMS) implementation
+ * supporting:
+ * - ContentDirectory service (Browse, Search, GetSearchCapabilities, etc.)
+ * - ConnectionManager service (GetProtocolInfo, GetCurrentConnectionIDs, etc.)
+ * - UPnP event subscriptions for state change notifications
+ *
+ * Usage:
+ * 1. Create an instance with HttpServer and IUDPService
+ * 2. Set callbacks for content preparation and retrieval
+ * 3. Call begin() to start the server
+ * 4. Call loop() repeatedly to process requests
+ */
 class DLNAMediaServer : public DLNADeviceInfo {
  public:
   /// Callback: prepare data for Browse/Search. Fills numberReturned,
