@@ -62,6 +62,9 @@ class AllocatorPSRAM {
 #ifdef ESP32
     pointer p = static_cast<pointer>(
         heap_caps_malloc(n * sizeof(T), MALLOC_CAP_SPIRAM));
+    if (p == nullptr) {
+      p = static_cast<pointer>(malloc(n * sizeof(T)));
+    }
     assert(p);
 #else
     pointer p = static_cast<pointer>(malloc(n * sizeof(T)));
