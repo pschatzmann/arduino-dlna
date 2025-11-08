@@ -16,10 +16,10 @@ var searchData=
   ['service_5ftype_13',['service_type',['../classtiny__dlna_1_1DLNAServiceInfo.html#a29a58472976868e02ae0fb12863c86e4',1,'tiny_dlna::DLNAServiceInfo']]],
   ['services_14',['services',['../classtiny__dlna_1_1DLNADeviceInfo.html#a07c9dfd8545a5247bd568c6c90d1cbb6',1,'tiny_dlna::DLNADeviceInfo']]],
   ['sid_15',['sid',['../structtiny__dlna_1_1Subscription.html#a1354fd91b95870da469f84e072472211',1,'tiny_dlna::Subscription']]],
-  ['sinkproto_16',['sinkProto',['../classtiny__dlna_1_1DLNAMediaRenderer.html#a6961834f0999e70a8a0060be9f51e0e1',1,'tiny_dlna::DLNAMediaRenderer::sinkProto()'],['../classtiny__dlna_1_1DLNAMediaServer.html#aaee5bdbbd2aee3253dedbecd70f165c0',1,'tiny_dlna::DLNAMediaServer::sinkProto()']]],
+  ['sinkproto_16',['sinkProto',['../classtiny__dlna_1_1DLNAMediaRenderer.html#a6961834f0999e70a8a0060be9f51e0e1',1,'tiny_dlna::DLNAMediaRenderer::sinkProto()'],['../classtiny__dlna_1_1DLNAMediaServer.html#a9e3228648e3466df07f567d7da6406df',1,'tiny_dlna::DLNAMediaServer::sinkProto()']]],
   ['size_5f_17',['size_',['../classtiny__dlna_1_1Vector.html#a2619b0a9425e68e0c4aacb507c122765',1,'tiny_dlna::Vector']]],
-  ['sourceproto_18',['sourceProto',['../classtiny__dlna_1_1DLNAMediaRenderer.html#a426501702acbc32a27917c2715978796',1,'tiny_dlna::DLNAMediaRenderer::sourceProto()'],['../classtiny__dlna_1_1DLNAMediaServer.html#a4462d03fd641b260dc6f184873d43472',1,'tiny_dlna::DLNAMediaServer::sourceProto()']]],
-  ['st_19',['st',['../classtiny__dlna_1_1DLNAMediaRenderer.html#a2d85449ef3db3bacb99139aba03b1a1e',1,'tiny_dlna::DLNAMediaRenderer::st()'],['../classtiny__dlna_1_1DLNAMediaServer.html#a797f036822bf83fecdf2a62f516d6e03',1,'tiny_dlna::DLNAMediaServer::st()']]],
+  ['sourceproto_18',['sourceProto',['../classtiny__dlna_1_1DLNAMediaRenderer.html#a426501702acbc32a27917c2715978796',1,'tiny_dlna::DLNAMediaRenderer::sourceProto()'],['../classtiny__dlna_1_1DLNAMediaServer.html#aedb29a70903cdc559be32d534404a7ef',1,'tiny_dlna::DLNAMediaServer::sourceProto()']]],
+  ['st_19',['st',['../classtiny__dlna_1_1DLNAMediaRenderer.html#a2d85449ef3db3bacb99139aba03b1a1e',1,'tiny_dlna::DLNAMediaRenderer::st()'],['../classtiny__dlna_1_1DLNAMediaServer.html#a5e4acd1a8e35465d8ce34f716d7dc165',1,'tiny_dlna::DLNAMediaServer::st()']]],
   ['start_20',['start',['../structtiny__dlna_1_1XMLParserPrint_1_1CBRef.html#a1858660cf0f27650e1dd4965fc826994',1,'tiny_dlna::XMLParserPrint::CBRef']]],
   ['start_5ftime_21',['start_time',['../classtiny__dlna_1_1DLNAMediaRenderer.html#accaed91744deebd168f8b9558d3fdb1c',1,'tiny_dlna::DLNAMediaRenderer']]],
   ['status_5fcode_22',['status_code',['../classtiny__dlna_1_1HttpHeader.html#abcb4c1600f7ff712e40238c80e94f62e',1,'tiny_dlna::HttpHeader']]],
@@ -35,5 +35,5 @@ var searchData=
   ['subscriptions_32',['subscriptions',['../classtiny__dlna_1_1SubscriptionMgrDevice.html#a4d5c022eeb18456868002c6bdc111f86',1,'tiny_dlna::SubscriptionMgrDevice']]],
   ['subscriptions_5finterval_5fms_33',['subscriptions_interval_ms',['../classtiny__dlna_1_1DLNADevice.html#a2d3284fe8f85710f97272a45500f3670',1,'tiny_dlna::DLNADevice']]],
   ['success_34',['SUCCESS',['../namespacetiny__dlna.html#aa203b0adbc2115c8cd956dd41ec09735',1,'tiny_dlna']]],
-  ['suffix_35',['suffix',['../structtiny__dlna_1_1DLNAMediaRenderer_1_1ActionRule.html#a0969aeef27e7ce3fbbe79a5455e008fe',1,'tiny_dlna::DLNAMediaRenderer::ActionRule::suffix()'],['../structtiny__dlna_1_1DLNAMediaServer_1_1ActionRule.html#ac581f5824ddf86b26d4e34716185887f',1,'tiny_dlna::DLNAMediaServer::ActionRule::suffix()']]]
+  ['suffix_35',['suffix',['../structtiny__dlna_1_1DLNAMediaRenderer_1_1ActionRule.html#a0969aeef27e7ce3fbbe79a5455e008fe',1,'tiny_dlna::DLNAMediaRenderer::ActionRule::suffix()'],['../structtiny__dlna_1_1DLNAMediaServer_1_1ActionRule.html#a7a4d1cd31124ae82d5570c1412308865',1,'tiny_dlna::DLNAMediaServer::ActionRule::suffix()']]]
 ];

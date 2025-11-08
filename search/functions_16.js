@@ -2,7 +2,7 @@ var searchData=
 [
   ['_7edlnacontrolpoint_0',['~DLNAControlPoint',['../classtiny__dlna_1_1DLNAControlPoint.html#a62a8953008abb3b88419cb6cdae970fb',1,'tiny_dlna::DLNAControlPoint']]],
   ['_7edlnadeviceinfo_1',['~DLNADeviceInfo',['../classtiny__dlna_1_1DLNADeviceInfo.html#a2b92b4f46e5cdf8c2d9fe87d22ac5fd9',1,'tiny_dlna::DLNADeviceInfo']]],
-  ['_7edlnamediaserver_2',['~DLNAMediaServer',['../classtiny__dlna_1_1DLNAMediaServer.html#a0a3285f74fbf14cf9d58b029c2c9cc5b',1,'tiny_dlna::DLNAMediaServer']]],
+  ['_7edlnamediaserver_2',['~DLNAMediaServer',['../classtiny__dlna_1_1DLNAMediaServer.html#a48605411efb9953282f8ed71b4ce33d1',1,'tiny_dlna::DLNAMediaServer']]],
   ['_7ehttpheader_3',['~HttpHeader',['../classtiny__dlna_1_1HttpHeader.html#a70d0dc8fc4fe1f76d89c33b6925c6465',1,'tiny_dlna::HttpHeader']]],
   ['_7ehttpparameters_4',['~HttpParameters',['../classtiny__dlna_1_1HttpParameters.html#a209dd0fd20d2dc8132ab1eabdbacf5be',1,'tiny_dlna::HttpParameters']]],
   ['_7ehttprequest_5',['~HttpRequest',['../classtiny__dlna_1_1HttpRequest.html#a30a4bc7a6d60a4f18f1a1d2394c4fd90',1,'tiny_dlna::HttpRequest']]],
