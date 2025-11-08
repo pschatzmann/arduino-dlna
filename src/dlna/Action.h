@@ -2,8 +2,8 @@
 #pragma once
 // #include "dlna/DLNAServiceInfo.h"
 #include "dlna/DLNACommon.h"
-#include "dlna/StringRegistry.h"
 #include "dlna/xml/XMLPrinter.h"
+#include "basic/Logger.h"  // ensure DlnaLogger and DlnaLogLevel declarations
 
 namespace tiny_dlna {
 
@@ -83,8 +83,8 @@ class ActionReply {
   void logArguments() {
     for (auto& a : arguments) {
       DlnaLogger.log(DlnaLogLevel::Debug, "  -> %s = %s",
-                     StringRegistry::nullStr(a.name.c_str()),
-                     StringRegistry::nullStr(a.value.c_str()));
+                     StrView(a.name.c_str()).c_str(),
+                     StrView(a.value.c_str()).c_str());
     }
   }
 
@@ -128,7 +128,7 @@ class ActionRequest {
   const char* getArgumentValue(const char* name) {
     for (auto& a : arguments) {
       if (a.name.endsWithIgnoreCase(name)) {
-        return StringRegistry::nullStr(a.value.c_str());
+  return StrView(a.value.c_str()).c_str();
       }
     }
 

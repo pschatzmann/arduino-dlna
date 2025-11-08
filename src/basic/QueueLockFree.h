@@ -14,8 +14,7 @@ namespace tiny_dlna {
 template <typename T>
 class QueueLockFree {
  public:
-  QueueLockFree(size_t capacity, ALLOCATOR& allocator = DefaultAllocator) {
-    setAllocator(allocator);
+  QueueLockFree(size_t capacity) {
     resize(capacity);
   }
 
@@ -27,7 +26,7 @@ class QueueLockFree {
       (&p_node[i & capacity_mask].data)->~T();
   }
 
-  void setAllocator(ALLOCATOR& allocator) { vector.setAllocator(allocator); }
+  // setAllocator removed – allocator compatibility dropped.
 
   void resize(size_t capacity) {
     // round up to next power-of-two and compute mask/value
@@ -128,6 +127,6 @@ class QueueLockFree {
   size_t capacity_value;
   std::atomic<size_t> tail_pos;
   std::atomic<size_t> head_pos;
-  Vector<Node> vector;
+  Vector<Node> vector; // uses default ALLOCATOR<T> for Node
 };
 }  // namespace audio_tools

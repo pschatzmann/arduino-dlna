@@ -5,7 +5,6 @@
 #include "basic/Vector.h"
 #include "dlna/Action.h"
 #include "dlna/DLNAServiceInfo.h"
-#include "dlna/StringRegistry.h"
 #include "dlna/xml/XMLPrinter.h"
 #include "http/Server/IHttpServer.h"
 #include "udp/IUDPService.h"  // Ensure IUDPService is declared
@@ -80,13 +79,13 @@ class DLNADeviceInfo {
   // sets the device type (ST or NT)
   void setDeviceType(const char* st) { device_type = st; }
 
-  const char* getDeviceType() { return device_type; }
+  const char* getDeviceType() { return device_type.c_str(); }
 
   /// Define the udn uuid
   void setUDN(const char* id) { udn = id; }
 
   /// Provide the udn uuid
-  const char* getUDN() { return udn; }
+  const char* getUDN() { return udn.c_str(); }
 
   /// Defines the base url
   void setBaseURL(const char* url) {
@@ -122,7 +121,7 @@ class DLNADeviceInfo {
       url_str.replace("localhost", getIPStr());
       base_url = url_str.c_str();
     }
-    return base_url;
+    return base_url.c_str();
   }
 
   /// This method returns base url/device.xml
@@ -152,25 +151,25 @@ class DLNADeviceInfo {
   }
 
   void setNS(const char* ns) { this->ns = ns; }
-  const char* getNS() { return ns; }
+  const char* getNS() { return ns.c_str(); }
   void setFriendlyName(const char* name) { friendly_name = name; }
-  const char* getFriendlyName() { return friendly_name; }
+  const char* getFriendlyName() { return friendly_name.c_str(); }
   void setManufacturer(const char* man) { manufacturer = man; }
-  const char* getManufacturer() { return manufacturer; }
+  const char* getManufacturer() { return manufacturer.c_str(); }
   void setManufacturerURL(const char* url) { manufacturer_url = url; }
-  const char* getManufacturerURL() { return manufacturer_url; }
+  const char* getManufacturerURL() { return manufacturer_url.c_str(); }
   void setModelDescription(const char* descr) { model_description = descr; }
-  const char* getModelDescription() { return model_description; }
+  const char* getModelDescription() { return model_description.c_str(); }
   void setModelName(const char* name) { model_name = name; }
-  const char* getModelName() { return model_name; }
+  const char* getModelName() { return model_name.c_str(); }
   void setModelNumber(const char* number) { model_number = number; }
-  const char* getModelNumber() { return model_number; }
+  const char* getModelNumber() { return model_number.c_str(); }
   void setSerialNumber(const char* sn) { serial_number = sn; }
-  const char* getSerialNumber() { return serial_number; }
+  const char* getSerialNumber() { return serial_number.c_str(); }
   void setUniversalProductCode(const char* upc) {
     universal_product_code = upc;
   }
-  const char* getUniversalProductCode() { return universal_product_code; }
+  const char* getUniversalProductCode() { return universal_product_code.c_str(); }
 
   /// Adds a service definition
   void addService(DLNAServiceInfo s) { services.push_back(s); }
@@ -203,17 +202,17 @@ class DLNADeviceInfo {
   /// Clears all device information
   void clear() {
     services.clear();
-    udn = nullptr;
-    ns = nullptr;
-    device_type = nullptr;
-    friendly_name = nullptr;
-    manufacturer = nullptr;
-    manufacturer_url = nullptr;
-    model_description = nullptr;
-    model_name = nullptr;
-    model_number = nullptr;
-    serial_number = nullptr;
-    universal_product_code = nullptr;
+  udn = "";
+  ns = "";
+  device_type = "";
+  friendly_name = "";
+  manufacturer = "";
+  manufacturer_url = "";
+  model_description = "";
+  model_name = "";
+  model_number = "";
+  serial_number = "";
+  universal_product_code = "";
   }
 
   /// Overwrite the default icon
@@ -253,19 +252,19 @@ class DLNADeviceInfo {
   IPAddress localhost;
   int version_major = 1;
   int version_minor = 0;
-  const char* base_url = "http://localhost:9876/dlna";
-  const char* udn = "uuid:09349455-2941-4cf7-9847-0dd5ab210e97";
-  const char* ns = "xmlns=\"urn:schemas-upnp-org:device-1-0\"";
-  const char* device_type = nullptr;
-  const char* friendly_name = nullptr;
-  const char* manufacturer = nullptr;
-  const char* manufacturer_url = nullptr;
-  const char* model_description = nullptr;
-  const char* model_name = nullptr;
-  const char* model_url = nullptr;
-  const char* model_number = nullptr;
-  const char* serial_number = nullptr;
-  const char* universal_product_code = nullptr;
+  Str base_url = "http://localhost:9876/dlna";
+  Str udn = "uuid:09349455-2941-4cf7-9847-0dd5ab210e97";
+  Str ns = "xmlns=\"urn:schemas-upnp-org:device-1-0\"";
+  Str device_type;
+  Str friendly_name;
+  Str manufacturer;
+  Str manufacturer_url;
+  Str model_description;
+  Str model_name;
+  Str model_url;
+  Str model_number;
+  Str serial_number;
+  Str universal_product_code;
   Icon icon;
   Vector<DLNAServiceInfo> services;
   Vector<Icon> icons;

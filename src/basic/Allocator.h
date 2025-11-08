@@ -1,185 +1,102 @@
 #pragma once
 #include <stdlib.h>
+#include <memory>
+#include <limits>
+#include <assert.h>
+#include <type_traits>
 
-#include "basic/AllocationTracker.h"
-#include "basic/Logger.h"
+#ifdef ESP32
+#include <esp_heap_caps.h>
+#endif
 #include "dlna_config.h"
 
 namespace tiny_dlna {
 
 /**
- * @defgroup memorymgmt Memory Management
- * @ingroup tools
- * @brief Allocators and Memory Manager
+ * @class AllocatorPSRAM
+ * @brief Custom allocator that uses ESP32's PSRAM for memory allocation
+ * @tparam T Type of elements to allocate
+ *
+ * This allocator uses ESP32's heap_caps_malloc with MALLOC_CAP_SPIRAM flag
+ * to ensure all memory is allocated in PSRAM instead of regular RAM.
  */
-
-/**
- * @brief Memory allocateator which uses malloc.
- * @ingroup memorymgmt
- * @author Phil Schatzmann
- * @copyright GPLv3
- */
-
-class Allocator {
+template <typename T>
+class AllocatorPSRAM {
  public:
-  // creates an object
-  template <class T>
-  T* create() {
-    void* addr = allocate(sizeof(T));
-    // call constructor
-    T* ref = new (addr) T();
-    return ref;
-  }
+  using value_type = T;
+  using pointer = T*;
+  using const_pointer = const T*;
+  using reference = T&;
+  using const_reference = const T&;
+  using size_type = std::size_t;
+  using difference_type = std::ptrdiff_t;
+  using is_always_equal = std::true_type;
+  using propagate_on_container_move_assignment = std::true_type;
 
-  /// deletes an object
-  template <class T>
-  void remove(T* obj) {
-    if (obj == nullptr) return;
-    obj->~T();
-    free((void*)obj);
-  }
+  /**
+   * @brief Default constructor
+   */
+  AllocatorPSRAM() noexcept {}
 
-  // creates an array of objects
-  template <class T>
-  T* createArray(int len) {
-    void* addr = allocate(sizeof(T) * len);
-    T* addrT = (T*)addr;
-    // call constructor
-    for (int j = 0; j < len; j++) new (addrT + j) T();
-    return (T*)addr;
-  }
+  /**
+   * @brief Copy constructor from another allocator type
+   * @tparam U Type of the other allocator
+   * @param other The other allocator
+   */
+  template <typename U>
+  AllocatorPSRAM(const AllocatorPSRAM<U>&) noexcept {}
 
-  // deletes an array of objects
-  template <class T>
-  void removeArray(T* obj, int len) {
-    if (obj == nullptr) return;
-    for (int j = 0; j < len; j++) {
-      obj[j].~T();
-    }
-    free((void*)obj);
-  }
+  /**
+   * @brief Allocate memory from PSRAM
+   * @param n Number of elements to allocate
+   * @return Pointer to allocated memory
+   * @throws std::bad_alloc If allocation fails or size is too large
+   */
+  pointer allocate(size_type n) {
+    if (n==0) return nullptr;
+    // if (n > std::numeric_limits<size_type>::max() / sizeof(T))
+    //     throw std::bad_alloc();
+    // in Arduino excepitons are disabled!
+    assert(n <= std::numeric_limits<size_type>::max() / sizeof(T));
 
-  /// Allocates memory
-  virtual void* allocate(size_t size) {
-    void* result = do_allocate(size);
-    if (result == nullptr) {
-      DlnaLogger.log(DlnaLogLevel::Error, "Allocateation failed for %zu bytes",
-                     size);
-      stop();
-    } else {
-      DlnaLogger.log(DlnaLogLevel::Debug, "Allocated %zu", size);
-    }
-    return result;
-  }
-
-  void stop() {
-    while (true) delay(1000);
-  }
-
-  /// frees memory
-  virtual void free(void* memory) {
-    if (memory != nullptr) ::free(memory);
-  }
-
- protected:
-  virtual void* do_allocate(size_t size) {
-    return calloc(1, size == 0 ? 1 : size);
-  }
-};
-
-#ifdef IS_DESKTOP
-
-/// Allocator which tracks allocations and deallocations
-class TrackedAllocator {
- public:
-  // creates an object
-  template <class T>
-  T* create() {
-    tracker.trackAlloc<T>();
-    return alloc.create<T>();
-  }
-
-  /// deletes an object
-  template <class T>
-  void remove(T* obj) {
-    tracker.trackFree<T>();
-    alloc.remove<T>(obj);
-  }
-
-  // creates an array of objects
-  template <class T>
-  T* createArray(int len) {
-    tracker.trackAlloc<T>();
-    return alloc.createArray<T>(len);
-  }
-
-  // deletes an array of objects
-  template <class T>
-  void removeArray(T* obj, int len) {
-    tracker.trackFree<T>();
-    alloc.removeArray<T>(obj, len);
-  }
-
- protected:
-  Allocator alloc;
-  AllocationTracker& tracker = AllocationTracker::getInstance();
-};
-
+#ifdef ESP32
+    pointer p = static_cast<pointer>(
+        heap_caps_malloc(n * sizeof(T), MALLOC_CAP_SPIRAM));
+    assert(p);
+#else
+    pointer p = static_cast<pointer>(malloc(n * sizeof(T)));
+    if (!p) throw std::bad_alloc();
 #endif
-
-/**
- * @brief Memory allocateator which uses ps_malloc (on the ESP32) and if this
- * fails it resorts to malloc.
- * @ingroup memorymgmt
- * @author Phil Schatzmann
- * @copyright GPLv3
- */
-class AllocatorExt : public Allocator {
-  void* do_allocate(size_t size) {
-    void* result = nullptr;
-    if (size == 0) size = 1;
-#if defined(ESP32) && defined(ARDUINO)
-    result = ps_malloc(size);
-#endif
-    if (result == nullptr) result = malloc(size);
-    if (result == nullptr) {
-      DlnaLogger.log(DlnaLogLevel::Error, "allocateation failed for %zu bytes",
-                     size);
-      stop();
-    }
-    // initialize object
-    memset(result, 0, size);
-    return result;
+    return p;
   }
-};
 
-#if defined(ESP32) && defined(ARDUINO)
-
-/**
- * @brief Memory allocateator which uses ps_malloc to allocate the memory in
- * PSRAM on the ESP32
- * @ingroup memorymgmt
- * @author Phil Schatzmann
- * @copyright GPLv3
- **/
-
-class AllocatorPSRAM : public Allocator {
-  void* do_allocate(size_t size) {
-    if (size == 0) size = 1;
-    void* result = nullptr;
-    result = ps_calloc(1, size);
-    if (result == nullptr) {
-      DlnaLogger.log(DlnaLogLevel::Error, "allocateation failed for %zu bytes",
-                     size);
-      stop();
-    }
-    return result;
-  }
-};
-
+  /**
+   * @brief Deallocate memory
+   * @param p Pointer to memory to deallocate
+   * @param size Size of allocation (unused)
+   */
+  void deallocate(pointer p, size_type) noexcept {
+#ifdef ESP32
+    if (p) heap_caps_free(p);
+#else
+    if (p) free(p);
 #endif
+  }
 
-// Default allocator instance
-static DLNA_DEFAULT_ALLOCATOR DefaultAllocator;
+  /**
+   * @brief Rebind allocator to another type
+   * @tparam U Type to rebind the allocator to
+   */
+  template <typename U>
+  struct rebind {
+    using other = AllocatorPSRAM<U>;
+  };
+
+  // Allocators compare equal (stateless)
+  template <typename U>
+  bool operator==(const AllocatorPSRAM<U>&) const noexcept { return true; }
+  template <typename U>
+  bool operator!=(const AllocatorPSRAM<U>&) const noexcept { return false; }
+};
 
 }  // namespace tiny_dlna

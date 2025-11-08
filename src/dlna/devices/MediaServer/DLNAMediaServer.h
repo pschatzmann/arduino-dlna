@@ -7,7 +7,6 @@
 #include "basic/Printf.h"
 #include "basic/Str.h"
 #include "dlna/Action.h"
-#include "dlna/StringRegistry.h"
 #include "dlna/devices/DLNADevice.h"
 #include "dlna/devices/MediaServer/MediaItem.h"
 #include "dlna/xml/XMLParserPrint.h"
@@ -140,10 +139,10 @@ class DLNAMediaServer : public DLNADeviceInfo {
       auto self = (DLNAMediaServer*)ref;
       size_t result = 0;
       result += out.print("<SourceProtocolInfo val=\"");
-      result += out.print(StringRegistry::nullStr(self->getSourceProtocols()));
+  result += out.print(StrView(self->getSourceProtocols()).c_str());
       result += out.print("\"/>\n");
       result += out.print("<SinkProtocolInfo val=\"");
-      result += out.print(StringRegistry::nullStr(self->getSinkProtocols()));
+  result += out.print(StrView(self->getSinkProtocols()).c_str());
       result += out.print("\"/>\n");
       return result;
     };
@@ -281,13 +280,13 @@ class DLNAMediaServer : public DLNADeviceInfo {
       auto self = (DLNAMediaServer*)ref;
       size_t result = 0;
       result += out.print("<SourceProtocolInfo val=\"");
-      result += out.print(StringRegistry::nullStr(self->getSourceProtocols()));
+  result += out.print(StrView(self->getSourceProtocols()).c_str());
       result += out.print("\"/>\n");
       result += out.print("<SinkProtocolInfo val=\"");
-      result += out.print(StringRegistry::nullStr(self->getSinkProtocols()));
+  result += out.print(StrView(self->getSinkProtocols()).c_str());
       result += out.print("\"/>\n");
       result += out.print("<CurrentConnectionIDs val=\"");
-      result += out.print(StringRegistry::nullStr(self->connectionID));
+  result += out.print(StrView(self->connectionID).c_str());
       result += out.print("\"/>\n");
       return result;
     };
@@ -514,7 +513,7 @@ class DLNAMediaServer : public DLNADeviceInfo {
               "urn:schemas-upnp-org:service:ContentDirectory:1");
           written += out.print("<SearchCaps>");
           written +=
-              out.print(StringRegistry::nullStr(self->g_search_capabiities));
+              out.print(StrView(self->g_search_capabiities).c_str());
           written += out.print("</SearchCaps>\r\n");
           written +=
               self->actionResponseEnd(out, "GetSearchCapabilitiesResponse");
@@ -541,7 +540,7 @@ class DLNAMediaServer : public DLNADeviceInfo {
               "urn:schemas-upnp-org:service:ContentDirectory:1");
           written += out.print("<SortCaps>");
           written +=
-              out.print(StringRegistry::nullStr(self->g_sort_capabilities));
+              out.print(StrView(self->g_sort_capabilities).c_str());
           written += out.print("</SortCaps>\r\n");
           written +=
               self->actionResponseEnd(out, "GetSortCapabilitiesResponse");
@@ -726,7 +725,7 @@ class DLNAMediaServer : public DLNADeviceInfo {
 
         // title
         written += out.print("&lt;dc:title&gt;");
-        written += out.print(StringRegistry::nullStr(item.title));
+  written += out.print(StrView(item.title).c_str());
         written += out.print("&lt;/dc:title&gt;\r\n");
         if (mediaItemClassStr != nullptr) {
           written += static_cast<size_t>(
@@ -741,11 +740,11 @@ class DLNAMediaServer : public DLNADeviceInfo {
           if (!StrView(item.mimeType).isEmpty()) {
             written += static_cast<size_t>(pr.printf(
                 "&lt;res protocolInfo=\"http-get:*:%s:*\"&gt;", item.mimeType));
-            written += out.print(StringRegistry::nullStr(url.c_str()));
+            written += out.print(StrView(url.c_str()).c_str());
             written += out.print("&lt;/res&gt;\r\n");
           } else {
             written += out.print("&lt;res&gt;");
-            written += out.print(StringRegistry::nullStr(url.c_str()));
+            written += out.print(StrView(url.c_str()).c_str());
             written += out.print("&lt;/res&gt;\r\n");
           }
         }

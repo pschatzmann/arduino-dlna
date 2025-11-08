@@ -4,7 +4,6 @@
 #include <functional>
 
 #include "dlna/Action.h"
-#include "dlna/StringRegistry.h"
 #include "dlna/clients/DLNAControlPoint.h"
 #include "dlna/xml/XMLProtocolInfoParser.h"
 #include "http/Server/HttpChunkWriter.h"

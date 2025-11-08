@@ -25,21 +25,21 @@ class DLNAServiceInfo {
              const char* event, http_callback cbEvent) {
     DlnaLogger.log(DlnaLogLevel::Info, "Setting up: %s | %s | %s", scp, control, event);
 
-    service_type = type;
-    service_id = id;
-    scpd_url = scp;
-    control_url = control;
-    event_sub_url = event;
+  service_type = type;
+  service_id = id;
+  scpd_url = scp;
+  control_url = control;
+  event_sub_url = event;
     scp_cb = cbScp;
     control_cb = cbControl;
     event_sub_cb = cbEvent;
   }
-  const char* service_type = nullptr;
-  const char* service_id = nullptr;
-  const char* scpd_url = nullptr;
-  const char* control_url = nullptr;
-  const char* event_sub_url = nullptr;
-  const char* event_sub_sid = nullptr; /**< SID assigned by remote service (if subscribed) */
+  Str service_type;
+  Str service_id;
+  Str scpd_url;
+  Str control_url;
+  Str event_sub_url;
+  // event_sub_sid previously stored remote-assigned SID; consolidated into subscription_id
   http_callback scp_cb = nullptr;
   http_callback control_cb = nullptr;
   http_callback event_sub_cb = nullptr;

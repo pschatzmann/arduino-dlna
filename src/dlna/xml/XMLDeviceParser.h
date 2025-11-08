@@ -18,9 +18,8 @@ namespace tiny_dlna {
  */
 class XMLDeviceParser {
  public:
-  XMLDeviceParser(DLNADeviceInfo& result, StringRegistry& strings) {
+  XMLDeviceParser(DLNADeviceInfo& result) {
     resetState();
-    p_registry = &strings;
     p_device = &result;
   }
 
@@ -46,26 +45,26 @@ class XMLDeviceParser {
         if (path[i] == "icon") path_has_icon = true;
       }
 
-      if (path_has_service) {
+  if (path_has_service) {
         if (!in_service) {
           in_service = true;
           cur_service = DLNAServiceInfo();
         }
         if (node.equals("serviceType")) {
           const char* t = text.c_str();
-          if (t && *t) cur_service.service_type = p_registry->add(t);
+          if (t && *t) cur_service.service_type = t;
         } else if (node.equals("serviceId")) {
           const char* t = text.c_str();
-          if (t && *t) cur_service.service_id = p_registry->add(t);
+          if (t && *t) cur_service.service_id = t;
         } else if (node.equals("SCPDURL")) {
           const char* t = text.c_str();
-          if (t && *t) cur_service.scpd_url = p_registry->add(t);
+          if (t && *t) cur_service.scpd_url = t;
         } else if (node.equals("controlURL")) {
           const char* t = text.c_str();
-          if (t && *t) cur_service.control_url = p_registry->add(t);
+          if (t && *t) cur_service.control_url = t;
         } else if (node.equals("eventSubURL")) {
           const char* t = text.c_str();
-          if (t && *t) cur_service.event_sub_url = p_registry->add(t);
+          if (t && *t) cur_service.event_sub_url = t;
         }
       } else if (path_has_icon) {
         if (!in_icon) {
@@ -74,7 +73,7 @@ class XMLDeviceParser {
         }
         if (node.equals("mimetype")) {
           const char* t = text.c_str();
-          if (t && *t) cur_icon.mime = p_registry->add(t);
+          if (t && *t) cur_icon.mime = t;
         } else if (node.equals("width")) {
           const char* t = text.c_str();
           cur_icon.width = t ? atoi(t) : 0;
@@ -86,46 +85,46 @@ class XMLDeviceParser {
           cur_icon.depth = t ? atoi(t) : 0;
         } else if (node.equals("url")) {
           const char* t = text.c_str();
-          if (t && *t) cur_icon.icon_url = p_registry->add(t);
+          if (t && *t) cur_icon.icon_url = t;
         }
       } else {
         // device-level
         if (node.equals("deviceType")) {
           const char* t = text.c_str();
-          if (t && *t) result.device_type = p_registry->add(t);
+          if (t && *t) result.device_type = t;
         } else if (node.equals("friendlyName")) {
           const char* t = text.c_str();
-          if (t && *t) result.friendly_name = p_registry->add(t);
+          if (t && *t) result.friendly_name = t;
         } else if (node.equals("manufacturer")) {
           const char* t = text.c_str();
-          if (t && *t) result.manufacturer = p_registry->add(t);
+          if (t && *t) result.manufacturer = t;
         } else if (node.equals("manufacturerURL")) {
           const char* t = text.c_str();
-          if (t && *t) result.manufacturer_url = p_registry->add(t);
+          if (t && *t) result.manufacturer_url = t;
         } else if (node.equals("modelDescription")) {
           const char* t = text.c_str();
-          if (t && *t) result.model_description = p_registry->add(t);
+          if (t && *t) result.model_description = t;
         } else if (node.equals("modelName")) {
           const char* t = text.c_str();
-          if (t && *t) result.model_name = p_registry->add(t);
+          if (t && *t) result.model_name = t;
         } else if (node.equals("modelNumber")) {
           const char* t = text.c_str();
-          if (t && *t) result.model_number = p_registry->add(t);
+          if (t && *t) result.model_number = t;
         } else if (node.equals("modelURL")) {
           const char* t = text.c_str();
-          if (t && *t) result.model_url = p_registry->add(t);
+          if (t && *t) result.model_url = t;
         } else if (node.equals("serialNumber")) {
           const char* t = text.c_str();
-          if (t && *t) result.serial_number = p_registry->add(t);
+          if (t && *t) result.serial_number = t;
         } else if (node.equals("UPC")) {
           const char* t = text.c_str();
-          if (t && *t) result.universal_product_code = p_registry->add(t);
+          if (t && *t) result.universal_product_code = t;
         } else if (node.equals("UDN")) {
           const char* t = text.c_str();
-          if (t && *t) result.udn = p_registry->add(t);
+          if (t && *t) result.udn = t;
         } else if (node.equals("URLBase")) {
           const char* t = text.c_str();
-          if (t && *t) result.base_url = p_registry->add(t);
+          if (t && *t) result.base_url = t;
         }
       }
 
@@ -170,7 +169,6 @@ class XMLDeviceParser {
  protected:
   DLNAServiceInfo cur_service;
   DLNADeviceInfo* p_device = nullptr;
-  StringRegistry* p_registry = nullptr;
   XMLParserPrint xml_parser;
   bool in_service = false;
   bool in_icon = false;
@@ -178,7 +176,6 @@ class XMLDeviceParser {
 
   void resetState() {
     p_device = nullptr;
-    p_registry = nullptr;
     in_service = false;
     cur_service = DLNAServiceInfo();
     in_icon = false;

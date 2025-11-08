@@ -92,7 +92,7 @@ class Scheduler {
       if (!(p_rule)->active) {
         DlnaLogger.log(DlnaLogLevel::Debug, "Scheduler::cleanup queue: %s",
                        p_rule->name());
-        // remove schedule from collection
+        // remove schedule from collection using iterator overload
         queue.erase(it);
         // delete schedule
         delete p_rule;

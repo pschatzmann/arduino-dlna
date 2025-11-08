@@ -300,7 +300,7 @@ class HttpRequest : public IHttpRequest {
     if (writer) {
       size_t written = writer(*client_ptr, ref);
 #if DLNA_LOG_XML
-      writer(Serial, ref);
+  writer(arduino::Serial, ref);
 #endif
       if (written != len) {
         DlnaLogger.log(DlnaLogLevel::Error,

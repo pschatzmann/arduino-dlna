@@ -9,7 +9,6 @@
 #include "basic/StrView.h"
 #include "basic/Url.h"
 #include "basic/Vector.h"
-#include "dlna/StringRegistry.h"
 #include "http/Http.h"
 #include "http/Server/HttpRequest.h"
 #include "http/Server/IHttpServer.h"
@@ -132,8 +131,8 @@ class SubscriptionMgrDevice : public ISubscriptionMgrDevice {
                 uint32_t timeoutSec = 1800) override {
     // simple SID generation
     DlnaLogger.log(DlnaLogLevel::Info, "subscribe: %s %s",
-                   StringRegistry::nullStr(service.service_id, "(null)"),
-                   StringRegistry::nullStr(callbackUrl, "(null)"));
+                   StrView(service.service_id).c_str(),
+                   StrView(callbackUrl).c_str());
 
     bool hasSid = !StrView(sid).isEmpty();
 
@@ -174,8 +173,8 @@ class SubscriptionMgrDevice : public ISubscriptionMgrDevice {
         DlnaLogger.log(DlnaLogLevel::Info,
                        "subscribe: found existing subscription for service "
                        "'%s' and callback '%s', renewing SID '%s'",
-                       StringRegistry::nullStr(service.service_id, "(null)"),
-                       StringRegistry::nullStr(callbackUrl, "(null)"),
+                       StrView(service.service_id).c_str(),
+                       StrView(callbackUrl).c_str(),
                        existing_sub->sid.c_str());
         // Renew existing subscription
         existing_sub->timeout_sec = timeoutSec;

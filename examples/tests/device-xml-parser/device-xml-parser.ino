@@ -3,8 +3,7 @@
 #include "device.h"
 
 DLNADeviceInfo device_info;
-StringRegistry strings;
-XMLDeviceParser parser(device_info, strings);
+XMLDeviceParser parser(device_info);
 
 void setup() {
   Serial.begin(119200);

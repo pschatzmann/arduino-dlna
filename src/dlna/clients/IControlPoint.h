@@ -14,7 +14,8 @@
 
 namespace tiny_dlna {
 
-template <class T>
+// Forward declaration of templated Vector with two parameters matches implementation
+template <class T, class Alloc>
 class Vector;
 
 class DLNADeviceInfo;

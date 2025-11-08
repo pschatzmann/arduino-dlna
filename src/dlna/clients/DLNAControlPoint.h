@@ -8,7 +8,6 @@
 #include "dlna/DLNADeviceInfo.h"
 #include "dlna/Schedule.h"
 #include "dlna/Scheduler.h"
-#include "dlna/StringRegistry.h"
 #include "dlna/clients/IControlPoint.h"
 #include "dlna/clients/SubscriptionMgrControlPoint.h"
 #include "dlna/devices/DLNADevice.h"
@@ -198,7 +197,7 @@ class DLNAControlPoint : public IControlPoint {
     }
 
     // instantiate subscription manager
-    subscription_mgr.setup(http, udp, local_url, registry, getDevice());
+  subscription_mgr.setup(http, udp, local_url, getDevice());
 
     // If we exited early because a device was found, deactivate the MSearch
     // schedule so it will stop repeating. The scheduler will clean up
@@ -251,8 +250,6 @@ class DLNAControlPoint : public IControlPoint {
     // reset xml printer state
     xml_printer.clear();
 
-    // clear string registry (frees owned strings)
-    registry.clear();
 
     // clear last reply
     reply.clear();
@@ -442,9 +439,9 @@ class DLNAControlPoint : public IControlPoint {
     }
 
     DLNADeviceInfo new_device;
-    new_device.base_url = nullptr;
+    new_device.base_url.clear();
 
-    XMLDeviceParser parser{new_device, registry};
+    XMLDeviceParser parser{new_device};
     uint8_t buffer[XML_PARSER_BUFFER_SIZE];
 
     // Read and incrementally parse into new_device
@@ -499,7 +496,7 @@ class DLNAControlPoint : public IControlPoint {
 
   /// Register a string in the shared registry and return the stored pointer
   const char* registerString(const char* s) override {
-    return registry.add((char*)s);
+    return s; // registry removed
   }
 
  protected:
@@ -512,7 +509,6 @@ class DLNAControlPoint : public IControlPoint {
   Vector<ActionRequest> actions;
   ActionReply reply;
   XMLPrinter xml_printer;
-  StringRegistry registry;
   int default_device_idx = 0;
   int msearch_repeat_ms = 10000;
   bool is_active = false;
@@ -714,8 +710,8 @@ class DLNAControlPoint : public IControlPoint {
     // Log service and base to help debug malformed control URLs
     DlnaLogger.log(DlnaLogLevel::Info,
                    "Service control_url: %s, device base: %s",
-                   StringRegistry::nullStr(service.control_url),
-                   StringRegistry::nullStr(device.getBaseURL()));
+                   StrView(service.control_url).c_str(),
+                   StrView(device.getBaseURL()).c_str());
     Url post_url{
         getUrl(device, service.control_url, url_buffer, DLNA_MAX_URL_LEN)};
     DlnaLogger.log(DlnaLogLevel::Info, "POST URL computed: %s", post_url.url());
@@ -757,7 +753,7 @@ class DLNAControlPoint : public IControlPoint {
       p_http->stop();
       reply.setValid(false);
       DlnaLogger.log(DlnaLogLevel::Error, "Action '%s' failed with HTTP rc %d",
-                     StringRegistry::nullStr(soapAction), rc);
+                     StrView(soapAction).c_str(), rc);
       return reply;
     }
 
@@ -809,19 +805,19 @@ class DLNAControlPoint : public IControlPoint {
             unEscapeStr(outText);
 
             if (!outText.isEmpty()) {
-              arg.name = registry.add((char*)outNodeName.c_str());
+              arg.name = outNodeName.c_str();
               arg.value = outText;
               reply.addArgument(arg);
             }
 
             DlnaLogger.log(DlnaLogLevel::Info, "Callback: '%s': %s (%s)",
-                           StringRegistry::nullStr(outNodeName),
-                           StringRegistry::nullStr(outText),
-                           StringRegistry::nullStr(outAttributes));
+                           StrView(outNodeName).c_str(),
+                           StrView(outText).c_str(),
+                           StrView(outAttributes).c_str());
             if (result_callback) {
-              result_callback(StringRegistry::nullStr(outNodeName, ""),
-                              StringRegistry::nullStr(outText, ""),
-                              StringRegistry::nullStr(outAttributes, ""));
+              result_callback(StrView(outNodeName ? outNodeName : "").c_str(),
+                              StrView(outText ? outText : "").c_str(),
+                              StrView(outAttributes ? outAttributes : "").c_str());
             }
           }
         }

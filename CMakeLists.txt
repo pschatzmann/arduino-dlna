@@ -21,20 +21,27 @@ endif()
 
 add_compile_options(-DIS_DESKTOP)
 
-
-file(GLOB_RECURSE SRC_LIST_CPP CONFIGURE_DEPENDS  "${PROJECT_SOURCE_DIR}/src/*.cpp" )
-
-# define libraries
-add_library (arduino-dlna ${SRC_LIST_CPP})
+# Header-only core library: expose include paths & compile definitions only.
+# We use an INTERFACE target so consumers can link against it while
+# inheriting the required include directories and defines.
+add_library(arduino-dlna INTERFACE)
 
 # prevent compile errors
-target_compile_options(arduino-dlna PUBLIC -DNO_GATEWAYIP -DIS_DESKTOP )
+target_compile_definitions(arduino-dlna INTERFACE NO_GATEWAYIP IS_DESKTOP)
+target_compile_options(arduino-dlna INTERFACE)
 
 # define location for header files
-target_include_directories(arduino-dlna PUBLIC ${CMAKE_SOURCE_DIR}/src ${CMAKE_SOURCE_DIR}/src/Basic ${CMAKE_SOURCE_DIR}/src/DLNA ${CMAKE_SOURCE_DIR}/src/Platform ${CMAKE_SOURCE_DIR}/src/TinyHttp  ${CMAKE_SOURCE_DIR}/src/DLNA )
+target_include_directories(arduino-dlna INTERFACE
+    $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/src>
+    $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/src/basic>
+    $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/src/dlna>
+    $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/src/http>
+    $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/src/udp>
+    $<INSTALL_INTERFACE:include>
+)
 
 # specify libraries
-target_link_libraries(arduino-dlna arduino_emulator)
+target_link_libraries(arduino-dlna INTERFACE arduino_emulator)
 
 if(DLNA_BUILD_EXAMPLES)
     add_subdirectory("examples")

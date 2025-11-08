@@ -7,7 +7,6 @@
 #include "basic/Vector.h"
 #include "dlna/DLNADeviceInfo.h"
 #include "udp/IUDPService.h"
-#include "dlna/StringRegistry.h"
 #include "dlna/devices/SubscriptionMgrDevice.h"
 #include "dlna/xml/XMLParserPrint.h"
 #include "dlna_config.h"
@@ -37,7 +36,7 @@ namespace tiny_dlna {
  *
  * Thread / lifetime notes:
  * - The manager does not own injected pointers (HttpServer, IHttpRequest,
- *   IUDPService, Url, StringRegistry, devices vector). The caller must
+ *   IUDPService, Url,  devices vector). The caller must
  *   ensure these outlive the manager.
  * - All public methods are safe to call from the single-threaded Arduino
  *   loop context. They are not thread-safe for concurrent access.
@@ -57,15 +56,14 @@ class SubscriptionMgrControlPoint {
    * @param localCallbackUrl URL that remote services should use when
    *                         delivering NOTIFY messages (manager registers
    *                         an endpoint based on this path).
-   * @param reg StringRegistry used for shared string storage (not owned).
    * @param devices Vector of DLNADeviceInfo instances managed by the
    *                control point; used to find matching services.
    */
   void setup(IHttpRequest& http, IUDPService& udp, Url& localCallbackUrl,
-             StringRegistry& reg, DLNADeviceInfo& device) {
+             DLNADeviceInfo& device) {
     p_http = &http;
     p_udp = &udp;
-    // store pointers to shared objects (caller/owner manages lifetime)
+  // store pointers to shared objects (caller/owner manages lifetime)
     p_local_url = &localCallbackUrl;
     p_device = &device;
     is_setup = true;
@@ -306,7 +304,7 @@ class SubscriptionMgrControlPoint {
     // Search single selected device first (if set)
     if (p_device != nullptr) {
       for (auto& service : p_device->getServices()) {
-        const char* ssid = service.event_sub_sid;
+        const char* ssid = service.subscription_id.c_str();
         if (ssid != nullptr && strcmp(ssid, sid) == 0) return service;
       }
     }
@@ -490,12 +488,11 @@ class SubscriptionMgrControlPoint {
     }
 
     Url url(service.event_sub_url);
-    int rc = p_http->unsubscribe(url, service.event_sub_sid);
+  int rc = p_http->unsubscribe(url, service.subscription_id.c_str());
     if (rc == 200) {
       DlnaLogger.log(DlnaLogLevel::Info, "Unsubscribe %s -> rc=%d", url.url(),
                      rc);
-      // clear SID and metadata regardless of remote rc
-      service.event_sub_sid = nullptr;
+  // clear SID and metadata regardless of remote rc
       service.subscription_id = "";
       service.subscription_state = SubscriptionState::Unsubscribed;
       service.time_subscription_confirmed = 0;

@@ -1,9 +1,10 @@
 #pragma once
 #include "dlna_config.h"
+#include "Allocator.h"
 #include <assert.h>
 #include <utility>
 #include <stddef.h>
-#include "Allocator.h"
+#include <memory>
 
 namespace tiny_dlna {
 
@@ -14,7 +15,7 @@ namespace tiny_dlna {
  * @copyright GPLv3
  * @tparam T
  */
-template <class T>
+template <class T, class Alloc = ALLOCATOR<T>>
 class List {
  public:
   /// List Node
@@ -92,17 +93,14 @@ class List {
   };
 
   /// Default constructor
-  List(ALLOCATOR& allocator = DefaultAllocator) {
-    p_allocator = &allocator;
-    link();
-  };
+  List() { link(); };
+  explicit List(const Alloc& alloc) : node_alloc_(alloc) { link(); }
   /// copy constructor
   List(List& ref) = default;
 
   /// Constructor using array
   template <size_t N>
-  List(const T (&a)[N], ALLOCATOR& allocator = DefaultAllocator) {
-    p_allocator = &allocator;
+  List(const T (&a)[N]) {
     link();
     for (int i = 0; i < N; ++i) push_back(a[i]);
   }
@@ -354,7 +352,7 @@ class List {
     return n->data;
   }
 
-  void setAllocator(ALLOCATOR& allocator) { p_allocator = &allocator; }
+  // Allocator: nodes are allocated via std::allocator (or compatible Alloc).
 
   /// Provides the last element
   T& back() { return *rbegin(); }
@@ -365,25 +363,19 @@ class List {
   Node last;  // empty dummy last node which which is always after the last data
               // node
   size_t record_count = 0;
-  ALLOCATOR* p_allocator = &DefaultAllocator;
+  using NodeAlloc = typename std::allocator_traits<Alloc>::template rebind_alloc<Node>;
+  NodeAlloc node_alloc_{};
 
   Node* createNode() {
-#if DLNA_USE_ALLOCATOR
-    // Use allocator->create to run constructors for Node and its contained T
-    Node* node = p_allocator->create<Node>();
-#else
-    Node* node = new Node();
-#endif
-    return node;
+    Node* raw = node_alloc_.allocate(1);
+    new (raw) Node();
+    return raw;
   }
 
   void deleteNode(Node* p_delete) {
-#if DLNA_USE_ALLOCATOR
-    // Use allocator->remove to call destructor then free memory
-    p_allocator->remove(p_delete);
-#else
-    delete p_delete;
-#endif
+    if (!p_delete) return;
+    p_delete->~Node();
+    node_alloc_.deallocate(p_delete, 1);
   }
 
   void link() {

@@ -53,10 +53,10 @@ class LoggerClass {
   }
 
  protected:
-  Print* log_stream_ptr = &Serial;
+  Print* log_stream_ptr = &arduino::Serial;
   DlnaLogLevel log_level = DlnaLogLevel::Warning;
 };
 
-extern LoggerClass DlnaLogger;
+static LoggerClass DlnaLogger;
 
 }  // namespace tiny_dlna

@@ -451,10 +451,10 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
       auto self = (DLNAMediaRenderer*)ref;
       size_t result = 0;
       result += out.print("<SourceProtocolInfo val=\"");
-      result += out.print(StringRegistry::nullStr(self->getSourceProtocols()));
+  result += out.print(StrView(self->getSourceProtocols()).c_str());
       result += out.print("\"/>\n");
       result += out.print("<SinkProtocolInfo val=\"");
-      result += out.print(StringRegistry::nullStr(self->getSinkProtocols()));
+  result += out.print(StrView(self->getSinkProtocols()).c_str());
       result += out.print("\"/>\n");
       return result;
     };
@@ -686,8 +686,8 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     // Log incoming SOAPAction header and parsed action for debugging
     const char* soapHdr = server->requestHeader().get("SOAPACTION");
     DlnaLogger.log(DlnaLogLevel::Debug, "controlCB: SOAPAction=%s, action=%s",
-                   StringRegistry::nullStr(soapHdr),
-                   StringRegistry::nullStr(action.getAction()));
+                   StrView(soapHdr).c_str(),
+                   StrView(action.getAction()).c_str());
 
     if (self) {
       if (self->processAction(action, *server)) return;
@@ -917,16 +917,16 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
                 auto self = (DLNAMediaRenderer*)innerRef;
                 size_t written = 0;
                 written += o.print("<PlayMedia>");
-                written += o.print(StringRegistry::nullStr(
-                    self->getPossiblePlaybackStorageMedia()));
+        written += o.print(StrView(
+          self->getPossiblePlaybackStorageMedia()).c_str());
                 written += o.print("</PlayMedia>");
                 written += o.print("<RecMedia>");
-                written += o.print(StringRegistry::nullStr(
-                    self->getPossibleRecordStorageMedia()));
+        written += o.print(StrView(
+          self->getPossibleRecordStorageMedia()).c_str());
                 written += o.print("</RecMedia>");
                 written += o.print("<RecQualityModes>");
-                written += o.print(StringRegistry::nullStr(
-                    self->getPossibleRecordQualityModes()));
+        written += o.print(StrView(
+          self->getPossibleRecordQualityModes()).c_str());
                 written += o.print("</RecQualityModes>");
                 return written;
               },
@@ -950,7 +950,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
                 // CurrentTransportState
                 written += o.print("<CurrentTransportState>");
                 written +=
-                    o.print(StringRegistry::nullStr(self->getTransportState()));
+                    o.print(StrView(self->getTransportState()).c_str());
                 written += o.print("</CurrentTransportState>");
 
                 // CurrentTransportStatus - return OK by default
@@ -981,7 +981,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
                 // PlayMode: report configured play mode
                 written += o.print("<PlayMode>");
                 written +=
-                    o.print(StringRegistry::nullStr(self->getPlayMode()));
+                    o.print(StrView(self->getPlayMode()).c_str());
                 written += o.print("</PlayMode>");
 
                 // RecQualityMode: single value - report NOT_IMPLEMENTED by
@@ -1021,7 +1021,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
                 // CurrentURI and CurrentURIMetaData
                 written += o.print("<CurrentURI>");
                 written +=
-                    o.print(StringRegistry::nullStr(self->getCurrentUri()));
+                    o.print(StrView(self->getCurrentUri()).c_str());
                 written += o.print("</CurrentURI>");
                 written += o.print("<CurrentURIMetaData></CurrentURIMetaData>");
 
@@ -1033,13 +1033,13 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
                 // PlayMedium / RecordMedium / WriteStatus: use configured
                 // defaults
                 written += o.print("<PlayMedium>");
-                written += o.print(StringRegistry::nullStr(
-                    self->getPossiblePlaybackStorageMedia()));
+        written += o.print(StrView(
+          self->getPossiblePlaybackStorageMedia()).c_str());
                 written += o.print("</PlayMedium>");
 
                 written += o.print("<RecordMedium>");
-                written += o.print(StringRegistry::nullStr(
-                    self->getPossibleRecordStorageMedia()));
+        written += o.print(StrView(
+          self->getPossibleRecordStorageMedia()).c_str());
                 written += o.print("</RecordMedium>");
 
                 written +=

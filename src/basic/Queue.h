@@ -10,35 +10,36 @@ namespace tiny_dlna {
  * @copyright GPLv3
  * @tparam T
  */
-template <class T>
+template <class T, class Alloc = ALLOCATOR<T>>
 class Queue {
  public:
   Queue() = default;
+  explicit Queue(const Alloc& alloc) : l_instance(alloc) {}
 
   // enqueue by non-const lvalue reference (matches existing copy ctor semantics)
-  bool enqueue(T& data) { return l.push_front(data); }
+  bool enqueue(T& data) { return l_instance.push_front(data); }
 
   // enqueue by move - avoids copying/memory allocation when possible
-  bool enqueue(T&& data) { return l.push_front(std::move(data)); }
+  bool enqueue(T&& data) { return l_instance.push_front(std::move(data)); }
 
   bool peek(T& data) {
-    if (l.end()->prior == nullptr) return false;
-    data = *(l.end()->prior);
+    if (l_instance.end()->prior == nullptr) return false;
+    data = *(l_instance.end()->prior);
     return true;
   }
 
-  bool dequeue(T& data) { return l.pop_back(data); }
+  bool dequeue(T& data) { return l_instance.pop_back(data); }
 
-  size_t size() { return l.size(); }
+  size_t size() { return l_instance.size(); }
 
-  bool clear() { return l.clear(); }
+  bool clear() { return l_instance.clear(); }
 
-  bool empty() { return l.empty(); }
+  bool empty() { return l_instance.empty(); }
 
-  void setAllocator(ALLOCATOR& allocator) { l.setAllocator(allocator); }
+  // setAllocator removed (legacy allocator support dropped)
 
  protected:
-  List<T> l;
+  List<T, Alloc> l_instance;  // underlying allocator-aware list
 };
 
 }  // namespace tiny_dlna

@@ -282,7 +282,6 @@ class DLNAControlPointMediaServer {
       "urn:schemas-upnp-org:device:MediaServer:1";
   const char* device_type_filter = device_type_filter_default;
   ActionReply last_reply;
-  StringRegistry strings;
   void* reference = nullptr;
   const char* object_id = "0";
   // transport references (optional) - must be set before calling begin()

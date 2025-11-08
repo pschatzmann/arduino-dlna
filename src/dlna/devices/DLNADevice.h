@@ -2,7 +2,6 @@
 
 #include <functional>
 
-#include "basic/AllocationTracker.h"
 #include "basic/Printf.h"
 #include "basic/Url.h"
 #include "dlna/DLNADeviceInfo.h"
@@ -221,7 +220,6 @@ class DLNADevice : public IDevice {
     post_alive_repeat_ms = ms;
   }
 
-  StringRegistry& getStringRegistry() override { return registry; }
 
   /// Enable or disable subscription notifications: call before begin
   void setSubscriptionsActive(bool flag) override {
@@ -330,10 +328,10 @@ class DLNADevice : public IDevice {
                            (void)ref;
                            size_t written = 0;
                            written += o.print("<Source>");
-                           written += o.print(StringRegistry::nullStr(source));
+                           written += o.print(StrView(source).c_str());
                            written += o.print("</Source>");
                            written += o.print("<Sink>");
-                           written += o.print(StringRegistry::nullStr(sink));
+                           written += o.print(StrView(sink).c_str());
                            written += o.print("</Sink>");
                            return written;
                          });
@@ -348,7 +346,7 @@ class DLNADevice : public IDevice {
           // UPnP spec uses "CurrentConnectionIDs" as the
           // response element name
           written += o.print("<CurrentConnectionIDs>");
-          written += o.print(StringRegistry::nullStr(ids, "0"));
+          written += o.print(StrView(ids ? ids : "0").c_str());
           written += o.print("</CurrentConnectionIDs>");
           return written;
         });
@@ -368,14 +366,14 @@ class DLNADevice : public IDevice {
           written += o.print("<RcsID>0</RcsID>");
           written += o.print("<AVTransportID>0</AVTransportID>");
           written += o.print("<ProtocolInfo>");
-          written += o.print(StringRegistry::nullStr(protocolInfo));
+          written += o.print(StrView(protocolInfo).c_str());
           written += o.print("</ProtocolInfo>");
           written += o.print("<PeerConnectionManager></PeerConnectionManager>");
           written += o.print("<PeerConnectionID>");
-          written += o.print(StringRegistry::nullStr(connectionID));
+          written += o.print(StrView(connectionID).c_str());
           written += o.print("</PeerConnectionID>");
           written += o.print("<Direction>");
-          written += o.print(StringRegistry::nullStr(direction));
+          written += o.print(StrView(direction).c_str());
           written += o.print("</Direction>");
           written += o.print("<Status>OK</Status>");
           return written;
@@ -419,7 +417,6 @@ class DLNADevice : public IDevice {
   DLNADeviceInfo* p_device_info = nullptr;
   IUDPService* p_udp = nullptr;
   IHttpServer* p_server = nullptr;
-  inline static StringRegistry registry;
   void* reference = nullptr;
 
   // Millisecond-based scheduling (defaults derived from existing loop
@@ -473,11 +470,6 @@ class DLNADevice : public IDevice {
                      (unsigned)ESP.getFreeHeap(), (unsigned)ESP.getFreePsram(),
                      scheduler.size(), isSchedulerActive() ? "true" : "false",
                      registry.count(), registry.size());
-#endif
-#ifdef IS_DESKTOP
-      AllocationTracker& tracker = AllocationTracker::getInstance();
-      tracker.reportLeaks();
-      tracker.createSnapshot();
 #endif
     }
   }

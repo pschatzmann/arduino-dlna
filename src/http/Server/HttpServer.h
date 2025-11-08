@@ -279,7 +279,7 @@ class HttpServer : public IHttpServer {
     reply_header.write(this->client());
     callback(*client_ptr, ref);
 #if DLNA_LOG_XML
-    callback(Serial, ref);
+  callback(arduino::Serial, ref);
 #endif
     endClient();
   }

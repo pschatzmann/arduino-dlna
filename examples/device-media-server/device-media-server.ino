@@ -113,7 +113,7 @@ bool myGetData(int index, MediaItem& item, void* reference) {
 
 void setup() {
   Serial.begin(115200);
-  DlnaLogger.begin(Serial, DlnaLogLevel::Warning);
+  DlnaLogger.begin(Serial, DlnaLogLevel::Info);
 
   setupWifi();
 
