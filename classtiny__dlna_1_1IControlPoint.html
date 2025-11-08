@@ -104,8 +104,11 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a53c5b39ff56b95824acb8d9a92de4810"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IControlPoint.html#a53c5b39ff56b95824acb8d9a92de4810">setLocalURL</a> (<a class="el" href="classtiny__dlna_1_1Url.html">Url</a> url)=0</td></tr>
 <tr class="memdesc:a53c5b39ff56b95824acb8d9a92de4810"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the local callback URL for event subscriptions.  <br /></td></tr>
 <tr class="separator:a53c5b39ff56b95824acb8d9a92de4810"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c6b73fe6fd4aca20f3e5d4ed7b76b53"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IControlPoint.html#a1c6b73fe6fd4aca20f3e5d4ed7b76b53">setLocalURL</a> (IPAddress url, int port=9001, const char *path=&quot;&quot;)=0</td></tr>
+<tr class="memdesc:a1c6b73fe6fd4aca20f3e5d4ed7b76b53"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the local callback URL for event subscriptions.  <br /></td></tr>
+<tr class="separator:a1c6b73fe6fd4aca20f3e5d4ed7b76b53"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a845d89b9c01918753f95823b28885ffb"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IControlPoint.html#a845d89b9c01918753f95823b28885ffb">setSearchRepeatMs</a> (int repeatMs)=0</td></tr>
-<tr class="memdesc:a845d89b9c01918753f95823b28885ffb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set repeat interval for SSDP search messages (ms)  <br /></td></tr>
+<tr class="memdesc:a845d89b9c01918753f95823b28885ffb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the repeat interval for M-SEARCH requests.  <br /></td></tr>
 <tr class="separator:a845d89b9c01918753f95823b28885ffb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1e033abf78fcc7e3f02a9806c62a3146"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IControlPoint.html#a1e033abf78fcc7e3f02a9806c62a3146">setReference</a> (void *ref)=0</td></tr>
 <tr class="memdesc:a1e033abf78fcc7e3f02a9806c62a3146"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set user reference pointer for callbacks.  <br /></td></tr>
@@ -1039,8 +1042,54 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a1c6b73fe6fd4aca20f3e5d4ed7b76b53" name="a1c6b73fe6fd4aca20f3e5d4ed7b76b53"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c6b73fe6fd4aca20f3e5d4ed7b76b53">&#9670;&#160;</a></span>setLocalURL() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void tiny_dlna::IControlPoint::setLocalURL </td>
+          <td>(</td>
+          <td class="paramtype">IPAddress&#160;</td>
+          <td class="paramname"><em>url</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>port</em> = <code>9001</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>path</em> = <code>&quot;&quot;</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set the local callback URL for event subscriptions. </p>
+
+<p>Implemented in <a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a93cd1d1c16a20487326ccac8ec1b21b1">tiny_dlna::DLNAControlPoint</a>.</p>
+
+</div>
+</div>
 <a id="a53c5b39ff56b95824acb8d9a92de4810" name="a53c5b39ff56b95824acb8d9a92de4810"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a53c5b39ff56b95824acb8d9a92de4810">&#9670;&#160;</a></span>setLocalURL()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a53c5b39ff56b95824acb8d9a92de4810">&#9670;&#160;</a></span>setLocalURL() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1153,7 +1202,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Set repeat interval for SSDP search messages (ms) </p>
+<p>Set the repeat interval for M-SEARCH requests. </p>
 
 <p>Implemented in <a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a837cec621ecb973dc4e6ded6815ed953">tiny_dlna::DLNAControlPoint</a>.</p>
 

@@ -119,6 +119,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a698be62797571a6c32dd8a97b04a3cc7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a698be62797571a6c32dd8a97b04a3cc7">setLocalURL</a> (<a class="el" href="classtiny__dlna_1_1Url.html">Url</a> url) override</td></tr>
 <tr class="memdesc:a698be62797571a6c32dd8a97b04a3cc7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the local url (needed for subscriptions)  <br /></td></tr>
 <tr class="separator:a698be62797571a6c32dd8a97b04a3cc7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93cd1d1c16a20487326ccac8ec1b21b1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a93cd1d1c16a20487326ccac8ec1b21b1">setLocalURL</a> (IPAddress url, int port=9001, const char *path=&quot;&quot;) override</td></tr>
+<tr class="memdesc:a93cd1d1c16a20487326ccac8ec1b21b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the local callback URL for event subscriptions.  <br /></td></tr>
+<tr class="separator:a93cd1d1c16a20487326ccac8ec1b21b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a837cec621ecb973dc4e6ded6815ed953"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a837cec621ecb973dc4e6ded6815ed953">setSearchRepeatMs</a> (int repeatMs) override</td></tr>
 <tr class="memdesc:a837cec621ecb973dc4e6ded6815ed953"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the repeat interval for M-SEARCH requests (define before begin)  <br /></td></tr>
 <tr class="separator:a837cec621ecb973dc4e6ded6815ed953"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -205,6 +208,8 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
+<tr class="memitem:ae138189ba2b50f810c359c64e7565009"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#ae138189ba2b50f810c359c64e7565009">isDiscoveryAllowed</a> (<a class="el" href="classtiny__dlna_1_1Url.html">Url</a> &amp;url)</td></tr>
+<tr class="separator:ae138189ba2b50f810c359c64e7565009"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a21c77981aa7035fc939e66a12683d066"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a21c77981aa7035fc939e66a12683d066">matches</a> (const char *usn)</td></tr>
 <tr class="memdesc:a21c77981aa7035fc939e66a12683d066"><td class="mdescLeft">&#160;</td><td class="mdescRight">checks if the usn contains the search target  <br /></td></tr>
 <tr class="separator:a21c77981aa7035fc939e66a12683d066"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1210,6 +1215,32 @@ xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n" "s:encodingStyle=\"ht
 
 </div>
 </div>
+<a id="ae138189ba2b50f810c359c64e7565009" name="ae138189ba2b50f810c359c64e7565009"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae138189ba2b50f810c359c64e7565009">&#9670;&#160;</a></span>isDiscoveryAllowed()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool tiny_dlna::DLNAControlPoint::isDiscoveryAllowed </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1Url.html">Url</a> &amp;&#160;</td>
+          <td class="paramname"><em>url</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a98e7d35683a1d18017f1aabaca41c433" name="a98e7d35683a1d18017f1aabaca41c433"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a98e7d35683a1d18017f1aabaca41c433">&#9670;&#160;</a></span>isUdnKnown()</h2>
 
@@ -1751,8 +1782,54 @@ attributes) </p>
 
 </div>
 </div>
+<a id="a93cd1d1c16a20487326ccac8ec1b21b1" name="a93cd1d1c16a20487326ccac8ec1b21b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a93cd1d1c16a20487326ccac8ec1b21b1">&#9670;&#160;</a></span>setLocalURL() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tiny_dlna::DLNAControlPoint::setLocalURL </td>
+          <td>(</td>
+          <td class="paramtype">IPAddress&#160;</td>
+          <td class="paramname"><em>url</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>port</em> = <code>9001</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>path</em> = <code>&quot;&quot;</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set the local callback URL for event subscriptions. </p>
+
+<p>Implements <a class="el" href="classtiny__dlna_1_1IControlPoint.html#a1c6b73fe6fd4aca20f3e5d4ed7b76b53">tiny_dlna::IControlPoint</a>.</p>
+
+</div>
+</div>
 <a id="a698be62797571a6c32dd8a97b04a3cc7" name="a698be62797571a6c32dd8a97b04a3cc7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a698be62797571a6c32dd8a97b04a3cc7">&#9670;&#160;</a></span>setLocalURL()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a698be62797571a6c32dd8a97b04a3cc7">&#9670;&#160;</a></span>setLocalURL() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
