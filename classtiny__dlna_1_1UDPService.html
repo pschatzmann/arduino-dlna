@@ -100,14 +100,19 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a056917b161e0f6c81133aa102e97f136"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1UDPService.html#a056917b161e0f6c81133aa102e97f136">UDPService</a> ()=default</td></tr>
 <tr class="separator:a056917b161e0f6c81133aa102e97f136"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9a1d8193c5a84ccc0ba7ae2a6756365a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1UDPService.html#a9a1d8193c5a84ccc0ba7ae2a6756365a">begin</a> (int port) override</td></tr>
+<tr class="memdesc:a9a1d8193c5a84ccc0ba7ae2a6756365a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize UDP service on specified port.  <br /></td></tr>
 <tr class="separator:a9a1d8193c5a84ccc0ba7ae2a6756365a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa73a47695a115c11a2f2d65acf9e842e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1UDPService.html#aa73a47695a115c11a2f2d65acf9e842e">begin</a> (<a class="el" href="structtiny__dlna_1_1IPAddressAndPort.html">IPAddressAndPort</a> addr) override</td></tr>
+<tr class="memdesc:aa73a47695a115c11a2f2d65acf9e842e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize UDP service on specified address and port.  <br /></td></tr>
 <tr class="separator:aa73a47695a115c11a2f2d65acf9e842e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a704d645ffaae9dfacf6a861e934aeae5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1UDPService.html#a704d645ffaae9dfacf6a861e934aeae5">send</a> (uint8_t *data, int len) override</td></tr>
+<tr class="memdesc:a704d645ffaae9dfacf6a861e934aeae5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send data to the default destination.  <br /></td></tr>
 <tr class="separator:a704d645ffaae9dfacf6a861e934aeae5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2dde173374bef74dcd17d75664bc3872"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1UDPService.html#a2dde173374bef74dcd17d75664bc3872">send</a> (<a class="el" href="structtiny__dlna_1_1IPAddressAndPort.html">IPAddressAndPort</a> addr, uint8_t *data, int len) override</td></tr>
+<tr class="memdesc:a2dde173374bef74dcd17d75664bc3872"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send data to specified address and port.  <br /></td></tr>
 <tr class="separator:a2dde173374bef74dcd17d75664bc3872"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a26f0c55cc3c48362ca3869dd8c880f8b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structtiny__dlna_1_1RequestData.html">RequestData</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1UDPService.html#a26f0c55cc3c48362ca3869dd8c880f8b">receive</a> () override</td></tr>
+<tr class="memdesc:a26f0c55cc3c48362ca3869dd8c880f8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Receive incoming UDP data and peer information.  <br /></td></tr>
 <tr class="separator:a26f0c55cc3c48362ca3869dd8c880f8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
@@ -187,6 +192,8 @@ template&lt;typename UDPType &gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Initialize UDP service on specified port. </p>
+
 <p>Implements <a class="el" href="classtiny__dlna_1_1IUDPService.html#ac6a40de224b4147a78a6da72acbb4103">tiny_dlna::IUDPService</a>.</p>
 
 </div>
@@ -217,6 +224,8 @@ template&lt;typename UDPType &gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Initialize UDP service on specified address and port. </p>
+
 <p>Implements <a class="el" href="classtiny__dlna_1_1IUDPService.html#abfb8daa5d9cb2a6573e75f123c2ff1ea">tiny_dlna::IUDPService</a>.</p>
 
 </div>
@@ -245,6 +254,8 @@ template&lt;typename UDPType &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Receive incoming UDP data and peer information. </p>
 
 <p>Implements <a class="el" href="classtiny__dlna_1_1IUDPService.html#a0d79ef948443dfeecc9bd90341893d2d">tiny_dlna::IUDPService</a>.</p>
 
@@ -292,6 +303,8 @@ template&lt;typename UDPType &gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Send data to specified address and port. </p>
+
 <p>Implements <a class="el" href="classtiny__dlna_1_1IUDPService.html#a6d29e48295121ba2b962514300f0e610">tiny_dlna::IUDPService</a>.</p>
 
 </div>
@@ -331,6 +344,8 @@ template&lt;typename UDPType &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Send data to the default destination. </p>
 
 <p>Implements <a class="el" href="classtiny__dlna_1_1IUDPService.html#aff5760f65e7e32da88170e34ada59c57">tiny_dlna::IUDPService</a>.</p>
 

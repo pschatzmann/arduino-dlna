@@ -94,7 +94,7 @@ Inheritance diagram for tiny_dlna::DLNADevice&lt; ClientType &gt;:</div>
 <div class="center"><img src="classtiny__dlna_1_1DLNADevice__inherit__graph.png" border="0" usemap="#atiny__dlna_1_1DLNADevice_3_01ClientType_01_4_inherit__map" alt="Inheritance graph"/></div>
 <map name="atiny__dlna_1_1DLNADevice_3_01ClientType_01_4_inherit__map" id="atiny__dlna_1_1DLNADevice_3_01ClientType_01_4_inherit__map">
 <area shape="rect" title="Setup of a Basic DLNA Device service. The device registers itself to the network and answers to the D..." alt="" coords="5,79,176,119"/>
-<area shape="rect" href="classtiny__dlna_1_1IDevice.html" title=" " alt="" coords="21,5,160,31"/>
+<area shape="rect" href="classtiny__dlna_1_1IDevice.html" title="Abstract interface for DLNA device functionality." alt="" coords="21,5,160,31"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -106,6 +106,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a6add1501cbd2bde30b871363dbcd1454"><td class="mdescLeft">&#160;</td><td class="mdescRight">start the  <br /></td></tr>
 <tr class="separator:a6add1501cbd2bde30b871363dbcd1454"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae1cca187be606ec574294f5dd9cf1b63"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1ISubscriptionMgrDevice.html">ISubscriptionMgrDevice</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#ae1cca187be606ec574294f5dd9cf1b63">getSubscriptionMgr</a> () override</td></tr>
+<tr class="memdesc:ae1cca187be606ec574294f5dd9cf1b63"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get subscription manager for event handling.  <br /></td></tr>
 <tr class="separator:ae1cca187be606ec574294f5dd9cf1b63"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2d4069ba8c31bc43a72e404fda99ef30"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a2d4069ba8c31bc43a72e404fda99ef30">end</a> () override</td></tr>
 <tr class="memdesc:a2d4069ba8c31bc43a72e404fda99ef30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stops the processing and releases the resources.  <br /></td></tr>
@@ -114,6 +115,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:afb4ff255406f85ca116fa86b4574d251"><td class="mdescLeft">&#160;</td><td class="mdescRight">call this method in the Arduino loop as often as possible  <br /></td></tr>
 <tr class="separator:afb4ff255406f85ca116fa86b4574d251"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adac1a8f03798e165f84dc8922fc59c4e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#adac1a8f03798e165f84dc8922fc59c4e">loopServer</a> () override</td></tr>
+<tr class="memdesc:adac1a8f03798e165f84dc8922fc59c4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Process HTTP server loop.  <br /></td></tr>
 <tr class="separator:adac1a8f03798e165f84dc8922fc59c4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a98d480c499ca20e25e579bbbf9c1545e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html">DLNAServiceInfo</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a98d480c499ca20e25e579bbbf9c1545e">getService</a> (const char *id) override</td></tr>
 <tr class="memdesc:a98d480c499ca20e25e579bbbf9c1545e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provide addess to the service information.  <br /></td></tr>
@@ -667,6 +669,8 @@ template&lt;typename ClientType &gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Get subscription manager for event handling. </p>
+
 <p>Implements <a class="el" href="classtiny__dlna_1_1IDevice.html#a329a4a656f3a1ebaad71950498a9b92c">tiny_dlna::IDevice</a>.</p>
 
 </div>
@@ -987,6 +991,8 @@ template&lt;typename ClientType &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Process HTTP server loop. </p>
 
 <p>Implements <a class="el" href="classtiny__dlna_1_1IDevice.html#a496a2dc2d755ba925892aca6be4cfbc8">tiny_dlna::IDevice</a>.</p>
 

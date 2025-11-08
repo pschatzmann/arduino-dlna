@@ -98,14 +98,19 @@ Inheritance diagram for tiny_dlna::UDPAsyncService:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:af16d6d30a85620ff4bf5bb4f2c8eed5b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1UDPAsyncService.html#af16d6d30a85620ff4bf5bb4f2c8eed5b">begin</a> (int port)</td></tr>
+<tr class="memdesc:af16d6d30a85620ff4bf5bb4f2c8eed5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize UDP service on specified port.  <br /></td></tr>
 <tr class="separator:af16d6d30a85620ff4bf5bb4f2c8eed5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4326cbcf7ca082d844dff8eb76c9d3a2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1UDPAsyncService.html#a4326cbcf7ca082d844dff8eb76c9d3a2">begin</a> (<a class="el" href="structtiny__dlna_1_1IPAddressAndPort.html">IPAddressAndPort</a> addr)</td></tr>
+<tr class="memdesc:a4326cbcf7ca082d844dff8eb76c9d3a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize UDP service on specified address and port.  <br /></td></tr>
 <tr class="separator:a4326cbcf7ca082d844dff8eb76c9d3a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af41645c5541241a1acba5e8c6cdff9a1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1UDPAsyncService.html#af41645c5541241a1acba5e8c6cdff9a1">send</a> (uint8_t *data, int len)</td></tr>
+<tr class="memdesc:af41645c5541241a1acba5e8c6cdff9a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send data to the default destination.  <br /></td></tr>
 <tr class="separator:af41645c5541241a1acba5e8c6cdff9a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae3e4b99aa2b5ef4879f54fa3847d1082"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1UDPAsyncService.html#ae3e4b99aa2b5ef4879f54fa3847d1082">send</a> (<a class="el" href="structtiny__dlna_1_1IPAddressAndPort.html">IPAddressAndPort</a> addr, uint8_t *data, int len)</td></tr>
+<tr class="memdesc:ae3e4b99aa2b5ef4879f54fa3847d1082"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send data to specified address and port.  <br /></td></tr>
 <tr class="separator:ae3e4b99aa2b5ef4879f54fa3847d1082"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae4184704292a49a63d732c9408e985a8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structtiny__dlna_1_1RequestData.html">RequestData</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1UDPAsyncService.html#ae4184704292a49a63d732c9408e985a8">receive</a> ()</td></tr>
+<tr class="memdesc:ae4184704292a49a63d732c9408e985a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Receive incoming UDP data and peer information.  <br /></td></tr>
 <tr class="separator:ae4184704292a49a63d732c9408e985a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
@@ -145,6 +150,8 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Initialize UDP service on specified port. </p>
+
 <p>Implements <a class="el" href="classtiny__dlna_1_1IUDPService.html#ac6a40de224b4147a78a6da72acbb4103">tiny_dlna::IUDPService</a>.</p>
 
 </div>
@@ -173,6 +180,8 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Initialize UDP service on specified address and port. </p>
+
 <p>Implements <a class="el" href="classtiny__dlna_1_1IUDPService.html#abfb8daa5d9cb2a6573e75f123c2ff1ea">tiny_dlna::IUDPService</a>.</p>
 
 </div>
@@ -199,6 +208,8 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Receive incoming UDP data and peer information. </p>
 
 <p>Implements <a class="el" href="classtiny__dlna_1_1IUDPService.html#a0d79ef948443dfeecc9bd90341893d2d">tiny_dlna::IUDPService</a>.</p>
 
@@ -244,6 +255,8 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Send data to specified address and port. </p>
+
 <p>Implements <a class="el" href="classtiny__dlna_1_1IUDPService.html#a6d29e48295121ba2b962514300f0e610">tiny_dlna::IUDPService</a>.</p>
 
 </div>
@@ -281,6 +294,8 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Send data to the default destination. </p>
 
 <p>Implements <a class="el" href="classtiny__dlna_1_1IUDPService.html#aff5760f65e7e32da88170e34ada59c57">tiny_dlna::IUDPService</a>.</p>
 

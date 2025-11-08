@@ -86,33 +86,6 @@ $(function() {
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacetiny__dlna.html">tiny_dlna</a> {</div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">/*</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment"> * @class Vector</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment"> * @brief Lightweight wrapper around std::vector with Arduino-friendly helpers and a pluggable allocator.</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment"> *</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment"> * This container inherits from std::vector to preserve its API and complexity guarantees while</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment"> * adding a few conveniences tailored for embedded/Arduino targets:</span></div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment"> *</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment"> * - Uses a configurable allocator (default: ALLOCATOR&lt;T&gt;) defined by the library to enable</span></div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment"> *   custom allocation strategies or tracking.</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment"> * - Keeps all standard std::vector constructors, types, and methods available.</span></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment"> * - Exposes std::vector erase overloads and provides index-based helpers.</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment"> * - Adds reset() which performs clear() followed by shrink_to_fit() to aggressively release memory.</span></div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment"> *</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment"> * Template parameters:</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment"> * - @tparam T     Element/value type stored in the vector.</span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment"> * - @tparam Alloc Allocator type (defaults to ALLOCATOR&lt;T&gt; as configured in dlna_config.h).</span></div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment"> *</span></div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment"> * Differences vs std::vector:</span></div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment"> * - erase(size_t index): convenience overload that erases an element by index and returns the</span></div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment"> *   iterator following the erased element (or end() if the last element was erased). If the index</span></div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment"> *   is out of range, end() is returned and no action is taken.</span></div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment"> * - eraseIndex(int index): bounds-checked helper; does nothing on out-of-range indices.</span></div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment"> *</span></div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment"> * Complexity: Matches std::vector for the corresponding operations (e.g. erase is linear in the</span></div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment"> * number of moved elements). Reserve/capacity/iterator invalidation rules are also identical to</span></div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment"> * std::vector.</span></div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment"> */</span></div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> T, <span class="keyword">class</span> Alloc = ALLOCATOR&lt;T&gt;&gt;</div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="classtiny__dlna_1_1Vector.html">   39</a></span><span class="keyword">class </span><a class="code hl_class" href="classtiny__dlna_1_1Vector.html">Vector</a> : <span class="keyword">public</span> std::vector&lt;T, Alloc&gt; {</div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> <span class="keyword">public</span>:</div>
@@ -150,7 +123,7 @@ $(function() {
 <div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>}  <span class="comment">// namespace tiny_dlna</span></div>
 <div class="ttc" id="aAllocator_8h_html"><div class="ttname"><a href="Allocator_8h.html">Allocator.h</a></div></div>
-<div class="ttc" id="aclasstiny__dlna_1_1Vector_html"><div class="ttname"><a href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a></div><div class="ttdef"><b>Definition:</b> Vector.h:39</div></div>
+<div class="ttc" id="aclasstiny__dlna_1_1Vector_html"><div class="ttname"><a href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a></div><div class="ttdoc">Lightweight wrapper around std::vector with Arduino-friendly helpers and a pluggable allocator.</div><div class="ttdef"><b>Definition:</b> Vector.h:39</div></div>
 <div class="ttc" id="aclasstiny__dlna_1_1Vector_html_a00fd010a2112efbd037847634ece063e"><div class="ttname"><a href="classtiny__dlna_1_1Vector.html#a00fd010a2112efbd037847634ece063e">tiny_dlna::Vector::Base</a></div><div class="ttdeci">std::vector&lt; T, Alloc &gt; Base</div><div class="ttdef"><b>Definition:</b> Vector.h:41</div></div>
 <div class="ttc" id="aclasstiny__dlna_1_1Vector_html_a0751f281c3cfb3930e6f60833a31c18b"><div class="ttname"><a href="classtiny__dlna_1_1Vector.html#a0751f281c3cfb3930e6f60833a31c18b">tiny_dlna::Vector::value_type</a></div><div class="ttdeci">T value_type</div><div class="ttdef"><b>Definition:</b> Vector.h:43</div></div>
 <div class="ttc" id="aclasstiny__dlna_1_1Vector_html_a20988e556956feac11b04a645efa234d"><div class="ttname"><a href="classtiny__dlna_1_1Vector.html#a20988e556956feac11b04a645efa234d">tiny_dlna::Vector::reset</a></div><div class="ttdeci">void reset()</div><div class="ttdoc">Reset the container by clearing and shrinking capacity to fit.</div><div class="ttdef"><b>Definition:</b> Vector.h:83</div></div>

@@ -1,4 +1,4 @@
 <map id="tiny_dlna::IControlPoint" name="tiny_dlna::IControlPoint">
-<area shape="rect" id="node1" title=" " alt="" coords="21,5,196,31"/>
+<area shape="rect" id="node1" title="Abstract interface for DLNA Control Point functionality." alt="" coords="21,5,196,31"/>
 <area shape="rect" id="node2" href="$classtiny__dlna_1_1DLNAControlPoint.html" title="Lightweight DLNA control point manager." alt="" coords="5,79,212,104"/>
 </map>

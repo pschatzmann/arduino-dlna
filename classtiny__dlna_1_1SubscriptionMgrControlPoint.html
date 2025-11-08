@@ -206,7 +206,7 @@ Protected Attributes</h2></td></tr>
 <li>Invoke a user-provided callback for property change events.</li>
 </ul>
 <p>Thread / lifetime notes:</p><ul>
-<li>The manager does not own injected pointers (<a class="el" href="classtiny__dlna_1_1HttpServer.html" title="Header-only HTTP server wrapper that registers callback handlers.">HttpServer</a>, <a class="el" href="classtiny__dlna_1_1IHttpRequest.html">IHttpRequest</a>, <a class="el" href="classtiny__dlna_1_1IUDPService.html" title="Abstract Interface for UDP API.">IUDPService</a>, <a class="el" href="classtiny__dlna_1_1Url.html" title="URL parser which breaks a full url string up into its individual parts.">Url</a>, devices vector). The caller must ensure these outlive the manager.</li>
+<li>The manager does not own injected pointers (<a class="el" href="classtiny__dlna_1_1HttpServer.html" title="Header-only HTTP server wrapper that registers callback handlers.">HttpServer</a>, <a class="el" href="classtiny__dlna_1_1IHttpRequest.html" title="Abstract interface for HTTP client request functionality.">IHttpRequest</a>, <a class="el" href="classtiny__dlna_1_1IUDPService.html" title="Abstract Interface for UDP API.">IUDPService</a>, <a class="el" href="classtiny__dlna_1_1Url.html" title="URL parser which breaks a full url string up into its individual parts.">Url</a>, devices vector). The caller must ensure these outlive the manager.</li>
 <li>All public methods are safe to call from the single-threaded Arduino loop context. They are not thread-safe for concurrent access. </li>
 </ul>
 </div><h2 class="groupheader">Member Function Documentation</h2>
@@ -714,7 +714,7 @@ Protected Attributes</h2></td></tr>
     <tr><td class="paramname">http</td><td>Reference to the HTTP helper used to perform SUBSCRIBE/ UNSUBSCRIBE requests. </td></tr>
     <tr><td class="paramname">udp</td><td>Reference to the UDP discovery/service helper (not owned). </td></tr>
     <tr><td class="paramname">localCallbackUrl</td><td>URL that remote services should use when delivering NOTIFY messages (manager registers an endpoint based on this path). </td></tr>
-    <tr><td class="paramname">devices</td><td><a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a> of <a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html" title="Device Attributes and generation of XML using urn:schemas-upnp-org:device-1-0. We could just return a...">DLNADeviceInfo</a> instances managed by the control point; used to find matching services. </td></tr>
+    <tr><td class="paramname">devices</td><td><a class="el" href="classtiny__dlna_1_1Vector.html" title="Lightweight wrapper around std::vector with Arduino-friendly helpers and a pluggable allocator.">Vector</a> of <a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html" title="Device Attributes and generation of XML using urn:schemas-upnp-org:device-1-0. We could just return a...">DLNADeviceInfo</a> instances managed by the control point; used to find matching services. </td></tr>
   </table>
   </dd>
 </dl>
@@ -818,7 +818,7 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Subscribe to a single eventing service described by <code>service</code>. </p>
-<p>Performs the SUBSCRIBE HTTP request using the injected <code><a class="el" href="classtiny__dlna_1_1IHttpRequest.html">IHttpRequest</a></code> instance. On success the returned SID is stored in <code><a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html#a5f357ead5488a19f39f4d429b9abd005" title="for subscriptions">DLNAServiceInfo::subscription_id</a></code> and timing metadata is updated.</p>
+<p>Performs the SUBSCRIBE HTTP request using the injected <code><a class="el" href="classtiny__dlna_1_1IHttpRequest.html" title="Abstract interface for HTTP client request functionality.">IHttpRequest</a></code> instance. On success the returned SID is stored in <code><a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html#a5f357ead5488a19f39f4d429b9abd005" title="for subscriptions">DLNAServiceInfo::subscription_id</a></code> and timing metadata is updated.</p>
 <p>Use <code>event_subscription_duration_sec</code> to control the TIMEOUT header.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">

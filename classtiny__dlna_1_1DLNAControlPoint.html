@@ -93,7 +93,7 @@ Inheritance diagram for tiny_dlna::DLNAControlPoint:</div>
 <div class="center"><img src="classtiny__dlna_1_1DLNAControlPoint__inherit__graph.png" border="0" usemap="#atiny__dlna_1_1DLNAControlPoint_inherit__map" alt="Inheritance graph"/></div>
 <map name="atiny__dlna_1_1DLNAControlPoint_inherit__map" id="atiny__dlna_1_1DLNAControlPoint_inherit__map">
 <area shape="rect" title="Lightweight DLNA control point manager." alt="" coords="5,79,212,104"/>
-<area shape="rect" href="classtiny__dlna_1_1IControlPoint.html" title=" " alt="" coords="21,5,196,31"/>
+<area shape="rect" href="classtiny__dlna_1_1IControlPoint.html" title="Abstract interface for DLNA Control Point functionality." alt="" coords="21,5,196,31"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -137,6 +137,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a9bf97d71b934dd4e51dfb7853df18a6e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a9bf97d71b934dd4e51dfb7853df18a6e">onResultNode</a> (std::function&lt; void(const char *nodeName, const char *text, const char *attributes)&gt; cb) override</td></tr>
 <tr class="separator:a9bf97d71b934dd4e51dfb7853df18a6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac51bf7f80186bf752d5165c625d27491"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#ac51bf7f80186bf752d5165c625d27491">begin</a> (const char *searchTarget=&quot;ssdp:all&quot;, uint32_t minWaitMs=3000, uint32_t maxWaitMs=60000) override</td></tr>
+<tr class="memdesc:ac51bf7f80186bf752d5165c625d27491"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start discovery with default HTTP/UDP services.  <br /></td></tr>
 <tr class="separator:ac51bf7f80186bf752d5165c625d27491"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abad26060e6457d6138dcb29b9808f296"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#abad26060e6457d6138dcb29b9808f296">begin</a> (<a class="el" href="classtiny__dlna_1_1IHttpRequest.html">IHttpRequest</a> &amp;http, <a class="el" href="classtiny__dlna_1_1IUDPService.html">IUDPService</a> &amp;udp, const char *searchTarget=&quot;ssdp:all&quot;, uint32_t minWaitMs=3000, uint32_t maxWaitMs=60000) override</td></tr>
 <tr class="memdesc:abad26060e6457d6138dcb29b9808f296"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start discovery by sending M-SEARCH requests and process replies.  <br /></td></tr>
@@ -170,6 +171,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ab4934f1d01308c37be48a41299a84192"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a device for a <a class="el" href="classtiny__dlna_1_1Url.html" title="URL parser which breaks a full url string up into its individual parts.">Url</a>.  <br /></td></tr>
 <tr class="separator:ab4934f1d01308c37be48a41299a84192"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab95fcecdb6eade5c1dce4a2e67755154"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt; <a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html">DLNADeviceInfo</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#ab95fcecdb6eade5c1dce4a2e67755154">getDevices</a> () override</td></tr>
+<tr class="memdesc:ab95fcecdb6eade5c1dce4a2e67755154"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get list of all discovered devices.  <br /></td></tr>
 <tr class="separator:ab95fcecdb6eade5c1dce4a2e67755154"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a74bcc9468daf45fc2a769541f215efe7"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a74bcc9468daf45fc2a769541f215efe7">getUrl</a> (<a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html">DLNADeviceInfo</a> &amp;device, const char *suffix, char *buffer, int len) override</td></tr>
 <tr class="separator:a74bcc9468daf45fc2a769541f215efe7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -297,7 +299,7 @@ Protected Attributes</h2></td></tr>
 <p>Notes and usage:</p><ul>
 <li>To receive HTTP-based event notifications register an <code><a class="el" href="classtiny__dlna_1_1HttpServer.html" title="Header-only HTTP server wrapper that registers callback handlers.">HttpServer</a></code> with <code><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a11e46bc2ab1b262150487492329cb9ef" title="Set HttpServer instance and register the notify handler.">setHttpServer()</a></code> (or construct with a server). The server's request handler will forward NOTIFY bodies to this manager.</li>
 <li>Register an application callback with <code>onNotification()</code> to receive parsed property updates. An opaque reference pointer may be stored with <code><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#aeb4d8d8c3b6368933f3531ae3772209f" title="Attach an opaque reference pointer (optional, for caller context)">setReference()</a></code> and will be passed back with the callback.</li>
-<li>Call <code><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#ac51bf7f80186bf752d5165c625d27491">begin()</a></code> to start discovery and <code><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a978d20c0ce667075c1bf16287af0c41e">loop()</a></code> frequently (e.g. from the device main loop) to process incoming network events and scheduled tasks.</li>
+<li>Call <code><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#ac51bf7f80186bf752d5165c625d27491" title="Start discovery with default HTTP/UDP services.">begin()</a></code> to start discovery and <code><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a978d20c0ce667075c1bf16287af0c41e">loop()</a></code> frequently (e.g. from the device main loop) to process incoming network events and scheduled tasks.</li>
 </ul>
 <p>The class is intentionally small and avoids dynamic STL-heavy constructs so it can run in constrained environments. It is not a full-featured UPnP stack but provides the common features required by many DLNA control point use cases.</p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
@@ -594,6 +596,8 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Start discovery with default HTTP/UDP services. </p>
 
 <p>Implements <a class="el" href="classtiny__dlna_1_1IControlPoint.html#af80498bcaf0d15b1ed0ea028f05b89ad">tiny_dlna::IControlPoint</a>.</p>
 
@@ -930,6 +934,8 @@ xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n" "s:encodingStyle=\"ht
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Get list of all discovered devices. </p>
 
 <p>Implements <a class="el" href="classtiny__dlna_1_1IControlPoint.html#a4885f398e90258c01ca32025def72520">tiny_dlna::IControlPoint</a>.</p>
 

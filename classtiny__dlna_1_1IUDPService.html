@@ -83,7 +83,7 @@ $(function() {
 <p>Abstract Interface for UDP API.  
  <a href="classtiny__dlna_1_1IUDPService.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="udp_2IUDPService_8h_source.html">IUDPService.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="IUDPService_8h_source.html">IUDPService.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for tiny_dlna::IUDPService:</div>
 <div class="dyncontent">
@@ -100,14 +100,19 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:af8f325c2686106c5c8e37307e661280e"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IUDPService.html#af8f325c2686106c5c8e37307e661280e">~IUDPService</a> ()=default</td></tr>
 <tr class="separator:af8f325c2686106c5c8e37307e661280e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac6a40de224b4147a78a6da72acbb4103"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IUDPService.html#ac6a40de224b4147a78a6da72acbb4103">begin</a> (int port)=0</td></tr>
+<tr class="memdesc:ac6a40de224b4147a78a6da72acbb4103"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize UDP service on specified port.  <br /></td></tr>
 <tr class="separator:ac6a40de224b4147a78a6da72acbb4103"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abfb8daa5d9cb2a6573e75f123c2ff1ea"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IUDPService.html#abfb8daa5d9cb2a6573e75f123c2ff1ea">begin</a> (<a class="el" href="structtiny__dlna_1_1IPAddressAndPort.html">IPAddressAndPort</a> addr)=0</td></tr>
+<tr class="memdesc:abfb8daa5d9cb2a6573e75f123c2ff1ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize UDP service on specified address and port.  <br /></td></tr>
 <tr class="separator:abfb8daa5d9cb2a6573e75f123c2ff1ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aff5760f65e7e32da88170e34ada59c57"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IUDPService.html#aff5760f65e7e32da88170e34ada59c57">send</a> (uint8_t *data, int len)=0</td></tr>
+<tr class="memdesc:aff5760f65e7e32da88170e34ada59c57"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send data to the default destination.  <br /></td></tr>
 <tr class="separator:aff5760f65e7e32da88170e34ada59c57"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6d29e48295121ba2b962514300f0e610"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IUDPService.html#a6d29e48295121ba2b962514300f0e610">send</a> (<a class="el" href="structtiny__dlna_1_1IPAddressAndPort.html">IPAddressAndPort</a> addr, uint8_t *data, int len)=0</td></tr>
+<tr class="memdesc:a6d29e48295121ba2b962514300f0e610"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send data to specified address and port.  <br /></td></tr>
 <tr class="separator:a6d29e48295121ba2b962514300f0e610"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0d79ef948443dfeecc9bd90341893d2d"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="structtiny__dlna_1_1RequestData.html">RequestData</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IUDPService.html#a0d79ef948443dfeecc9bd90341893d2d">receive</a> ()=0</td></tr>
+<tr class="memdesc:a0d79ef948443dfeecc9bd90341893d2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Receive incoming UDP data and peer information.  <br /></td></tr>
 <tr class="separator:a0d79ef948443dfeecc9bd90341893d2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -164,6 +169,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Initialize UDP service on specified port. </p>
+
 <p>Implemented in <a class="el" href="classtiny__dlna_1_1UDPAsyncService.html#af16d6d30a85620ff4bf5bb4f2c8eed5b">tiny_dlna::UDPAsyncService</a>, and <a class="el" href="classtiny__dlna_1_1UDPService.html#a9a1d8193c5a84ccc0ba7ae2a6756365a">tiny_dlna::UDPService&lt; UDPType &gt;</a>.</p>
 
 </div>
@@ -192,6 +199,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Initialize UDP service on specified address and port. </p>
+
 <p>Implemented in <a class="el" href="classtiny__dlna_1_1UDPAsyncService.html#a4326cbcf7ca082d844dff8eb76c9d3a2">tiny_dlna::UDPAsyncService</a>, and <a class="el" href="classtiny__dlna_1_1UDPService.html#aa73a47695a115c11a2f2d65acf9e842e">tiny_dlna::UDPService&lt; UDPType &gt;</a>.</p>
 
 </div>
@@ -218,6 +227,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Receive incoming UDP data and peer information. </p>
 
 <p>Implemented in <a class="el" href="classtiny__dlna_1_1UDPAsyncService.html#ae4184704292a49a63d732c9408e985a8">tiny_dlna::UDPAsyncService</a>, and <a class="el" href="classtiny__dlna_1_1UDPService.html#a26f0c55cc3c48362ca3869dd8c880f8b">tiny_dlna::UDPService&lt; UDPType &gt;</a>.</p>
 
@@ -263,6 +274,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Send data to specified address and port. </p>
+
 <p>Implemented in <a class="el" href="classtiny__dlna_1_1UDPAsyncService.html#ae3e4b99aa2b5ef4879f54fa3847d1082">tiny_dlna::UDPAsyncService</a>, and <a class="el" href="classtiny__dlna_1_1UDPService.html#a2dde173374bef74dcd17d75664bc3872">tiny_dlna::UDPService&lt; UDPType &gt;</a>.</p>
 
 </div>
@@ -301,12 +314,14 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Send data to the default destination. </p>
+
 <p>Implemented in <a class="el" href="classtiny__dlna_1_1UDPAsyncService.html#af41645c5541241a1acba5e8c6cdff9a1">tiny_dlna::UDPAsyncService</a>, and <a class="el" href="classtiny__dlna_1_1UDPService.html#a704d645ffaae9dfacf6a861e934aeae5">tiny_dlna::UDPService&lt; UDPType &gt;</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/udp/<a class="el" href="udp_2IUDPService_8h_source.html">IUDPService.h</a></li>
+<li>src/udp/<a class="el" href="IUDPService_8h_source.html">IUDPService.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

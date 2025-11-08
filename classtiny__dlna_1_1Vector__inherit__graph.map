@@ -1,4 +1,4 @@
 <map id="tiny_dlna::Vector&lt; T, Alloc &gt;" name="tiny_dlna::Vector&lt; T, Alloc &gt;">
-<area shape="rect" id="node1" title=" " alt="" coords="33,93,176,133"/>
+<area shape="rect" id="node1" title="Lightweight wrapper around std::vector with Arduino&#45;friendly helpers and a pluggable allocator." alt="" coords="33,93,176,133"/>
 <area shape="rect" id="node2" title=" " alt="" coords="5,5,204,45"/>
 </map>

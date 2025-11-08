@@ -80,143 +80,217 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>Heap-backed string utility used throughout <a class="el" href="namespacetiny__dlna.html">tiny_dlna</a>.  
+ <a href="classtiny__dlna_1_1Str.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="Str_8h_source.html">Str.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a774280a35f54122649adde782c8ca4c6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#a774280a35f54122649adde782c8ca4c6">Str</a> ()</td></tr>
+<tr class="memdesc:a774280a35f54122649adde782c8ca4c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct empty string.  <br /></td></tr>
 <tr class="separator:a774280a35f54122649adde782c8ca4c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abc4f9f20a40c75458565bef654a1833e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#abc4f9f20a40c75458565bef654a1833e">Str</a> (size_t initialAllocatedLength)</td></tr>
+<tr class="memdesc:abc4f9f20a40c75458565bef654a1833e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct reserving an initial capacity.  <br /></td></tr>
 <tr class="separator:abc4f9f20a40c75458565bef654a1833e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0a360561e184aa9f02c446e8c61b5694"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#a0a360561e184aa9f02c446e8c61b5694">Str</a> (int initialAllocatedLength)</td></tr>
+<tr class="memdesc:a0a360561e184aa9f02c446e8c61b5694"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct reserving an initial capacity (int overload)  <br /></td></tr>
 <tr class="separator:a0a360561e184aa9f02c446e8c61b5694"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3b3e37994c8c9ed61cc12b90e65bc1e1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#a3b3e37994c8c9ed61cc12b90e65bc1e1">Str</a> (const char *str)</td></tr>
+<tr class="memdesc:a3b3e37994c8c9ed61cc12b90e65bc1e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct from C-string (nullptr -&gt; empty)  <br /></td></tr>
 <tr class="separator:a3b3e37994c8c9ed61cc12b90e65bc1e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0fe15e01cb5744b43b83fc38af764c0a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#a0fe15e01cb5744b43b83fc38af764c0a">Str</a> (const <a class="el" href="classtiny__dlna_1_1Str.html">Str</a> &amp;other)=default</td></tr>
+<tr class="memdesc:a0fe15e01cb5744b43b83fc38af764c0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy-construct.  <br /></td></tr>
 <tr class="separator:a0fe15e01cb5744b43b83fc38af764c0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a15e367b5b54b6e2c1588a0ca05560169"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#a15e367b5b54b6e2c1588a0ca05560169">Str</a> (<a class="el" href="classtiny__dlna_1_1Str.html">Str</a> &amp;&amp;other) noexcept=default</td></tr>
+<tr class="memdesc:a15e367b5b54b6e2c1588a0ca05560169"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move-construct.  <br /></td></tr>
 <tr class="separator:a15e367b5b54b6e2c1588a0ca05560169"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a06ee15e4950348fd25c1cd28c0b2031e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Str.html">Str</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#a06ee15e4950348fd25c1cd28c0b2031e">operator=</a> (const <a class="el" href="classtiny__dlna_1_1Str.html">Str</a> &amp;other)=default</td></tr>
+<tr class="memdesc:a06ee15e4950348fd25c1cd28c0b2031e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy-assign.  <br /></td></tr>
 <tr class="separator:a06ee15e4950348fd25c1cd28c0b2031e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a11e751918041cf9f6d2ebc79cf8b93b7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Str.html">Str</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#a11e751918041cf9f6d2ebc79cf8b93b7">operator=</a> (<a class="el" href="classtiny__dlna_1_1Str.html">Str</a> &amp;&amp;other) noexcept=default</td></tr>
+<tr class="memdesc:a11e751918041cf9f6d2ebc79cf8b93b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move-assign.  <br /></td></tr>
 <tr class="separator:a11e751918041cf9f6d2ebc79cf8b93b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a39cbfe6dc04129a1b4244382728d17e3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#a39cbfe6dc04129a1b4244382728d17e3">isEmpty</a> () const</td></tr>
+<tr class="memdesc:a39cbfe6dc04129a1b4244382728d17e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">True if empty.  <br /></td></tr>
 <tr class="separator:a39cbfe6dc04129a1b4244382728d17e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0c9cb20f111d2a78208588abb7ae0a4c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#a0c9cb20f111d2a78208588abb7ae0a4c">length</a> () const</td></tr>
+<tr class="memdesc:a0c9cb20f111d2a78208588abb7ae0a4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current length (int)  <br /></td></tr>
 <tr class="separator:a0c9cb20f111d2a78208588abb7ae0a4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a65c61660d9f66b17d43b2fd040853652"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#a65c61660d9f66b17d43b2fd040853652">copyFrom</a> (const char *source, int len)</td></tr>
+<tr class="memdesc:a65c61660d9f66b17d43b2fd040853652"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy from raw buffer with length.  <br /></td></tr>
 <tr class="separator:a65c61660d9f66b17d43b2fd040853652"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8d647ee6a15da64f0542ec1befc15f3a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#a8d647ee6a15da64f0542ec1befc15f3a">substrView</a> (<a class="el" href="classtiny__dlna_1_1StrView.html">StrView</a> &amp;from, int start, int end)</td></tr>
+<tr class="memdesc:a8d647ee6a15da64f0542ec1befc15f3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign substring view from <a class="el" href="classtiny__dlna_1_1StrView.html" title="A simple wrapper to provide string functions on char*. If the underlying char* is a const we do not a...">StrView</a> [start,end)  <br /></td></tr>
 <tr class="separator:a8d647ee6a15da64f0542ec1befc15f3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac69a1080e1ae6910162f412220617c6a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#ac69a1080e1ae6910162f412220617c6a">substrView</a> (const char *from, int start, int end)</td></tr>
+<tr class="memdesc:ac69a1080e1ae6910162f412220617c6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign substring view from const char* [start,end)  <br /></td></tr>
 <tr class="separator:ac69a1080e1ae6910162f412220617c6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad71254871301b90d3117b99b46648b0e"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#ad71254871301b90d3117b99b46648b0e">c_str</a> () const</td></tr>
+<tr class="memdesc:ad71254871301b90d3117b99b46648b0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">C-string pointer to internal buffer.  <br /></td></tr>
 <tr class="separator:ad71254871301b90d3117b99b46648b0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a536e105ec5f330571d5b07efba7fad38"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#a536e105ec5f330571d5b07efba7fad38">operator const char *</a> () const</td></tr>
+<tr class="memdesc:a536e105ec5f330571d5b07efba7fad38"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implicit conversion to const char*.  <br /></td></tr>
 <tr class="separator:a536e105ec5f330571d5b07efba7fad38"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab24bd28159ab3498466a660e441a9e09"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#ab24bd28159ab3498466a660e441a9e09">clear</a> ()</td></tr>
+<tr class="memdesc:ab24bd28159ab3498466a660e441a9e09"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear contents (size -&gt; 0)  <br /></td></tr>
 <tr class="separator:ab24bd28159ab3498466a660e441a9e09"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaeb9694de63380450da42863ca6b980a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#aaeb9694de63380450da42863ca6b980a">add</a> (const char *append)</td></tr>
+<tr class="memdesc:aaeb9694de63380450da42863ca6b980a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Append C-string (ignored if nullptr)  <br /></td></tr>
 <tr class="separator:aaeb9694de63380450da42863ca6b980a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:addc6db4b49971ee19b862b20f4839d9b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#addc6db4b49971ee19b862b20f4839d9b">add</a> (const uint8_t *append, int len)</td></tr>
+<tr class="memdesc:addc6db4b49971ee19b862b20f4839d9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Append raw bytes.  <br /></td></tr>
 <tr class="separator:addc6db4b49971ee19b862b20f4839d9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab92820177a03c836b98dd03d291c075a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#ab92820177a03c836b98dd03d291c075a">add</a> (char c)</td></tr>
+<tr class="memdesc:ab92820177a03c836b98dd03d291c075a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Append single character.  <br /></td></tr>
 <tr class="separator:ab92820177a03c836b98dd03d291c075a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8de3d2ed071229244098a96e8bfc6530"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#a8de3d2ed071229244098a96e8bfc6530">add</a> (int value)</td></tr>
+<tr class="memdesc:a8de3d2ed071229244098a96e8bfc6530"><td class="mdescLeft">&#160;</td><td class="mdescRight">Append integer as decimal text.  <br /></td></tr>
 <tr class="separator:a8de3d2ed071229244098a96e8bfc6530"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2cdb19e1c2a3878d95b70802ffae6093"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#a2cdb19e1c2a3878d95b70802ffae6093">add</a> (double value, int precision=2, int=0)</td></tr>
+<tr class="memdesc:a2cdb19e1c2a3878d95b70802ffae6093"><td class="mdescLeft">&#160;</td><td class="mdescRight">Append floating point as text with precision.  <br /></td></tr>
 <tr class="separator:a2cdb19e1c2a3878d95b70802ffae6093"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaaaddbbd5ab55b0bb5d0544df30f7607"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#aaaaddbbd5ab55b0bb5d0544df30f7607">set</a> (const char *v)</td></tr>
+<tr class="memdesc:aaaaddbbd5ab55b0bb5d0544df30f7607"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign from C-string (nullptr -&gt; empty)  <br /></td></tr>
 <tr class="separator:aaaaddbbd5ab55b0bb5d0544df30f7607"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa2effd8b37eeb7012052e88cfe7d99f8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#aa2effd8b37eeb7012052e88cfe7d99f8">set</a> (int v)</td></tr>
+<tr class="memdesc:aa2effd8b37eeb7012052e88cfe7d99f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign from integer.  <br /></td></tr>
 <tr class="separator:aa2effd8b37eeb7012052e88cfe7d99f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad8288ce263f2729f2e0bd36eea948ad3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#ad8288ce263f2729f2e0bd36eea948ad3">set</a> (double v, int precision=2, int width=0)</td></tr>
+<tr class="memdesc:ad8288ce263f2729f2e0bd36eea948ad3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign from floating point with precision.  <br /></td></tr>
 <tr class="separator:ad8288ce263f2729f2e0bd36eea948ad3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a850cfaef6d2f9d82f6496c53fa4990b0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Str.html">Str</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#a850cfaef6d2f9d82f6496c53fa4990b0">operator=</a> (const char *v)</td></tr>
+<tr class="memdesc:a850cfaef6d2f9d82f6496c53fa4990b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign from C-string (operator=)  <br /></td></tr>
 <tr class="separator:a850cfaef6d2f9d82f6496c53fa4990b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a446023f8194e28c2028fd99948f5ae2b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Str.html">Str</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#a446023f8194e28c2028fd99948f5ae2b">operator=</a> (char *v)</td></tr>
+<tr class="memdesc:a446023f8194e28c2028fd99948f5ae2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign from char* (operator=)  <br /></td></tr>
 <tr class="separator:a446023f8194e28c2028fd99948f5ae2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0195caed9d18610023e20e8b9857514a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Str.html">Str</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#a0195caed9d18610023e20e8b9857514a">operator=</a> (int v)</td></tr>
+<tr class="memdesc:a0195caed9d18610023e20e8b9857514a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign from integer (operator=)  <br /></td></tr>
 <tr class="separator:a0195caed9d18610023e20e8b9857514a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7acbfa6b666deab15b5fa7f3e816e8bc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Str.html">Str</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#a7acbfa6b666deab15b5fa7f3e816e8bc">operator=</a> (double v)</td></tr>
+<tr class="memdesc:a7acbfa6b666deab15b5fa7f3e816e8bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign from double (operator=)  <br /></td></tr>
 <tr class="separator:a7acbfa6b666deab15b5fa7f3e816e8bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a734f0cd4da970f50f6ae1d2b9de9af20"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#a734f0cd4da970f50f6ae1d2b9de9af20">reset</a> ()</td></tr>
+<tr class="memdesc:a734f0cd4da970f50f6ae1d2b9de9af20"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear contents (alias of clear)  <br /></td></tr>
 <tr class="separator:a734f0cd4da970f50f6ae1d2b9de9af20"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a642e2fff5d3f640e7ded6ae4570eb38c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#a642e2fff5d3f640e7ded6ae4570eb38c">clearAll</a> ()</td></tr>
+<tr class="memdesc:a642e2fff5d3f640e7ded6ae4570eb38c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear contents (legacy alias)  <br /></td></tr>
 <tr class="separator:a642e2fff5d3f640e7ded6ae4570eb38c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad64f32b39412410d3bde5aa9eb75173c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#ad64f32b39412410d3bde5aa9eb75173c">release</a> ()</td></tr>
+<tr class="memdesc:ad64f32b39412410d3bde5aa9eb75173c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear and shrink capacity to fit.  <br /></td></tr>
 <tr class="separator:ad64f32b39412410d3bde5aa9eb75173c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a042fbcb8cf6ed657088968a4e4fb8428"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#a042fbcb8cf6ed657088968a4e4fb8428">equals</a> (const char *other) const</td></tr>
+<tr class="memdesc:a042fbcb8cf6ed657088968a4e4fb8428"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exact string equality with C-string.  <br /></td></tr>
 <tr class="separator:a042fbcb8cf6ed657088968a4e4fb8428"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab5808f8123149b7a93d7c4d354a9f2b3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#ab5808f8123149b7a93d7c4d354a9f2b3">contains</a> (const char *sub) const</td></tr>
+<tr class="memdesc:ab5808f8123149b7a93d7c4d354a9f2b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">True if substring occurs.  <br /></td></tr>
 <tr class="separator:ab5808f8123149b7a93d7c4d354a9f2b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a39e0714fc94b6f5b2e9af1705ef00e4c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#a39e0714fc94b6f5b2e9af1705ef00e4c">endsWith</a> (const char *suffix) const</td></tr>
+<tr class="memdesc:a39e0714fc94b6f5b2e9af1705ef00e4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">True if ends with suffix (case-sensitive)  <br /></td></tr>
 <tr class="separator:a39e0714fc94b6f5b2e9af1705ef00e4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5f54d2a8bdd3f5c8ddf88e5134d636bc"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#a5f54d2a8bdd3f5c8ddf88e5134d636bc">equalsIgnoreCase</a> (const char *other) const</td></tr>
+<tr class="memdesc:a5f54d2a8bdd3f5c8ddf88e5134d636bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Case-insensitive equality with C-string.  <br /></td></tr>
 <tr class="separator:a5f54d2a8bdd3f5c8ddf88e5134d636bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a23a8dea6121296123a864b28bc250ccd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#a23a8dea6121296123a864b28bc250ccd">endsWithIgnoreCase</a> (const char *suffix) const</td></tr>
+<tr class="memdesc:a23a8dea6121296123a864b28bc250ccd"><td class="mdescLeft">&#160;</td><td class="mdescRight">True if ends with suffix (case-insensitive)  <br /></td></tr>
 <tr class="separator:a23a8dea6121296123a864b28bc250ccd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a64a29c3b1eed250fe003db330e6bf18c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#a64a29c3b1eed250fe003db330e6bf18c">startsWith</a> (const char *prefix) const</td></tr>
+<tr class="memdesc:a64a29c3b1eed250fe003db330e6bf18c"><td class="mdescLeft">&#160;</td><td class="mdescRight">True if starts with prefix (case-sensitive)  <br /></td></tr>
 <tr class="separator:a64a29c3b1eed250fe003db330e6bf18c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a99b8e234be79b2df9458f10aff64407e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#a99b8e234be79b2df9458f10aff64407e">indexOf</a> (const char *substr, int start=0) const</td></tr>
+<tr class="memdesc:a99b8e234be79b2df9458f10aff64407e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Index of substring from position (or -1)  <br /></td></tr>
 <tr class="separator:a99b8e234be79b2df9458f10aff64407e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:accfdae0fc54a1e497c3a4441ad3ddc92"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#accfdae0fc54a1e497c3a4441ad3ddc92">indexOf</a> (char c, int start=0) const</td></tr>
+<tr class="memdesc:accfdae0fc54a1e497c3a4441ad3ddc92"><td class="mdescLeft">&#160;</td><td class="mdescRight">Index of character from position (or -1)  <br /></td></tr>
 <tr class="separator:accfdae0fc54a1e497c3a4441ad3ddc92"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:addf79f0305b65500f6f98859210d67d3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#addf79f0305b65500f6f98859210d67d3">remove</a> (int n)</td></tr>
 <tr class="memdesc:addf79f0305b65500f6f98859210d67d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">removes the first n characters  <br /></td></tr>
 <tr class="separator:addf79f0305b65500f6f98859210d67d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a84bf4e611b6a364dd5f4f498a64d60b6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#a84bf4e611b6a364dd5f4f498a64d60b6">trim</a> ()</td></tr>
+<tr class="memdesc:a84bf4e611b6a364dd5f4f498a64d60b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Trim spaces on both ends.  <br /></td></tr>
 <tr class="separator:a84bf4e611b6a364dd5f4f498a64d60b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa086be87fc0c2aaaf81ffd77e13535dd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#aa086be87fc0c2aaaf81ffd77e13535dd">ltrim</a> ()</td></tr>
+<tr class="memdesc:aa086be87fc0c2aaaf81ffd77e13535dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Trim leading spaces.  <br /></td></tr>
 <tr class="separator:aa086be87fc0c2aaaf81ffd77e13535dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aff4cb7cbd78ed64c6fe5e8597de8c2c6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#aff4cb7cbd78ed64c6fe5e8597de8c2c6">rtrim</a> ()</td></tr>
+<tr class="memdesc:aff4cb7cbd78ed64c6fe5e8597de8c2c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Trim trailing spaces.  <br /></td></tr>
 <tr class="separator:aff4cb7cbd78ed64c6fe5e8597de8c2c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a43886a44c9fcc07316905cbcec3ca447"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#a43886a44c9fcc07316905cbcec3ca447">setLength</a> (int newLen, bool addZero=true)</td></tr>
+<tr class="memdesc:a43886a44c9fcc07316905cbcec3ca447"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resize logical length (pads with NUL if growing)  <br /></td></tr>
 <tr class="separator:a43886a44c9fcc07316905cbcec3ca447"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2693c229465f0ce8941d72475d7b1acb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#a2693c229465f0ce8941d72475d7b1acb">remove</a> (const char *toRemove)</td></tr>
+<tr class="memdesc:a2693c229465f0ce8941d72475d7b1acb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove first occurrence of substring (no-op if not found)  <br /></td></tr>
 <tr class="separator:a2693c229465f0ce8941d72475d7b1acb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af46ca2d34c878ff488616a9d38a5ef5b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#af46ca2d34c878ff488616a9d38a5ef5b">replace</a> (const char *toReplace, const char *replaced, int startPos=0)</td></tr>
+<tr class="memdesc:af46ca2d34c878ff488616a9d38a5ef5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Replace first occurrence of toReplace with replaced starting at startPos.  <br /></td></tr>
 <tr class="separator:af46ca2d34c878ff488616a9d38a5ef5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a72f0f7309a0b18ca2244dbf55f28d140"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#a72f0f7309a0b18ca2244dbf55f28d140">replaceAll</a> (const char *toReplace, const char *replaced)</td></tr>
+<tr class="memdesc:a72f0f7309a0b18ca2244dbf55f28d140"><td class="mdescLeft">&#160;</td><td class="mdescRight">Replace all occurrences of toReplace with replaced; returns count.  <br /></td></tr>
 <tr class="separator:a72f0f7309a0b18ca2244dbf55f28d140"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9c483dd3c2bfdf86e3e0e85b19a3fe3b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Str.html">Str</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#a9c483dd3c2bfdf86e3e0e85b19a3fe3b">substring</a> (int start, int end) const</td></tr>
+<tr class="memdesc:a9c483dd3c2bfdf86e3e0e85b19a3fe3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return substring [start,end) as a new <a class="el" href="classtiny__dlna_1_1Str.html" title="Heap-backed string utility used throughout tiny_dlna.">Str</a>.  <br /></td></tr>
 <tr class="separator:a9c483dd3c2bfdf86e3e0e85b19a3fe3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8892b7527a2ca4f960c90b5b1478bb38"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#a8892b7527a2ca4f960c90b5b1478bb38">toInt</a> () const</td></tr>
+<tr class="memdesc:a8892b7527a2ca4f960c90b5b1478bb38"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert to int (0 if empty)  <br /></td></tr>
 <tr class="separator:a8892b7527a2ca4f960c90b5b1478bb38"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a89f710d7c8e3ccfb12be830ec457bc43"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#a89f710d7c8e3ccfb12be830ec457bc43">toLong</a> () const</td></tr>
+<tr class="memdesc:a89f710d7c8e3ccfb12be830ec457bc43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert to long (0 if empty)  <br /></td></tr>
 <tr class="separator:a89f710d7c8e3ccfb12be830ec457bc43"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a415f1ae1627f1111f388be22a213274b"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#a415f1ae1627f1111f388be22a213274b">toDouble</a> () const</td></tr>
+<tr class="memdesc:a415f1ae1627f1111f388be22a213274b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert to double (0.0 if empty)  <br /></td></tr>
 <tr class="separator:a415f1ae1627f1111f388be22a213274b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abc4c0d5629a8126b4ee947e8c12fc283"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#abc4c0d5629a8126b4ee947e8c12fc283">toFloat</a> () const</td></tr>
+<tr class="memdesc:abc4c0d5629a8126b4ee947e8c12fc283"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert to float (0.0f if empty)  <br /></td></tr>
 <tr class="separator:abc4c0d5629a8126b4ee947e8c12fc283"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2c5547e412ae402bbfbafa9c984d3b52"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#a2c5547e412ae402bbfbafa9c984d3b52">toLowerCase</a> ()</td></tr>
+<tr class="memdesc:a2c5547e412ae402bbfbafa9c984d3b52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lowercase in-place.  <br /></td></tr>
 <tr class="separator:a2c5547e412ae402bbfbafa9c984d3b52"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afd7f718fe45da0f5d584e8cbec73ce88"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#afd7f718fe45da0f5d584e8cbec73ce88">toUpperCase</a> ()</td></tr>
+<tr class="memdesc:afd7f718fe45da0f5d584e8cbec73ce88"><td class="mdescLeft">&#160;</td><td class="mdescRight">Uppercase in-place.  <br /></td></tr>
 <tr class="separator:afd7f718fe45da0f5d584e8cbec73ce88"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad05066c8ecd54b751701c93bb2e49689"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#ad05066c8ecd54b751701c93bb2e49689">setCapacity</a> (size_t newLen)</td></tr>
+<tr class="memdesc:ad05066c8ecd54b751701c93bb2e49689"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reserve capacity.  <br /></td></tr>
 <tr class="separator:ad05066c8ecd54b751701c93bb2e49689"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae2551c563d22f42647f97523ee3eb40b"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#ae2551c563d22f42647f97523ee3eb40b">capacity</a> () const</td></tr>
+<tr class="memdesc:ae2551c563d22f42647f97523ee3eb40b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current capacity.  <br /></td></tr>
 <tr class="separator:ae2551c563d22f42647f97523ee3eb40b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5885b69bc4eff44f659b9fabe296904c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#a5885b69bc4eff44f659b9fabe296904c">operator+=</a> (const char *v)</td></tr>
+<tr class="memdesc:a5885b69bc4eff44f659b9fabe296904c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Append via operator+= (C-string)  <br /></td></tr>
 <tr class="separator:a5885b69bc4eff44f659b9fabe296904c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a67db74508283b7f19b0cbdd3fbe9bad4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#a67db74508283b7f19b0cbdd3fbe9bad4">operator+=</a> (int v)</td></tr>
+<tr class="memdesc:a67db74508283b7f19b0cbdd3fbe9bad4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Append via operator+= (int)  <br /></td></tr>
 <tr class="separator:a67db74508283b7f19b0cbdd3fbe9bad4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abce4c7668096cb9d8d90bf46eea5093a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#abce4c7668096cb9d8d90bf46eea5093a">operator+=</a> (double v)</td></tr>
+<tr class="memdesc:abce4c7668096cb9d8d90bf46eea5093a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Append via operator+= (double)  <br /></td></tr>
 <tr class="separator:abce4c7668096cb9d8d90bf46eea5093a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1fdb15f95c35d04079519a36b91e4a30"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#a1fdb15f95c35d04079519a36b91e4a30">operator+=</a> (const char c)</td></tr>
+<tr class="memdesc:a1fdb15f95c35d04079519a36b91e4a30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Append via operator+= (char)  <br /></td></tr>
 <tr class="separator:a1fdb15f95c35d04079519a36b91e4a30"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5c9f6e9596bf7a73e2233c456596ad83"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#a5c9f6e9596bf7a73e2233c456596ad83">operator==</a> (const char *alt) const</td></tr>
+<tr class="memdesc:a5c9f6e9596bf7a73e2233c456596ad83"><td class="mdescLeft">&#160;</td><td class="mdescRight">Equality with C-string.  <br /></td></tr>
 <tr class="separator:a5c9f6e9596bf7a73e2233c456596ad83"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a88a26368c521b55ffb47fe8b3fee6a10"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#a88a26368c521b55ffb47fe8b3fee6a10">operator!=</a> (const char *alt) const</td></tr>
+<tr class="memdesc:a88a26368c521b55ffb47fe8b3fee6a10"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inequality with C-string.  <br /></td></tr>
 <tr class="separator:a88a26368c521b55ffb47fe8b3fee6a10"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeab5d4aeb17fd56d13c4924e70934907"><td class="memItemLeft" align="right" valign="top">char &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#aeab5d4aeb17fd56d13c4924e70934907">operator[]</a> (size_t i)</td></tr>
+<tr class="memdesc:aeab5d4aeb17fd56d13c4924e70934907"><td class="mdescLeft">&#160;</td><td class="mdescRight">Element access (mutable)  <br /></td></tr>
 <tr class="separator:aeab5d4aeb17fd56d13c4924e70934907"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab6fd3e8c0d5ebc2f116a767c47dbab6a"><td class="memItemLeft" align="right" valign="top">const char &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#ab6fd3e8c0d5ebc2f116a767c47dbab6a">operator[]</a> (size_t i) const</td></tr>
+<tr class="memdesc:ab6fd3e8c0d5ebc2f116a767c47dbab6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Element access (const)  <br /></td></tr>
 <tr class="separator:ab6fd3e8c0d5ebc2f116a767c47dbab6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6723331be98d3dba7f7a000f40a8fe09"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html#a6723331be98d3dba7f7a000f40a8fe09">isOnHeap</a> () const</td></tr>
+<tr class="memdesc:a6723331be98d3dba7f7a000f40a8fe09"><td class="mdescLeft">&#160;</td><td class="mdescRight">Always true: storage is heap-backed.  <br /></td></tr>
 <tr class="separator:a6723331be98d3dba7f7a000f40a8fe09"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Heap-backed string utility used throughout <a class="el" href="namespacetiny__dlna.html">tiny_dlna</a>. </p>
+<p>This class intentionally uses composition around <code>std::string</code> and forwards a small, controlled subset of operations used by the codebase. It attempts to preserve the historical <code><a class="el" href="classtiny__dlna_1_1Str.html" title="Heap-backed string utility used throughout tiny_dlna.">Str</a></code> API (length as <code>int</code>, <code>add</code>/<code>set</code> helpers, substring helpers, simple trimming and search utilities) while keeping ownership explicit and avoiding exposure of the entire <code>std::string</code> interface.</p>
+<p>Usage notes:</p><ul>
+<li>Most callers treat <code><a class="el" href="classtiny__dlna_1_1Str.html" title="Heap-backed string utility used throughout tiny_dlna.">Str</a></code> similarly to the original project string type; it provides an implicit conversion to <code>const char*</code> for convenience when interoperating with legacy <code><a class="el" href="classtiny__dlna_1_1StrView.html" title="A simple wrapper to provide string functions on char*. If the underlying char* is a const we do not a...">StrView</a></code> APIs.</li>
+<li>The class is intended for embedded-friendly usage where a heap buffer is acceptable; <code><a class="el" href="classtiny__dlna_1_1Str.html#a6723331be98d3dba7f7a000f40a8fe09" title="Always true: storage is heap-backed.">isOnHeap()</a></code> returns true for the callers that check allocation semantics. </li>
+</ul>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a774280a35f54122649adde782c8ca4c6" name="a774280a35f54122649adde782c8ca4c6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a774280a35f54122649adde782c8ca4c6">&#9670;&#160;</a></span>Str() <span class="overload">[1/6]</span></h2>
 
@@ -239,6 +313,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Construct empty string. </p>
 
 </div>
 </div>
@@ -266,6 +342,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Construct reserving an initial capacity. </p>
+
 </div>
 </div>
 <a id="a0a360561e184aa9f02c446e8c61b5694" name="a0a360561e184aa9f02c446e8c61b5694"></a>
@@ -291,6 +369,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Construct reserving an initial capacity (int overload) </p>
 
 </div>
 </div>
@@ -318,6 +398,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Construct from C-string (nullptr -&gt; empty) </p>
+
 </div>
 </div>
 <a id="a0fe15e01cb5744b43b83fc38af764c0a" name="a0fe15e01cb5744b43b83fc38af764c0a"></a>
@@ -344,6 +426,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Copy-construct. </p>
+
 </div>
 </div>
 <a id="a15e367b5b54b6e2c1588a0ca05560169" name="a15e367b5b54b6e2c1588a0ca05560169"></a>
@@ -369,6 +453,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Move-construct. </p>
 
 </div>
 </div>
@@ -397,6 +483,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Append single character. </p>
+
 </div>
 </div>
 <a id="aaeb9694de63380450da42863ca6b980a" name="aaeb9694de63380450da42863ca6b980a"></a>
@@ -422,6 +510,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Append C-string (ignored if nullptr) </p>
 
 </div>
 </div>
@@ -458,6 +548,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Append raw bytes. </p>
 
 </div>
 </div>
@@ -501,6 +593,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Append floating point as text with precision. </p>
+
 </div>
 </div>
 <a id="a8de3d2ed071229244098a96e8bfc6530" name="a8de3d2ed071229244098a96e8bfc6530"></a>
@@ -527,6 +621,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Append integer as decimal text. </p>
+
 </div>
 </div>
 <a id="ad71254871301b90d3117b99b46648b0e" name="ad71254871301b90d3117b99b46648b0e"></a>
@@ -551,6 +647,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>C-string pointer to internal buffer. </p>
 
 </div>
 </div>
@@ -577,6 +675,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Current capacity. </p>
+
 </div>
 </div>
 <a id="ab24bd28159ab3498466a660e441a9e09" name="ab24bd28159ab3498466a660e441a9e09"></a>
@@ -601,6 +701,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Clear contents (size -&gt; 0) </p>
 
 </div>
 </div>
@@ -627,6 +729,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Clear contents (legacy alias) </p>
+
 </div>
 </div>
 <a id="ab5808f8123149b7a93d7c4d354a9f2b3" name="ab5808f8123149b7a93d7c4d354a9f2b3"></a>
@@ -652,6 +756,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>True if substring occurs. </p>
 
 </div>
 </div>
@@ -689,6 +795,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Copy from raw buffer with length. </p>
+
 </div>
 </div>
 <a id="a39e0714fc94b6f5b2e9af1705ef00e4c" name="a39e0714fc94b6f5b2e9af1705ef00e4c"></a>
@@ -714,6 +822,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>True if ends with suffix (case-sensitive) </p>
 
 </div>
 </div>
@@ -741,6 +851,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>True if ends with suffix (case-insensitive) </p>
+
 </div>
 </div>
 <a id="a042fbcb8cf6ed657088968a4e4fb8428" name="a042fbcb8cf6ed657088968a4e4fb8428"></a>
@@ -767,6 +879,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Exact string equality with C-string. </p>
+
 </div>
 </div>
 <a id="a5f54d2a8bdd3f5c8ddf88e5134d636bc" name="a5f54d2a8bdd3f5c8ddf88e5134d636bc"></a>
@@ -792,6 +906,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Case-insensitive equality with C-string. </p>
 
 </div>
 </div>
@@ -829,6 +945,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Index of character from position (or -1) </p>
+
 </div>
 </div>
 <a id="a99b8e234be79b2df9458f10aff64407e" name="a99b8e234be79b2df9458f10aff64407e"></a>
@@ -865,6 +983,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Index of substring from position (or -1) </p>
+
 </div>
 </div>
 <a id="a39cbfe6dc04129a1b4244382728d17e3" name="a39cbfe6dc04129a1b4244382728d17e3"></a>
@@ -889,6 +1009,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>True if empty. </p>
 
 </div>
 </div>
@@ -915,6 +1037,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Always true: storage is heap-backed. </p>
+
 </div>
 </div>
 <a id="a0c9cb20f111d2a78208588abb7ae0a4c" name="a0c9cb20f111d2a78208588abb7ae0a4c"></a>
@@ -939,6 +1063,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Current length (int) </p>
 
 </div>
 </div>
@@ -965,6 +1091,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Trim leading spaces. </p>
+
 </div>
 </div>
 <a id="a536e105ec5f330571d5b07efba7fad38" name="a536e105ec5f330571d5b07efba7fad38"></a>
@@ -989,6 +1117,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Implicit conversion to const char*. </p>
 
 </div>
 </div>
@@ -1016,6 +1146,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Inequality with C-string. </p>
+
 </div>
 </div>
 <a id="a5885b69bc4eff44f659b9fabe296904c" name="a5885b69bc4eff44f659b9fabe296904c"></a>
@@ -1041,6 +1173,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Append via operator+= (C-string) </p>
 
 </div>
 </div>
@@ -1068,6 +1202,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Append via operator+= (char) </p>
+
 </div>
 </div>
 <a id="abce4c7668096cb9d8d90bf46eea5093a" name="abce4c7668096cb9d8d90bf46eea5093a"></a>
@@ -1093,6 +1229,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Append via operator+= (double) </p>
 
 </div>
 </div>
@@ -1120,6 +1258,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Append via operator+= (int) </p>
+
 </div>
 </div>
 <a id="a446023f8194e28c2028fd99948f5ae2b" name="a446023f8194e28c2028fd99948f5ae2b"></a>
@@ -1145,6 +1285,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Assign from char* (operator=) </p>
 
 </div>
 </div>
@@ -1172,6 +1314,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Assign from C-string (operator=) </p>
+
 </div>
 </div>
 <a id="a06ee15e4950348fd25c1cd28c0b2031e" name="a06ee15e4950348fd25c1cd28c0b2031e"></a>
@@ -1197,6 +1341,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Copy-assign. </p>
 
 </div>
 </div>
@@ -1224,6 +1370,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Assign from double (operator=) </p>
+
 </div>
 </div>
 <a id="a0195caed9d18610023e20e8b9857514a" name="a0195caed9d18610023e20e8b9857514a"></a>
@@ -1249,6 +1397,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Assign from integer (operator=) </p>
 
 </div>
 </div>
@@ -1276,6 +1426,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Move-assign. </p>
+
 </div>
 </div>
 <a id="a5c9f6e9596bf7a73e2233c456596ad83" name="a5c9f6e9596bf7a73e2233c456596ad83"></a>
@@ -1301,6 +1453,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Equality with C-string. </p>
 
 </div>
 </div>
@@ -1328,6 +1482,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Element access (mutable) </p>
+
 </div>
 </div>
 <a id="ab6fd3e8c0d5ebc2f116a767c47dbab6a" name="ab6fd3e8c0d5ebc2f116a767c47dbab6a"></a>
@@ -1354,6 +1510,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Element access (const) </p>
+
 </div>
 </div>
 <a id="ad64f32b39412410d3bde5aa9eb75173c" name="ad64f32b39412410d3bde5aa9eb75173c"></a>
@@ -1378,6 +1536,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Clear and shrink capacity to fit. </p>
 
 </div>
 </div>
@@ -1404,6 +1564,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Remove first occurrence of substring (no-op if not found) </p>
 
 </div>
 </div>
@@ -1475,6 +1637,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Replace first occurrence of toReplace with replaced starting at startPos. </p>
+
 </div>
 </div>
 <a id="a72f0f7309a0b18ca2244dbf55f28d140" name="a72f0f7309a0b18ca2244dbf55f28d140"></a>
@@ -1511,6 +1675,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Replace all occurrences of toReplace with replaced; returns count. </p>
+
 </div>
 </div>
 <a id="a734f0cd4da970f50f6ae1d2b9de9af20" name="a734f0cd4da970f50f6ae1d2b9de9af20"></a>
@@ -1535,6 +1701,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Clear contents (alias of clear) </p>
 
 </div>
 </div>
@@ -1561,6 +1729,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Trim trailing spaces. </p>
+
 </div>
 </div>
 <a id="aaaaddbbd5ab55b0bb5d0544df30f7607" name="aaaaddbbd5ab55b0bb5d0544df30f7607"></a>
@@ -1586,6 +1756,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Assign from C-string (nullptr -&gt; empty) </p>
 
 </div>
 </div>
@@ -1629,6 +1801,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Assign from floating point with precision. </p>
+
 </div>
 </div>
 <a id="aa2effd8b37eeb7012052e88cfe7d99f8" name="aa2effd8b37eeb7012052e88cfe7d99f8"></a>
@@ -1655,6 +1829,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Assign from integer. </p>
+
 </div>
 </div>
 <a id="ad05066c8ecd54b751701c93bb2e49689" name="ad05066c8ecd54b751701c93bb2e49689"></a>
@@ -1680,6 +1856,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Reserve capacity. </p>
 
 </div>
 </div>
@@ -1717,6 +1895,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Resize logical length (pads with NUL if growing) </p>
+
 </div>
 </div>
 <a id="a64a29c3b1eed250fe003db330e6bf18c" name="a64a29c3b1eed250fe003db330e6bf18c"></a>
@@ -1742,6 +1922,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>True if starts with prefix (case-sensitive) </p>
 
 </div>
 </div>
@@ -1778,6 +1960,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Return substring [start,end) as a new <a class="el" href="classtiny__dlna_1_1Str.html" title="Heap-backed string utility used throughout tiny_dlna.">Str</a>. </p>
 
 </div>
 </div>
@@ -1821,6 +2005,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Assign substring view from const char* [start,end) </p>
+
 </div>
 </div>
 <a id="a8d647ee6a15da64f0542ec1befc15f3a" name="a8d647ee6a15da64f0542ec1befc15f3a"></a>
@@ -1863,6 +2049,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Assign substring view from <a class="el" href="classtiny__dlna_1_1StrView.html" title="A simple wrapper to provide string functions on char*. If the underlying char* is a const we do not a...">StrView</a> [start,end) </p>
+
 </div>
 </div>
 <a id="a415f1ae1627f1111f388be22a213274b" name="a415f1ae1627f1111f388be22a213274b"></a>
@@ -1887,6 +2075,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Convert to double (0.0 if empty) </p>
 
 </div>
 </div>
@@ -1913,6 +2103,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Convert to float (0.0f if empty) </p>
+
 </div>
 </div>
 <a id="a8892b7527a2ca4f960c90b5b1478bb38" name="a8892b7527a2ca4f960c90b5b1478bb38"></a>
@@ -1937,6 +2129,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Convert to int (0 if empty) </p>
 
 </div>
 </div>
@@ -1963,6 +2157,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Convert to long (0 if empty) </p>
+
 </div>
 </div>
 <a id="a2c5547e412ae402bbfbafa9c984d3b52" name="a2c5547e412ae402bbfbafa9c984d3b52"></a>
@@ -1987,6 +2183,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Lowercase in-place. </p>
 
 </div>
 </div>
@@ -2013,6 +2211,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Uppercase in-place. </p>
+
 </div>
 </div>
 <a id="a84bf4e611b6a364dd5f4f498a64d60b6" name="a84bf4e611b6a364dd5f4f498a64d60b6"></a>
@@ -2037,6 +2237,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Trim spaces on both ends. </p>
 
 </div>
 </div>

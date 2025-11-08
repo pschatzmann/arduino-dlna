@@ -80,13 +80,16 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>Abstract interface for HTTP client request functionality.  
+ <a href="classtiny__dlna_1_1IHttpRequest.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="IHttpRequest_8h_source.html">IHttpRequest.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for tiny_dlna::IHttpRequest:</div>
 <div class="dyncontent">
 <div class="center"><img src="classtiny__dlna_1_1IHttpRequest__inherit__graph.png" border="0" usemap="#atiny__dlna_1_1IHttpRequest_inherit__map" alt="Inheritance graph"/></div>
 <map name="atiny__dlna_1_1IHttpRequest_inherit__map" id="atiny__dlna_1_1IHttpRequest_inherit__map">
-<area shape="rect" title=" " alt="" coords="5,5,180,31"/>
+<area shape="rect" title="Abstract interface for HTTP client request functionality." alt="" coords="5,5,180,31"/>
 <area shape="rect" href="classtiny__dlna_1_1HttpRequest.html" title="Simple API to process get, put, post, del http requests I tried to use Arduino HttpClient,..." alt="" coords="7,79,178,119"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
@@ -96,55 +99,82 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a07afd1bf64713a3f0a2d3d6e709b29d4"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IHttpRequest.html#a07afd1bf64713a3f0a2d3d6e709b29d4">~IHttpRequest</a> ()=default</td></tr>
 <tr class="separator:a07afd1bf64713a3f0a2d3d6e709b29d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a873724a85705e2453e78f139c4b9eaa0"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IHttpRequest.html#a873724a85705e2453e78f139c4b9eaa0">setClient</a> (Client &amp;<a class="el" href="classtiny__dlna_1_1IHttpRequest.html#a2b86c0401ec83fb7848a42a050da707c">client</a>)=0</td></tr>
+<tr class="memdesc:a873724a85705e2453e78f139c4b9eaa0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the client for HTTP requests.  <br /></td></tr>
 <tr class="separator:a873724a85705e2453e78f139c4b9eaa0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adf05ade498bcf533a6502e1e4f92e3ac"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IHttpRequest.html#adf05ade498bcf533a6502e1e4f92e3ac">setHost</a> (const char *host)=0</td></tr>
+<tr class="memdesc:adf05ade498bcf533a6502e1e4f92e3ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the host header for requests.  <br /></td></tr>
 <tr class="separator:adf05ade498bcf533a6502e1e4f92e3ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1e161bac2de3139ef846b12555d8a535"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IHttpRequest.html#a1e161bac2de3139ef846b12555d8a535">operator bool</a> ()=0</td></tr>
+<tr class="memdesc:a1e161bac2de3139ef846b12555d8a535"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if request interface is valid.  <br /></td></tr>
 <tr class="separator:a1e161bac2de3139ef846b12555d8a535"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a92f34a3aebf4b3c468688b68e1835cd1"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IHttpRequest.html#a92f34a3aebf4b3c468688b68e1835cd1">connected</a> ()=0</td></tr>
+<tr class="memdesc:a92f34a3aebf4b3c468688b68e1835cd1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if connected to server.  <br /></td></tr>
 <tr class="separator:a92f34a3aebf4b3c468688b68e1835cd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adf05bfa5adb7e80c101e84e94f05e6c2"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IHttpRequest.html#adf05bfa5adb7e80c101e84e94f05e6c2">available</a> ()=0</td></tr>
+<tr class="memdesc:adf05bfa5adb7e80c101e84e94f05e6c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get number of bytes available to read.  <br /></td></tr>
 <tr class="separator:adf05bfa5adb7e80c101e84e94f05e6c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a862b7a3cca2f61a96118b1f746c044a7"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IHttpRequest.html#a862b7a3cca2f61a96118b1f746c044a7">stop</a> ()=0</td></tr>
+<tr class="memdesc:a862b7a3cca2f61a96118b1f746c044a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stop the connection.  <br /></td></tr>
 <tr class="separator:a862b7a3cca2f61a96118b1f746c044a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6a7f9834b8d53f583019ab3596f31dc1"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IHttpRequest.html#a6a7f9834b8d53f583019ab3596f31dc1">post</a> (<a class="el" href="classtiny__dlna_1_1Url.html">Url</a> &amp;url, const char *mime, const char *data, int len=-1)=0</td></tr>
+<tr class="memdesc:a6a7f9834b8d53f583019ab3596f31dc1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send POST request with string data.  <br /></td></tr>
 <tr class="separator:a6a7f9834b8d53f583019ab3596f31dc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afda982c0f2f32a5e98007a897b19ff5b"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IHttpRequest.html#afda982c0f2f32a5e98007a897b19ff5b">post</a> (<a class="el" href="classtiny__dlna_1_1Url.html">Url</a> &amp;url, size_t len, std::function&lt; size_t(Print &amp;, void *)&gt; writer, const char *mime=nullptr, void *ref=nullptr)=0</td></tr>
+<tr class="memdesc:afda982c0f2f32a5e98007a897b19ff5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send POST request with callback writer.  <br /></td></tr>
 <tr class="separator:afda982c0f2f32a5e98007a897b19ff5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2b0352d9599111df8edf8ae4f85c7626"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IHttpRequest.html#a2b0352d9599111df8edf8ae4f85c7626">notify</a> (<a class="el" href="classtiny__dlna_1_1Url.html">Url</a> &amp;url, std::function&lt; size_t(Print &amp;, void *)&gt; writer, const char *mime=nullptr, void *ref=nullptr)=0</td></tr>
+<tr class="memdesc:a2b0352d9599111df8edf8ae4f85c7626"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send NOTIFY request with callback writer.  <br /></td></tr>
 <tr class="separator:a2b0352d9599111df8edf8ae4f85c7626"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3f1dc8b01e59b62b2e3a396e0bfcf963"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IHttpRequest.html#a3f1dc8b01e59b62b2e3a396e0bfcf963">put</a> (<a class="el" href="classtiny__dlna_1_1Url.html">Url</a> &amp;url, const char *mime, const char *data, int len=-1)=0</td></tr>
+<tr class="memdesc:a3f1dc8b01e59b62b2e3a396e0bfcf963"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send PUT request with string data.  <br /></td></tr>
 <tr class="separator:a3f1dc8b01e59b62b2e3a396e0bfcf963"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aef97b678d5a039c8cf2be108e5b31412"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IHttpRequest.html#aef97b678d5a039c8cf2be108e5b31412">del</a> (<a class="el" href="classtiny__dlna_1_1Url.html">Url</a> &amp;url, const char *mime=nullptr, const char *data=nullptr, int len=-1)=0</td></tr>
+<tr class="memdesc:aef97b678d5a039c8cf2be108e5b31412"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send DELETE request.  <br /></td></tr>
 <tr class="separator:aef97b678d5a039c8cf2be108e5b31412"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aba26379306a7f98bd7f8866ff59b245f"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IHttpRequest.html#aba26379306a7f98bd7f8866ff59b245f">get</a> (<a class="el" href="classtiny__dlna_1_1Url.html">Url</a> &amp;url, const char *acceptMime=nullptr, const char *data=nullptr, int len=-1)=0</td></tr>
+<tr class="memdesc:aba26379306a7f98bd7f8866ff59b245f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send GET request.  <br /></td></tr>
 <tr class="separator:aba26379306a7f98bd7f8866ff59b245f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab8dbb66a0f161fa1641bb81c073dc6e0"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IHttpRequest.html#ab8dbb66a0f161fa1641bb81c073dc6e0">head</a> (<a class="el" href="classtiny__dlna_1_1Url.html">Url</a> &amp;url, const char *acceptMime=nullptr, const char *data=nullptr, int len=-1)=0</td></tr>
+<tr class="memdesc:ab8dbb66a0f161fa1641bb81c073dc6e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send HEAD request.  <br /></td></tr>
 <tr class="separator:ab8dbb66a0f161fa1641bb81c073dc6e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac88b3a5461e0d3bc820f6b9ad944bf21"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IHttpRequest.html#ac88b3a5461e0d3bc820f6b9ad944bf21">subscribe</a> (<a class="el" href="classtiny__dlna_1_1Url.html">Url</a> &amp;url)=0</td></tr>
+<tr class="memdesc:ac88b3a5461e0d3bc820f6b9ad944bf21"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send SUBSCRIBE request for UPnP events.  <br /></td></tr>
 <tr class="separator:ac88b3a5461e0d3bc820f6b9ad944bf21"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af909f51fdfb65e4791dcdb4f5841d0d7"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IHttpRequest.html#af909f51fdfb65e4791dcdb4f5841d0d7">unsubscribe</a> (<a class="el" href="classtiny__dlna_1_1Url.html">Url</a> &amp;url, const char *sid)=0</td></tr>
+<tr class="memdesc:af909f51fdfb65e4791dcdb4f5841d0d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send UNSUBSCRIBE request for UPnP events.  <br /></td></tr>
 <tr class="separator:af909f51fdfb65e4791dcdb4f5841d0d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a60923bd0aa38028beeefd102f9de59ad"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IHttpRequest.html#a60923bd0aa38028beeefd102f9de59ad">read</a> (uint8_t *str, int len)=0</td></tr>
+<tr class="memdesc:a60923bd0aa38028beeefd102f9de59ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read data from response.  <br /></td></tr>
 <tr class="separator:a60923bd0aa38028beeefd102f9de59ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a039f3431a6404ba5b77eff3b29850196"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IHttpRequest.html#a039f3431a6404ba5b77eff3b29850196">readln</a> (uint8_t *str, int len, bool incl_nl=true)=0</td></tr>
+<tr class="memdesc:a039f3431a6404ba5b77eff3b29850196"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read line from response.  <br /></td></tr>
 <tr class="separator:a039f3431a6404ba5b77eff3b29850196"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa46ce1a560841a7e9d9977f0995021c0"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classtiny__dlna_1_1HttpReplyHeader.html">HttpReplyHeader</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IHttpRequest.html#aa46ce1a560841a7e9d9977f0995021c0">reply</a> ()=0</td></tr>
+<tr class="memdesc:aa46ce1a560841a7e9d9977f0995021c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get reference to reply header.  <br /></td></tr>
 <tr class="separator:aa46ce1a560841a7e9d9977f0995021c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a65406af8553d00017788d59fba3a223b"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classtiny__dlna_1_1HttpRequestHeader.html">HttpRequestHeader</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IHttpRequest.html#a65406af8553d00017788d59fba3a223b">request</a> ()=0</td></tr>
+<tr class="memdesc:a65406af8553d00017788d59fba3a223b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get reference to request header.  <br /></td></tr>
 <tr class="separator:a65406af8553d00017788d59fba3a223b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afe0b77d184fa3d949ba180b07066d491"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IHttpRequest.html#afe0b77d184fa3d949ba180b07066d491">setAgent</a> (const char *agent)=0</td></tr>
+<tr class="memdesc:afe0b77d184fa3d949ba180b07066d491"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set User-Agent header.  <br /></td></tr>
 <tr class="separator:afe0b77d184fa3d949ba180b07066d491"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac6c07dc5ffe39e11a686210d9c5c6d9b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IHttpRequest.html#ac6c07dc5ffe39e11a686210d9c5c6d9b">setConnection</a> (const char *connection)=0</td></tr>
+<tr class="memdesc:ac6c07dc5ffe39e11a686210d9c5c6d9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set Connection header.  <br /></td></tr>
 <tr class="separator:ac6c07dc5ffe39e11a686210d9c5c6d9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5004d3778f606450c288d946b26a0a64"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IHttpRequest.html#a5004d3778f606450c288d946b26a0a64">setAcceptsEncoding</a> (const char *enc)=0</td></tr>
+<tr class="memdesc:a5004d3778f606450c288d946b26a0a64"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set Accept-Encoding header.  <br /></td></tr>
 <tr class="separator:a5004d3778f606450c288d946b26a0a64"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2b86c0401ec83fb7848a42a050da707c"><td class="memItemLeft" align="right" valign="top">virtual Client *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IHttpRequest.html#a2b86c0401ec83fb7848a42a050da707c">client</a> ()=0</td></tr>
+<tr class="memdesc:a2b86c0401ec83fb7848a42a050da707c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get pointer to client.  <br /></td></tr>
 <tr class="separator:a2b86c0401ec83fb7848a42a050da707c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a273722387e555afb3b5f57f51d8c6b6c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IHttpRequest.html#a273722387e555afb3b5f57f51d8c6b6c">setTimeout</a> (int ms)=0</td></tr>
+<tr class="memdesc:a273722387e555afb3b5f57f51d8c6b6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set request timeout in milliseconds.  <br /></td></tr>
 <tr class="separator:a273722387e555afb3b5f57f51d8c6b6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Abstract interface for HTTP client request functionality. </p>
+<p>Defines the contract for implementing an HTTP client that can send various types of HTTP requests (GET, POST, PUT, DELETE, etc.) and handle responses. Supports UPnP-specific methods like SUBSCRIBE/UNSUBSCRIBE for event handling. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a07afd1bf64713a3f0a2d3d6e709b29d4" name="a07afd1bf64713a3f0a2d3d6e709b29d4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a07afd1bf64713a3f0a2d3d6e709b29d4">&#9670;&#160;</a></span>~IHttpRequest()</h2>
 
@@ -194,6 +224,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Get number of bytes available to read. </p>
+
 <p>Implemented in <a class="el" href="classtiny__dlna_1_1HttpRequest.html#a881ecde3b7b7e31612db70868887f0e0">tiny_dlna::HttpRequest&lt; ClientType &gt;</a>.</p>
 
 </div>
@@ -221,6 +253,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Get pointer to client. </p>
+
 <p>Implemented in <a class="el" href="classtiny__dlna_1_1HttpRequest.html#acae3d1004eeaa4f984a7ed513ed40609">tiny_dlna::HttpRequest&lt; ClientType &gt;</a>.</p>
 
 </div>
@@ -247,6 +281,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Check if connected to server. </p>
 
 <p>Implemented in <a class="el" href="classtiny__dlna_1_1HttpRequest.html#aa71597eab5abdc402095af5c57e8a291">tiny_dlna::HttpRequest&lt; ClientType &gt;</a>.</p>
 
@@ -298,6 +334,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Send DELETE request. </p>
+
 <p>Implemented in <a class="el" href="classtiny__dlna_1_1HttpRequest.html#ad7d5c60051a066b9e037f91a44fd2049">tiny_dlna::HttpRequest&lt; ClientType &gt;</a>.</p>
 
 </div>
@@ -347,6 +385,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Send GET request. </p>
 
 <p>Implemented in <a class="el" href="classtiny__dlna_1_1HttpRequest.html#abfff66b4bb5655673a181c9734a73e78">tiny_dlna::HttpRequest&lt; ClientType &gt;</a>.</p>
 
@@ -398,6 +438,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Send HEAD request. </p>
+
 <p>Implemented in <a class="el" href="classtiny__dlna_1_1HttpRequest.html#ad96c4194e1c843faee852b8c185b1958">tiny_dlna::HttpRequest&lt; ClientType &gt;</a>.</p>
 
 </div>
@@ -448,6 +490,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Send NOTIFY request with callback writer. </p>
+
 <p>Implemented in <a class="el" href="classtiny__dlna_1_1HttpRequest.html#aafc651193a04e4271d2c045ac7e43d75">tiny_dlna::HttpRequest&lt; ClientType &gt;</a>.</p>
 
 </div>
@@ -474,6 +518,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Check if request interface is valid. </p>
 
 <p>Implemented in <a class="el" href="classtiny__dlna_1_1HttpRequest.html#a4fc4e522e73961c9f63378bb5b65d223">tiny_dlna::HttpRequest&lt; ClientType &gt;</a>.</p>
 
@@ -524,6 +570,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Send POST request with string data. </p>
 
 <p>Implemented in <a class="el" href="classtiny__dlna_1_1HttpRequest.html#abbfbba43e9ddb4d1cda7ba2569068fc1">tiny_dlna::HttpRequest&lt; ClientType &gt;</a>.</p>
 
@@ -581,6 +629,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Send POST request with callback writer. </p>
+
 <p>Implemented in <a class="el" href="classtiny__dlna_1_1HttpRequest.html#aac14cb2d1778ade7f50a667c60a278d7">tiny_dlna::HttpRequest&lt; ClientType &gt;</a>.</p>
 
 </div>
@@ -631,6 +681,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Send PUT request with string data. </p>
+
 <p>Implemented in <a class="el" href="classtiny__dlna_1_1HttpRequest.html#a6ade28d75325fffe8338a8d00c128c42">tiny_dlna::HttpRequest&lt; ClientType &gt;</a>.</p>
 
 </div>
@@ -668,6 +720,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Read data from response. </p>
 
 <p>Implemented in <a class="el" href="classtiny__dlna_1_1HttpRequest.html#a56aabfdbb5410753f59dfd15065eab11">tiny_dlna::HttpRequest&lt; ClientType &gt;</a>.</p>
 
@@ -713,6 +767,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Read line from response. </p>
+
 <p>Implemented in <a class="el" href="classtiny__dlna_1_1HttpRequest.html#add7d08a79c551f8fdff3e9e1a3693077">tiny_dlna::HttpRequest&lt; ClientType &gt;</a>.</p>
 
 </div>
@@ -740,6 +796,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Get reference to reply header. </p>
+
 <p>Implemented in <a class="el" href="classtiny__dlna_1_1HttpRequest.html#a46849524f26cef7e57095ffc43628d80">tiny_dlna::HttpRequest&lt; ClientType &gt;</a>.</p>
 
 </div>
@@ -766,6 +824,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Get reference to request header. </p>
 
 <p>Implemented in <a class="el" href="classtiny__dlna_1_1HttpRequest.html#a1e2bd27e1639e6b7ab8e898356dc1952">tiny_dlna::HttpRequest&lt; ClientType &gt;</a>.</p>
 
@@ -795,6 +855,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Set Accept-Encoding header. </p>
+
 <p>Implemented in <a class="el" href="classtiny__dlna_1_1HttpRequest.html#a77148baed922c46b979077d78b0e0076">tiny_dlna::HttpRequest&lt; ClientType &gt;</a>.</p>
 
 </div>
@@ -822,6 +884,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Set User-Agent header. </p>
 
 <p>Implemented in <a class="el" href="classtiny__dlna_1_1HttpRequest.html#afd8854144638bd3e2c0388292488d0cc">tiny_dlna::HttpRequest&lt; ClientType &gt;</a>.</p>
 
@@ -851,6 +915,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Set the client for HTTP requests. </p>
+
 <p>Implemented in <a class="el" href="classtiny__dlna_1_1HttpRequest.html#a7eddd7c2fa7322a0505f2f31d104844c">tiny_dlna::HttpRequest&lt; ClientType &gt;</a>.</p>
 
 </div>
@@ -878,6 +944,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Set Connection header. </p>
 
 <p>Implemented in <a class="el" href="classtiny__dlna_1_1HttpRequest.html#a12a6d87f0c67ee5198dd7dc3bab19cfa">tiny_dlna::HttpRequest&lt; ClientType &gt;</a>.</p>
 
@@ -907,6 +975,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Set the host header for requests. </p>
+
 <p>Implemented in <a class="el" href="classtiny__dlna_1_1HttpRequest.html#a3e9e921eaaa4c6558b9c98ea98a7d742">tiny_dlna::HttpRequest&lt; ClientType &gt;</a>.</p>
 
 </div>
@@ -935,6 +1005,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Set request timeout in milliseconds. </p>
+
 <p>Implemented in <a class="el" href="classtiny__dlna_1_1HttpRequest.html#af1fa91a5af0cb5bce0fd50005eaebde8">tiny_dlna::HttpRequest&lt; ClientType &gt;</a>.</p>
 
 </div>
@@ -961,6 +1033,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Stop the connection. </p>
 
 <p>Implemented in <a class="el" href="classtiny__dlna_1_1HttpRequest.html#a24a41c1facd9f4fec8f12ef821ccd59a">tiny_dlna::HttpRequest&lt; ClientType &gt;</a>.</p>
 
@@ -989,6 +1063,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Send SUBSCRIBE request for UPnP events. </p>
 
 <p>Implemented in <a class="el" href="classtiny__dlna_1_1HttpRequest.html#af61453b594f4cc370104be7db531f141">tiny_dlna::HttpRequest&lt; ClientType &gt;</a>.</p>
 
@@ -1027,6 +1103,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Send UNSUBSCRIBE request for UPnP events. </p>
 
 <p>Implemented in <a class="el" href="classtiny__dlna_1_1HttpRequest.html#a6276a5b0ca0061dda26699db6afe36f1">tiny_dlna::HttpRequest&lt; ClientType &gt;</a>.</p>
 

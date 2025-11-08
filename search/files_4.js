@@ -9,5 +9,5 @@ var searchData=
   ['ihttpserver_2eh_6',['IHttpServer.h',['../IHttpServer_8h.html',1,'']]],
   ['ipaddressandport_2eh_7',['IPAddressAndPort.h',['../IPAddressAndPort_8h.html',1,'']]],
   ['isubscriptionmgrdevice_2eh_8',['ISubscriptionMgrDevice.h',['../ISubscriptionMgrDevice_8h.html',1,'']]],
-  ['iudpservice_2eh_9',['IUDPService.h',['../dlna_2IUDPService_8h.html',1,'(Global Namespace)'],['../udp_2IUDPService_8h.html',1,'(Global Namespace)']]]
+  ['iudpservice_2eh_9',['IUDPService.h',['../IUDPService_8h.html',1,'']]]
 ];

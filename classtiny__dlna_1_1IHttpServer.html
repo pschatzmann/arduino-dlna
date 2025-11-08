@@ -80,13 +80,16 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>Abstract interface for HTTP server functionality.  
+ <a href="classtiny__dlna_1_1IHttpServer.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="IHttpServer_8h_source.html">IHttpServer.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for tiny_dlna::IHttpServer:</div>
 <div class="dyncontent">
 <div class="center"><img src="classtiny__dlna_1_1IHttpServer__inherit__graph.png" border="0" usemap="#atiny__dlna_1_1IHttpServer_inherit__map" alt="Inheritance graph"/></div>
 <map name="atiny__dlna_1_1IHttpServer_inherit__map" id="atiny__dlna_1_1IHttpServer_inherit__map">
-<area shape="rect" title=" " alt="" coords="23,5,187,31"/>
+<area shape="rect" title="Abstract interface for HTTP server functionality." alt="" coords="23,5,187,31"/>
 <area shape="rect" href="classtiny__dlna_1_1HttpServer.html" title="Header&#45;only HTTP server wrapper that registers callback handlers." alt="" coords="5,79,205,119"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
@@ -96,75 +99,112 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:adf8205dd97abcb892dd1edfcae5e5988"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IHttpServer.html#adf8205dd97abcb892dd1edfcae5e5988">~IHttpServer</a> ()=default</td></tr>
 <tr class="separator:adf8205dd97abcb892dd1edfcae5e5988"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a72848b2471c6a61de852371a551bcf08"><td class="memItemLeft" align="right" valign="top">virtual IPAddress &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IHttpServer.html#a72848b2471c6a61de852371a551bcf08">localIP</a> ()=0</td></tr>
+<tr class="memdesc:a72848b2471c6a61de852371a551bcf08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the local IP address of the server.  <br /></td></tr>
 <tr class="separator:a72848b2471c6a61de852371a551bcf08"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a08d2f1647b78b03fbbba71e1229417ae"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IHttpServer.html#a08d2f1647b78b03fbbba71e1229417ae">begin</a> ()=0</td></tr>
+<tr class="memdesc:a08d2f1647b78b03fbbba71e1229417ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start the HTTP server.  <br /></td></tr>
 <tr class="separator:a08d2f1647b78b03fbbba71e1229417ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3bdda12879bb908dcc3f6ae450f405b9"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IHttpServer.html#a3bdda12879bb908dcc3f6ae450f405b9">end</a> ()=0</td></tr>
+<tr class="memdesc:a3bdda12879bb908dcc3f6ae450f405b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stop the HTTP server.  <br /></td></tr>
 <tr class="separator:a3bdda12879bb908dcc3f6ae450f405b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afd4a0d4c699fe16d25c9be43d1a7d840"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IHttpServer.html#afd4a0d4c699fe16d25c9be43d1a7d840">rewrite</a> (const char *from, const char *to)=0</td></tr>
+<tr class="memdesc:afd4a0d4c699fe16d25c9be43d1a7d840"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add URL rewrite rule.  <br /></td></tr>
 <tr class="separator:afd4a0d4c699fe16d25c9be43d1a7d840"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a44012247482614d313f2195fa0fe9050"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IHttpServer.html#a44012247482614d313f2195fa0fe9050">on</a> (const char *url, <a class="el" href="namespacetiny__dlna.html#a8b30900e538135f563c83e48319e5247">TinyMethodID</a> method, <a class="el" href="namespacetiny__dlna.html#acf8c66b4a24ac309391845e144afb6a9">web_callback_fn</a> fn, void *ctx[]=nullptr, int ctxCount=0)=0</td></tr>
+<tr class="memdesc:a44012247482614d313f2195fa0fe9050"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register callback for HTTP request with context.  <br /></td></tr>
 <tr class="separator:a44012247482614d313f2195fa0fe9050"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2cc2dc15e026c196618e88ad7b610ceb"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IHttpServer.html#a2cc2dc15e026c196618e88ad7b610ceb">on</a> (const char *url, <a class="el" href="namespacetiny__dlna.html#a8b30900e538135f563c83e48319e5247">TinyMethodID</a> method, const char *mime, <a class="el" href="namespacetiny__dlna.html#acf8c66b4a24ac309391845e144afb6a9">web_callback_fn</a> fn)=0</td></tr>
+<tr class="memdesc:a2cc2dc15e026c196618e88ad7b610ceb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register callback for HTTP request with MIME type.  <br /></td></tr>
 <tr class="separator:a2cc2dc15e026c196618e88ad7b610ceb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a43a7a12c0f6a35dfa803eb38a213abc1"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IHttpServer.html#a43a7a12c0f6a35dfa803eb38a213abc1">on</a> (const char *url, <a class="el" href="namespacetiny__dlna.html#a8b30900e538135f563c83e48319e5247">TinyMethodID</a> method, const char *mime, const char *result)=0</td></tr>
+<tr class="memdesc:a43a7a12c0f6a35dfa803eb38a213abc1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register static response for HTTP request.  <br /></td></tr>
 <tr class="separator:a43a7a12c0f6a35dfa803eb38a213abc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a21cb097feb1f937f6faf00cf8c5cf1e2"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IHttpServer.html#a21cb097feb1f937f6faf00cf8c5cf1e2">on</a> (const char *url, <a class="el" href="namespacetiny__dlna.html#a8b30900e538135f563c83e48319e5247">TinyMethodID</a> method, const char *mime, const uint8_t *data, int len)=0</td></tr>
+<tr class="memdesc:a21cb097feb1f937f6faf00cf8c5cf1e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register binary data response for HTTP request.  <br /></td></tr>
 <tr class="separator:a21cb097feb1f937f6faf00cf8c5cf1e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8925c2a8ab7b749c57279f306f38c46f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IHttpServer.html#a8925c2a8ab7b749c57279f306f38c46f">on</a> (const char *url, <a class="el" href="namespacetiny__dlna.html#a8b30900e538135f563c83e48319e5247">TinyMethodID</a> method, <a class="el" href="classtiny__dlna_1_1Url.html">Url</a> &amp;redirect)=0</td></tr>
+<tr class="memdesc:a8925c2a8ab7b749c57279f306f38c46f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register redirect response for HTTP request.  <br /></td></tr>
 <tr class="separator:a8925c2a8ab7b749c57279f306f38c46f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acd7d00663f767ca1825d58d958ac3668"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IHttpServer.html#acd7d00663f767ca1825d58d958ac3668">onRequest</a> (const char *path)=0</td></tr>
+<tr class="memdesc:acd7d00663f767ca1825d58d958ac3668"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if request matches registered handlers.  <br /></td></tr>
 <tr class="separator:acd7d00663f767ca1825d58d958ac3668"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a06f36e6405446789c5c20efae291c54e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IHttpServer.html#a06f36e6405446789c5c20efae291c54e">replyChunked</a> (const char *contentType, Stream &amp;inputStream, int status=200, const char *msg=<a class="el" href="namespacetiny__dlna.html#aa203b0adbc2115c8cd956dd41ec09735">SUCCESS</a>)=0</td></tr>
+<tr class="memdesc:a06f36e6405446789c5c20efae291c54e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send chunked response from input stream.  <br /></td></tr>
 <tr class="separator:a06f36e6405446789c5c20efae291c54e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6c70429984004be71a1c9efedc398f35"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IHttpServer.html#a6c70429984004be71a1c9efedc398f35">replyChunked</a> (const char *contentType, int status=200, const char *msg=<a class="el" href="namespacetiny__dlna.html#aa203b0adbc2115c8cd956dd41ec09735">SUCCESS</a>)=0</td></tr>
+<tr class="memdesc:a6c70429984004be71a1c9efedc398f35"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send chunked response with callback.  <br /></td></tr>
 <tr class="separator:a6c70429984004be71a1c9efedc398f35"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afa7b50ce15364f68397ed209d8b6ed80"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IHttpServer.html#afa7b50ce15364f68397ed209d8b6ed80">reply</a> (const char *contentType, Stream &amp;inputStream, int size, int status=200, const char *msg=<a class="el" href="namespacetiny__dlna.html#aa203b0adbc2115c8cd956dd41ec09735">SUCCESS</a>)=0</td></tr>
+<tr class="memdesc:afa7b50ce15364f68397ed209d8b6ed80"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send response from input stream with known size.  <br /></td></tr>
 <tr class="separator:afa7b50ce15364f68397ed209d8b6ed80"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af9207fb096f4a135caab8a85c5364086"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IHttpServer.html#af9207fb096f4a135caab8a85c5364086">reply</a> (const char *contentType, size_t(*callback)(Print &amp;out, void *ref), int status=200, const char *msg=<a class="el" href="namespacetiny__dlna.html#aa203b0adbc2115c8cd956dd41ec09735">SUCCESS</a>, void *ref=nullptr)=0</td></tr>
+<tr class="memdesc:af9207fb096f4a135caab8a85c5364086"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send response using callback function.  <br /></td></tr>
 <tr class="separator:af9207fb096f4a135caab8a85c5364086"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2a0ca4b5cb3fc85117c59811d6522184"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IHttpServer.html#a2a0ca4b5cb3fc85117c59811d6522184">reply</a> (const char *contentType, const char *str, int status=200, const char *msg=<a class="el" href="namespacetiny__dlna.html#aa203b0adbc2115c8cd956dd41ec09735">SUCCESS</a>)=0</td></tr>
+<tr class="memdesc:a2a0ca4b5cb3fc85117c59811d6522184"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send string response.  <br /></td></tr>
 <tr class="separator:a2a0ca4b5cb3fc85117c59811d6522184"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aec80dbb4eaea009de90b914ea55c58f0"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IHttpServer.html#aec80dbb4eaea009de90b914ea55c58f0">reply</a> (const char *contentType, const uint8_t *str, int len, int status=200, const char *msg=<a class="el" href="namespacetiny__dlna.html#aa203b0adbc2115c8cd956dd41ec09735">SUCCESS</a>)=0</td></tr>
+<tr class="memdesc:aec80dbb4eaea009de90b914ea55c58f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send binary data response.  <br /></td></tr>
 <tr class="separator:aec80dbb4eaea009de90b914ea55c58f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a46b1adf7abbdd24f885bc7abd914caa0"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IHttpServer.html#a46b1adf7abbdd24f885bc7abd914caa0">replyOK</a> ()=0</td></tr>
+<tr class="memdesc:a46b1adf7abbdd24f885bc7abd914caa0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send 200 OK response.  <br /></td></tr>
 <tr class="separator:a46b1adf7abbdd24f885bc7abd914caa0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a217a67bab90d3726828edb6cf20320a3"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IHttpServer.html#a217a67bab90d3726828edb6cf20320a3">replyNotFound</a> ()=0</td></tr>
+<tr class="memdesc:a217a67bab90d3726828edb6cf20320a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send 404 Not Found response.  <br /></td></tr>
 <tr class="separator:a217a67bab90d3726828edb6cf20320a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aea1fe58329503674e55d34b25cc8885e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IHttpServer.html#aea1fe58329503674e55d34b25cc8885e">replyError</a> (int err, const char *msg=&quot;Internal Server Error&quot;)=0</td></tr>
+<tr class="memdesc:aea1fe58329503674e55d34b25cc8885e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send error response with status code.  <br /></td></tr>
 <tr class="separator:aea1fe58329503674e55d34b25cc8885e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af5ded1a8220b4b26560c29f63e87d4fa"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classtiny__dlna_1_1HttpRequestHeader.html">HttpRequestHeader</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IHttpServer.html#af5ded1a8220b4b26560c29f63e87d4fa">requestHeader</a> ()=0</td></tr>
+<tr class="memdesc:af5ded1a8220b4b26560c29f63e87d4fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get reference to request header.  <br /></td></tr>
 <tr class="separator:af5ded1a8220b4b26560c29f63e87d4fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6fc312e61d36698cc30aec10f149d65d"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classtiny__dlna_1_1HttpReplyHeader.html">HttpReplyHeader</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IHttpServer.html#a6fc312e61d36698cc30aec10f149d65d">replyHeader</a> ()=0</td></tr>
+<tr class="memdesc:a6fc312e61d36698cc30aec10f149d65d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get reference to reply header.  <br /></td></tr>
 <tr class="separator:a6fc312e61d36698cc30aec10f149d65d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae4fa2e54369bbc59ffb580bbf2a23321"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IHttpServer.html#ae4fa2e54369bbc59ffb580bbf2a23321">endClient</a> ()=0</td></tr>
+<tr class="memdesc:ae4fa2e54369bbc59ffb580bbf2a23321"><td class="mdescLeft">&#160;</td><td class="mdescRight">Close the client connection.  <br /></td></tr>
 <tr class="separator:ae4fa2e54369bbc59ffb580bbf2a23321"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5b6f92545f70cd0d1cbd53c9d4ddf67c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IHttpServer.html#a5b6f92545f70cd0d1cbd53c9d4ddf67c">crlf</a> ()=0</td></tr>
+<tr class="memdesc:a5b6f92545f70cd0d1cbd53c9d4ddf67c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send CRLF sequence.  <br /></td></tr>
 <tr class="separator:a5b6f92545f70cd0d1cbd53c9d4ddf67c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a73a5e2e67f2d2b77e155383f4ffabff6"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IHttpServer.html#a73a5e2e67f2d2b77e155383f4ffabff6">addHandler</a> (<a class="el" href="classtiny__dlna_1_1HttpRequestHandlerLine.html">HttpRequestHandlerLine</a> *handlerLinePtr)=0</td></tr>
+<tr class="memdesc:a73a5e2e67f2d2b77e155383f4ffabff6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add custom request handler.  <br /></td></tr>
 <tr class="separator:a73a5e2e67f2d2b77e155383f4ffabff6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a14412b17a657da3e7d63acb3fded3a02"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IHttpServer.html#a14412b17a657da3e7d63acb3fded3a02">doLoop</a> ()=0</td></tr>
+<tr class="memdesc:a14412b17a657da3e7d63acb3fded3a02"><td class="mdescLeft">&#160;</td><td class="mdescRight">Process server loop.  <br /></td></tr>
 <tr class="separator:a14412b17a657da3e7d63acb3fded3a02"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4e602b45ccfe047bbcf8d5696ec5ed57"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IHttpServer.html#a4e602b45ccfe047bbcf8d5696ec5ed57">copy</a> ()=0</td></tr>
+<tr class="memdesc:a4e602b45ccfe047bbcf8d5696ec5ed57"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a copy of the server instance.  <br /></td></tr>
 <tr class="separator:a4e602b45ccfe047bbcf8d5696ec5ed57"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab46674358ddac92783d1966e1a1d402a"><td class="memItemLeft" align="right" valign="top">virtual Client &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IHttpServer.html#ab46674358ddac92783d1966e1a1d402a">client</a> ()=0</td></tr>
+<tr class="memdesc:ab46674358ddac92783d1966e1a1d402a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get reference to current client.  <br /></td></tr>
 <tr class="separator:ab46674358ddac92783d1966e1a1d402a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3a3360e95af2fb779c31d8f6f675edd4"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IHttpServer.html#a3a3360e95af2fb779c31d8f6f675edd4">operator bool</a> ()=0</td></tr>
+<tr class="memdesc:a3a3360e95af2fb779c31d8f6f675edd4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if server is valid.  <br /></td></tr>
 <tr class="separator:a3a3360e95af2fb779c31d8f6f675edd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aec1667e160113649429c0e1c835441e7"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IHttpServer.html#aec1667e160113649429c0e1c835441e7">isActive</a> ()=0</td></tr>
+<tr class="memdesc:aec1667e160113649429c0e1c835441e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if server is active.  <br /></td></tr>
 <tr class="separator:aec1667e160113649429c0e1c835441e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a496f22182ee2f44f572896adede03ec0"><td class="memItemLeft" align="right" valign="top">virtual const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IHttpServer.html#a496f22182ee2f44f572896adede03ec0">localHost</a> ()=0</td></tr>
+<tr class="memdesc:a496f22182ee2f44f572896adede03ec0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get local hostname.  <br /></td></tr>
 <tr class="separator:a496f22182ee2f44f572896adede03ec0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a40b65b3a35d2b7fefc9702ee3b13693f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IHttpServer.html#a40b65b3a35d2b7fefc9702ee3b13693f">setNoConnectDelay</a> (int delay)=0</td></tr>
+<tr class="memdesc:a40b65b3a35d2b7fefc9702ee3b13693f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set no-connect delay.  <br /></td></tr>
 <tr class="separator:a40b65b3a35d2b7fefc9702ee3b13693f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a14331c38af7b4810e82ad76c0b8a133d"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classtiny__dlna_1_1Str.html">Str</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IHttpServer.html#a14331c38af7b4810e82ad76c0b8a133d">contentStr</a> ()=0</td></tr>
+<tr class="memdesc:a14331c38af7b4810e82ad76c0b8a133d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get content as string.  <br /></td></tr>
 <tr class="separator:a14331c38af7b4810e82ad76c0b8a133d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a50ef98f6775bbe2c855f1ca142452b47"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IHttpServer.html#a50ef98f6775bbe2c855f1ca142452b47">setReference</a> (void *reference)=0</td></tr>
+<tr class="memdesc:a50ef98f6775bbe2c855f1ca142452b47"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set user reference pointer.  <br /></td></tr>
 <tr class="separator:a50ef98f6775bbe2c855f1ca142452b47"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0be9bc1b4317cbcacd5a0025c742e994"><td class="memItemLeft" align="right" valign="top">virtual void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IHttpServer.html#a0be9bc1b4317cbcacd5a0025c742e994">getReference</a> ()=0</td></tr>
+<tr class="memdesc:a0be9bc1b4317cbcacd5a0025c742e994"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get user reference pointer.  <br /></td></tr>
 <tr class="separator:a0be9bc1b4317cbcacd5a0025c742e994"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Abstract interface for HTTP server functionality. </p>
+<p>Defines the contract for implementing an HTTP server that can handle requests, send responses, manage connections, and support various HTTP methods and content types. Provides methods for routing, response handling, header management, and server lifecycle. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="adf8205dd97abcb892dd1edfcae5e5988" name="adf8205dd97abcb892dd1edfcae5e5988"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adf8205dd97abcb892dd1edfcae5e5988">&#9670;&#160;</a></span>~IHttpServer()</h2>
 
@@ -215,6 +255,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Add custom request handler. </p>
+
 <p>Implemented in <a class="el" href="classtiny__dlna_1_1HttpServer.html#ad8cc77e90a0b107172eb499b6bf0770b">tiny_dlna::HttpServer&lt; ClientType, ServerType &gt;</a>.</p>
 
 </div>
@@ -241,6 +283,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Start the HTTP server. </p>
 
 <p>Implemented in <a class="el" href="classtiny__dlna_1_1HttpServer.html#adfadbb5ca1440ccb8a0ff5fb12dec179">tiny_dlna::HttpServer&lt; ClientType, ServerType &gt;</a>.</p>
 
@@ -269,6 +313,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Get reference to current client. </p>
+
 <p>Implemented in <a class="el" href="classtiny__dlna_1_1HttpServer.html#a803a69ebb8f8f4c0b5a5ac666ff00bfc">tiny_dlna::HttpServer&lt; ClientType, ServerType &gt;</a>.</p>
 
 </div>
@@ -295,6 +341,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Get content as string. </p>
 
 <p>Implemented in <a class="el" href="classtiny__dlna_1_1HttpServer.html#af88b7327537cf37ebf1d67237baf7a4c">tiny_dlna::HttpServer&lt; ClientType, ServerType &gt;</a>.</p>
 
@@ -323,6 +371,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Create a copy of the server instance. </p>
+
 <p>Implemented in <a class="el" href="classtiny__dlna_1_1HttpServer.html#a1fc95c8189114f4b9946bca7ea48e959">tiny_dlna::HttpServer&lt; ClientType, ServerType &gt;</a>.</p>
 
 </div>
@@ -349,6 +399,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Send CRLF sequence. </p>
 
 <p>Implemented in <a class="el" href="classtiny__dlna_1_1HttpServer.html#a4f422d14191b679b3bd5b4da2ddd60c0">tiny_dlna::HttpServer&lt; ClientType, ServerType &gt;</a>.</p>
 
@@ -377,6 +429,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Process server loop. </p>
+
 <p>Implemented in <a class="el" href="classtiny__dlna_1_1HttpServer.html#a79f9e5508bd42e915e44b064e3ee30ba">tiny_dlna::HttpServer&lt; ClientType, ServerType &gt;</a>.</p>
 
 </div>
@@ -403,6 +457,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Stop the HTTP server. </p>
 
 <p>Implemented in <a class="el" href="classtiny__dlna_1_1HttpServer.html#abc60960c03d08b865921b196323afbc4">tiny_dlna::HttpServer&lt; ClientType, ServerType &gt;</a>.</p>
 
@@ -431,6 +487,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Close the client connection. </p>
+
 <p>Implemented in <a class="el" href="classtiny__dlna_1_1HttpServer.html#afa47588bf70a25ab37a8c93c7442b67f">tiny_dlna::HttpServer&lt; ClientType, ServerType &gt;</a>.</p>
 
 </div>
@@ -457,6 +515,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Get user reference pointer. </p>
 
 <p>Implemented in <a class="el" href="classtiny__dlna_1_1HttpServer.html#ae9cefbb2685566505afa4c6c9833c28f">tiny_dlna::HttpServer&lt; ClientType, ServerType &gt;</a>.</p>
 
@@ -485,6 +545,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Check if server is active. </p>
+
 <p>Implemented in <a class="el" href="classtiny__dlna_1_1HttpServer.html#a4072cac4a8dd7fda018f46767df11276">tiny_dlna::HttpServer&lt; ClientType, ServerType &gt;</a>.</p>
 
 </div>
@@ -512,6 +574,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Get local hostname. </p>
+
 <p>Implemented in <a class="el" href="classtiny__dlna_1_1HttpServer.html#af955a04279c84fa4e79ecd839ddf7c95">tiny_dlna::HttpServer&lt; ClientType, ServerType &gt;</a>.</p>
 
 </div>
@@ -538,6 +602,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Get the local IP address of the server. </p>
 
 <p>Implemented in <a class="el" href="classtiny__dlna_1_1HttpServer.html#aaea3ed8fd5abc49d7261aa81293bea5e">tiny_dlna::HttpServer&lt; ClientType, ServerType &gt;</a>.</p>
 
@@ -588,6 +654,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Register static response for HTTP request. </p>
 
 <p>Implemented in <a class="el" href="classtiny__dlna_1_1HttpServer.html#a6081e29591d70cb38de374e92e40f8f0">tiny_dlna::HttpServer&lt; ClientType, ServerType &gt;</a>.</p>
 
@@ -645,6 +713,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Register binary data response for HTTP request. </p>
+
 <p>Implemented in <a class="el" href="classtiny__dlna_1_1HttpServer.html#a5f1ff60fcf62fe15452447044edee5f8">tiny_dlna::HttpServer&lt; ClientType, ServerType &gt;</a>.</p>
 
 </div>
@@ -695,6 +765,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Register callback for HTTP request with MIME type. </p>
+
 <p>Implemented in <a class="el" href="classtiny__dlna_1_1HttpServer.html#af5e7de4eee5b8eeb05bb1c05aa07ee20">tiny_dlna::HttpServer&lt; ClientType, ServerType &gt;</a>.</p>
 
 </div>
@@ -738,6 +810,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Register redirect response for HTTP request. </p>
 
 <p>Implemented in <a class="el" href="classtiny__dlna_1_1HttpServer.html#a3f57718f6047e30d09dde5b61014cae6">tiny_dlna::HttpServer&lt; ClientType, ServerType &gt;</a>.</p>
 
@@ -795,6 +869,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Register callback for HTTP request with context. </p>
+
 <p>Implemented in <a class="el" href="classtiny__dlna_1_1HttpServer.html#a34fbf584b08ad7cc168f80686bc2f0fa">tiny_dlna::HttpServer&lt; ClientType, ServerType &gt;</a>.</p>
 
 </div>
@@ -823,6 +899,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Check if request matches registered handlers. </p>
+
 <p>Implemented in <a class="el" href="classtiny__dlna_1_1HttpServer.html#a44dae05f6774359ce262dcf440a7dd5c">tiny_dlna::HttpServer&lt; ClientType, ServerType &gt;</a>.</p>
 
 </div>
@@ -849,6 +927,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Check if server is valid. </p>
 
 <p>Implemented in <a class="el" href="classtiny__dlna_1_1HttpServer.html#a8ddfc538144199df9b131116a084a37e">tiny_dlna::HttpServer&lt; ClientType, ServerType &gt;</a>.</p>
 
@@ -899,6 +979,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Send string response. </p>
 
 <p>Implemented in <a class="el" href="classtiny__dlna_1_1HttpServer.html#aee8ede52421adb01727a5c56a6d3fe50">tiny_dlna::HttpServer&lt; ClientType, ServerType &gt;</a>.</p>
 
@@ -956,6 +1038,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Send binary data response. </p>
+
 <p>Implemented in <a class="el" href="classtiny__dlna_1_1HttpServer.html#ad5c057cb180ba4db874868dd9fff7be8">tiny_dlna::HttpServer&lt; ClientType, ServerType &gt;</a>.</p>
 
 </div>
@@ -1011,6 +1095,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Send response using callback function. </p>
 
 <p>Implemented in <a class="el" href="classtiny__dlna_1_1HttpServer.html#a1353bec5940f9d90ebed3093c8479b3b">tiny_dlna::HttpServer&lt; ClientType, ServerType &gt;</a>.</p>
 
@@ -1068,6 +1154,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Send response from input stream with known size. </p>
+
 <p>Implemented in <a class="el" href="classtiny__dlna_1_1HttpServer.html#a8066dc0ee2e8575f3544b21de183c19c">tiny_dlna::HttpServer&lt; ClientType, ServerType &gt;</a>.</p>
 
 </div>
@@ -1111,6 +1199,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Send chunked response with callback. </p>
 
 <p>Implemented in <a class="el" href="classtiny__dlna_1_1HttpServer.html#a3a8e186e4f833b08f59bdb41116b9495">tiny_dlna::HttpServer&lt; ClientType, ServerType &gt;</a>.</p>
 
@@ -1162,6 +1252,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Send chunked response from input stream. </p>
+
 <p>Implemented in <a class="el" href="classtiny__dlna_1_1HttpServer.html#ac71fd83ab8e20d484d63d86f781c0164">tiny_dlna::HttpServer&lt; ClientType, ServerType &gt;</a>.</p>
 
 </div>
@@ -1200,6 +1292,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Send error response with status code. </p>
+
 <p>Implemented in <a class="el" href="classtiny__dlna_1_1HttpServer.html#acb635fa6ab6ff63b548d33f6c01bb5e5">tiny_dlna::HttpServer&lt; ClientType, ServerType &gt;</a>.</p>
 
 </div>
@@ -1226,6 +1320,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Get reference to reply header. </p>
 
 <p>Implemented in <a class="el" href="classtiny__dlna_1_1HttpServer.html#af2a84ec8e19d0c631e67ca3ee953222e">tiny_dlna::HttpServer&lt; ClientType, ServerType &gt;</a>.</p>
 
@@ -1254,6 +1350,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Send 404 Not Found response. </p>
+
 <p>Implemented in <a class="el" href="classtiny__dlna_1_1HttpServer.html#a14a81c5bbae7520d787542a6e70a4e7d">tiny_dlna::HttpServer&lt; ClientType, ServerType &gt;</a>.</p>
 
 </div>
@@ -1281,6 +1379,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Send 200 OK response. </p>
+
 <p>Implemented in <a class="el" href="classtiny__dlna_1_1HttpServer.html#a23ce4b93dad3434f391a2159c2d19169">tiny_dlna::HttpServer&lt; ClientType, ServerType &gt;</a>.</p>
 
 </div>
@@ -1307,6 +1407,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Get reference to request header. </p>
 
 <p>Implemented in <a class="el" href="classtiny__dlna_1_1HttpServer.html#a63486224eee0b65d46ca9f50c51673c3">tiny_dlna::HttpServer&lt; ClientType, ServerType &gt;</a>.</p>
 
@@ -1346,6 +1448,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Add URL rewrite rule. </p>
+
 <p>Implemented in <a class="el" href="classtiny__dlna_1_1HttpServer.html#a77e2de9e47a89d2154a9e4b1b2a5417b">tiny_dlna::HttpServer&lt; ClientType, ServerType &gt;</a>.</p>
 
 </div>
@@ -1374,6 +1478,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Set no-connect delay. </p>
+
 <p>Implemented in <a class="el" href="classtiny__dlna_1_1HttpServer.html#a4095b2422b209b111a903dd9e5676498">tiny_dlna::HttpServer&lt; ClientType, ServerType &gt;</a>.</p>
 
 </div>
@@ -1401,6 +1507,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Set user reference pointer. </p>
 
 <p>Implemented in <a class="el" href="classtiny__dlna_1_1HttpServer.html#a10e9e94addb662bf59685d1104ec1683">tiny_dlna::HttpServer&lt; ClientType, ServerType &gt;</a>.</p>
 
