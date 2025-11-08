@@ -133,7 +133,7 @@ class DLNADevice : public IDevice {
   bool loop() override {
     if (!is_active) return false;
     // Platform-specific periodic diagnostics (e.g. ESP32 memory logging)
-    logMemoryIfNeeded();
+    logScheduledStatus();
 
     // handle server requests
     bool rc = loopServer();
@@ -452,11 +452,11 @@ class DLNADevice : public IDevice {
   /// Periodic platform-specific diagnostics. Kept as a separate method so
   /// it can be tested or stubbed easily. Currently logs ESP32 heap/psram
   /// every 10s.
-  void logMemoryIfNeeded() {
+  void logScheduledStatus(bool runImmediately = false) {
     static uint64_t last_mem_log = 0;
     const uint64_t MEM_LOG_INTERVAL_MS = 10000;
     uint64_t now = millis();
-    if ((uint64_t)(now - last_mem_log) >= MEM_LOG_INTERVAL_MS) {
+    if (runImmediately || (uint64_t)(now - last_mem_log) >= MEM_LOG_INTERVAL_MS) {
       // update timestamp for next interval on all platforms
       last_mem_log = now;
       DlnaLogger.log(DlnaLogLevel::Info,
