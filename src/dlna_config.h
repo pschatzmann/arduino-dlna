@@ -168,17 +168,9 @@
 #define DLNA_PROTOCOL DLNA_PROTOCOL_AUDIO
 #endif
 
-// Define the default allocator base class to use.
-// If ALLOCATOR is not predefined (e.g. via compiler -D flag), choose based on
-// optional feature macro USE_PSRAM_ALLOCATOR. This makes it easy to toggle
-// between the PSRAM-aware allocator and the standard allocator for debugging
-// (e.g. to isolate crashes potentially related to a custom allocator).
+// Define the default allocator base class to use: std::allocator, AllocatorPSRAM
 #ifndef ALLOCATOR
-  #ifdef USE_PSRAM_ALLOCATOR
     #define ALLOCATOR AllocatorPSRAM
-  #else
-    #define ALLOCATOR std::allocator
-  #endif
 #endif
 
 #ifndef DLNA_LOG_XML
