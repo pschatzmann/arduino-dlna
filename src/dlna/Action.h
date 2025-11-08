@@ -174,7 +174,10 @@ class ActionRequest {
 
  protected:
   DLNAServiceInfo* p_service = nullptr;
-  Vector<Argument> arguments{10};
+  // Start with an empty vector; previously we default-constructed with a
+  // size of 10 which introduced 10 empty arguments and led to malformed
+  // SOAP XML (< /> repeated). We only store explicitly added arguments.
+  Vector<Argument> arguments;  
   int result_count = 0;
   Str action;
 };

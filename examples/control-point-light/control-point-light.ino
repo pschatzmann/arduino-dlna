@@ -40,6 +40,7 @@ void setup() {
   DlnaLogger.begin(Serial, DlnaLogLevel::Info);
 
   setupWifi();
+  cp.setLocalURL(WiFi.localIP());
   if (!cp.begin( "urn:schemas-upnp-org:device:DimmableLight:1", 1000, 60*10000)) {
     Serial.println("Dimmable Light not found");
     while (true);  // stop processing

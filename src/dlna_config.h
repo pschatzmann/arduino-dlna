@@ -175,7 +175,7 @@
 
 /// Enable or disable logging of XML messages
 #ifndef DLNA_LOG_XML
-#define DLNA_LOG_XML false
+#define DLNA_LOG_XML true
 #endif
 
 /// Define the netmask for discovery filtering

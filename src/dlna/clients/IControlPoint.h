@@ -7,13 +7,14 @@
 #include "Client.h"
 #include "basic/Url.h"
 #include "dlna/Action.h"
+#include "dlna/udp/IUDPService.h"
 #include "http/Server/IHttpRequest.h"
 #include "http/Server/IHttpServer.h"
-#include "dlna/udp/IUDPService.h"
 
 namespace tiny_dlna {
 
-// Forward declaration of templated Vector with two parameters matches implementation
+// Forward declaration of templated Vector with two parameters matches
+// implementation
 template <class T, class Alloc>
 class Vector;
 
@@ -33,7 +34,8 @@ class SubscriptionMgrControlPoint;
  *
  * Defines the contract for implementing a DLNA Control Point that discovers,
  * manages, and controls DLNA devices on the network. Provides methods for
- * device discovery, service interaction, action execution, and event subscription.
+ * device discovery, service interaction, action execution, and event
+ * subscription.
  *
  * Implementations should handle SSDP discovery, SOAP action invocation,
  * and UPnP event subscription management.
@@ -46,7 +48,10 @@ class IControlPoint {
   virtual void setParseDevice(bool flag) = 0;
   /// Set the local callback URL for event subscriptions
   virtual void setLocalURL(Url url) = 0;
-  /// Set repeat interval for SSDP search messages (ms)
+  /// Set the local callback URL for event subscriptions
+  virtual void setLocalURL(IPAddress url, int port = 9001,
+                           const char* path = "") = 0;
+  /// Set the repeat interval for M-SEARCH requests
   virtual void setSearchRepeatMs(int repeatMs) = 0;
   /// Set user reference pointer for callbacks
   virtual void setReference(void* ref) = 0;

@@ -4,6 +4,7 @@
 #include "XMLParserPrint.h"
 #include "assert.h"
 #include "basic/Icon.h"
+#include "basic/Logger.h"
 #include "basic/StrView.h"
 #include "dlna/DLNADeviceInfo.h"
 
@@ -23,11 +24,11 @@ class XMLDeviceParser {
     p_device = &result;
   }
 
+  void begin() { start_time = millis(); }
+
   /// Parse available nodes from xml_parser and populate `result`.
   /// Caller may call this repeatedly as more data is written into xml_parser.
   void parse(const uint8_t* buffer, size_t len) {
-    // Feed the buffer to the XML parser
-
     DLNADeviceInfo& result = *p_device;
     Str node;
     Str text;
@@ -45,7 +46,7 @@ class XMLDeviceParser {
         if (path[i] == "icon") path_has_icon = true;
       }
 
-  if (path_has_service) {
+      if (path_has_service) {
         if (!in_service) {
           in_service = true;
           cur_service = DLNAServiceInfo();
@@ -150,7 +151,7 @@ class XMLDeviceParser {
   }
 
   /// Finalize parser state and flush any pending objects
-  void finalize(DLNADeviceInfo& result) {
+  void end(DLNADeviceInfo& result) {
     if (in_service) {
       if (cur_service.service_id != nullptr ||
           cur_service.service_type != nullptr) {
@@ -164,12 +165,17 @@ class XMLDeviceParser {
       in_icon = false;
       cur_icon = Icon();
     }
+
+    uint64_t elapsed = millis() - start_time;
+    DlnaLogger.log(DlnaLogLevel::Info, "XMLDeviceParser::parse took %d ms",
+                   (int)elapsed);
   }
 
  protected:
   DLNAServiceInfo cur_service;
   DLNADeviceInfo* p_device = nullptr;
   XMLParserPrint xml_parser;
+  uint64_t start_time = 0;
   bool in_service = false;
   bool in_icon = false;
   Icon cur_icon;

@@ -69,7 +69,8 @@ class DLNAControlPoint : public IControlPoint {
   }
 
   /// Constructor wiring HTTP and UDP dependencies; notifications disabled
-  DLNAControlPoint(IHttpRequest& http, IUDPService& udp, IHttpServer& server) : DLNAControlPoint() {
+  DLNAControlPoint(IHttpRequest& http, IUDPService& udp, IHttpServer& server)
+      : DLNAControlPoint() {
     setTransports(http, udp);
     setHttpServer(server);
   }
@@ -86,6 +87,12 @@ class DLNAControlPoint : public IControlPoint {
 
   /// Defines the local url (needed for subscriptions)
   void setLocalURL(Url url) override { local_url = url; }
+  void setLocalURL(IPAddress url, int port=9001, const char* path="") override {
+    char buffer[200];
+    snprintf(buffer, sizeof(buffer), "http://%s:%d%s", url.toString().c_str(), port,
+             path);
+    local_url.setUrl(buffer);
+  }
 
   /// Sets the repeat interval for M-SEARCH requests (define before begin)
   void setSearchRepeatMs(int repeatMs) override {
@@ -197,7 +204,7 @@ class DLNAControlPoint : public IControlPoint {
     }
 
     // instantiate subscription manager
-  subscription_mgr.setup(http, udp, local_url, getDevice());
+    subscription_mgr.setup(http, udp, local_url, getDevice());
 
     // If we exited early because a device was found, deactivate the MSearch
     // schedule so it will stop repeating. The scheduler will clean up
@@ -249,7 +256,6 @@ class DLNAControlPoint : public IControlPoint {
 
     // reset xml printer state
     xml_printer.clear();
-
 
     // clear last reply
     reply.clear();
@@ -417,10 +423,6 @@ class DLNAControlPoint : public IControlPoint {
 
   /// Adds the device from the device xml url if it does not already exist
   bool addDevice(Url url) override {
-    if (!allow_localhost && StrView(url.host()).equals("127.0.0.1")) {
-      DlnaLogger.log(DlnaLogLevel::Info, "Ignoring localhost device");
-      return false;
-    }
     DlnaLogger.log(DlnaLogLevel::Debug, "DLNAControlPointMgr::addDevice");
     DLNADeviceInfo& device = getDevice(url);
     if (device != NO_DEVICE) {
@@ -440,20 +442,25 @@ class DLNAControlPoint : public IControlPoint {
 
     DLNADeviceInfo new_device;
     new_device.base_url.clear();
+    new_device.device_url = url;
 
-    XMLDeviceParser parser{new_device};
+    XMLDeviceParser device_parser{new_device};
     uint8_t buffer[XML_PARSER_BUFFER_SIZE];
 
     // Read and incrementally parse into new_device
+    device_parser.begin();
     while (true) {
       int len = p_http->read(buffer, sizeof(buffer));
       if (len <= 0) break;
-      parser.parse(buffer, len);
+      device_parser.parse(buffer, len);
+    }
+    device_parser.end(new_device);
+
+    // if base_url is empty, derive it from the device description URL root
+    if (new_device.base_url.isEmpty()) {
+      new_device.base_url = url.urlRoot();
     }
 
-    parser.finalize(new_device);
-
-    new_device.device_url = url;
     // Avoid adding the same device multiple times: check UDN uniqueness
     for (auto& existing_device : devices) {
       if (existing_device.getUDN() == new_device.getUDN()) {
@@ -496,7 +503,7 @@ class DLNAControlPoint : public IControlPoint {
 
   /// Register a string in the shared registry and return the stored pointer
   const char* registerString(const char* s) override {
-    return s; // registry removed
+    return s;  // registry removed
   }
 
  protected:
@@ -562,9 +569,55 @@ class DLNAControlPoint : public IControlPoint {
       return true;
     }
 
-    // Not known -> fetch and add device description
+    // Apply discovery netmask filtering before adding the device
     Url url{data.location.c_str()};
+    if (!selfDLNAControlPoint->isDiscoveryAllowed(url)) {
+      DlnaLogger.log(DlnaLogLevel::Info,
+                     "Device '%s' filtered by netmask (LOCATION %s)",
+                     data.usn.c_str(), url.host());
+      return false;
+    }
+
+    // Not known and subnet accepted -> fetch and add device description
     selfDLNAControlPoint->addDevice(url);
+    return true;
+  }
+
+  // Returns true if the LOCATION URL's host is in the same subnet as the
+  // local_url host according to DLNA_DISCOVERY_NETMASK. If either side is
+  // not a numeric IP literal or information is missing, the function
+  // permits discovery (returns true).
+  bool isDiscoveryAllowed(Url& url) {
+    IPAddress netmask = DLNA_DISCOVERY_NETMASK;
+
+    const char* peerHost = url.host();
+    const char* localHost = local_url.host();
+
+    IPAddress peerIP;
+    IPAddress localIP;
+    bool peerOK = (peerHost && *peerHost) ? peerIP.fromString(peerHost) : false;
+    bool localOK =
+        (localHost && *localHost) ? localIP.fromString(localHost) : false;
+
+    // If we cannot parse both addresses, allow by default.
+    if (!peerOK || !localOK) return true;
+
+    for (int i = 0; i < 4; i++) {
+      if ((localIP[i] & netmask[i]) != (peerIP[i] & netmask[i])) {
+        DlnaLogger.log(DlnaLogLevel::Info,
+                       "Discovery filtered: local=%d.%d.%d.%d peer=%d.%d.%d.%d "
+                       "mask=%d.%d.%d.%d",
+                       localIP[0], localIP[1], localIP[2], localIP[3],
+                       peerIP[0], peerIP[1], peerIP[2], peerIP[3], netmask[0],
+                       netmask[1], netmask[2], netmask[3]);
+        return false;
+      }
+    }
+
+    DlnaLogger.log(DlnaLogLevel::Debug,
+                   "Discovery accepted: local=%d.%d.%d.%d peer=%d.%d.%d.%d",
+                   localIP[0], localIP[1], localIP[2], localIP[3], peerIP[0],
+                   peerIP[1], peerIP[2], peerIP[3]);
     return true;
   }
 
@@ -670,7 +723,11 @@ class DLNAControlPoint : public IControlPoint {
     result += xml_printer.printNodeBegin(action.getAction(),
                                          namespace_str.c_str(), "u");
     for (auto arg : action.getArguments()) {
-      result += xml_printer.printNode(arg.name.c_str(), arg.value.c_str());
+      const char* n = arg.name.c_str();
+      const char* v = arg.value.c_str();
+      if (n && *n) {
+        result += xml_printer.printNode(n, v);
+      }
     }
     result += xml_printer.printNodeEnd(action.getAction(), "u");
 
@@ -712,8 +769,7 @@ class DLNAControlPoint : public IControlPoint {
                    "Service control_url: %s, device base: %s",
                    StrView(service.control_url).c_str(),
                    StrView(device.getBaseURL()).c_str());
-    Url post_url{
-        getUrl(device, service.control_url, url_buffer, DLNA_MAX_URL_LEN)};
+    Url post_url = getUrl(device, service.control_url, url_buffer, DLNA_MAX_URL_LEN);
     DlnaLogger.log(DlnaLogLevel::Info, "POST URL computed: %s", post_url.url());
 
     // send HTTP POST and collect/handle response. If the caller provided an
@@ -815,9 +871,10 @@ class DLNAControlPoint : public IControlPoint {
                            StrView(outText).c_str(),
                            StrView(outAttributes).c_str());
             if (result_callback) {
-              result_callback(StrView(outNodeName ? outNodeName : "").c_str(),
-                              StrView(outText ? outText : "").c_str(),
-                              StrView(outAttributes ? outAttributes : "").c_str());
+              result_callback(
+                  StrView(outNodeName ? outNodeName : "").c_str(),
+                  StrView(outText ? outText : "").c_str(),
+                  StrView(outAttributes ? outAttributes : "").c_str());
             }
           }
         }
