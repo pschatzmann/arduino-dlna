@@ -13,6 +13,5 @@ var searchData=
   ['httprequestrewrite_10',['HttpRequestRewrite',['../classtiny__dlna_1_1HttpRequestRewrite.html',1,'tiny_dlna']]],
   ['httpserver_11',['HttpServer',['../classtiny__dlna_1_1HttpServer.html',1,'tiny_dlna']]],
   ['httpstreamcopy_12',['HttpStreamCopy',['../classtiny__dlna_1_1HttpStreamCopy.html',1,'tiny_dlna']]],
-  ['httpstreamedoutput_13',['HttpStreamedOutput',['../classtiny__dlna_1_1HttpStreamedOutput.html',1,'tiny_dlna']]],
-  ['httptunnel_14',['HttpTunnel',['../classtiny__dlna_1_1HttpTunnel.html',1,'tiny_dlna']]]
+  ['httpstreamedoutput_13',['HttpStreamedOutput',['../classtiny__dlna_1_1HttpStreamedOutput.html',1,'tiny_dlna']]]
 ];

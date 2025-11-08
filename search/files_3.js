@@ -12,6 +12,5 @@ var searchData=
   ['httprequestrewrite_2eh_9',['HttpRequestRewrite.h',['../HttpRequestRewrite_8h.html',1,'']]],
   ['httpserver_2eh_10',['HttpServer.h',['../HttpServer_8h.html',1,'']]],
   ['httpstreamcopy_2eh_11',['HttpStreamCopy.h',['../HttpStreamCopy_8h.html',1,'']]],
-  ['httpstreamedoutput_2eh_12',['HttpStreamedOutput.h',['../HttpStreamedOutput_8h.html',1,'']]],
-  ['httptunnel_2eh_13',['HttpTunnel.h',['../HttpTunnel_8h.html',1,'']]]
+  ['httpstreamedoutput_2eh_12',['HttpStreamedOutput.h',['../HttpStreamedOutput_8h.html',1,'']]]
 ];

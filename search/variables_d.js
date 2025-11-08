@@ -2,7 +2,7 @@ var searchData=
 [
   ['object_5fid_0',['object_id',['../classtiny__dlna_1_1DLNAControlPointMediaServer.html#a7f7644afed424a3c085c8a1c8f799ca6',1,'tiny_dlna::DLNAControlPointMediaServer']]],
   ['open_5fchunk_5flen_1',['open_chunk_len',['../classtiny__dlna_1_1HttpChunkReader.html#a105acae8b61ee6ca24d8c05b6e7b77f8',1,'tiny_dlna::HttpChunkReader']]],
-  ['open_5fclients_2',['open_clients',['../classtiny__dlna_1_1HttpServer.html#ace105ebd0342bb3649775dccb210e4a8',1,'tiny_dlna::HttpServer']]],
+  ['open_5fclients_2',['open_clients',['../classtiny__dlna_1_1HttpServer.html#a5d7638a44ee7de2fbec3fba30b92f441',1,'tiny_dlna::HttpServer']]],
   ['outattrs_3',['outAttrs',['../structtiny__dlna_1_1XMLParserPrint_1_1CBRef.html#acc1fd54f2a6022632909217c677ed73a',1,'tiny_dlna::XMLParserPrint::CBRef']]],
   ['outnode_4',['outNode',['../structtiny__dlna_1_1XMLParserPrint_1_1CBRef.html#a214ad27b0017082953aa1358de288879',1,'tiny_dlna::XMLParserPrint::CBRef']]],
   ['outpath_5',['outPath',['../structtiny__dlna_1_1XMLParserPrint_1_1CBRef.html#af3fd9f94f7cb89ba0114b48dfd9e3fa1',1,'tiny_dlna::XMLParserPrint::CBRef']]],

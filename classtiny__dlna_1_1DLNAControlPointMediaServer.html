@@ -101,18 +101,18 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a24ddb1a22425732d55d63eaa75283dd7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMediaServer.html#a24ddb1a22425732d55d63eaa75283dd7">DLNAControlPointMediaServer</a> ()=default</td></tr>
 <tr class="memdesc:a24ddb1a22425732d55d63eaa75283dd7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor.  <br /></td></tr>
 <tr class="separator:a24ddb1a22425732d55d63eaa75283dd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7bd18f3d4acd85034ef7625547979ae8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMediaServer.html#a7bd18f3d4acd85034ef7625547979ae8">DLNAControlPointMediaServer</a> (<a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html">DLNAControlPoint</a> &amp;mgr, <a class="el" href="namespacetiny__dlna.html#ad910622e470286a7c1774b545d469d00">DLNAHttpRequest</a> &amp;http, <a class="el" href="classtiny__dlna_1_1IUDPService.html">IUDPService</a> &amp;udp)</td></tr>
-<tr class="memdesc:a7bd18f3d4acd85034ef7625547979ae8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct helper with references to control point manager and required transport instances (HTTP for subscribe callbacks and UDP for SSDP discovery)  <br /></td></tr>
-<tr class="separator:a7bd18f3d4acd85034ef7625547979ae8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1a6cb08557ed64262275e7f387d040a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMediaServer.html#af1a6cb08557ed64262275e7f387d040a">DLNAControlPointMediaServer</a> (<a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html">DLNAControlPoint</a> &amp;mgr, <a class="el" href="classtiny__dlna_1_1IHttpRequest.html">IHttpRequest</a> &amp;http, <a class="el" href="classtiny__dlna_1_1IUDPService.html">IUDPService</a> &amp;udp)</td></tr>
+<tr class="memdesc:af1a6cb08557ed64262275e7f387d040a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct helper with references to control point manager and required transport instances (HTTP for subscribe callbacks and UDP for SSDP discovery)  <br /></td></tr>
+<tr class="separator:af1a6cb08557ed64262275e7f387d040a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7898fee443e33df961f44c488fc8cfb6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMediaServer.html#a7898fee443e33df961f44c488fc8cfb6">setDLNAControlPoint</a> (<a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html">DLNAControlPoint</a> &amp;m)</td></tr>
 <tr class="memdesc:a7898fee443e33df961f44c488fc8cfb6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the control point manager instance (required before using helper)  <br /></td></tr>
 <tr class="separator:a7898fee443e33df961f44c488fc8cfb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a827fa2d36708a3242265072c46691c3a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMediaServer.html#a827fa2d36708a3242265072c46691c3a">begin</a> (uint32_t minWaitMs=3000, uint32_t maxWaitMs=60000)</td></tr>
 <tr class="memdesc:a827fa2d36708a3242265072c46691c3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Begin discovery and processing (forwards to underlying control point)  <br /></td></tr>
 <tr class="separator:a827fa2d36708a3242265072c46691c3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adb7c403c74ea50e71dfe74cac2f80363"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMediaServer.html#adb7c403c74ea50e71dfe74cac2f80363">setHttp</a> (<a class="el" href="namespacetiny__dlna.html#ad910622e470286a7c1774b545d469d00">DLNAHttpRequest</a> &amp;http)</td></tr>
-<tr class="memdesc:adb7c403c74ea50e71dfe74cac2f80363"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setter for the HTTP wrapper used for subscriptions and callbacks.  <br /></td></tr>
-<tr class="separator:adb7c403c74ea50e71dfe74cac2f80363"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c8c63c80a003cdf9897c660f80b3bc2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMediaServer.html#a6c8c63c80a003cdf9897c660f80b3bc2">setHttp</a> (<a class="el" href="classtiny__dlna_1_1IHttpRequest.html">IHttpRequest</a> &amp;http)</td></tr>
+<tr class="memdesc:a6c8c63c80a003cdf9897c660f80b3bc2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setter for the HTTP wrapper used for subscriptions and callbacks.  <br /></td></tr>
+<tr class="separator:a6c8c63c80a003cdf9897c660f80b3bc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6a271bccff02977e5302a2f198c7b209"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMediaServer.html#a6a271bccff02977e5302a2f198c7b209">setUdp</a> (<a class="el" href="classtiny__dlna_1_1IUDPService.html">IUDPService</a> &amp;udp)</td></tr>
 <tr class="memdesc:a6a271bccff02977e5302a2f198c7b209"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setter for UDP service used for discovery (SSDP)  <br /></td></tr>
 <tr class="separator:a6a271bccff02977e5302a2f198c7b209"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -196,8 +196,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a179f40a462e269865aa27bbc014c50b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7f7644afed424a3c085c8a1c8f799ca6"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMediaServer.html#a7f7644afed424a3c085c8a1c8f799ca6">object_id</a> = &quot;0&quot;</td></tr>
 <tr class="separator:a7f7644afed424a3c085c8a1c8f799ca6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5b475ef74a61e4aed41dbd44f2e9e11d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacetiny__dlna.html#ad910622e470286a7c1774b545d469d00">DLNAHttpRequest</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMediaServer.html#a5b475ef74a61e4aed41dbd44f2e9e11d">p_http</a> = nullptr</td></tr>
-<tr class="separator:a5b475ef74a61e4aed41dbd44f2e9e11d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab57dbf966698d60a9e2e47741e90f07c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1IHttpRequest.html">IHttpRequest</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMediaServer.html#ab57dbf966698d60a9e2e47741e90f07c">p_http</a> = nullptr</td></tr>
+<tr class="separator:ab57dbf966698d60a9e2e47741e90f07c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a69e7bad815f5eb52777c064ebba27fbc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1IUDPService.html">IUDPService</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMediaServer.html#a69e7bad815f5eb52777c064ebba27fbc">p_udp</a> = nullptr</td></tr>
 <tr class="separator:a69e7bad815f5eb52777c064ebba27fbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -261,8 +261,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a7bd18f3d4acd85034ef7625547979ae8" name="a7bd18f3d4acd85034ef7625547979ae8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7bd18f3d4acd85034ef7625547979ae8">&#9670;&#160;</a></span>DLNAControlPointMediaServer() <span class="overload">[2/2]</span></h2>
+<a id="af1a6cb08557ed64262275e7f387d040a" name="af1a6cb08557ed64262275e7f387d040a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af1a6cb08557ed64262275e7f387d040a">&#9670;&#160;</a></span>DLNAControlPointMediaServer() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -279,7 +279,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacetiny__dlna.html#ad910622e470286a7c1774b545d469d00">DLNAHttpRequest</a> &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1IHttpRequest.html">IHttpRequest</a> &amp;&#160;</td>
           <td class="paramname"><em>http</em>, </td>
         </tr>
         <tr>
@@ -1069,8 +1069,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="adb7c403c74ea50e71dfe74cac2f80363" name="adb7c403c74ea50e71dfe74cac2f80363"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adb7c403c74ea50e71dfe74cac2f80363">&#9670;&#160;</a></span>setHttp()</h2>
+<a id="a6c8c63c80a003cdf9897c660f80b3bc2" name="a6c8c63c80a003cdf9897c660f80b3bc2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c8c63c80a003cdf9897c660f80b3bc2">&#9670;&#160;</a></span>setHttp()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1081,7 +1081,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">void tiny_dlna::DLNAControlPointMediaServer::setHttp </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacetiny__dlna.html#ad910622e470286a7c1774b545d469d00">DLNAHttpRequest</a> &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1IHttpRequest.html">IHttpRequest</a> &amp;&#160;</td>
           <td class="paramname"><em>http</em></td><td>)</td>
           <td></td>
         </tr>
@@ -1312,8 +1312,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a5b475ef74a61e4aed41dbd44f2e9e11d" name="a5b475ef74a61e4aed41dbd44f2e9e11d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5b475ef74a61e4aed41dbd44f2e9e11d">&#9670;&#160;</a></span>p_http</h2>
+<a id="ab57dbf966698d60a9e2e47741e90f07c" name="ab57dbf966698d60a9e2e47741e90f07c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab57dbf966698d60a9e2e47741e90f07c">&#9670;&#160;</a></span>p_http</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1322,7 +1322,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacetiny__dlna.html#ad910622e470286a7c1774b545d469d00">DLNAHttpRequest</a>* tiny_dlna::DLNAControlPointMediaServer::p_http = nullptr</td>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1IHttpRequest.html">IHttpRequest</a>* tiny_dlna::DLNAControlPointMediaServer::p_http = nullptr</td>
         </tr>
       </table>
   </td>

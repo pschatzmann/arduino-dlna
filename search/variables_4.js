@@ -5,7 +5,7 @@ var searchData=
   ['error_5fcount_2',['error_count',['../structtiny__dlna_1_1PendingNotification.html#a451b3c7b08305dd41469ca973c7650a5',1,'tiny_dlna::PendingNotification']]],
   ['event_5fcallback_3',['event_callback',['../classtiny__dlna_1_1SubscriptionMgrControlPoint.html#a09288f90c2d0456c0e675c0604c91636',1,'tiny_dlna::SubscriptionMgrControlPoint']]],
   ['event_5fcallback_5fref_4',['event_callback_ref',['../classtiny__dlna_1_1SubscriptionMgrControlPoint.html#a791b7d5313e53840d3294535035f5136',1,'tiny_dlna::SubscriptionMgrControlPoint']]],
-  ['event_5fcb_5',['event_cb',['../classtiny__dlna_1_1DLNAMediaRenderer.html#a19962a36618c87bfe51f3efb759ec526',1,'tiny_dlna::DLNAMediaRenderer']]],
+  ['event_5fcb_5',['event_cb',['../classtiny__dlna_1_1DLNAMediaRenderer.html#afe577e449fd75dd5ee1e40944542569d',1,'tiny_dlna::DLNAMediaRenderer']]],
   ['event_5fkey_6',['event_key',['../classtiny__dlna_1_1NotifyReplyCP.html#a871f2c344fea14af3afae67d98498692',1,'tiny_dlna::NotifyReplyCP']]],
   ['event_5fsub_5fcb_7',['event_sub_cb',['../classtiny__dlna_1_1DLNAServiceInfo.html#aad09297e371a3c4db2c7e6b782cc3319',1,'tiny_dlna::DLNAServiceInfo']]],
   ['event_5fsub_5fsid_8',['event_sub_sid',['../classtiny__dlna_1_1DLNAServiceInfo.html#a6e0e681d505fe8bfd30a5bfa3c945f00',1,'tiny_dlna::DLNAServiceInfo']]],

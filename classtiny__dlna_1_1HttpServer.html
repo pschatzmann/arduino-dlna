@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Arduino DLNA Server: tiny_dlna::HttpServer Class Reference</title>
+<title>Arduino DLNA Server: tiny_dlna::HttpServer&lt; ClientType, ServerType &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -78,186 +78,201 @@ $(function() {
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classtiny__dlna_1_1HttpServer-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">tiny_dlna::HttpServer Class Reference</div></div>
+  <div class="headertitle"><div class="title">tiny_dlna::HttpServer&lt; ClientType, ServerType &gt; Class Template Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>A Simple Header only implementation of Http Server that allows the registration of callback functions. This is based on the Arduino Server class.  
+<p>Header-only HTTP server wrapper that registers callback handlers.  
  <a href="classtiny__dlna_1_1HttpServer.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="HttpServer_8h_source.html">HttpServer.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for tiny_dlna::HttpServer&lt; ClientType, ServerType &gt;:</div>
+<div class="dyncontent">
+<div class="center"><img src="classtiny__dlna_1_1HttpServer__inherit__graph.png" border="0" usemap="#atiny__dlna_1_1HttpServer_3_01ClientType_00_01ServerType_01_4_inherit__map" alt="Inheritance graph"/></div>
+<map name="atiny__dlna_1_1HttpServer_3_01ClientType_00_01ServerType_01_4_inherit__map" id="atiny__dlna_1_1HttpServer_3_01ClientType_00_01ServerType_01_4_inherit__map">
+<area shape="rect" title="Header&#45;only HTTP server wrapper that registers callback handlers." alt="" coords="5,79,205,119"/>
+<area shape="rect" href="classtiny__dlna_1_1IHttpServer.html" title=" " alt="" coords="23,5,187,31"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ae52b3bbe1b696fc11a953650456eac06"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#ae52b3bbe1b696fc11a953650456eac06">HttpServer</a> (WiFiServer &amp;server, int bufferSize=1024)</td></tr>
-<tr class="separator:ae52b3bbe1b696fc11a953650456eac06"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aee86d60a474a88fa3eec36be04298811"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#aee86d60a474a88fa3eec36be04298811">~HttpServer</a> ()</td></tr>
-<tr class="separator:aee86d60a474a88fa3eec36be04298811"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7f5681c2c7b4a8e35ffdc5e28a04ecb9"><td class="memItemLeft" align="right" valign="top">IPAddress &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a7f5681c2c7b4a8e35ffdc5e28a04ecb9">localIP</a> ()</td></tr>
-<tr class="memdesc:a7f5681c2c7b4a8e35ffdc5e28a04ecb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the local ip address.  <br /></td></tr>
-<tr class="separator:a7f5681c2c7b4a8e35ffdc5e28a04ecb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0d7a984293e33edebfa22cb7e419b546"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a0d7a984293e33edebfa22cb7e419b546">begin</a> (int port, const char *ssid, const char *password)</td></tr>
-<tr class="separator:a0d7a984293e33edebfa22cb7e419b546"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af816b9950996eb60ebe31743e830bb5c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#af816b9950996eb60ebe31743e830bb5c">begin</a> (int port)</td></tr>
-<tr class="memdesc:af816b9950996eb60ebe31743e830bb5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts the server on the indicated port.  <br /></td></tr>
-<tr class="separator:af816b9950996eb60ebe31743e830bb5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa9496af98000da1f8fedee485623e964"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#aa9496af98000da1f8fedee485623e964">end</a> ()</td></tr>
-<tr class="memdesc:aa9496af98000da1f8fedee485623e964"><td class="mdescLeft">&#160;</td><td class="mdescRight">stops the server_ptr  <br /></td></tr>
-<tr class="separator:aa9496af98000da1f8fedee485623e964"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac31fcdd40df8ab8d64ae60efc96b6f55"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#ac31fcdd40df8ab8d64ae60efc96b6f55">rewrite</a> (const char *from, const char *to)</td></tr>
-<tr class="memdesc:ac31fcdd40df8ab8d64ae60efc96b6f55"><td class="mdescLeft">&#160;</td><td class="mdescRight">adds a rewrite rule  <br /></td></tr>
-<tr class="separator:ac31fcdd40df8ab8d64ae60efc96b6f55"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a194398c2ae176c6a7b7acf1cf5b11c95"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a194398c2ae176c6a7b7acf1cf5b11c95">on</a> (const char *url, <a class="el" href="namespacetiny__dlna.html#a8b30900e538135f563c83e48319e5247">TinyMethodID</a> method, <a class="el" href="namespacetiny__dlna.html#a575a263fd75f2731f40accf7fa73dafe">web_callback_fn</a> fn, void *ctx[]=nullptr, int ctxCount=0)</td></tr>
-<tr class="memdesc:a194398c2ae176c6a7b7acf1cf5b11c95"><td class="mdescLeft">&#160;</td><td class="mdescRight">register a generic handler  <br /></td></tr>
-<tr class="separator:a194398c2ae176c6a7b7acf1cf5b11c95"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af020a970280024c879f9f4d997c9ae2a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#af020a970280024c879f9f4d997c9ae2a">on</a> (const char *url, <a class="el" href="namespacetiny__dlna.html#a8b30900e538135f563c83e48319e5247">TinyMethodID</a> method, const char *mime, <a class="el" href="namespacetiny__dlna.html#a575a263fd75f2731f40accf7fa73dafe">web_callback_fn</a> fn)</td></tr>
-<tr class="memdesc:af020a970280024c879f9f4d997c9ae2a"><td class="mdescLeft">&#160;</td><td class="mdescRight">register a handler with mime  <br /></td></tr>
-<tr class="separator:af020a970280024c879f9f4d997c9ae2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8b7caaf89f829b43878089e6cbdfa181"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a8b7caaf89f829b43878089e6cbdfa181">on</a> (const char *url, <a class="el" href="namespacetiny__dlna.html#a8b30900e538135f563c83e48319e5247">TinyMethodID</a> method, const char *mime, const char *result)</td></tr>
-<tr class="memdesc:a8b7caaf89f829b43878089e6cbdfa181"><td class="mdescLeft">&#160;</td><td class="mdescRight">register a handler which provides the indicated string  <br /></td></tr>
-<tr class="separator:a8b7caaf89f829b43878089e6cbdfa181"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae7c162006d5b2d0ba8e1cf0d36274978"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#ae7c162006d5b2d0ba8e1cf0d36274978">on</a> (const char *url, <a class="el" href="namespacetiny__dlna.html#a8b30900e538135f563c83e48319e5247">TinyMethodID</a> method, const char *mime, const uint8_t *data, int len)</td></tr>
-<tr class="memdesc:ae7c162006d5b2d0ba8e1cf0d36274978"><td class="mdescLeft">&#160;</td><td class="mdescRight">register a handler which provides the indicated string  <br /></td></tr>
-<tr class="separator:ae7c162006d5b2d0ba8e1cf0d36274978"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a29ffe5befea5d41e424d7e24ad935a57"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a29ffe5befea5d41e424d7e24ad935a57">on</a> (const char *url, <a class="el" href="namespacetiny__dlna.html#a8b30900e538135f563c83e48319e5247">TinyMethodID</a> method, <a class="el" href="classtiny__dlna_1_1Url.html">Url</a> &amp;redirect)</td></tr>
-<tr class="memdesc:a29ffe5befea5d41e424d7e24ad935a57"><td class="mdescLeft">&#160;</td><td class="mdescRight">register a redirection  <br /></td></tr>
-<tr class="separator:a29ffe5befea5d41e424d7e24ad935a57"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9708cd1c5c09b75b32a22464fef07d14"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a9708cd1c5c09b75b32a22464fef07d14">on</a> (const char *url, <a class="el" href="namespacetiny__dlna.html#a8b30900e538135f563c83e48319e5247">TinyMethodID</a> method, <a class="el" href="classtiny__dlna_1_1HttpTunnel.html">HttpTunnel</a> &amp;tunnel)</td></tr>
-<tr class="memdesc:a9708cd1c5c09b75b32a22464fef07d14"><td class="mdescLeft">&#160;</td><td class="mdescRight">register a redirection  <br /></td></tr>
-<tr class="separator:a9708cd1c5c09b75b32a22464fef07d14"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3d8c5ada4276553644249f22407bbcfe"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a3d8c5ada4276553644249f22407bbcfe">onRequest</a> (const char *path)</td></tr>
-<tr class="separator:a3d8c5ada4276553644249f22407bbcfe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae2b0647a572ca50a4c451e712eab4437"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#ae2b0647a572ca50a4c451e712eab4437">replyChunked</a> (const char *contentType, Stream &amp;inputStream, int status=200, const char *msg=<a class="el" href="namespacetiny__dlna.html#aa203b0adbc2115c8cd956dd41ec09735">SUCCESS</a>)</td></tr>
-<tr class="memdesc:ae2b0647a572ca50a4c451e712eab4437"><td class="mdescLeft">&#160;</td><td class="mdescRight">chunked reply with data from an input stream  <br /></td></tr>
-<tr class="separator:ae2b0647a572ca50a4c451e712eab4437"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adc9864cb3901e8b172bd97d8532b2326"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#adc9864cb3901e8b172bd97d8532b2326">replyChunked</a> (const char *contentType, int status=200, const char *msg=<a class="el" href="namespacetiny__dlna.html#aa203b0adbc2115c8cd956dd41ec09735">SUCCESS</a>)</td></tr>
-<tr class="memdesc:adc9864cb3901e8b172bd97d8532b2326"><td class="mdescLeft">&#160;</td><td class="mdescRight">start of chunked reply: use <a class="el" href="classtiny__dlna_1_1HttpChunkWriter.html" title="Writes the data chunked to the actual client.">HttpChunkWriter</a> to provde the data  <br /></td></tr>
-<tr class="separator:adc9864cb3901e8b172bd97d8532b2326"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a64e046b368260f3b39b31b74e75b65c4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a64e046b368260f3b39b31b74e75b65c4">reply</a> (const char *contentType, Stream &amp;inputStream, int size, int status=200, const char *msg=<a class="el" href="namespacetiny__dlna.html#aa203b0adbc2115c8cd956dd41ec09735">SUCCESS</a>)</td></tr>
-<tr class="memdesc:a64e046b368260f3b39b31b74e75b65c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">write reply - copies data from input stream with header size  <br /></td></tr>
-<tr class="separator:a64e046b368260f3b39b31b74e75b65c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9e62ab9be94dd0522aff196628a7e2bd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a9e62ab9be94dd0522aff196628a7e2bd">reply</a> (const char *contentType, size_t(*callback)(Print &amp;out, void *<a class="el" href="classtiny__dlna_1_1HttpServer.html#af2f2f1f1526aa646e266fde6f72bb3f0">ref</a>), int status=200, const char *msg=<a class="el" href="namespacetiny__dlna.html#aa203b0adbc2115c8cd956dd41ec09735">SUCCESS</a>, void *<a class="el" href="classtiny__dlna_1_1HttpServer.html#af2f2f1f1526aa646e266fde6f72bb3f0">ref</a>=nullptr)</td></tr>
-<tr class="memdesc:a9e62ab9be94dd0522aff196628a7e2bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">write reply - using callback that writes to stream  <br /></td></tr>
-<tr class="separator:a9e62ab9be94dd0522aff196628a7e2bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab94ebae60e1796dd80d267de4e97b387"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#ab94ebae60e1796dd80d267de4e97b387">reply</a> (const char *contentType, const char *str, int status=200, const char *msg=<a class="el" href="namespacetiny__dlna.html#aa203b0adbc2115c8cd956dd41ec09735">SUCCESS</a>)</td></tr>
-<tr class="memdesc:ab94ebae60e1796dd80d267de4e97b387"><td class="mdescLeft">&#160;</td><td class="mdescRight">write reply - string with header size  <br /></td></tr>
-<tr class="separator:ab94ebae60e1796dd80d267de4e97b387"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae22224deb58942df014cfe294fad6b8d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#ae22224deb58942df014cfe294fad6b8d">reply</a> (const char *contentType, const uint8_t *str, int len, int status=200, const char *msg=<a class="el" href="namespacetiny__dlna.html#aa203b0adbc2115c8cd956dd41ec09735">SUCCESS</a>)</td></tr>
-<tr class="separator:ae22224deb58942df014cfe294fad6b8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1aaf5671caad3c46f55ec23c6ad19931"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a1aaf5671caad3c46f55ec23c6ad19931">replyOK</a> ()</td></tr>
-<tr class="memdesc:a1aaf5671caad3c46f55ec23c6ad19931"><td class="mdescLeft">&#160;</td><td class="mdescRight">write OK reply with 200 SUCCESS  <br /></td></tr>
-<tr class="separator:a1aaf5671caad3c46f55ec23c6ad19931"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab4c7c70acb4d3501d239385cda0622f2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#ab4c7c70acb4d3501d239385cda0622f2">replyNotFound</a> ()</td></tr>
-<tr class="memdesc:ab4c7c70acb4d3501d239385cda0622f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">write 404 reply  <br /></td></tr>
-<tr class="separator:ab4c7c70acb4d3501d239385cda0622f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa5d0d9d72f09a4c905d50d5b98209bfc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#aa5d0d9d72f09a4c905d50d5b98209bfc">replyError</a> (int err, const char *msg=&quot;Internal Server Error&quot;)</td></tr>
-<tr class="separator:aa5d0d9d72f09a4c905d50d5b98209bfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a83060e693944bb6b5feb6eea6f949297"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1HttpRequestHeader.html">HttpRequestHeader</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a83060e693944bb6b5feb6eea6f949297">requestHeader</a> ()</td></tr>
-<tr class="memdesc:a83060e693944bb6b5feb6eea6f949297"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides the request header  <br /></td></tr>
-<tr class="separator:a83060e693944bb6b5feb6eea6f949297"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af9673915866486ed252791f661fef57b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1HttpReplyHeader.html">HttpReplyHeader</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#af9673915866486ed252791f661fef57b">replyHeader</a> ()</td></tr>
-<tr class="memdesc:af9673915866486ed252791f661fef57b"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides the reply header  <br /></td></tr>
-<tr class="separator:af9673915866486ed252791f661fef57b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3abdce72a8f3f94a2c6848038572577d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a3abdce72a8f3f94a2c6848038572577d">endClient</a> ()</td></tr>
-<tr class="memdesc:a3abdce72a8f3f94a2c6848038572577d"><td class="mdescLeft">&#160;</td><td class="mdescRight">closes the connection to the current client_ptr  <br /></td></tr>
-<tr class="separator:a3abdce72a8f3f94a2c6848038572577d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab54de9871805f143d7637ccdc2ed27b7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#ab54de9871805f143d7637ccdc2ed27b7">crlf</a> ()</td></tr>
-<tr class="memdesc:ab54de9871805f143d7637ccdc2ed27b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">print a CR LF  <br /></td></tr>
-<tr class="separator:ab54de9871805f143d7637ccdc2ed27b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7e1b9baa5ba7be8eb689e3c7b5d922b3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a7e1b9baa5ba7be8eb689e3c7b5d922b3">addHandler</a> (<a class="el" href="classtiny__dlna_1_1HttpRequestHandlerLine.html">HttpRequestHandlerLine</a> *handlerLinePtr)</td></tr>
-<tr class="memdesc:a7e1b9baa5ba7be8eb689e3c7b5d922b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">adds a new handler  <br /></td></tr>
-<tr class="separator:a7e1b9baa5ba7be8eb689e3c7b5d922b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a10f0f3ba0d56a18e354b260b28e46821"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a10f0f3ba0d56a18e354b260b28e46821">doLoop</a> ()</td></tr>
-<tr class="memdesc:a10f0f3ba0d56a18e354b260b28e46821"><td class="mdescLeft">&#160;</td><td class="mdescRight">Legacy method: same as <a class="el" href="classtiny__dlna_1_1HttpServer.html#a21c5fcc5ea86d304d9be3c893a776658" title="Call this method from your loop!">copy()</a>;.  <br /></td></tr>
-<tr class="separator:a10f0f3ba0d56a18e354b260b28e46821"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a21c5fcc5ea86d304d9be3c893a776658"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a21c5fcc5ea86d304d9be3c893a776658">copy</a> ()</td></tr>
-<tr class="memdesc:a21c5fcc5ea86d304d9be3c893a776658"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call this method from your loop!  <br /></td></tr>
-<tr class="separator:a21c5fcc5ea86d304d9be3c893a776658"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2bc07d99605ddf5112431814fa571797"><td class="memItemLeft" align="right" valign="top">Client &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a2bc07d99605ddf5112431814fa571797">client</a> ()</td></tr>
-<tr class="memdesc:a2bc07d99605ddf5112431814fa571797"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the current client.  <br /></td></tr>
-<tr class="separator:a2bc07d99605ddf5112431814fa571797"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa1d02d157a9928cb0a212e007365441a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#aa1d02d157a9928cb0a212e007365441a">operator bool</a> ()</td></tr>
-<tr class="memdesc:aa1d02d157a9928cb0a212e007365441a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides true if the server has been started.  <br /></td></tr>
-<tr class="separator:aa1d02d157a9928cb0a212e007365441a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3c211e5f249f2cf0ad22cf045010cc91"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a3c211e5f249f2cf0ad22cf045010cc91">isActive</a> ()</td></tr>
-<tr class="separator:a3c211e5f249f2cf0ad22cf045010cc91"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0351a570f910ee1493235e7811da1b36"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a0351a570f910ee1493235e7811da1b36">localHost</a> ()</td></tr>
-<tr class="memdesc:a0351a570f910ee1493235e7811da1b36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines the local ip address.  <br /></td></tr>
-<tr class="separator:a0351a570f910ee1493235e7811da1b36"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0fb00c176d9d36a8c83cfe8d4ef98b52"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a0fb00c176d9d36a8c83cfe8d4ef98b52">setNoConnectDelay</a> (int delay)</td></tr>
-<tr class="separator:a0fb00c176d9d36a8c83cfe8d4ef98b52"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a8f23bf03bc3d5ccbbe4ed5d317b1b2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Str.html">Str</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a5a8f23bf03bc3d5ccbbe4ed5d317b1b2">contentStr</a> ()</td></tr>
-<tr class="memdesc:a5a8f23bf03bc3d5ccbbe4ed5d317b1b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">converts the client content to a string  <br /></td></tr>
-<tr class="separator:a5a8f23bf03bc3d5ccbbe4ed5d317b1b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8a20cbfc5bfd5f470969b1059ac026a1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a8a20cbfc5bfd5f470969b1059ac026a1">setReference</a> (void *reference)</td></tr>
-<tr class="memdesc:a8a20cbfc5bfd5f470969b1059ac026a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Definesa reference/context object.  <br /></td></tr>
-<tr class="separator:a8a20cbfc5bfd5f470969b1059ac026a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8f7c18cd601e0e4a4db9594effb3bc48"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a8f7c18cd601e0e4a4db9594effb3bc48">getReference</a> ()</td></tr>
-<tr class="memdesc:a8f7c18cd601e0e4a4db9594effb3bc48"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides access to a reference/context object.  <br /></td></tr>
-<tr class="separator:a8f7c18cd601e0e4a4db9594effb3bc48"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a0cfe498609d281b8631518e0a078e2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a6a0cfe498609d281b8631518e0a078e2">HttpServer</a> (ServerType &amp;server, int bufferSize=1024)</td></tr>
+<tr class="separator:a6a0cfe498609d281b8631518e0a078e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d80e928e77eeca49f464f6e61a85829"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a8d80e928e77eeca49f464f6e61a85829">~HttpServer</a> () override</td></tr>
+<tr class="separator:a8d80e928e77eeca49f464f6e61a85829"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaea3ed8fd5abc49d7261aa81293bea5e"><td class="memItemLeft" align="right" valign="top">IPAddress &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#aaea3ed8fd5abc49d7261aa81293bea5e">localIP</a> () override</td></tr>
+<tr class="memdesc:aaea3ed8fd5abc49d7261aa81293bea5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the local ip address.  <br /></td></tr>
+<tr class="separator:aaea3ed8fd5abc49d7261aa81293bea5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adfadbb5ca1440ccb8a0ff5fb12dec179"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#adfadbb5ca1440ccb8a0ff5fb12dec179">begin</a> () override</td></tr>
+<tr class="memdesc:adfadbb5ca1440ccb8a0ff5fb12dec179"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts the server.  <br /></td></tr>
+<tr class="separator:adfadbb5ca1440ccb8a0ff5fb12dec179"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc60960c03d08b865921b196323afbc4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#abc60960c03d08b865921b196323afbc4">end</a> () override</td></tr>
+<tr class="memdesc:abc60960c03d08b865921b196323afbc4"><td class="mdescLeft">&#160;</td><td class="mdescRight">stops the server_ptr  <br /></td></tr>
+<tr class="separator:abc60960c03d08b865921b196323afbc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77e2de9e47a89d2154a9e4b1b2a5417b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a77e2de9e47a89d2154a9e4b1b2a5417b">rewrite</a> (const char *from, const char *to) override</td></tr>
+<tr class="memdesc:a77e2de9e47a89d2154a9e4b1b2a5417b"><td class="mdescLeft">&#160;</td><td class="mdescRight">adds a rewrite rule  <br /></td></tr>
+<tr class="separator:a77e2de9e47a89d2154a9e4b1b2a5417b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34fbf584b08ad7cc168f80686bc2f0fa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a34fbf584b08ad7cc168f80686bc2f0fa">on</a> (const char *url, <a class="el" href="namespacetiny__dlna.html#a8b30900e538135f563c83e48319e5247">TinyMethodID</a> method, <a class="el" href="namespacetiny__dlna.html#acf8c66b4a24ac309391845e144afb6a9">web_callback_fn</a> fn, void *ctx[]=nullptr, int ctxCount=0) override</td></tr>
+<tr class="memdesc:a34fbf584b08ad7cc168f80686bc2f0fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">register a generic handler  <br /></td></tr>
+<tr class="separator:a34fbf584b08ad7cc168f80686bc2f0fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5e7de4eee5b8eeb05bb1c05aa07ee20"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#af5e7de4eee5b8eeb05bb1c05aa07ee20">on</a> (const char *url, <a class="el" href="namespacetiny__dlna.html#a8b30900e538135f563c83e48319e5247">TinyMethodID</a> method, const char *mime, <a class="el" href="namespacetiny__dlna.html#acf8c66b4a24ac309391845e144afb6a9">web_callback_fn</a> fn) override</td></tr>
+<tr class="memdesc:af5e7de4eee5b8eeb05bb1c05aa07ee20"><td class="mdescLeft">&#160;</td><td class="mdescRight">register a handler with mime  <br /></td></tr>
+<tr class="separator:af5e7de4eee5b8eeb05bb1c05aa07ee20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6081e29591d70cb38de374e92e40f8f0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a6081e29591d70cb38de374e92e40f8f0">on</a> (const char *url, <a class="el" href="namespacetiny__dlna.html#a8b30900e538135f563c83e48319e5247">TinyMethodID</a> method, const char *mime, const char *result) override</td></tr>
+<tr class="memdesc:a6081e29591d70cb38de374e92e40f8f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">register a handler which provides the indicated string  <br /></td></tr>
+<tr class="separator:a6081e29591d70cb38de374e92e40f8f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f1ff60fcf62fe15452447044edee5f8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a5f1ff60fcf62fe15452447044edee5f8">on</a> (const char *url, <a class="el" href="namespacetiny__dlna.html#a8b30900e538135f563c83e48319e5247">TinyMethodID</a> method, const char *mime, const uint8_t *data, int len) override</td></tr>
+<tr class="memdesc:a5f1ff60fcf62fe15452447044edee5f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">register a handler which provides the indicated string  <br /></td></tr>
+<tr class="separator:a5f1ff60fcf62fe15452447044edee5f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f57718f6047e30d09dde5b61014cae6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a3f57718f6047e30d09dde5b61014cae6">on</a> (const char *url, <a class="el" href="namespacetiny__dlna.html#a8b30900e538135f563c83e48319e5247">TinyMethodID</a> method, <a class="el" href="classtiny__dlna_1_1Url.html">Url</a> &amp;redirect) override</td></tr>
+<tr class="memdesc:a3f57718f6047e30d09dde5b61014cae6"><td class="mdescLeft">&#160;</td><td class="mdescRight">register a redirection  <br /></td></tr>
+<tr class="separator:a3f57718f6047e30d09dde5b61014cae6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44dae05f6774359ce262dcf440a7dd5c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a44dae05f6774359ce262dcf440a7dd5c">onRequest</a> (const char *path) override</td></tr>
+<tr class="separator:a44dae05f6774359ce262dcf440a7dd5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac71fd83ab8e20d484d63d86f781c0164"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#ac71fd83ab8e20d484d63d86f781c0164">replyChunked</a> (const char *contentType, Stream &amp;inputStream, int status=200, const char *msg=<a class="el" href="namespacetiny__dlna.html#aa203b0adbc2115c8cd956dd41ec09735">SUCCESS</a>) override</td></tr>
+<tr class="memdesc:ac71fd83ab8e20d484d63d86f781c0164"><td class="mdescLeft">&#160;</td><td class="mdescRight">chunked reply with data from an input stream  <br /></td></tr>
+<tr class="separator:ac71fd83ab8e20d484d63d86f781c0164"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a8e186e4f833b08f59bdb41116b9495"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a3a8e186e4f833b08f59bdb41116b9495">replyChunked</a> (const char *contentType, int status=200, const char *msg=<a class="el" href="namespacetiny__dlna.html#aa203b0adbc2115c8cd956dd41ec09735">SUCCESS</a>) override</td></tr>
+<tr class="memdesc:a3a8e186e4f833b08f59bdb41116b9495"><td class="mdescLeft">&#160;</td><td class="mdescRight">start of chunked reply: use <a class="el" href="classtiny__dlna_1_1HttpChunkWriter.html" title="Writes the data chunked to the actual client.">HttpChunkWriter</a> to provde the data  <br /></td></tr>
+<tr class="separator:a3a8e186e4f833b08f59bdb41116b9495"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8066dc0ee2e8575f3544b21de183c19c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a8066dc0ee2e8575f3544b21de183c19c">reply</a> (const char *contentType, Stream &amp;inputStream, int size, int status=200, const char *msg=<a class="el" href="namespacetiny__dlna.html#aa203b0adbc2115c8cd956dd41ec09735">SUCCESS</a>) override</td></tr>
+<tr class="memdesc:a8066dc0ee2e8575f3544b21de183c19c"><td class="mdescLeft">&#160;</td><td class="mdescRight">write reply - copies data from input stream with header size  <br /></td></tr>
+<tr class="separator:a8066dc0ee2e8575f3544b21de183c19c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1353bec5940f9d90ebed3093c8479b3b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a1353bec5940f9d90ebed3093c8479b3b">reply</a> (const char *contentType, size_t(*callback)(Print &amp;out, void *<a class="el" href="classtiny__dlna_1_1HttpServer.html#ae8e0fb26d4014206d415b279bf6a0e40">ref</a>), int status=200, const char *msg=<a class="el" href="namespacetiny__dlna.html#aa203b0adbc2115c8cd956dd41ec09735">SUCCESS</a>, void *<a class="el" href="classtiny__dlna_1_1HttpServer.html#ae8e0fb26d4014206d415b279bf6a0e40">ref</a>=nullptr) override</td></tr>
+<tr class="memdesc:a1353bec5940f9d90ebed3093c8479b3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">write reply - using callback that writes to stream  <br /></td></tr>
+<tr class="separator:a1353bec5940f9d90ebed3093c8479b3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee8ede52421adb01727a5c56a6d3fe50"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#aee8ede52421adb01727a5c56a6d3fe50">reply</a> (const char *contentType, const char *str, int status=200, const char *msg=<a class="el" href="namespacetiny__dlna.html#aa203b0adbc2115c8cd956dd41ec09735">SUCCESS</a>) override</td></tr>
+<tr class="memdesc:aee8ede52421adb01727a5c56a6d3fe50"><td class="mdescLeft">&#160;</td><td class="mdescRight">write reply - string with header size  <br /></td></tr>
+<tr class="separator:aee8ede52421adb01727a5c56a6d3fe50"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5c057cb180ba4db874868dd9fff7be8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#ad5c057cb180ba4db874868dd9fff7be8">reply</a> (const char *contentType, const uint8_t *str, int len, int status=200, const char *msg=<a class="el" href="namespacetiny__dlna.html#aa203b0adbc2115c8cd956dd41ec09735">SUCCESS</a>) override</td></tr>
+<tr class="separator:ad5c057cb180ba4db874868dd9fff7be8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a23ce4b93dad3434f391a2159c2d19169"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a23ce4b93dad3434f391a2159c2d19169">replyOK</a> () override</td></tr>
+<tr class="memdesc:a23ce4b93dad3434f391a2159c2d19169"><td class="mdescLeft">&#160;</td><td class="mdescRight">write OK reply with 200 SUCCESS  <br /></td></tr>
+<tr class="separator:a23ce4b93dad3434f391a2159c2d19169"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a14a81c5bbae7520d787542a6e70a4e7d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a14a81c5bbae7520d787542a6e70a4e7d">replyNotFound</a> () override</td></tr>
+<tr class="memdesc:a14a81c5bbae7520d787542a6e70a4e7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">write 404 reply  <br /></td></tr>
+<tr class="separator:a14a81c5bbae7520d787542a6e70a4e7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb635fa6ab6ff63b548d33f6c01bb5e5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#acb635fa6ab6ff63b548d33f6c01bb5e5">replyError</a> (int err, const char *msg=&quot;Internal Server Error&quot;) override</td></tr>
+<tr class="separator:acb635fa6ab6ff63b548d33f6c01bb5e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63486224eee0b65d46ca9f50c51673c3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1HttpRequestHeader.html">HttpRequestHeader</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a63486224eee0b65d46ca9f50c51673c3">requestHeader</a> () override</td></tr>
+<tr class="memdesc:a63486224eee0b65d46ca9f50c51673c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides the request header  <br /></td></tr>
+<tr class="separator:a63486224eee0b65d46ca9f50c51673c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af2a84ec8e19d0c631e67ca3ee953222e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1HttpReplyHeader.html">HttpReplyHeader</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#af2a84ec8e19d0c631e67ca3ee953222e">replyHeader</a> () override</td></tr>
+<tr class="memdesc:af2a84ec8e19d0c631e67ca3ee953222e"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides the reply header  <br /></td></tr>
+<tr class="separator:af2a84ec8e19d0c631e67ca3ee953222e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa47588bf70a25ab37a8c93c7442b67f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#afa47588bf70a25ab37a8c93c7442b67f">endClient</a> () override</td></tr>
+<tr class="memdesc:afa47588bf70a25ab37a8c93c7442b67f"><td class="mdescLeft">&#160;</td><td class="mdescRight">closes the connection to the current client_ptr  <br /></td></tr>
+<tr class="separator:afa47588bf70a25ab37a8c93c7442b67f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f422d14191b679b3bd5b4da2ddd60c0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a4f422d14191b679b3bd5b4da2ddd60c0">crlf</a> () override</td></tr>
+<tr class="memdesc:a4f422d14191b679b3bd5b4da2ddd60c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">print a CR LF  <br /></td></tr>
+<tr class="separator:a4f422d14191b679b3bd5b4da2ddd60c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8cc77e90a0b107172eb499b6bf0770b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#ad8cc77e90a0b107172eb499b6bf0770b">addHandler</a> (<a class="el" href="classtiny__dlna_1_1HttpRequestHandlerLine.html">HttpRequestHandlerLine</a> *handlerLinePtr) override</td></tr>
+<tr class="memdesc:ad8cc77e90a0b107172eb499b6bf0770b"><td class="mdescLeft">&#160;</td><td class="mdescRight">adds a new handler  <br /></td></tr>
+<tr class="separator:ad8cc77e90a0b107172eb499b6bf0770b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79f9e5508bd42e915e44b064e3ee30ba"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a79f9e5508bd42e915e44b064e3ee30ba">doLoop</a> () override</td></tr>
+<tr class="memdesc:a79f9e5508bd42e915e44b064e3ee30ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Legacy method: same as <a class="el" href="classtiny__dlna_1_1HttpServer.html#a1fc95c8189114f4b9946bca7ea48e959" title="Call this method from your loop!">copy()</a>;.  <br /></td></tr>
+<tr class="separator:a79f9e5508bd42e915e44b064e3ee30ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1fc95c8189114f4b9946bca7ea48e959"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a1fc95c8189114f4b9946bca7ea48e959">copy</a> () override</td></tr>
+<tr class="memdesc:a1fc95c8189114f4b9946bca7ea48e959"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call this method from your loop!  <br /></td></tr>
+<tr class="separator:a1fc95c8189114f4b9946bca7ea48e959"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a803a69ebb8f8f4c0b5a5ac666ff00bfc"><td class="memItemLeft" align="right" valign="top">ClientType &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a803a69ebb8f8f4c0b5a5ac666ff00bfc">client</a> () override</td></tr>
+<tr class="memdesc:a803a69ebb8f8f4c0b5a5ac666ff00bfc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the current client.  <br /></td></tr>
+<tr class="separator:a803a69ebb8f8f4c0b5a5ac666ff00bfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ddfc538144199df9b131116a084a37e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a8ddfc538144199df9b131116a084a37e">operator bool</a> () override</td></tr>
+<tr class="memdesc:a8ddfc538144199df9b131116a084a37e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides true if the server has been started.  <br /></td></tr>
+<tr class="separator:a8ddfc538144199df9b131116a084a37e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4072cac4a8dd7fda018f46767df11276"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a4072cac4a8dd7fda018f46767df11276">isActive</a> () override</td></tr>
+<tr class="separator:a4072cac4a8dd7fda018f46767df11276"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af955a04279c84fa4e79ecd839ddf7c95"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#af955a04279c84fa4e79ecd839ddf7c95">localHost</a> () override</td></tr>
+<tr class="memdesc:af955a04279c84fa4e79ecd839ddf7c95"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines the local ip address.  <br /></td></tr>
+<tr class="separator:af955a04279c84fa4e79ecd839ddf7c95"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4095b2422b209b111a903dd9e5676498"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a4095b2422b209b111a903dd9e5676498">setNoConnectDelay</a> (int delay) override</td></tr>
+<tr class="separator:a4095b2422b209b111a903dd9e5676498"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af88b7327537cf37ebf1d67237baf7a4c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Str.html">Str</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#af88b7327537cf37ebf1d67237baf7a4c">contentStr</a> () override</td></tr>
+<tr class="memdesc:af88b7327537cf37ebf1d67237baf7a4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">converts the client content to a string  <br /></td></tr>
+<tr class="separator:af88b7327537cf37ebf1d67237baf7a4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10e9e94addb662bf59685d1104ec1683"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a10e9e94addb662bf59685d1104ec1683">setReference</a> (void *reference) override</td></tr>
+<tr class="memdesc:a10e9e94addb662bf59685d1104ec1683"><td class="mdescLeft">&#160;</td><td class="mdescRight">Definesa reference/context object.  <br /></td></tr>
+<tr class="separator:a10e9e94addb662bf59685d1104ec1683"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9cefbb2685566505afa4c6c9833c28f"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#ae9cefbb2685566505afa4c6c9833c28f">getReference</a> () override</td></tr>
+<tr class="memdesc:ae9cefbb2685566505afa4c6c9833c28f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides access to a reference/context object.  <br /></td></tr>
+<tr class="separator:ae9cefbb2685566505afa4c6c9833c28f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:aac73bcf4c64ef0c4bd83b86a610e3579"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#aac73bcf4c64ef0c4bd83b86a610e3579">removeClosedClients</a> ()</td></tr>
-<tr class="separator:aac73bcf4c64ef0c4bd83b86a610e3579"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9cdef43d38d0f4dc8a0cbfb0d2f02008"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a9cdef43d38d0f4dc8a0cbfb0d2f02008">reply</a> (int status, const char *msg)</td></tr>
-<tr class="memdesc:a9cdef43d38d0f4dc8a0cbfb0d2f02008"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes the status and message to the reply.  <br /></td></tr>
-<tr class="separator:a9cdef43d38d0f4dc8a0cbfb0d2f02008"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a591ab7508102cf1a7a1cebb9755e3ba6"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a591ab7508102cf1a7a1cebb9755e3ba6">nullstr</a> (const char *in)</td></tr>
-<tr class="memdesc:a591ab7508102cf1a7a1cebb9755e3ba6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts null to an empty string.  <br /></td></tr>
-<tr class="separator:a591ab7508102cf1a7a1cebb9755e3ba6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5d1b1962e5e9a3e598934b26f228a119"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a5d1b1962e5e9a3e598934b26f228a119">processRequest</a> ()</td></tr>
-<tr class="separator:a5d1b1962e5e9a3e598934b26f228a119"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aecc1eae11fb9a8a8bc765cb03e048bd6"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#aecc1eae11fb9a8a8bc765cb03e048bd6">resolveRewrite</a> (const char *from)</td></tr>
-<tr class="separator:aecc1eae11fb9a8a8bc765cb03e048bd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5896428e85ce317a3fdf4eba774cd054"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a5896428e85ce317a3fdf4eba774cd054">matchesMime</a> (const char *handler_mime, const char *request_mime)</td></tr>
-<tr class="separator:a5896428e85ce317a3fdf4eba774cd054"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43b0a77ad58bedaebafe4ed52f3d6f3e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a43b0a77ad58bedaebafe4ed52f3d6f3e">removeClosedClients</a> ()</td></tr>
+<tr class="separator:a43b0a77ad58bedaebafe4ed52f3d6f3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29d6bb6a632e7b25dfc10c92e9e45e23"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a29d6bb6a632e7b25dfc10c92e9e45e23">reply</a> (int status, const char *msg)</td></tr>
+<tr class="memdesc:a29d6bb6a632e7b25dfc10c92e9e45e23"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes the status and message to the reply.  <br /></td></tr>
+<tr class="separator:a29d6bb6a632e7b25dfc10c92e9e45e23"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaab7d7c3431c07ea8aa0cfb49eebfe43"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#aaab7d7c3431c07ea8aa0cfb49eebfe43">nullstr</a> (const char *in)</td></tr>
+<tr class="memdesc:aaab7d7c3431c07ea8aa0cfb49eebfe43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts null to an empty string.  <br /></td></tr>
+<tr class="separator:aaab7d7c3431c07ea8aa0cfb49eebfe43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0611ca631a86821293cd7c9f91ab5eba"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a0611ca631a86821293cd7c9f91ab5eba">processRequest</a> ()</td></tr>
+<tr class="separator:a0611ca631a86821293cd7c9f91ab5eba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae60facece436f7c65f9d73d078ddcda9"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#ae60facece436f7c65f9d73d078ddcda9">resolveRewrite</a> (const char *from)</td></tr>
+<tr class="separator:ae60facece436f7c65f9d73d078ddcda9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a473eca79a7c2c668fe5eef7e0bc3587f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a473eca79a7c2c668fe5eef7e0bc3587f">matchesMime</a> (const char *handler_mime, const char *request_mime)</td></tr>
+<tr class="separator:a473eca79a7c2c668fe5eef7e0bc3587f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a68722d22f7cef776b6873416362f1975"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1HttpRequestHeader.html">HttpRequestHeader</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a68722d22f7cef776b6873416362f1975">request_header</a></td></tr>
-<tr class="separator:a68722d22f7cef776b6873416362f1975"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa884816e4c4abfb879066b5bc7f11794"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1HttpReplyHeader.html">HttpReplyHeader</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#aa884816e4c4abfb879066b5bc7f11794">reply_header</a></td></tr>
-<tr class="separator:aa884816e4c4abfb879066b5bc7f11794"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3d3a2d77e4978b7171c73dcb054437d5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1List.html">List</a>&lt; <a class="el" href="classtiny__dlna_1_1HttpRequestHandlerLine.html">HttpRequestHandlerLine</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a3d3a2d77e4978b7171c73dcb054437d5">handler_collection</a></td></tr>
-<tr class="separator:a3d3a2d77e4978b7171c73dcb054437d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a207ba896655c9c92ea1df450a5eb97a7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1List.html">List</a>&lt; <a class="el" href="classtiny__dlna_1_1HttpRequestRewrite.html">HttpRequestRewrite</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a207ba896655c9c92ea1df450a5eb97a7">rewrite_collection</a></td></tr>
-<tr class="separator:a207ba896655c9c92ea1df450a5eb97a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ace105ebd0342bb3649775dccb210e4a8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1List.html">List</a>&lt; WiFiClient &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#ace105ebd0342bb3649775dccb210e4a8">open_clients</a></td></tr>
-<tr class="separator:ace105ebd0342bb3649775dccb210e4a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9df39d5e04972ac45b5521e400716785"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1List.html">List</a>&lt; WiFiClient &gt;::Iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a9df39d5e04972ac45b5521e400716785">current_client_iterator</a> = open_clients.begin()</td></tr>
-<tr class="separator:a9df39d5e04972ac45b5521e400716785"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0fe37ea1e8fbe4e74c25b3d69abe86fa"><td class="memItemLeft" align="right" valign="top">Client *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a0fe37ea1e8fbe4e74c25b3d69abe86fa">client_ptr</a> = nullptr</td></tr>
-<tr class="separator:a0fe37ea1e8fbe4e74c25b3d69abe86fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7074a493c7953ccb840e7bea72dc9041"><td class="memItemLeft" align="right" valign="top">WiFiServer *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a7074a493c7953ccb840e7bea72dc9041">server_ptr</a> = nullptr</td></tr>
-<tr class="separator:a7074a493c7953ccb840e7bea72dc9041"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a02f7c9f0df49c959d5688f9296b9251b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a02f7c9f0df49c959d5688f9296b9251b">is_active</a></td></tr>
-<tr class="separator:a02f7c9f0df49c959d5688f9296b9251b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a117f2f32d70e9f4ba985adb7837b1afb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt; char &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a117f2f32d70e9f4ba985adb7837b1afb">buffer</a> {0}</td></tr>
-<tr class="separator:a117f2f32d70e9f4ba985adb7837b1afb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a47eeb593260afbfb1e03587f010289bd"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a47eeb593260afbfb1e03587f010289bd">local_host</a> = nullptr</td></tr>
-<tr class="separator:a47eeb593260afbfb1e03587f010289bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad2e1c3274f2f2a70177c8506e1ab6752"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#ad2e1c3274f2f2a70177c8506e1ab6752">no_connect_delay</a> = 5</td></tr>
-<tr class="separator:ad2e1c3274f2f2a70177c8506e1ab6752"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af2f2f1f1526aa646e266fde6f72bb3f0"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#af2f2f1f1526aa646e266fde6f72bb3f0">ref</a> = nullptr</td></tr>
-<tr class="separator:af2f2f1f1526aa646e266fde6f72bb3f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2f7d2e8e4c443aaeb08d4fd9a34652e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1HttpRequestHeader.html">HttpRequestHeader</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#aa2f7d2e8e4c443aaeb08d4fd9a34652e">request_header</a></td></tr>
+<tr class="separator:aa2f7d2e8e4c443aaeb08d4fd9a34652e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b924d581bc4cb757c1ff8a3329a073f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1HttpReplyHeader.html">HttpReplyHeader</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a2b924d581bc4cb757c1ff8a3329a073f">reply_header</a></td></tr>
+<tr class="separator:a2b924d581bc4cb757c1ff8a3329a073f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae529f7f17804cb3376c653135eee75a1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1List.html">List</a>&lt; <a class="el" href="classtiny__dlna_1_1HttpRequestHandlerLine.html">HttpRequestHandlerLine</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#ae529f7f17804cb3376c653135eee75a1">handler_collection</a></td></tr>
+<tr class="separator:ae529f7f17804cb3376c653135eee75a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9df2bfb67e8a1ec913e982a97c57893e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1List.html">List</a>&lt; <a class="el" href="classtiny__dlna_1_1HttpRequestRewrite.html">HttpRequestRewrite</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a9df2bfb67e8a1ec913e982a97c57893e">rewrite_collection</a></td></tr>
+<tr class="separator:a9df2bfb67e8a1ec913e982a97c57893e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d7638a44ee7de2fbec3fba30b92f441"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1List.html">List</a>&lt; ClientType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a5d7638a44ee7de2fbec3fba30b92f441">open_clients</a></td></tr>
+<tr class="separator:a5d7638a44ee7de2fbec3fba30b92f441"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e8ba72b84eae0c1714d829fa166df15"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1List.html">List</a>&lt; ClientType &gt;::Iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a3e8ba72b84eae0c1714d829fa166df15">current_client_iterator</a></td></tr>
+<tr class="separator:a3e8ba72b84eae0c1714d829fa166df15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a022b5a34d73b417046189f86174a80b3"><td class="memItemLeft" align="right" valign="top">ClientType *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a022b5a34d73b417046189f86174a80b3">client_ptr</a> = nullptr</td></tr>
+<tr class="separator:a022b5a34d73b417046189f86174a80b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7989d98a15ecd422d52e76b55320b337"><td class="memItemLeft" align="right" valign="top">ServerType *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a7989d98a15ecd422d52e76b55320b337">server_ptr</a> = nullptr</td></tr>
+<tr class="separator:a7989d98a15ecd422d52e76b55320b337"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85844d410aed7c2865e15409d144bca7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a85844d410aed7c2865e15409d144bca7">is_active</a></td></tr>
+<tr class="separator:a85844d410aed7c2865e15409d144bca7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af599bec19fa5d2573bdf25beba74e456"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt; char &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#af599bec19fa5d2573bdf25beba74e456">buffer</a> {0}</td></tr>
+<tr class="separator:af599bec19fa5d2573bdf25beba74e456"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5a0894a78fd39e49e31ac599561a1c8"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#ad5a0894a78fd39e49e31ac599561a1c8">local_host</a> = nullptr</td></tr>
+<tr class="separator:ad5a0894a78fd39e49e31ac599561a1c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a704b0737a832146cb6b7ccef2c17845a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a704b0737a832146cb6b7ccef2c17845a">no_connect_delay</a> = 5</td></tr>
+<tr class="separator:a704b0737a832146cb6b7ccef2c17845a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8e0fb26d4014206d415b279bf6a0e40"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#ae8e0fb26d4014206d415b279bf6a0e40">ref</a> = nullptr</td></tr>
+<tr class="separator:ae8e0fb26d4014206d415b279bf6a0e40"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>A Simple Header only implementation of Http Server that allows the registration of callback functions. This is based on the Arduino Server class. </p>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename ClientType, typename ServerType&gt;<br />
+class tiny_dlna::HttpServer&lt; ClientType, ServerType &gt;</div><p>Header-only HTTP server wrapper that registers callback handlers. </p>
+<p>This server is templated so you can provide the concrete Arduino networking classes that back the transport. <code>ClientType</code> is the socket implementation accepted from the server (for example <code>WiFiClient</code> or <code>EthernetClient</code>) and <code>ServerType</code> is the listener type (for example <code>WiFiServer</code>). Default template arguments keep the legacy WiFi behaviour intact, while custom transports can swap in their own client/server types.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">ClientType</td><td>Arduino client class accepted from the listener (e.g. <code>WiFiClient</code>, <code>EthernetClient</code>). </td></tr>
+    <tr><td class="paramname">ServerType</td><td>Arduino server/listener class that produces <code>ClientType</code> instances (e.g. <code>WiFiServer</code>, <code>EthernetServer</code>). </td></tr>
+  </table>
+  </dd>
+</dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="ae52b3bbe1b696fc11a953650456eac06" name="ae52b3bbe1b696fc11a953650456eac06"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae52b3bbe1b696fc11a953650456eac06">&#9670;&#160;</a></span>HttpServer()</h2>
+<a id="a6a0cfe498609d281b8631518e0a078e2" name="a6a0cfe498609d281b8631518e0a078e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a0cfe498609d281b8631518e0a078e2">&#9670;&#160;</a></span>HttpServer()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType , typename ServerType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">tiny_dlna::HttpServer::HttpServer </td>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1HttpServer.html">tiny_dlna::HttpServer</a>&lt; ClientType, ServerType &gt;::HttpServer </td>
           <td>(</td>
-          <td class="paramtype">WiFiServer &amp;&#160;</td>
+          <td class="paramtype">ServerType &amp;&#160;</td>
           <td class="paramname"><em>server</em>, </td>
         </tr>
         <tr>
@@ -281,17 +296,19 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="aee86d60a474a88fa3eec36be04298811" name="aee86d60a474a88fa3eec36be04298811"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aee86d60a474a88fa3eec36be04298811">&#9670;&#160;</a></span>~HttpServer()</h2>
+<a id="a8d80e928e77eeca49f464f6e61a85829" name="a8d80e928e77eeca49f464f6e61a85829"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d80e928e77eeca49f464f6e61a85829">&#9670;&#160;</a></span>~HttpServer()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType , typename ServerType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">tiny_dlna::HttpServer::~HttpServer </td>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1HttpServer.html">tiny_dlna::HttpServer</a>&lt; ClientType, ServerType &gt;::~<a class="el" href="classtiny__dlna_1_1HttpServer.html">HttpServer</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -299,7 +316,7 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -307,17 +324,19 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a7e1b9baa5ba7be8eb689e3c7b5d922b3" name="a7e1b9baa5ba7be8eb689e3c7b5d922b3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7e1b9baa5ba7be8eb689e3c7b5d922b3">&#9670;&#160;</a></span>addHandler()</h2>
+<a id="ad8cc77e90a0b107172eb499b6bf0770b" name="ad8cc77e90a0b107172eb499b6bf0770b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad8cc77e90a0b107172eb499b6bf0770b">&#9670;&#160;</a></span>addHandler()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType , typename ServerType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void tiny_dlna::HttpServer::addHandler </td>
+          <td class="memname">void <a class="el" href="classtiny__dlna_1_1HttpServer.html">tiny_dlna::HttpServer</a>&lt; ClientType, ServerType &gt;::addHandler </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classtiny__dlna_1_1HttpRequestHandlerLine.html">HttpRequestHandlerLine</a> *&#160;</td>
           <td class="paramname"><em>handlerLinePtr</em></td><td>)</td>
@@ -326,98 +345,30 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>adds a new handler </p>
 
+<p>Implements <a class="el" href="classtiny__dlna_1_1IHttpServer.html#a73a5e2e67f2d2b77e155383f4ffabff6">tiny_dlna::IHttpServer</a>.</p>
+
 </div>
 </div>
-<a id="af816b9950996eb60ebe31743e830bb5c" name="af816b9950996eb60ebe31743e830bb5c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af816b9950996eb60ebe31743e830bb5c">&#9670;&#160;</a></span>begin() <span class="overload">[1/2]</span></h2>
+<a id="adfadbb5ca1440ccb8a0ff5fb12dec179" name="adfadbb5ca1440ccb8a0ff5fb12dec179"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adfadbb5ca1440ccb8a0ff5fb12dec179">&#9670;&#160;</a></span>begin()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType , typename ServerType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool tiny_dlna::HttpServer::begin </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>port</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Starts the server on the indicated port. </p>
-
-</div>
-</div>
-<a id="a0d7a984293e33edebfa22cb7e419b546" name="a0d7a984293e33edebfa22cb7e419b546"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0d7a984293e33edebfa22cb7e419b546">&#9670;&#160;</a></span>begin() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool tiny_dlna::HttpServer::begin </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>port</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>ssid</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>password</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Starts the server on the indicated port - calls WiFi.begin(ssid,
-password); </p>
-
-</div>
-</div>
-<a id="a2bc07d99605ddf5112431814fa571797" name="a2bc07d99605ddf5112431814fa571797"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2bc07d99605ddf5112431814fa571797">&#9670;&#160;</a></span>client()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">Client &amp; tiny_dlna::HttpServer::client </td>
+          <td class="memname">bool <a class="el" href="classtiny__dlna_1_1HttpServer.html">tiny_dlna::HttpServer</a>&lt; ClientType, ServerType &gt;::begin </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -425,26 +376,61 @@ password); </p>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Starts the server. </p>
+
+<p>Implements <a class="el" href="classtiny__dlna_1_1IHttpServer.html#a08d2f1647b78b03fbbba71e1229417ae">tiny_dlna::IHttpServer</a>.</p>
+
+</div>
+</div>
+<a id="a803a69ebb8f8f4c0b5a5ac666ff00bfc" name="a803a69ebb8f8f4c0b5a5ac666ff00bfc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a803a69ebb8f8f4c0b5a5ac666ff00bfc">&#9670;&#160;</a></span>client()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType , typename ServerType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ClientType &amp; <a class="el" href="classtiny__dlna_1_1HttpServer.html">tiny_dlna::HttpServer</a>&lt; ClientType, ServerType &gt;::client </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Provides the current client. </p>
 
+<p>Implements <a class="el" href="classtiny__dlna_1_1IHttpServer.html#ab46674358ddac92783d1966e1a1d402a">tiny_dlna::IHttpServer</a>.</p>
+
 </div>
 </div>
-<a id="a5a8f23bf03bc3d5ccbbe4ed5d317b1b2" name="a5a8f23bf03bc3d5ccbbe4ed5d317b1b2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5a8f23bf03bc3d5ccbbe4ed5d317b1b2">&#9670;&#160;</a></span>contentStr()</h2>
+<a id="af88b7327537cf37ebf1d67237baf7a4c" name="af88b7327537cf37ebf1d67237baf7a4c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af88b7327537cf37ebf1d67237baf7a4c">&#9670;&#160;</a></span>contentStr()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType , typename ServerType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtiny__dlna_1_1Str.html">Str</a> tiny_dlna::HttpServer::contentStr </td>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1Str.html">Str</a> <a class="el" href="classtiny__dlna_1_1HttpServer.html">tiny_dlna::HttpServer</a>&lt; ClientType, ServerType &gt;::contentStr </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -452,26 +438,30 @@ password); </p>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>converts the client content to a string </p>
 
+<p>Implements <a class="el" href="classtiny__dlna_1_1IHttpServer.html#a14331c38af7b4810e82ad76c0b8a133d">tiny_dlna::IHttpServer</a>.</p>
+
 </div>
 </div>
-<a id="a21c5fcc5ea86d304d9be3c893a776658" name="a21c5fcc5ea86d304d9be3c893a776658"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a21c5fcc5ea86d304d9be3c893a776658">&#9670;&#160;</a></span>copy()</h2>
+<a id="a1fc95c8189114f4b9946bca7ea48e959" name="a1fc95c8189114f4b9946bca7ea48e959"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1fc95c8189114f4b9946bca7ea48e959">&#9670;&#160;</a></span>copy()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType , typename ServerType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool tiny_dlna::HttpServer::copy </td>
+          <td class="memname">bool <a class="el" href="classtiny__dlna_1_1HttpServer.html">tiny_dlna::HttpServer</a>&lt; ClientType, ServerType &gt;::copy </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -479,26 +469,30 @@ password); </p>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Call this method from your loop! </p>
 
+<p>Implements <a class="el" href="classtiny__dlna_1_1IHttpServer.html#a4e602b45ccfe047bbcf8d5696ec5ed57">tiny_dlna::IHttpServer</a>.</p>
+
 </div>
 </div>
-<a id="ab54de9871805f143d7637ccdc2ed27b7" name="ab54de9871805f143d7637ccdc2ed27b7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab54de9871805f143d7637ccdc2ed27b7">&#9670;&#160;</a></span>crlf()</h2>
+<a id="a4f422d14191b679b3bd5b4da2ddd60c0" name="a4f422d14191b679b3bd5b4da2ddd60c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f422d14191b679b3bd5b4da2ddd60c0">&#9670;&#160;</a></span>crlf()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType , typename ServerType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void tiny_dlna::HttpServer::crlf </td>
+          <td class="memname">void <a class="el" href="classtiny__dlna_1_1HttpServer.html">tiny_dlna::HttpServer</a>&lt; ClientType, ServerType &gt;::crlf </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -506,26 +500,30 @@ password); </p>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>print a CR LF </p>
 
+<p>Implements <a class="el" href="classtiny__dlna_1_1IHttpServer.html#a5b6f92545f70cd0d1cbd53c9d4ddf67c">tiny_dlna::IHttpServer</a>.</p>
+
 </div>
 </div>
-<a id="a10f0f3ba0d56a18e354b260b28e46821" name="a10f0f3ba0d56a18e354b260b28e46821"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a10f0f3ba0d56a18e354b260b28e46821">&#9670;&#160;</a></span>doLoop()</h2>
+<a id="a79f9e5508bd42e915e44b064e3ee30ba" name="a79f9e5508bd42e915e44b064e3ee30ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a79f9e5508bd42e915e44b064e3ee30ba">&#9670;&#160;</a></span>doLoop()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType , typename ServerType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool tiny_dlna::HttpServer::doLoop </td>
+          <td class="memname">bool <a class="el" href="classtiny__dlna_1_1HttpServer.html">tiny_dlna::HttpServer</a>&lt; ClientType, ServerType &gt;::doLoop </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -533,26 +531,30 @@ password); </p>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Legacy method: same as <a class="el" href="classtiny__dlna_1_1HttpServer.html#a21c5fcc5ea86d304d9be3c893a776658" title="Call this method from your loop!">copy()</a>;. </p>
+<p>Legacy method: same as <a class="el" href="classtiny__dlna_1_1HttpServer.html#a1fc95c8189114f4b9946bca7ea48e959" title="Call this method from your loop!">copy()</a>;. </p>
+
+<p>Implements <a class="el" href="classtiny__dlna_1_1IHttpServer.html#a14412b17a657da3e7d63acb3fded3a02">tiny_dlna::IHttpServer</a>.</p>
 
 </div>
 </div>
-<a id="aa9496af98000da1f8fedee485623e964" name="aa9496af98000da1f8fedee485623e964"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa9496af98000da1f8fedee485623e964">&#9670;&#160;</a></span>end()</h2>
+<a id="abc60960c03d08b865921b196323afbc4" name="abc60960c03d08b865921b196323afbc4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc60960c03d08b865921b196323afbc4">&#9670;&#160;</a></span>end()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType , typename ServerType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void tiny_dlna::HttpServer::end </td>
+          <td class="memname">void <a class="el" href="classtiny__dlna_1_1HttpServer.html">tiny_dlna::HttpServer</a>&lt; ClientType, ServerType &gt;::end </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -560,26 +562,30 @@ password); </p>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>stops the server_ptr </p>
 
+<p>Implements <a class="el" href="classtiny__dlna_1_1IHttpServer.html#a3bdda12879bb908dcc3f6ae450f405b9">tiny_dlna::IHttpServer</a>.</p>
+
 </div>
 </div>
-<a id="a3abdce72a8f3f94a2c6848038572577d" name="a3abdce72a8f3f94a2c6848038572577d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3abdce72a8f3f94a2c6848038572577d">&#9670;&#160;</a></span>endClient()</h2>
+<a id="afa47588bf70a25ab37a8c93c7442b67f" name="afa47588bf70a25ab37a8c93c7442b67f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa47588bf70a25ab37a8c93c7442b67f">&#9670;&#160;</a></span>endClient()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType , typename ServerType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void tiny_dlna::HttpServer::endClient </td>
+          <td class="memname">void <a class="el" href="classtiny__dlna_1_1HttpServer.html">tiny_dlna::HttpServer</a>&lt; ClientType, ServerType &gt;::endClient </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -587,26 +593,30 @@ password); </p>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>closes the connection to the current client_ptr </p>
 
+<p>Implements <a class="el" href="classtiny__dlna_1_1IHttpServer.html#ae4fa2e54369bbc59ffb580bbf2a23321">tiny_dlna::IHttpServer</a>.</p>
+
 </div>
 </div>
-<a id="a8f7c18cd601e0e4a4db9594effb3bc48" name="a8f7c18cd601e0e4a4db9594effb3bc48"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8f7c18cd601e0e4a4db9594effb3bc48">&#9670;&#160;</a></span>getReference()</h2>
+<a id="ae9cefbb2685566505afa4c6c9833c28f" name="ae9cefbb2685566505afa4c6c9833c28f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9cefbb2685566505afa4c6c9833c28f">&#9670;&#160;</a></span>getReference()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType , typename ServerType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void * tiny_dlna::HttpServer::getReference </td>
+          <td class="memname">void * <a class="el" href="classtiny__dlna_1_1HttpServer.html">tiny_dlna::HttpServer</a>&lt; ClientType, ServerType &gt;::getReference </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -614,26 +624,30 @@ password); </p>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Provides access to a reference/context object. </p>
 
+<p>Implements <a class="el" href="classtiny__dlna_1_1IHttpServer.html#a0be9bc1b4317cbcacd5a0025c742e994">tiny_dlna::IHttpServer</a>.</p>
+
 </div>
 </div>
-<a id="a3c211e5f249f2cf0ad22cf045010cc91" name="a3c211e5f249f2cf0ad22cf045010cc91"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3c211e5f249f2cf0ad22cf045010cc91">&#9670;&#160;</a></span>isActive()</h2>
+<a id="a4072cac4a8dd7fda018f46767df11276" name="a4072cac4a8dd7fda018f46767df11276"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4072cac4a8dd7fda018f46767df11276">&#9670;&#160;</a></span>isActive()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType , typename ServerType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool tiny_dlna::HttpServer::isActive </td>
+          <td class="memname">bool <a class="el" href="classtiny__dlna_1_1HttpServer.html">tiny_dlna::HttpServer</a>&lt; ClientType, ServerType &gt;::isActive </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -641,24 +655,28 @@ password); </p>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
+<p>Implements <a class="el" href="classtiny__dlna_1_1IHttpServer.html#aec1667e160113649429c0e1c835441e7">tiny_dlna::IHttpServer</a>.</p>
+
 </div>
 </div>
-<a id="a0351a570f910ee1493235e7811da1b36" name="a0351a570f910ee1493235e7811da1b36"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0351a570f910ee1493235e7811da1b36">&#9670;&#160;</a></span>localHost()</h2>
+<a id="af955a04279c84fa4e79ecd839ddf7c95" name="af955a04279c84fa4e79ecd839ddf7c95"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af955a04279c84fa4e79ecd839ddf7c95">&#9670;&#160;</a></span>localHost()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType , typename ServerType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const char * tiny_dlna::HttpServer::localHost </td>
+          <td class="memname">const char * <a class="el" href="classtiny__dlna_1_1HttpServer.html">tiny_dlna::HttpServer</a>&lt; ClientType, ServerType &gt;::localHost </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -666,26 +684,30 @@ password); </p>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Determines the local ip address. </p>
 
+<p>Implements <a class="el" href="classtiny__dlna_1_1IHttpServer.html#a496f22182ee2f44f572896adede03ec0">tiny_dlna::IHttpServer</a>.</p>
+
 </div>
 </div>
-<a id="a7f5681c2c7b4a8e35ffdc5e28a04ecb9" name="a7f5681c2c7b4a8e35ffdc5e28a04ecb9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7f5681c2c7b4a8e35ffdc5e28a04ecb9">&#9670;&#160;</a></span>localIP()</h2>
+<a id="aaea3ed8fd5abc49d7261aa81293bea5e" name="aaea3ed8fd5abc49d7261aa81293bea5e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaea3ed8fd5abc49d7261aa81293bea5e">&#9670;&#160;</a></span>localIP()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType , typename ServerType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">IPAddress &amp; tiny_dlna::HttpServer::localIP </td>
+          <td class="memname">IPAddress &amp; <a class="el" href="classtiny__dlna_1_1HttpServer.html">tiny_dlna::HttpServer</a>&lt; ClientType, ServerType &gt;::localIP </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -693,26 +715,30 @@ password); </p>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Provides the local ip address. </p>
 
+<p>Implements <a class="el" href="classtiny__dlna_1_1IHttpServer.html#a72848b2471c6a61de852371a551bcf08">tiny_dlna::IHttpServer</a>.</p>
+
 </div>
 </div>
-<a id="a5896428e85ce317a3fdf4eba774cd054" name="a5896428e85ce317a3fdf4eba774cd054"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5896428e85ce317a3fdf4eba774cd054">&#9670;&#160;</a></span>matchesMime()</h2>
+<a id="a473eca79a7c2c668fe5eef7e0bc3587f" name="a473eca79a7c2c668fe5eef7e0bc3587f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a473eca79a7c2c668fe5eef7e0bc3587f">&#9670;&#160;</a></span>matchesMime()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType , typename ServerType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool tiny_dlna::HttpServer::matchesMime </td>
+          <td class="memname">bool <a class="el" href="classtiny__dlna_1_1HttpServer.html">tiny_dlna::HttpServer</a>&lt; ClientType, ServerType &gt;::matchesMime </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>handler_mime</em>, </td>
@@ -739,17 +765,19 @@ password); </p>
 
 </div>
 </div>
-<a id="a591ab7508102cf1a7a1cebb9755e3ba6" name="a591ab7508102cf1a7a1cebb9755e3ba6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a591ab7508102cf1a7a1cebb9755e3ba6">&#9670;&#160;</a></span>nullstr()</h2>
+<a id="aaab7d7c3431c07ea8aa0cfb49eebfe43" name="aaab7d7c3431c07ea8aa0cfb49eebfe43"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaab7d7c3431c07ea8aa0cfb49eebfe43">&#9670;&#160;</a></span>nullstr()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType , typename ServerType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const char * tiny_dlna::HttpServer::nullstr </td>
+          <td class="memname">const char * <a class="el" href="classtiny__dlna_1_1HttpServer.html">tiny_dlna::HttpServer</a>&lt; ClientType, ServerType &gt;::nullstr </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>in</em></td><td>)</td>
@@ -767,17 +795,19 @@ password); </p>
 
 </div>
 </div>
-<a id="a8b7caaf89f829b43878089e6cbdfa181" name="a8b7caaf89f829b43878089e6cbdfa181"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8b7caaf89f829b43878089e6cbdfa181">&#9670;&#160;</a></span>on() <span class="overload">[1/6]</span></h2>
+<a id="a6081e29591d70cb38de374e92e40f8f0" name="a6081e29591d70cb38de374e92e40f8f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6081e29591d70cb38de374e92e40f8f0">&#9670;&#160;</a></span>on() <span class="overload">[1/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType , typename ServerType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void tiny_dlna::HttpServer::on </td>
+          <td class="memname">void <a class="el" href="classtiny__dlna_1_1HttpServer.html">tiny_dlna::HttpServer</a>&lt; ClientType, ServerType &gt;::on </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>url</em>, </td>
@@ -808,26 +838,30 @@ password); </p>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>register a handler which provides the indicated string </p>
 
+<p>Implements <a class="el" href="classtiny__dlna_1_1IHttpServer.html#a43a7a12c0f6a35dfa803eb38a213abc1">tiny_dlna::IHttpServer</a>.</p>
+
 </div>
 </div>
-<a id="ae7c162006d5b2d0ba8e1cf0d36274978" name="ae7c162006d5b2d0ba8e1cf0d36274978"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae7c162006d5b2d0ba8e1cf0d36274978">&#9670;&#160;</a></span>on() <span class="overload">[2/6]</span></h2>
+<a id="a5f1ff60fcf62fe15452447044edee5f8" name="a5f1ff60fcf62fe15452447044edee5f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f1ff60fcf62fe15452447044edee5f8">&#9670;&#160;</a></span>on() <span class="overload">[2/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType , typename ServerType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void tiny_dlna::HttpServer::on </td>
+          <td class="memname">void <a class="el" href="classtiny__dlna_1_1HttpServer.html">tiny_dlna::HttpServer</a>&lt; ClientType, ServerType &gt;::on </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>url</em>, </td>
@@ -864,26 +898,30 @@ password); </p>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>register a handler which provides the indicated string </p>
 
+<p>Implements <a class="el" href="classtiny__dlna_1_1IHttpServer.html#a21cb097feb1f937f6faf00cf8c5cf1e2">tiny_dlna::IHttpServer</a>.</p>
+
 </div>
 </div>
-<a id="af020a970280024c879f9f4d997c9ae2a" name="af020a970280024c879f9f4d997c9ae2a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af020a970280024c879f9f4d997c9ae2a">&#9670;&#160;</a></span>on() <span class="overload">[3/6]</span></h2>
+<a id="af5e7de4eee5b8eeb05bb1c05aa07ee20" name="af5e7de4eee5b8eeb05bb1c05aa07ee20"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af5e7de4eee5b8eeb05bb1c05aa07ee20">&#9670;&#160;</a></span>on() <span class="overload">[3/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType , typename ServerType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void tiny_dlna::HttpServer::on </td>
+          <td class="memname">void <a class="el" href="classtiny__dlna_1_1HttpServer.html">tiny_dlna::HttpServer</a>&lt; ClientType, ServerType &gt;::on </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>url</em>, </td>
@@ -903,7 +941,7 @@ password); </p>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacetiny__dlna.html#a575a263fd75f2731f40accf7fa73dafe">web_callback_fn</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="namespacetiny__dlna.html#acf8c66b4a24ac309391845e144afb6a9">web_callback_fn</a>&#160;</td>
           <td class="paramname"><em>fn</em>&#160;</td>
         </tr>
         <tr>
@@ -914,70 +952,30 @@ password); </p>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>register a handler with mime </p>
 
+<p>Implements <a class="el" href="classtiny__dlna_1_1IHttpServer.html#a2cc2dc15e026c196618e88ad7b610ceb">tiny_dlna::IHttpServer</a>.</p>
+
 </div>
 </div>
-<a id="a9708cd1c5c09b75b32a22464fef07d14" name="a9708cd1c5c09b75b32a22464fef07d14"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9708cd1c5c09b75b32a22464fef07d14">&#9670;&#160;</a></span>on() <span class="overload">[4/6]</span></h2>
+<a id="a3f57718f6047e30d09dde5b61014cae6" name="a3f57718f6047e30d09dde5b61014cae6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f57718f6047e30d09dde5b61014cae6">&#9670;&#160;</a></span>on() <span class="overload">[4/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType , typename ServerType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void tiny_dlna::HttpServer::on </td>
-          <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>url</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="namespacetiny__dlna.html#a8b30900e538135f563c83e48319e5247">TinyMethodID</a>&#160;</td>
-          <td class="paramname"><em>method</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1HttpTunnel.html">HttpTunnel</a> &amp;&#160;</td>
-          <td class="paramname"><em>tunnel</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>register a redirection </p>
-
-</div>
-</div>
-<a id="a29ffe5befea5d41e424d7e24ad935a57" name="a29ffe5befea5d41e424d7e24ad935a57"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a29ffe5befea5d41e424d7e24ad935a57">&#9670;&#160;</a></span>on() <span class="overload">[5/6]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void tiny_dlna::HttpServer::on </td>
+          <td class="memname">void <a class="el" href="classtiny__dlna_1_1HttpServer.html">tiny_dlna::HttpServer</a>&lt; ClientType, ServerType &gt;::on </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>url</em>, </td>
@@ -1002,26 +1000,30 @@ password); </p>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>register a redirection </p>
 
+<p>Implements <a class="el" href="classtiny__dlna_1_1IHttpServer.html#a8925c2a8ab7b749c57279f306f38c46f">tiny_dlna::IHttpServer</a>.</p>
+
 </div>
 </div>
-<a id="a194398c2ae176c6a7b7acf1cf5b11c95" name="a194398c2ae176c6a7b7acf1cf5b11c95"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a194398c2ae176c6a7b7acf1cf5b11c95">&#9670;&#160;</a></span>on() <span class="overload">[6/6]</span></h2>
+<a id="a34fbf584b08ad7cc168f80686bc2f0fa" name="a34fbf584b08ad7cc168f80686bc2f0fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34fbf584b08ad7cc168f80686bc2f0fa">&#9670;&#160;</a></span>on() <span class="overload">[5/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType , typename ServerType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void tiny_dlna::HttpServer::on </td>
+          <td class="memname">void <a class="el" href="classtiny__dlna_1_1HttpServer.html">tiny_dlna::HttpServer</a>&lt; ClientType, ServerType &gt;::on </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>url</em>, </td>
@@ -1035,7 +1037,7 @@ password); </p>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacetiny__dlna.html#a575a263fd75f2731f40accf7fa73dafe">web_callback_fn</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="namespacetiny__dlna.html#acf8c66b4a24ac309391845e144afb6a9">web_callback_fn</a>&#160;</td>
           <td class="paramname"><em>fn</em>, </td>
         </tr>
         <tr>
@@ -1058,26 +1060,30 @@ password); </p>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>register a generic handler </p>
 
+<p>Implements <a class="el" href="classtiny__dlna_1_1IHttpServer.html#a44012247482614d313f2195fa0fe9050">tiny_dlna::IHttpServer</a>.</p>
+
 </div>
 </div>
-<a id="a3d8c5ada4276553644249f22407bbcfe" name="a3d8c5ada4276553644249f22407bbcfe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3d8c5ada4276553644249f22407bbcfe">&#9670;&#160;</a></span>onRequest()</h2>
+<a id="a44dae05f6774359ce262dcf440a7dd5c" name="a44dae05f6774359ce262dcf440a7dd5c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a44dae05f6774359ce262dcf440a7dd5c">&#9670;&#160;</a></span>onRequest()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType , typename ServerType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool tiny_dlna::HttpServer::onRequest </td>
+          <td class="memname">bool <a class="el" href="classtiny__dlna_1_1HttpServer.html">tiny_dlna::HttpServer</a>&lt; ClientType, ServerType &gt;::onRequest </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>path</em></td><td>)</td>
@@ -1086,25 +1092,29 @@ password); </p>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 <p>generic handler - you can overwrite this method to provide your specifc processing logic </p>
 
+<p>Implements <a class="el" href="classtiny__dlna_1_1IHttpServer.html#acd7d00663f767ca1825d58d958ac3668">tiny_dlna::IHttpServer</a>.</p>
+
 </div>
 </div>
-<a id="aa1d02d157a9928cb0a212e007365441a" name="aa1d02d157a9928cb0a212e007365441a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa1d02d157a9928cb0a212e007365441a">&#9670;&#160;</a></span>operator bool()</h2>
+<a id="a8ddfc538144199df9b131116a084a37e" name="a8ddfc538144199df9b131116a084a37e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ddfc538144199df9b131116a084a37e">&#9670;&#160;</a></span>operator bool()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType , typename ServerType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">tiny_dlna::HttpServer::operator bool </td>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1HttpServer.html">tiny_dlna::HttpServer</a>&lt; ClientType, ServerType &gt;::operator bool </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1112,26 +1122,30 @@ password); </p>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Provides true if the server has been started. </p>
 
+<p>Implements <a class="el" href="classtiny__dlna_1_1IHttpServer.html#a3a3360e95af2fb779c31d8f6f675edd4">tiny_dlna::IHttpServer</a>.</p>
+
 </div>
 </div>
-<a id="a5d1b1962e5e9a3e598934b26f228a119" name="a5d1b1962e5e9a3e598934b26f228a119"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5d1b1962e5e9a3e598934b26f228a119">&#9670;&#160;</a></span>processRequest()</h2>
+<a id="a0611ca631a86821293cd7c9f91ab5eba" name="a0611ca631a86821293cd7c9f91ab5eba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0611ca631a86821293cd7c9f91ab5eba">&#9670;&#160;</a></span>processRequest()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType , typename ServerType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void tiny_dlna::HttpServer::processRequest </td>
+          <td class="memname">void <a class="el" href="classtiny__dlna_1_1HttpServer.html">tiny_dlna::HttpServer</a>&lt; ClientType, ServerType &gt;::processRequest </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1146,17 +1160,19 @@ password); </p>
 
 </div>
 </div>
-<a id="aac73bcf4c64ef0c4bd83b86a610e3579" name="aac73bcf4c64ef0c4bd83b86a610e3579"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aac73bcf4c64ef0c4bd83b86a610e3579">&#9670;&#160;</a></span>removeClosedClients()</h2>
+<a id="a43b0a77ad58bedaebafe4ed52f3d6f3e" name="a43b0a77ad58bedaebafe4ed52f3d6f3e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a43b0a77ad58bedaebafe4ed52f3d6f3e">&#9670;&#160;</a></span>removeClosedClients()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType , typename ServerType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void tiny_dlna::HttpServer::removeClosedClients </td>
+          <td class="memname">void <a class="el" href="classtiny__dlna_1_1HttpServer.html">tiny_dlna::HttpServer</a>&lt; ClientType, ServerType &gt;::removeClosedClients </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1171,17 +1187,19 @@ password); </p>
 
 </div>
 </div>
-<a id="ab94ebae60e1796dd80d267de4e97b387" name="ab94ebae60e1796dd80d267de4e97b387"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab94ebae60e1796dd80d267de4e97b387">&#9670;&#160;</a></span>reply() <span class="overload">[1/5]</span></h2>
+<a id="aee8ede52421adb01727a5c56a6d3fe50" name="aee8ede52421adb01727a5c56a6d3fe50"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee8ede52421adb01727a5c56a6d3fe50">&#9670;&#160;</a></span>reply() <span class="overload">[1/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType , typename ServerType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void tiny_dlna::HttpServer::reply </td>
+          <td class="memname">void <a class="el" href="classtiny__dlna_1_1HttpServer.html">tiny_dlna::HttpServer</a>&lt; ClientType, ServerType &gt;::reply </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>contentType</em>, </td>
@@ -1212,26 +1230,30 @@ password); </p>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>write reply - string with header size </p>
 
+<p>Implements <a class="el" href="classtiny__dlna_1_1IHttpServer.html#a2a0ca4b5cb3fc85117c59811d6522184">tiny_dlna::IHttpServer</a>.</p>
+
 </div>
 </div>
-<a id="ae22224deb58942df014cfe294fad6b8d" name="ae22224deb58942df014cfe294fad6b8d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae22224deb58942df014cfe294fad6b8d">&#9670;&#160;</a></span>reply() <span class="overload">[2/5]</span></h2>
+<a id="ad5c057cb180ba4db874868dd9fff7be8" name="ad5c057cb180ba4db874868dd9fff7be8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5c057cb180ba4db874868dd9fff7be8">&#9670;&#160;</a></span>reply() <span class="overload">[2/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType , typename ServerType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void tiny_dlna::HttpServer::reply </td>
+          <td class="memname">void <a class="el" href="classtiny__dlna_1_1HttpServer.html">tiny_dlna::HttpServer</a>&lt; ClientType, ServerType &gt;::reply </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>contentType</em>, </td>
@@ -1268,24 +1290,28 @@ password); </p>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
+<p>Implements <a class="el" href="classtiny__dlna_1_1IHttpServer.html#aec80dbb4eaea009de90b914ea55c58f0">tiny_dlna::IHttpServer</a>.</p>
+
 </div>
 </div>
-<a id="a9e62ab9be94dd0522aff196628a7e2bd" name="a9e62ab9be94dd0522aff196628a7e2bd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9e62ab9be94dd0522aff196628a7e2bd">&#9670;&#160;</a></span>reply() <span class="overload">[3/5]</span></h2>
+<a id="a1353bec5940f9d90ebed3093c8479b3b" name="a1353bec5940f9d90ebed3093c8479b3b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1353bec5940f9d90ebed3093c8479b3b">&#9670;&#160;</a></span>reply() <span class="overload">[3/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType , typename ServerType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void tiny_dlna::HttpServer::reply </td>
+          <td class="memname">void <a class="el" href="classtiny__dlna_1_1HttpServer.html">tiny_dlna::HttpServer</a>&lt; ClientType, ServerType &gt;::reply </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>contentType</em>, </td>
@@ -1293,7 +1319,7 @@ password); </p>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t(*)(Print &amp;out, void *<a class="el" href="classtiny__dlna_1_1HttpServer.html#af2f2f1f1526aa646e266fde6f72bb3f0">ref</a>)&#160;</td>
+          <td class="paramtype">size_t(*)(Print &amp;out, void *<a class="el" href="classtiny__dlna_1_1HttpServer.html#ae8e0fb26d4014206d415b279bf6a0e40">ref</a>)&#160;</td>
           <td class="paramname"><em>callback</em>, </td>
         </tr>
         <tr>
@@ -1322,26 +1348,30 @@ password); </p>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>write reply - using callback that writes to stream </p>
 
+<p>Implements <a class="el" href="classtiny__dlna_1_1IHttpServer.html#af9207fb096f4a135caab8a85c5364086">tiny_dlna::IHttpServer</a>.</p>
+
 </div>
 </div>
-<a id="a64e046b368260f3b39b31b74e75b65c4" name="a64e046b368260f3b39b31b74e75b65c4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a64e046b368260f3b39b31b74e75b65c4">&#9670;&#160;</a></span>reply() <span class="overload">[4/5]</span></h2>
+<a id="a8066dc0ee2e8575f3544b21de183c19c" name="a8066dc0ee2e8575f3544b21de183c19c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8066dc0ee2e8575f3544b21de183c19c">&#9670;&#160;</a></span>reply() <span class="overload">[4/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType , typename ServerType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void tiny_dlna::HttpServer::reply </td>
+          <td class="memname">void <a class="el" href="classtiny__dlna_1_1HttpServer.html">tiny_dlna::HttpServer</a>&lt; ClientType, ServerType &gt;::reply </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>contentType</em>, </td>
@@ -1378,26 +1408,30 @@ password); </p>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>write reply - copies data from input stream with header size </p>
 
+<p>Implements <a class="el" href="classtiny__dlna_1_1IHttpServer.html#afa7b50ce15364f68397ed209d8b6ed80">tiny_dlna::IHttpServer</a>.</p>
+
 </div>
 </div>
-<a id="a9cdef43d38d0f4dc8a0cbfb0d2f02008" name="a9cdef43d38d0f4dc8a0cbfb0d2f02008"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9cdef43d38d0f4dc8a0cbfb0d2f02008">&#9670;&#160;</a></span>reply() <span class="overload">[5/5]</span></h2>
+<a id="a29d6bb6a632e7b25dfc10c92e9e45e23" name="a29d6bb6a632e7b25dfc10c92e9e45e23"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29d6bb6a632e7b25dfc10c92e9e45e23">&#9670;&#160;</a></span>reply() <span class="overload">[5/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType , typename ServerType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void tiny_dlna::HttpServer::reply </td>
+          <td class="memname">void <a class="el" href="classtiny__dlna_1_1HttpServer.html">tiny_dlna::HttpServer</a>&lt; ClientType, ServerType &gt;::reply </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>status</em>, </td>
@@ -1425,17 +1459,19 @@ password); </p>
 
 </div>
 </div>
-<a id="adc9864cb3901e8b172bd97d8532b2326" name="adc9864cb3901e8b172bd97d8532b2326"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adc9864cb3901e8b172bd97d8532b2326">&#9670;&#160;</a></span>replyChunked() <span class="overload">[1/2]</span></h2>
+<a id="a3a8e186e4f833b08f59bdb41116b9495" name="a3a8e186e4f833b08f59bdb41116b9495"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a8e186e4f833b08f59bdb41116b9495">&#9670;&#160;</a></span>replyChunked() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType , typename ServerType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void tiny_dlna::HttpServer::replyChunked </td>
+          <td class="memname">void <a class="el" href="classtiny__dlna_1_1HttpServer.html">tiny_dlna::HttpServer</a>&lt; ClientType, ServerType &gt;::replyChunked </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>contentType</em>, </td>
@@ -1460,26 +1496,30 @@ password); </p>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>start of chunked reply: use <a class="el" href="classtiny__dlna_1_1HttpChunkWriter.html" title="Writes the data chunked to the actual client.">HttpChunkWriter</a> to provde the data </p>
 
+<p>Implements <a class="el" href="classtiny__dlna_1_1IHttpServer.html#a6c70429984004be71a1c9efedc398f35">tiny_dlna::IHttpServer</a>.</p>
+
 </div>
 </div>
-<a id="ae2b0647a572ca50a4c451e712eab4437" name="ae2b0647a572ca50a4c451e712eab4437"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae2b0647a572ca50a4c451e712eab4437">&#9670;&#160;</a></span>replyChunked() <span class="overload">[2/2]</span></h2>
+<a id="ac71fd83ab8e20d484d63d86f781c0164" name="ac71fd83ab8e20d484d63d86f781c0164"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac71fd83ab8e20d484d63d86f781c0164">&#9670;&#160;</a></span>replyChunked() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType , typename ServerType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void tiny_dlna::HttpServer::replyChunked </td>
+          <td class="memname">void <a class="el" href="classtiny__dlna_1_1HttpServer.html">tiny_dlna::HttpServer</a>&lt; ClientType, ServerType &gt;::replyChunked </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>contentType</em>, </td>
@@ -1510,26 +1550,30 @@ password); </p>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>chunked reply with data from an input stream </p>
 
+<p>Implements <a class="el" href="classtiny__dlna_1_1IHttpServer.html#a06f36e6405446789c5c20efae291c54e">tiny_dlna::IHttpServer</a>.</p>
+
 </div>
 </div>
-<a id="aa5d0d9d72f09a4c905d50d5b98209bfc" name="aa5d0d9d72f09a4c905d50d5b98209bfc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa5d0d9d72f09a4c905d50d5b98209bfc">&#9670;&#160;</a></span>replyError()</h2>
+<a id="acb635fa6ab6ff63b548d33f6c01bb5e5" name="acb635fa6ab6ff63b548d33f6c01bb5e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb635fa6ab6ff63b548d33f6c01bb5e5">&#9670;&#160;</a></span>replyError()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType , typename ServerType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void tiny_dlna::HttpServer::replyError </td>
+          <td class="memname">void <a class="el" href="classtiny__dlna_1_1HttpServer.html">tiny_dlna::HttpServer</a>&lt; ClientType, ServerType &gt;::replyError </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>err</em>, </td>
@@ -1548,24 +1592,28 @@ password); </p>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
+<p>Implements <a class="el" href="classtiny__dlna_1_1IHttpServer.html#aea1fe58329503674e55d34b25cc8885e">tiny_dlna::IHttpServer</a>.</p>
+
 </div>
 </div>
-<a id="af9673915866486ed252791f661fef57b" name="af9673915866486ed252791f661fef57b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af9673915866486ed252791f661fef57b">&#9670;&#160;</a></span>replyHeader()</h2>
+<a id="af2a84ec8e19d0c631e67ca3ee953222e" name="af2a84ec8e19d0c631e67ca3ee953222e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af2a84ec8e19d0c631e67ca3ee953222e">&#9670;&#160;</a></span>replyHeader()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType , typename ServerType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtiny__dlna_1_1HttpReplyHeader.html">HttpReplyHeader</a> &amp; tiny_dlna::HttpServer::replyHeader </td>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1HttpReplyHeader.html">HttpReplyHeader</a> &amp; <a class="el" href="classtiny__dlna_1_1HttpServer.html">tiny_dlna::HttpServer</a>&lt; ClientType, ServerType &gt;::replyHeader </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1573,26 +1621,30 @@ password); </p>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>provides the reply header </p>
 
+<p>Implements <a class="el" href="classtiny__dlna_1_1IHttpServer.html#a6fc312e61d36698cc30aec10f149d65d">tiny_dlna::IHttpServer</a>.</p>
+
 </div>
 </div>
-<a id="ab4c7c70acb4d3501d239385cda0622f2" name="ab4c7c70acb4d3501d239385cda0622f2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab4c7c70acb4d3501d239385cda0622f2">&#9670;&#160;</a></span>replyNotFound()</h2>
+<a id="a14a81c5bbae7520d787542a6e70a4e7d" name="a14a81c5bbae7520d787542a6e70a4e7d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a14a81c5bbae7520d787542a6e70a4e7d">&#9670;&#160;</a></span>replyNotFound()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType , typename ServerType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void tiny_dlna::HttpServer::replyNotFound </td>
+          <td class="memname">void <a class="el" href="classtiny__dlna_1_1HttpServer.html">tiny_dlna::HttpServer</a>&lt; ClientType, ServerType &gt;::replyNotFound </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1600,26 +1652,30 @@ password); </p>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>write 404 reply </p>
 
+<p>Implements <a class="el" href="classtiny__dlna_1_1IHttpServer.html#a217a67bab90d3726828edb6cf20320a3">tiny_dlna::IHttpServer</a>.</p>
+
 </div>
 </div>
-<a id="a1aaf5671caad3c46f55ec23c6ad19931" name="a1aaf5671caad3c46f55ec23c6ad19931"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1aaf5671caad3c46f55ec23c6ad19931">&#9670;&#160;</a></span>replyOK()</h2>
+<a id="a23ce4b93dad3434f391a2159c2d19169" name="a23ce4b93dad3434f391a2159c2d19169"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a23ce4b93dad3434f391a2159c2d19169">&#9670;&#160;</a></span>replyOK()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType , typename ServerType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void tiny_dlna::HttpServer::replyOK </td>
+          <td class="memname">void <a class="el" href="classtiny__dlna_1_1HttpServer.html">tiny_dlna::HttpServer</a>&lt; ClientType, ServerType &gt;::replyOK </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1627,26 +1683,30 @@ password); </p>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>write OK reply with 200 SUCCESS </p>
 
+<p>Implements <a class="el" href="classtiny__dlna_1_1IHttpServer.html#a46b1adf7abbdd24f885bc7abd914caa0">tiny_dlna::IHttpServer</a>.</p>
+
 </div>
 </div>
-<a id="a83060e693944bb6b5feb6eea6f949297" name="a83060e693944bb6b5feb6eea6f949297"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a83060e693944bb6b5feb6eea6f949297">&#9670;&#160;</a></span>requestHeader()</h2>
+<a id="a63486224eee0b65d46ca9f50c51673c3" name="a63486224eee0b65d46ca9f50c51673c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63486224eee0b65d46ca9f50c51673c3">&#9670;&#160;</a></span>requestHeader()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType , typename ServerType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtiny__dlna_1_1HttpRequestHeader.html">HttpRequestHeader</a> &amp; tiny_dlna::HttpServer::requestHeader </td>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1HttpRequestHeader.html">HttpRequestHeader</a> &amp; <a class="el" href="classtiny__dlna_1_1HttpServer.html">tiny_dlna::HttpServer</a>&lt; ClientType, ServerType &gt;::requestHeader </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1654,26 +1714,30 @@ password); </p>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>provides the request header </p>
 
+<p>Implements <a class="el" href="classtiny__dlna_1_1IHttpServer.html#af5ded1a8220b4b26560c29f63e87d4fa">tiny_dlna::IHttpServer</a>.</p>
+
 </div>
 </div>
-<a id="aecc1eae11fb9a8a8bc765cb03e048bd6" name="aecc1eae11fb9a8a8bc765cb03e048bd6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aecc1eae11fb9a8a8bc765cb03e048bd6">&#9670;&#160;</a></span>resolveRewrite()</h2>
+<a id="ae60facece436f7c65f9d73d078ddcda9" name="ae60facece436f7c65f9d73d078ddcda9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae60facece436f7c65f9d73d078ddcda9">&#9670;&#160;</a></span>resolveRewrite()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType , typename ServerType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const char * tiny_dlna::HttpServer::resolveRewrite </td>
+          <td class="memname">const char * <a class="el" href="classtiny__dlna_1_1HttpServer.html">tiny_dlna::HttpServer</a>&lt; ClientType, ServerType &gt;::resolveRewrite </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>from</em></td><td>)</td>
@@ -1690,17 +1754,19 @@ password); </p>
 
 </div>
 </div>
-<a id="ac31fcdd40df8ab8d64ae60efc96b6f55" name="ac31fcdd40df8ab8d64ae60efc96b6f55"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac31fcdd40df8ab8d64ae60efc96b6f55">&#9670;&#160;</a></span>rewrite()</h2>
+<a id="a77e2de9e47a89d2154a9e4b1b2a5417b" name="a77e2de9e47a89d2154a9e4b1b2a5417b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a77e2de9e47a89d2154a9e4b1b2a5417b">&#9670;&#160;</a></span>rewrite()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType , typename ServerType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void tiny_dlna::HttpServer::rewrite </td>
+          <td class="memname">void <a class="el" href="classtiny__dlna_1_1HttpServer.html">tiny_dlna::HttpServer</a>&lt; ClientType, ServerType &gt;::rewrite </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>from</em>, </td>
@@ -1719,26 +1785,30 @@ password); </p>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>adds a rewrite rule </p>
 
+<p>Implements <a class="el" href="classtiny__dlna_1_1IHttpServer.html#afd4a0d4c699fe16d25c9be43d1a7d840">tiny_dlna::IHttpServer</a>.</p>
+
 </div>
 </div>
-<a id="a0fb00c176d9d36a8c83cfe8d4ef98b52" name="a0fb00c176d9d36a8c83cfe8d4ef98b52"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0fb00c176d9d36a8c83cfe8d4ef98b52">&#9670;&#160;</a></span>setNoConnectDelay()</h2>
+<a id="a4095b2422b209b111a903dd9e5676498" name="a4095b2422b209b111a903dd9e5676498"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4095b2422b209b111a903dd9e5676498">&#9670;&#160;</a></span>setNoConnectDelay()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType , typename ServerType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void tiny_dlna::HttpServer::setNoConnectDelay </td>
+          <td class="memname">void <a class="el" href="classtiny__dlna_1_1HttpServer.html">tiny_dlna::HttpServer</a>&lt; ClientType, ServerType &gt;::setNoConnectDelay </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>delay</em></td><td>)</td>
@@ -1747,24 +1817,28 @@ password); </p>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
+<p>Implements <a class="el" href="classtiny__dlna_1_1IHttpServer.html#a40b65b3a35d2b7fefc9702ee3b13693f">tiny_dlna::IHttpServer</a>.</p>
+
 </div>
 </div>
-<a id="a8a20cbfc5bfd5f470969b1059ac026a1" name="a8a20cbfc5bfd5f470969b1059ac026a1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8a20cbfc5bfd5f470969b1059ac026a1">&#9670;&#160;</a></span>setReference()</h2>
+<a id="a10e9e94addb662bf59685d1104ec1683" name="a10e9e94addb662bf59685d1104ec1683"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a10e9e94addb662bf59685d1104ec1683">&#9670;&#160;</a></span>setReference()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType , typename ServerType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void tiny_dlna::HttpServer::setReference </td>
+          <td class="memname">void <a class="el" href="classtiny__dlna_1_1HttpServer.html">tiny_dlna::HttpServer</a>&lt; ClientType, ServerType &gt;::setReference </td>
           <td>(</td>
           <td class="paramtype">void *&#160;</td>
           <td class="paramname"><em>reference</em></td><td>)</td>
@@ -1773,27 +1847,31 @@ password); </p>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Definesa reference/context object. </p>
 
+<p>Implements <a class="el" href="classtiny__dlna_1_1IHttpServer.html#a50ef98f6775bbe2c855f1ca142452b47">tiny_dlna::IHttpServer</a>.</p>
+
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="a117f2f32d70e9f4ba985adb7837b1afb" name="a117f2f32d70e9f4ba985adb7837b1afb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a117f2f32d70e9f4ba985adb7837b1afb">&#9670;&#160;</a></span>buffer</h2>
+<a id="af599bec19fa5d2573bdf25beba74e456" name="af599bec19fa5d2573bdf25beba74e456"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af599bec19fa5d2573bdf25beba74e456">&#9670;&#160;</a></span>buffer</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType , typename ServerType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt;char&gt; tiny_dlna::HttpServer::buffer {0}</td>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a>&lt;char&gt; <a class="el" href="classtiny__dlna_1_1HttpServer.html">tiny_dlna::HttpServer</a>&lt; ClientType, ServerType &gt;::buffer {0}</td>
         </tr>
       </table>
   </td>
@@ -1805,17 +1883,19 @@ password); </p>
 
 </div>
 </div>
-<a id="a0fe37ea1e8fbe4e74c25b3d69abe86fa" name="a0fe37ea1e8fbe4e74c25b3d69abe86fa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0fe37ea1e8fbe4e74c25b3d69abe86fa">&#9670;&#160;</a></span>client_ptr</h2>
+<a id="a022b5a34d73b417046189f86174a80b3" name="a022b5a34d73b417046189f86174a80b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a022b5a34d73b417046189f86174a80b3">&#9670;&#160;</a></span>client_ptr</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType , typename ServerType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">Client* tiny_dlna::HttpServer::client_ptr = nullptr</td>
+          <td class="memname">ClientType* <a class="el" href="classtiny__dlna_1_1HttpServer.html">tiny_dlna::HttpServer</a>&lt; ClientType, ServerType &gt;::client_ptr = nullptr</td>
         </tr>
       </table>
   </td>
@@ -1827,17 +1907,47 @@ password); </p>
 
 </div>
 </div>
-<a id="a9df39d5e04972ac45b5521e400716785" name="a9df39d5e04972ac45b5521e400716785"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9df39d5e04972ac45b5521e400716785">&#9670;&#160;</a></span>current_client_iterator</h2>
+<a id="a3e8ba72b84eae0c1714d829fa166df15" name="a3e8ba72b84eae0c1714d829fa166df15"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e8ba72b84eae0c1714d829fa166df15">&#9670;&#160;</a></span>current_client_iterator</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType , typename ServerType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtiny__dlna_1_1List.html">List</a>&lt;WiFiClient&gt;::Iterator tiny_dlna::HttpServer::current_client_iterator = open_clients.begin()</td>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1List.html">List</a>&lt;ClientType&gt;::Iterator <a class="el" href="classtiny__dlna_1_1HttpServer.html">tiny_dlna::HttpServer</a>&lt; ClientType, ServerType &gt;::current_client_iterator</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">=</div>
+<div class="line">      <a class="code hl_variable" href="classtiny__dlna_1_1HttpServer.html#a5d7638a44ee7de2fbec3fba30b92f441">open_clients</a>.<a class="code hl_function" href="classtiny__dlna_1_1List.html#af61bb5038042dc94a30ab00f48acb4b9">begin</a>()</div>
+<div class="ttc" id="aclasstiny__dlna_1_1HttpServer_html_a5d7638a44ee7de2fbec3fba30b92f441"><div class="ttname"><a href="classtiny__dlna_1_1HttpServer.html#a5d7638a44ee7de2fbec3fba30b92f441">tiny_dlna::HttpServer::open_clients</a></div><div class="ttdeci">List&lt; ClientType &gt; open_clients</div><div class="ttdef"><b>Definition:</b> HttpServer.h:448</div></div>
+<div class="ttc" id="aclasstiny__dlna_1_1List_html_af61bb5038042dc94a30ab00f48acb4b9"><div class="ttname"><a href="classtiny__dlna_1_1List.html#af61bb5038042dc94a30ab00f48acb4b9">tiny_dlna::List::begin</a></div><div class="ttdeci">Iterator begin()</div><div class="ttdef"><b>Definition:</b> List.h:311</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ae529f7f17804cb3376c653135eee75a1" name="ae529f7f17804cb3376c653135eee75a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae529f7f17804cb3376c653135eee75a1">&#9670;&#160;</a></span>handler_collection</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType , typename ServerType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1List.html">List</a>&lt;<a class="el" href="classtiny__dlna_1_1HttpRequestHandlerLine.html">HttpRequestHandlerLine</a>*&gt; <a class="el" href="classtiny__dlna_1_1HttpServer.html">tiny_dlna::HttpServer</a>&lt; ClientType, ServerType &gt;::handler_collection</td>
         </tr>
       </table>
   </td>
@@ -1849,17 +1959,19 @@ password); </p>
 
 </div>
 </div>
-<a id="a3d3a2d77e4978b7171c73dcb054437d5" name="a3d3a2d77e4978b7171c73dcb054437d5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3d3a2d77e4978b7171c73dcb054437d5">&#9670;&#160;</a></span>handler_collection</h2>
+<a id="a85844d410aed7c2865e15409d144bca7" name="a85844d410aed7c2865e15409d144bca7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a85844d410aed7c2865e15409d144bca7">&#9670;&#160;</a></span>is_active</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType , typename ServerType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtiny__dlna_1_1List.html">List</a>&lt;<a class="el" href="classtiny__dlna_1_1HttpRequestHandlerLine.html">HttpRequestHandlerLine</a>*&gt; tiny_dlna::HttpServer::handler_collection</td>
+          <td class="memname">bool <a class="el" href="classtiny__dlna_1_1HttpServer.html">tiny_dlna::HttpServer</a>&lt; ClientType, ServerType &gt;::is_active</td>
         </tr>
       </table>
   </td>
@@ -1871,17 +1983,19 @@ password); </p>
 
 </div>
 </div>
-<a id="a02f7c9f0df49c959d5688f9296b9251b" name="a02f7c9f0df49c959d5688f9296b9251b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a02f7c9f0df49c959d5688f9296b9251b">&#9670;&#160;</a></span>is_active</h2>
+<a id="ad5a0894a78fd39e49e31ac599561a1c8" name="ad5a0894a78fd39e49e31ac599561a1c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5a0894a78fd39e49e31ac599561a1c8">&#9670;&#160;</a></span>local_host</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType , typename ServerType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool tiny_dlna::HttpServer::is_active</td>
+          <td class="memname">const char* <a class="el" href="classtiny__dlna_1_1HttpServer.html">tiny_dlna::HttpServer</a>&lt; ClientType, ServerType &gt;::local_host = nullptr</td>
         </tr>
       </table>
   </td>
@@ -1893,17 +2007,19 @@ password); </p>
 
 </div>
 </div>
-<a id="a47eeb593260afbfb1e03587f010289bd" name="a47eeb593260afbfb1e03587f010289bd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a47eeb593260afbfb1e03587f010289bd">&#9670;&#160;</a></span>local_host</h2>
+<a id="a704b0737a832146cb6b7ccef2c17845a" name="a704b0737a832146cb6b7ccef2c17845a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a704b0737a832146cb6b7ccef2c17845a">&#9670;&#160;</a></span>no_connect_delay</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType , typename ServerType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const char* tiny_dlna::HttpServer::local_host = nullptr</td>
+          <td class="memname">int <a class="el" href="classtiny__dlna_1_1HttpServer.html">tiny_dlna::HttpServer</a>&lt; ClientType, ServerType &gt;::no_connect_delay = 5</td>
         </tr>
       </table>
   </td>
@@ -1915,17 +2031,19 @@ password); </p>
 
 </div>
 </div>
-<a id="ad2e1c3274f2f2a70177c8506e1ab6752" name="ad2e1c3274f2f2a70177c8506e1ab6752"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad2e1c3274f2f2a70177c8506e1ab6752">&#9670;&#160;</a></span>no_connect_delay</h2>
+<a id="a5d7638a44ee7de2fbec3fba30b92f441" name="a5d7638a44ee7de2fbec3fba30b92f441"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d7638a44ee7de2fbec3fba30b92f441">&#9670;&#160;</a></span>open_clients</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType , typename ServerType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int tiny_dlna::HttpServer::no_connect_delay = 5</td>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1List.html">List</a>&lt;ClientType&gt; <a class="el" href="classtiny__dlna_1_1HttpServer.html">tiny_dlna::HttpServer</a>&lt; ClientType, ServerType &gt;::open_clients</td>
         </tr>
       </table>
   </td>
@@ -1937,17 +2055,19 @@ password); </p>
 
 </div>
 </div>
-<a id="ace105ebd0342bb3649775dccb210e4a8" name="ace105ebd0342bb3649775dccb210e4a8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ace105ebd0342bb3649775dccb210e4a8">&#9670;&#160;</a></span>open_clients</h2>
+<a id="ae8e0fb26d4014206d415b279bf6a0e40" name="ae8e0fb26d4014206d415b279bf6a0e40"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8e0fb26d4014206d415b279bf6a0e40">&#9670;&#160;</a></span>ref</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType , typename ServerType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtiny__dlna_1_1List.html">List</a>&lt;WiFiClient&gt; tiny_dlna::HttpServer::open_clients</td>
+          <td class="memname">void* <a class="el" href="classtiny__dlna_1_1HttpServer.html">tiny_dlna::HttpServer</a>&lt; ClientType, ServerType &gt;::ref = nullptr</td>
         </tr>
       </table>
   </td>
@@ -1959,17 +2079,19 @@ password); </p>
 
 </div>
 </div>
-<a id="af2f2f1f1526aa646e266fde6f72bb3f0" name="af2f2f1f1526aa646e266fde6f72bb3f0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af2f2f1f1526aa646e266fde6f72bb3f0">&#9670;&#160;</a></span>ref</h2>
+<a id="a2b924d581bc4cb757c1ff8a3329a073f" name="a2b924d581bc4cb757c1ff8a3329a073f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b924d581bc4cb757c1ff8a3329a073f">&#9670;&#160;</a></span>reply_header</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType , typename ServerType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void* tiny_dlna::HttpServer::ref = nullptr</td>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1HttpReplyHeader.html">HttpReplyHeader</a> <a class="el" href="classtiny__dlna_1_1HttpServer.html">tiny_dlna::HttpServer</a>&lt; ClientType, ServerType &gt;::reply_header</td>
         </tr>
       </table>
   </td>
@@ -1981,17 +2103,19 @@ password); </p>
 
 </div>
 </div>
-<a id="aa884816e4c4abfb879066b5bc7f11794" name="aa884816e4c4abfb879066b5bc7f11794"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa884816e4c4abfb879066b5bc7f11794">&#9670;&#160;</a></span>reply_header</h2>
+<a id="aa2f7d2e8e4c443aaeb08d4fd9a34652e" name="aa2f7d2e8e4c443aaeb08d4fd9a34652e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2f7d2e8e4c443aaeb08d4fd9a34652e">&#9670;&#160;</a></span>request_header</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType , typename ServerType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtiny__dlna_1_1HttpReplyHeader.html">HttpReplyHeader</a> tiny_dlna::HttpServer::reply_header</td>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1HttpRequestHeader.html">HttpRequestHeader</a> <a class="el" href="classtiny__dlna_1_1HttpServer.html">tiny_dlna::HttpServer</a>&lt; ClientType, ServerType &gt;::request_header</td>
         </tr>
       </table>
   </td>
@@ -2003,17 +2127,19 @@ password); </p>
 
 </div>
 </div>
-<a id="a68722d22f7cef776b6873416362f1975" name="a68722d22f7cef776b6873416362f1975"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a68722d22f7cef776b6873416362f1975">&#9670;&#160;</a></span>request_header</h2>
+<a id="a9df2bfb67e8a1ec913e982a97c57893e" name="a9df2bfb67e8a1ec913e982a97c57893e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9df2bfb67e8a1ec913e982a97c57893e">&#9670;&#160;</a></span>rewrite_collection</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType , typename ServerType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtiny__dlna_1_1HttpRequestHeader.html">HttpRequestHeader</a> tiny_dlna::HttpServer::request_header</td>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1List.html">List</a>&lt;<a class="el" href="classtiny__dlna_1_1HttpRequestRewrite.html">HttpRequestRewrite</a>*&gt; <a class="el" href="classtiny__dlna_1_1HttpServer.html">tiny_dlna::HttpServer</a>&lt; ClientType, ServerType &gt;::rewrite_collection</td>
         </tr>
       </table>
   </td>
@@ -2025,39 +2151,19 @@ password); </p>
 
 </div>
 </div>
-<a id="a207ba896655c9c92ea1df450a5eb97a7" name="a207ba896655c9c92ea1df450a5eb97a7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a207ba896655c9c92ea1df450a5eb97a7">&#9670;&#160;</a></span>rewrite_collection</h2>
+<a id="a7989d98a15ecd422d52e76b55320b337" name="a7989d98a15ecd422d52e76b55320b337"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7989d98a15ecd422d52e76b55320b337">&#9670;&#160;</a></span>server_ptr</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType , typename ServerType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtiny__dlna_1_1List.html">List</a>&lt;<a class="el" href="classtiny__dlna_1_1HttpRequestRewrite.html">HttpRequestRewrite</a>*&gt; tiny_dlna::HttpServer::rewrite_collection</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a7074a493c7953ccb840e7bea72dc9041" name="a7074a493c7953ccb840e7bea72dc9041"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7074a493c7953ccb840e7bea72dc9041">&#9670;&#160;</a></span>server_ptr</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">WiFiServer* tiny_dlna::HttpServer::server_ptr = nullptr</td>
+          <td class="memname">ServerType* <a class="el" href="classtiny__dlna_1_1HttpServer.html">tiny_dlna::HttpServer</a>&lt; ClientType, ServerType &gt;::server_ptr = nullptr</td>
         </tr>
       </table>
   </td>

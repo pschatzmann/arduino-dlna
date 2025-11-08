@@ -1,3 +1,4 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classtiny__dlna_1_1HttpStreamCopy.html" title="Processing of a single stream to a single client. In the loop we can simply provide individual small ..." alt="" coords="5,5,204,31"/>
+<area shape="rect" id="node1" href="$classtiny__dlna_1_1IDevice.html" title=" " alt="" coords="5,13,144,38"/>
+<area shape="rect" id="node2" href="$classtiny__dlna_1_1DLNADevice.html" title="Setup of a Basic DLNA Device service. The device registers itself to the network and answers to the D..." alt="" coords="192,5,363,45"/>
 </map>

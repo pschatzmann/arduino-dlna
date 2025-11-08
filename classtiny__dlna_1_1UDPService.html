@@ -125,6 +125,12 @@ class tiny_dlna::UDPService&lt; UDPType &gt;</div><p>Access to UDP functionality
 <p>This class is a template and requires you to specify the UDP implementation type. For example, use UDPService&lt;WiFiUDP&gt; for WiFiUDP or UDPService&lt;MyUDPType&gt; for a custom UDP class.</p>
 <p>Usage: UDPService&lt;WiFiUDP&gt; udp; // Uses WiFiUDP UDPService&lt;MyUDPType&gt; udp2; // Uses custom UDP type</p>
 <p>Implements <a class="el" href="classtiny__dlna_1_1IUDPService.html" title="Abstract Interface for UDP API.">IUDPService</a> for sending and receiving UDP packets, including multicast support.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">UDPType</td><td>Arduino UDP implementation that provides the standard <code>UDP</code> interface (e.g. <code>WiFiUDP</code>, <code>EthernetUDP</code>).</td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a056917b161e0f6c81133aa102e97f136" name="a056917b161e0f6c81133aa102e97f136"></a>

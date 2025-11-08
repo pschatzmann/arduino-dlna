@@ -1,4 +1,4 @@
-<map id="tiny_dlna::DLNAMediaRenderer" name="tiny_dlna::DLNAMediaRenderer">
-<area shape="rect" id="node1" title="MediaRenderer DLNA Device." alt="" coords="5,79,231,104"/>
+<map id="tiny_dlna::DLNAMediaRenderer&lt; ClientType &gt;" name="tiny_dlna::DLNAMediaRenderer&lt; ClientType &gt;">
+<area shape="rect" id="node1" title="MediaRenderer DLNA Device." alt="" coords="5,79,231,119"/>
 <area shape="rect" id="node2" href="$classtiny__dlna_1_1DLNADeviceInfo.html" title="Device Attributes and generation of XML using urn:schemas&#45;upnp&#45;org:device&#45;1&#45;0. We could just return a..." alt="" coords="20,5,216,31"/>
 </map>
