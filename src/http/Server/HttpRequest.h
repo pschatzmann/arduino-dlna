@@ -25,33 +25,39 @@ namespace tiny_dlna {
 template <typename ClientType>
 class HttpRequest : public IHttpRequest {
  public:
+  /// Default constructor.
   HttpRequest() {
     DlnaLogger.log(DlnaLogLevel::Debug, "HttpRequest (default client)");
     setClient(default_client);
   }
 
+  /// Constructor with specified client.
   explicit HttpRequest(ClientType& client) {
     DlnaLogger.log(DlnaLogLevel::Debug, "HttpRequest");
     setClient(client);
   }
 
+  /// Destructor.
   ~HttpRequest() override { stop(); }
 
+  /// Sets the client to be used for the requests.
   void setClient(Client& client) override { this->client_ptr = &client; }
 
-  // the requests usually need a host. This needs to be set if we did not
-  // provide a URL
+  /// Sets the host name for the requests.
   void setHost(const char* host) override {
     DlnaLogger.log(DlnaLogLevel::Info, "HttpRequest::setHost: ", host);
     this->host_name = host;
   }
 
+  /// Checks if the request is valid.
   operator bool() override {
     return client_ptr != nullptr && static_cast<bool>(*client_ptr);
   }
 
+  /// Checks if connected to the server.
   bool connected() override { return client_ptr->connected(); }
 
+  /// Returns the number of available bytes to read.
   int available() override {
     if (reply_header.isChunked()) {
       return chunk_reader.available();
@@ -59,6 +65,7 @@ class HttpRequest : public IHttpRequest {
     return client_ptr->available();
   }
 
+  /// Stops the connection.
   void stop() override {
     DlnaLogger.log(DlnaLogLevel::Info, "HttpRequest::stop");
     if (client_ptr != nullptr) {
@@ -66,19 +73,20 @@ class HttpRequest : public IHttpRequest {
     }
   }
 
+  /// Sends a POST request with data.
   int post(Url& url, const char* mime, const char* data,
            int len = -1) override {
     DlnaLogger.log(DlnaLogLevel::Info, "post %s", url.url());
     return process(T_POST, url, mime, data, len);
   }
 
+  /// Sends a POST request with streaming body.
   int post(Url& url, size_t len, std::function<size_t(Print&, void*)> writer,
            const char* mime = nullptr, void* ref = nullptr) override {
     return process(T_POST, url, len, writer, mime, ref);
   }
 
-  /// Send a NOTIFY request with a streaming body. This mirrors the
-  /// chunked POST implementation but uses the NOTIFY method.
+  /// Sends a NOTIFY request with streaming body.
   int notify(Url& url, std::function<size_t(Print&, void*)> writer,
              const char* mime = nullptr, void* ref = nullptr) override {
     NullPrint nop;
@@ -86,17 +94,20 @@ class HttpRequest : public IHttpRequest {
     return process(T_NOTIFY, url, len, writer, mime, ref);
   }
 
+  /// Sends a PUT request.
   int put(Url& url, const char* mime, const char* data, int len = -1) override {
     DlnaLogger.log(DlnaLogLevel::Info, "put %s", url.url());
     return process(T_PUT, url, mime, data, len);
   }
 
+  /// Sends a DELETE request.
   int del(Url& url, const char* mime = nullptr, const char* data = nullptr,
           int len = -1) override {
     DlnaLogger.log(DlnaLogLevel::Info, "del %s", url.url());
     return process(T_DELETE, url, mime, data, len);
   }
 
+  /// Sends a GET request.
   int get(Url& url, const char* acceptMime = nullptr,
           const char* data = nullptr, int len = -1) override {
     DlnaLogger.log(DlnaLogLevel::Info, "get %s", str(url.url()));
@@ -104,6 +115,7 @@ class HttpRequest : public IHttpRequest {
     return process(T_GET, url, nullptr, data, len);
   }
 
+  /// Sends a HEAD request.
   int head(Url& url, const char* acceptMime = nullptr,
            const char* data = nullptr, int len = -1) override {
     DlnaLogger.log(DlnaLogLevel::Info, "head %s", url.url());
@@ -111,11 +123,13 @@ class HttpRequest : public IHttpRequest {
     return process(T_HEAD, url, nullptr, data, len);
   }
 
+  /// Sends a SUBSCRIBE request.
   int subscribe(Url& url) override {
     DlnaLogger.log(DlnaLogLevel::Info, "post %s", url.url());
     return process(T_SUBSCRIBE, url, nullptr, nullptr, 0);
   }
 
+  /// Sends an UNSUBSCRIBE request.
   int unsubscribe(Url& url, const char* sid) override {
     DlnaLogger.log(DlnaLogLevel::Info, "unsubscribe %s (SID=%s)", url.url(),
                    sid);
@@ -125,7 +139,7 @@ class HttpRequest : public IHttpRequest {
     return process(T_UNSUBSCRIBE, url, nullptr, nullptr, 0);
   }
 
-  // reads the reply data
+  /// Reads reply data.
   int read(uint8_t* str, int len) override {
     if (reply_header.isChunked()) {
       return chunk_reader.read(*client_ptr, str, len);
@@ -134,8 +148,7 @@ class HttpRequest : public IHttpRequest {
     }
   }
 
-  // read the reply data up to the next new line. For Chunked data we provide
-  // the full chunk!
+  /// Reads reply data up to the next new line.
   int readln(uint8_t* str, int len, bool incl_nl = true) override {
     if (reply_header.isChunked()) {
       return chunk_reader.readln(*client_ptr, str, len);
@@ -144,23 +157,29 @@ class HttpRequest : public IHttpRequest {
     }
   }
 
-  // provides the head information of the reply
+  /// Returns the reply header.
   HttpReplyHeader& reply() override { return reply_header; }
 
+  /// Returns the request header.
   HttpRequestHeader& request() override { return request_header; }
 
+  /// Sets the user agent.
   void setAgent(const char* agent) override { this->agent = agent; }
 
+  /// Sets the connection type.
   void setConnection(const char* connection) override {
     this->connection = connection;
   }
 
+  /// Sets the accepted encodings.
   void setAcceptsEncoding(const char* enc) override {
     this->accept_encoding = enc;
   }
 
+  /// Returns the client pointer.
   Client* client() override { return client_ptr; }
 
+  /// Sets the timeout.
   void setTimeout(int ms) override { client_ptr->setTimeout(ms); }
 
  protected:
@@ -176,9 +195,10 @@ class HttpRequest : public IHttpRequest {
   const char* accept = ACCEPT_ALL;
   const char* accept_encoding = nullptr;
 
+  /// Returns an empty string if input is null, otherwise returns the input.
   const char* str(const char* in) { return in == nullptr ? "" : in; }
 
-  // opens a connection to the indicated host
+  /// opens a connection to the indicated host
   virtual int connect(const char* ip, uint16_t port) {
     DlnaLogger.log(DlnaLogLevel::Info, "HttpRequest::connect %s", ip);
     int rc = this->client_ptr->connect(ip, port);
@@ -189,7 +209,7 @@ class HttpRequest : public IHttpRequest {
     return rc;
   }
 
-  // sends request and reads the reply_header from the server
+  /// sends request and reads the reply_header from the server
   virtual int process(TinyMethodID action, Url& url, const char* mime,
                       const char* data, int len = -1) {
     if (!connected()) {
