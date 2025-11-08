@@ -327,7 +327,7 @@ $(function() {
 <div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>    <a class="code hl_variable" href="classtiny__dlna_1_1HttpServer.html#a2b924d581bc4cb757c1ff8a3329a073f">reply_header</a>.<a class="code hl_function" href="classtiny__dlna_1_1HttpHeader.html#af273ebfe4a371eb20a1f5c0fa45c2879">write</a>(this-&gt;<a class="code hl_function" href="classtiny__dlna_1_1HttpServer.html#a803a69ebb8f8f4c0b5a5ac666ff00bfc">client</a>());</div>
 <div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>    callback(*<a class="code hl_variable" href="classtiny__dlna_1_1HttpServer.html#a022b5a34d73b417046189f86174a80b3">client_ptr</a>, <a class="code hl_variable" href="classtiny__dlna_1_1HttpServer.html#ae8e0fb26d4014206d415b279bf6a0e40">ref</a>);</div>
 <div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span><span class="preprocessor">#if DLNA_LOG_XML</span></div>
-<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>  callback(arduino::Serial, <a class="code hl_variable" href="classtiny__dlna_1_1HttpServer.html#ae8e0fb26d4014206d415b279bf6a0e40">ref</a>);</div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>  callback(Serial, <a class="code hl_variable" href="classtiny__dlna_1_1HttpServer.html#ae8e0fb26d4014206d415b279bf6a0e40">ref</a>);</div>
 <div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>    <a class="code hl_function" href="classtiny__dlna_1_1HttpServer.html#afa47588bf70a25ab37a8c93c7442b67f">endClient</a>();</div>
 <div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>  }</div>
@@ -376,7 +376,7 @@ $(function() {
 <div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span> </div>
 <div class="line"><a id="l00335" name="l00335"></a><span class="lineno"><a class="line" href="classtiny__dlna_1_1HttpServer.html#afa47588bf70a25ab37a8c93c7442b67f">  335</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classtiny__dlna_1_1HttpServer.html#afa47588bf70a25ab37a8c93c7442b67f">endClient</a>()<span class="keyword"> override </span>{</div>
 <div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>    DlnaLogger.log(<a class="code hl_enumvalue" href="namespacetiny__dlna.html#a5eabb92538a2ba1397f67b903cb9d35ea4059b0251f66a18cb56f544728796875">DlnaLogLevel::Info</a>, <span class="stringliteral">&quot;HttpServer %s&quot;</span>, <span class="stringliteral">&quot;endClient&quot;</span>);</div>
-<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>    <a class="code hl_variable" href="classtiny__dlna_1_1HttpServer.html#a022b5a34d73b417046189f86174a80b3">client_ptr</a>-&gt;flush();</div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>    <span class="comment">//client_ptr-&gt;flush();</span></div>
 <div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>    <a class="code hl_variable" href="classtiny__dlna_1_1HttpServer.html#a022b5a34d73b417046189f86174a80b3">client_ptr</a>-&gt;stop();</div>
 <div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>  }</div>
 <div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span> </div>
