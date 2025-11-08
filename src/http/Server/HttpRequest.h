@@ -1,6 +1,7 @@
 #pragma once
 
 #include <functional>
+
 #include "HttpChunkReader.h"
 #include "HttpChunkWriter.h"
 #include "HttpHeader.h"
@@ -71,8 +72,7 @@ class HttpRequest : public IHttpRequest {
     return process(T_POST, url, mime, data, len);
   }
 
-  int post(Url& url, size_t len,
-           std::function<size_t(Print&, void*)> writer,
+  int post(Url& url, size_t len, std::function<size_t(Print&, void*)> writer,
            const char* mime = nullptr, void* ref = nullptr) override {
     return process(T_POST, url, len, writer, mime, ref);
   }
@@ -86,20 +86,19 @@ class HttpRequest : public IHttpRequest {
     return process(T_NOTIFY, url, len, writer, mime, ref);
   }
 
-  int put(Url& url, const char* mime, const char* data,
-    int len = -1) override {
+  int put(Url& url, const char* mime, const char* data, int len = -1) override {
     DlnaLogger.log(DlnaLogLevel::Info, "put %s", url.url());
     return process(T_PUT, url, mime, data, len);
   }
 
   int del(Url& url, const char* mime = nullptr, const char* data = nullptr,
-    int len = -1) override {
+          int len = -1) override {
     DlnaLogger.log(DlnaLogLevel::Info, "del %s", url.url());
     return process(T_DELETE, url, mime, data, len);
   }
 
   int get(Url& url, const char* acceptMime = nullptr,
-    const char* data = nullptr, int len = -1) override {
+          const char* data = nullptr, int len = -1) override {
     DlnaLogger.log(DlnaLogLevel::Info, "get %s", str(url.url()));
     this->accept = acceptMime;
     return process(T_GET, url, nullptr, data, len);
@@ -300,7 +299,7 @@ class HttpRequest : public IHttpRequest {
     if (writer) {
       size_t written = writer(*client_ptr, ref);
 #if DLNA_LOG_XML
-  writer(arduino::Serial, ref);
+      writer(Serial, ref);
 #endif
       if (written != len) {
         DlnaLogger.log(DlnaLogLevel::Error,
@@ -320,4 +319,4 @@ class HttpRequest : public IHttpRequest {
 
 }  // namespace tiny_dlna
 
-//using ma = tiny_dlna::HttpRequest;
+// using ma = tiny_dlna::HttpRequest;

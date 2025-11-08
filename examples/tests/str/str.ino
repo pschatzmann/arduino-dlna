@@ -1,4 +1,4 @@
-    
+
 #include "basic/Str.h"
 #include <Arduino.h>
 
@@ -8,7 +8,7 @@ void setup() {
   tiny_dlna::Str test_str{200};
   test_str.set(xml_data);
   test_str.replaceAll("&", "&amp;");
-  arduino::Serial.println(test_str.c_str());
+  Serial.println(test_str.c_str());
 }
 
 void loop() {}

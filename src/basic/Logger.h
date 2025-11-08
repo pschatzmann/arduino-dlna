@@ -53,7 +53,7 @@ class LoggerClass {
   }
 
  protected:
-  Print* log_stream_ptr = &arduino::Serial;
+  Print* log_stream_ptr = &Serial;
   DlnaLogLevel log_level = DlnaLogLevel::Warning;
 };
 

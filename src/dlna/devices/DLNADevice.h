@@ -6,8 +6,8 @@
 #include "basic/Url.h"
 #include "dlna/DLNADeviceInfo.h"
 #include "dlna/Schedule.h"
-#include "dlna/devices/IDevice.h"
 #include "dlna/devices/DLNADeviceRequestParser.h"
+#include "dlna/devices/IDevice.h"
 #include "dlna/devices/SubscriptionMgrDevice.h"
 #include "dlna/xml/XMLParserPrint.h"
 #include "http/Http.h"
@@ -179,8 +179,7 @@ class DLNADevice : public IDevice {
   /// Find a service by its event subscription URL (returns nullptr if not
   /// found). This encapsulates the lookup that was previously done inline
   /// in the static subscription handler.
-  DLNAServiceInfo* getServiceByEventPath(
-      const char* requestPath) override {
+  DLNAServiceInfo* getServiceByEventPath(const char* requestPath) override {
     if (p_device_info == nullptr || requestPath == nullptr) return nullptr;
     for (DLNAServiceInfo& s : p_device_info->getServices()) {
       if (StrView(s.event_sub_url).equals(requestPath)) {
@@ -216,10 +215,7 @@ class DLNADevice : public IDevice {
 
   /// Repeat the post-alive messages (default: 0 = no repeat). Call this method
   /// before calling begin!
-  void setPostAliveRepeatMs(uint32_t ms) override {
-    post_alive_repeat_ms = ms;
-  }
-
+  void setPostAliveRepeatMs(uint32_t ms) override { post_alive_repeat_ms = ms; }
 
   /// Enable or disable subscription notifications: call before begin
   void setSubscriptionsActive(bool flag) override {
@@ -338,18 +334,18 @@ class DLNADevice : public IDevice {
   }
 
   static size_t replyGetCurrentConnectionIDs(Print& out, const char* ids) {
-    return printReplyXML(
-        out, "GetCurrentConnectionIDsResponse", "ConnectionManager",
-        [ids](Print& o, void* ref) -> size_t {
-          (void)ref;
-          size_t written = 0;
-          // UPnP spec uses "CurrentConnectionIDs" as the
-          // response element name
-          written += o.print("<CurrentConnectionIDs>");
-          written += o.print(StrView(ids ? ids : "0").c_str());
-          written += o.print("</CurrentConnectionIDs>");
-          return written;
-        });
+    return printReplyXML(out, "GetCurrentConnectionIDsResponse",
+                         "ConnectionManager",
+                         [ids](Print& o, void* ref) -> size_t {
+                           (void)ref;
+                           size_t written = 0;
+                           // UPnP spec uses "CurrentConnectionIDs" as the
+                           // response element name
+                           written += o.print("<CurrentConnectionIDs>");
+                           written += o.print(StrView(ids ? ids : "0").c_str());
+                           written += o.print("</CurrentConnectionIDs>");
+                           return written;
+                         });
   }
 
   static size_t replyGetCurrentConnectionInfo(Print& out,
@@ -466,10 +462,9 @@ class DLNADevice : public IDevice {
 #ifdef ESP32
       DlnaLogger.log(DlnaLogLevel::Info,
                      "Mem: freeHeap=%u freePsram=%u  / Scheduler: size=%d "
-                     "active=%s / StrRegistry: count=%d size=%d",
+                     "active=%s",
                      (unsigned)ESP.getFreeHeap(), (unsigned)ESP.getFreePsram(),
-                     scheduler.size(), isSchedulerActive() ? "true" : "false",
-                     registry.count(), registry.size());
+                     scheduler.size(), isSchedulerActive() ? "true" : "false");
 #endif
     }
   }
@@ -631,7 +626,7 @@ class DLNADevice : public IDevice {
     }
   }
 
-  /// Handle SUBSCRIBE requests 
+  /// Handle SUBSCRIBE requests
   static bool handleSubscribe(IHttpServer* server, const char* requestPath,
                               HttpRequestHandlerLine* hl) {
     DlnaLogger.log(DlnaLogLevel::Debug, "handleSubscribe");
@@ -644,7 +639,7 @@ class DLNADevice : public IDevice {
     return device->getSubscriptionMgr().processSubscribeRequest(*server, *svc);
   }
 
-  /// Handle UNSUBSCRIBE requests 
+  /// Handle UNSUBSCRIBE requests
   static bool handleUnsubscribe(IHttpServer* server, const char* requestPath,
                                 HttpRequestHandlerLine* hl) {
     DlnaLogger.log(DlnaLogLevel::Debug, "handleUnsubscribe");

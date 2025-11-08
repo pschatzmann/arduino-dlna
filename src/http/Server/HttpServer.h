@@ -279,7 +279,7 @@ class HttpServer : public IHttpServer {
     reply_header.write(this->client());
     callback(*client_ptr, ref);
 #if DLNA_LOG_XML
-  callback(arduino::Serial, ref);
+  callback(Serial, ref);
 #endif
     endClient();
   }
@@ -334,7 +334,7 @@ class HttpServer : public IHttpServer {
   /// closes the connection to the current client_ptr
   void endClient() override {
     DlnaLogger.log(DlnaLogLevel::Info, "HttpServer %s", "endClient");
-    client_ptr->flush();
+    //client_ptr->flush();
     client_ptr->stop();
   }
 

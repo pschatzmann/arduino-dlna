@@ -8,7 +8,7 @@
 #include "basic/StrView.h"
 #include "basic/Vector.h"
 #include "dlna_config.h"
-#include <Arduino.h>  // for arduino::Serial on host/emulator
+#include <Arduino.h>  // for Serial on host/emulator
 
 namespace tiny_dlna {
 /**
@@ -362,12 +362,12 @@ struct XMLPrinter {
 
   void clear() {
     // Reset to default serial output (qualified to support emulator namespace)
-    p_out = &arduino::Serial;
+    p_out = &Serial;
   }
 
  protected:
   // Default output: Arduino serial (qualified to avoid name resolution issues)
-  Print* p_out = &arduino::Serial;
+  Print* p_out = &Serial;
 
   size_t println(const char* txt) {
     assert(p_out != nullptr);
