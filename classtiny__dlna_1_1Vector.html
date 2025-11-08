@@ -119,10 +119,13 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ada5f46a6f5e7ac431052e2d65b10d30c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#ada5f46a6f5e7ac431052e2d65b10d30c">Vector</a> (const Alloc &amp;alloc)</td></tr>
 <tr class="separator:ada5f46a6f5e7ac431052e2d65b10d30c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3e6ceb791d58ef9a4bb5ab8a7001eabe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a3e6ceb791d58ef9a4bb5ab8a7001eabe">eraseIndex</a> (int index)</td></tr>
+<tr class="memdesc:a3e6ceb791d58ef9a4bb5ab8a7001eabe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Erase element by index (no-op on out-of-range).  <br /></td></tr>
 <tr class="separator:a3e6ceb791d58ef9a4bb5ab8a7001eabe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af012d91eb8cc8e7a9e51b98da76466fa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Vector.html#a7302d3b426332ef7a59fc48996628c2c">iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#af012d91eb8cc8e7a9e51b98da76466fa">erase</a> (size_t index)</td></tr>
+<tr class="memdesc:af012d91eb8cc8e7a9e51b98da76466fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience overload to erase by index.  <br /></td></tr>
 <tr class="separator:af012d91eb8cc8e7a9e51b98da76466fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a20988e556956feac11b04a645efa234d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html#a20988e556956feac11b04a645efa234d">reset</a> ()</td></tr>
+<tr class="memdesc:a20988e556956feac11b04a645efa234d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset the container by clearing and shrinking capacity to fit.  <br /></td></tr>
 <tr class="separator:a20988e556956feac11b04a645efa234d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Typedef Documentation</h2>
@@ -407,6 +410,16 @@ template&lt;class T , class Alloc  = ALLOCATOR&lt;T&gt;&gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Convenience overload to erase by index. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>Zero-based index to erase. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>iterator Iterator to the element following the erased one, or end() if none. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Returns end() and performs no action if the index is out of range. </dd></dl>
+
 </div>
 </div>
 <a id="a3e6ceb791d58ef9a4bb5ab8a7001eabe" name="a3e6ceb791d58ef9a4bb5ab8a7001eabe"></a>
@@ -435,6 +448,15 @@ template&lt;class T , class Alloc  = ALLOCATOR&lt;T&gt;&gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Erase element by index (no-op on out-of-range). </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>Zero-based index of the element to erase. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>Equivalent to erase(begin() + index) when in range; does nothing otherwise. </dd></dl>
+
 </div>
 </div>
 <a id="a20988e556956feac11b04a645efa234d" name="a20988e556956feac11b04a645efa234d"></a>
@@ -461,6 +483,9 @@ template&lt;class T , class Alloc  = ALLOCATOR&lt;T&gt;&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Reset the container by clearing and shrinking capacity to fit. </p>
+<p>Calls clear() followed by shrink_to_fit() to return memory to the system where supported. Useful on memory-constrained targets after large, temporary usage. </p>
 
 </div>
 </div>
