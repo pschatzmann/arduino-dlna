@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Arduino DLNA Server: tiny_dlna::Queue&lt; T &gt; Class Template Reference</title>
+<title>Arduino DLNA Server: tiny_dlna::Queue&lt; T, Alloc &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -77,7 +77,7 @@ $(function() {
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classtiny__dlna_1_1Queue-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">tiny_dlna::Queue&lt; T &gt; Class Template Reference</div></div>
+  <div class="headertitle"><div class="title">tiny_dlna::Queue&lt; T, Alloc &gt; Class Template Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -88,33 +88,33 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a45e46351ceedfcb8af55f3b8712073a8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Queue.html#a45e46351ceedfcb8af55f3b8712073a8">Queue</a> ()=default</td></tr>
-<tr class="separator:a45e46351ceedfcb8af55f3b8712073a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acb53a82aca6a70fcf8a4ae969da9df27"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Queue.html#acb53a82aca6a70fcf8a4ae969da9df27">enqueue</a> (T &amp;data)</td></tr>
-<tr class="separator:acb53a82aca6a70fcf8a4ae969da9df27"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6a203fd5debc97640bc8f79a13776aa0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Queue.html#a6a203fd5debc97640bc8f79a13776aa0">enqueue</a> (T &amp;&amp;data)</td></tr>
-<tr class="separator:a6a203fd5debc97640bc8f79a13776aa0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a852a90ec44e3391311dcf22e891158ec"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Queue.html#a852a90ec44e3391311dcf22e891158ec">peek</a> (T &amp;data)</td></tr>
-<tr class="separator:a852a90ec44e3391311dcf22e891158ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab9104e34d7484e092389987f6f16a91b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Queue.html#ab9104e34d7484e092389987f6f16a91b">dequeue</a> (T &amp;data)</td></tr>
-<tr class="separator:ab9104e34d7484e092389987f6f16a91b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a01d670cfd73e5e629e6e1dc3f7c7c296"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Queue.html#a01d670cfd73e5e629e6e1dc3f7c7c296">size</a> ()</td></tr>
-<tr class="separator:a01d670cfd73e5e629e6e1dc3f7c7c296"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7c88f19d21fcacf857c786c4be6e6aff"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Queue.html#a7c88f19d21fcacf857c786c4be6e6aff">clear</a> ()</td></tr>
-<tr class="separator:a7c88f19d21fcacf857c786c4be6e6aff"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4e4af8415a6449f4accb884cc893a5b6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Queue.html#a4e4af8415a6449f4accb884cc893a5b6">empty</a> ()</td></tr>
-<tr class="separator:a4e4af8415a6449f4accb884cc893a5b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1f0b448089c9b4ed4571a60f3ce4ae41"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Queue.html#a1f0b448089c9b4ed4571a60f3ce4ae41">setAllocator</a> (<a class="el" href="dlna__config_8h.html#afddba70f8ea3f9edae2d1dbc4fa07130">ALLOCATOR</a> &amp;allocator)</td></tr>
-<tr class="separator:a1f0b448089c9b4ed4571a60f3ce4ae41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adbecdd81d187d9a88dfc79ddd7f9dd03"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Queue.html#adbecdd81d187d9a88dfc79ddd7f9dd03">Queue</a> ()=default</td></tr>
+<tr class="separator:adbecdd81d187d9a88dfc79ddd7f9dd03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab07499a144953a7eef2cc2958596fb41"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Queue.html#ab07499a144953a7eef2cc2958596fb41">Queue</a> (const Alloc &amp;alloc)</td></tr>
+<tr class="separator:ab07499a144953a7eef2cc2958596fb41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af302bcb2d1d9e8bfe226550220e1503e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Queue.html#af302bcb2d1d9e8bfe226550220e1503e">enqueue</a> (T &amp;data)</td></tr>
+<tr class="separator:af302bcb2d1d9e8bfe226550220e1503e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f30519014d117dacac3de824c6124c5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Queue.html#a3f30519014d117dacac3de824c6124c5">enqueue</a> (T &amp;&amp;data)</td></tr>
+<tr class="separator:a3f30519014d117dacac3de824c6124c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6269b23d00eeb51b97aade774a3f8ab"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Queue.html#ae6269b23d00eeb51b97aade774a3f8ab">peek</a> (T &amp;data)</td></tr>
+<tr class="separator:ae6269b23d00eeb51b97aade774a3f8ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25c705540caa598059db09d35173cc67"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Queue.html#a25c705540caa598059db09d35173cc67">dequeue</a> (T &amp;data)</td></tr>
+<tr class="separator:a25c705540caa598059db09d35173cc67"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28ebf81ee6eb397e23d7e580fef39312"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Queue.html#a28ebf81ee6eb397e23d7e580fef39312">size</a> ()</td></tr>
+<tr class="separator:a28ebf81ee6eb397e23d7e580fef39312"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a4d0d3d57e8aae850729f50d92b978f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Queue.html#a5a4d0d3d57e8aae850729f50d92b978f">clear</a> ()</td></tr>
+<tr class="separator:a5a4d0d3d57e8aae850729f50d92b978f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf090e96ef3b68a1de6246108dca1376"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Queue.html#abf090e96ef3b68a1de6246108dca1376">empty</a> ()</td></tr>
+<tr class="separator:abf090e96ef3b68a1de6246108dca1376"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a04167389daeecf61ba2ca48780741d84"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1List.html">List</a>&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Queue.html#a04167389daeecf61ba2ca48780741d84">l</a></td></tr>
-<tr class="separator:a04167389daeecf61ba2ca48780741d84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a6bf94a4d2ad24661e81ff8016503fd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1List.html">List</a>&lt; T, Alloc &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Queue.html#a6a6bf94a4d2ad24661e81ff8016503fd">l_instance</a></td></tr>
+<tr class="separator:a6a6bf94a4d2ad24661e81ff8016503fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;class T&gt;<br />
-class tiny_dlna::Queue&lt; T &gt;</div><p>FIFO <a class="el" href="classtiny__dlna_1_1Queue.html" title="FIFO Queue which is based on a List.">Queue</a> which is based on a <a class="el" href="classtiny__dlna_1_1List.html" title="Double linked list.">List</a>. </p>
+<div class="textblock"><div class="compoundTemplParams">template&lt;class T, class Alloc = ALLOCATOR&lt;T&gt;&gt;<br />
+class tiny_dlna::Queue&lt; T, Alloc &gt;</div><p>FIFO <a class="el" href="classtiny__dlna_1_1Queue.html" title="FIFO Queue which is based on a List.">Queue</a> which is based on a <a class="el" href="classtiny__dlna_1_1List.html" title="Double linked list.">List</a>. </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
@@ -124,19 +124,19 @@ class tiny_dlna::Queue&lt; T &gt;</div><p>FIFO <a class="el" href="classtiny__dl
   </dd>
 </dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a45e46351ceedfcb8af55f3b8712073a8" name="a45e46351ceedfcb8af55f3b8712073a8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a45e46351ceedfcb8af55f3b8712073a8">&#9670;&#160;</a></span>Queue()</h2>
+<a id="adbecdd81d187d9a88dfc79ddd7f9dd03" name="adbecdd81d187d9a88dfc79ddd7f9dd03"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adbecdd81d187d9a88dfc79ddd7f9dd03">&#9670;&#160;</a></span>Queue() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class T &gt; </div>
+template&lt;class T , class Alloc  = ALLOCATOR&lt;T&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtiny__dlna_1_1Queue.html">tiny_dlna::Queue</a>&lt; T &gt;::Queue </td>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1Queue.html">tiny_dlna::Queue</a>&lt; T, Alloc &gt;::Queue </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -151,20 +151,48 @@ template&lt;class T &gt; </div>
 
 </div>
 </div>
-<h2 class="groupheader">Member Function Documentation</h2>
-<a id="a7c88f19d21fcacf857c786c4be6e6aff" name="a7c88f19d21fcacf857c786c4be6e6aff"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7c88f19d21fcacf857c786c4be6e6aff">&#9670;&#160;</a></span>clear()</h2>
+<a id="ab07499a144953a7eef2cc2958596fb41" name="ab07499a144953a7eef2cc2958596fb41"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab07499a144953a7eef2cc2958596fb41">&#9670;&#160;</a></span>Queue() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class T &gt; </div>
+template&lt;class T , class Alloc  = ALLOCATOR&lt;T&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool <a class="el" href="classtiny__dlna_1_1Queue.html">tiny_dlna::Queue</a>&lt; T &gt;::clear </td>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1Queue.html">tiny_dlna::Queue</a>&lt; T, Alloc &gt;::Queue </td>
+          <td>(</td>
+          <td class="paramtype">const Alloc &amp;&#160;</td>
+          <td class="paramname"><em>alloc</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a5a4d0d3d57e8aae850729f50d92b978f" name="a5a4d0d3d57e8aae850729f50d92b978f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a4d0d3d57e8aae850729f50d92b978f">&#9670;&#160;</a></span>clear()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T , class Alloc  = ALLOCATOR&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classtiny__dlna_1_1Queue.html">tiny_dlna::Queue</a>&lt; T, Alloc &gt;::clear </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -179,19 +207,19 @@ template&lt;class T &gt; </div>
 
 </div>
 </div>
-<a id="ab9104e34d7484e092389987f6f16a91b" name="ab9104e34d7484e092389987f6f16a91b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab9104e34d7484e092389987f6f16a91b">&#9670;&#160;</a></span>dequeue()</h2>
+<a id="a25c705540caa598059db09d35173cc67" name="a25c705540caa598059db09d35173cc67"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a25c705540caa598059db09d35173cc67">&#9670;&#160;</a></span>dequeue()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class T &gt; </div>
+template&lt;class T , class Alloc  = ALLOCATOR&lt;T&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool <a class="el" href="classtiny__dlna_1_1Queue.html">tiny_dlna::Queue</a>&lt; T &gt;::dequeue </td>
+          <td class="memname">bool <a class="el" href="classtiny__dlna_1_1Queue.html">tiny_dlna::Queue</a>&lt; T, Alloc &gt;::dequeue </td>
           <td>(</td>
           <td class="paramtype">T &amp;&#160;</td>
           <td class="paramname"><em>data</em></td><td>)</td>
@@ -207,19 +235,19 @@ template&lt;class T &gt; </div>
 
 </div>
 </div>
-<a id="a4e4af8415a6449f4accb884cc893a5b6" name="a4e4af8415a6449f4accb884cc893a5b6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4e4af8415a6449f4accb884cc893a5b6">&#9670;&#160;</a></span>empty()</h2>
+<a id="abf090e96ef3b68a1de6246108dca1376" name="abf090e96ef3b68a1de6246108dca1376"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf090e96ef3b68a1de6246108dca1376">&#9670;&#160;</a></span>empty()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class T &gt; </div>
+template&lt;class T , class Alloc  = ALLOCATOR&lt;T&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool <a class="el" href="classtiny__dlna_1_1Queue.html">tiny_dlna::Queue</a>&lt; T &gt;::empty </td>
+          <td class="memname">bool <a class="el" href="classtiny__dlna_1_1Queue.html">tiny_dlna::Queue</a>&lt; T, Alloc &gt;::empty </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -234,19 +262,19 @@ template&lt;class T &gt; </div>
 
 </div>
 </div>
-<a id="a6a203fd5debc97640bc8f79a13776aa0" name="a6a203fd5debc97640bc8f79a13776aa0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6a203fd5debc97640bc8f79a13776aa0">&#9670;&#160;</a></span>enqueue() <span class="overload">[1/2]</span></h2>
+<a id="a3f30519014d117dacac3de824c6124c5" name="a3f30519014d117dacac3de824c6124c5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f30519014d117dacac3de824c6124c5">&#9670;&#160;</a></span>enqueue() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class T &gt; </div>
+template&lt;class T , class Alloc  = ALLOCATOR&lt;T&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool <a class="el" href="classtiny__dlna_1_1Queue.html">tiny_dlna::Queue</a>&lt; T &gt;::enqueue </td>
+          <td class="memname">bool <a class="el" href="classtiny__dlna_1_1Queue.html">tiny_dlna::Queue</a>&lt; T, Alloc &gt;::enqueue </td>
           <td>(</td>
           <td class="paramtype">T &amp;&amp;&#160;</td>
           <td class="paramname"><em>data</em></td><td>)</td>
@@ -262,19 +290,19 @@ template&lt;class T &gt; </div>
 
 </div>
 </div>
-<a id="acb53a82aca6a70fcf8a4ae969da9df27" name="acb53a82aca6a70fcf8a4ae969da9df27"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acb53a82aca6a70fcf8a4ae969da9df27">&#9670;&#160;</a></span>enqueue() <span class="overload">[2/2]</span></h2>
+<a id="af302bcb2d1d9e8bfe226550220e1503e" name="af302bcb2d1d9e8bfe226550220e1503e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af302bcb2d1d9e8bfe226550220e1503e">&#9670;&#160;</a></span>enqueue() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class T &gt; </div>
+template&lt;class T , class Alloc  = ALLOCATOR&lt;T&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool <a class="el" href="classtiny__dlna_1_1Queue.html">tiny_dlna::Queue</a>&lt; T &gt;::enqueue </td>
+          <td class="memname">bool <a class="el" href="classtiny__dlna_1_1Queue.html">tiny_dlna::Queue</a>&lt; T, Alloc &gt;::enqueue </td>
           <td>(</td>
           <td class="paramtype">T &amp;&#160;</td>
           <td class="paramname"><em>data</em></td><td>)</td>
@@ -290,19 +318,19 @@ template&lt;class T &gt; </div>
 
 </div>
 </div>
-<a id="a852a90ec44e3391311dcf22e891158ec" name="a852a90ec44e3391311dcf22e891158ec"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a852a90ec44e3391311dcf22e891158ec">&#9670;&#160;</a></span>peek()</h2>
+<a id="ae6269b23d00eeb51b97aade774a3f8ab" name="ae6269b23d00eeb51b97aade774a3f8ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae6269b23d00eeb51b97aade774a3f8ab">&#9670;&#160;</a></span>peek()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class T &gt; </div>
+template&lt;class T , class Alloc  = ALLOCATOR&lt;T&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool <a class="el" href="classtiny__dlna_1_1Queue.html">tiny_dlna::Queue</a>&lt; T &gt;::peek </td>
+          <td class="memname">bool <a class="el" href="classtiny__dlna_1_1Queue.html">tiny_dlna::Queue</a>&lt; T, Alloc &gt;::peek </td>
           <td>(</td>
           <td class="paramtype">T &amp;&#160;</td>
           <td class="paramname"><em>data</em></td><td>)</td>
@@ -318,47 +346,19 @@ template&lt;class T &gt; </div>
 
 </div>
 </div>
-<a id="a1f0b448089c9b4ed4571a60f3ce4ae41" name="a1f0b448089c9b4ed4571a60f3ce4ae41"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1f0b448089c9b4ed4571a60f3ce4ae41">&#9670;&#160;</a></span>setAllocator()</h2>
+<a id="a28ebf81ee6eb397e23d7e580fef39312" name="a28ebf81ee6eb397e23d7e580fef39312"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28ebf81ee6eb397e23d7e580fef39312">&#9670;&#160;</a></span>size()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class T &gt; </div>
+template&lt;class T , class Alloc  = ALLOCATOR&lt;T&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classtiny__dlna_1_1Queue.html">tiny_dlna::Queue</a>&lt; T &gt;::setAllocator </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="dlna__config_8h.html#afddba70f8ea3f9edae2d1dbc4fa07130">ALLOCATOR</a> &amp;&#160;</td>
-          <td class="paramname"><em>allocator</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a01d670cfd73e5e629e6e1dc3f7c7c296" name="a01d670cfd73e5e629e6e1dc3f7c7c296"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a01d670cfd73e5e629e6e1dc3f7c7c296">&#9670;&#160;</a></span>size()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">size_t <a class="el" href="classtiny__dlna_1_1Queue.html">tiny_dlna::Queue</a>&lt; T &gt;::size </td>
+          <td class="memname">size_t <a class="el" href="classtiny__dlna_1_1Queue.html">tiny_dlna::Queue</a>&lt; T, Alloc &gt;::size </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -374,19 +374,19 @@ template&lt;class T &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="a04167389daeecf61ba2ca48780741d84" name="a04167389daeecf61ba2ca48780741d84"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a04167389daeecf61ba2ca48780741d84">&#9670;&#160;</a></span>l</h2>
+<a id="a6a6bf94a4d2ad24661e81ff8016503fd" name="a6a6bf94a4d2ad24661e81ff8016503fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a6bf94a4d2ad24661e81ff8016503fd">&#9670;&#160;</a></span>l_instance</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class T &gt; </div>
+template&lt;class T , class Alloc  = ALLOCATOR&lt;T&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtiny__dlna_1_1List.html">List</a>&lt;T&gt; <a class="el" href="classtiny__dlna_1_1Queue.html">tiny_dlna::Queue</a>&lt; T &gt;::l</td>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1List.html">List</a>&lt;T, Alloc&gt; <a class="el" href="classtiny__dlna_1_1Queue.html">tiny_dlna::Queue</a>&lt; T, Alloc &gt;::l_instance</td>
         </tr>
       </table>
   </td>

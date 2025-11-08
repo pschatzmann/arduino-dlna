@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['xmlcallback_0',['XMLCallback',['../classtiny__dlna_1_1DLNAControlPointMediaServer.html#afecd658052168fa63ff13d4ebb9919e1',1,'tiny_dlna::DLNAControlPointMediaServer::XMLCallback()'],['../namespacetiny__dlna.html#af5e7d998a1158b5b3b2627df5ec61a80',1,'tiny_dlna::XMLCallback()']]]
+  ['web_5fcallback_5ffn_0',['web_callback_fn',['../namespacetiny__dlna.html#acf8c66b4a24ac309391845e144afb6a9',1,'tiny_dlna']]],
+  ['wifihttpserver_1',['WiFiHttpServer',['../namespacetiny__dlna.html#a9da2cdc1203db4cbbb2e1201cfac70b5',1,'tiny_dlna']]]
 ];

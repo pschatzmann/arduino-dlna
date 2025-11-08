@@ -79,7 +79,6 @@ $(function() {
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-static-methods">Static Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
-<a href="#pro-static-attribs">Static Protected Attributes</a> &#124;
 <a href="classtiny__dlna_1_1DLNADevice-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">tiny_dlna::DLNADevice&lt; ClientType &gt; Class Template Reference</div></div>
 </div><!--header-->
@@ -138,8 +137,6 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ad9dd60f9b97de5d2ab1cac7dc357b4e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaf10ce5de5a5d0ffe271d47ad432fa15"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#aaf10ce5de5a5d0ffe271d47ad432fa15">setPostAliveRepeatMs</a> (uint32_t ms) override</td></tr>
 <tr class="separator:aaf10ce5de5a5d0ffe271d47ad432fa15"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad84a9848653b0fdbd741e4251801a448"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1StringRegistry.html">StringRegistry</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#ad84a9848653b0fdbd741e4251801a448">getStringRegistry</a> () override</td></tr>
-<tr class="separator:ad84a9848653b0fdbd741e4251801a448"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aed95aa02eaea8a6077c6a79613f045e8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#aed95aa02eaea8a6077c6a79613f045e8">setSubscriptionsActive</a> (bool flag) override</td></tr>
 <tr class="memdesc:aed95aa02eaea8a6077c6a79613f045e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable or disable subscription notifications: call before begin.  <br /></td></tr>
 <tr class="separator:aed95aa02eaea8a6077c6a79613f045e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -242,11 +239,6 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a59763e87be438de5b69883efd20d0ccd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a05bc12c8f4d1e55258bf67f4145329d3"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a05bc12c8f4d1e55258bf67f4145329d3">next_subscriptions_timeout_ms</a> = 0</td></tr>
 <tr class="separator:a05bc12c8f4d1e55258bf67f4145329d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-attribs" name="pro-static-attribs"></a>
-Static Protected Attributes</h2></td></tr>
-<tr class="memitem:a9d49a6ed66f2481ed6fef9f8a7173b83"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classtiny__dlna_1_1StringRegistry.html">StringRegistry</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a9d49a6ed66f2481ed6fef9f8a7173b83">registry</a></td></tr>
-<tr class="separator:a9d49a6ed66f2481ed6fef9f8a7173b83"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename ClientType&gt;<br />
@@ -647,35 +639,6 @@ template&lt;typename ClientType &gt; </div>
 <p>Find a service by its event subscription URL (returns nullptr if not found). This encapsulates the lookup that was previously done inline in the static subscription handler. </p>
 
 <p>Implements <a class="el" href="classtiny__dlna_1_1IDevice.html#ac6f4c5f4e30ab0311a9a77d7d113b2cd">tiny_dlna::IDevice</a>.</p>
-
-</div>
-</div>
-<a id="ad84a9848653b0fdbd741e4251801a448" name="ad84a9848653b0fdbd741e4251801a448"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad84a9848653b0fdbd741e4251801a448">&#9670;&#160;</a></span>getStringRegistry()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename ClientType &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classtiny__dlna_1_1StringRegistry.html">StringRegistry</a> &amp; <a class="el" href="classtiny__dlna_1_1DLNADevice.html">tiny_dlna::DLNADevice</a>&lt; ClientType &gt;::getStringRegistry </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Implements <a class="el" href="classtiny__dlna_1_1IDevice.html#a719ccc5a26ef0681c668a2706215c861">tiny_dlna::IDevice</a>.</p>
 
 </div>
 </div>
@@ -1867,30 +1830,6 @@ template&lt;typename ClientType &gt; </div>
   </td>
   <td class="mlabels-right">
 <span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a9d49a6ed66f2481ed6fef9f8a7173b83" name="a9d49a6ed66f2481ed6fef9f8a7173b83"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9d49a6ed66f2481ed6fef9f8a7173b83">&#9670;&#160;</a></span>registry</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename ClientType &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classtiny__dlna_1_1StringRegistry.html">StringRegistry</a> <a class="el" href="classtiny__dlna_1_1DLNADevice.html">tiny_dlna::DLNADevice</a>&lt; ClientType &gt;::registry</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">

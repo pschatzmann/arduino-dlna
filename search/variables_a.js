@@ -1,11 +1,11 @@
 var searchData=
 [
-  ['l_0',['l',['../classtiny__dlna_1_1Queue.html#a04167389daeecf61ba2ca48780741d84',1,'tiny_dlna::Queue']]],
-  ['last_1',['last',['../classtiny__dlna_1_1List.html#a2c80a73fc7be3fadbc698b8d4b58227d',1,'tiny_dlna::List']]],
+  ['l_5finstance_0',['l_instance',['../classtiny__dlna_1_1Queue.html#a6a6bf94a4d2ad24661e81ff8016503fd',1,'tiny_dlna::Queue']]],
+  ['last_1',['last',['../classtiny__dlna_1_1List.html#a730e204598421cd1b5383a83fd6373e3',1,'tiny_dlna::List']]],
   ['last_5fattributes_2',['last_attributes',['../classtiny__dlna_1_1XMLParser.html#a0181e2e4bf8110abf69db577b00f4a32',1,'tiny_dlna::XMLParser']]],
   ['last_5fevent_5fnotify_5fms_3',['last_event_notify_ms',['../classtiny__dlna_1_1SubscriptionMgrControlPoint.html#a19faa4c6793a8ed88559a8e9b5856484',1,'tiny_dlna::SubscriptionMgrControlPoint']]],
   ['last_5freply_4',['last_reply',['../classtiny__dlna_1_1DLNAControlPointMediaRenderer.html#a868a1d3e694d0d082bf2334a0b8f29f9',1,'tiny_dlna::DLNAControlPointMediaRenderer::last_reply()'],['../classtiny__dlna_1_1DLNAControlPointMediaServer.html#adee5db73ee1ebcfe06a951edd1a36597',1,'tiny_dlna::DLNAControlPointMediaServer::last_reply()']]],
-  ['len_5',['len',['../classtiny__dlna_1_1StrView.html#a84766049d01621d878a6aafe1c7c35f4',1,'tiny_dlna::StrView::len()'],['../classtiny__dlna_1_1Vector.html#abc61d2836d97b5a611f49a17167402cb',1,'tiny_dlna::Vector::len()'],['../structtiny__dlna_1_1XMLParserPrint_1_1CBRef.html#a0d9526b4399cf64825e2b0d12240a261',1,'tiny_dlna::XMLParserPrint::CBRef::len()']]],
+  ['len_5',['len',['../classtiny__dlna_1_1StrView.html#a84766049d01621d878a6aafe1c7c35f4',1,'tiny_dlna::StrView::len()'],['../structtiny__dlna_1_1XMLParserPrint_1_1CBRef.html#a0d9526b4399cf64825e2b0d12240a261',1,'tiny_dlna::XMLParserPrint::CBRef::len()']]],
   ['lines_6',['lines',['../classtiny__dlna_1_1HttpHeader.html#a0303dd1387028e16f3c48b312e28a44c',1,'tiny_dlna::HttpHeader']]],
   ['local_5fhost_7',['local_host',['../classtiny__dlna_1_1HttpServer.html#ad5a0894a78fd39e49e31ac599561a1c8',1,'tiny_dlna::HttpServer']]],
   ['local_5fmute_8',['local_mute',['../classtiny__dlna_1_1DLNAControlPointMediaRenderer.html#a1bad194a60906ce811e962e15f8e01c2',1,'tiny_dlna::DLNAControlPointMediaRenderer']]],

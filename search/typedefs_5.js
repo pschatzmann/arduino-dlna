@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['iterator_5fcategory_0',['iterator_category',['../classtiny__dlna_1_1Vector_1_1Iterator.html#a7d643dec23809149be3f2306157d8020',1,'tiny_dlna::Vector::Iterator::iterator_category()'],['../classtiny__dlna_1_1Vector_1_1ConstIterator.html#aec23df6d67a5369d52828e069bee36ed',1,'tiny_dlna::Vector::ConstIterator::iterator_category()']]]
+  ['is_5falways_5fequal_0',['is_always_equal',['../classtiny__dlna_1_1AllocatorPSRAM.html#a57a0b2b11214e49d099d1656847e7935',1,'tiny_dlna::AllocatorPSRAM']]],
+  ['iterator_1',['iterator',['../classtiny__dlna_1_1Vector.html#a7302d3b426332ef7a59fc48996628c2c',1,'tiny_dlna::Vector']]]
 ];

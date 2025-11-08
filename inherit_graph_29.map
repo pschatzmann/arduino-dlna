@@ -1,4 +1,4 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classtiny__dlna_1_1ISubscriptionMgrDevice.html" title=" " alt="" coords="5,5,180,45"/>
-<area shape="rect" id="node2" href="$classtiny__dlna_1_1SubscriptionMgrDevice.html" title="Manages UPnP event subscriptions and queued notifications for a DLNA device." alt="" coords="228,5,423,45"/>
+<area shape="rect" id="node1" href="$classtiny__dlna_1_1IHttpServer.html" title=" " alt="" coords="5,13,169,38"/>
+<area shape="rect" id="node2" href="$classtiny__dlna_1_1HttpServer.html" title="Header&#45;only HTTP server wrapper that registers callback handlers." alt="" coords="217,5,417,45"/>
 </map>

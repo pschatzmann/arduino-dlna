@@ -1,3 +1,5 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$structtiny__dlna_1_1DLNAMediaRenderer_1_1ActionRule.html" title=" " alt="" coords="5,5,231,45"/>
+<area shape="rect" id="node1" href="$classtiny__dlna_1_1DLNADeviceInfo.html" title="Device Attributes and generation of XML using urn:schemas&#45;upnp&#45;org:device&#45;1&#45;0. We could just return a..." alt="" coords="5,45,201,70"/>
+<area shape="rect" id="node2" href="$classtiny__dlna_1_1DLNAMediaRenderer.html" title="MediaRenderer DLNA Device." alt="" coords="249,5,475,45"/>
+<area shape="rect" id="node3" href="$classtiny__dlna_1_1DLNAMediaServer.html" title="Digital Media Server implementation." alt="" coords="258,69,466,109"/>
 </map>

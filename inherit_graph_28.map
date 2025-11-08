@@ -1,3 +1,4 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$structtiny__dlna_1_1IPAddressAndPort.html" title="IP Adress including Port information." alt="" coords="5,5,209,31"/>
+<area shape="rect" id="node1" href="$classtiny__dlna_1_1IHttpRequest.html" title=" " alt="" coords="5,13,180,38"/>
+<area shape="rect" id="node2" href="$classtiny__dlna_1_1HttpRequest.html" title="Simple API to process get, put, post, del http requests I tried to use Arduino HttpClient,..." alt="" coords="228,5,399,45"/>
 </map>

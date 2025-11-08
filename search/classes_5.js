@@ -7,6 +7,6 @@ var searchData=
   ['ihttpserver_4',['IHttpServer',['../classtiny__dlna_1_1IHttpServer.html',1,'tiny_dlna']]],
   ['ipaddressandport_5',['IPAddressAndPort',['../structtiny__dlna_1_1IPAddressAndPort.html',1,'tiny_dlna']]],
   ['isubscriptionmgrdevice_6',['ISubscriptionMgrDevice',['../classtiny__dlna_1_1ISubscriptionMgrDevice.html',1,'tiny_dlna']]],
-  ['iterator_7',['Iterator',['../classtiny__dlna_1_1List_1_1Iterator.html',1,'tiny_dlna::List&lt; T &gt;::Iterator'],['../classtiny__dlna_1_1Vector_1_1Iterator.html',1,'tiny_dlna::Vector&lt; T &gt;::Iterator']]],
+  ['iterator_7',['Iterator',['../classtiny__dlna_1_1List_1_1Iterator.html',1,'tiny_dlna::List']]],
   ['iudpservice_8',['IUDPService',['../classtiny__dlna_1_1IUDPService.html',1,'tiny_dlna']]]
 ];

@@ -89,8 +89,8 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a7d37bbabff277417e19e31bd1da17d92"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1XMLDeviceParser.html#a7d37bbabff277417e19e31bd1da17d92">XMLDeviceParser</a> (<a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html">DLNADeviceInfo</a> &amp;result, <a class="el" href="classtiny__dlna_1_1StringRegistry.html">StringRegistry</a> &amp;strings)</td></tr>
-<tr class="separator:a7d37bbabff277417e19e31bd1da17d92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94e45ab82a633699dc13189fa55dd961"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1XMLDeviceParser.html#a94e45ab82a633699dc13189fa55dd961">XMLDeviceParser</a> (<a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html">DLNADeviceInfo</a> &amp;result)</td></tr>
+<tr class="separator:a94e45ab82a633699dc13189fa55dd961"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae613f1ca5ffc7ca056f8829cb381cb0c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1XMLDeviceParser.html#ae613f1ca5ffc7ca056f8829cb381cb0c">parse</a> (const uint8_t *buffer, size_t len)</td></tr>
 <tr class="separator:ae613f1ca5ffc7ca056f8829cb381cb0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a99ed4babb56b05a6a118b27d5eddde0f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1XMLDeviceParser.html#a99ed4babb56b05a6a118b27d5eddde0f">finalize</a> (<a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html">DLNADeviceInfo</a> &amp;result)</td></tr>
@@ -108,8 +108,6 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:af04a4bcd88228d7104aa6429358fbb17"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afb9b44e34b46728134e1c8f0fbd54521"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html">DLNADeviceInfo</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1XMLDeviceParser.html#afb9b44e34b46728134e1c8f0fbd54521">p_device</a> = nullptr</td></tr>
 <tr class="separator:afb9b44e34b46728134e1c8f0fbd54521"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:add81efba4d3c7fa9cc2ffecd4ce8f852"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1StringRegistry.html">StringRegistry</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1XMLDeviceParser.html#add81efba4d3c7fa9cc2ffecd4ce8f852">p_registry</a> = nullptr</td></tr>
-<tr class="separator:add81efba4d3c7fa9cc2ffecd4ce8f852"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7ba4af2d134f9c0f26e35a71b52c90d0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1XMLParserPrint.html">XMLParserPrint</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1XMLDeviceParser.html#a7ba4af2d134f9c0f26e35a71b52c90d0">xml_parser</a></td></tr>
 <tr class="separator:a7ba4af2d134f9c0f26e35a71b52c90d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad84f804724d73c2c5840f6fc0113bccd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1XMLDeviceParser.html#ad84f804724d73c2c5840f6fc0113bccd">in_service</a> = false</td></tr>
@@ -123,8 +121,8 @@ Protected Attributes</h2></td></tr>
 <div class="textblock"><p>Incremental XML device parser using <a class="el" href="classtiny__dlna_1_1XMLParserPrint.html" title="Helper class that implements a Print interface to accumulate XML data and then parse it using XMLPars...">XMLParserPrint</a>. </p>
 <p>This parser consumes parse events from an <a class="el" href="classtiny__dlna_1_1XMLParserPrint.html" title="Helper class that implements a Print interface to accumulate XML data and then parse it using XMLPars...">XMLParserPrint</a> instance and fills a <a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html" title="Device Attributes and generation of XML using urn:schemas-upnp-org:device-1-0. We could just return a...">DLNADeviceInfo</a> structure incrementally. It keeps internal state across multiple calls so callers can feed XML data in chunks. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a7d37bbabff277417e19e31bd1da17d92" name="a7d37bbabff277417e19e31bd1da17d92"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7d37bbabff277417e19e31bd1da17d92">&#9670;&#160;</a></span>XMLDeviceParser()</h2>
+<a id="a94e45ab82a633699dc13189fa55dd961" name="a94e45ab82a633699dc13189fa55dd961"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a94e45ab82a633699dc13189fa55dd961">&#9670;&#160;</a></span>XMLDeviceParser()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -136,18 +134,8 @@ Protected Attributes</h2></td></tr>
           <td class="memname">tiny_dlna::XMLDeviceParser::XMLDeviceParser </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html">DLNADeviceInfo</a> &amp;&#160;</td>
-          <td class="paramname"><em>result</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"><em>result</em></td><td>)</td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1StringRegistry.html">StringRegistry</a> &amp;&#160;</td>
-          <td class="paramname"><em>strings</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -350,28 +338,6 @@ Protected Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html">DLNADeviceInfo</a>* tiny_dlna::XMLDeviceParser::p_device = nullptr</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="add81efba4d3c7fa9cc2ffecd4ce8f852" name="add81efba4d3c7fa9cc2ffecd4ce8f852"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#add81efba4d3c7fa9cc2ffecd4ce8f852">&#9670;&#160;</a></span>p_registry</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classtiny__dlna_1_1StringRegistry.html">StringRegistry</a>* tiny_dlna::XMLDeviceParser::p_registry = nullptr</td>
         </tr>
       </table>
   </td>

@@ -80,32 +80,26 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="dlna__config_8h_source.html">dlna_config.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="Allocator_8h_source.html">Allocator.h</a>&quot;</code><br />
 <code>#include &lt;assert.h&gt;</code><br />
 <code>#include &lt;utility&gt;</code><br />
 <code>#include &lt;stddef.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="Allocator_8h_source.html">Allocator.h</a>&quot;</code><br />
+<code>#include &lt;memory&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for List.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="List_8h__incl.png" border="0" usemap="#asrc_2basic_2List_8h" alt=""/></div>
 <map name="asrc_2basic_2List_8h" id="asrc_2basic_2List_8h">
-<area shape="rect" title=" " alt="" coords="116,5,235,31"/>
+<area shape="rect" title=" " alt="" coords="257,5,376,31"/>
 <area shape="rect" href="dlna__config_8h.html" title=" " alt="" coords="5,152,113,177"/>
-<area shape="rect" title=" " alt="" coords="46,79,121,104"/>
-<area shape="rect" title=" " alt="" coords="145,79,205,104"/>
-<area shape="rect" title=" " alt="" coords="230,79,305,104"/>
-<area shape="rect" href="Allocator_8h.html" title=" " alt="" coords="329,79,419,104"/>
-<area shape="rect" title=" " alt="" coords="188,152,259,177"/>
-<area shape="rect" href="AllocationTracker_8h.html" title=" " alt="" coords="283,152,465,177"/>
-<area shape="rect" href="Logger_8h.html" title=" " alt="" coords="490,225,605,251"/>
-<area shape="rect" title=" " alt="" coords="139,225,204,251"/>
-<area shape="rect" title=" " alt="" coords="229,225,309,251"/>
-<area shape="rect" title=" " alt="" coords="333,225,383,251"/>
-<area shape="rect" title=" " alt="" coords="407,225,466,251"/>
-<area shape="rect" title=" " alt="" coords="369,299,443,324"/>
-<area shape="rect" title=" " alt="" coords="467,299,534,324"/>
-<area shape="rect" title=" " alt="" coords="559,299,629,324"/>
-<area shape="rect" title=" " alt="" coords="653,299,737,324"/>
+<area shape="rect" href="Allocator_8h.html" title=" " alt="" coords="230,79,321,104"/>
+<area shape="rect" title=" " alt="" coords="138,152,215,177"/>
+<area shape="rect" title=" " alt="" coords="535,152,610,177"/>
+<area shape="rect" title=" " alt="" coords="396,79,456,104"/>
+<area shape="rect" title=" " alt="" coords="481,79,555,104"/>
+<area shape="rect" title=" " alt="" coords="240,152,311,177"/>
+<area shape="rect" title=" " alt="" coords="335,152,394,177"/>
+<area shape="rect" title=" " alt="" coords="419,152,511,177"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -149,13 +143,13 @@ This graph shows which files directly or indirectly include this file:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1List.html">tiny_dlna::List&lt; T &gt;</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1List.html">tiny_dlna::List&lt; T, Alloc &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Double linked list.  <a href="classtiny__dlna_1_1List.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1List_1_1Node.html">tiny_dlna::List&lt; T &gt;::Node</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1List_1_1Node.html">tiny_dlna::List&lt; T, Alloc &gt;::Node</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classtiny__dlna_1_1List.html" title="Double linked list.">List</a> <a class="el" href="structtiny__dlna_1_1List_1_1Node.html" title="List Node.">Node</a>.  <a href="structtiny__dlna_1_1List_1_1Node.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1List_1_1Iterator.html">tiny_dlna::List&lt; T &gt;::Iterator</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1List_1_1Iterator.html">tiny_dlna::List&lt; T, Alloc &gt;::Iterator</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classtiny__dlna_1_1List.html" title="Double linked list.">List</a> <a class="el" href="classtiny__dlna_1_1List_1_1Iterator.html" title="List Iterator.">Iterator</a>.  <a href="classtiny__dlna_1_1List_1_1Iterator.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">

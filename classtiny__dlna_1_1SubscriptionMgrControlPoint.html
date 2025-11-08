@@ -90,9 +90,9 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a326688d5e10f4855c48eac1c0876350d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgrControlPoint.html#a326688d5e10f4855c48eac1c0876350d">setup</a> (<a class="el" href="classtiny__dlna_1_1IHttpRequest.html">IHttpRequest</a> &amp;http, <a class="el" href="classtiny__dlna_1_1IUDPService.html">IUDPService</a> &amp;udp, <a class="el" href="classtiny__dlna_1_1Url.html">Url</a> &amp;localCallbackUrl, <a class="el" href="classtiny__dlna_1_1StringRegistry.html">StringRegistry</a> &amp;reg, <a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html">DLNADeviceInfo</a> &amp;device)</td></tr>
-<tr class="memdesc:a326688d5e10f4855c48eac1c0876350d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inject required dependencies and initialize the manager.  <br /></td></tr>
-<tr class="separator:a326688d5e10f4855c48eac1c0876350d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0e321b7b97dade9e28b34dc0cb5fb7e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgrControlPoint.html#af0e321b7b97dade9e28b34dc0cb5fb7e">setup</a> (<a class="el" href="classtiny__dlna_1_1IHttpRequest.html">IHttpRequest</a> &amp;http, <a class="el" href="classtiny__dlna_1_1IUDPService.html">IUDPService</a> &amp;udp, <a class="el" href="classtiny__dlna_1_1Url.html">Url</a> &amp;localCallbackUrl, <a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html">DLNADeviceInfo</a> &amp;device)</td></tr>
+<tr class="memdesc:af0e321b7b97dade9e28b34dc0cb5fb7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inject required dependencies and initialize the manager.  <br /></td></tr>
+<tr class="separator:af0e321b7b97dade9e28b34dc0cb5fb7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad838f34437bfb2bc27a7cafd90d4628a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgrControlPoint.html#ad838f34437bfb2bc27a7cafd90d4628a">setHttpServer</a> (<a class="el" href="classtiny__dlna_1_1IHttpServer.html">IHttpServer</a> &amp;server)</td></tr>
 <tr class="memdesc:ad838f34437bfb2bc27a7cafd90d4628a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attach an <a class="el" href="classtiny__dlna_1_1HttpServer.html" title="Header-only HTTP server wrapper that registers callback handlers.">HttpServer</a> instance and register the internal NOTIFY handler.  <br /></td></tr>
 <tr class="separator:ad838f34437bfb2bc27a7cafd90d4628a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -198,7 +198,7 @@ Protected Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Standalone manager for UPnP/DLNA event subscriptions used by control points and devices. </p>
-<p>This class centralizes SUBSCRIBE / UNSUBSCRIBE lifecycle management and NOTIFY handling for UPnP event subscriptions. It is intentionally independent from <a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html" title="Lightweight DLNA control point manager.">DLNAControlPoint</a>: the owner injects dependencies via <code><a class="el" href="classtiny__dlna_1_1SubscriptionMgrControlPoint.html#a326688d5e10f4855c48eac1c0876350d" title="Inject required dependencies and initialize the manager.">setup()</a></code> and may store this manager as a value member (no dynamic allocation required).</p>
+<p>This class centralizes SUBSCRIBE / UNSUBSCRIBE lifecycle management and NOTIFY handling for UPnP event subscriptions. It is intentionally independent from <a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html" title="Lightweight DLNA control point manager.">DLNAControlPoint</a>: the owner injects dependencies via <code><a class="el" href="classtiny__dlna_1_1SubscriptionMgrControlPoint.html#af0e321b7b97dade9e28b34dc0cb5fb7e" title="Inject required dependencies and initialize the manager.">setup()</a></code> and may store this manager as a value member (no dynamic allocation required).</p>
 <p>Responsibilities:</p><ul>
 <li>Perform SUBSCRIBE requests and store subscription metadata on <a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html" title="Attributes needed for the DLNA Service Definition.">DLNAServiceInfo</a> (SID, subscription_state, timestamps).</li>
 <li>Perform UNSUBSCRIBE requests and clear local metadata.</li>
@@ -206,7 +206,7 @@ Protected Attributes</h2></td></tr>
 <li>Invoke a user-provided callback for property change events.</li>
 </ul>
 <p>Thread / lifetime notes:</p><ul>
-<li>The manager does not own injected pointers (<a class="el" href="classtiny__dlna_1_1HttpServer.html" title="Header-only HTTP server wrapper that registers callback handlers.">HttpServer</a>, <a class="el" href="classtiny__dlna_1_1IHttpRequest.html">IHttpRequest</a>, <a class="el" href="classtiny__dlna_1_1IUDPService.html" title="Abstract Interface for UDP API.">IUDPService</a>, <a class="el" href="classtiny__dlna_1_1Url.html" title="URL parser which breaks a full url string up into its individual parts.">Url</a>, <a class="el" href="classtiny__dlna_1_1StringRegistry.html" title="Make sure that a string is stored only once.">StringRegistry</a>, devices vector). The caller must ensure these outlive the manager.</li>
+<li>The manager does not own injected pointers (<a class="el" href="classtiny__dlna_1_1HttpServer.html" title="Header-only HTTP server wrapper that registers callback handlers.">HttpServer</a>, <a class="el" href="classtiny__dlna_1_1IHttpRequest.html">IHttpRequest</a>, <a class="el" href="classtiny__dlna_1_1IUDPService.html" title="Abstract Interface for UDP API.">IUDPService</a>, <a class="el" href="classtiny__dlna_1_1Url.html" title="URL parser which breaks a full url string up into its individual parts.">Url</a>, devices vector). The caller must ensure these outlive the manager.</li>
 <li>All public methods are safe to call from the single-threaded Arduino loop context. They are not thread-safe for concurrent access. </li>
 </ul>
 </div><h2 class="groupheader">Member Function Documentation</h2>
@@ -657,12 +657,12 @@ Protected Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<p>The method registers an HTTP handler at the local callback path (derived from the injected <code><a class="el" href="classtiny__dlna_1_1Url.html" title="URL parser which breaks a full url string up into its individual parts.">Url</a></code> via <a class="el" href="classtiny__dlna_1_1SubscriptionMgrControlPoint.html#a326688d5e10f4855c48eac1c0876350d" title="Inject required dependencies and initialize the manager.">setup()</a>). </p>
+<p>The method registers an HTTP handler at the local callback path (derived from the injected <code><a class="el" href="classtiny__dlna_1_1Url.html" title="URL parser which breaks a full url string up into its individual parts.">Url</a></code> via <a class="el" href="classtiny__dlna_1_1SubscriptionMgrControlPoint.html#af0e321b7b97dade9e28b34dc0cb5fb7e" title="Inject required dependencies and initialize the manager.">setup()</a>). </p>
 
 </div>
 </div>
-<a id="a326688d5e10f4855c48eac1c0876350d" name="a326688d5e10f4855c48eac1c0876350d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a326688d5e10f4855c48eac1c0876350d">&#9670;&#160;</a></span>setup()</h2>
+<a id="af0e321b7b97dade9e28b34dc0cb5fb7e" name="af0e321b7b97dade9e28b34dc0cb5fb7e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af0e321b7b97dade9e28b34dc0cb5fb7e">&#9670;&#160;</a></span>setup()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -691,12 +691,6 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1StringRegistry.html">StringRegistry</a> &amp;&#160;</td>
-          <td class="paramname"><em>reg</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html">DLNADeviceInfo</a> &amp;&#160;</td>
           <td class="paramname"><em>device</em>&#160;</td>
         </tr>
@@ -720,8 +714,7 @@ Protected Attributes</h2></td></tr>
     <tr><td class="paramname">http</td><td>Reference to the HTTP helper used to perform SUBSCRIBE/ UNSUBSCRIBE requests. </td></tr>
     <tr><td class="paramname">udp</td><td>Reference to the UDP discovery/service helper (not owned). </td></tr>
     <tr><td class="paramname">localCallbackUrl</td><td>URL that remote services should use when delivering NOTIFY messages (manager registers an endpoint based on this path). </td></tr>
-    <tr><td class="paramname">reg</td><td><a class="el" href="classtiny__dlna_1_1StringRegistry.html" title="Make sure that a string is stored only once.">StringRegistry</a> used for shared string storage (not owned). </td></tr>
-    <tr><td class="paramname">devices</td><td><a class="el" href="classtiny__dlna_1_1Vector.html" title="Custom Vector implementation that provides std::vector-like API with support for custom allocators....">Vector</a> of <a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html" title="Device Attributes and generation of XML using urn:schemas-upnp-org:device-1-0. We could just return a...">DLNADeviceInfo</a> instances managed by the control point; used to find matching services. </td></tr>
+    <tr><td class="paramname">devices</td><td><a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a> of <a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html" title="Device Attributes and generation of XML using urn:schemas-upnp-org:device-1-0. We could just return a...">DLNADeviceInfo</a> instances managed by the control point; used to find matching services. </td></tr>
   </table>
   </dd>
 </dl>
@@ -1000,14 +993,12 @@ Protected Attributes</h2></td></tr>
 <b>Initial value:</b><div class="fragment"><div class="line">= [](<span class="keyword">const</span> <span class="keywordtype">char</span>* sid, <span class="keyword">const</span> <span class="keywordtype">char</span>* varName,</div>
 <div class="line">                          <span class="keyword">const</span> <span class="keywordtype">char</span>* newValue, <span class="keywordtype">void</span>* reference) {</div>
 <div class="line">        </div>
-<div class="line">        <a class="code hl_variable" href="namespacetiny__dlna.html#ad1a9a726ef5546aa12b5f58a2af3db3c">DlnaLogger</a>.<a class="code hl_function" href="classtiny__dlna_1_1LoggerClass.html#ab7ac4f166531a8d27e919b3f47fe8388">log</a>(<a class="code hl_enumvalue" href="namespacetiny__dlna.html#a5eabb92538a2ba1397f67b903cb9d35eaa603905470e2a5b8c13e96b579ef0dba">DlnaLogLevel::Debug</a>,</div>
+<div class="line">        DlnaLogger.log(<a class="code hl_enumvalue" href="namespacetiny__dlna.html#a5eabb92538a2ba1397f67b903cb9d35eaa603905470e2a5b8c13e96b579ef0dba">DlnaLogLevel::Debug</a>,</div>
 <div class="line">                       <span class="stringliteral">&quot;- Event notification: SID=&#39;%s&#39; var=&#39;%s&#39; value=&#39;%s&#39;&quot;</span>,</div>
 <div class="line">                       sid ? sid : <span class="stringliteral">&quot;&quot;</span>, varName ? varName : <span class="stringliteral">&quot;&quot;</span>,</div>
 <div class="line">                       newValue ? newValue : <span class="stringliteral">&quot;&quot;</span>);</div>
 <div class="line">      }</div>
-<div class="ttc" id="aclasstiny__dlna_1_1LoggerClass_html_ab7ac4f166531a8d27e919b3f47fe8388"><div class="ttname"><a href="classtiny__dlna_1_1LoggerClass.html#ab7ac4f166531a8d27e919b3f47fe8388">tiny_dlna::LoggerClass::log</a></div><div class="ttdeci">void log(DlnaLogLevel current_level, const char *fmt...)</div><div class="ttdoc">Print log message.</div><div class="ttdef"><b>Definition:</b> Logger.h:40</div></div>
 <div class="ttc" id="anamespacetiny__dlna_html_a5eabb92538a2ba1397f67b903cb9d35eaa603905470e2a5b8c13e96b579ef0dba"><div class="ttname"><a href="namespacetiny__dlna.html#a5eabb92538a2ba1397f67b903cb9d35eaa603905470e2a5b8c13e96b579ef0dba">tiny_dlna::DlnaLogLevel::Debug</a></div><div class="ttdeci">@ Debug</div></div>
-<div class="ttc" id="anamespacetiny__dlna_html_ad1a9a726ef5546aa12b5f58a2af3db3c"><div class="ttname"><a href="namespacetiny__dlna.html#ad1a9a726ef5546aa12b5f58a2af3db3c">tiny_dlna::DlnaLogger</a></div><div class="ttdeci">LoggerClass DlnaLogger</div><div class="ttdef"><b>Definition:</b> Logger.cpp:5</div></div>
 </div><!-- fragment -->
 </div>
 </div>

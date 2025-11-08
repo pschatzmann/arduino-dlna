@@ -86,11 +86,8 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a request to invoke a remote DLNA service action.  <a href="classtiny__dlna_1_1ActionRequest.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Allocator.html">Allocator</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Memory allocateator which uses malloc.  <a href="classtiny__dlna_1_1Allocator.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1AllocatorExt.html">AllocatorExt</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Memory allocateator which uses ps_malloc (on the ESP32) and if this fails it resorts to malloc.  <a href="classtiny__dlna_1_1AllocatorExt.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1AllocatorPSRAM.html">AllocatorPSRAM</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Custom allocator that uses ESP32's PSRAM for memory allocation.  <a href="classtiny__dlna_1_1AllocatorPSRAM.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Argument.html">Argument</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">DLNA Service: Action <a class="el" href="classtiny__dlna_1_1Argument.html" title="DLNA Service: Action Argument.">Argument</a>.  <a href="classtiny__dlna_1_1Argument.html#details">More...</a><br /></td></tr>
@@ -271,10 +268,6 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classtiny__dlna_1_1Scheduler.html" title="Scheduler which processes all due Schedules (to send out UDP replies)">Scheduler</a> which processes all due Schedules (to send out UDP replies)  <a href="classtiny__dlna_1_1Scheduler.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Str.html">Str</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">String implementation which keeps the data on the heap. We grow the allocated memory only if the copy source is not fitting.  <a href="classtiny__dlna_1_1Str.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1StringRegistry.html">StringRegistry</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Make sure that a string is stored only once.  <a href="classtiny__dlna_1_1StringRegistry.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1StrPrint.html">StrPrint</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print to a dynamic string.  <a href="classtiny__dlna_1_1StrPrint.html#details">More...</a><br /></td></tr>
@@ -301,7 +294,6 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">URL parser which breaks a full url string up into its individual parts.  <a href="classtiny__dlna_1_1Url.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1Vector.html">Vector</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Custom <a class="el" href="classtiny__dlna_1_1Vector.html" title="Custom Vector implementation that provides std::vector-like API with support for custom allocators....">Vector</a> implementation that provides std::vector-like API with support for custom allocators. This implementation is used when DLNA_USE_STD_VECTOR is disabled, typically for embedded systems where std::vector is not available or custom memory management is required.  <a href="classtiny__dlna_1_1Vector.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1XMLAttributeParser.html">XMLAttributeParser</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Small utility to extract attributes from a start-tag in an XML fragment.  <a href="classtiny__dlna_1_1XMLAttributeParser.html#details">More...</a><br /></td></tr>
@@ -409,8 +401,6 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:ad1a9a726ef5546aa12b5f58a2af3db3c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1LoggerClass.html">LoggerClass</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetiny__dlna.html#ad1a9a726ef5546aa12b5f58a2af3db3c">DlnaLogger</a></td></tr>
-<tr class="separator:ad1a9a726ef5546aa12b5f58a2af3db3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acc6e7eb7763b852f949101cb5450dd0f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html">DLNAControlPoint</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetiny__dlna.html#acc6e7eb7763b852f949101cb5450dd0f">selfDLNAControlPoint</a> = nullptr</td></tr>
 <tr class="separator:acc6e7eb7763b852f949101cb5450dd0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a286262803e800d8b73d9e3d50ec6df99"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetiny__dlna.html#a286262803e800d8b73d9e3d50ec6df99">MaxHeaderLineLength</a> = 200</td></tr>
@@ -877,20 +867,6 @@ Variables</h2></td></tr>
 <b>Initial value:</b><div class="fragment"><div class="line">=</div>
 <div class="line">    <span class="stringliteral">&quot;Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)&quot;</span></div>
 </div><!-- fragment -->
-</div>
-</div>
-<a id="ad1a9a726ef5546aa12b5f58a2af3db3c" name="ad1a9a726ef5546aa12b5f58a2af3db3c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad1a9a726ef5546aa12b5f58a2af3db3c">&#9670;&#160;</a></span>DlnaLogger</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classtiny__dlna_1_1LoggerClass.html">LoggerClass</a> tiny_dlna::DlnaLogger</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
 </div>
 </div>
 <a id="a8a15987adbef522eb850ee7a6c095eab" name="a8a15987adbef522eb850ee7a6c095eab"></a>

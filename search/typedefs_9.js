@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['reference_0',['reference',['../classtiny__dlna_1_1Vector.html#a6360a0de42235e5ee6f5a12a347e1179',1,'tiny_dlna::Vector::reference()'],['../classtiny__dlna_1_1Vector_1_1Iterator.html#a795d30e5d9cd987a848da4a1fc99c865',1,'tiny_dlna::Vector::Iterator::reference()'],['../classtiny__dlna_1_1Vector_1_1ConstIterator.html#a57422480ef4af2fd6016772f9ae5ed7a',1,'tiny_dlna::Vector::ConstIterator::reference()']]]
+  ['pointer_0',['pointer',['../classtiny__dlna_1_1AllocatorPSRAM.html#ae3eef57d22ddc630528d7acbea558e78',1,'tiny_dlna::AllocatorPSRAM']]],
+  ['preparedatacallback_1',['PrepareDataCallback',['../classtiny__dlna_1_1DLNAMediaServer.html#ae71f655de7ed60810bae7e7acfd09ab7',1,'tiny_dlna::DLNAMediaServer']]],
+  ['propagate_5fon_5fcontainer_5fmove_5fassignment_2',['propagate_on_container_move_assignment',['../classtiny__dlna_1_1AllocatorPSRAM.html#ab87b886f3753c8d65ba393c395da71c9',1,'tiny_dlna::AllocatorPSRAM']]]
 ];
