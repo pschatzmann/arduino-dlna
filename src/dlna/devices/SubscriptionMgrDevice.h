@@ -374,13 +374,13 @@ class SubscriptionMgrDevice : public ISubscriptionMgrDevice {
    * @brief Number of active subscriptions
    * @return int count of subscriptions
    */
-  int subscriptionsCount() override { return subscriptions.size(); }
+  size_t subscriptionsCount() override { return subscriptions.size(); }
 
   /**
    * @brief Number of queued pending notifications
    * @return int count of pending notifications
    */
-  int pendingCount() override { return pending_list.size(); }
+  size_t pendingCount() override { return pending_list.size(); }
 
   /**
    * @brief Enable or disable subscription delivery.
@@ -405,7 +405,8 @@ class SubscriptionMgrDevice : public ISubscriptionMgrDevice {
    * @brief Query whether subscription delivery is active
    * @return true if subscription delivery is enabled
    */
-  bool isSubscriptionsActive() const override { return is_active; }
+  bool isSubscriptionsActive() override { return is_active; }
+
 
  protected:
   // store pointers to heap-allocated Subscription objects. This keeps

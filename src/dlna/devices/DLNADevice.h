@@ -459,14 +459,17 @@ class DLNADevice : public IDevice {
     if ((uint64_t)(now - last_mem_log) >= MEM_LOG_INTERVAL_MS) {
       // update timestamp for next interval on all platforms
       last_mem_log = now;
-#ifdef ESP32
       DlnaLogger.log(DlnaLogLevel::Info,
-                     "Mem: freeHeap=%u freePsram=%u  / Scheduler: size=%d "
-                     "active=%s",
-                     (unsigned)ESP.getFreeHeap(), (unsigned)ESP.getFreePsram(),
-                     scheduler.size(), isSchedulerActive() ? "true" : "false");
+        "Subscriptions: active=%d pending=%d / Scheduler: size=%d active = %s",
+        subscription_mgr.subscriptionsCount(),
+        subscription_mgr.pendingCount(), scheduler.size(),
+        isSchedulerActive() ? "true" : "false");
+#ifdef ESP32
+      DlnaLogger.log(DlnaLogLevel::Info, "Memory: freeHeap=%u freePsram=%u",
+        (unsigned)ESP.getFreeHeap(),
+        (unsigned)ESP.getFreePsram());
 #endif
-    }
+}
   }
 
   /// Process incoming UDP and execute scheduled replies.

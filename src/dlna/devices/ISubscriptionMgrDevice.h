@@ -31,15 +31,15 @@ class ISubscriptionMgrDevice {
 
   virtual void removeExpired() = 0;
 
-  virtual int subscriptionsCount() = 0;
+  virtual size_t subscriptionsCount() = 0;
 
-  virtual int pendingCount() = 0;
+  virtual size_t pendingCount() = 0;
 
   virtual void setSubscriptionsActive(bool flag) = 0;
 
   virtual void end() = 0;
 
-  virtual bool isSubscriptionsActive() const = 0;
+  virtual bool isSubscriptionsActive() = 0;
 
   virtual bool processSubscribeRequest(IHttpServer& server,
                                        DLNAServiceInfo& service) = 0;
