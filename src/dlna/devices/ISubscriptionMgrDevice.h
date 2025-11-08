@@ -47,8 +47,10 @@ class ISubscriptionMgrDevice {
   /// Remove expired subscriptions
   virtual void removeExpired() = 0;
 
+  /// Provide actual number of subscriptions
   virtual size_t subscriptionsCount() = 0;
 
+  /// Provide actual number of open (unprocessed) notifications
   virtual size_t pendingCount() = 0;
 
   /// Enable/disable subscription processing
