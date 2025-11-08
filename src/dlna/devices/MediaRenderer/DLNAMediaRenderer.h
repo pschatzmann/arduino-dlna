@@ -486,6 +486,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
   DLNADescr& getConnectionMgrDescr() { return *p_connmgrDescr; }
 
  protected:
+  /// Individual action rule for handling specific actions
   struct ActionRule {
     const char* suffix;
     bool (*handler)(DLNAMediaRenderer*, ActionRequest&, IHttpServer&);

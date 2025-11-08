@@ -2,7 +2,7 @@
 
 #include "Arduino.h"  // for millis
 #include "dlna/DLNADeviceInfo.h"
-#include "udp/IUDPService.h"
+#include "dlna/udp/IUDPService.h"
 #include "dlna/Schedule.h"
 
 namespace tiny_dlna {

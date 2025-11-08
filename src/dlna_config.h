@@ -1,56 +1,56 @@
 #pragma once
 
-// Define delay in ms for main DLNA loop
+/// Define delay in ms for main DLNA loop
 #ifndef DLNA_LOOP_DELAY_MS
 #define DLNA_LOOP_DELAY_MS 8
 #endif
 
-// Define scheduler run interval in ms
+/// Define scheduler run interval in ms
 #ifndef DLNA_RUN_SCHEDULER_EVERY_MS
 #define DLNA_RUN_SCHEDULER_EVERY_MS 200
 #endif
 
-// Define subscription publish interval in ms
+/// Define subscription publish interval in ms
 #ifndef DLNA_RUN_SUBSCRIPTIONS_EVERY_MS
 #define DLNA_RUN_SUBSCRIPTIONS_EVERY_MS 500
 #endif
 
-// Define the default http request timeout
+/// Define the default http request timeout
 #ifndef DLNA_HTTP_REQUEST_TIMEOUT_MS
 #define DLNA_HTTP_REQUEST_TIMEOUT_MS 6000
 #endif
 
-// Define XML parse buffer size
+/// Define XML parse buffer size
 #ifndef XML_PARSER_BUFFER_SIZE
 #define XML_PARSER_BUFFER_SIZE 512
 #endif
 
-// Define initial size for StrPrint
+/// Define initial size for StrPrint
 #ifndef STR_PRINT_INITIAL_SIZE
 #define STR_PRINT_INITIAL_SIZE 200
 #endif
 
-// Define increment size for StrPrint
+/// Define increment size for StrPrint
 #ifndef STR_PRINT_INC_SIZE
 #define STR_PRINT_INC_SIZE 200
 #endif
 
-// SSDP multicast/UDP port (default 1900)
+/// SSDP multicast/UDP port (default 1900)
 #ifndef DLNA_SSDP_PORT
 #define DLNA_SSDP_PORT 1900
 #endif
 
-// app-wide max URL length
+/// app-wide max URL length
 #ifndef DLNA_MAX_URL_LEN
 #define DLNA_MAX_URL_LEN 256
 #endif
 
-// Max printf buffer size
+/// Max printf buffer size
 #ifndef MAX_PRINTF_SIZE
 #define MAX_PRINTF_SIZE 512
 #endif
 
-// All possible protocols
+/// All possible protocols
 #ifndef DLNA_PROTOCOL_ALL
 #define DLNA_PROTOCOL_ALL                                                    \
   "http-get:*:image/jpeg:DLNA.ORG_PN=JPEG_TN,http-get:*:image/"              \
@@ -139,7 +139,7 @@
   "vnd.rn-realmedia-vbr:*http-get:*:video/webm:*"
 #endif
 
-// All possible audio protocols
+/// All possible audio protocols
 #ifndef DLNA_PROTOCOL_AUDIO
 #define DLNA_PROTOCOL_AUDIO                                      \
   "http-get:*:audio/mpeg:DLNA.ORG_PN=MP3,"                       \
@@ -168,16 +168,17 @@
 #define DLNA_PROTOCOL DLNA_PROTOCOL_AUDIO
 #endif
 
-// Define the default allocator base class to use: std::allocator, AllocatorPSRAM
+/// Define the default allocator base class to use: std::allocator, AllocatorPSRAM
 #ifndef ALLOCATOR
     #define ALLOCATOR AllocatorPSRAM
 #endif
 
+/// Enable or disable logging of XML messages
 #ifndef DLNA_LOG_XML
 #define DLNA_LOG_XML false
 #endif
 
-// Define the netmask for discovery filtering
+/// Define the netmask for discovery filtering
 #ifndef DLNA_DISCOVERY_NETMASK
 #define DLNA_DISCOVERY_NETMASK IPAddress(255, 255, 255, 0)
 #endif

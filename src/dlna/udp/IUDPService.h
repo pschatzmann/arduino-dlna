@@ -33,10 +33,15 @@ struct RequestData {
 class IUDPService {
  public:
   virtual ~IUDPService() = default;
+  /// Initialize UDP service on specified port
   virtual bool begin(int port) = 0;
+  /// Initialize UDP service on specified address and port
   virtual bool begin(IPAddressAndPort addr) = 0;
+  /// Send data to the default destination
   virtual bool send(uint8_t* data, int len) = 0;
+  /// Send data to specified address and port
   virtual bool send(IPAddressAndPort addr, uint8_t* data, int len) = 0;
+  /// Receive incoming UDP data and peer information
   virtual RequestData receive() = 0;
 };
 

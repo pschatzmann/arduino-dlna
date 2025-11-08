@@ -1,6 +1,6 @@
 #pragma once
 
-#include "udp/IUDPService.h"
+#include "dlna/udp/IUDPService.h"
 #include "dlna/Schedule.h"
 #include "dlna/Scheduler.h"
 

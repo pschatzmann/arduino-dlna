@@ -7,7 +7,7 @@
 #include "dlna/DLNAServiceInfo.h"
 #include "dlna/xml/XMLPrinter.h"
 #include "http/Server/IHttpServer.h"
-#include "udp/IUDPService.h"  // Ensure IUDPService is declared
+#include "dlna/udp/IUDPService.h"  // Ensure IUDPService is declared
 
 namespace tiny_dlna {
 

@@ -1,15 +1,16 @@
 #pragma once
 
-#include "udp/IUDPService.h"
 #include "assert.h"
+#include "dlna/udp/IUDPService.h"
 
 namespace tiny_dlna {
 
 /**
  * @brief Access to UDP functionality: sending and receiving of data
  *
- * This class is a template and requires you to specify the UDP implementation type.
- * For example, use UDPService<WiFiUDP> for WiFiUDP or UDPService<MyUDPType> for a custom UDP class.
+ * This class is a template and requires you to specify the UDP implementation
+ * type. For example, use UDPService<WiFiUDP> for WiFiUDP or
+ * UDPService<MyUDPType> for a custom UDP class.
  *
  * Usage:
  *   UDPService<WiFiUDP> udp; // Uses WiFiUDP
@@ -42,9 +43,9 @@ class UDPService : public IUDPService {
     return udp.beginMulticast(addr.address, addr.port);
   }
 
-  bool send(uint8_t *data, int len) override { return send(peer, data, len); }
+  bool send(uint8_t* data, int len) override { return send(peer, data, len); }
 
-  bool send(IPAddressAndPort addr, uint8_t *data, int len) override {
+  bool send(IPAddressAndPort addr, uint8_t* data, int len) override {
     DlnaLogger.log(DlnaLogLevel::Debug, "sending %d bytes", len);
     udp.beginPacket(addr.address, addr.port);
     int sent = udp.write(data, len);
@@ -66,8 +67,8 @@ class UDPService : public IUDPService {
       char tmp[packetSize + 1] = {0};
       int len = udp.readBytes(tmp, packetSize);
       result.data = tmp;
-      DlnaLogger.log(DlnaLogLevel::Debug, "Receive (%s [%d])->: %s", result.peer.toString(),
-                     packetSize, tmp);
+      DlnaLogger.log(DlnaLogLevel::Debug, "Receive (%s [%d])->: %s",
+                     result.peer.toString(), packetSize, tmp);
     }
     return result;
   }
