@@ -25,8 +25,8 @@ This library provides memory-efficient classes to implement __DLNA devices__ and
   - [DLNAControlPointMediaServer](https://pschatzmann.github.io/arduino-dlna/classtiny__dlna_1_1DLNAControlPointMediaServer.html)
 
 
-When instantiating the templated networking classes pick the client and server
-types that match your transport stack. The table below shows the recommended
+This implementation supports the different Arduino network stacks. Just specify
+your network class as template parameter. The table below shows the recommended
 pairings for the common Arduino WiFi and Ethernet libraries.
 
 | Class | WiFi | Ethernet |
