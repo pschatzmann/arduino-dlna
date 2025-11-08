@@ -1,14 +1,14 @@
 // Example: ControlPointMediaServer usage
 // Discovers MediaServer devices and performs a Browse on the root ("0").
 
+#include "WiFi.h"
 #include "DLNA.h"
 
 const char* ssid = "YOUR_SSID";
 const char* password = "YOUR_PASSWORD";
 
-WiFiClient client;
-DLNAHttpRequest http(client);
-UDPAsyncService udp;
+HttpRequest<WiFiClient> http;
+UDPService<WiFiUDP> udp;
 DLNAControlPoint cp;  // no notifications needed
 DLNAControlPointMediaServer cpms(cp, http, udp);
 

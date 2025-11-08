@@ -7,11 +7,13 @@
 #include "basic/Url.h"
 #include "dlna/DLNADeviceInfo.h"
 #include "dlna/Schedule.h"
-#include "dlna/devices/DLNADevice.h"
+#include "dlna/devices/IDevice.h"
 #include "dlna/devices/DLNADeviceRequestParser.h"
 #include "dlna/devices/SubscriptionMgrDevice.h"
 #include "dlna/xml/XMLParserPrint.h"
 #include "http/Http.h"
+#include "http/Server/IHttpServer.h"
+#include "udp/IUDPService.h"
 
 namespace tiny_dlna {
 
@@ -25,16 +27,25 @@ namespace tiny_dlna {
  * - The XML service descriptions can be stored as char arrays in progmem or
  * generated dynamically with the help of the XMLPrinter class.
  *
+ * The template parameter selects the HTTP client implementation (for example
+ * WiFiClient) that will be used by all internal helpers; choose the one that
+ * matches your platform.
+ *
+ * @tparam ClientType Arduino `Client` implementation used for outbound HTTP
+ *         traffic (e.g. `WiFiClient`, `EthernetClient`).
+ *
  * @author Phil Schatzmann
  */
-class DLNADevice {
+template <typename ClientType>
+class DLNADevice : public IDevice {
  public:
   DLNADevice() {
     // distribute initial subscription active flag to subscription manager
     setSubscriptionsActive(isSubscriptionsActive());
   }
   /// start the
-  bool begin(DLNADeviceInfo& device, IUDPService& udp, HttpServer& server) {
+  bool begin(DLNADeviceInfo& device, IUDPService& udp,
+             IHttpServer& server) override {
     DlnaLogger.log(DlnaLogLevel::Info, "DLNADevice::begin");
     server.setReference(this);
     p_server = &server;
@@ -66,7 +77,7 @@ class DLNADevice {
 
     // start web server
     Url url{baseUrl};
-    if (!p_server->begin(url.port())) {
+    if (!p_server->begin()) {
       DlnaLogger.log(DlnaLogLevel::Error, "Server failed");
       return false;
     }
@@ -93,10 +104,12 @@ class DLNADevice {
     return true;
   }
 
-  SubscriptionMgrDevice& getSubscriptionMgr() { return subscription_mgr; }
+  ISubscriptionMgrDevice& getSubscriptionMgr() override {
+    return subscription_mgr;
+  }
 
   /// Stops the processing and releases the resources
-  void end() {
+  void end() override {
     DlnaLogger.log(DlnaLogLevel::Info, "DLNADevice::end");
     p_server->end();
 
@@ -118,7 +131,7 @@ class DLNADevice {
   }
 
   /// call this method in the Arduino loop as often as possible
-  bool loop() {
+  bool loop() override {
     if (!is_active) return false;
     // Platform-specific periodic diagnostics (e.g. ESP32 memory logging)
     logMemoryIfNeeded();
@@ -147,7 +160,7 @@ class DLNADevice {
     return true;
   }
 
-  bool loopServer() {
+  bool loopServer() override {
     if (!is_active) return false;
     bool rc = p_server->doLoop();
     DlnaLogger.log(DlnaLogLevel::Debug, "server %s", rc ? "true" : "false");
@@ -155,19 +168,20 @@ class DLNADevice {
   }
 
   /// Provide addess to the service information
-  DLNAServiceInfo& getService(const char* id) {
+  DLNAServiceInfo& getService(const char* id) override {
     return p_device_info->getService(id);
   }
 
   /// Get Service by subscription ns abbrev
-  DLNAServiceInfo& getServiceByAbbrev(const char* abbrev) {
+  DLNAServiceInfo& getServiceByAbbrev(const char* abbrev) override {
     return p_device_info->getServiceByAbbrev(abbrev);
   }
 
   /// Find a service by its event subscription URL (returns nullptr if not
   /// found). This encapsulates the lookup that was previously done inline
   /// in the static subscription handler.
-  DLNAServiceInfo* getServiceByEventPath(const char* requestPath) {
+  DLNAServiceInfo* getServiceByEventPath(
+      const char* requestPath) override {
     if (p_device_info == nullptr || requestPath == nullptr) return nullptr;
     for (DLNAServiceInfo& s : p_device_info->getServices()) {
       if (StrView(s.event_sub_url).equals(requestPath)) {
@@ -179,8 +193,9 @@ class DLNADevice {
 
   /// Record a state variable change for subscription notifications
   void addChange(const char* serviceAbbrev,
-                 std::function<size_t(Print&, void*)> changeWriter, void* ref) {
-    SubscriptionMgrDevice& mgr = getSubscriptionMgr();
+                 std::function<size_t(Print&, void*)> changeWriter,
+                 void* ref) override {
+    auto& mgr = getSubscriptionMgr();
     DLNAServiceInfo& serviceInfo = getServiceByAbbrev(serviceAbbrev);
     if (!serviceInfo) {
       DlnaLogger.log(DlnaLogLevel::Warning,
@@ -192,22 +207,24 @@ class DLNADevice {
   }
 
   /// Provides the device
-  DLNADeviceInfo& getDeviceInfo() { return *p_device_info; }
+  DLNADeviceInfo& getDeviceInfo() override { return *p_device_info; }
 
   /// We can activate/deactivate the scheduler
-  void setSchedulerActive(bool flag) { scheduler.setActive(flag); }
+  void setSchedulerActive(bool flag) override { scheduler.setActive(flag); }
 
   /// Checks if the scheduler is active
-  bool isSchedulerActive() { return scheduler.isActive(); }
+  bool isSchedulerActive() override { return scheduler.isActive(); }
 
   /// Repeat the post-alive messages (default: 0 = no repeat). Call this method
   /// before calling begin!
-  void setPostAliveRepeatMs(uint32_t ms) { post_alive_repeat_ms = ms; }
+  void setPostAliveRepeatMs(uint32_t ms) override {
+    post_alive_repeat_ms = ms;
+  }
 
-  StringRegistry& getStringRegistry() { return registry; }
+  StringRegistry& getStringRegistry() override { return registry; }
 
   /// Enable or disable subscription notifications: call before begin
-  void setSubscriptionsActive(bool flag) {
+  void setSubscriptionsActive(bool flag) override {
     is_subscriptions_active = flag;
     if (p_device_info != nullptr) {
       p_device_info->setSubscriptionActive(flag);
@@ -216,10 +233,12 @@ class DLNADevice {
   }
 
   /// Check if subscription notifications are active
-  bool isSubscriptionsActive() const { return is_subscriptions_active; }
+  bool isSubscriptionsActive() const override {
+    return is_subscriptions_active;
+  }
 
   /// Parses the SOAP content of a DLNA action request
-  static void parseActionRequest(HttpServer* server, const char* requestPath,
+  static void parseActionRequest(IHttpServer* server, const char* requestPath,
                                  HttpRequestHandlerLine* hl,
                                  ActionRequest& action) {
     DlnaLogger.log(DlnaLogLevel::Info, "parseActionRequest");
@@ -364,7 +383,7 @@ class DLNADevice {
   }
 
   /// Static handler for SUBSCRIBE/UNSUBSCRIBE requests on service event URLs
-  static bool handleSubscription(HttpServer* server, const char* requestPath,
+  static bool handleSubscription(IHttpServer* server, const char* requestPath,
                                  HttpRequestHandlerLine* hl,
                                  bool& is_subscribe) {
     // Dispatch to dedicated handlers for subscribe/unsubscribe to keep the
@@ -385,21 +404,21 @@ class DLNADevice {
   }
 
   /// Sets a reference pointer that can be used to associate application
-  void setReference(void* ref) { reference = ref; }
+  void setReference(void* ref) override { reference = ref; }
 
   /// Gets the reference pointer
-  void* getReference() { return reference; }
+  void* getReference() override { return reference; }
 
  protected:
   bool is_active = false;
   bool is_subscriptions_active = true;
   uint32_t post_alive_repeat_ms = 0;
   Scheduler scheduler;
-  SubscriptionMgrDevice subscription_mgr;
+  SubscriptionMgrDevice<ClientType> subscription_mgr;
   DLNADeviceRequestParser parser;
   DLNADeviceInfo* p_device_info = nullptr;
   IUDPService* p_udp = nullptr;
-  HttpServer* p_server = nullptr;
+  IHttpServer* p_server = nullptr;
   inline static StringRegistry registry;
   void* reference = nullptr;
 
@@ -546,7 +565,7 @@ class DLNADevice {
   }
 
   /// set up Web Server to handle Service Addresses
-  virtual bool setupDLNAServer(HttpServer& srv) {
+  virtual bool setupDLNAServer(IHttpServer& srv) {
     DlnaLogger.log(DlnaLogLevel::Debug, "setupDLNAServer");
     char buffer[DLNA_MAX_URL_LEN] = {0};
     StrView url(buffer, DLNA_MAX_URL_LEN);
@@ -598,7 +617,7 @@ class DLNADevice {
   }
 
   /// callback to provide device XML
-  static void deviceXMLCallback(HttpServer* server, const char* requestPath,
+  static void deviceXMLCallback(IHttpServer* server, const char* requestPath,
                                 HttpRequestHandlerLine* hl) {
     DlnaLogger.log(DlnaLogLevel::Debug, "deviceXMLCallback");
 
@@ -621,29 +640,30 @@ class DLNADevice {
   }
 
   /// Handle SUBSCRIBE requests 
-  static bool handleSubscribe(HttpServer* server, const char* requestPath,
+  static bool handleSubscribe(IHttpServer* server, const char* requestPath,
                               HttpRequestHandlerLine* hl) {
     DlnaLogger.log(DlnaLogLevel::Debug, "handleSubscribe");
-    DLNADevice* p_device = (DLNADevice*)server->getReference();
-    assert(p_device != nullptr);
-    DLNAServiceInfo* svc = p_device->getServiceByEventPath(requestPath);
-    assert(svc != nullptr); 
-
-    // Delegate all HTTP processing to SubscriptionMgrDevice
-    return p_device->subscription_mgr.processSubscribeRequest(*server, *svc);
-  }
-
-  /// Handle UNSUBSCRIBE requests 
-  static bool handleUnsubscribe(HttpServer* server, const char* requestPath,
-                                HttpRequestHandlerLine* hl) {
-    DlnaLogger.log(DlnaLogLevel::Debug, "handleUnsubscribe");
-    DLNADevice* p_device = (DLNADevice*)server->getReference();
-    assert(p_device != nullptr);
-    DLNAServiceInfo* svc = p_device->getServiceByEventPath(requestPath);
+    auto* device = static_cast<IDevice*>(server->getReference());
+    assert(device != nullptr);
+    DLNAServiceInfo* svc = device->getServiceByEventPath(requestPath);
     assert(svc != nullptr);
 
     // Delegate all HTTP processing to SubscriptionMgrDevice
-    return p_device->subscription_mgr.processUnsubscribeRequest(*server, *svc);
+    return device->getSubscriptionMgr().processSubscribeRequest(*server, *svc);
+  }
+
+  /// Handle UNSUBSCRIBE requests 
+  static bool handleUnsubscribe(IHttpServer* server, const char* requestPath,
+                                HttpRequestHandlerLine* hl) {
+    DlnaLogger.log(DlnaLogLevel::Debug, "handleUnsubscribe");
+    auto* device = static_cast<IDevice*>(server->getReference());
+    assert(device != nullptr);
+    DLNAServiceInfo* svc = device->getServiceByEventPath(requestPath);
+    assert(svc != nullptr);
+
+    // Delegate all HTTP processing to SubscriptionMgrDevice
+    return device->getSubscriptionMgr().processUnsubscribeRequest(*server,
+                                                                  *svc);
   }
 };
 

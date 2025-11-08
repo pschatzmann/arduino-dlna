@@ -9,6 +9,7 @@
 #include "dlna/Schedule.h"
 #include "dlna/Scheduler.h"
 #include "dlna/StringRegistry.h"
+#include "dlna/clients/IControlPoint.h"
 #include "dlna/clients/SubscriptionMgrControlPoint.h"
 #include "dlna/devices/DLNADevice.h"
 #include "dlna/xml/XMLDeviceParser.h"
@@ -19,7 +20,6 @@
 
 namespace tiny_dlna {
 
-using XMLCallback = std::function<void(Client& client, ActionReply& reply)>;
 class DLNAControlPoint;
 DLNAControlPoint* selfDLNAControlPoint = nullptr;
 
@@ -59,47 +59,60 @@ DLNAControlPoint* selfDLNAControlPoint = nullptr;
  *
  * @author Phil Schatzmann
  */
-class DLNAControlPoint {
+class DLNAControlPoint : public IControlPoint {
  public:
   /// Default constructor w/o Notifications
   DLNAControlPoint() { selfDLNAControlPoint = this; }
 
-  /// Constructor supporting Notifications
-  DLNAControlPoint(HttpServer& server, int port = 80) : DLNAControlPoint() {
-    setHttpServer(server, port);
+  /// Constructor wiring HTTP and UDP dependencies; notifications disabled
+  DLNAControlPoint(IHttpRequest& http, IUDPService& udp) : DLNAControlPoint() {
+    setTransports(http, udp);
   }
+
+  /// Constructor wiring HTTP and UDP dependencies; notifications disabled
+  DLNAControlPoint(IHttpRequest& http, IUDPService& udp, IHttpServer& server) : DLNAControlPoint() {
+    setTransports(http, udp);
+    setHttpServer(server);
+  }
+
+  /// Constructor supporting Notifications
+  DLNAControlPoint(IHttpServer& server) : DLNAControlPoint() {
+    setHttpServer(server);
+  }
+
+  ~DLNAControlPoint() override = default;
+
   /// Requests the parsing of the device information
-  void setParseDevice(bool flag) { is_parse_device = flag; }
+  void setParseDevice(bool flag) override { is_parse_device = flag; }
 
   /// Defines the local url (needed for subscriptions)
-  void setLocalURL(Url url) { local_url = url; }
+  void setLocalURL(Url url) override { local_url = url; }
 
   /// Sets the repeat interval for M-SEARCH requests (define before begin)
-  void setSearchRepeatMs(int repeatMs) { msearch_repeat_ms = repeatMs; }
+  void setSearchRepeatMs(int repeatMs) override {
+    msearch_repeat_ms = repeatMs;
+  }
 
   /// Attach an opaque reference pointer (optional, for caller context)
-  void setReference(void* ref) { reference = ref; }
+  void setReference(void* ref) override { reference = ref; }
 
   /// Selects the default device by index
-  void setDeviceIndex(int idx) { default_device_idx = 0; }
-
-  /// (Subscription management has been moved to SubscriptionMgrControlPoint)
+  void setDeviceIndex(int idx) override { default_device_idx = 0; }
 
   /// Register a callback that will be invoked for incoming event notification
   void setEventSubscriptionCallback(
       std::function<void(const char* sid, const char* varName,
                          const char* newValue, void* reference)>
           cb,
-      void* ref = nullptr) {
+      void* ref = nullptr) override {
     subscription_mgr.setEventSubscriptionCallback(cb, ref);
   }
 
   /// Set HttpServer instance and register the notify handler
-  void setHttpServer(HttpServer& server, int port = 80) {
+  void setHttpServer(IHttpServer& server) override {
     DlnaLogger.log(DlnaLogLevel::Debug, "DLNAControlPointMgr::setHttpServer");
     p_http_server = &server;
-    http_server_port = port;
-    subscription_mgr.setHttpServer(server, port);
+    subscription_mgr.setHttpServer(server);
   }
 
   /// Register a callback that will be invoked when parsing SOAP/Action results
@@ -107,8 +120,18 @@ class DLNAControlPoint {
   /// attributes)
   void onResultNode(std::function<void(const char* nodeName, const char* text,
                                        const char* attributes)>
-                        cb) {
+                        cb) override {
     result_callback = cb;
+  }
+
+  bool begin(const char* searchTarget = "ssdp:all", uint32_t minWaitMs = 3000,
+             uint32_t maxWaitMs = 60000) override {
+    if (!p_http || !p_udp) {
+      DlnaLogger.log(DlnaLogLevel::Error,
+                     "DLNAControlPoint::begin: transports not configured");
+      return false;
+    }
+    return begin(*p_http, *p_udp, searchTarget, minWaitMs, maxWaitMs);
   }
 
   /**
@@ -123,22 +146,21 @@ class DLNAControlPoint {
    * `minWaitMs` elapsed the function will return early; otherwise it will block
    * until `maxWaitMs`.
    */
-  bool begin(DLNAHttpRequest& http, IUDPService& udp,
+  bool begin(IHttpRequest& http, IUDPService& udp,
              const char* searchTarget = "ssdp:all", uint32_t minWaitMs = 3000,
-             uint32_t maxWaitMs = 60000) {
+             uint32_t maxWaitMs = 60000) override {
     DlnaLogger.log(DlnaLogLevel::Info, "DLNADevice::begin");
     http.setTimeout(DLNA_HTTP_REQUEST_TIMEOUT_MS);
     search_target = searchTarget;
     is_active = true;
-    p_udp = &udp;
-    p_http = &http;
+    setTransports(http, udp);
 
     // set timeout for http requests
     http.setTimeout(DLNA_HTTP_REQUEST_TIMEOUT_MS);
 
-    if (p_http_server && http_server_port > 0) {
+    if (p_http_server) {
       // handle server requests
-      if (!p_http_server->begin(http_server_port)) {
+      if (!p_http_server->begin()) {
         DlnaLogger.log(DlnaLogLevel::Error, "HttpServer begin failed");
         return false;
       }
@@ -192,8 +214,13 @@ class DLNAControlPoint {
     return devices.size() > 0;
   }
 
+  void setTransports(IHttpRequest& http, IUDPService& udp) {
+    p_http = &http;
+    p_udp = &udp;
+  }
+
   /// Stops the processing and releases the resources
-  void end() {
+  void end() override {
     DlnaLogger.log(DlnaLogLevel::Debug, "DLNAControlPointMgr::end");
     // stop active processing
     is_active = false;
@@ -240,7 +267,7 @@ class DLNAControlPoint {
   }
 
   /// Registers a method that will be called
-  ActionRequest& addAction(ActionRequest act) {
+  ActionRequest& addAction(ActionRequest act) override {
     DlnaLogger.log(DlnaLogLevel::Debug, "DLNAControlPointMgr::addAction");
     actions.push_back(act);
     return actions[actions.size() - 1];
@@ -254,7 +281,7 @@ class DLNAControlPoint {
    * @param xmlProcessor Optional XML processor callback
    *
    */
-  ActionReply& executeActions(XMLCallback xmlProcessor = nullptr) {
+  ActionReply& executeActions(XMLCallback xmlProcessor = nullptr) override {
     DlnaLogger.log(DlnaLogLevel::Debug, "DLNAControlPointMgr::executeActions");
     reply.clear();
     postAllActions(xmlProcessor);
@@ -268,7 +295,7 @@ class DLNAControlPoint {
 
   /// call this method in the Arduino loop as often as possible: the processes
   /// all replys
-  bool loop() {
+  bool loop() override {
     if (!is_active) return false;
     DLNAControlPointRequestParser parser;
 
@@ -311,7 +338,7 @@ class DLNAControlPoint {
   }
 
   /// Provide addess to the service information
-  DLNAServiceInfo& getService(const char* id) {
+  DLNAServiceInfo& getService(const char* id) override {
     DlnaLogger.log(DlnaLogLevel::Debug, "DLNAControlPointMgr::getService");
     static DLNAServiceInfo no_service(false);
     for (auto& dev : devices) {
@@ -322,13 +349,13 @@ class DLNAControlPoint {
   }
 
   /// Provides the device information of the actually selected device
-  DLNADeviceInfo& getDevice() {
+  DLNADeviceInfo& getDevice() override {
     DlnaLogger.log(DlnaLogLevel::Debug, "DLNAControlPointMgr::getDevice");
     return devices[default_device_idx];
   }
 
   /// Provides the device information by index
-  DLNADeviceInfo& getDevice(int idx) {
+  DLNADeviceInfo& getDevice(int idx) override {
     DlnaLogger.log(DlnaLogLevel::Debug, "DLNAControlPointMgr::getDevice");
     if (idx < 0 || idx >= devices.size()) {
       DlnaLogger.log(DlnaLogLevel::Error, "Device index %d out of range", idx);
@@ -338,7 +365,7 @@ class DLNAControlPoint {
   }
 
   /// Provides the device for a service
-  DLNADeviceInfo& getDevice(DLNAServiceInfo& service) {
+  DLNADeviceInfo& getDevice(DLNAServiceInfo& service) override {
     DlnaLogger.log(DlnaLogLevel::Debug, "DLNAControlPointMgr::getDevice");
     for (auto& dev : devices) {
       for (auto& srv : dev.getServices()) {
@@ -349,7 +376,7 @@ class DLNAControlPoint {
   }
 
   /// Get a device for a Url
-  DLNADeviceInfo& getDevice(Url location) {
+  DLNADeviceInfo& getDevice(Url location) override {
     DlnaLogger.log(DlnaLogLevel::Debug, "DLNAControlPointMgr::getDevice");
     for (auto& dev : devices) {
       if (dev.getDeviceURL() == location) {
@@ -362,7 +389,7 @@ class DLNAControlPoint {
     return NO_DEVICE;
   }
 
-  Vector<DLNADeviceInfo>& getDevices() { return devices; }
+  Vector<DLNADeviceInfo>& getDevices() override { return devices; }
 
   /**
    * Public wrapper to build a fully-qualified URL for a device + suffix.
@@ -371,12 +398,12 @@ class DLNAControlPoint {
    * internal protected method directly.
    */
   const char* getUrl(DLNADeviceInfo& device, const char* suffix, char* buffer,
-                     int len) {
+                     int len) override {
     return getUrlImpl(device, suffix, buffer, len);
   }
 
   /// Adds a new device
-  bool addDevice(DLNADeviceInfo dev) {
+  bool addDevice(DLNADeviceInfo dev) override {
     DlnaLogger.log(DlnaLogLevel::Debug, "DLNAControlPointMgr::addDevice");
     for (auto& existing_device : devices) {
       if (dev.getUDN() == existing_device.getUDN()) {
@@ -392,7 +419,7 @@ class DLNAControlPoint {
   }
 
   /// Adds the device from the device xml url if it does not already exist
-  bool addDevice(Url url) {
+  bool addDevice(Url url) override {
     if (!allow_localhost && StrView(url.host()).equals("127.0.0.1")) {
       DlnaLogger.log(DlnaLogLevel::Info, "Ignoring localhost device");
       return false;
@@ -406,8 +433,7 @@ class DLNAControlPoint {
     }
     // http get - incremental parse using XMLParserPrint so we don't hold
     // the whole device.xml in memory
-    DLNAHttpRequest req;
-    int rc = req.get(url, "text/xml");
+    int rc = p_http->get(url, "text/xml");
 
     if (rc != 200) {
       DlnaLogger.log(DlnaLogLevel::Error, "Http get to '%s' failed with %d",
@@ -423,7 +449,7 @@ class DLNAControlPoint {
 
     // Read and incrementally parse into new_device
     while (true) {
-      int len = req.read(buffer, sizeof(buffer));
+      int len = p_http->read(buffer, sizeof(buffer));
       if (len <= 0) break;
       parser.parse(buffer, len);
     }
@@ -450,34 +476,36 @@ class DLNAControlPoint {
   }
 
   /// We can activate/deactivate the scheduler
-  void setActive(bool flag) { is_active = flag; }
+  void setActive(bool flag) override { is_active = flag; }
 
   /// Checks if the scheduler is active
-  bool isActive() { return is_active; }
+  bool isActive() override { return is_active; }
 
   /// Defines if localhost devices should be allowed
-  void setAllowLocalhost(bool flag) { allow_localhost = flag; }
+  void setAllowLocalhost(bool flag) override { allow_localhost = flag; }
 
   /// Provides the last reply
-  ActionReply& getLastReply() { return reply; }
+  ActionReply& getLastReply() override { return reply; }
 
   /// Provides the subscription manager
-  SubscriptionMgrControlPoint* getSubscriptionMgr() {
+  SubscriptionMgrControlPoint* getSubscriptionMgr() override {
     return &subscription_mgr;
   }
 
   /// Activate/deactivate subscription notifications
-  void setSubscribeNotificationsActive(bool flag) {
+  void setSubscribeNotificationsActive(bool flag) override {
     subscription_mgr.setEventSubscriptionActive(flag);
   }
 
   /// Register a string in the shared registry and return the stored pointer
-  const char* registerString(const char* s) { return registry.add((char*)s); }
+  const char* registerString(const char* s) override {
+    return registry.add((char*)s);
+  }
 
  protected:
   DLNADeviceInfo NO_DEVICE{false};
   Scheduler scheduler;
-  DLNAHttpRequest* p_http = nullptr;
+  IHttpRequest* p_http = nullptr;
   IUDPService* p_udp = nullptr;
   SubscriptionMgrControlPoint subscription_mgr;
   Vector<DLNADeviceInfo> devices;
@@ -492,8 +520,7 @@ class DLNAControlPoint {
   const char* search_target;
   Url local_url;
   bool allow_localhost = false;
-  HttpServer* p_http_server = nullptr;
-  int http_server_port = 0;
+  IHttpServer* p_http_server = nullptr;
   void* reference = nullptr;
   std::function<void(const char* nodeName, const char* text,
                      const char* attributes)>
@@ -640,12 +667,12 @@ class DLNAControlPoint {
     char ns[200];
     StrView namespace_str(ns, 200);
     namespace_str = "xmlns:u=\"%1\"";
-  bool ok = namespace_str.replace("%1", action.getService()->service_type);
+    bool ok = namespace_str.replace("%1", action.getService()->service_type);
     DlnaLogger.log(DlnaLogLevel::Debug, "ns = '%s'", namespace_str.c_str());
 
     // assert(ok);
-    result +=
-        xml_printer.printNodeBegin(action.getAction(), namespace_str.c_str(), "u");
+    result += xml_printer.printNodeBegin(action.getAction(),
+                                         namespace_str.c_str(), "u");
     for (auto arg : action.getArguments()) {
       result += xml_printer.printNode(arg.name.c_str(), arg.value.c_str());
     }
@@ -670,14 +697,14 @@ class DLNAControlPoint {
     DlnaLogger.log(DlnaLogLevel::Debug, "DLNAControlPointMgr::postAction: %s",
                    action.getAction());
     reply.clear();
-  DLNAServiceInfo& service = *(action.getService());
+    DLNAServiceInfo& service = *(action.getService());
     DLNADeviceInfo& device = getDevice(service);
 
     // create SOAPACTION header value
     char act[200];
     StrView action_str{act, 200};
     action_str = "\"";
-  action_str.add(action.getService()->service_type);
+    action_str.add(action.getService()->service_type);
     action_str.add("#");
     action_str.add(action.getAction());
     action_str.add("\"");

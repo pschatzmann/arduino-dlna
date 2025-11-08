@@ -33,7 +33,7 @@ class DLNAControlPointMediaServer {
    * @param http  Http server wrapper used for subscription callbacks
    * @param udp   UDP service used for SSDP discovery
    */
-  DLNAControlPointMediaServer(DLNAControlPoint& mgr, DLNAHttpRequest& http,
+  DLNAControlPointMediaServer(DLNAControlPoint& mgr, IHttpRequest& http,
                               IUDPService& udp)
       : p_mgr(&mgr), p_http(&http), p_udp(&udp) {}
 
@@ -69,7 +69,7 @@ class DLNAControlPointMediaServer {
   }
 
   /// Setter for the HTTP wrapper used for subscriptions and callbacks
-  void setHttp(DLNAHttpRequest& http) { p_http = &http; }
+  void setHttp(IHttpRequest& http) { p_http = &http; }
 
   /// Setter for UDP service used for discovery (SSDP)
   void setUdp(IUDPService& udp) { p_udp = &udp; }
@@ -286,7 +286,7 @@ class DLNAControlPointMediaServer {
   void* reference = nullptr;
   const char* object_id = "0";
   // transport references (optional) - must be set before calling begin()
-  DLNAHttpRequest* p_http = nullptr;
+  IHttpRequest* p_http = nullptr;
   IUDPService* p_udp = nullptr;
 
   /// Notification callback: just log for now

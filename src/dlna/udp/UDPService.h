@@ -1,6 +1,6 @@
 #pragma once
 
-#include "dlna/IUDPService.h"
+#include "udp/IUDPService.h"
 #include "assert.h"
 
 namespace tiny_dlna {
@@ -17,6 +17,9 @@ namespace tiny_dlna {
  *
  * Implements IUDPService for sending and receiving UDP packets, including
  * multicast support.
+ *
+ * @tparam UDPType Arduino UDP implementation that provides the standard
+ *         `UDP` interface (e.g. `WiFiUDP`, `EthernetUDP`).
  *
  * @author Phil Schatzmann
  */

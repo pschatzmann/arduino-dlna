@@ -6,7 +6,7 @@
 #include "assert.h"
 #include "basic/Queue.h"
 #include "basic/QueueLockFree.h"
-#include "dlna/IUDPService.h"
+#include "udp/IUDPService.h"
 
 namespace tiny_dlna {
 

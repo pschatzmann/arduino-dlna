@@ -1,6 +1,5 @@
 #pragma once
 
-#include <WiFi.h>
 #include <stdlib.h>
 
 #include "Client.h"
@@ -9,7 +8,7 @@
 #include "HttpHeader.h"
 #include "HttpRequestHandlerLine.h"
 #include "HttpRequestRewrite.h"
-#include "HttpTunnel.h"
+#include "IHttpServer.h"
 #include "Server.h"
 #include "basic/IPAddressAndPort.h"  // for toStr
 #include "basic/List.h"
@@ -17,20 +16,30 @@
 namespace tiny_dlna {
 
 /**
- * @brief A Simple Header only implementation of Http Server that allows the
- * registration of callback functions. This is based on the Arduino Server
- * class.
+ * @brief Header-only HTTP server wrapper that registers callback handlers.
  *
+ * This server is templated so you can provide the concrete Arduino
+ * networking classes that back the transport. `ClientType` is the socket
+ * implementation accepted from the server (for example `WiFiClient` or
+ * `EthernetClient`) and `ServerType` is the listener type (for example
+ * `WiFiServer`). Default template arguments keep the legacy WiFi behaviour
+ * intact, while custom transports can swap in their own client/server types.
+ *
+ * @tparam ClientType Arduino client class accepted from the listener
+ *         (e.g. `WiFiClient`, `EthernetClient`).
+ * @tparam ServerType Arduino server/listener class that produces
+ *         `ClientType` instances (e.g. `WiFiServer`, `EthernetServer`).
  */
-class HttpServer {
+template <typename ClientType, typename ServerType>
+class HttpServer : public IHttpServer {
  public:
-  HttpServer(WiFiServer& server, int bufferSize = 1024) {
+  HttpServer(ServerType& server, int bufferSize = 1024) {
     DlnaLogger.log(DlnaLogLevel::Info, "HttpServer");
     this->server_ptr = &server;
     this->buffer.resize(bufferSize);
   }
 
-  ~HttpServer() {
+  ~HttpServer() override {
     DlnaLogger.log(DlnaLogLevel::Info, "~HttpServer");
     handler_collection.clear();
     request_header.clear(false);
@@ -39,48 +48,29 @@ class HttpServer {
   }
 
   /// Provides the local ip address
-  IPAddress& localIP() {
+  IPAddress& localIP() override {
     static IPAddress address;
     address = WiFi.localIP();
     return address;
   }
 
-  /// Starts the server on the indicated port - calls WiFi.begin(ssid,
-  /// password);
-  bool begin(int port, const char* ssid, const char* password) {
-    if (WiFi.status() != WL_CONNECTED && ssid != nullptr &&
-        password != nullptr) {
-      WiFi.begin(ssid, password);
-      while (WiFi.status() != WL_CONNECTED) {
-        delay(500);
-        Serial.print(".");
-      }
 
-      Serial.println();
-      Serial.print("Started Server at ");
-      Serial.print(WiFi.localIP());
-      Serial.print(":");
-      Serial.println(port);
-    }
-    return begin(port);
-  }
-
-  /// Starts the server on the indicated port
-  bool begin(int port) {
-    DlnaLogger.log(DlnaLogLevel::Info, "HttpServer begin at port %d", port);
+  /// Starts the server 
+  bool begin() override {
+    DlnaLogger.log(DlnaLogLevel::Info, "HttpServer begin");
     is_active = true;
-    server_ptr->begin(port);
+    server_ptr->begin();
     return true;
   }
 
   /// stops the server_ptr
-  void end() {
+  void end() override {
     DlnaLogger.log(DlnaLogLevel::Info, "HttpServer %s", "stop");
     is_active = false;
   }
 
   /// adds a rewrite rule
-  void rewrite(const char* from, const char* to) {
+  void rewrite(const char* from, const char* to) override {
     DlnaLogger.log(DlnaLogLevel::Info, "Rewriting %s to %s", from, to);
     HttpRequestRewrite* line = new HttpRequestRewrite(from, to);
     rewrite_collection.push_back(line);
@@ -88,7 +78,7 @@ class HttpServer {
 
   /// register a generic handler
   void on(const char* url, TinyMethodID method, web_callback_fn fn,
-          void* ctx[] = nullptr, int ctxCount = 0) {
+    void* ctx[] = nullptr, int ctxCount = 0) override {
     DlnaLogger.log(DlnaLogLevel::Info, "Serving at %s", url);
     HttpRequestHandlerLine* hl = new HttpRequestHandlerLine(ctxCount);
     hl->path = url;
@@ -102,7 +92,7 @@ class HttpServer {
 
   /// register a handler with mime
   void on(const char* url, TinyMethodID method, const char* mime,
-          web_callback_fn fn) {
+    web_callback_fn fn) override {
     DlnaLogger.log(DlnaLogLevel::Info, "Serving at %s", url);
     HttpRequestHandlerLine* hl = new HttpRequestHandlerLine();
     hl->path = url;
@@ -114,10 +104,10 @@ class HttpServer {
 
   /// register a handler which provides the indicated string
   void on(const char* url, TinyMethodID method, const char* mime,
-          const char* result) {
+    const char* result) override {
     DlnaLogger.log(DlnaLogLevel::Info, "Serving at %s", url);
 
-    auto lambda = [](HttpServer* server_ptr, const char* requestPath,
+  auto lambda = [](IHttpServer* server_ptr, const char* requestPath,
                      HttpRequestHandlerLine* hl) {
       DlnaLogger.log(DlnaLogLevel::Info, "on-strings %s", "lambda");
       if (hl->contextCount < 2) {
@@ -139,10 +129,10 @@ class HttpServer {
 
   /// register a handler which provides the indicated string
   void on(const char* url, TinyMethodID method, const char* mime,
-          const uint8_t* data, int len) {
+    const uint8_t* data, int len) override {
     DlnaLogger.log(DlnaLogLevel::Info, "Serving at %s", url);
 
-    auto lambda = [](HttpServer* server_ptr, const char* requestPath,
+  auto lambda = [](IHttpServer* server_ptr, const char* requestPath,
                      HttpRequestHandlerLine* hl) {
       DlnaLogger.log(DlnaLogLevel::Info, "on-strings %s", "lambda");
       if (hl->contextCount < 3) {
@@ -167,9 +157,9 @@ class HttpServer {
   }
 
   /// register a redirection
-  void on(const char* url, TinyMethodID method, Url& redirect) {
+  void on(const char* url, TinyMethodID method, Url& redirect) override {
     DlnaLogger.log(DlnaLogLevel::Info, "Serving at %s", url);
-    auto lambda = [](HttpServer* server_ptr, const char* requestPath,
+  auto lambda = [](IHttpServer* server_ptr, const char* requestPath,
                      HttpRequestHandlerLine* hl) {
       if (hl->contextCount < 1) {
         DlnaLogger.log(DlnaLogLevel::Error, "The context is not available");
@@ -195,45 +185,10 @@ class HttpServer {
     addHandler(hl);
   }
 
-  /// register a redirection
-  void on(const char* url, TinyMethodID method, HttpTunnel& tunnel) {
-    DlnaLogger.log(DlnaLogLevel::Info, "Serving at %s", url);
-
-    auto lambda = [](HttpServer* server_ptr, const char* requestPath,
-                     HttpRequestHandlerLine* hl) {
-      DlnaLogger.log(DlnaLogLevel::Info, "on-HttpTunnel %s", "lambda");
-      HttpTunnel* p_tunnel = static_cast<HttpTunnel*>(hl->context[0]);
-      if (p_tunnel == nullptr) {
-        DlnaLogger.log(DlnaLogLevel::Error, "p_tunnel is null");
-        server_ptr->replyNotFound();
-        return;
-      }
-      const char* mime = hl->mime;
-      // execute T_GET request
-      Stream* p_in = p_tunnel->get();
-      if (p_in == nullptr) {
-        DlnaLogger.log(DlnaLogLevel::Error, "p_in is null");
-        server_ptr->replyNotFound();
-        return;
-      }
-      const char* content_len = p_tunnel->request().reply().get(CONTENT_LENGTH);
-      StrView content_len_str{content_len};
-      // provide result
-      server_ptr->reply(mime, *p_in, content_len_str.toInt());
-    };
-
-    HttpRequestHandlerLine* hl = new HttpRequestHandlerLine(1);
-    hl->path = url;
-    hl->method = method;
-    hl->mime = tunnel.mime();
-    hl->context[0] = &tunnel;
-    hl->fn = lambda;
-    addHandler(hl);
-  }
 
   /// generic handler - you can overwrite this method to provide your specifc
   /// processing logic
-  bool onRequest(const char* path) {
+  bool onRequest(const char* path) override {
     DlnaLogger.log(DlnaLogLevel::Info, "Serving at %s", path);
 
     bool result = false;
@@ -269,7 +224,7 @@ class HttpServer {
 
   /// chunked reply with data from an input stream
   void replyChunked(const char* contentType, Stream& inputStream,
-                    int status = 200, const char* msg = SUCCESS) {
+                    int status = 200, const char* msg = SUCCESS) override {
     replyChunked(contentType, status, msg);
     HttpChunkWriter chunk_writer;
     while (inputStream.available()) {
@@ -283,7 +238,7 @@ class HttpServer {
 
   /// start of chunked reply: use HttpChunkWriter to provde the data
   void replyChunked(const char* contentType, int status = 200,
-                    const char* msg = SUCCESS) {
+                    const char* msg = SUCCESS) override {
     DlnaLogger.log(DlnaLogLevel::Info, "reply %s", "replyChunked");
     reply_header.setValues(status, msg);
     reply_header.put(TRANSFER_ENCODING, CHUNKED);
@@ -294,7 +249,7 @@ class HttpServer {
 
   /// write reply - copies data from input stream with header size
   void reply(const char* contentType, Stream& inputStream, int size,
-             int status = 200, const char* msg = SUCCESS) {
+             int status = 200, const char* msg = SUCCESS) override {
     DlnaLogger.log(DlnaLogLevel::Info, "reply %s", "stream");
     reply_header.setValues(status, msg);
     reply_header.put(CONTENT_LENGTH, size);
@@ -312,7 +267,8 @@ class HttpServer {
 
   /// write reply - using callback that writes to stream
   void reply(const char* contentType, size_t (*callback)(Print& out, void* ref),
-             int status = 200, const char* msg = SUCCESS, void* ref = nullptr) {
+             int status = 200, const char* msg = SUCCESS,
+             void* ref = nullptr) override {
     DlnaLogger.log(DlnaLogLevel::Info, "reply %s", "via callback");
     NullPrint nop;
     size_t size = callback(nop, ref);
@@ -330,7 +286,7 @@ class HttpServer {
 
   /// write reply - string with header size
   void reply(const char* contentType, const char* str, int status = 200,
-             const char* msg = SUCCESS) {
+             const char* msg = SUCCESS) override {
     DlnaLogger.log(DlnaLogLevel::Info, "reply %s", str);
     int len = strlen(str);
     reply_header.setValues(status, msg);
@@ -343,7 +299,7 @@ class HttpServer {
   }
 
   void reply(const char* contentType, const uint8_t* str, int len,
-             int status = 200, const char* msg = SUCCESS) {
+             int status = 200, const char* msg = SUCCESS) override {
     DlnaLogger.log(DlnaLogLevel::Info, "reply %s: %d bytes", contentType, len);
     reply_header.setValues(status, msg);
     reply_header.put(CONTENT_LENGTH, len);
@@ -355,48 +311,49 @@ class HttpServer {
   }
 
   /// write OK reply with 200 SUCCESS
-  void replyOK() { reply(200, SUCCESS); }
+  void replyOK() override { reply(200, SUCCESS); }
 
   /// write 404 reply
-  void replyNotFound() {
+  void replyNotFound() override {
     DlnaLogger.log(DlnaLogLevel::Info, "reply %s", "404");
     reply(404, "Page Not Found");
   }
 
-  void replyError(int err, const char* msg = "Internal Server Error") {
+  void replyError(int err,
+                  const char* msg = "Internal Server Error") override {
     DlnaLogger.log(DlnaLogLevel::Info, "reply %s", "error");
     reply(err, msg);
   }
 
   /// provides the request header
-  HttpRequestHeader& requestHeader() { return request_header; }
+  HttpRequestHeader& requestHeader() override { return request_header; }
 
   /// provides the reply header
-  HttpReplyHeader& replyHeader() { return reply_header; }
+  HttpReplyHeader& replyHeader() override { return reply_header; }
 
   /// closes the connection to the current client_ptr
-  void endClient() {
+  void endClient() override {
     DlnaLogger.log(DlnaLogLevel::Info, "HttpServer %s", "endClient");
     client_ptr->flush();
     client_ptr->stop();
   }
 
   /// print a CR LF
-  void crlf() {
+  void crlf() override {
     client_ptr->print("\r\n");
-    client_ptr->flush();
+    //client_ptr->flush();
   }
 
   /// adds a new handler
-  void addHandler(HttpRequestHandlerLine* handlerLinePtr) {
+  void addHandler(HttpRequestHandlerLine* handlerLinePtr) override {
     handler_collection.push_back(handlerLinePtr);
   }
 
   /// Legacy method: same as copy();
-  bool doLoop() { return copy(); }
+  bool doLoop() override { return copy(); }
 
   /// Call this method from your loop!
-  bool copy() {
+  bool copy() override {
     bool result = false;
     if (!is_active) {
       delay(no_connect_delay);
@@ -404,7 +361,7 @@ class HttpServer {
     }
 
     // Accept new client and add to list if connected
-    WiFiClient client = server_ptr->accept();
+    ClientType client = server_ptr->accept();
     if (client.connected()) {
       DlnaLogger.log(DlnaLogLevel::Info, "copy: accepted new client");
       open_clients.push_back(client);
@@ -447,25 +404,25 @@ class HttpServer {
   }
 
   /// Provides the current client
-  Client& client() { return *client_ptr; }
+  ClientType& client() override { return *client_ptr; }
 
   /// Provides true if the server has been started
-  operator bool() { return is_active; }
+  operator bool() override { return is_active; }
 
-  bool isActive() { return is_active; }
+  bool isActive() override { return is_active; }
 
   /// Determines the local ip address
-  const char* localHost() {
+  const char* localHost() override {
     if (local_host == nullptr) {
       local_host = toStr(WiFi.localIP());
     }
     return local_host;
   }
 
-  void setNoConnectDelay(int delay) { no_connect_delay = delay; }
+  void setNoConnectDelay(int delay) override { no_connect_delay = delay; }
 
   /// converts the client content to a string
-  Str contentStr() {
+  Str contentStr() override {
     uint8_t buffer[1024];
     Str result;
     while (client_ptr->available()) {
@@ -477,10 +434,10 @@ class HttpServer {
   }
 
   /// Definesa reference/context object
-  void setReference(void* reference) { ref = reference; }
+  void setReference(void* reference) override { ref = reference; }
 
   /// Provides access to a reference/context object
-  void* getReference() { return ref; }
+  void* getReference() override { return ref; }
 
  protected:
   // data
@@ -488,10 +445,11 @@ class HttpServer {
   HttpReplyHeader reply_header;
   List<HttpRequestHandlerLine*> handler_collection;
   List<HttpRequestRewrite*> rewrite_collection;
-  List<WiFiClient> open_clients;
-  List<WiFiClient>::Iterator current_client_iterator = open_clients.begin();
-  Client* client_ptr = nullptr;
-  WiFiServer* server_ptr = nullptr;
+  List<ClientType> open_clients;
+  typename List<ClientType>::Iterator current_client_iterator =
+      open_clients.begin();
+  ClientType* client_ptr = nullptr;
+  ServerType* server_ptr = nullptr;
   bool is_active;
   Vector<char> buffer{0};
   const char* local_host = nullptr;
@@ -570,5 +528,7 @@ class HttpServer {
     return result;
   }
 };
+
+using WiFiHttpServer = HttpServer<WiFiClient, WiFiServer>;
 
 }  // namespace tiny_dlna

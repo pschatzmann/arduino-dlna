@@ -1,27 +1,28 @@
-// Example: Device MediaServer
+// Example: Device MediaServer over Ethernet
 // Starts a minimal MediaServer device that responds to Browse requests
-// with a couple of test DIDL items. Replace WiFi credentials and base URL
-// as needed before running on hardware.
-// URLS determined with
-// http://162.55.180.156/csv/stations/search?tag=blues&offset=0&limit=30
+// with a couple of test DIDL items. Configure the MAC address and (optionally)
+// the static network settings before running on hardware without DHCP.
 
-#include "WiFi.h"
 #include "DLNA.h"
+#include <SPI.h>
+#include <Ethernet.h>
+#include <EthernetUdp.h>
 
-// Replace with your WiFi credentials
-const char* ssid = "YOUR_SSID";
-const char* password = "YOUR_PASSWORD";
+// Replace with a unique MAC address for your hardware
+byte macAddress[] = {0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xEE};
 
-const int port = 9000;
-WiFiServer wifi(port);
-HttpServer<WiFiClient, WiFiServer> server(wifi);
-// WiFiClient client;
-// DLNAHttpRequest http(client);
-UDPService<WiFiUDP> udp;
-DLNAMediaServer<WiFiClient> mediaServer(server, udp);
+// Optional static network configuration (used if DHCP fails)
+IPAddress staticIP(192, 168, 1, 177);
+IPAddress staticDNS(192, 168, 1, 1);
+IPAddress staticGateway(192, 168, 1, 1);
+IPAddress staticSubnet(255, 255, 255, 0);
+
+EthernetServer ethernetServer(80);
+HttpServer<EthernetClient, EthernetServer> server(ethernetServer);
+UDPService<EthernetUDP> udp;
+DLNAMediaServer<EthernetClient> mediaServer(server, udp);
 
 // Store items as a global const array (for PROGMEM/flash storage)
-// Populated from provided station list (first 30 entries). For this
 const MediaItem items[] = {
   {"1", "0", true, "Radios", "", "", MediaItemClass::Folder},
   {"2", "1", true, "# RdMix Classic Rock 70s 80s 90s", "https://cast1.torontocast.com:4610/stream", "audio/mpeg", MediaItemClass::Radio},
@@ -53,38 +54,25 @@ const MediaItem items[] = {
   {"29", "1", true, "Arctic Outpost Radio", "https://radio.streemlion.com:3715/stream", "audio/mpeg", MediaItemClass::Radio},
   {"30", "1", true, "ArtSound FM", "https://stream.artsound.fm/mp3", "audio/mpeg", MediaItemClass::Radio},
   {"31", "1", true, "ArtSound FM - Canberra - 92.7 FM (MP3)", "http://stream.artsound.fm/mp3", "audio/mpeg", MediaItemClass::Radio}};
-constexpr int itemCount = sizeof(items) / sizeof(items[0]);
 std::vector<MediaItem> result_items;
 
-// log into wifi
-void setupWifi() {
-  WiFi.begin(ssid, password);
-  Serial.print("Connecting to WiFi ..");
-  while (WiFi.status() != WL_CONNECTED) {
-    Serial.print('.');
-    delay(500);
+void setupEthernet() {
+  Serial.println("Initializing Ethernet...");
+  if (Ethernet.begin(macAddress) == 0) {
+    Serial.println("DHCP failed, using static configuration");
+    Ethernet.begin(macAddress, staticIP, staticDNS, staticGateway, staticSubnet);
   }
-  WiFi.setSleep(false);
-  Serial.println("connected!");
+  delay(1000);
+  Serial.print("Ethernet IP address: ");
+  Serial.println(Ethernet.localIP());
 }
 
-/**
- * PrepareData callback: sets selects the items, etc. based on the query
- * This might by triggered by the Search or by the Browse request. BrowseMetadata
- * needs to provide the data for the indicated node and BrowseChildren needs to
- * provide all children of the indicated node.
- *
- */
-void myPrepareData(const char* objectID, ContentQueryType queryType,
-                   const char* filter, int startingIndex, int requestedCount,
-                   const char* sortCriteria, int& numberReturned,
-                   int& totalMatches, int& updateID, void* reference) {
+void selectItems(const char* objectID, ContentQueryType queryType) {
   result_items.clear();
   switch (queryType) {
     case ContentQueryType::Search:
       for (auto& item : items) {
-        if (item.itemClass != MediaItemClass::Folder)
-          result_items.push_back(item);
+        if (item.itemClass != MediaItemClass::Folder) result_items.push_back(item);
       }
       break;
     case ContentQueryType::BrowseMetadata:
@@ -94,11 +82,24 @@ void myPrepareData(const char* objectID, ContentQueryType queryType,
       break;
     case ContentQueryType::BrowseChildren:
       for (auto& item : items) {
-        if (StrView(item.parentID).equals(objectID))
-          result_items.push_back(item);
+        if (StrView(item.parentID).equals(objectID)) result_items.push_back(item);
       }
       break;
   }
+}
+
+// PrepareData callback: selects items based on the query
+void myPrepareData(const char* objectID, ContentQueryType queryType,
+                   const char* filter, int startingIndex, int requestedCount,
+                   const char* sortCriteria, int& numberReturned,
+                   int& totalMatches, int& updateID, void* reference) {
+  (void)filter;
+  (void)startingIndex;
+  (void)requestedCount;
+  (void)sortCriteria;
+  (void)updateID;
+  (void)reference;
+  selectItems(objectID, queryType);
   numberReturned = result_items.size();
   totalMatches = result_items.size();
 }
@@ -106,7 +107,7 @@ void myPrepareData(const char* objectID, ContentQueryType queryType,
 // GetData callback: returns each item by index
 bool myGetData(int index, MediaItem& item, void* reference) {
   (void)reference;
-  if (index < 0 || index >= result_items.size()) return false;
+  if (index < 0 || index >= static_cast<int>(result_items.size())) return false;
   item = result_items[index];
   return true;
 }
@@ -115,17 +116,16 @@ void setup() {
   Serial.begin(115200);
   DlnaLogger.begin(Serial, DlnaLogLevel::Warning);
 
-  setupWifi();
+  setupEthernet();
 
-  // define local base URL based on assigned IP address
-  mediaServer.setFriendlyName("ArduinoMediaServer");
-  mediaServer.setBaseURL(WiFi.localIP(), port);
-  mediaServer.setReference(nullptr);  // not needed for this example
+  mediaServer.setFriendlyName("ArduinoEthernetMediaServer");
+  mediaServer.setBaseURL(Ethernet.localIP(), 44757);
+  mediaServer.setReference(nullptr);
   mediaServer.setPrepareDataCallback(myPrepareData);
   mediaServer.setGetDataCallback(myGetData);
 
   if (mediaServer.begin()) {
-    Serial.println("MediaServer started");
+    Serial.println("MediaServer started over Ethernet");
   } else {
     Serial.println("MediaServer failed to start");
   }

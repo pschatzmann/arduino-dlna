@@ -1,13 +1,16 @@
 // Example for creating a Media Renderer
+
+#include "WiFi.h"
 #include "DLNA.h"
 
 const char* ssid = "YOUR_SSID";
 const char* password = "YOUR_PASSWORD";
 
-WiFiServer wifi;
-HttpServer server(wifi);
-UDPAsyncService udp;
-DLNAMediaRenderer media_renderer(server, udp);
+const int port=9000;
+WiFiServer wifi(port);
+HttpServer<WiFiClient, WiFiServer> server(wifi);
+UDPService<WiFiUDP> udp;
+DLNAMediaRenderer<WiFiClient> media_renderer(server, udp);
 // Use Serial as a simple output when no audio stack is present
 Print& out = Serial;
 
@@ -31,10 +34,10 @@ void setup() {
   setupWifi();
 
   // setup media renderer (use event callbacks to handle audio at app level)
-  media_renderer.setBaseURL(WiFi.localIP(), 9999);
+  media_renderer.setBaseURL(WiFi.localIP(), port);
 
   media_renderer.setMediaEventHandler(
-    [](MediaEvent ev, DLNAMediaRenderer& mr) {
+    [](MediaEvent ev, DLNAMediaRenderer<WiFiClient>& mr) {
       switch (ev) {
         case MediaEvent::SET_URI:
           Serial.print("Event: SET_URI ");

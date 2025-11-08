@@ -1,13 +1,10 @@
 #pragma once
 
-#include <WiFi.h>
-
 #include <functional>
-
 #include "HttpChunkReader.h"
 #include "HttpChunkWriter.h"
 #include "HttpHeader.h"
-#include "WiFiClient.h"
+#include "IHttpRequest.h"
 
 namespace tiny_dlna {
 
@@ -16,101 +13,111 @@ namespace tiny_dlna {
  * I tried to use Arduino HttpClient, but I  did not manage to extract the mime
  * type from streaming get requests.
  *
- * The functionality is based on the Arduino Client class.
+ * The functionality is based on the Arduino Client class. The template
+ * parameter defines the concrete client that will be managed (e.g.
+ * WiFiClient); callers must now provide it explicitly.
  *
+ * @tparam ClientType concrete Arduino client type that implements the
+ *         `Client` interface (e.g. `WiFiClient`, `EthernetClient`).
  */
 
-class HttpRequest {
+template <typename ClientType>
+class HttpRequest : public IHttpRequest {
  public:
   HttpRequest() {
-    DlnaLogger.log(DlnaLogLevel::Debug, "HttpRequest");
-    // default_client.setInsecure();
+    DlnaLogger.log(DlnaLogLevel::Debug, "HttpRequest (default client)");
     setClient(default_client);
   }
 
-  HttpRequest(Client& client) {
+  explicit HttpRequest(ClientType& client) {
     DlnaLogger.log(DlnaLogLevel::Debug, "HttpRequest");
     setClient(client);
   }
 
-  ~HttpRequest() { stop(); }
+  ~HttpRequest() override { stop(); }
 
-  void setClient(Client& client) { this->client_ptr = &client; }
+  void setClient(Client& client) override { this->client_ptr = &client; }
 
   // the requests usually need a host. This needs to be set if we did not
   // provide a URL
-  void setHost(const char* host) {
+  void setHost(const char* host) override {
     DlnaLogger.log(DlnaLogLevel::Info, "HttpRequest::setHost: ", host);
     this->host_name = host;
   }
 
-  operator bool() { return client_ptr != nullptr && (bool)*client_ptr; }
+  operator bool() override {
+    return client_ptr != nullptr && static_cast<bool>(*client_ptr);
+  }
 
-  virtual bool connected() { return client_ptr->connected(); }
+  bool connected() override { return client_ptr->connected(); }
 
-  virtual int available() {
+  int available() override {
     if (reply_header.isChunked()) {
       return chunk_reader.available();
     }
     return client_ptr->available();
   }
 
-  virtual void stop() {
+  void stop() override {
     DlnaLogger.log(DlnaLogLevel::Info, "HttpRequest::stop");
-    client_ptr->stop();
+    if (client_ptr != nullptr) {
+      client_ptr->stop();
+    }
   }
 
-  virtual int post(Url& url, const char* mime, const char* data, int len = -1) {
+  int post(Url& url, const char* mime, const char* data,
+           int len = -1) override {
     DlnaLogger.log(DlnaLogLevel::Info, "post %s", url.url());
     return process(T_POST, url, mime, data, len);
   }
 
-  virtual int post(Url& url, size_t len,
-                   std::function<size_t(Print&, void*)> writer,
-                   const char* mime = nullptr, void* ref = nullptr) {
+  int post(Url& url, size_t len,
+           std::function<size_t(Print&, void*)> writer,
+           const char* mime = nullptr, void* ref = nullptr) override {
     return process(T_POST, url, len, writer, mime, ref);
   }
 
   /// Send a NOTIFY request with a streaming body. This mirrors the
   /// chunked POST implementation but uses the NOTIFY method.
-  virtual int notify(Url& url, std::function<size_t(Print&, void*)> writer,
-                     const char* mime = nullptr, void* ref = nullptr) {
+  int notify(Url& url, std::function<size_t(Print&, void*)> writer,
+             const char* mime = nullptr, void* ref = nullptr) override {
     NullPrint nop;
     int len = writer(nop, ref);
     return process(T_NOTIFY, url, len, writer, mime, ref);
   }
 
-  virtual int put(Url& url, const char* mime, const char* data, int len = -1) {
+  int put(Url& url, const char* mime, const char* data,
+    int len = -1) override {
     DlnaLogger.log(DlnaLogLevel::Info, "put %s", url.url());
     return process(T_PUT, url, mime, data, len);
   }
 
-  virtual int del(Url& url, const char* mime = nullptr,
-                  const char* data = nullptr, int len = -1) {
+  int del(Url& url, const char* mime = nullptr, const char* data = nullptr,
+    int len = -1) override {
     DlnaLogger.log(DlnaLogLevel::Info, "del %s", url.url());
     return process(T_DELETE, url, mime, data, len);
   }
 
-  virtual int get(Url& url, const char* acceptMime = nullptr,
-                  const char* data = nullptr, int len = -1) {
+  int get(Url& url, const char* acceptMime = nullptr,
+    const char* data = nullptr, int len = -1) override {
     DlnaLogger.log(DlnaLogLevel::Info, "get %s", str(url.url()));
     this->accept = acceptMime;
     return process(T_GET, url, nullptr, data, len);
   }
 
-  virtual int head(Url& url, const char* acceptMime = nullptr,
-                   const char* data = nullptr, int len = -1) {
+  int head(Url& url, const char* acceptMime = nullptr,
+           const char* data = nullptr, int len = -1) override {
     DlnaLogger.log(DlnaLogLevel::Info, "head %s", url.url());
     this->accept = acceptMime;
     return process(T_HEAD, url, nullptr, data, len);
   }
 
-  virtual int subscribe(Url& url) {
+  int subscribe(Url& url) override {
     DlnaLogger.log(DlnaLogLevel::Info, "post %s", url.url());
     return process(T_SUBSCRIBE, url, nullptr, nullptr, 0);
   }
 
-  virtual int unsubscribe(Url& url, const char* sid) {
+  int unsubscribe(Url& url, const char* sid) override {
     DlnaLogger.log(DlnaLogLevel::Info, "unsubscribe %s (SID=%s)", url.url(),
                    sid);
     if (sid != nullptr) {
@@ -120,7 +127,7 @@ class HttpRequest {
   }
 
   // reads the reply data
-  virtual int read(uint8_t* str, int len) {
+  int read(uint8_t* str, int len) override {
     if (reply_header.isChunked()) {
       return chunk_reader.read(*client_ptr, str, len);
     } else {
@@ -130,7 +137,7 @@ class HttpRequest {
 
   // read the reply data up to the next new line. For Chunked data we provide
   // the full chunk!
-  virtual int readln(uint8_t* str, int len, bool incl_nl = true) {
+  int readln(uint8_t* str, int len, bool incl_nl = true) override {
     if (reply_header.isChunked()) {
       return chunk_reader.readln(*client_ptr, str, len);
     } else {
@@ -139,27 +146,27 @@ class HttpRequest {
   }
 
   // provides the head information of the reply
-  virtual HttpReplyHeader& reply() { return reply_header; }
+  HttpReplyHeader& reply() override { return reply_header; }
 
-  virtual HttpRequestHeader& request() { return request_header; }
+  HttpRequestHeader& request() override { return request_header; }
 
-  virtual void setAgent(const char* agent) { this->agent = agent; }
+  void setAgent(const char* agent) override { this->agent = agent; }
 
-  virtual void setConnection(const char* connection) {
+  void setConnection(const char* connection) override {
     this->connection = connection;
   }
 
-  virtual void setAcceptsEncoding(const char* enc) {
+  void setAcceptsEncoding(const char* enc) override {
     this->accept_encoding = enc;
   }
 
-  Client* client() { return client_ptr; }
+  Client* client() override { return client_ptr; }
 
-  void setTimeout(int ms) { client_ptr->setTimeout(ms); }
+  void setTimeout(int ms) override { client_ptr->setTimeout(ms); }
 
  protected:
-  WiFiClient default_client;
-  Client* client_ptr;
+  ClientType default_client;
+  Client* client_ptr = nullptr;
   Url url;
   HttpRequestHeader request_header;
   HttpReplyHeader reply_header;
@@ -311,6 +318,6 @@ class HttpRequest {
   }
 };
 
-using DLNAHttpRequest = tiny_dlna::HttpRequest;
-
 }  // namespace tiny_dlna
+
+//using ma = tiny_dlna::HttpRequest;

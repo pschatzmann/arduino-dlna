@@ -41,7 +41,7 @@ class DLNAControlPointMediaRenderer {
    * @param http Reference to an HTTP request wrapper used for subscriptions
    * @param udp Reference to a UDP service used for SSDP discovery
    */
-  DLNAControlPointMediaRenderer(DLNAControlPoint& m, DLNAHttpRequest& http,
+  DLNAControlPointMediaRenderer(DLNAControlPoint& m, IHttpRequest& http,
                                 IUDPService& udp)
       : p_mgr(&m), p_http(&http), p_udp(&udp) {}
 
@@ -107,7 +107,7 @@ class DLNAControlPointMediaRenderer {
   void setDeviceIndex(int idx) { device_index = idx; }
 
   /// Setter for the HTTP wrapper used for subscriptions and callbacks
-  void setHttp(DLNAHttpRequest& http) { p_http = &http; }
+  void setHttp(IHttpRequest& http) { p_http = &http; }
 
   /// Setter for UDP service used for discovery (SSDP)
   void setUdp(IUDPService& udp) { p_udp = &udp; }
@@ -557,7 +557,7 @@ class DLNAControlPointMediaRenderer {
   ActionReply last_reply;
   void* reference = nullptr;
   // Optional transport references (must be set before calling begin())
-  DLNAHttpRequest* p_http = nullptr;
+  IHttpRequest* p_http = nullptr;
   IUDPService* p_udp = nullptr;
   int local_volume = 0;
   int local_mute = false;

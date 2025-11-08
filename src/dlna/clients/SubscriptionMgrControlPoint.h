@@ -6,12 +6,14 @@
 #include "basic/Url.h"
 #include "basic/Vector.h"
 #include "dlna/DLNADeviceInfo.h"
-#include "dlna/IUDPService.h"
+#include "udp/IUDPService.h"
 #include "dlna/StringRegistry.h"
 #include "dlna/devices/SubscriptionMgrDevice.h"
 #include "dlna/xml/XMLParserPrint.h"
 #include "dlna_config.h"
 #include "http/Http.h"
+#include "http/Server/IHttpRequest.h"
+#include "http/Server/IHttpServer.h"
 
 namespace tiny_dlna {
 /**
@@ -34,7 +36,7 @@ namespace tiny_dlna {
  * - Invoke a user-provided callback for property change events.
  *
  * Thread / lifetime notes:
- * - The manager does not own injected pointers (HttpServer, DLNAHttpRequest,
+ * - The manager does not own injected pointers (HttpServer, IHttpRequest,
  *   IUDPService, Url, StringRegistry, devices vector). The caller must
  *   ensure these outlive the manager.
  * - All public methods are safe to call from the single-threaded Arduino
@@ -59,7 +61,7 @@ class SubscriptionMgrControlPoint {
    * @param devices Vector of DLNADeviceInfo instances managed by the
    *                control point; used to find matching services.
    */
-  void setup(DLNAHttpRequest& http, IUDPService& udp, Url& localCallbackUrl,
+  void setup(IHttpRequest& http, IUDPService& udp, Url& localCallbackUrl,
              StringRegistry& reg, DLNADeviceInfo& device) {
     p_http = &http;
     p_udp = &udp;
@@ -81,10 +83,9 @@ class SubscriptionMgrControlPoint {
    * The method registers an HTTP handler at the local callback path
    * (derived from the injected @c Url via setup()).
    */
-  void setHttpServer(HttpServer& server, int port = 80) {
+  void setHttpServer(IHttpServer& server) {
     DlnaLogger.log(DlnaLogLevel::Debug, "DLNAControlPointMgr::setHttpServer");
     p_http_server = &server;
-    http_server_port = port;
     attachHttpServer(server);
   }
 
@@ -226,10 +227,9 @@ class SubscriptionMgrControlPoint {
   uint32_t event_subscription_retry_ms = 0;
   bool event_subscription_active = false;
   uint64_t last_event_notify_ms = 0;  // timestamp of last received NOTIFY
-  DLNAHttpRequest* p_http = nullptr;
+  IHttpRequest* p_http = nullptr;
   IUDPService* p_udp = nullptr;
-  HttpServer* p_http_server = nullptr;
-  int http_server_port = 80;
+  IHttpServer* p_http_server = nullptr;
   Url* p_local_url = nullptr;
   DLNADeviceInfo* p_device = nullptr;
   DLNAServiceInfo NO_SERVICE;
@@ -326,7 +326,7 @@ class SubscriptionMgrControlPoint {
    *         not found. Do NOT take ownership of the returned reference.
    */
 
-  void attachHttpServer(HttpServer& server) {
+  void attachHttpServer(IHttpServer& server) {
     DlnaLogger.log(DlnaLogLevel::Debug,
                    "DLNAControlPointMgr::attachHttpServer");
     p_http_server = &server;
@@ -407,7 +407,7 @@ class SubscriptionMgrControlPoint {
   /**
    * @brief Subscribe to a single eventing service described by @p service.
    *
-   * Performs the SUBSCRIBE HTTP request using the injected @c DLNAHttpRequest
+   * Performs the SUBSCRIBE HTTP request using the injected @c IHttpRequest
    * instance. On success the returned SID is stored in
    * @c DLNAServiceInfo::subscription_id and timing metadata is updated.
    *
@@ -530,7 +530,7 @@ class SubscriptionMgrControlPoint {
    * @param handlerLine Pointer to the server-provided handler context which
    *                    contains the manager instance in its context array.
    */
-  static void notifyHandler(HttpServer* server, const char* requestPath,
+  static void notifyHandler(IHttpServer* server, const char* requestPath,
                             HttpRequestHandlerLine* handlerLine) {
     if (handlerLine == nullptr || handlerLine->contextCount < 1) return;
     void* ctx0 = handlerLine->context[0];

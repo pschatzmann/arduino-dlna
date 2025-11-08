@@ -9,7 +9,6 @@ namespace tiny_dlna {
  * In the loop we can simply provide individual small chunks
  * until we are done.
  *
- * We work on a copy of the WiFiClient
  */
 
 class HttpStreamCopy {

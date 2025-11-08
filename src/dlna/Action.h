@@ -8,9 +8,7 @@
 namespace tiny_dlna {
 
 class DLNAServiceInfo;
-class DLNAMediaRenderer;
 class ActionRequest;
-class HttpServer;
 
 /**
  * @brief DLNA Service: Action Argument
