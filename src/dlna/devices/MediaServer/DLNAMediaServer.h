@@ -37,7 +37,13 @@ namespace tiny_dlna {
  * 2. Set callbacks for content preparation and retrieval
  * 3. Call begin() to start the server
  * 4. Call loop() repeatedly to process requests
+ * 
+ * @tparam ClientType Arduino `Client` implementation used for outbound HTTP
+ *         control and event traffic (e.g. `WiFiClient`, `EthernetClient`).
+ *
+ * Author: Phil Schatzmann
  */
+template <typename ClientType>
 class DLNAMediaServer : public DLNADeviceInfo {
  public:
   using HttpClient = ClientType;
