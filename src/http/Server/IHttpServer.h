@@ -24,8 +24,7 @@ class IHttpServer {
   virtual ~IHttpServer() = default;
 
   virtual IPAddress& localIP() = 0;
-  virtual bool begin(int port, const char* ssid, const char* password) = 0;
-  virtual bool begin(int port) = 0;
+  virtual bool begin() = 0;
   virtual void end() = 0;
   virtual void rewrite(const char* from, const char* to) = 0;
   virtual void on(const char* url, TinyMethodID method, web_callback_fn fn,

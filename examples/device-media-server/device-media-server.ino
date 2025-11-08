@@ -5,18 +5,20 @@
 // URLS determined with
 // http://162.55.180.156/csv/stations/search?tag=blues&offset=0&limit=30
 
+#include "WiFi.h"
 #include "DLNA.h"
 
 // Replace with your WiFi credentials
 const char* ssid = "YOUR_SSID";
 const char* password = "YOUR_PASSWORD";
 
-WiFiServer wifi;
-HttpServer server(wifi);
+const int port = 9000;
+WiFiServer wifi(port);
+HttpServer<WiFiClient, WiFiServer> server(wifi);
 // WiFiClient client;
 // DLNAHttpRequest http(client);
-UDPAsyncService udp;
-DLNAMediaServer mediaServer(server, udp);
+UDPService<WiFiUDP> udp;
+DLNAMediaServer<WiFiClient> mediaServer(server, udp);
 
 // Store items as a global const array (for PROGMEM/flash storage)
 // Populated from provided station list (first 30 entries). For this
@@ -117,7 +119,7 @@ void setup() {
 
   // define local base URL based on assigned IP address
   mediaServer.setFriendlyName("ArduinoMediaServer");
-  mediaServer.setBaseURL(WiFi.localIP(), 44757);
+  mediaServer.setBaseURL(WiFi.localIP(), port);
   mediaServer.setReference(nullptr);  // not needed for this example
   mediaServer.setPrepareDataCallback(myPrepareData);
   mediaServer.setGetDataCallback(myGetData);

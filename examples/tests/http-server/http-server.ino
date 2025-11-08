@@ -2,7 +2,8 @@
 
 const char* ssid = "SSID";
 const char* password = "PASSWORD";
-WiFiServer wifi;
+const int port = 9000;
+WiFiServer wifi(port);
 HttpServer<WiFiClient, WiFiServer> server(wifi);
 tiny_dlna::Url indexUrl("/index.html");
 
@@ -34,7 +35,7 @@ void setup() {
   server.rewrite("/index.html", "/hallo.html");
 
   server.on("/hallo.html", T_GET, "text/html", htmlHallo);
-  server.begin(80);
+  server.begin();
 }
 
 void loop() { server.doLoop(); }

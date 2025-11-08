@@ -9,9 +9,10 @@
 const char* ssid = "YOUR_SSID";
 const char* password = "YOUR_PASSWORD";
 
-WiFiServer wifi;
+const int port = 9000;
+WiFiServer wifi(port);
 HttpServer<WiFiClient, WiFiServer> server(wifi);
-DLNAControlPoint cp(server, 9000); // with Notifications
+DLNAControlPoint cp(server); // with Notifications
 HttpRequest<WiFiClient> http;
 UDPService<WiFiUDP> udp;
 DLNAControlPointMediaRenderer renderer(cp, http, udp);

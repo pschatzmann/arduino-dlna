@@ -77,7 +77,7 @@ class DLNADevice : public IDevice {
 
     // start web server
     Url url{baseUrl};
-    if (!p_server->begin(url.port())) {
+    if (!p_server->begin()) {
       DlnaLogger.log(DlnaLogLevel::Error, "Server failed");
       return false;
     }

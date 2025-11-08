@@ -6,7 +6,8 @@
 const char* ssid = "YOUR_SSID";
 const char* password = "YOUR_PASSWORD";
 
-WiFiServer wifi;
+const int port=9000;
+WiFiServer wifi(port);
 HttpServer<WiFiClient, WiFiServer> server(wifi);
 UDPService<WiFiUDP> udp;
 DLNAMediaRenderer<WiFiClient> media_renderer(server, udp);
@@ -33,7 +34,7 @@ void setup() {
   setupWifi();
 
   // setup media renderer (use event callbacks to handle audio at app level)
-  media_renderer.setBaseURL(WiFi.localIP(), 9999);
+  media_renderer.setBaseURL(WiFi.localIP(), port);
 
   media_renderer.setMediaEventHandler(
     [](MediaEvent ev, DLNAMediaRenderer<WiFiClient>& mr) {

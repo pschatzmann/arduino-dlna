@@ -70,14 +70,14 @@ class DLNAControlPoint : public IControlPoint {
   }
 
   /// Constructor wiring HTTP and UDP dependencies; notifications disabled
-  DLNAControlPoint(IHttpRequest& http, IUDPService& udp, IHttpServer& server, int port = 80) : DLNAControlPoint() {
+  DLNAControlPoint(IHttpRequest& http, IUDPService& udp, IHttpServer& server) : DLNAControlPoint() {
     setTransports(http, udp);
-    setHttpServer(server, port);
+    setHttpServer(server);
   }
 
   /// Constructor supporting Notifications
-  DLNAControlPoint(IHttpServer& server, int port = 80) : DLNAControlPoint() {
-    setHttpServer(server, port);
+  DLNAControlPoint(IHttpServer& server) : DLNAControlPoint() {
+    setHttpServer(server);
   }
 
   ~DLNAControlPoint() override = default;
@@ -109,11 +109,10 @@ class DLNAControlPoint : public IControlPoint {
   }
 
   /// Set HttpServer instance and register the notify handler
-  void setHttpServer(IHttpServer& server, int port = 80) override {
+  void setHttpServer(IHttpServer& server) override {
     DlnaLogger.log(DlnaLogLevel::Debug, "DLNAControlPointMgr::setHttpServer");
     p_http_server = &server;
-    http_server_port = port;
-    subscription_mgr.setHttpServer(server, port);
+    subscription_mgr.setHttpServer(server);
   }
 
   /// Register a callback that will be invoked when parsing SOAP/Action results
@@ -159,9 +158,9 @@ class DLNAControlPoint : public IControlPoint {
     // set timeout for http requests
     http.setTimeout(DLNA_HTTP_REQUEST_TIMEOUT_MS);
 
-    if (p_http_server && http_server_port > 0) {
+    if (p_http_server) {
       // handle server requests
-      if (!p_http_server->begin(http_server_port)) {
+      if (!p_http_server->begin()) {
         DlnaLogger.log(DlnaLogLevel::Error, "HttpServer begin failed");
         return false;
       }
@@ -522,7 +521,6 @@ class DLNAControlPoint : public IControlPoint {
   Url local_url;
   bool allow_localhost = false;
   IHttpServer* p_http_server = nullptr;
-  int http_server_port = 0;
   void* reference = nullptr;
   std::function<void(const char* nodeName, const char* text,
                      const char* attributes)>

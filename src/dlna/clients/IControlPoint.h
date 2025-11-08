@@ -37,7 +37,7 @@ class IControlPoint {
                          const char* newValue, void* reference)>
           cb,
       void* ref = nullptr) = 0;
-  virtual void setHttpServer(IHttpServer& server, int port = 80) = 0;
+  virtual void setHttpServer(IHttpServer& server) = 0;
   virtual void onResultNode(
       std::function<void(const char* nodeName, const char* text,
                          const char* attributes)>

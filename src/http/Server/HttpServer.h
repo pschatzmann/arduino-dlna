@@ -54,31 +54,12 @@ class HttpServer : public IHttpServer {
     return address;
   }
 
-  /// Starts the server on the indicated port - calls WiFi.begin(ssid,
-  /// password);
-  bool begin(int port, const char* ssid, const char* password) override {
-    if (WiFi.status() != WL_CONNECTED && ssid != nullptr &&
-        password != nullptr) {
-      WiFi.begin(ssid, password);
-      while (WiFi.status() != WL_CONNECTED) {
-        delay(500);
-        Serial.print(".");
-      }
 
-      Serial.println();
-      Serial.print("Started Server at ");
-      Serial.print(WiFi.localIP());
-      Serial.print(":");
-      Serial.println(port);
-    }
-    return begin(port);
-  }
-
-  /// Starts the server on the indicated port
-  bool begin(int port) override {
-    DlnaLogger.log(DlnaLogLevel::Info, "HttpServer begin at port %d", port);
+  /// Starts the server 
+  bool begin() override {
+    DlnaLogger.log(DlnaLogLevel::Info, "HttpServer begin");
     is_active = true;
-    server_ptr->begin(port);
+    server_ptr->begin();
     return true;
   }
 
@@ -360,7 +341,7 @@ class HttpServer : public IHttpServer {
   /// print a CR LF
   void crlf() override {
     client_ptr->print("\r\n");
-    client_ptr->flush();
+    //client_ptr->flush();
   }
 
   /// adds a new handler

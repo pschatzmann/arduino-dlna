@@ -83,10 +83,9 @@ class SubscriptionMgrControlPoint {
    * The method registers an HTTP handler at the local callback path
    * (derived from the injected @c Url via setup()).
    */
-  void setHttpServer(IHttpServer& server, int port = 80) {
+  void setHttpServer(IHttpServer& server) {
     DlnaLogger.log(DlnaLogLevel::Debug, "DLNAControlPointMgr::setHttpServer");
     p_http_server = &server;
-    http_server_port = port;
     attachHttpServer(server);
   }
 
@@ -231,7 +230,6 @@ class SubscriptionMgrControlPoint {
   IHttpRequest* p_http = nullptr;
   IUDPService* p_udp = nullptr;
   IHttpServer* p_http_server = nullptr;
-  int http_server_port = 80;
   Url* p_local_url = nullptr;
   DLNADeviceInfo* p_device = nullptr;
   DLNAServiceInfo NO_SERVICE;
