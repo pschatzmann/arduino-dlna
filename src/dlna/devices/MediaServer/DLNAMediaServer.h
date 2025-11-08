@@ -211,7 +211,7 @@ class DLNAMediaServer : public DLNADeviceInfo {
   DLNADescr& getConnectionMgrDescr() { return *p_connmgrDescr; }
 
  protected:
-  // Action rule struct for ContentDirectory
+  /// Individual action rule for handling specific actions
   struct ActionRule {
   const char* suffix;
   bool (*handler)(DLNAMediaServer*, ActionRequest&, IHttpServer&);
