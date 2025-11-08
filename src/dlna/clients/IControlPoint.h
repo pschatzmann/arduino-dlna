@@ -9,8 +9,7 @@
 #include "dlna/Action.h"
 #include "http/Server/IHttpRequest.h"
 #include "http/Server/IHttpServer.h"
-#include "udp/IUDPService.h"
-// #include "http/Server/HttpServerTypes.h"
+#include "dlna/udp/IUDPService.h"
 
 namespace tiny_dlna {
 

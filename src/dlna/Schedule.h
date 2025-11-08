@@ -2,7 +2,7 @@
 
 #include "basic/IPAddressAndPort.h"
 #include "dlna/DLNADeviceInfo.h"
-#include "udp/IUDPService.h"
+#include "dlna/udp/IUDPService.h"
 
 #define MAX_TMP_SIZE 300
 #define ALIVE_MS 0

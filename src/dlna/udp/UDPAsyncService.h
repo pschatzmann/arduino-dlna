@@ -6,7 +6,7 @@
 #include "assert.h"
 #include "basic/Queue.h"
 #include "basic/QueueLockFree.h"
-#include "udp/IUDPService.h"
+#include "dlna/udp/IUDPService.h"
 
 namespace tiny_dlna {
 
@@ -44,7 +44,8 @@ class UDPAsyncService : public IUDPService {
         bool ok = queue.enqueue(result);
         if (!ok) {
           DlnaLogger.log(DlnaLogLevel::Warning,
-                         "UDPAsyncService::enqueue failed: queue full, packet %d bytes, queueSize=%d",
+                         "UDPAsyncService::enqueue failed: queue full, packet "
+                         "%d bytes, queueSize=%d",
                          packet.length(), (int)queue.size());
         }
       });
@@ -65,11 +66,13 @@ class UDPAsyncService : public IUDPService {
         bool ok = queue.enqueue(result);
         if (!ok) {
           DlnaLogger.log(DlnaLogLevel::Warning,
-                         "UDPAsyncService::enqueue failed: multicast queue full, packet %d bytes, queueSize=%d",
+                         "UDPAsyncService::enqueue failed: multicast queue "
+                         "full, packet %d bytes, queueSize=%d",
                          packet.length(), (int)queue.size());
         }
-        DlnaLogger.log(DlnaLogLevel::Info, "UDPAsyncService::receive: received %d bytes", packet.length());
-
+        DlnaLogger.log(DlnaLogLevel::Info,
+                       "UDPAsyncService::receive: received %d bytes",
+                       packet.length());
       });
     }
     return true;

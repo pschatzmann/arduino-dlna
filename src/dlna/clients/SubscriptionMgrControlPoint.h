@@ -6,8 +6,8 @@
 #include "basic/Url.h"
 #include "basic/Vector.h"
 #include "dlna/DLNADeviceInfo.h"
-#include "udp/IUDPService.h"
 #include "dlna/devices/SubscriptionMgrDevice.h"
+#include "dlna/udp/IUDPService.h"
 #include "dlna/xml/XMLParserPrint.h"
 #include "dlna_config.h"
 #include "http/Http.h"
@@ -63,7 +63,7 @@ class SubscriptionMgrControlPoint {
              DLNADeviceInfo& device) {
     p_http = &http;
     p_udp = &udp;
-  // store pointers to shared objects (caller/owner manages lifetime)
+    // store pointers to shared objects (caller/owner manages lifetime)
     p_local_url = &localCallbackUrl;
     p_device = &device;
     is_setup = true;
@@ -488,11 +488,11 @@ class SubscriptionMgrControlPoint {
     }
 
     Url url(service.event_sub_url);
-  int rc = p_http->unsubscribe(url, service.subscription_id.c_str());
+    int rc = p_http->unsubscribe(url, service.subscription_id.c_str());
     if (rc == 200) {
       DlnaLogger.log(DlnaLogLevel::Info, "Unsubscribe %s -> rc=%d", url.url(),
                      rc);
-  // clear SID and metadata regardless of remote rc
+      // clear SID and metadata regardless of remote rc
       service.subscription_id = "";
       service.subscription_state = SubscriptionState::Unsubscribed;
       service.time_subscription_confirmed = 0;
