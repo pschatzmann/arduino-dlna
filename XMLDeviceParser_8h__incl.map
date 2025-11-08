@@ -1,13 +1,13 @@
 <map id="src/dlna/xml/XMLDeviceParser.h" name="src/dlna/xml/XMLDeviceParser.h">
-<area shape="rect" id="node1" title=" " alt="" coords="479,5,710,31"/>
+<area shape="rect" id="node1" title=" " alt="" coords="487,5,718,31"/>
 <area shape="rect" id="node2" title=" " alt="" coords="496,592,560,617"/>
-<area shape="rect" id="node3" href="$XMLParserPrint_8h.html" title=" " alt="" coords="555,445,687,471"/>
+<area shape="rect" id="node3" href="$XMLParserPrint_8h.html" title=" " alt="" coords="563,445,695,471"/>
 <area shape="rect" id="node5" title=" " alt="" coords="741,812,816,837"/>
 <area shape="rect" id="node7" href="$StrView_8h.html" title=" " alt="" coords="1231,665,1313,691"/>
-<area shape="rect" id="node21" href="$Icon_8h.html" title=" " alt="" coords="485,152,584,177"/>
+<area shape="rect" id="node21" href="$Icon_8h.html" title=" " alt="" coords="493,152,592,177"/>
 <area shape="rect" id="node23" href="$DLNADeviceInfo_8h.html" title=" " alt="" coords="867,79,1039,104"/>
-<area shape="rect" id="node4" href="$XMLParser_8h.html" title=" " alt="" coords="772,519,873,544"/>
-<area shape="rect" id="node20" href="$StrPrint_8h.html" title=" " alt="" coords="425,519,545,544"/>
+<area shape="rect" id="node4" href="$XMLParser_8h.html" title=" " alt="" coords="780,519,881,544"/>
+<area shape="rect" id="node20" href="$StrPrint_8h.html" title=" " alt="" coords="433,519,553,544"/>
 <area shape="rect" id="node6" href="$Str_8h.html" title=" " alt="" coords="1313,592,1402,617"/>
 <area shape="rect" id="node11" href="$Vector_8h.html" title=" " alt="" coords="1064,665,1139,691"/>
 <area shape="rect" id="node19" title=" " alt="" coords="1337,665,1396,691"/>
@@ -21,31 +21,31 @@
 <area shape="rect" id="node14" title=" " alt="" coords="1889,812,1959,837"/>
 <area shape="rect" id="node16" title=" " alt="" coords="1512,812,1571,837"/>
 <area shape="rect" id="node17" title=" " alt="" coords="1595,812,1687,837"/>
-<area shape="rect" id="node22" href="$icon48x48_8h.html" title=" " alt="" coords="395,225,533,251"/>
-<area shape="rect" id="node24" href="$Action_8h.html" title=" " alt="" coords="948,372,1055,397"/>
-<area shape="rect" id="node27" href="$XMLPrinter_8h.html" title=" " alt="" coords="948,519,1113,544"/>
-<area shape="rect" id="node34" href="$DLNAServiceInfo_8h.html" title=" " alt="" coords="1090,152,1265,177"/>
-<area shape="rect" id="node44" href="$IHttpServer_8h.html" title=" " alt="" coords="1383,372,1489,397"/>
-<area shape="rect" id="node48" href="$IUDPService_8h.html" title=" " alt="" coords="157,519,299,544"/>
-<area shape="rect" id="node25" href="$DLNACommon_8h.html" title=" " alt="" coords="711,445,873,471"/>
+<area shape="rect" id="node22" href="$icon48x48_8h.html" title=" " alt="" coords="403,225,541,251"/>
+<area shape="rect" id="node24" href="$Action_8h.html" title=" " alt="" coords="956,372,1063,397"/>
+<area shape="rect" id="node27" href="$XMLPrinter_8h.html" title=" " alt="" coords="956,519,1121,544"/>
+<area shape="rect" id="node34" href="$DLNAServiceInfo_8h.html" title=" " alt="" coords="1098,152,1273,177"/>
+<area shape="rect" id="node44" href="$IHttpServer_8h.html" title=" " alt="" coords="1391,372,1497,397"/>
+<area shape="rect" id="node48" href="$IUDPService_8h.html" title=" " alt="" coords="133,519,307,544"/>
+<area shape="rect" id="node25" href="$DLNACommon_8h.html" title=" " alt="" coords="719,445,881,471"/>
 <area shape="rect" id="node32" href="$Logger_8h.html" title=" " alt="" coords="1579,592,1693,617"/>
-<area shape="rect" id="node26" href="$NullPrint_8h.html" title=" " alt="" coords="620,519,748,544"/>
+<area shape="rect" id="node26" href="$NullPrint_8h.html" title=" " alt="" coords="628,519,756,544"/>
 <area shape="rect" id="node28" title=" " alt="" coords="939,592,1005,617"/>
 <area shape="rect" id="node29" title=" " alt="" coords="1030,592,1101,617"/>
 <area shape="rect" id="node30" title=" " alt="" coords="1125,592,1187,617"/>
 <area shape="rect" id="node31" title=" " alt="" coords="1426,665,1510,691"/>
 <area shape="rect" id="node33" title=" " alt="" coords="1636,665,1711,691"/>
-<area shape="rect" id="node35" href="$Http_8h.html" title=" " alt="" coords="1794,225,1886,251"/>
-<area shape="rect" id="node36" href="$HttpServer_8h.html" title=" " alt="" coords="1637,299,1787,324"/>
-<area shape="rect" id="node46" href="$HttpRequest_8h.html" title=" " alt="" coords="1889,299,2050,324"/>
-<area shape="rect" id="node47" href="$HttpParameters_8h.html" title=" " alt="" coords="1766,519,1949,544"/>
-<area shape="rect" id="node37" title=" " alt="" coords="1499,445,1571,471"/>
-<area shape="rect" id="node38" title=" " alt="" coords="1514,372,1649,397"/>
-<area shape="rect" id="node39" href="$HttpHeader_8h.html" title=" " alt="" coords="1607,445,1715,471"/>
+<area shape="rect" id="node35" href="$Http_8h.html" title=" " alt="" coords="1789,225,1881,251"/>
+<area shape="rect" id="node36" href="$HttpServer_8h.html" title=" " alt="" coords="1645,299,1795,324"/>
+<area shape="rect" id="node46" href="$HttpRequest_8h.html" title=" " alt="" coords="1870,299,2031,324"/>
+<area shape="rect" id="node47" href="$HttpParameters_8h.html" title=" " alt="" coords="1774,519,1957,544"/>
+<area shape="rect" id="node37" title=" " alt="" coords="1507,445,1579,471"/>
+<area shape="rect" id="node38" title=" " alt="" coords="1522,372,1657,397"/>
+<area shape="rect" id="node39" href="$HttpHeader_8h.html" title=" " alt="" coords="1615,445,1723,471"/>
 <area shape="rect" id="node42" href="$List_8h.html" title=" " alt="" coords="1786,665,1881,691"/>
 <area shape="rect" id="node45" href="$IPAddressAndPort_8h.html" title=" " alt="" coords="685,665,872,691"/>
-<area shape="rect" id="node40" href="$HttpLineReader_8h.html" title=" " alt="" coords="1607,519,1742,544"/>
-<area shape="rect" id="node41" href="$Url_8h.html" title=" " alt="" coords="1391,519,1481,544"/>
+<area shape="rect" id="node40" href="$HttpLineReader_8h.html" title=" " alt="" coords="1615,519,1750,544"/>
+<area shape="rect" id="node41" href="$Url_8h.html" title=" " alt="" coords="1399,519,1489,544"/>
 <area shape="rect" id="node43" title=" " alt="" coords="1812,739,1887,764"/>
 <area shape="rect" id="node49" title=" " alt="" coords="94,592,157,617"/>
 <area shape="rect" id="node50" title=" " alt="" coords="181,592,269,617"/>

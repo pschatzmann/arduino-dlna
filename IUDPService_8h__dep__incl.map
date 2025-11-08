@@ -1,5 +1,5 @@
-<map id="src/udp/IUDPService.h" name="src/udp/IUDPService.h">
-<area shape="rect" id="node1" title=" " alt="" coords="850,5,1015,31"/>
+<map id="src/dlna/udp/IUDPService.h" name="src/dlna/udp/IUDPService.h">
+<area shape="rect" id="node1" title=" " alt="" coords="834,5,1031,31"/>
 <area shape="rect" id="node2" href="$DLNADeviceInfo_8h.html" title=" " alt="" coords="553,79,747,104"/>
 <area shape="rect" id="node3" href="$Schedule_8h.html" title=" " alt="" coords="411,159,559,185"/>
 <area shape="rect" id="node4" href="$Scheduler_8h.html" title=" " alt="" coords="231,240,383,265"/>
