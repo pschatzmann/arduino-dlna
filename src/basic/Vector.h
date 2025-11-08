@@ -8,7 +8,7 @@
 
 namespace tiny_dlna {
 
-/*
+/** 
  * @class Vector
  * @brief Lightweight wrapper around std::vector with Arduino-friendly helpers and a pluggable allocator.
  *
