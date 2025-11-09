@@ -35,12 +35,12 @@ pairings for the common Arduino WiFi and Ethernet libraries.
 
 | Class | WiFi | Ethernet |
 | - | - | - |
-| `HttpRequest` | `tiny_dlna::HttpRequest<WiFiClient>` | `tiny_dlna::HttpRequest<EthernetClient>` |
-| `HttpServer` | `tiny_dlna::HttpServer<WiFiClient, WiFiServer>`  | `tiny_dlna::HttpServer<EthernetClient, EthernetServer>` |
-| `DLNADevice` | `tiny_dlna::DLNADevice<WiFiClient>` | `tiny_dlna::DLNADevice<EthernetClient>` |
-| `DLNAMediaRenderer` | `tiny_dlna::DLNAMediaRenderer<WiFiClient>` | `tiny_dlna::DLNAMediaRenderer<EthernetClient>` |
-| `DLNAMediaServer` | `tiny_dlna::DLNAMediaServer<WiFiClient>` | `tiny_dlna::DLNAMediaServer<EthernetClient>` |
-| `UDPService` | `tiny_dlna::UDPService<WiFiUDP>` | `tiny_dlna::UDPService<EthernetUDP>` |
+| `HttpRequest` | `HttpRequest<WiFiClient>` | `HttpRequest<EthernetClient>` |
+| `HttpServer` | `HttpServer<WiFiClient, WiFiServer>`  | `HttpServer<EthernetClient, EthernetServer>` |
+| `DLNADevice` | `DLNADevice<WiFiClient>` | `DLNADevice<EthernetClient>` |
+| `DLNAMediaRenderer` | `DLNAMediaRenderer<WiFiClient>` | `DLNAMediaRenderer<EthernetClient>` |
+| `DLNAMediaServer` | `DLNAMediaServer<WiFiClient>` | `DLNAMediaServer<EthernetClient>` |
+| `UDPService` | `UDPService<WiFiUDP>` | `UDPService<EthernetUDP>` |
 
 
 
