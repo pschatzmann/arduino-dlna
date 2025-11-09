@@ -64,6 +64,7 @@ class DLNAControlPointMediaServer {
       DlnaLogger.log(DlnaLogLevel::Error, "udp instance not set");
       return false;
     }
+
     return p_mgr->begin(*p_http, *p_udp, device_type_filter, minWaitMs,
                         maxWaitMs);
   }

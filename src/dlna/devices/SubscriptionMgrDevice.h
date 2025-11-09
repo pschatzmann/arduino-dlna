@@ -304,13 +304,13 @@ class SubscriptionMgrDevice : public ISubscriptionMgrDevice {
       // Build and send HTTP notify as in previous implementation
       Url cbUrl(sub.callback_url.c_str());
       HttpRequest<ClientType> http;
+      http.setTimeout(DLNA_HTTP_REQUEST_TIMEOUT_MS);
       http.setHost(cbUrl.host());
       http.setAgent("tiny-dlna-notify");
       http.request().put("NT", "upnp:event");
       http.request().put("NTS", "upnp:propchange");
       http.request().put("SEQ", seqBuf);
       http.request().put("SID", sub.sid.c_str());
-      http.setTimeout(DLNA_HTTP_REQUEST_TIMEOUT_MS);
       DlnaLogger.log(DlnaLogLevel::Info, "Notify %s", cbUrl.url());
       DlnaLogger.log(DlnaLogLevel::Info, "- SEQ: %s", seqBuf);
       DlnaLogger.log(DlnaLogLevel::Info, "- SID: %s", sub.sid.c_str());

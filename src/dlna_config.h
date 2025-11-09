@@ -2,22 +2,22 @@
 
 /// Define delay in ms for main DLNA loop
 #ifndef DLNA_LOOP_DELAY_MS
-#define DLNA_LOOP_DELAY_MS 8
+#define DLNA_LOOP_DELAY_MS 1
 #endif
 
 /// Define scheduler run interval in ms
 #ifndef DLNA_RUN_SCHEDULER_EVERY_MS
-#define DLNA_RUN_SCHEDULER_EVERY_MS 200
+#define DLNA_RUN_SCHEDULER_EVERY_MS 600
 #endif
 
 /// Define subscription publish interval in ms
 #ifndef DLNA_RUN_SUBSCRIPTIONS_EVERY_MS
-#define DLNA_RUN_SUBSCRIPTIONS_EVERY_MS 500
+#define DLNA_RUN_SUBSCRIPTIONS_EVERY_MS 800
 #endif
 
 /// Define the default http request timeout
 #ifndef DLNA_HTTP_REQUEST_TIMEOUT_MS
-#define DLNA_HTTP_REQUEST_TIMEOUT_MS 6000
+#define DLNA_HTTP_REQUEST_TIMEOUT_MS 400
 #endif
 
 /// Define XML parse buffer size
@@ -175,7 +175,7 @@
 
 /// Enable or disable logging of XML messages
 #ifndef DLNA_LOG_XML
-#define DLNA_LOG_XML true
+#define DLNA_LOG_XML false
 #endif
 
 /// Define the netmask for discovery filtering

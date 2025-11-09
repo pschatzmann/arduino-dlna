@@ -161,9 +161,6 @@ class DLNAControlPoint : public IControlPoint {
     is_active = true;
     setTransports(http, udp);
 
-    // set timeout for http requests
-    http.setTimeout(DLNA_HTTP_REQUEST_TIMEOUT_MS);
-
     if (p_http_server) {
       // handle server requests
       if (!p_http_server->begin()) {

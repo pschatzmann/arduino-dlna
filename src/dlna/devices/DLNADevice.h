@@ -250,7 +250,6 @@ class DLNADevice : public IDevice {
     char buffer[XML_PARSER_BUFFER_SIZE];
     Client& client = server->client();
 
-    client.setTimeout(20);
     while (true) {
       size_t len = client.readBytes(buffer, sizeof(buffer));
       if (len == 0) break;
