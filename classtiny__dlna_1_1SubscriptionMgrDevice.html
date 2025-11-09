@@ -115,9 +115,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a0c42c3e353bdbc0d8d160ead46024da9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgrDevice.html#a0c42c3e353bdbc0d8d160ead46024da9">addChange</a> (<a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html">DLNAServiceInfo</a> &amp;service, std::function&lt; size_t(Print &amp;, void *)&gt; changeWriter, void *ref) override</td></tr>
 <tr class="memdesc:a0c42c3e353bdbc0d8d160ead46024da9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueue a state-variable change for delivery.  <br /></td></tr>
 <tr class="separator:a0c42c3e353bdbc0d8d160ead46024da9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab830486e1636a4f25cc2d57a6e99fc09"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgrDevice.html#ab830486e1636a4f25cc2d57a6e99fc09">publish</a> () override</td></tr>
-<tr class="memdesc:ab830486e1636a4f25cc2d57a6e99fc09"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deliver queued notifications.  <br /></td></tr>
-<tr class="separator:ab830486e1636a4f25cc2d57a6e99fc09"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2889f011f9fb8ed84d0fa0f9eef7ecc2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgrDevice.html#a2889f011f9fb8ed84d0fa0f9eef7ecc2">publish</a> () override</td></tr>
+<tr class="memdesc:a2889f011f9fb8ed84d0fa0f9eef7ecc2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deliver queued notifications.  <br /></td></tr>
+<tr class="separator:a2889f011f9fb8ed84d0fa0f9eef7ecc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9c9301c99094e3256405223550b38a04"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgrDevice.html#a9c9301c99094e3256405223550b38a04">removeExpired</a> () override</td></tr>
 <tr class="memdesc:a9c9301c99094e3256405223550b38a04"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove expired subscriptions.  <br /></td></tr>
 <tr class="separator:a9c9301c99094e3256405223550b38a04"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -577,8 +577,8 @@ template&lt;typename ClientType &gt; </div>
 
 </div>
 </div>
-<a id="ab830486e1636a4f25cc2d57a6e99fc09" name="ab830486e1636a4f25cc2d57a6e99fc09"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab830486e1636a4f25cc2d57a6e99fc09">&#9670;&#160;</a></span>publish()</h2>
+<a id="a2889f011f9fb8ed84d0fa0f9eef7ecc2" name="a2889f011f9fb8ed84d0fa0f9eef7ecc2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2889f011f9fb8ed84d0fa0f9eef7ecc2">&#9670;&#160;</a></span>publish()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -589,7 +589,7 @@ template&lt;typename ClientType &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classtiny__dlna_1_1SubscriptionMgrDevice.html">tiny_dlna::SubscriptionMgrDevice</a>&lt; ClientType &gt;::publish </td>
+          <td class="memname">int <a class="el" href="classtiny__dlna_1_1SubscriptionMgrDevice.html">tiny_dlna::SubscriptionMgrDevice</a>&lt; ClientType &gt;::publish </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -605,7 +605,7 @@ template&lt;typename ClientType &gt; </div>
 <p>Deliver queued notifications. </p>
 <p>Iterates the pending notification queue and attempts to deliver each notification via HTTP NOTIFY. Successful deliveries are removed from the queue. Failed attempts increment an error counter; entries that exceed MAX_NOTIFY_RETIES are dropped. Expired subscriptions are removed prior to delivery. </p>
 
-<p>Implements <a class="el" href="classtiny__dlna_1_1ISubscriptionMgrDevice.html#abe49d5d68584e276b2fc6186b17c249f">tiny_dlna::ISubscriptionMgrDevice</a>.</p>
+<p>Implements <a class="el" href="classtiny__dlna_1_1ISubscriptionMgrDevice.html#afc581a6129097e0a96b6c107266674bc">tiny_dlna::ISubscriptionMgrDevice</a>.</p>
 
 </div>
 </div>

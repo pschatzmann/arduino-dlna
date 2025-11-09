@@ -114,9 +114,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:afb4ff255406f85ca116fa86b4574d251"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#afb4ff255406f85ca116fa86b4574d251">loop</a> () override</td></tr>
 <tr class="memdesc:afb4ff255406f85ca116fa86b4574d251"><td class="mdescLeft">&#160;</td><td class="mdescRight">call this method in the Arduino loop as often as possible  <br /></td></tr>
 <tr class="separator:afb4ff255406f85ca116fa86b4574d251"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e8898dc4c27491efbd36449649157c2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a6e8898dc4c27491efbd36449649157c2">loopPublishSubscriptions</a> ()</td></tr>
+<tr class="memdesc:a6e8898dc4c27491efbd36449649157c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Publish pending subscription notifications.  <br /></td></tr>
+<tr class="separator:a6e8898dc4c27491efbd36449649157c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adac1a8f03798e165f84dc8922fc59c4e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#adac1a8f03798e165f84dc8922fc59c4e">loopServer</a> () override</td></tr>
-<tr class="memdesc:adac1a8f03798e165f84dc8922fc59c4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Process HTTP server loop.  <br /></td></tr>
+<tr class="memdesc:adac1a8f03798e165f84dc8922fc59c4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Process http server loop.  <br /></td></tr>
 <tr class="separator:adac1a8f03798e165f84dc8922fc59c4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07012fb59b921062622d2064d0316c28"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a07012fb59b921062622d2064d0316c28">loopUDPMessages</a> ()</td></tr>
+<tr class="memdesc:a07012fb59b921062622d2064d0316c28"><td class="mdescLeft">&#160;</td><td class="mdescRight">Process incoming UDP and execute scheduled replies.  <br /></td></tr>
+<tr class="separator:a07012fb59b921062622d2064d0316c28"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a98d480c499ca20e25e579bbbf9c1545e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html">DLNAServiceInfo</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a98d480c499ca20e25e579bbbf9c1545e">getService</a> (const char *id) override</td></tr>
 <tr class="memdesc:a98d480c499ca20e25e579bbbf9c1545e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provide addess to the service information.  <br /></td></tr>
 <tr class="separator:a98d480c499ca20e25e579bbbf9c1545e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -184,9 +190,6 @@ Protected Member Functions</h2></td></tr>
 <tr class="separator:ad3fa0cf93900af0501000abb2d70437a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a66e1f5ea2539e14b39b43e2a35e3a605"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a66e1f5ea2539e14b39b43e2a35e3a605">logScheduledStatus</a> (bool runImmediately=false)</td></tr>
 <tr class="separator:a66e1f5ea2539e14b39b43e2a35e3a605"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac8d35612ad3f0d75adfb30a8a5d2a685"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#ac8d35612ad3f0d75adfb30a8a5d2a685">processUdpAndScheduler</a> ()</td></tr>
-<tr class="memdesc:ac8d35612ad3f0d75adfb30a8a5d2a685"><td class="mdescLeft">&#160;</td><td class="mdescRight">Process incoming UDP and execute scheduled replies.  <br /></td></tr>
-<tr class="separator:ac8d35612ad3f0d75adfb30a8a5d2a685"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad42e71585f120ce65348601ed7819fca"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#ad42e71585f120ce65348601ed7819fca">setupParser</a> ()</td></tr>
 <tr class="separator:ad42e71585f120ce65348601ed7819fca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a58e020551957e3422a8360d82710edec"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a58e020551957e3422a8360d82710edec">setupScheduler</a> ()</td></tr>
@@ -968,6 +971,35 @@ template&lt;typename ClientType &gt; </div>
 
 </div>
 </div>
+<a id="a6e8898dc4c27491efbd36449649157c2" name="a6e8898dc4c27491efbd36449649157c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e8898dc4c27491efbd36449649157c2">&#9670;&#160;</a></span>loopPublishSubscriptions()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="classtiny__dlna_1_1DLNADevice.html">tiny_dlna::DLNADevice</a>&lt; ClientType &gt;::loopPublishSubscriptions </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Publish pending subscription notifications. </p>
+
+</div>
+</div>
 <a id="adac1a8f03798e165f84dc8922fc59c4e" name="adac1a8f03798e165f84dc8922fc59c4e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adac1a8f03798e165f84dc8922fc59c4e">&#9670;&#160;</a></span>loopServer()</h2>
 
@@ -993,9 +1025,38 @@ template&lt;typename ClientType &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Process HTTP server loop. </p>
+<p>Process http server loop. </p>
 
 <p>Implements <a class="el" href="classtiny__dlna_1_1IDevice.html#a496a2dc2d755ba925892aca6be4cfbc8">tiny_dlna::IDevice</a>.</p>
+
+</div>
+</div>
+<a id="a07012fb59b921062622d2064d0316c28" name="a07012fb59b921062622d2064d0316c28"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a07012fb59b921062622d2064d0316c28">&#9670;&#160;</a></span>loopUDPMessages()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="classtiny__dlna_1_1DLNADevice.html">tiny_dlna::DLNADevice</a>&lt; ClientType &gt;::loopUDPMessages </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Process incoming UDP and execute scheduled replies. </p>
 
 </div>
 </div>
@@ -1107,35 +1168,6 @@ template&lt;typename ClientType &gt; </div>
 
 <p>Builds a standard SOAP reply envelope. </p>
 <p>This helper prints a SOAP envelope and calls the provided valuesWriter to emit the inner XML fragment. The valuesWriter receives the output Print and a void* ref for caller-provided context and shall return the number of bytes written. </p>
-
-</div>
-</div>
-<a id="ac8d35612ad3f0d75adfb30a8a5d2a685" name="ac8d35612ad3f0d75adfb30a8a5d2a685"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac8d35612ad3f0d75adfb30a8a5d2a685">&#9670;&#160;</a></span>processUdpAndScheduler()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename ClientType &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="classtiny__dlna_1_1DLNADevice.html">tiny_dlna::DLNADevice</a>&lt; ClientType &gt;::processUdpAndScheduler </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Process incoming UDP and execute scheduled replies. </p>
 
 </div>
 </div>
