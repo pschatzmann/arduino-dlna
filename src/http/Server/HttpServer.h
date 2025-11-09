@@ -370,14 +370,14 @@ class HttpServer : public IHttpServer {
 
     // Stop when nothing to process
     if (open_clients.empty()) {
-      delay(no_connect_delay);
+      //delay(no_connect_delay);
       return false;
     }
 
     if (current_client_iterator == open_clients.end()) {
       current_client_iterator = open_clients.begin();
       if (current_client_iterator == open_clients.end()) {
-        delay(no_connect_delay);
+        //delay(no_connect_delay);
         return false;
       }
     }
