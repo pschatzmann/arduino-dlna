@@ -112,7 +112,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a2d4069ba8c31bc43a72e404fda99ef30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stops the processing and releases the resources.  <br /></td></tr>
 <tr class="separator:a2d4069ba8c31bc43a72e404fda99ef30"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afb4ff255406f85ca116fa86b4574d251"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#afb4ff255406f85ca116fa86b4574d251">loop</a> () override</td></tr>
-<tr class="memdesc:afb4ff255406f85ca116fa86b4574d251"><td class="mdescLeft">&#160;</td><td class="mdescRight">call this method in the Arduino loop as often as possible  <br /></td></tr>
 <tr class="separator:afb4ff255406f85ca116fa86b4574d251"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6e8898dc4c27491efbd36449649157c2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a6e8898dc4c27491efbd36449649157c2">loopPublishSubscriptions</a> ()</td></tr>
 <tr class="memdesc:a6e8898dc4c27491efbd36449649157c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Publish pending subscription notifications.  <br /></td></tr>
@@ -964,8 +963,8 @@ template&lt;typename ClientType &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>call this method in the Arduino loop as often as possible </p>
+<p>Call this method in the Arduino loop as often as possible. It calls loopServer, loopUDP and loopPublishSubscriptions in defined intervals.. <br  />
+ </p>
 
 <p>Implements <a class="el" href="classtiny__dlna_1_1IDevice.html#a1186a44b44cefed4955f4c4ea5d50c95">tiny_dlna::IDevice</a>.</p>
 
