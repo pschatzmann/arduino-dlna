@@ -126,6 +126,8 @@ Public Member Functions</h2></td></tr>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:ac1d60d06f67666127d4710a8055af23f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1XMLParser.html#ac1d60d06f67666127d4710a8055af23f">findGt</a> (const char *s, int start, int len)</td></tr>
 <tr class="separator:ac1d60d06f67666127d4710a8055af23f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6137e143fb628656f471099a9102261"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1XMLParser.html#af6137e143fb628656f471099a9102261">hasNonWhitespaceTextAhead</a> (const char *s, int gt, int len)</td></tr>
+<tr class="separator:af6137e143fb628656f471099a9102261"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae637310662c8d0ff2d1b0bd3e096688e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1XMLParser.html#ae637310662c8d0ff2d1b0bd3e096688e">emitTextSegment</a> (const char *s, int ts, int te)</td></tr>
 <tr class="separator:ae637310662c8d0ff2d1b0bd3e096688e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a97eeab3696c62c0941e30b9daebe9c57"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1XMLParser.html#a97eeab3696c62c0941e30b9daebe9c57">emitTagSegment</a> (const char *s, int lt, int gt)</td></tr>
@@ -604,6 +606,48 @@ text, int start, int len, void* ref)</a><ul>
           <td></td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>gt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af6137e143fb628656f471099a9102261" name="af6137e143fb628656f471099a9102261"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af6137e143fb628656f471099a9102261">&#9670;&#160;</a></span>hasNonWhitespaceTextAhead()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool tiny_dlna::XMLParser::hasNonWhitespaceTextAhead </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>gt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>len</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
