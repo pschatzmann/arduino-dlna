@@ -176,6 +176,23 @@ class XMLParser {
     return gt;
   }
 
+  // Check if there is non-whitespace text immediately after this tag
+  // (before the next '<'). If true, the element has text content and we
+  // should suppress the start-tag-only callback to avoid duplicate events
+  // (first empty, then text) for the same node.
+  bool hasNonWhitespaceTextAhead(const char* s, int gt, int len) {
+    int start = gt + 1;
+    if (start >= len) return false;
+    int next = str_view.indexOf('<', start);
+    if (next < 0) next = len;
+    for (int i = start; i < next; ++i) {
+      if (!isspace((unsigned char)s[i])) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   void emitTextSegment(const char* s, int ts, int te) {
     // trim whitespace bounds already provided by caller when appropriate
     if (te > ts && callback) {
@@ -318,14 +335,19 @@ class XMLParser {
       // start tag (or self-closing)
       handleStartTag(s, lt, gt);
 
-      // callback for the tag itself
-      emitTagSegment(s, lt, gt);
-
       // detect self-closing and pop if needed
       bool selfClosing = false;
       int back = gt - 1;
       while (back > lt && isspace((unsigned char)s[back])) back--;
       if (back > lt && s[back] == '/') selfClosing = true;
+
+      // Only emit the start tag callback if the element is self-closing
+      // or if there is no non-whitespace text ahead. This suppresses the
+      // first (empty-text) callback for nodes that will immediately yield
+      // a text callback.
+      if (selfClosing || !hasNonWhitespaceTextAhead(s, gt, len)) {
+        emitTagSegment(s, lt, gt);
+      }
 
       pos = gt + 1;
 
@@ -395,16 +417,18 @@ class XMLParser {
       // start tag (or self-closing)
       handleStartTag(s, lt, gt);
 
-      // callback for the tag itself
-      if (callback) {
+      // detect self-closing and whether to emit start-tag callback
+      bool selfClosing = false;
+      int back = gt - 1;
+      while (back > lt && isspace((unsigned char)s[back])) back--;
+      if (back > lt && s[back] == '/') selfClosing = true;
+
+      bool emitStartTag = selfClosing || !hasNonWhitespaceTextAhead(s, gt, len);
+
+      if (callback && emitStartTag) {
         node_name = path.size() > 0 ? path.back() : empty_str;
         result = invokeCallback(node_name, path, empty_str, last_attributes, lt,
                                 gt - lt + 1);
-        // detect self-closing and pop if needed
-        bool selfClosing = false;
-        int back = gt - 1;
-        while (back > lt && isspace((unsigned char)s[back])) back--;
-        if (back > lt && s[back] == '/') selfClosing = true;
         pos = gt + 1;
         if (selfClosing && path.size() > 0) {
           path.erase(path.size() - 1);
@@ -415,7 +439,15 @@ class XMLParser {
         return result;
       }
 
+      // Suppressed start-tag callback (expecting text ahead) or no callback
+      // registered; just advance position and continue scanning.
       pos = gt + 1;
+      if (selfClosing && path.size() > 0) {
+        path.erase(path.size() - 1);
+        if (contentStarts.size() > 0)
+          contentStarts.erase(contentStarts.size() - 1);
+      }
+
       parsePos = pos;
     }
 
