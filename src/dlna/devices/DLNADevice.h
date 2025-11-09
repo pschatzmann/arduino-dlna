@@ -142,28 +142,52 @@ class DLNADevice : public IDevice {
     // real-time intervals instead of loop-counts.
     uint64_t now = millis();
     if (isSchedulerActive() && now >= next_scheduler_timeout_ms) {
-      processUdpAndScheduler();
+      int count = loopUDPMessages();
+      if (count > 0) rc = true;
       // schedule next run
       next_scheduler_timeout_ms = now + scheduler_interval_ms;
     }
 
     // deliver any queued subscription notifications (if enabled)
     if (isSubscriptionsActive() && now >= next_subscriptions_timeout_ms) {
-      subscription_mgr.publish();
+      int count = loopPublishSubscriptions();
+      if (count > 0) rc = true;
       // schedule next run
       next_subscriptions_timeout_ms = now + subscriptions_interval_ms;
     }
 
     // be nice, if we have other tasks
-    delay(DLNA_LOOP_DELAY_MS);
+    if (!rc) delay(DLNA_LOOP_DELAY_MS);
     return true;
   }
 
+  /// Publish pending subscription notifications
+  int loopPublishSubscriptions() {
+    return subscription_mgr.publish();
+  }
+
+  /// Process http server loop
   bool loopServer() override {
     if (!is_active) return false;
     bool rc = p_server->doLoop();
     DlnaLogger.log(DlnaLogLevel::Debug, "server %s", rc ? "true" : "false");
     return rc;
+  }
+  
+  /// Process incoming UDP and execute scheduled replies.
+  int loopUDPMessages() {
+    // process UDP requests
+    DlnaLogger.log(DlnaLogLevel::Debug, "processUdpAndScheduler");
+    RequestData req = p_udp->receive();
+    if (req) {
+      Schedule* schedule = parser.parse(*p_device_info, req);
+      if (schedule != nullptr) {
+        scheduler.add(schedule);
+      }
+    }
+
+    // execute scheduled udp replys
+    return scheduler.execute(*p_udp);
   }
 
   /// Provide addess to the service information
@@ -469,22 +493,6 @@ class DLNADevice : public IDevice {
         (unsigned)ESP.getFreePsram());
 #endif
 }
-  }
-
-  /// Process incoming UDP and execute scheduled replies.
-  void processUdpAndScheduler() {
-    // process UDP requests
-    DlnaLogger.log(DlnaLogLevel::Debug, "processUdpAndScheduler");
-    RequestData req = p_udp->receive();
-    if (req) {
-      Schedule* schedule = parser.parse(*p_device_info, req);
-      if (schedule != nullptr) {
-        scheduler.add(schedule);
-      }
-    }
-
-    // execute scheduled udp replys
-    scheduler.execute(*p_udp);
   }
 
   /// MSearch requests reply to upnp:rootdevice and the device type defined

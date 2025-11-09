@@ -275,10 +275,10 @@ class SubscriptionMgrDevice : public ISubscriptionMgrDevice {
    * exceed MAX_NOTIFY_RETIES are dropped. Expired subscriptions are removed
    * prior to delivery.
    */
-  void publish() override {
+  int publish() override {
     // First remove expired subscriptions so we don't deliver to them.
     removeExpired();
-    if (pending_list.empty()) return;
+    if (pending_list.empty()) return 0;
     // Attempt to process each pending notification once. If processing
     // fails (non-200), leave the entry in the queue for a later retry.
     int processed = 0;
@@ -344,6 +344,7 @@ class SubscriptionMgrDevice : public ISubscriptionMgrDevice {
         DlnaLogLevel::Info,
         "Published: %d notifications, %d remaining (for %d subscriptions)",
         processed, pendingCount(), subscriptionsCount());
+    return processed;
   }
 
   /**

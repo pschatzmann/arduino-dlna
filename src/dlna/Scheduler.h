@@ -27,9 +27,10 @@ class Scheduler {
   }
 
   /// Execute all due schedules
-  void execute(IUDPService& udp) {
+  int execute(IUDPService& udp) {
     // DlnaLogger.log(DlnaLogLevel::Debug, "Scheduler::execute");
     bool is_cleanup = false;
+    int processed = 0;
     for (auto& p_s : queue) {
       if (p_s == nullptr) continue;
       Schedule& s = *p_s;
@@ -44,6 +45,7 @@ class Scheduler {
                          "Scheduler::execute %s: Executing", s.name());
 
           s.process(udp);
+          processed++;
           // reschedule if necessary
           if (s.repeat_ms > 0) {
             s.time = millis() + s.repeat_ms;
@@ -60,6 +62,7 @@ class Scheduler {
     }
 
     cleanup();
+    return processed;
   }
 
   /// Returns true if there is any active schedule with name "MSearch"

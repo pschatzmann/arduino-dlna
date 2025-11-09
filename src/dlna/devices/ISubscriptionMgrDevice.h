@@ -42,7 +42,7 @@ class ISubscriptionMgrDevice {
       std::function<size_t(Print&, void*)> changeWriter, void* ref) = 0;
 
   /// Publish pending event notifications
-  virtual void publish() = 0;
+  virtual int publish() = 0;
 
   /// Remove expired subscriptions
   virtual void removeExpired() = 0;
