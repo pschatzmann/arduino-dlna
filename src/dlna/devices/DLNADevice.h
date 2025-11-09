@@ -129,7 +129,8 @@ class DLNADevice : public IDevice {
     is_active = false;
   }
 
-  /// call this method in the Arduino loop as often as possible
+  /// Call this method in the Arduino loop as often as possible. It calls 
+  /// loopServer, loopUDP and loopPublishSubscriptions in defined intervals.. 
   bool loop() override {
     if (!is_active) return false;
     // Platform-specific periodic diagnostics (e.g. ESP32 memory logging)
@@ -173,7 +174,7 @@ class DLNADevice : public IDevice {
     DlnaLogger.log(DlnaLogLevel::Debug, "server %s", rc ? "true" : "false");
     return rc;
   }
-  
+
   /// Process incoming UDP and execute scheduled replies.
   int loopUDPMessages() {
     // process UDP requests
