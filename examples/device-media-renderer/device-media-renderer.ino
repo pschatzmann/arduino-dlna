@@ -11,8 +11,35 @@ WiFiServer wifi(port);
 HttpServer<WiFiClient, WiFiServer> server(wifi);
 UDPService<WiFiUDP> udp;
 DLNAMediaRenderer<WiFiClient> media_renderer(server, udp);
-// Use Serial as a simple output when no audio stack is present
-Print& out = Serial;
+
+void handleMediaEvent(MediaEvent ev, DLNAMediaRenderer<WiFiClient>& mr) {
+  switch (ev) {
+    case MediaEvent::SET_URI:
+      Serial.print("Event: SET_URI ");
+      if (mr.getCurrentUri()) Serial.println(mr.getCurrentUri());
+      else Serial.println("(null)");
+      break;
+    case MediaEvent::PLAY:
+      Serial.println("Event: PLAY");
+      break;
+    case MediaEvent::STOP:
+      Serial.println("Event: STOP");
+      break;
+    case MediaEvent::PAUSE:
+      Serial.println("Event: PAUSE");
+      break;
+    case MediaEvent::SET_VOLUME:
+      Serial.print("Event: SET_VOLUME ");
+      Serial.println(mr.getVolume());
+      break;
+    case MediaEvent::SET_MUTE:
+      Serial.print("Event: SET_MUTE ");
+      Serial.println(mr.isMuted() ? 1 : 0);
+      break;
+    default:
+      Serial.println("Event: OTHER");
+  }
+}
 
 void setupWifi() {
   WiFi.begin(ssid, password);
@@ -30,41 +57,13 @@ void setup() {
   // setup logger
   Serial.begin(115200);
   DlnaLogger.begin(Serial, DlnaLogLevel::Info);
+
   // start Wifi
   setupWifi();
 
   // setup media renderer (use event callbacks to handle audio at app level)
   media_renderer.setBaseURL(WiFi.localIP(), port);
-
-  media_renderer.setMediaEventHandler(
-    [](MediaEvent ev, DLNAMediaRenderer<WiFiClient>& mr) {
-      switch (ev) {
-        case MediaEvent::SET_URI:
-          Serial.print("Event: SET_URI ");
-          if (mr.getCurrentUri()) Serial.println(mr.getCurrentUri());
-          else Serial.println("(null)");
-          break;
-        case MediaEvent::PLAY:
-          Serial.println("Event: PLAY");
-          break;
-        case MediaEvent::STOP:
-          Serial.println("Event: STOP");
-          break;
-        case MediaEvent::PAUSE:
-          Serial.println("Event: PAUSE");
-          break;
-        case MediaEvent::SET_VOLUME:
-          Serial.print("Event: SET_VOLUME ");
-          Serial.println(mr.getVolume());
-          break;
-        case MediaEvent::SET_MUTE:
-          Serial.print("Event: SET_MUTE ");
-          Serial.println(mr.isMuted() ? 1 : 0);
-          break;
-        default:
-          Serial.println("Event: OTHER");
-      }
-    });
+  media_renderer.setMediaEventHandler(handleMediaEvent);
 
   // start device
   if (!media_renderer.begin()) {

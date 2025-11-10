@@ -15,8 +15,6 @@ const char* password = "YOUR_PASSWORD";
 const int port = 9000;
 WiFiServer wifi(port);
 HttpServer<WiFiClient, WiFiServer> server(wifi);
-// WiFiClient client;
-// DLNAHttpRequest http(client);
 UDPService<WiFiUDP> udp;
 DLNAMediaServer<WiFiClient> mediaServer(server, udp);
 
