@@ -24,9 +24,10 @@ struct MediaItem {
   const char* parentID = "0";
   bool restricted = true;
   const char* title = nullptr;
-  const char* resourceURL = nullptr;  // resource URL
+  const char* resourceURI = nullptr;  // resource URL
   const char* mimeType = nullptr;
   MediaItemClass itemClass = MediaItemClass::Unknown;
+  const char* albumArtURI = nullptr;  // optional album art URI
   // Additional optional metadata fields could be added here (duration,
   // creator...)
 };

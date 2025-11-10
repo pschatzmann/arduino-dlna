@@ -770,9 +770,19 @@ class DLNAMediaServer : public DLNADeviceInfo {
           "&lt;upnp:class&gt;%s&lt;/upnp:class&gt;\r\n", mediaItemClassStr));
     }
 
+    // Optional album art URI
+    if (!StrView(item.albumArtURI).isEmpty()) {
+      Str art{160};
+      art.set(item.albumArtURI);
+      art.replaceAll("&", "&amp;");
+      written += out.print("&lt;upnp:albumArtURI&gt;");
+      written += out.print(StrView(art.c_str()).c_str());
+      written += out.print("&lt;/upnp:albumArtURI&gt;\r\n");
+    }
+
     // res with optional protocolInfo attribute
     Str url{160};
-    url.set(item.resourceURL);
+    url.set(item.resourceURI);
     if (!url.isEmpty()) {
       url.replaceAll("&", "&amp;");
       if (!StrView(item.mimeType).isEmpty()) {
