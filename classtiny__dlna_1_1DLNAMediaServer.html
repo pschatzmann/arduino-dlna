@@ -116,6 +116,8 @@ Public Types</h2></td></tr>
 <tr class="memitem:a6d27b2ed87ab945dfc211b129369700b"><td class="memItemLeft" align="right" valign="top">typedef bool(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaServer.html#a6d27b2ed87ab945dfc211b129369700b">GetDataCallback</a>) (int index, <a class="el" href="structtiny__dlna_1_1MediaItem.html">MediaItem</a> &amp;item, void *reference)</td></tr>
 <tr class="memdesc:a6d27b2ed87ab945dfc211b129369700b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback: retrieve <a class="el" href="structtiny__dlna_1_1MediaItem.html" title="Media item description used to build DIDL-Lite entries.">MediaItem</a> by index. Returns true if item is valid.  <br /></td></tr>
 <tr class="separator:a6d27b2ed87ab945dfc211b129369700b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3cb602bcc72e4c7994f92097253052c"><td class="memItemLeft" align="right" valign="top">typedef size_t(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaServer.html#ab3cb602bcc72e4c7994f92097253052c">GetDataCallbackPrint</a>) (int index, Print &amp;out, void *reference)</td></tr>
+<tr class="separator:ab3cb602bcc72e4c7994f92097253052c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -173,8 +175,11 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a8879d25da9ab03044c3e354dfba47434"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the callback that prepares the data for the Browse and Search.  <br /></td></tr>
 <tr class="separator:a8879d25da9ab03044c3e354dfba47434"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a767fb10e5708aefda18624874646cf71"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaServer.html#a767fb10e5708aefda18624874646cf71">setGetDataCallback</a> (<a class="el" href="classtiny__dlna_1_1DLNAMediaServer.html#a6d27b2ed87ab945dfc211b129369700b">GetDataCallback</a> cb)</td></tr>
-<tr class="memdesc:a767fb10e5708aefda18624874646cf71"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the callback that provides a <a class="el" href="structtiny__dlna_1_1MediaItem.html" title="Media item description used to build DIDL-Lite entries.">MediaItem</a> by index.  <br /></td></tr>
+<tr class="memdesc:a767fb10e5708aefda18624874646cf71"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the data callback that provides a <a class="el" href="structtiny__dlna_1_1MediaItem.html" title="Media item description used to build DIDL-Lite entries.">MediaItem</a> by index.  <br /></td></tr>
 <tr class="separator:a767fb10e5708aefda18624874646cf71"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8bcf88d0d803e8bbcc6cb709b781dc89"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaServer.html#a8bcf88d0d803e8bbcc6cb709b781dc89">setGetDataCallback</a> (<a class="el" href="classtiny__dlna_1_1DLNAMediaServer.html#ab3cb602bcc72e4c7994f92097253052c">GetDataCallbackPrint</a> cb)</td></tr>
+<tr class="memdesc:a8bcf88d0d803e8bbcc6cb709b781dc89"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the alternative data callback that prints a DIDL entry directly.  <br /></td></tr>
+<tr class="separator:a8bcf88d0d803e8bbcc6cb709b781dc89"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7065d640da8a8e5c13e8920b67e0971f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaServer.html#a7065d640da8a8e5c13e8920b67e0971f">setReference</a> (void *ref)</td></tr>
 <tr class="memdesc:a7065d640da8a8e5c13e8920b67e0971f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets a user reference pointer, available in callbacks.  <br /></td></tr>
 <tr class="separator:a7065d640da8a8e5c13e8920b67e0971f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -377,6 +382,10 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:af6c526bce36d3c2d5f47fc077511b026"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaServer.html#af6c526bce36d3c2d5f47fc077511b026">streamDIDL</a> (Print &amp;out, int numberReturned, int startingIndex)</td></tr>
 <tr class="memdesc:af6c526bce36d3c2d5f47fc077511b026"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stream DIDL-Lite payload for a Browse/Search result.  <br /></td></tr>
 <tr class="separator:af6c526bce36d3c2d5f47fc077511b026"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d2e019e79af02b75b354a735a477191"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaServer.html#a8d2e019e79af02b75b354a735a477191">streamDIDLItems</a> (Print &amp;out, int numberReturned, int startingIndex)</td></tr>
+<tr class="separator:a8d2e019e79af02b75b354a735a477191"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab10b8ad122b94941b6f2a3c62d43bc7b"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaServer.html#ab10b8ad122b94941b6f2a3c62d43bc7b">streamDIDLItem</a> (Print &amp;out, const <a class="el" href="structtiny__dlna_1_1MediaItem.html">MediaItem</a> &amp;item)</td></tr>
+<tr class="separator:ab10b8ad122b94941b6f2a3c62d43bc7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a738305d9d01d266ecbd1995dc473bb7d"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaServer.html#a738305d9d01d266ecbd1995dc473bb7d">toStr</a> (<a class="el" href="namespacetiny__dlna.html#a85d3f686372782f654ff23302800aac9">MediaItemClass</a> itemClass)</td></tr>
 <tr class="separator:a738305d9d01d266ecbd1995dc473bb7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad48a7c95d992fe3cc3665b88056ca2ee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaServer.html#ad48a7c95d992fe3cc3665b88056ca2ee">setupRules</a> ()</td></tr>
@@ -428,6 +437,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a44a6a3b5b43a81bdd95d0b7da9115cab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6ab12852dce43dd6c32c137b31c90ccd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1DLNAMediaServer.html#a6d27b2ed87ab945dfc211b129369700b">GetDataCallback</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaServer.html#a6ab12852dce43dd6c32c137b31c90ccd">get_data_cb</a> = nullptr</td></tr>
 <tr class="separator:a6ab12852dce43dd6c32c137b31c90ccd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acbb8bfa4d1908e05358a5597b7016f96"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1DLNAMediaServer.html#ab3cb602bcc72e4c7994f92097253052c">GetDataCallbackPrint</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaServer.html#acbb8bfa4d1908e05358a5597b7016f96">get_data_print_cb</a> = nullptr</td></tr>
+<tr class="separator:acbb8bfa4d1908e05358a5597b7016f96"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acc8595978c23fcd28a33e7495a60ce53"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1IHttpServer.html">IHttpServer</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaServer.html#acc8595978c23fcd28a33e7495a60ce53">p_server</a> = nullptr</td></tr>
 <tr class="separator:acc8595978c23fcd28a33e7495a60ce53"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f5ec0d1cfe4db88dd5adc6c6bbb1b1b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1IUDPService.html">IUDPService</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaServer.html#a4f5ec0d1cfe4db88dd5adc6c6bbb1b1b">p_udp_member</a> = nullptr</td></tr>
@@ -571,6 +582,23 @@ template&lt;typename ClientType &gt; </div>
 </div><div class="memdoc">
 
 <p>Callback: retrieve <a class="el" href="structtiny__dlna_1_1MediaItem.html" title="Media item description used to build DIDL-Lite entries.">MediaItem</a> by index. Returns true if item is valid. </p>
+
+</div>
+</div>
+<a id="ab3cb602bcc72e4c7994f92097253052c" name="ab3cb602bcc72e4c7994f92097253052c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab3cb602bcc72e4c7994f92097253052c">&#9670;&#160;</a></span>GetDataCallbackPrint</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef size_t(* <a class="el" href="classtiny__dlna_1_1DLNAMediaServer.html">tiny_dlna::DLNAMediaServer</a>&lt; ClientType &gt;::GetDataCallbackPrint) (int index, Print &amp;out, void *reference)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Alternative callback: directly print DIDL entry for given index to out. Returns number of bytes written; return 0 to stop iteration early. </p>
 
 </div>
 </div>
@@ -3220,7 +3248,7 @@ template&lt;typename ClientType &gt; </div>
 </div>
 </div>
 <a id="a767fb10e5708aefda18624874646cf71" name="a767fb10e5708aefda18624874646cf71"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a767fb10e5708aefda18624874646cf71">&#9670;&#160;</a></span>setGetDataCallback()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a767fb10e5708aefda18624874646cf71">&#9670;&#160;</a></span>setGetDataCallback() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3245,7 +3273,37 @@ template&lt;typename ClientType &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Sets the callback that provides a <a class="el" href="structtiny__dlna_1_1MediaItem.html" title="Media item description used to build DIDL-Lite entries.">MediaItem</a> by index. </p>
+<p>Sets the data callback that provides a <a class="el" href="structtiny__dlna_1_1MediaItem.html" title="Media item description used to build DIDL-Lite entries.">MediaItem</a> by index. </p>
+
+</div>
+</div>
+<a id="a8bcf88d0d803e8bbcc6cb709b781dc89" name="a8bcf88d0d803e8bbcc6cb709b781dc89"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8bcf88d0d803e8bbcc6cb709b781dc89">&#9670;&#160;</a></span>setGetDataCallback() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classtiny__dlna_1_1DLNAMediaServer.html">tiny_dlna::DLNAMediaServer</a>&lt; ClientType &gt;::setGetDataCallback </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1DLNAMediaServer.html#ab3cb602bcc72e4c7994f92097253052c">GetDataCallbackPrint</a>&#160;</td>
+          <td class="paramname"><em>cb</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sets the alternative data callback that prints a DIDL entry directly. </p>
 
 </div>
 </div>
@@ -4091,6 +4149,88 @@ template&lt;typename ClientType &gt; </div>
 
 </div>
 </div>
+<a id="ab10b8ad122b94941b6f2a3c62d43bc7b" name="ab10b8ad122b94941b6f2a3c62d43bc7b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab10b8ad122b94941b6f2a3c62d43bc7b">&#9670;&#160;</a></span>streamDIDLItem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t <a class="el" href="classtiny__dlna_1_1DLNAMediaServer.html">tiny_dlna::DLNAMediaServer</a>&lt; ClientType &gt;::streamDIDLItem </td>
+          <td>(</td>
+          <td class="paramtype">Print &amp;&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structtiny__dlna_1_1MediaItem.html">MediaItem</a> &amp;&#160;</td>
+          <td class="paramname"><em>item</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8d2e019e79af02b75b354a735a477191" name="a8d2e019e79af02b75b354a735a477191"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d2e019e79af02b75b354a735a477191">&#9670;&#160;</a></span>streamDIDLItems()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t <a class="el" href="classtiny__dlna_1_1DLNAMediaServer.html">tiny_dlna::DLNAMediaServer</a>&lt; ClientType &gt;::streamDIDLItems </td>
+          <td>(</td>
+          <td class="paramtype">Print &amp;&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>numberReturned</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>startingIndex</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a738305d9d01d266ecbd1995dc473bb7d" name="a738305d9d01d266ecbd1995dc473bb7d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a738305d9d01d266ecbd1995dc473bb7d">&#9670;&#160;</a></span>toStr()</h2>
 
@@ -4515,6 +4655,30 @@ template&lt;typename ClientType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classtiny__dlna_1_1DLNAMediaServer.html#a6d27b2ed87ab945dfc211b129369700b">GetDataCallback</a> <a class="el" href="classtiny__dlna_1_1DLNAMediaServer.html">tiny_dlna::DLNAMediaServer</a>&lt; ClientType &gt;::get_data_cb = nullptr</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="acbb8bfa4d1908e05358a5597b7016f96" name="acbb8bfa4d1908e05358a5597b7016f96"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acbb8bfa4d1908e05358a5597b7016f96">&#9670;&#160;</a></span>get_data_print_cb</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1DLNAMediaServer.html#ab3cb602bcc72e4c7994f92097253052c">GetDataCallbackPrint</a> <a class="el" href="classtiny__dlna_1_1DLNAMediaServer.html">tiny_dlna::DLNAMediaServer</a>&lt; ClientType &gt;::get_data_print_cb = nullptr</td>
         </tr>
       </table>
   </td>
