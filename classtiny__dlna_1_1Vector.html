@@ -90,8 +90,8 @@ Inheritance diagram for tiny_dlna::Vector&lt; T, Alloc &gt;:</div>
 <div class="dyncontent">
 <div class="center"><img src="classtiny__dlna_1_1Vector__inherit__graph.png" border="0" usemap="#atiny__dlna_1_1Vector_3_01T_00_01Alloc_01_4_inherit__map" alt="Inheritance graph"/></div>
 <map name="atiny__dlna_1_1Vector_3_01T_00_01Alloc_01_4_inherit__map" id="atiny__dlna_1_1Vector_3_01T_00_01Alloc_01_4_inherit__map">
-<area shape="rect" title="Lightweight wrapper around std::vector with Arduino&#45;friendly helpers and a pluggable allocator." alt="" coords="33,93,176,133"/>
-<area shape="rect" title=" " alt="" coords="5,5,204,45"/>
+<area shape="rect" title="Lightweight wrapper around std::vector with Arduino&#45;friendly helpers and a pluggable allocator." alt="" coords="13,93,156,133"/>
+<area shape="rect" title=" " alt="" coords="5,5,164,45"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -132,11 +132,11 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a20988e556956feac11b04a645efa234d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;class T, class Alloc = ALLOCATOR&lt;T&gt;&gt;<br />
+<div class="textblock"><div class="compoundTemplParams">template&lt;class T, class Alloc = DLNA_ALLOCATOR&lt;T&gt;&gt;<br />
 class tiny_dlna::Vector&lt; T, Alloc &gt;</div><p>Lightweight wrapper around std::vector with Arduino-friendly helpers and a pluggable allocator. </p>
 <p>This container inherits from std::vector to preserve its API and complexity guarantees while adding a few conveniences tailored for embedded/Arduino targets:</p>
 <ul>
-<li>Uses a configurable allocator (default: ALLOCATOR&lt;T&gt;) defined by the library to enable custom allocation strategies or tracking.</li>
+<li>Uses a configurable allocator (default: DLNA_ALLOCATOR&lt;T&gt;) defined by the library to enable custom allocation strategies or tracking.</li>
 <li>Keeps all standard std::vector constructors, types, and methods available.</li>
 <li>Exposes std::vector erase overloads and provides index-based helpers.</li>
 <li>Adds <a class="el" href="classtiny__dlna_1_1Vector.html#a20988e556956feac11b04a645efa234d" title="Reset the container by clearing and shrinking capacity to fit.">reset()</a> which performs clear() followed by shrink_to_fit() to aggressively release memory.</li>
@@ -151,7 +151,7 @@ class tiny_dlna::Vector&lt; T, Alloc &gt;</div><p>Lightweight wrapper around std
 </li>
 <li><dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">Alloc</td><td>Allocator type (defaults to ALLOCATOR&lt;T&gt; as configured in <a class="el" href="dlna__config_8h.html">dlna_config.h</a>).</td></tr>
+    <tr><td class="paramname">Alloc</td><td>Allocator type (defaults to DLNA_ALLOCATOR&lt;T&gt; as configured in <a class="el" href="dlna__config_8h.html">dlna_config.h</a>).</td></tr>
   </table>
   </dd>
 </dl>
@@ -167,7 +167,7 @@ Differences vs std::vector:</li>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class T , class Alloc  = ALLOCATOR&lt;T&gt;&gt; </div>
+template&lt;class T , class Alloc  = DLNA_ALLOCATOR&lt;T&gt;&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">using <a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T, Alloc &gt;::Base =  std::vector&lt;T, Alloc&gt;</td>
@@ -183,7 +183,7 @@ template&lt;class T , class Alloc  = ALLOCATOR&lt;T&gt;&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class T , class Alloc  = ALLOCATOR&lt;T&gt;&gt; </div>
+template&lt;class T , class Alloc  = DLNA_ALLOCATOR&lt;T&gt;&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">using <a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T, Alloc &gt;::const_iterator =  typename Base::const_iterator</td>
@@ -199,7 +199,7 @@ template&lt;class T , class Alloc  = ALLOCATOR&lt;T&gt;&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class T , class Alloc  = ALLOCATOR&lt;T&gt;&gt; </div>
+template&lt;class T , class Alloc  = DLNA_ALLOCATOR&lt;T&gt;&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">using <a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T, Alloc &gt;::iterator =  typename Base::iterator</td>
@@ -215,7 +215,7 @@ template&lt;class T , class Alloc  = ALLOCATOR&lt;T&gt;&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class T , class Alloc  = ALLOCATOR&lt;T&gt;&gt; </div>
+template&lt;class T , class Alloc  = DLNA_ALLOCATOR&lt;T&gt;&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">using <a class="el" href="classtiny__dlna_1_1Vector.html">tiny_dlna::Vector</a>&lt; T, Alloc &gt;::value_type =  T</td>
@@ -232,7 +232,7 @@ template&lt;class T , class Alloc  = ALLOCATOR&lt;T&gt;&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class T , class Alloc  = ALLOCATOR&lt;T&gt;&gt; </div>
+template&lt;class T , class Alloc  = DLNA_ALLOCATOR&lt;T&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -259,7 +259,7 @@ template&lt;class T , class Alloc  = ALLOCATOR&lt;T&gt;&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class T , class Alloc  = ALLOCATOR&lt;T&gt;&gt; </div>
+template&lt;class T , class Alloc  = DLNA_ALLOCATOR&lt;T&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -287,7 +287,7 @@ template&lt;class T , class Alloc  = ALLOCATOR&lt;T&gt;&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class T , class Alloc  = ALLOCATOR&lt;T&gt;&gt; </div>
+template&lt;class T , class Alloc  = DLNA_ALLOCATOR&lt;T&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -325,7 +325,7 @@ template&lt;class T , class Alloc  = ALLOCATOR&lt;T&gt;&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class T , class Alloc  = ALLOCATOR&lt;T&gt;&gt; </div>
+template&lt;class T , class Alloc  = DLNA_ALLOCATOR&lt;T&gt;&gt; </div>
 <div class="memtemplate">
 template&lt;class It &gt; </div>
 <table class="mlabels">
@@ -365,7 +365,7 @@ template&lt;class It &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class T , class Alloc  = ALLOCATOR&lt;T&gt;&gt; </div>
+template&lt;class T , class Alloc  = DLNA_ALLOCATOR&lt;T&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -393,7 +393,7 @@ template&lt;class T , class Alloc  = ALLOCATOR&lt;T&gt;&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class T , class Alloc  = ALLOCATOR&lt;T&gt;&gt; </div>
+template&lt;class T , class Alloc  = DLNA_ALLOCATOR&lt;T&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -422,7 +422,7 @@ template&lt;class T , class Alloc  = ALLOCATOR&lt;T&gt;&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class T , class Alloc  = ALLOCATOR&lt;T&gt;&gt; </div>
+template&lt;class T , class Alloc  = DLNA_ALLOCATOR&lt;T&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -460,7 +460,7 @@ template&lt;class T , class Alloc  = ALLOCATOR&lt;T&gt;&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class T , class Alloc  = ALLOCATOR&lt;T&gt;&gt; </div>
+template&lt;class T , class Alloc  = DLNA_ALLOCATOR&lt;T&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -497,7 +497,7 @@ template&lt;class T , class Alloc  = ALLOCATOR&lt;T&gt;&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class T , class Alloc  = ALLOCATOR&lt;T&gt;&gt; </div>
+template&lt;class T , class Alloc  = DLNA_ALLOCATOR&lt;T&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
