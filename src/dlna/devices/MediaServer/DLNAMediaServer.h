@@ -56,6 +56,10 @@ class DLNAMediaServer : public DLNADeviceInfo {
 
   /// Callback: retrieve MediaItem by index. Returns true if item is valid.
   typedef bool (*GetDataCallback)(int index, MediaItem& item, void* reference);
+  /// Alternative callback: directly print DIDL entry for given index to out.
+  /// Returns number of bytes written; return 0 to stop iteration early.
+  typedef size_t (*GetDataCallbackPrint)(int index, Print& out,
+                                         void* reference);
 
   /// Default constructor: initialize device info and defaults
   DLNAMediaServer() {
@@ -157,8 +161,10 @@ class DLNAMediaServer : public DLNADeviceInfo {
   /// Sets the callback that prepares the data for the Browse and Search
   void setPrepareDataCallback(PrepareDataCallback cb) { prepare_data_cb = cb; }
 
-  /// Sets the callback that provides a MediaItem by index
+  /// Sets the data callback that provides a MediaItem by index
   void setGetDataCallback(GetDataCallback cb) { get_data_cb = cb; }
+  /// Sets the alternative data callback that prints a DIDL entry directly
+  void setGetDataCallback(GetDataCallbackPrint cb) { get_data_print_cb = cb; }
 
   /// Sets a user reference pointer, available in callbacks
   void setReference(void* ref) { reference_ = ref; }
@@ -219,6 +225,7 @@ class DLNAMediaServer : public DLNADeviceInfo {
   DeviceType dlna_device;
   PrepareDataCallback prepare_data_cb = nullptr;
   GetDataCallback get_data_cb = nullptr;
+  GetDataCallbackPrint get_data_print_cb = nullptr;
   IHttpServer* p_server = nullptr;
   IUDPService* p_udp_member = nullptr;
   void* reference_ = nullptr;
@@ -703,56 +710,89 @@ class DLNAMediaServer : public DLNADeviceInfo {
         "xmlns:upnp=\"urn:schemas-upnp-org:metadata-1-0/upnp/\" "
         "xmlns=\"urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/\"&gt;\r\n");
 
-    if (get_data_cb) {
-      Str url{160};
-      for (int i = 0; i < numberReturned; ++i) {
-        MediaItem item;
-        int idx = startingIndex + i;
-        if (!get_data_cb(idx, item, reference_)) break;
-
-        const char* mediaItemClassStr = toStr(item.itemClass);
-        const char* nodeName =
-            (item.itemClass == MediaItemClass::Folder) ? "container" : "item";
-
-        Printf pr{out};
-        written += static_cast<size_t>(pr.printf(
-            "&lt;%s id=\"%s\" parentID=\"%s\" restricted=\"%d\"&gt;", nodeName,
-            item.id ? item.id : "", item.parentID ? item.parentID : "0",
-            item.restricted ? 1 : 0));
-
-        // title
-        written += out.print("&lt;dc:title&gt;");
-        written += out.print(StrView(item.title).c_str());
-        written += out.print("&lt;/dc:title&gt;\r\n");
-        if (mediaItemClassStr != nullptr) {
-          written += static_cast<size_t>(
-              pr.printf("&lt;upnp:class&gt;%s&lt;/upnp:class&gt;\r\n",
-                        mediaItemClassStr));
-        }
-
-        // res with optional protocolInfo attribute
-        url.set(item.resourceURL);
-        if (!url.isEmpty()) {
-          url.replaceAll("&", "&amp;");
-          if (!StrView(item.mimeType).isEmpty()) {
-            written += static_cast<size_t>(pr.printf(
-                "&lt;res protocolInfo=\"http-get:*:%s:*\"&gt;", item.mimeType));
-            written += out.print(StrView(url.c_str()).c_str());
-            written += out.print("&lt;/res&gt;\r\n");
-          } else {
-            written += out.print("&lt;res&gt;");
-            written += out.print(StrView(url.c_str()).c_str());
-            written += out.print("&lt;/res&gt;\r\n");
-          }
-        }
-
-        written += static_cast<size_t>(pr.printf("&lt;/%s&gt;\r\n", nodeName));
-      }
-    }
+    written += streamDIDLItems(out, numberReturned, startingIndex);
 
     written += out.print("&lt;/DIDL-Lite&gt;\r\n");
     return written;
   }
+
+  // Streams each MediaItem entry (container/item with title,
+  // class and optional resource). Returns bytes written.
+  // Single-pass loop that prefers get_data_print_cb and falls back
+  // to get_data_cb for any item where print produced 0 bytes.
+  size_t streamDIDLItems(Print& out, int numberReturned, int startingIndex) {
+    if (get_data_print_cb == nullptr && get_data_cb == nullptr) {
+      // no data callback defined
+      return 0;
+    }
+    size_t total = 0;
+    for (int i = 0; i < numberReturned; ++i) {
+      int idx = startingIndex + i;
+
+      // 1) Try print callback if present
+      if (get_data_print_cb) {
+        EscapingPrint esc_out(out);
+        size_t w = get_data_print_cb(idx, esc_out, reference_);
+        if (w > 0) {
+          total += w;
+          continue;  // done with this item
+        }
+      }
+
+      // 2) Structured callback path
+      if (get_data_cb) {
+        MediaItem item;
+        if (!get_data_cb(idx, item, reference_)) break;  // end-of-list
+        total += streamDIDLItem(out, item);
+        continue;
+      }
+    }
+    return total;
+  }
+
+  // Print a single MediaItem as escaped DIDL (returns bytes written)
+  size_t streamDIDLItem(Print& out, const MediaItem& item) {
+    size_t written = 0;
+    const char* mediaItemClassStr = toStr(item.itemClass);
+    const char* nodeName =
+        (item.itemClass == MediaItemClass::Folder) ? "container" : "item";
+    Printf pr{out};
+    written += static_cast<size_t>(pr.printf(
+        "&lt;%s id=\"%s\" parentID=\"%s\" restricted=\"%d\"&gt;", nodeName,
+        item.id ? item.id : "", item.parentID ? item.parentID : "0",
+        item.restricted ? 1 : 0));
+
+    written += out.print("&lt;dc:title&gt;");
+    written += out.print(StrView(item.title).c_str());
+    written += out.print("&lt;/dc:title&gt;\r\n");
+    if (mediaItemClassStr != nullptr) {
+      written += static_cast<size_t>(pr.printf(
+          "&lt;upnp:class&gt;%s&lt;/upnp:class&gt;\r\n", mediaItemClassStr));
+    }
+
+    // res with optional protocolInfo attribute
+    Str url{160};
+    url.set(item.resourceURL);
+    if (!url.isEmpty()) {
+      url.replaceAll("&", "&amp;");
+      if (!StrView(item.mimeType).isEmpty()) {
+        written += static_cast<size_t>(pr.printf(
+            "&lt;res protocolInfo=\"http-get:*:%s:*\"&gt;", item.mimeType));
+        written += out.print(StrView(url.c_str()).c_str());
+        written += out.print("&lt;/res&gt;\r\n");
+      } else {
+        written += out.print("&lt;res&gt;");
+        written += out.print(StrView(url.c_str()).c_str());
+        written += out.print("&lt;/res&gt;\r\n");
+      }
+    }
+
+    written += static_cast<size_t>(pr.printf("&lt;/%s&gt;\r\n", nodeName));
+    return written;
+  }
+
+  // Removed separate streamDIDLItemsGetData helper; unified into
+  // streamDIDLItems
 
   const char* toStr(MediaItemClass itemClass) {
     switch (itemClass) {
