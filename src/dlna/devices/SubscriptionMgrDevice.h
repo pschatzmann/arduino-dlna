@@ -262,7 +262,7 @@ class SubscriptionMgrDevice : public ISubscriptionMgrDevice {
     }
     if (!any) {
       DlnaLogger.log(DlnaLogLevel::Info, "service '%s' has no subscriptions",
-                     service.service_id);
+                     service.service_id.c_str());
     }
   }
 
