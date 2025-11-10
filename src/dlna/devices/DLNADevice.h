@@ -9,10 +9,10 @@
 #include "dlna/devices/DLNADeviceRequestParser.h"
 #include "dlna/devices/IDevice.h"
 #include "dlna/devices/SubscriptionMgrDevice.h"
+#include "dlna/udp/IUDPService.h"
 #include "dlna/xml/XMLParserPrint.h"
 #include "http/Http.h"
 #include "http/Server/IHttpServer.h"
-#include "udp/IUDPService.h"
 
 namespace tiny_dlna {
 
@@ -129,8 +129,8 @@ class DLNADevice : public IDevice {
     is_active = false;
   }
 
-  /// Call this method in the Arduino loop as often as possible. It calls 
-  /// loopServer, loopUDP and loopPublishSubscriptions in defined intervals.. 
+  /// Call this method in the Arduino loop as often as possible. It calls
+  /// loopServer, loopUDP and loopPublishSubscriptions in defined intervals..
   bool loop() override {
     if (!is_active) return false;
     // Platform-specific periodic diagnostics (e.g. ESP32 memory logging)
@@ -163,9 +163,7 @@ class DLNADevice : public IDevice {
   }
 
   /// Publish pending subscription notifications
-  int loopPublishSubscriptions() {
-    return subscription_mgr.publish();
-  }
+  int loopPublishSubscriptions() { return subscription_mgr.publish(); }
 
   /// Process http server loop
   bool loopServer() override {
@@ -480,20 +478,21 @@ class DLNADevice : public IDevice {
     static uint64_t last_mem_log = 0;
     const uint64_t MEM_LOG_INTERVAL_MS = 10000;
     uint64_t now = millis();
-    if (runImmediately || (uint64_t)(now - last_mem_log) >= MEM_LOG_INTERVAL_MS) {
+    if (runImmediately ||
+        (uint64_t)(now - last_mem_log) >= MEM_LOG_INTERVAL_MS) {
       // update timestamp for next interval on all platforms
       last_mem_log = now;
       DlnaLogger.log(DlnaLogLevel::Info,
-        "Subscriptions: active=%d pending=%d / Scheduler: size=%d active = %s",
-        subscription_mgr.subscriptionsCount(),
-        subscription_mgr.pendingCount(), scheduler.size(),
-        isSchedulerActive() ? "true" : "false");
+                     "Subscriptions: active=%d pending=%d / Scheduler: size=%d "
+                     "active = %s",
+                     subscription_mgr.subscriptionsCount(),
+                     subscription_mgr.pendingCount(), scheduler.size(),
+                     isSchedulerActive() ? "true" : "false");
 #ifdef ESP32
       DlnaLogger.log(DlnaLogLevel::Info, "Memory: freeHeap=%u freePsram=%u",
-        (unsigned)ESP.getFreeHeap(),
-        (unsigned)ESP.getFreePsram());
+                     (unsigned)ESP.getFreeHeap(), (unsigned)ESP.getFreePsram());
 #endif
-}
+    }
   }
 
   /// MSearch requests reply to upnp:rootdevice and the device type defined
