@@ -14,7 +14,8 @@ var searchData=
   ['actual_5fwrite_5fpos_11',['actual_write_pos',['../classtiny__dlna_1_1RingBuffer.html#a6176a15411db9e9b679d64ba167d1288',1,'tiny_dlna::RingBuffer']]],
   ['address_12',['address',['../structtiny__dlna_1_1IPAddressAndPort.html#af4524b51e1febda48d794a510a17929f',1,'tiny_dlna::IPAddressAndPort::address()'],['../structtiny__dlna_1_1Schedule.html#a1e95bf094b3e35f09c35d21bb30bb437',1,'tiny_dlna::Schedule::address()']]],
   ['agent_13',['agent',['../classtiny__dlna_1_1HttpRequest.html#ad1e169dc61cd340cf1c6ebc883df98bb',1,'tiny_dlna::HttpRequest']]],
-  ['allow_5flocalhost_14',['allow_localhost',['../classtiny__dlna_1_1DLNAControlPoint.html#a3c39a85a90f31184688fa1306a21c7b8',1,'tiny_dlna::DLNAControlPoint']]],
-  ['arguments_15',['arguments',['../classtiny__dlna_1_1ActionReply.html#a7e11b59d7803b3a76bc1286ac0f71abb',1,'tiny_dlna::ActionReply::arguments()'],['../classtiny__dlna_1_1ActionRequest.html#a6d07771a8b57b367ab248b3283c9008d',1,'tiny_dlna::ActionRequest::arguments()']]],
-  ['attributes_16',['attributes',['../structtiny__dlna_1_1XMLNode.html#adc4b88eabc13b3c54e0d52fbc78231bc',1,'tiny_dlna::XMLNode']]]
+  ['albumarturi_14',['albumArtURI',['../structtiny__dlna_1_1MediaItem.html#ac010824562c67c2cde097ae93db919a1',1,'tiny_dlna::MediaItem']]],
+  ['allow_5flocalhost_15',['allow_localhost',['../classtiny__dlna_1_1DLNAControlPoint.html#a3c39a85a90f31184688fa1306a21c7b8',1,'tiny_dlna::DLNAControlPoint']]],
+  ['arguments_16',['arguments',['../classtiny__dlna_1_1ActionReply.html#a7e11b59d7803b3a76bc1286ac0f71abb',1,'tiny_dlna::ActionReply::arguments()'],['../classtiny__dlna_1_1ActionRequest.html#a6d07771a8b57b367ab248b3283c9008d',1,'tiny_dlna::ActionRequest::arguments()']]],
+  ['attributes_17',['attributes',['../structtiny__dlna_1_1XMLNode.html#adc4b88eabc13b3c54e0d52fbc78231bc',1,'tiny_dlna::XMLNode']]]
 ];

@@ -11,7 +11,7 @@ var searchData=
   ['report_5fip_8',['report_ip',['../structtiny__dlna_1_1Schedule.html#a36ec0ab10cef70772d95d79d03fb750f',1,'tiny_dlna::Schedule']]],
   ['report_5ftext_5fonly_9',['report_text_only',['../classtiny__dlna_1_1XMLParser.html#ab524343629008a06ef4db0498747ed1e',1,'tiny_dlna::XMLParser']]],
   ['request_5fheader_10',['request_header',['../classtiny__dlna_1_1HttpRequest.html#a355c3bf1957db95f381b2c8a16b95f23',1,'tiny_dlna::HttpRequest::request_header()'],['../classtiny__dlna_1_1HttpServer.html#aa2f7d2e8e4c443aaeb08d4fd9a34652e',1,'tiny_dlna::HttpServer::request_header()']]],
-  ['resourceurl_11',['resourceURL',['../structtiny__dlna_1_1MediaItem.html#a14ba42b1787800cd1fd718572500331d',1,'tiny_dlna::MediaItem']]],
+  ['resourceuri_11',['resourceURI',['../structtiny__dlna_1_1MediaItem.html#aa36ee45bb3fbce2929ca39ad95af0279',1,'tiny_dlna::MediaItem']]],
   ['restricted_12',['restricted',['../structtiny__dlna_1_1MediaItem.html#a5daaa997d5d5af02e0af630174f7f50c',1,'tiny_dlna::MediaItem']]],
   ['result_5fcallback_13',['result_callback',['../classtiny__dlna_1_1DLNAControlPoint.html#aad13d3f06512b8a66acf0043b0c5be18',1,'tiny_dlna::DLNAControlPoint']]],
   ['result_5fcount_14',['result_count',['../classtiny__dlna_1_1ActionRequest.html#a7e55f9b4b0ec5e86478d30aae5f5dd94',1,'tiny_dlna::ActionRequest']]],
