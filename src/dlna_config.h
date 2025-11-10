@@ -169,8 +169,8 @@
 #endif
 
 /// Define the default allocator base class to use: std::allocator, AllocatorPSRAM
-#ifndef ALLOCATOR
-    #define ALLOCATOR AllocatorPSRAM
+#ifndef DLNA_ALLOCATOR
+    #define DLNA_ALLOCATOR AllocatorPSRAM
 #endif
 
 /// Enable or disable logging of XML messages

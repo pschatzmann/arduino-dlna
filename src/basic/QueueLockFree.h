@@ -127,6 +127,6 @@ class QueueLockFree {
   size_t capacity_value;
   std::atomic<size_t> tail_pos;
   std::atomic<size_t> head_pos;
-  Vector<Node> vector; // uses default ALLOCATOR<T> for Node
+  Vector<Node> vector; // uses default DLNA_ALLOCATOR<T> for Node
 };
 }  // namespace audio_tools

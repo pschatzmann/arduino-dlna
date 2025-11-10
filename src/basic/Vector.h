@@ -15,7 +15,7 @@ namespace tiny_dlna {
  * This container inherits from std::vector to preserve its API and complexity guarantees while
  * adding a few conveniences tailored for embedded/Arduino targets:
  *
- * - Uses a configurable allocator (default: ALLOCATOR<T>) defined by the library to enable
+ * - Uses a configurable allocator (default: DLNA_ALLOCATOR<T>) defined by the library to enable
  *   custom allocation strategies or tracking.
  * - Keeps all standard std::vector constructors, types, and methods available.
  * - Exposes std::vector erase overloads and provides index-based helpers.
@@ -23,7 +23,7 @@ namespace tiny_dlna {
  *
  * Template parameters:
  * - @tparam T     Element/value type stored in the vector.
- * - @tparam Alloc Allocator type (defaults to ALLOCATOR<T> as configured in dlna_config.h).
+ * - @tparam Alloc Allocator type (defaults to DLNA_ALLOCATOR<T> as configured in dlna_config.h).
  *
  * Differences vs std::vector:
  * - erase(size_t index): convenience overload that erases an element by index and returns the
@@ -35,7 +35,7 @@ namespace tiny_dlna {
  * number of moved elements). Reserve/capacity/iterator invalidation rules are also identical to
  * std::vector.
  */
-template <class T, class Alloc = ALLOCATOR<T>>
+template <class T, class Alloc = DLNA_ALLOCATOR<T>>
 class Vector : public std::vector<T, Alloc> {
  public:
   using Base = std::vector<T, Alloc>;

@@ -5,9 +5,9 @@
 #include "basic/Vector.h"
 #include "dlna/Action.h"
 #include "dlna/DLNAServiceInfo.h"
+#include "dlna/udp/IUDPService.h"  // Ensure IUDPService is declared
 #include "dlna/xml/XMLPrinter.h"
 #include "http/Server/IHttpServer.h"
-#include "dlna/udp/IUDPService.h"  // Ensure IUDPService is declared
 
 namespace tiny_dlna {
 
@@ -169,7 +169,9 @@ class DLNADeviceInfo {
   void setUniversalProductCode(const char* upc) {
     universal_product_code = upc;
   }
-  const char* getUniversalProductCode() { return universal_product_code.c_str(); }
+  const char* getUniversalProductCode() {
+    return universal_product_code.c_str();
+  }
 
   /// Adds a service definition
   void addService(DLNAServiceInfo s) { services.push_back(s); }
@@ -202,17 +204,17 @@ class DLNADeviceInfo {
   /// Clears all device information
   void clear() {
     services.clear();
-  udn = "";
-  ns = "";
-  device_type = "";
-  friendly_name = "";
-  manufacturer = "";
-  manufacturer_url = "";
-  model_description = "";
-  model_name = "";
-  model_number = "";
-  serial_number = "";
-  universal_product_code = "";
+    udn = "";
+    ns = "";
+    device_type = "";
+    friendly_name = "";
+    manufacturer = "";
+    manufacturer_url = "";
+    model_description = "";
+    model_name = "";
+    model_number = "";
+    serial_number = "";
+    universal_product_code = "";
   }
 
   /// Overwrite the default icon
@@ -247,7 +249,7 @@ class DLNADeviceInfo {
   bool isSubscriptionActive() { return is_subcription_active; }
 
  protected:
-  bool is_active = true;
+  bool is_active = false;
   Url device_url;
   IPAddress localhost;
   int version_major = 1;

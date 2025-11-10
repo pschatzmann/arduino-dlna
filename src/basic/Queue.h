@@ -10,7 +10,7 @@ namespace tiny_dlna {
  * @copyright GPLv3
  * @tparam T
  */
-template <class T, class Alloc = ALLOCATOR<T>>
+template <class T, class Alloc = DLNA_ALLOCATOR<T>>
 class Queue {
  public:
   Queue() = default;

@@ -412,6 +412,9 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
 
   /// Get a csv of the valid actions
   const char* getCurrentTransportActions() {
+    if (current_uri.isEmpty()) {
+      return "SetAVTransportURI";
+    }
     if (is_active) {
       return "Pause,Stop";
     } else {
