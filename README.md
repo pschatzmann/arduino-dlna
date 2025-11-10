@@ -43,6 +43,7 @@ pairings for the common Arduino WiFi and Ethernet libraries.
 
 ## Project Documentation
 
+* [Examples](https://github.com/pschatzmann/arduino-dlna/tree/main/examples)
 * [Wiki](https://github.com/pschatzmann/arduino-dlna/wiki)
 * [Class Documentation](https://pschatzmann.github.io/arduino-dlna/annotated.html)
 
