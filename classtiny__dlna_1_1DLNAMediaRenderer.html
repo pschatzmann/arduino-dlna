@@ -188,6 +188,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a5c09167ea17719163c56daf254dc730a"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a5c09167ea17719163c56daf254dc730a">getCurrentUri</a> ()</td></tr>
 <tr class="memdesc:a5c09167ea17719163c56daf254dc730a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access current URI.  <br /></td></tr>
 <tr class="separator:a5c09167ea17719163c56daf254dc730a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d8c9d91b6560632e423c6fa4e12add2"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a5d8c9d91b6560632e423c6fa4e12add2">getCurrentUriMetadata</a> ()</td></tr>
+<tr class="memdesc:a5d8c9d91b6560632e423c6fa4e12add2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access the metadata as string.  <br /></td></tr>
+<tr class="separator:a5d8c9d91b6560632e423c6fa4e12add2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a54d12e1d950696acc3e2bb6a17e20b66"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a54d12e1d950696acc3e2bb6a17e20b66">getTransportState</a> ()</td></tr>
 <tr class="memdesc:a54d12e1d950696acc3e2bb6a17e20b66"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get textual transport state.  <br /></td></tr>
 <tr class="separator:a54d12e1d950696acc3e2bb6a17e20b66"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -468,6 +471,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a4c4a54bc07ecc2920cdbf9eca45c2bec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a21a9f83bf41f7457d008d8f1ce09946a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Str.html">tiny_dlna::Str</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a21a9f83bf41f7457d008d8f1ce09946a">current_mime</a></td></tr>
 <tr class="separator:a21a9f83bf41f7457d008d8f1ce09946a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5ccb0384edc703d26a18fa0f17a13e5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Str.html">tiny_dlna::Str</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#aa5ccb0384edc703d26a18fa0f17a13e5">current_uri_metadata</a></td></tr>
+<tr class="separator:aa5ccb0384edc703d26a18fa0f17a13e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afe577e449fd75dd5ee1e40944542569d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a0cf447cc1a13f7736d65aeaa4c9aee3a">MediaEventHandler</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#afe577e449fd75dd5ee1e40944542569d">event_cb</a> = nullptr</td></tr>
 <tr class="separator:afe577e449fd75dd5ee1e40944542569d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a46d2e527ff1792f5c068f4367ce17c92"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a46d2e527ff1792f5c068f4367ce17c92">current_volume</a> = 50</td></tr>
@@ -1290,6 +1295,35 @@ template&lt;typename ClientType &gt; </div>
 </div><div class="memdoc">
 
 <p>Access current URI. </p>
+
+</div>
+</div>
+<a id="a5d8c9d91b6560632e423c6fa4e12add2" name="a5d8c9d91b6560632e423c6fa4e12add2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d8c9d91b6560632e423c6fa4e12add2">&#9670;&#160;</a></span>getCurrentUriMetadata()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char * <a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html">tiny_dlna::DLNAMediaRenderer</a>&lt; ClientType &gt;::getCurrentUriMetadata </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access the metadata as string. </p>
 
 </div>
 </div>
@@ -4809,6 +4843,30 @@ template&lt;typename ClientType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classtiny__dlna_1_1Str.html">tiny_dlna::Str</a> <a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html">tiny_dlna::DLNAMediaRenderer</a>&lt; ClientType &gt;::current_uri</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa5ccb0384edc703d26a18fa0f17a13e5" name="aa5ccb0384edc703d26a18fa0f17a13e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa5ccb0384edc703d26a18fa0f17a13e5">&#9670;&#160;</a></span>current_uri_metadata</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1Str.html">tiny_dlna::Str</a> <a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html">tiny_dlna::DLNAMediaRenderer</a>&lt; ClientType &gt;::current_uri_metadata</td>
         </tr>
       </table>
   </td>

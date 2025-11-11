@@ -30,6 +30,7 @@ var searchData=
   ['current_5fclient_5fiterator_27',['current_client_iterator',['../classtiny__dlna_1_1HttpServer.html#a3e8ba72b84eae0c1714d829fa166df15',1,'tiny_dlna::HttpServer']]],
   ['current_5fmime_28',['current_mime',['../classtiny__dlna_1_1DLNAMediaRenderer.html#a21a9f83bf41f7457d008d8f1ce09946a',1,'tiny_dlna::DLNAMediaRenderer']]],
   ['current_5furi_29',['current_uri',['../classtiny__dlna_1_1DLNAMediaRenderer.html#a4c4a54bc07ecc2920cdbf9eca45c2bec',1,'tiny_dlna::DLNAMediaRenderer']]],
-  ['current_5fvolume_30',['current_volume',['../classtiny__dlna_1_1DLNAMediaRenderer.html#a46d2e527ff1792f5c068f4367ce17c92',1,'tiny_dlna::DLNAMediaRenderer']]],
-  ['currentplaymode_31',['currentPlayMode',['../classtiny__dlna_1_1DLNAMediaRenderer.html#a42e04e8db7be7515b2e6125fdfae9038',1,'tiny_dlna::DLNAMediaRenderer']]]
+  ['current_5furi_5fmetadata_30',['current_uri_metadata',['../classtiny__dlna_1_1DLNAMediaRenderer.html#aa5ccb0384edc703d26a18fa0f17a13e5',1,'tiny_dlna::DLNAMediaRenderer']]],
+  ['current_5fvolume_31',['current_volume',['../classtiny__dlna_1_1DLNAMediaRenderer.html#a46d2e527ff1792f5c068f4367ce17c92',1,'tiny_dlna::DLNAMediaRenderer']]],
+  ['currentplaymode_32',['currentPlayMode',['../classtiny__dlna_1_1DLNAMediaRenderer.html#a42e04e8db7be7515b2e6125fdfae9038',1,'tiny_dlna::DLNAMediaRenderer']]]
 ];
