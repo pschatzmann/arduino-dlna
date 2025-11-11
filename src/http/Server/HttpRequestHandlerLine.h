@@ -17,14 +17,19 @@ class HttpRequestHandlerLine {
   HttpRequestHandlerLine(int ctxSize = 0) {
     DlnaLogger.log(DlnaLogLevel::Debug, "HttpRequestHandlerLine");
     contextCount = ctxSize;
-    context = new void*[ctxSize];
+    if (ctxSize > 0) {
+      context = new void*[ctxSize];
+      for (int i = 0; i < ctxSize; i++) {
+        context[i] = nullptr;
+      }
+    } 
   }
 
   ~HttpRequestHandlerLine() {
     DlnaLogger.log(DlnaLogLevel::Debug, "~HttpRequestHandlerLine");
     if (contextCount > 0) {
       DlnaLogger.log(DlnaLogLevel::Debug, "HttpRequestHandlerLine %s", "free");
-      delete[] context;
+      if (contextCount > 0) delete[] context;
     }
   }
 
@@ -32,8 +37,8 @@ class HttpRequestHandlerLine {
   Str path;
   const char* mime = nullptr;
   web_callback_fn fn;
-  void** context;
-  int contextCount;
+  void** context = nullptr;
+  int contextCount = 0;
   StrView* header = nullptr;
 };
 

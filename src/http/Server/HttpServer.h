@@ -54,8 +54,7 @@ class HttpServer : public IHttpServer {
     return address;
   }
 
-
-  /// Starts the server 
+  /// Starts the server
   bool begin() override {
     DlnaLogger.log(DlnaLogLevel::Info, "HttpServer begin");
     is_active = true;
@@ -78,7 +77,7 @@ class HttpServer : public IHttpServer {
 
   /// register a generic handler
   void on(const char* url, TinyMethodID method, web_callback_fn fn,
-    void* ctx[] = nullptr, int ctxCount = 0) override {
+          void* ctx[] = nullptr, int ctxCount = 0) override {
     DlnaLogger.log(DlnaLogLevel::Info, "Serving at %s", url);
     HttpRequestHandlerLine* hl = new HttpRequestHandlerLine(ctxCount);
     hl->path = url;
@@ -92,7 +91,7 @@ class HttpServer : public IHttpServer {
 
   /// register a handler with mime
   void on(const char* url, TinyMethodID method, const char* mime,
-    web_callback_fn fn) override {
+          web_callback_fn fn) override {
     DlnaLogger.log(DlnaLogLevel::Info, "Serving at %s", url);
     HttpRequestHandlerLine* hl = new HttpRequestHandlerLine();
     hl->path = url;
@@ -104,10 +103,10 @@ class HttpServer : public IHttpServer {
 
   /// register a handler which provides the indicated string
   void on(const char* url, TinyMethodID method, const char* mime,
-    const char* result) override {
+          const char* result) override {
     DlnaLogger.log(DlnaLogLevel::Info, "Serving at %s", url);
 
-  auto lambda = [](IHttpServer* server_ptr, const char* requestPath,
+    auto lambda = [](IHttpServer* server_ptr, const char* requestPath,
                      HttpRequestHandlerLine* hl) {
       DlnaLogger.log(DlnaLogLevel::Info, "on-strings %s", "lambda");
       if (hl->contextCount < 2) {
@@ -129,10 +128,10 @@ class HttpServer : public IHttpServer {
 
   /// register a handler which provides the indicated string
   void on(const char* url, TinyMethodID method, const char* mime,
-    const uint8_t* data, int len) override {
+          const uint8_t* data, int len) override {
     DlnaLogger.log(DlnaLogLevel::Info, "Serving at %s", url);
 
-  auto lambda = [](IHttpServer* server_ptr, const char* requestPath,
+    auto lambda = [](IHttpServer* server_ptr, const char* requestPath,
                      HttpRequestHandlerLine* hl) {
       DlnaLogger.log(DlnaLogLevel::Info, "on-strings %s", "lambda");
       if (hl->contextCount < 3) {
@@ -159,7 +158,7 @@ class HttpServer : public IHttpServer {
   /// register a redirection
   void on(const char* url, TinyMethodID method, Url& redirect) override {
     DlnaLogger.log(DlnaLogLevel::Info, "Serving at %s", url);
-  auto lambda = [](IHttpServer* server_ptr, const char* requestPath,
+    auto lambda = [](IHttpServer* server_ptr, const char* requestPath,
                      HttpRequestHandlerLine* hl) {
       if (hl->contextCount < 1) {
         DlnaLogger.log(DlnaLogLevel::Error, "The context is not available");
@@ -184,7 +183,6 @@ class HttpServer : public IHttpServer {
     hl->method = method;
     addHandler(hl);
   }
-
 
   /// generic handler - you can overwrite this method to provide your specifc
   /// processing logic
@@ -279,7 +277,7 @@ class HttpServer : public IHttpServer {
     reply_header.write(this->client());
     callback(*client_ptr, ref);
 #if DLNA_LOG_XML
-  callback(Serial, ref);
+    callback(Serial, ref);
 #endif
     endClient();
   }
@@ -319,8 +317,7 @@ class HttpServer : public IHttpServer {
     reply(404, "Page Not Found");
   }
 
-  void replyError(int err,
-                  const char* msg = "Internal Server Error") override {
+  void replyError(int err, const char* msg = "Internal Server Error") override {
     DlnaLogger.log(DlnaLogLevel::Info, "reply %s", "error");
     reply(err, msg);
   }
@@ -334,14 +331,14 @@ class HttpServer : public IHttpServer {
   /// closes the connection to the current client_ptr
   void endClient() override {
     DlnaLogger.log(DlnaLogLevel::Info, "HttpServer %s", "endClient");
-    //client_ptr->flush();
+    // client_ptr->flush();
     client_ptr->stop();
   }
 
   /// print a CR LF
   void crlf() override {
     client_ptr->print("\r\n");
-    //client_ptr->flush();
+    // client_ptr->flush();
   }
 
   /// adds a new handler
@@ -370,7 +367,7 @@ class HttpServer : public IHttpServer {
 
     // Stop when nothing to process
     if (open_clients.empty()) {
-      //delay(no_connect_delay);
+      // delay(no_connect_delay);
       return false;
     }
 

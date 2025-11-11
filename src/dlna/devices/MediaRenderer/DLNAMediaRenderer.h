@@ -183,16 +183,22 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     }
     // reflect state in transport_state so deferred writer can read it
     transport_state = active ? "PLAYING" : "PAUSED_PLAYBACK";
-    (void)transport_state;  // value used by writer via ref
-    auto writer = [](Print& out, void* ref) -> size_t {
-      auto self = (DLNAMediaRenderer*)ref;
-      size_t written = 0;
-      written += out.print("<TransportState val=\"");
-      written += out.print(self->transport_state.c_str());
-      written += out.print("\"/>");
-      return written;
+    struct StateWriter {
+      static size_t write(Print& out, void* ref) {
+        auto self = (DLNAMediaRenderer*)ref;
+        size_t written = 0;
+
+        written += out.print("<TransportState val=\"");
+        written += out.print(self->getTransportState());
+        written += out.print("\"/>");
+        written += out.print("<CurrentTransportActions val=\"");
+        written += out.print(self->getCurrentTransportActions());
+        written += out.print("\"/>");
+
+        return written;
+      }
     };
-    addChange("AVT", writer);
+    addChange("AVT", StateWriter::write);
   }
 
   /// Provides the mime from the DIDL or nullptr
@@ -217,7 +223,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
       size_t written = 0;
       written += out.print("<Volume val=\"");
       written += out.print(self->current_volume);
-      written += out.print("\"/>");
+      written += out.print("\" channel=\"Master\"/>");
       return written;
     };
     addChange("RCS", writer);
@@ -241,7 +247,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
       size_t written = 0;
       written += out.print("<Mute val=\"");
       written += out.print(self->isMuted() ? 1 : 0);
-      written += out.print("\"/>");
+      written += out.print("\" channel=\"Master\"/>");
       return written;
     };
     addChange("RCS", writer);
@@ -249,6 +255,9 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
 
   /// Access current URI
   const char* getCurrentUri() { return current_uri.c_str(); }
+
+  /// Access the metadata as string
+  const char* getCurrentUriMetadata() { return current_uri_metadata.c_str(); }
 
   /// Get textual transport state
   const char* getTransportState() { return transport_state.c_str(); }
@@ -279,7 +288,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     // notify handler about the new URI; do not dispatch PLAY here — action
     // handlers will dispatch media events explicitly.
     (void)event_cb;
-    setActive(true);
+    is_active = true;
 
     // ensure transport_state reflects playing for subscribers
     transport_state = "PLAYING";
@@ -288,11 +297,18 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
       auto writer = [](Print& out, void* ref) -> size_t {
         auto self = (DLNAMediaRenderer*)ref;
         size_t written = 0;
+        written += out.print("<CurrentTrack val=\"1\"/>\n");
         written += out.print("<CurrentTrackURI val=\"");
         written += out.print(self->current_uri.c_str());
         written += out.print("\"/>\n");
+        written += out.print("<CurrentTrackMetadata val=\"");
+        written += out.print(self->current_uri_metadata.c_str());
+        written += out.print("\"/>\n");
         written += out.print("<TransportState val=\"");
         written += out.print(self->transport_state.c_str());
+        written += out.print("\"/>");
+        written += out.print("<CurrentTransportActions val=\"");
+        written += out.print(self->transport_actions.c_str());
         written += out.print("\"/>");
         return written;
       };
@@ -310,19 +326,21 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     current_uri = Str(urlStr);
     // Do not notify application here; event notifications are emitted
     // from the SOAP action handlers (processAction*).
+    auto writer = [](Print& out, void* ref) -> size_t {
+      auto self = (DLNAMediaRenderer*)ref;
+      size_t written = 0;
+      written += out.print("<AVTransportURI val=\"");
+      written += out.print(self->current_uri.c_str());
+      written += out.print("\"/>\n");
 
-    (void)current_uri;  // writer will fetch it from ref
-    {
-      auto writer = [](Print& out, void* ref) -> size_t {
-        auto self = (DLNAMediaRenderer*)ref;
-        size_t written = 0;
-        written += out.print("<CurrentTrackURI val=\"");
-        written += out.print(self->current_uri.c_str());
-        written += out.print("\"/>\n");
-        return written;
-      };
-      addChange("AVT", writer);
-    }
+      written += out.print("<AVTransportURIMetaData val=\"");
+      written += out.print(self->current_uri_metadata.c_str());
+      written += out.print("\"/>\n");
+
+      written += out.print("<NumberOfTracks val=\"1\"/>\n");
+      return written;
+    };
+    addChange("AVT", writer);
 
     return true;
   }
@@ -335,15 +353,22 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     time_sum = 0;
     // reflect stopped state
     transport_state = "STOPPED";
-    auto writer = [](Print& out, void* ref) -> size_t {
-      auto self = (DLNAMediaRenderer*)ref;
-      size_t written = 0;
-      written += out.print("<TransportState val=\"");
-      written += out.print(self->getTransportState());
-      written += out.print("\"/>");
-      return written;
+    struct StopWriter {
+      static size_t write(Print& out, void* ref) {
+        auto self = (DLNAMediaRenderer*)ref;
+        size_t written = 0;
+
+        written += out.print("<TransportState val=\"");
+        written += out.print(self->getTransportState());
+        written += out.print("\"/>");
+        written += out.print("<CurrentTransportActions val=\"");
+        written += out.print(self->getCurrentTransportActions());
+        written += out.print("\"/>");
+
+        return written;
+      }
     };
-    addChange("AVT", writer);
+    addChange("AVT", StopWriter::write);
     return true;
   }
 
@@ -497,6 +522,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
 
   tiny_dlna::Str current_uri;
   tiny_dlna::Str current_mime;
+  tiny_dlna::Str current_uri_metadata;
   MediaEventHandler event_cb = nullptr;
   uint8_t current_volume = 50;
   uint8_t muted_volume = 0;
@@ -804,7 +830,6 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
 
   // Per-action handlers (match MediaServer pattern)
   bool processActionPlay(ActionRequest& action, IHttpServer& server) {
-    setActive(true);
     if (event_cb) event_cb(MediaEvent::PLAY, *this);
     server.reply(
         "text/xml",
@@ -813,11 +838,12 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
           return DeviceType::printReplyXML(out, "PlayResponse", "AVTransport");
         },
         200, nullptr, this);
+    //setActive(true);
+    play();
     return true;
   }
 
   bool processActionPause(ActionRequest& action, IHttpServer& server) {
-    setActive(false);
     if (event_cb) event_cb(MediaEvent::PAUSE, *this);
     server.reply(
         "text/xml",
@@ -826,12 +852,12 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
           return DeviceType::printReplyXML(out, "PauseResponse", "AVTransport");
         },
         200, nullptr, this);
+    setActive(false);
     return true;
   }
 
   bool processActionStop(ActionRequest& action, IHttpServer& server) {
     // use stop() to ensure state reset and application callback are invoked
-    stop();
     if (event_cb) event_cb(MediaEvent::STOP, *this);
     server.reply(
         "text/xml",
@@ -840,6 +866,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
           return DeviceType::printReplyXML(out, "StopResponse", "AVTransport");
         },
         200, nullptr, this);
+    stop();
     return true;
   }
 
@@ -952,7 +979,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
                 size_t written = 0;
                 // CurrentTransportState
                 written += o.print("<CurrentTransportState>");
-                written += o.print(StrView(self->getTransportState()).c_str());
+                written += o.print(self->getTransportState());
                 written += o.print("</CurrentTransportState>");
 
                 // CurrentTransportStatus - return OK by default
@@ -1022,7 +1049,10 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
                 written += o.print("<CurrentURI>");
                 written += o.print(StrView(self->getCurrentUri()).c_str());
                 written += o.print("</CurrentURI>");
-                written += o.print("<CurrentURIMetaData></CurrentURIMetaData>");
+                written += o.print("<CurrentURIMetaData>");
+                written +=
+                    o.print(StrView(self->getCurrentUriMetadata()).c_str());
+                written += o.print("</CurrentURIMetaData>");
 
                 // NextURI and NextURIMetaData: not supported -> empty
                 written += o.print("<NextURI>NOT_IMPLEMENTED</NextURI>");
@@ -1055,6 +1085,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
   bool processActionSetAVTransportURI(ActionRequest& action,
                                       IHttpServer& server) {
     const char* uri = action.getArgumentValue("CurrentURI");
+    current_uri_metadata = action.getArgumentValue("CurrentURIMetaData");
     if (uri && *uri) {
       setPlaybackURL(uri);
       if (event_cb) event_cb(MediaEvent::SET_URI, *this);

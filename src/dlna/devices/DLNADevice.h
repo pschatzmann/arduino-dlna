@@ -319,9 +319,9 @@ class DLNADevice : public IDevice {
     XMLPrinter xp(out);
     size_t result = 0;
     result += xp.printNodeBegin(
-        "s:Envelope", "xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\"");
+        "s:Envelope", "xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\"\n");
     result += xp.printNodeBegin("s:Body");
-    result += xp.printf("<u:%s xmlns:u=\"urn:schemas-upnp-org:service:%s:1\">",
+    result += xp.printf("<u:%s xmlns:u=\"urn:schemas-upnp-org:service:%s:1\">\n",
                         replyName, serviceId);
 
     // e.g.<u:return>Stop,Pause,Next,Seek</u:return> for
@@ -330,7 +330,7 @@ class DLNADevice : public IDevice {
       result += valuesWriter(out, ref);
     }
 
-    result += xp.printf("</u:%s>", replyName);
+    result += xp.printf("</u:%s>\n", replyName);
     result += xp.printNodeEnd("s:Body");
     result += xp.printNodeEnd("s:Envelope");
     return result;
