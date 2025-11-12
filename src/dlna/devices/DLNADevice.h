@@ -131,18 +131,22 @@ class DLNADevice : public IDevice {
 
   /// Call this method in the Arduino loop as often as possible. It calls
   /// loopServer, loopUDP and loopPublishSubscriptions in defined intervals..
-  bool loop() override {
+  bool loop(int loopAction = RUN_ALL) override {
     if (!is_active) return false;
     // Platform-specific periodic diagnostics (e.g. ESP32 memory logging)
     logScheduledStatus();
+    bool rc = false;
 
     // handle server requests
-    bool rc = loopServer();
+    if (loopAction & RUN_SERVER) {
+      rc = loopServer();
+    }
 
     // Use millisecond-based intervals for scheduling so callers can set
     // real-time intervals instead of loop-counts.
     uint64_t now = millis();
-    if (isSchedulerActive() && now >= next_scheduler_timeout_ms) {
+    if ((loopAction & RUN_UDP) && isSchedulerActive() &&
+        now >= next_scheduler_timeout_ms) {
       int count = loopUDPMessages();
       if (count > 0) rc = true;
       // schedule next run
@@ -150,7 +154,8 @@ class DLNADevice : public IDevice {
     }
 
     // deliver any queued subscription notifications (if enabled)
-    if (isSubscriptionsActive() && now >= next_subscriptions_timeout_ms) {
+    if ((loopAction & RUN_SUBSCRIPTIONS) && isSubscriptionsActive() &&
+        now >= next_subscriptions_timeout_ms) {
       int count = loopPublishSubscriptions();
       if (count > 0) rc = true;
       // schedule next run
@@ -319,10 +324,12 @@ class DLNADevice : public IDevice {
     XMLPrinter xp(out);
     size_t result = 0;
     result += xp.printNodeBegin(
-        "s:Envelope", "xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\"\n");
+        "s:Envelope",
+        "xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\"\n");
     result += xp.printNodeBegin("s:Body");
-    result += xp.printf("<u:%s xmlns:u=\"urn:schemas-upnp-org:service:%s:1\">\n",
-                        replyName, serviceId);
+    result +=
+        xp.printf("<u:%s xmlns:u=\"urn:schemas-upnp-org:service:%s:1\">\n",
+                  replyName, serviceId);
 
     // e.g.<u:return>Stop,Pause,Next,Seek</u:return> for
     // QueryStateVariableResponse
@@ -435,38 +442,30 @@ class DLNADevice : public IDevice {
   DLNADeviceInfo* p_device_info = nullptr;
   IUDPService* p_udp = nullptr;
   IHttpServer* p_server = nullptr;
-  void* reference = nullptr;
-
-  // Millisecond-based scheduling (defaults derived from existing loop
-  // constants) Use millisecond-based defaults from configuration (macros ending
-  // with _MS)
   uint64_t scheduler_interval_ms = (uint64_t)DLNA_RUN_SCHEDULER_EVERY_MS;
-  uint64_t subscriptions_interval_ms =
-      (uint64_t)DLNA_RUN_SUBSCRIPTIONS_EVERY_MS;
-  // store the next absolute timeout (millis) when the task should run
+  uint64_t subscriptions_interval_ms = (uint64_t)DLNA_RUN_SUBSCRIPTIONS_EVERY_MS;
   uint64_t next_scheduler_timeout_ms = 0;
   uint64_t next_subscriptions_timeout_ms = 0;
+  void* reference = nullptr;
 
   void setDeviceInfo(DLNADeviceInfo& device) {
     p_device_info = &device;
     device.setSubscriptionActive(isSubscriptionsActive());
   }
 
-  /// Set scheduler interval in milliseconds (default =
-  /// DLNA_RUN_SCHEDULER_EVERY_MS * DLNA_LOOP_DELAY_MS) Set scheduler interval
-  /// in milliseconds (default = DLNA_RUN_SCHEDULER_EVERY_MS)
+  /// Set scheduler interval in milliseconds 
   void setSchedulerIntervalMs(uint32_t ms) { scheduler_interval_ms = ms; }
+  /// Get scheduler interval in milliseconds
   uint32_t getSchedulerIntervalMs() const {
     return (uint32_t)scheduler_interval_ms;
   }
 
-  /// Set subscription publish interval in milliseconds (default =
-  /// DLNA_RUN_SUBSCRIPTIONS_EVERY_MS * DLNA_LOOP_DELAY_MS) Set subscription
-  /// publish interval in milliseconds (default =
-  /// DLNA_RUN_SUBSCRIPTIONS_EVERY_MS)
+  /// Set subscription publish interval in milliseconds 
   void setSubscriptionsIntervalMs(uint32_t ms) {
     subscriptions_interval_ms = ms;
   }
+
+  /// Get subscription publish interval in milliseconds
   uint32_t getSubscriptionsIntervalMs() const {
     return (uint32_t)subscriptions_interval_ms;
   }

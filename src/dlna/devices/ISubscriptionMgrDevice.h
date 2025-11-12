@@ -44,9 +44,6 @@ class ISubscriptionMgrDevice {
   /// Publish pending event notifications
   virtual int publish() = 0;
 
-  /// Remove expired subscriptions
-  virtual void removeExpired() = 0;
-
   /// Provide actual number of subscriptions
   virtual size_t subscriptionsCount() = 0;
 

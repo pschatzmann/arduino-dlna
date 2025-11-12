@@ -14,6 +14,10 @@ class IHttpServer;
 
 class IHttpServer;
 
+/// Loop Action flag
+enum LoopAction { RUN_SERVER = 1, RUN_UDP = 2, RUN_SUBSCRIPTIONS = 4, RUN_ALL = 7 };
+
+
 /**
  * @class IDevice
  * @brief Abstract interface for DLNA device functionality
@@ -35,7 +39,7 @@ class IDevice {
   /// Stop device and cleanup resources
   virtual void end() = 0;
   /// Process device loop for UDP and scheduler operations
-  virtual bool loop() = 0;
+  virtual bool loop(int loopActions = RUN_ALL) = 0;
   /// Process HTTP server loop
   virtual bool loopServer() = 0;
   /// Get service by ID

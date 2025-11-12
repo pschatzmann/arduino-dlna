@@ -108,7 +108,7 @@ class DLNAMediaServer : public DLNADeviceInfo {
   }
 
   /// call this method in the Arduino loop as often as possible
-  bool loop() { return dlna_device.loop(); }
+  bool loop(int loopAction = RUN_ALL) { return dlna_device.loop(loopAction); }
 
   /// Define the search capabilities: use csv
   void setSearchCapabilities(const char* caps) { g_search_capabiities = caps; }

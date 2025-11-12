@@ -117,7 +117,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
   }
 
   /// Call this from Arduino loop()
-  bool loop() { return dlna_device.loop(); }
+  bool loop(int loopAction = RUN_ALL) { return dlna_device.loop(loopAction); }
 
   /// Set the http server instance the MediaRenderer should use
   void setHttpServer(IHttpServer& server) {

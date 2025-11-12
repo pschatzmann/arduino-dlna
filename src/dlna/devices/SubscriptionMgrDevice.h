@@ -276,8 +276,14 @@ class SubscriptionMgrDevice : public ISubscriptionMgrDevice {
    * prior to delivery.
    */
   int publish() override {
+    if (!is_active) {
+      // clear any queued notifications when subscriptions are turned off
+      clear();
+      return 0;
+    }
     // First remove expired subscriptions so we don't deliver to them.
     removeExpired();
+    
     if (pending_list.empty()) return 0;
     // Attempt to process each pending notification once. If processing
     // fails (non-200), leave the entry in the queue for a later retry.
@@ -347,29 +353,6 @@ class SubscriptionMgrDevice : public ISubscriptionMgrDevice {
     return processed;
   }
 
-  /**
-   * @brief Remove expired subscriptions
-   *
-   * Walks the subscription list and unsubscribes any entry whose
-   * `expires_at` timestamp has passed. This also removes pending
-   * notifications related to the unsubscribed entries.
-   */
-  void removeExpired() override {
-    uint64_t now = millis();
-    for (int i = 0; i < subscriptions.size();) {
-      Subscription* s = subscriptions[i];
-      if (s->expires_at != 0 && s->expires_at <= now) {
-        DlnaLogger.log(DlnaLogLevel::Info, "removing expired subscription %s",
-                       s->sid.c_str());
-        // Use unsubscribe() which will remove pending notifications and
-        // free the subscription object. Do not increment `i` because the
-        // erase shifts the vector content down into the same index.
-        unsubscribe(*s->service, s->sid.c_str());
-      } else {
-        ++i;
-      }
-    }
-  }
 
   /**
    * @brief Number of active subscriptions
@@ -393,10 +376,6 @@ class SubscriptionMgrDevice : public ISubscriptionMgrDevice {
    */
   void setSubscriptionsActive(bool flag) override {
     is_active = flag;
-    if (!is_active) {
-      // clear any queued notifications when subscriptions are turned off
-      clear();
-    }
   }
 
   /// Convenience method to disable subscriptions at the end of the lifecycle
@@ -416,6 +395,30 @@ class SubscriptionMgrDevice : public ISubscriptionMgrDevice {
   Vector<Subscription*> subscriptions;
   Vector<PendingNotification> pending_list;
   bool is_active = true;
+
+  /**
+   * @brief Remove expired subscriptions
+   *
+   * Walks the subscription list and unsubscribes any entry whose
+   * `expires_at` timestamp has passed. This also removes pending
+   * notifications related to the unsubscribed entries.
+   */
+  void removeExpired() {
+    uint64_t now = millis();
+    for (int i = 0; i < subscriptions.size();) {
+      Subscription* s = subscriptions[i];
+      if (s->expires_at != 0 && s->expires_at <= now) {
+        DlnaLogger.log(DlnaLogLevel::Info, "removing expired subscription %s",
+                       s->sid.c_str());
+        // Use unsubscribe() which will remove pending notifications and
+        // free the subscription object. Do not increment `i` because the
+        // erase shifts the vector content down into the same index.
+        unsubscribe(*s->service, s->sid.c_str());
+      } else {
+        ++i;
+      }
+    }
+  }
 
   /**
    * @brief Try to renew an existing subscription identified by SID for the
