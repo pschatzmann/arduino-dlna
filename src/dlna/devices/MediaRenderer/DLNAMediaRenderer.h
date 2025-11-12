@@ -287,33 +287,30 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     current_uri.set(urlStr);
     // notify handler about the new URI; do not dispatch PLAY here — action
     // handlers will dispatch media events explicitly.
-    (void)event_cb;
     is_active = true;
 
     // ensure transport_state reflects playing for subscribers
     transport_state = "PLAYING";
     (void)current_uri;  // writer will fetch it from ref
-    {
-      auto writer = [](Print& out, void* ref) -> size_t {
-        auto self = (DLNAMediaRenderer*)ref;
-        size_t written = 0;
-        written += out.print("<CurrentTrack val=\"1\"/>\n");
-        written += out.print("<CurrentTrackURI val=\"");
-        written += out.print(self->current_uri.c_str());
-        written += out.print("\"/>\n");
-        written += out.print("<CurrentTrackMetadata val=\"");
-        written += out.print(self->current_uri_metadata.c_str());
-        written += out.print("\"/>\n");
-        written += out.print("<TransportState val=\"");
-        written += out.print(self->transport_state.c_str());
-        written += out.print("\"/>");
-        written += out.print("<CurrentTransportActions val=\"");
-        written += out.print(self->transport_actions.c_str());
-        written += out.print("\"/>");
-        return written;
-      };
-      addChange("AVT", writer);
-    }
+    auto writer = [](Print& out, void* ref) -> size_t {
+      auto self = (DLNAMediaRenderer*)ref;
+      size_t written = 0;
+      written += out.print("<CurrentTrack val=\"1\"/>\n");
+      written += out.print("<CurrentTrackURI val=\"");
+      written += out.print(self->current_uri.c_str());
+      written += out.print("\"/>\n");
+      written += out.print("<CurrentTrackMetadata val=\"");
+      written += out.print(self->current_uri_metadata.c_str());
+      written += out.print("\"/>\n");
+      written += out.print("<TransportState val=\"");
+      written += out.print(self->transport_state.c_str());
+      written += out.print("\"/>");
+      written += out.print("<CurrentTransportActions val=\"");
+      written += out.print(self->transport_actions.c_str());
+      written += out.print("\"/>");
+      return written;
+    };
+    addChange("AVT", writer);
 
     return true;
   }
@@ -353,22 +350,18 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     time_sum = 0;
     // reflect stopped state
     transport_state = "STOPPED";
-    struct StopWriter {
-      static size_t write(Print& out, void* ref) {
-        auto self = (DLNAMediaRenderer*)ref;
-        size_t written = 0;
-
-        written += out.print("<TransportState val=\"");
-        written += out.print(self->getTransportState());
-        written += out.print("\"/>");
-        written += out.print("<CurrentTransportActions val=\"");
-        written += out.print(self->getCurrentTransportActions());
-        written += out.print("\"/>");
-
-        return written;
-      }
+    auto writer = [](Print& out, void* ref) -> size_t {
+      auto self = (DLNAMediaRenderer*)ref;
+      size_t written = 0;
+      written += out.print("<TransportState val=\"");
+      written += out.print(self->getTransportState());
+      written += out.print("\"/>");
+      written += out.print("<CurrentTransportActions val=\"");
+      written += out.print(self->getCurrentTransportActions());
+      written += out.print("\"/>");
+      return written;
     };
-    addChange("AVT", StopWriter::write);
+    addChange("AVT", writer);
     return true;
   }
 
@@ -443,7 +436,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     if (is_active) {
       return "Pause,Stop";
     } else {
-      return "Play,Stop";
+      return "Play";
     }
   }
   /// Defines a custom action rule for the media renderer.
@@ -529,7 +522,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
   unsigned long start_time = 0;
   unsigned long time_sum = 0;
   // Current state (e.g. "STOPPED", "PLAYING","PAUSED_PLAYBACK")
-  tiny_dlna::Str transport_state = "NO_MEDIA_PRESENT";
+  tiny_dlna::Str transport_state = "STOPPED";
   const char* st = "urn:schemas-upnp-org:device:MediaRenderer:1";
   const char* usn = "uuid:09349455-2941-4cf7-9847-1dd5ab210e97";
   DeviceType dlna_device;
@@ -838,7 +831,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
           return DeviceType::printReplyXML(out, "PlayResponse", "AVTransport");
         },
         200, nullptr, this);
-    //setActive(true);
+    // setActive(true);
     play();
     return true;
   }
