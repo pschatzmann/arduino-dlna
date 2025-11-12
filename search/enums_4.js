@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['subscriptionstate_0',['SubscriptionState',['../namespacetiny__dlna.html#aaeb449bfe04e5561476e1371856fa0cf',1,'tiny_dlna']]]
+  ['protocolrole_0',['ProtocolRole',['../namespacetiny__dlna.html#a504b776a2804411b65b3b1cd864d8d92',1,'tiny_dlna']]]
 ];

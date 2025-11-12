@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['tinymethodid_0',['TinyMethodID',['../namespacetiny__dlna.html#a8b30900e538135f563c83e48319e5247',1,'tiny_dlna']]]
+  ['subscriptionstate_0',['SubscriptionState',['../namespacetiny__dlna.html#aaeb449bfe04e5561476e1371856fa0cf',1,'tiny_dlna']]]
 ];

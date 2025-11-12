@@ -111,8 +111,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a2d4069ba8c31bc43a72e404fda99ef30"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a2d4069ba8c31bc43a72e404fda99ef30">end</a> () override</td></tr>
 <tr class="memdesc:a2d4069ba8c31bc43a72e404fda99ef30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stops the processing and releases the resources.  <br /></td></tr>
 <tr class="separator:a2d4069ba8c31bc43a72e404fda99ef30"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afb4ff255406f85ca116fa86b4574d251"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#afb4ff255406f85ca116fa86b4574d251">loop</a> () override</td></tr>
-<tr class="separator:afb4ff255406f85ca116fa86b4574d251"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa35acfd4a0a62f037a0235ad741dcd2c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#aa35acfd4a0a62f037a0235ad741dcd2c">loop</a> (int loopAction=<a class="el" href="namespacetiny__dlna.html#a4b827ed63d901e894e77dc30e0df6cdda7877550c260d2b73fc66a55dfbe5c8fc">RUN_ALL</a>) override</td></tr>
+<tr class="separator:aa35acfd4a0a62f037a0235ad741dcd2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6e8898dc4c27491efbd36449649157c2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a6e8898dc4c27491efbd36449649157c2">loopPublishSubscriptions</a> ()</td></tr>
 <tr class="memdesc:a6e8898dc4c27491efbd36449649157c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Publish pending subscription notifications.  <br /></td></tr>
 <tr class="separator:a6e8898dc4c27491efbd36449649157c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -180,12 +180,16 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a206714dfe904b65506f07f7caa7aea65"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a206714dfe904b65506f07f7caa7aea65">setDeviceInfo</a> (<a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html">DLNADeviceInfo</a> &amp;device)</td></tr>
 <tr class="separator:a206714dfe904b65506f07f7caa7aea65"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a05336f103e07a500d49398e05e11e384"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a05336f103e07a500d49398e05e11e384">setSchedulerIntervalMs</a> (uint32_t ms)</td></tr>
+<tr class="memdesc:a05336f103e07a500d49398e05e11e384"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set scheduler interval in milliseconds.  <br /></td></tr>
 <tr class="separator:a05336f103e07a500d49398e05e11e384"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4e6e34000b9e7e841a88c4af1806de47"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a4e6e34000b9e7e841a88c4af1806de47">getSchedulerIntervalMs</a> () const</td></tr>
+<tr class="memdesc:a4e6e34000b9e7e841a88c4af1806de47"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get scheduler interval in milliseconds.  <br /></td></tr>
 <tr class="separator:a4e6e34000b9e7e841a88c4af1806de47"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a417f7d1d7c52d26959905a0603a9596e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a417f7d1d7c52d26959905a0603a9596e">setSubscriptionsIntervalMs</a> (uint32_t ms)</td></tr>
+<tr class="memdesc:a417f7d1d7c52d26959905a0603a9596e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set subscription publish interval in milliseconds.  <br /></td></tr>
 <tr class="separator:a417f7d1d7c52d26959905a0603a9596e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad3fa0cf93900af0501000abb2d70437a"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#ad3fa0cf93900af0501000abb2d70437a">getSubscriptionsIntervalMs</a> () const</td></tr>
+<tr class="memdesc:ad3fa0cf93900af0501000abb2d70437a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get subscription publish interval in milliseconds.  <br /></td></tr>
 <tr class="separator:ad3fa0cf93900af0501000abb2d70437a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a66e1f5ea2539e14b39b43e2a35e3a605"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a66e1f5ea2539e14b39b43e2a35e3a605">logScheduledStatus</a> (bool runImmediately=false)</td></tr>
 <tr class="separator:a66e1f5ea2539e14b39b43e2a35e3a605"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -233,16 +237,16 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a65b9f8a8d6a4e5507d105421f8d33621"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a79028fa7d12ea17aa4b44276c7e47d81"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1IHttpServer.html">IHttpServer</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a79028fa7d12ea17aa4b44276c7e47d81">p_server</a> = nullptr</td></tr>
 <tr class="separator:a79028fa7d12ea17aa4b44276c7e47d81"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0251342973e7605ee442fdd494b54597"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a0251342973e7605ee442fdd494b54597">reference</a> = nullptr</td></tr>
-<tr class="separator:a0251342973e7605ee442fdd494b54597"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af122549acc2ce41e574a740cf64aa241"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#af122549acc2ce41e574a740cf64aa241">scheduler_interval_ms</a> = (uint64_t)<a class="el" href="dlna__config_8h.html#aa693f4a5a61b6042d6d2b0a5d19ce43a">DLNA_RUN_SCHEDULER_EVERY_MS</a></td></tr>
 <tr class="separator:af122549acc2ce41e574a740cf64aa241"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2d3284fe8f85710f97272a45500f3670"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a2d3284fe8f85710f97272a45500f3670">subscriptions_interval_ms</a></td></tr>
+<tr class="memitem:a2d3284fe8f85710f97272a45500f3670"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a2d3284fe8f85710f97272a45500f3670">subscriptions_interval_ms</a> = (uint64_t)<a class="el" href="dlna__config_8h.html#aaa87dfb5a8224047ab269dfc707d4baf">DLNA_RUN_SUBSCRIPTIONS_EVERY_MS</a></td></tr>
 <tr class="separator:a2d3284fe8f85710f97272a45500f3670"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a59763e87be438de5b69883efd20d0ccd"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a59763e87be438de5b69883efd20d0ccd">next_scheduler_timeout_ms</a> = 0</td></tr>
 <tr class="separator:a59763e87be438de5b69883efd20d0ccd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a05bc12c8f4d1e55258bf67f4145329d3"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a05bc12c8f4d1e55258bf67f4145329d3">next_subscriptions_timeout_ms</a> = 0</td></tr>
 <tr class="separator:a05bc12c8f4d1e55258bf67f4145329d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0251342973e7605ee442fdd494b54597"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a0251342973e7605ee442fdd494b54597">reference</a> = nullptr</td></tr>
+<tr class="separator:a0251342973e7605ee442fdd494b54597"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename ClientType&gt;<br />
@@ -549,6 +553,8 @@ template&lt;typename ClientType &gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Get scheduler interval in milliseconds. </p>
+
 </div>
 </div>
 <a id="a98d480c499ca20e25e579bbbf9c1545e" name="a98d480c499ca20e25e579bbbf9c1545e"></a>
@@ -701,6 +707,8 @@ template&lt;typename ClientType &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Get subscription publish interval in milliseconds. </p>
 
 </div>
 </div>
@@ -939,8 +947,8 @@ template&lt;typename ClientType &gt; </div>
 
 </div>
 </div>
-<a id="afb4ff255406f85ca116fa86b4574d251" name="afb4ff255406f85ca116fa86b4574d251"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afb4ff255406f85ca116fa86b4574d251">&#9670;&#160;</a></span>loop()</h2>
+<a id="aa35acfd4a0a62f037a0235ad741dcd2c" name="aa35acfd4a0a62f037a0235ad741dcd2c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa35acfd4a0a62f037a0235ad741dcd2c">&#9670;&#160;</a></span>loop()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -953,7 +961,8 @@ template&lt;typename ClientType &gt; </div>
         <tr>
           <td class="memname">bool <a class="el" href="classtiny__dlna_1_1DLNADevice.html">tiny_dlna::DLNADevice</a>&lt; ClientType &gt;::loop </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>loopAction</em> = <code><a class="el" href="namespacetiny__dlna.html#a4b827ed63d901e894e77dc30e0df6cdda7877550c260d2b73fc66a55dfbe5c8fc">RUN_ALL</a></code></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -965,7 +974,7 @@ template&lt;typename ClientType &gt; </div>
 </div><div class="memdoc">
 <p>Call this method in the Arduino loop as often as possible. It calls loopServer, loopUDP and loopPublishSubscriptions in defined intervals.. </p>
 
-<p>Implements <a class="el" href="classtiny__dlna_1_1IDevice.html#a1186a44b44cefed4955f4c4ea5d50c95">tiny_dlna::IDevice</a>.</p>
+<p>Implements <a class="el" href="classtiny__dlna_1_1IDevice.html#a0d4ad47338a643a9909bdeea89731fc8">tiny_dlna::IDevice</a>.</p>
 
 </div>
 </div>
@@ -1450,7 +1459,8 @@ template&lt;typename ClientType &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Set scheduler interval in milliseconds (default = DLNA_RUN_SCHEDULER_EVERY_MS * DLNA_LOOP_DELAY_MS) Set scheduler interval in milliseconds (default = DLNA_RUN_SCHEDULER_EVERY_MS) </p>
+
+<p>Set scheduler interval in milliseconds. </p>
 
 </div>
 </div>
@@ -1511,7 +1521,8 @@ template&lt;typename ClientType &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Set subscription publish interval in milliseconds (default = DLNA_RUN_SUBSCRIPTIONS_EVERY_MS * DLNA_LOOP_DELAY_MS) Set subscription publish interval in milliseconds (default = DLNA_RUN_SUBSCRIPTIONS_EVERY_MS) </p>
+
+<p>Set subscription publish interval in milliseconds. </p>
 
 </div>
 </div>
@@ -1957,7 +1968,7 @@ template&lt;typename ClientType &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">uint64_t <a class="el" href="classtiny__dlna_1_1DLNADevice.html">tiny_dlna::DLNADevice</a>&lt; ClientType &gt;::subscriptions_interval_ms</td>
+          <td class="memname">uint64_t <a class="el" href="classtiny__dlna_1_1DLNADevice.html">tiny_dlna::DLNADevice</a>&lt; ClientType &gt;::subscriptions_interval_ms = (uint64_t)<a class="el" href="dlna__config_8h.html#aaa87dfb5a8224047ab269dfc707d4baf">DLNA_RUN_SUBSCRIPTIONS_EVERY_MS</a></td>
         </tr>
       </table>
   </td>
@@ -1966,10 +1977,7 @@ template&lt;typename ClientType &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">=</div>
-<div class="line">      (uint64_t)<a class="code hl_define" href="dlna__config_8h.html#aaa87dfb5a8224047ab269dfc707d4baf">DLNA_RUN_SUBSCRIPTIONS_EVERY_MS</a></div>
-<div class="ttc" id="adlna__config_8h_html_aaa87dfb5a8224047ab269dfc707d4baf"><div class="ttname"><a href="dlna__config_8h.html#aaa87dfb5a8224047ab269dfc707d4baf">DLNA_RUN_SUBSCRIPTIONS_EVERY_MS</a></div><div class="ttdeci">#define DLNA_RUN_SUBSCRIPTIONS_EVERY_MS</div><div class="ttdoc">Define subscription publish interval in ms.</div><div class="ttdef"><b>Definition:</b> dlna_config.h:15</div></div>
-</div><!-- fragment -->
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>

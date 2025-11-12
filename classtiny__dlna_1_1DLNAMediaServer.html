@@ -141,9 +141,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a115575af36654fdd0f8532b88e26d761"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaServer.html#a115575af36654fdd0f8532b88e26d761">end</a> ()</td></tr>
 <tr class="memdesc:a115575af36654fdd0f8532b88e26d761"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stops the processing and releases the resources.  <br /></td></tr>
 <tr class="separator:a115575af36654fdd0f8532b88e26d761"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a85919cc36f0ac5a5da8508a9ab4b8870"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaServer.html#a85919cc36f0ac5a5da8508a9ab4b8870">loop</a> ()</td></tr>
-<tr class="memdesc:a85919cc36f0ac5a5da8508a9ab4b8870"><td class="mdescLeft">&#160;</td><td class="mdescRight">call this method in the Arduino loop as often as possible  <br /></td></tr>
-<tr class="separator:a85919cc36f0ac5a5da8508a9ab4b8870"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a750fd628fb3cce74be906e0ba5f6a53e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaServer.html#a750fd628fb3cce74be906e0ba5f6a53e">loop</a> (int loopAction=<a class="el" href="namespacetiny__dlna.html#a4b827ed63d901e894e77dc30e0df6cdda7877550c260d2b73fc66a55dfbe5c8fc">RUN_ALL</a>)</td></tr>
+<tr class="memdesc:a750fd628fb3cce74be906e0ba5f6a53e"><td class="mdescLeft">&#160;</td><td class="mdescRight">call this method in the Arduino loop as often as possible  <br /></td></tr>
+<tr class="separator:a750fd628fb3cce74be906e0ba5f6a53e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae2c06b252d5983a2b78c0e5640191c0c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaServer.html#ae2c06b252d5983a2b78c0e5640191c0c">setSearchCapabilities</a> (const char *caps)</td></tr>
 <tr class="memdesc:ae2c06b252d5983a2b78c0e5640191c0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define the search capabilities: use csv.  <br /></td></tr>
 <tr class="separator:ae2c06b252d5983a2b78c0e5640191c0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -315,6 +315,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a714c374025464075d8cf073381f91d07"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#a714c374025464075d8cf073381f91d07">operator bool</a> ()</td></tr>
 <tr class="memdesc:a714c374025464075d8cf073381f91d07"><td class="mdescLeft">&#160;</td><td class="mdescRight">return true if active  <br /></td></tr>
 <tr class="separator:a714c374025464075d8cf073381f91d07"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad157d9cd7b457189424ec6caa4a98f75"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#ad157d9cd7b457189424ec6caa4a98f75">loop</a> ()</td></tr>
+<tr class="memdesc:ad157d9cd7b457189424ec6caa4a98f75"><td class="mdescLeft">&#160;</td><td class="mdescRight">loop processing  <br /></td></tr>
+<tr class="separator:ad157d9cd7b457189424ec6caa4a98f75"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a72789ce2156fd567f8ab06456f21f876"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#a72789ce2156fd567f8ab06456f21f876">setSubscriptionActive</a> (bool flag)</td></tr>
 <tr class="separator:a72789ce2156fd567f8ab06456f21f876"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab30655c76819d36639f78bc02b4769c0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#ab30655c76819d36639f78bc02b4769c0">isSubscriptionActive</a> ()</td></tr>
@@ -541,7 +544,7 @@ class tiny_dlna::DLNAMediaServer&lt; ClientType &gt;</div><p>Digital Media Serve
 <li>Create an instance with <a class="el" href="classtiny__dlna_1_1HttpServer.html" title="Header-only HTTP server wrapper that registers callback handlers.">HttpServer</a> and <a class="el" href="classtiny__dlna_1_1IUDPService.html" title="Abstract Interface for UDP API.">IUDPService</a></li>
 <li>Set callbacks for content preparation and retrieval</li>
 <li>Call <a class="el" href="classtiny__dlna_1_1DLNAMediaServer.html#aa6efcf367a35cdf25fdebdbfdf358e8a">begin()</a> to start the server</li>
-<li>Call <a class="el" href="classtiny__dlna_1_1DLNAMediaServer.html#a85919cc36f0ac5a5da8508a9ab4b8870" title="call this method in the Arduino loop as often as possible">loop()</a> repeatedly to process requests</li>
+<li>Call <a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#ad157d9cd7b457189424ec6caa4a98f75" title="loop processing">loop()</a> repeatedly to process requests</li>
 </ol>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
@@ -2162,8 +2165,35 @@ template&lt;typename ClientType &gt; </div>
 
 </div>
 </div>
-<a id="a85919cc36f0ac5a5da8508a9ab4b8870" name="a85919cc36f0ac5a5da8508a9ab4b8870"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a85919cc36f0ac5a5da8508a9ab4b8870">&#9670;&#160;</a></span>loop()</h2>
+<a id="ad157d9cd7b457189424ec6caa4a98f75" name="ad157d9cd7b457189424ec6caa4a98f75"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad157d9cd7b457189424ec6caa4a98f75">&#9670;&#160;</a></span>loop() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool tiny_dlna::DLNADeviceInfo::loop </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>loop processing </p>
+
+</div>
+</div>
+<a id="a750fd628fb3cce74be906e0ba5f6a53e" name="a750fd628fb3cce74be906e0ba5f6a53e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a750fd628fb3cce74be906e0ba5f6a53e">&#9670;&#160;</a></span>loop() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2176,20 +2206,19 @@ template&lt;typename ClientType &gt; </div>
         <tr>
           <td class="memname">bool <a class="el" href="classtiny__dlna_1_1DLNAMediaServer.html">tiny_dlna::DLNAMediaServer</a>&lt; ClientType &gt;::loop </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>loopAction</em> = <code><a class="el" href="namespacetiny__dlna.html#a4b827ed63d901e894e77dc30e0df6cdda7877550c260d2b73fc66a55dfbe5c8fc">RUN_ALL</a></code></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>call this method in the Arduino loop as often as possible </p>
-
-<p>Reimplemented from <a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#ad157d9cd7b457189424ec6caa4a98f75">tiny_dlna::DLNADeviceInfo</a>.</p>
 
 </div>
 </div>

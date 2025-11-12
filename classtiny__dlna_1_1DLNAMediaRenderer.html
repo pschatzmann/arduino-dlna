@@ -128,9 +128,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ae612f4e187d4500fb9edabe5c3d6d56b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#ae612f4e187d4500fb9edabe5c3d6d56b">end</a> ()</td></tr>
 <tr class="memdesc:ae612f4e187d4500fb9edabe5c3d6d56b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stops processing and releases resources.  <br /></td></tr>
 <tr class="separator:ae612f4e187d4500fb9edabe5c3d6d56b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a24005e9658365e9d2da90cb094379da7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a24005e9658365e9d2da90cb094379da7">loop</a> ()</td></tr>
-<tr class="memdesc:a24005e9658365e9d2da90cb094379da7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call this from Arduino <a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a24005e9658365e9d2da90cb094379da7" title="Call this from Arduino loop()">loop()</a>  <br /></td></tr>
-<tr class="separator:a24005e9658365e9d2da90cb094379da7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a667600eb997ea604fe402fa4f3f5fd40"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a667600eb997ea604fe402fa4f3f5fd40">loop</a> (int loopAction=<a class="el" href="namespacetiny__dlna.html#a4b827ed63d901e894e77dc30e0df6cdda7877550c260d2b73fc66a55dfbe5c8fc">RUN_ALL</a>)</td></tr>
+<tr class="memdesc:a667600eb997ea604fe402fa4f3f5fd40"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call this from Arduino <a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#ad157d9cd7b457189424ec6caa4a98f75" title="loop processing">loop()</a>  <br /></td></tr>
+<tr class="separator:a667600eb997ea604fe402fa4f3f5fd40"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac7a72b6dc7afd23e20ff2e3e29d8c4a9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#ac7a72b6dc7afd23e20ff2e3e29d8c4a9">setHttpServer</a> (<a class="el" href="classtiny__dlna_1_1IHttpServer.html">IHttpServer</a> &amp;server)</td></tr>
 <tr class="memdesc:ac7a72b6dc7afd23e20ff2e3e29d8c4a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the http server instance the MediaRenderer should use.  <br /></td></tr>
 <tr class="separator:ac7a72b6dc7afd23e20ff2e3e29d8c4a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -360,6 +360,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a714c374025464075d8cf073381f91d07"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#a714c374025464075d8cf073381f91d07">operator bool</a> ()</td></tr>
 <tr class="memdesc:a714c374025464075d8cf073381f91d07"><td class="mdescLeft">&#160;</td><td class="mdescRight">return true if active  <br /></td></tr>
 <tr class="separator:a714c374025464075d8cf073381f91d07"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad157d9cd7b457189424ec6caa4a98f75"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#ad157d9cd7b457189424ec6caa4a98f75">loop</a> ()</td></tr>
+<tr class="memdesc:ad157d9cd7b457189424ec6caa4a98f75"><td class="mdescLeft">&#160;</td><td class="mdescRight">loop processing  <br /></td></tr>
+<tr class="separator:ad157d9cd7b457189424ec6caa4a98f75"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a72789ce2156fd567f8ab06456f21f876"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#a72789ce2156fd567f8ab06456f21f876">setSubscriptionActive</a> (bool flag)</td></tr>
 <tr class="separator:a72789ce2156fd567f8ab06456f21f876"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab30655c76819d36639f78bc02b4769c0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#ab30655c76819d36639f78bc02b4769c0">isSubscriptionActive</a> ()</td></tr>
@@ -2257,8 +2260,35 @@ template&lt;typename ClientType &gt; </div>
 
 </div>
 </div>
-<a id="a24005e9658365e9d2da90cb094379da7" name="a24005e9658365e9d2da90cb094379da7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a24005e9658365e9d2da90cb094379da7">&#9670;&#160;</a></span>loop()</h2>
+<a id="ad157d9cd7b457189424ec6caa4a98f75" name="ad157d9cd7b457189424ec6caa4a98f75"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad157d9cd7b457189424ec6caa4a98f75">&#9670;&#160;</a></span>loop() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool tiny_dlna::DLNADeviceInfo::loop </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>loop processing </p>
+
+</div>
+</div>
+<a id="a667600eb997ea604fe402fa4f3f5fd40" name="a667600eb997ea604fe402fa4f3f5fd40"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a667600eb997ea604fe402fa4f3f5fd40">&#9670;&#160;</a></span>loop() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2271,20 +2301,19 @@ template&lt;typename ClientType &gt; </div>
         <tr>
           <td class="memname">bool <a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html">tiny_dlna::DLNAMediaRenderer</a>&lt; ClientType &gt;::loop </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>loopAction</em> = <code><a class="el" href="namespacetiny__dlna.html#a4b827ed63d901e894e77dc30e0df6cdda7877550c260d2b73fc66a55dfbe5c8fc">RUN_ALL</a></code></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Call this from Arduino <a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a24005e9658365e9d2da90cb094379da7" title="Call this from Arduino loop()">loop()</a> </p>
-
-<p>Reimplemented from <a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#ad157d9cd7b457189424ec6caa4a98f75">tiny_dlna::DLNADeviceInfo</a>.</p>
+<p>Call this from Arduino <a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html#ad157d9cd7b457189424ec6caa4a98f75" title="loop processing">loop()</a> </p>
 
 </div>
 </div>

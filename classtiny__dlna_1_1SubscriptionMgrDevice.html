@@ -118,9 +118,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a2889f011f9fb8ed84d0fa0f9eef7ecc2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgrDevice.html#a2889f011f9fb8ed84d0fa0f9eef7ecc2">publish</a> () override</td></tr>
 <tr class="memdesc:a2889f011f9fb8ed84d0fa0f9eef7ecc2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deliver queued notifications.  <br /></td></tr>
 <tr class="separator:a2889f011f9fb8ed84d0fa0f9eef7ecc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9c9301c99094e3256405223550b38a04"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgrDevice.html#a9c9301c99094e3256405223550b38a04">removeExpired</a> () override</td></tr>
-<tr class="memdesc:a9c9301c99094e3256405223550b38a04"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove expired subscriptions.  <br /></td></tr>
-<tr class="separator:a9c9301c99094e3256405223550b38a04"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae3f47c674d2a4ab7750956259abe43e1"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgrDevice.html#ae3f47c674d2a4ab7750956259abe43e1">subscriptionsCount</a> () override</td></tr>
 <tr class="memdesc:ae3f47c674d2a4ab7750956259abe43e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of active subscriptions.  <br /></td></tr>
 <tr class="separator:ae3f47c674d2a4ab7750956259abe43e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -139,6 +136,9 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
+<tr class="memitem:ae51f74140f72112f13c777db32fa81e7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgrDevice.html#ae51f74140f72112f13c777db32fa81e7">removeExpired</a> ()</td></tr>
+<tr class="memdesc:ae51f74140f72112f13c777db32fa81e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove expired subscriptions.  <br /></td></tr>
+<tr class="separator:ae51f74140f72112f13c777db32fa81e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a31f86709533411373039f6e63bb10f38"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Str.html">Str</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgrDevice.html#a31f86709533411373039f6e63bb10f38">renewSubscription</a> (<a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html">DLNAServiceInfo</a> &amp;service, const char *sid, const char *callbackUrl, uint32_t timeoutSec)</td></tr>
 <tr class="memdesc:a31f86709533411373039f6e63bb10f38"><td class="mdescLeft">&#160;</td><td class="mdescRight">Try to renew an existing subscription identified by SID for the given service. If successful the subscription's timeout/expiry (and optionally callback URL) are updated and the renewed SID is returned. If no matching subscription exists an empty <a class="el" href="classtiny__dlna_1_1Str.html" title="Heap-backed string utility used throughout tiny_dlna.">Str</a> is returned.  <br /></td></tr>
 <tr class="separator:a31f86709533411373039f6e63bb10f38"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -609,8 +609,8 @@ template&lt;typename ClientType &gt; </div>
 
 </div>
 </div>
-<a id="a9c9301c99094e3256405223550b38a04" name="a9c9301c99094e3256405223550b38a04"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9c9301c99094e3256405223550b38a04">&#9670;&#160;</a></span>removeExpired()</h2>
+<a id="ae51f74140f72112f13c777db32fa81e7" name="ae51f74140f72112f13c777db32fa81e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae51f74140f72112f13c777db32fa81e7">&#9670;&#160;</a></span>removeExpired()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -629,15 +629,13 @@ template&lt;typename ClientType &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Remove expired subscriptions. </p>
 <p>Walks the subscription list and unsubscribes any entry whose <code>expires_at</code> timestamp has passed. This also removes pending notifications related to the unsubscribed entries. </p>
-
-<p>Implements <a class="el" href="classtiny__dlna_1_1ISubscriptionMgrDevice.html#a46a5c6966afa3bafdc8150b943651947">tiny_dlna::ISubscriptionMgrDevice</a>.</p>
 
 </div>
 </div>
