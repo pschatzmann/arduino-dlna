@@ -143,10 +143,10 @@ class DLNAMediaServer : public DLNADeviceInfo {
       size_t result = 0;
       result += out.print("<SourceProtocolInfo val=\"");
       result += out.print(StrView(self->getSourceProtocols()).c_str());
-      result += out.print("\"/>\n");
+      result += out.println("\"/>");
       result += out.print("<SinkProtocolInfo val=\"");
       result += out.print(StrView(self->getSinkProtocols()).c_str());
-      result += out.print("\"/>\n");
+      result += out.println("\"/>");
       return result;
     };
     addChange("CMS", writer);
@@ -271,7 +271,7 @@ class DLNAMediaServer : public DLNADeviceInfo {
       size_t result = 0;
       result += out.print("<SystemUpdateID val=\"");
       result += out.print(self->g_stream_updateID);
-      result += out.print("\"/>\n");
+      result += out.println("\"/>");
       return result;
     };
     addChange("AVT", writer);
@@ -287,13 +287,13 @@ class DLNAMediaServer : public DLNADeviceInfo {
       size_t result = 0;
       result += out.print("<SourceProtocolInfo val=\"");
       result += out.print(StrView(self->getSourceProtocols()).c_str());
-      result += out.print("\"/>\n");
+      result += out.println("\"/>");
       result += out.print("<SinkProtocolInfo val=\"");
       result += out.print(StrView(self->getSinkProtocols()).c_str());
-      result += out.print("\"/>\n");
+      result += out.println("\"/>");
       result += out.print("<CurrentConnectionIDs val=\"");
       result += out.print(StrView(self->connectionID).c_str());
-      result += out.print("\"/>\n");
+      result += out.println("\"/>");
       return result;
     };
     addChange("CMS", writer);

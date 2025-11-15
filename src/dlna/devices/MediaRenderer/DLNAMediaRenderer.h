@@ -298,10 +298,10 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
       written += out.print("<CurrentTrack val=\"1\"/>\n");
       written += out.print("<CurrentTrackURI val=\"");
       written += out.print(self->current_uri.c_str());
-      written += out.print("\"/>\n");
+      written += out.println("\"/>");
       written += out.print("<CurrentTrackMetadata val=\"");
       written += out.print(self->current_uri_metadata.c_str());
-      written += out.print("\"/>\n");
+      written += out.println("\"/>");
       written += out.print("<TransportState val=\"");
       written += out.print(self->transport_state.c_str());
       written += out.print("\"/>");
@@ -328,11 +328,11 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
       size_t written = 0;
       written += out.print("<AVTransportURI val=\"");
       written += out.print(self->current_uri.c_str());
-      written += out.print("\"/>\n");
+      written += out.println("\"/>");
 
       written += out.print("<AVTransportURIMetaData val=\"");
       written += out.print(self->current_uri_metadata.c_str());
-      written += out.print("\"/>\n");
+      written += out.println("\"/>");
 
       written += out.print("<NumberOfTracks val=\"1\"/>\n");
       return written;
@@ -473,10 +473,10 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
       size_t result = 0;
       result += out.print("<SourceProtocolInfo val=\"");
       result += out.print(StrView(self->getSourceProtocols()).c_str());
-      result += out.print("\"/>\n");
+      result += out.println("\"/>");
       result += out.print("<SinkProtocolInfo val=\"");
       result += out.print(StrView(self->getSinkProtocols()).c_str());
-      result += out.print("\"/>\n");
+      result += out.println("\"/>");
       return result;
     };
     addChange("CMS", writer);
@@ -588,11 +588,12 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
   void publishRCS() {
     auto writer = [](Print& out, void* ref) -> size_t {
       auto self = (DLNAMediaRenderer*)ref;
-      StrPrint tmp;
+      Printf outf{out};
       size_t written = 0;
-      written += tmp.printf("<Volume val=\"%d\"/>", self->current_volume);
-      written += tmp.printf("<Mute val=\"%d\"/>", self->isMuted() ? 1 : 0);
-      out.print(tmp.c_str());
+      written += outf.printf("<Volume val=\"%d\" channel=\"Master\"/>", self->current_volume);
+      written += out.println();
+      written += outf.printf("<Mute val=\"%d\" channel=\"Master\"/>", self->isMuted() ? 1 : 0);
+      written += out.println();
       return written;
     };
     addChange("RCS", writer);

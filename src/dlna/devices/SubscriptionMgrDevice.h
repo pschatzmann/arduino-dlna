@@ -476,29 +476,29 @@ class SubscriptionMgrDevice : public ISubscriptionMgrDevice {
     int instance_id = pn.p_subscription->service->instance_id;
 
     size_t written = 0;
-    written += out.print("<?xml version=\"1.0\"?>\r\n");
-    written += out.print(
+    written += out.println("<?xml version=\"1.0\"?>");
+    written += out.println(
         "<e:propertyset "
-        "xmlns:e=\"urn:schemas-upnp-org:metadata-1-0/events\">\r\n");
-    written += out.print("<e:property>\r\n");
-    written += out.print("<LastChange>\r\n");
+        "xmlns:e=\"urn:schemas-upnp-org:metadata-1-0/events\">");
+    written += out.println("<e:property>");
+    written += out.println("<LastChange>");
     // blow should be escaped
     written +=
         out_esc.print("<Event xmlns=\"urn:schemas-upnp-org:metadata-1-0/");
     written += out_esc.print(service_abbrev);
-    written += out_esc.print("/\">\r\n");
+    written += out_esc.println("/\">");
     written += out_esc.print("<InstanceID val=\"");
     written += out_esc.print(instance_id);
-    written += out_esc.print("\">\r\n");
+    written += out_esc.println("\">");
     if (pn.writer) {
       written += pn.writer(out_esc, pn.ref);
     }
-    written += out_esc.print("</InstanceID>\r\n");
-    written += out_esc.print("</Event>\r\n");
+    written += out_esc.println("</InstanceID>");
+    written += out_esc.println("</Event>");
     // end of escaped
-    written += out.print("</LastChange>\r\n");
-    written += out.print("</e:property>\r\n");
-    written += out.print("</e:propertyset>\r\n");
+    written += out.println("</LastChange>");
+    written += out.println("</e:property>");
+    written += out.println("</e:propertyset>");
     return written;
   }
 
