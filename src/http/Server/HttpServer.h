@@ -12,6 +12,7 @@
 #include "Server.h"
 #include "basic/IPAddressAndPort.h"  // for toStr
 #include "basic/List.h"
+#include "basic/StrPrint.h"
 
 namespace tiny_dlna {
 
@@ -279,6 +280,15 @@ class HttpServer : public IHttpServer {
 #if DLNA_LOG_XML
     callback(Serial, ref);
 #endif
+#if DLNA_CHECK_XML_LENGTH
+    StrPrint test;
+    size_t test_len = callback(test, ref);
+    if (strlen(test.c_str()) != size) {
+      DlnaLogger.log(DlnaLogLevel::Error,
+                      "HttpRequest test wrote %d bytes: expected %d", test_len, size);
+    }   
+#endif      
+
     endClient();
   }
 

@@ -178,6 +178,10 @@
 #define DLNA_LOG_XML false
 #endif
 
+#ifndef DLNA_CHECK_XML_LENGTH
+#define DLNA_CHECK_XML_LENGTH false
+#endif
+
 /// Define the netmask for discovery filtering
 #ifndef DLNA_DISCOVERY_NETMASK
 #define DLNA_DISCOVERY_NETMASK IPAddress(255, 255, 255, 0)

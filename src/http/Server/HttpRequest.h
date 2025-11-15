@@ -6,6 +6,7 @@
 #include "HttpChunkWriter.h"
 #include "HttpHeader.h"
 #include "IHttpRequest.h"
+#include "basic/StrPrint.h"
 
 namespace tiny_dlna {
 
@@ -325,6 +326,14 @@ class HttpRequest : public IHttpRequest {
         DlnaLogger.log(DlnaLogLevel::Error,
                        "HttpRequest wrote %d bytes: expected %d", written, len);
       }
+#if DLNA_CHECK_XML_LENGTH
+      StrPrint test;
+      size_t test_len = writer(test, ref);
+      if (strlen(test.c_str()) != len) {
+        DlnaLogger.log(DlnaLogLevel::Error,
+                       "HttpRequest test wrote %d bytes: expected %d", test_len, len);
+      }   
+#endif      
     }
 
     // read reply header and prepare chunk reader if needed
