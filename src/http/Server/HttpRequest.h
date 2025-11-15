@@ -331,7 +331,7 @@ class HttpRequest : public IHttpRequest {
       size_t test_len = writer(test, ref);
       if (strlen(test.c_str()) != len) {
         DlnaLogger.log(DlnaLogLevel::Error,
-                       "HttpRequest test wrote %d bytes: expected %d", test_len, len);
+                      "HttpRequest test wrote %d bytes: expected %d / strlen: %d", test_len, len, strlen(test.c_str()));
       }   
 #endif      
     }

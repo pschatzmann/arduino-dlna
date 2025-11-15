@@ -482,20 +482,21 @@ class SubscriptionMgrDevice : public ISubscriptionMgrDevice {
         "xmlns:e=\"urn:schemas-upnp-org:metadata-1-0/events\">");
     written += out.println("<e:property>");
     written += out.println("<LastChange>");
-    // blow should be escaped
+    // below should be escaped
     written +=
         out_esc.print("<Event xmlns=\"urn:schemas-upnp-org:metadata-1-0/");
     written += out_esc.print(service_abbrev);
-    written += out_esc.println("/\">");
+    written += out_esc.print("/\">");
     written += out_esc.print("<InstanceID val=\"");
     written += out_esc.print(instance_id);
-    written += out_esc.println("\">");
+    written += out_esc.print("\">");
     if (pn.writer) {
       written += pn.writer(out_esc, pn.ref);
     }
-    written += out_esc.println("</InstanceID>");
-    written += out_esc.println("</Event>");
+    written += out_esc.print("</InstanceID>");
+    written += out_esc.print("</Event>");
     // end of escaped
+    written += out.println();
     written += out.println("</LastChange>");
     written += out.println("</e:property>");
     written += out.println("</e:propertyset>");

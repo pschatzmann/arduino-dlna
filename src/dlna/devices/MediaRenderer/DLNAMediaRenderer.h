@@ -562,24 +562,22 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     // Transport state will be built by the writer from the instance (ref)
     auto writer = [](Print& out, void* ref) -> size_t {
       auto self = (DLNAMediaRenderer*)ref;
-      StrPrint tmp;
-      size_t result = 0;
-      result += tmp.printf("<TransportState val=\"%s\"/>",
-                           self->transport_state.c_str());
+      Printf outf{out};
+      size_t written = 0;
+      written += outf.printf("<TransportState val=\"%s\"/>",
+                             self->transport_state.c_str());
       if (!self->current_uri.isEmpty()) {
-        result += tmp.printf("<CurrentTrackURI val=\"%s\"/>",
-                             self->current_uri.c_str());
+        written += outf.printf("<CurrentTrackURI val=\"%s\"/>",
+                               self->current_uri.c_str());
       }
-      result += tmp.printf(
+      written += outf.printf(
           "<RelativeTimePosition val=\"%02d:%02d:%02d\"/>",
           static_cast<int>(self->getRelativeTimePositionSec() / 3600),
           static_cast<int>((self->getRelativeTimePositionSec() % 3600) / 60),
           static_cast<int>(self->getRelativeTimePositionSec() % 60));
-      result += tmp.printf("<CurrentTransportActions val=\"%s\"/>",
-                           self->getCurrentTransportActions());
-      // write formatted content to provided Print
-      out.print(tmp.c_str());
-      return result;
+      written += outf.printf("<CurrentTransportActions val=\"%s\"/>",
+                             self->getCurrentTransportActions());
+      return written;
     };
     addChange("AVT", writer);
   }

@@ -285,7 +285,7 @@ class HttpServer : public IHttpServer {
     size_t test_len = callback(test, ref);
     if (strlen(test.c_str()) != size) {
       DlnaLogger.log(DlnaLogLevel::Error,
-                      "HttpRequest test wrote %d bytes: expected %d", test_len, size);
+                      "HttpServer wrote %d bytes: expected %d / strlen: %d", test_len, size, strlen(test.c_str()));
     }   
 #endif      
 
