@@ -364,7 +364,7 @@ $(function() {
 <div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>      <span class="keywordtype">size_t</span> test_len = writer(test, ref);</div>
 <div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>      <span class="keywordflow">if</span> (strlen(test.<a class="code hl_function" href="classtiny__dlna_1_1StrPrint.html#a06b7cee87a61db3899094b963cae397f">c_str</a>()) != len) {</div>
 <div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>        DlnaLogger.log(<a class="code hl_enumvalue" href="namespacetiny__dlna.html#a5eabb92538a2ba1397f67b903cb9d35ea902b0d55fddef6f8d651fe1035b7d4bd">DlnaLogLevel::Error</a>,</div>
-<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>                       <span class="stringliteral">&quot;HttpRequest test wrote %d bytes: expected %d&quot;</span>, test_len, len);</div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>                      <span class="stringliteral">&quot;HttpRequest test wrote %d bytes: expected %d / strlen: %d&quot;</span>, test_len, len, strlen(test.<a class="code hl_function" href="classtiny__dlna_1_1StrPrint.html#a06b7cee87a61db3899094b963cae397f">c_str</a>()));</div>
 <div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>      }   </div>
 <div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span><span class="preprocessor">#endif      </span></div>
 <div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>    }</div>

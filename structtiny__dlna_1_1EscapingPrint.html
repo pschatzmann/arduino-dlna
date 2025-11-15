@@ -75,13 +75,13 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="structtiny__dlna_1_1EscapingPrint-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">tiny_dlna::EscapingPrint Struct Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Print wrapper that escapes &amp; &lt; &gt; while forwarding to an underlying Print.  
+<p>Print wrapper that escapes &amp; &lt; &gt; " ' while forwarding to an underlying Print. Returns the expanded output length (not input bytes consumed).  
  <a href="structtiny__dlna_1_1EscapingPrint.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="EscapingPrint_8h_source.html">EscapingPrint.h</a>&gt;</code></p>
@@ -90,7 +90,7 @@ Inheritance diagram for tiny_dlna::EscapingPrint:</div>
 <div class="dyncontent">
 <div class="center"><img src="structtiny__dlna_1_1EscapingPrint__inherit__graph.png" border="0" usemap="#atiny__dlna_1_1EscapingPrint_inherit__map" alt="Inheritance graph"/></div>
 <map name="atiny__dlna_1_1EscapingPrint_inherit__map" id="atiny__dlna_1_1EscapingPrint_inherit__map">
-<area shape="rect" title="Print wrapper that escapes &amp; &lt; &gt; while forwarding to an underlying Print." alt="" coords="5,79,184,104"/>
+<area shape="rect" title="Print wrapper that escapes &amp; &lt; &gt; &quot; &#39; while forwarding to an underlying Print. Returns the expanded ou..." alt="" coords="5,79,184,104"/>
 <area shape="rect" title=" " alt="" coords="69,5,121,31"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
@@ -103,16 +103,14 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a6eb0a78cbec63ded35f6eff04e2e7952"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab5534f3d077a448a1fce1a8be1edfaaf"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1EscapingPrint.html#ab5534f3d077a448a1fce1a8be1edfaaf">write</a> (const uint8_t *buffer, size_t size) override</td></tr>
 <tr class="separator:ab5534f3d077a448a1fce1a8be1edfaaf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a44f71b94e5429ad883d9a5fafe308b73"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1EscapingPrint.html#a44f71b94e5429ad883d9a5fafe308b73">available</a> ()</td></tr>
-<tr class="separator:a44f71b94e5429ad883d9a5fafe308b73"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
-Public Attributes</h2></td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
 <tr class="memitem:a491b3ea8e5b3454aa175fc85d5313bda"><td class="memItemLeft" align="right" valign="top">Print &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1EscapingPrint.html#a491b3ea8e5b3454aa175fc85d5313bda">dest</a></td></tr>
 <tr class="separator:a491b3ea8e5b3454aa175fc85d5313bda"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Print wrapper that escapes &amp; &lt; &gt; while forwarding to an underlying Print. </p>
+<div class="textblock"><p>Print wrapper that escapes &amp; &lt; &gt; " ' while forwarding to an underlying Print. Returns the expanded output length (not input bytes consumed). </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a754d5f85ff54206d47fcc83d0dd82494" name="a754d5f85ff54206d47fcc83d0dd82494"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a754d5f85ff54206d47fcc83d0dd82494">&#9670;&#160;</a></span>EscapingPrint()</h2>
@@ -141,31 +139,6 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a44f71b94e5429ad883d9a5fafe308b73" name="a44f71b94e5429ad883d9a5fafe308b73"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a44f71b94e5429ad883d9a5fafe308b73">&#9670;&#160;</a></span>available()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">int tiny_dlna::EscapingPrint::available </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="ab5534f3d077a448a1fce1a8be1edfaaf" name="ab5534f3d077a448a1fce1a8be1edfaaf"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab5534f3d077a448a1fce1a8be1edfaaf">&#9670;&#160;</a></span>write() <span class="overload">[1/2]</span></h2>
 
@@ -234,11 +207,19 @@ Public Attributes</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">Print&amp; tiny_dlna::EscapingPrint::dest</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 </div>

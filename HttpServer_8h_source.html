@@ -333,7 +333,7 @@ $(function() {
 <div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>    <span class="keywordtype">size_t</span> test_len = callback(test, <a class="code hl_variable" href="classtiny__dlna_1_1HttpServer.html#ae8e0fb26d4014206d415b279bf6a0e40">ref</a>);</div>
 <div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>    <span class="keywordflow">if</span> (strlen(test.<a class="code hl_function" href="classtiny__dlna_1_1StrPrint.html#a06b7cee87a61db3899094b963cae397f">c_str</a>()) != size) {</div>
 <div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>      DlnaLogger.log(<a class="code hl_enumvalue" href="namespacetiny__dlna.html#a5eabb92538a2ba1397f67b903cb9d35ea902b0d55fddef6f8d651fe1035b7d4bd">DlnaLogLevel::Error</a>,</div>
-<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>                      <span class="stringliteral">&quot;HttpRequest test wrote %d bytes: expected %d&quot;</span>, test_len, size);</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>                      <span class="stringliteral">&quot;HttpServer wrote %d bytes: expected %d / strlen: %d&quot;</span>, test_len, size, strlen(test.<a class="code hl_function" href="classtiny__dlna_1_1StrPrint.html#a06b7cee87a61db3899094b963cae397f">c_str</a>()));</div>
 <div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>    }   </div>
 <div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span><span class="preprocessor">#endif      </span></div>
 <div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span> </div>

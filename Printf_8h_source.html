@@ -93,22 +93,24 @@ $(function() {
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    va_end(args);</div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="keywordflow">if</span> (n &lt;= 0) <span class="keywordflow">return</span> 0;</div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="comment">// vsnprintf returns the number of characters that would have been</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="comment">// written if the buffer were large enough. Clamp to the actual buffer</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="comment">// size to avoid reading past &#39;buf&#39; when n &gt;= sizeof(buf).</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="comment">// written if the buffer were large enough. Assert buffer was sufficient.</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    assert(n &lt; (<span class="keywordtype">int</span>)<span class="keyword">sizeof</span>(buf));</div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keywordtype">int</span> toWrite = n;</div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keywordflow">if</span> (toWrite &gt;= (<span class="keywordtype">int</span>)<span class="keyword">sizeof</span>(buf)) toWrite = (int)<span class="keyword">sizeof</span>(buf) - 1;</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <a class="code hl_variable" href="classtiny__dlna_1_1Printf.html#afc8d53d2eee09116196933ef4ef62192">p_print</a>-&gt;write((<span class="keyword">const</span> uint8_t*)buf, (size_t)toWrite);</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keywordflow">return</span> (<span class="keywordtype">size_t</span>)toWrite;</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>  }</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> <span class="keyword">protected</span>:</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="classtiny__dlna_1_1Printf.html#afc8d53d2eee09116196933ef4ef62192">   33</a></span>  Print* <a class="code hl_variable" href="classtiny__dlna_1_1Printf.html#afc8d53d2eee09116196933ef4ef62192">p_print</a> = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>};</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>}  <span class="comment">// namespace tiny_dlna</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="comment">// Return the actual bytes written by the Print object (which may expand</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="comment">// characters when using wrappers like EscapingPrint)</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keywordtype">size_t</span> written = <a class="code hl_variable" href="classtiny__dlna_1_1Printf.html#afc8d53d2eee09116196933ef4ef62192">p_print</a>-&gt;write((<span class="keyword">const</span> uint8_t*)buf, (size_t)toWrite);</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keywordflow">return</span> written;</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  }</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> <span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="classtiny__dlna_1_1Printf.html#afc8d53d2eee09116196933ef4ef62192">   35</a></span>  Print* <a class="code hl_variable" href="classtiny__dlna_1_1Printf.html#afc8d53d2eee09116196933ef4ef62192">p_print</a> = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>};</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>}  <span class="comment">// namespace tiny_dlna</span></div>
 <div class="ttc" id="aclasstiny__dlna_1_1Printf_html"><div class="ttname"><a href="classtiny__dlna_1_1Printf.html">tiny_dlna::Printf</a></div><div class="ttdoc">Printf support with output to Print. This class does not do any heap allocations!</div><div class="ttdef"><b>Definition:</b> Printf.h:12</div></div>
 <div class="ttc" id="aclasstiny__dlna_1_1Printf_html_a98d1a568f3fcdc5ef4ad2a6450193ad4"><div class="ttname"><a href="classtiny__dlna_1_1Printf.html#a98d1a568f3fcdc5ef4ad2a6450193ad4">tiny_dlna::Printf::Printf</a></div><div class="ttdeci">Printf(Print &amp;out)</div><div class="ttdef"><b>Definition:</b> Printf.h:14</div></div>
-<div class="ttc" id="aclasstiny__dlna_1_1Printf_html_afc8d53d2eee09116196933ef4ef62192"><div class="ttname"><a href="classtiny__dlna_1_1Printf.html#afc8d53d2eee09116196933ef4ef62192">tiny_dlna::Printf::p_print</a></div><div class="ttdeci">Print * p_print</div><div class="ttdef"><b>Definition:</b> Printf.h:33</div></div>
+<div class="ttc" id="aclasstiny__dlna_1_1Printf_html_afc8d53d2eee09116196933ef4ef62192"><div class="ttname"><a href="classtiny__dlna_1_1Printf.html#afc8d53d2eee09116196933ef4ef62192">tiny_dlna::Printf::p_print</a></div><div class="ttdeci">Print * p_print</div><div class="ttdef"><b>Definition:</b> Printf.h:35</div></div>
 <div class="ttc" id="aclasstiny__dlna_1_1Printf_html_afed655556f4e6a1beb9f0da7750da3a5"><div class="ttname"><a href="classtiny__dlna_1_1Printf.html#afed655556f4e6a1beb9f0da7750da3a5">tiny_dlna::Printf::printf</a></div><div class="ttdeci">size_t printf(const char *fmt,...)</div><div class="ttdef"><b>Definition:</b> Printf.h:16</div></div>
 <div class="ttc" id="adlna__config_8h_html"><div class="ttname"><a href="dlna__config_8h.html">dlna_config.h</a></div></div>
 <div class="ttc" id="adlna__config_8h_html_a85b168bfd5d805105247c87cc7163db0"><div class="ttname"><a href="dlna__config_8h.html#a85b168bfd5d805105247c87cc7163db0">MAX_PRINTF_SIZE</a></div><div class="ttdeci">#define MAX_PRINTF_SIZE</div><div class="ttdoc">Max printf buffer size.</div><div class="ttdef"><b>Definition:</b> dlna_config.h:50</div></div>
