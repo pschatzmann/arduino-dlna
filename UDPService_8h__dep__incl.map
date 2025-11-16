@@ -1,4 +1,5 @@
 <map id="src/dlna/udp/UDPService.h" name="src/dlna/udp/UDPService.h">
-<area shape="rect" id="node1" title=" " alt="" coords="5,5,199,31"/>
-<area shape="rect" id="node2" href="$DLNA_8h.html" title=" " alt="" coords="55,79,149,104"/>
+<area shape="rect" id="node1" title=" " alt="" coords="25,5,218,31"/>
+<area shape="rect" id="node2" href="$DLNA_8h.html" title=" " alt="" coords="75,79,168,104"/>
+<area shape="rect" id="node3" href="$SdFatContentProvider_8h.html" title="DLNA content provider backed by SdFat filesystem directory tree." alt="" coords="5,152,237,177"/>
 </map>

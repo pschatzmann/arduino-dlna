@@ -10,5 +10,6 @@ var searchData=
   ['tostring_7',['toString',['../structtiny__dlna_1_1IPAddressAndPort.html#a03dafeafa067fa880a6a1d05d8c748e1',1,'tiny_dlna::IPAddressAndPort']]],
   ['touppercase_8',['toUpperCase',['../classtiny__dlna_1_1Str.html#afd7f718fe45da0f5d584e8cbec73ce88',1,'tiny_dlna::Str::toUpperCase()'],['../classtiny__dlna_1_1StrView.html#afddb2b1aff609ff143a4d4bd99d38c9d',1,'tiny_dlna::StrView::toUpperCase()']]],
   ['transportdescrcb_9',['transportDescrCB',['../classtiny__dlna_1_1DLNAMediaRenderer.html#a9e8e8fbd6c1712aee295f821e9d88085',1,'tiny_dlna::DLNAMediaRenderer']]],
-  ['trim_10',['trim',['../classtiny__dlna_1_1Str.html#a84bf4e611b6a364dd5f4f498a64d60b6',1,'tiny_dlna::Str::trim()'],['../classtiny__dlna_1_1StrView.html#a8ece7148c765b8a590ec997715335c04',1,'tiny_dlna::StrView::trim()']]]
+  ['treenode_10',['TreeNode',['../classtiny__dlna_1_1TreeNode.html#aa387a37509b2c12016da880cd6e7ac5e',1,'tiny_dlna::TreeNode']]],
+  ['trim_11',['trim',['../classtiny__dlna_1_1Str.html#a84bf4e611b6a364dd5f4f498a64d60b6',1,'tiny_dlna::Str::trim()'],['../classtiny__dlna_1_1StrView.html#a8ece7148c765b8a590ec997715335c04',1,'tiny_dlna::StrView::trim()']]]
 ];

@@ -156,6 +156,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a0b48516962970b2077a774704d907990"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a0b48516962970b2077a774704d907990">getReference</a> () override</td></tr>
 <tr class="memdesc:a0b48516962970b2077a774704d907990"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the reference pointer.  <br /></td></tr>
 <tr class="separator:a0b48516962970b2077a774704d907990"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab65b88985783281de0170e85429acebe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#ab65b88985783281de0170e85429acebe">logStatus</a> ()</td></tr>
+<tr class="separator:ab65b88985783281de0170e85429acebe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -239,7 +241,7 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a79028fa7d12ea17aa4b44276c7e47d81"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af122549acc2ce41e574a740cf64aa241"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#af122549acc2ce41e574a740cf64aa241">scheduler_interval_ms</a> = (uint64_t)<a class="el" href="dlna__config_8h.html#aa693f4a5a61b6042d6d2b0a5d19ce43a">DLNA_RUN_SCHEDULER_EVERY_MS</a></td></tr>
 <tr class="separator:af122549acc2ce41e574a740cf64aa241"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2d3284fe8f85710f97272a45500f3670"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a2d3284fe8f85710f97272a45500f3670">subscriptions_interval_ms</a> = (uint64_t)<a class="el" href="dlna__config_8h.html#aaa87dfb5a8224047ab269dfc707d4baf">DLNA_RUN_SUBSCRIPTIONS_EVERY_MS</a></td></tr>
+<tr class="memitem:a2d3284fe8f85710f97272a45500f3670"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a2d3284fe8f85710f97272a45500f3670">subscriptions_interval_ms</a></td></tr>
 <tr class="separator:a2d3284fe8f85710f97272a45500f3670"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a59763e87be438de5b69883efd20d0ccd"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a59763e87be438de5b69883efd20d0ccd">next_scheduler_timeout_ms</a> = 0</td></tr>
 <tr class="separator:a59763e87be438de5b69883efd20d0ccd"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -944,6 +946,33 @@ template&lt;typename ClientType &gt; </div>
 </table>
 </div><div class="memdoc">
 <p>Periodic platform-specific diagnostics. Kept as a separate method so it can be tested or stubbed easily. Currently logs ESP32 heap/psram every 10s. </p>
+
+</div>
+</div>
+<a id="ab65b88985783281de0170e85429acebe" name="ab65b88985783281de0170e85429acebe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab65b88985783281de0170e85429acebe">&#9670;&#160;</a></span>logStatus()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classtiny__dlna_1_1DLNADevice.html">tiny_dlna::DLNADevice</a>&lt; ClientType &gt;::logStatus </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -1968,7 +1997,7 @@ template&lt;typename ClientType &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">uint64_t <a class="el" href="classtiny__dlna_1_1DLNADevice.html">tiny_dlna::DLNADevice</a>&lt; ClientType &gt;::subscriptions_interval_ms = (uint64_t)<a class="el" href="dlna__config_8h.html#aaa87dfb5a8224047ab269dfc707d4baf">DLNA_RUN_SUBSCRIPTIONS_EVERY_MS</a></td>
+          <td class="memname">uint64_t <a class="el" href="classtiny__dlna_1_1DLNADevice.html">tiny_dlna::DLNADevice</a>&lt; ClientType &gt;::subscriptions_interval_ms</td>
         </tr>
       </table>
   </td>
@@ -1977,7 +2006,10 @@ template&lt;typename ClientType &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-
+<b>Initial value:</b><div class="fragment"><div class="line">=</div>
+<div class="line">      (uint64_t)<a class="code hl_define" href="dlna__config_8h.html#aaa87dfb5a8224047ab269dfc707d4baf">DLNA_RUN_SUBSCRIPTIONS_EVERY_MS</a></div>
+<div class="ttc" id="adlna__config_8h_html_aaa87dfb5a8224047ab269dfc707d4baf"><div class="ttname"><a href="dlna__config_8h.html#aaa87dfb5a8224047ab269dfc707d4baf">DLNA_RUN_SUBSCRIPTIONS_EVERY_MS</a></div><div class="ttdeci">#define DLNA_RUN_SUBSCRIPTIONS_EVERY_MS</div><div class="ttdoc">Define subscription publish interval in ms.</div><div class="ttdef"><b>Definition:</b> dlna_config.h:15</div></div>
+</div><!-- fragment -->
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>

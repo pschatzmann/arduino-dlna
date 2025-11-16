@@ -2,12 +2,13 @@
 <area shape="rect" id="node1" title=" " alt="" coords="430,5,645,45"/>
 <area shape="rect" id="node2" href="$SubscriptionMgrDevice_8h.html" title=" " alt="" coords="432,93,643,133"/>
 <area shape="rect" id="node3" href="$SubscriptionMgrControlPoint_8h.html" title=" " alt="" coords="366,181,570,221"/>
-<area shape="rect" id="node9" href="$DLNADevice_8h.html" title=" " alt="" coords="416,453,640,478"/>
+<area shape="rect" id="node10" href="$DLNADevice_8h.html" title=" " alt="" coords="416,453,640,478"/>
 <area shape="rect" id="node4" href="$DLNAControlPoint_8h.html" title=" " alt="" coords="222,269,429,309"/>
 <area shape="rect" id="node5" href="$DLNA_8h.html" title=" " alt="" coords="247,621,340,647"/>
-<area shape="rect" id="node6" href="$DLNAControlPointMediaRenderer_8h.html" title=" " alt="" coords="23,445,230,485"/>
-<area shape="rect" id="node7" href="$DLNAControlPointMediaServer_8h.html" title=" " alt="" coords="105,357,311,397"/>
-<area shape="rect" id="node8" href="$DLNADeviceRequestParser_8h.html" title=" " alt="" coords="335,357,547,397"/>
-<area shape="rect" id="node10" href="$DLNAMediaRenderer_8h.html" title=" " alt="" coords="357,533,587,573"/>
-<area shape="rect" id="node11" href="$DLNAMediaServer_8h.html" title=" " alt="" coords="612,533,825,573"/>
+<area shape="rect" id="node7" href="$DLNAControlPointMediaRenderer_8h.html" title=" " alt="" coords="23,445,230,485"/>
+<area shape="rect" id="node8" href="$DLNAControlPointMediaServer_8h.html" title=" " alt="" coords="105,357,311,397"/>
+<area shape="rect" id="node9" href="$DLNADeviceRequestParser_8h.html" title=" " alt="" coords="335,357,547,397"/>
+<area shape="rect" id="node6" href="$SdFatContentProvider_8h.html" title="DLNA content provider backed by SdFat filesystem directory tree." alt="" coords="177,695,409,720"/>
+<area shape="rect" id="node11" href="$DLNAMediaRenderer_8h.html" title=" " alt="" coords="357,533,587,573"/>
+<area shape="rect" id="node12" href="$DLNAMediaServer_8h.html" title=" " alt="" coords="612,533,825,573"/>
 </map>

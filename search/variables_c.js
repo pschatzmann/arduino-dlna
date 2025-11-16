@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['name_0',['name',['../classtiny__dlna_1_1Argument.html#a9f1cfa83b57f270b98af969574c08bea',1,'tiny_dlna::Argument']]],
+  ['name_0',['name',['../classtiny__dlna_1_1Argument.html#a9f1cfa83b57f270b98af969574c08bea',1,'tiny_dlna::Argument::name()'],['../structtiny__dlna_1_1SdFatFileInfo.html#ab1cd16538b1101df5a73185f2ce9a039',1,'tiny_dlna::SdFatFileInfo::name()'],['../classtiny__dlna_1_1SdFatParser.html#a6dff3cd1b1c84adaed35d285142292db',1,'tiny_dlna::SdFatParser::name()']]],
   ['next_1',['next',['../structtiny__dlna_1_1List_1_1Node.html#ab9ac72f0bd8652458512d425faefb5d0',1,'tiny_dlna::List::Node']]],
   ['next_5fscheduler_5ftimeout_5fms_2',['next_scheduler_timeout_ms',['../classtiny__dlna_1_1DLNADevice.html#a59763e87be438de5b69883efd20d0ccd',1,'tiny_dlna::DLNADevice']]],
   ['next_5fsubscriptions_5ftimeout_5fms_3',['next_subscriptions_timeout_ms',['../classtiny__dlna_1_1DLNADevice.html#a05bc12c8f4d1e55258bf67f4145329d3',1,'tiny_dlna::DLNADevice']]],
