@@ -988,6 +988,68 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     return true;
   }
 
+  // AVTransport: GetPositionInfo
+  bool processActionGetPositionInfo(ActionRequest& action,
+                                    IHttpServer& server) {
+    server.reply(
+        "text/xml",
+        [](Print& out, void* ref) -> size_t {
+          return DeviceType::printReplyXML(
+              out, "GetPositionInfoResponse", "AVTransport",
+              [](Print& o, void* innerRef) -> size_t {
+                auto self = (DLNAMediaRenderer*)innerRef;
+                size_t written = 0;
+                const bool hasUri = self->getCurrentUri() && *self->getCurrentUri();
+
+                // Track (1 if URI present, else 0)
+                written += o.print("<Track>");
+                written += o.print(hasUri ? 1 : 0);
+                written += o.print("</Track>");
+
+                // TrackDuration (unknown -> 00:00:00)
+                written += o.print("<TrackDuration>00:00:00</TrackDuration>");
+
+                // TrackMetaData (DIDL-Lite or empty)
+                written += o.print("<TrackMetaData>");
+                written += o.print(StrView(self->getCurrentUriMetadata()).c_str());
+                written += o.print("</TrackMetaData>");
+
+                // TrackURI
+                written += o.print("<TrackURI>");
+                written += o.print(StrView(self->getCurrentUri()).c_str());
+                written += o.print("</TrackURI>");
+
+                // RelTime (hh:mm:ss based on getRelativeTimePositionSec)
+                unsigned long secs = self->getRelativeTimePositionSec();
+                int h = static_cast<int>(secs / 3600);
+                int m = static_cast<int>((secs % 3600) / 60);
+                int s = static_cast<int>(secs % 60);
+                written += o.print("<RelTime>");
+                if (h < 10) written += o.print('0');
+                written += o.print(h);
+                written += o.print(':');
+                if (m < 10) written += o.print('0');
+                written += o.print(m);
+                written += o.print(':');
+                if (s < 10) written += o.print('0');
+                written += o.print(s);
+                written += o.print("</RelTime>");
+
+                // AbsTime (unknown -> 00:00:00)
+                written += o.print("<AbsTime>00:00:00</AbsTime>");
+
+                // RelCount, AbsCount (unknown -> 2147483647)
+                written += o.print("<RelCount>2147483647</RelCount>");
+                written += o.print("<AbsCount>2147483647</AbsCount>");
+
+                return written;
+              },
+              ref);
+        },
+        200, nullptr, this);
+    return true;
+  }
+
   // AVTransport: GetTransportSettings
   bool processActionGetTransportSettings(ActionRequest& action,
                                          IHttpServer& server) {
@@ -1200,6 +1262,12 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
                         IHttpServer& server) {
                        return self->processActionGetTransportSettings(action,
                                                                       server);
+                     }});
+    rules.push_back({"GetPositionInfo",
+                     [](DLNAMediaRenderer* self, ActionRequest& action,
+                        IHttpServer& server) {
+                       return self->processActionGetPositionInfo(action,
+                                                                 server);
                      }});
     rules.push_back(
         {"GetMediaInfo", [](DLNAMediaRenderer* self, ActionRequest& action,
