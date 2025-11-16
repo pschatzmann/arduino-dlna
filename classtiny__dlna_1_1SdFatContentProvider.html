@@ -89,6 +89,9 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a22cba0dc8ccc8fdf6b708d13823b7244"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html#a22cba0dc8ccc8fdf6b708d13823b7244">setBaseURL</a> (const IPAddress &amp;ip, int port, const char *basePath)</td></tr>
+<tr class="memdesc:a22cba0dc8ccc8fdf6b708d13823b7244"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the base URL for resource URIs.  <br /></td></tr>
+<tr class="separator:a22cba0dc8ccc8fdf6b708d13823b7244"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aca4dbe385055eff18d954d7da6d62a9b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html#aca4dbe385055eff18d954d7da6d62a9b">begin</a> (FS &amp;fs, const char *rootPath)</td></tr>
 <tr class="memdesc:aca4dbe385055eff18d954d7da6d62a9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the content provider and scans the filesystem.  <br /></td></tr>
 <tr class="separator:aca4dbe385055eff18d954d7da6d62a9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -100,6 +103,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab51fee1607cc176d5b8f0f1f27ec8829"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html#ab51fee1607cc176d5b8f0f1f27ec8829">prepareData</a> (const char *objectID, <a class="el" href="namespacetiny__dlna.html#a7ecfa08a6b938018e48a3a309e895aa9">ContentQueryType</a> queryType, const char *filter, int startingIndex, int requestedCount, const char *sortCriteria, int &amp;numberReturned, int &amp;totalMatches, int &amp;updateID, void *reference)</td></tr>
 <tr class="memdesc:ab51fee1607cc176d5b8f0f1f27ec8829"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prepares data for a DLNA content query.  <br /></td></tr>
 <tr class="separator:ab51fee1607cc176d5b8f0f1f27ec8829"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c71004a1fe70681b3df61b41b5a12a9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html#a3c71004a1fe70681b3df61b41b5a12a9">isHidden</a> (<a class="el" href="classtiny__dlna_1_1TreeNode.html">TreeNode</a> *node) const</td></tr>
+<tr class="memdesc:a3c71004a1fe70681b3df61b41b5a12a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the node is hidden (file or directory name starts with '.')  <br /></td></tr>
+<tr class="separator:a3c71004a1fe70681b3df61b41b5a12a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3808bb0387d6dc9f52ec5f675da94f7e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html#a3808bb0387d6dc9f52ec5f675da94f7e">getData</a> (int index, <a class="el" href="structtiny__dlna_1_1MediaItem.html">MediaItem</a> &amp;item, void *reference=nullptr)</td></tr>
 <tr class="memdesc:a3808bb0387d6dc9f52ec5f675da94f7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves a single media item by index.  <br /></td></tr>
 <tr class="separator:a3808bb0387d6dc9f52ec5f675da94f7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -112,6 +118,12 @@ Protected Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
+<tr class="memitem:a7d18d9951cb41d9840ea3761394eacea"><td class="memItemLeft" align="right" valign="top">IPAddress&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html#a7d18d9951cb41d9840ea3761394eacea">baseIP_</a></td></tr>
+<tr class="separator:a7d18d9951cb41d9840ea3761394eacea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa84d5eafdaa974a7aba81ea8d3ce252e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html#aa84d5eafdaa974a7aba81ea8d3ce252e">basePort_</a> = 0</td></tr>
+<tr class="separator:aa84d5eafdaa974a7aba81ea8d3ce252e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c5e67bca23c6c78ec818549283bcc1b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacetiny__dlna.html#ae37837f99b4c25b8e03929377da6e18e">stringPSRAM</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html#a2c5e67bca23c6c78ec818549283bcc1b">basePath_</a> = &quot;/&quot;</td></tr>
+<tr class="separator:a2c5e67bca23c6c78ec818549283bcc1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:accea87dc3b361ce95ef1f92eeea1f098"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1SdFatDirectoryTree.html">SdFatDirectoryTree</a>&lt; FS &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html#accea87dc3b361ce95ef1f92eeea1f098">directoryTree</a></td></tr>
 <tr class="separator:accea87dc3b361ce95ef1f92eeea1f098"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7171ad13fa5064a1e6fd0a62ee028857"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html#a7171ad13fa5064a1e6fd0a62ee028857">objectID_</a> = nullptr</td></tr>
@@ -334,6 +346,43 @@ template&lt;typename FS &gt; </div>
 
 </div>
 </div>
+<a id="a3c71004a1fe70681b3df61b41b5a12a9" name="a3c71004a1fe70681b3df61b41b5a12a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c71004a1fe70681b3df61b41b5a12a9">&#9670;&#160;</a></span>isHidden()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename FS &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html">tiny_dlna::SdFatContentProvider</a>&lt; FS &gt;::isHidden </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1TreeNode.html">TreeNode</a> *&#160;</td>
+          <td class="paramname"><em>node</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns true if the node is hidden (file or directory name starts with '.') </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">node</td><td>Pointer to <a class="el" href="classtiny__dlna_1_1TreeNode.html" title="Node in the directory tree representing either a file or a directory.">TreeNode</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if hidden, false otherwise </dd></dl>
+
+</div>
+</div>
 <a id="ab51fee1607cc176d5b8f0f1f27ec8829" name="ab51fee1607cc176d5b8f0f1f27ec8829"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab51fee1607cc176d5b8f0f1f27ec8829">&#9670;&#160;</a></span>prepareData()</h2>
 
@@ -438,6 +487,60 @@ template&lt;typename FS &gt; </div>
 
 </div>
 </div>
+<a id="a22cba0dc8ccc8fdf6b708d13823b7244" name="a22cba0dc8ccc8fdf6b708d13823b7244"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22cba0dc8ccc8fdf6b708d13823b7244">&#9670;&#160;</a></span>setBaseURL()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename FS &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html">tiny_dlna::SdFatContentProvider</a>&lt; FS &gt;::setBaseURL </td>
+          <td>(</td>
+          <td class="paramtype">const IPAddress &amp;&#160;</td>
+          <td class="paramname"><em>ip</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>port</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>basePath</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set the base URL for resource URIs. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ip</td><td>IP address of the server </td></tr>
+    <tr><td class="paramname">port</td><td>Port number </td></tr>
+    <tr><td class="paramname">basePath</td><td>Base path for files (e.g., "/files") </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="af0a2c2392c76bbbe53a39ce3558b88c2" name="af0a2c2392c76bbbe53a39ce3558b88c2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af0a2c2392c76bbbe53a39ce3558b88c2">&#9670;&#160;</a></span>size()</h2>
 
@@ -466,6 +569,78 @@ template&lt;typename FS &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="a7d18d9951cb41d9840ea3761394eacea" name="a7d18d9951cb41d9840ea3761394eacea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d18d9951cb41d9840ea3761394eacea">&#9670;&#160;</a></span>baseIP_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename FS &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">IPAddress <a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html">tiny_dlna::SdFatContentProvider</a>&lt; FS &gt;::baseIP_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2c5e67bca23c6c78ec818549283bcc1b" name="a2c5e67bca23c6c78ec818549283bcc1b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c5e67bca23c6c78ec818549283bcc1b">&#9670;&#160;</a></span>basePath_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename FS &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacetiny__dlna.html#ae37837f99b4c25b8e03929377da6e18e">stringPSRAM</a> <a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html">tiny_dlna::SdFatContentProvider</a>&lt; FS &gt;::basePath_ = &quot;/&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa84d5eafdaa974a7aba81ea8d3ce252e" name="aa84d5eafdaa974a7aba81ea8d3ce252e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa84d5eafdaa974a7aba81ea8d3ce252e">&#9670;&#160;</a></span>basePort_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename FS &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html">tiny_dlna::SdFatContentProvider</a>&lt; FS &gt;::basePort_ = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a4d6afbb922145b966cbab234b9db25d9" name="a4d6afbb922145b966cbab234b9db25d9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4d6afbb922145b966cbab234b9db25d9">&#9670;&#160;</a></span>currentId_</h2>
 

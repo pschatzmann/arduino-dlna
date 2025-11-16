@@ -60,11 +60,10 @@ var searchData=
   ['ringbuffer_57',['RingBuffer',['../classtiny__dlna_1_1RingBuffer.html#a1d5b85e6e7051598879c2b70961cd434',1,'tiny_dlna::RingBuffer::RingBuffer()'],['../classtiny__dlna_1_1RingBuffer.html',1,'tiny_dlna::RingBuffer']]],
   ['ringbuffer_2eh_58',['RingBuffer.h',['../RingBuffer_8h.html',1,'']]],
   ['root_59',['root',['../classtiny__dlna_1_1SdFatDirectoryTree.html#a647ff598fa4fa8048116922674a65abb',1,'tiny_dlna::SdFatDirectoryTree']]],
-  ['root_5fnode_60',['root_node',['../classtiny__dlna_1_1SdFatDirectoryTree.html#ab002fce8090c21578c8b81fcfbe8bdeb',1,'tiny_dlna::SdFatDirectoryTree']]],
-  ['rtrim_61',['rtrim',['../classtiny__dlna_1_1Str.html#aff4cb7cbd78ed64c6fe5e8597de8c2c6',1,'tiny_dlna::Str::rtrim()'],['../classtiny__dlna_1_1StrView.html#ae5ebc511810bb75b46647670292e33e6',1,'tiny_dlna::StrView::rtrim()']]],
-  ['rules_62',['rules',['../classtiny__dlna_1_1DLNAMediaRenderer.html#a6ec8e94c9f0eee20702493c409c316e6',1,'tiny_dlna::DLNAMediaRenderer::rules()'],['../classtiny__dlna_1_1DLNAMediaServer.html#a68733ff425caccdef1d015311b597b20',1,'tiny_dlna::DLNAMediaServer::rules()']]],
-  ['run_5fall_63',['RUN_ALL',['../namespacetiny__dlna.html#a4b827ed63d901e894e77dc30e0df6cdda7877550c260d2b73fc66a55dfbe5c8fc',1,'tiny_dlna']]],
-  ['run_5fserver_64',['RUN_SERVER',['../namespacetiny__dlna.html#a4b827ed63d901e894e77dc30e0df6cdda571bd7aab9dae58ffa5bd014c3513dfa',1,'tiny_dlna']]],
-  ['run_5fsubscriptions_65',['RUN_SUBSCRIPTIONS',['../namespacetiny__dlna.html#a4b827ed63d901e894e77dc30e0df6cdda91d5f15100a583b3a2c0408343c22586',1,'tiny_dlna']]],
-  ['run_5fudp_66',['RUN_UDP',['../namespacetiny__dlna.html#a4b827ed63d901e894e77dc30e0df6cdda09b31e0a8496539075623912dfc09baa',1,'tiny_dlna']]]
+  ['rtrim_60',['rtrim',['../classtiny__dlna_1_1StrView.html#ae5ebc511810bb75b46647670292e33e6',1,'tiny_dlna::StrView::rtrim()'],['../classtiny__dlna_1_1SdFatParser.html#aabdc2d4a7d70e515132e44355eb5fb53',1,'tiny_dlna::SdFatParser::rtrim()'],['../classtiny__dlna_1_1Str.html#aff4cb7cbd78ed64c6fe5e8597de8c2c6',1,'tiny_dlna::Str::rtrim()']]],
+  ['rules_61',['rules',['../classtiny__dlna_1_1DLNAMediaRenderer.html#a6ec8e94c9f0eee20702493c409c316e6',1,'tiny_dlna::DLNAMediaRenderer::rules()'],['../classtiny__dlna_1_1DLNAMediaServer.html#a68733ff425caccdef1d015311b597b20',1,'tiny_dlna::DLNAMediaServer::rules()']]],
+  ['run_5fall_62',['RUN_ALL',['../namespacetiny__dlna.html#a4b827ed63d901e894e77dc30e0df6cdda7877550c260d2b73fc66a55dfbe5c8fc',1,'tiny_dlna']]],
+  ['run_5fserver_63',['RUN_SERVER',['../namespacetiny__dlna.html#a4b827ed63d901e894e77dc30e0df6cdda571bd7aab9dae58ffa5bd014c3513dfa',1,'tiny_dlna']]],
+  ['run_5fsubscriptions_64',['RUN_SUBSCRIPTIONS',['../namespacetiny__dlna.html#a4b827ed63d901e894e77dc30e0df6cdda91d5f15100a583b3a2c0408343c22586',1,'tiny_dlna']]],
+  ['run_5fudp_65',['RUN_UDP',['../namespacetiny__dlna.html#a4b827ed63d901e894e77dc30e0df6cdda09b31e0a8496539075623912dfc09baa',1,'tiny_dlna']]]
 ];

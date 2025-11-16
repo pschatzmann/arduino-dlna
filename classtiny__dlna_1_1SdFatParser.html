@@ -116,6 +116,12 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:aa3f57d8ed36aec6445ef4f6b7a48c259"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SdFatParser.html#aa3f57d8ed36aec6445ef4f6b7a48c259">parse</a> ()</td></tr>
 <tr class="memdesc:aa3f57d8ed36aec6445ef4f6b7a48c259"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parses the accumulated line and emits a callback if set.  <br /></td></tr>
 <tr class="separator:aa3f57d8ed36aec6445ef4f6b7a48c259"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aabdc2d4a7d70e515132e44355eb5fb53"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SdFatParser.html#aabdc2d4a7d70e515132e44355eb5fb53">rtrim</a> (std::string &amp;s)</td></tr>
+<tr class="separator:aabdc2d4a7d70e515132e44355eb5fb53"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f07e3ebba001514ca81b291b6bb492f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SdFatParser.html#a2f07e3ebba001514ca81b291b6bb492f">ltrim</a> (std::string &amp;s)</td></tr>
+<tr class="separator:a2f07e3ebba001514ca81b291b6bb492f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79c779525cc9d39c11ff6f81c6a34e78"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SdFatParser.html#a79c779525cc9d39c11ff6f81c6a34e78">trim</a> (std::string &amp;s)</td></tr>
+<tr class="separator:a79c779525cc9d39c11ff6f81c6a34e78"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -166,6 +172,32 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a2f07e3ebba001514ca81b291b6bb492f" name="a2f07e3ebba001514ca81b291b6bb492f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f07e3ebba001514ca81b291b6bb492f">&#9670;&#160;</a></span>ltrim()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tiny_dlna::SdFatParser::ltrim </td>
+          <td>(</td>
+          <td class="paramtype">std::string &amp;&#160;</td>
+          <td class="paramname"><em>s</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="aa3f57d8ed36aec6445ef4f6b7a48c259" name="aa3f57d8ed36aec6445ef4f6b7a48c259"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa3f57d8ed36aec6445ef4f6b7a48c259">&#9670;&#160;</a></span>parse()</h2>
 
@@ -191,6 +223,32 @@ Protected Attributes</h2></td></tr>
 
 <p>Parses the accumulated line and emits a callback if set. </p>
 <p>Determines nesting level from leading spaces (2 spaces == 1 level), strips the indentation, infers directory status from a trailing '/', and notifies the user callback. </p>
+
+</div>
+</div>
+<a id="aabdc2d4a7d70e515132e44355eb5fb53" name="aabdc2d4a7d70e515132e44355eb5fb53"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aabdc2d4a7d70e515132e44355eb5fb53">&#9670;&#160;</a></span>rtrim()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tiny_dlna::SdFatParser::rtrim </td>
+          <td>(</td>
+          <td class="paramtype">std::string &amp;&#160;</td>
+          <td class="paramname"><em>s</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -264,6 +322,32 @@ Protected Attributes</h2></td></tr>
 
 <p>Counts leading spaces in the current line buffer. </p>
 <dl class="section return"><dt>Returns</dt><dd>Number of consecutive spaces from the beginning of the buffer. </dd></dl>
+
+</div>
+</div>
+<a id="a79c779525cc9d39c11ff6f81c6a34e78" name="a79c779525cc9d39c11ff6f81c6a34e78"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a79c779525cc9d39c11ff6f81c6a34e78">&#9670;&#160;</a></span>trim()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tiny_dlna::SdFatParser::trim </td>
+          <td>(</td>
+          <td class="paramtype">std::string &amp;&#160;</td>
+          <td class="paramname"><em>s</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>

@@ -126,16 +126,14 @@ Static Protected Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:ab002fce8090c21578c8b81fcfbe8bdeb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1TreeNode.html">TreeNode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SdFatDirectoryTree.html#ab002fce8090c21578c8b81fcfbe8bdeb">root_node</a></td></tr>
-<tr class="separator:ab002fce8090c21578c8b81fcfbe8bdeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abbf6fa0fb3fbea647903055704f746a8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1SdFatParser.html">SdFatParser</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SdFatDirectoryTree.html#abbf6fa0fb3fbea647903055704f746a8">parser</a></td></tr>
 <tr class="separator:abbf6fa0fb3fbea647903055704f746a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7ac9b5ac51b50fab61a4461e2cf33d7c"><td class="memItemLeft" align="right" valign="top">FS *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SdFatDirectoryTree.html#a7ac9b5ac51b50fab61a4461e2cf33d7c">p_sd</a> = nullptr</td></tr>
 <tr class="separator:a7ac9b5ac51b50fab61a4461e2cf33d7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3ce67db0c7826504f0eba16fb211b8f9"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classtiny__dlna_1_1TreeNode.html">TreeNode</a> *, <a class="el" href="classtiny__dlna_1_1AllocatorPSRAM.html">AllocatorPSRAM</a>&lt; <a class="el" href="classtiny__dlna_1_1TreeNode.html">TreeNode</a> * &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SdFatDirectoryTree.html#a3ce67db0c7826504f0eba16fb211b8f9">tree_nodes</a></td></tr>
 <tr class="separator:a3ce67db0c7826504f0eba16fb211b8f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae51cc5e7b3fff5c28755badffc898475"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classtiny__dlna_1_1TreeNode.html">TreeNode</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SdFatDirectoryTree.html#ae51cc5e7b3fff5c28755badffc898475">parents_</a></td></tr>
-<tr class="separator:ae51cc5e7b3fff5c28755badffc898475"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba1d9d44d371a56282aeba2d58fd3eeb"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classtiny__dlna_1_1TreeNode.html">TreeNode</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SdFatDirectoryTree.html#aba1d9d44d371a56282aeba2d58fd3eeb">parent_stack</a></td></tr>
+<tr class="separator:aba1d9d44d371a56282aeba2d58fd3eeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename FS&gt;<br />
@@ -192,7 +190,7 @@ template&lt;typename FS &gt; </div>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>true on success. Starts the processing </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>true on success. </dd></dl>
 
 </div>
 </div>
@@ -509,8 +507,8 @@ template&lt;typename FS &gt; </div>
 
 </div>
 </div>
-<a id="ae51cc5e7b3fff5c28755badffc898475" name="ae51cc5e7b3fff5c28755badffc898475"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae51cc5e7b3fff5c28755badffc898475">&#9670;&#160;</a></span>parents_</h2>
+<a id="aba1d9d44d371a56282aeba2d58fd3eeb" name="aba1d9d44d371a56282aeba2d58fd3eeb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba1d9d44d371a56282aeba2d58fd3eeb">&#9670;&#160;</a></span>parent_stack</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -521,7 +519,7 @@ template&lt;typename FS &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt;<a class="el" href="classtiny__dlna_1_1TreeNode.html">TreeNode</a>*&gt; <a class="el" href="classtiny__dlna_1_1SdFatDirectoryTree.html">tiny_dlna::SdFatDirectoryTree</a>&lt; FS &gt;::parents_</td>
+          <td class="memname">std::vector&lt;<a class="el" href="classtiny__dlna_1_1TreeNode.html">TreeNode</a>*&gt; <a class="el" href="classtiny__dlna_1_1SdFatDirectoryTree.html">tiny_dlna::SdFatDirectoryTree</a>&lt; FS &gt;::parent_stack</td>
         </tr>
       </table>
   </td>
@@ -546,30 +544,6 @@ template&lt;typename FS &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classtiny__dlna_1_1SdFatParser.html">SdFatParser</a> <a class="el" href="classtiny__dlna_1_1SdFatDirectoryTree.html">tiny_dlna::SdFatDirectoryTree</a>&lt; FS &gt;::parser</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ab002fce8090c21578c8b81fcfbe8bdeb" name="ab002fce8090c21578c8b81fcfbe8bdeb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab002fce8090c21578c8b81fcfbe8bdeb">&#9670;&#160;</a></span>root_node</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename FS &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classtiny__dlna_1_1TreeNode.html">TreeNode</a> <a class="el" href="classtiny__dlna_1_1SdFatDirectoryTree.html">tiny_dlna::SdFatDirectoryTree</a>&lt; FS &gt;::root_node</td>
         </tr>
       </table>
   </td>

@@ -7,7 +7,7 @@ var searchData=
   ['reference_5f_4',['reference_',['../classtiny__dlna_1_1DLNAMediaServer.html#a24ba46fac496be42f5fada1f6896779f',1,'tiny_dlna::DLNAMediaServer::reference_()'],['../classtiny__dlna_1_1SdFatContentProvider.html#a7f304c276fb61a57f692ff0fdfe0ab24',1,'tiny_dlna::SdFatContentProvider::reference_()']]],
   ['repeat_5fms_5',['repeat_ms',['../structtiny__dlna_1_1Schedule.html#ae72839e74ad1799cb4320195bdb98622',1,'tiny_dlna::Schedule']]],
   ['reply_6',['reply',['../classtiny__dlna_1_1DLNAControlPoint.html#ab8127d3df0cfc772bc06b29e0523f4ac',1,'tiny_dlna::DLNAControlPoint']]],
-  ['reply_5fheader_7',['reply_header',['../classtiny__dlna_1_1HttpServer.html#a2b924d581bc4cb757c1ff8a3329a073f',1,'tiny_dlna::HttpServer::reply_header()'],['../classtiny__dlna_1_1HttpRequest.html#a4d5ccb1b373d6f831016615c86a0cde1',1,'tiny_dlna::HttpRequest::reply_header()']]],
+  ['reply_5fheader_7',['reply_header',['../classtiny__dlna_1_1HttpRequest.html#a4d5ccb1b373d6f831016615c86a0cde1',1,'tiny_dlna::HttpRequest::reply_header()'],['../classtiny__dlna_1_1HttpServer.html#a2b924d581bc4cb757c1ff8a3329a073f',1,'tiny_dlna::HttpServer::reply_header()']]],
   ['report_5fip_8',['report_ip',['../structtiny__dlna_1_1Schedule.html#a36ec0ab10cef70772d95d79d03fb750f',1,'tiny_dlna::Schedule']]],
   ['report_5ftext_5fonly_9',['report_text_only',['../classtiny__dlna_1_1XMLParser.html#ab524343629008a06ef4db0498747ed1e',1,'tiny_dlna::XMLParser']]],
   ['request_5fheader_10',['request_header',['../classtiny__dlna_1_1HttpRequest.html#a355c3bf1957db95f381b2c8a16b95f23',1,'tiny_dlna::HttpRequest::request_header()'],['../classtiny__dlna_1_1HttpServer.html#aa2f7d2e8e4c443aaeb08d4fd9a34652e',1,'tiny_dlna::HttpServer::request_header()']]],
@@ -18,6 +18,5 @@ var searchData=
   ['result_5fcount_15',['result_count',['../classtiny__dlna_1_1ActionRequest.html#a7e55f9b4b0ec5e86478d30aae5f5dd94',1,'tiny_dlna::ActionRequest']]],
   ['resultnodes_5f_16',['resultNodes_',['../classtiny__dlna_1_1SdFatContentProvider.html#a3f0d96cb6f9d21e88d0376b242dbb121',1,'tiny_dlna::SdFatContentProvider']]],
   ['rewrite_5fcollection_17',['rewrite_collection',['../classtiny__dlna_1_1HttpServer.html#a9df2bfb67e8a1ec913e982a97c57893e',1,'tiny_dlna::HttpServer']]],
-  ['root_5fnode_18',['root_node',['../classtiny__dlna_1_1SdFatDirectoryTree.html#ab002fce8090c21578c8b81fcfbe8bdeb',1,'tiny_dlna::SdFatDirectoryTree']]],
-  ['rules_19',['rules',['../classtiny__dlna_1_1DLNAMediaRenderer.html#a6ec8e94c9f0eee20702493c409c316e6',1,'tiny_dlna::DLNAMediaRenderer::rules()'],['../classtiny__dlna_1_1DLNAMediaServer.html#a68733ff425caccdef1d015311b597b20',1,'tiny_dlna::DLNAMediaServer::rules()']]]
+  ['rules_18',['rules',['../classtiny__dlna_1_1DLNAMediaRenderer.html#a6ec8e94c9f0eee20702493c409c316e6',1,'tiny_dlna::DLNAMediaRenderer::rules()'],['../classtiny__dlna_1_1DLNAMediaServer.html#a68733ff425caccdef1d015311b597b20',1,'tiny_dlna::DLNAMediaServer::rules()']]]
 ];
