@@ -215,6 +215,9 @@ class DLNAMediaServer : public DLNADeviceInfo {
   /// Get pointer to the per-instance ConnectionManager descriptor
   DLNADescr& getConnectionMgrDescr() { return *p_connmgrDescr; }
 
+  /// Log current status of subscriptions and scheduler
+  void logStatus() { return dlna_device.logStatus(); }
+
  protected:
   /// Individual action rule for handling specific actions
   struct ActionRule {

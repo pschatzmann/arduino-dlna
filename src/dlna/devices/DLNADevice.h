@@ -133,6 +133,7 @@ class DLNADevice : public IDevice {
   /// loopServer, loopUDP and loopPublishSubscriptions in defined intervals..
   bool loop(int loopAction = RUN_ALL) override {
     if (!is_active) return false;
+    DlnaLogger.log(DlnaLogLevel::Debug, "loop");
     // Platform-specific periodic diagnostics (e.g. ESP32 memory logging)
     logScheduledStatus();
     bool rc = false;
@@ -172,6 +173,7 @@ class DLNADevice : public IDevice {
 
   /// Process http server loop
   bool loopServer() override {
+    DlnaLogger.log(DlnaLogLevel::Debug, "loopServer");
     if (!is_active) return false;
     bool rc = p_server->doLoop();
     DlnaLogger.log(DlnaLogLevel::Debug, "server %s", rc ? "true" : "false");
@@ -181,7 +183,7 @@ class DLNADevice : public IDevice {
   /// Process incoming UDP and execute scheduled replies.
   int loopUDPMessages() {
     // process UDP requests
-    DlnaLogger.log(DlnaLogLevel::Debug, "processUdpAndScheduler");
+    DlnaLogger.log(DlnaLogLevel::Debug, "loopUDPMessages");
     RequestData req = p_udp->receive();
     if (req) {
       Schedule* schedule = parser.parse(*p_device_info, req);
@@ -208,6 +210,7 @@ class DLNADevice : public IDevice {
   /// found). This encapsulates the lookup that was previously done inline
   /// in the static subscription handler.
   DLNAServiceInfo* getServiceByEventPath(const char* requestPath) override {
+    DlnaLogger.log(DlnaLogLevel::Debug, "getServiceByEventPath");
     if (p_device_info == nullptr || requestPath == nullptr) return nullptr;
     for (DLNAServiceInfo& s : p_device_info->getServices()) {
       if (StrView(s.event_sub_url).equals(requestPath)) {
@@ -221,6 +224,7 @@ class DLNADevice : public IDevice {
   void addChange(const char* serviceAbbrev,
                  std::function<size_t(Print&, void*)> changeWriter,
                  void* ref) override {
+    DlnaLogger.log(DlnaLogLevel::Debug, "addChange");
     auto& mgr = getSubscriptionMgr();
     DLNAServiceInfo& serviceInfo = getServiceByAbbrev(serviceAbbrev);
     if (!serviceInfo) {
@@ -321,6 +325,7 @@ class DLNADevice : public IDevice {
       Print& out, const char* replyName, const char* serviceId,
       std::function<size_t(Print&, void*)> valuesWriter = nullptr,
       void* ref = nullptr) {
+    DlnaLogger.log(DlnaLogLevel::Debug, "printReplyXML");
     XMLPrinter xp(out);
     size_t result = 0;
     result += xp.printNodeBegin(
@@ -348,6 +353,7 @@ class DLNADevice : public IDevice {
    */
   static size_t replyGetProtocolInfo(Print& out, const char* source = "",
                                      const char* sink = "") {
+    DlnaLogger.log(DlnaLogLevel::Debug, "replyGetProtocolInfo");
     return printReplyXML(out, "GetProtocolInfoResponse", "ConnectionManager",
                          [source, sink](Print& o, void* ref) -> size_t {
                            (void)ref;
@@ -363,6 +369,7 @@ class DLNADevice : public IDevice {
   }
 
   static size_t replyGetCurrentConnectionIDs(Print& out, const char* ids) {
+    DlnaLogger.log(DlnaLogLevel::Debug, "replyGetCurrentConnectionIDs");
     return printReplyXML(out, "GetCurrentConnectionIDsResponse",
                          "ConnectionManager",
                          [ids](Print& o, void* ref) -> size_t {
@@ -381,6 +388,7 @@ class DLNADevice : public IDevice {
                                               const char* protocolInfo,
                                               const char* connectionID,
                                               const char* direction) {
+    DlnaLogger.log(DlnaLogLevel::Debug, "handleSubscription");
     return printReplyXML(
         out, "GetCurrentConnectionInfoResponse", "ConnectionManager",
         [protocolInfo, connectionID, direction](Print& o, void* ref) -> size_t {
@@ -409,7 +417,7 @@ class DLNADevice : public IDevice {
   static bool handleSubscription(IHttpServer* server, const char* requestPath,
                                  HttpRequestHandlerLine* hl,
                                  bool& is_subscribe) {
-    // Dispatch to dedicated handlers for subscribe/unsubscribe to keep the
+    DlnaLogger.log(DlnaLogLevel::Debug, "handleSubscription");
     // logic separated and easier to test.
     is_subscribe = false;
     HttpRequestHeader& req = server->requestHeader();
@@ -432,6 +440,19 @@ class DLNADevice : public IDevice {
   /// Gets the reference pointer
   void* getReference() override { return reference; }
 
+  void logStatus() {
+    DlnaLogger.log(DlnaLogLevel::Info,
+                   "Subscriptions: active=%d pending=%d / Scheduler: size=%d "
+                   "active = %s",
+                   subscription_mgr.subscriptionsCount(),
+                   subscription_mgr.pendingCount(), scheduler.size(),
+                   isSchedulerActive() ? "true" : "false");
+#ifdef ESP32
+    DlnaLogger.log(DlnaLogLevel::Info, "Memory: freeHeap=%u freePsram=%u",
+                   (unsigned)ESP.getFreeHeap(), (unsigned)ESP.getFreePsram());
+#endif
+  }
+
  protected:
   bool is_active = false;
   bool is_subscriptions_active = true;
@@ -443,24 +464,27 @@ class DLNADevice : public IDevice {
   IUDPService* p_udp = nullptr;
   IHttpServer* p_server = nullptr;
   uint64_t scheduler_interval_ms = (uint64_t)DLNA_RUN_SCHEDULER_EVERY_MS;
-  uint64_t subscriptions_interval_ms = (uint64_t)DLNA_RUN_SUBSCRIPTIONS_EVERY_MS;
+  uint64_t subscriptions_interval_ms =
+      (uint64_t)DLNA_RUN_SUBSCRIPTIONS_EVERY_MS;
   uint64_t next_scheduler_timeout_ms = 0;
   uint64_t next_subscriptions_timeout_ms = 0;
   void* reference = nullptr;
 
   void setDeviceInfo(DLNADeviceInfo& device) {
+    DlnaLogger.log(DlnaLogLevel::Debug, "setDeviceInfo");
     p_device_info = &device;
     device.setSubscriptionActive(isSubscriptionsActive());
   }
 
-  /// Set scheduler interval in milliseconds 
+  /// Set scheduler interval in milliseconds
   void setSchedulerIntervalMs(uint32_t ms) { scheduler_interval_ms = ms; }
+
   /// Get scheduler interval in milliseconds
   uint32_t getSchedulerIntervalMs() const {
     return (uint32_t)scheduler_interval_ms;
   }
 
-  /// Set subscription publish interval in milliseconds 
+  /// Set subscription publish interval in milliseconds
   void setSubscriptionsIntervalMs(uint32_t ms) {
     subscriptions_interval_ms = ms;
   }
@@ -481,16 +505,7 @@ class DLNADevice : public IDevice {
         (uint64_t)(now - last_mem_log) >= MEM_LOG_INTERVAL_MS) {
       // update timestamp for next interval on all platforms
       last_mem_log = now;
-      DlnaLogger.log(DlnaLogLevel::Info,
-                     "Subscriptions: active=%d pending=%d / Scheduler: size=%d "
-                     "active = %s",
-                     subscription_mgr.subscriptionsCount(),
-                     subscription_mgr.pendingCount(), scheduler.size(),
-                     isSchedulerActive() ? "true" : "false");
-#ifdef ESP32
-      DlnaLogger.log(DlnaLogLevel::Info, "Memory: freeHeap=%u freePsram=%u",
-                     (unsigned)ESP.getFreeHeap(), (unsigned)ESP.getFreePsram());
-#endif
+      logStatus();
     }
   }
 
@@ -522,6 +537,7 @@ class DLNADevice : public IDevice {
 
   /// Validates that all required service URLs and callbacks are defined
   bool validateServiceInfo(const DLNAServiceInfo& service) {
+    DlnaLogger.log(DlnaLogLevel::Debug, "validateServiceInfo");
     bool has_error = false;
 
     if (!service.scpd_url || !*service.scpd_url) {

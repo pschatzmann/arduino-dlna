@@ -96,7 +96,8 @@ class DLNADeviceInfo {
   /// Defines the base URL
   void setBaseURL(IPAddress ip, int port, const char* path = nullptr) {
     localhost = ip;
-    static Str str = "http://";
+    Str str{80};
+    str = "http://";
     str += ip[0];
     str += ".";
     str += ip[1];
