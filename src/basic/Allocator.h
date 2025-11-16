@@ -102,4 +102,9 @@ class AllocatorPSRAM {
   bool operator!=(const AllocatorPSRAM<U>&) const noexcept { return false; }
 };
 
+// Alias for a std::string that stores its dynamic buffer in PSRAM
+using stringPSRAM = std::basic_string<char, std::char_traits<char>, AllocatorPSRAM<char>>;
+
+
+
 }  // namespace tiny_dlna

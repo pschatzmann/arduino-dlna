@@ -215,6 +215,9 @@ class DLNAMediaServer : public DLNADeviceInfo {
   /// Get pointer to the per-instance ConnectionManager descriptor
   DLNADescr& getConnectionMgrDescr() { return *p_connmgrDescr; }
 
+  /// Log current status of subscriptions and scheduler
+  void logStatus() { return dlna_device.logStatus(); }
+
  protected:
   /// Individual action rule for handling specific actions
   struct ActionRule {
@@ -725,13 +728,13 @@ class DLNAMediaServer : public DLNADeviceInfo {
       // no data callback defined
       return 0;
     }
+    EscapingPrint esc_out(out);
     size_t total = 0;
     for (int i = 0; i < numberReturned; ++i) {
       int idx = startingIndex + i;
 
       // 1) Try print callback if present
       if (get_data_print_cb) {
-        EscapingPrint esc_out(out);
         size_t w = get_data_print_cb(idx, esc_out, reference_);
         if (w > 0) {
           total += w;
@@ -743,7 +746,7 @@ class DLNAMediaServer : public DLNADeviceInfo {
       if (get_data_cb) {
         MediaItem item;
         if (!get_data_cb(idx, item, reference_)) break;  // end-of-list
-        total += streamDIDLItem(out, item);
+        total += streamDIDLItem(esc_out, item);
         continue;
       }
     }
@@ -758,46 +761,44 @@ class DLNAMediaServer : public DLNADeviceInfo {
         (item.itemClass == MediaItemClass::Folder) ? "container" : "item";
     Printf pr{out};
     written += static_cast<size_t>(pr.printf(
-        "&lt;%s id=\"%s\" parentID=\"%s\" restricted=\"%d\"&gt;", nodeName,
+        "<%s id=\"%s\" parentID=\"%s\" restricted=\"%d\">", nodeName,
         item.id ? item.id : "", item.parentID ? item.parentID : "0",
         item.restricted ? 1 : 0));
 
-    written += out.print("&lt;dc:title&gt;");
+    written += out.print("<dc:title>");
     written += out.print(StrView(item.title).c_str());
-    written += out.print("&lt;/dc:title&gt;\r\n");
+    written += out.print("</dc:title>\r\n");
     if (mediaItemClassStr != nullptr) {
       written += static_cast<size_t>(pr.printf(
-          "&lt;upnp:class&gt;%s&lt;/upnp:class&gt;\r\n", mediaItemClassStr));
+          "<upnp:class>%s</upnp:class>\r\n", mediaItemClassStr));
     }
 
     // Optional album art URI
     if (!StrView(item.albumArtURI).isEmpty()) {
       Str art{160};
       art.set(item.albumArtURI);
-      art.replaceAll("&", "&amp;");
-      written += out.print("&lt;upnp:albumArtURI&gt;");
+      written += out.print("<upnp:albumArtURI>");
       written += out.print(StrView(art.c_str()).c_str());
-      written += out.print("&lt;/upnp:albumArtURI&gt;\r\n");
+      written += out.print("</upnp:albumArtURI>\r\n");
     }
 
     // res with optional protocolInfo attribute
     Str url{160};
     url.set(item.resourceURI);
     if (!url.isEmpty()) {
-      url.replaceAll("&", "&amp;");
       if (!StrView(item.mimeType).isEmpty()) {
         written += static_cast<size_t>(pr.printf(
-            "&lt;res protocolInfo=\"http-get:*:%s:*\"&gt;", item.mimeType));
+            "<res protocolInfo=\"http-get:*:%s:*\">", item.mimeType));
         written += out.print(StrView(url.c_str()).c_str());
-        written += out.print("&lt;/res&gt;\r\n");
+        written += out.print("</res>\r\n");
       } else {
-        written += out.print("&lt;res&gt;");
+        written += out.print("<res>");
         written += out.print(StrView(url.c_str()).c_str());
-        written += out.print("&lt;/res&gt;\r\n");
+        written += out.print("</res>\r\n");
       }
     }
 
-    written += static_cast<size_t>(pr.printf("&lt;/%s&gt;\r\n", nodeName));
+    written += static_cast<size_t>(pr.printf("</%s>\r\n", nodeName));
     return written;
   }
 

@@ -347,7 +347,7 @@ class Str {
   bool isOnHeap() const { return true; }
 
  private:
-  std::string s;
+  stringPSRAM s;
 };
 
 }  // namespace tiny_dlna
