@@ -111,6 +111,7 @@ void setup() {
   }
 
   // Initialize content provider with SD filesystem
+  contentProvider.setBaseURL(local_ip, port, "/files");
   if (!contentProvider.begin(sd, "/")) {
     Serial.println("Failed to initialize content provider. Halting.");
     while (1) delay(1000);

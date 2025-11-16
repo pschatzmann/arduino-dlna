@@ -38,13 +38,17 @@ class SdFatDirectoryTree {
    * @param beginPath Root path to start scanning from (defaults to "/").
    * @return true on success.
    */
-
-  /// Starts the processing
   bool begin(FS& SD, const char* beginPath = "/") {
     this->p_sd = &SD;
     SD.chdir(beginPath);
-    root_node.file_name = beginPath;
-    buildTree(root_node);
+    // Allocate root node as first entry in tree_nodes
+    tree_nodes.clear();
+    auto* root = new TreeNode();
+    root->file_name = beginPath;
+    root->parent = nullptr;
+    root->id = 0;
+    tree_nodes.push_back(root);
+    buildTree(*root);
     return true;
   }
 
@@ -61,7 +65,7 @@ class SdFatDirectoryTree {
   /**
    * @brief Returns the root node of the tree.
    */
-  TreeNode& root() { return root_node; }
+  TreeNode& root() { return *tree_nodes[0]; }
 
   /**
    * @brief Finds a node by its numeric id.
@@ -79,7 +83,7 @@ class SdFatDirectoryTree {
    */
   std::vector<TreeNode*, AllocatorPSRAM<TreeNode*>> getAllFiles() {
     std::vector<TreeNode*, AllocatorPSRAM<TreeNode*>> result;
-    collectAllFilesFrom(root_node, result);
+    if (!tree_nodes.empty()) collectAllFilesFrom(*tree_nodes[0], result);
     return result;
   }
 
@@ -92,14 +96,10 @@ class SdFatDirectoryTree {
   size_t size() { return tree_nodes.size(); }
 
  protected:
-  TreeNode root_node;
   SdFatParser parser;
   FS* p_sd = nullptr;
   std::vector<TreeNode*, AllocatorPSRAM<TreeNode*>> tree_nodes;
-
-  // Temporary build-time state
-  std::vector<TreeNode*>
-      parents_;  // parents_[level] holds parent at that level
+  std::vector<TreeNode*> parent_stack;  // stack for parent management
 
   // Recursively collect all file nodes from a tree
   void collectAllFilesFrom(
@@ -117,59 +117,47 @@ class SdFatDirectoryTree {
   static void onParsedCallback(SdFatFileInfo& info, void* ref) {
     auto* self = static_cast<SdFatDirectoryTree*>(ref);
     if (!self) return;
+    TreeNode* root = self->tree_nodes[0];
+    // Initialize stack with root if empty
+    if (self->parent_stack.empty()) self->parent_stack.push_back(root);
 
-    TreeNode* root = &self->root_node;
-
-    // Ensure parents_ has at least the root at level 0
-    if (self->parents_.empty()) self->parents_.push_back(root);
-
-    // Clamp/resize parents_ to cover current level
-    if (info.level >= static_cast<int>(self->parents_.size())) {
-      self->parents_.resize(static_cast<size_t>(info.level) + 1, nullptr);
+    // Ensure parent_stack has exactly info.level+1 elements (root at 0)
+    while ((int)self->parent_stack.size() > info.level + 1) {
+      self->parent_stack.pop_back();
+    }
+    while ((int)self->parent_stack.size() < info.level + 1) {
+      self->parent_stack.push_back(nullptr);
     }
 
-    TreeNode* parent = nullptr;
-    if (info.level == 0) {
-      parent = root;
-    } else {
-      parent = self->parents_[static_cast<size_t>(info.level)];
-      if (parent == nullptr) parent = root;  // fallback safety
-    }
+    TreeNode* parent = self->parent_stack[info.level];
 
-    // Create and populate the node
     auto* node = new TreeNode();
     assert(node != nullptr);
     node->is_dir = info.is_directory;
     node->file_name = info.name;
-    // Strip trailing '/' for directory names to keep path() consistent
-    if (node->is_dir && !node->file_name.empty() &&
-        node->file_name.back() == '/') {
-      node->file_name.pop_back();
-    }
     node->parent = parent;
     node->id = static_cast<uint32_t>(self->tree_nodes.size());
-
-    // Link into tree
-    parent->children.push_back(node);
+    if (parent != nullptr) parent->children.push_back(node);
     self->tree_nodes.push_back(node);
 
-    // Set the parent for the next deeper level when this is a directory
+    // If this is a directory, ensure parent_stack[info.level+1] is this node
     if (node->is_dir) {
-      if (self->parents_.size() <= static_cast<size_t>(info.level + 1)) {
-        self->parents_.resize(static_cast<size_t>(info.level + 2), nullptr);
+      if (self->parent_stack.size() <= static_cast<size_t>(info.level + 1)) {
+        self->parent_stack.resize(static_cast<size_t>(info.level + 2), nullptr);
       }
-      self->parents_[static_cast<size_t>(info.level + 1)] = node;
+      self->parent_stack[static_cast<size_t>(info.level + 1)] = node;
     }
   }
 
   void buildTree(TreeNode& node) {
     // Reset any previous children of the root
     node.children.clear();
-    tree_nodes.clear();
+    // Do not clear tree_nodes here; root is already allocated and in
+    // tree_nodes[0]
 
     // Prepare parsing context on this instance
-    parents_.clear();
-    parents_.push_back(&root_node);  // level 0
+    parent_stack.clear();
+    parent_stack.push_back(tree_nodes[0]);  // root on stack
 
     parser.setCallback(&SdFatDirectoryTree::onParsedCallback, this);
 

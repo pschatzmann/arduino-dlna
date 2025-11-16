@@ -1,3 +1,5 @@
+
+
 /**
  * @file SdFatContentProvider.h
  * @brief DLNA content provider backed by SdFat filesystem directory tree.
@@ -31,6 +33,17 @@ template <typename FS>
 class SdFatContentProvider {
  public:
   /**
+   * @brief Set the base URL for resource URIs.
+   * @param ip IP address of the server
+   * @param port Port number
+   * @param basePath Base path for files (e.g., "/files")
+   */
+  void setBaseURL(const IPAddress& ip, int port, const char* basePath) {
+    baseIP_ = ip;
+    basePort_ = port;
+    basePath_ = basePath ? basePath : "/";
+  }
+  /**
    * @brief Initializes the content provider and scans the filesystem.
    * @param fs Filesystem instance (e.g., SdFs)
    * @param rootPath Root directory path to scan (defaults to "/")
@@ -48,28 +61,6 @@ class SdFatContentProvider {
 
   size_t size() { return directoryTree.size(); }
 
- protected:
-  SdFatDirectoryTree<FS> directoryTree;
-
-  // Store query parameters for getData
-  const char* objectID_ = nullptr;
-  ContentQueryType queryType_;
-  const char* filter_ = nullptr;
-  int startingIndex_ = 0;
-  int requestedCount_ = 0;
-  const char* sortCriteria_ = nullptr;
-  void* reference_ = nullptr;
-
-  // Collected results from prepareData
-  std::vector<TreeNode*, AllocatorPSRAM<TreeNode*>> resultNodes_;
-
-  // String storage for MediaItem pointers (lifetime managed by class)
-  stringPSRAM currentId_;        ///< Current item ID string
-  stringPSRAM currentParentId_;  ///< Current parent ID string
-  stringPSRAM currentPath_;      ///< Current resource path string
-  stringPSRAM currentMime_;      ///< Current MIME type string
-
- public:
   /**
    * @brief Prepares data for a DLNA content query.
    *
@@ -156,19 +147,6 @@ class SdFatContentProvider {
                    numberReturned);
   }
 
- protected:
-  /**
-   * @brief Finds a tree node by its object ID string.
-   * @param objectID Object ID as string (node's numeric id)
-   * @return Pointer to the node, or nullptr if not found or invalid
-   */
-  TreeNode* findNodeByObjectID(const char* objectID) {
-    if (!objectID) return nullptr;
-    uint32_t id = std::stoul(objectID);
-    return &directoryTree.getTreeNodeById(id);
-  }
-
- public:
   /**
    * @brief Retrieves a single media item by index.
    *
@@ -229,14 +207,53 @@ class SdFatContentProvider {
         item.itemClass = MediaItemClass::Unknown;
       }
 
-      // Resource URI is the file path
-      currentPath_ = directoryTree.path(node->id);
+      // Resource URI: baseURL + basePath + ?ID=id
+      char urlBuffer[128];
+      snprintf(urlBuffer, sizeof(urlBuffer), "http://%u.%u.%u.%u:%d%s?ID=%u",
+               baseIP_[0], baseIP_[1], baseIP_[2], baseIP_[3], basePort_,
+               basePath_.c_str(), node->id);
+      currentPath_ = urlBuffer;
       item.resourceURI = currentPath_.c_str();
     }
 
     item.albumArtURI = nullptr;
 
     return true;
+  }
+
+ protected:
+  IPAddress baseIP_;
+  int basePort_ = 0;
+  stringPSRAM basePath_ = "/";
+  SdFatDirectoryTree<FS> directoryTree;
+
+  // Store query parameters for getData
+  const char* objectID_ = nullptr;
+  ContentQueryType queryType_;
+  const char* filter_ = nullptr;
+  int startingIndex_ = 0;
+  int requestedCount_ = 0;
+  const char* sortCriteria_ = nullptr;
+  void* reference_ = nullptr;
+
+  // Collected results from prepareData
+  std::vector<TreeNode*, AllocatorPSRAM<TreeNode*>> resultNodes_;
+
+  // String storage for MediaItem pointers (lifetime managed by class)
+  stringPSRAM currentId_;        ///< Current item ID string
+  stringPSRAM currentParentId_;  ///< Current parent ID string
+  stringPSRAM currentPath_;      ///< Current resource path string
+  stringPSRAM currentMime_;      ///< Current MIME type string
+
+  /**
+   * @brief Finds a tree node by its object ID string.
+   * @param objectID Object ID as string (node's numeric id)
+   * @return Pointer to the node, or nullptr if not found or invalid
+   */
+  TreeNode* findNodeByObjectID(const char* objectID) {
+    if (!objectID) return nullptr;
+    uint32_t id = std::stoul(objectID);
+    return &directoryTree.getTreeNodeById(id);
   }
 };
 

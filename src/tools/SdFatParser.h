@@ -9,8 +9,9 @@
  * Print so it can be used anywhere a Print sink is accepted.
  */
 
-#include <string>
 #include <Print.h>
+
+#include <string>
 
 namespace tiny_dlna {
 
@@ -29,7 +30,8 @@ struct SdFatFileInfo {
 };
 
 /**
- * @brief Simple character-by-character parser that emits SdFatFileInfo via a callback.
+ * @brief Simple character-by-character parser that emits SdFatFileInfo via a
+ * callback.
  *
  * Typical usage:
  * - Create an instance.
@@ -41,13 +43,11 @@ struct SdFatFileInfo {
  * level). A trailing '/' marks a directory entry.
  */
 class SdFatParser : public Print {
-public:
+ public:
   /**
    * @brief Constructs the parser and reserves internal buffer capacity.
    */
-  SdFatParser() {
-    name.reserve(80);
-  }
+  SdFatParser() { name.reserve(80); }
 
   /**
    * @brief Consumes one character of input.
@@ -84,7 +84,7 @@ public:
     this->cb = cb;
   }
 
-protected:
+ protected:
   /** Accumulates characters until a newline terminates the line. */
   std::string name;
   /** User-provided callback invoked after each parsed line. */
@@ -111,15 +111,38 @@ protected:
    * Determines nesting level from leading spaces (2 spaces == 1 level), strips
    * the indentation, infers directory status from a trailing '/', and notifies
    * the user callback.
-  */
+   */
   void parse() {
     int spaces = spaceCount();
     info.level = spaces / 2;
-    info.name = name.erase(0, static_cast<size_t>(spaces));
-    info.is_directory = !info.name.empty() && info.name[info.name.size() - 1] == '/';
+    trim(name);
+    info.name = name;
+    info.is_directory =
+        !info.name.empty() && info.name[info.name.size() - 1] == '/';
     if (cb) cb(info, ref);
     name.clear();
   }
+
+  inline void rtrim(std::string& s) {
+    s.erase(std::find_if(s.rbegin(), s.rend(),
+                         [](unsigned char ch) { return !std::isspace(ch); })
+                .base(),
+            s.end());
+  }
+
+// Trim from the start (in place)
+inline void ltrim(std::string &s) {
+    s.erase(s.begin(), std::find_if(s.begin(), s.end(), [](unsigned char ch) {
+        return !std::isspace(ch);
+    }));
+}
+
+// Trim from both ends (in place)
+inline void trim(std::string &s) {
+    rtrim(s);
+    ltrim(s);
+}
+
 };
 
 }  // namespace tiny_dlna

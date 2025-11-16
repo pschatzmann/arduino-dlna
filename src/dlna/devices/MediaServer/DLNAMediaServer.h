@@ -746,7 +746,7 @@ class DLNAMediaServer : public DLNADeviceInfo {
       if (get_data_cb) {
         MediaItem item;
         if (!get_data_cb(idx, item, reference_)) break;  // end-of-list
-        total += streamDIDLItem(out, item);
+        total += streamDIDLItem(esc_out, item);
         continue;
       }
     }
