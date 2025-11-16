@@ -102,7 +102,7 @@ class SdFatContentProvider {
       // Metadata for a single object
       TreeNode* node =
           objectID ? findNodeByObjectID(objectID) : &directoryTree.root();
-      if (node) {
+      if (node && !isHidden(node)) {
         resultNodes_.push_back(node);
         totalMatches = 1;
         numberReturned = 1;
@@ -115,8 +115,13 @@ class SdFatContentProvider {
       TreeNode* parentNode =
           objectID ? findNodeByObjectID(objectID) : &directoryTree.root();
       if (parentNode) {
-        // Collect all children
-        resultNodes_ = parentNode->children;
+        // Collect all children, filter out hidden
+        resultNodes_.clear();
+        for (auto* child : parentNode->children) {
+          if (!isHidden(child)) {
+            resultNodes_.push_back(child);
+          }
+        }
         totalMatches = static_cast<int>(resultNodes_.size());
 
         // Apply pagination
@@ -130,8 +135,14 @@ class SdFatContentProvider {
         numberReturned = 0;
       }
     } else {
-      // Search - return all files
-      resultNodes_ = directoryTree.getAllFiles();
+      // Search - return all files, filter out hidden
+      auto allFiles = directoryTree.getAllFiles();
+      resultNodes_.clear();
+      for (auto* node : allFiles) {
+        if (!isHidden(node)) {
+          resultNodes_.push_back(node);
+        }
+      }
       totalMatches = static_cast<int>(resultNodes_.size());
 
       // Apply pagination
@@ -145,6 +156,15 @@ class SdFatContentProvider {
     DlnaLogger.log(DlnaLogLevel::Info,
                    "Number of results: Total=%d, Returned=%d", totalMatches,
                    numberReturned);
+  }
+
+  /**
+   * @brief Returns true if the node is hidden (file or directory name starts with '.')
+   * @param node Pointer to TreeNode
+   * @return true if hidden, false otherwise
+   */
+  bool isHidden(TreeNode* node) const {
+    return node == nullptr || (!node->file_name.empty() && node->file_name[0] == '.');
   }
 
   /**

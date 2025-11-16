@@ -117,8 +117,13 @@ class SdFatParser : public Print {
     info.level = spaces / 2;
     trim(name);
     info.name = name;
+    // directories have a trailing /
     info.is_directory =
         !info.name.empty() && info.name[info.name.size() - 1] == '/';
+    // if it is a directory remove trailing /
+    if (info.is_directory) {
+        info.name.pop_back();
+    }
     if (cb) cb(info, ref);
     name.clear();
   }
@@ -130,19 +135,18 @@ class SdFatParser : public Print {
             s.end());
   }
 
-// Trim from the start (in place)
-inline void ltrim(std::string &s) {
+  // Trim from the start (in place)
+  inline void ltrim(std::string& s) {
     s.erase(s.begin(), std::find_if(s.begin(), s.end(), [](unsigned char ch) {
-        return !std::isspace(ch);
-    }));
-}
+              return !std::isspace(ch);
+            }));
+  }
 
-// Trim from both ends (in place)
-inline void trim(std::string &s) {
+  // Trim from both ends (in place)
+  inline void trim(std::string& s) {
     rtrim(s);
     ltrim(s);
-}
-
+  }
 };
 
 }  // namespace tiny_dlna
