@@ -82,7 +82,7 @@ var searchData=
   ['gettreenodebyid_79',['getTreeNodeById',['../classtiny__dlna_1_1SdFatContentProvider.html#abc42446eeb340d8af7e3eb08732191b7',1,'tiny_dlna::SdFatContentProvider::getTreeNodeById()'],['../classtiny__dlna_1_1SdFatDirectoryTree.html#ab8db6b216a9ceee1b67df6b4eb246f38',1,'tiny_dlna::SdFatDirectoryTree::getTreeNodeById()']]],
   ['getudn_80',['getUDN',['../classtiny__dlna_1_1DLNADeviceInfo.html#a753fc8431d08e07e2b3e4bff18a7eb84',1,'tiny_dlna::DLNADeviceInfo']]],
   ['getuniversalproductcode_81',['getUniversalProductCode',['../classtiny__dlna_1_1DLNADeviceInfo.html#a7b20af8df263f19506f12fb25d78eefe',1,'tiny_dlna::DLNADeviceInfo']]],
-  ['geturi_82',['getUri',['../classtiny__dlna_1_1DLNAMediaServer.html#acee79cf66fe886d861d9db529b180dba',1,'tiny_dlna::DLNAMediaServer']]],
+  ['geturi_82',['getUri',['../classtiny__dlna_1_1DLNAMediaServer.html#ae89f0317f1b5a1c8a33c6d7fec82dee4',1,'tiny_dlna::DLNAMediaServer']]],
   ['geturl_83',['getUrl',['../classtiny__dlna_1_1DLNAControlPoint.html#a74bcc9468daf45fc2a769541f215efe7',1,'tiny_dlna::DLNAControlPoint::getUrl()'],['../classtiny__dlna_1_1IControlPoint.html#a306b968cbb497e084d33d4ccfefb27fa',1,'tiny_dlna::IControlPoint::getUrl()']]],
   ['geturlimpl_84',['getUrlImpl',['../classtiny__dlna_1_1DLNAControlPoint.html#a372dcf6373fbebe771a38d69e3dc987f',1,'tiny_dlna::DLNAControlPoint']]],
   ['getvalue_85',['getValue',['../classtiny__dlna_1_1HttpParameters.html#adc71a0a477f4f053d94f22d67c695a44',1,'tiny_dlna::HttpParameters']]],
