@@ -33,17 +33,6 @@ template <typename FS>
 class SdFatContentProvider {
  public:
   /**
-   * @brief Set the base URL for resource URIs.
-   * @param ip IP address of the server
-   * @param port Port number
-   * @param basePath Base path for files (e.g., "/files")
-   */
-  void setBaseURL(const IPAddress& ip, int port, const char* basePath) {
-    baseIP_ = ip;
-    basePort_ = port;
-    basePath_ = basePath ? basePath : "/";
-  }
-  /**
    * @brief Initializes the content provider and scans the filesystem.
    * @param fs Filesystem instance (e.g., SdFs)
    * @param rootPath Root directory path to scan (defaults to "/")
@@ -228,10 +217,8 @@ class SdFatContentProvider {
       }
 
       // Resource URI: baseURL + basePath + ?ID=id
-      char urlBuffer[128];
-      snprintf(urlBuffer, sizeof(urlBuffer), "http://%u.%u.%u.%u:%d%s?ID=%u",
-               baseIP_[0], baseIP_[1], baseIP_[2], baseIP_[3], basePort_,
-               basePath_.c_str(), node->id);
+      char urlBuffer[80];
+      snprintf(urlBuffer, sizeof(urlBuffer), "/%s?ID=%u", path, node->id);
       currentPath_ = urlBuffer;
       item.resourceURI = currentPath_.c_str();
     }
@@ -241,11 +228,24 @@ class SdFatContentProvider {
     return true;
   }
 
+  /// Provides the path prefix for resource URIs
+  const char* getPath() {
+    return path;
+  } 
+
+  /// Sets the path prefix for resource URIs
+  void setPath(const char* p) {
+    path = p;
+  } 
+
+  /// Returns the full file path by node ID
+  TreeNode& getTreeNodeById(uint32_t id) {
+    return directoryTree.getTreeNodeById(id);
+  }
+
  protected:
-  IPAddress baseIP_;
-  int basePort_ = 0;
-  stringPSRAM basePath_ = "/";
   SdFatDirectoryTree<FS> directoryTree;
+  const char* path = "/file";
 
   // Store query parameters for getData
   const char* objectID_ = nullptr;

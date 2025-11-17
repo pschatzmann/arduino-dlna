@@ -775,31 +775,42 @@ class DLNAMediaServer : public DLNADeviceInfo {
 
     // Optional album art URI
     if (!StrView(item.albumArtURI).isEmpty()) {
-      Str art{160};
-      art.set(item.albumArtURI);
       written += out.print("<upnp:albumArtURI>");
-      written += out.print(StrView(art.c_str()).c_str());
+      written += out.print(getUri(item.albumArtURI));
       written += out.print("</upnp:albumArtURI>\r\n");
     }
 
     // res with optional protocolInfo attribute
-    Str url{160};
-    url.set(item.resourceURI);
-    if (!url.isEmpty()) {
+    if (!StrView(item.resourceURI).isEmpty()) {
       if (!StrView(item.mimeType).isEmpty()) {
         written += static_cast<size_t>(pr.printf(
             "<res protocolInfo=\"http-get:*:%s:*\">", item.mimeType));
-        written += out.print(StrView(url.c_str()).c_str());
+        written += out.print(getUri(item.resourceURI));
         written += out.print("</res>\r\n");
       } else {
         written += out.print("<res>");
-        written += out.print(StrView(url.c_str()).c_str());
+        written += out.print(getUri(item.resourceURI));
         written += out.print("</res>\r\n");
       }
     }
 
     written += static_cast<size_t>(pr.printf("</%s>\r\n", nodeName));
     return written;
+  }
+
+  const char* getUri(const char* path){
+    static Str url{256};
+    if (path == nullptr)
+      path = "";
+    if (!StrView(path).startsWith("http://")) {
+      url = getBaseURL();
+      if (!StrView(path).startsWith("/")) {
+        url += "/";
+      }
+      url += path;
+      return url.c_str();
+    }
+    return path;
   }
 
   // Removed separate streamDIDLItemsGetData helper; unified into

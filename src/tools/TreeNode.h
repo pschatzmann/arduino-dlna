@@ -84,15 +84,15 @@ class TreeNode {
    * @brief Computes the full path from the root to this node.
    * @return Path string where directory components are separated by '/'.
    */
-  stringPSRAM path() {
+  std::string path() const {
     if (parent == nullptr) {
-      return file_name;
+      std::string result = file_name.c_str();
+      return result;
     }
-    stringPSRAM prefix = parent->path();
-    if (!prefix.empty() && prefix.back() == '/') {
-      return prefix + file_name;
-    }
-    return prefix + "/" + file_name;
+    std::string parentPath = parent->path();
+    if (parentPath.back() != '/') parentPath += '/';
+    parentPath += file_name.c_str();
+    return parentPath;
   }
 
   /**
