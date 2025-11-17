@@ -76,9 +76,10 @@ var searchData=
   ['isvalid_73',['isValid',['../classtiny__dlna_1_1ActionReply.html#a10e2f756a6ed65769e146ef31509022b',1,'tiny_dlna::ActionReply::isValid()'],['../classtiny__dlna_1_1HttpStreamedOutput.html#ade4959b5af27dbb8cfc915bf3970a729',1,'tiny_dlna::HttpStreamedOutput::isValid()'],['../classtiny__dlna_1_1MSearchReplySchedule.html#a121e9aef3592391b720c3aadccf46bfa',1,'tiny_dlna::MSearchReplySchedule::isValid()'],['../structtiny__dlna_1_1Schedule.html#a81fd24c97ebe2863fe4b1284f1d8e97e',1,'tiny_dlna::Schedule::isValid()']]],
   ['isvalidstatus_74',['isValidStatus',['../classtiny__dlna_1_1HttpHeader.html#ad0f067cb97410498bf2edc51ba9133f2',1,'tiny_dlna::HttpHeader']]],
   ['itemclass_75',['itemClass',['../structtiny__dlna_1_1MediaItem.html#a37376175e2bfb28530add3b3d3ea28a7',1,'tiny_dlna::MediaItem']]],
-  ['iterator_76',['iterator',['../classtiny__dlna_1_1Vector.html#a7302d3b426332ef7a59fc48996628c2c',1,'tiny_dlna::Vector']]],
-  ['iterator_77',['Iterator',['../classtiny__dlna_1_1List_1_1Iterator.html#aa783321b18f32af56eef0dd0d571e16f',1,'tiny_dlna::List::Iterator::Iterator()'],['../classtiny__dlna_1_1List_1_1Iterator.html',1,'tiny_dlna::List&lt; T, Alloc &gt;::Iterator']]],
-  ['itoa_78',['itoa',['../classtiny__dlna_1_1StrView.html#a30eba24c90cfe3ba4c7771d45168faec',1,'tiny_dlna::StrView']]],
-  ['iudpservice_79',['IUDPService',['../classtiny__dlna_1_1IUDPService.html',1,'tiny_dlna']]],
-  ['iudpservice_2eh_80',['IUDPService.h',['../IUDPService_8h.html',1,'']]]
+  ['iterator_76',['Iterator',['../classtiny__dlna_1_1List_1_1Iterator.html#aa783321b18f32af56eef0dd0d571e16f',1,'tiny_dlna::List::Iterator']]],
+  ['iterator_77',['iterator',['../classtiny__dlna_1_1Vector.html#a7302d3b426332ef7a59fc48996628c2c',1,'tiny_dlna::Vector']]],
+  ['iterator_78',['Iterator',['../classtiny__dlna_1_1List_1_1Iterator.html',1,'tiny_dlna::List']]],
+  ['itoa_79',['itoa',['../classtiny__dlna_1_1StrView.html#a30eba24c90cfe3ba4c7771d45168faec',1,'tiny_dlna::StrView']]],
+  ['iudpservice_80',['IUDPService',['../classtiny__dlna_1_1IUDPService.html',1,'tiny_dlna']]],
+  ['iudpservice_2eh_81',['IUDPService.h',['../IUDPService_8h.html',1,'']]]
 ];
