@@ -760,62 +760,62 @@ class DLNAMediaServer : public DLNADeviceInfo {
     const char* nodeName =
         (item.itemClass == MediaItemClass::Folder) ? "container" : "item";
     Printf pr{out};
-    written += static_cast<size_t>(pr.printf(
-        "<%s id=\"%s\" parentID=\"%s\" restricted=\"%d\">", nodeName,
-        item.id ? item.id : "", item.parentID ? item.parentID : "0",
-        item.restricted ? 1 : 0));
+    written += static_cast<size_t>(
+        pr.printf("<%s id=\"%s\" parentID=\"%s\" restricted=\"%d\">", nodeName,
+                  item.id ? item.id : "", item.parentID ? item.parentID : "0",
+                  item.restricted ? 1 : 0));
 
     written += out.print("<dc:title>");
     written += out.print(StrView(item.title).c_str());
     written += out.print("</dc:title>\r\n");
     if (mediaItemClassStr != nullptr) {
-      written += static_cast<size_t>(pr.printf(
-          "<upnp:class>%s</upnp:class>\r\n", mediaItemClassStr));
+      written += static_cast<size_t>(
+          pr.printf("<upnp:class>%s</upnp:class>\r\n", mediaItemClassStr));
     }
 
     // Optional album art URI
     if (!StrView(item.albumArtURI).isEmpty()) {
+      Str url_str = getUri(item.albumArtURI);
       written += out.print("<upnp:albumArtURI>");
-      written += out.print(getUri(item.albumArtURI));
+      written += out.print(url_str.c_str());
       written += out.print("</upnp:albumArtURI>\r\n");
     }
 
     // res with optional protocolInfo attribute
     if (!StrView(item.resourceURI).isEmpty()) {
       if (!StrView(item.mimeType).isEmpty()) {
-        written += static_cast<size_t>(pr.printf(
-            "<res protocolInfo=\"http-get:*:%s:*\">", item.mimeType));
-        written += out.print(getUri(item.resourceURI));
-        written += out.print("</res>\r\n");
+        written += static_cast<size_t>(
+            pr.printf("<res protocolInfo=\"http-get:*:%s:*\">", item.mimeType));
       } else {
         written += out.print("<res>");
-        written += out.print(getUri(item.resourceURI));
-        written += out.print("</res>\r\n");
       }
+      Str url_str = getUri(item.resourceURI);
+      written += out.print(url_str.c_str());
+      written += out.print("</res>\r\n");
     }
 
     written += static_cast<size_t>(pr.printf("</%s>\r\n", nodeName));
     return written;
   }
 
-  const char* getUri(const char* path){
-    static Str url{256};
-    if (path == nullptr)
-      path = "";
-    if (!StrView(path).startsWith("http://")) {
-      url = getBaseURL();
-      if (!StrView(path).startsWith("/")) {
-        url += "/";
-      }
-      url += path;
-      return url.c_str();
+  /// Complete Uri
+  Str getUri(const char* path) {
+    Str url{256};
+    // We got a valid url
+    url = path;
+    if (url.startsWith("http://")) {
+      return url;
     }
-    return path;
+    // We need to add the path to the base url
+    url = getBaseURL();
+    if (!StrView(path).startsWith("/")) {
+      url += "/";
+    }
+    url += path;
+    return url;
   }
 
-  // Removed separate streamDIDLItemsGetData helper; unified into
-  // streamDIDLItems
-
+  /// convert MediaItemClass to UPnP class string
   const char* toStr(MediaItemClass itemClass) {
     switch (itemClass) {
       case MediaItemClass::Music:
