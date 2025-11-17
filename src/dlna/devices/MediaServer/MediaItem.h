@@ -3,12 +3,14 @@
 
 namespace tiny_dlna {
 
-// Music: <upnp:class>object.item.audioItem.musicTrack</upnp:class>
-// Radio: <upnp:class>object.item.audioItem.audioBroadcast</upnp:class>
-// Video: <upnp:class>object.item.videoItem.movie</upnp:class>
-// Photo: <upnp:class>object.item.imageItem.photo</upnp:class>
-// Folder: <upnp:class>object.container.storageFolder</upnp:class>
-
+/***  
+ * @brief MediaItemClass which maps to the following classes:
+ * - Folder: <upnp:class>object.container.storageFolder</upnp:class>
+ * - Music: <upnp:class>object.item.audioItem.musicTrack</upnp:class>
+ * - Radio: <upnp:class>object.item.audioItem.audioBroadcast</upnp:class>
+ * - Video: <upnp:class>object.item.videoItem.movie</upnp:class>
+ * - Photo: <upnp:class>object.item.imageItem.photo</upnp:class>
+ */
 enum class MediaItemClass {
   Unknown,
   Folder,
