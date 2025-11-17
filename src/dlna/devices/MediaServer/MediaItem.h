@@ -4,7 +4,7 @@
 namespace tiny_dlna {
 
 /***  
- * @brief MediaItemClass which maps to the following classes:
+ * @brief MediaItemClass which maps to the following DLNA classes:
  * - Folder: <upnp:class>object.container.storageFolder</upnp:class>
  * - Music: <upnp:class>object.item.audioItem.musicTrack</upnp:class>
  * - Radio: <upnp:class>object.item.audioItem.audioBroadcast</upnp:class>
