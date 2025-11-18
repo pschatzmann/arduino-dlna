@@ -13,6 +13,7 @@
 #include "http/Server/HttpRequest.h"
 #include "http/Server/IHttpServer.h"
 #include "dlna/devices/ISubscriptionMgrDevice.h"
+#include "concurrency/ListLockFree.h"
 
 namespace tiny_dlna {
 
@@ -201,19 +202,20 @@ class SubscriptionMgrDevice : public ISubscriptionMgrDevice {
    * @return false if no matching subscription exists
    */
   bool unsubscribe(DLNAServiceInfo& service, const char* sid) override {
-    for (size_t i = 0; i < subscriptions.size(); ++i) {
-      Subscription* s = subscriptions[i];
+    for (auto it = subscriptions.begin(); it != subscriptions.end(); ++it) {
+      Subscription* s = *it;
       if (s->service == &service && StrView(s->sid).equals(sid)) {
         // remove pending notifications that reference this subscription
-        for (int j = 0; j < pending_list.size();) {
-          if (pending_list[j].p_subscription == s) {
-            pending_list.erase(j);
+        for (auto pit = pending_list.begin(); pit != pending_list.end(); ) {
+          if (pit->p_subscription == s) {
+            pending_list.erase(pit);
+            pit = pending_list.begin(); // restart after erase (iterator invalidated)
           } else {
-            ++j;
+            ++pit;
           }
         }
         delete s;
-        subscriptions.erase(i);
+        subscriptions.erase(it);
         return true;
       }
     }
@@ -288,26 +290,19 @@ class SubscriptionMgrDevice : public ISubscriptionMgrDevice {
     // Attempt to process each pending notification once. If processing
     // fails (non-200), leave the entry in the queue for a later retry.
     int processed = 0;
-    for (int i = 0; i < pending_list.size();) {
-      // copy entry to avoid referencing vector storage while potentially
-      // modifying the vector (erase)
-      PendingNotification pn = pending_list[i];
-
+    for (auto it = pending_list.begin(); it != pending_list.end(); ) {
+      PendingNotification pn = *it;
       // Ensure the subscription pointer is valid; if not, drop the entry.
       if (pn.p_subscription == nullptr) {
         DlnaLogger.log(DlnaLogLevel::Warning,
                        "pending notification dropped: missing subscription");
-        pending_list.erase(i);
+        pending_list.erase(it);
+        it = pending_list.begin(); // restart after erase
         continue;
       }
-      // determine subscription details
       Subscription& sub = *pn.p_subscription;
-
-      // convert the sequence number to string
       char seqBuf[32];
       snprintf(seqBuf, sizeof(seqBuf), "%d", pn.seq);
-
-      // Build and send HTTP notify as in previous implementation
       Url cbUrl(sub.callback_url.c_str());
       HttpRequest<ClientType> http;
       http.setTimeout(DLNA_HTTP_REQUEST_TIMEOUT_MS);
@@ -321,27 +316,23 @@ class SubscriptionMgrDevice : public ISubscriptionMgrDevice {
       DlnaLogger.log(DlnaLogLevel::Info, "- SEQ: %s", seqBuf);
       DlnaLogger.log(DlnaLogLevel::Info, "- SID: %s", sub.sid.c_str());
       int rc = http.notify(cbUrl, createXML, "text/xml", &pn);
-
-      // log result
       DlnaLogger.log(DlnaLogLevel::Info, "Notify %s -> %d", cbUrl.url(), rc);
-
-      // remove processed notification on success; otherwise keep it for retry
       if (rc == 200) {
-        pending_list.erase(i);
+        pending_list.erase(it);
+        it = pending_list.begin();
         processed++;
-        // do not increment i: elements shifted down into current index
       } else {
         // Increment error count on the stored entry (not the local copy)
-        pending_list[i].error_count++;
-        if (pending_list[i].error_count > MAX_NOTIFY_RETIES) {
-          // give up and drop the entry after too many failed attempts
+        it->error_count++;
+        if (it->error_count > MAX_NOTIFY_RETIES) {
           DlnaLogger.log(DlnaLogLevel::Warning,
                          "dropping notify to %s after %d errors with rc=%d %s",
-                         cbUrl.url(), pending_list[i].error_count, rc,
+                         cbUrl.url(), it->error_count, rc,
                          http.reply().statusMessage());
-          pending_list.erase(i);
+          pending_list.erase(it);
+          it = pending_list.begin();
         } else {
-          ++i;
+          ++it;
         }
       }
     }
@@ -392,8 +383,10 @@ class SubscriptionMgrDevice : public ISubscriptionMgrDevice {
   // store pointers to heap-allocated Subscription objects. This keeps
   // references stable (we manage lifetimes explicitly) and avoids
   // large copies when enqueuing notifications.
-  Vector<Subscription*> subscriptions;
-  Vector<PendingNotification> pending_list;
+  //Vector<Subscription*> subscriptions;
+  //Vector<PendingNotification> pending_list;
+  ListLockFree<Subscription*> subscriptions;
+  ListLockFree<PendingNotification> pending_list;
   bool is_active = true;
 
   /**
