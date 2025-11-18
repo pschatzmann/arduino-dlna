@@ -1,8 +1,8 @@
-<map id="src/dlna/Action.h" name="src/dlna/Action.h">
-<area shape="rect" id="node1" title=" " alt="" coords="287,5,417,31"/>
-<area shape="rect" id="node2" href="$DLNACommon_8h.html" title=" " alt="" coords="90,79,251,104"/>
+<map id="src/dlna/common/Action.h" name="src/dlna/common/Action.h">
+<area shape="rect" id="node1" title=" " alt="" coords="271,5,462,31"/>
+<area shape="rect" id="node2" href="$DLNACommon_8h.html" title=" " alt="" coords="59,79,282,104"/>
 <area shape="rect" id="node5" href="$XMLPrinter_8h.html" title=" " alt="" coords="692,79,857,104"/>
-<area shape="rect" id="node23" href="$Logger_8h.html" title=" " alt="" coords="295,79,409,104"/>
+<area shape="rect" id="node23" href="$Logger_8h.html" title=" " alt="" coords="309,79,424,104"/>
 <area shape="rect" id="node3" title=" " alt="" coords="139,225,203,251"/>
 <area shape="rect" id="node4" href="$NullPrint_8h.html" title=" " alt="" coords="5,152,133,177"/>
 <area shape="rect" id="node6" title=" " alt="" coords="627,299,701,324"/>

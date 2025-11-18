@@ -372,6 +372,24 @@ Enumerations</h2></td></tr>
  }</td></tr>
 <tr class="memdesc:a5eabb92538a2ba1397f67b903cb9d35e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Supported log levels.  <a href="namespacetiny__dlna.html#a5eabb92538a2ba1397f67b903cb9d35e">More...</a><br /></td></tr>
 <tr class="separator:a5eabb92538a2ba1397f67b903cb9d35e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaeb449bfe04e5561476e1371856fa0cf"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetiny__dlna.html#aaeb449bfe04e5561476e1371856fa0cf">SubscriptionState</a> { <a class="el" href="namespacetiny__dlna.html#aaeb449bfe04e5561476e1371856fa0cfafdc7aa92ecb714c25019e988c09aeffa">Unsubscribed</a>
+, <a class="el" href="namespacetiny__dlna.html#aaeb449bfe04e5561476e1371856fa0cfaae54f8374e019ce8a7d61c839bd307b8">Subscribing</a>
+, <a class="el" href="namespacetiny__dlna.html#aaeb449bfe04e5561476e1371856fa0cfa808c7457c768423c5651cbf676d9f6d7">Subscribed</a>
+, <a class="el" href="namespacetiny__dlna.html#aaeb449bfe04e5561476e1371856fa0cfadd7dd6fc394076deae158ff90ead2776">Unsubscribing</a>
+ }</td></tr>
+<tr class="memdesc:aaeb449bfe04e5561476e1371856fa0cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subscription State for DLNA eventing.  <a href="namespacetiny__dlna.html#aaeb449bfe04e5561476e1371856fa0cf">More...</a><br /></td></tr>
+<tr class="separator:aaeb449bfe04e5561476e1371856fa0cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a504b776a2804411b65b3b1cd864d8d92"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetiny__dlna.html#a504b776a2804411b65b3b1cd864d8d92">ProtocolRole</a> { <a class="el" href="namespacetiny__dlna.html#a504b776a2804411b65b3b1cd864d8d92a69e59c2c0791225115a2a78deed062cf">IsSource</a> = 0
+, <a class="el" href="namespacetiny__dlna.html#a504b776a2804411b65b3b1cd864d8d92a4af7b7766fbfc7921a237d15c3d99309">IsSink</a> = 1
+ }</td></tr>
+<tr class="memdesc:a504b776a2804411b65b3b1cd864d8d92"><td class="mdescLeft">&#160;</td><td class="mdescRight">Role to indicate whether a protocolInfo entry is a Source or a Sink.  <a href="namespacetiny__dlna.html#a504b776a2804411b65b3b1cd864d8d92">More...</a><br /></td></tr>
+<tr class="separator:a504b776a2804411b65b3b1cd864d8d92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ecfa08a6b938018e48a3a309e895aa9"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetiny__dlna.html#a7ecfa08a6b938018e48a3a309e895aa9">ContentQueryType</a> { <a class="el" href="namespacetiny__dlna.html#a7ecfa08a6b938018e48a3a309e895aa9a13348442cc6a27032d2b4aa28b75a5d3">Search</a>
+, <a class="el" href="namespacetiny__dlna.html#a7ecfa08a6b938018e48a3a309e895aa9acf95a156ec0d73dc4d9fa743f0248b6f">BrowseMetadata</a>
+, <a class="el" href="namespacetiny__dlna.html#a7ecfa08a6b938018e48a3a309e895aa9a19bd5a29b763bd371a9e9b85df2ae672">BrowseChildren</a>
+ }</td></tr>
+<tr class="memdesc:a7ecfa08a6b938018e48a3a309e895aa9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type of content query for DLNA browsing/searching.  <a href="namespacetiny__dlna.html#a7ecfa08a6b938018e48a3a309e895aa9">More...</a><br /></td></tr>
+<tr class="separator:a7ecfa08a6b938018e48a3a309e895aa9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4b827ed63d901e894e77dc30e0df6cdd"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetiny__dlna.html#a4b827ed63d901e894e77dc30e0df6cdd">LoopAction</a> { <a class="el" href="namespacetiny__dlna.html#a4b827ed63d901e894e77dc30e0df6cdda571bd7aab9dae58ffa5bd014c3513dfa">RUN_SERVER</a> = 1
 , <a class="el" href="namespacetiny__dlna.html#a4b827ed63d901e894e77dc30e0df6cdda09b31e0a8496539075623912dfc09baa">RUN_UDP</a> = 2
 , <a class="el" href="namespacetiny__dlna.html#a4b827ed63d901e894e77dc30e0df6cdda91d5f15100a583b3a2c0408343c22586">RUN_SUBSCRIPTIONS</a> = 4
@@ -402,24 +420,6 @@ Enumerations</h2></td></tr>
 <br />
  }</td></tr>
 <tr class="separator:a85d3f686372782f654ff23302800aac9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaeb449bfe04e5561476e1371856fa0cf"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetiny__dlna.html#aaeb449bfe04e5561476e1371856fa0cf">SubscriptionState</a> { <a class="el" href="namespacetiny__dlna.html#aaeb449bfe04e5561476e1371856fa0cfafdc7aa92ecb714c25019e988c09aeffa">Unsubscribed</a>
-, <a class="el" href="namespacetiny__dlna.html#aaeb449bfe04e5561476e1371856fa0cfaae54f8374e019ce8a7d61c839bd307b8">Subscribing</a>
-, <a class="el" href="namespacetiny__dlna.html#aaeb449bfe04e5561476e1371856fa0cfa808c7457c768423c5651cbf676d9f6d7">Subscribed</a>
-, <a class="el" href="namespacetiny__dlna.html#aaeb449bfe04e5561476e1371856fa0cfadd7dd6fc394076deae158ff90ead2776">Unsubscribing</a>
- }</td></tr>
-<tr class="memdesc:aaeb449bfe04e5561476e1371856fa0cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subscription State for DLNA eventing.  <a href="namespacetiny__dlna.html#aaeb449bfe04e5561476e1371856fa0cf">More...</a><br /></td></tr>
-<tr class="separator:aaeb449bfe04e5561476e1371856fa0cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a504b776a2804411b65b3b1cd864d8d92"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetiny__dlna.html#a504b776a2804411b65b3b1cd864d8d92">ProtocolRole</a> { <a class="el" href="namespacetiny__dlna.html#a504b776a2804411b65b3b1cd864d8d92a69e59c2c0791225115a2a78deed062cf">IsSource</a> = 0
-, <a class="el" href="namespacetiny__dlna.html#a504b776a2804411b65b3b1cd864d8d92a4af7b7766fbfc7921a237d15c3d99309">IsSink</a> = 1
- }</td></tr>
-<tr class="memdesc:a504b776a2804411b65b3b1cd864d8d92"><td class="mdescLeft">&#160;</td><td class="mdescRight">Role to indicate whether a protocolInfo entry is a Source or a Sink.  <a href="namespacetiny__dlna.html#a504b776a2804411b65b3b1cd864d8d92">More...</a><br /></td></tr>
-<tr class="separator:a504b776a2804411b65b3b1cd864d8d92"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7ecfa08a6b938018e48a3a309e895aa9"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetiny__dlna.html#a7ecfa08a6b938018e48a3a309e895aa9">ContentQueryType</a> { <a class="el" href="namespacetiny__dlna.html#a7ecfa08a6b938018e48a3a309e895aa9a13348442cc6a27032d2b4aa28b75a5d3">Search</a>
-, <a class="el" href="namespacetiny__dlna.html#a7ecfa08a6b938018e48a3a309e895aa9acf95a156ec0d73dc4d9fa743f0248b6f">BrowseMetadata</a>
-, <a class="el" href="namespacetiny__dlna.html#a7ecfa08a6b938018e48a3a309e895aa9a19bd5a29b763bd371a9e9b85df2ae672">BrowseChildren</a>
- }</td></tr>
-<tr class="memdesc:a7ecfa08a6b938018e48a3a309e895aa9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type of content query for DLNA browsing/searching.  <a href="namespacetiny__dlna.html#a7ecfa08a6b938018e48a3a309e895aa9">More...</a><br /></td></tr>
-<tr class="separator:a7ecfa08a6b938018e48a3a309e895aa9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8b30900e538135f563c83e48319e5247"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetiny__dlna.html#a8b30900e538135f563c83e48319e5247">TinyMethodID</a> { <br />
 &#160;&#160;<a class="el" href="namespacetiny__dlna.html#a8b30900e538135f563c83e48319e5247a38bf86d84d310d359e8de997cf53b32f">T_UNDEFINED</a>
 , <a class="el" href="namespacetiny__dlna.html#a8b30900e538135f563c83e48319e5247a97fc3ce47a74a4e9ed375738b0b77c17">T_GET</a>
