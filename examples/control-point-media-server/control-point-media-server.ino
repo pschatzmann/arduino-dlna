@@ -2,7 +2,7 @@
 // Discovers MediaServer devices and performs a Browse on the root ("0").
 
 #include "WiFi.h"
-#include "DLNA.h"
+#include "dlna.h"
 
 const char* ssid = "YOUR_SSID";
 const char* password = "YOUR_PASSWORD";

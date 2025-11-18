@@ -1,5 +1,5 @@
 // Test UDP receive
-#include "DLNA.h"
+#include "dlna.h"
 
 const char *ssid = "";
 const char *password = "";

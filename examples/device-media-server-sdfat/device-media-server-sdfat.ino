@@ -19,7 +19,7 @@
 
 #include <SdFat.h>
 
-#include "DLNA.h"
+#include "dlna.h"
 #include "WiFi.h"
 #include "tools/SdFatContentProvider.h"
 

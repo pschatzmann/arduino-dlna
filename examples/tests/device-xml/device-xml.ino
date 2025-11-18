@@ -1,5 +1,5 @@
 // Test XML generation for Device
-#include "DLNA.h"
+#include "dlna.h"
 
 DLNADeviceInfo device_info;
 

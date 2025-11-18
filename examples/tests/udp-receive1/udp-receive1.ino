@@ -1,7 +1,7 @@
 // Test UDP receive -> does not work for multicast!
 #include <WiFi.h>
 #include <WiFiUdp.h>
-#include "DLNA.h"
+#include "dlna.h"
 
 const char *ssid = "ssid";
 const char *password = "password";

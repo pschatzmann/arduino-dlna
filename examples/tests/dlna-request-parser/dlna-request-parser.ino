@@ -1,4 +1,4 @@
-#include "DLNA.h"
+#include "dlna.h"
 
 RequestData data;
 DLNADeviceRequestParser rp;

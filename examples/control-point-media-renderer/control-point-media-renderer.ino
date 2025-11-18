@@ -3,7 +3,7 @@
 // starting playback, changing volume, and querying transport state.
 
 #include "WiFi.h"
-#include "DLNA.h"
+#include "dlna.h"
 
 // Replace these with your WiFi credentials
 const char* ssid = "YOUR_SSID";

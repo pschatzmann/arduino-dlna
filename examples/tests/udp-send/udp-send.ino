@@ -1,7 +1,7 @@
 // Test UDP send
 // we should receive it via sudo ngrep -W byline -d any udp and host 239.255.255.250 and dst port 1900
 
-#include "DLNA.h"
+#include "dlna.h"
 
 const char *ssid = "";
 const char *password = "";

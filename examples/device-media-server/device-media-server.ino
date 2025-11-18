@@ -6,7 +6,7 @@
 // http://162.55.180.156/csv/stations/search?tag=blues&offset=0&limit=30
 
 #include "WiFi.h"
-#include "DLNA.h"
+#include "dlna.h"
 
 // Replace with your WiFi credentials
 const char* ssid = "YOUR_SSID";

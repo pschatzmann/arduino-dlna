@@ -5,7 +5,7 @@
  * @brief DLNA content provider backed by SdFat filesystem directory tree.
  */
 
-#include "DLNA.h"
+#include "dlna.h"
 #include "SdFatDirectoryTree.h"
 
 namespace tiny_dlna {

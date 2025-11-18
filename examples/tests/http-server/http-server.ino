@@ -1,4 +1,4 @@
-#include "DLNA.h"
+#include "dlna.h"
 
 const char* ssid = "SSID";
 const char* password = "PASSWORD";

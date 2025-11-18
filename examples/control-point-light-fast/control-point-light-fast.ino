@@ -1,7 +1,7 @@
 // Example to test the GUPnP Network Light Test Application - we do not do any discovery
 
 #include "WiFi.h"
-#include "DLNA.h"
+#include "dlna.h"
 
 const char* ssid = "SSID";
 const char* password = "PASSWORD";

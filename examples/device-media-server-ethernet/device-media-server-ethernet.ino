@@ -3,7 +3,7 @@
 // with a couple of test DIDL items. Configure the MAC address and (optionally)
 // the static network settings before running on hardware without DHCP.
 
-#include "DLNA.h"
+#include "dlna.h"
 #include <SPI.h>
 #include <Ethernet.h>
 #include <EthernetUdp.h>

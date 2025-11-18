@@ -1,4 +1,4 @@
-#include "DLNA.h"
+#include "dlna.h"
 #include "dlna/xml/XMLParserPrint.h"
 
 using namespace tiny_dlna;

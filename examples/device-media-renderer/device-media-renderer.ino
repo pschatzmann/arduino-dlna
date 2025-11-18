@@ -1,7 +1,7 @@
 // Example for creating a Media Renderer
 
 #include "WiFi.h"
-#include "DLNA.h"
+#include "dlna.h"
 
 const char* ssid = "YOUR_SSID";
 const char* password = "YOUR_PASSWORD";
