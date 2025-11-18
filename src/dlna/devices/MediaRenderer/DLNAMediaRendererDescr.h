@@ -1,6 +1,6 @@
 #pragma once
 
-#include "dlna/DLNADescr.h"
+#include "dlna/common/DLNADescr.h"
 #include "dlna/xml/XMLPrinter.h"
 
 namespace tiny_dlna {

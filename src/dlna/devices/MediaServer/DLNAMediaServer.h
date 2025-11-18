@@ -6,7 +6,7 @@
 #include "basic/EscapingPrint.h"
 #include "basic/Printf.h"
 #include "basic/Str.h"
-#include "dlna/Action.h"
+#include "dlna/common/Action.h"
 #include "dlna/devices/DLNADevice.h"
 #include "dlna/devices/MediaServer/MediaItem.h"
 #include "dlna/udp/IUDPService.h"

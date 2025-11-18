@@ -3,8 +3,8 @@
 
 #include "basic/Icon.h"
 #include "basic/Vector.h"
-#include "dlna/Action.h"
-#include "dlna/DLNAServiceInfo.h"
+#include "dlna/common/Action.h"
+#include "dlna/common/DLNAServiceInfo.h"
 #include "dlna/udp/IUDPService.h"  // Ensure IUDPService is declared
 #include "dlna/xml/XMLPrinter.h"
 #include "http/Server/IHttpServer.h"

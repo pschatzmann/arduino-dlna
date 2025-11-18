@@ -6,7 +6,7 @@
 #include "basic/Icon.h"
 #include "basic/Logger.h"
 #include "basic/StrView.h"
-#include "dlna/DLNADeviceInfo.h"
+#include "dlna/common/DLNADeviceInfo.h"
 
 namespace tiny_dlna {
 

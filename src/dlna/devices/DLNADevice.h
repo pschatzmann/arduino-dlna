@@ -4,8 +4,8 @@
 
 #include "basic/Printf.h"
 #include "basic/Url.h"
-#include "dlna/DLNADeviceInfo.h"
-#include "dlna/Schedule.h"
+#include "dlna/common/DLNADeviceInfo.h"
+#include "dlna/common/Schedule.h"
 #include "dlna/devices/DLNADeviceRequestParser.h"
 #include "dlna/devices/IDevice.h"
 #include "dlna/devices/SubscriptionMgrDevice.h"

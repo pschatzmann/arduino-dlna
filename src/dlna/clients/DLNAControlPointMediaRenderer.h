@@ -3,7 +3,7 @@
 
 #include <functional>
 
-#include "dlna/Action.h"
+#include "dlna/common/Action.h"
 #include "dlna/clients/DLNAControlPoint.h"
 #include "dlna/xml/XMLProtocolInfoParser.h"
 #include "http/Server/HttpChunkWriter.h"

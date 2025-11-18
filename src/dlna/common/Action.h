@@ -1,7 +1,7 @@
 
 #pragma once
-// #include "dlna/DLNAServiceInfo.h"
-#include "dlna/DLNACommon.h"
+// #include "dlnaServiceInfo.h"
+#include "dlna/common/DLNACommon.h"
 #include "dlna/xml/XMLPrinter.h"
 #include "basic/Logger.h"  // ensure DlnaLogger and DlnaLogLevel declarations
 

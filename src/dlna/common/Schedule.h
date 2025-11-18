@@ -1,7 +1,7 @@
 #pragma once
 
 #include "basic/IPAddressAndPort.h"
-#include "dlna/DLNADeviceInfo.h"
+#include "dlna/common/DLNADeviceInfo.h"
 #include "dlna/udp/IUDPService.h"
 
 #define MAX_TMP_SIZE 300

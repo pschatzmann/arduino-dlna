@@ -5,7 +5,7 @@
 
 #include "basic/Url.h"
 #include "basic/Vector.h"
-#include "dlna/DLNADeviceInfo.h"
+#include "dlna/common/DLNADeviceInfo.h"
 #include "dlna/devices/SubscriptionMgrDevice.h"
 #include "dlna/udp/IUDPService.h"
 #include "dlna/xml/XMLParserPrint.h"

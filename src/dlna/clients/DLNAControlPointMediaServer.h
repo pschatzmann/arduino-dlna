@@ -1,7 +1,7 @@
 // Header-only control point helper for MediaServer devices
 #pragma once
 
-#include "dlna/Action.h"
+#include "dlna/common/Action.h"
 #include "dlna/clients/DLNAControlPoint.h"
 
 namespace tiny_dlna {

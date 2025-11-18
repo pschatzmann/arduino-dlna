@@ -1,6 +1,6 @@
 #pragma once
 
-#include "dlna/DLNACommon.h"
+#include "dlna/common/DLNACommon.h"
 
 namespace tiny_dlna {
 /**

@@ -6,7 +6,7 @@
 
 #include "Client.h"
 #include "basic/Url.h"
-#include "dlna/Action.h"
+#include "dlna/common/Action.h"
 #include "dlna/udp/IUDPService.h"
 #include "http/Server/IHttpRequest.h"
 #include "http/Server/IHttpServer.h"
