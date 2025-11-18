@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['dlna_2eh_0',['DLNA.h',['../DLNA_8h.html',1,'']]],
+  ['dlna_2eh_0',['dlna.h',['../dlna_8h.html',1,'']]],
   ['dlna_5fconfig_2eh_1',['dlna_config.h',['../dlna__config_8h.html',1,'']]],
   ['dlnacommon_2eh_2',['DLNACommon.h',['../DLNACommon_8h.html',1,'']]],
   ['dlnacontrolpoint_2eh_3',['DLNAControlPoint.h',['../DLNAControlPoint_8h.html',1,'']]],

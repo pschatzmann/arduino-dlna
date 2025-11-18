@@ -29,7 +29,7 @@ var searchData=
   ['devicexmlcallback_26',['deviceXMLCallback',['../classtiny__dlna_1_1DLNADevice.html#af6a71bfac4649063b387309854fec6cd',1,'tiny_dlna::DLNADevice']]],
   ['difference_5ftype_27',['difference_type',['../classtiny__dlna_1_1AllocatorPSRAM.html#af168b0a79368eeb12398afe493b443ae',1,'tiny_dlna::AllocatorPSRAM']]],
   ['directorytree_28',['directoryTree',['../classtiny__dlna_1_1SdFatContentProvider.html#ae465276b5f5e334f3266522f545c17d3',1,'tiny_dlna::SdFatContentProvider']]],
-  ['dlna_2eh_29',['DLNA.h',['../DLNA_8h.html',1,'']]],
+  ['dlna_2eh_29',['dlna.h',['../dlna_8h.html',1,'']]],
   ['dlna_5fallocator_30',['DLNA_ALLOCATOR',['../dlna__config_8h.html#a4096a4836ca8eb69303dc4a5a65bc0a6',1,'dlna_config.h']]],
   ['dlna_5fcheck_5fxml_5flength_31',['DLNA_CHECK_XML_LENGTH',['../dlna__config_8h.html#a06c796e0419b3a7928ff93c80ba90ea6',1,'dlna_config.h']]],
   ['dlna_5fconfig_2eh_32',['dlna_config.h',['../dlna__config_8h.html',1,'']]],

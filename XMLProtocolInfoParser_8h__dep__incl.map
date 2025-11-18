@@ -1,6 +1,7 @@
 <map id="src/dlna/xml/XMLProtocolInfoParser.h" name="src/dlna/xml/XMLProtocolInfoParser.h">
-<area shape="rect" id="node1" title=" " alt="" coords="28,5,215,45"/>
-<area shape="rect" id="node2" href="$DLNAControlPointMediaRenderer_8h.html" title=" " alt="" coords="18,93,225,133"/>
-<area shape="rect" id="node3" href="$DLNA_8h.html" title=" " alt="" coords="75,181,168,207"/>
-<area shape="rect" id="node4" href="$tools_2SdFatContentProvider_8h.html" title="DLNA content provider backed by SdFat filesystem directory tree." alt="" coords="5,255,237,280"/>
+<area shape="rect" id="node1" title=" " alt="" coords="153,5,339,45"/>
+<area shape="rect" id="node2" href="$DLNAControlPointMediaRenderer_8h.html" title=" " alt="" coords="143,93,349,133"/>
+<area shape="rect" id="node3" href="$dlna_8h.html" title=" " alt="" coords="203,181,289,207"/>
+<area shape="rect" id="node4" href="$dlna_2SdFatContentProvider_8h.html" title="DLNA content provider backed by SdFat filesystem directory tree." alt="" coords="5,255,233,280"/>
+<area shape="rect" id="node5" href="$tools_2SdFatContentProvider_8h.html" title="DLNA content provider backed by SdFat filesystem directory tree." alt="" coords="258,255,490,280"/>
 </map>
