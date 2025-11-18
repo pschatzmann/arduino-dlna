@@ -1,20 +1,18 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" title=" " alt="" coords="5,555,96,581"/>
-<area shape="rect" id="node2" href="$classtiny__dlna_1_1Vector.html" title=" " alt="" coords="175,5,349,45"/>
-<area shape="rect" id="node3" href="$classtiny__dlna_1_1Vector.html" title=" " alt="" coords="155,69,369,109"/>
-<area shape="rect" id="node4" href="$classtiny__dlna_1_1Vector.html" title=" " alt="" coords="161,133,363,173"/>
-<area shape="rect" id="node5" href="$classtiny__dlna_1_1Vector.html" title=" " alt="" coords="153,197,371,237"/>
-<area shape="rect" id="node6" href="$classtiny__dlna_1_1Vector.html" title=" " alt="" coords="191,261,333,301"/>
-<area shape="rect" id="node7" href="$classtiny__dlna_1_1Vector.html" title=" " alt="" coords="191,325,333,365"/>
-<area shape="rect" id="node8" href="$classtiny__dlna_1_1Vector.html" title=" " alt="" coords="147,390,377,445"/>
-<area shape="rect" id="node9" href="$classtiny__dlna_1_1Vector.html" title=" " alt="" coords="156,469,368,523"/>
-<area shape="rect" id="node10" href="$classtiny__dlna_1_1Vector.html" title=" " alt="" coords="171,548,353,588"/>
-<area shape="rect" id="node11" href="$classtiny__dlna_1_1Vector.html" title=" " alt="" coords="191,612,333,652"/>
-<area shape="rect" id="node12" href="$classtiny__dlna_1_1Vector.html" title=" " alt="" coords="165,677,359,731"/>
-<area shape="rect" id="node13" href="$classtiny__dlna_1_1Vector.html" title=" " alt="" coords="173,756,351,796"/>
-<area shape="rect" id="node14" href="$classtiny__dlna_1_1Vector.html" title=" " alt="" coords="162,820,362,860"/>
-<area shape="rect" id="node15" href="$classtiny__dlna_1_1Vector.html" title=" " alt="" coords="144,884,380,924"/>
-<area shape="rect" id="node16" href="$classtiny__dlna_1_1Vector.html" title=" " alt="" coords="191,948,333,988"/>
-<area shape="rect" id="node17" href="$classtiny__dlna_1_1Vector.html" title=" " alt="" coords="191,1012,333,1052"/>
-<area shape="rect" id="node18" href="$classtiny__dlna_1_1Vector.html" title="Lightweight wrapper around std::vector with Arduino&#45;friendly helpers and a pluggable allocator." alt="" coords="191,1076,333,1116"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,483,96,509"/>
+<area shape="rect" id="node2" href="$classtiny__dlna_1_1Vector.html" title=" " alt="" coords="172,5,345,45"/>
+<area shape="rect" id="node3" href="$classtiny__dlna_1_1Vector.html" title=" " alt="" coords="151,69,366,109"/>
+<area shape="rect" id="node4" href="$classtiny__dlna_1_1Vector.html" title=" " alt="" coords="157,133,360,173"/>
+<area shape="rect" id="node5" href="$classtiny__dlna_1_1Vector.html" title=" " alt="" coords="149,197,368,237"/>
+<area shape="rect" id="node6" href="$classtiny__dlna_1_1Vector.html" title=" " alt="" coords="187,261,330,301"/>
+<area shape="rect" id="node7" href="$classtiny__dlna_1_1Vector.html" title=" " alt="" coords="187,325,330,365"/>
+<area shape="rect" id="node8" href="$classtiny__dlna_1_1Vector.html" title=" " alt="" coords="144,390,373,445"/>
+<area shape="rect" id="node9" href="$classtiny__dlna_1_1Vector.html" title=" " alt="" coords="153,469,365,523"/>
+<area shape="rect" id="node10" href="$classtiny__dlna_1_1Vector.html" title=" " alt="" coords="168,548,349,588"/>
+<area shape="rect" id="node11" href="$classtiny__dlna_1_1Vector.html" title=" " alt="" coords="187,612,330,652"/>
+<area shape="rect" id="node12" href="$classtiny__dlna_1_1Vector.html" title=" " alt="" coords="161,677,356,731"/>
+<area shape="rect" id="node13" href="$classtiny__dlna_1_1Vector.html" title=" " alt="" coords="169,756,348,796"/>
+<area shape="rect" id="node14" href="$classtiny__dlna_1_1Vector.html" title=" " alt="" coords="187,820,330,860"/>
+<area shape="rect" id="node15" href="$classtiny__dlna_1_1Vector.html" title=" " alt="" coords="187,884,330,924"/>
+<area shape="rect" id="node16" href="$classtiny__dlna_1_1Vector.html" title="Lightweight wrapper around std::vector with Arduino&#45;friendly helpers and a pluggable allocator." alt="" coords="187,948,330,988"/>
 </map>

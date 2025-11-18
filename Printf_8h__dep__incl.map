@@ -5,7 +5,7 @@
 <area shape="rect" id="node10" href="$DLNAMediaServer_8h.html" title=" " alt="" coords="807,152,1020,192"/>
 <area shape="rect" id="node3" href="$DLNA_8h.html" title=" " alt="" coords="627,328,720,353"/>
 <area shape="rect" id="node5" href="$DLNAControlPoint_8h.html" title=" " alt="" coords="500,152,706,192"/>
-<area shape="rect" id="node4" href="$SdFatContentProvider_8h.html" title="DLNA content provider backed by SdFat filesystem directory tree." alt="" coords="558,401,790,427"/>
+<area shape="rect" id="node4" href="$tools_2SdFatContentProvider_8h.html" title="DLNA content provider backed by SdFat filesystem directory tree." alt="" coords="558,401,790,427"/>
 <area shape="rect" id="node6" href="$DLNAControlPointMediaRenderer_8h.html" title=" " alt="" coords="269,240,476,280"/>
 <area shape="rect" id="node7" href="$DLNAControlPointMediaServer_8h.html" title=" " alt="" coords="500,240,706,280"/>
 <area shape="rect" id="node8" href="$DLNADeviceRequestParser_8h.html" title=" " alt="" coords="33,240,245,280"/>

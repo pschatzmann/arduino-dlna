@@ -7,5 +7,8 @@ var searchData=
   ['list_3c_20tiny_5fdlna_3a_3ahttprequesthandlerline_20_2a_20_3e_4',['List&lt; tiny_dlna::HttpRequestHandlerLine * &gt;',['../classtiny__dlna_1_1List.html',1,'tiny_dlna']]],
   ['list_3c_20tiny_5fdlna_3a_3ahttprequestrewrite_20_2a_20_3e_5',['List&lt; tiny_dlna::HttpRequestRewrite * &gt;',['../classtiny__dlna_1_1List.html',1,'tiny_dlna']]],
   ['list_3c_20tiny_5fdlna_3a_3arequestdata_2c_20dlna_5fallocator_3c_20tiny_5fdlna_3a_3arequestdata_20_3e_20_3e_6',['List&lt; tiny_dlna::RequestData, DLNA_ALLOCATOR&lt; tiny_dlna::RequestData &gt; &gt;',['../classtiny__dlna_1_1List.html',1,'tiny_dlna']]],
-  ['loggerclass_7',['LoggerClass',['../classtiny__dlna_1_1LoggerClass.html',1,'tiny_dlna']]]
+  ['listlockfree_7',['ListLockFree',['../classtiny__dlna_1_1ListLockFree.html',1,'tiny_dlna']]],
+  ['listlockfree_3c_20tiny_5fdlna_3a_3apendingnotification_20_3e_8',['ListLockFree&lt; tiny_dlna::PendingNotification &gt;',['../classtiny__dlna_1_1ListLockFree.html',1,'tiny_dlna']]],
+  ['listlockfree_3c_20tiny_5fdlna_3a_3asubscription_20_2a_20_3e_9',['ListLockFree&lt; tiny_dlna::Subscription * &gt;',['../classtiny__dlna_1_1ListLockFree.html',1,'tiny_dlna']]],
+  ['loggerclass_10',['LoggerClass',['../classtiny__dlna_1_1LoggerClass.html',1,'tiny_dlna']]]
 ];

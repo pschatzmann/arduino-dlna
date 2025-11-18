@@ -1,7 +1,7 @@
 var searchData=
 [
   ['l_5finstance_0',['l_instance',['../classtiny__dlna_1_1Queue.html#a6a6bf94a4d2ad24661e81ff8016503fd',1,'tiny_dlna::Queue']]],
-  ['last_1',['last',['../classtiny__dlna_1_1List.html#a730e204598421cd1b5383a83fd6373e3',1,'tiny_dlna::List']]],
+  ['last_1',['last',['../classtiny__dlna_1_1List.html#a730e204598421cd1b5383a83fd6373e3',1,'tiny_dlna::List::last()'],['../classtiny__dlna_1_1ListLockFree.html#ad444d60cdfc770e7a4fca5d5abf177e2',1,'tiny_dlna::ListLockFree::last()']]],
   ['last_5fattributes_2',['last_attributes',['../classtiny__dlna_1_1XMLParser.html#a0181e2e4bf8110abf69db577b00f4a32',1,'tiny_dlna::XMLParser']]],
   ['last_5fevent_5fnotify_5fms_3',['last_event_notify_ms',['../classtiny__dlna_1_1SubscriptionMgrControlPoint.html#a19faa4c6793a8ed88559a8e9b5856484',1,'tiny_dlna::SubscriptionMgrControlPoint']]],
   ['last_5freply_4',['last_reply',['../classtiny__dlna_1_1DLNAControlPointMediaRenderer.html#a868a1d3e694d0d082bf2334a0b8f29f9',1,'tiny_dlna::DLNAControlPointMediaRenderer::last_reply()'],['../classtiny__dlna_1_1DLNAControlPointMediaServer.html#adee5db73ee1ebcfe06a951edd1a36597',1,'tiny_dlna::DLNAControlPointMediaServer::last_reply()']]],
@@ -17,5 +17,6 @@ var searchData=
   ['location_14',['location',['../classtiny__dlna_1_1MSearchReplyCP.html#ac2c66bea457ce9b9337d8e5b27e53971',1,'tiny_dlna::MSearchReplyCP']]],
   ['location_15',['LOCATION',['../namespacetiny__dlna.html#afce8f59f39df8a9aed9f14e4c56dcd84',1,'tiny_dlna']]],
   ['log_5flevel_16',['log_level',['../classtiny__dlna_1_1LoggerClass.html#a183ab881f8dc3feab082a38d7d301704',1,'tiny_dlna::LoggerClass']]],
-  ['log_5fstream_5fptr_17',['log_stream_ptr',['../classtiny__dlna_1_1LoggerClass.html#a704408410ecd0260af3659b212a10d8b',1,'tiny_dlna::LoggerClass']]]
+  ['log_5fstream_5fptr_17',['log_stream_ptr',['../classtiny__dlna_1_1LoggerClass.html#a704408410ecd0260af3659b212a10d8b',1,'tiny_dlna::LoggerClass']]],
+  ['loop_5fcode_18',['loop_code',['../classtiny__dlna_1_1TaskRTOS.html#a425224956aa0d298be82ef70d0b17060',1,'tiny_dlna::TaskRTOS']]]
 ];

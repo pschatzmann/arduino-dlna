@@ -11,6 +11,7 @@ var searchData=
   ['httprequesthandlerline_2eh_8',['HttpRequestHandlerLine.h',['../HttpRequestHandlerLine_8h.html',1,'']]],
   ['httprequestrewrite_2eh_9',['HttpRequestRewrite.h',['../HttpRequestRewrite_8h.html',1,'']]],
   ['httpserver_2eh_10',['HttpServer.h',['../HttpServer_8h.html',1,'']]],
-  ['httpstreamcopy_2eh_11',['HttpStreamCopy.h',['../HttpStreamCopy_8h.html',1,'']]],
-  ['httpstreamedoutput_2eh_12',['HttpStreamedOutput.h',['../HttpStreamedOutput_8h.html',1,'']]]
+  ['httpserverusingtask_2eh_11',['HttpServerUsingTask.h',['../HttpServerUsingTask_8h.html',1,'']]],
+  ['httpstreamcopy_2eh_12',['HttpStreamCopy.h',['../HttpStreamCopy_8h.html',1,'']]],
+  ['httpstreamedoutput_2eh_13',['HttpStreamedOutput.h',['../HttpStreamedOutput_8h.html',1,'']]]
 ];

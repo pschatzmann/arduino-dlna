@@ -22,5 +22,6 @@ var searchData=
   ['httprequesthandlerline_19',['HttpRequestHandlerLine',['../classtiny__dlna_1_1HttpRequestHandlerLine.html#a65e3c61d4c564f59b55a55f5a912882f',1,'tiny_dlna::HttpRequestHandlerLine']]],
   ['httprequestrewrite_20',['HttpRequestRewrite',['../classtiny__dlna_1_1HttpRequestRewrite.html#a6e89e0a5d9147acee904df4b9e74ab43',1,'tiny_dlna::HttpRequestRewrite']]],
   ['httpserver_21',['HttpServer',['../classtiny__dlna_1_1HttpServer.html#a6a0cfe498609d281b8631518e0a078e2',1,'tiny_dlna::HttpServer']]],
-  ['httpstreamcopy_22',['HttpStreamCopy',['../classtiny__dlna_1_1HttpStreamCopy.html#af33ad0060f62d49578f33b42d240f852',1,'tiny_dlna::HttpStreamCopy']]]
+  ['httpserverusingtask_22',['HttpServerUsingTask',['../classtiny__dlna_1_1HttpServerUsingTask.html#a8b1e31bd909152d3cdcefd007b472d65',1,'tiny_dlna::HttpServerUsingTask']]],
+  ['httpstreamcopy_23',['HttpStreamCopy',['../classtiny__dlna_1_1HttpStreamCopy.html#af33ad0060f62d49578f33b42d240f852',1,'tiny_dlna::HttpStreamCopy']]]
 ];

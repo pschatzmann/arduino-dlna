@@ -14,7 +14,7 @@ var searchData=
   ['haseventsubscriptioncallback_11',['hasEventSubscriptionCallback',['../classtiny__dlna_1_1SubscriptionMgrControlPoint.html#a6bd10953ff8830275802c39d00eb4c60',1,'tiny_dlna::SubscriptionMgrControlPoint']]],
   ['haskey_12',['hasKey',['../classtiny__dlna_1_1HttpParameters.html#a44c129cdb36c7463465a47cecd70b58f',1,'tiny_dlna::HttpParameters']]],
   ['hasnonwhitespacetextahead_13',['hasNonWhitespaceTextAhead',['../classtiny__dlna_1_1XMLParser.html#af6137e143fb628656f471099a9102261',1,'tiny_dlna::XMLParser']]],
-  ['head_14',['head',['../classtiny__dlna_1_1IHttpRequest.html#ab8dbb66a0f161fa1641bb81c073dc6e0',1,'tiny_dlna::IHttpRequest::head()'],['../classtiny__dlna_1_1HttpRequest.html#ad96c4194e1c843faee852b8c185b1958',1,'tiny_dlna::HttpRequest::head()'],['../structtiny__dlna_1_1QueueLockFree_1_1Node.html#a0ff922b8dfa7f2e9e2b94279bc93e875',1,'tiny_dlna::QueueLockFree::Node::head()']]],
+  ['head_14',['head',['../structtiny__dlna_1_1QueueLockFree_1_1Node.html#a0ff922b8dfa7f2e9e2b94279bc93e875',1,'tiny_dlna::QueueLockFree::Node::head()'],['../classtiny__dlna_1_1HttpRequest.html#ad96c4194e1c843faee852b8c185b1958',1,'tiny_dlna::HttpRequest::head()'],['../classtiny__dlna_1_1IHttpRequest.html#ab8dbb66a0f161fa1641bb81c073dc6e0',1,'tiny_dlna::IHttpRequest::head()']]],
   ['head_5fpos_15',['head_pos',['../classtiny__dlna_1_1QueueLockFree.html#ac4268ffc0605c1acef7a900d22642935',1,'tiny_dlna::QueueLockFree']]],
   ['header_16',['header',['../classtiny__dlna_1_1HttpRequestHandlerLine.html#a1647dc6a8267fde508d921f5d02ca45a',1,'tiny_dlna::HttpRequestHandlerLine']]],
   ['headerline_17',['headerLine',['../classtiny__dlna_1_1HttpHeader.html#a26538bf6bacc49c11161a27ce5be8d8f',1,'tiny_dlna::HttpHeader']]],
@@ -49,8 +49,10 @@ var searchData=
   ['httprequestrewrite_2eh_46',['HttpRequestRewrite.h',['../HttpRequestRewrite_8h.html',1,'']]],
   ['httpserver_47',['HttpServer',['../classtiny__dlna_1_1HttpServer.html#a6a0cfe498609d281b8631518e0a078e2',1,'tiny_dlna::HttpServer::HttpServer()'],['../classtiny__dlna_1_1HttpServer.html',1,'tiny_dlna::HttpServer&lt; ClientType, ServerType &gt;']]],
   ['httpserver_2eh_48',['HttpServer.h',['../HttpServer_8h.html',1,'']]],
-  ['httpstreamcopy_49',['HttpStreamCopy',['../classtiny__dlna_1_1HttpStreamCopy.html#af33ad0060f62d49578f33b42d240f852',1,'tiny_dlna::HttpStreamCopy::HttpStreamCopy()'],['../classtiny__dlna_1_1HttpStreamCopy.html',1,'tiny_dlna::HttpStreamCopy']]],
-  ['httpstreamcopy_2eh_50',['HttpStreamCopy.h',['../HttpStreamCopy_8h.html',1,'']]],
-  ['httpstreamedoutput_51',['HttpStreamedOutput',['../classtiny__dlna_1_1HttpStreamedOutput.html',1,'tiny_dlna']]],
-  ['httpstreamedoutput_2eh_52',['HttpStreamedOutput.h',['../HttpStreamedOutput_8h.html',1,'']]]
+  ['httpserverusingtask_49',['HttpServerUsingTask',['../classtiny__dlna_1_1HttpServerUsingTask.html#a8b1e31bd909152d3cdcefd007b472d65',1,'tiny_dlna::HttpServerUsingTask::HttpServerUsingTask()'],['../classtiny__dlna_1_1HttpServerUsingTask.html',1,'tiny_dlna::HttpServerUsingTask&lt; ClientType, ServerType &gt;']]],
+  ['httpserverusingtask_2eh_50',['HttpServerUsingTask.h',['../HttpServerUsingTask_8h.html',1,'']]],
+  ['httpstreamcopy_51',['HttpStreamCopy',['../classtiny__dlna_1_1HttpStreamCopy.html#af33ad0060f62d49578f33b42d240f852',1,'tiny_dlna::HttpStreamCopy::HttpStreamCopy()'],['../classtiny__dlna_1_1HttpStreamCopy.html',1,'tiny_dlna::HttpStreamCopy']]],
+  ['httpstreamcopy_2eh_52',['HttpStreamCopy.h',['../HttpStreamCopy_8h.html',1,'']]],
+  ['httpstreamedoutput_53',['HttpStreamedOutput',['../classtiny__dlna_1_1HttpStreamedOutput.html',1,'tiny_dlna']]],
+  ['httpstreamedoutput_2eh_54',['HttpStreamedOutput.h',['../HttpStreamedOutput_8h.html',1,'']]]
 ];

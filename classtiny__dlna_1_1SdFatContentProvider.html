@@ -85,10 +85,36 @@ $(function() {
 <p>Content provider for DLNA media server using SdFat filesystem.  
  <a href="classtiny__dlna_1_1SdFatContentProvider.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="SdFatContentProvider_8h_source.html">SdFatContentProvider.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="dlna_2SdFatContentProvider_8h_source.html">SdFatContentProvider.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:aca4dbe385055eff18d954d7da6d62a9b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html#aca4dbe385055eff18d954d7da6d62a9b">begin</a> (FS &amp;fs, const char *rootPath)</td></tr>
+<tr class="memdesc:aca4dbe385055eff18d954d7da6d62a9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the content provider and scans the filesystem.  <br /></td></tr>
+<tr class="separator:aca4dbe385055eff18d954d7da6d62a9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1cebb5e45313911ec9123a6431ff6a25"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html#a1cebb5e45313911ec9123a6431ff6a25">end</a> ()</td></tr>
+<tr class="memdesc:a1cebb5e45313911ec9123a6431ff6a25"><td class="mdescLeft">&#160;</td><td class="mdescRight">Releases all resources and clears the directory tree.  <br /></td></tr>
+<tr class="separator:a1cebb5e45313911ec9123a6431ff6a25"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0a2c2392c76bbbe53a39ce3558b88c2"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html#af0a2c2392c76bbbe53a39ce3558b88c2">size</a> ()</td></tr>
+<tr class="separator:af0a2c2392c76bbbe53a39ce3558b88c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab51fee1607cc176d5b8f0f1f27ec8829"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html#ab51fee1607cc176d5b8f0f1f27ec8829">prepareData</a> (const char *objectID, <a class="el" href="namespacetiny__dlna.html#a7ecfa08a6b938018e48a3a309e895aa9">ContentQueryType</a> queryType, const char *filter, int startingIndex, int requestedCount, const char *sortCriteria, int &amp;numberReturned, int &amp;totalMatches, int &amp;updateID, void *reference)</td></tr>
+<tr class="memdesc:ab51fee1607cc176d5b8f0f1f27ec8829"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prepares data for a DLNA content query.  <br /></td></tr>
+<tr class="separator:ab51fee1607cc176d5b8f0f1f27ec8829"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c71004a1fe70681b3df61b41b5a12a9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html#a3c71004a1fe70681b3df61b41b5a12a9">isHidden</a> (<a class="el" href="classtiny__dlna_1_1TreeNode.html">TreeNode</a> *node) const</td></tr>
+<tr class="memdesc:a3c71004a1fe70681b3df61b41b5a12a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the node is hidden (file or directory name starts with '.')  <br /></td></tr>
+<tr class="separator:a3c71004a1fe70681b3df61b41b5a12a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3808bb0387d6dc9f52ec5f675da94f7e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html#a3808bb0387d6dc9f52ec5f675da94f7e">getData</a> (int index, <a class="el" href="structtiny__dlna_1_1MediaItem.html">MediaItem</a> &amp;item, void *reference=nullptr)</td></tr>
+<tr class="memdesc:a3808bb0387d6dc9f52ec5f675da94f7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves a single media item by index.  <br /></td></tr>
+<tr class="separator:a3808bb0387d6dc9f52ec5f675da94f7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a998a95f1177147124478b0af1101eea2"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html#a998a95f1177147124478b0af1101eea2">getPath</a> ()</td></tr>
+<tr class="memdesc:a998a95f1177147124478b0af1101eea2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the path prefix for resource URIs.  <br /></td></tr>
+<tr class="separator:a998a95f1177147124478b0af1101eea2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acfec4ba14dce053a57d91248185dbfbd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html#acfec4ba14dce053a57d91248185dbfbd">setPath</a> (const char *p)</td></tr>
+<tr class="memdesc:acfec4ba14dce053a57d91248185dbfbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the path prefix for resource URIs.  <br /></td></tr>
+<tr class="separator:acfec4ba14dce053a57d91248185dbfbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc42446eeb340d8af7e3eb08732191b7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1TreeNode.html">TreeNode</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html#abc42446eeb340d8af7e3eb08732191b7">getTreeNodeById</a> (uint32_t id)</td></tr>
+<tr class="memdesc:abc42446eeb340d8af7e3eb08732191b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the full file path by node ID.  <br /></td></tr>
+<tr class="separator:abc42446eeb340d8af7e3eb08732191b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aca4dbe385055eff18d954d7da6d62a9b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html#aca4dbe385055eff18d954d7da6d62a9b">begin</a> (FS &amp;fs, const char *rootPath)</td></tr>
 <tr class="memdesc:aca4dbe385055eff18d954d7da6d62a9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the content provider and scans the filesystem.  <br /></td></tr>
 <tr class="separator:aca4dbe385055eff18d954d7da6d62a9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -121,29 +147,32 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:abcbf325a7c59ff2c3a5914d2d806da52"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1TreeNode.html">TreeNode</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html#abcbf325a7c59ff2c3a5914d2d806da52">findNodeByObjectID</a> (const char *objectID)</td></tr>
 <tr class="memdesc:abcbf325a7c59ff2c3a5914d2d806da52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds a tree node by its object ID string.  <br /></td></tr>
 <tr class="separator:abcbf325a7c59ff2c3a5914d2d806da52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abcbf325a7c59ff2c3a5914d2d806da52"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1TreeNode.html">TreeNode</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html#abcbf325a7c59ff2c3a5914d2d806da52">findNodeByObjectID</a> (const char *objectID)</td></tr>
+<tr class="memdesc:abcbf325a7c59ff2c3a5914d2d806da52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds a tree node by its object ID string.  <br /></td></tr>
+<tr class="separator:abcbf325a7c59ff2c3a5914d2d806da52"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:accea87dc3b361ce95ef1f92eeea1f098"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1SdFatDirectoryTree.html">SdFatDirectoryTree</a>&lt; FS &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html#accea87dc3b361ce95ef1f92eeea1f098">directoryTree</a></td></tr>
-<tr class="separator:accea87dc3b361ce95ef1f92eeea1f098"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a99f7dae7b07ac88e2fbd73cf02cd0f14"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html#a99f7dae7b07ac88e2fbd73cf02cd0f14">path</a> = &quot;/file&quot;</td></tr>
-<tr class="separator:a99f7dae7b07ac88e2fbd73cf02cd0f14"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7171ad13fa5064a1e6fd0a62ee028857"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html#a7171ad13fa5064a1e6fd0a62ee028857">objectID_</a> = nullptr</td></tr>
-<tr class="separator:a7171ad13fa5064a1e6fd0a62ee028857"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae465276b5f5e334f3266522f545c17d3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1SdFatDirectoryTree.html">SdFatDirectoryTree</a>&lt; FS &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html#ae465276b5f5e334f3266522f545c17d3">directoryTree</a></td></tr>
+<tr class="separator:ae465276b5f5e334f3266522f545c17d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37d84ee5e9dc1e7b60e81862a6e47c65"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html#a37d84ee5e9dc1e7b60e81862a6e47c65">path</a> = &quot;/file&quot;</td></tr>
+<tr class="separator:a37d84ee5e9dc1e7b60e81862a6e47c65"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acae96ef598ba84b6da202e7fd8dd2afd"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html#acae96ef598ba84b6da202e7fd8dd2afd">objectID_</a> = nullptr</td></tr>
+<tr class="separator:acae96ef598ba84b6da202e7fd8dd2afd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaa35e2d439b50d96c92067f0684409b9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacetiny__dlna.html#a7ecfa08a6b938018e48a3a309e895aa9">ContentQueryType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html#aaa35e2d439b50d96c92067f0684409b9">queryType_</a></td></tr>
 <tr class="separator:aaa35e2d439b50d96c92067f0684409b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7f71c84f5706170065c96aab078e8dfc"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html#a7f71c84f5706170065c96aab078e8dfc">filter_</a> = nullptr</td></tr>
-<tr class="separator:a7f71c84f5706170065c96aab078e8dfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa186e401770d791000faf57470472ab3"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html#aa186e401770d791000faf57470472ab3">filter_</a> = nullptr</td></tr>
+<tr class="separator:aa186e401770d791000faf57470472ab3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa83c0672494cf40e9d2581bd5ebf5219"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html#aa83c0672494cf40e9d2581bd5ebf5219">startingIndex_</a> = 0</td></tr>
 <tr class="separator:aa83c0672494cf40e9d2581bd5ebf5219"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a69d55b8b08ba96500121f40516738887"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html#a69d55b8b08ba96500121f40516738887">requestedCount_</a> = 0</td></tr>
 <tr class="separator:a69d55b8b08ba96500121f40516738887"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0092fb70a474773e0f9bee39da121726"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html#a0092fb70a474773e0f9bee39da121726">sortCriteria_</a> = nullptr</td></tr>
-<tr class="separator:a0092fb70a474773e0f9bee39da121726"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7f304c276fb61a57f692ff0fdfe0ab24"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html#a7f304c276fb61a57f692ff0fdfe0ab24">reference_</a> = nullptr</td></tr>
-<tr class="separator:a7f304c276fb61a57f692ff0fdfe0ab24"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3f0d96cb6f9d21e88d0376b242dbb121"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classtiny__dlna_1_1TreeNode.html">TreeNode</a> *, <a class="el" href="classtiny__dlna_1_1AllocatorPSRAM.html">AllocatorPSRAM</a>&lt; <a class="el" href="classtiny__dlna_1_1TreeNode.html">TreeNode</a> * &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html#a3f0d96cb6f9d21e88d0376b242dbb121">resultNodes_</a></td></tr>
-<tr class="separator:a3f0d96cb6f9d21e88d0376b242dbb121"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a394afb74f565a7b5434c47226f491e56"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html#a394afb74f565a7b5434c47226f491e56">sortCriteria_</a> = nullptr</td></tr>
+<tr class="separator:a394afb74f565a7b5434c47226f491e56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9bd124cc37cc7255e8f5a1faa64dc5a"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html#ad9bd124cc37cc7255e8f5a1faa64dc5a">reference_</a> = nullptr</td></tr>
+<tr class="separator:ad9bd124cc37cc7255e8f5a1faa64dc5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f73311564363ba76a1676349367b8eb"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classtiny__dlna_1_1TreeNode.html">TreeNode</a> *, <a class="el" href="classtiny__dlna_1_1AllocatorPSRAM.html">AllocatorPSRAM</a>&lt; <a class="el" href="classtiny__dlna_1_1TreeNode.html">TreeNode</a> * &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html#a0f73311564363ba76a1676349367b8eb">resultNodes_</a></td></tr>
+<tr class="separator:a0f73311564363ba76a1676349367b8eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4d6afbb922145b966cbab234b9db25d9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacetiny__dlna.html#ae37837f99b4c25b8e03929377da6e18e">stringPSRAM</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html#a4d6afbb922145b966cbab234b9db25d9">currentId_</a></td></tr>
 <tr class="memdesc:a4d6afbb922145b966cbab234b9db25d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current item ID string.  <br /></td></tr>
 <tr class="separator:a4d6afbb922145b966cbab234b9db25d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -179,7 +208,55 @@ class tiny_dlna::SdFatContentProvider&lt; FS &gt;</div><p>Content provider for D
 </dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="aca4dbe385055eff18d954d7da6d62a9b" name="aca4dbe385055eff18d954d7da6d62a9b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aca4dbe385055eff18d954d7da6d62a9b">&#9670;&#160;</a></span>begin()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aca4dbe385055eff18d954d7da6d62a9b">&#9670;&#160;</a></span>begin() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename FS &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html">tiny_dlna::SdFatContentProvider</a>&lt; FS &gt;::begin </td>
+          <td>(</td>
+          <td class="paramtype">FS &amp;&#160;</td>
+          <td class="paramname"><em>fs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>rootPath</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Initializes the content provider and scans the filesystem. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fs</td><td>Filesystem instance (e.g., SdFs) </td></tr>
+    <tr><td class="paramname">rootPath</td><td>Root directory path to scan (defaults to "/") </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true on success </dd></dl>
+
+</div>
+</div>
+<a id="aca4dbe385055eff18d954d7da6d62a9b" name="aca4dbe385055eff18d954d7da6d62a9b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca4dbe385055eff18d954d7da6d62a9b">&#9670;&#160;</a></span>begin() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -227,7 +304,36 @@ template&lt;typename FS &gt; </div>
 </div>
 </div>
 <a id="a1cebb5e45313911ec9123a6431ff6a25" name="a1cebb5e45313911ec9123a6431ff6a25"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1cebb5e45313911ec9123a6431ff6a25">&#9670;&#160;</a></span>end()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a1cebb5e45313911ec9123a6431ff6a25">&#9670;&#160;</a></span>end() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename FS &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html">tiny_dlna::SdFatContentProvider</a>&lt; FS &gt;::end </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Releases all resources and clears the directory tree. </p>
+
+</div>
+</div>
+<a id="a1cebb5e45313911ec9123a6431ff6a25" name="a1cebb5e45313911ec9123a6431ff6a25"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1cebb5e45313911ec9123a6431ff6a25">&#9670;&#160;</a></span>end() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -256,7 +362,44 @@ template&lt;typename FS &gt; </div>
 </div>
 </div>
 <a id="abcbf325a7c59ff2c3a5914d2d806da52" name="abcbf325a7c59ff2c3a5914d2d806da52"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abcbf325a7c59ff2c3a5914d2d806da52">&#9670;&#160;</a></span>findNodeByObjectID()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#abcbf325a7c59ff2c3a5914d2d806da52">&#9670;&#160;</a></span>findNodeByObjectID() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename FS &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1TreeNode.html">TreeNode</a> * <a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html">tiny_dlna::SdFatContentProvider</a>&lt; FS &gt;::findNodeByObjectID </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>objectID</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Finds a tree node by its object ID string. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">objectID</td><td>Object ID as string (node's numeric id) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Pointer to the node, or nullptr if not found or invalid </dd></dl>
+
+</div>
+</div>
+<a id="abcbf325a7c59ff2c3a5914d2d806da52" name="abcbf325a7c59ff2c3a5914d2d806da52"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abcbf325a7c59ff2c3a5914d2d806da52">&#9670;&#160;</a></span>findNodeByObjectID() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -293,7 +436,63 @@ template&lt;typename FS &gt; </div>
 </div>
 </div>
 <a id="a3808bb0387d6dc9f52ec5f675da94f7e" name="a3808bb0387d6dc9f52ec5f675da94f7e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3808bb0387d6dc9f52ec5f675da94f7e">&#9670;&#160;</a></span>getData()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a3808bb0387d6dc9f52ec5f675da94f7e">&#9670;&#160;</a></span>getData() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename FS &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html">tiny_dlna::SdFatContentProvider</a>&lt; FS &gt;::getData </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structtiny__dlna_1_1MediaItem.html">MediaItem</a> &amp;&#160;</td>
+          <td class="paramname"><em>item</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>reference</em> = <code>nullptr</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Retrieves a single media item by index. </p>
+<p>Called repeatedly by DLNA after <a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html#ab51fee1607cc176d5b8f0f1f27ec8829" title="Prepares data for a DLNA content query.">prepareData()</a> to fetch individual items. Uses the cached resultNodes_ populated during <a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html#ab51fee1607cc176d5b8f0f1f27ec8829" title="Prepares data for a DLNA content query.">prepareData()</a>.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>Zero-based index relative to startingIndex </td></tr>
+    <tr><td class="paramname">item</td><td>Output: <a class="el" href="structtiny__dlna_1_1MediaItem.html" title="Media item description used to build DIDL-Lite entries.">MediaItem</a> populated with metadata </td></tr>
+    <tr><td class="paramname">reference</td><td>User-defined reference pointer </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if successful, false if index out of range </dd></dl>
+
+</div>
+</div>
+<a id="a3808bb0387d6dc9f52ec5f675da94f7e" name="a3808bb0387d6dc9f52ec5f675da94f7e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3808bb0387d6dc9f52ec5f675da94f7e">&#9670;&#160;</a></span>getData() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -349,7 +548,36 @@ template&lt;typename FS &gt; </div>
 </div>
 </div>
 <a id="a998a95f1177147124478b0af1101eea2" name="a998a95f1177147124478b0af1101eea2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a998a95f1177147124478b0af1101eea2">&#9670;&#160;</a></span>getPath()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a998a95f1177147124478b0af1101eea2">&#9670;&#160;</a></span>getPath() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename FS &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char * <a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html">tiny_dlna::SdFatContentProvider</a>&lt; FS &gt;::getPath </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Provides the path prefix for resource URIs. </p>
+
+</div>
+</div>
+<a id="a998a95f1177147124478b0af1101eea2" name="a998a95f1177147124478b0af1101eea2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a998a95f1177147124478b0af1101eea2">&#9670;&#160;</a></span>getPath() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -378,7 +606,37 @@ template&lt;typename FS &gt; </div>
 </div>
 </div>
 <a id="abc42446eeb340d8af7e3eb08732191b7" name="abc42446eeb340d8af7e3eb08732191b7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abc42446eeb340d8af7e3eb08732191b7">&#9670;&#160;</a></span>getTreeNodeById()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#abc42446eeb340d8af7e3eb08732191b7">&#9670;&#160;</a></span>getTreeNodeById() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename FS &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1TreeNode.html">TreeNode</a> &amp; <a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html">tiny_dlna::SdFatContentProvider</a>&lt; FS &gt;::getTreeNodeById </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the full file path by node ID. </p>
+
+</div>
+</div>
+<a id="abc42446eeb340d8af7e3eb08732191b7" name="abc42446eeb340d8af7e3eb08732191b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc42446eeb340d8af7e3eb08732191b7">&#9670;&#160;</a></span>getTreeNodeById() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -408,7 +666,44 @@ template&lt;typename FS &gt; </div>
 </div>
 </div>
 <a id="a3c71004a1fe70681b3df61b41b5a12a9" name="a3c71004a1fe70681b3df61b41b5a12a9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3c71004a1fe70681b3df61b41b5a12a9">&#9670;&#160;</a></span>isHidden()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c71004a1fe70681b3df61b41b5a12a9">&#9670;&#160;</a></span>isHidden() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename FS &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html">tiny_dlna::SdFatContentProvider</a>&lt; FS &gt;::isHidden </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1TreeNode.html">TreeNode</a> *&#160;</td>
+          <td class="paramname"><em>node</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns true if the node is hidden (file or directory name starts with '.') </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">node</td><td>Pointer to <a class="el" href="classtiny__dlna_1_1TreeNode.html" title="Node in the directory tree representing either a file or a directory.">TreeNode</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if hidden, false otherwise </dd></dl>
+
+</div>
+</div>
+<a id="a3c71004a1fe70681b3df61b41b5a12a9" name="a3c71004a1fe70681b3df61b41b5a12a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c71004a1fe70681b3df61b41b5a12a9">&#9670;&#160;</a></span>isHidden() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -445,7 +740,111 @@ template&lt;typename FS &gt; </div>
 </div>
 </div>
 <a id="ab51fee1607cc176d5b8f0f1f27ec8829" name="ab51fee1607cc176d5b8f0f1f27ec8829"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab51fee1607cc176d5b8f0f1f27ec8829">&#9670;&#160;</a></span>prepareData()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ab51fee1607cc176d5b8f0f1f27ec8829">&#9670;&#160;</a></span>prepareData() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename FS &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html">tiny_dlna::SdFatContentProvider</a>&lt; FS &gt;::prepareData </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>objectID</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespacetiny__dlna.html#a7ecfa08a6b938018e48a3a309e895aa9">ContentQueryType</a>&#160;</td>
+          <td class="paramname"><em>queryType</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>filter</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>startingIndex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>requestedCount</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>sortCriteria</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int &amp;&#160;</td>
+          <td class="paramname"><em>numberReturned</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int &amp;&#160;</td>
+          <td class="paramname"><em>totalMatches</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int &amp;&#160;</td>
+          <td class="paramname"><em>updateID</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>reference</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Prepares data for a DLNA content query. </p>
+<p>Collects all matching nodes from the directory tree and stores them in resultNodes_. Calculates pagination and total match counts based on the query type and parameters.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">objectID</td><td>Object ID to query (nullptr or "0" for root) </td></tr>
+    <tr><td class="paramname">queryType</td><td>Type of query (BrowseMetadata/BrowseChildren/Search) </td></tr>
+    <tr><td class="paramname">filter</td><td>Content filter (not currently used) </td></tr>
+    <tr><td class="paramname">startingIndex</td><td>Zero-based index of first item to return </td></tr>
+    <tr><td class="paramname">requestedCount</td><td>Number of items requested (0 = all) </td></tr>
+    <tr><td class="paramname">sortCriteria</td><td>Sort criteria (not currently used) </td></tr>
+    <tr><td class="paramname">numberReturned</td><td>Output: number of items available to return </td></tr>
+    <tr><td class="paramname">totalMatches</td><td>Output: total matching items </td></tr>
+    <tr><td class="paramname">updateID</td><td>Output: content version ID </td></tr>
+    <tr><td class="paramname">reference</td><td>User pointer </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ab51fee1607cc176d5b8f0f1f27ec8829" name="ab51fee1607cc176d5b8f0f1f27ec8829"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab51fee1607cc176d5b8f0f1f27ec8829">&#9670;&#160;</a></span>prepareData() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -549,7 +948,37 @@ template&lt;typename FS &gt; </div>
 </div>
 </div>
 <a id="acfec4ba14dce053a57d91248185dbfbd" name="acfec4ba14dce053a57d91248185dbfbd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acfec4ba14dce053a57d91248185dbfbd">&#9670;&#160;</a></span>setPath()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#acfec4ba14dce053a57d91248185dbfbd">&#9670;&#160;</a></span>setPath() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename FS &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html">tiny_dlna::SdFatContentProvider</a>&lt; FS &gt;::setPath </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sets the path prefix for resource URIs. </p>
+
+</div>
+</div>
+<a id="acfec4ba14dce053a57d91248185dbfbd" name="acfec4ba14dce053a57d91248185dbfbd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acfec4ba14dce053a57d91248185dbfbd">&#9670;&#160;</a></span>setPath() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -579,7 +1008,34 @@ template&lt;typename FS &gt; </div>
 </div>
 </div>
 <a id="af0a2c2392c76bbbe53a39ce3558b88c2" name="af0a2c2392c76bbbe53a39ce3558b88c2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af0a2c2392c76bbbe53a39ce3558b88c2">&#9670;&#160;</a></span>size()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#af0a2c2392c76bbbe53a39ce3558b88c2">&#9670;&#160;</a></span>size() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename FS &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t <a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html">tiny_dlna::SdFatContentProvider</a>&lt; FS &gt;::size </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af0a2c2392c76bbbe53a39ce3558b88c2" name="af0a2c2392c76bbbe53a39ce3558b88c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af0a2c2392c76bbbe53a39ce3558b88c2">&#9670;&#160;</a></span>size() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -710,8 +1166,8 @@ template&lt;typename FS &gt; </div>
 
 </div>
 </div>
-<a id="accea87dc3b361ce95ef1f92eeea1f098" name="accea87dc3b361ce95ef1f92eeea1f098"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#accea87dc3b361ce95ef1f92eeea1f098">&#9670;&#160;</a></span>directoryTree</h2>
+<a id="ae465276b5f5e334f3266522f545c17d3" name="ae465276b5f5e334f3266522f545c17d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae465276b5f5e334f3266522f545c17d3">&#9670;&#160;</a></span>directoryTree</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -722,7 +1178,7 @@ template&lt;typename FS &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtiny__dlna_1_1SdFatDirectoryTree.html">SdFatDirectoryTree</a>&lt;FS&gt; <a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html">tiny_dlna::SdFatContentProvider</a>&lt; FS &gt;::directoryTree</td>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1SdFatDirectoryTree.html">SdFatDirectoryTree</a>&lt; FS &gt; <a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html">tiny_dlna::SdFatContentProvider</a>&lt; FS &gt;::directoryTree</td>
         </tr>
       </table>
   </td>
@@ -734,8 +1190,8 @@ template&lt;typename FS &gt; </div>
 
 </div>
 </div>
-<a id="a7f71c84f5706170065c96aab078e8dfc" name="a7f71c84f5706170065c96aab078e8dfc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7f71c84f5706170065c96aab078e8dfc">&#9670;&#160;</a></span>filter_</h2>
+<a id="aa186e401770d791000faf57470472ab3" name="aa186e401770d791000faf57470472ab3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa186e401770d791000faf57470472ab3">&#9670;&#160;</a></span>filter_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -746,7 +1202,7 @@ template&lt;typename FS &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const char* <a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html">tiny_dlna::SdFatContentProvider</a>&lt; FS &gt;::filter_ = nullptr</td>
+          <td class="memname">const char * <a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html">tiny_dlna::SdFatContentProvider</a>&lt; FS &gt;::filter_ = nullptr</td>
         </tr>
       </table>
   </td>
@@ -758,8 +1214,8 @@ template&lt;typename FS &gt; </div>
 
 </div>
 </div>
-<a id="a7171ad13fa5064a1e6fd0a62ee028857" name="a7171ad13fa5064a1e6fd0a62ee028857"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7171ad13fa5064a1e6fd0a62ee028857">&#9670;&#160;</a></span>objectID_</h2>
+<a id="acae96ef598ba84b6da202e7fd8dd2afd" name="acae96ef598ba84b6da202e7fd8dd2afd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acae96ef598ba84b6da202e7fd8dd2afd">&#9670;&#160;</a></span>objectID_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -770,7 +1226,7 @@ template&lt;typename FS &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const char* <a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html">tiny_dlna::SdFatContentProvider</a>&lt; FS &gt;::objectID_ = nullptr</td>
+          <td class="memname">const char * <a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html">tiny_dlna::SdFatContentProvider</a>&lt; FS &gt;::objectID_ = nullptr</td>
         </tr>
       </table>
   </td>
@@ -782,8 +1238,8 @@ template&lt;typename FS &gt; </div>
 
 </div>
 </div>
-<a id="a99f7dae7b07ac88e2fbd73cf02cd0f14" name="a99f7dae7b07ac88e2fbd73cf02cd0f14"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a99f7dae7b07ac88e2fbd73cf02cd0f14">&#9670;&#160;</a></span>path</h2>
+<a id="a37d84ee5e9dc1e7b60e81862a6e47c65" name="a37d84ee5e9dc1e7b60e81862a6e47c65"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a37d84ee5e9dc1e7b60e81862a6e47c65">&#9670;&#160;</a></span>path</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -794,7 +1250,7 @@ template&lt;typename FS &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const char* <a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html">tiny_dlna::SdFatContentProvider</a>&lt; FS &gt;::path = &quot;/file&quot;</td>
+          <td class="memname">const char * <a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html">tiny_dlna::SdFatContentProvider</a>&lt; FS &gt;::path = &quot;/file&quot;</td>
         </tr>
       </table>
   </td>
@@ -830,8 +1286,8 @@ template&lt;typename FS &gt; </div>
 
 </div>
 </div>
-<a id="a7f304c276fb61a57f692ff0fdfe0ab24" name="a7f304c276fb61a57f692ff0fdfe0ab24"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7f304c276fb61a57f692ff0fdfe0ab24">&#9670;&#160;</a></span>reference_</h2>
+<a id="ad9bd124cc37cc7255e8f5a1faa64dc5a" name="ad9bd124cc37cc7255e8f5a1faa64dc5a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9bd124cc37cc7255e8f5a1faa64dc5a">&#9670;&#160;</a></span>reference_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -842,7 +1298,7 @@ template&lt;typename FS &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void* <a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html">tiny_dlna::SdFatContentProvider</a>&lt; FS &gt;::reference_ = nullptr</td>
+          <td class="memname">void * <a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html">tiny_dlna::SdFatContentProvider</a>&lt; FS &gt;::reference_ = nullptr</td>
         </tr>
       </table>
   </td>
@@ -878,8 +1334,8 @@ template&lt;typename FS &gt; </div>
 
 </div>
 </div>
-<a id="a3f0d96cb6f9d21e88d0376b242dbb121" name="a3f0d96cb6f9d21e88d0376b242dbb121"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3f0d96cb6f9d21e88d0376b242dbb121">&#9670;&#160;</a></span>resultNodes_</h2>
+<a id="a0f73311564363ba76a1676349367b8eb" name="a0f73311564363ba76a1676349367b8eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f73311564363ba76a1676349367b8eb">&#9670;&#160;</a></span>resultNodes_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -890,7 +1346,7 @@ template&lt;typename FS &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt;<a class="el" href="classtiny__dlna_1_1TreeNode.html">TreeNode</a>*, <a class="el" href="classtiny__dlna_1_1AllocatorPSRAM.html">AllocatorPSRAM</a>&lt;<a class="el" href="classtiny__dlna_1_1TreeNode.html">TreeNode</a>*&gt; &gt; <a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html">tiny_dlna::SdFatContentProvider</a>&lt; FS &gt;::resultNodes_</td>
+          <td class="memname">std::vector&lt; <a class="el" href="classtiny__dlna_1_1TreeNode.html">TreeNode</a> *, <a class="el" href="classtiny__dlna_1_1AllocatorPSRAM.html">AllocatorPSRAM</a>&lt; <a class="el" href="classtiny__dlna_1_1TreeNode.html">TreeNode</a> * &gt; &gt; <a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html">tiny_dlna::SdFatContentProvider</a>&lt; FS &gt;::resultNodes_</td>
         </tr>
       </table>
   </td>
@@ -902,8 +1358,8 @@ template&lt;typename FS &gt; </div>
 
 </div>
 </div>
-<a id="a0092fb70a474773e0f9bee39da121726" name="a0092fb70a474773e0f9bee39da121726"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0092fb70a474773e0f9bee39da121726">&#9670;&#160;</a></span>sortCriteria_</h2>
+<a id="a394afb74f565a7b5434c47226f491e56" name="a394afb74f565a7b5434c47226f491e56"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a394afb74f565a7b5434c47226f491e56">&#9670;&#160;</a></span>sortCriteria_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -914,7 +1370,7 @@ template&lt;typename FS &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const char* <a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html">tiny_dlna::SdFatContentProvider</a>&lt; FS &gt;::sortCriteria_ = nullptr</td>
+          <td class="memname">const char * <a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html">tiny_dlna::SdFatContentProvider</a>&lt; FS &gt;::sortCriteria_ = nullptr</td>
         </tr>
       </table>
   </td>
@@ -950,8 +1406,9 @@ template&lt;typename FS &gt; </div>
 
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/tools/<a class="el" href="SdFatContentProvider_8h_source.html">SdFatContentProvider.h</a></li>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li>src/dlna/<a class="el" href="dlna_2SdFatContentProvider_8h_source.html">SdFatContentProvider.h</a></li>
+<li>src/tools/<a class="el" href="tools_2SdFatContentProvider_8h_source.html">SdFatContentProvider.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
