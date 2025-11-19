@@ -1,4 +1,4 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classtiny__dlna_1_1IHttpRequest.html" title="Abstract interface for HTTP client request functionality." alt="" coords="5,13,180,38"/>
-<area shape="rect" id="node2" href="$classtiny__dlna_1_1HttpRequest.html" title="Simple API to process get, put, post, del http requests I tried to use Arduino HttpClient,..." alt="" coords="228,5,399,45"/>
+<area shape="rect" id="node1" href="$classtiny__dlna_1_1IDevice.html" title="Abstract interface for DLNA device functionality." alt="" coords="5,13,144,38"/>
+<area shape="rect" id="node2" href="$classtiny__dlna_1_1DLNADevice.html" title="Setup of a Basic DLNA Device service. The device registers itself to the network and answers to the D..." alt="" coords="192,5,363,45"/>
 </map>

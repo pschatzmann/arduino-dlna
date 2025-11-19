@@ -145,12 +145,12 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a6a4aac71f1330745299c215d4fab7ea6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgrDevice.html#a6a4aac71f1330745299c215d4fab7ea6">clear</a> ()</td></tr>
 <tr class="memdesc:a6a4aac71f1330745299c215d4fab7ea6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear all subscriptions and pending notifications.  <br /></td></tr>
 <tr class="separator:a6a4aac71f1330745299c215d4fab7ea6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:addde3fb87286a20a2ceabd3f7a7be76a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgrDevice.html#addde3fb87286a20a2ceabd3f7a7be76a">processSubscribeRequest</a> (<a class="el" href="classtiny__dlna_1_1IHttpServer.html">IHttpServer</a> &amp;server, <a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html">DLNAServiceInfo</a> &amp;service) override</td></tr>
-<tr class="memdesc:addde3fb87286a20a2ceabd3f7a7be76a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle SUBSCRIBE request including HTTP response.  <br /></td></tr>
-<tr class="separator:addde3fb87286a20a2ceabd3f7a7be76a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaf0465b901888cbe7eb8185d3f8d1dc8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgrDevice.html#aaf0465b901888cbe7eb8185d3f8d1dc8">processUnsubscribeRequest</a> (<a class="el" href="classtiny__dlna_1_1IHttpServer.html">IHttpServer</a> &amp;server, <a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html">DLNAServiceInfo</a> &amp;service) override</td></tr>
-<tr class="memdesc:aaf0465b901888cbe7eb8185d3f8d1dc8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle UNSUBSCRIBE request including HTTP response.  <br /></td></tr>
-<tr class="separator:aaf0465b901888cbe7eb8185d3f8d1dc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad65f6c8841cf8a718a7c15b91456b3e4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgrDevice.html#ad65f6c8841cf8a718a7c15b91456b3e4">processSubscribeRequest</a> (<a class="el" href="classtiny__dlna_1_1IHttpServer.html">IHttpServer</a> &amp;server, <a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html">DLNAServiceInfo</a> &amp;service, <a class="el" href="classtiny__dlna_1_1IClientHandler.html">IClientHandler</a> *client)</td></tr>
+<tr class="memdesc:ad65f6c8841cf8a718a7c15b91456b3e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle SUBSCRIBE request including HTTP response.  <br /></td></tr>
+<tr class="separator:ad65f6c8841cf8a718a7c15b91456b3e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80cb8c4364e67c59a975caa9b04a2314"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgrDevice.html#a80cb8c4364e67c59a975caa9b04a2314">processUnsubscribeRequest</a> (<a class="el" href="classtiny__dlna_1_1IHttpServer.html">IHttpServer</a> &amp;server, <a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html">DLNAServiceInfo</a> &amp;service, <a class="el" href="classtiny__dlna_1_1IClientHandler.html">IClientHandler</a> *client)</td></tr>
+<tr class="memdesc:a80cb8c4364e67c59a975caa9b04a2314"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle UNSUBSCRIBE request including HTTP response.  <br /></td></tr>
+<tr class="separator:a80cb8c4364e67c59a975caa9b04a2314"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
 Static Protected Member Functions</h2></td></tr>
@@ -475,8 +475,8 @@ template&lt;typename ClientType &gt; </div>
 
 </div>
 </div>
-<a id="addde3fb87286a20a2ceabd3f7a7be76a" name="addde3fb87286a20a2ceabd3f7a7be76a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#addde3fb87286a20a2ceabd3f7a7be76a">&#9670;&#160;</a></span>processSubscribeRequest()</h2>
+<a id="ad65f6c8841cf8a718a7c15b91456b3e4" name="ad65f6c8841cf8a718a7c15b91456b3e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad65f6c8841cf8a718a7c15b91456b3e4">&#9670;&#160;</a></span>processSubscribeRequest()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -496,7 +496,13 @@ template&lt;typename ClientType &gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html">DLNAServiceInfo</a> &amp;&#160;</td>
-          <td class="paramname"><em>service</em>&#160;</td>
+          <td class="paramname"><em>service</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1IClientHandler.html">IClientHandler</a> *&#160;</td>
+          <td class="paramname"><em>client</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -506,7 +512,7 @@ template&lt;typename ClientType &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -522,12 +528,12 @@ template&lt;typename ClientType &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if subscription was successful and response sent </dd></dl>
 
-<p>Implements <a class="el" href="classtiny__dlna_1_1ISubscriptionMgrDevice.html#a7dba08aeedceceb327ccb626a376cd4e">tiny_dlna::ISubscriptionMgrDevice</a>.</p>
+<p>Implements <a class="el" href="classtiny__dlna_1_1ISubscriptionMgrDevice.html#a18e44f9e4722f0bbe5e6b790ecd80cf2">tiny_dlna::ISubscriptionMgrDevice</a>.</p>
 
 </div>
 </div>
-<a id="aaf0465b901888cbe7eb8185d3f8d1dc8" name="aaf0465b901888cbe7eb8185d3f8d1dc8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaf0465b901888cbe7eb8185d3f8d1dc8">&#9670;&#160;</a></span>processUnsubscribeRequest()</h2>
+<a id="a80cb8c4364e67c59a975caa9b04a2314" name="a80cb8c4364e67c59a975caa9b04a2314"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a80cb8c4364e67c59a975caa9b04a2314">&#9670;&#160;</a></span>processUnsubscribeRequest()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -547,7 +553,13 @@ template&lt;typename ClientType &gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="classtiny__dlna_1_1DLNAServiceInfo.html">DLNAServiceInfo</a> &amp;&#160;</td>
-          <td class="paramname"><em>service</em>&#160;</td>
+          <td class="paramname"><em>service</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1IClientHandler.html">IClientHandler</a> *&#160;</td>
+          <td class="paramname"><em>client</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -557,7 +569,7 @@ template&lt;typename ClientType &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -573,7 +585,7 @@ template&lt;typename ClientType &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if unsubscribe was successful and response sent </dd></dl>
 
-<p>Implements <a class="el" href="classtiny__dlna_1_1ISubscriptionMgrDevice.html#a80607e1623c3df373e2b7212ea82f3a3">tiny_dlna::ISubscriptionMgrDevice</a>.</p>
+<p>Implements <a class="el" href="classtiny__dlna_1_1ISubscriptionMgrDevice.html#a2e3a6e8fbcffcc510c54dd9a94b85550">tiny_dlna::ISubscriptionMgrDevice</a>.</p>
 
 </div>
 </div>

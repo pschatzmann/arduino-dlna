@@ -16,7 +16,7 @@ var searchData=
   ['nop_13',['nop',['../classtiny__dlna_1_1TaskRTOS.html#af9bf895d393bfdc7e68df528eebf17b1',1,'tiny_dlna::TaskRTOS']]],
   ['notificationcallback_14',['NotificationCallback',['../classtiny__dlna_1_1DLNAControlPointMediaRenderer.html#a3120f67002c464497e2134d7da2869f0',1,'tiny_dlna::DLNAControlPointMediaRenderer::NotificationCallback()'],['../classtiny__dlna_1_1DLNAControlPointMediaServer.html#a5748d533f468c2e1f233421f437b3876',1,'tiny_dlna::DLNAControlPointMediaServer::NotificationCallback()']]],
   ['notify_15',['notify',['../classtiny__dlna_1_1HttpRequest.html#aafc651193a04e4271d2c045ac7e43d75',1,'tiny_dlna::HttpRequest::notify()'],['../classtiny__dlna_1_1IHttpRequest.html#a2b0352d9599111df8edf8ae4f85c7626',1,'tiny_dlna::IHttpRequest::notify()']]],
-  ['notifyhandler_16',['notifyHandler',['../classtiny__dlna_1_1SubscriptionMgrControlPoint.html#aa5feb54b83cdf6c95d7014eecbd2e271',1,'tiny_dlna::SubscriptionMgrControlPoint']]],
+  ['notifyhandler_16',['notifyHandler',['../classtiny__dlna_1_1SubscriptionMgrControlPoint.html#a5170a5343f60162724a024ee9d2b0302',1,'tiny_dlna::SubscriptionMgrControlPoint']]],
   ['notifyreplycp_17',['NotifyReplyCP',['../classtiny__dlna_1_1NotifyReplyCP.html',1,'tiny_dlna']]],
   ['ns_18',['ns',['../classtiny__dlna_1_1DLNADeviceInfo.html#a6072a190ff95e63dba7d49b12ac4a0f0',1,'tiny_dlna::DLNADeviceInfo']]],
   ['nts_19',['nts',['../classtiny__dlna_1_1NotifyReplyCP.html#af6d4a28af16fe48612e2f8f2de246cbd',1,'tiny_dlna::NotifyReplyCP']]],

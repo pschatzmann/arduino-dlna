@@ -1,0 +1,5 @@
+<map id="tiny_dlna::IClientHandler" name="tiny_dlna::IClientHandler">
+<area shape="rect" id="node1" title=" " alt="" coords="5,45,188,70"/>
+<area shape="rect" id="node2" href="$classtiny__dlna_1_1HttpClientHandler.html" title=" " alt="" coords="236,5,443,45"/>
+<area shape="rect" id="node3" href="$classtiny__dlna_1_1HttpClientHandler.html" title="Handles HTTP client connections and responses for the DLNA HTTP server." alt="" coords="236,69,443,109"/>
+</map>

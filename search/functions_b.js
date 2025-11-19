@@ -4,7 +4,7 @@ var searchData=
   ['node_1',['Node',['../structtiny__dlna_1_1ListLockFree_1_1Node.html#a88e071d1de5da8646d247d349d95d7d2',1,'tiny_dlna::ListLockFree::Node::Node()=default'],['../structtiny__dlna_1_1ListLockFree_1_1Node.html#aa893e51ed33126c17863912613607bb6',1,'tiny_dlna::ListLockFree::Node::Node(const T &amp;value)']]],
   ['nop_2',['nop',['../classtiny__dlna_1_1TaskRTOS.html#af9bf895d393bfdc7e68df528eebf17b1',1,'tiny_dlna::TaskRTOS']]],
   ['notify_3',['notify',['../classtiny__dlna_1_1HttpRequest.html#aafc651193a04e4271d2c045ac7e43d75',1,'tiny_dlna::HttpRequest::notify()'],['../classtiny__dlna_1_1IHttpRequest.html#a2b0352d9599111df8edf8ae4f85c7626',1,'tiny_dlna::IHttpRequest::notify()']]],
-  ['notifyhandler_4',['notifyHandler',['../classtiny__dlna_1_1SubscriptionMgrControlPoint.html#aa5feb54b83cdf6c95d7014eecbd2e271',1,'tiny_dlna::SubscriptionMgrControlPoint']]],
+  ['notifyhandler_4',['notifyHandler',['../classtiny__dlna_1_1SubscriptionMgrControlPoint.html#a5170a5343f60162724a024ee9d2b0302',1,'tiny_dlna::SubscriptionMgrControlPoint']]],
   ['nullstr_5',['nullstr',['../classtiny__dlna_1_1HttpServer.html#aaab7d7c3431c07ea8aa0cfb49eebfe43',1,'tiny_dlna::HttpServer']]],
   ['numberofdecimals_6',['numberOfDecimals',['../classtiny__dlna_1_1StrView.html#a5c0c4b151d66444d0c8296e648400cb9',1,'tiny_dlna::StrView']]]
 ];

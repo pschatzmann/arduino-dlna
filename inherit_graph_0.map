@@ -1,9 +1,10 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" title=" " alt="" coords="5,129,57,155"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,153,57,179"/>
 <area shape="rect" id="node2" href="$classtiny__dlna_1_1ChunkPrint.html" title="Print implementation for HTTP chunked transfer encoding." alt="" coords="119,5,280,31"/>
 <area shape="rect" id="node3" href="$structtiny__dlna_1_1EscapingPrint.html" title="Print wrapper that escapes &amp; &lt; &gt; &quot; &#39; while forwarding to an underlying Print. Returns the expanded ou..." alt="" coords="110,55,289,80"/>
 <area shape="rect" id="node4" href="$classtiny__dlna_1_1NullPrint.html" title="Class with does not do any output: it can be used to determine the length of the output." alt="" coords="126,104,273,129"/>
-<area shape="rect" id="node5" href="$classtiny__dlna_1_1SdFatParser.html" title="Simple character&#45;by&#45;character parser that emits SdFatFileInfo via a callback." alt="" coords="117,153,282,179"/>
-<area shape="rect" id="node6" href="$classtiny__dlna_1_1StrPrint.html" title="Print to a dynamic string." alt="" coords="130,203,269,228"/>
-<area shape="rect" id="node7" href="$classtiny__dlna_1_1XMLParserPrint.html" title="Helper class that implements a Print interface to accumulate XML data and then parse it using XMLPars..." alt="" coords="105,252,293,277"/>
+<area shape="rect" id="node5" href="$classtiny__dlna_1_1RetryPrint.html" title="Print wrapper that retries writing unwritten data." alt="" coords="122,153,277,179"/>
+<area shape="rect" id="node6" href="$classtiny__dlna_1_1SdFatParser.html" title="Simple character&#45;by&#45;character parser that emits SdFatFileInfo via a callback." alt="" coords="117,203,282,228"/>
+<area shape="rect" id="node7" href="$classtiny__dlna_1_1StrPrint.html" title="Print to a dynamic string." alt="" coords="130,252,269,277"/>
+<area shape="rect" id="node8" href="$classtiny__dlna_1_1XMLParserPrint.html" title="Helper class that implements a Print interface to accumulate XML data and then parse it using XMLPars..." alt="" coords="105,301,293,327"/>
 </map>

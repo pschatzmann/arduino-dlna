@@ -161,9 +161,9 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:ac503de98dbd149706c38c74de77d7753"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#ac503de98dbd149706c38c74de77d7753">parseActionRequest</a> (<a class="el" href="classtiny__dlna_1_1IHttpServer.html">IHttpServer</a> *server, const char *requestPath, <a class="el" href="classtiny__dlna_1_1HttpRequestHandlerLine.html">HttpRequestHandlerLine</a> *hl, <a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;action)</td></tr>
-<tr class="memdesc:ac503de98dbd149706c38c74de77d7753"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parses the SOAP content of a DLNA action request.  <br /></td></tr>
-<tr class="separator:ac503de98dbd149706c38c74de77d7753"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51f14417817b4aa6030694bdf52a6d45"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a51f14417817b4aa6030694bdf52a6d45">parseActionRequest</a> (<a class="el" href="classtiny__dlna_1_1IHttpServer.html">IHttpServer</a> *server, <a class="el" href="classtiny__dlna_1_1IClientHandler.html">IClientHandler</a> &amp;client, const char *requestPath, <a class="el" href="classtiny__dlna_1_1HttpRequestHandlerLine.html">HttpRequestHandlerLine</a> *hl, <a class="el" href="classtiny__dlna_1_1ActionRequest.html">ActionRequest</a> &amp;action)</td></tr>
+<tr class="memdesc:a51f14417817b4aa6030694bdf52a6d45"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parses the SOAP content of a DLNA action request.  <br /></td></tr>
+<tr class="separator:a51f14417817b4aa6030694bdf52a6d45"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4686911f425e582fbd69900c62244de8"><td class="memItemLeft" align="right" valign="top">static size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a4686911f425e582fbd69900c62244de8">printReplyXML</a> (Print &amp;out, const char *replyName, const char *serviceId, std::function&lt; size_t(Print &amp;, void *)&gt; valuesWriter=nullptr, void *ref=nullptr)</td></tr>
 <tr class="memdesc:a4686911f425e582fbd69900c62244de8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Builds a standard SOAP reply envelope.  <br /></td></tr>
 <tr class="separator:a4686911f425e582fbd69900c62244de8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -173,9 +173,9 @@ Static Public Member Functions</h2></td></tr>
 <tr class="separator:aeb1bc3cd71b00513ae4d2b743a924e04"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7729ced4c44e834236a30b2e0a3b46a3"><td class="memItemLeft" align="right" valign="top">static size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a7729ced4c44e834236a30b2e0a3b46a3">replyGetCurrentConnectionInfo</a> (Print &amp;out, const char *protocolInfo, const char *connectionID, const char *direction)</td></tr>
 <tr class="separator:a7729ced4c44e834236a30b2e0a3b46a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a88ace31517692f0b76eb434d816401c5"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a88ace31517692f0b76eb434d816401c5">handleSubscription</a> (<a class="el" href="classtiny__dlna_1_1IHttpServer.html">IHttpServer</a> *server, const char *requestPath, <a class="el" href="classtiny__dlna_1_1HttpRequestHandlerLine.html">HttpRequestHandlerLine</a> *hl, bool &amp;is_subscribe)</td></tr>
-<tr class="memdesc:a88ace31517692f0b76eb434d816401c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Static handler for SUBSCRIBE/UNSUBSCRIBE requests on service event URLs.  <br /></td></tr>
-<tr class="separator:a88ace31517692f0b76eb434d816401c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac147ca7bf47467f1ce2f2c7bcdb2dcd6"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#ac147ca7bf47467f1ce2f2c7bcdb2dcd6">handleSubscription</a> (<a class="el" href="classtiny__dlna_1_1IHttpServer.html">IHttpServer</a> *server, <a class="el" href="classtiny__dlna_1_1IClientHandler.html">IClientHandler</a> *client, const char *requestPath, <a class="el" href="classtiny__dlna_1_1HttpRequestHandlerLine.html">HttpRequestHandlerLine</a> *hl, bool &amp;is_subscribe)</td></tr>
+<tr class="memdesc:ac147ca7bf47467f1ce2f2c7bcdb2dcd6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Static handler for SUBSCRIBE/UNSUBSCRIBE requests on service event URLs.  <br /></td></tr>
+<tr class="separator:ac147ca7bf47467f1ce2f2c7bcdb2dcd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -209,15 +209,15 @@ Protected Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
 Static Protected Member Functions</h2></td></tr>
-<tr class="memitem:af6a71bfac4649063b387309854fec6cd"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#af6a71bfac4649063b387309854fec6cd">deviceXMLCallback</a> (<a class="el" href="classtiny__dlna_1_1IHttpServer.html">IHttpServer</a> *server, const char *requestPath, <a class="el" href="classtiny__dlna_1_1HttpRequestHandlerLine.html">HttpRequestHandlerLine</a> *hl)</td></tr>
-<tr class="memdesc:af6a71bfac4649063b387309854fec6cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">callback to provide device XML  <br /></td></tr>
-<tr class="separator:af6a71bfac4649063b387309854fec6cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a968104a90c9ae08123911768711edd77"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a968104a90c9ae08123911768711edd77">handleSubscribe</a> (<a class="el" href="classtiny__dlna_1_1IHttpServer.html">IHttpServer</a> *server, const char *requestPath, <a class="el" href="classtiny__dlna_1_1HttpRequestHandlerLine.html">HttpRequestHandlerLine</a> *hl)</td></tr>
-<tr class="memdesc:a968104a90c9ae08123911768711edd77"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle SUBSCRIBE requests.  <br /></td></tr>
-<tr class="separator:a968104a90c9ae08123911768711edd77"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a263f7939943c87756ceb3577d12377eb"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a263f7939943c87756ceb3577d12377eb">handleUnsubscribe</a> (<a class="el" href="classtiny__dlna_1_1IHttpServer.html">IHttpServer</a> *server, const char *requestPath, <a class="el" href="classtiny__dlna_1_1HttpRequestHandlerLine.html">HttpRequestHandlerLine</a> *hl)</td></tr>
-<tr class="memdesc:a263f7939943c87756ceb3577d12377eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle UNSUBSCRIBE requests.  <br /></td></tr>
-<tr class="separator:a263f7939943c87756ceb3577d12377eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c22e22bcf59216e5b0e7a2851f62922"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a0c22e22bcf59216e5b0e7a2851f62922">deviceXMLCallback</a> (<a class="el" href="classtiny__dlna_1_1IClientHandler.html">IClientHandler</a> &amp;client, <a class="el" href="classtiny__dlna_1_1IHttpServer.html">IHttpServer</a> *server, const char *requestPath, <a class="el" href="classtiny__dlna_1_1HttpRequestHandlerLine.html">HttpRequestHandlerLine</a> *hl)</td></tr>
+<tr class="memdesc:a0c22e22bcf59216e5b0e7a2851f62922"><td class="mdescLeft">&#160;</td><td class="mdescRight">callback to provide device XML  <br /></td></tr>
+<tr class="separator:a0c22e22bcf59216e5b0e7a2851f62922"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af9acc2148a8dfa8c9bbe137a79456fed"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#af9acc2148a8dfa8c9bbe137a79456fed">handleSubscribe</a> (<a class="el" href="classtiny__dlna_1_1IClientHandler.html">IClientHandler</a> *client, <a class="el" href="classtiny__dlna_1_1IHttpServer.html">IHttpServer</a> *server, const char *requestPath, <a class="el" href="classtiny__dlna_1_1HttpRequestHandlerLine.html">HttpRequestHandlerLine</a> *hl)</td></tr>
+<tr class="memdesc:af9acc2148a8dfa8c9bbe137a79456fed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle SUBSCRIBE requests.  <br /></td></tr>
+<tr class="separator:af9acc2148a8dfa8c9bbe137a79456fed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4fe33df772ac01aa7bd5fac3dfcc31dc"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNADevice.html#a4fe33df772ac01aa7bd5fac3dfcc31dc">handleUnsubscribe</a> (<a class="el" href="classtiny__dlna_1_1IClientHandler.html">IClientHandler</a> *client, <a class="el" href="classtiny__dlna_1_1IHttpServer.html">IHttpServer</a> *server, const char *requestPath, <a class="el" href="classtiny__dlna_1_1HttpRequestHandlerLine.html">HttpRequestHandlerLine</a> *hl)</td></tr>
+<tr class="memdesc:a4fe33df772ac01aa7bd5fac3dfcc31dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle UNSUBSCRIBE requests.  <br /></td></tr>
+<tr class="separator:a4fe33df772ac01aa7bd5fac3dfcc31dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -391,8 +391,8 @@ template&lt;typename ClientType &gt; </div>
 
 </div>
 </div>
-<a id="af6a71bfac4649063b387309854fec6cd" name="af6a71bfac4649063b387309854fec6cd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af6a71bfac4649063b387309854fec6cd">&#9670;&#160;</a></span>deviceXMLCallback()</h2>
+<a id="a0c22e22bcf59216e5b0e7a2851f62922" name="a0c22e22bcf59216e5b0e7a2851f62922"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0c22e22bcf59216e5b0e7a2851f62922">&#9670;&#160;</a></span>deviceXMLCallback()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -405,6 +405,12 @@ template&lt;typename ClientType &gt; </div>
         <tr>
           <td class="memname">static void <a class="el" href="classtiny__dlna_1_1DLNADevice.html">tiny_dlna::DLNADevice</a>&lt; ClientType &gt;::deviceXMLCallback </td>
           <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1IClientHandler.html">IClientHandler</a> &amp;&#160;</td>
+          <td class="paramname"><em>client</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype"><a class="el" href="classtiny__dlna_1_1IHttpServer.html">IHttpServer</a> *&#160;</td>
           <td class="paramname"><em>server</em>, </td>
         </tr>
@@ -714,8 +720,8 @@ template&lt;typename ClientType &gt; </div>
 
 </div>
 </div>
-<a id="a968104a90c9ae08123911768711edd77" name="a968104a90c9ae08123911768711edd77"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a968104a90c9ae08123911768711edd77">&#9670;&#160;</a></span>handleSubscribe()</h2>
+<a id="af9acc2148a8dfa8c9bbe137a79456fed" name="af9acc2148a8dfa8c9bbe137a79456fed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af9acc2148a8dfa8c9bbe137a79456fed">&#9670;&#160;</a></span>handleSubscribe()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -728,6 +734,12 @@ template&lt;typename ClientType &gt; </div>
         <tr>
           <td class="memname">static bool <a class="el" href="classtiny__dlna_1_1DLNADevice.html">tiny_dlna::DLNADevice</a>&lt; ClientType &gt;::handleSubscribe </td>
           <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1IClientHandler.html">IClientHandler</a> *&#160;</td>
+          <td class="paramname"><em>client</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype"><a class="el" href="classtiny__dlna_1_1IHttpServer.html">IHttpServer</a> *&#160;</td>
           <td class="paramname"><em>server</em>, </td>
         </tr>
@@ -760,8 +772,8 @@ template&lt;typename ClientType &gt; </div>
 
 </div>
 </div>
-<a id="a88ace31517692f0b76eb434d816401c5" name="a88ace31517692f0b76eb434d816401c5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a88ace31517692f0b76eb434d816401c5">&#9670;&#160;</a></span>handleSubscription()</h2>
+<a id="ac147ca7bf47467f1ce2f2c7bcdb2dcd6" name="ac147ca7bf47467f1ce2f2c7bcdb2dcd6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac147ca7bf47467f1ce2f2c7bcdb2dcd6">&#9670;&#160;</a></span>handleSubscription()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -776,6 +788,12 @@ template&lt;typename ClientType &gt; </div>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classtiny__dlna_1_1IHttpServer.html">IHttpServer</a> *&#160;</td>
           <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1IClientHandler.html">IClientHandler</a> *&#160;</td>
+          <td class="paramname"><em>client</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -812,8 +830,8 @@ template&lt;typename ClientType &gt; </div>
 
 </div>
 </div>
-<a id="a263f7939943c87756ceb3577d12377eb" name="a263f7939943c87756ceb3577d12377eb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a263f7939943c87756ceb3577d12377eb">&#9670;&#160;</a></span>handleUnsubscribe()</h2>
+<a id="a4fe33df772ac01aa7bd5fac3dfcc31dc" name="a4fe33df772ac01aa7bd5fac3dfcc31dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4fe33df772ac01aa7bd5fac3dfcc31dc">&#9670;&#160;</a></span>handleUnsubscribe()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -826,6 +844,12 @@ template&lt;typename ClientType &gt; </div>
         <tr>
           <td class="memname">static bool <a class="el" href="classtiny__dlna_1_1DLNADevice.html">tiny_dlna::DLNADevice</a>&lt; ClientType &gt;::handleUnsubscribe </td>
           <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1IClientHandler.html">IClientHandler</a> *&#160;</td>
+          <td class="paramname"><em>client</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype"><a class="el" href="classtiny__dlna_1_1IHttpServer.html">IHttpServer</a> *&#160;</td>
           <td class="paramname"><em>server</em>, </td>
         </tr>
@@ -1096,8 +1120,8 @@ template&lt;typename ClientType &gt; </div>
 
 </div>
 </div>
-<a id="ac503de98dbd149706c38c74de77d7753" name="ac503de98dbd149706c38c74de77d7753"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac503de98dbd149706c38c74de77d7753">&#9670;&#160;</a></span>parseActionRequest()</h2>
+<a id="a51f14417817b4aa6030694bdf52a6d45" name="a51f14417817b4aa6030694bdf52a6d45"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51f14417817b4aa6030694bdf52a6d45">&#9670;&#160;</a></span>parseActionRequest()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1112,6 +1136,12 @@ template&lt;typename ClientType &gt; </div>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classtiny__dlna_1_1IHttpServer.html">IHttpServer</a> *&#160;</td>
           <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1IClientHandler.html">IClientHandler</a> &amp;&#160;</td>
+          <td class="paramname"><em>client</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
