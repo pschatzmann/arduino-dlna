@@ -59,13 +59,15 @@ class ISubscriptionMgrDevice {
   /// Check if subscriptions are active
   virtual bool isSubscriptionsActive() = 0;
 
-  /// Process HTTP SUBSCRIBE request
-  virtual bool processSubscribeRequest(IHttpServer& server,
-                                       DLNAServiceInfo& service) = 0;
+    /// Process HTTP SUBSCRIBE request
+    virtual bool processSubscribeRequest(IHttpServer& server,
+                       DLNAServiceInfo& service,
+                       IClientHandler* client) = 0;
 
-  /// Process HTTP UNSUBSCRIBE request
-  virtual bool processUnsubscribeRequest(IHttpServer& server,
-                                         DLNAServiceInfo& service) = 0;
+    /// Process HTTP UNSUBSCRIBE request
+    virtual bool processUnsubscribeRequest(IHttpServer& server,
+                         DLNAServiceInfo& service,
+                         IClientHandler* client) = 0;
 };
 
 }  // namespace tiny_dlna

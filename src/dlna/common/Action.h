@@ -1,9 +1,9 @@
 
 #pragma once
 // #include "dlnaServiceInfo.h"
+#include "basic/Logger.h"  // ensure DlnaLogger and DlnaLogLevel declarations
 #include "dlna/common/DLNACommon.h"
 #include "dlna/xml/XMLPrinter.h"
-#include "basic/Logger.h"  // ensure DlnaLogger and DlnaLogLevel declarations
 
 namespace tiny_dlna {
 
@@ -128,7 +128,7 @@ class ActionRequest {
   const char* getArgumentValue(const char* name) {
     for (auto& a : arguments) {
       if (a.name.endsWithIgnoreCase(name)) {
-  return StrView(a.value.c_str()).c_str();
+        return StrView(a.value.c_str()).c_str();
       }
     }
 
@@ -177,7 +177,7 @@ class ActionRequest {
   // Start with an empty vector; previously we default-constructed with a
   // size of 10 which introduced 10 empty arguments and led to malformed
   // SOAP XML (< /> repeated). We only store explicitly added arguments.
-  Vector<Argument> arguments;  
+  Vector<Argument> arguments;
   int result_count = 0;
   Str action;
 };

@@ -5,6 +5,7 @@
 #include "Client.h"
 #include "HardwareSerial.h"
 #include "HttpChunkWriter.h"
+#include "HttpClientHandler.h"
 #include "HttpHeader.h"
 #include "HttpRequestHandlerLine.h"
 #include "HttpRequestRewrite.h"
@@ -13,6 +14,7 @@
 #include "basic/IPAddressAndPort.h"  // for toStr
 #include "basic/List.h"
 #include "basic/StrPrint.h"
+#include "concurrency/ListLockFree.h"
 
 namespace tiny_dlna {
 
@@ -37,14 +39,14 @@ class HttpServer : public IHttpServer {
   HttpServer(ServerType& server, int bufferSize = 1024) {
     DlnaLogger.log(DlnaLogLevel::Info, "HttpServer");
     this->server_ptr = &server;
-    this->buffer.resize(bufferSize);
+    client_handler.resize(bufferSize);
   }
 
   ~HttpServer() override {
     DlnaLogger.log(DlnaLogLevel::Info, "~HttpServer");
     handler_collection.clear();
-    request_header.clear(false);
-    reply_header.clear(false);
+    client_handler.requestHeader().clear(false);
+    client_handler.replyHeader().clear(false);
     rewrite_collection.clear();
   }
 
@@ -107,7 +109,7 @@ class HttpServer : public IHttpServer {
           const char* result) override {
     DlnaLogger.log(DlnaLogLevel::Info, "Serving at %s", url);
 
-    auto lambda = [](IHttpServer* server_ptr, const char* requestPath,
+    auto lambda = [](IClientHandler& handler, IHttpServer*, const char*,
                      HttpRequestHandlerLine* hl) {
       DlnaLogger.log(DlnaLogLevel::Info, "on-strings %s", "lambda");
       if (hl->contextCount < 2) {
@@ -116,7 +118,7 @@ class HttpServer : public IHttpServer {
       }
       const char* mime = (const char*)hl->context[0];
       const char* msg = (const char*)hl->context[1];
-      server_ptr->reply(mime, msg, 200);
+      handler.reply(mime, msg, 200);
     };
     HttpRequestHandlerLine* hl = new HttpRequestHandlerLine(2);
     hl->context[0] = (void*)mime;
@@ -132,7 +134,7 @@ class HttpServer : public IHttpServer {
           const uint8_t* data, int len) override {
     DlnaLogger.log(DlnaLogLevel::Info, "Serving at %s", url);
 
-    auto lambda = [](IHttpServer* server_ptr, const char* requestPath,
+    auto lambda = [](IClientHandler& handler, IHttpServer*, const char*,
                      HttpRequestHandlerLine* hl) {
       DlnaLogger.log(DlnaLogLevel::Info, "on-strings %s", "lambda");
       if (hl->contextCount < 3) {
@@ -144,7 +146,7 @@ class HttpServer : public IHttpServer {
       int* p_len = (int*)hl->context[2];
       int len = *p_len;
       DlnaLogger.log(DlnaLogLevel::Debug, "Mime %d - Len: %d", mime, len);
-      server_ptr->reply(mime, data, len, 200);
+      handler.reply(mime, data, len, 200);
     };
     HttpRequestHandlerLine* hl = new HttpRequestHandlerLine(3);
     hl->context[0] = (void*)mime;
@@ -159,7 +161,7 @@ class HttpServer : public IHttpServer {
   /// register a redirection
   void on(const char* url, TinyMethodID method, Url& redirect) override {
     DlnaLogger.log(DlnaLogLevel::Info, "Serving at %s", url);
-    auto lambda = [](IHttpServer* server_ptr, const char* requestPath,
+    auto lambda = [](IClientHandler& handler, IHttpServer*, const char*,
                      HttpRequestHandlerLine* hl) {
       if (hl->contextCount < 1) {
         DlnaLogger.log(DlnaLogLevel::Error, "The context is not available");
@@ -171,8 +173,8 @@ class HttpServer : public IHttpServer {
       reply_header.setValues(301, "Moved");
       reply_header.put(LOCATION, url->url());
       reply_header.put("X-Forwarded-Host", (const char*)hl->context[1]);
-      reply_header.write(server_ptr->client());
-      server_ptr->endClient();
+      reply_header.write(*handler.client());
+      handler.endClient();
     };
 
     HttpRequestHandlerLine* hl = new HttpRequestHandlerLine(2);
@@ -196,19 +198,19 @@ class HttpServer : public IHttpServer {
     pathStr.replace("//", "/");  // TODO investiage why we get //
     for (auto handler_line_ptr : handler_collection) {
       DlnaLogger.log(DlnaLogLevel::Debug, "onRequest: %s %s vs: %s %s %s", path,
-                     methods[request_header.method()],
+                     methods[client_handler.requestHeader().method()],
                      nullstr(handler_line_ptr->path.c_str()),
                      methods[handler_line_ptr->method],
                      nullstr(handler_line_ptr->mime));
 
       if (pathStr.matches(handler_line_ptr->path.c_str()) &&
-          request_header.method() == handler_line_ptr->method &&
+          client_handler.requestHeader().method() == handler_line_ptr->method &&
           matchesMime(nullstr(handler_line_ptr->mime),
-                      nullstr(request_header.accept()))) {
+                      nullstr(client_handler.requestHeader().accept()))) {
         // call registed handler function
         DlnaLogger.log(DlnaLogLevel::Debug, "onRequest %s", "->found",
                        nullstr(handler_line_ptr->path.c_str()));
-        handler_line_ptr->fn(this, path, handler_line_ptr);
+        handler_line_ptr->fn(client_handler, this, path, handler_line_ptr);
         result = true;
         break;
       }
@@ -221,138 +223,8 @@ class HttpServer : public IHttpServer {
     return result;
   }
 
-  /// chunked reply with data from an input stream
-  void replyChunked(const char* contentType, Stream& inputStream,
-                    int status = 200, const char* msg = SUCCESS) override {
-    replyChunked(contentType, status, msg);
-    HttpChunkWriter chunk_writer;
-    while (inputStream.available()) {
-      int len = inputStream.readBytes(buffer.data(), buffer.size());
-      chunk_writer.writeChunk(*client_ptr, (const char*)buffer.data(), len);
-    }
-    // final chunk
-    chunk_writer.writeEnd(*client_ptr);
-    endClient();
-  }
-
-  /// start of chunked reply: use HttpChunkWriter to provde the data
-  void replyChunked(const char* contentType, int status = 200,
-                    const char* msg = SUCCESS) override {
-    DlnaLogger.log(DlnaLogLevel::Info, "reply %s", "replyChunked");
-    reply_header.setValues(status, msg);
-    reply_header.put(TRANSFER_ENCODING, CHUNKED);
-    reply_header.put(CONTENT_TYPE, contentType);
-    reply_header.put(CONNECTION, CON_KEEP_ALIVE);
-    reply_header.write(this->client());
-  }
-
-  /// write reply - copies data from input stream with header size
-  void reply(const char* contentType, Stream& inputStream, int size,
-             int status = 200, const char* msg = SUCCESS) override {
-    DlnaLogger.log(DlnaLogLevel::Info, "reply %s", "stream");
-    reply_header.setValues(status, msg);
-    reply_header.put(CONTENT_LENGTH, size);
-    reply_header.put(CONTENT_TYPE, contentType);
-    reply_header.put(CONNECTION, CON_KEEP_ALIVE);
-    reply_header.write(this->client());
-
-    while (inputStream.available()) {
-      int len = inputStream.readBytes(buffer.data(), buffer.size());
-      int written = client_ptr->write((const uint8_t*)buffer.data(), len);
-    }
-    // inputStream.close();
-    endClient();
-  }
-
-  /// write reply - using callback that writes to stream
-  void reply(const char* contentType, size_t (*callback)(Print& out, void* ref),
-             int status = 200, const char* msg = SUCCESS,
-             void* ref = nullptr) override {
-    DlnaLogger.log(DlnaLogLevel::Info, "reply %s", "via callback");
-    NullPrint nop;
-    size_t size = callback(nop, ref);
-    reply_header.setValues(status, msg);
-    reply_header.put(CONTENT_TYPE, contentType);
-    reply_header.put(CONTENT_LENGTH, size);
-    reply_header.put(CONNECTION, CON_KEEP_ALIVE);
-    reply_header.write(this->client());
-    callback(*client_ptr, ref);
-#if DLNA_LOG_XML
-    callback(Serial, ref);
-#endif
-#if DLNA_CHECK_XML_LENGTH
-    StrPrint test;
-    size_t test_len = callback(test, ref);
-    if (strlen(test.c_str()) != size) {
-      DlnaLogger.log(DlnaLogLevel::Error,
-                      "HttpServer wrote %d bytes: expected %d / strlen: %d", test_len, size, strlen(test.c_str()));
-    }   
-#endif      
-
-    endClient();
-  }
-
-  /// write reply - string with header size
-  void reply(const char* contentType, const char* str, int status = 200,
-             const char* msg = SUCCESS) override {
-    DlnaLogger.log(DlnaLogLevel::Info, "reply %s", str);
-    int len = strlen(str);
-    reply_header.setValues(status, msg);
-    reply_header.put(CONTENT_LENGTH, len);
-    reply_header.put(CONTENT_TYPE, contentType);
-    reply_header.put(CONNECTION, CON_KEEP_ALIVE);
-    reply_header.write(this->client());
-    client_ptr->write((const uint8_t*)str, len);
-    endClient();
-  }
-
-  void reply(const char* contentType, const uint8_t* str, int len,
-             int status = 200, const char* msg = SUCCESS) override {
-    DlnaLogger.log(DlnaLogLevel::Info, "reply %s: %d bytes", contentType, len);
-    reply_header.setValues(status, msg);
-    reply_header.put(CONTENT_LENGTH, len);
-    reply_header.put(CONTENT_TYPE, contentType);
-    reply_header.put(CONNECTION, CON_KEEP_ALIVE);
-    reply_header.write(this->client());
-    client_ptr->write((const uint8_t*)str, len);
-    endClient();
-  }
-
-  /// write OK reply with 200 SUCCESS
-  void replyOK() override { reply(200, SUCCESS); }
-
-  /// write 404 reply
-  void replyNotFound() override {
-    DlnaLogger.log(DlnaLogLevel::Info, "reply %s", "404");
-    reply(404, "Page Not Found");
-  }
-
-  void replyError(int err, const char* msg = "Internal Server Error") override {
-    DlnaLogger.log(DlnaLogLevel::Info, "reply %s", "error");
-    reply(err, msg);
-  }
-
-  /// provides the request header
-  HttpRequestHeader& requestHeader() override { return request_header; }
-
-  /// provides the reply header
-  HttpReplyHeader& replyHeader() override { return reply_header; }
-
-  /// closes the connection to the current client_ptr
-  void endClient() override {
-    DlnaLogger.log(DlnaLogLevel::Info, "HttpServer %s", "endClient");
-    // client_ptr->flush();
-    client_ptr->stop();
-  }
-
-  /// print a CR LF
-  void crlf() override {
-    client_ptr->print("\r\n");
-    // client_ptr->flush();
-  }
-
   /// adds a new handler
-  void addHandler(HttpRequestHandlerLine* handlerLinePtr) override {
+  void addHandler(HttpRequestHandlerLine* handlerLinePtr) {
     handler_collection.push_back(handlerLinePtr);
   }
 
@@ -361,7 +233,6 @@ class HttpServer : public IHttpServer {
 
   /// Call this method from your loop!
   bool copy() override {
-    bool result = false;
     if (!is_active) {
       delay(no_connect_delay);
       return false;
@@ -372,6 +243,7 @@ class HttpServer : public IHttpServer {
     if (client.connected()) {
       DlnaLogger.log(DlnaLogLevel::Info, "copy: accepted new client");
       client.setTimeout(DLNA_HTTP_REQUEST_TIMEOUT_MS);
+      client.setNoDelay(true);  // disables Nagle
       open_clients.push_back(client);
     }
 
@@ -389,16 +261,25 @@ class HttpServer : public IHttpServer {
       }
     }
 
-    client_ptr = &(*current_client_iterator);
-    if (!client_ptr->connected()) {
+    ClientType* p_client = &(*current_client_iterator);
+    if (!p_client->connected()) {
       DlnaLogger.log(DlnaLogLevel::Debug, "copy: removing disconnected client");
-      current_client_iterator = open_clients.erase(current_client_iterator);
-      // Do not advance iterator here; erase returns the next valid iterator
+      auto to_erase = current_client_iterator;
+      ++current_client_iterator;
+      open_clients.erase(to_erase);
       return false;
     }
-
-    processRequest();
-    result = true;
+    if (p_client->available() == 0) {
+      DlnaLogger.log(DlnaLogLevel::Debug,
+                     "copy: no data available from client");
+      ++current_client_iterator;
+      if (current_client_iterator == open_clients.end() &&
+          !open_clients.empty()) {
+        current_client_iterator = open_clients.begin();
+      }
+      return false;
+    }
+    processRequest(p_client);
     ++current_client_iterator;
     if (current_client_iterator == open_clients.end() &&
         !open_clients.empty()) {
@@ -407,12 +288,8 @@ class HttpServer : public IHttpServer {
 
     // cleanup clients
     removeClosedClients();
-
-    return result;
+    return true;
   }
-
-  /// Provides the current client
-  ClientType& client() override { return *client_ptr; }
 
   /// Provides true if the server has been started
   operator bool() override { return is_active; }
@@ -429,17 +306,19 @@ class HttpServer : public IHttpServer {
 
   void setNoConnectDelay(int delay) override { no_connect_delay = delay; }
 
-  /// converts the client content to a string
-  Str contentStr() override {
-    uint8_t buffer[1024];
-    Str result;
-    while (client_ptr->available()) {
-      int len = client_ptr->readBytes(buffer, sizeof(buffer));
-      result.add((const uint8_t*)buffer, len);
-    }
-    result.add("\0");
-    return result;
-  }
+  // /// converts the client content to a string
+  // Str contentStr(ClientType* client) {
+  //   uint8_t buffer[1024];
+  //   Str result;
+  //   while (client->available()) {
+  //     int len = client->readBytes(buffer, sizeof(buffer));
+  //     result.add((const uint8_t*)buffer, len);
+  //   }
+  //   result.add("\0");
+  //   return result;
+  // }
+
+  // const char* urlPath() { return client_handler.requestHeader().urlPath(); }
 
   /// Definesa reference/context object
   void setReference(void* reference) override { ref = reference; }
@@ -449,17 +328,14 @@ class HttpServer : public IHttpServer {
 
  protected:
   // data
-  HttpRequestHeader request_header;
-  HttpReplyHeader reply_header;
   List<HttpRequestHandlerLine*> handler_collection;
   List<HttpRequestRewrite*> rewrite_collection;
-  List<ClientType> open_clients;
-  typename List<ClientType>::Iterator current_client_iterator =
+  ListLockFree<ClientType> open_clients;
+  HttpClientHandler<ClientType> client_handler;
+  typename ListLockFree<ClientType>::Iterator current_client_iterator =
       open_clients.begin();
-  ClientType* client_ptr = nullptr;
   ServerType* server_ptr = nullptr;
   bool is_active;
-  Vector<char> buffer{0};
   const char* local_host = nullptr;
   int no_connect_delay = 5;
   void* ref = nullptr;
@@ -472,11 +348,12 @@ class HttpServer : public IHttpServer {
     auto it = open_clients.begin();
     while (it != open_clients.end()) {
       if ((!(*it).connected())) {
-        auto next = open_clients.erase(it);
-        if (current_client_iterator == it) {
-          current_client_iterator = next;
+        auto to_erase = it;
+        ++it;
+        open_clients.erase(to_erase);
+        if (current_client_iterator == to_erase) {
+          current_client_iterator = it;
         }
-        it = next;
       } else {
         ++it;
       }
@@ -486,31 +363,21 @@ class HttpServer : public IHttpServer {
     }
   }
 
-  /// Writes the status and message to the reply
-  void reply(int status, const char* msg) {
-    reply_header.setValues(status, msg);
-    reply_header.write(this->client());
-    endClient();
-  }
-
-  /// Converts null to an empty string
+  // Converts null to an empty string
   const char* nullstr(const char* in) { return in == nullptr ? "" : in; }
 
   // process a full request and send the reply
-  void processRequest() {
+  void processRequest(ClientType* p_client) {
     DlnaLogger.log(DlnaLogLevel::Info, "processRequest");
-    request_header.read(this->client());
-    // provide reply with empty header
-    reply_header.clear();
-    // determine the path
-    const char* path = request_header.urlPath();
+    client_handler.setClient(p_client);
+    client_handler.readHttpHeader();
+    const char* path = client_handler.requestHeader().urlPath();
     path = resolveRewrite(path);
     bool processed = onRequest(path);
     if (!processed) {
-      replyNotFound();
+      client_handler.replyNotFound();
     }
   }
-
   /// determiens the potentially rewritten url which should be used for the
   /// further processing
   const char* resolveRewrite(const char* from) {
@@ -525,7 +392,7 @@ class HttpServer : public IHttpServer {
   }
 
   /// compares mime of handler with mime of request: provides true if they match
-  /// of one is null (=any value)
+  /// or one is null (=any value)
   bool matchesMime(const char* handler_mime, const char* request_mime) {
     DlnaLogger.log(DlnaLogLevel::Debug, "matchesMime: %s vs %s", handler_mime,
                    request_mime);

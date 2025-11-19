@@ -9,6 +9,7 @@
 #include "task.h"
 #endif
 #include <functional>
+
 #include "basic/Logger.h"
 
 namespace tiny_dlna {
@@ -26,8 +27,64 @@ class TaskRTOS {
     create(name, stackSize, priority, core);
   }
 
-  TaskRTOS() = default;
+  TaskRTOS() {
+    create("TaskRTOS", 4096, 1, -1);
+  };
+
   ~TaskRTOS() { remove(); }
+
+  /// deletes the FreeRTOS task
+  void remove() {
+    if (xHandle != nullptr) {
+      suspend();
+      vTaskDelete(xHandle);
+      xHandle = nullptr;
+    }
+  }
+
+  bool begin(std::function<void()> process) {
+    DlnaLogger.log(DlnaLogLevel::Info, "staring task");
+    loop_code = process;
+    resume();
+    return true;
+  }
+
+  /// suspends the task
+  void end() { suspend(); }
+
+  void suspend() {
+    if (xHandle == nullptr) {
+      DlnaLogger.log(DlnaLogLevel::Warning,
+                     "TaskRTOS::suspend() called but task not created");
+      return;
+    }
+    vTaskSuspend(xHandle);
+  }
+
+  void resume() {
+    if (xHandle == nullptr) {
+      DlnaLogger.log(DlnaLogLevel::Warning,
+                     "TaskRTOS::resume() called but task not created");
+      return;
+    }
+
+    vTaskResume(xHandle);
+  }
+
+  TaskHandle_t& getTaskHandle() { return xHandle; }
+
+  void setReference(void* r) { ref = r; }
+
+  void* getReference() { return ref; }
+
+#ifdef ESP32
+  int getCoreID() { return xPortGetCoreID(); }
+#endif
+
+ protected:
+  TaskHandle_t xHandle = nullptr;
+  std::function<void()> loop_code = nop;
+  void* ref;
 
   /// If you used the empty constructor, you need to call create!
   bool create(const char* name, int stackSize, int priority = 1,
@@ -42,55 +99,10 @@ class TaskRTOS {
 #else
     xTaskCreate(task_loop, name, stackSize, this, priority, &xHandle);
 #endif
+    delay(50);
     suspend();
-    return true;
+    return xHandle != nullptr;
   }
-
-  /// deletes the FreeRTOS task
-  void remove() {
-    if (xHandle != nullptr) {
-      suspend();
-      vTaskDelete(xHandle);
-      xHandle = nullptr;
-    }
-  }
-
-  bool begin(std::function<void()> process) {
-    DlnaLogger.log(DlnaLogLevel::Info,"staring task");
-    loop_code = process;
-    resume();
-    return true;
-  }
-
-  /// suspends the task
-  void end() { suspend(); }
-
-  void suspend() { vTaskSuspend(xHandle); }
-
-  void resume() { vTaskResume(xHandle); }
-
-  TaskHandle_t &getTaskHandle() {
-    return xHandle;
-  }
-
-  void setReference(void *r){
-    ref = r;
-  }
-
-  void *getReference(){
-    return ref;
-  }
-
-#ifdef ESP32
-  int getCoreID() {
-    return xPortGetCoreID();
-  }
-#endif
-
- protected:
-  TaskHandle_t xHandle = nullptr;
-  std::function<void()> loop_code = nop;
-  void *ref;
 
   static void nop() { delay(100); }
 
@@ -104,4 +116,4 @@ class TaskRTOS {
 
 using Task = TaskRTOS;
 
-}  // namespace audio_tools
+}  // namespace tiny_dlna

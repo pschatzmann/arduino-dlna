@@ -527,7 +527,7 @@ class SubscriptionMgrControlPoint {
    * @param handlerLine Pointer to the server-provided handler context which
    *                    contains the manager instance in its context array.
    */
-  static void notifyHandler(IHttpServer* server, const char* requestPath,
+  static void notifyHandler(IClientHandler& client, IHttpServer* server, const char* requestPath,
                             HttpRequestHandlerLine* handlerLine) {
     if (handlerLine == nullptr || handlerLine->contextCount < 1) return;
     void* ctx0 = handlerLine->context[0];
@@ -537,7 +537,7 @@ class SubscriptionMgrControlPoint {
     void* reference = mgr->event_callback_ref;
 
     // read SID header and body
-    const char* sid = server->requestHeader().get("SID");
+    const char* sid = client.requestHeader().get("SID");
 
     // Use XMLParserPrint to incrementally parse the NOTIFY body and extract
     // property child elements. XMLParserPrint accumulates the buffer and
@@ -553,10 +553,9 @@ class SubscriptionMgrControlPoint {
     Str text;
     Str attrs;
     xml_parser.setExpandEncoded(true);
-    Client& client = server->client();
-
-    while (client.available()) {
-      int read = client.read(buffer, XML_PARSER_BUFFER_SIZE);
+    Client* p_client = client.client();
+    while (p_client && p_client->available()) {
+      int read = p_client->read(buffer, XML_PARSER_BUFFER_SIZE);
       xml_parser.write(buffer, read);
 
       while (xml_parser.parse(nodeName, path, text, attrs)) {
@@ -573,7 +572,7 @@ class SubscriptionMgrControlPoint {
     }
 
     // reply OK to the NOTIFY
-    server->replyOK();
+    client.replyOK();
   }
 };
 

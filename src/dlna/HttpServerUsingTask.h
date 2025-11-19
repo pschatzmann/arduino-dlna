@@ -42,6 +42,7 @@ class HttpServerUsingTask : public HttpServer<ClientType, ServerType> {
     server_task_.begin([this]() {
       while (this->isActive()) {
         HttpServer<ClientType, ServerType>::doLoop();
+        delay(1);
       }
     });
     DlnaLogger.log(DlnaLogLevel::Info, "HttpServerUsingTask started: %s",

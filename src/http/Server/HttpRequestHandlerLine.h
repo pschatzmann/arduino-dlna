@@ -5,9 +5,6 @@
 
 namespace tiny_dlna {
 
-class IHttpServer;
-class HttpRequestHandlerLine;
-
 /**
  * @brief Used to register and process callbacks
  *

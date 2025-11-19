@@ -9,11 +9,11 @@
 #include "basic/StrView.h"
 #include "basic/Url.h"
 #include "basic/Vector.h"
+#include "concurrency/ListLockFree.h"
+#include "dlna/devices/ISubscriptionMgrDevice.h"
 #include "http/Http.h"
 #include "http/Server/HttpRequest.h"
 #include "http/Server/IHttpServer.h"
-#include "dlna/devices/ISubscriptionMgrDevice.h"
-#include "concurrency/ListLockFree.h"
 
 namespace tiny_dlna {
 
@@ -89,8 +89,8 @@ struct PendingNotification {
  */
 template <typename ClientType>
 class SubscriptionMgrDevice : public ISubscriptionMgrDevice {
-    template <typename>
-    friend class DLNADevice;
+  template <typename>
+  friend class DLNADevice;
 
  public:
   /**
@@ -154,6 +154,13 @@ class SubscriptionMgrDevice : public ISubscriptionMgrDevice {
       // not found: fall through and create new subscription
     }
 
+    // Make sure that we have an url
+    if (StrView(callbackUrl).isEmpty()) {
+      DlnaLogger.log(DlnaLogLevel::Warning,
+                     "subscribe: missing CALLBACK header for new subscription");
+      return Str();
+    }
+
     // generate uuid-based SID
     char buffer[64];
     snprintf(buffer, sizeof(buffer), "uuid:%lu", millis());
@@ -167,7 +174,8 @@ class SubscriptionMgrDevice : public ISubscriptionMgrDevice {
     s->expires_at = millis() + (uint64_t)timeoutSec * 1000ULL;
     s->service = &service;
 
-    for (auto& existing_sub : subscriptions) {
+    for (auto it = subscriptions.begin(); it != subscriptions.end(); it++) {
+      auto existing_sub = *it;
       if (existing_sub->service == &service &&
           StrView(existing_sub->callback_url).equals(callbackUrl)) {
         // Found existing subscription for same service and callback URL
@@ -175,8 +183,7 @@ class SubscriptionMgrDevice : public ISubscriptionMgrDevice {
                        "subscribe: found existing subscription for service "
                        "'%s' and callback '%s', renewing SID '%s'",
                        StrView(service.service_id).c_str(),
-                       StrView(callbackUrl).c_str(),
-                       existing_sub->sid.c_str());
+                       StrView(callbackUrl).c_str(), existing_sub->sid.c_str());
         // Renew existing subscription
         existing_sub->timeout_sec = timeoutSec;
         existing_sub->expires_at = millis() + (uint64_t)timeoutSec * 1000ULL;
@@ -206,10 +213,11 @@ class SubscriptionMgrDevice : public ISubscriptionMgrDevice {
       Subscription* s = *it;
       if (s->service == &service && StrView(s->sid).equals(sid)) {
         // remove pending notifications that reference this subscription
-        for (auto pit = pending_list.begin(); pit != pending_list.end(); ) {
+        for (auto pit = pending_list.begin(); pit != pending_list.end();) {
           if (pit->p_subscription == s) {
             pending_list.erase(pit);
-            pit = pending_list.begin(); // restart after erase (iterator invalidated)
+            pit = pending_list
+                      .begin();  // restart after erase (iterator invalidated)
           } else {
             ++pit;
           }
@@ -247,14 +255,14 @@ class SubscriptionMgrDevice : public ISubscriptionMgrDevice {
     if (!is_active) return;
 
     // enqueue notifications to be posted later by post()
-    for (int i = 0; i < subscriptions.size(); ++i) {
-      Subscription* sub = subscriptions[i];
+    for (auto it = subscriptions.begin(); it != subscriptions.end(); ++it) {
+      Subscription* sub = *it;
       if (sub->service != &service) continue;
       any = true;
       NullPrint np;
       PendingNotification pn;
       // store pointer to the subscription entry (no snapshot)
-      pn.p_subscription = subscriptions[i];
+      pn.p_subscription = sub;
       pn.ref = ref;
       pn.writer = changeWriter;
       pn.seq = sub->seq;
@@ -285,19 +293,19 @@ class SubscriptionMgrDevice : public ISubscriptionMgrDevice {
     }
     // First remove expired subscriptions so we don't deliver to them.
     removeExpired();
-    
+
     if (pending_list.empty()) return 0;
     // Attempt to process each pending notification once. If processing
     // fails (non-200), leave the entry in the queue for a later retry.
     int processed = 0;
-    for (auto it = pending_list.begin(); it != pending_list.end(); ) {
+    for (auto it = pending_list.begin(); it != pending_list.end();) {
       PendingNotification pn = *it;
       // Ensure the subscription pointer is valid; if not, drop the entry.
       if (pn.p_subscription == nullptr) {
         DlnaLogger.log(DlnaLogLevel::Warning,
                        "pending notification dropped: missing subscription");
         pending_list.erase(it);
-        it = pending_list.begin(); // restart after erase
+        it = pending_list.begin();  // restart after erase
         continue;
       }
       Subscription& sub = *pn.p_subscription;
@@ -344,7 +352,6 @@ class SubscriptionMgrDevice : public ISubscriptionMgrDevice {
     return processed;
   }
 
-
   /**
    * @brief Number of active subscriptions
    * @return int count of subscriptions
@@ -365,9 +372,7 @@ class SubscriptionMgrDevice : public ISubscriptionMgrDevice {
    * delivering stale notifications when re-enabled. Use
    * `isSubscriptionsActive()` to query the current state.
    */
-  void setSubscriptionsActive(bool flag) override {
-    is_active = flag;
-  }
+  void setSubscriptionsActive(bool flag) override { is_active = flag; }
 
   /// Convenience method to disable subscriptions at the end of the lifecycle
   void end() override { setSubscriptionsActive(false); }
@@ -378,13 +383,12 @@ class SubscriptionMgrDevice : public ISubscriptionMgrDevice {
    */
   bool isSubscriptionsActive() override { return is_active; }
 
-
  protected:
   // store pointers to heap-allocated Subscription objects. This keeps
   // references stable (we manage lifetimes explicitly) and avoids
   // large copies when enqueuing notifications.
-  //Vector<Subscription*> subscriptions;
-  //Vector<PendingNotification> pending_list;
+  // Vector<Subscription*> subscriptions;
+  // Vector<PendingNotification> pending_list;
   ListLockFree<Subscription*> subscriptions;
   ListLockFree<PendingNotification> pending_list;
   bool is_active = true;
@@ -398,17 +402,16 @@ class SubscriptionMgrDevice : public ISubscriptionMgrDevice {
    */
   void removeExpired() {
     uint64_t now = millis();
-    for (int i = 0; i < subscriptions.size();) {
-      Subscription* s = subscriptions[i];
+    auto it = subscriptions.begin();
+    while (it != subscriptions.end()) {
+      Subscription* s = *it;
       if (s->expires_at != 0 && s->expires_at <= now) {
         DlnaLogger.log(DlnaLogLevel::Info, "removing expired subscription %s",
                        s->sid.c_str());
-        // Use unsubscribe() which will remove pending notifications and
-        // free the subscription object. Do not increment `i` because the
-        // erase shifts the vector content down into the same index.
         unsubscribe(*s->service, s->sid.c_str());
+        it = subscriptions.begin();  // restart after erase
       } else {
-        ++i;
+        ++it;
       }
     }
   }
@@ -422,8 +425,8 @@ class SubscriptionMgrDevice : public ISubscriptionMgrDevice {
   Str renewSubscription(DLNAServiceInfo& service, const char* sid,
                         const char* callbackUrl, uint32_t timeoutSec) {
     if (StrView(sid).isEmpty()) return Str();
-    for (int i = 0; i < subscriptions.size(); ++i) {
-      Subscription* ex = subscriptions[i];
+    for (auto it = subscriptions.begin(); it != subscriptions.end(); ++it) {
+      Subscription* ex = *it;
       if (ex->service == &service && StrView(ex->sid).equals(sid)) {
         // renew: update timeout and expiry, do not change SID
         ex->timeout_sec = timeoutSec;
@@ -507,12 +510,15 @@ class SubscriptionMgrDevice : public ISubscriptionMgrDevice {
    * @param service Reference to the DLNA service to subscribe to
    * @return true if subscription was successful and response sent
    */
-  bool processSubscribeRequest(IHttpServer& server,
-                               DLNAServiceInfo& service) override {
+  bool processSubscribeRequest(IHttpServer& server, DLNAServiceInfo& service,
+                               IClientHandler* client) {
     // Get headers from request
-    const char* callbackHeader = server.requestHeader().get("CALLBACK");
-    const char* timeoutHeader = server.requestHeader().get("TIMEOUT");
-    const char* sidHeader = server.requestHeader().get("SID");
+    const char* callbackHeader =
+        client ? client->requestHeader().get("CALLBACK") : nullptr;
+    const char* timeoutHeader =
+        client ? client->requestHeader().get("TIMEOUT") : nullptr;
+    const char* sidHeader =
+        client ? client->requestHeader().get("SID") : nullptr;
 
     // Log the incoming headers
     DlnaLogger.log(DlnaLogLevel::Info, "- SUBSCRIBE CALLBACK: %s",
@@ -547,28 +553,32 @@ class SubscriptionMgrDevice : public ISubscriptionMgrDevice {
     }
 
     // Create or renew subscription
-    const char* callbackPtr = cbStr.isEmpty() ? nullptr : cbStr.c_str();
-    const char* sidPtr = sidStr.isEmpty() ? nullptr : sidStr.c_str();
+    const char* callbackPtr = cbStr.c_str();
+    const char* sidPtr = sidStr.c_str();
 
     Str sid = subscribe(service, callbackPtr, sidPtr, tsec);
     if (sid.isEmpty()) {
       DlnaLogger.log(DlnaLogLevel::Warning,
                      "subscribe request rejected (missing data)");
-      server.replyHeader().setValues(412, "Precondition Failed");
-      server.replyHeader().put("Content-Length", 0);
-      server.replyHeader().write(server.client());
-      server.endClient();
+      if (client) {
+        client->replyHeader().setValues(412, "Precondition Failed");
+        client->replyHeader().put("Content-Length", 0);
+        if (client->client()) client->replyHeader().write(*client->client());
+        client->endClient();
+      }
       return false;
     }
     DlnaLogger.log(DlnaLogLevel::Info, "- SID: %s", sid.c_str());
 
     // Send SUBSCRIBE response
-    server.replyHeader().setValues(200, "OK");
-    server.replyHeader().put("SID", sid.c_str());
-    server.replyHeader().put("TIMEOUT", "Second-1800");
-    server.replyHeader().put("Content-Length", 0);
-    server.replyHeader().write(server.client());
-    server.endClient();
+    if (client) {
+      client->replyHeader().setValues(200, "OK");
+      client->replyHeader().put("SID", sid.c_str());
+      client->replyHeader().put("TIMEOUT", "Second-1800");
+      client->replyHeader().put("Content-Length", 0);
+      if (client->client()) client->replyHeader().write(*client->client());
+      client->endClient();
+    }
 
     return true;
   }
@@ -584,9 +594,9 @@ class SubscriptionMgrDevice : public ISubscriptionMgrDevice {
    * @param service Reference to the DLNA service to unsubscribe from
    * @return true if unsubscribe was successful and response sent
    */
-  bool processUnsubscribeRequest(IHttpServer& server,
-                                 DLNAServiceInfo& service) override {
-    const char* sid = server.requestHeader().get("SID");
+  bool processUnsubscribeRequest(IHttpServer& server, DLNAServiceInfo& service,
+                                 IClientHandler* client) {
+    const char* sid = client ? client->requestHeader().get("SID") : nullptr;
 
     DlnaLogger.log(DlnaLogLevel::Info, "- UNSUBSCRIBE SID: %s",
                    sid ? sid : "null");
@@ -595,7 +605,7 @@ class SubscriptionMgrDevice : public ISubscriptionMgrDevice {
       bool ok = unsubscribe(service, sid);
       if (ok) {
         DlnaLogger.log(DlnaLogLevel::Info, "Unsubscribed: %s", sid);
-        server.replyOK();
+        if (client) client->replyOK();
         return true;
       }
     }
@@ -604,7 +614,7 @@ class SubscriptionMgrDevice : public ISubscriptionMgrDevice {
     DlnaLogger.log(DlnaLogLevel::Warning,
                    "handleUnsubscribeRequest: failed for SID %s",
                    sid ? sid : "(null)");
-    server.replyNotFound();
+    if (client) client->replyNotFound();
     return false;
   }
 };

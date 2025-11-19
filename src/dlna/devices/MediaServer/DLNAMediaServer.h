@@ -192,8 +192,7 @@ class DLNAMediaServer : public DLNADeviceInfo {
 
   /// Define your own custom logic
   void setCustomActionRule(const char* suffix,
-                           bool (*handler)(DLNAMediaServer*, ActionRequest&,
-                                           IHttpServer&)) {
+                           bool (*handler)(IClientHandler*, DLNAMediaServer*, ActionRequest&, IHttpServer&)) {
     for (size_t i = 0; i < rules.size(); ++i) {
       if (StrView(rules[i].suffix).equals(suffix)) {
         rules[i].handler = handler;
@@ -222,7 +221,7 @@ class DLNAMediaServer : public DLNADeviceInfo {
   /// Individual action rule for handling specific actions
   struct ActionRule {
     const char* suffix;
-    bool (*handler)(DLNAMediaServer*, ActionRequest&, IHttpServer&);
+    bool (*handler)(IClientHandler&, DLNAMediaServer*, ActionRequest&, IHttpServer&);
   };
 
   DeviceType dlna_device;
@@ -312,15 +311,15 @@ class DLNAMediaServer : public DLNADeviceInfo {
   }
 
   /// Static descriptor callback for ContentDirectory SCPD
-  static void contentDescCB(IHttpServer* server, const char* requestPath,
+  static void contentDescCB(IClientHandler& client, IHttpServer* server, const char* requestPath,
                             HttpRequestHandlerLine* hl) {
     DLNAMediaServer* self = getMediaServer(server);
     assert(self != nullptr);
     // Non-capturing lambda matches function-pointer signature and can be
     // passed directly to reply (avoids extra static helpers).
-    server->reply(
-        "text/xml",
-        [](Print& out, void* ref) -> size_t {
+    client.reply(
+      "text/xml",
+      [](Print& out, void* ref) -> size_t {
           size_t result = 0;
           if (ref) {
             auto self = (DLNAMediaServer*)ref;
@@ -335,13 +334,13 @@ class DLNAMediaServer : public DLNADeviceInfo {
   }
 
   /// Static descriptor callback for ConnectionManager SCPD
-  static void connDescCB(IHttpServer* server, const char* requestPath,
+  static void connDescCB(IClientHandler& client, IHttpServer* server, const char* requestPath,
                          HttpRequestHandlerLine* hl) {
     DLNAMediaServer* self = getMediaServer(server);
 
-    server->reply(
-        "text/xml",
-        [](Print& out, void* ref) -> size_t {
+    client.reply(
+      "text/xml",
+      [](Print& out, void* ref) -> size_t {
           size_t result = 0;
           if (ref) {
             auto self = (DLNAMediaServer*)ref;
@@ -358,11 +357,11 @@ class DLNAMediaServer : public DLNADeviceInfo {
   // (Removed static helper functions — lambdas are used inline at callsite.)
 
   /// After the subscription we publish all relevant properties
-  static void eventSubscriptionHandler(IHttpServer* server,
+  static void eventSubscriptionHandler(IClientHandler& client, IHttpServer* server,
                                        const char* requestPath,
                                        HttpRequestHandlerLine* hl) {
     bool is_subscribe = false;
-    DeviceType::handleSubscription(server, requestPath, hl, is_subscribe);
+    DeviceType::handleSubscription(server, &client, requestPath, hl, is_subscribe);
     if (is_subscribe) {
       DLNAMediaServer* self = getMediaServer(server);
       assert(self != nullptr);
@@ -381,12 +380,11 @@ class DLNAMediaServer : public DLNADeviceInfo {
   /// Setup and register ContentDirectory service
   void setupContentDirectoryService(IHttpServer* server) {
     DLNAServiceInfo cd;
-    cd.setup("urn:schemas-upnp-org:service:ContentDirectory:1",
-             "urn:upnp-org:serviceId:ContentDirectory", "/CD/service.xml",
-             &DLNAMediaServer::contentDescCB, "/CD/control",
-             &DLNAMediaServer::contentDirectoryControlCB, "/CD/event",
-             [](IHttpServer* server, const char* requestPath,
-                HttpRequestHandlerLine* hl) { server->replyOK(); });
+     cd.setup("urn:schemas-upnp-org:service:ContentDirectory:1",
+           "urn:upnp-org:serviceId:ContentDirectory", "/CD/service.xml",
+           &DLNAMediaServer::contentDescCB, "/CD/control",
+           &DLNAMediaServer::contentDirectoryControlCB, "/CD/event",
+           [](IClientHandler& client, IHttpServer*, const char*, HttpRequestHandlerLine*) { client.replyOK(); });
 
     // subscription namespace abbreviation used for event publishing
     cd.subscription_namespace_abbrev = "AVT";
@@ -398,10 +396,10 @@ class DLNAMediaServer : public DLNADeviceInfo {
   void setupConnectionManagerService(IHttpServer* server) {
     DLNAServiceInfo cm;
     cm.setup("urn:schemas-upnp-org:service:ConnectionManager:1",
-             "urn:upnp-org:serviceId:ConnectionManager", "/CM/service.xml",
-             &DLNAMediaServer::connDescCB, "/CM/control",
-             &DLNAMediaServer::connmgrControlCB, "/CM/event",
-             &DLNAMediaServer::eventSubscriptionHandler);
+         "urn:upnp-org:serviceId:ConnectionManager", "/CM/service.xml",
+         &DLNAMediaServer::connDescCB, "/CM/control",
+         (http_callback)&DLNAMediaServer::connmgrControlCB, "/CM/event",
+         (http_callback)&DLNAMediaServer::eventSubscriptionHandler);
 
     // subscription namespace abbreviation used for event publishing
     cm.subscription_namespace_abbrev = "CMS";
@@ -410,28 +408,28 @@ class DLNAMediaServer : public DLNADeviceInfo {
   }
 
   /// Process action requests using rules-based dispatch
-  bool processAction(ActionRequest& action, IHttpServer& server) {
+  bool processAction(ActionRequest& action, IHttpServer& server, IClientHandler& client) {
     DlnaLogger.log(DlnaLogLevel::Info, "DLNAMediaServer::processAction: %s",
                    action.getAction());
     auto& action_str = action.getActionStr();
     if (action_str.isEmpty()) {
       DlnaLogger.log(DlnaLogLevel::Error, "Empty action received");
-      server.replyNotFound();
+      client.replyNotFound();
       return false;
     }
     for (const auto& rule : rules) {
       if (action_str.endsWith(rule.suffix)) {
-        return rule.handler(this, action, server);
+        return rule.handler(client, this, action, server);
       }
     }
-    DlnaLogger.log(DlnaLogLevel::Error, "Unsupported action: %s",
-                   action.getAction());
-    server.replyNotFound();
-    return false;
+        DlnaLogger.log(DlnaLogLevel::Error, "Unsupported action: %s",
+          action.getAction());
+        client.replyNotFound();
+        return false;
   }
 
   /// Handle ContentDirectory:Browse action
-  bool processActionBrowse(ActionRequest& action, IHttpServer& server) {
+  bool processActionBrowse(ActionRequest& action, IHttpServer& server, IClientHandler& client) {
     DlnaLogger.log(DlnaLogLevel::Info, "processActionBrowse");
     int numberReturned = 0;
     int totalMatches = 0;
@@ -458,7 +456,7 @@ class DLNAMediaServer : public DLNADeviceInfo {
     g_stream_updateID = updateID;
     g_stream_startingIndex = startingIndex;
 
-    server.reply(
+    client.reply(
         "text/xml",
         [](Print& out, void* ref) -> size_t {
           auto self = (DLNAMediaServer*)ref;
@@ -470,7 +468,7 @@ class DLNAMediaServer : public DLNADeviceInfo {
   }
 
   /// Handle ContentDirectory:Search action
-  bool processActionSearch(ActionRequest& action, IHttpServer& server) {
+  bool processActionSearch(ActionRequest& action, IHttpServer& server, IClientHandler& client) {
     DlnaLogger.log(DlnaLogLevel::Info, "processActionSearch");
     int numberReturned = 0;
     int totalMatches = 0;
@@ -497,7 +495,7 @@ class DLNAMediaServer : public DLNADeviceInfo {
     g_stream_updateID = updateID;
     g_stream_startingIndex = startingIndex;
 
-    server.reply(
+    client.reply(
         "text/xml",
         [](Print& out, void* ref) -> size_t {
           auto self = (DLNAMediaServer*)ref;
@@ -510,21 +508,21 @@ class DLNAMediaServer : public DLNADeviceInfo {
 
   /// Handle ContentDirectory:GetSearchCapabilities action
   bool processActionGetSearchCapabilities(ActionRequest& action,
-                                          IHttpServer& server) {
-    server.reply(
+                                          IHttpServer& server, IClientHandler& client) {
+    client.reply(
         "text/xml",
         [](Print& out, void* ref) -> size_t {
           auto self = (DLNAMediaServer*)ref;
           size_t written = 0;
           written += self->soapEnvelopeStart(out);
           written += self->actionResponseStart(
-              out, "GetSearchCapabilitiesResponse",
-              "urn:schemas-upnp-org:service:ContentDirectory:1");
+            out, "GetSearchCapabilitiesResponse",
+            "urn:schemas-upnp-org:service:ContentDirectory:1");
           written += out.print("<SearchCaps>");
           written += out.print(StrView(self->g_search_capabiities).c_str());
           written += out.print("</SearchCaps>\r\n");
           written +=
-              self->actionResponseEnd(out, "GetSearchCapabilitiesResponse");
+            self->actionResponseEnd(out, "GetSearchCapabilitiesResponse");
           written += self->soapEnvelopeEnd(out);
           return written;
         },
@@ -536,21 +534,21 @@ class DLNAMediaServer : public DLNADeviceInfo {
 
   /// Handle ContentDirectory:GetSortCapabilities action
   bool processActionGetSortCapabilities(ActionRequest& action,
-                                        IHttpServer& server) {
-    server.reply(
+                                        IHttpServer& server, IClientHandler& client) {
+    client.reply(
         "text/xml",
         [](Print& out, void* ref) -> size_t {
           auto self = (DLNAMediaServer*)ref;
           size_t written = 0;
           written += self->soapEnvelopeStart(out);
           written += self->actionResponseStart(
-              out, "GetSortCapabilitiesResponse",
-              "urn:schemas-upnp-org:service:ContentDirectory:1");
+            out, "GetSortCapabilitiesResponse",
+            "urn:schemas-upnp-org:service:ContentDirectory:1");
           written += out.print("<SortCaps>");
           written += out.print(StrView(self->g_sort_capabilities).c_str());
           written += out.print("</SortCaps>\r\n");
           written +=
-              self->actionResponseEnd(out, "GetSortCapabilitiesResponse");
+            self->actionResponseEnd(out, "GetSortCapabilitiesResponse");
           written += self->soapEnvelopeEnd(out);
           return written;
         },
@@ -562,19 +560,19 @@ class DLNAMediaServer : public DLNADeviceInfo {
 
   /// Handle ContentDirectory:GetSystemUpdateID action
   bool processActionGetSystemUpdateID(ActionRequest& action,
-                                      IHttpServer& server) {
-    server.reply(
+                                      IHttpServer& server, IClientHandler& client) {
+    client.reply(
         "text/xml",
         [](Print& out, void* ref) -> size_t {
           auto self = (DLNAMediaServer*)ref;
           size_t written = 0;
           written += self->soapEnvelopeStart(out);
           written += self->actionResponseStart(
-              out, "GetSystemUpdateIDResponse",
-              "urn:schemas-upnp-org:service:ContentDirectory:1");
+            out, "GetSystemUpdateIDResponse",
+            "urn:schemas-upnp-org:service:ContentDirectory:1");
           Printf pr{out};
           written += static_cast<size_t>(
-              pr.printf("<Id>%d</Id>\r\n", self->g_stream_updateID));
+            pr.printf("<Id>%d</Id>\r\n", self->g_stream_updateID));
           written += self->actionResponseEnd(out, "GetSystemUpdateIDResponse");
           written += self->soapEnvelopeEnd(out);
           return written;
@@ -588,14 +586,14 @@ class DLNAMediaServer : public DLNADeviceInfo {
 
   /// Replies with Source and Sink protocol lists (CSV protocolInfo strings)
   bool processActionGetProtocolInfo(ActionRequest& action,
-                                    IHttpServer& server) {
+                                    IHttpServer& server, IClientHandler& client) {
     // Stream reply directly using a writer callback to avoid temporary buffers
-    server.reply(
+    client.reply(
         "text/xml",
         [](Print& out, void* ref) -> size_t {
           auto self = static_cast<DLNAMediaServer*>(ref);
           return DeviceType::replyGetProtocolInfo(out, self->sourceProto,
-                                                  self->sinkProto);
+                                                 self->sinkProto);
         },
         200, nullptr, this);
     return true;
@@ -603,33 +601,33 @@ class DLNAMediaServer : public DLNADeviceInfo {
 
   /// Handle ConnectionManager:GetCurrentConnectionIDs action
   bool processActionGetCurrentConnectionIDs(ActionRequest& action,
-                                            IHttpServer& server) {
+                                            IHttpServer& server, IClientHandler& client) {
     // Stream reply directly using a writer callback
-    server.reply(
+    client.reply(
         "text/xml",
         [](Print& out, void* ref) -> size_t {
           auto self = static_cast<DLNAMediaServer*>(ref);
           return DeviceType::replyGetCurrentConnectionIDs(out,
-                                                          self->connectionID);
+                                                         self->connectionID);
         },
         200, nullptr, this);
     return true;
   }
   /// Handle ConnectionManager:GetCurrentConnectionInfo action
   bool processActionGetCurrentConnectionInfo(ActionRequest& action,
-                                             IHttpServer& server) {
+                                             IHttpServer& server, IClientHandler& client) {
     // Read requested ConnectionID (not used in this simple implementation)
     int connId = action.getArgumentIntValue("ConnectionID");
 
     // Stream the GetCurrentConnectionInfo response using chunked encoding
     // to avoid building the full response in memory and to remain
     // consistent with other handlers.
-    server.reply(
+    client.reply(
         "text/xml",
         [](Print& out, void* ref) -> size_t {
           auto self = static_cast<DLNAMediaServer*>(ref);
           return DeviceType::replyGetCurrentConnectionInfo(
-              out, self->sourceProto, self->connectionID, "Output");
+            out, self->sourceProto, self->connectionID, "Output");
         },
         200, nullptr, this);
     return true;
@@ -834,11 +832,11 @@ class DLNAMediaServer : public DLNADeviceInfo {
   }
 
   /// Control handler for ContentDirectory service
-  static void contentDirectoryControlCB(IHttpServer* server,
+  static void contentDirectoryControlCB(IClientHandler& client, IHttpServer* server,
                                         const char* requestPath,
                                         HttpRequestHandlerLine* hl) {
     ActionRequest action;
-    DeviceType::parseActionRequest(server, requestPath, hl, action);
+    DeviceType::parseActionRequest(server, client, requestPath, hl, action);
 
     // If a user-provided callback is registered, hand over the parsed
     // ActionRequest for custom handling. The callback is responsible for
@@ -847,10 +845,9 @@ class DLNAMediaServer : public DLNADeviceInfo {
 
     // process the requested action using instance method if available
     if (ms) {
-      if (ms->processAction(action, *server)) return;
+      if (ms->processAction(action, *server, client)) return;
     }
-
-    server->replyNotFound();
+    client.replyNotFound();
   }
 
   /**
@@ -871,64 +868,63 @@ class DLNAMediaServer : public DLNADeviceInfo {
   }
 
   /// simple connection manager control that replies OK
-  static void connmgrControlCB(IHttpServer* server, const char* requestPath,
+  static void connmgrControlCB(IClientHandler& client, IHttpServer* server, const char* requestPath,
                                HttpRequestHandlerLine* hl) {
     ActionRequest action;
-    DeviceType::parseActionRequest(server, requestPath, hl, action);
+    DeviceType::parseActionRequest(server, client, requestPath, hl, action);
 
     DLNAMediaServer* ms = getMediaServer(server);
     if (!ms) {
-      server->replyNotFound();
+      client.replyNotFound();
       return;
     }
-
     // Use rules-based dispatch for ConnectionManager actions
-    if (ms->processAction(action, *server)) return;
-    server->replyNotFound();
+    if (ms->processAction(action, *server, client)) return;
+    client.replyNotFound();
   }
 
   /// Setup the action rules for supported ContentDirectory and
   /// ConnectionManager commands
   void setupRules() {
     // ContentDirectory rules
-    rules.push_back({"Browse", [](DLNAMediaServer* self, ActionRequest& action,
+    rules.push_back({"Browse", [](IClientHandler& client, DLNAMediaServer* self, ActionRequest& action,
                                   IHttpServer& server) {
-                       return self->processActionBrowse(action, server);
+                       return self->processActionBrowse(action, server, client);
                      }});
-    rules.push_back({"Search", [](DLNAMediaServer* self, ActionRequest& action,
+    rules.push_back({"Search", [](IClientHandler& client, DLNAMediaServer* self, ActionRequest& action,
                                   IHttpServer& server) {
-                       return self->processActionSearch(action, server);
+                       return self->processActionSearch(action, server, client);
                      }});
     rules.push_back(
         {"GetSearchCapabilities",
-         [](DLNAMediaServer* self, ActionRequest& action, IHttpServer& server) {
-           return self->processActionGetSearchCapabilities(action, server);
+         [](IClientHandler& client, DLNAMediaServer* self, ActionRequest& action, IHttpServer& server) {
+           return self->processActionGetSearchCapabilities(action, server, client);
          }});
     rules.push_back(
         {"GetSortCapabilities",
-         [](DLNAMediaServer* self, ActionRequest& action, IHttpServer& server) {
-           return self->processActionGetSortCapabilities(action, server);
+         [](IClientHandler& client, DLNAMediaServer* self, ActionRequest& action, IHttpServer& server) {
+           return self->processActionGetSortCapabilities(action, server, client);
          }});
     rules.push_back(
         {"GetSystemUpdateID",
-         [](DLNAMediaServer* self, ActionRequest& action, IHttpServer& server) {
-           return self->processActionGetSystemUpdateID(action, server);
+         [](IClientHandler& client, DLNAMediaServer* self, ActionRequest& action, IHttpServer& server) {
+           return self->processActionGetSystemUpdateID(action, server, client);
          }});
     // ConnectionManager rules
     rules.push_back(
         {"GetProtocolInfo",
-         [](DLNAMediaServer* self, ActionRequest& action, IHttpServer& server) {
-           return self->processActionGetProtocolInfo(action, server);
+         [](IClientHandler& client, DLNAMediaServer* self, ActionRequest& action, IHttpServer& server) {
+           return self->processActionGetProtocolInfo(action, server, client);
          }});
     rules.push_back(
         {"GetCurrentConnectionIDs",
-         [](DLNAMediaServer* self, ActionRequest& action, IHttpServer& server) {
-           return self->processActionGetCurrentConnectionIDs(action, server);
+         [](IClientHandler& client, DLNAMediaServer* self, ActionRequest& action, IHttpServer& server) {
+           return self->processActionGetCurrentConnectionIDs(action, server, client);
          }});
     rules.push_back(
         {"GetCurrentConnectionInfo",
-         [](DLNAMediaServer* self, ActionRequest& action, IHttpServer& server) {
-           return self->processActionGetCurrentConnectionInfo(action, server);
+         [](IClientHandler& client, DLNAMediaServer* self, ActionRequest& action, IHttpServer& server) {
+           return self->processActionGetCurrentConnectionInfo(action, server, client);
          }});
   }
 };

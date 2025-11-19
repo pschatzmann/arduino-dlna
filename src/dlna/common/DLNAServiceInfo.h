@@ -8,7 +8,7 @@
 
 namespace tiny_dlna {
 
-typedef void (*http_callback)(IHttpServer* server, const char* requestPath,
+typedef void (*http_callback)(IClientHandler& client, IHttpServer* server, const char* requestPath,
                               HttpRequestHandlerLine* hl);
 
 /**

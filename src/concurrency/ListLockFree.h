@@ -43,15 +43,19 @@ class ListLockFree {
    */
   class Iterator {
    public:
-    Iterator(Node* node) : node(node) {}
+
+    Iterator(Node* node, ListLockFree* owner_ptr = nullptr) : node(node), owner(owner_ptr) {
+      if (node == nullptr) is_eof = true;
+    }
 
     inline Iterator operator++() {
-      if (node != nullptr) {
+      if (node != nullptr && owner != nullptr) {
         Node* next_node = node->next.load(std::memory_order_acquire);
         if (next_node != nullptr && next_node != &owner->last) {
           node = next_node;
           is_eof = false;
         } else {
+          node = nullptr;
           is_eof = true;
         }
       }
@@ -65,12 +69,13 @@ class ListLockFree {
     }
 
     inline Iterator operator--() {
-      if (node != nullptr) {
+      if (node != nullptr && owner != nullptr) {
         Node* prior_node = node->prior.load(std::memory_order_acquire);
         if (prior_node != nullptr && prior_node != &owner->first) {
           node = prior_node;
           is_eof = false;
         } else {
+          node = nullptr;
           is_eof = true;
         }
       }
@@ -91,13 +96,26 @@ class ListLockFree {
       return getIteratorAtOffset(-offset);
     }
 
-    inline bool operator==(const Iterator& it) const { return node == it.node; }
 
-    inline bool operator!=(const Iterator& it) const { return node != it.node; }
+    inline bool operator==(const Iterator& it) const {
+      return node == it.node && owner == it.owner;
+    }
 
-    inline T& operator*() { return node->data; }
+    inline bool operator!=(const Iterator& it) const {
+      return !(*this == it);
+    }
 
-    inline T* operator->() { return &(node->data); }
+
+    inline T& operator*() {
+      if (node == nullptr) throw std::out_of_range("Iterator dereference: nullptr");
+      return node->data;
+    }
+
+    inline T* operator->() {
+      if (node == nullptr) throw std::out_of_range("Iterator dereference: nullptr");
+      return &(node->data);
+    }
+
 
     inline Node* get_node() { return node; }
 
@@ -366,29 +384,29 @@ class ListLockFree {
     }
   }
 
+
   Iterator begin() {
     Node* first_data = first.next.load(std::memory_order_acquire);
-    Iterator it(first_data == &last ? nullptr : first_data);
-    it.set_owner(this);
+    Iterator it(first_data == &last ? nullptr : first_data, this);
     return it;
   }
 
+
   Iterator end() {
-    Iterator it(&last);
-    it.set_owner(this);
+    Iterator it(nullptr, this);
     return it;
   }
+
 
   Iterator rbegin() {
     Node* last_data = last.prior.load(std::memory_order_acquire);
-    Iterator it(last_data == &first ? nullptr : last_data);
-    it.set_owner(this);
+    Iterator it(last_data == &first ? nullptr : last_data, this);
     return it;
   }
 
+
   Iterator rend() {
-    Iterator it(&first);
-    it.set_owner(this);
+    Iterator it(nullptr, this);
     return it;
   }
 

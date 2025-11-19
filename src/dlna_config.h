@@ -17,7 +17,7 @@
 
 /// Define the default http request timeout
 #ifndef DLNA_HTTP_REQUEST_TIMEOUT_MS
-#define DLNA_HTTP_REQUEST_TIMEOUT_MS 300
+#define DLNA_HTTP_REQUEST_TIMEOUT_MS 50
 #endif
 
 /// Define XML parse buffer size

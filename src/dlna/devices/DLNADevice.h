@@ -2,15 +2,22 @@
 
 #include <functional>
 
+#include "basic/Icon.h"
 #include "basic/Printf.h"
+#include "basic/StrView.h"
 #include "basic/Url.h"
+#include "basic/Vector.h"
+#include "dlna/common/Action.h"
 #include "dlna/common/DLNADeviceInfo.h"
+#include "dlna/common/DLNAServiceInfo.h"
 #include "dlna/common/Schedule.h"
+#include "dlna/common/Scheduler.h"
 #include "dlna/devices/DLNADeviceRequestParser.h"
 #include "dlna/devices/IDevice.h"
 #include "dlna/devices/SubscriptionMgrDevice.h"
 #include "dlna/udp/IUDPService.h"
 #include "dlna/xml/XMLParserPrint.h"
+#include "dlna/xml/XMLPrinter.h"
 #include "http/Http.h"
 #include "http/Server/IHttpServer.h"
 
@@ -264,7 +271,8 @@ class DLNADevice : public IDevice {
   }
 
   /// Parses the SOAP content of a DLNA action request
-  static void parseActionRequest(IHttpServer* server, const char* requestPath,
+  static void parseActionRequest(IHttpServer* server, IClientHandler& client,
+                                 const char* requestPath,
                                  HttpRequestHandlerLine* hl,
                                  ActionRequest& action) {
     DlnaLogger.log(DlnaLogLevel::Info, "parseActionRequest");
@@ -280,10 +288,12 @@ class DLNADevice : public IDevice {
     bool is_action = false;
     Str actionName;
     char buffer[XML_PARSER_BUFFER_SIZE];
-    Client& client = server->client();
+    // Client* client = server->client(); // No longer valid, use handler
+    // reference
 
+    auto* pClient = client.client();
     while (true) {
-      size_t len = client.readBytes(buffer, sizeof(buffer));
+      size_t len = pClient->readBytes(buffer, sizeof(buffer));
       if (len == 0) break;
       xp.write((const uint8_t*)buffer, len);
 
@@ -414,23 +424,27 @@ class DLNADevice : public IDevice {
   }
 
   /// Static handler for SUBSCRIBE/UNSUBSCRIBE requests on service event URLs
-  static bool handleSubscription(IHttpServer* server, const char* requestPath,
+  static bool handleSubscription(IHttpServer* server, IClientHandler* client,
+                                 const char* requestPath,
                                  HttpRequestHandlerLine* hl,
                                  bool& is_subscribe) {
     DlnaLogger.log(DlnaLogLevel::Debug, "handleSubscription");
     // logic separated and easier to test.
     is_subscribe = false;
-    HttpRequestHeader& req = server->requestHeader();
-    if (req.method() == T_SUBSCRIBE) {
-      is_subscribe = true;
-      return handleSubscribe(server, requestPath, hl);
-    }
-    if (req.method() == T_UNSUBSCRIBE) {
-      return handleUnsubscribe(server, requestPath, hl);
+    // Use client handler for request header and error reply
+    if (client) {
+      HttpRequestHeader& req = client->requestHeader();
+      if (req.method() == T_SUBSCRIBE) {
+        is_subscribe = true;
+        return handleSubscribe(client, server, requestPath, hl);  // If needed
+      }
+      if (req.method() == T_UNSUBSCRIBE) {
+        return handleUnsubscribe(client, server, requestPath, hl);  // If
+      }
     }
 
     // default reply OK for other methods
-    server->replyError(501, "Unsupported Method");
+    client->replyError(501, "Unsupported Method");
     return false;
   }
 
@@ -618,18 +632,23 @@ class DLNADevice : public IDevice {
         continue;
       }
 
-      p_server->on(service.scpd_url, T_GET, service.scp_cb);
-      p_server->on(service.control_url, T_POST, service.control_cb);
-      p_server->on(service.event_sub_url, T_SUBSCRIBE, service.event_sub_cb);
-      p_server->on(service.event_sub_url, T_UNSUBSCRIBE, service.event_sub_cb);
-      p_server->on(service.event_sub_url, T_POST, service.event_sub_cb);
+      p_server->on(service.scpd_url, T_GET, (web_callback_fn)service.scp_cb);
+      p_server->on(service.control_url, T_POST,
+                   (web_callback_fn)service.control_cb);
+      p_server->on(service.event_sub_url, T_SUBSCRIBE,
+                   (web_callback_fn)service.event_sub_cb);
+      p_server->on(service.event_sub_url, T_UNSUBSCRIBE,
+                   (web_callback_fn)service.event_sub_cb);
+      p_server->on(service.event_sub_url, T_POST,
+                   (web_callback_fn)service.event_sub_cb);
     }
 
     return true;
   }
 
   /// callback to provide device XML
-  static void deviceXMLCallback(IHttpServer* server, const char* requestPath,
+  static void deviceXMLCallback(IClientHandler& client, IHttpServer* server,
+                                const char* requestPath,
                                 HttpRequestHandlerLine* hl) {
     DlnaLogger.log(DlnaLogLevel::Debug, "deviceXMLCallback");
 
@@ -639,7 +658,7 @@ class DLNADevice : public IDevice {
       DlnaLogger.log(DlnaLogLevel::Info, "reply %s", "DeviceXML");
       // Use server->reply with a callback so the Content-Length is computed
       // and headers are written correctly before streaming the body.
-      server->reply(
+      client.reply(
           "text/xml",
           [](Print& out, void* ref) -> size_t {
             return ((DLNADeviceInfo*)ref)->print(out, ref);
@@ -647,12 +666,13 @@ class DLNADevice : public IDevice {
           200, "SUCCESS", device_xml);
     } else {
       DlnaLogger.log(DlnaLogLevel::Error, "DLNADevice is null");
-      server->replyNotFound();
+      client.replyNotFound();
     }
   }
 
   /// Handle SUBSCRIBE requests
-  static bool handleSubscribe(IHttpServer* server, const char* requestPath,
+  static bool handleSubscribe(IClientHandler* client, IHttpServer* server,
+                              const char* requestPath,
                               HttpRequestHandlerLine* hl) {
     DlnaLogger.log(DlnaLogLevel::Debug, "handleSubscribe");
     auto* device = static_cast<IDevice*>(server->getReference());
@@ -661,11 +681,13 @@ class DLNADevice : public IDevice {
     assert(svc != nullptr);
 
     // Delegate all HTTP processing to SubscriptionMgrDevice
-    return device->getSubscriptionMgr().processSubscribeRequest(*server, *svc);
+    return device->getSubscriptionMgr().processSubscribeRequest(*server, *svc,
+                                                                client);
   }
 
   /// Handle UNSUBSCRIBE requests
-  static bool handleUnsubscribe(IHttpServer* server, const char* requestPath,
+  static bool handleUnsubscribe(IClientHandler* client, IHttpServer* server,
+                                const char* requestPath,
                                 HttpRequestHandlerLine* hl) {
     DlnaLogger.log(DlnaLogLevel::Debug, "handleUnsubscribe");
     auto* device = static_cast<IDevice*>(server->getReference());
@@ -674,8 +696,8 @@ class DLNADevice : public IDevice {
     assert(svc != nullptr);
 
     // Delegate all HTTP processing to SubscriptionMgrDevice
-    return device->getSubscriptionMgr().processUnsubscribeRequest(*server,
-                                                                  *svc);
+    return device->getSubscriptionMgr().processUnsubscribeRequest(*server, *svc,
+                                                                  client);
   }
 };
 

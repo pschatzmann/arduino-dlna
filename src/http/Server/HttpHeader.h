@@ -291,9 +291,6 @@ class HttpHeader {
   bool is_chunked = false;
   bool create_new_lines = true;
   TinyMethodID method_id = T_GET;
-  // we store the values on the heap. this is acceptable because we just have
-  // one instance for the requests and one for the replys: which needs about
-  // 2*100 bytes
   Str protocol_str = Str(10);
   Str url_path = Str(70);
   Str status_msg = Str(20);
@@ -303,7 +300,7 @@ class HttpHeader {
 
   // the headers need to delimited with CR LF
   void crlf(Client& out) {
-    out.print(CRLF);
+    out.println();
     DlnaLogger.log(DlnaLogLevel::Debug, " -> %s", "<CR LF>");
   }
 

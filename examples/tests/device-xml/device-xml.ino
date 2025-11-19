@@ -8,25 +8,22 @@ void setupDevice() {
   device_info.setDeviceType("urn:schemas-upnp-org:device:MediaRenderer:1");
   device_info.setUDN("uuid:09349455-2941-4cf7-9847-0dd5ab210e97");
   
-  auto dummyCB = [](IHttpServer* server, const char* requestPath,
-                    HttpRequestHandlerLine* hl) {
+
+  auto dummyCB = [](IClientHandler& client, IHttpServer* /*server*/, const char* requestPath, HttpRequestHandlerLine* /*hl*/) {
     DlnaLogger.log(DlnaLogLevel::Error, "Unhandled request: %s", requestPath);
-    server->reply("text/xml", "<test/>");
+    client.reply("text/xml", "<test/>");
   };
 
-  auto transportCB = [](IHttpServer* server, const char* requestPath,
-                        HttpRequestHandlerLine* hl) {
-  server->reply("text/xml", [](Print& out, void*) -> size_t { tiny_dlna::DLNAMediaRendererTransportDescr d; return d.printDescr(out); });
+  auto transportCB = [](IClientHandler& client, IHttpServer* /*server*/, const char* /*requestPath*/, HttpRequestHandlerLine* /*hl*/) {
+    client.reply("text/xml", [](Print& out, void*) -> size_t { tiny_dlna::DLNAMediaRendererTransportDescr d; return d.printDescr(out); });
   };
 
-  auto connmgrCB = [](IHttpServer* server, const char* requestPath,
-                      HttpRequestHandlerLine* hl) {
-  server->reply("text/xml", [](Print& out, void*) -> size_t { tiny_dlna::DLNAMediaRendererConnectionMgrDescr d; return d.printDescr(out); });
+  auto connmgrCB = [](IClientHandler& client, IHttpServer* /*server*/, const char* /*requestPath*/, HttpRequestHandlerLine* /*hl*/) {
+    client.reply("text/xml", [](Print& out, void*) -> size_t { tiny_dlna::DLNAMediaRendererConnectionMgrDescr d; return d.printDescr(out); });
   };
 
-  auto controlCB = [](IHttpServer* server, const char* requestPath,
-                      HttpRequestHandlerLine* hl) {
-  server->reply("text/xml", [](Print& out, void*) -> size_t { tiny_dlna::DLNAMediaRendererControlDescr d; return d.printDescr(out); });
+  auto controlCB = [](IClientHandler& client, IHttpServer* /*server*/, const char* /*requestPath*/, HttpRequestHandlerLine* /*hl*/) {
+    client.reply("text/xml", [](Print& out, void*) -> size_t { tiny_dlna::DLNAMediaRendererControlDescr d; return d.printDescr(out); });
   };
 
   // define services

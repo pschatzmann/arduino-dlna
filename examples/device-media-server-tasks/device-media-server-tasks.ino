@@ -7,6 +7,7 @@
 
 #include "WiFi.h"
 #include "dlna.h"
+#include "DLNA/HttpServerUsingTasks.h"
 
 // Replace with your WiFi credentials
 const char* ssid = "YOUR_SSID";
@@ -14,7 +15,7 @@ const char* password = "YOUR_PASSWORD";
 
 const int port = 9000;
 WiFiServer wifi(port);
-HttpServer<WiFiClient, WiFiServer> server(wifi);
+HttpServerUsingTasks<WiFiClient, WiFiServer> server(wifi);
 UDPService<WiFiUDP> udp;
 DLNAMediaServer<WiFiClient> mediaServer(server, udp);
 
@@ -111,7 +112,7 @@ bool myGetData(int index, MediaItem& item, void* reference) {
 
 void setup() {
   Serial.begin(115200);
-  DlnaLogger.begin(Serial, DlnaLogLevel::Info);
+  DlnaLogger.begin(Serial, DlnaLogLevel::Warning);
 
   setupWifi();
 
