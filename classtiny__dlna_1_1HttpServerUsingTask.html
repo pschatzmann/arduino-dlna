@@ -99,8 +99,8 @@ Inheritance diagram for tiny_dlna::HttpServerUsingTask&lt; ClientType, ServerTyp
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a8b1e31bd909152d3cdcefd007b472d65"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServerUsingTask.html#a8b1e31bd909152d3cdcefd007b472d65">HttpServerUsingTask</a> (ServerType &amp;server, int bufferSize=1024, int taskStackSize=4096, int taskPriority=1)</td></tr>
-<tr class="separator:a8b1e31bd909152d3cdcefd007b472d65"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a351a1c6d3891f2b240ea4c07338fd162"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServerUsingTask.html#a351a1c6d3891f2b240ea4c07338fd162">HttpServerUsingTask</a> (ServerType &amp;server, int bufferSize=1024, int taskStackSize=1024 *8, int taskPriority=1)</td></tr>
+<tr class="separator:a351a1c6d3891f2b240ea4c07338fd162"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac59b45eaeece2b9d3dbd4601e764f263"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServerUsingTask.html#ac59b45eaeece2b9d3dbd4601e764f263">~HttpServerUsingTask</a> ()</td></tr>
 <tr class="separator:ac59b45eaeece2b9d3dbd4601e764f263"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0f084be525663e534732a3b009009f17"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServerUsingTask.html#a0f084be525663e534732a3b009009f17">begin</a> () override</td></tr>
@@ -209,8 +209,8 @@ class tiny_dlna::HttpServerUsingTask&lt; ClientType, ServerType &gt;</div><p>HTT
 <p>Example usage: </p><div class="fragment"><div class="line"><a class="code hl_class" href="classtiny__dlna_1_1HttpServerUsingTask.html">tiny_dlna::HttpServerUsingTask&lt;WiFiClient, WiFiServer&gt;</a> server(80);</div>
 <div class="ttc" id="aclasstiny__dlna_1_1HttpServerUsingTask_html"><div class="ttname"><a href="classtiny__dlna_1_1HttpServerUsingTask.html">tiny_dlna::HttpServerUsingTask</a></div><div class="ttdoc">HTTP server implementation that runs in a separate task/thread.</div><div class="ttdef"><b>Definition:</b> HttpServerUsingTask.h:29</div></div>
 </div><!-- fragment --> </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a8b1e31bd909152d3cdcefd007b472d65" name="a8b1e31bd909152d3cdcefd007b472d65"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8b1e31bd909152d3cdcefd007b472d65">&#9670;&#160;</a></span>HttpServerUsingTask()</h2>
+<a id="a351a1c6d3891f2b240ea4c07338fd162" name="a351a1c6d3891f2b240ea4c07338fd162"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a351a1c6d3891f2b240ea4c07338fd162">&#9670;&#160;</a></span>HttpServerUsingTask()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -236,7 +236,7 @@ template&lt;typename ClientType , typename ServerType &gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>taskStackSize</em> = <code>4096</code>, </td>
+          <td class="paramname"><em>taskStackSize</em> = <code>1024&#160;*&#160;8</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
