@@ -29,7 +29,7 @@ template <typename ClientType, typename ServerType>
 class HttpServerUsingTask : public HttpServer<ClientType, ServerType> {
  public:
   HttpServerUsingTask(ServerType& server, int bufferSize = 1024,
-                      int taskStackSize = 4096, int taskPriority = 1)
+                      int taskStackSize = 1024 * 8, int taskPriority = 1)
       : HttpServer<ClientType, ServerType>(server, bufferSize),
         server_task_("HttpServerTask", taskStackSize, taskPriority) {}
 

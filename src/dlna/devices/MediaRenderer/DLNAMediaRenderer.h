@@ -85,7 +85,8 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
   DLNAMediaRenderer() {
     // Constructor
     DlnaLogger.log(DlnaLogLevel::Info, "MediaRenderer::MediaRenderer");
-    setSerialNumber(usn);
+    setUDN(usn);
+    setSerialNumber("1.0");
     setDeviceType(st);
     setFriendlyName("ArduinoMediaRenderer");
     setManufacturer("TinyDLNA");

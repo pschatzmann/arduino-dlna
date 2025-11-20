@@ -92,23 +92,36 @@ class MSearchReplySchedule : public Schedule {
 
   bool process(IUDPService &udp) override {
     // we keep the data on the stack
-    DlnaLogger.log(DlnaLogLevel::Debug, "Sending %s for %s to %s", name(),
+    DlnaLogger.log(DlnaLogLevel::Info, "Sending %s for %s to %s", name(),
                    search_target.c_str(), address.toString());
+
+
+    // replace ssdp:all with device type               
+    if (search_target.equals("ssdp:all")){
+      search_target = p_device->getDeviceType();
+    } 
 
     DLNADeviceInfo &device = *p_device;
     char buffer[MAX_TMP_SIZE] = {0};
     const char *tmp =
-        "HTTP/1.1 200 OK\r\n"
-        "CACHE-CONTROL: max-age = %d\r\n"
-        "LOCATION: %s\r\n"
-        "ST: %s\r\n"
-        "USN: %s\r\n\r\n";
+      "HTTP/1.1 200 OK\r\n"
+      "CACHE-CONTROL: max-age=%d\r\n"
+      "EXT:\r\n"
+      "LOCATION: %s\r\n"
+      "SERVER: Arduino-DLNA/1.0 UPnP/1.1 DLNA/1.5\r\n"
+      "ST: %s\r\n"
+      "USN: %s\r\n"
+      "CONTENT-LENGTH: 0\r\n\r\n";
     int n = snprintf(buffer, MAX_TMP_SIZE, tmp, max_age,
                      device.getDeviceURL().url(), search_target.c_str(),
                      device.getUDN());
     assert(n < MAX_TMP_SIZE);
-    DlnaLogger.log(DlnaLogLevel::Debug, "sending: %s", buffer);
-    udp.send(address, (uint8_t *)buffer, n);
+    DlnaLogger.log(DlnaLogLevel::Info, "sending: %s", buffer);
+    if (!udp.send(address, (uint8_t *)buffer, n)) {
+      DlnaLogger.log(DlnaLogLevel::Warning, "Failed to send MSearchReply to %s",
+                     address.toString());
+      return false;
+    }
     return true;
   }
 

@@ -63,7 +63,8 @@ class DLNAMediaServer : public DLNADeviceInfo {
 
   /// Default constructor: initialize device info and defaults
   DLNAMediaServer() {
-    setSerialNumber(usn);
+    setUDN(usn);
+    setSerialNumber("1.0");
     setDeviceType(st);
     setFriendlyName("ArduinoMediaServer");
     setManufacturer("TinyDLNA");
