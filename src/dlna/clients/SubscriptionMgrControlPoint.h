@@ -223,7 +223,7 @@ class SubscriptionMgrControlPoint {
   uint64_t subscribe_timeout = 0;
   uint32_t event_subscription_duration_sec = 3600;
   uint32_t event_subscription_retry_ms = 0;
-  bool event_subscription_active = false;
+  bool event_subscription_active = true;
   uint64_t last_event_notify_ms = 0;  // timestamp of last received NOTIFY
   IHttpRequest* p_http = nullptr;
   IUDPService* p_udp = nullptr;
@@ -368,6 +368,7 @@ class SubscriptionMgrControlPoint {
    *         failures result in continued attempts for remaining services).
    */
   bool subscribeToDevice(DLNADeviceInfo& device) {
+    DlnaLogger.log(DlnaLogLevel::Info, "subscribeToDevice");
     bool ok = true;
     for (auto& service : device.getServices()) {
       if (!subscribeToService(service)) {
@@ -390,6 +391,7 @@ class SubscriptionMgrControlPoint {
    * @return true if all unsubscriptions succeeded; false otherwise.
    */
   bool unsubscribeFromDevice(DLNADeviceInfo& device) {
+    DlnaLogger.log(DlnaLogLevel::Info, "unsubscribeFromDevice");
     bool ok = true;
     for (auto& service : device.getServices()) {
       if (!unsubscribeFromService(service)) {
@@ -538,10 +540,6 @@ class SubscriptionMgrControlPoint {
 
     // read SID header and body
     const char* sid = client.requestHeader().get("SID");
-
-    // Use XMLParserPrint to incrementally parse the NOTIFY body and extract
-    // property child elements. XMLParserPrint accumulates the buffer and
-    // exposes a parse() method that returns the next fragment.
 
     // mark notify received early so subscription metadata gets updated
     mgr->updateReceived(sid);

@@ -330,10 +330,12 @@ class HttpRequest : public IHttpRequest {
       StrPrint test;
       size_t test_len = writer(test, ref);
       if (strlen(test.c_str()) != len) {
-        DlnaLogger.log(DlnaLogLevel::Error,
-                      "HttpRequest test wrote %d bytes: expected %d / strlen: %d", test_len, len, strlen(test.c_str()));
-      }   
-#endif      
+        DlnaLogger.log(
+            DlnaLogLevel::Error,
+            "HttpRequest test wrote %d bytes: expected %d / strlen: %d",
+            test_len, len, strlen(test.c_str()));
+      }
+#endif
     }
 
     // read reply header and prepare chunk reader if needed

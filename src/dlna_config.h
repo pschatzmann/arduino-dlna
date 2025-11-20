@@ -186,3 +186,6 @@
 #ifndef DLNA_DISCOVERY_NETMASK
 #define DLNA_DISCOVERY_NETMASK IPAddress(255, 255, 255, 0)
 #endif
+
+// Deactivate warnings
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"

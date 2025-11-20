@@ -243,7 +243,9 @@ class HttpServer : public IHttpServer {
     if (client.connected()) {
       DlnaLogger.log(DlnaLogLevel::Info, "copy: accepted new client");
       client.setTimeout(DLNA_HTTP_REQUEST_TIMEOUT_MS);
+#ifdef ESP32    
       client.setNoDelay(true);  // disables Nagle
+#endif
       open_clients.push_back(client);
     }
 

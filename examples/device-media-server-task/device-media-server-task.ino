@@ -7,7 +7,7 @@
 
 #include "WiFi.h"
 #include "dlna.h"
-#include "DLNA/HttpServerUsingTask.h"
+#include "dlna/HttpServerUsingTask.h"
 
 // Replace with your WiFi credentials
 const char* ssid = "YOUR_SSID";

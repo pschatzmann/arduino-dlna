@@ -438,7 +438,7 @@ class DLNADevice : public IDevice {
         is_subscribe = true;
         return handleSubscribe(client, server, requestPath, hl);  // If needed
       }
-      if (req.method() == T_UNSUBSCRIBE) {
+      if (req.method() == T_UNSUBSCRIBE || req.method() == T_POST) {
         return handleUnsubscribe(client, server, requestPath, hl);  // If
       }
     }

@@ -125,7 +125,8 @@ class HttpClientHandler : public IClientHandler {
 #if DLNA_LOG_XML
     callback(Serial, ref);
 #endif
-#if DLNA_CHECK_XML_LENGTH
+
+    #if DLNA_CHECK_XML_LENGTH
     StrPrint test;
     size_t test_len = callback(test, ref);
     if (strlen(test.c_str()) != size) {
@@ -176,9 +177,6 @@ class HttpClientHandler : public IClientHandler {
     DlnaLogger.log(DlnaLogLevel::Info, "reply %s", "error");
     reply("text/plain", msg, err, msg);
   }
-
-
-  #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 
   void endClient() override {
     if (p_client) {
