@@ -135,7 +135,6 @@ class HttpClientHandler : public IClientHandler {
                      test_len, size, strlen(test.c_str()));
     }
 #endif
-    delay(200);
     endClient();
   }
 

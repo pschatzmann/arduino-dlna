@@ -361,13 +361,10 @@ class DLNADeviceInfo {
     DLNAServiceInfo* service = (DLNAServiceInfo*)srv;
     result += xp.printNode("serviceType", service->service_type);
     result += xp.printNode("serviceId", service->service_id);
-    result +=
-        xp.printNode("SCPDURL", url.buildPath(base_url, service->scpd_url));
-    result += xp.printNode("controlURL",
-                           url.buildPath(base_url, service->control_url));
+    result += xp.printNode("SCPDURL", service->scpd_url);
+    result += xp.printNode("controlURL", service->control_url);
     if (is_subcription_active)
-      result += xp.printNode("eventSubURL",
-                             url.buildPath(base_url, service->event_sub_url));
+      result += xp.printNode("eventSubURL", service->event_sub_url);
     else
       result += xp.printf("<eventSubURL/>");
 
@@ -410,7 +407,7 @@ class DLNADeviceInfo {
       result += xp.printNode("width", icon->width);
       result += xp.printNode("height", icon->height);
       result += xp.printNode("depth", icon->depth);
-      result += xp.printNode("url", url.buildPath(base_url, icon->icon_url));
+      result += xp.printNode("url", icon->icon_url);
     }
     return result;
   }

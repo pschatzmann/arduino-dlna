@@ -46,7 +46,7 @@ class UDPService : public IUDPService {
   bool send(uint8_t* data, int len) override { return send(peer, data, len); }
 
   bool send(IPAddressAndPort addr, uint8_t* data, int len) override {
-    DlnaLogger.log(DlnaLogLevel::Debug, "sending %d bytes", len);
+    DlnaLogger.log(DlnaLogLevel::Debug, "sending %d bytes to %s", len, addr.toString());
     udp.beginPacket(addr.address, addr.port);
     int sent = udp.write(data, len);
     assert(sent == len);

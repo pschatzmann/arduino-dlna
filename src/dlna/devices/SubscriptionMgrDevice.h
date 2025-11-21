@@ -614,7 +614,7 @@ class SubscriptionMgrDevice : public ISubscriptionMgrDevice {
     DlnaLogger.log(DlnaLogLevel::Warning,
                    "handleUnsubscribeRequest: failed for SID %s",
                    sid ? sid : "(null)");
-    if (client) client->replyNotFound();
+    if (client) client->replyOK();
     return false;
   }
 };

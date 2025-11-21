@@ -116,7 +116,7 @@ class MSearchReplySchedule : public Schedule {
                      device.getDeviceURL().url(), search_target.c_str(),
                      device.getUDN());
     assert(n < MAX_TMP_SIZE);
-    DlnaLogger.log(DlnaLogLevel::Info, "sending: %s", buffer);
+    DlnaLogger.log(DlnaLogLevel::Debug, "sending: %s", buffer);
     if (!udp.send(address, (uint8_t *)buffer, n)) {
       DlnaLogger.log(DlnaLogLevel::Warning, "Failed to send MSearchReply to %s",
                      address.toString());
@@ -281,7 +281,7 @@ class PostAliveSchedule : public Schedule {
     const char *tmp =
         "NOTIFY * HTTP/1.1\r\n"
         "HOST:%s\r\n"
-        "CACHE-CONTROL: max-age = %d\r\n"
+        "CACHE-CONTROL: max-age=%d\r\n"
         "LOCATION: %s\r\n"
         "NT: %s\r\n"
         "NTS: ssdp:alive\r\n"
@@ -290,7 +290,8 @@ class PostAliveSchedule : public Schedule {
                      max_age, device_url, nt, usn);
 
     assert(n < MAX_TMP_SIZE);
-    DlnaLogger.log(DlnaLogLevel::Debug, "sending: %s", buffer);
+    DlnaLogger.log(DlnaLogLevel::Info, "sending: ssdp:alive %s", nt);
+    DlnaLogger.log(DlnaLogLevel::Debug, "%s", buffer);
     udp.send(DLNABroadcastAddress, (uint8_t *)buffer, n);
     return true;
   }

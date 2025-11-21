@@ -24,14 +24,14 @@ class DLNADeviceRequestParser {
       return processMSearch(req);
     }
 
-    // We ignore alive notifications
+    // Handle NOTIFY requests
     if (req.data.contains("NOTIFY")) {
       if (req.data.contains("ssdp:alive")) {
-        DlnaLogger.log(DlnaLogLevel::Debug, "invalid request: %s",
-                       req.data.c_str());
+        DlnaLogger.log(DlnaLogLevel::Debug, "NOTIFY ssdp:alive received: %s", req.data.c_str());
+      } else if (req.data.contains("ssdp:byebye")) {
+        DlnaLogger.log(DlnaLogLevel::Info, "NOTIFY ssdp:byebye received: %s", req.data.c_str());
       } else {
-        DlnaLogger.log(DlnaLogLevel::Warning, "invalid request: %s",
-                       req.data.c_str());
+        DlnaLogger.log(DlnaLogLevel::Warning, "NOTIFY (unknown NTS) received: %s", req.data.c_str());
       }
       return nullptr;
     }

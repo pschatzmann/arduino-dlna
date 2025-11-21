@@ -831,6 +831,23 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
     return true;
   }
 
+  bool processActionListPresets(ActionRequest& action, IHttpServer& server, IClientHandler& client) {
+    client.reply(
+        "text/xml",
+        [](Print& out, void* ref) -> size_t {
+          return DeviceType::printReplyXML(
+              out, "ListPresetsResponse", "AVTransport",
+              [](Print& o, void* /*innerRef*/) -> size_t {
+                size_t written = 0;
+                written += o.print("<CurrentPresetNameList>FactoryDefault</CurrentPresetNameList>");
+                return written;
+              },
+              nullptr);
+        },
+        200, nullptr, this);
+    return true;
+  }
+
   bool processActionPause(ActionRequest& action, IHttpServer& server, IClientHandler& client) {
     if (event_cb) event_cb(MediaEvent::PAUSE, *this);
     client.reply(
@@ -1230,6 +1247,9 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
 
   /// Setup the action handling rules
   void setupRules() {
+    rules.push_back({"ListPresets", [](DLNAMediaRenderer* self, ActionRequest& action, IHttpServer& server, IClientHandler& client) {
+      return self->processActionListPresets(action, server, client);
+    }});
     rules.push_back({"Play", [](DLNAMediaRenderer* self, ActionRequest& action, IHttpServer& server, IClientHandler& client) {
       return self->processActionPlay(action, server, client);
     }});
