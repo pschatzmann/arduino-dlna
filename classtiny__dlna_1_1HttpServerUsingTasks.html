@@ -82,7 +82,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>HTTP server implementation that handles each client in a separate task.  
+<p>Experimental HTTP server implementation that handles each client in a separate task.  
  <a href="classtiny__dlna_1_1HttpServerUsingTasks.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="HttpServerUsingTasks_8h_source.html">HttpServerUsingTasks.h</a>&gt;</code></p>
@@ -91,7 +91,7 @@ Inheritance diagram for tiny_dlna::HttpServerUsingTasks&lt; ClientType, ServerTy
 <div class="dyncontent">
 <div class="center"><img src="classtiny__dlna_1_1HttpServerUsingTasks__inherit__graph.png" border="0" usemap="#atiny__dlna_1_1HttpServerUsingTasks_3_01ClientType_00_01ServerType_01_4_inherit__map" alt="Inheritance graph"/></div>
 <map name="atiny__dlna_1_1HttpServerUsingTasks_3_01ClientType_00_01ServerType_01_4_inherit__map" id="atiny__dlna_1_1HttpServerUsingTasks_3_01ClientType_00_01ServerType_01_4_inherit__map">
-<area shape="rect" title="HTTP server implementation that handles each client in a separate task." alt="" coords="5,167,241,207"/>
+<area shape="rect" title="Experimental HTTP server implementation that handles each client in a separate task." alt="" coords="5,167,241,207"/>
 <area shape="rect" href="classtiny__dlna_1_1HttpServer.html" title="Header&#45;only HTTP server wrapper that registers callback handlers." alt="" coords="23,79,223,119"/>
 <area shape="rect" href="classtiny__dlna_1_1IHttpServer.html" title="Abstract interface for HTTP server functionality." alt="" coords="41,5,205,31"/>
 </map>
@@ -99,8 +99,8 @@ Inheritance diagram for tiny_dlna::HttpServerUsingTasks&lt; ClientType, ServerTy
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a6ae31295f06879b95c8be6e98d03b37f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServerUsingTasks.html#a6ae31295f06879b95c8be6e98d03b37f">HttpServerUsingTasks</a> (ServerType &amp;server, int bufferSize=1024, int taskStackSize=4096, int taskPriority=1)</td></tr>
-<tr class="separator:a6ae31295f06879b95c8be6e98d03b37f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58a71d43be86f480b54da8c3812b67ce"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServerUsingTasks.html#a58a71d43be86f480b54da8c3812b67ce">HttpServerUsingTasks</a> (ServerType &amp;server, int bufferSize=1024, int taskStackSize=1024 *8, int taskPriority=1)</td></tr>
+<tr class="separator:a58a71d43be86f480b54da8c3812b67ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a51b041f132407d2fec95eb7fbec9b41e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServerUsingTasks.html#a51b041f132407d2fec95eb7fbec9b41e">~HttpServerUsingTasks</a> ()</td></tr>
 <tr class="separator:a51b041f132407d2fec95eb7fbec9b41e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab91d6e86c349111b200b644fa18c9a7e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServerUsingTasks.html#ab91d6e86c349111b200b644fa18c9a7e">begin</a> () override</td></tr>
@@ -209,7 +209,7 @@ Protected Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename ClientType, typename ServerType&gt;<br />
-class tiny_dlna::HttpServerUsingTasks&lt; ClientType, ServerType &gt;</div><p>HTTP server implementation that handles each client in a separate task. </p>
+class tiny_dlna::HttpServerUsingTasks&lt; ClientType, ServerType &gt;</div><p>Experimental HTTP server implementation that handles each client in a separate task. </p>
 <p>This class extends <a class="el" href="classtiny__dlna_1_1HttpServer.html" title="Header-only HTTP server wrapper that registers callback handlers.">HttpServer</a> and, upon a new client connection, spawns a dedicated Task to handle the client. The task runs until the client disconnects, then cleans up.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
@@ -219,10 +219,10 @@ class tiny_dlna::HttpServerUsingTasks&lt; ClientType, ServerType &gt;</div><p>HT
   </dd>
 </dl>
 <p>Example usage: </p><div class="fragment"><div class="line"><a class="code hl_class" href="classtiny__dlna_1_1HttpServerUsingTasks.html">tiny_dlna::HttpServerUsingTasks&lt;WiFiClient, WiFiServer&gt;</a> server(80);</div>
-<div class="ttc" id="aclasstiny__dlna_1_1HttpServerUsingTasks_html"><div class="ttname"><a href="classtiny__dlna_1_1HttpServerUsingTasks.html">tiny_dlna::HttpServerUsingTasks</a></div><div class="ttdoc">HTTP server implementation that handles each client in a separate task.</div><div class="ttdef"><b>Definition:</b> HttpServerUsingTasks.h:27</div></div>
+<div class="ttc" id="aclasstiny__dlna_1_1HttpServerUsingTasks_html"><div class="ttname"><a href="classtiny__dlna_1_1HttpServerUsingTasks.html">tiny_dlna::HttpServerUsingTasks</a></div><div class="ttdoc">Experimental HTTP server implementation that handles each client in a separate task.</div><div class="ttdef"><b>Definition:</b> HttpServerUsingTasks.h:27</div></div>
 </div><!-- fragment --> </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a6ae31295f06879b95c8be6e98d03b37f" name="a6ae31295f06879b95c8be6e98d03b37f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6ae31295f06879b95c8be6e98d03b37f">&#9670;&#160;</a></span>HttpServerUsingTasks()</h2>
+<a id="a58a71d43be86f480b54da8c3812b67ce" name="a58a71d43be86f480b54da8c3812b67ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a58a71d43be86f480b54da8c3812b67ce">&#9670;&#160;</a></span>HttpServerUsingTasks()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -248,7 +248,7 @@ template&lt;typename ClientType , typename ServerType &gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>taskStackSize</em> = <code>4096</code>, </td>
+          <td class="paramname"><em>taskStackSize</em> = <code>1024&#160;*&#160;8</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>

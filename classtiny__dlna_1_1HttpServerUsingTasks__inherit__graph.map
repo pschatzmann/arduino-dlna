@@ -1,5 +1,5 @@
 <map id="tiny_dlna::HttpServerUsingTasks&lt; ClientType, ServerType &gt;" name="tiny_dlna::HttpServerUsingTasks&lt; ClientType, ServerType &gt;">
-<area shape="rect" id="node1" title="HTTP server implementation that handles each client in a separate task." alt="" coords="5,167,241,207"/>
+<area shape="rect" id="node1" title="Experimental HTTP server implementation that handles each client in a separate task." alt="" coords="5,167,241,207"/>
 <area shape="rect" id="node2" href="$classtiny__dlna_1_1HttpServer.html" title="Header&#45;only HTTP server wrapper that registers callback handlers." alt="" coords="23,79,223,119"/>
 <area shape="rect" id="node3" href="$classtiny__dlna_1_1IHttpServer.html" title="Abstract interface for HTTP server functionality." alt="" coords="41,5,205,31"/>
 </map>

@@ -25,6 +25,6 @@ var searchData=
   ['httprequestrewrite_22',['HttpRequestRewrite',['../classtiny__dlna_1_1HttpRequestRewrite.html#a6e89e0a5d9147acee904df4b9e74ab43',1,'tiny_dlna::HttpRequestRewrite']]],
   ['httpserver_23',['HttpServer',['../classtiny__dlna_1_1HttpServer.html#a6a0cfe498609d281b8631518e0a078e2',1,'tiny_dlna::HttpServer']]],
   ['httpserverusingtask_24',['HttpServerUsingTask',['../classtiny__dlna_1_1HttpServerUsingTask.html#a351a1c6d3891f2b240ea4c07338fd162',1,'tiny_dlna::HttpServerUsingTask']]],
-  ['httpserverusingtasks_25',['HttpServerUsingTasks',['../classtiny__dlna_1_1HttpServerUsingTasks.html#a6ae31295f06879b95c8be6e98d03b37f',1,'tiny_dlna::HttpServerUsingTasks']]],
+  ['httpserverusingtasks_25',['HttpServerUsingTasks',['../classtiny__dlna_1_1HttpServerUsingTasks.html#a58a71d43be86f480b54da8c3812b67ce',1,'tiny_dlna::HttpServerUsingTasks']]],
   ['httpstreamcopy_26',['HttpStreamCopy',['../classtiny__dlna_1_1HttpStreamCopy.html#af33ad0060f62d49578f33b42d240f852',1,'tiny_dlna::HttpStreamCopy']]]
 ];
