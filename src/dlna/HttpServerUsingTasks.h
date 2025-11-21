@@ -6,8 +6,8 @@
 namespace tiny_dlna {
 
 /**
- * @brief HTTP server implementation that handles each client in a separate
- * task.
+ * @brief Experimental HTTP server implementation that handles each client in a
+ * separate task.
  *
  * This class extends HttpServer and, upon a new client connection, spawns a
  * dedicated Task to handle the client. The task runs until the client
@@ -30,7 +30,7 @@ class HttpServerUsingTasks : public HttpServer<ClientType, ServerType> {
 
  public:
   HttpServerUsingTasks(ServerType& server, int bufferSize = 1024,
-                       int taskStackSize = 4096, int taskPriority = 1)
+                       int taskStackSize = 1024 * 8, int taskPriority = 1)
       : HttpServer<ClientType, ServerType>(server, bufferSize),
         taskStackSize_(taskStackSize),
         taskPriority_(taskPriority) {}
@@ -65,6 +65,7 @@ class HttpServerUsingTasks : public HttpServer<ClientType, ServerType> {
             Task* clientTask = tasks_.back().get();
             clientTask->begin([this, client, clientTask]() mutable {
               this->handleClientTask(client);
+              delay(5);
               DlnaLogger.log(DlnaLogLevel::Debug, "Removing client");
             });
           }

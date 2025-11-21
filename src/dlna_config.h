@@ -7,17 +7,17 @@
 
 /// Define scheduler run interval in ms
 #ifndef DLNA_RUN_SCHEDULER_EVERY_MS
-#define DLNA_RUN_SCHEDULER_EVERY_MS 20
+#define DLNA_RUN_SCHEDULER_EVERY_MS 10
 #endif
 
 /// Define subscription publish interval in ms
 #ifndef DLNA_RUN_SUBSCRIPTIONS_EVERY_MS
-#define DLNA_RUN_SUBSCRIPTIONS_EVERY_MS 20
+#define DLNA_RUN_SUBSCRIPTIONS_EVERY_MS 10
 #endif
 
 /// Define the default http request timeout
 #ifndef DLNA_HTTP_REQUEST_TIMEOUT_MS
-#define DLNA_HTTP_REQUEST_TIMEOUT_MS 50
+#define DLNA_HTTP_REQUEST_TIMEOUT_MS 60
 #endif
 
 /// Define XML parse buffer size
