@@ -10,10 +10,13 @@ var searchData=
   ['dlnadevicerequestparser_7',['DLNADeviceRequestParser',['../classtiny__dlna_1_1DLNADeviceRequestParser.html',1,'tiny_dlna']]],
   ['dlnamediarenderer_8',['DLNAMediaRenderer',['../classtiny__dlna_1_1DLNAMediaRenderer.html',1,'tiny_dlna']]],
   ['dlnamediarendererconnectionmgrdescr_9',['DLNAMediaRendererConnectionMgrDescr',['../classtiny__dlna_1_1DLNAMediaRendererConnectionMgrDescr.html',1,'tiny_dlna']]],
-  ['dlnamediarenderercontroldescr_10',['DLNAMediaRendererControlDescr',['../classtiny__dlna_1_1DLNAMediaRendererControlDescr.html',1,'tiny_dlna']]],
-  ['dlnamediarenderertransportdescr_11',['DLNAMediaRendererTransportDescr',['../classtiny__dlna_1_1DLNAMediaRendererTransportDescr.html',1,'tiny_dlna']]],
-  ['dlnamediaserver_12',['DLNAMediaServer',['../classtiny__dlna_1_1DLNAMediaServer.html',1,'tiny_dlna']]],
-  ['dlnamediaserverconnectionmgrdescr_13',['DLNAMediaServerConnectionMgrDescr',['../classtiny__dlna_1_1DLNAMediaServerConnectionMgrDescr.html',1,'tiny_dlna']]],
-  ['dlnamediaservercontentdirectorydescr_14',['DLNAMediaServerContentDirectoryDescr',['../classtiny__dlna_1_1DLNAMediaServerContentDirectoryDescr.html',1,'tiny_dlna']]],
-  ['dlnaserviceinfo_15',['DLNAServiceInfo',['../classtiny__dlna_1_1DLNAServiceInfo.html',1,'tiny_dlna']]]
+  ['dlnamediarendererconnectionmgrdescralt_10',['DLNAMediaRendererConnectionMgrDescrAlt',['../classtiny__dlna_1_1DLNAMediaRendererConnectionMgrDescrAlt.html',1,'tiny_dlna']]],
+  ['dlnamediarenderercontroldescr_11',['DLNAMediaRendererControlDescr',['../classtiny__dlna_1_1DLNAMediaRendererControlDescr.html',1,'tiny_dlna']]],
+  ['dlnamediarenderercontroldescralt_12',['DLNAMediaRendererControlDescrAlt',['../classtiny__dlna_1_1DLNAMediaRendererControlDescrAlt.html',1,'tiny_dlna']]],
+  ['dlnamediarenderertransportdescr_13',['DLNAMediaRendererTransportDescr',['../classtiny__dlna_1_1DLNAMediaRendererTransportDescr.html',1,'tiny_dlna']]],
+  ['dlnamediarenderertransportdescralt_14',['DLNAMediaRendererTransportDescrAlt',['../classtiny__dlna_1_1DLNAMediaRendererTransportDescrAlt.html',1,'tiny_dlna']]],
+  ['dlnamediaserver_15',['DLNAMediaServer',['../classtiny__dlna_1_1DLNAMediaServer.html',1,'tiny_dlna']]],
+  ['dlnamediaserverconnectionmgrdescr_16',['DLNAMediaServerConnectionMgrDescr',['../classtiny__dlna_1_1DLNAMediaServerConnectionMgrDescr.html',1,'tiny_dlna']]],
+  ['dlnamediaservercontentdirectorydescr_17',['DLNAMediaServerContentDirectoryDescr',['../classtiny__dlna_1_1DLNAMediaServerContentDirectoryDescr.html',1,'tiny_dlna']]],
+  ['dlnaserviceinfo_18',['DLNAServiceInfo',['../classtiny__dlna_1_1DLNAServiceInfo.html',1,'tiny_dlna']]]
 ];

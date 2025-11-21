@@ -1,0 +1,4 @@
+<map id="tiny_dlna::DLNAMediaRendererTransportDescrAlt" name="tiny_dlna::DLNAMediaRendererTransportDescrAlt">
+<area shape="rect" id="node1" title="AVTransport service descriptor (SCPD) generator." alt="" coords="5,79,231,119"/>
+<area shape="rect" id="node2" href="$classtiny__dlna_1_1DLNADescr.html" title="Abstract DLNA Descriptor Generation." alt="" coords="37,5,199,31"/>
+</map>
