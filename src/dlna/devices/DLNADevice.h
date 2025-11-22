@@ -613,13 +613,13 @@ class DLNADevice : public IDevice {
     }
 
     // Register icon and privide favicon.ico
-    Icon icon = p_device_info->getIcon();
-    if (icon.icon_data != nullptr) {
+    for (Icon &icon : p_device_info->getIcons()) {
       char tmp[DLNA_MAX_URL_LEN];
       // const char* icon_path = url.buildPath(prefix, icon.icon_url);
       p_server->on(icon.icon_url, T_GET, icon.mime,
                    (const uint8_t*)icon.icon_data, icon.icon_size);
-      p_server->on("/favicon.ico", T_GET, icon.mime,
+      if (icon.isfavicon)  // provide favicon.ico         
+        p_server->on("/favicon.ico", T_GET, icon.mime,
                    (const uint8_t*)icon.icon_data, icon.icon_size);
     }
 

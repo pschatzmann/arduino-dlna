@@ -15,7 +15,8 @@ class Icon {
   int depth = 24;
   const char* icon_url = "/icon.png";
   uint8_t* icon_data = (uint8_t*) icon_png;
-  int icon_size = icon_png_len;
+  unsigned int icon_size = icon_png_len;
+  bool isfavicon = false;
 };
 
 }

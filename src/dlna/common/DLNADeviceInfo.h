@@ -8,6 +8,9 @@
 #include "dlna/udp/IUDPService.h"  // Ensure IUDPService is declared
 #include "dlna/xml/XMLPrinter.h"
 #include "http/Server/IHttpServer.h"
+#include "icons/icon128x128.h"
+#include "icons/icon48x48.h"
+#include "icons/icon512x512.h"
 
 namespace tiny_dlna {
 
@@ -48,7 +51,6 @@ class DLNADeviceInfo {
         model_number(other.model_number),
         serial_number(other.serial_number),
         universal_product_code(other.universal_product_code),
-        icon(other.icon),
         services(other.services),
         icons(other.icons),
         is_subcription_active(other.is_subcription_active) {}
@@ -233,6 +235,34 @@ class DLNADeviceInfo {
     return icons[idx];
   }
 
+  /// Provides all icons
+  Vector<Icon>& getIcons() {
+    if (icons.empty()) {
+      // make sure we have at least the default icon
+      Icon icon{"image/png",        48,          48, 24, "/icon.png",
+                (uint8_t*)icon_png, icon_png_len, true};
+      Icon icon128{"image/png",
+                   128,
+                   128,
+                   24,
+                   "/icon128.png",
+                   (uint8_t*)icon128x128_png,
+                   icon128x128_png_len};
+      Icon icon512{"image/png",
+                   512,
+                   512,
+                   24,
+                   "/icon512.png",
+                   (uint8_t*)icon512x512_png,
+                   icon512x512_png_len};
+      icons.push_back(icon);
+      icons.push_back(icon128);
+      icons.push_back(icon512);
+    }
+
+    return icons;
+  }
+
   /// Sets the server to inactive
   void setActive(bool flag) { is_active = flag; }
 
@@ -268,7 +298,6 @@ class DLNADeviceInfo {
   Str model_number;
   Str serial_number;
   Str universal_product_code;
-  Icon icon;
   Vector<DLNAServiceInfo> services;
   Vector<Icon> icons;
   Str url_str;
@@ -372,16 +401,11 @@ class DLNADeviceInfo {
   }
 
   size_t printIconList(Print& out, void* ref) {
-    // make sure we have at least the default icon
-    Icon icon;
-    if (icons.empty()) {
-      icons.push_back(icon);
-    }
     XMLPrinter xp(out);
     int result = 0;
 
     // print all icons
-    for (auto& icon : icons) {
+    for (auto& icon : getIcons()) {
       struct CtxI {
         DLNADeviceInfo* self;
         Icon* icon;
