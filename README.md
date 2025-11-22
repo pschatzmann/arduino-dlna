@@ -34,6 +34,7 @@ pairings for the common Arduino WiFi and Ethernet libraries.
 | - | - | - |
 | `HttpRequest` | `HttpRequest<WiFiClient>` | `HttpRequest<EthernetClient>` |
 | `HttpServer` | `HttpServer<WiFiClient, WiFiServer>`  | `HttpServer<EthernetClient, EthernetServer>` |
+| `HttpServerUsingTask` | `HttpServerUsingTask<WiFiClient, WiFiServer>`  | `HttpServerUsingTask<EthernetClient, EthernetServer>` |
 | `DLNADevice` | `DLNADevice<WiFiClient>` | `DLNADevice<EthernetClient>` |
 | `DLNAMediaRenderer` | `DLNAMediaRenderer<WiFiClient>` | `DLNAMediaRenderer<EthernetClient>` |
 | `DLNAMediaServer` | `DLNAMediaServer<WiFiClient>` | `DLNAMediaServer<EthernetClient>` |
