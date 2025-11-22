@@ -33,8 +33,9 @@ var searchData=
   ['msearchreplycp_30',['MSearchReplyCP',['../classtiny__dlna_1_1MSearchReplyCP.html',1,'tiny_dlna']]],
   ['msearchreplyschedule_31',['MSearchReplySchedule',['../classtiny__dlna_1_1MSearchReplySchedule.html#a797d2fc636c7f13f9b1662863aa42650',1,'tiny_dlna::MSearchReplySchedule::MSearchReplySchedule()'],['../classtiny__dlna_1_1MSearchReplySchedule.html',1,'tiny_dlna::MSearchReplySchedule']]],
   ['msearchschedule_32',['MSearchSchedule',['../classtiny__dlna_1_1MSearchSchedule.html#ae29a86226fe9c3376436b07c2dfb0ed4',1,'tiny_dlna::MSearchSchedule::MSearchSchedule()'],['../classtiny__dlna_1_1MSearchSchedule.html',1,'tiny_dlna::MSearchSchedule']]],
-  ['music_33',['Music',['../namespacetiny__dlna.html#a85d3f686372782f654ff23302800aac9a47dcbd834e669233d7eb8a51456ed217',1,'tiny_dlna']]],
-  ['muted_5fvolume_34',['muted_volume',['../classtiny__dlna_1_1DLNAMediaRenderer.html#abca2f7dde6901bd0ff4c891fd9ea9342',1,'tiny_dlna::DLNAMediaRenderer']]],
-  ['mx_35',['mx',['../classtiny__dlna_1_1MSearchReplySchedule.html#a3f029ab2f4c2660456ac3111c203dd8a',1,'tiny_dlna::MSearchReplySchedule']]],
-  ['mx_5fvector_36',['mx_vector',['../classtiny__dlna_1_1DLNADeviceRequestParser.html#acc4399bb0142b826470158645795280a',1,'tiny_dlna::DLNADeviceRequestParser']]]
+  ['multi_5fmsg_5fdelay_5fms_33',['MULTI_MSG_DELAY_MS',['../Schedule_8h.html#a4fbc3717a7156efb0f9c5a825e6e27df',1,'Schedule.h']]],
+  ['music_34',['Music',['../namespacetiny__dlna.html#a85d3f686372782f654ff23302800aac9a47dcbd834e669233d7eb8a51456ed217',1,'tiny_dlna']]],
+  ['muted_5fvolume_35',['muted_volume',['../classtiny__dlna_1_1DLNAMediaRenderer.html#abca2f7dde6901bd0ff4c891fd9ea9342',1,'tiny_dlna::DLNAMediaRenderer']]],
+  ['mx_36',['mx',['../classtiny__dlna_1_1MSearchReplySchedule.html#a3f029ab2f4c2660456ac3111c203dd8a',1,'tiny_dlna::MSearchReplySchedule']]],
+  ['mx_5fvector_37',['mx_vector',['../classtiny__dlna_1_1DLNADeviceRequestParser.html#acc4399bb0142b826470158645795280a',1,'tiny_dlna::DLNADeviceRequestParser']]]
 ];
