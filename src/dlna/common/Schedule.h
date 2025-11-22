@@ -78,7 +78,7 @@ class MSearchSchedule : public Schedule {
 };
 
 /**
- * @brief Answer from device to MSearch request by sending a reply
+ * @brief Answer from device to MSearch request by sending the related replies
  * @author Phil Schatzmann
  */
 class MSearchReplySchedule : public Schedule {
@@ -111,8 +111,22 @@ class MSearchReplySchedule : public Schedule {
   }
 
   bool isValid() override {
-    // Check if the requester's IP is on the same subnet as defined by
-    // DLNA_DISCOVERY_NETMASK
+    // check if the search target is valid for this device
+    if (!isValidSearchTarget(*p_device, search_target.c_str())){
+      return false;
+    }
+    return isValidIP();
+  }
+
+  Str search_target;
+  DLNADeviceInfo* p_device;
+  int mx = 0;
+
+ protected:
+  int max_age = MAX_AGE;
+
+  /// check netmask
+  bool isValidIP() {
     IPAddress netmask = DLNA_DISCOVERY_NETMASK;
     IPAddress localIP = p_device->getIPAddress();
     IPAddress peerIP = address.address;
@@ -133,12 +147,27 @@ class MSearchReplySchedule : public Schedule {
     return true;
   }
 
-  Str search_target;
-  DLNADeviceInfo* p_device;
-  int mx = 0;
-
- protected:
-  int max_age = MAX_AGE;
+  // check requested search target
+  bool isValidSearchTarget(DLNADeviceInfo& device, const char* search_target) {
+    if (StrView(search_target).equals("ssdp:all")) {
+      return true;
+    }
+    if (StrView(search_target).equals("upnp:rootdevice")) {
+      return true;
+    }
+    if (StrView(search_target).equals(device.getDeviceType())) {
+      return true;
+    }
+    // check services
+    for (auto& service : device.getServices()) {
+      if (StrView(search_target).equals(service.service_type)) {
+        return true;
+      }
+    }
+    DlnaLogger.log(DlnaLogLevel::Info, "Ignoring M-SEARCH for %s",
+                   search_target);
+    return false;
+  }
 
   bool sendReply(IUDPService& udp, DLNADeviceInfo& device, const char* target,
                  const char* udn) {
