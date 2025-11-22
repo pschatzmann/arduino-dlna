@@ -612,7 +612,7 @@ class DLNADevice : public IDevice {
       p_server->on(device_path, T_GET, deviceXMLCallback, ref, 1);
     }
 
-    // Register icon and privide favicon.ico
+    // Register icons and favicon.ico
     for (Icon &icon : p_device_info->getIcons()) {
       char tmp[DLNA_MAX_URL_LEN];
       // const char* icon_path = url.buildPath(prefix, icon.icon_url);
