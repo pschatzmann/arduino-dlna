@@ -4,20 +4,20 @@
 #include "dlna/common/DLNADeviceInfo.h"
 #include "dlna/udp/IUDPService.h"
 
-#define MAX_TMP_SIZE 300
+#define MAX_TMP_SIZE 400
 #define ALIVE_MS 0
 #define MAX_AGE (60 * 60 * 24)
+#define MULTI_MSG_DELAY_MS 80
 
 namespace tiny_dlna {
-
 
 /**
  * @brief An individual Schedule (to send out UDP messages)
  * @author Phil Schatzmann
  */
 struct Schedule {
-  //int id = 0;
-  // scheduled next execution time
+  // int id = 0;
+  //  scheduled next execution time
   uint64_t time = 0;
   // repeat every n ms
   uint32_t repeat_ms = 0;
@@ -30,9 +30,9 @@ struct Schedule {
   // enables logging the address when the schedule is queued
   bool report_ip = false;
 
-  virtual bool process(IUDPService &udp) { return false; }
+  virtual bool process(IUDPService& udp) { return false; }
 
-  virtual const char *name() { return "n/a"; };
+  virtual const char* name() { return "n/a"; };
 
   virtual bool isValid() { return true; }
 
@@ -45,20 +45,20 @@ struct Schedule {
  */
 class MSearchSchedule : public Schedule {
  public:
-  MSearchSchedule(IPAddressAndPort addr, const char *searchTarget, int mx = 3) {
+  MSearchSchedule(IPAddressAndPort addr, const char* searchTarget, int mx = 3) {
     this->address = addr;
     search_target = searchTarget;
     max_age = mx;
   }
-  const char *name() override { return "MSearch"; }
+  const char* name() override { return "MSearch"; }
 
-  bool process(IUDPService &udp) override {
+  bool process(IUDPService& udp) override {
     // we keep the data on the stack
-    DlnaLogger.log(DlnaLogLevel::Debug, "Sending %s for %s to %s", name(), search_target,
-                   address.toString());
+    DlnaLogger.log(DlnaLogLevel::Debug, "Sending %s for %s to %s", name(),
+                   search_target, address.toString());
 
     char buffer[MAX_TMP_SIZE] = {0};
-    const char *tmp =
+    const char* tmp =
         "M-SEARCH * HTTP/1.1\r\n"
         "HOST: %s\r\n"
         "MAN: \"ssdp:discover\"\r\n"
@@ -68,13 +68,13 @@ class MSearchSchedule : public Schedule {
                      search_target);
     assert(n < MAX_TMP_SIZE);
     DlnaLogger.log(DlnaLogLevel::Debug, "sending: %s", buffer);
-    udp.send(address, (uint8_t *)buffer, n);
+    udp.send(address, (uint8_t*)buffer, n);
     return true;
   }
 
  protected:
   int max_age = 3;
-  const char *search_target = nullptr;
+  const char* search_target = nullptr;
 };
 
 /**
@@ -83,50 +83,36 @@ class MSearchSchedule : public Schedule {
  */
 class MSearchReplySchedule : public Schedule {
  public:
-  MSearchReplySchedule(DLNADeviceInfo &device, IPAddressAndPort addr) {
+  MSearchReplySchedule(DLNADeviceInfo& device, IPAddressAndPort addr) {
     this->address = addr;
     this->report_ip = true;
     p_device = &device;
   }
-  const char *name() override { return "MSearchReply"; }
+  const char* name() override { return "MSearchReply"; }
 
-  bool process(IUDPService &udp) override {
+  bool process(IUDPService& udp) override {
     // we keep the data on the stack
     DlnaLogger.log(DlnaLogLevel::Info, "Sending %s for %s to %s", name(),
                    search_target.c_str(), address.toString());
 
+    DLNADeviceInfo& device = *p_device;
+    const char* udn = device.getUDN();
+    int delay_ms = MULTI_MSG_DELAY_MS;
 
-    // replace ssdp:all with device type               
-    if (search_target.equals("ssdp:all")){
-      search_target = p_device->getDeviceType();
-    } 
-
-    DLNADeviceInfo &device = *p_device;
-    char buffer[MAX_TMP_SIZE] = {0};
-    const char *tmp =
-      "HTTP/1.1 200 OK\r\n"
-      "CACHE-CONTROL: max-age=%d\r\n"
-      "EXT:\r\n"
-      "LOCATION: %s\r\n"
-      "SERVER: Arduino-DLNA/1.0 UPnP/1.1 DLNA/1.5\r\n"
-      "ST: %s\r\n"
-      "USN: %s\r\n"
-      "CONTENT-LENGTH: 0\r\n\r\n";
-    int n = snprintf(buffer, MAX_TMP_SIZE, tmp, max_age,
-                     device.getDeviceURL().url(), search_target.c_str(),
-                     device.getUDN());
-    assert(n < MAX_TMP_SIZE);
-    DlnaLogger.log(DlnaLogLevel::Debug, "sending: %s", buffer);
-    if (!udp.send(address, (uint8_t *)buffer, n)) {
-      DlnaLogger.log(DlnaLogLevel::Warning, "Failed to send MSearchReply to %s",
-                     address.toString());
-      return false;
+    sendReply(udp, device, "upnp:rootdevice", udn);
+    delay(delay_ms);
+    sendReply(udp, device, p_device->getDeviceType(), udn);
+    // announce with service udn
+    for (auto& service : device.getServices()) {
+      delay(delay_ms);
+      sendReply(udp, device, service.service_type, udn);
     }
     return true;
   }
 
   bool isValid() override {
-    // Check if the requester's IP is on the same subnet as defined by DLNA_DISCOVERY_NETMASK
+    // Check if the requester's IP is on the same subnet as defined by
+    // DLNA_DISCOVERY_NETMASK
     IPAddress netmask = DLNA_DISCOVERY_NETMASK;
     IPAddress localIP = p_device->getIPAddress();
     IPAddress peerIP = address.address;
@@ -136,21 +122,52 @@ class MSearchReplySchedule : public Schedule {
     // Apply netmask to both local and peer IP addresses
     for (int i = 0; i < 4; i++) {
       if ((localIP[i] & netmask[i]) != (peerIP[i] & netmask[i])) {
-        DlnaLogger.log(DlnaLogLevel::Info, 
-                       "Discovery request from %s filtered (not in same subnet as %s with mask %s)",
-                       address.toString(), localIP_str.c_str(), netmask_str.c_str());
-         return false;
+        DlnaLogger.log(DlnaLogLevel::Info,
+                       "Discovery request from %s filtered (not in same subnet "
+                       "as %s with mask %s)",
+                       address.toString(), localIP_str.c_str(),
+                       netmask_str.c_str());
+        return false;
       }
     }
     return true;
   }
 
   Str search_target;
-  DLNADeviceInfo *p_device;
+  DLNADeviceInfo* p_device;
   int mx = 0;
 
  protected:
   int max_age = MAX_AGE;
+
+  bool sendReply(IUDPService& udp, DLNADeviceInfo& device, const char* target,
+                 const char* udn) {
+    // construct usn
+    char usn_str[200];
+    snprintf(usn_str, 200, "%s::%s", device.getUDN(), target);
+    // construct message
+    char buffer[MAX_TMP_SIZE] = {0};
+    const char* tmp =
+        "HTTP/1.1 200 OK\r\n"
+        "CACHE-CONTROL: max-age=%d\r\n"
+        "EXT:\r\n"
+        "LOCATION: %s\r\n"
+        "SERVER: Arduino-DLNA/1.0 UPnP/1.1 DLNA/1.5\r\n"
+        "ST: %s\r\n"
+        "USN: %s\r\n"
+        "CONTENT-LENGTH: 0\r\n\r\n";
+    int n = snprintf(buffer, MAX_TMP_SIZE, tmp, max_age,
+                     device.getDeviceURL().url(), target, usn_str);
+    assert(n < MAX_TMP_SIZE);
+    DlnaLogger.log(DlnaLogLevel::Info, "- %s: %s", name(), target);
+    DlnaLogger.log(DlnaLogLevel::Debug, "%s", buffer);
+    if (!udp.send(address, (uint8_t*)buffer, n)) {
+      DlnaLogger.log(DlnaLogLevel::Warning, "Failed to send MSearchReply to %s",
+                     address.toString());
+      return false;
+    }
+    return true;
+  }
 };
 
 /**
@@ -160,16 +177,16 @@ class MSearchReplySchedule : public Schedule {
  */
 class MSearchReplyCP : public Schedule {
  public:
-  const char *name() override { return "MSearchReplyCP"; }
+  const char* name() override { return "MSearchReplyCP"; }
   Str location;
   Str usn;
   Str search_target;
 
-  bool process(IUDPService &udp) override {
-    DlnaLogger.log(DlnaLogLevel::Debug, "-> %s not processed", search_target.c_str());
+  bool process(IUDPService& udp) override {
+    DlnaLogger.log(DlnaLogLevel::Debug, "-> %s not processed",
+                   search_target.c_str());
     return true;
   }
-
 };
 
 /**
@@ -201,7 +218,7 @@ class MSearchReplyCP : public Schedule {
  */
 class NotifyReplyCP : public MSearchReplyCP {
  public:
-  const char *name() override { return "NotifyReplyCP"; }
+  const char* name() override { return "NotifyReplyCP"; }
   Str nts{80};
   Str delivery_host_and_port;
   Str delivery_path;
@@ -211,10 +228,10 @@ class NotifyReplyCP : public MSearchReplyCP {
 
   // callback invoked by the scheduler when processing this notification.
   // Return true if the notification was handled; false otherwise.
-  std::function<bool(NotifyReplyCP &ref)> callback;
+  std::function<bool(NotifyReplyCP& ref)> callback;
 
-  bool process(IUDPService &udp) override {
-    if (callback(*this)){
+  bool process(IUDPService& udp) override {
+    if (callback(*this)) {
       DlnaLogger.log(DlnaLogLevel::Debug, "%s -> %s", name(), nts.c_str());
       return true;
     }
@@ -230,55 +247,56 @@ class NotifyReplyCP : public MSearchReplyCP {
  */
 class PostAliveSchedule : public Schedule {
  public:
-  PostAliveSchedule(DLNADeviceInfo &device, uint32_t repeatMs) {
+  PostAliveSchedule(DLNADeviceInfo& device, uint32_t repeatMs) {
     p_device = &device;
     this->repeat_ms = repeatMs;
   }
-  const char *name() override { return "PostAlive"; }
+  const char* name() override { return "PostAlive"; }
 
   void setRepeatMs(uint32_t ms) { this->repeat_ms = ms; }
 
-  bool process(IUDPService &udp) override {
+  bool process(IUDPService& udp) override {
     DlnaLogger.log(DlnaLogLevel::Debug, "Sending %s to %s", name(),
                    DLNABroadcastAddress.toString());
-    DLNADeviceInfo &device = *p_device;
+    DLNADeviceInfo& device = *p_device;
     char nt[100];
-    char usn[200];
 
-    const char *device_url = device.getDeviceURL().url();
-    int max_age = 100;
+    const char* device_url = device.getDeviceURL().url();
+    const char* udn = device.getUDN();
+    int max_age = repeat_ms / 1000 + 10;
+    int delay_ms = MULTI_MSG_DELAY_MS;
+
     // announce with udn
-    process(device.getUDN(), device.getUDN(), device_url, max_age, udp);
+    sendData(udn, udn, device_url, max_age, udp);
     // NT: upnp:rootdevice\r\n
-    setupData("upnp:rootdevice", device.getUDN(), nt, usn);
-    process(nt, usn, device_url, max_age, udp);
+    sendData("upnp:rootdevice", udn, device_url, max_age, udp);
+    delay(delay_ms);
     // NT: urn:schemas-upnp-org:device:MediaRenderer:1\r\n
-    setupData(device.getDeviceType(), device.getUDN(), nt, usn);
-    process(nt, usn, device_url, max_age, udp);
+    sendData(device.getDeviceType(), udn, device_url, max_age, udp);
 
     // announce with service udn
-    for (auto &service : device.getServices()) {
-      setupData(service.service_type, device.getUDN(), nt, usn);
-      process(nt, usn, device_url, max_age, udp);
+    for (auto& service : device.getServices()) {
+      delay(delay_ms);
+      sendData(service.service_type, udn, device_url, max_age, udp);
     }
     return true;
   }
 
  protected:
-  DLNADeviceInfo *p_device;
-  void setupData(const char *nt, const char *udn, char *result_nt,
-                 char *result_usn) {
-    strcpy(result_nt, nt);
-    strcpy(result_usn, udn);
-    strcat(result_usn, "::");
-    strcat(result_usn, nt);
-  }
+  DLNADeviceInfo* p_device;
 
-  bool process(const char *nt, const char *usn, const char *device_url,
-               int max_age, IUDPService &udp) {
+  bool sendData(const char* nt, const char* udn, const char* device_url,
+                int max_age, IUDPService& udp) {
+    char usn[200];
+    if (StrView(nt).equals(udn)) {
+      strcpy(usn, nt);
+    } else {
+      snprintf(usn, 200, "%s::%s", udn, nt);
+    }
+
     // we keep the data on the stack
     char buffer[MAX_TMP_SIZE] = {0};
-    const char *tmp =
+    const char* tmp =
         "NOTIFY * HTTP/1.1\r\n"
         "HOST:%s\r\n"
         "CACHE-CONTROL: max-age=%d\r\n"
@@ -292,7 +310,7 @@ class PostAliveSchedule : public Schedule {
     assert(n < MAX_TMP_SIZE);
     DlnaLogger.log(DlnaLogLevel::Info, "sending: ssdp:alive %s", nt);
     DlnaLogger.log(DlnaLogLevel::Debug, "%s", buffer);
-    udp.send(DLNABroadcastAddress, (uint8_t *)buffer, n);
+    udp.send(DLNABroadcastAddress, (uint8_t*)buffer, n);
     return true;
   }
 };
@@ -303,14 +321,14 @@ class PostAliveSchedule : public Schedule {
  */
 class PostByeSchedule : public Schedule {
  public:
-  PostByeSchedule(DLNADeviceInfo &device) { p_device = &device; }
-  const char *name() override { return "ByeBye"; }
-  bool process(IUDPService &udp) override {
+  PostByeSchedule(DLNADeviceInfo& device) { p_device = &device; }
+  const char* name() override { return "ByeBye"; }
+  bool process(IUDPService& udp) override {
     DlnaLogger.log(DlnaLogLevel::Debug, "Sending %s to %s", name(),
                    DLNABroadcastAddress.toString());
     // we keep the data on the stack
     char buffer[MAX_TMP_SIZE] = {0};
-    const char *tmp =
+    const char* tmp =
         "NOTIFY * HTTP/1.1\r\n"
         "HOST: %s\r\n"
         "CACHE-CONTROL: max-age = %d\r\n"
@@ -322,13 +340,13 @@ class PostByeSchedule : public Schedule {
                      max_age, p_device->getDeviceType(), p_device->getUDN());
 
     DlnaLogger.log(DlnaLogLevel::Debug, "sending: %s", buffer);
-    udp.send(DLNABroadcastAddress, (uint8_t *)buffer, n);
+    udp.send(DLNABroadcastAddress, (uint8_t*)buffer, n);
     return true;
   }
 
  protected:
   int max_age = 1800;
-  DLNADeviceInfo *p_device;
+  DLNADeviceInfo* p_device;
 };
 
 /**
@@ -337,18 +355,19 @@ class PostByeSchedule : public Schedule {
  */
 class PostSubscribe : public Schedule {
  public:
-  PostSubscribe(IPAddressAndPort addr, const char *path, uint32_t sec) {
+  PostSubscribe(IPAddressAndPort addr, const char* path, uint32_t sec) {
     setDestination(addr, path);
     setDuration(sec);
   }
-  const char *name() override { return "Subscribe"; }
+  const char* name() override { return "Subscribe"; }
 
-  bool process(IUDPService &udp) override {
+  bool process(IUDPService& udp) override {
     ///
-    DlnaLogger.log(DlnaLogLevel::Debug, "Sending Subscribe  to %s", address.toString());
+    DlnaLogger.log(DlnaLogLevel::Debug, "Sending Subscribe  to %s",
+                   address.toString());
 
     char buffer[MAX_TMP_SIZE] = {0};
-    const char *tmp =
+    const char* tmp =
         "SUBSCRIBE %s HTTP/1.1\r\n"
         "HOST: %s\r\n"
         "CALLBACK: %s"
@@ -358,15 +377,15 @@ class PostSubscribe : public Schedule {
                      durationSec);
     assert(n < MAX_TMP_SIZE);
     DlnaLogger.log(DlnaLogLevel::Debug, "sending: %s", buffer);
-    udp.send(address, (uint8_t *)buffer, n);
+    udp.send(address, (uint8_t*)buffer, n);
     return true;
   }
 
  protected:
-  const char *path;
+  const char* path;
   int durationSec = 0;
 
-  void setDestination(IPAddressAndPort addr, const char *path) {
+  void setDestination(IPAddressAndPort addr, const char* path) {
     this->address = addr;
     this->path = path;
   }
