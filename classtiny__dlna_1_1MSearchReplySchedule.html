@@ -83,7 +83,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Answer from device to MSearch request by sending a reply.  
+<p>Answer from device to MSearch request by sending the related replies.  
  <a href="classtiny__dlna_1_1MSearchReplySchedule.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="Schedule_8h_source.html">Schedule.h</a>&gt;</code></p>
@@ -92,7 +92,7 @@ Inheritance diagram for tiny_dlna::MSearchReplySchedule:</div>
 <div class="dyncontent">
 <div class="center"><img src="classtiny__dlna_1_1MSearchReplySchedule__inherit__graph.png" border="0" usemap="#atiny__dlna_1_1MSearchReplySchedule_inherit__map" alt="Inheritance graph"/></div>
 <map name="atiny__dlna_1_1MSearchReplySchedule_inherit__map" id="atiny__dlna_1_1MSearchReplySchedule_inherit__map">
-<area shape="rect" title="Answer from device to MSearch request by sending a reply." alt="" coords="5,79,248,104"/>
+<area shape="rect" title="Answer from device to MSearch request by sending the related replies." alt="" coords="5,79,248,104"/>
 <area shape="rect" href="structtiny__dlna_1_1Schedule.html" title="An individual Schedule (to send out UDP messages)" alt="" coords="52,5,201,31"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
@@ -133,6 +133,11 @@ Public Attributes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
+<tr class="memitem:a6515e1331b9b2c7a1cd3799759294800"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MSearchReplySchedule.html#a6515e1331b9b2c7a1cd3799759294800">isValidIP</a> ()</td></tr>
+<tr class="memdesc:a6515e1331b9b2c7a1cd3799759294800"><td class="mdescLeft">&#160;</td><td class="mdescRight">check netmask  <br /></td></tr>
+<tr class="separator:a6515e1331b9b2c7a1cd3799759294800"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abca53670a9cbfde30f0902c13636cb13"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MSearchReplySchedule.html#abca53670a9cbfde30f0902c13636cb13">isValidSearchTarget</a> (<a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html">DLNADeviceInfo</a> &amp;device, const char *<a class="el" href="classtiny__dlna_1_1MSearchReplySchedule.html#a0612c690074fc74241b39f209b79ff84">search_target</a>)</td></tr>
+<tr class="separator:abca53670a9cbfde30f0902c13636cb13"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abdfa1dd12467ee775d78fc4c1451bebf"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1MSearchReplySchedule.html#abdfa1dd12467ee775d78fc4c1451bebf">sendReply</a> (<a class="el" href="classtiny__dlna_1_1IUDPService.html">IUDPService</a> &amp;udp, <a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html">DLNADeviceInfo</a> &amp;device, const char *target, const char *udn)</td></tr>
 <tr class="separator:abdfa1dd12467ee775d78fc4c1451bebf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -142,7 +147,7 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:af574dc17f8ea41f56fac1d588e7e1308"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Answer from device to MSearch request by sending a reply. </p>
+<div class="textblock"><p>Answer from device to MSearch request by sending the related replies. </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a797d2fc636c7f13f9b1662863aa42650" name="a797d2fc636c7f13f9b1662863aa42650"></a>
@@ -206,6 +211,69 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Reimplemented from <a class="el" href="structtiny__dlna_1_1Schedule.html#a81fd24c97ebe2863fe4b1284f1d8e97e">tiny_dlna::Schedule</a>.</p>
+
+</div>
+</div>
+<a id="a6515e1331b9b2c7a1cd3799759294800" name="a6515e1331b9b2c7a1cd3799759294800"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6515e1331b9b2c7a1cd3799759294800">&#9670;&#160;</a></span>isValidIP()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool tiny_dlna::MSearchReplySchedule::isValidIP </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>check netmask </p>
+
+</div>
+</div>
+<a id="abca53670a9cbfde30f0902c13636cb13" name="abca53670a9cbfde30f0902c13636cb13"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abca53670a9cbfde30f0902c13636cb13">&#9670;&#160;</a></span>isValidSearchTarget()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool tiny_dlna::MSearchReplySchedule::isValidSearchTarget </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1DLNADeviceInfo.html">DLNADeviceInfo</a> &amp;&#160;</td>
+          <td class="paramname"><em>device</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>search_target</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
