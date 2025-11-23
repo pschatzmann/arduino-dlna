@@ -185,12 +185,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a49e09a23e0dbb3b246956746321e6289"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classtiny__dlna_1_1SubscriptionMgrControlPoint.html">SubscriptionMgrControlPoint</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IControlPoint.html#a49e09a23e0dbb3b246956746321e6289">getSubscriptionMgr</a> ()=0</td></tr>
 <tr class="memdesc:a49e09a23e0dbb3b246956746321e6289"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get subscription manager for event handling.  <br /></td></tr>
 <tr class="separator:a49e09a23e0dbb3b246956746321e6289"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac5dfa8bfe486b3f91e0fc4782372d5d6"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IControlPoint.html#ac5dfa8bfe486b3f91e0fc4782372d5d6">setSubscribeNotificationsActive</a> (bool flag)=0</td></tr>
-<tr class="memdesc:ac5dfa8bfe486b3f91e0fc4782372d5d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable/disable event subscription notifications.  <br /></td></tr>
-<tr class="separator:ac5dfa8bfe486b3f91e0fc4782372d5d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa8123d2bb2552eb950ab7405e53e53fa"><td class="memItemLeft" align="right" valign="top">virtual const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IControlPoint.html#aa8123d2bb2552eb950ab7405e53e53fa">registerString</a> (const char *s)=0</td></tr>
-<tr class="memdesc:aa8123d2bb2552eb950ab7405e53e53fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register string for memory management.  <br /></td></tr>
-<tr class="separator:aa8123d2bb2552eb950ab7405e53e53fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58d60521ea9e19dfcb028e1cb564a774"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IControlPoint.html#a58d60521ea9e19dfcb028e1cb564a774">setNotificationsActive</a> (bool flag)=0</td></tr>
+<tr class="memdesc:a58d60521ea9e19dfcb028e1cb564a774"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable/disable event subscription notifications.  <br /></td></tr>
+<tr class="separator:a58d60521ea9e19dfcb028e1cb564a774"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Abstract interface for DLNA Control Point functionality. </p>
@@ -852,36 +849,6 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="aa8123d2bb2552eb950ab7405e53e53fa" name="aa8123d2bb2552eb950ab7405e53e53fa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa8123d2bb2552eb950ab7405e53e53fa">&#9670;&#160;</a></span>registerString()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual const char * tiny_dlna::IControlPoint::registerString </td>
-          <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>s</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Register string for memory management. </p>
-
-<p>Implemented in <a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a6bd286d19fe0321e321cb97722db1f3b">tiny_dlna::DLNAControlPoint</a>.</p>
-
-</div>
-</div>
 <a id="a16479dec981a4d6374038afa3666fc65" name="a16479dec981a4d6374038afa3666fc65"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a16479dec981a4d6374038afa3666fc65">&#9670;&#160;</a></span>setActive()</h2>
 
@@ -1118,6 +1085,36 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a58d60521ea9e19dfcb028e1cb564a774" name="a58d60521ea9e19dfcb028e1cb564a774"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a58d60521ea9e19dfcb028e1cb564a774">&#9670;&#160;</a></span>setNotificationsActive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void tiny_dlna::IControlPoint::setNotificationsActive </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>flag</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Enable/disable event subscription notifications. </p>
+
+<p>Implemented in <a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#ac141e7598fe2a60de723a52c6b4e7b4e">tiny_dlna::DLNAControlPoint</a>.</p>
+
+</div>
+</div>
 <a id="a8c6aae13f0434920a11b8ea6a7369821" name="a8c6aae13f0434920a11b8ea6a7369821"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8c6aae13f0434920a11b8ea6a7369821">&#9670;&#160;</a></span>setParseDevice()</h2>
 
@@ -1205,36 +1202,6 @@ Public Member Functions</h2></td></tr>
 <p>Set the repeat interval for M-SEARCH requests. </p>
 
 <p>Implemented in <a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a837cec621ecb973dc4e6ded6815ed953">tiny_dlna::DLNAControlPoint</a>.</p>
-
-</div>
-</div>
-<a id="ac5dfa8bfe486b3f91e0fc4782372d5d6" name="ac5dfa8bfe486b3f91e0fc4782372d5d6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac5dfa8bfe486b3f91e0fc4782372d5d6">&#9670;&#160;</a></span>setSubscribeNotificationsActive()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual void tiny_dlna::IControlPoint::setSubscribeNotificationsActive </td>
-          <td>(</td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>flag</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Enable/disable event subscription notifications. </p>
-
-<p>Implemented in <a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a0840b55ab2250cd9d771742c2f35a577">tiny_dlna::DLNAControlPoint</a>.</p>
 
 </div>
 </div>

@@ -199,12 +199,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a6d2c45f64e0d2e350008a8de2d6a1068"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1SubscriptionMgrControlPoint.html">SubscriptionMgrControlPoint</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a6d2c45f64e0d2e350008a8de2d6a1068">getSubscriptionMgr</a> () override</td></tr>
 <tr class="memdesc:a6d2c45f64e0d2e350008a8de2d6a1068"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the subscription manager.  <br /></td></tr>
 <tr class="separator:a6d2c45f64e0d2e350008a8de2d6a1068"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0840b55ab2250cd9d771742c2f35a577"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a0840b55ab2250cd9d771742c2f35a577">setSubscribeNotificationsActive</a> (bool flag) override</td></tr>
-<tr class="memdesc:a0840b55ab2250cd9d771742c2f35a577"><td class="mdescLeft">&#160;</td><td class="mdescRight">Activate/deactivate subscription notifications.  <br /></td></tr>
-<tr class="separator:a0840b55ab2250cd9d771742c2f35a577"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6bd286d19fe0321e321cb97722db1f3b"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#a6bd286d19fe0321e321cb97722db1f3b">registerString</a> (const char *s) override</td></tr>
-<tr class="memdesc:a6bd286d19fe0321e321cb97722db1f3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a string in the shared registry and return the stored pointer.  <br /></td></tr>
-<tr class="separator:a6bd286d19fe0321e321cb97722db1f3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac141e7598fe2a60de723a52c6b4e7b4e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPoint.html#ac141e7598fe2a60de723a52c6b4e7b4e">setNotificationsActive</a> (bool flag) override</td></tr>
+<tr class="memdesc:ac141e7598fe2a60de723a52c6b4e7b4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Activate/deactivate subscription notifications.  <br /></td></tr>
+<tr class="separator:ac141e7598fe2a60de723a52c6b4e7b4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -1300,7 +1297,7 @@ xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n" "s:encodingStyle=\"ht
   </tr>
 </table>
 </div><div class="memdoc">
-<p>call this method in the Arduino loop as often as possible: the processes all replys </p>
+<p>call this method in the Arduino loop as often as possible: it processes all subscriptions and scheduled tasks for udp requests </p>
 
 <p>Implements <a class="el" href="classtiny__dlna_1_1IControlPoint.html#adfd7c8280f512d7583f245699df8c363">tiny_dlna::IControlPoint</a>.</p>
 
@@ -1592,36 +1589,6 @@ attributes) </p>
 
 </div>
 </div>
-<a id="a6bd286d19fe0321e321cb97722db1f3b" name="a6bd286d19fe0321e321cb97722db1f3b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6bd286d19fe0321e321cb97722db1f3b">&#9670;&#160;</a></span>registerString()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const char * tiny_dlna::DLNAControlPoint::registerString </td>
-          <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>s</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Register a string in the shared registry and return the stored pointer. </p>
-
-<p>Implements <a class="el" href="classtiny__dlna_1_1IControlPoint.html#aa8123d2bb2552eb950ab7405e53e53fa">tiny_dlna::IControlPoint</a>.</p>
-
-</div>
-</div>
 <a id="a8751202d48ef8841d44605f8c94af448" name="a8751202d48ef8841d44605f8c94af448"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8751202d48ef8841d44605f8c94af448">&#9670;&#160;</a></span>setActive()</h2>
 
@@ -1858,6 +1825,36 @@ attributes) </p>
 
 </div>
 </div>
+<a id="ac141e7598fe2a60de723a52c6b4e7b4e" name="ac141e7598fe2a60de723a52c6b4e7b4e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac141e7598fe2a60de723a52c6b4e7b4e">&#9670;&#160;</a></span>setNotificationsActive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tiny_dlna::DLNAControlPoint::setNotificationsActive </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>flag</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Activate/deactivate subscription notifications. </p>
+
+<p>Implements <a class="el" href="classtiny__dlna_1_1IControlPoint.html#a58d60521ea9e19dfcb028e1cb564a774">tiny_dlna::IControlPoint</a>.</p>
+
+</div>
+</div>
 <a id="ab89fc6b57c68c23e45894258a6a37557" name="ab89fc6b57c68c23e45894258a6a37557"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab89fc6b57c68c23e45894258a6a37557">&#9670;&#160;</a></span>setParseDevice()</h2>
 
@@ -1945,36 +1942,6 @@ attributes) </p>
 <p>Sets the repeat interval for M-SEARCH requests (define before begin) </p>
 
 <p>Implements <a class="el" href="classtiny__dlna_1_1IControlPoint.html#a845d89b9c01918753f95823b28885ffb">tiny_dlna::IControlPoint</a>.</p>
-
-</div>
-</div>
-<a id="a0840b55ab2250cd9d771742c2f35a577" name="a0840b55ab2250cd9d771742c2f35a577"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0840b55ab2250cd9d771742c2f35a577">&#9670;&#160;</a></span>setSubscribeNotificationsActive()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void tiny_dlna::DLNAControlPoint::setSubscribeNotificationsActive </td>
-          <td>(</td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>flag</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Activate/deactivate subscription notifications. </p>
-
-<p>Implements <a class="el" href="classtiny__dlna_1_1IControlPoint.html#ac5dfa8bfe486b3f91e0fc4782372d5d6">tiny_dlna::IControlPoint</a>.</p>
 
 </div>
 </div>

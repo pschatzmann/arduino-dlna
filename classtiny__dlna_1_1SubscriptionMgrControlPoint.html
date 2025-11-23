@@ -111,9 +111,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a543794c329a65f32c078016e3b24f8ee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgrControlPoint.html#a543794c329a65f32c078016e3b24f8ee">setEventSubscriptionRetryMs</a> (int ms)</td></tr>
 <tr class="memdesc:a543794c329a65f32c078016e3b24f8ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the retry threshold in milliseconds.  <br /></td></tr>
 <tr class="separator:a543794c329a65f32c078016e3b24f8ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af4ee9a79abccf32b7387991b700b50af"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgrControlPoint.html#af4ee9a79abccf32b7387991b700b50af">setEventSubscriptionActive</a> (bool active)</td></tr>
-<tr class="memdesc:af4ee9a79abccf32b7387991b700b50af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Turn automatic event subscription on or off.  <br /></td></tr>
-<tr class="separator:af4ee9a79abccf32b7387991b700b50af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add2ad099a313e24864162b360075ab43"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgrControlPoint.html#add2ad099a313e24864162b360075ab43">setNotificationsActive</a> (bool active)</td></tr>
+<tr class="memdesc:add2ad099a313e24864162b360075ab43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Turn automatic event subscription on or off.  <br /></td></tr>
+<tr class="separator:add2ad099a313e24864162b360075ab43"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a00e156d0030e0e485095c8c863ff25ef"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SubscriptionMgrControlPoint.html#a00e156d0030e0e485095c8c863ff25ef">getLastEventNotifyMs</a> ()</td></tr>
 <tr class="memdesc:a00e156d0030e0e485095c8c863ff25ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the timestamp of the last received NOTIFY message.  <br /></td></tr>
 <tr class="separator:a00e156d0030e0e485095c8c863ff25ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -474,41 +474,6 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="af4ee9a79abccf32b7387991b700b50af" name="af4ee9a79abccf32b7387991b700b50af"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af4ee9a79abccf32b7387991b700b50af">&#9670;&#160;</a></span>setEventSubscriptionActive()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void tiny_dlna::SubscriptionMgrControlPoint::setEventSubscriptionActive </td>
-          <td>(</td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>active</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Turn automatic event subscription on or off. </p>
-<p>When enabled and the manager is setup and active the manager will attempt to subscribe to services and renew existing subscriptions as needed. When disabled the manager will attempt to unsubscribe from services if currently subscribed.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">active</td><td>true to maintain subscriptions automatically; false to stop and attempt unsubscription. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
 <a id="a1ae00fdbd0c1eb6e78d5ce1a33b4ebaf" name="a1ae00fdbd0c1eb6e78d5ce1a33b4ebaf"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1ae00fdbd0c1eb6e78d5ce1a33b4ebaf">&#9670;&#160;</a></span>setEventSubscriptionCallback()</h2>
 
@@ -664,6 +629,41 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 <p>The method registers an HTTP handler at the local callback path (derived from the injected <code><a class="el" href="classtiny__dlna_1_1Url.html" title="URL parser which breaks a full url string up into its individual parts.">Url</a></code> via <a class="el" href="classtiny__dlna_1_1SubscriptionMgrControlPoint.html#af0e321b7b97dade9e28b34dc0cb5fb7e" title="Inject required dependencies and initialize the manager.">setup()</a>). </p>
+
+</div>
+</div>
+<a id="add2ad099a313e24864162b360075ab43" name="add2ad099a313e24864162b360075ab43"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#add2ad099a313e24864162b360075ab43">&#9670;&#160;</a></span>setNotificationsActive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tiny_dlna::SubscriptionMgrControlPoint::setNotificationsActive </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>active</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Turn automatic event subscription on or off. </p>
+<p>When enabled and the manager is setup and active the manager will attempt to subscribe to services and renew existing subscriptions as needed. When disabled the manager will attempt to unsubscribe from services if currently subscribed.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">active</td><td>true to maintain subscriptions automatically; false to stop and attempt unsubscription. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

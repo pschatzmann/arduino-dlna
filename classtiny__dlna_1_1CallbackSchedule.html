@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Arduino DLNA Server: tiny_dlna::Schedule Struct Reference</title>
+<title>Arduino DLNA Server: tiny_dlna::CallbackSchedule Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,45 +69,41 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="namespacetiny__dlna.html">tiny_dlna</a></li><li class="navelem"><a class="el" href="structtiny__dlna_1_1Schedule.html">Schedule</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespacetiny__dlna.html">tiny_dlna</a></li><li class="navelem"><a class="el" href="classtiny__dlna_1_1CallbackSchedule.html">CallbackSchedule</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="structtiny__dlna_1_1Schedule-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">tiny_dlna::Schedule Struct Reference</div></div>
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="classtiny__dlna_1_1CallbackSchedule-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">tiny_dlna::CallbackSchedule Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>An individual <a class="el" href="structtiny__dlna_1_1Schedule.html" title="An individual Schedule (to send out UDP messages)">Schedule</a> (to send out UDP messages)  
- <a href="structtiny__dlna_1_1Schedule.html#details">More...</a></p>
+<p>Generic <a class="el" href="structtiny__dlna_1_1Schedule.html" title="An individual Schedule (to send out UDP messages)">Schedule</a> that invokes a callback function.  
+ <a href="classtiny__dlna_1_1CallbackSchedule.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="Schedule_8h_source.html">Schedule.h</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for tiny_dlna::Schedule:</div>
+Inheritance diagram for tiny_dlna::CallbackSchedule:</div>
 <div class="dyncontent">
-<div class="center"><img src="structtiny__dlna_1_1Schedule__inherit__graph.png" border="0" usemap="#atiny__dlna_1_1Schedule_inherit__map" alt="Inheritance graph"/></div>
-<map name="atiny__dlna_1_1Schedule_inherit__map" id="atiny__dlna_1_1Schedule_inherit__map">
-<area shape="rect" title="An individual Schedule (to send out UDP messages)" alt="" coords="5,153,155,179"/>
-<area shape="rect" href="classtiny__dlna_1_1CallbackSchedule.html" title="Generic Schedule that invokes a callback function." alt="" coords="221,5,427,31"/>
-<area shape="rect" href="classtiny__dlna_1_1MSearchReplyCP.html" title="Processing at control point to handle a MSearchReply from the device." alt="" coords="224,55,424,80"/>
-<area shape="rect" href="classtiny__dlna_1_1MSearchReplySchedule.html" title="Answer from device to MSearch request by sending the related replies." alt="" coords="203,104,445,129"/>
-<area shape="rect" href="classtiny__dlna_1_1MSearchSchedule.html" title="Send MSearch request." alt="" coords="221,153,427,179"/>
-<area shape="rect" href="classtiny__dlna_1_1PostAliveSchedule.html" title="Send out PostAlive messages: Repeated every 5 seconds." alt="" coords="219,203,429,228"/>
-<area shape="rect" href="classtiny__dlna_1_1PostByeSchedule.html" title="Send out ByeBye message." alt="" coords="223,252,425,277"/>
-<area shape="rect" href="classtiny__dlna_1_1PostSubscribe.html" title="Send SUBSCRIBE message via UDP unicast." alt="" coords="233,301,415,327"/>
-<area shape="rect" href="classtiny__dlna_1_1NotifyReplyCP.html" title="Represents a notification/notify reply scheduled for control&#45;point processing." alt="" coords="493,55,676,80"/>
+<div class="center"><img src="classtiny__dlna_1_1CallbackSchedule__inherit__graph.png" border="0" usemap="#atiny__dlna_1_1CallbackSchedule_inherit__map" alt="Inheritance graph"/></div>
+<map name="atiny__dlna_1_1CallbackSchedule_inherit__map" id="atiny__dlna_1_1CallbackSchedule_inherit__map">
+<area shape="rect" title="Generic Schedule that invokes a callback function." alt="" coords="5,79,211,104"/>
+<area shape="rect" href="structtiny__dlna_1_1Schedule.html" title="An individual Schedule (to send out UDP messages)" alt="" coords="33,5,183,31"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a914855b088ede397dc656784b8cf9875"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1Schedule.html#a914855b088ede397dc656784b8cf9875">process</a> (<a class="el" href="classtiny__dlna_1_1IUDPService.html">IUDPService</a> &amp;udp)</td></tr>
-<tr class="separator:a914855b088ede397dc656784b8cf9875"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a59112af6f9007a24784fe3022b865608"><td class="memItemLeft" align="right" valign="top">virtual const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1Schedule.html#a59112af6f9007a24784fe3022b865608">name</a> ()</td></tr>
-<tr class="separator:a59112af6f9007a24784fe3022b865608"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ca4a7e7d5533e6d7bf9784274f17b11"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1CallbackSchedule.html#a0ca4a7e7d5533e6d7bf9784274f17b11">CallbackSchedule</a> (std::function&lt; bool(void *ref)&gt; cb, void *ref)</td></tr>
+<tr class="separator:a0ca4a7e7d5533e6d7bf9784274f17b11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7597788bdcaaf083a6f2d47cd83708d1"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1CallbackSchedule.html#a7597788bdcaaf083a6f2d47cd83708d1">name</a> () override</td></tr>
+<tr class="separator:a7597788bdcaaf083a6f2d47cd83708d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4640d215fbc5088a0faf38d7b4ce6cd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1CallbackSchedule.html#ae4640d215fbc5088a0faf38d7b4ce6cd">process</a> (<a class="el" href="classtiny__dlna_1_1IUDPService.html">IUDPService</a> &amp;udp) override</td></tr>
+<tr class="separator:ae4640d215fbc5088a0faf38d7b4ce6cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a81fd24c97ebe2863fe4b1284f1d8e97e"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1Schedule.html#a81fd24c97ebe2863fe4b1284f1d8e97e">isValid</a> ()</td></tr>
 <tr class="separator:a81fd24c97ebe2863fe4b1284f1d8e97e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab68a78be25e74294fbac6839bd5111ae"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1Schedule.html#ab68a78be25e74294fbac6839bd5111ae">operator bool</a> ()</td></tr>
@@ -115,6 +111,8 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
+<tr class="memitem:a41c9b856e78a5b8df0e9fa61af1e4501"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1CallbackSchedule.html#a41c9b856e78a5b8df0e9fa61af1e4501">reference</a> = nullptr</td></tr>
+<tr class="separator:a41c9b856e78a5b8df0e9fa61af1e4501"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa0fdcc689c16e045b7e8c7893c340d3f"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1Schedule.html#aa0fdcc689c16e045b7e8c7893c340d3f">time</a> = 0</td></tr>
 <tr class="separator:aa0fdcc689c16e045b7e8c7893c340d3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae72839e74ad1799cb4320195bdb98622"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1Schedule.html#ae72839e74ad1799cb4320195bdb98622">repeat_ms</a> = 0</td></tr>
@@ -127,11 +125,53 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a1e95bf094b3e35f09c35d21bb30bb437"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a36ec0ab10cef70772d95d79d03fb750f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtiny__dlna_1_1Schedule.html#a36ec0ab10cef70772d95d79d03fb750f">report_ip</a> = false</td></tr>
 <tr class="separator:a36ec0ab10cef70772d95d79d03fb750f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:a585a33570015f7c7d225b8259a128d4f"><td class="memItemLeft" align="right" valign="top">std::function&lt; bool(void *ref)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1CallbackSchedule.html#a585a33570015f7c7d225b8259a128d4f">callback</a></td></tr>
+<tr class="separator:a585a33570015f7c7d225b8259a128d4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>An individual <a class="el" href="structtiny__dlna_1_1Schedule.html" title="An individual Schedule (to send out UDP messages)">Schedule</a> (to send out UDP messages) </p>
+<div class="textblock"><p>Generic <a class="el" href="structtiny__dlna_1_1Schedule.html" title="An individual Schedule (to send out UDP messages)">Schedule</a> that invokes a callback function. </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
-</div><h2 class="groupheader">Member Function Documentation</h2>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a0ca4a7e7d5533e6d7bf9784274f17b11" name="a0ca4a7e7d5533e6d7bf9784274f17b11"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ca4a7e7d5533e6d7bf9784274f17b11">&#9670;&#160;</a></span>CallbackSchedule()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">tiny_dlna::CallbackSchedule::CallbackSchedule </td>
+          <td>(</td>
+          <td class="paramtype">std::function&lt; bool(void *ref)&gt;&#160;</td>
+          <td class="paramname"><em>cb</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>ref</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
 <a id="a81fd24c97ebe2863fe4b1284f1d8e97e" name="a81fd24c97ebe2863fe4b1284f1d8e97e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a81fd24c97ebe2863fe4b1284f1d8e97e">&#9670;&#160;</a></span>isValid()</h2>
 
@@ -150,7 +190,7 @@ Public Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -159,8 +199,8 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a59112af6f9007a24784fe3022b865608" name="a59112af6f9007a24784fe3022b865608"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a59112af6f9007a24784fe3022b865608">&#9670;&#160;</a></span>name()</h2>
+<a id="a7597788bdcaaf083a6f2d47cd83708d1" name="a7597788bdcaaf083a6f2d47cd83708d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7597788bdcaaf083a6f2d47cd83708d1">&#9670;&#160;</a></span>name()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -169,7 +209,7 @@ Public Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual const char * tiny_dlna::Schedule::name </td>
+          <td class="memname">const char * tiny_dlna::CallbackSchedule::name </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -177,12 +217,12 @@ Public Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="classtiny__dlna_1_1MSearchSchedule.html#aa697dec451cb06b4d85360842e788fff">tiny_dlna::MSearchSchedule</a>, <a class="el" href="classtiny__dlna_1_1MSearchReplySchedule.html#aa7d5660f8966a0c25a4f33d0d4b610b7">tiny_dlna::MSearchReplySchedule</a>, <a class="el" href="classtiny__dlna_1_1MSearchReplyCP.html#a28cc56a3093854e23073ac6978671655">tiny_dlna::MSearchReplyCP</a>, <a class="el" href="classtiny__dlna_1_1NotifyReplyCP.html#aebe3d7a569626a84abc6caec9403f7ce">tiny_dlna::NotifyReplyCP</a>, <a class="el" href="classtiny__dlna_1_1PostAliveSchedule.html#a7a0963d919fe5de31fce47d0310dc660">tiny_dlna::PostAliveSchedule</a>, <a class="el" href="classtiny__dlna_1_1PostByeSchedule.html#aebf8dca009f1d9387379402f42c62c64">tiny_dlna::PostByeSchedule</a>, <a class="el" href="classtiny__dlna_1_1PostSubscribe.html#a263ff31cdc9b02b8d00b0891045d7afa">tiny_dlna::PostSubscribe</a>, and <a class="el" href="classtiny__dlna_1_1CallbackSchedule.html#a7597788bdcaaf083a6f2d47cd83708d1">tiny_dlna::CallbackSchedule</a>.</p>
+<p>Reimplemented from <a class="el" href="structtiny__dlna_1_1Schedule.html#a59112af6f9007a24784fe3022b865608">tiny_dlna::Schedule</a>.</p>
 
 </div>
 </div>
@@ -204,15 +244,15 @@ Public Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a914855b088ede397dc656784b8cf9875" name="a914855b088ede397dc656784b8cf9875"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a914855b088ede397dc656784b8cf9875">&#9670;&#160;</a></span>process()</h2>
+<a id="ae4640d215fbc5088a0faf38d7b4ce6cd" name="ae4640d215fbc5088a0faf38d7b4ce6cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4640d215fbc5088a0faf38d7b4ce6cd">&#9670;&#160;</a></span>process()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -221,7 +261,7 @@ Public Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual bool tiny_dlna::Schedule::process </td>
+          <td class="memname">bool tiny_dlna::CallbackSchedule::process </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classtiny__dlna_1_1IUDPService.html">IUDPService</a> &amp;&#160;</td>
           <td class="paramname"><em>udp</em></td><td>)</td>
@@ -230,12 +270,12 @@ Public Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="classtiny__dlna_1_1MSearchSchedule.html#a78d50ea3f56af5d5c5122d598828472f">tiny_dlna::MSearchSchedule</a>, <a class="el" href="classtiny__dlna_1_1MSearchReplySchedule.html#a532217a17d9ebeb6ecaea3768889c500">tiny_dlna::MSearchReplySchedule</a>, <a class="el" href="classtiny__dlna_1_1MSearchReplyCP.html#ad7bc110096f06973f23a27f5e3a3ccbd">tiny_dlna::MSearchReplyCP</a>, <a class="el" href="classtiny__dlna_1_1NotifyReplyCP.html#af2c2fb38004e4f9cf56dcb8a8470c8e9">tiny_dlna::NotifyReplyCP</a>, <a class="el" href="classtiny__dlna_1_1PostAliveSchedule.html#aa54e34df318100330642e2e49f65eb84">tiny_dlna::PostAliveSchedule</a>, <a class="el" href="classtiny__dlna_1_1PostByeSchedule.html#a64092006b5c7f71126db1bb00634e227">tiny_dlna::PostByeSchedule</a>, <a class="el" href="classtiny__dlna_1_1PostSubscribe.html#ad96cd29a9bd0f93ed3131a39bee57e59">tiny_dlna::PostSubscribe</a>, and <a class="el" href="classtiny__dlna_1_1CallbackSchedule.html#ae4640d215fbc5088a0faf38d7b4ce6cd">tiny_dlna::CallbackSchedule</a>.</p>
+<p>Reimplemented from <a class="el" href="structtiny__dlna_1_1Schedule.html#a914855b088ede397dc656784b8cf9875">tiny_dlna::Schedule</a>.</p>
 
 </div>
 </div>
@@ -245,11 +285,19 @@ Public Attributes</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">bool tiny_dlna::Schedule::active = false</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 </div>
@@ -259,11 +307,41 @@ Public Attributes</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="structtiny__dlna_1_1IPAddressAndPort.html">IPAddressAndPort</a> tiny_dlna::Schedule::address</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a585a33570015f7c7d225b8259a128d4f" name="a585a33570015f7c7d225b8259a128d4f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a585a33570015f7c7d225b8259a128d4f">&#9670;&#160;</a></span>callback</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::function&lt;bool(void* ref)&gt; tiny_dlna::CallbackSchedule::callback</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 </div>
@@ -273,9 +351,31 @@ Public Attributes</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">uint64_t tiny_dlna::Schedule::end_time = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a41c9b856e78a5b8df0e9fa61af1e4501" name="a41c9b856e78a5b8df0e9fa61af1e4501"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a41c9b856e78a5b8df0e9fa61af1e4501">&#9670;&#160;</a></span>reference</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void* tiny_dlna::CallbackSchedule::reference = nullptr</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -287,11 +387,19 @@ Public Attributes</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">uint32_t tiny_dlna::Schedule::repeat_ms = 0</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 </div>
@@ -301,11 +409,19 @@ Public Attributes</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">bool tiny_dlna::Schedule::report_ip = false</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 </div>
@@ -315,16 +431,24 @@ Public Attributes</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">uint64_t tiny_dlna::Schedule::time = 0</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<hr/>The documentation for this struct was generated from the following file:<ul>
+<hr/>The documentation for this class was generated from the following file:<ul>
 <li>src/dlna/common/<a class="el" href="Schedule_8h_source.html">Schedule.h</a></li>
 </ul>
 </div><!-- contents -->
