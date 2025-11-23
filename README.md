@@ -4,7 +4,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 
-This library provides the functionality to implement __UPnP/DLNA devices and control points__ for Arduino.
+This library provides the functionality to implement __UPnP/DLNA control points and devices__ for Arduino.
 
 The Digital Living Network Alliance (DLNA) aimed to establish __interoperability__ among PCs, consumer appliances, and mobile devices across wired and wireless networks. The goal was to provide a common solution for __sharing digital media and content__ services. 
 
@@ -67,3 +67,4 @@ This software is totally free, but you can make me happy by rewarding me with a 
 - [Buy me a coffee](https://www.buymeacoffee.com/philschatzh)
 
 - [Paypal me](https://paypal.me/pschatzmann?country.x=CH&locale.x=en_US)
+
