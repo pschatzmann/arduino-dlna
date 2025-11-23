@@ -293,8 +293,8 @@ class DLNAControlPoint : public IControlPoint {
     return reply;
   }
 
-  /// call this method in the Arduino loop as often as possible: the processes
-  /// all replys
+  /// call this method in the Arduino loop as often as possible: it processes
+  /// all subscriptions and scheduled tasks for udp requests
   bool loop() override {
     if (!is_active) return false;
     DLNAControlPointRequestParser parser;
@@ -494,13 +494,8 @@ class DLNAControlPoint : public IControlPoint {
   }
 
   /// Activate/deactivate subscription notifications
-  void setSubscribeNotificationsActive(bool flag) override {
-    subscription_mgr.setEventSubscriptionActive(flag);
-  }
-
-  /// Register a string in the shared registry and return the stored pointer
-  const char* registerString(const char* s) override {
-    return s;  // registry removed
+  void setNotificationsActive(bool flag) override {
+    subscription_mgr.setNotificationsActive(flag);
   }
 
  protected:

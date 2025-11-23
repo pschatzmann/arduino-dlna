@@ -104,8 +104,18 @@ class DLNAControlPointMediaServer {
   void setDeviceIndex(int idx) { p_mgr->setDeviceIndex(idx); }
 
   /// Activate/deactivate subscription notifications
-  void setSubscribeNotificationsActive(bool flag) {
-    p_mgr->setSubscribeNotificationsActive(flag);
+  void setNotificationsActive(bool flag) {
+    p_mgr->setNotificationsActive(flag);
+  }
+
+  /// Register a callback for notifications and activate subscriptions
+  void setNotificationCallback(
+      std::function<void(const char* sid, const char* varName,
+                         const char* newValue, void* reference)>
+          cb,
+      void* ref = nullptr)  {
+    p_mgr->setNotificationsActive(true);
+    p_mgr->setEventSubscriptionCallback(cb, ref);
   }
 
   /**

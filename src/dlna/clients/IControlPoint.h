@@ -115,9 +115,7 @@ class IControlPoint {
   /// Get subscription manager for event handling
   virtual SubscriptionMgrControlPoint* getSubscriptionMgr() = 0;
   /// Enable/disable event subscription notifications
-  virtual void setSubscribeNotificationsActive(bool flag) = 0;
-  /// Register string for memory management
-  virtual const char* registerString(const char* s) = 0;
+  virtual void setNotificationsActive(bool flag) = 0;
 };
 
 }  // namespace tiny_dlna

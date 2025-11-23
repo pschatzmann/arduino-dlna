@@ -112,7 +112,7 @@ class MSearchReplySchedule : public Schedule {
 
   bool isValid() override {
     // check if the search target is valid for this device
-    if (!isValidSearchTarget(*p_device, search_target.c_str())){
+    if (!isValidSearchTarget(*p_device, search_target.c_str())) {
       return false;
     }
     return isValidIP();
@@ -420,6 +420,30 @@ class PostSubscribe : public Schedule {
   }
 
   void setDuration(uint32_t sec) { durationSec = sec; }
+};
+
+/**
+ * @brief Generic Schedule that invokes a callback function
+ * @author Phil Schatzmann
+ */
+class CallbackSchedule : public Schedule {
+ public:
+  CallbackSchedule(std::function<bool(void* ref)> cb, void* ref) {
+    callback = cb;
+    reference = ref;
+  }
+  const char* name() override { return "Callback"; }
+  void* reference = nullptr;
+
+  bool process(IUDPService& udp) override {
+    if (callback) {
+      return callback(reference);
+    }
+    return false;
+  }
+
+ protected:
+  std::function<bool(void* ref)> callback;
 };
 
 }  // namespace tiny_dlna

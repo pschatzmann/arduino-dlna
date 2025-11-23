@@ -47,7 +47,7 @@ void setup() {
   // Use first discovered renderer device
   renderer.setDeviceIndex(0);
   // Subscribe to event notifications
-  renderer.setSubscribeNotificationsActive(true);
+  renderer.setNotificationsActive(true);
 
   // Starting playback
   Serial.println("Starting playback...");

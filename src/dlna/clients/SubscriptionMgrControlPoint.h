@@ -68,7 +68,7 @@ class SubscriptionMgrControlPoint {
     p_device = &device;
     is_setup = true;
     // Initialize event subscription state
-    setEventSubscriptionActive(event_subscription_active);
+    setNotificationsActive(event_subscription_active);
   }
   /**
    * @brief Attach an HttpServer instance and register the internal
@@ -169,7 +169,7 @@ class SubscriptionMgrControlPoint {
    * @param active true to maintain subscriptions automatically; false to
    *               stop and attempt unsubscription.
    */
-  void setEventSubscriptionActive(bool active) {
+  void setNotificationsActive(bool active) {
     event_subscription_active = active;
 
     // if not setup, ignore
