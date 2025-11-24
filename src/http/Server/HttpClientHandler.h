@@ -180,7 +180,7 @@ class HttpClientHandler : public IClientHandler {
   void endClient() override {
     if (!p_client) return;
     p_client->flush();
-    if (!p_client->isKeepAlive()) p_client->stop();
+    p_client->stop();
   }
 
   void crlf() override {
