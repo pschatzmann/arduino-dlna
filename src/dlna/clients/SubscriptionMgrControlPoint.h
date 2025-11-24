@@ -373,7 +373,7 @@ class SubscriptionMgrControlPoint {
     for (auto& service : device.getServices()) {
       if (!subscribeToService(service)) {
         DlnaLogger.log(DlnaLogLevel::Error, "Subscription to service %s failed",
-                       service.service_id);
+                       service.service_id.c_str());
         ok = false;
       }
     }
@@ -397,7 +397,7 @@ class SubscriptionMgrControlPoint {
       if (!unsubscribeFromService(service)) {
         DlnaLogger.log(DlnaLogLevel::Warning,
                        "Unsubscribe from service %s failed",
-                       service.service_id);
+                       service.service_id.c_str());
         ok = false;
       }
     }
@@ -422,7 +422,8 @@ class SubscriptionMgrControlPoint {
     if (StrView(service.event_sub_url).isEmpty()) {
       return false;
     }
-    Url url(service.event_sub_url);
+
+    Url url(getURLString(service).c_str());
 
     // If already subscribed and not expired, nothing to do
     if (service.subscription_state == SubscriptionState::Subscribed &&
@@ -463,7 +464,7 @@ class SubscriptionMgrControlPoint {
       // failed to subscribe
       DlnaLogger.log(DlnaLogLevel::Error,
                      "Failed to subscribe to service %s, rc=%d",
-                     service.service_id, rc);
+                     service.service_id.c_str(), rc);
       return false;
     }
     return true;
@@ -489,7 +490,7 @@ class SubscriptionMgrControlPoint {
       return true;
     }
 
-    Url url(service.event_sub_url);
+    Url url(getURLString(service).c_str());
     int rc = p_http->unsubscribe(url, service.subscription_id.c_str());
     if (rc == 200) {
       DlnaLogger.log(DlnaLogLevel::Info, "Unsubscribe %s -> rc=%d", url.url(),
@@ -503,7 +504,7 @@ class SubscriptionMgrControlPoint {
     } else {
       DlnaLogger.log(DlnaLogLevel::Error,
                      "Failed to unsubscribe from service %s, rc=%d",
-                     service.service_id, rc);
+                     service.service_id.c_str(), rc);
       return false;
     }
     return true;
@@ -571,6 +572,20 @@ class SubscriptionMgrControlPoint {
 
     // reply OK to the NOTIFY
     client.replyOK();
+  }
+
+  Str getURLString(DLNAServiceInfo& service) {
+     Str url_str{100};
+    if (service.event_sub_url.startsWith("/")) {
+      // relative URL: need to build full URL using device base URL
+      url_str = p_device->getBaseURL();
+      url_str += service.event_sub_url.c_str();
+      url_str.replace("//", "/");
+
+    } else {
+      url_str = service.event_sub_url.c_str();
+    }
+    return url_str;
   }
 };
 

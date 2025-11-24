@@ -201,7 +201,9 @@ class DLNAControlPoint : public IControlPoint {
     }
 
     // instantiate subscription manager
-    subscription_mgr.setup(http, udp, local_url, getDevice());
+    if (local_url && p_http_server) {
+      subscription_mgr.setup(http, udp, local_url, getDevice());
+    }
 
     // If we exited early because a device was found, deactivate the MSearch
     // schedule so it will stop repeating. The scheduler will clean up
@@ -656,8 +658,9 @@ class DLNAControlPoint : public IControlPoint {
 
   /// checks if the usn contains the search target
   bool matches(const char* usn) {
+    if (search_target == nullptr || *search_target == '\0') return true;
     if (StrView(search_target).equals("ssdp:all")) return true;
-    return StrView(usn).contains(search_target);
+    return StrView(usn).contains(search_target) || StrView(search_target).contains(usn);
   }
 
   /// processes a bye-bye message
@@ -792,7 +795,9 @@ class DLNAControlPoint : public IControlPoint {
       (void)ref;
       return createSoapXML(action, out);
     };
-    p_http->stop();
+    if (!p_http->isKeepAlive()) {
+      p_http->stop();
+    }
     p_http->request().put("SOAPACTION", soapAction);
     int rc = p_http->post(post_url, xmlLen, printXML, "text/xml");
 

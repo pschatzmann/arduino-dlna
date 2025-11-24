@@ -32,6 +32,8 @@ class IHttpRequest {
   virtual bool connected() = 0;
   /// Get number of bytes available to read
   virtual int available() = 0;
+  /// Do not close the connection after request
+  virtual bool isKeepAlive() = 0;
   /// Stop the connection
   virtual void stop() = 0;
   /// Send POST request with string data

@@ -7,6 +7,10 @@
 #include "HttpHeader.h"
 #include "IHttpRequest.h"
 #include "basic/StrPrint.h"
+#ifdef ESP32
+#include <WiFi.h>
+#include <lwip/sockets.h>
+#endif
 
 namespace tiny_dlna {
 
@@ -71,6 +75,7 @@ class HttpRequest : public IHttpRequest {
     DlnaLogger.log(DlnaLogLevel::Info, "HttpRequest::stop");
     if (client_ptr != nullptr) {
       client_ptr->stop();
+      // delay(300);
     }
   }
 
@@ -183,6 +188,8 @@ class HttpRequest : public IHttpRequest {
   /// Sets the timeout.
   void setTimeout(int ms) override { client_ptr->setTimeout(ms); }
 
+  bool isKeepAlive() { return StrView(connection).equals(CON_KEEP_ALIVE); }
+
  protected:
   ClientType default_client;
   Client* client_ptr = nullptr;
@@ -201,12 +208,38 @@ class HttpRequest : public IHttpRequest {
 
   /// opens a connection to the indicated host
   virtual int connect(const char* ip, uint16_t port) {
-    DlnaLogger.log(DlnaLogLevel::Info, "HttpRequest::connect %s", ip);
-    int rc = this->client_ptr->connect(ip, port);
+    this->client_ptr->setTimeout(DLNA_HTTP_REQUEST_TIMEOUT_MS);
+    if (!isKeepAlive() && this->client_ptr->connected()) {
+      stop();
+    }
+#ifdef ESP32
+    // clear input buffer
+    static_cast<ClientType*>(client_ptr)->clear();
+    // static_cast<ClientType*>(client_ptr)
+    //     ->setConnectionTimeout(DLNA_HTTP_REQUEST_TIMEOUT_MS);
+    static_cast<ClientType*>(client_ptr)->setNoDelay(true);
+    int enable = 1;
+    static_cast<ClientType*>(client_ptr)
+        ->setSocketOption(SOL_SOCKET, SO_REUSEADDR, &enable,
+                          sizeof(enable));  // Address reuse
+#endif
+    DlnaLogger.log(DlnaLogLevel::Info, "HttpRequest::connect %s:%d", ip, port);
     uint64_t end = millis() + client_ptr->getTimeout();
-    DlnaLogger.log(DlnaLogLevel::Info, "Connected: %s (rc=%d) with timeout %ld",
-                   connected() ? "true" : "false", rc,
-                   client_ptr->getTimeout());
+    bool rc = false;
+    for (int j=0;j < 3; j++) {
+      rc = this->client_ptr->connect(ip, port);
+      if (rc) break;
+      delay(200);
+    }
+    if (!connected()) {
+      DlnaLogger.log(
+          DlnaLogLevel::Error, "Connected: %s (rc=%d) with timeout %ld",
+          connected() ? "true" : "false", rc, client_ptr->getTimeout());
+    } else {
+      DlnaLogger.log(
+          DlnaLogLevel::Debug, "Connected: %s (rc=%d) with timeout %ld",
+          connected() ? "true" : "false", rc, client_ptr->getTimeout());
+    }
     return rc;
   }
 
@@ -281,9 +314,6 @@ class HttpRequest : public IHttpRequest {
     DlnaLogger.log(DlnaLogLevel::Info, "%s %s", methods[method], url.url());
 
     if (!connected()) {
-      DlnaLogger.log(DlnaLogLevel::Info,
-                     "HttpRequest::connecting to host %s port %d", url.host(),
-                     url.port());
       connect(url.host(), url.port());
     }
 
