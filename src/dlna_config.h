@@ -22,7 +22,7 @@
 
 /// Define the default http request timeout
 #ifndef DLNA_HTTP_REQUEST_TIMEOUT_MS
-#define DLNA_HTTP_REQUEST_TIMEOUT_MS 6000
+#define DLNA_HTTP_REQUEST_TIMEOUT_MS 15000
 #endif
 
 /// Keep the session open for multiple requests
