@@ -25,6 +25,11 @@
 #define DLNA_HTTP_REQUEST_TIMEOUT_MS 6000
 #endif
 
+/// Keep the session open for multiple requests
+#ifndef DLNA_REQUEST_KEEP_ALIVE
+#define DLNA_REQUEST_KEEP_ALIVE false
+#endif
+
 /// Define XML parse buffer size
 #ifndef XML_PARSER_BUFFER_SIZE
 #define XML_PARSER_BUFFER_SIZE 512

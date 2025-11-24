@@ -221,6 +221,7 @@ class DLNAControlPoint : public IControlPoint {
 
   void setTransports(IHttpRequest& http, IUDPService& udp) {
     p_http = &http;
+    p_http->setConnection(DLNA_REQUEST_KEEP_ALIVE ? CON_KEEP_ALIVE : CON_CLOSE);
     p_udp = &udp;
   }
 
