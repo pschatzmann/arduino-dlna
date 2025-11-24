@@ -108,6 +108,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a769f4086a2cb4d167edd0b6bad553ba2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMediaRenderer.html#a769f4086a2cb4d167edd0b6bad553ba2">setDeviceTypeFilter</a> (const char *filter)</td></tr>
 <tr class="memdesc:a769f4086a2cb4d167edd0b6bad553ba2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Restrict this helper to devices of the given device type.  <br /></td></tr>
 <tr class="separator:a769f4086a2cb4d167edd0b6bad553ba2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a952384912274f30e170f06afb8b402e1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMediaRenderer.html#a952384912274f30e170f06afb8b402e1">setLocalURL</a> (<a class="el" href="classtiny__dlna_1_1Url.html">Url</a> url)</td></tr>
+<tr class="memdesc:a952384912274f30e170f06afb8b402e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the local URL for the control point.  <br /></td></tr>
+<tr class="separator:a952384912274f30e170f06afb8b402e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab41727242ae96ca0e57dcde193414509"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMediaRenderer.html#ab41727242ae96ca0e57dcde193414509">setLocalURL</a> (IPAddress url, int port=9001, const char *path=&quot;&quot;)</td></tr>
+<tr class="memdesc:ab41727242ae96ca0e57dcde193414509"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the local URL for the control point.  <br /></td></tr>
+<tr class="separator:ab41727242ae96ca0e57dcde193414509"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae1284685ccb1f0b42ec1811a30de7370"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMediaRenderer.html#ae1284685ccb1f0b42ec1811a30de7370">begin</a> (uint32_t minWaitMs=3000, uint32_t maxWaitMs=60000)</td></tr>
 <tr class="memdesc:ae1284685ccb1f0b42ec1811a30de7370"><td class="mdescLeft">&#160;</td><td class="mdescRight">Begin discovery and processing.  <br /></td></tr>
 <tr class="separator:ae1284685ccb1f0b42ec1811a30de7370"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -117,6 +123,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a240d70adfcbe1ded795315dd41e3b8a0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMediaRenderer.html#a240d70adfcbe1ded795315dd41e3b8a0">setDeviceIndex</a> (int idx)</td></tr>
 <tr class="memdesc:a240d70adfcbe1ded795315dd41e3b8a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Select the active renderer by index (0-based)  <br /></td></tr>
 <tr class="separator:a240d70adfcbe1ded795315dd41e3b8a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a3241cfc91ae66f3577f4ada5ffd53a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMediaRenderer.html#a9a3241cfc91ae66f3577f4ada5ffd53a">subscribe</a> ()</td></tr>
+<tr class="memdesc:a9a3241cfc91ae66f3577f4ada5ffd53a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subscribe to event notifications: call after selecting the device.  <br /></td></tr>
+<tr class="separator:a9a3241cfc91ae66f3577f4ada5ffd53a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaba40029d77dbcb02557de6a46dd0d68"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAControlPointMediaRenderer.html#aaba40029d77dbcb02557de6a46dd0d68">setHttp</a> (<a class="el" href="classtiny__dlna_1_1IHttpRequest.html">IHttpRequest</a> &amp;http)</td></tr>
 <tr class="memdesc:aaba40029d77dbcb02557de6a46dd0d68"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setter for the HTTP wrapper used for subscriptions and callbacks.  <br /></td></tr>
 <tr class="separator:aaba40029d77dbcb02557de6a46dd0d68"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1243,6 +1252,78 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="ab41727242ae96ca0e57dcde193414509" name="ab41727242ae96ca0e57dcde193414509"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab41727242ae96ca0e57dcde193414509">&#9670;&#160;</a></span>setLocalURL() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tiny_dlna::DLNAControlPointMediaRenderer::setLocalURL </td>
+          <td>(</td>
+          <td class="paramtype">IPAddress&#160;</td>
+          <td class="paramname"><em>url</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>port</em> = <code>9001</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>path</em> = <code>&quot;&quot;</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Defines the local URL for the control point. </p>
+
+</div>
+</div>
+<a id="a952384912274f30e170f06afb8b402e1" name="a952384912274f30e170f06afb8b402e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a952384912274f30e170f06afb8b402e1">&#9670;&#160;</a></span>setLocalURL() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tiny_dlna::DLNAControlPointMediaRenderer::setLocalURL </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1Url.html">Url</a>&#160;</td>
+          <td class="paramname"><em>url</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Defines the local URL for the control point. </p>
+
+</div>
+</div>
 <a id="ad36f7e16838fbc65616054c680b2d5bc" name="ad36f7e16838fbc65616054c680b2d5bc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad36f7e16838fbc65616054c680b2d5bc">&#9670;&#160;</a></span>setMediaURI()</h2>
 
@@ -1501,6 +1582,33 @@ Protected Attributes</h2></td></tr>
 
 <p>Stop playback. </p>
 <dl class="section return"><dt>Returns</dt><dd>true on success, false on error </dd></dl>
+
+</div>
+</div>
+<a id="a9a3241cfc91ae66f3577f4ada5ffd53a" name="a9a3241cfc91ae66f3577f4ada5ffd53a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a3241cfc91ae66f3577f4ada5ffd53a">&#9670;&#160;</a></span>subscribe()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool tiny_dlna::DLNAControlPointMediaRenderer::subscribe </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Subscribe to event notifications: call after selecting the device. </p>
 
 </div>
 </div>
