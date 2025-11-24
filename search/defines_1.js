@@ -12,7 +12,8 @@ var searchData=
   ['dlna_5fprotocol_9',['DLNA_PROTOCOL',['../dlna__config_8h.html#a5e6b994e83ab7a93cf09dca167a58863',1,'dlna_config.h']]],
   ['dlna_5fprotocol_5fall_10',['DLNA_PROTOCOL_ALL',['../dlna__config_8h.html#a20e1e7277b587b2ec82925677bc513e2',1,'dlna_config.h']]],
   ['dlna_5fprotocol_5faudio_11',['DLNA_PROTOCOL_AUDIO',['../dlna__config_8h.html#a27763beedb4243c957f40475655c40f3',1,'dlna_config.h']]],
-  ['dlna_5frun_5fscheduler_5fevery_5fms_12',['DLNA_RUN_SCHEDULER_EVERY_MS',['../dlna__config_8h.html#aa693f4a5a61b6042d6d2b0a5d19ce43a',1,'dlna_config.h']]],
-  ['dlna_5frun_5fsubscriptions_5fevery_5fms_13',['DLNA_RUN_SUBSCRIPTIONS_EVERY_MS',['../dlna__config_8h.html#aaa87dfb5a8224047ab269dfc707d4baf',1,'dlna_config.h']]],
-  ['dlna_5fssdp_5fport_14',['DLNA_SSDP_PORT',['../dlna__config_8h.html#ae919a6bbd251038afbea0cda0e3c1f8b',1,'dlna_config.h']]]
+  ['dlna_5frequest_5fkeep_5falive_12',['DLNA_REQUEST_KEEP_ALIVE',['../dlna__config_8h.html#a0332afd6086006d15eabd02b887cad02',1,'dlna_config.h']]],
+  ['dlna_5frun_5fscheduler_5fevery_5fms_13',['DLNA_RUN_SCHEDULER_EVERY_MS',['../dlna__config_8h.html#aa693f4a5a61b6042d6d2b0a5d19ce43a',1,'dlna_config.h']]],
+  ['dlna_5frun_5fsubscriptions_5fevery_5fms_14',['DLNA_RUN_SUBSCRIPTIONS_EVERY_MS',['../dlna__config_8h.html#aaa87dfb5a8224047ab269dfc707d4baf',1,'dlna_config.h']]],
+  ['dlna_5fssdp_5fport_15',['DLNA_SSDP_PORT',['../dlna__config_8h.html#ae919a6bbd251038afbea0cda0e3c1f8b',1,'dlna_config.h']]]
 ];
