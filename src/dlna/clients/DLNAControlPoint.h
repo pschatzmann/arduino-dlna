@@ -5,11 +5,11 @@
 #include "Client.h"
 #include "DLNAControlPointRequestParser.h"
 #include "basic/Url.h"
+#include "dlna/clients/IControlPoint.h"
+#include "dlna/clients/SubscriptionMgrControlPoint.h"
 #include "dlna/common/DLNADeviceInfo.h"
 #include "dlna/common/Schedule.h"
 #include "dlna/common/Scheduler.h"
-#include "dlna/clients/IControlPoint.h"
-#include "dlna/clients/SubscriptionMgrControlPoint.h"
 #include "dlna/devices/DLNADevice.h"
 #include "dlna/xml/XMLDeviceParser.h"
 #include "dlna/xml/XMLParser.h"
@@ -87,10 +87,11 @@ class DLNAControlPoint : public IControlPoint {
 
   /// Defines the local url (needed for subscriptions)
   void setLocalURL(Url url) override { local_url = url; }
-  void setLocalURL(IPAddress url, int port=9001, const char* path="") override {
+  void setLocalURL(IPAddress url, int port = 9001,
+                   const char* path = "") override {
     char buffer[200];
-    snprintf(buffer, sizeof(buffer), "http://%s:%d%s", url.toString().c_str(), port,
-             path);
+    snprintf(buffer, sizeof(buffer), "http://%s:%d%s", url.toString().c_str(),
+             port, path);
     local_url.setUrl(buffer);
   }
 
@@ -118,7 +119,6 @@ class DLNAControlPoint : public IControlPoint {
   void setHttpServer(IHttpServer& server) override {
     DlnaLogger.log(DlnaLogLevel::Debug, "DLNAControlPointMgr::setHttpServer");
     p_http_server = &server;
-    subscription_mgr.setHttpServer(server);
   }
 
   /// Register a callback that will be invoked when parsing SOAP/Action results
@@ -161,14 +161,6 @@ class DLNAControlPoint : public IControlPoint {
     is_active = true;
     setTransports(http, udp);
 
-    if (p_http_server) {
-      // handle server requests
-      if (!p_http_server->begin()) {
-        DlnaLogger.log(DlnaLogLevel::Error, "HttpServer begin failed");
-        return false;
-      }
-    }
-
     // setup multicast UDP
     if (!(p_udp->begin(DLNABroadcastAddress))) {
       DlnaLogger.log(DlnaLogLevel::Error, "UDP begin failed");
@@ -200,22 +192,6 @@ class DLNAControlPoint : public IControlPoint {
       loop();
     }
 
-    // setup subscription manager
-    if (local_url && p_http_server) {
-      subscription_mgr.setup(http, udp, local_url, getDevice());
-    } else {
-      if (!local_url && !p_http_server) {
-        DlnaLogger.log(DlnaLogLevel::Info,
-                       "No local URL and no HttpServer for subscriptions");
-      } else if (!local_url) {
-        DlnaLogger.log(DlnaLogLevel::Warning,
-                       "No local URL for subscriptions");
-      } else {
-        DlnaLogger.log(DlnaLogLevel::Warning,
-                       "No HttpServer for subscriptions");
-      }
-    }
-
     // If we exited early because a device was found, deactivate the MSearch
     // schedule so it will stop repeating. The scheduler will clean up
     // inactive schedules on its next pass.
@@ -234,6 +210,36 @@ class DLNAControlPoint : public IControlPoint {
     p_http = &http;
     p_http->setConnection(DLNA_REQUEST_KEEP_ALIVE ? CON_KEEP_ALIVE : CON_CLOSE);
     p_udp = &udp;
+  }
+
+  /// Subscribes to event notifications for all services of the selected device
+  bool subscribe() {
+    if (devices.size() == 0) return false;
+    if (!getDevice()) return false;
+
+    // setup subscription manager
+    if (local_url && p_http_server) {
+      if (p_http_server) {
+        // handle server requests
+        if (!p_http_server->begin()) {
+          DlnaLogger.log(DlnaLogLevel::Error, "HttpServer begin failed");
+          return false;
+        }
+      }
+      subscription_mgr.setHttpServer(*p_http_server);
+      subscription_mgr.setup(*p_http, *p_udp, local_url, getDevice());
+      return true;
+    }
+    
+    if (!local_url && !p_http_server) {
+      DlnaLogger.log(DlnaLogLevel::Info,
+                     "No local URL and no HttpServer for subscriptions");
+    } else if (!local_url) {
+      DlnaLogger.log(DlnaLogLevel::Warning, "No local URL for subscriptions");
+    } else {
+      DlnaLogger.log(DlnaLogLevel::Warning, "No HttpServer for subscriptions");
+    }
+    return false;
   }
 
   /// Stops the processing and releases the resources
@@ -365,6 +371,8 @@ class DLNAControlPoint : public IControlPoint {
   /// Provides the device information of the actually selected device
   DLNADeviceInfo& getDevice() override {
     DlnaLogger.log(DlnaLogLevel::Debug, "DLNAControlPointMgr::getDevice");
+    if (default_device_idx < 0 || default_device_idx >= devices.size())
+      return NO_DEVICE;
     return devices[default_device_idx];
   }
 
@@ -672,7 +680,8 @@ class DLNAControlPoint : public IControlPoint {
   bool matches(const char* usn) {
     if (search_target == nullptr || *search_target == '\0') return true;
     if (StrView(search_target).equals("ssdp:all")) return true;
-    return StrView(usn).contains(search_target) || StrView(search_target).contains(usn);
+    return StrView(usn).contains(search_target) ||
+           StrView(search_target).contains(usn);
   }
 
   /// processes a bye-bye message
@@ -776,7 +785,8 @@ class DLNAControlPoint : public IControlPoint {
                    "Service control_url: %s, device base: %s",
                    StrView(service.control_url).c_str(),
                    StrView(device.getBaseURL()).c_str());
-    Url post_url = getUrl(device, service.control_url, url_buffer, DLNA_MAX_URL_LEN);
+    Url post_url =
+        getUrl(device, service.control_url, url_buffer, DLNA_MAX_URL_LEN);
     DlnaLogger.log(DlnaLogLevel::Info, "POST URL computed: %s", post_url.url());
 
     // send HTTP POST and collect/handle response. If the caller provided an

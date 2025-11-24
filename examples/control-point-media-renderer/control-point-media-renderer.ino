@@ -34,6 +34,9 @@ void setup() {
 
   setupWifi();
 
+  // Provide local URL for notifications
+  renderer.setLocalURL(WiFi.localIP(), port, "/events");
+
   // Start control point to discover devices: 10 min
   if (!renderer.begin(1000, 10 * 60 * 1000)) {
     Serial.println("No devices found");
@@ -46,8 +49,9 @@ void setup() {
 
   // Use first discovered renderer device
   renderer.setDeviceIndex(0);
+
   // Subscribe to event notifications
-  renderer.setNotificationsActive(true);
+  renderer.subscribe();
 
   // Starting playback
   Serial.println("Starting playback...");

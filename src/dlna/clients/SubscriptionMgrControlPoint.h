@@ -67,6 +67,7 @@ class SubscriptionMgrControlPoint {
     p_local_url = &localCallbackUrl;
     p_device = &device;
     is_setup = true;
+    attachHttpServer(*p_http_server);
     // Initialize event subscription state
     setNotificationsActive(event_subscription_active);
   }
@@ -84,7 +85,6 @@ class SubscriptionMgrControlPoint {
   void setHttpServer(IHttpServer& server) {
     DlnaLogger.log(DlnaLogLevel::Debug, "DLNAControlPointMgr::setHttpServer");
     p_http_server = &server;
-    attachHttpServer(server);
   }
 
   /**
@@ -328,14 +328,9 @@ class SubscriptionMgrControlPoint {
     DlnaLogger.log(DlnaLogLevel::Debug,
                    "DLNAControlPointMgr::attachHttpServer");
     p_http_server = &server;
-    // register handler at the local path. If local_url is not set we use
-    // a default path "/dlna/events"
-    const char* path = "/dlna/events";
-    if (p_local_url && !StrView(p_local_url->url()).isEmpty())
-      path = p_local_url->path();
-
     void* ctx[1];
     ctx[0] = this;
+    const char* path = p_local_url->path();
     server.on(path, T_NOTIFY, notifyHandler, ctx, 1);
   }
 
@@ -434,15 +429,22 @@ class SubscriptionMgrControlPoint {
     char seconds_txt[80] = {0};
     snprintf(seconds_txt, sizeof(seconds_txt), "Second-%d",
              event_subscription_duration_sec);
+    char callback_url[256] = {0};
+    snprintf(callback_url, sizeof(callback_url), "<%s>",
+             p_local_url ? p_local_url->url() : "");
     p_http->request().put("NT", "upnp:event");
     p_http->request().put("TIMEOUT", seconds_txt);
-    p_http->request().put("CALLBACK", p_local_url ? p_local_url->url() : "");
+    p_http->request().put("CALLBACK", callback_url);
     // For re-subscribe, include existing SID header if present
     if (!service.subscription_id.isEmpty()) {
       p_http->request().put("SID", service.subscription_id.c_str());
     }
+    p_http->request().put("CONTENT-LENGTH", "0");
 
     int rc = p_http->subscribe(url);
+    if (!p_http->isKeepAlive()) {
+      p_http->stop();
+    }
     if (rc == 200) {
       const char* sid = p_http->reply().get("SID");
       if (sid != nullptr) {
@@ -530,7 +532,8 @@ class SubscriptionMgrControlPoint {
    * @param handlerLine Pointer to the server-provided handler context which
    *                    contains the manager instance in its context array.
    */
-  static void notifyHandler(IClientHandler& client, IHttpServer* server, const char* requestPath,
+  static void notifyHandler(IClientHandler& client, IHttpServer* server,
+                            const char* requestPath,
                             HttpRequestHandlerLine* handlerLine) {
     if (handlerLine == nullptr || handlerLine->contextCount < 1) return;
     void* ctx0 = handlerLine->context[0];
@@ -575,12 +578,14 @@ class SubscriptionMgrControlPoint {
   }
 
   Str getURLString(DLNAServiceInfo& service) {
-     Str url_str{100};
+    Str url_str{100};
     if (service.event_sub_url.startsWith("/")) {
       // relative URL: need to build full URL using device base URL
       url_str = p_device->getBaseURL();
-      url_str += service.event_sub_url.c_str();
-      url_str.replace("//", "/");
+      if (url_str.endsWith("/") && service.event_sub_url.startsWith("/"))
+        url_str += service.event_sub_url.c_str() + 1;
+      else
+        url_str += service.event_sub_url.c_str();
 
     } else {
       url_str = service.event_sub_url.c_str();

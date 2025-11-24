@@ -40,6 +40,14 @@ class DLNAControlPointMediaServer {
   /// Set the control point manager instance (required before using helper)
   void setDLNAControlPoint(DLNAControlPoint& m) { p_mgr = &m; }
 
+   /// Defines the local URL for the control point
+  void setLocalURL(Url url) { p_mgr->setLocalURL(url); }
+
+  /// Defines the local URL for the control point
+  void setLocalURL(IPAddress url, int port=9001, const char* path="")  {
+    this->p_mgr->setLocalURL(url, port, path);
+  }
+ 
   /**
    * @brief Begin discovery and processing (forwards to underlying control
    * point)
@@ -102,6 +110,9 @@ class DLNAControlPointMediaServer {
    * @param idx Device index
    */
   void setDeviceIndex(int idx) { p_mgr->setDeviceIndex(idx); }
+
+  bool subscribe() { return p_mgr->subscribe(); }  /// Subscribe to event notifications: call after selecting the device
+
 
   /// Activate/deactivate subscription notifications
   void setNotificationsActive(bool flag) {

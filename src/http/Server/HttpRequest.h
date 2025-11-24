@@ -131,14 +131,14 @@ class HttpRequest : public IHttpRequest {
 
   /// Sends a SUBSCRIBE request.
   int subscribe(Url& url) override {
-    DlnaLogger.log(DlnaLogLevel::Info, "post %s", url.url());
+    DlnaLogger.log(DlnaLogLevel::Info, "%s %s", methods[T_SUBSCRIBE], url.path());
     return process(T_SUBSCRIBE, url, nullptr, nullptr, 0);
   }
 
   /// Sends an UNSUBSCRIBE request.
   int unsubscribe(Url& url, const char* sid) override {
-    DlnaLogger.log(DlnaLogLevel::Info, "unsubscribe %s (SID=%s)", url.url(),
-                   sid);
+    DlnaLogger.log(DlnaLogLevel::Info, "%s %s (SID=%s)", methods[T_UNSUBSCRIBE],
+                   url.path(), sid);
     if (sid != nullptr) {
       request_header.put("SID", sid);
     }
@@ -226,7 +226,7 @@ class HttpRequest : public IHttpRequest {
     DlnaLogger.log(DlnaLogLevel::Info, "HttpRequest::connect %s:%d", ip, port);
     uint64_t end = millis() + client_ptr->getTimeout();
     bool rc = false;
-    for (int j=0;j < 3; j++) {
+    for (int j = 0; j < 3; j++) {
       rc = this->client_ptr->connect(ip, port);
       if (rc) break;
       delay(200);

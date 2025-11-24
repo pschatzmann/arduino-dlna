@@ -56,6 +56,13 @@ class DLNAControlPointMediaRenderer {
   void setDeviceTypeFilter(const char* filter) {
     device_type_filter = filter ? filter : device_type_filter_default;
   }
+  /// Defines the local URL for the control point
+  void setLocalURL(Url url) { p_mgr->setLocalURL(url); }
+
+  /// Defines the local URL for the control point
+  void setLocalURL(IPAddress url, int port=9001, const char* path="")  {
+    this->p_mgr->setLocalURL(url, port, path);
+  }
 
   /**
    * @brief Begin discovery and processing
@@ -104,6 +111,10 @@ class DLNAControlPointMediaRenderer {
    * @param idx Index of the device to select; defaults to 0
    */
   void setDeviceIndex(int idx) { device_index = idx; }
+
+  /// Subscribe to event notifications: call after selecting the device
+  bool subscribe() { return p_mgr->subscribe(); }
+
 
   /// Setter for the HTTP wrapper used for subscriptions and callbacks
   void setHttp(IHttpRequest& http) { p_http = &http; }
