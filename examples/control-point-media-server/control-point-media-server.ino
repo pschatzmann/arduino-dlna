@@ -1,4 +1,4 @@
-// Example: ControlPointMediaServer usage
+// Example: control-point-media-server 
 // Discovers MediaServer devices and performs a Browse on the root ("0").
 
 #include "WiFi.h"

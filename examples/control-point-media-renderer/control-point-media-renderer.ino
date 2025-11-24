@@ -1,6 +1,10 @@
-// Example: ControlPointMediaRenderer
+// Example: control-point-media-renderer.ino
 // Discovers MediaRenderer devices and demonstrates setting AVTransport URI,
 // starting playback, changing volume, and querying transport state.
+// We are setting up event notifications which requires:
+// - an HTTP server to receive the notifications
+// - a local URL that is reachable by the renderer devices
+// - calling subscribe() after selecting the device 
 
 #include "WiFi.h"
 #include "dlna.h"
