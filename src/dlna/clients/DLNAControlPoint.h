@@ -200,9 +200,20 @@ class DLNAControlPoint : public IControlPoint {
       loop();
     }
 
-    // instantiate subscription manager
+    // setup subscription manager
     if (local_url && p_http_server) {
       subscription_mgr.setup(http, udp, local_url, getDevice());
+    } else {
+      if (!local_url && !p_http_server) {
+        DlnaLogger.log(DlnaLogLevel::Info,
+                       "No local URL and no HttpServer for subscriptions");
+      } else if (!local_url) {
+        DlnaLogger.log(DlnaLogLevel::Warning,
+                       "No local URL for subscriptions");
+      } else {
+        DlnaLogger.log(DlnaLogLevel::Warning,
+                       "No HttpServer for subscriptions");
+      }
     }
 
     // If we exited early because a device was found, deactivate the MSearch
