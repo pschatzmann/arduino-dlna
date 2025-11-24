@@ -113,6 +113,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:adf05bfa5adb7e80c101e84e94f05e6c2"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IHttpRequest.html#adf05bfa5adb7e80c101e84e94f05e6c2">available</a> ()=0</td></tr>
 <tr class="memdesc:adf05bfa5adb7e80c101e84e94f05e6c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get number of bytes available to read.  <br /></td></tr>
 <tr class="separator:adf05bfa5adb7e80c101e84e94f05e6c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4cbee6cc3cce101a0f526dc17f90835"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IHttpRequest.html#af4cbee6cc3cce101a0f526dc17f90835">isKeepAlive</a> ()=0</td></tr>
+<tr class="memdesc:af4cbee6cc3cce101a0f526dc17f90835"><td class="mdescLeft">&#160;</td><td class="mdescRight">Do not close the connection after request.  <br /></td></tr>
+<tr class="separator:af4cbee6cc3cce101a0f526dc17f90835"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a862b7a3cca2f61a96118b1f746c044a7"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IHttpRequest.html#a862b7a3cca2f61a96118b1f746c044a7">stop</a> ()=0</td></tr>
 <tr class="memdesc:a862b7a3cca2f61a96118b1f746c044a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stop the connection.  <br /></td></tr>
 <tr class="separator:a862b7a3cca2f61a96118b1f746c044a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -441,6 +444,35 @@ Public Member Functions</h2></td></tr>
 <p>Send HEAD request. </p>
 
 <p>Implemented in <a class="el" href="classtiny__dlna_1_1HttpRequest.html#ad96c4194e1c843faee852b8c185b1958">tiny_dlna::HttpRequest&lt; ClientType &gt;</a>.</p>
+
+</div>
+</div>
+<a id="af4cbee6cc3cce101a0f526dc17f90835" name="af4cbee6cc3cce101a0f526dc17f90835"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af4cbee6cc3cce101a0f526dc17f90835">&#9670;&#160;</a></span>isKeepAlive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool tiny_dlna::IHttpRequest::isKeepAlive </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Do not close the connection after request. </p>
+
+<p>Implemented in <a class="el" href="classtiny__dlna_1_1HttpRequest.html#abdff14762e740446482b407d85c2c685">tiny_dlna::HttpRequest&lt; ClientType &gt;</a>.</p>
 
 </div>
 </div>

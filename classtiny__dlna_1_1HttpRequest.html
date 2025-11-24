@@ -179,6 +179,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:af1fa91a5af0cb5bce0fd50005eaebde8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpRequest.html#af1fa91a5af0cb5bce0fd50005eaebde8">setTimeout</a> (int ms) override</td></tr>
 <tr class="memdesc:af1fa91a5af0cb5bce0fd50005eaebde8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the timeout.  <br /></td></tr>
 <tr class="separator:af1fa91a5af0cb5bce0fd50005eaebde8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abdff14762e740446482b407d85c2c685"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpRequest.html#abdff14762e740446482b407d85c2c685">isKeepAlive</a> ()</td></tr>
+<tr class="memdesc:abdff14762e740446482b407d85c2c685"><td class="mdescLeft">&#160;</td><td class="mdescRight">Do not close the connection after request.  <br /></td></tr>
+<tr class="separator:abdff14762e740446482b407d85c2c685"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -611,6 +614,37 @@ template&lt;typename ClientType &gt; </div>
 <p>Sends a HEAD request. </p>
 
 <p>Implements <a class="el" href="classtiny__dlna_1_1IHttpRequest.html#ab8dbb66a0f161fa1641bb81c073dc6e0">tiny_dlna::IHttpRequest</a>.</p>
+
+</div>
+</div>
+<a id="abdff14762e740446482b407d85c2c685" name="abdff14762e740446482b407d85c2c685"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abdff14762e740446482b407d85c2c685">&#9670;&#160;</a></span>isKeepAlive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classtiny__dlna_1_1HttpRequest.html">tiny_dlna::HttpRequest</a>&lt; ClientType &gt;::isKeepAlive </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Do not close the connection after request. </p>
+
+<p>Implements <a class="el" href="classtiny__dlna_1_1IHttpRequest.html#af4cbee6cc3cce101a0f526dc17f90835">tiny_dlna::IHttpRequest</a>.</p>
 
 </div>
 </div>
