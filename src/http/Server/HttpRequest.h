@@ -191,6 +191,39 @@ class HttpRequest : public IHttpRequest {
   bool isKeepAlive() { return StrView(connection).equals(CON_KEEP_ALIVE); }
 
  protected:
+  template <typename T>
+  static auto clearIfSupported(T* client, int) -> decltype(client->clear(), void()) {
+    client->clear();
+  }
+
+  template <typename T>
+  static void clearIfSupported(T*, long) {}
+
+  template <typename T>
+  static auto setNoDelayIfSupported(T* client, bool value, int)
+      -> decltype(client->setNoDelay(value), void()) {
+    client->setNoDelay(value);
+  }
+
+  template <typename T>
+  static void setNoDelayIfSupported(T*, bool, long) {}
+
+#ifdef ESP32
+  template <typename T>
+  static auto setSocketReuseAddrIfSupported(T* client, int)
+      -> decltype(client->setSocketOption(SOL_SOCKET, SO_REUSEADDR,
+                                          (const void*)nullptr,
+                                          (socklen_t)0),
+                  void()) {
+    int enable = 1;
+    client->setSocketOption(SOL_SOCKET, SO_REUSEADDR, &enable,
+                            sizeof(enable));
+  }
+
+  template <typename T>
+  static void setSocketReuseAddrIfSupported(T*, long) {}
+#endif
+
   ClientType default_client;
   Client* client_ptr = nullptr;
   Url url;
@@ -214,14 +247,11 @@ class HttpRequest : public IHttpRequest {
     }
 #ifdef ESP32
     // clear input buffer
-    static_cast<ClientType*>(client_ptr)->clear();
+  clearIfSupported(static_cast<ClientType*>(client_ptr), 0);
     // static_cast<ClientType*>(client_ptr)
     //     ->setConnectionTimeout(DLNA_HTTP_REQUEST_TIMEOUT_MS);
-    static_cast<ClientType*>(client_ptr)->setNoDelay(true);
-    int enable = 1;
-    static_cast<ClientType*>(client_ptr)
-        ->setSocketOption(SOL_SOCKET, SO_REUSEADDR, &enable,
-                          sizeof(enable));  // Address reuse
+  setNoDelayIfSupported(static_cast<ClientType*>(client_ptr), true, 0);
+  setSocketReuseAddrIfSupported(static_cast<ClientType*>(client_ptr), 0);
 #endif
     DlnaLogger.log(DlnaLogLevel::Info, "HttpRequest::connect %s:%d", ip, port);
     uint64_t end = millis() + client_ptr->getTimeout();

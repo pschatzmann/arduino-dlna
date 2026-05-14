@@ -244,7 +244,7 @@ class HttpServer : public IHttpServer {
       DlnaLogger.log(DlnaLogLevel::Info, "copy: accepted new client");
       client.setTimeout(DLNA_HTTP_READ_TIMEOUT_MS);
 #ifdef ESP32    
-      client.setNoDelay(true);  // disables Nagle
+      setNoDelayIfSupported(client, true, 0);  // disables Nagle when available
 #endif
       open_clients.push_back(client);
     }
@@ -329,6 +329,15 @@ class HttpServer : public IHttpServer {
   void* getReference() override { return ref; }
 
  protected:
+  template <typename T>
+  static auto setNoDelayIfSupported(T& client, bool value, int)
+      -> decltype(client.setNoDelay(value), void()) {
+    client.setNoDelay(value);
+  }
+
+  template <typename T>
+  static void setNoDelayIfSupported(T&, bool, long) {}
+
   // data
   List<HttpRequestHandlerLine*> handler_collection;
   List<HttpRequestRewrite*> rewrite_collection;
