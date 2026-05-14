@@ -76,6 +76,7 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pro-static-methods">Static Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classtiny__dlna_1_1HttpRequest-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">tiny_dlna::HttpRequest&lt; ClientType &gt; Class Template Reference</div></div>
@@ -196,6 +197,21 @@ Protected Member Functions</h2></td></tr>
 <tr class="separator:aef331d099c21347a0247f4b55f3f47da"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9a961e50942d69aa248b48eb41de6f52"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpRequest.html#a9a961e50942d69aa248b48eb41de6f52">process</a> (<a class="el" href="namespacetiny__dlna.html#a8b30900e538135f563c83e48319e5247">TinyMethodID</a> method, <a class="el" href="classtiny__dlna_1_1Url.html">Url</a> &amp;<a class="el" href="classtiny__dlna_1_1HttpRequest.html#a653fc0c856412be00be097edf3f5d94d">url</a>, size_t len, std::function&lt; size_t(Print &amp;, void *)&gt; writer, const char *mime=nullptr, void *ref=nullptr)</td></tr>
 <tr class="separator:a9a961e50942d69aa248b48eb41de6f52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
+Static Protected Member Functions</h2></td></tr>
+<tr class="memitem:af879d03d87f1bfac5fe1140557dd8205"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:af879d03d87f1bfac5fe1140557dd8205"><td class="memTemplItemLeft" align="right" valign="top">static auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpRequest.html#af879d03d87f1bfac5fe1140557dd8205">clearIfSupported</a> (T *<a class="el" href="classtiny__dlna_1_1HttpRequest.html#acae3d1004eeaa4f984a7ed513ed40609">client</a>, int) -&gt; decltype(<a class="el" href="classtiny__dlna_1_1HttpRequest.html#acae3d1004eeaa4f984a7ed513ed40609">client</a>-&gt;clear(), void())</td></tr>
+<tr class="separator:af879d03d87f1bfac5fe1140557dd8205"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b1ec384187c568ca67c49162430ec03"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a5b1ec384187c568ca67c49162430ec03"><td class="memTemplItemLeft" align="right" valign="top">static void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpRequest.html#a5b1ec384187c568ca67c49162430ec03">clearIfSupported</a> (T *, long)</td></tr>
+<tr class="separator:a5b1ec384187c568ca67c49162430ec03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a14c81144049be4d4bf9ce1b1e77d4e3f"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a14c81144049be4d4bf9ce1b1e77d4e3f"><td class="memTemplItemLeft" align="right" valign="top">static auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpRequest.html#a14c81144049be4d4bf9ce1b1e77d4e3f">setNoDelayIfSupported</a> (T *<a class="el" href="classtiny__dlna_1_1HttpRequest.html#acae3d1004eeaa4f984a7ed513ed40609">client</a>, bool value, int) -&gt; decltype(<a class="el" href="classtiny__dlna_1_1HttpRequest.html#acae3d1004eeaa4f984a7ed513ed40609">client</a>-&gt;setNoDelay(value), void())</td></tr>
+<tr class="separator:a14c81144049be4d4bf9ce1b1e77d4e3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaaa3218c52b7af2a77faea223ac3dd2b"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:aaaa3218c52b7af2a77faea223ac3dd2b"><td class="memTemplItemLeft" align="right" valign="top">static void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpRequest.html#aaaa3218c52b7af2a77faea223ac3dd2b">setNoDelayIfSupported</a> (T *, bool, long)</td></tr>
+<tr class="separator:aaaa3218c52b7af2a77faea223ac3dd2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -350,6 +366,86 @@ template&lt;typename ClientType &gt; </div>
 <p>Returns the number of available bytes to read. </p>
 
 <p>Implements <a class="el" href="classtiny__dlna_1_1IHttpRequest.html#adf05bfa5adb7e80c101e84e94f05e6c2">tiny_dlna::IHttpRequest</a>.</p>
+
+</div>
+</div>
+<a id="a5b1ec384187c568ca67c49162430ec03" name="a5b1ec384187c568ca67c49162430ec03"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b1ec384187c568ca67c49162430ec03">&#9670;&#160;</a></span>clearIfSupported() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType &gt; </div>
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void <a class="el" href="classtiny__dlna_1_1HttpRequest.html">tiny_dlna::HttpRequest</a>&lt; ClientType &gt;::clearIfSupported </td>
+          <td>(</td>
+          <td class="paramtype">T *&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af879d03d87f1bfac5fe1140557dd8205" name="af879d03d87f1bfac5fe1140557dd8205"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af879d03d87f1bfac5fe1140557dd8205">&#9670;&#160;</a></span>clearIfSupported() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType &gt; </div>
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static auto <a class="el" href="classtiny__dlna_1_1HttpRequest.html">tiny_dlna::HttpRequest</a>&lt; ClientType &gt;::clearIfSupported </td>
+          <td>(</td>
+          <td class="paramtype">T *&#160;</td>
+          <td class="paramname"><em>client</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> -&gt; decltype(<a class="el" href="classtiny__dlna_1_1HttpRequest.html#acae3d1004eeaa4f984a7ed513ed40609">client</a>-&gt;clear(), void()) </td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -1331,6 +1427,98 @@ template&lt;typename ClientType &gt; </div>
 <p>Sets the host name for the requests. </p>
 
 <p>Implements <a class="el" href="classtiny__dlna_1_1IHttpRequest.html#adf05ade498bcf533a6502e1e4f92e3ac">tiny_dlna::IHttpRequest</a>.</p>
+
+</div>
+</div>
+<a id="aaaa3218c52b7af2a77faea223ac3dd2b" name="aaaa3218c52b7af2a77faea223ac3dd2b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaaa3218c52b7af2a77faea223ac3dd2b">&#9670;&#160;</a></span>setNoDelayIfSupported() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType &gt; </div>
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void <a class="el" href="classtiny__dlna_1_1HttpRequest.html">tiny_dlna::HttpRequest</a>&lt; ClientType &gt;::setNoDelayIfSupported </td>
+          <td>(</td>
+          <td class="paramtype">T *&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a14c81144049be4d4bf9ce1b1e77d4e3f" name="a14c81144049be4d4bf9ce1b1e77d4e3f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a14c81144049be4d4bf9ce1b1e77d4e3f">&#9670;&#160;</a></span>setNoDelayIfSupported() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType &gt; </div>
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static auto <a class="el" href="classtiny__dlna_1_1HttpRequest.html">tiny_dlna::HttpRequest</a>&lt; ClientType &gt;::setNoDelayIfSupported </td>
+          <td>(</td>
+          <td class="paramtype">T *&#160;</td>
+          <td class="paramname"><em>client</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>value</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> -&gt; decltype(<a class="el" href="classtiny__dlna_1_1HttpRequest.html#acae3d1004eeaa4f984a7ed513ed40609">client</a>-&gt;setNoDelay(value), void()) </td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>

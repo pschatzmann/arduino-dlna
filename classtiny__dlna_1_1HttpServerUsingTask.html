@@ -76,6 +76,7 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pro-static-methods">Static Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classtiny__dlna_1_1HttpServerUsingTask-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">tiny_dlna::HttpServerUsingTask&lt; ClientType, ServerType &gt; Class Template Reference</div></div>
@@ -168,6 +169,15 @@ Protected Member Functions</h2></td></tr>
 <tr class="separator:ae60facece436f7c65f9d73d078ddcda9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a473eca79a7c2c668fe5eef7e0bc3587f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a473eca79a7c2c668fe5eef7e0bc3587f">matchesMime</a> (const char *handler_mime, const char *request_mime)</td></tr>
 <tr class="separator:a473eca79a7c2c668fe5eef7e0bc3587f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
+Static Protected Member Functions</h2></td></tr>
+<tr class="memitem:a444edd772a72ec6292794035559c457a"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a444edd772a72ec6292794035559c457a"><td class="memTemplItemLeft" align="right" valign="top">static auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a444edd772a72ec6292794035559c457a">setNoDelayIfSupported</a> (T &amp;client, bool value, int) -&gt; decltype(client.setNoDelay(value), void())</td></tr>
+<tr class="separator:a444edd772a72ec6292794035559c457a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61eb75386a4dc43b548d5931c625443d"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a61eb75386a4dc43b548d5931c625443d"><td class="memTemplItemLeft" align="right" valign="top">static void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a61eb75386a4dc43b548d5931c625443d">setNoDelayIfSupported</a> (T &amp;, bool, long)</td></tr>
+<tr class="separator:a61eb75386a4dc43b548d5931c625443d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -1122,6 +1132,98 @@ template&lt;typename ClientType , typename ServerType &gt; </div>
 
 </div>
 </div>
+<a id="a61eb75386a4dc43b548d5931c625443d" name="a61eb75386a4dc43b548d5931c625443d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a61eb75386a4dc43b548d5931c625443d">&#9670;&#160;</a></span>setNoDelayIfSupported() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType , typename ServerType &gt; </div>
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void <a class="el" href="classtiny__dlna_1_1HttpServer.html">tiny_dlna::HttpServer</a>&lt; ClientType, ServerType &gt;::setNoDelayIfSupported </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a444edd772a72ec6292794035559c457a" name="a444edd772a72ec6292794035559c457a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a444edd772a72ec6292794035559c457a">&#9670;&#160;</a></span>setNoDelayIfSupported() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType , typename ServerType &gt; </div>
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static auto <a class="el" href="classtiny__dlna_1_1HttpServer.html">tiny_dlna::HttpServer</a>&lt; ClientType, ServerType &gt;::setNoDelayIfSupported </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&#160;</td>
+          <td class="paramname"><em>client</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>value</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> -&gt; decltype(client.setNoDelay(value), void()) </td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a10e9e94addb662bf59685d1104ec1683" name="a10e9e94addb662bf59685d1104ec1683"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a10e9e94addb662bf59685d1104ec1683">&#9670;&#160;</a></span>setReference()</h2>
 
@@ -1202,7 +1304,7 @@ template&lt;typename ClientType , typename ServerType &gt; </div>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">=</div>
 <div class="line">      <a class="code hl_variable" href="classtiny__dlna_1_1HttpServer.html#a173391adfdd8ec709d57caa84b9295f6">open_clients</a>.<a class="code hl_function" href="classtiny__dlna_1_1ListLockFree.html#ac20b517519de0fc72822c6c293772bd3">begin</a>()</div>
-<div class="ttc" id="aclasstiny__dlna_1_1HttpServer_html_a173391adfdd8ec709d57caa84b9295f6"><div class="ttname"><a href="classtiny__dlna_1_1HttpServer.html#a173391adfdd8ec709d57caa84b9295f6">tiny_dlna::HttpServer::open_clients</a></div><div class="ttdeci">ListLockFree&lt; ClientType &gt; open_clients</div><div class="ttdef"><b>Definition:</b> HttpServer.h:335</div></div>
+<div class="ttc" id="aclasstiny__dlna_1_1HttpServer_html_a173391adfdd8ec709d57caa84b9295f6"><div class="ttname"><a href="classtiny__dlna_1_1HttpServer.html#a173391adfdd8ec709d57caa84b9295f6">tiny_dlna::HttpServer::open_clients</a></div><div class="ttdeci">ListLockFree&lt; ClientType &gt; open_clients</div><div class="ttdef"><b>Definition:</b> HttpServer.h:344</div></div>
 <div class="ttc" id="aclasstiny__dlna_1_1ListLockFree_html_ac20b517519de0fc72822c6c293772bd3"><div class="ttname"><a href="classtiny__dlna_1_1ListLockFree.html#ac20b517519de0fc72822c6c293772bd3">tiny_dlna::ListLockFree::begin</a></div><div class="ttdeci">Iterator begin()</div><div class="ttdef"><b>Definition:</b> ListLockFree.h:388</div></div>
 </div><!-- fragment -->
 </div>
