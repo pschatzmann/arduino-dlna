@@ -101,7 +101,13 @@ class DLNADeviceRequestParser {
 
   bool parse(Str& in, const char* tag, StrView& result) {
     result.clearAll();
-    int start = in.indexOf(tag);
+    // HTTP header names are case-insensitive (RFC 7230); some SSDP clients
+    // (e.g. Android) send lower-case headers like "st:" instead of "ST:"
+    Str in_lower = in;
+    in_lower.toLowerCase();
+    Str tag_lower = tag;
+    tag_lower.toLowerCase();
+    int start = in_lower.indexOf(tag_lower.c_str());
     if (start >= 0) {
       start += strlen(tag);
       int end = in.indexOf("\r\n", start);

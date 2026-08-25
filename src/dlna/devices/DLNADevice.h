@@ -310,12 +310,14 @@ class DLNADevice : public IDevice {
           DlnaLogger.log(DlnaLogLevel::Info, "action: %s", action.getAction());
           continue;
         }
-        // skip SOAP envelope wrappers
-        if (outNodeName.equals("s:Envelope") || outNodeName.equals("Body")) {
+        // skip SOAP envelope wrappers (different clients use different
+        // namespace prefixes, e.g. s:Envelope, soap:Envelope, SOAP-ENV:Envelope)
+        if (outNodeName.endsWith("Envelope")) {
           continue;
         }
-        if (outNodeName.equals("s:Body")) {
+        if (outNodeName.endsWith("Body")) {
           is_action = true;
+          continue;
         }
       }
     }
@@ -340,7 +342,7 @@ class DLNADevice : public IDevice {
     size_t result = 0;
     result += xp.printNodeBegin(
         "s:Envelope",
-        "xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\"\n");
+        "xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\"");
     result += xp.printNodeBegin("s:Body");
     result +=
         xp.printf("<u:%s xmlns:u=\"urn:schemas-upnp-org:service:%s:1\">\n",
