@@ -17,7 +17,7 @@
 
 /// Define the default http request timeout
 #ifndef DLNA_HTTP_READ_TIMEOUT_MS
-#define DLNA_HTTP_READ_TIMEOUT_MS 100
+#define DLNA_HTTP_READ_TIMEOUT_MS 1000
 #endif
 
 /// Define the default http request timeout
