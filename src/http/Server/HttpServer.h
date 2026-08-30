@@ -308,6 +308,8 @@ class HttpServer : public IHttpServer {
 
   void setNoConnectDelay(int delay) override { no_connect_delay = delay; }
 
+  void setKeepAlive(bool active) override { client_handler.setKeepAlive(active); }
+
   // /// converts the client content to a string
   // Str contentStr(ClientType* client) {
   //   uint8_t buffer[1024];

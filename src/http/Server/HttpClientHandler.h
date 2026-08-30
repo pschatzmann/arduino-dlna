@@ -38,6 +38,11 @@ class HttpClientHandler : public IClientHandler {
 
   void setClient(ClientT* client) { p_client = client; }
 
+  /// Determines if replies advertise "Connection: keep-alive" (default) or
+  /// "Connection: close"
+  void setKeepAlive(bool active) { is_keep_alive = active; }
+  bool isKeepAlive() { return is_keep_alive; }
+
   /// Reads the http header info from the client
   void readHttpHeader() {
     if (!p_client) return;
@@ -83,7 +88,7 @@ class HttpClientHandler : public IClientHandler {
     reply_header.setValues(status, msg);
     reply_header.put(TRANSFER_ENCODING, CHUNKED);
     reply_header.put(CONTENT_TYPE, contentType);
-    reply_header.put(CONNECTION, CON_KEEP_ALIVE);
+    reply_header.put(CONNECTION, is_keep_alive ? CON_KEEP_ALIVE : CON_CLOSE);
     reply_header.write(*p_client);
   }
 
@@ -94,7 +99,7 @@ class HttpClientHandler : public IClientHandler {
     reply_header.setValues(status, msg);
     reply_header.put(CONTENT_LENGTH, size);
     reply_header.put(CONTENT_TYPE, contentType);
-    reply_header.put(CONNECTION, CON_KEEP_ALIVE);
+    reply_header.put(CONNECTION, is_keep_alive ? CON_KEEP_ALIVE : CON_CLOSE);
     reply_header.write(*p_client);
     uint8_t buffer[buffer_size];
     while (inputStream.available()) {
@@ -113,7 +118,7 @@ class HttpClientHandler : public IClientHandler {
     size_t size = callback(nop, ref);
     reply_header.setValues(status, msg);
     reply_header.put(CONTENT_TYPE, contentType);
-    reply_header.put(CONNECTION, CON_KEEP_ALIVE);
+    reply_header.put(CONNECTION, is_keep_alive ? CON_KEEP_ALIVE : CON_CLOSE);
     reply_header.put(CONTENT_LENGTH, size);
     reply_header.write(*p_client);
     size_t size_eff = callback(*p_client, ref);
@@ -146,7 +151,7 @@ class HttpClientHandler : public IClientHandler {
     reply_header.setValues(status, msg);
     reply_header.put(CONTENT_LENGTH, len);
     reply_header.put(CONTENT_TYPE, contentType);
-    reply_header.put(CONNECTION, CON_KEEP_ALIVE);
+    reply_header.put(CONNECTION, is_keep_alive ? CON_KEEP_ALIVE : CON_CLOSE);
     reply_header.write(*p_client);
     p_client->write((const uint8_t*)str, len);
     endClient();
@@ -159,7 +164,7 @@ class HttpClientHandler : public IClientHandler {
     reply_header.setValues(status, msg);
     reply_header.put(CONTENT_LENGTH, len);
     reply_header.put(CONTENT_TYPE, contentType);
-    reply_header.put(CONNECTION, CON_KEEP_ALIVE);
+    reply_header.put(CONNECTION, is_keep_alive ? CON_KEEP_ALIVE : CON_CLOSE);
     reply_header.write(*p_client);
     p_client->write((const uint8_t*)str, len);
     endClient();
@@ -201,6 +206,7 @@ class HttpClientHandler : public IClientHandler {
   HttpRequestHeader request_header;
   HttpReplyHeader reply_header;
   int buffer_size = 512;
+  bool is_keep_alive = true;
 };
 
 }  // namespace tiny_dlna

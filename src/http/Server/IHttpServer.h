@@ -79,6 +79,9 @@ class IHttpServer {
   virtual bool isActive() = 0;
   virtual const char* localHost() = 0;
   virtual void setNoConnectDelay(int delay) = 0;
+  /// Determines if replies advertise "Connection: keep-alive" (default) or
+  /// "Connection: close"
+  virtual void setKeepAlive(bool active) = 0;
   virtual void setReference(void* reference) = 0;
   virtual void* getReference() = 0;
 };

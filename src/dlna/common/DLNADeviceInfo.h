@@ -41,6 +41,8 @@ class DLNADeviceInfo {
         version_minor(other.version_minor),
         base_url(other.base_url),
         udn(other.udn),
+        ns(other.ns),
+        x_dlnacap(other.x_dlnacap),
         device_type(other.device_type),
         friendly_name(other.friendly_name),
         manufacturer(other.manufacturer),
@@ -176,6 +178,11 @@ class DLNADeviceInfo {
     return universal_product_code.c_str();
   }
 
+  /// Defines the dlna:X_DLNACAP capability (default: "audio"); pass an
+  /// empty string to omit the element from the device description
+  void setDLNACapability(const char* cap) { x_dlnacap = cap; }
+  const char* getDLNACapability() { return x_dlnacap.c_str(); }
+
   /// Adds a service definition
   void addService(DLNAServiceInfo s) { services.push_back(s); }
 
@@ -287,7 +294,10 @@ class DLNADeviceInfo {
   int version_minor = 0;
   Str base_url = "http://localhost:9876/dlna";
   Str udn = "uuid:09349455-2941-4cf7-9847-0dd5ab210e97";
-  Str ns = "xmlns=\"urn:schemas-upnp-org:device-1-0\"";
+  Str ns =
+      "xmlns=\"urn:schemas-upnp-org:device-1-0\" "
+      "xmlns:dlna=\"urn:schemas-dlna-org:device-1-0\"";
+  Str x_dlnacap = DEFAULT_DLNA_XCAP;
   Str device_type;
   Str friendly_name;
   Str manufacturer;
@@ -337,6 +347,9 @@ class DLNADeviceInfo {
     result += xp.printNode("modelNumber", model_number);
     result += xp.printNode("modelURL", model_url);
     result += xp.printNode("serialNumber", serial_number);
+    if (!x_dlnacap.isEmpty()) {
+      result += xp.printNode("dlna:X_DLNACAP", x_dlnacap);
+    }
     result += xp.printNode("UDN", getUDN());
     result += xp.printNode("UPC", universal_product_code);
     // use ref-based callbacks that receive Print& and void*

@@ -292,9 +292,22 @@ class DLNADevice : public IDevice {
     // reference
 
     auto* pClient = client.client();
-    while (true) {
-      size_t len = pClient->readBytes(buffer, sizeof(buffer));
+    const char* clen_str = client.requestHeader().get("Content-Length");
+    int remaining = -1;
+    if (clen_str != nullptr) {
+      char* endptr = nullptr;
+      long val = strtol(clen_str, &endptr, 10);
+      // only trust a header that actually parsed as a non-negative number;
+      // otherwise fall back to reading until the client stalls
+      if (endptr != clen_str && val >= 0) remaining = (int)val;
+    }
+    while (remaining != 0) {
+      size_t chunk = remaining < 0 || (size_t)remaining > sizeof(buffer)
+                         ? sizeof(buffer)
+                         : (size_t)remaining;
+      size_t len = pClient->readBytes(buffer, chunk);
       if (len == 0) break;
+      if (remaining > 0) remaining -= (int)len;
       xp.write((const uint8_t*)buffer, len);
 
       while (xp.parse(outNodeName, outPath, outText, outAttributes)) {
@@ -533,6 +546,11 @@ class DLNADevice : public IDevice {
     parser.addMSearchST("ssdp:all");
     parser.addMSearchST(p_device_info->getUDN());
     parser.addMSearchST(p_device_info->getDeviceType());
+    // also register each service type, since some control points (e.g. VLC)
+    // search for services directly instead of the device type
+    for (auto& service : p_device_info->getServices()) {
+      parser.addMSearchST(service.service_type.c_str());
+    }
     return true;
   }
 

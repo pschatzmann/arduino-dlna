@@ -17,7 +17,7 @@
 
 /// Define the default http request timeout
 #ifndef DLNA_HTTP_READ_TIMEOUT_MS
-#define DLNA_HTTP_READ_TIMEOUT_MS 1000
+#define DLNA_HTTP_READ_TIMEOUT_MS 300
 #endif
 
 /// Define the default http request timeout
@@ -28,6 +28,12 @@
 /// Keep the session open for multiple requests
 #ifndef DLNA_REQUEST_KEEP_ALIVE
 #define DLNA_REQUEST_KEEP_ALIVE false
+#endif
+
+/// Define the default dlna:X_DLNACAP capability advertised in the device
+/// description
+#ifndef DEFAULT_DLNA_XCAP
+#define DEFAULT_DLNA_XCAP "audio"
 #endif
 
 /// Define XML parse buffer size

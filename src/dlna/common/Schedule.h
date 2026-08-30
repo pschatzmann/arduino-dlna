@@ -7,7 +7,7 @@
 #define MAX_TMP_SIZE 400
 #define ALIVE_MS 0
 #define MAX_AGE (60 * 60 * 24)
-#define MULTI_MSG_DELAY_MS 80
+#define MULTI_MSG_DELAY_MS 50
 
 namespace tiny_dlna {
 
@@ -156,6 +156,11 @@ class MSearchReplySchedule : public Schedule {
       return true;
     }
     if (StrView(search_target).equals(device.getDeviceType())) {
+      return true;
+    }
+    // accept discovery by UDN (uuid:...), used by some control points
+    // (e.g. BubbleUPnP, some Windows components)
+    if (StrView(search_target).equals(device.getUDN())) {
       return true;
     }
     // check services
