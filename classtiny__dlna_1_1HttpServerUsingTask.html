@@ -150,6 +150,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:af955a04279c84fa4e79ecd839ddf7c95"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4095b2422b209b111a903dd9e5676498"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a4095b2422b209b111a903dd9e5676498">setNoConnectDelay</a> (int delay) override</td></tr>
 <tr class="separator:a4095b2422b209b111a903dd9e5676498"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d94cf8cca2b23038142059d6dd665fb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a2d94cf8cca2b23038142059d6dd665fb">setKeepAlive</a> (bool active) override</td></tr>
+<tr class="separator:a2d94cf8cca2b23038142059d6dd665fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a10e9e94addb662bf59685d1104ec1683"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a10e9e94addb662bf59685d1104ec1683">setReference</a> (void *reference) override</td></tr>
 <tr class="memdesc:a10e9e94addb662bf59685d1104ec1683"><td class="mdescLeft">&#160;</td><td class="mdescRight">Definesa reference/context object.  <br /></td></tr>
 <tr class="separator:a10e9e94addb662bf59685d1104ec1683"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1102,6 +1104,37 @@ template&lt;typename ClientType , typename ServerType &gt; </div>
 
 </div>
 </div>
+<a id="a2d94cf8cca2b23038142059d6dd665fb" name="a2d94cf8cca2b23038142059d6dd665fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d94cf8cca2b23038142059d6dd665fb">&#9670;&#160;</a></span>setKeepAlive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType , typename ServerType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classtiny__dlna_1_1HttpServer.html">tiny_dlna::HttpServer</a>&lt; ClientType, ServerType &gt;::setKeepAlive </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>active</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Determines if replies advertise "Connection: keep-alive" (default) or "Connection: close" </p>
+
+<p>Implements <a class="el" href="classtiny__dlna_1_1IHttpServer.html#a91a3015b21f4cf487cff3e33b0e27072">tiny_dlna::IHttpServer</a>.</p>
+
+</div>
+</div>
 <a id="a4095b2422b209b111a903dd9e5676498" name="a4095b2422b209b111a903dd9e5676498"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4095b2422b209b111a903dd9e5676498">&#9670;&#160;</a></span>setNoConnectDelay()</h2>
 
@@ -1304,7 +1337,7 @@ template&lt;typename ClientType , typename ServerType &gt; </div>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">=</div>
 <div class="line">      <a class="code hl_variable" href="classtiny__dlna_1_1HttpServer.html#a173391adfdd8ec709d57caa84b9295f6">open_clients</a>.<a class="code hl_function" href="classtiny__dlna_1_1ListLockFree.html#ac20b517519de0fc72822c6c293772bd3">begin</a>()</div>
-<div class="ttc" id="aclasstiny__dlna_1_1HttpServer_html_a173391adfdd8ec709d57caa84b9295f6"><div class="ttname"><a href="classtiny__dlna_1_1HttpServer.html#a173391adfdd8ec709d57caa84b9295f6">tiny_dlna::HttpServer::open_clients</a></div><div class="ttdeci">ListLockFree&lt; ClientType &gt; open_clients</div><div class="ttdef"><b>Definition:</b> HttpServer.h:344</div></div>
+<div class="ttc" id="aclasstiny__dlna_1_1HttpServer_html_a173391adfdd8ec709d57caa84b9295f6"><div class="ttname"><a href="classtiny__dlna_1_1HttpServer.html#a173391adfdd8ec709d57caa84b9295f6">tiny_dlna::HttpServer::open_clients</a></div><div class="ttdeci">ListLockFree&lt; ClientType &gt; open_clients</div><div class="ttdef"><b>Definition:</b> HttpServer.h:346</div></div>
 <div class="ttc" id="aclasstiny__dlna_1_1ListLockFree_html_ac20b517519de0fc72822c6c293772bd3"><div class="ttname"><a href="classtiny__dlna_1_1ListLockFree.html#ac20b517519de0fc72822c6c293772bd3">tiny_dlna::ListLockFree::begin</a></div><div class="ttdeci">Iterator begin()</div><div class="ttdef"><b>Definition:</b> ListLockFree.h:388</div></div>
 </div><!-- fragment -->
 </div>

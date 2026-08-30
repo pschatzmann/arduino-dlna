@@ -107,6 +107,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a05e5bc28a32ed84cb0240264d0b5b5bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a760e6ce9239de1b743cd4b132b29e673"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpClientHandler.html#a760e6ce9239de1b743cd4b132b29e673">setClient</a> (ClientT *<a class="el" href="classtiny__dlna_1_1HttpClientHandler.html#a84af34db36f8ab2ea6bfb431f005136b">client</a>)</td></tr>
 <tr class="separator:a760e6ce9239de1b743cd4b132b29e673"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa274c3d9d1d193162b0ff3b89d9b4a3d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpClientHandler.html#aa274c3d9d1d193162b0ff3b89d9b4a3d">setKeepAlive</a> (bool active)</td></tr>
+<tr class="separator:aa274c3d9d1d193162b0ff3b89d9b4a3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8529f1a7d6600f2df8d0964bf2aeff2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpClientHandler.html#aa8529f1a7d6600f2df8d0964bf2aeff2">isKeepAlive</a> ()</td></tr>
+<tr class="separator:aa8529f1a7d6600f2df8d0964bf2aeff2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a50dddec7162ecaeb7da72fbedd92133f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpClientHandler.html#a50dddec7162ecaeb7da72fbedd92133f">readHttpHeader</a> ()</td></tr>
 <tr class="memdesc:a50dddec7162ecaeb7da72fbedd92133f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads the http header info from the client.  <br /></td></tr>
 <tr class="separator:a50dddec7162ecaeb7da72fbedd92133f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -153,6 +157,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a0567865cb8c930d883fd5a7f36aebf54"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a358642f2247f25987e9b2d4bca2e41a8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpClientHandler.html#a358642f2247f25987e9b2d4bca2e41a8">buffer_size</a> = 512</td></tr>
 <tr class="separator:a358642f2247f25987e9b2d4bca2e41a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f167ba490d05ec6c6e2983dff312abf"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpClientHandler.html#a0f167ba490d05ec6c6e2983dff312abf">is_keep_alive</a> = true</td></tr>
+<tr class="separator:a0f167ba490d05ec6c6e2983dff312abf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename ClientT&gt;<br />
@@ -360,6 +366,33 @@ template&lt;typename ClientT &gt; </div>
 </div><div class="memdoc">
 
 <p>Implements <a class="el" href="classtiny__dlna_1_1IClientHandler.html#ad059ed8e07996b0645913d6f798687da">tiny_dlna::IClientHandler</a>.</p>
+
+</div>
+</div>
+<a id="aa8529f1a7d6600f2df8d0964bf2aeff2" name="aa8529f1a7d6600f2df8d0964bf2aeff2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8529f1a7d6600f2df8d0964bf2aeff2">&#9670;&#160;</a></span>isKeepAlive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classtiny__dlna_1_1HttpClientHandler.html">tiny_dlna::HttpClientHandler</a>&lt; ClientT &gt;::isKeepAlive </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -966,6 +999,35 @@ template&lt;typename ClientT &gt; </div>
 
 </div>
 </div>
+<a id="aa274c3d9d1d193162b0ff3b89d9b4a3d" name="aa274c3d9d1d193162b0ff3b89d9b4a3d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa274c3d9d1d193162b0ff3b89d9b4a3d">&#9670;&#160;</a></span>setKeepAlive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classtiny__dlna_1_1HttpClientHandler.html">tiny_dlna::HttpClientHandler</a>&lt; ClientT &gt;::setKeepAlive </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>active</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Determines if replies advertise "Connection: keep-alive" (default) or "Connection: close" </p>
+
+</div>
+</div>
 <h2 class="groupheader">Member Data Documentation</h2>
 <a id="a358642f2247f25987e9b2d4bca2e41a8" name="a358642f2247f25987e9b2d4bca2e41a8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a358642f2247f25987e9b2d4bca2e41a8">&#9670;&#160;</a></span>buffer_size</h2>
@@ -980,6 +1042,30 @@ template&lt;typename ClientT &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">int <a class="el" href="classtiny__dlna_1_1HttpClientHandler.html">tiny_dlna::HttpClientHandler</a>&lt; ClientT &gt;::buffer_size = 512</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0f167ba490d05ec6c6e2983dff312abf" name="a0f167ba490d05ec6c6e2983dff312abf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f167ba490d05ec6c6e2983dff312abf">&#9670;&#160;</a></span>is_keep_alive</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classtiny__dlna_1_1HttpClientHandler.html">tiny_dlna::HttpClientHandler</a>&lt; ClientT &gt;::is_keep_alive = true</td>
         </tr>
       </table>
   </td>
