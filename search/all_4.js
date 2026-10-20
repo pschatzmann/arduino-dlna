@@ -35,5 +35,6 @@ var searchData=
   ['extension_32',['extension',['../structtiny__dlna_1_1MimeExtension.html#a68f40254e86ae693175f7d49333b5523',1,'tiny_dlna::MimeExtension']]],
   ['extractattribute_33',['extractAttribute',['../classtiny__dlna_1_1XMLAttributeParser.html#af1a77b7f4086ba1b85e4b50e228f703f',1,'tiny_dlna::XMLAttributeParser::extractAttribute(const char *xml, const char *tagName, const char *attrName, char *outBuf, size_t bufSize)'],['../classtiny__dlna_1_1XMLAttributeParser.html#a2f7ac680991aa20ef6061c1b305f088c',1,'tiny_dlna::XMLAttributeParser::extractAttribute(const char *attrs, const char *attrName, char *outBuf, size_t bufSize)']]],
   ['extractattributetoken_34',['extractAttributeToken',['../classtiny__dlna_1_1XMLAttributeParser.html#a514354afaf92cebb01516565b6e26e36',1,'tiny_dlna::XMLAttributeParser']]],
-  ['extractquotedvalue_35',['extractQuotedValue',['../classtiny__dlna_1_1XMLAttributeParser.html#a134eda66fe773e3ebeacef7036f591ba',1,'tiny_dlna::XMLAttributeParser']]]
+  ['extractelementtext_35',['extractElementText',['../classtiny__dlna_1_1XMLAttributeParser.html#aa5fdf0021f24b20b1c1c9775ddf515da',1,'tiny_dlna::XMLAttributeParser']]],
+  ['extractquotedvalue_36',['extractQuotedValue',['../classtiny__dlna_1_1XMLAttributeParser.html#a134eda66fe773e3ebeacef7036f591ba',1,'tiny_dlna::XMLAttributeParser']]]
 ];

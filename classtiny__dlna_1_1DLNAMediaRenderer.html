@@ -189,8 +189,16 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a5c09167ea17719163c56daf254dc730a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access current URI.  <br /></td></tr>
 <tr class="separator:a5c09167ea17719163c56daf254dc730a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5d8c9d91b6560632e423c6fa4e12add2"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a5d8c9d91b6560632e423c6fa4e12add2">getCurrentUriMetadata</a> ()</td></tr>
-<tr class="memdesc:a5d8c9d91b6560632e423c6fa4e12add2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access the metadata as string.  <br /></td></tr>
+<tr class="memdesc:a5d8c9d91b6560632e423c6fa4e12add2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access the metadata (DIDL-Lite XML) as string.  <br /></td></tr>
 <tr class="separator:a5d8c9d91b6560632e423c6fa4e12add2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d7242c816705d2c0ada5f22cbb7f193"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a3d7242c816705d2c0ada5f22cbb7f193">getTitle</a> ()</td></tr>
+<tr class="memdesc:a3d7242c816705d2c0ada5f22cbb7f193"><td class="mdescLeft">&#160;</td><td class="mdescRight">Title (dc:title) from the DIDL-Lite metadata or empty string.  <br /></td></tr>
+<tr class="separator:a3d7242c816705d2c0ada5f22cbb7f193"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac18ca2da8f9a85983d8eb5d0353c1888"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#ac18ca2da8f9a85983d8eb5d0353c1888">getArtist</a> ()</td></tr>
+<tr class="separator:ac18ca2da8f9a85983d8eb5d0353c1888"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ed9c666f4f06c277912039e163b867b"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a3ed9c666f4f06c277912039e163b867b">getAlbum</a> ()</td></tr>
+<tr class="memdesc:a3ed9c666f4f06c277912039e163b867b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Album (upnp:album) from the DIDL-Lite metadata or empty string.  <br /></td></tr>
+<tr class="separator:a3ed9c666f4f06c277912039e163b867b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a54d12e1d950696acc3e2bb6a17e20b66"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a54d12e1d950696acc3e2bb6a17e20b66">getTransportState</a> ()</td></tr>
 <tr class="memdesc:a54d12e1d950696acc3e2bb6a17e20b66"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get textual transport state.  <br /></td></tr>
 <tr class="separator:a54d12e1d950696acc3e2bb6a17e20b66"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -393,6 +401,9 @@ Protected Member Functions</h2></td></tr>
 <tr class="separator:a0e58de940e119890f9881108844870f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0716204d5b98a1fd0c1e10e6b980b66a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a0716204d5b98a1fd0c1e10e6b980b66a">setMimeFromDIDL</a> (const char *didl)</td></tr>
 <tr class="separator:a0716204d5b98a1fd0c1e10e6b980b66a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac66d3a98cdaf38bf3214b19809f98ace"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#ac66d3a98cdaf38bf3214b19809f98ace">setMetadata</a> (const char *didl)</td></tr>
+<tr class="memdesc:ac66d3a98cdaf38bf3214b19809f98ace"><td class="mdescLeft">&#160;</td><td class="mdescRight">Store the DIDL-Lite metadata and extract mime, title, artist and album.  <br /></td></tr>
+<tr class="separator:ac66d3a98cdaf38bf3214b19809f98ace"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad0acb0a0295d7ed17213cdb99d94c0f3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#ad0acb0a0295d7ed17213cdb99d94c0f3">setupTransportService</a> (<a class="el" href="classtiny__dlna_1_1IHttpServer.html">IHttpServer</a> *server)</td></tr>
 <tr class="separator:ad0acb0a0295d7ed17213cdb99d94c0f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a89813f0b7b6a2034a757d18a07b7916b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a89813f0b7b6a2034a757d18a07b7916b">setupConnectionManagerService</a> (<a class="el" href="classtiny__dlna_1_1IHttpServer.html">IHttpServer</a> *server)</td></tr>
@@ -487,6 +498,12 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a21a9f83bf41f7457d008d8f1ce09946a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa5ccb0384edc703d26a18fa0f17a13e5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Str.html">tiny_dlna::Str</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#aa5ccb0384edc703d26a18fa0f17a13e5">current_uri_metadata</a></td></tr>
 <tr class="separator:aa5ccb0384edc703d26a18fa0f17a13e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12ea3d912b6c9cc25fbca54717d3db5d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Str.html">tiny_dlna::Str</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a12ea3d912b6c9cc25fbca54717d3db5d">current_title</a></td></tr>
+<tr class="separator:a12ea3d912b6c9cc25fbca54717d3db5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01888b8afb76fed2159f1e03642d28e6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Str.html">tiny_dlna::Str</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a01888b8afb76fed2159f1e03642d28e6">current_artist</a></td></tr>
+<tr class="separator:a01888b8afb76fed2159f1e03642d28e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6d39c0272cc8e3a93f60f8c0b9bd8c9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1Str.html">tiny_dlna::Str</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#ab6d39c0272cc8e3a93f60f8c0b9bd8c9">current_album</a></td></tr>
+<tr class="separator:ab6d39c0272cc8e3a93f60f8c0b9bd8c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afe577e449fd75dd5ee1e40944542569d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a0cf447cc1a13f7736d65aeaa4c9aee3a">MediaEventHandler</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#afe577e449fd75dd5ee1e40944542569d">event_cb</a> = nullptr</td></tr>
 <tr class="separator:afe577e449fd75dd5ee1e40944542569d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a46d2e527ff1792f5c068f4367ce17c92"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html#a46d2e527ff1792f5c068f4367ce17c92">current_volume</a> = 50</td></tr>
@@ -1164,6 +1181,63 @@ template&lt;typename ClientType &gt; </div>
 
 </div>
 </div>
+<a id="a3ed9c666f4f06c277912039e163b867b" name="a3ed9c666f4f06c277912039e163b867b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ed9c666f4f06c277912039e163b867b">&#9670;&#160;</a></span>getAlbum()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char * <a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html">tiny_dlna::DLNAMediaRenderer</a>&lt; ClientType &gt;::getAlbum </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Album (upnp:album) from the DIDL-Lite metadata or empty string. </p>
+
+</div>
+</div>
+<a id="ac18ca2da8f9a85983d8eb5d0353c1888" name="ac18ca2da8f9a85983d8eb5d0353c1888"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac18ca2da8f9a85983d8eb5d0353c1888">&#9670;&#160;</a></span>getArtist()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char * <a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html">tiny_dlna::DLNAMediaRenderer</a>&lt; ClientType &gt;::getArtist </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Artist (upnp:artist or dc:creator) from the DIDL-Lite metadata or empty string </p>
+
+</div>
+</div>
 <a id="a8c07832e0836da14b4da7a89eb30f194" name="a8c07832e0836da14b4da7a89eb30f194"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8c07832e0836da14b4da7a89eb30f194">&#9670;&#160;</a></span>getBaseURL()</h2>
 
@@ -1361,7 +1435,7 @@ template&lt;typename ClientType &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Access the metadata as string. </p>
+<p>Access the metadata (DIDL-Lite XML) as string. </p>
 
 </div>
 </div>
@@ -2093,6 +2167,35 @@ template&lt;typename ClientType &gt; </div>
 </div><div class="memdoc">
 
 <p>Get the current source <code>ProtocolInfo</code> string. </p>
+
+</div>
+</div>
+<a id="a3d7242c816705d2c0ada5f22cbb7f193" name="a3d7242c816705d2c0ada5f22cbb7f193"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d7242c816705d2c0ada5f22cbb7f193">&#9670;&#160;</a></span>getTitle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char * <a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html">tiny_dlna::DLNAMediaRenderer</a>&lt; ClientType &gt;::getTitle </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Title (dc:title) from the DIDL-Lite metadata or empty string. </p>
 
 </div>
 </div>
@@ -4199,6 +4302,36 @@ template&lt;typename ClientType &gt; </div>
 
 </div>
 </div>
+<a id="ac66d3a98cdaf38bf3214b19809f98ace" name="ac66d3a98cdaf38bf3214b19809f98ace"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac66d3a98cdaf38bf3214b19809f98ace">&#9670;&#160;</a></span>setMetadata()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html">tiny_dlna::DLNAMediaRenderer</a>&lt; ClientType &gt;::setMetadata </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>didl</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Store the DIDL-Lite metadata and extract mime, title, artist and album. </p>
+
+</div>
+</div>
 <a id="a0e58de940e119890f9881108844870f1" name="a0e58de940e119890f9881108844870f1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0e58de940e119890f9881108844870f1">&#9670;&#160;</a></span>setMime()</h2>
 
@@ -5145,6 +5278,54 @@ template&lt;typename ClientType &gt; </div>
 
 </div>
 </div>
+<a id="ab6d39c0272cc8e3a93f60f8c0b9bd8c9" name="ab6d39c0272cc8e3a93f60f8c0b9bd8c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab6d39c0272cc8e3a93f60f8c0b9bd8c9">&#9670;&#160;</a></span>current_album</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1Str.html">tiny_dlna::Str</a> <a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html">tiny_dlna::DLNAMediaRenderer</a>&lt; ClientType &gt;::current_album</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a01888b8afb76fed2159f1e03642d28e6" name="a01888b8afb76fed2159f1e03642d28e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a01888b8afb76fed2159f1e03642d28e6">&#9670;&#160;</a></span>current_artist</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1Str.html">tiny_dlna::Str</a> <a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html">tiny_dlna::DLNAMediaRenderer</a>&lt; ClientType &gt;::current_artist</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a21a9f83bf41f7457d008d8f1ce09946a" name="a21a9f83bf41f7457d008d8f1ce09946a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a21a9f83bf41f7457d008d8f1ce09946a">&#9670;&#160;</a></span>current_mime</h2>
 
@@ -5158,6 +5339,30 @@ template&lt;typename ClientType &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classtiny__dlna_1_1Str.html">tiny_dlna::Str</a> <a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html">tiny_dlna::DLNAMediaRenderer</a>&lt; ClientType &gt;::current_mime</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a12ea3d912b6c9cc25fbca54717d3db5d" name="a12ea3d912b6c9cc25fbca54717d3db5d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a12ea3d912b6c9cc25fbca54717d3db5d">&#9670;&#160;</a></span>current_title</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1Str.html">tiny_dlna::Str</a> <a class="el" href="classtiny__dlna_1_1DLNAMediaRenderer.html">tiny_dlna::DLNAMediaRenderer</a>&lt; ClientType &gt;::current_title</td>
         </tr>
       </table>
   </td>

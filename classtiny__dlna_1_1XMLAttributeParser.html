@@ -98,6 +98,12 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a514354afaf92cebb01516565b6e26e36"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1XMLAttributeParser.html#a514354afaf92cebb01516565b6e26e36">extractAttributeToken</a> (const char *xml, const char *tagName, const char *attrName, int n, char *outBuf, size_t bufSize)</td></tr>
 <tr class="memdesc:a514354afaf92cebb01516565b6e26e36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extract the nth (1-based) colon-separated token from an attribute value located on the first occurrence of <code>tagName</code>.  <br /></td></tr>
 <tr class="separator:a514354afaf92cebb01516565b6e26e36"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5fdf0021f24b20b1c1c9775ddf515da"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1XMLAttributeParser.html#aa5fdf0021f24b20b1c1c9775ddf515da">extractElementText</a> (const char *xml, const char *elementName, <a class="el" href="classtiny__dlna_1_1Str.html">Str</a> &amp;out)</td></tr>
+<tr class="memdesc:aa5fdf0021f24b20b1c1c9775ddf515da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extract the (unescaped) text content of the first element with the given name.  <br /></td></tr>
+<tr class="separator:aa5fdf0021f24b20b1c1c9775ddf515da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91a50b1e05e4bad3310e841ca5430a64"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1XMLAttributeParser.html#a91a50b1e05e4bad3310e841ca5430a64">unEscape</a> (<a class="el" href="classtiny__dlna_1_1Str.html">Str</a> &amp;str)</td></tr>
+<tr class="memdesc:a91a50b1e05e4bad3310e841ca5430a64"><td class="mdescLeft">&#160;</td><td class="mdescRight">Expands the predefined XML entities (&lt; &gt; &quot; ' &amp;)  <br /></td></tr>
+<tr class="separator:a91a50b1e05e4bad3310e841ca5430a64"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Small utility to extract attributes from a start-tag in an XML fragment. </p>
@@ -308,6 +314,60 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="aa5fdf0021f24b20b1c1c9775ddf515da" name="aa5fdf0021f24b20b1c1c9775ddf515da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa5fdf0021f24b20b1c1c9775ddf515da">&#9670;&#160;</a></span>extractElementText()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool tiny_dlna::XMLAttributeParser::extractElementText </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>xml</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>elementName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1Str.html">Str</a> &amp;&#160;</td>
+          <td class="paramname"><em>out</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Extract the (unescaped) text content of the first element with the given name. </p>
+<p>Example: extractElementText(didl, "dc:title", title) returns the text between &lt;dc:title&gt; and &lt;/dc:title&gt;. Nested elements are not supported.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">xml</td><td>Pointer to a null-terminated XML fragment to search. </td></tr>
+    <tr><td class="paramname">elementName</td><td>Element name without '&lt;' (e.g. "dc:title"). </td></tr>
+    <tr><td class="paramname">out</td><td>Output: the text content with XML entities expanded. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if the element was found and has non-empty text. </dd></dl>
+
+</div>
+</div>
 <a id="a134eda66fe773e3ebeacef7036f591ba" name="a134eda66fe773e3ebeacef7036f591ba"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a134eda66fe773e3ebeacef7036f591ba">&#9670;&#160;</a></span>extractQuotedValue()</h2>
 
@@ -353,6 +413,34 @@ Static Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="a91a50b1e05e4bad3310e841ca5430a64" name="a91a50b1e05e4bad3310e841ca5430a64"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a91a50b1e05e4bad3310e841ca5430a64">&#9670;&#160;</a></span>unEscape()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void tiny_dlna::XMLAttributeParser::unEscape </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1Str.html">Str</a> &amp;&#160;</td>
+          <td class="paramname"><em>str</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Expands the predefined XML entities (&lt; &gt; &quot; ' &amp;) </p>
 
 </div>
 </div>
