@@ -18,6 +18,11 @@ void handleMediaEvent(MediaEvent ev, DLNAMediaRenderer<WiFiClient>& mr) {
       Serial.print("Event: SET_URI ");
       if (mr.getCurrentUri()) Serial.println(mr.getCurrentUri());
       else Serial.println("(null)");
+      // song information from the DIDL-Lite metadata (empty if not provided)
+      Serial.print("Title: ");
+      Serial.println(mr.getTitle());
+      Serial.print("Artist: ");
+      Serial.println(mr.getArtist());
       break;
     case MediaEvent::PLAY:
       Serial.println("Event: PLAY");

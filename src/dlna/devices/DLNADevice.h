@@ -14,6 +14,7 @@
 #include "dlna/common/Scheduler.h"
 #include "dlna/devices/DLNADeviceRequestParser.h"
 #include "dlna/devices/IDevice.h"
+#include "dlna/xml/XMLAttributeParser.h"
 #include "dlna/devices/SubscriptionMgrDevice.h"
 #include "dlna/udp/IUDPService.h"
 #include "dlna/xml/XMLParserPrint.h"
@@ -232,6 +233,8 @@ class DLNADevice : public IDevice {
                  std::function<size_t(Print&, void*)> changeWriter,
                  void* ref) override {
     DlnaLogger.log(DlnaLogLevel::Debug, "addChange");
+    // not started yet (begin() not called): nobody to notify
+    if (p_device_info == nullptr) return;
     auto& mgr = getSubscriptionMgr();
     DLNAServiceInfo& serviceInfo = getServiceByAbbrev(serviceAbbrev);
     if (!serviceInfo) {
@@ -277,8 +280,10 @@ class DLNADevice : public IDevice {
                                  ActionRequest& action) {
     DlnaLogger.log(DlnaLogLevel::Info, "parseActionRequest");
     auto start = millis();
+    // Entities are expanded per argument value (below) and not on the raw
+    // stream: otherwise escaped XML values (e.g. the DIDL-Lite in
+    // CurrentURIMetaData) would be parsed as nested elements.
     XMLParserPrint xp;
-    xp.setExpandEncoded(true);
 
     Str outNodeName;
     Vector<Str> outPath;
@@ -313,6 +318,7 @@ class DLNADevice : public IDevice {
       while (xp.parse(outNodeName, outPath, outText, outAttributes)) {
         if (is_attribute) {
           const char* argName = outNodeName.c_str();
+          XMLAttributeParser::unEscape(outText);
           action.addArgument(argName, outText.c_str());
           continue;
         }

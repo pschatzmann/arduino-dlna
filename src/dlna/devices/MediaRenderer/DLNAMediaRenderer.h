@@ -4,6 +4,7 @@
 #include <functional>
 
 #include "DLNAMediaRendererDescr.h"
+#include "basic/EscapingPrint.h"
 #include "basic/Printf.h"
 #include "basic/Str.h"
 #include "dlna/devices/DLNADevice.h"
@@ -257,8 +258,18 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
   /// Access current URI
   const char* getCurrentUri() { return current_uri.c_str(); }
 
-  /// Access the metadata as string
+  /// Access the metadata (DIDL-Lite XML) as string
   const char* getCurrentUriMetadata() { return current_uri_metadata.c_str(); }
+
+  /// Title (dc:title) from the DIDL-Lite metadata or empty string
+  const char* getTitle() { return current_title.c_str(); }
+
+  /// Artist (upnp:artist or dc:creator) from the DIDL-Lite metadata or empty
+  /// string
+  const char* getArtist() { return current_artist.c_str(); }
+
+  /// Album (upnp:album) from the DIDL-Lite metadata or empty string
+  const char* getAlbum() { return current_album.c_str(); }
 
   /// Get textual transport state
   const char* getTransportState() { return transport_state.c_str(); }
@@ -300,8 +311,9 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
       written += out.print("<CurrentTrackURI val=\"");
       written += out.print(self->current_uri.c_str());
       written += out.println("\"/>");
-      written += out.print("<CurrentTrackMetadata val=\"");
-      written += out.print(self->current_uri_metadata.c_str());
+      written += out.print("<CurrentTrackMetaData val=\"");
+      EscapingPrint esc{out};
+      written += esc.print(self->current_uri_metadata.c_str());
       written += out.println("\"/>");
       written += out.print("<TransportState val=\"");
       written += out.print(self->transport_state.c_str());
@@ -332,7 +344,8 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
       written += out.println("\"/>");
 
       written += out.print("<AVTransportURIMetaData val=\"");
-      written += out.print(self->current_uri_metadata.c_str());
+      EscapingPrint esc{out};
+      written += esc.print(self->current_uri_metadata.c_str());
       written += out.println("\"/>");
 
       written += out.print("<NumberOfTracks val=\"1\"/>\n");
@@ -517,6 +530,9 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
   tiny_dlna::Str current_uri;
   tiny_dlna::Str current_mime;
   tiny_dlna::Str current_uri_metadata;
+  tiny_dlna::Str current_title;
+  tiny_dlna::Str current_artist;
+  tiny_dlna::Str current_album;
   MediaEventHandler event_cb = nullptr;
   uint8_t current_volume = 50;
   uint8_t muted_volume = 0;
@@ -628,6 +644,26 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
             didl, "<res", "protocolInfo=", 3, mimeBuf, sizeof(mimeBuf))) {
       setMime(mimeBuf);
     }
+  }
+
+  /// Store the DIDL-Lite metadata and extract mime, title, artist and album
+  void setMetadata(const char* didl) {
+    current_uri_metadata = didl ? didl : "";
+    current_mime.clear();
+    current_title.clear();
+    current_artist.clear();
+    current_album.clear();
+    if (current_uri_metadata.isEmpty()) return;
+    const char* xml = current_uri_metadata.c_str();
+    setMimeFromDIDL(xml);
+    XMLAttributeParser::extractElementText(xml, "dc:title", current_title);
+    if (!XMLAttributeParser::extractElementText(xml, "upnp:artist",
+                                                current_artist)) {
+      XMLAttributeParser::extractElementText(xml, "dc:creator",
+                                             current_artist);
+    }
+    XMLAttributeParser::extractElementText(xml, "upnp:album", current_album);
+    DlnaLogger.log(DlnaLogLevel::Info, "Title: %s", current_title.c_str());
   }
 
   // Static descriptor callbacks: print the SCPD XML for each service
@@ -1024,7 +1060,8 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
 
                 // TrackMetaData (DIDL-Lite or empty)
                 written += o.print("<TrackMetaData>");
-                written += o.print(StrView(self->getCurrentUriMetadata()).c_str());
+                EscapingPrint esc{o};
+                written += esc.print(self->getCurrentUriMetadata());
                 written += o.print("</TrackMetaData>");
 
                 // TrackURI
@@ -1117,8 +1154,8 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
           written += o.print(StrView(self->getCurrentUri()).c_str());
           written += o.print("</CurrentURI>");
           written += o.print("<CurrentURIMetaData>");
-          written +=
-            o.print(StrView(self->getCurrentUriMetadata()).c_str());
+          EscapingPrint esc{o};
+          written += esc.print(self->getCurrentUriMetadata());
           written += o.print("</CurrentURIMetaData>");
 
           // NextURI and NextURIMetaData: not supported -> empty
@@ -1152,7 +1189,7 @@ class DLNAMediaRenderer : public DLNADeviceInfo {
   bool processActionSetAVTransportURI(ActionRequest& action,
                                       IHttpServer& server, IClientHandler& client) {
     const char* uri = action.getArgumentValue("CurrentURI");
-    current_uri_metadata = action.getArgumentValue("CurrentURIMetaData");
+    setMetadata(action.getArgumentValue("CurrentURIMetaData"));
     if (uri && *uri) {
       setPlaybackURL(uri);
       if (event_cb) event_cb(MediaEvent::SET_URI, *this);

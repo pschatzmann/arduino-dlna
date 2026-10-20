@@ -157,6 +157,57 @@ class XMLAttributeParser {
     outBuf[j] = '\0';
     return outBuf[0] != '\0';
   }
+
+  /**
+   * @brief Extract the (unescaped) text content of the first element with
+   * the given name.
+   *
+   * Example: extractElementText(didl, "dc:title", title) returns the text
+   * between <dc:title> and </dc:title>. Nested elements are not supported.
+   *
+   * @param xml Pointer to a null-terminated XML fragment to search.
+   * @param elementName Element name without '<' (e.g. "dc:title").
+   * @param out Output: the text content with XML entities expanded.
+   * @return true if the element was found and has non-empty text.
+   */
+  static bool extractElementText(const char* xml, const char* elementName,
+                                 Str& out) {
+    out.clear();
+    if (!xml || !elementName || !*elementName) return false;
+    size_t nameLen = strlen(elementName);
+    const char* p = strchr(xml, '<');
+    while (p) {
+      // match "<name" followed by '>', '/' or whitespace
+      if (strncmp(p + 1, elementName, nameLen) == 0) {
+        char next = p[1 + nameLen];
+        if (next == '>' || next == ' ' || next == '\t' || next == '\r' ||
+            next == '\n') {
+          const char* tagEnd = strchr(p, '>');
+          if (!tagEnd) return false;
+          // self-closing element: <name/>
+          if (tagEnd[-1] == '/') return false;
+          const char* textStart = tagEnd + 1;
+          const char* textEnd = strchr(textStart, '<');
+          if (!textEnd) return false;
+          out.copyFrom(textStart, (int)(textEnd - textStart));
+          unEscape(out);
+          return !out.isEmpty();
+        }
+      }
+      p = strchr(p + 1, '<');
+    }
+    return false;
+  }
+
+  /// Expands the predefined XML entities (&lt; &gt; &quot; &apos; &amp;)
+  static void unEscape(Str& str) {
+    str.replaceAll("&lt;", "<");
+    str.replaceAll("&gt;", ">");
+    str.replaceAll("&quot;", "\"");
+    str.replaceAll("&apos;", "'");
+    // must be last so that e.g. "&amp;lt;" becomes "&lt;" and not "<"
+    str.replaceAll("&amp;", "&");
+  }
 };
 
 } // namespace tiny_dlna
