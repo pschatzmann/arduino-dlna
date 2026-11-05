@@ -1,24 +1,24 @@
 <map id="src/http/Server/HttpServer.h" name="src/http/Server/HttpServer.h">
-<area shape="rect" id="node1" title=" " alt="" coords="257,5,460,31"/>
-<area shape="rect" id="node2" href="$HttpServerUsingTask_8h.html" title=" " alt="" coords="59,79,243,119"/>
-<area shape="rect" id="node3" href="$HttpServerUsingTasks_8h.html" title=" " alt="" coords="267,79,451,119"/>
-<area shape="rect" id="node4" href="$Http_8h.html" title=" " alt="" coords="475,86,589,111"/>
-<area shape="rect" id="node5" href="$DLNAControlPoint_8h.html" title=" " alt="" coords="191,592,398,632"/>
-<area shape="rect" id="node12" href="$DLNADevice_8h.html" title=" " alt="" coords="731,775,955,801"/>
-<area shape="rect" id="node14" href="$DLNAMediaServer_8h.html" title=" " alt="" coords="768,856,981,896"/>
-<area shape="rect" id="node15" href="$SubscriptionMgrControlPoint_8h.html" title=" " alt="" coords="43,343,247,383"/>
-<area shape="rect" id="node16" href="$DLNAServiceInfo_8h.html" title=" " alt="" coords="495,167,718,207"/>
-<area shape="rect" id="node22" href="$SubscriptionMgrDevice_8h.html" title=" " alt="" coords="263,255,473,295"/>
-<area shape="rect" id="node6" href="$dlna_8h.html" title=" " alt="" coords="407,944,492,969"/>
-<area shape="rect" id="node9" href="$DLNAControlPointMediaRenderer_8h.html" title=" " alt="" coords="179,768,386,808"/>
-<area shape="rect" id="node10" href="$DLNAControlPointMediaServer_8h.html" title=" " alt="" coords="230,680,437,720"/>
-<area shape="rect" id="node11" href="$DLNADeviceRequestParser_8h.html" title=" " alt="" coords="594,680,806,720"/>
-<area shape="rect" id="node7" href="$dlna_2SdFatContentProvider_8h.html" title="DLNA content provider backed by SdFat filesystem directory tree." alt="" coords="209,1017,437,1043"/>
-<area shape="rect" id="node8" href="$tools_2SdFatContentProvider_8h.html" title="DLNA content provider backed by SdFat filesystem directory tree." alt="" coords="461,1017,693,1043"/>
-<area shape="rect" id="node13" href="$DLNAMediaRenderer_8h.html" title=" " alt="" coords="513,856,743,896"/>
-<area shape="rect" id="node17" href="$DLNADeviceInfo_8h.html" title=" " alt="" coords="497,255,716,295"/>
-<area shape="rect" id="node18" href="$Schedule_8h.html" title=" " alt="" coords="502,350,711,375"/>
-<area shape="rect" id="node20" href="$Scheduler_8h.html" title=" " alt="" coords="640,431,853,456"/>
-<area shape="rect" id="node21" href="$XMLDeviceParser_8h.html" title=" " alt="" coords="145,431,375,456"/>
-<area shape="rect" id="node19" href="$DLNAControlPointRequestParser_8h.html" title=" " alt="" coords="497,504,703,544"/>
+<area shape="rect" id="node1" title=" " alt="" coords="233,5,434,33"/>
+<area shape="rect" id="node2" href="$HttpServerUsingTask_8h.html" title=" " alt="" coords="34,81,217,126"/>
+<area shape="rect" id="node3" href="$HttpServerUsingTasks_8h.html" title=" " alt="" coords="242,81,425,126"/>
+<area shape="rect" id="node4" href="$Http_8h.html" title=" " alt="" coords="450,90,564,117"/>
+<area shape="rect" id="node5" href="$DLNAControlPoint_8h.html" title=" " alt="" coords="176,620,382,665"/>
+<area shape="rect" id="node12" href="$DLNADevice_8h.html" title=" " alt="" coords="684,814,908,842"/>
+<area shape="rect" id="node14" href="$DLNAMediaServer_8h.html" title=" " alt="" coords="724,898,937,943"/>
+<area shape="rect" id="node15" href="$SubscriptionMgrControlPoint_8h.html" title=" " alt="" coords="42,359,246,404"/>
+<area shape="rect" id="node16" href="$DLNAServiceInfo_8h.html" title=" " alt="" coords="492,174,713,218"/>
+<area shape="rect" id="node22" href="$SubscriptionMgrDevice_8h.html" title=" " alt="" coords="259,266,469,311"/>
+<area shape="rect" id="node6" href="$dlna_8h.html" title=" " alt="" coords="366,991,450,1018"/>
+<area shape="rect" id="node9" href="$DLNAControlPointMediaRenderer_8h.html" title=" " alt="" coords="140,805,346,850"/>
+<area shape="rect" id="node10" href="$DLNAControlPointMediaServer_8h.html" title=" " alt="" coords="190,713,396,757"/>
+<area shape="rect" id="node11" href="$DLNADeviceRequestParser_8h.html" title=" " alt="" coords="548,713,759,757"/>
+<area shape="rect" id="node7" href="$dlna_2SdFatContentProvider_8h.html" title="DLNA content provider backed by SdFat filesystem directory tree." alt="" coords="168,1066,395,1094"/>
+<area shape="rect" id="node8" href="$tools_2SdFatContentProvider_8h.html" title="DLNA content provider backed by SdFat filesystem directory tree." alt="" coords="419,1066,650,1094"/>
+<area shape="rect" id="node13" href="$DLNAMediaRenderer_8h.html" title=" " alt="" coords="471,898,700,943"/>
+<area shape="rect" id="node17" href="$DLNADeviceInfo_8h.html" title=" " alt="" coords="494,266,712,311"/>
+<area shape="rect" id="node18" href="$Schedule_8h.html" title=" " alt="" coords="498,368,707,395"/>
+<area shape="rect" id="node20" href="$Scheduler_8h.html" title=" " alt="" coords="595,452,808,479"/>
+<area shape="rect" id="node21" href="$XMLDeviceParser_8h.html" title=" " alt="" coords="144,452,373,479"/>
+<area shape="rect" id="node19" href="$DLNAControlPointRequestParser_8h.html" title=" " alt="" coords="452,527,658,572"/>
 </map>

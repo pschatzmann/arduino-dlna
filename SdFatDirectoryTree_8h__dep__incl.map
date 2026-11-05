@@ -1,5 +1,5 @@
 <map id="src/tools/SdFatDirectoryTree.h" name="src/tools/SdFatDirectoryTree.h">
-<area shape="rect" id="node1" title="In&#45;memory directory tree built from SdFat recursive listings." alt="" coords="158,5,334,45"/>
-<area shape="rect" id="node2" href="$dlna_2SdFatContentProvider_8h.html" title="DLNA content provider backed by SdFat filesystem directory tree." alt="" coords="5,93,233,119"/>
-<area shape="rect" id="node3" href="$tools_2SdFatContentProvider_8h.html" title="DLNA content provider backed by SdFat filesystem directory tree." alt="" coords="258,93,490,119"/>
+<area shape="rect" id="node1" title="In&#45;memory directory tree built from SdFat recursive listings." alt="" coords="158,5,333,50"/>
+<area shape="rect" id="node2" href="$dlna_2SdFatContentProvider_8h.html" title="DLNA content provider backed by SdFat filesystem directory tree." alt="" coords="5,98,233,126"/>
+<area shape="rect" id="node3" href="$tools_2SdFatContentProvider_8h.html" title="DLNA content provider backed by SdFat filesystem directory tree." alt="" coords="257,98,488,126"/>
 </map>

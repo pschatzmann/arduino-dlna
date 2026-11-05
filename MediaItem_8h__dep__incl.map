@@ -1,7 +1,7 @@
 <map id="src/dlna/devices/MediaServer/MediaItem.h" name="src/dlna/devices/MediaServer/MediaItem.h">
-<area shape="rect" id="node1" title=" " alt="" coords="139,5,353,45"/>
-<area shape="rect" id="node2" href="$DLNAMediaServer_8h.html" title=" " alt="" coords="139,93,353,133"/>
-<area shape="rect" id="node3" href="$dlna_8h.html" title=" " alt="" coords="203,181,289,207"/>
-<area shape="rect" id="node4" href="$dlna_2SdFatContentProvider_8h.html" title="DLNA content provider backed by SdFat filesystem directory tree." alt="" coords="5,255,233,280"/>
-<area shape="rect" id="node5" href="$tools_2SdFatContentProvider_8h.html" title="DLNA content provider backed by SdFat filesystem directory tree." alt="" coords="258,255,490,280"/>
+<area shape="rect" id="node1" title=" " alt="" coords="140,5,352,50"/>
+<area shape="rect" id="node2" href="$DLNAMediaServer_8h.html" title=" " alt="" coords="140,98,352,143"/>
+<area shape="rect" id="node3" href="$dlna_8h.html" title=" " alt="" coords="204,191,288,218"/>
+<area shape="rect" id="node4" href="$dlna_2SdFatContentProvider_8h.html" title="DLNA content provider backed by SdFat filesystem directory tree." alt="" coords="5,266,233,294"/>
+<area shape="rect" id="node5" href="$tools_2SdFatContentProvider_8h.html" title="DLNA content provider backed by SdFat filesystem directory tree." alt="" coords="257,266,488,294"/>
 </map>

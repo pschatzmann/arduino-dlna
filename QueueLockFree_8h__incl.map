@@ -1,7 +1,7 @@
 <map id="src/concurrency/QueueLockFree.h" name="src/concurrency/QueueLockFree.h">
-<area shape="rect" id="node1" title=" " alt="" coords="81,5,281,45"/>
-<area shape="rect" id="node2" title=" " alt="" coords="5,93,76,119"/>
-<area shape="rect" id="node3" title=" " alt="" coords="101,93,167,119"/>
-<area shape="rect" id="node4" title=" " alt="" coords="192,93,263,119"/>
-<area shape="rect" id="node5" title=" " alt="" coords="287,93,347,119"/>
+<area shape="rect" id="node1" title=" " alt="" coords="78,5,278,50"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,98,76,126"/>
+<area shape="rect" id="node3" title=" " alt="" coords="99,98,166,126"/>
+<area shape="rect" id="node4" title=" " alt="" coords="190,98,259,126"/>
+<area shape="rect" id="node5" title=" " alt="" coords="283,98,342,126"/>
 </map>
