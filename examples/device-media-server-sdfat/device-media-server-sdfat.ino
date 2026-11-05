@@ -64,7 +64,7 @@ IPAddress setupWifi() {
 }
 
 /// Method to handle file requests for /files*
-void handleFileRequestMethod(IHttpServer* server_ptr, const char* requestPath, HttpRequestHandlerLine* hl) {
+void handleFileRequestMethod(IClientHandler& client, IHttpServer* server_ptr, const char* requestPath, HttpRequestHandlerLine* hl) {
   // Determine id from request path 
   StrView path{requestPath};
   int id_pos = path.indexOf("ID=") + 3;
@@ -82,10 +82,10 @@ void handleFileRequestMethod(IHttpServer* server_ptr, const char* requestPath, H
   file = sd.open(file_name.c_str(), O_READ);
   if (!file){
     DlnaLogger.log(DlnaLogLevel::Error, "Failed to open file: %s (id %d)", file_name.c_str(), id);
-    server_ptr->replyNotFound();
+    client.replyNotFound();
     return;
   }
-  server_ptr->reply(mime, file, file.size(), 200);
+  client.reply(mime, file, file.size(), 200);
 }
 
 
