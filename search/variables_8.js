@@ -29,11 +29,12 @@ var searchData=
   ['is_5fmulticast_26',['is_multicast',['../classtiny__dlna_1_1UDPService.html#a54fb3809d7f488bc38eb2ab1f6a850a8',1,'tiny_dlna::UDPService']]],
   ['is_5fopen_27',['is_open',['../classtiny__dlna_1_1HttpStreamCopy.html#a843b559f8316bfb226ced6083a26029c',1,'tiny_dlna::HttpStreamCopy']]],
   ['is_5fparse_5fdevice_28',['is_parse_device',['../classtiny__dlna_1_1DLNAControlPoint.html#a343f33243cd45c151368c3843d484a98',1,'tiny_dlna::DLNAControlPoint']]],
-  ['is_5fsetup_29',['is_setup',['../classtiny__dlna_1_1SubscriptionMgrControlPoint.html#a56f6b7d06a7b4eaffe3913e2b70b3fb2',1,'tiny_dlna::SubscriptionMgrControlPoint']]],
-  ['is_5fsubcription_5factive_30',['is_subcription_active',['../classtiny__dlna_1_1DLNADeviceInfo.html#a92a36990a2971b94778832eadc41f192',1,'tiny_dlna::DLNADeviceInfo']]],
-  ['is_5fsubscriptions_5factive_31',['is_subscriptions_active',['../classtiny__dlna_1_1DLNADevice.html#afada167761c9eea2d990e3cf8d801a2e',1,'tiny_dlna::DLNADevice']]],
-  ['is_5fvalid_32',['is_valid',['../classtiny__dlna_1_1ActionReply.html#abe1df4cc1a81298cbf5e1acaa3fd2bdd',1,'tiny_dlna::ActionReply']]],
-  ['is_5fwritten_33',['is_written',['../classtiny__dlna_1_1HttpHeader.html#a9374c18382ecf8ad330d13907e7fb3eb',1,'tiny_dlna::HttpHeader']]],
-  ['isfavicon_34',['isfavicon',['../classtiny__dlna_1_1Icon.html#a096c1041c9964077083045ca05db8a8c',1,'tiny_dlna::Icon']]],
-  ['itemclass_35',['itemClass',['../structtiny__dlna_1_1MediaItem.html#a37376175e2bfb28530add3b3d3ea28a7',1,'tiny_dlna::MediaItem']]]
+  ['is_5fsatisfiable_29',['is_satisfiable',['../classtiny__dlna_1_1HttpRange.html#adf799ac7dadfa894a853fef343865f7f',1,'tiny_dlna::HttpRange']]],
+  ['is_5fsetup_30',['is_setup',['../classtiny__dlna_1_1SubscriptionMgrControlPoint.html#a56f6b7d06a7b4eaffe3913e2b70b3fb2',1,'tiny_dlna::SubscriptionMgrControlPoint']]],
+  ['is_5fsubcription_5factive_31',['is_subcription_active',['../classtiny__dlna_1_1DLNADeviceInfo.html#a92a36990a2971b94778832eadc41f192',1,'tiny_dlna::DLNADeviceInfo']]],
+  ['is_5fsubscriptions_5factive_32',['is_subscriptions_active',['../classtiny__dlna_1_1DLNADevice.html#afada167761c9eea2d990e3cf8d801a2e',1,'tiny_dlna::DLNADevice']]],
+  ['is_5fvalid_33',['is_valid',['../classtiny__dlna_1_1HttpRange.html#a96b0f327ba91c31e48ec9317824c1e67',1,'tiny_dlna::HttpRange::is_valid()'],['../classtiny__dlna_1_1ActionReply.html#abe1df4cc1a81298cbf5e1acaa3fd2bdd',1,'tiny_dlna::ActionReply::is_valid()']]],
+  ['is_5fwritten_34',['is_written',['../classtiny__dlna_1_1HttpHeader.html#a9374c18382ecf8ad330d13907e7fb3eb',1,'tiny_dlna::HttpHeader']]],
+  ['isfavicon_35',['isfavicon',['../classtiny__dlna_1_1Icon.html#a096c1041c9964077083045ca05db8a8c',1,'tiny_dlna::Icon']]],
+  ['itemclass_36',['itemClass',['../structtiny__dlna_1_1MediaItem.html#a37376175e2bfb28530add3b3d3ea28a7',1,'tiny_dlna::MediaItem']]]
 ];

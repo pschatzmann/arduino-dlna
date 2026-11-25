@@ -1,7 +1,7 @@
 <map id="src/http/Server/HttpRequestHandlerLine.h" name="src/http/Server/HttpRequestHandlerLine.h">
-<area shape="rect" id="node1" title=" " alt="" coords="373,5,575,50"/>
-<area shape="rect" id="node2" href="$HttpHeader_8h.html" title=" " alt="" coords="364,174,472,201"/>
-<area shape="rect" id="node26" href="$IHttpServer_8h.html" title=" " alt="" coords="472,98,578,126"/>
+<area shape="rect" id="node1" title=" " alt="" coords="316,5,517,50"/>
+<area shape="rect" id="node2" href="$HttpHeader_8h.html" title=" " alt="" coords="306,174,413,201"/>
+<area shape="rect" id="node26" href="$IHttpServer_8h.html" title=" " alt="" coords="420,98,526,126"/>
 <area shape="rect" id="node3" href="$HttpLineReader_8h.html" title=" " alt="" coords="377,249,510,277"/>
 <area shape="rect" id="node4" href="$Logger_8h.html" title=" " alt="" coords="402,325,516,353"/>
 <area shape="rect" id="node9" href="$Url_8h.html" title=" " alt="" coords="534,249,624,277"/>
@@ -25,5 +25,6 @@
 <area shape="rect" id="node20" title=" " alt="" coords="287,552,378,580"/>
 <area shape="rect" id="node24" title=" " alt="" coords="103,476,162,504"/>
 <area shape="rect" id="node25" title=" " alt="" coords="5,476,79,504"/>
-<area shape="rect" id="node27" title=" " alt="" coords="496,174,567,201"/>
+<area shape="rect" id="node27" title=" " alt="" coords="438,174,508,201"/>
+<area shape="rect" id="node28" title=" " alt="" coords="532,174,603,201"/>
 </map>

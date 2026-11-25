@@ -75,6 +75,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classtiny__dlna_1_1HttpClientHandler-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">tiny_dlna::HttpClientHandler&lt; ClientT &gt; Class Template Reference</div></div>
@@ -122,6 +123,13 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a1dbac9fe72ef6659435596e06239067d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4bfc00ce974547f03ccb35ff2c6cd3b2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpClientHandler.html#a4bfc00ce974547f03ccb35ff2c6cd3b2">reply</a> (const char *contentType, Stream &amp;inputStream, int size, int status=200, const char *msg=<a class="el" href="namespacetiny__dlna.html#aa203b0adbc2115c8cd956dd41ec09735">SUCCESS</a>) override</td></tr>
 <tr class="separator:a4bfc00ce974547f03ccb35ff2c6cd3b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae673d9765c43d23dba5204ce44bb975f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpClientHandler.html#ae673d9765c43d23dba5204ce44bb975f">replyRange</a> (const char *contentType, Stream &amp;inputStream, uint64_t totalSize, uint64_t start, uint64_t end) override</td></tr>
+<tr class="separator:ae673d9765c43d23dba5204ce44bb975f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38d8c8ae9c90d0033796208b95c57cf8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpClientHandler.html#a38d8c8ae9c90d0033796208b95c57cf8">replyRangeNotSatisfiable</a> (uint64_t totalSize) override</td></tr>
+<tr class="memdesc:a38d8c8ae9c90d0033796208b95c57cf8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Replies with 416 Range Not Satisfiable for a content with totalSize bytes.  <br /></td></tr>
+<tr class="separator:a38d8c8ae9c90d0033796208b95c57cf8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e3551a2fc54170f51def32b9d699300"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpClientHandler.html#a7e3551a2fc54170f51def32b9d699300">isHeadRequest</a> ()</td></tr>
+<tr class="separator:a7e3551a2fc54170f51def32b9d699300"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1788e37911dc410368a77fe366516347"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpClientHandler.html#a1788e37911dc410368a77fe366516347">reply</a> (const char *contentType, size_t(*callback)(Print &amp;out, void *ref), int status=200, const char *msg=<a class="el" href="namespacetiny__dlna.html#aa203b0adbc2115c8cd956dd41ec09735">SUCCESS</a>, void *ref=nullptr) override</td></tr>
 <tr class="separator:a1788e37911dc410368a77fe366516347"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acacb1f05cf8a22b9063f30e84e800f1f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpClientHandler.html#acacb1f05cf8a22b9063f30e84e800f1f">reply</a> (const char *contentType, const char *str, int status=200, const char *msg=<a class="el" href="namespacetiny__dlna.html#aa203b0adbc2115c8cd956dd41ec09735">SUCCESS</a>) override</td></tr>
@@ -146,6 +154,11 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a5c3ae0526e9c8b145ec5b9cad971d928"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad84162a329e5c927ffe93bbc82fe395c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpClientHandler.html#ad84162a329e5c927ffe93bbc82fe395c">resize</a> (size_t newSize)</td></tr>
 <tr class="separator:ad84162a329e5c927ffe93bbc82fe395c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:ac3abe8d9e8969e0e0dcac3f215f2351c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpClientHandler.html#ac3abe8d9e8969e0e0dcac3f215f2351c">copyStream</a> (Stream &amp;inputStream, int size)</td></tr>
+<tr class="separator:ac3abe8d9e8969e0e0dcac3f215f2351c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -311,6 +324,45 @@ template&lt;typename ClientT &gt; </div>
 
 </div>
 </div>
+<a id="ac3abe8d9e8969e0e0dcac3f215f2351c" name="ac3abe8d9e8969e0e0dcac3f215f2351c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac3abe8d9e8969e0e0dcac3f215f2351c">&#9670;&#160;</a></span>copyStream()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classtiny__dlna_1_1HttpClientHandler.html">tiny_dlna::HttpClientHandler</a>&lt; ClientT &gt;::copyStream </td>
+          <td>(</td>
+          <td class="paramtype">Stream &amp;&#160;</td>
+          <td class="paramname"><em>inputStream</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Copies up to size bytes (all if size &lt;= 0) from the stream to the client; stops when the client write fails (e.g. the client closed the connection) </p>
+
+</div>
+</div>
 <a id="adf3d3961a047f811415df1477cb40a89" name="adf3d3961a047f811415df1477cb40a89"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adf3d3961a047f811415df1477cb40a89">&#9670;&#160;</a></span>crlf()</h2>
 
@@ -366,6 +418,34 @@ template&lt;typename ClientT &gt; </div>
 </div><div class="memdoc">
 
 <p>Implements <a class="el" href="classtiny__dlna_1_1IClientHandler.html#ad059ed8e07996b0645913d6f798687da">tiny_dlna::IClientHandler</a>.</p>
+
+</div>
+</div>
+<a id="a7e3551a2fc54170f51def32b9d699300" name="a7e3551a2fc54170f51def32b9d699300"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e3551a2fc54170f51def32b9d699300">&#9670;&#160;</a></span>isHeadRequest()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classtiny__dlna_1_1HttpClientHandler.html">tiny_dlna::HttpClientHandler</a>&lt; ClientT &gt;::isHeadRequest </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>True if the current request is a HEAD request: replies send the header only </p>
 
 </div>
 </div>
@@ -911,6 +991,97 @@ template&lt;typename ClientT &gt; </div>
 </div><div class="memdoc">
 
 <p>Implements <a class="el" href="classtiny__dlna_1_1IClientHandler.html#a385eb737d722e2c745eff5e1421a198c">tiny_dlna::IClientHandler</a>.</p>
+
+</div>
+</div>
+<a id="ae673d9765c43d23dba5204ce44bb975f" name="ae673d9765c43d23dba5204ce44bb975f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae673d9765c43d23dba5204ce44bb975f">&#9670;&#160;</a></span>replyRange()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classtiny__dlna_1_1HttpClientHandler.html">tiny_dlna::HttpClientHandler</a>&lt; ClientT &gt;::replyRange </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>contentType</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Stream &amp;&#160;</td>
+          <td class="paramname"><em>inputStream</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint64_t&#160;</td>
+          <td class="paramname"><em>totalSize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint64_t&#160;</td>
+          <td class="paramname"><em>start</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint64_t&#160;</td>
+          <td class="paramname"><em>end</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Replies with 206 Partial Content for the byte range [start, end] of a content with totalSize bytes. The inputStream must already be positioned at start (e.g. file.seek(start)). See <a class="el" href="classtiny__dlna_1_1HttpRange.html" title="Parser for a HTTP &quot;Range&quot; request header (RFC 7233)">HttpRange</a> for parsing the request. </p>
+
+<p>Implements <a class="el" href="classtiny__dlna_1_1IClientHandler.html#ae913ec3e11763538077f0f72c04c15a3">tiny_dlna::IClientHandler</a>.</p>
+
+</div>
+</div>
+<a id="a38d8c8ae9c90d0033796208b95c57cf8" name="a38d8c8ae9c90d0033796208b95c57cf8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a38d8c8ae9c90d0033796208b95c57cf8">&#9670;&#160;</a></span>replyRangeNotSatisfiable()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classtiny__dlna_1_1HttpClientHandler.html">tiny_dlna::HttpClientHandler</a>&lt; ClientT &gt;::replyRangeNotSatisfiable </td>
+          <td>(</td>
+          <td class="paramtype">uint64_t&#160;</td>
+          <td class="paramname"><em>totalSize</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Replies with 416 Range Not Satisfiable for a content with totalSize bytes. </p>
+
+<p>Implements <a class="el" href="classtiny__dlna_1_1IClientHandler.html#a0a25084d5ff225299ca907492af43a12">tiny_dlna::IClientHandler</a>.</p>
 
 </div>
 </div>

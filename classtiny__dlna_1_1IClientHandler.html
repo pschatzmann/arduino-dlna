@@ -108,6 +108,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aeff0e0f769b781fedcf7b717ec9cf317"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abfdbab32f4aab155dba84bb88a88ba2e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IClientHandler.html#abfdbab32f4aab155dba84bb88a88ba2e">reply</a> (const char *contentType, const uint8_t *str, int len, int status=200, const char *msg=<a class="el" href="namespacetiny__dlna.html#aa203b0adbc2115c8cd956dd41ec09735">SUCCESS</a>)=0</td></tr>
 <tr class="separator:abfdbab32f4aab155dba84bb88a88ba2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae913ec3e11763538077f0f72c04c15a3"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IClientHandler.html#ae913ec3e11763538077f0f72c04c15a3">replyRange</a> (const char *contentType, Stream &amp;inputStream, uint64_t totalSize, uint64_t start, uint64_t end)=0</td></tr>
+<tr class="memdesc:ae913ec3e11763538077f0f72c04c15a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">206 Partial Content for the byte range [start, end]: the stream must be positioned at start  <br /></td></tr>
+<tr class="separator:ae913ec3e11763538077f0f72c04c15a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a25084d5ff225299ca907492af43a12"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IClientHandler.html#a0a25084d5ff225299ca907492af43a12">replyRangeNotSatisfiable</a> (uint64_t totalSize)=0</td></tr>
+<tr class="memdesc:a0a25084d5ff225299ca907492af43a12"><td class="mdescLeft">&#160;</td><td class="mdescRight">416 Range Not Satisfiable  <br /></td></tr>
+<tr class="separator:a0a25084d5ff225299ca907492af43a12"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a385eb737d722e2c745eff5e1421a198c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IClientHandler.html#a385eb737d722e2c745eff5e1421a198c">replyOK</a> ()=0</td></tr>
 <tr class="separator:a385eb737d722e2c745eff5e1421a198c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2ba2ba90bf9f752db809647eeae6c717"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1IClientHandler.html#a2ba2ba90bf9f752db809647eeae6c717">replyNotFound</a> ()=0</td></tr>
@@ -661,6 +667,94 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Implemented in <a class="el" href="classtiny__dlna_1_1HttpClientHandler.html#a858659d8cf421ad82a1821b13b5a42a7">tiny_dlna::HttpClientHandler&lt; ClientT &gt;</a>, and <a class="el" href="classtiny__dlna_1_1HttpClientHandler.html#a858659d8cf421ad82a1821b13b5a42a7">tiny_dlna::HttpClientHandler&lt; ClientType &gt;</a>.</p>
+
+</div>
+</div>
+<a id="ae913ec3e11763538077f0f72c04c15a3" name="ae913ec3e11763538077f0f72c04c15a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae913ec3e11763538077f0f72c04c15a3">&#9670;&#160;</a></span>replyRange()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void tiny_dlna::IClientHandler::replyRange </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>contentType</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Stream &amp;&#160;</td>
+          <td class="paramname"><em>inputStream</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint64_t&#160;</td>
+          <td class="paramname"><em>totalSize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint64_t&#160;</td>
+          <td class="paramname"><em>start</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint64_t&#160;</td>
+          <td class="paramname"><em>end</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>206 Partial Content for the byte range [start, end]: the stream must be positioned at start </p>
+
+<p>Implemented in <a class="el" href="classtiny__dlna_1_1HttpClientHandler.html#ae673d9765c43d23dba5204ce44bb975f">tiny_dlna::HttpClientHandler&lt; ClientT &gt;</a>, and <a class="el" href="classtiny__dlna_1_1HttpClientHandler.html#ae673d9765c43d23dba5204ce44bb975f">tiny_dlna::HttpClientHandler&lt; ClientType &gt;</a>.</p>
+
+</div>
+</div>
+<a id="a0a25084d5ff225299ca907492af43a12" name="a0a25084d5ff225299ca907492af43a12"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a25084d5ff225299ca907492af43a12">&#9670;&#160;</a></span>replyRangeNotSatisfiable()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void tiny_dlna::IClientHandler::replyRangeNotSatisfiable </td>
+          <td>(</td>
+          <td class="paramtype">uint64_t&#160;</td>
+          <td class="paramname"><em>totalSize</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>416 Range Not Satisfiable </p>
+
+<p>Implemented in <a class="el" href="classtiny__dlna_1_1HttpClientHandler.html#a38d8c8ae9c90d0033796208b95c57cf8">tiny_dlna::HttpClientHandler&lt; ClientT &gt;</a>, and <a class="el" href="classtiny__dlna_1_1HttpClientHandler.html#a38d8c8ae9c90d0033796208b95c57cf8">tiny_dlna::HttpClientHandler&lt; ClientType &gt;</a>.</p>
 
 </div>
 </div>

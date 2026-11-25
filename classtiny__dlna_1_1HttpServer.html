@@ -172,6 +172,8 @@ Protected Member Functions</h2></td></tr>
 <tr class="separator:a1247978cbba97bc15eab165407974149"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae60facece436f7c65f9d73d078ddcda9"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#ae60facece436f7c65f9d73d078ddcda9">resolveRewrite</a> (const char *from)</td></tr>
 <tr class="separator:ae60facece436f7c65f9d73d078ddcda9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86e83e72be8984f98e48366a407e9e22"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1HttpRequestHandlerLine.html">HttpRequestHandlerLine</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a86e83e72be8984f98e48366a407e9e22">findHandler</a> (<a class="el" href="classtiny__dlna_1_1StrView.html">StrView</a> &amp;pathStr, <a class="el" href="namespacetiny__dlna.html#a8b30900e538135f563c83e48319e5247">TinyMethodID</a> method, const char *accept)</td></tr>
+<tr class="separator:a86e83e72be8984f98e48366a407e9e22"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a473eca79a7c2c668fe5eef7e0bc3587f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1HttpServer.html#a473eca79a7c2c668fe5eef7e0bc3587f">matchesMime</a> (const char *handler_mime, const char *request_mime)</td></tr>
 <tr class="separator:a473eca79a7c2c668fe5eef7e0bc3587f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -438,6 +440,51 @@ template&lt;typename ClientType , typename ServerType &gt; </div>
 <p>stops the server_ptr </p>
 
 <p>Implements <a class="el" href="classtiny__dlna_1_1IHttpServer.html#a3bdda12879bb908dcc3f6ae450f405b9">tiny_dlna::IHttpServer</a>.</p>
+
+</div>
+</div>
+<a id="a86e83e72be8984f98e48366a407e9e22" name="a86e83e72be8984f98e48366a407e9e22"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a86e83e72be8984f98e48366a407e9e22">&#9670;&#160;</a></span>findHandler()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClientType , typename ServerType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtiny__dlna_1_1HttpRequestHandlerLine.html">HttpRequestHandlerLine</a> * <a class="el" href="classtiny__dlna_1_1HttpServer.html">tiny_dlna::HttpServer</a>&lt; ClientType, ServerType &gt;::findHandler </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1StrView.html">StrView</a> &amp;&#160;</td>
+          <td class="paramname"><em>pathStr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespacetiny__dlna.html#a8b30900e538135f563c83e48319e5247">TinyMethodID</a>&#160;</td>
+          <td class="paramname"><em>method</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>accept</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Finds the handler for the path, method and accepted mime type. A HEAD request without a dedicated HEAD handler is served by the GET handler: the client handler then only sends the reply header. </p>
 
 </div>
 </div>
@@ -1327,7 +1374,7 @@ template&lt;typename ClientType , typename ServerType &gt; </div>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">=</div>
 <div class="line">      <a class="code hl_variable" href="classtiny__dlna_1_1HttpServer.html#a173391adfdd8ec709d57caa84b9295f6">open_clients</a>.<a class="code hl_function" href="classtiny__dlna_1_1ListLockFree.html#ac20b517519de0fc72822c6c293772bd3">begin</a>()</div>
-<div class="ttc" id="aclasstiny__dlna_1_1HttpServer_html_a173391adfdd8ec709d57caa84b9295f6"><div class="ttname"><a href="classtiny__dlna_1_1HttpServer.html#a173391adfdd8ec709d57caa84b9295f6">tiny_dlna::HttpServer::open_clients</a></div><div class="ttdeci">ListLockFree&lt; ClientType &gt; open_clients</div><div class="ttdef"><b>Definition:</b> HttpServer.h:346</div></div>
+<div class="ttc" id="aclasstiny__dlna_1_1HttpServer_html_a173391adfdd8ec709d57caa84b9295f6"><div class="ttname"><a href="classtiny__dlna_1_1HttpServer.html#a173391adfdd8ec709d57caa84b9295f6">tiny_dlna::HttpServer::open_clients</a></div><div class="ttdeci">ListLockFree&lt; ClientType &gt; open_clients</div><div class="ttdef"><b>Definition:</b> HttpServer.h:335</div></div>
 <div class="ttc" id="aclasstiny__dlna_1_1ListLockFree_html_ac20b517519de0fc72822c6c293772bd3"><div class="ttname"><a href="classtiny__dlna_1_1ListLockFree.html#ac20b517519de0fc72822c6c293772bd3">tiny_dlna::ListLockFree::begin</a></div><div class="ttdeci">Iterator begin()</div><div class="ttdef"><b>Definition:</b> ListLockFree.h:388</div></div>
 </div><!-- fragment -->
 </div>

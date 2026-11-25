@@ -8,12 +8,13 @@ var searchData=
   ['httpheader_2eh_5',['HttpHeader.h',['../HttpHeader_8h.html',1,'']]],
   ['httplinereader_2eh_6',['HttpLineReader.h',['../HttpLineReader_8h.html',1,'']]],
   ['httpparameters_2eh_7',['HttpParameters.h',['../HttpParameters_8h.html',1,'']]],
-  ['httprequest_2eh_8',['HttpRequest.h',['../HttpRequest_8h.html',1,'']]],
-  ['httprequesthandlerline_2eh_9',['HttpRequestHandlerLine.h',['../HttpRequestHandlerLine_8h.html',1,'']]],
-  ['httprequestrewrite_2eh_10',['HttpRequestRewrite.h',['../HttpRequestRewrite_8h.html',1,'']]],
-  ['httpserver_2eh_11',['HttpServer.h',['../HttpServer_8h.html',1,'']]],
-  ['httpserverusingtask_2eh_12',['HttpServerUsingTask.h',['../HttpServerUsingTask_8h.html',1,'']]],
-  ['httpserverusingtasks_2eh_13',['HttpServerUsingTasks.h',['../HttpServerUsingTasks_8h.html',1,'']]],
-  ['httpstreamcopy_2eh_14',['HttpStreamCopy.h',['../HttpStreamCopy_8h.html',1,'']]],
-  ['httpstreamedoutput_2eh_15',['HttpStreamedOutput.h',['../HttpStreamedOutput_8h.html',1,'']]]
+  ['httprange_2eh_8',['HttpRange.h',['../HttpRange_8h.html',1,'']]],
+  ['httprequest_2eh_9',['HttpRequest.h',['../HttpRequest_8h.html',1,'']]],
+  ['httprequesthandlerline_2eh_10',['HttpRequestHandlerLine.h',['../HttpRequestHandlerLine_8h.html',1,'']]],
+  ['httprequestrewrite_2eh_11',['HttpRequestRewrite.h',['../HttpRequestRewrite_8h.html',1,'']]],
+  ['httpserver_2eh_12',['HttpServer.h',['../HttpServer_8h.html',1,'']]],
+  ['httpserverusingtask_2eh_13',['HttpServerUsingTask.h',['../HttpServerUsingTask_8h.html',1,'']]],
+  ['httpserverusingtasks_2eh_14',['HttpServerUsingTasks.h',['../HttpServerUsingTasks_8h.html',1,'']]],
+  ['httpstreamcopy_2eh_15',['HttpStreamCopy.h',['../HttpStreamCopy_8h.html',1,'']]],
+  ['httpstreamedoutput_2eh_16',['HttpStreamedOutput.h',['../HttpStreamedOutput_8h.html',1,'']]]
 ];

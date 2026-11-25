@@ -1,5 +1,4 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classtiny__dlna_1_1IUDPService.html" title="Abstract Interface for UDP API." alt="" coords="5,36,175,64"/>
-<area shape="rect" id="node2" href="$classtiny__dlna_1_1UDPAsyncService.html" title="Access to UDP functionality: sending and receiving of data using the Async API of the ESP32." alt="" coords="223,5,426,33"/>
-<area shape="rect" id="node3" href="$classtiny__dlna_1_1UDPService.html" title="Access to UDP functionality: sending and receiving of data." alt="" coords="242,57,407,102"/>
+<area shape="rect" id="node1" href="$classtiny__dlna_1_1ISubscriptionMgrDevice.html" title="Abstract interface for UPnP event subscription management." alt="" coords="5,5,179,50"/>
+<area shape="rect" id="node2" href="$classtiny__dlna_1_1SubscriptionMgrDevice.html" title="Manages UPnP event subscriptions and queued notifications for a DLNA device." alt="" coords="227,5,421,50"/>
 </map>
