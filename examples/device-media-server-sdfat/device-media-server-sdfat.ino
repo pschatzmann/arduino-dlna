@@ -73,9 +73,11 @@ void handleFileRequestMethod(IClientHandler& client, IHttpServer* server_ptr, co
 
   // determine file name
   TreeNode& node = contentProvider.getTreeNodeById(id);
-  const char* mime = node.getMime().c_str();
+  // keep the std::string alive: getMime() returns a temporary
+  std::string mime = node.getMime();
+  if (mime.empty()) mime = "application/octet-stream";
   std::string file_name = node.path();
-  DlnaLogger.log(DlnaLogLevel::Info, "file name: %s (mime %s)", file_name.c_str(), mime);
+  DlnaLogger.log(DlnaLogLevel::Info, "file name: %s (mime %s)", file_name.c_str(), mime.c_str());
 
   // open file name and reply
   file.close();
@@ -85,7 +87,7 @@ void handleFileRequestMethod(IClientHandler& client, IHttpServer* server_ptr, co
     client.replyNotFound();
     return;
   }
-  client.reply(mime, file, file.size(), 200);
+  client.reply(mime.c_str(), file, file.size(), 200);
 }
 
 
@@ -145,7 +147,8 @@ void setup() {
 
   // setup file path and file handling
   contentProvider.setPath("files");
-  server.on("/files*", T_GET, "text/html", handleFileRequestMethod);
+  // no mime filter: media players send e.g. "Accept: */*"
+  server.on("/files*", T_GET, handleFileRequestMethod);
 
   // Wire up the content provider callbacks via lambdas calling the global
   // instance

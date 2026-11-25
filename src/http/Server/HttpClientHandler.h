@@ -73,11 +73,22 @@ class HttpClientHandler : public IClientHandler {
     replyChunked(contentType, status, msg);
     HttpChunkWriter chunk_writer;
     uint8_t buffer[buffer_size];
+    bool ok = true;
     while (inputStream.available()) {
       int len = inputStream.readBytes(buffer, buffer_size);
-      chunk_writer.writeChunk(*p_client, (const char*)buffer, len);
+      if (len <= 0) break;
+      int written =
+          chunk_writer.writeChunk(*p_client, (const char*)buffer, len);
+      if (written != len) {
+        DlnaLogger.log(DlnaLogLevel::Warning,
+                       "replyChunked: client write failed (%d of %d bytes): "
+                       "aborting",
+                       written, len);
+        ok = false;
+        break;
+      }
     }
-    chunk_writer.writeEnd(*p_client);
+    if (ok) chunk_writer.writeEnd(*p_client);
     endClient();
   }
 
@@ -102,9 +113,20 @@ class HttpClientHandler : public IClientHandler {
     reply_header.put(CONNECTION, is_keep_alive ? CON_KEEP_ALIVE : CON_CLOSE);
     reply_header.write(*p_client);
     uint8_t buffer[buffer_size];
-    while (inputStream.available()) {
+    int total = 0;
+    while ((size <= 0 || total < size) && inputStream.available()) {
       int len = inputStream.readBytes(buffer, buffer_size);
-      p_client->write((const uint8_t*)buffer, len);
+      if (len <= 0) break;
+      size_t written = p_client->write((const uint8_t*)buffer, len);
+      if (written != (size_t)len) {
+        // e.g. the client closed the connection: stop reading the stream
+        DlnaLogger.log(DlnaLogLevel::Warning,
+                       "reply: client write failed after %d of %d bytes: "
+                       "aborting",
+                       total + (int)written, size);
+        break;
+      }
+      total += len;
     }
     endClient();
   }

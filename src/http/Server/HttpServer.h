@@ -412,6 +412,8 @@ class HttpServer : public IHttpServer {
     if (StrView(handler_mime).isEmpty() || StrView(request_mime).isEmpty()) {
       return true;
     }
+    // "*/*" accepts any content type
+    if (StrView(request_mime).contains("*/*")) return true;
     bool result = StrView(request_mime).contains(handler_mime);
     return result;
   }
