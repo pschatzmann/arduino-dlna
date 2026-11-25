@@ -13,6 +13,25 @@ def pytest_addoption(parser):
     )
 
 
+    parser.addoption(
+        "--file-url",
+        action="store",
+        default=os.environ.get("DLNA_FILE_URL"),
+        help="URL of a media file served by the media server, e.g. "
+        "http://192.168.1.36:9000/files?ID=52 (default from DLNA_FILE_URL); "
+        "the file tests are skipped if it is not defined",
+    )
+
+
+@pytest.fixture
+def file_url(request):
+    """Fixture that provides the media file URL configured via --file-url."""
+    url = request.config.getoption("--file-url")
+    if not url:
+        pytest.skip("no --file-url / DLNA_FILE_URL defined")
+    return url
+
+
 @pytest.fixture
 def base_url(request):
     """Fixture that provides the base URL configured via --base."""

@@ -143,6 +143,10 @@ class MockClientHandler : public IClientHandler {
     this->status = status;
     out.write(str, len);
   }
+  void replyRange(const char*, Stream&, uint64_t, uint64_t, uint64_t) override {
+    status = 206;
+  }
+  void replyRangeNotSatisfiable(uint64_t) override { status = 416; }
   void replyOK() override { status = 200; }
   void replyNotFound() override { status = 404; }
   void replyError(int err, const char*) override { status = err; }

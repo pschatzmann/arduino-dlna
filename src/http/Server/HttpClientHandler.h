@@ -71,6 +71,10 @@ class HttpClientHandler : public IClientHandler {
                     int status = 200, const char* msg = SUCCESS) override {
     if (!p_client) return;
     replyChunked(contentType, status, msg);
+    if (isHeadRequest()) {
+      endClient();
+      return;
+    }
     HttpChunkWriter chunk_writer;
     uint8_t buffer[buffer_size];
     bool ok = true;
@@ -112,24 +116,53 @@ class HttpClientHandler : public IClientHandler {
     reply_header.put(CONTENT_TYPE, contentType);
     reply_header.put(CONNECTION, is_keep_alive ? CON_KEEP_ALIVE : CON_CLOSE);
     reply_header.write(*p_client);
-    uint8_t buffer[buffer_size];
-    int total = 0;
-    while ((size <= 0 || total < size) && inputStream.available()) {
-      int len = inputStream.readBytes(buffer, buffer_size);
-      if (len <= 0) break;
-      size_t written = p_client->write((const uint8_t*)buffer, len);
-      if (written != (size_t)len) {
-        // e.g. the client closed the connection: stop reading the stream
-        DlnaLogger.log(DlnaLogLevel::Warning,
-                       "reply: client write failed after %d of %d bytes: "
-                       "aborting",
-                       total + (int)written, size);
-        break;
-      }
-      total += len;
-    }
+    if (!isHeadRequest()) copyStream(inputStream, size);
     endClient();
   }
+
+  /// Replies with 206 Partial Content for the byte range [start, end] of a
+  /// content with totalSize bytes. The inputStream must already be positioned
+  /// at start (e.g. file.seek(start)). See HttpRange for parsing the request.
+  void replyRange(const char* contentType, Stream& inputStream,
+                  uint64_t totalSize, uint64_t start, uint64_t end) override {
+    if (!p_client) return;
+    uint64_t len = end - start + 1;
+    DlnaLogger.log(DlnaLogLevel::Info, "reply range %lu-%lu/%lu",
+                   (unsigned long)start, (unsigned long)end,
+                   (unsigned long)totalSize);
+    char content_range[80];
+    snprintf(content_range, sizeof(content_range), "bytes %llu-%llu/%llu",
+             (unsigned long long)start, (unsigned long long)end,
+             (unsigned long long)totalSize);
+    reply_header.setValues(206, "Partial Content");
+    reply_header.put(CONTENT_LENGTH, (int)len);
+    reply_header.put(CONTENT_RANGE, content_range);
+    reply_header.put(ACCEPT_RANGES, "bytes");
+    reply_header.put(CONTENT_TYPE, contentType);
+    reply_header.put(CONNECTION, is_keep_alive ? CON_KEEP_ALIVE : CON_CLOSE);
+    reply_header.write(*p_client);
+    if (!isHeadRequest()) copyStream(inputStream, (int)len);
+    endClient();
+  }
+
+  /// Replies with 416 Range Not Satisfiable for a content with totalSize bytes
+  void replyRangeNotSatisfiable(uint64_t totalSize) override {
+    if (!p_client) return;
+    DlnaLogger.log(DlnaLogLevel::Info, "reply %s", "416");
+    char content_range[40];
+    snprintf(content_range, sizeof(content_range), "bytes */%llu",
+             (unsigned long long)totalSize);
+    reply_header.setValues(416, "Range Not Satisfiable");
+    reply_header.put(CONTENT_LENGTH, 0);
+    reply_header.put(CONTENT_RANGE, content_range);
+    reply_header.put(CONNECTION, is_keep_alive ? CON_KEEP_ALIVE : CON_CLOSE);
+    reply_header.write(*p_client);
+    endClient();
+  }
+
+  /// True if the current request is a HEAD request: replies send the
+  /// header only
+  bool isHeadRequest() { return request_header.method() == T_HEAD; }
 
   void reply(const char* contentType, size_t (*callback)(Print& out, void* ref),
              int status = 200, const char* msg = SUCCESS,
@@ -143,6 +176,10 @@ class HttpClientHandler : public IClientHandler {
     reply_header.put(CONNECTION, is_keep_alive ? CON_KEEP_ALIVE : CON_CLOSE);
     reply_header.put(CONTENT_LENGTH, size);
     reply_header.write(*p_client);
+    if (isHeadRequest()) {
+      endClient();
+      return;
+    }
     size_t size_eff = callback(*p_client, ref);
     if (size_eff != size) {
       DlnaLogger.log(DlnaLogLevel::Warning,
@@ -175,7 +212,7 @@ class HttpClientHandler : public IClientHandler {
     reply_header.put(CONTENT_TYPE, contentType);
     reply_header.put(CONNECTION, is_keep_alive ? CON_KEEP_ALIVE : CON_CLOSE);
     reply_header.write(*p_client);
-    p_client->write((const uint8_t*)str, len);
+    if (!isHeadRequest()) p_client->write((const uint8_t*)str, len);
     endClient();
   }
 
@@ -188,7 +225,7 @@ class HttpClientHandler : public IClientHandler {
     reply_header.put(CONTENT_TYPE, contentType);
     reply_header.put(CONNECTION, is_keep_alive ? CON_KEEP_ALIVE : CON_CLOSE);
     reply_header.write(*p_client);
-    p_client->write((const uint8_t*)str, len);
+    if (!isHeadRequest()) p_client->write((const uint8_t*)str, len);
     endClient();
   }
 
@@ -224,6 +261,28 @@ class HttpClientHandler : public IClientHandler {
   void resize(size_t newSize) { buffer_size = newSize; }
 
  protected:
+  /// Copies up to size bytes (all if size <= 0) from the stream to the client;
+  /// stops when the client write fails (e.g. the client closed the connection)
+  void copyStream(Stream& inputStream, int size) {
+    uint8_t buffer[buffer_size];
+    int total = 0;
+    while ((size <= 0 || total < size) && inputStream.available()) {
+      int to_read = buffer_size;
+      if (size > 0 && size - total < to_read) to_read = size - total;
+      int len = inputStream.readBytes(buffer, to_read);
+      if (len <= 0) break;
+      size_t written = p_client->write((const uint8_t*)buffer, len);
+      if (written != (size_t)len) {
+        DlnaLogger.log(DlnaLogLevel::Warning,
+                       "reply: client write failed after %d of %d bytes: "
+                       "aborting",
+                       total + (int)written, size);
+        break;
+      }
+      total += len;
+    }
+  }
+
   ClientT* p_client = nullptr;
   HttpRequestHeader request_header;
   HttpReplyHeader reply_header;

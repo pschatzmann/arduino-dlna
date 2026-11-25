@@ -40,3 +40,16 @@ Notes:
 - These tests are intentionally simple smoke tests and assert basic XML
   structure and HTTP 200 responses. Extend them to validate full DIDL
   contents or to use a configurable base URL if you need more flexibility.
+
+File serving tests (HEAD and Range requests)
+
+`test_file_server.py` checks HEAD and Range requests for a media file served
+e.g. by the `device-media-server-sdfat` example. Pass the URL of a file with
+more than 1000 bytes (from the `<res>` of a Browse reply); without it the tests
+are skipped:
+
+```bash
+pytest -q tests/test_file_server.py --file-url="http://192.168.1.50:9000/files?ID=52"
+```
+
+You can also set the `DLNA_FILE_URL` environment variable instead.

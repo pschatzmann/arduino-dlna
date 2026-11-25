@@ -131,24 +131,13 @@ class HttpServerUsingTasks : public HttpServer<ClientType, ServerType> {
     // check in registered handlers
     StrView pathStr = StrView(path);
     pathStr.replace("//", "/");  // TODO investiage why we get //
-    for (auto handler_line_ptr : this->handler_collection) {
-      DlnaLogger.log(DlnaLogLevel::Debug, "onRequest: %s %s vs: %s %s %s", path,
-                     methods[handler.requestHeader().method()],
-                     this->nullstr(handler_line_ptr->path.c_str()),
-                     methods[handler_line_ptr->method],
-                     this->nullstr(handler_line_ptr->mime));
-
-      if (pathStr.matches(handler_line_ptr->path.c_str()) &&
-          handler.requestHeader().method() == handler_line_ptr->method &&
-          this->matchesMime(this->nullstr(handler_line_ptr->mime),
-                            this->nullstr(handler.requestHeader().accept()))) {
-        // call registed handler function
-        DlnaLogger.log(DlnaLogLevel::Debug, "onRequest %s", "->found",
-                       this->nullstr(handler_line_ptr->path.c_str()));
-        handler_line_ptr->fn(handler, this, path, handler_line_ptr);
-        result = true;
-        break;
-      }
+    HttpRequestHandlerLine* handler_line_ptr =
+        this->findHandler(pathStr, handler.requestHeader().method(),
+                          handler.requestHeader().accept());
+    if (handler_line_ptr != nullptr) {
+      // call registed handler function
+      handler_line_ptr->fn(handler, this, path, handler_line_ptr);
+      result = true;
     }
 
     if (!result) {

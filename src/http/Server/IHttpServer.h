@@ -1,6 +1,7 @@
 #pragma once
 
 #include <stddef.h>
+#include <stdint.h>
 
 #include "Client.h"
 #include "HttpHeader.h"
@@ -26,6 +27,10 @@ class IClientHandler {
   virtual void reply(const char* contentType, size_t (*callback)(Print& out, void* ref), int status = 200, const char* msg = SUCCESS, void* ref = nullptr) = 0;
   virtual void reply(const char* contentType, const char* str, int status = 200, const char* msg = SUCCESS) = 0;
   virtual void reply(const char* contentType, const uint8_t* str, int len, int status = 200, const char* msg = SUCCESS) = 0;
+  /// 206 Partial Content for the byte range [start, end]: the stream must be positioned at start
+  virtual void replyRange(const char* contentType, Stream& inputStream, uint64_t totalSize, uint64_t start, uint64_t end) = 0;
+  /// 416 Range Not Satisfiable
+  virtual void replyRangeNotSatisfiable(uint64_t totalSize) = 0;
   virtual void replyOK() = 0;
   virtual void replyNotFound() = 0;
   virtual void replyError(int err, const char* msg = "Internal Server Error") = 0;

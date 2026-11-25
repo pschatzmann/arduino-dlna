@@ -87,7 +87,21 @@ void handleFileRequestMethod(IClientHandler& client, IHttpServer* server_ptr, co
     client.replyNotFound();
     return;
   }
-  client.reply(mime.c_str(), file, file.size(), 200);
+  // support for seeking: reply with the requested byte range if any
+  uint64_t size = file.size();
+  HttpRange range;
+  if (range.parse(client.requestHeader().get(RANGE_C), size)) {
+    if (!range.isSatisfiable()) {
+      client.replyRangeNotSatisfiable(size);
+      return;
+    }
+    file.seek(range.start());
+    client.replyRange(mime.c_str(), file, size, range.start(), range.end());
+    return;
+  }
+  // full content: HEAD requests are also handled here (header only)
+  client.replyHeader().put(ACCEPT_RANGES, "bytes");
+  client.reply(mime.c_str(), file, size, 200);
 }
 
 

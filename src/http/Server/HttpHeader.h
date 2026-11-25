@@ -30,6 +30,9 @@ const char* HOST_C = "Host";
 const char* ACCEPT_ENCODING = "Accept-Encoding";
 const char* IDENTITY = "identity";
 const char* LOCATION = "Location";
+const char* RANGE_C = "Range";
+const char* ACCEPT_RANGES = "Accept-Ranges";
+const char* CONTENT_RANGE = "Content-Range";
 
 // Http methods
 enum TinyMethodID {

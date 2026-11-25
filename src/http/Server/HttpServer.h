@@ -196,24 +196,13 @@ class HttpServer : public IHttpServer {
     // check in registered handlers
     StrView pathStr = StrView(path);
     pathStr.replace("//", "/");  // TODO investiage why we get //
-    for (auto handler_line_ptr : handler_collection) {
-      DlnaLogger.log(DlnaLogLevel::Debug, "onRequest: %s %s vs: %s %s %s", path,
-                     methods[client_handler.requestHeader().method()],
-                     nullstr(handler_line_ptr->path.c_str()),
-                     methods[handler_line_ptr->method],
-                     nullstr(handler_line_ptr->mime));
-
-      if (pathStr.matches(handler_line_ptr->path.c_str()) &&
-          client_handler.requestHeader().method() == handler_line_ptr->method &&
-          matchesMime(nullstr(handler_line_ptr->mime),
-                      nullstr(client_handler.requestHeader().accept()))) {
-        // call registed handler function
-        DlnaLogger.log(DlnaLogLevel::Debug, "onRequest %s", "->found",
-                       nullstr(handler_line_ptr->path.c_str()));
-        handler_line_ptr->fn(client_handler, this, path, handler_line_ptr);
-        result = true;
-        break;
-      }
+    HttpRequestHandlerLine* handler_line_ptr =
+        findHandler(pathStr, client_handler.requestHeader().method(),
+                    client_handler.requestHeader().accept());
+    if (handler_line_ptr != nullptr) {
+      // call registed handler function
+      handler_line_ptr->fn(client_handler, this, path, handler_line_ptr);
+      result = true;
     }
 
     if (!result) {
@@ -402,6 +391,35 @@ class HttpServer : public IHttpServer {
       }
     }
     return from;
+  }
+
+  /// Finds the handler for the path, method and accepted mime type. A HEAD
+  /// request without a dedicated HEAD handler is served by the GET handler:
+  /// the client handler then only sends the reply header.
+  HttpRequestHandlerLine* findHandler(StrView& pathStr, TinyMethodID method,
+                                      const char* accept) {
+    for (int pass = 0; pass < 2; pass++) {
+      TinyMethodID search = method;
+      if (pass == 1) {
+        if (method != T_HEAD) break;
+        search = T_GET;
+      }
+      for (auto handler_line_ptr : handler_collection) {
+        DlnaLogger.log(DlnaLogLevel::Debug, "onRequest: %s %s vs: %s %s %s",
+                       pathStr.c_str(), methods[search],
+                       nullstr(handler_line_ptr->path.c_str()),
+                       methods[handler_line_ptr->method],
+                       nullstr(handler_line_ptr->mime));
+        if (handler_line_ptr->method == search &&
+            pathStr.matches(handler_line_ptr->path.c_str()) &&
+            matchesMime(nullstr(handler_line_ptr->mime), nullstr(accept))) {
+          DlnaLogger.log(DlnaLogLevel::Debug, "onRequest %s %s", "->found",
+                         nullstr(handler_line_ptr->path.c_str()));
+          return handler_line_ptr;
+        }
+      }
+    }
+    return nullptr;
   }
 
   /// compares mime of handler with mime of request: provides true if they match
