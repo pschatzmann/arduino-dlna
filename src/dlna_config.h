@@ -20,6 +20,12 @@
 #define DLNA_HTTP_READ_TIMEOUT_MS 300
 #endif
 
+/// Buffer size used to send replies which are generated via a callback
+/// (e.g. the XML of Browse results)
+#ifndef DLNA_HTTP_REPLY_BUFFER_SIZE
+#define DLNA_HTTP_REPLY_BUFFER_SIZE 1024
+#endif
+
 /// Define the default http request timeout
 #ifndef DLNA_HTTP_REQUEST_TIMEOUT_MS
 #define DLNA_HTTP_REQUEST_TIMEOUT_MS 15000

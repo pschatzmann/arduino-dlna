@@ -1,5 +1,6 @@
 #pragma once
 #include "Print.h"
+#include "Logger.h"
 
 namespace tiny_dlna {
 

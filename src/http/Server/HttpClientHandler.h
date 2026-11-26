@@ -6,6 +6,7 @@
 #include "HttpChunkWriter.h"
 #include "HttpHeader.h"
 #include "IHttpServer.h"
+#include "basic/BufferedPrint.h"
 #include "basic/RetryPrint.h"
 #include "basic/StrPrint.h"
 
@@ -180,7 +181,15 @@ class HttpClientHandler : public IClientHandler {
       endClient();
       return;
     }
-    size_t size_eff = callback(*p_client, ref);
+    // callbacks often print the content in tiny pieces (e.g. escaped XML
+    // character by character): collect them to avoid one TCP packet per write
+    BufferedPrint buffered(*p_client, DLNA_HTTP_REPLY_BUFFER_SIZE);
+    size_t size_eff = callback(buffered, ref);
+    buffered.flush();
+    if (buffered.hasError()) {
+      DlnaLogger.log(DlnaLogLevel::Warning,
+                     "reply: client write failed: %s", "aborting");
+    }
     if (size_eff != size) {
       DlnaLogger.log(DlnaLogLevel::Warning,
                      "HttpServer callback wrote %d bytes; expected %d",

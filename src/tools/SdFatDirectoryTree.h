@@ -97,6 +97,8 @@ class SdFatDirectoryTree {
 
  protected:
   SdFatParser parser;
+  /// same value as SdFat's LS_R: so we do not depend on SdFat being included
+  static constexpr uint8_t LIST_RECURSIVE = 8;
   FS* p_sd = nullptr;
   std::vector<TreeNode*, AllocatorPSRAM<TreeNode*>> tree_nodes;
   std::vector<TreeNode*> parent_stack;  // stack for parent management
@@ -162,7 +164,7 @@ class SdFatDirectoryTree {
     parser.setCallback(&SdFatDirectoryTree::onParsedCallback, this);
 
     // Ask SdFat to list recursively; output is fed into our parser (Print)
-    p_sd->ls(&parser, LS_R);
+    p_sd->ls(&parser, LIST_RECURSIVE);
   }
 };
 
