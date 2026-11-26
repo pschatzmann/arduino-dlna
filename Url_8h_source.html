@@ -174,8 +174,8 @@ $(function() {
 <div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>        <a class="code hl_variable" href="classtiny__dlna_1_1Url.html#a459259c71067d4a0699ad770f0affa2a">portInt</a> = -1;  <span class="comment">// undefined</span></div>
 <div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    }</div>
 <div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    <span class="keywordtype">int</span> pathStart = <a class="code hl_variable" href="classtiny__dlna_1_1Url.html#a73d3be7052549f7ca936f55d2e3ce28d">urlStr</a>.<a class="code hl_function" href="classtiny__dlna_1_1Str.html#a99b8e234be79b2df9458f10aff64407e">indexOf</a>(<span class="stringliteral">&quot;/&quot;</span>, protocolEnd + 4);</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    <span class="keywordflow">if</span> (pathStart == 0) {</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>      <span class="comment">// we have no path</span></div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    <span class="keywordflow">if</span> (pathStart &lt;= 0) {</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>      <span class="comment">// we have no path (indexOf() returns -1 if there is no &quot;/&quot;)</span></div>
 <div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>      <a class="code hl_variable" href="classtiny__dlna_1_1Url.html#ac995280838fdd64327e883540f549a5b">pathStr</a> = <span class="stringliteral">&quot;/&quot;</span>;</div>
 <div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>      <a class="code hl_variable" href="classtiny__dlna_1_1Url.html#aba1e15e94ea6ab6dbc765f2d969877ac">urlRootStr</a> = <a class="code hl_variable" href="classtiny__dlna_1_1Url.html#a73d3be7052549f7ca936f55d2e3ce28d">urlStr</a>;</div>
 <div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    } <span class="keywordflow">else</span> {</div>

@@ -75,7 +75,9 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pro-static-methods">Static Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classtiny__dlna_1_1SdFatContentProvider-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">tiny_dlna::SdFatContentProvider&lt; FS &gt; Class Template Reference</div></div>
@@ -118,6 +120,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aca4dbe385055eff18d954d7da6d62a9b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html#aca4dbe385055eff18d954d7da6d62a9b">begin</a> (FS &amp;fs, const char *rootPath)</td></tr>
 <tr class="memdesc:aca4dbe385055eff18d954d7da6d62a9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the content provider and scans the filesystem.  <br /></td></tr>
 <tr class="separator:aca4dbe385055eff18d954d7da6d62a9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af3098f7a567d121d58f24c889356da18"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html#af3098f7a567d121d58f24c889356da18">addFileHandler</a> (<a class="el" href="classtiny__dlna_1_1IHttpServer.html">IHttpServer</a> &amp;server)</td></tr>
+<tr class="memdesc:af3098f7a567d121d58f24c889356da18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers the http handler which serves the files.  <br /></td></tr>
+<tr class="separator:af3098f7a567d121d58f24c889356da18"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a122ac689061bf4eab128c9743ee379ef"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html#a122ac689061bf4eab128c9743ee379ef">serveFile</a> (<a class="el" href="classtiny__dlna_1_1IClientHandler.html">IClientHandler</a> &amp;client, const char *requestPath)</td></tr>
+<tr class="memdesc:a122ac689061bf4eab128c9743ee379ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Replies with the file which is identified by the ID query parameter of the request path: e.g. /files?ID=12.  <br /></td></tr>
+<tr class="separator:a122ac689061bf4eab128c9743ee379ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1cebb5e45313911ec9123a6431ff6a25"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html#a1cebb5e45313911ec9123a6431ff6a25">end</a> ()</td></tr>
 <tr class="memdesc:a1cebb5e45313911ec9123a6431ff6a25"><td class="mdescLeft">&#160;</td><td class="mdescRight">Releases all resources and clears the directory tree.  <br /></td></tr>
 <tr class="separator:a1cebb5e45313911ec9123a6431ff6a25"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -142,6 +150,13 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:abc42446eeb340d8af7e3eb08732191b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the full file path by node ID.  <br /></td></tr>
 <tr class="separator:abc42446eeb340d8af7e3eb08732191b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a9ca42667562fa67fb3b9040570b9873a"><td class="memTemplParams" colspan="2">template&lt;typename F &gt; </td></tr>
+<tr class="memitem:a9ca42667562fa67fb3b9040570b9873a"><td class="memTemplItemLeft" align="right" valign="top">static void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html#a9ca42667562fa67fb3b9040570b9873a">replyFile</a> (<a class="el" href="classtiny__dlna_1_1IClientHandler.html">IClientHandler</a> &amp;client, F &amp;file, const char *mime)</td></tr>
+<tr class="memdesc:a9ca42667562fa67fb3b9040570b9873a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Replies with the content of an open file: supports HEAD and Range requests (206 Partial Content / 416 Range Not Satisfiable).  <br /></td></tr>
+<tr class="separator:a9ca42667562fa67fb3b9040570b9873a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:abcbf325a7c59ff2c3a5914d2d806da52"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1TreeNode.html">TreeNode</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html#abcbf325a7c59ff2c3a5914d2d806da52">findNodeByObjectID</a> (const char *objectID)</td></tr>
@@ -150,6 +165,12 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:abcbf325a7c59ff2c3a5914d2d806da52"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtiny__dlna_1_1TreeNode.html">TreeNode</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html#abcbf325a7c59ff2c3a5914d2d806da52">findNodeByObjectID</a> (const char *objectID)</td></tr>
 <tr class="memdesc:abcbf325a7c59ff2c3a5914d2d806da52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds a tree node by its object ID string.  <br /></td></tr>
 <tr class="separator:abcbf325a7c59ff2c3a5914d2d806da52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
+Static Protected Member Functions</h2></td></tr>
+<tr class="memitem:a9a7214614d287ade92015dcfac0b3aeb"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html#a9a7214614d287ade92015dcfac0b3aeb">fileHandler</a> (<a class="el" href="classtiny__dlna_1_1IClientHandler.html">IClientHandler</a> &amp;client, <a class="el" href="classtiny__dlna_1_1IHttpServer.html">IHttpServer</a> *server, const char *requestPath, <a class="el" href="classtiny__dlna_1_1HttpRequestHandlerLine.html">HttpRequestHandlerLine</a> *hl)</td></tr>
+<tr class="memdesc:a9a7214614d287ade92015dcfac0b3aeb"><td class="mdescLeft">&#160;</td><td class="mdescRight">http handler: the context provides the content provider  <br /></td></tr>
+<tr class="separator:a9a7214614d287ade92015dcfac0b3aeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -185,6 +206,11 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:aea018c1f7f608a19b7d164e9bdab0417"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacetiny__dlna.html#ae37837f99b4c25b8e03929377da6e18e">stringPSRAM</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html#aea018c1f7f608a19b7d164e9bdab0417">currentMime_</a></td></tr>
 <tr class="memdesc:aea018c1f7f608a19b7d164e9bdab0417"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current MIME type string.  <br /></td></tr>
 <tr class="separator:aea018c1f7f608a19b7d164e9bdab0417"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72cee1778b4f47f2b15df1d60bc0ce2b"><td class="memItemLeft" align="right" valign="top">FS *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html#a72cee1778b4f47f2b15df1d60bc0ce2b">p_fs</a> = nullptr</td></tr>
+<tr class="separator:a72cee1778b4f47f2b15df1d60bc0ce2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f4423a2fbd0da129a7dd39721103849"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html#a9f4423a2fbd0da129a7dd39721103849">file_url</a></td></tr>
+<tr class="memdesc:a9f4423a2fbd0da129a7dd39721103849"><td class="mdescLeft">&#160;</td><td class="mdescRight">url pattern of the file handler  <br /></td></tr>
+<tr class="separator:a9f4423a2fbd0da129a7dd39721103849"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename FS&gt;<br />
@@ -202,11 +228,66 @@ class tiny_dlna::SdFatContentProvider&lt; FS &gt;</div><p>Content provider for D
 </ol>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
+    <tr><td class="paramname">FS</td><td>Filesystem type compatible with SdFat API (e.g., SdFs, SdFat32).</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>This class bridges the SdFat filesystem with DLNA's content browsing/searching interface. It builds an in-memory directory tree from the filesystem and provides DLNA-compliant metadata for media files and folders.</p>
+<p>The provider supports three query types:</p><ul>
+<li>BrowseMetadata: Return metadata for a single object</li>
+<li>BrowseChildren: <a class="el" href="classtiny__dlna_1_1List.html" title="Double linked list.">List</a> children of a directory</li>
+<li>Search: Return all files in the tree</li>
+</ul>
+<p>Usage pattern:</p><ol type="1">
+<li>Call <a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html#aca4dbe385055eff18d954d7da6d62a9b" title="Initializes the content provider and scans the filesystem.">begin()</a> to initialize and scan the filesystem</li>
+<li>Call <a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html#af3098f7a567d121d58f24c889356da18" title="Registers the http handler which serves the files.">addFileHandler()</a> to serve the files via the http server</li>
+<li><a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html#ab51fee1607cc176d5b8f0f1f27ec8829" title="Prepares data for a DLNA content query.">prepareData()</a> is called by DLNA to set up a query</li>
+<li><a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html#a3808bb0387d6dc9f52ec5f675da94f7e" title="Retrieves a single media item by index.">getData()</a> is called repeatedly to retrieve individual items</li>
+</ol>
+<p>The filesystem must provide open(path), which returns a Stream with <a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html#af0a2c2392c76bbbe53a39ce3558b88c2">size()</a>, seek(), close() and a bool conversion: e.g. SdFat (SdFs, SdFat32...), ESP32FSAdapter or <a class="el" href="classtiny__dlna_1_1TinyFATFSAdapter.html" title="Makes a TinyFATFS volume usable with SdFatContentProvider.">TinyFATFSAdapter</a>.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
     <tr><td class="paramname">FS</td><td>Filesystem type compatible with SdFat API (e.g., SdFs, SdFat32). </td></tr>
   </table>
   </dd>
 </dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="af3098f7a567d121d58f24c889356da18" name="af3098f7a567d121d58f24c889356da18"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af3098f7a567d121d58f24c889356da18">&#9670;&#160;</a></span>addFileHandler()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename FS &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html">tiny_dlna::SdFatContentProvider</a>&lt; FS &gt;::addFileHandler </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1IHttpServer.html">IHttpServer</a> &amp;&#160;</td>
+          <td class="paramname"><em>server</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Registers the http handler which serves the files. </p>
+<p>The files are served at /&lt;path&gt;?ID=&lt;id&gt; (see <a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html#acfec4ba14dce053a57d91248185dbfbd" title="Sets the path prefix for resource URIs.">setPath()</a>), which is the resource URI that is reported to the DLNA clients. GET and HEAD requests are supported, including byte ranges (seeking). </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">server</td><td>Http server of the media server </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="aca4dbe385055eff18d954d7da6d62a9b" name="aca4dbe385055eff18d954d7da6d62a9b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aca4dbe385055eff18d954d7da6d62a9b">&#9670;&#160;</a></span>begin() <span class="overload">[1/2]</span></h2>
 
@@ -358,6 +439,58 @@ template&lt;typename FS &gt; </div>
 </div><div class="memdoc">
 
 <p>Releases all resources and clears the directory tree. </p>
+
+</div>
+</div>
+<a id="a9a7214614d287ade92015dcfac0b3aeb" name="a9a7214614d287ade92015dcfac0b3aeb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a7214614d287ade92015dcfac0b3aeb">&#9670;&#160;</a></span>fileHandler()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename FS &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void <a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html">tiny_dlna::SdFatContentProvider</a>&lt; FS &gt;::fileHandler </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1IClientHandler.html">IClientHandler</a> &amp;&#160;</td>
+          <td class="paramname"><em>client</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1IHttpServer.html">IHttpServer</a> *&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>requestPath</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1HttpRequestHandlerLine.html">HttpRequestHandlerLine</a> *&#160;</td>
+          <td class="paramname"><em>hl</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>http handler: the context provides the content provider </p>
 
 </div>
 </div>
@@ -947,6 +1080,100 @@ template&lt;typename FS &gt; </div>
 
 </div>
 </div>
+<a id="a9ca42667562fa67fb3b9040570b9873a" name="a9ca42667562fa67fb3b9040570b9873a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ca42667562fa67fb3b9040570b9873a">&#9670;&#160;</a></span>replyFile()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename FS &gt; </div>
+<div class="memtemplate">
+template&lt;typename F &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void <a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html">tiny_dlna::SdFatContentProvider</a>&lt; FS &gt;::replyFile </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1IClientHandler.html">IClientHandler</a> &amp;&#160;</td>
+          <td class="paramname"><em>client</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">F &amp;&#160;</td>
+          <td class="paramname"><em>file</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>mime</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Replies with the content of an open file: supports HEAD and Range requests (206 Partial Content / 416 Range Not Satisfiable). </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">F</td><td>File type with <a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html#af0a2c2392c76bbbe53a39ce3558b88c2">size()</a> and seek() which is a Stream </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a122ac689061bf4eab128c9743ee379ef" name="a122ac689061bf4eab128c9743ee379ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a122ac689061bf4eab128c9743ee379ef">&#9670;&#160;</a></span>serveFile()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename FS &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html">tiny_dlna::SdFatContentProvider</a>&lt; FS &gt;::serveFile </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtiny__dlna_1_1IClientHandler.html">IClientHandler</a> &amp;&#160;</td>
+          <td class="paramname"><em>client</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>requestPath</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Replies with the file which is identified by the ID query parameter of the request path: e.g. /files?ID=12. </p>
+
+</div>
+</div>
 <a id="acfec4ba14dce053a57d91248185dbfbd" name="acfec4ba14dce053a57d91248185dbfbd"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#acfec4ba14dce053a57d91248185dbfbd">&#9670;&#160;</a></span>setPath() <span class="overload">[1/2]</span></h2>
 
@@ -1190,6 +1417,32 @@ template&lt;typename FS &gt; </div>
 
 </div>
 </div>
+<a id="a9f4423a2fbd0da129a7dd39721103849" name="a9f4423a2fbd0da129a7dd39721103849"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f4423a2fbd0da129a7dd39721103849">&#9670;&#160;</a></span>file_url</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename FS &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string <a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html">tiny_dlna::SdFatContentProvider</a>&lt; FS &gt;::file_url</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>url pattern of the file handler </p>
+
+</div>
+</div>
 <a id="aa186e401770d791000faf57470472ab3" name="aa186e401770d791000faf57470472ab3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa186e401770d791000faf57470472ab3">&#9670;&#160;</a></span>filter_</h2>
 
@@ -1227,6 +1480,30 @@ template&lt;typename FS &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">const char * <a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html">tiny_dlna::SdFatContentProvider</a>&lt; FS &gt;::objectID_ = nullptr</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a72cee1778b4f47f2b15df1d60bc0ce2b" name="a72cee1778b4f47f2b15df1d60bc0ce2b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72cee1778b4f47f2b15df1d60bc0ce2b">&#9670;&#160;</a></span>p_fs</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename FS &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">FS* <a class="el" href="classtiny__dlna_1_1SdFatContentProvider.html">tiny_dlna::SdFatContentProvider</a>&lt; FS &gt;::p_fs = nullptr</td>
         </tr>
       </table>
   </td>

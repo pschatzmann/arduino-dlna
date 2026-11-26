@@ -23,7 +23,8 @@ var searchData=
   ['_7elist_20',['~List',['../classtiny__dlna_1_1List.html#a23ebd45ed5cbba4b31a7e8d4d22f36d9',1,'tiny_dlna::List']]],
   ['_7elistlockfree_21',['~ListLockFree',['../classtiny__dlna_1_1ListLockFree.html#a273ec86e39f3edb75e4ab5b140fd3946',1,'tiny_dlna::ListLockFree']]],
   ['_7equeuelockfree_22',['~QueueLockFree',['../classtiny__dlna_1_1QueueLockFree.html#a2e0ef4bc815678adbff3895f2fa25b2d',1,'tiny_dlna::QueueLockFree']]],
-  ['_7esubscriptionmgrdevice_23',['~SubscriptionMgrDevice',['../classtiny__dlna_1_1SubscriptionMgrDevice.html#aae12ba8ba66b4d62e73378bd132afca2',1,'tiny_dlna::SubscriptionMgrDevice']]],
-  ['_7etaskrtos_24',['~TaskRTOS',['../classtiny__dlna_1_1TaskRTOS.html#a5132ef975135e4caa242b6c81fb04c07',1,'tiny_dlna::TaskRTOS']]],
-  ['_7eurl_25',['~Url',['../classtiny__dlna_1_1Url.html#a74e121ff36765454bd8a2232ad83224b',1,'tiny_dlna::Url']]]
+  ['_7eschedule_23',['~Schedule',['../structtiny__dlna_1_1Schedule.html#a30e1dbe94fb9882f372b053cc4f35c7a',1,'tiny_dlna::Schedule']]],
+  ['_7esubscriptionmgrdevice_24',['~SubscriptionMgrDevice',['../classtiny__dlna_1_1SubscriptionMgrDevice.html#aae12ba8ba66b4d62e73378bd132afca2',1,'tiny_dlna::SubscriptionMgrDevice']]],
+  ['_7etaskrtos_25',['~TaskRTOS',['../classtiny__dlna_1_1TaskRTOS.html#a5132ef975135e4caa242b6c81fb04c07',1,'tiny_dlna::TaskRTOS']]],
+  ['_7eurl_26',['~Url',['../classtiny__dlna_1_1Url.html#a74e121ff36765454bd8a2232ad83224b',1,'tiny_dlna::Url']]]
 ];
