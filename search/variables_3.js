@@ -12,7 +12,7 @@ var searchData=
   ['delivery_5fhost_5fand_5fport_9',['delivery_host_and_port',['../classtiny__dlna_1_1NotifyReplyCP.html#a4a12cffe8b7cdc4e175115b07a3e716a',1,'tiny_dlna::NotifyReplyCP']]],
   ['delivery_5fpath_10',['delivery_path',['../classtiny__dlna_1_1NotifyReplyCP.html#aca6add36f3d7b963afdc24f340f65aed',1,'tiny_dlna::NotifyReplyCP']]],
   ['depth_11',['depth',['../classtiny__dlna_1_1Icon.html#ac02fe6c82f8b390d17267f022692d6a5',1,'tiny_dlna::Icon']]],
-  ['dest_12',['dest',['../structtiny__dlna_1_1EscapingPrint.html#a491b3ea8e5b3454aa175fc85d5313bda',1,'tiny_dlna::EscapingPrint']]],
+  ['dest_12',['dest',['../classtiny__dlna_1_1BufferedPrint.html#afd3d0bcdfa68cb4e6594eb97454c91f2',1,'tiny_dlna::BufferedPrint::dest()'],['../structtiny__dlna_1_1EscapingPrint.html#a491b3ea8e5b3454aa175fc85d5313bda',1,'tiny_dlna::EscapingPrint::dest()']]],
   ['device_5findex_13',['device_index',['../classtiny__dlna_1_1DLNAControlPointMediaRenderer.html#a47c4da5c6c67557b5265c8a7808afaee',1,'tiny_dlna::DLNAControlPointMediaRenderer']]],
   ['device_5ftype_14',['device_type',['../classtiny__dlna_1_1DLNADeviceInfo.html#a245fe18996fd9cd0c3ec5482973f5a82',1,'tiny_dlna::DLNADeviceInfo']]],
   ['device_5ftype_5ffilter_15',['device_type_filter',['../classtiny__dlna_1_1DLNAControlPointMediaRenderer.html#a916196a8766036d600eef05272801915',1,'tiny_dlna::DLNAControlPointMediaRenderer::device_type_filter()'],['../classtiny__dlna_1_1DLNAControlPointMediaServer.html#a9ce046ce5f3550c0f0956692cfb9024b',1,'tiny_dlna::DLNAControlPointMediaServer::device_type_filter()']]],

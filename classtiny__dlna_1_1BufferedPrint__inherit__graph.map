@@ -1,0 +1,4 @@
+<map id="tiny_dlna::BufferedPrint" name="tiny_dlna::BufferedPrint">
+<area shape="rect" id="node1" title="Print decorator which collects small writes into a buffer." alt="" coords="5,81,180,109"/>
+<area shape="rect" id="node2" title=" " alt="" coords="67,5,118,33"/>
+</map>

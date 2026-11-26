@@ -1,14 +1,13 @@
 var searchData=
 [
-  ['list_0',['List',['../classtiny__dlna_1_1List.html',1,'tiny_dlna']]],
-  ['list_3c_20t_2c_20dlna_5fallocator_3c_20t_20_3e_20_3e_1',['List&lt; T, DLNA_ALLOCATOR&lt; T &gt; &gt;',['../classtiny__dlna_1_1List.html',1,'tiny_dlna']]],
-  ['list_3c_20tiny_5fdlna_3a_3ahttpheaderline_20_2a_20_3e_2',['List&lt; tiny_dlna::HttpHeaderLine * &gt;',['../classtiny__dlna_1_1List.html',1,'tiny_dlna']]],
-  ['list_3c_20tiny_5fdlna_3a_3ahttprequesthandlerline_20_2a_20_3e_3',['List&lt; tiny_dlna::HttpRequestHandlerLine * &gt;',['../classtiny__dlna_1_1List.html',1,'tiny_dlna']]],
-  ['list_3c_20tiny_5fdlna_3a_3ahttprequestrewrite_20_2a_20_3e_4',['List&lt; tiny_dlna::HttpRequestRewrite * &gt;',['../classtiny__dlna_1_1List.html',1,'tiny_dlna']]],
-  ['list_3c_20tiny_5fdlna_3a_3arequestdata_2c_20dlna_5fallocator_3c_20tiny_5fdlna_3a_3arequestdata_20_3e_20_3e_5',['List&lt; tiny_dlna::RequestData, DLNA_ALLOCATOR&lt; tiny_dlna::RequestData &gt; &gt;',['../classtiny__dlna_1_1List.html',1,'tiny_dlna']]],
-  ['listlockfree_6',['ListLockFree',['../classtiny__dlna_1_1ListLockFree.html',1,'tiny_dlna']]],
-  ['listlockfree_3c_20clienttype_20_3e_7',['ListLockFree&lt; ClientType &gt;',['../classtiny__dlna_1_1ListLockFree.html',1,'tiny_dlna']]],
-  ['listlockfree_3c_20tiny_5fdlna_3a_3apendingnotification_20_3e_8',['ListLockFree&lt; tiny_dlna::PendingNotification &gt;',['../classtiny__dlna_1_1ListLockFree.html',1,'tiny_dlna']]],
-  ['listlockfree_3c_20tiny_5fdlna_3a_3asubscription_20_2a_20_3e_9',['ListLockFree&lt; tiny_dlna::Subscription * &gt;',['../classtiny__dlna_1_1ListLockFree.html',1,'tiny_dlna']]],
-  ['loggerclass_10',['LoggerClass',['../classtiny__dlna_1_1LoggerClass.html',1,'tiny_dlna']]]
+  ['iclienthandler_0',['IClientHandler',['../classtiny__dlna_1_1IClientHandler.html',1,'tiny_dlna']]],
+  ['icon_1',['Icon',['../classtiny__dlna_1_1Icon.html',1,'tiny_dlna']]],
+  ['icontrolpoint_2',['IControlPoint',['../classtiny__dlna_1_1IControlPoint.html',1,'tiny_dlna']]],
+  ['idevice_3',['IDevice',['../classtiny__dlna_1_1IDevice.html',1,'tiny_dlna']]],
+  ['ihttprequest_4',['IHttpRequest',['../classtiny__dlna_1_1IHttpRequest.html',1,'tiny_dlna']]],
+  ['ihttpserver_5',['IHttpServer',['../classtiny__dlna_1_1IHttpServer.html',1,'tiny_dlna']]],
+  ['ipaddressandport_6',['IPAddressAndPort',['../structtiny__dlna_1_1IPAddressAndPort.html',1,'tiny_dlna']]],
+  ['isubscriptionmgrdevice_7',['ISubscriptionMgrDevice',['../classtiny__dlna_1_1ISubscriptionMgrDevice.html',1,'tiny_dlna']]],
+  ['iterator_8',['Iterator',['../classtiny__dlna_1_1List_1_1Iterator.html',1,'tiny_dlna::List&lt; T, Alloc &gt;::Iterator'],['../classtiny__dlna_1_1ListLockFree_1_1Iterator.html',1,'tiny_dlna::ListLockFree&lt; T, Alloc &gt;::Iterator']]],
+  ['iudpservice_9',['IUDPService',['../classtiny__dlna_1_1IUDPService.html',1,'tiny_dlna']]]
 ];
