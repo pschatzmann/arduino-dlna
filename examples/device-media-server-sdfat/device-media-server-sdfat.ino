@@ -34,7 +34,6 @@ const char* ssid = "SSID";
 const char* password = "PASSWORD";
 
 SdFs sd;
-FsFile file;
 // Global content provider instance
 SdFatContentProvider<SdFs> contentProvider;
 
@@ -62,48 +61,6 @@ IPAddress setupWifi() {
   Serial.println(ip);
   return ip;
 }
-
-/// Method to handle file requests for /files*
-void handleFileRequestMethod(IClientHandler& client, IHttpServer* server_ptr, const char* requestPath, HttpRequestHandlerLine* hl) {
-  // Determine id from request path 
-  StrView path{requestPath};
-  int id_pos = path.indexOf("ID=") + 3;
-  int id = StrView(path.c_str() + id_pos).toInt();
-  DlnaLogger.log(DlnaLogLevel::Info, "file id: %d", id);
-
-  // determine file name
-  TreeNode& node = contentProvider.getTreeNodeById(id);
-  // keep the std::string alive: getMime() returns a temporary
-  std::string mime = node.getMime();
-  if (mime.empty()) mime = "application/octet-stream";
-  std::string file_name = node.path();
-  DlnaLogger.log(DlnaLogLevel::Info, "file name: %s (mime %s)", file_name.c_str(), mime.c_str());
-
-  // open file name and reply
-  file.close();
-  file = sd.open(file_name.c_str(), O_READ);
-  if (!file){
-    DlnaLogger.log(DlnaLogLevel::Error, "Failed to open file: %s (id %d)", file_name.c_str(), id);
-    client.replyNotFound();
-    return;
-  }
-  // support for seeking: reply with the requested byte range if any
-  uint64_t size = file.size();
-  HttpRange range;
-  if (range.parse(client.requestHeader().get(RANGE_C), size)) {
-    if (!range.isSatisfiable()) {
-      client.replyRangeNotSatisfiable(size);
-      return;
-    }
-    file.seek(range.start());
-    client.replyRange(mime.c_str(), file, size, range.start(), range.end());
-    return;
-  }
-  // full content: HEAD requests are also handled here (header only)
-  client.replyHeader().put(ACCEPT_RANGES, "bytes");
-  client.reply(mime.c_str(), file, size, 200);
-}
-
 
 /**
  * @brief Initialize SD card
@@ -161,8 +118,8 @@ void setup() {
 
   // setup file path and file handling
   contentProvider.setPath("files");
-  // no mime filter: media players send e.g. "Accept: */*"
-  server.on("/files*", T_GET, handleFileRequestMethod);
+  // serve the files at /files?ID=<id> (GET, HEAD and Range requests)
+  contentProvider.addFileHandler(server);
 
   // Wire up the content provider callbacks via lambdas calling the global
   // instance

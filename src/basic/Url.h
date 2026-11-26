@@ -106,8 +106,8 @@ class Url {
         portInt = -1;  // undefined
     }
     int pathStart = urlStr.indexOf("/", protocolEnd + 4);
-    if (pathStart == 0) {
-      // we have no path
+    if (pathStart <= 0) {
+      // we have no path (indexOf() returns -1 if there is no "/")
       pathStr = "/";
       urlRootStr = urlStr;
     } else {

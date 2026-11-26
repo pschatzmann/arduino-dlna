@@ -168,3 +168,40 @@ def test_range_is_not_reused(file_url, total_size):
     r = requests.head(file_url, timeout=TIMEOUT)
     assert r.status_code == 200
     assert int(r.headers["Content-Length"]) == total_size
+
+
+def _file_url_with_id(file_url: str, id_value: str) -> str:
+    u = urlparse(file_url)
+    return f"{u.scheme}://{u.netloc}{u.path}?ID={id_value}"
+
+
+@pytest.mark.parametrize("id_value", ["999999", "0", "abc", ""])
+def test_invalid_id(file_url, id_value):
+    """Unknown ids, the root directory and garbage must give 404."""
+    r = requests.get(_file_url_with_id(file_url, id_value), timeout=TIMEOUT)
+    assert r.status_code == 404
+
+
+def test_directory_id(file_url):
+    """Directories can not be downloaded: request the id of the first
+    container of the root."""
+    u = urlparse(file_url)
+    body = (
+        '<?xml version="1.0"?><s:Envelope xmlns:s="http://schemas.xmlsoap.org/'
+        'soap/envelope/" s:encodingStyle="http://schemas.xmlsoap.org/soap/'
+        'encoding/"><s:Body><u:Browse xmlns:u="urn:schemas-upnp-org:service:'
+        'ContentDirectory:1"><ObjectID>0</ObjectID><BrowseFlag>'
+        'BrowseDirectChildren</BrowseFlag><Filter>*</Filter><StartingIndex>0'
+        '</StartingIndex><RequestedCount>0</RequestedCount><SortCriteria>'
+        '</SortCriteria></u:Browse></s:Body></s:Envelope>')
+    r = requests.post(
+        f"{u.scheme}://{u.netloc}/CD/control", data=body, timeout=TIMEOUT,
+        headers={"Content-Type": 'text/xml; charset="utf-8"',
+                 "SOAPACTION": '"urn:schemas-upnp-org:service:'
+                               'ContentDirectory:1#Browse"'})
+    assert r.status_code == 200
+    m = re.search(r'container id=(?:"|&quot;)(\d+)', r.text)
+    if not m:
+        pytest.skip("no container in the root")
+    r = requests.get(_file_url_with_id(file_url, m.group(1)), timeout=TIMEOUT)
+    assert r.status_code == 404

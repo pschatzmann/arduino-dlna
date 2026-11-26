@@ -77,7 +77,7 @@ class Str {
 
   /// Assign substring view from const char* [start,end)
   void substrView(const char* from, int start, int end) {
-    if (from == nullptr || end <= start) {
+    if (from == nullptr || start < 0 || end <= start) {
       s.clear();
       return;
     }

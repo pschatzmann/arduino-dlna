@@ -16,6 +16,8 @@ namespace tiny_dlna {
  * @author Phil Schatzmann
  */
 struct Schedule {
+  /// virtual: schedules are deleted via a Schedule pointer
+  virtual ~Schedule() = default;
   // int id = 0;
   //  scheduled next execution time
   uint64_t time = 0;

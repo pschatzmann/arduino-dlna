@@ -5,6 +5,10 @@
  * @brief DLNA content provider backed by SdFat filesystem directory tree.
  */
 
+#pragma once
+
+#include <stdlib.h>
+
 #include "dlna.h"
 #include "SdFatDirectoryTree.h"
 
@@ -24,8 +28,13 @@ namespace tiny_dlna {
  *
  * Usage pattern:
  * 1. Call begin() to initialize and scan the filesystem
- * 2. prepareData() is called by DLNA to set up a query
- * 3. getData() is called repeatedly to retrieve individual items
+ * 2. Call addFileHandler() to serve the files via the http server
+ * 3. prepareData() is called by DLNA to set up a query
+ * 4. getData() is called repeatedly to retrieve individual items
+ *
+ * The filesystem must provide open(path), which returns a Stream with size(),
+ * seek(), close() and a bool conversion: e.g. SdFat (SdFs, SdFat32...),
+ * ESP32FSAdapter or TinyFATFSAdapter.
  *
  * @tparam FS Filesystem type compatible with SdFat API (e.g., SdFs, SdFat32).
  */
@@ -39,7 +48,85 @@ class SdFatContentProvider {
    * @return true on success
    */
   bool begin(FS& fs, const char* rootPath) {
+    p_fs = &fs;
     return directoryTree.begin(fs, rootPath);
+  }
+
+  /**
+   * @brief Registers the http handler which serves the files.
+   *
+   * The files are served at /<path>?ID=<id> (see setPath()), which is the
+   * resource URI that is reported to the DLNA clients. GET and HEAD requests
+   * are supported, including byte ranges (seeking).
+   * @param server Http server of the media server
+   */
+  void addFileHandler(IHttpServer& server) {
+    file_url = "/";
+    file_url += (path[0] == '/') ? path + 1 : path;
+    file_url += "*";
+    void* ctx[] = {this};
+    server.on(file_url.c_str(), T_GET, fileHandler, ctx, 1);
+  }
+
+  /**
+   * @brief Replies with the file which is identified by the ID query parameter
+   * of the request path: e.g. /files?ID=12
+   */
+  void serveFile(IClientHandler& client, const char* requestPath) {
+    StrView path_str{requestPath};
+    int id_pos = path_str.indexOf("ID=");
+    long id = id_pos >= 0 ? atol(requestPath + id_pos + 3) : -1;
+    // id 0 is the root directory
+    if (p_fs == nullptr || id <= 0 || id >= (long)size()) {
+      DlnaLogger.log(DlnaLogLevel::Error, "Invalid file request: %s",
+                     requestPath);
+      client.replyNotFound();
+      return;
+    }
+    TreeNode& node = getTreeNodeById(id);
+    if (node.is_dir) {
+      client.replyNotFound();
+      return;
+    }
+    // keep the std::string alive: getMime() returns a temporary
+    std::string mime = node.getMime();
+    if (mime.empty()) mime = "application/octet-stream";
+    std::string file_name = node.path();
+    DlnaLogger.log(DlnaLogLevel::Info, "file: %s (mime %s)",
+                   file_name.c_str(), mime.c_str());
+
+    auto file = p_fs->open(file_name.c_str());
+    if (!file) {
+      DlnaLogger.log(DlnaLogLevel::Error, "Failed to open file: %s (id %ld)",
+                     file_name.c_str(), id);
+      client.replyNotFound();
+      return;
+    }
+    replyFile(client, file, mime.c_str());
+    file.close();
+  }
+
+  /**
+   * @brief Replies with the content of an open file: supports HEAD and Range
+   * requests (206 Partial Content / 416 Range Not Satisfiable).
+   * @tparam F File type with size() and seek() which is a Stream
+   */
+  template <typename F>
+  static void replyFile(IClientHandler& client, F& file, const char* mime) {
+    uint64_t size = file.size();
+    HttpRange range;
+    if (range.parse(client.requestHeader().get(RANGE_C), size)) {
+      if (!range.isSatisfiable()) {
+        client.replyRangeNotSatisfiable(size);
+        return;
+      }
+      file.seek(range.start());
+      client.replyRange(mime, file, size, range.start(), range.end());
+      return;
+    }
+    // full content: HEAD requests are also handled here (header only)
+    client.replyHeader().put(ACCEPT_RANGES, "bytes");
+    client.reply(mime, file, size, 200);
   }
 
   /// Releases all resources and clears the directory tree
@@ -245,7 +332,16 @@ class SdFatContentProvider {
 
  protected:
   SdFatDirectoryTree<FS> directoryTree;
+  FS* p_fs = nullptr;
   const char* path = "/file";
+  std::string file_url;  ///< url pattern of the file handler
+
+  /// http handler: the context provides the content provider
+  static void fileHandler(IClientHandler& client, IHttpServer* server,
+                          const char* requestPath, HttpRequestHandlerLine* hl) {
+    auto self = static_cast<SdFatContentProvider*>(hl->context[0]);
+    self->serveFile(client, requestPath);
+  }
 
   // Store query parameters for getData
   const char* objectID_ = nullptr;
@@ -271,8 +367,12 @@ class SdFatContentProvider {
    * @return Pointer to the node, or nullptr if not found or invalid
    */
   TreeNode* findNodeByObjectID(const char* objectID) {
-    if (!objectID) return nullptr;
-    uint32_t id = std::stoul(objectID);
+    if (!objectID || *objectID == 0) return nullptr;
+    char* end = nullptr;
+    unsigned long id = strtoul(objectID, &end, 10);
+    if (end == objectID || *end != 0 || id >= directoryTree.size()) {
+      return nullptr;
+    }
     return &directoryTree.getTreeNodeById(id);
   }
 };
